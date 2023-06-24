@@ -299,3 +299,400 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IIdentityAdvise
+  def query_interface(this : IIdentityAdvise*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdentityAdvise*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdentityAdvise*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def identity_updated(this : IIdentityAdvise*, dwidentityupdateevents : IdentityUpdateEvent, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.identity_updated.call(this, dwidentityupdateevents, lpszuniqueid)
+  end
+end
+struct LibWin32::AsyncIIdentityAdvise
+  def query_interface(this : AsyncIIdentityAdvise*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIIdentityAdvise*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIIdentityAdvise*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_identity_updated(this : AsyncIIdentityAdvise*, dwidentityupdateevents : UInt32, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_identity_updated.call(this, dwidentityupdateevents, lpszuniqueid)
+  end
+  def finish_identity_updated(this : AsyncIIdentityAdvise*) : HRESULT
+    @lpVtbl.value.finish_identity_updated.call(this)
+  end
+end
+struct LibWin32::IIdentityProvider
+  def query_interface(this : IIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_identity_enum(this : IIdentityProvider*, eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_identity_enum.call(this, eidentitytype, pfilterkey, pfilterpropvarvalue, ppidentityenum)
+  end
+  def create(this : IIdentityProvider*, lpszusername : LibC::LPWSTR, pppropertystore : IPropertyStore*, pkeywordstoadd : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.create.call(this, lpszusername, pppropertystore, pkeywordstoadd)
+  end
+  def import(this : IIdentityProvider*, ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.import.call(this, ppropertystore)
+  end
+  def delete(this : IIdentityProvider*, lpszuniqueid : LibC::LPWSTR, pkeywordstodelete : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.delete.call(this, lpszuniqueid, pkeywordstodelete)
+  end
+  def find_by_unique_id(this : IIdentityProvider*, lpszuniqueid : LibC::LPWSTR, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.find_by_unique_id.call(this, lpszuniqueid, pppropertystore)
+  end
+  def get_provider_property_store(this : IIdentityProvider*, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_provider_property_store.call(this, pppropertystore)
+  end
+  def advise(this : IIdentityProvider*, pidentityadvise : IIdentityAdvise, dwidentityupdateevents : IdentityUpdateEvent, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, pidentityadvise, dwidentityupdateevents, pdwcookie)
+  end
+  def un_advise(this : IIdentityProvider*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.un_advise.call(this, dwcookie)
+  end
+end
+struct LibWin32::AsyncIIdentityProvider
+  def query_interface(this : AsyncIIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_get_identity_enum(this : AsyncIIdentityProvider*, eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_get_identity_enum.call(this, eidentitytype, pfilterkey, pfilterpropvarvalue)
+  end
+  def finish_get_identity_enum(this : AsyncIIdentityProvider*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.finish_get_identity_enum.call(this, ppidentityenum)
+  end
+  def begin_create(this : AsyncIIdentityProvider*, lpszusername : LibC::LPWSTR, pkeywordstoadd : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_create.call(this, lpszusername, pkeywordstoadd)
+  end
+  def finish_create(this : AsyncIIdentityProvider*, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_create.call(this, pppropertystore)
+  end
+  def begin_import(this : AsyncIIdentityProvider*, ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.begin_import.call(this, ppropertystore)
+  end
+  def finish_import(this : AsyncIIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_import.call(this)
+  end
+  def begin_delete(this : AsyncIIdentityProvider*, lpszuniqueid : LibC::LPWSTR, pkeywordstodelete : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_delete.call(this, lpszuniqueid, pkeywordstodelete)
+  end
+  def finish_delete(this : AsyncIIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_delete.call(this)
+  end
+  def begin_find_by_unique_id(this : AsyncIIdentityProvider*, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_find_by_unique_id.call(this, lpszuniqueid)
+  end
+  def finish_find_by_unique_id(this : AsyncIIdentityProvider*, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_find_by_unique_id.call(this, pppropertystore)
+  end
+  def begin_get_provider_property_store(this : AsyncIIdentityProvider*) : HRESULT
+    @lpVtbl.value.begin_get_provider_property_store.call(this)
+  end
+  def finish_get_provider_property_store(this : AsyncIIdentityProvider*, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_get_provider_property_store.call(this, pppropertystore)
+  end
+  def begin_advise(this : AsyncIIdentityProvider*, pidentityadvise : IIdentityAdvise, dwidentityupdateevents : UInt32) : HRESULT
+    @lpVtbl.value.begin_advise.call(this, pidentityadvise, dwidentityupdateevents)
+  end
+  def finish_advise(this : AsyncIIdentityProvider*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.finish_advise.call(this, pdwcookie)
+  end
+  def begin_un_advise(this : AsyncIIdentityProvider*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.begin_un_advise.call(this, dwcookie)
+  end
+  def finish_un_advise(this : AsyncIIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_un_advise.call(this)
+  end
+end
+struct LibWin32::IAssociatedIdentityProvider
+  def query_interface(this : IAssociatedIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAssociatedIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAssociatedIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def associate_identity(this : IAssociatedIdentityProvider*, hwndparent : LibC::HANDLE, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.associate_identity.call(this, hwndparent, pppropertystore)
+  end
+  def disassociate_identity(this : IAssociatedIdentityProvider*, hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.disassociate_identity.call(this, hwndparent, lpszuniqueid)
+  end
+  def change_credential(this : IAssociatedIdentityProvider*, hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.change_credential.call(this, hwndparent, lpszuniqueid)
+  end
+end
+struct LibWin32::AsyncIAssociatedIdentityProvider
+  def query_interface(this : AsyncIAssociatedIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIAssociatedIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIAssociatedIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_associate_identity(this : AsyncIAssociatedIdentityProvider*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.begin_associate_identity.call(this, hwndparent)
+  end
+  def finish_associate_identity(this : AsyncIAssociatedIdentityProvider*, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_associate_identity.call(this, pppropertystore)
+  end
+  def begin_disassociate_identity(this : AsyncIAssociatedIdentityProvider*, hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_disassociate_identity.call(this, hwndparent, lpszuniqueid)
+  end
+  def finish_disassociate_identity(this : AsyncIAssociatedIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_disassociate_identity.call(this)
+  end
+  def begin_change_credential(this : AsyncIAssociatedIdentityProvider*, hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_change_credential.call(this, hwndparent, lpszuniqueid)
+  end
+  def finish_change_credential(this : AsyncIAssociatedIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_change_credential.call(this)
+  end
+end
+struct LibWin32::IConnectedIdentityProvider
+  def query_interface(this : IConnectedIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IConnectedIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IConnectedIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect_identity(this : IConnectedIdentityProvider*, authbuffer : UInt8*, authbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.connect_identity.call(this, authbuffer, authbuffersize)
+  end
+  def disconnect_identity(this : IConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.disconnect_identity.call(this)
+  end
+  def is_connected(this : IConnectedIdentityProvider*, connected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_connected.call(this, connected)
+  end
+  def get_url(this : IConnectedIdentityProvider*, identifier : IDENTITY_URL, context : IBindCtx, postdata : VARIANT*, url : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_url.call(this, identifier, context, postdata, url)
+  end
+  def get_account_state(this : IConnectedIdentityProvider*, pstate : ACCOUNT_STATE*) : HRESULT
+    @lpVtbl.value.get_account_state.call(this, pstate)
+  end
+end
+struct LibWin32::AsyncIConnectedIdentityProvider
+  def query_interface(this : AsyncIConnectedIdentityProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIConnectedIdentityProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIConnectedIdentityProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_connect_identity(this : AsyncIConnectedIdentityProvider*, authbuffer : UInt8*, authbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.begin_connect_identity.call(this, authbuffer, authbuffersize)
+  end
+  def finish_connect_identity(this : AsyncIConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_connect_identity.call(this)
+  end
+  def begin_disconnect_identity(this : AsyncIConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.begin_disconnect_identity.call(this)
+  end
+  def finish_disconnect_identity(this : AsyncIConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.finish_disconnect_identity.call(this)
+  end
+  def begin_is_connected(this : AsyncIConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.begin_is_connected.call(this)
+  end
+  def finish_is_connected(this : AsyncIConnectedIdentityProvider*, connected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_is_connected.call(this, connected)
+  end
+  def begin_get_url(this : AsyncIConnectedIdentityProvider*, identifier : IDENTITY_URL, context : IBindCtx) : HRESULT
+    @lpVtbl.value.begin_get_url.call(this, identifier, context)
+  end
+  def finish_get_url(this : AsyncIConnectedIdentityProvider*, postdata : VARIANT*, url : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.finish_get_url.call(this, postdata, url)
+  end
+  def begin_get_account_state(this : AsyncIConnectedIdentityProvider*) : HRESULT
+    @lpVtbl.value.begin_get_account_state.call(this)
+  end
+  def finish_get_account_state(this : AsyncIConnectedIdentityProvider*, pstate : ACCOUNT_STATE*) : HRESULT
+    @lpVtbl.value.finish_get_account_state.call(this, pstate)
+  end
+end
+struct LibWin32::IIdentityAuthentication
+  def query_interface(this : IIdentityAuthentication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdentityAuthentication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdentityAuthentication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_identity_credential(this : IIdentityAuthentication*, credbuffer : UInt8*, credbufferlength : UInt32) : HRESULT
+    @lpVtbl.value.set_identity_credential.call(this, credbuffer, credbufferlength)
+  end
+  def validate_identity_credential(this : IIdentityAuthentication*, credbuffer : UInt8*, credbufferlength : UInt32, ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.validate_identity_credential.call(this, credbuffer, credbufferlength, ppidentityproperties)
+  end
+end
+struct LibWin32::AsyncIIdentityAuthentication
+  def query_interface(this : AsyncIIdentityAuthentication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIIdentityAuthentication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIIdentityAuthentication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_set_identity_credential(this : AsyncIIdentityAuthentication*, credbuffer : UInt8*, credbufferlength : UInt32) : HRESULT
+    @lpVtbl.value.begin_set_identity_credential.call(this, credbuffer, credbufferlength)
+  end
+  def finish_set_identity_credential(this : AsyncIIdentityAuthentication*) : HRESULT
+    @lpVtbl.value.finish_set_identity_credential.call(this)
+  end
+  def begin_validate_identity_credential(this : AsyncIIdentityAuthentication*, credbuffer : UInt8*, credbufferlength : UInt32, ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.begin_validate_identity_credential.call(this, credbuffer, credbufferlength, ppidentityproperties)
+  end
+  def finish_validate_identity_credential(this : AsyncIIdentityAuthentication*, ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_validate_identity_credential.call(this, ppidentityproperties)
+  end
+end
+struct LibWin32::IIdentityStore
+  def query_interface(this : IIdentityStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdentityStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdentityStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IIdentityStore*, pdwproviders : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwproviders)
+  end
+  def get_at(this : IIdentityStore*, dwprovider : UInt32, pprovguid : Guid*, ppidentityprovider : IUnknown*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwprovider, pprovguid, ppidentityprovider)
+  end
+  def add_to_cache(this : IIdentityStore*, lpszuniqueid : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.add_to_cache.call(this, lpszuniqueid, providerguid)
+  end
+  def convert_to_sid(this : IIdentityStore*, lpszuniqueid : LibC::LPWSTR, providerguid : Guid*, cbsid : UInt16, psid : UInt8*, pcbrequiredsid : UInt16*) : HRESULT
+    @lpVtbl.value.convert_to_sid.call(this, lpszuniqueid, providerguid, cbsid, psid, pcbrequiredsid)
+  end
+  def enumerate_identities(this : IIdentityStore*, eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enumerate_identities.call(this, eidentitytype, pfilterkey, pfilterpropvarvalue, ppidentityenum)
+  end
+  def reset(this : IIdentityStore*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::AsyncIIdentityStore
+  def query_interface(this : AsyncIIdentityStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIIdentityStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIIdentityStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_get_count(this : AsyncIIdentityStore*) : HRESULT
+    @lpVtbl.value.begin_get_count.call(this)
+  end
+  def finish_get_count(this : AsyncIIdentityStore*, pdwproviders : UInt32*) : HRESULT
+    @lpVtbl.value.finish_get_count.call(this, pdwproviders)
+  end
+  def begin_get_at(this : AsyncIIdentityStore*, dwprovider : UInt32, pprovguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_get_at.call(this, dwprovider, pprovguid)
+  end
+  def finish_get_at(this : AsyncIIdentityStore*, pprovguid : Guid*, ppidentityprovider : IUnknown*) : HRESULT
+    @lpVtbl.value.finish_get_at.call(this, pprovguid, ppidentityprovider)
+  end
+  def begin_add_to_cache(this : AsyncIIdentityStore*, lpszuniqueid : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_add_to_cache.call(this, lpszuniqueid, providerguid)
+  end
+  def finish_add_to_cache(this : AsyncIIdentityStore*) : HRESULT
+    @lpVtbl.value.finish_add_to_cache.call(this)
+  end
+  def begin_convert_to_sid(this : AsyncIIdentityStore*, lpszuniqueid : LibC::LPWSTR, providerguid : Guid*, cbsid : UInt16, psid : UInt8*) : HRESULT
+    @lpVtbl.value.begin_convert_to_sid.call(this, lpszuniqueid, providerguid, cbsid, psid)
+  end
+  def finish_convert_to_sid(this : AsyncIIdentityStore*, psid : UInt8*, pcbrequiredsid : UInt16*) : HRESULT
+    @lpVtbl.value.finish_convert_to_sid.call(this, psid, pcbrequiredsid)
+  end
+  def begin_enumerate_identities(this : AsyncIIdentityStore*, eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_enumerate_identities.call(this, eidentitytype, pfilterkey, pfilterpropvarvalue)
+  end
+  def finish_enumerate_identities(this : AsyncIIdentityStore*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.finish_enumerate_identities.call(this, ppidentityenum)
+  end
+  def begin_reset(this : AsyncIIdentityStore*) : HRESULT
+    @lpVtbl.value.begin_reset.call(this)
+  end
+  def finish_reset(this : AsyncIIdentityStore*) : HRESULT
+    @lpVtbl.value.finish_reset.call(this)
+  end
+end
+struct LibWin32::IIdentityStoreEx
+  def query_interface(this : IIdentityStoreEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdentityStoreEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdentityStoreEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_connected_identity(this : IIdentityStoreEx*, localname : LibC::LPWSTR, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.create_connected_identity.call(this, localname, connectedname, providerguid)
+  end
+  def delete_connected_identity(this : IIdentityStoreEx*, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.delete_connected_identity.call(this, connectedname, providerguid)
+  end
+end
+struct LibWin32::AsyncIIdentityStoreEx
+  def query_interface(this : AsyncIIdentityStoreEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIIdentityStoreEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIIdentityStoreEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_create_connected_identity(this : AsyncIIdentityStoreEx*, localname : LibC::LPWSTR, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_create_connected_identity.call(this, localname, connectedname, providerguid)
+  end
+  def finish_create_connected_identity(this : AsyncIIdentityStoreEx*) : HRESULT
+    @lpVtbl.value.finish_create_connected_identity.call(this)
+  end
+  def begin_delete_connected_identity(this : AsyncIIdentityStoreEx*, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_delete_connected_identity.call(this, connectedname, providerguid)
+  end
+  def finish_delete_connected_identity(this : AsyncIIdentityStoreEx*) : HRESULT
+    @lpVtbl.value.finish_delete_connected_identity.call(this)
+  end
+end

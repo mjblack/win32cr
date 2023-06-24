@@ -61,7 +61,7 @@ lib LibWin32
   fun McastApiStartup(version : UInt32*) : UInt32
 
   # Params # 
-  fun McastApiCleanup
+  fun McastApiCleanup : Void
 
   # Params # prequestid : MCAST_CLIENT_UID* [In]
   fun McastGenUID(prequestid : MCAST_CLIENT_UID*) : UInt32

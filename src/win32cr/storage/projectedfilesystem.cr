@@ -226,7 +226,7 @@ lib LibWin32
   fun PrjStartVirtualizing(virtualizationrootpath : LibC::LPWSTR, callbacks : PRJ_CALLBACKS*, instancecontext : Void*, options : PRJ_STARTVIRTUALIZING_OPTIONS*, namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT*) : HRESULT
 
   # Params # namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT [In]
-  fun PrjStopVirtualizing(namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT)
+  fun PrjStopVirtualizing(namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) : Void
 
   # Params # namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT [In],totalentrynumber : UInt32* [In]
   fun PrjClearNegativePathCache(namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalentrynumber : UInt32*) : HRESULT
@@ -259,7 +259,7 @@ lib LibWin32
   fun PrjAllocateAlignedBuffer(namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size : LibC::UINT_PTR) : Void*
 
   # Params # buffer : Void* [In]
-  fun PrjFreeAlignedBuffer(buffer : Void*)
+  fun PrjFreeAlignedBuffer(buffer : Void*) : Void
 
   # Params # namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT [In],commandid : Int32 [In],completionresult : HRESULT [In],extendedparameters : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS* [In]
   fun PrjCompleteCommand(namespacevirtualizationcontext : PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandid : Int32, completionresult : HRESULT, extendedparameters : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS*) : HRESULT

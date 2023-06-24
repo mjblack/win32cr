@@ -3606,7 +3606,7 @@ lib LibWin32
   fun WlanAllocateMemory(dwmemorysize : UInt32) : Void*
 
   # Params # pmemory : Void* [In]
-  fun WlanFreeMemory(pmemory : Void*)
+  fun WlanFreeMemory(pmemory : Void*) : Void
 
   # Params # hclienthandle : LibC::HANDLE [In],securableobject : WLAN_SECURABLE_OBJECT [In],strmodifiedsddl : LibC::LPWSTR [In]
   fun WlanSetSecuritySettings(hclienthandle : LibC::HANDLE, securableobject : WLAN_SECURABLE_OBJECT, strmodifiedsddl : LibC::LPWSTR) : UInt32
@@ -3673,4 +3673,255 @@ lib LibWin32
 
   # Params # pdeviceaddress : UInt8** [In]
   fun WFDUpdateDeviceVisibility(pdeviceaddress : UInt8**) : UInt32
+end
+struct LibWin32::IDot11AdHocManager
+  def query_interface(this : IDot11AdHocManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_network(this : IDot11AdHocManager*, name : LibC::LPWSTR, password : LibC::LPWSTR, geographicalid : Int32, pinterface : IDot11AdHocInterface, psecurity : IDot11AdHocSecuritySettings, pcontextguid : Guid*, piadhoc : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.create_network.call(this, name, password, geographicalid, pinterface, psecurity, pcontextguid, piadhoc)
+  end
+  def commit_created_network(this : IDot11AdHocManager*, piadhoc : IDot11AdHocNetwork, fsaveprofile : BOOLEAN, fmakesavedprofileuserspecific : BOOLEAN) : HRESULT
+    @lpVtbl.value.commit_created_network.call(this, piadhoc, fsaveprofile, fmakesavedprofileuserspecific)
+  end
+  def get_i_enum_dot11_ad_hoc_networks(this : IDot11AdHocManager*, pcontextguid : Guid*, ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_networks.call(this, pcontextguid, ppenum)
+  end
+  def get_i_enum_dot11_ad_hoc_interfaces(this : IDot11AdHocManager*, ppenum : IEnumDot11AdHocInterfaces*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_interfaces.call(this, ppenum)
+  end
+  def get_network(this : IDot11AdHocManager*, networksignature : Guid*, pnetwork : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, networksignature, pnetwork)
+  end
+end
+struct LibWin32::IDot11AdHocManagerNotificationSink
+  def query_interface(this : IDot11AdHocManagerNotificationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocManagerNotificationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocManagerNotificationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_network_add(this : IDot11AdHocManagerNotificationSink*, piadhocnetwork : IDot11AdHocNetwork) : HRESULT
+    @lpVtbl.value.on_network_add.call(this, piadhocnetwork)
+  end
+  def on_network_remove(this : IDot11AdHocManagerNotificationSink*, signature : Guid*) : HRESULT
+    @lpVtbl.value.on_network_remove.call(this, signature)
+  end
+  def on_interface_add(this : IDot11AdHocManagerNotificationSink*, piadhocinterface : IDot11AdHocInterface) : HRESULT
+    @lpVtbl.value.on_interface_add.call(this, piadhocinterface)
+  end
+  def on_interface_remove(this : IDot11AdHocManagerNotificationSink*, signature : Guid*) : HRESULT
+    @lpVtbl.value.on_interface_remove.call(this, signature)
+  end
+end
+struct LibWin32::IEnumDot11AdHocNetworks
+  def query_interface(this : IEnumDot11AdHocNetworks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDot11AdHocNetworks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDot11AdHocNetworks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDot11AdHocNetworks*, celt : UInt32, rgelt : IDot11AdHocNetwork*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumDot11AdHocNetworks*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDot11AdHocNetworks*, ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IDot11AdHocNetwork
+  def query_interface(this : IDot11AdHocNetwork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocNetwork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocNetwork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IDot11AdHocNetwork*, estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, estatus)
+  end
+  def get_ssid(this : IDot11AdHocNetwork*, ppszwssid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_ssid.call(this, ppszwssid)
+  end
+  def has_profile(this : IDot11AdHocNetwork*, pf11d : UInt8*) : HRESULT
+    @lpVtbl.value.has_profile.call(this, pf11d)
+  end
+  def get_profile_name(this : IDot11AdHocNetwork*, ppszwprofilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_profile_name.call(this, ppszwprofilename)
+  end
+  def delete_profile(this : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.delete_profile.call(this)
+  end
+  def get_signal_quality(this : IDot11AdHocNetwork*, pustrengthvalue : UInt32*, pustrengthmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_quality.call(this, pustrengthvalue, pustrengthmax)
+  end
+  def get_security_setting(this : IDot11AdHocNetwork*, padhocsecuritysetting : IDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.get_security_setting.call(this, padhocsecuritysetting)
+  end
+  def get_context_guid(this : IDot11AdHocNetwork*, pcontextguid : Guid*) : HRESULT
+    @lpVtbl.value.get_context_guid.call(this, pcontextguid)
+  end
+  def get_signature(this : IDot11AdHocNetwork*, psignature : Guid*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, psignature)
+  end
+  def get_interface(this : IDot11AdHocNetwork*, padhocinterface : IDot11AdHocInterface*) : HRESULT
+    @lpVtbl.value.get_interface.call(this, padhocinterface)
+  end
+  def connect(this : IDot11AdHocNetwork*, passphrase : LibC::LPWSTR, geographicalid : Int32, fsaveprofile : BOOLEAN, fmakesavedprofileuserspecific : BOOLEAN) : HRESULT
+    @lpVtbl.value.connect.call(this, passphrase, geographicalid, fsaveprofile, fmakesavedprofileuserspecific)
+  end
+  def disconnect(this : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+end
+struct LibWin32::IDot11AdHocNetworkNotificationSink
+  def query_interface(this : IDot11AdHocNetworkNotificationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocNetworkNotificationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocNetworkNotificationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status_change(this : IDot11AdHocNetworkNotificationSink*, estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, estatus)
+  end
+  def on_connect_fail(this : IDot11AdHocNetworkNotificationSink*, efailreason : DOT11_ADHOC_CONNECT_FAIL_REASON) : HRESULT
+    @lpVtbl.value.on_connect_fail.call(this, efailreason)
+  end
+end
+struct LibWin32::IDot11AdHocInterface
+  def query_interface(this : IDot11AdHocInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_signature(this : IDot11AdHocInterface*, psignature : Guid*) : HRESULT
+    @lpVtbl.value.get_device_signature.call(this, psignature)
+  end
+  def get_friendly_name(this : IDot11AdHocInterface*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, ppszname)
+  end
+  def is_dot11d(this : IDot11AdHocInterface*, pf11d : UInt8*) : HRESULT
+    @lpVtbl.value.is_dot11d.call(this, pf11d)
+  end
+  def is_ad_hoc_capable(this : IDot11AdHocInterface*, pfadhoccapable : UInt8*) : HRESULT
+    @lpVtbl.value.is_ad_hoc_capable.call(this, pfadhoccapable)
+  end
+  def is_radio_on(this : IDot11AdHocInterface*, pfisradioon : UInt8*) : HRESULT
+    @lpVtbl.value.is_radio_on.call(this, pfisradioon)
+  end
+  def get_active_network(this : IDot11AdHocInterface*, ppnetwork : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.get_active_network.call(this, ppnetwork)
+  end
+  def get_i_enum_security_settings(this : IDot11AdHocInterface*, ppenum : IEnumDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.get_i_enum_security_settings.call(this, ppenum)
+  end
+  def get_i_enum_dot11_ad_hoc_networks(this : IDot11AdHocInterface*, pfilterguid : Guid*, ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_networks.call(this, pfilterguid, ppenum)
+  end
+  def get_status(this : IDot11AdHocInterface*, pstate : DOT11_ADHOC_NETWORK_CONNECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstate)
+  end
+end
+struct LibWin32::IEnumDot11AdHocInterfaces
+  def query_interface(this : IEnumDot11AdHocInterfaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDot11AdHocInterfaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDot11AdHocInterfaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDot11AdHocInterfaces*, celt : UInt32, rgelt : IDot11AdHocInterface*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumDot11AdHocInterfaces*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDot11AdHocInterfaces*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDot11AdHocInterfaces*, ppenum : IEnumDot11AdHocInterfaces*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumDot11AdHocSecuritySettings
+  def query_interface(this : IEnumDot11AdHocSecuritySettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDot11AdHocSecuritySettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDot11AdHocSecuritySettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDot11AdHocSecuritySettings*, celt : UInt32, rgelt : IDot11AdHocSecuritySettings*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumDot11AdHocSecuritySettings*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDot11AdHocSecuritySettings*, ppenum : IEnumDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IDot11AdHocSecuritySettings
+  def query_interface(this : IDot11AdHocSecuritySettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocSecuritySettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocSecuritySettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dot11_auth_algorithm(this : IDot11AdHocSecuritySettings*, pauth : DOT11_ADHOC_AUTH_ALGORITHM*) : HRESULT
+    @lpVtbl.value.get_dot11_auth_algorithm.call(this, pauth)
+  end
+  def get_dot11_cipher_algorithm(this : IDot11AdHocSecuritySettings*, pcipher : DOT11_ADHOC_CIPHER_ALGORITHM*) : HRESULT
+    @lpVtbl.value.get_dot11_cipher_algorithm.call(this, pcipher)
+  end
+end
+struct LibWin32::IDot11AdHocInterfaceNotificationSink
+  def query_interface(this : IDot11AdHocInterfaceNotificationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDot11AdHocInterfaceNotificationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDot11AdHocInterfaceNotificationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_connection_status_change(this : IDot11AdHocInterfaceNotificationSink*, estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS) : HRESULT
+    @lpVtbl.value.on_connection_status_change.call(this, estatus)
+  end
 end

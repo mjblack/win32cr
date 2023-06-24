@@ -1894,3 +1894,878 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWiaDevMgr
+  def query_interface(this : IWiaDevMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaDevMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaDevMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_device_info(this : IWiaDevMgr*, lflag : Int32, ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.enum_device_info.call(this, lflag, ppienum)
+  end
+  def create_device(this : IWiaDevMgr*, bstrdeviceid : UInt8*, ppwiaitemroot : IWiaItem*) : HRESULT
+    @lpVtbl.value.create_device.call(this, bstrdeviceid, ppwiaitemroot)
+  end
+  def select_device_dlg(this : IWiaDevMgr*, hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**, ppitemroot : IWiaItem*) : HRESULT
+    @lpVtbl.value.select_device_dlg.call(this, hwndparent, ldevicetype, lflags, pbstrdeviceid, ppitemroot)
+  end
+  def select_device_dlg_id(this : IWiaDevMgr*, hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.select_device_dlg_id.call(this, hwndparent, ldevicetype, lflags, pbstrdeviceid)
+  end
+  def get_image_dlg(this : IWiaDevMgr*, hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, lintent : Int32, pitemroot : IWiaItem, bstrfilename : UInt8*, pguidformat : Guid*) : HRESULT
+    @lpVtbl.value.get_image_dlg.call(this, hwndparent, ldevicetype, lflags, lintent, pitemroot, bstrfilename, pguidformat)
+  end
+  def register_event_callback_program(this : IWiaDevMgr*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, bstrcommandline : UInt8*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_program.call(this, lflags, bstrdeviceid, peventguid, bstrcommandline, bstrname, bstrdescription, bstricon)
+  end
+  def register_event_callback_interface(this : IWiaDevMgr*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, piwiaeventcallback : IWiaEventCallback, peventobject : IUnknown*) : HRESULT
+    @lpVtbl.value.register_event_callback_interface.call(this, lflags, bstrdeviceid, peventguid, piwiaeventcallback, peventobject)
+  end
+  def register_event_callback_clsid(this : IWiaDevMgr*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, pclsid : Guid*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_clsid.call(this, lflags, bstrdeviceid, peventguid, pclsid, bstrname, bstrdescription, bstricon)
+  end
+  def add_device_dlg(this : IWiaDevMgr*, hwndparent : LibC::HANDLE, lflags : Int32) : HRESULT
+    @lpVtbl.value.add_device_dlg.call(this, hwndparent, lflags)
+  end
+end
+struct LibWin32::IEnumWIA_DEV_INFO
+  def query_interface(this : IEnumWIA_DEV_INFO*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWIA_DEV_INFO*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWIA_DEV_INFO*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWIA_DEV_INFO*, celt : UInt32, rgelt : IWiaPropertyStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumWIA_DEV_INFO*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWIA_DEV_INFO*, ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+  def get_count(this : IEnumWIA_DEV_INFO*, celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, celt)
+  end
+end
+struct LibWin32::IWiaEventCallback
+  def query_interface(this : IWiaEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaEventCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaEventCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def image_event_callback(this : IWiaEventCallback*, peventguid : Guid*, bstreventdescription : UInt8*, bstrdeviceid : UInt8*, bstrdevicedescription : UInt8*, dwdevicetype : UInt32, bstrfullitemname : UInt8*, puleventtype : UInt32*, ulreserved : UInt32) : HRESULT
+    @lpVtbl.value.image_event_callback.call(this, peventguid, bstreventdescription, bstrdeviceid, bstrdevicedescription, dwdevicetype, bstrfullitemname, puleventtype, ulreserved)
+  end
+end
+struct LibWin32::IWiaDataCallback
+  def query_interface(this : IWiaDataCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaDataCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaDataCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def banded_data_callback(this : IWiaDataCallback*, lmessage : Int32, lstatus : Int32, lpercentcomplete : Int32, loffset : Int32, llength : Int32, lreserved : Int32, lreslength : Int32, pbbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.banded_data_callback.call(this, lmessage, lstatus, lpercentcomplete, loffset, llength, lreserved, lreslength, pbbuffer)
+  end
+end
+struct LibWin32::IWiaDataTransfer
+  def query_interface(this : IWiaDataTransfer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaDataTransfer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaDataTransfer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def idt_get_data(this : IWiaDataTransfer*, pmedium : STGMEDIUM*, piwiadatacallback : IWiaDataCallback) : HRESULT
+    @lpVtbl.value.idt_get_data.call(this, pmedium, piwiadatacallback)
+  end
+  def idt_get_banded_data(this : IWiaDataTransfer*, pwiadatatransinfo : WIA_DATA_TRANSFER_INFO*, piwiadatacallback : IWiaDataCallback) : HRESULT
+    @lpVtbl.value.idt_get_banded_data.call(this, pwiadatatransinfo, piwiadatacallback)
+  end
+  def idt_query_get_data(this : IWiaDataTransfer*, pfe : WIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.idt_query_get_data.call(this, pfe)
+  end
+  def idt_enum_wia_format_info(this : IWiaDataTransfer*, ppenum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.idt_enum_wia_format_info.call(this, ppenum)
+  end
+  def idt_get_extended_transfer_info(this : IWiaDataTransfer*, pextendedtransferinfo : WIA_EXTENDED_TRANSFER_INFO*) : HRESULT
+    @lpVtbl.value.idt_get_extended_transfer_info.call(this, pextendedtransferinfo)
+  end
+end
+struct LibWin32::IWiaItem
+  def query_interface(this : IWiaItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IWiaItem*, pitemtype : Int32*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def analyze_item(this : IWiaItem*, lflags : Int32) : HRESULT
+    @lpVtbl.value.analyze_item.call(this, lflags)
+  end
+  def enum_child_items(this : IWiaItem*, ppienumwiaitem : IEnumWiaItem*) : HRESULT
+    @lpVtbl.value.enum_child_items.call(this, ppienumwiaitem)
+  end
+  def delete_item(this : IWiaItem*, lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_item.call(this, lflags)
+  end
+  def create_child_item(this : IWiaItem*, lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.create_child_item.call(this, lflags, bstritemname, bstrfullitemname, ppiwiaitem)
+  end
+  def enum_register_event_info(this : IWiaItem*, lflags : Int32, peventguid : Guid*, ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_register_event_info.call(this, lflags, peventguid, ppienum)
+  end
+  def find_item_by_name(this : IWiaItem*, lflags : Int32, bstrfullitemname : UInt8*, ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.find_item_by_name.call(this, lflags, bstrfullitemname, ppiwiaitem)
+  end
+  def device_dlg(this : IWiaItem*, hwndparent : LibC::HANDLE, lflags : Int32, lintent : Int32, plitemcount : Int32*, ppiwiaitem : IWiaItem**) : HRESULT
+    @lpVtbl.value.device_dlg.call(this, hwndparent, lflags, lintent, plitemcount, ppiwiaitem)
+  end
+  def device_command(this : IWiaItem*, lflags : Int32, pcmdguid : Guid*, piwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.device_command.call(this, lflags, pcmdguid, piwiaitem)
+  end
+  def get_root_item(this : IWiaItem*, ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.get_root_item.call(this, ppiwiaitem)
+  end
+  def enum_device_capabilities(this : IWiaItem*, lflags : Int32, ppienumwia_dev_caps : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_device_capabilities.call(this, lflags, ppienumwia_dev_caps)
+  end
+  def dump_item_data(this : IWiaItem*, bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_item_data.call(this, bstrdata)
+  end
+  def dump_drv_item_data(this : IWiaItem*, bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_drv_item_data.call(this, bstrdata)
+  end
+  def dump_tree_item_data(this : IWiaItem*, bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_tree_item_data.call(this, bstrdata)
+  end
+  def diagnostic(this : IWiaItem*, ulsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.diagnostic.call(this, ulsize, pbuffer)
+  end
+end
+struct LibWin32::IWiaPropertyStorage
+  def query_interface(this : IWiaPropertyStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaPropertyStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaPropertyStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_multiple(this : IWiaPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.read_multiple.call(this, cpspec, rgpspec, rgpropvar)
+  end
+  def write_multiple(this : IWiaPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*, propidnamefirst : UInt32) : HRESULT
+    @lpVtbl.value.write_multiple.call(this, cpspec, rgpspec, rgpropvar, propidnamefirst)
+  end
+  def delete_multiple(this : IWiaPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*) : HRESULT
+    @lpVtbl.value.delete_multiple.call(this, cpspec, rgpspec)
+  end
+  def read_property_names(this : IWiaPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.read_property_names.call(this, cpropid, rgpropid, rglpwstrname)
+  end
+  def write_property_names(this : IWiaPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.write_property_names.call(this, cpropid, rgpropid, rglpwstrname)
+  end
+  def delete_property_names(this : IWiaPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*) : HRESULT
+    @lpVtbl.value.delete_property_names.call(this, cpropid, rgpropid)
+  end
+  def commit(this : IWiaPropertyStorage*, grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, grfcommitflags)
+  end
+  def revert(this : IWiaPropertyStorage*) : HRESULT
+    @lpVtbl.value.revert.call(this)
+  end
+  def enum(this : IWiaPropertyStorage*, ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.enum.call(this, ppenum)
+  end
+  def set_times(this : IWiaPropertyStorage*, pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_times.call(this, pctime, patime, pmtime)
+  end
+  def set_class(this : IWiaPropertyStorage*, clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.call(this, clsid)
+  end
+  def stat(this : IWiaPropertyStorage*, pstatpsstg : STATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatpsstg)
+  end
+  def get_property_attributes(this : IWiaPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*, rgflags : UInt32*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property_attributes.call(this, cpspec, rgpspec, rgflags, rgpropvar)
+  end
+  def get_count(this : IWiaPropertyStorage*, pulnumprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pulnumprops)
+  end
+  def get_property_stream(this : IWiaPropertyStorage*, pcompatibilityid : Guid*, ppistream : IStream*) : HRESULT
+    @lpVtbl.value.get_property_stream.call(this, pcompatibilityid, ppistream)
+  end
+  def set_property_stream(this : IWiaPropertyStorage*, pcompatibilityid : Guid*, pistream : IStream) : HRESULT
+    @lpVtbl.value.set_property_stream.call(this, pcompatibilityid, pistream)
+  end
+end
+struct LibWin32::IEnumWiaItem
+  def query_interface(this : IEnumWiaItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWiaItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWiaItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWiaItem*, celt : UInt32, ppiwiaitem : IWiaItem*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppiwiaitem, pceltfetched)
+  end
+  def skip(this : IEnumWiaItem*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWiaItem*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWiaItem*, ppienum : IEnumWiaItem*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+  def get_count(this : IEnumWiaItem*, celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, celt)
+  end
+end
+struct LibWin32::IEnumWIA_DEV_CAPS
+  def query_interface(this : IEnumWIA_DEV_CAPS*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWIA_DEV_CAPS*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWIA_DEV_CAPS*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWIA_DEV_CAPS*, celt : UInt32, rgelt : WIA_DEV_CAP*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumWIA_DEV_CAPS*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWIA_DEV_CAPS*, ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+  def get_count(this : IEnumWIA_DEV_CAPS*, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelt)
+  end
+end
+struct LibWin32::IEnumWIA_FORMAT_INFO
+  def query_interface(this : IEnumWIA_FORMAT_INFO*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWIA_FORMAT_INFO*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWIA_FORMAT_INFO*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWIA_FORMAT_INFO*, celt : UInt32, rgelt : WIA_FORMAT_INFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumWIA_FORMAT_INFO*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWIA_FORMAT_INFO*, ppienum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+  def get_count(this : IEnumWIA_FORMAT_INFO*, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelt)
+  end
+end
+struct LibWin32::IWiaLog
+  def query_interface(this : IWiaLog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaLog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaLog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_log(this : IWiaLog*, hinstance : Int32) : HRESULT
+    @lpVtbl.value.initialize_log.call(this, hinstance)
+  end
+  def h_result(this : IWiaLog*, hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result.call(this, hresult)
+  end
+  def log(this : IWiaLog*, lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log.call(this, lflags, lresid, ldetail, bstrtext)
+  end
+end
+struct LibWin32::IWiaLogEx
+  def query_interface(this : IWiaLogEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaLogEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaLogEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_log_ex(this : IWiaLogEx*, hinstance : UInt8*) : HRESULT
+    @lpVtbl.value.initialize_log_ex.call(this, hinstance)
+  end
+  def h_result(this : IWiaLogEx*, hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result.call(this, hresult)
+  end
+  def log(this : IWiaLogEx*, lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log.call(this, lflags, lresid, ldetail, bstrtext)
+  end
+  def h_result_ex(this : IWiaLogEx*, lmethodid : Int32, hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result_ex.call(this, lmethodid, hresult)
+  end
+  def log_ex(this : IWiaLogEx*, lmethodid : Int32, lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log_ex.call(this, lmethodid, lflags, lresid, ldetail, bstrtext)
+  end
+end
+struct LibWin32::IWiaNotifyDevMgr
+  def query_interface(this : IWiaNotifyDevMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaNotifyDevMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaNotifyDevMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def new_device_arrival(this : IWiaNotifyDevMgr*) : HRESULT
+    @lpVtbl.value.new_device_arrival.call(this)
+  end
+end
+struct LibWin32::IWiaItemExtras
+  def query_interface(this : IWiaItemExtras*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaItemExtras*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaItemExtras*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_extended_error_info(this : IWiaItemExtras*, bstrerrortext : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_error_info.call(this, bstrerrortext)
+  end
+  def escape(this : IWiaItemExtras*, dwescapecode : UInt32, lpindata : UInt8*, cbindatasize : UInt32, poutdata : UInt8*, dwoutdatasize : UInt32, pdwactualdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.escape.call(this, dwescapecode, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdatasize)
+  end
+  def cancel_pending_io(this : IWiaItemExtras*) : HRESULT
+    @lpVtbl.value.cancel_pending_io.call(this)
+  end
+end
+struct LibWin32::IWiaAppErrorHandler
+  def query_interface(this : IWiaAppErrorHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaAppErrorHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaAppErrorHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IWiaAppErrorHandler*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def report_status(this : IWiaAppErrorHandler*, lflags : Int32, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, lpercentcomplete : Int32) : HRESULT
+    @lpVtbl.value.report_status.call(this, lflags, pwiaitem2, hrstatus, lpercentcomplete)
+  end
+end
+struct LibWin32::IWiaErrorHandler
+  def query_interface(this : IWiaErrorHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaErrorHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaErrorHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def report_status(this : IWiaErrorHandler*, lflags : Int32, hwndparent : LibC::HANDLE, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, lpercentcomplete : Int32) : HRESULT
+    @lpVtbl.value.report_status.call(this, lflags, hwndparent, pwiaitem2, hrstatus, lpercentcomplete)
+  end
+  def get_status_description(this : IWiaErrorHandler*, lflags : Int32, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_description.call(this, lflags, pwiaitem2, hrstatus, pbstrdescription)
+  end
+end
+struct LibWin32::IWiaTransfer
+  def query_interface(this : IWiaTransfer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaTransfer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaTransfer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def download(this : IWiaTransfer*, lflags : Int32, piwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.download.call(this, lflags, piwiatransfercallback)
+  end
+  def upload(this : IWiaTransfer*, lflags : Int32, psource : IStream, piwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.upload.call(this, lflags, psource, piwiatransfercallback)
+  end
+  def cancel(this : IWiaTransfer*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def enum_wia_format_info(this : IWiaTransfer*, ppenum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.enum_wia_format_info.call(this, ppenum)
+  end
+end
+struct LibWin32::IWiaTransferCallback
+  def query_interface(this : IWiaTransferCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaTransferCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaTransferCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_callback(this : IWiaTransferCallback*, lflags : Int32, pwiatransferparams : WiaTransferParams*) : HRESULT
+    @lpVtbl.value.transfer_callback.call(this, lflags, pwiatransferparams)
+  end
+  def get_next_stream(this : IWiaTransferCallback*, lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppdestination : IStream*) : HRESULT
+    @lpVtbl.value.get_next_stream.call(this, lflags, bstritemname, bstrfullitemname, ppdestination)
+  end
+end
+struct LibWin32::IWiaSegmentationFilter
+  def query_interface(this : IWiaSegmentationFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaSegmentationFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaSegmentationFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def detect_regions(this : IWiaSegmentationFilter*, lflags : Int32, pinputstream : IStream, pwiaitem2 : IWiaItem2) : HRESULT
+    @lpVtbl.value.detect_regions.call(this, lflags, pinputstream, pwiaitem2)
+  end
+end
+struct LibWin32::IWiaImageFilter
+  def query_interface(this : IWiaImageFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaImageFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaImageFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_filter(this : IWiaImageFilter*, pwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.initialize_filter.call(this, pwiaitem2, pwiatransfercallback)
+  end
+  def set_new_callback(this : IWiaImageFilter*, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.set_new_callback.call(this, pwiatransfercallback)
+  end
+  def filter_preview_image(this : IWiaImageFilter*, lflags : Int32, pwiachilditem2 : IWiaItem2, inputimageextents : RECT, pinputstream : IStream) : HRESULT
+    @lpVtbl.value.filter_preview_image.call(this, lflags, pwiachilditem2, inputimageextents, pinputstream)
+  end
+  def apply_properties(this : IWiaImageFilter*, pwiapropertystorage : IWiaPropertyStorage) : HRESULT
+    @lpVtbl.value.apply_properties.call(this, pwiapropertystorage)
+  end
+end
+struct LibWin32::IWiaPreview
+  def query_interface(this : IWiaPreview*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaPreview*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaPreview*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_new_preview(this : IWiaPreview*, lflags : Int32, pwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.get_new_preview.call(this, lflags, pwiaitem2, pwiatransfercallback)
+  end
+  def update_preview(this : IWiaPreview*, lflags : Int32, pchildwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.update_preview.call(this, lflags, pchildwiaitem2, pwiatransfercallback)
+  end
+  def detect_regions(this : IWiaPreview*, lflags : Int32) : HRESULT
+    @lpVtbl.value.detect_regions.call(this, lflags)
+  end
+  def clear(this : IWiaPreview*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IEnumWiaItem2
+  def query_interface(this : IEnumWiaItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWiaItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWiaItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWiaItem2*, celt : UInt32, ppiwiaitem2 : IWiaItem2*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppiwiaitem2, pceltfetched)
+  end
+  def skip(this : IEnumWiaItem2*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWiaItem2*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWiaItem2*, ppienum : IEnumWiaItem2*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+  def get_count(this : IEnumWiaItem2*, celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, celt)
+  end
+end
+struct LibWin32::IWiaItem2
+  def query_interface(this : IWiaItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaItem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaItem2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_child_item(this : IWiaItem2*, litemflags : Int32, lcreationflags : Int32, bstritemname : UInt8*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.create_child_item.call(this, litemflags, lcreationflags, bstritemname, ppiwiaitem2)
+  end
+  def delete_item(this : IWiaItem2*, lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_item.call(this, lflags)
+  end
+  def enum_child_items(this : IWiaItem2*, pcategoryguid : Guid*, ppienumwiaitem2 : IEnumWiaItem2*) : HRESULT
+    @lpVtbl.value.enum_child_items.call(this, pcategoryguid, ppienumwiaitem2)
+  end
+  def find_item_by_name(this : IWiaItem2*, lflags : Int32, bstrfullitemname : UInt8*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.find_item_by_name.call(this, lflags, bstrfullitemname, ppiwiaitem2)
+  end
+  def get_item_category(this : IWiaItem2*, pitemcategoryguid : Guid*) : HRESULT
+    @lpVtbl.value.get_item_category.call(this, pitemcategoryguid)
+  end
+  def get_item_type(this : IWiaItem2*, pitemtype : Int32*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def device_dlg(this : IWiaItem2*, lflags : Int32, hwndparent : LibC::HANDLE, bstrfoldername : UInt8*, bstrfilename : UInt8*, plnumfiles : Int32*, ppbstrfilepaths : UInt8***, ppitem : IWiaItem2*) : HRESULT
+    @lpVtbl.value.device_dlg.call(this, lflags, hwndparent, bstrfoldername, bstrfilename, plnumfiles, ppbstrfilepaths, ppitem)
+  end
+  def device_command(this : IWiaItem2*, lflags : Int32, pcmdguid : Guid*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.device_command.call(this, lflags, pcmdguid, ppiwiaitem2)
+  end
+  def enum_device_capabilities(this : IWiaItem2*, lflags : Int32, ppienumwia_dev_caps : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_device_capabilities.call(this, lflags, ppienumwia_dev_caps)
+  end
+  def check_extension(this : IWiaItem2*, lflags : Int32, bstrname : UInt8*, riidextensioninterface : Guid*, pbextensionexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_extension.call(this, lflags, bstrname, riidextensioninterface, pbextensionexists)
+  end
+  def get_extension(this : IWiaItem2*, lflags : Int32, bstrname : UInt8*, riidextensioninterface : Guid*, ppout : Void**) : HRESULT
+    @lpVtbl.value.get_extension.call(this, lflags, bstrname, riidextensioninterface, ppout)
+  end
+  def get_parent_item(this : IWiaItem2*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppiwiaitem2)
+  end
+  def get_root_item(this : IWiaItem2*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_root_item.call(this, ppiwiaitem2)
+  end
+  def get_preview_component(this : IWiaItem2*, lflags : Int32, ppwiapreview : IWiaPreview*) : HRESULT
+    @lpVtbl.value.get_preview_component.call(this, lflags, ppwiapreview)
+  end
+  def enum_register_event_info(this : IWiaItem2*, lflags : Int32, peventguid : Guid*, ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_register_event_info.call(this, lflags, peventguid, ppienum)
+  end
+  def diagnostic(this : IWiaItem2*, ulsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.diagnostic.call(this, ulsize, pbuffer)
+  end
+end
+struct LibWin32::IWiaDevMgr2
+  def query_interface(this : IWiaDevMgr2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaDevMgr2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaDevMgr2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_device_info(this : IWiaDevMgr2*, lflags : Int32, ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.enum_device_info.call(this, lflags, ppienum)
+  end
+  def create_device(this : IWiaDevMgr2*, lflags : Int32, bstrdeviceid : UInt8*, ppwiaitem2root : IWiaItem2*) : HRESULT
+    @lpVtbl.value.create_device.call(this, lflags, bstrdeviceid, ppwiaitem2root)
+  end
+  def select_device_dlg(this : IWiaDevMgr2*, hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**, ppitemroot : IWiaItem2*) : HRESULT
+    @lpVtbl.value.select_device_dlg.call(this, hwndparent, ldevicetype, lflags, pbstrdeviceid, ppitemroot)
+  end
+  def select_device_dlg_id(this : IWiaDevMgr2*, hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.select_device_dlg_id.call(this, hwndparent, ldevicetype, lflags, pbstrdeviceid)
+  end
+  def register_event_callback_interface(this : IWiaDevMgr2*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, piwiaeventcallback : IWiaEventCallback, peventobject : IUnknown*) : HRESULT
+    @lpVtbl.value.register_event_callback_interface.call(this, lflags, bstrdeviceid, peventguid, piwiaeventcallback, peventobject)
+  end
+  def register_event_callback_program(this : IWiaDevMgr2*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, bstrfullappname : UInt8*, bstrcommandlinearg : UInt8*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_program.call(this, lflags, bstrdeviceid, peventguid, bstrfullappname, bstrcommandlinearg, bstrname, bstrdescription, bstricon)
+  end
+  def register_event_callback_clsid(this : IWiaDevMgr2*, lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, pclsid : Guid*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_clsid.call(this, lflags, bstrdeviceid, peventguid, pclsid, bstrname, bstrdescription, bstricon)
+  end
+  def get_image_dlg(this : IWiaDevMgr2*, lflags : Int32, bstrdeviceid : UInt8*, hwndparent : LibC::HANDLE, bstrfoldername : UInt8*, bstrfilename : UInt8*, plnumfiles : Int32*, ppbstrfilepaths : UInt8***, ppitem : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_image_dlg.call(this, lflags, bstrdeviceid, hwndparent, bstrfoldername, bstrfilename, plnumfiles, ppbstrfilepaths, ppitem)
+  end
+end
+struct LibWin32::IWiaMiniDrv
+  def query_interface(this : IWiaMiniDrv*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaMiniDrv*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaMiniDrv*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def drv_initialize_wia(this : IWiaMiniDrv*, midl__iwiaminidrv0000 : UInt8*, midl__iwiaminidrv0001 : Int32, midl__iwiaminidrv0002 : UInt8*, midl__iwiaminidrv0003 : UInt8*, midl__iwiaminidrv0004 : IUnknown, midl__iwiaminidrv0005 : IUnknown, midl__iwiaminidrv0006 : IWiaDrvItem*, midl__iwiaminidrv0007 : IUnknown*, midl__iwiaminidrv0008 : Int32*) : HRESULT
+    @lpVtbl.value.drv_initialize_wia.call(this, midl__iwiaminidrv0000, midl__iwiaminidrv0001, midl__iwiaminidrv0002, midl__iwiaminidrv0003, midl__iwiaminidrv0004, midl__iwiaminidrv0005, midl__iwiaminidrv0006, midl__iwiaminidrv0007, midl__iwiaminidrv0008)
+  end
+  def drv_acquire_item_data(this : IWiaMiniDrv*, midl__iwiaminidrv0009 : UInt8*, midl__iwiaminidrv0010 : Int32, midl__iwiaminidrv0011 : MINIDRV_TRANSFER_CONTEXT*, midl__iwiaminidrv0012 : Int32*) : HRESULT
+    @lpVtbl.value.drv_acquire_item_data.call(this, midl__iwiaminidrv0009, midl__iwiaminidrv0010, midl__iwiaminidrv0011, midl__iwiaminidrv0012)
+  end
+  def drv_init_item_properties(this : IWiaMiniDrv*, midl__iwiaminidrv0013 : UInt8*, midl__iwiaminidrv0014 : Int32, midl__iwiaminidrv0015 : Int32*) : HRESULT
+    @lpVtbl.value.drv_init_item_properties.call(this, midl__iwiaminidrv0013, midl__iwiaminidrv0014, midl__iwiaminidrv0015)
+  end
+  def drv_validate_item_properties(this : IWiaMiniDrv*, midl__iwiaminidrv0016 : UInt8*, midl__iwiaminidrv0017 : Int32, midl__iwiaminidrv0018 : UInt32, midl__iwiaminidrv0019 : PROPSPEC*, midl__iwiaminidrv0020 : Int32*) : HRESULT
+    @lpVtbl.value.drv_validate_item_properties.call(this, midl__iwiaminidrv0016, midl__iwiaminidrv0017, midl__iwiaminidrv0018, midl__iwiaminidrv0019, midl__iwiaminidrv0020)
+  end
+  def drv_write_item_properties(this : IWiaMiniDrv*, midl__iwiaminidrv0021 : UInt8*, midl__iwiaminidrv0022 : Int32, midl__iwiaminidrv0023 : MINIDRV_TRANSFER_CONTEXT*, midl__iwiaminidrv0024 : Int32*) : HRESULT
+    @lpVtbl.value.drv_write_item_properties.call(this, midl__iwiaminidrv0021, midl__iwiaminidrv0022, midl__iwiaminidrv0023, midl__iwiaminidrv0024)
+  end
+  def drv_read_item_properties(this : IWiaMiniDrv*, midl__iwiaminidrv0025 : UInt8*, midl__iwiaminidrv0026 : Int32, midl__iwiaminidrv0027 : UInt32, midl__iwiaminidrv0028 : PROPSPEC*, midl__iwiaminidrv0029 : Int32*) : HRESULT
+    @lpVtbl.value.drv_read_item_properties.call(this, midl__iwiaminidrv0025, midl__iwiaminidrv0026, midl__iwiaminidrv0027, midl__iwiaminidrv0028, midl__iwiaminidrv0029)
+  end
+  def drv_lock_wia_device(this : IWiaMiniDrv*, midl__iwiaminidrv0030 : UInt8*, midl__iwiaminidrv0031 : Int32, midl__iwiaminidrv0032 : Int32*) : HRESULT
+    @lpVtbl.value.drv_lock_wia_device.call(this, midl__iwiaminidrv0030, midl__iwiaminidrv0031, midl__iwiaminidrv0032)
+  end
+  def drv_un_lock_wia_device(this : IWiaMiniDrv*, midl__iwiaminidrv0033 : UInt8*, midl__iwiaminidrv0034 : Int32, midl__iwiaminidrv0035 : Int32*) : HRESULT
+    @lpVtbl.value.drv_un_lock_wia_device.call(this, midl__iwiaminidrv0033, midl__iwiaminidrv0034, midl__iwiaminidrv0035)
+  end
+  def drv_analyze_item(this : IWiaMiniDrv*, midl__iwiaminidrv0036 : UInt8*, midl__iwiaminidrv0037 : Int32, midl__iwiaminidrv0038 : Int32*) : HRESULT
+    @lpVtbl.value.drv_analyze_item.call(this, midl__iwiaminidrv0036, midl__iwiaminidrv0037, midl__iwiaminidrv0038)
+  end
+  def drv_get_device_error_str(this : IWiaMiniDrv*, midl__iwiaminidrv0039 : Int32, midl__iwiaminidrv0040 : Int32, midl__iwiaminidrv0041 : LibC::LPWSTR*, midl__iwiaminidrv0042 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_device_error_str.call(this, midl__iwiaminidrv0039, midl__iwiaminidrv0040, midl__iwiaminidrv0041, midl__iwiaminidrv0042)
+  end
+  def drv_device_command(this : IWiaMiniDrv*, midl__iwiaminidrv0043 : UInt8*, midl__iwiaminidrv0044 : Int32, midl__iwiaminidrv0045 : Guid*, midl__iwiaminidrv0046 : IWiaDrvItem*, midl__iwiaminidrv0047 : Int32*) : HRESULT
+    @lpVtbl.value.drv_device_command.call(this, midl__iwiaminidrv0043, midl__iwiaminidrv0044, midl__iwiaminidrv0045, midl__iwiaminidrv0046, midl__iwiaminidrv0047)
+  end
+  def drv_get_capabilities(this : IWiaMiniDrv*, midl__iwiaminidrv0048 : UInt8*, midl__iwiaminidrv0049 : Int32, midl__iwiaminidrv0050 : Int32*, midl__iwiaminidrv0051 : WIA_DEV_CAP_DRV**, midl__iwiaminidrv0052 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_capabilities.call(this, midl__iwiaminidrv0048, midl__iwiaminidrv0049, midl__iwiaminidrv0050, midl__iwiaminidrv0051, midl__iwiaminidrv0052)
+  end
+  def drv_delete_item(this : IWiaMiniDrv*, midl__iwiaminidrv0053 : UInt8*, midl__iwiaminidrv0054 : Int32, midl__iwiaminidrv0055 : Int32*) : HRESULT
+    @lpVtbl.value.drv_delete_item.call(this, midl__iwiaminidrv0053, midl__iwiaminidrv0054, midl__iwiaminidrv0055)
+  end
+  def drv_free_drv_item_context(this : IWiaMiniDrv*, midl__iwiaminidrv0056 : Int32, midl__iwiaminidrv0057 : UInt8*, midl__iwiaminidrv0058 : Int32*) : HRESULT
+    @lpVtbl.value.drv_free_drv_item_context.call(this, midl__iwiaminidrv0056, midl__iwiaminidrv0057, midl__iwiaminidrv0058)
+  end
+  def drv_get_wia_format_info(this : IWiaMiniDrv*, midl__iwiaminidrv0059 : UInt8*, midl__iwiaminidrv0060 : Int32, midl__iwiaminidrv0061 : Int32*, midl__iwiaminidrv0062 : WIA_FORMAT_INFO**, midl__iwiaminidrv0063 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_wia_format_info.call(this, midl__iwiaminidrv0059, midl__iwiaminidrv0060, midl__iwiaminidrv0061, midl__iwiaminidrv0062, midl__iwiaminidrv0063)
+  end
+  def drv_notify_pnp_event(this : IWiaMiniDrv*, peventguid : Guid*, bstrdeviceid : UInt8*, ulreserved : UInt32) : HRESULT
+    @lpVtbl.value.drv_notify_pnp_event.call(this, peventguid, bstrdeviceid, ulreserved)
+  end
+  def drv_un_initialize_wia(this : IWiaMiniDrv*, midl__iwiaminidrv0064 : UInt8*) : HRESULT
+    @lpVtbl.value.drv_un_initialize_wia.call(this, midl__iwiaminidrv0064)
+  end
+end
+struct LibWin32::IWiaMiniDrvCallBack
+  def query_interface(this : IWiaMiniDrvCallBack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaMiniDrvCallBack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaMiniDrvCallBack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def mini_drv_callback(this : IWiaMiniDrvCallBack*, lreason : Int32, lstatus : Int32, lpercentcomplete : Int32, loffset : Int32, llength : Int32, ptranctx : MINIDRV_TRANSFER_CONTEXT*, lreserved : Int32) : HRESULT
+    @lpVtbl.value.mini_drv_callback.call(this, lreason, lstatus, lpercentcomplete, loffset, llength, ptranctx, lreserved)
+  end
+end
+struct LibWin32::IWiaMiniDrvTransferCallback
+  def query_interface(this : IWiaMiniDrvTransferCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaMiniDrvTransferCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaMiniDrvTransferCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_stream(this : IWiaMiniDrvTransferCallback*, lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppistream : IStream*) : HRESULT
+    @lpVtbl.value.get_next_stream.call(this, lflags, bstritemname, bstrfullitemname, ppistream)
+  end
+  def send_message(this : IWiaMiniDrvTransferCallback*, lflags : Int32, pwiatransferparams : WiaTransferParams*) : HRESULT
+    @lpVtbl.value.send_message.call(this, lflags, pwiatransferparams)
+  end
+end
+struct LibWin32::IWiaDrvItem
+  def query_interface(this : IWiaDrvItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaDrvItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaDrvItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_flags(this : IWiaDrvItem*, midl__iwiadrvitem0000 : Int32*) : HRESULT
+    @lpVtbl.value.get_item_flags.call(this, midl__iwiadrvitem0000)
+  end
+  def get_device_spec_context(this : IWiaDrvItem*, midl__iwiadrvitem0001 : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_spec_context.call(this, midl__iwiadrvitem0001)
+  end
+  def get_full_item_name(this : IWiaDrvItem*, midl__iwiadrvitem0002 : UInt8**) : HRESULT
+    @lpVtbl.value.get_full_item_name.call(this, midl__iwiadrvitem0002)
+  end
+  def get_item_name(this : IWiaDrvItem*, midl__iwiadrvitem0003 : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.call(this, midl__iwiadrvitem0003)
+  end
+  def add_item_to_folder(this : IWiaDrvItem*, midl__iwiadrvitem0004 : IWiaDrvItem) : HRESULT
+    @lpVtbl.value.add_item_to_folder.call(this, midl__iwiadrvitem0004)
+  end
+  def unlink_item_tree(this : IWiaDrvItem*, midl__iwiadrvitem0005 : Int32) : HRESULT
+    @lpVtbl.value.unlink_item_tree.call(this, midl__iwiadrvitem0005)
+  end
+  def remove_item_from_folder(this : IWiaDrvItem*, midl__iwiadrvitem0006 : Int32) : HRESULT
+    @lpVtbl.value.remove_item_from_folder.call(this, midl__iwiadrvitem0006)
+  end
+  def find_item_by_name(this : IWiaDrvItem*, midl__iwiadrvitem0007 : Int32, midl__iwiadrvitem0008 : UInt8*, midl__iwiadrvitem0009 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.find_item_by_name.call(this, midl__iwiadrvitem0007, midl__iwiadrvitem0008, midl__iwiadrvitem0009)
+  end
+  def find_child_item_by_name(this : IWiaDrvItem*, midl__iwiadrvitem0010 : UInt8*, midl__iwiadrvitem0011 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.find_child_item_by_name.call(this, midl__iwiadrvitem0010, midl__iwiadrvitem0011)
+  end
+  def get_parent_item(this : IWiaDrvItem*, midl__iwiadrvitem0012 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, midl__iwiadrvitem0012)
+  end
+  def get_first_child_item(this : IWiaDrvItem*, midl__iwiadrvitem0013 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_first_child_item.call(this, midl__iwiadrvitem0013)
+  end
+  def get_next_sibling_item(this : IWiaDrvItem*, midl__iwiadrvitem0014 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_next_sibling_item.call(this, midl__iwiadrvitem0014)
+  end
+  def dump_item_data(this : IWiaDrvItem*, midl__iwiadrvitem0015 : UInt8**) : HRESULT
+    @lpVtbl.value.dump_item_data.call(this, midl__iwiadrvitem0015)
+  end
+end
+struct LibWin32::IWiaVideo
+  def query_interface(this : IWiaVideo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaVideo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaVideo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_preview_visible(this : IWiaVideo*, pbpreviewvisible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_preview_visible.call(this, pbpreviewvisible)
+  end
+  def put_preview_visible(this : IWiaVideo*, bpreviewvisible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_preview_visible.call(this, bpreviewvisible)
+  end
+  def get_images_directory(this : IWiaVideo*, pbstrimagedirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_images_directory.call(this, pbstrimagedirectory)
+  end
+  def put_images_directory(this : IWiaVideo*, bstrimagedirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_images_directory.call(this, bstrimagedirectory)
+  end
+  def create_video_by_wia_dev_id(this : IWiaVideo*, bstrwiadeviceid : UInt8*, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_wia_dev_id.call(this, bstrwiadeviceid, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def create_video_by_dev_num(this : IWiaVideo*, uidevicenumber : UInt32, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_dev_num.call(this, uidevicenumber, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def create_video_by_name(this : IWiaVideo*, bstrfriendlyname : UInt8*, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_name.call(this, bstrfriendlyname, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def destroy_video(this : IWiaVideo*) : HRESULT
+    @lpVtbl.value.destroy_video.call(this)
+  end
+  def play(this : IWiaVideo*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def pause(this : IWiaVideo*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def take_picture(this : IWiaVideo*, pbstrnewimagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.take_picture.call(this, pbstrnewimagefilename)
+  end
+  def resize_video(this : IWiaVideo*, bstretchtofitparent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.resize_video.call(this, bstretchtofitparent)
+  end
+  def get_current_state(this : IWiaVideo*, pstate : WIAVIDEO_STATE*) : HRESULT
+    @lpVtbl.value.get_current_state.call(this, pstate)
+  end
+end
+struct LibWin32::IWiaUIExtension2
+  def query_interface(this : IWiaUIExtension2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaUIExtension2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaUIExtension2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def device_dialog(this : IWiaUIExtension2*, pdevicedialogdata : DEVICEDIALOGDATA2*) : HRESULT
+    @lpVtbl.value.device_dialog.call(this, pdevicedialogdata)
+  end
+  def get_device_icon(this : IWiaUIExtension2*, bstrdeviceid : UInt8*, phicon : HANDLE*, nsize : UInt32) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, bstrdeviceid, phicon, nsize)
+  end
+end
+struct LibWin32::IWiaUIExtension
+  def query_interface(this : IWiaUIExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWiaUIExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWiaUIExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def device_dialog(this : IWiaUIExtension*, pdevicedialogdata : DEVICEDIALOGDATA*) : HRESULT
+    @lpVtbl.value.device_dialog.call(this, pdevicedialogdata)
+  end
+  def get_device_icon(this : IWiaUIExtension*, bstrdeviceid : UInt8*, phicon : HANDLE*, nsize : UInt32) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, bstrdeviceid, phicon, nsize)
+  end
+  def get_device_bitmap_logo(this : IWiaUIExtension*, bstrdeviceid : UInt8*, phbitmap : HBITMAP*, nmaxwidth : UInt32, nmaxheight : UInt32) : HRESULT
+    @lpVtbl.value.get_device_bitmap_logo.call(this, bstrdeviceid, phbitmap, nmaxwidth, nmaxheight)
+  end
+end

@@ -148,3 +148,183 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ICompositionDrawingSurfaceInterop
+  def query_interface(this : ICompositionDrawingSurfaceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositionDrawingSurfaceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositionDrawingSurfaceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ICompositionDrawingSurfaceInterop*, updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw(this : ICompositionDrawingSurfaceInterop*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def resize(this : ICompositionDrawingSurfaceInterop*, sizepixels : SIZE) : HRESULT
+    @lpVtbl.value.resize.call(this, sizepixels)
+  end
+  def scroll(this : ICompositionDrawingSurfaceInterop*, scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollrect, cliprect, offsetx, offsety)
+  end
+  def resume_draw(this : ICompositionDrawingSurfaceInterop*) : HRESULT
+    @lpVtbl.value.resume_draw.call(this)
+  end
+  def suspend_draw(this : ICompositionDrawingSurfaceInterop*) : HRESULT
+    @lpVtbl.value.suspend_draw.call(this)
+  end
+end
+struct LibWin32::ICompositionDrawingSurfaceInterop2
+  def query_interface(this : ICompositionDrawingSurfaceInterop2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositionDrawingSurfaceInterop2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositionDrawingSurfaceInterop2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ICompositionDrawingSurfaceInterop2*, updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw(this : ICompositionDrawingSurfaceInterop2*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def resize(this : ICompositionDrawingSurfaceInterop2*, sizepixels : SIZE) : HRESULT
+    @lpVtbl.value.resize.call(this, sizepixels)
+  end
+  def scroll(this : ICompositionDrawingSurfaceInterop2*, scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollrect, cliprect, offsetx, offsety)
+  end
+  def resume_draw(this : ICompositionDrawingSurfaceInterop2*) : HRESULT
+    @lpVtbl.value.resume_draw.call(this)
+  end
+  def suspend_draw(this : ICompositionDrawingSurfaceInterop2*) : HRESULT
+    @lpVtbl.value.suspend_draw.call(this)
+  end
+  def copy_surface(this : ICompositionDrawingSurfaceInterop2*, destinationresource : IUnknown, destinationoffsetx : Int32, destinationoffsety : Int32, sourcerectangle : RECT*) : HRESULT
+    @lpVtbl.value.copy_surface.call(this, destinationresource, destinationoffsetx, destinationoffsety, sourcerectangle)
+  end
+end
+struct LibWin32::ICompositionGraphicsDeviceInterop
+  def query_interface(this : ICompositionGraphicsDeviceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositionGraphicsDeviceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositionGraphicsDeviceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_rendering_device(this : ICompositionGraphicsDeviceInterop*, value : IUnknown*) : HRESULT
+    @lpVtbl.value.get_rendering_device.call(this, value)
+  end
+  def set_rendering_device(this : ICompositionGraphicsDeviceInterop*, value : IUnknown) : HRESULT
+    @lpVtbl.value.set_rendering_device.call(this, value)
+  end
+end
+struct LibWin32::ICompositorInterop
+  def query_interface(this : ICompositorInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositorInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositorInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_composition_surface_for_handle(this : ICompositorInterop*, swapchain : LibC::HANDLE, result : ICompositionSurface*) : HRESULT
+    @lpVtbl.value.create_composition_surface_for_handle.call(this, swapchain, result)
+  end
+  def create_composition_surface_for_swap_chain(this : ICompositorInterop*, swapchain : IUnknown, result : ICompositionSurface*) : HRESULT
+    @lpVtbl.value.create_composition_surface_for_swap_chain.call(this, swapchain, result)
+  end
+  def create_graphics_device(this : ICompositorInterop*, renderingdevice : IUnknown, result : CompositionGraphicsDevice*) : HRESULT
+    @lpVtbl.value.create_graphics_device.call(this, renderingdevice, result)
+  end
+end
+struct LibWin32::ISwapChainInterop
+  def query_interface(this : ISwapChainInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISwapChainInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISwapChainInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_swap_chain(this : ISwapChainInterop*, swapchain : IUnknown) : HRESULT
+    @lpVtbl.value.set_swap_chain.call(this, swapchain)
+  end
+end
+struct LibWin32::IVisualInteractionSourceInterop
+  def query_interface(this : IVisualInteractionSourceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualInteractionSourceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualInteractionSourceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def try_redirect_for_manipulation(this : IVisualInteractionSourceInterop*, pointerinfo : POINTER_INFO*) : HRESULT
+    @lpVtbl.value.try_redirect_for_manipulation.call(this, pointerinfo)
+  end
+end
+struct LibWin32::ICompositionCapabilitiesInteropFactory
+  def query_interface(this : ICompositionCapabilitiesInteropFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositionCapabilitiesInteropFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositionCapabilitiesInteropFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ICompositionCapabilitiesInteropFactory*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ICompositionCapabilitiesInteropFactory*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ICompositionCapabilitiesInteropFactory*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : ICompositionCapabilitiesInteropFactory*, hwnd : LibC::HANDLE, result : CompositionCapabilities*) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, hwnd, result)
+  end
+end
+struct LibWin32::ICompositorDesktopInterop
+  def query_interface(this : ICompositorDesktopInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICompositorDesktopInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICompositorDesktopInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_desktop_window_target(this : ICompositorDesktopInterop*, hwndtarget : LibC::HANDLE, istopmost : LibC::BOOL, result : DesktopWindowTarget*) : HRESULT
+    @lpVtbl.value.create_desktop_window_target.call(this, hwndtarget, istopmost, result)
+  end
+  def ensure_on_thread(this : ICompositorDesktopInterop*, threadid : UInt32) : HRESULT
+    @lpVtbl.value.ensure_on_thread.call(this, threadid)
+  end
+end
+struct LibWin32::IDesktopWindowTargetInterop
+  def query_interface(this : IDesktopWindowTargetInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDesktopWindowTargetInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDesktopWindowTargetInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_hwnd(this : IDesktopWindowTargetInterop*, value : HANDLE*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, value)
+  end
+end

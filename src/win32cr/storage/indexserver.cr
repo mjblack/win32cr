@@ -301,3 +301,46 @@ lib LibWin32
   # Params # pstm : IStream [In],punkouter : IUnknown [In],ppiunk : Void** [In]
   fun BindIFilterFromStream(pstm : IStream, punkouter : IUnknown, ppiunk : Void**) : HRESULT
 end
+struct LibWin32::IFilter
+  def query_interface(this : IFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : IFilter*, grfflags : UInt32, cattributes : UInt32, aattributes : FULLPROPSPEC*, pflags : UInt32*) : Int32
+    @lpVtbl.value.init.call(this, grfflags, cattributes, aattributes, pflags)
+  end
+  def get_chunk(this : IFilter*, pstat : STAT_CHUNK*) : Int32
+    @lpVtbl.value.get_chunk.call(this, pstat)
+  end
+  def get_text(this : IFilter*, pcwcbuffer : UInt32*, awcbuffer : Char*) : Int32
+    @lpVtbl.value.get_text.call(this, pcwcbuffer, awcbuffer)
+  end
+  def get_value(this : IFilter*, pppropvalue : PROPVARIANT**) : Int32
+    @lpVtbl.value.get_value.call(this, pppropvalue)
+  end
+  def bind_region(this : IFilter*, origpos : FILTERREGION, riid : Guid*, ppunk : Void**) : Int32
+    @lpVtbl.value.bind_region.call(this, origpos, riid, ppunk)
+  end
+end
+struct LibWin32::IPhraseSink
+  def query_interface(this : IPhraseSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhraseSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhraseSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def put_small_phrase(this : IPhraseSink*, pwcnoun : LibC::LPWSTR, cwcnoun : UInt32, pwcmodifier : LibC::LPWSTR, cwcmodifier : UInt32, ulattachmenttype : UInt32) : HRESULT
+    @lpVtbl.value.put_small_phrase.call(this, pwcnoun, cwcnoun, pwcmodifier, cwcmodifier, ulattachmenttype)
+  end
+  def put_phrase(this : IPhraseSink*, pwcphrase : LibC::LPWSTR, cwcphrase : UInt32) : HRESULT
+    @lpVtbl.value.put_phrase.call(this, pwcphrase, cwcphrase)
+  end
+end

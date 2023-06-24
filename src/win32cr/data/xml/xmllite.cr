@@ -321,3 +321,290 @@ lib LibWin32
   # Params # poutputstream : IUnknown [In],pmalloc : IMalloc [In],pwszencodingname : LibC::LPWSTR [In],ppoutput : IUnknown* [In]
   fun CreateXmlWriterOutputWithEncodingName(poutputstream : IUnknown, pmalloc : IMalloc, pwszencodingname : LibC::LPWSTR, ppoutput : IUnknown*) : HRESULT
 end
+struct LibWin32::IXmlReader
+  def query_interface(this : IXmlReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXmlReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXmlReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IXmlReader*, pinput : IUnknown) : HRESULT
+    @lpVtbl.value.set_input.call(this, pinput)
+  end
+  def get_property(this : IXmlReader*, nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, nproperty, ppvalue)
+  end
+  def set_property(this : IXmlReader*, nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.call(this, nproperty, pvalue)
+  end
+  def read(this : IXmlReader*, pnodetype : XmlNodeType*) : HRESULT
+    @lpVtbl.value.read.call(this, pnodetype)
+  end
+  def get_node_type(this : IXmlReader*, pnodetype : XmlNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, pnodetype)
+  end
+  def move_to_first_attribute(this : IXmlReader*) : HRESULT
+    @lpVtbl.value.move_to_first_attribute.call(this)
+  end
+  def move_to_next_attribute(this : IXmlReader*) : HRESULT
+    @lpVtbl.value.move_to_next_attribute.call(this)
+  end
+  def move_to_attribute_by_name(this : IXmlReader*, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move_to_attribute_by_name.call(this, pwszlocalname, pwsznamespaceuri)
+  end
+  def move_to_element(this : IXmlReader*) : HRESULT
+    @lpVtbl.value.move_to_element.call(this)
+  end
+  def get_qualified_name(this : IXmlReader*, ppwszqualifiedname : LibC::LPWSTR*, pcwchqualifiedname : UInt32*) : HRESULT
+    @lpVtbl.value.get_qualified_name.call(this, ppwszqualifiedname, pcwchqualifiedname)
+  end
+  def get_namespace_uri(this : IXmlReader*, ppwsznamespaceuri : LibC::LPWSTR*, pcwchnamespaceuri : UInt32*) : HRESULT
+    @lpVtbl.value.get_namespace_uri.call(this, ppwsznamespaceuri, pcwchnamespaceuri)
+  end
+  def get_local_name(this : IXmlReader*, ppwszlocalname : LibC::LPWSTR*, pcwchlocalname : UInt32*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, ppwszlocalname, pcwchlocalname)
+  end
+  def get_prefix(this : IXmlReader*, ppwszprefix : LibC::LPWSTR*, pcwchprefix : UInt32*) : HRESULT
+    @lpVtbl.value.get_prefix.call(this, ppwszprefix, pcwchprefix)
+  end
+  def get_value(this : IXmlReader*, ppwszvalue : LibC::LPWSTR*, pcwchvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_value.call(this, ppwszvalue, pcwchvalue)
+  end
+  def read_value_chunk(this : IXmlReader*, pwchbuffer : Char*, cwchchunksize : UInt32, pcwchread : UInt32*) : HRESULT
+    @lpVtbl.value.read_value_chunk.call(this, pwchbuffer, cwchchunksize, pcwchread)
+  end
+  def get_base_uri(this : IXmlReader*, ppwszbaseuri : LibC::LPWSTR*, pcwchbaseuri : UInt32*) : HRESULT
+    @lpVtbl.value.get_base_uri.call(this, ppwszbaseuri, pcwchbaseuri)
+  end
+  def is_default(this : IXmlReader*) : LibC::BOOL
+    @lpVtbl.value.is_default.call(this)
+  end
+  def is_empty_element(this : IXmlReader*) : LibC::BOOL
+    @lpVtbl.value.is_empty_element.call(this)
+  end
+  def get_line_number(this : IXmlReader*, pnlinenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_number.call(this, pnlinenumber)
+  end
+  def get_line_position(this : IXmlReader*, pnlineposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_position.call(this, pnlineposition)
+  end
+  def get_attribute_count(this : IXmlReader*, pnattributecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, pnattributecount)
+  end
+  def get_depth(this : IXmlReader*, pndepth : UInt32*) : HRESULT
+    @lpVtbl.value.get_depth.call(this, pndepth)
+  end
+  def is_eof(this : IXmlReader*) : LibC::BOOL
+    @lpVtbl.value.is_eof.call(this)
+  end
+end
+struct LibWin32::IXmlResolver
+  def query_interface(this : IXmlResolver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXmlResolver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXmlResolver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resolve_uri(this : IXmlResolver*, pwszbaseuri : LibC::LPWSTR, pwszpublicidentifier : LibC::LPWSTR, pwszsystemidentifier : LibC::LPWSTR, ppresolvedinput : IUnknown*) : HRESULT
+    @lpVtbl.value.resolve_uri.call(this, pwszbaseuri, pwszpublicidentifier, pwszsystemidentifier, ppresolvedinput)
+  end
+end
+struct LibWin32::IXmlWriter
+  def query_interface(this : IXmlWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXmlWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXmlWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_output(this : IXmlWriter*, poutput : IUnknown) : HRESULT
+    @lpVtbl.value.set_output.call(this, poutput)
+  end
+  def get_property(this : IXmlWriter*, nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, nproperty, ppvalue)
+  end
+  def set_property(this : IXmlWriter*, nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.call(this, nproperty, pvalue)
+  end
+  def write_attributes(this : IXmlWriter*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_attributes.call(this, preader, fwritedefaultattributes)
+  end
+  def write_attribute_string(this : IXmlWriter*, pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_attribute_string.call(this, pwszprefix, pwszlocalname, pwsznamespaceuri, pwszvalue)
+  end
+  def write_c_data(this : IXmlWriter*, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_c_data.call(this, pwsztext)
+  end
+  def write_char_entity(this : IXmlWriter*, wch : Char) : HRESULT
+    @lpVtbl.value.write_char_entity.call(this, wch)
+  end
+  def write_chars(this : IXmlWriter*, pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_chars.call(this, pwch, cwch)
+  end
+  def write_comment(this : IXmlWriter*, pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_comment.call(this, pwszcomment)
+  end
+  def write_doc_type(this : IXmlWriter*, pwszname : LibC::LPWSTR, pwszpublicid : LibC::LPWSTR, pwszsystemid : LibC::LPWSTR, pwszsubset : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_doc_type.call(this, pwszname, pwszpublicid, pwszsystemid, pwszsubset)
+  end
+  def write_element_string(this : IXmlWriter*, pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_element_string.call(this, pwszprefix, pwszlocalname, pwsznamespaceuri, pwszvalue)
+  end
+  def write_end_document(this : IXmlWriter*) : HRESULT
+    @lpVtbl.value.write_end_document.call(this)
+  end
+  def write_end_element(this : IXmlWriter*) : HRESULT
+    @lpVtbl.value.write_end_element.call(this)
+  end
+  def write_entity_ref(this : IXmlWriter*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_entity_ref.call(this, pwszname)
+  end
+  def write_full_end_element(this : IXmlWriter*) : HRESULT
+    @lpVtbl.value.write_full_end_element.call(this)
+  end
+  def write_name(this : IXmlWriter*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_name.call(this, pwszname)
+  end
+  def write_nm_token(this : IXmlWriter*, pwsznmtoken : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_nm_token.call(this, pwsznmtoken)
+  end
+  def write_node(this : IXmlWriter*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node.call(this, preader, fwritedefaultattributes)
+  end
+  def write_node_shallow(this : IXmlWriter*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node_shallow.call(this, preader, fwritedefaultattributes)
+  end
+  def write_processing_instruction(this : IXmlWriter*, pwszname : LibC::LPWSTR, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_processing_instruction.call(this, pwszname, pwsztext)
+  end
+  def write_qualified_name(this : IXmlWriter*, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_qualified_name.call(this, pwszlocalname, pwsznamespaceuri)
+  end
+  def write_raw(this : IXmlWriter*, pwszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_raw.call(this, pwszdata)
+  end
+  def write_raw_chars(this : IXmlWriter*, pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_raw_chars.call(this, pwch, cwch)
+  end
+  def write_start_document(this : IXmlWriter*, standalone : XmlStandalone) : HRESULT
+    @lpVtbl.value.write_start_document.call(this, standalone)
+  end
+  def write_start_element(this : IXmlWriter*, pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_start_element.call(this, pwszprefix, pwszlocalname, pwsznamespaceuri)
+  end
+  def write_string(this : IXmlWriter*, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_string.call(this, pwsztext)
+  end
+  def write_surrogate_char_entity(this : IXmlWriter*, wchlow : Char, wchhigh : Char) : HRESULT
+    @lpVtbl.value.write_surrogate_char_entity.call(this, wchlow, wchhigh)
+  end
+  def write_whitespace(this : IXmlWriter*, pwszwhitespace : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_whitespace.call(this, pwszwhitespace)
+  end
+  def flush(this : IXmlWriter*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end
+struct LibWin32::IXmlWriterLite
+  def query_interface(this : IXmlWriterLite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXmlWriterLite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXmlWriterLite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_output(this : IXmlWriterLite*, poutput : IUnknown) : HRESULT
+    @lpVtbl.value.set_output.call(this, poutput)
+  end
+  def get_property(this : IXmlWriterLite*, nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, nproperty, ppvalue)
+  end
+  def set_property(this : IXmlWriterLite*, nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.call(this, nproperty, pvalue)
+  end
+  def write_attributes(this : IXmlWriterLite*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_attributes.call(this, preader, fwritedefaultattributes)
+  end
+  def write_attribute_string(this : IXmlWriterLite*, pwszqname : Char*, cwszqname : UInt32, pwszvalue : Char*, cwszvalue : UInt32) : HRESULT
+    @lpVtbl.value.write_attribute_string.call(this, pwszqname, cwszqname, pwszvalue, cwszvalue)
+  end
+  def write_c_data(this : IXmlWriterLite*, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_c_data.call(this, pwsztext)
+  end
+  def write_char_entity(this : IXmlWriterLite*, wch : Char) : HRESULT
+    @lpVtbl.value.write_char_entity.call(this, wch)
+  end
+  def write_chars(this : IXmlWriterLite*, pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_chars.call(this, pwch, cwch)
+  end
+  def write_comment(this : IXmlWriterLite*, pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_comment.call(this, pwszcomment)
+  end
+  def write_doc_type(this : IXmlWriterLite*, pwszname : LibC::LPWSTR, pwszpublicid : LibC::LPWSTR, pwszsystemid : LibC::LPWSTR, pwszsubset : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_doc_type.call(this, pwszname, pwszpublicid, pwszsystemid, pwszsubset)
+  end
+  def write_element_string(this : IXmlWriterLite*, pwszqname : Char*, cwszqname : UInt32, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_element_string.call(this, pwszqname, cwszqname, pwszvalue)
+  end
+  def write_end_document(this : IXmlWriterLite*) : HRESULT
+    @lpVtbl.value.write_end_document.call(this)
+  end
+  def write_end_element(this : IXmlWriterLite*, pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_end_element.call(this, pwszqname, cwszqname)
+  end
+  def write_entity_ref(this : IXmlWriterLite*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_entity_ref.call(this, pwszname)
+  end
+  def write_full_end_element(this : IXmlWriterLite*, pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_full_end_element.call(this, pwszqname, cwszqname)
+  end
+  def write_name(this : IXmlWriterLite*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_name.call(this, pwszname)
+  end
+  def write_nm_token(this : IXmlWriterLite*, pwsznmtoken : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_nm_token.call(this, pwsznmtoken)
+  end
+  def write_node(this : IXmlWriterLite*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node.call(this, preader, fwritedefaultattributes)
+  end
+  def write_node_shallow(this : IXmlWriterLite*, preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node_shallow.call(this, preader, fwritedefaultattributes)
+  end
+  def write_processing_instruction(this : IXmlWriterLite*, pwszname : LibC::LPWSTR, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_processing_instruction.call(this, pwszname, pwsztext)
+  end
+  def write_raw(this : IXmlWriterLite*, pwszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_raw.call(this, pwszdata)
+  end
+  def write_raw_chars(this : IXmlWriterLite*, pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_raw_chars.call(this, pwch, cwch)
+  end
+  def write_start_document(this : IXmlWriterLite*, standalone : XmlStandalone) : HRESULT
+    @lpVtbl.value.write_start_document.call(this, standalone)
+  end
+  def write_start_element(this : IXmlWriterLite*, pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_start_element.call(this, pwszqname, cwszqname)
+  end
+  def write_string(this : IXmlWriterLite*, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_string.call(this, pwsztext)
+  end
+  def write_surrogate_char_entity(this : IXmlWriterLite*, wchlow : Char, wchhigh : Char) : HRESULT
+    @lpVtbl.value.write_surrogate_char_entity.call(this, wchlow, wchhigh)
+  end
+  def write_whitespace(this : IXmlWriterLite*, pwszwhitespace : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_whitespace.call(this, pwszwhitespace)
+  end
+  def flush(this : IXmlWriterLite*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end

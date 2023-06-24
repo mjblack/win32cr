@@ -1473,3 +1473,174 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IEnumEnhancedStorageACT
+  def query_interface(this : IEnumEnhancedStorageACT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumEnhancedStorageACT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumEnhancedStorageACT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_ac_ts(this : IEnumEnhancedStorageACT*, pppienhancedstorageacts : IEnhancedStorageACT**, pcenhancedstorageacts : UInt32*) : HRESULT
+    @lpVtbl.value.get_ac_ts.call(this, pppienhancedstorageacts, pcenhancedstorageacts)
+  end
+  def get_matching_act(this : IEnumEnhancedStorageACT*, szvolume : LibC::LPWSTR, ppienhancedstorageact : IEnhancedStorageACT*) : HRESULT
+    @lpVtbl.value.get_matching_act.call(this, szvolume, ppienhancedstorageact)
+  end
+end
+struct LibWin32::IEnhancedStorageACT
+  def query_interface(this : IEnhancedStorageACT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnhancedStorageACT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnhancedStorageACT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def authorize(this : IEnhancedStorageACT*, hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.call(this, hwndparent, dwflags)
+  end
+  def unauthorize(this : IEnhancedStorageACT*) : HRESULT
+    @lpVtbl.value.unauthorize.call(this)
+  end
+  def get_authorization_state(this : IEnhancedStorageACT*, pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.call(this, pstate)
+  end
+  def get_matching_volume(this : IEnhancedStorageACT*, ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.call(this, ppwszvolume)
+  end
+  def get_unique_identity(this : IEnhancedStorageACT*, ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.call(this, ppwszidentity)
+  end
+  def get_silos(this : IEnhancedStorageACT*, pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.call(this, pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+end
+struct LibWin32::IEnhancedStorageACT2
+  def query_interface(this : IEnhancedStorageACT2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnhancedStorageACT2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnhancedStorageACT2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def authorize(this : IEnhancedStorageACT2*, hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.call(this, hwndparent, dwflags)
+  end
+  def unauthorize(this : IEnhancedStorageACT2*) : HRESULT
+    @lpVtbl.value.unauthorize.call(this)
+  end
+  def get_authorization_state(this : IEnhancedStorageACT2*, pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.call(this, pstate)
+  end
+  def get_matching_volume(this : IEnhancedStorageACT2*, ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.call(this, ppwszvolume)
+  end
+  def get_unique_identity(this : IEnhancedStorageACT2*, ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.call(this, ppwszidentity)
+  end
+  def get_silos(this : IEnhancedStorageACT2*, pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.call(this, pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+  def get_device_name(this : IEnhancedStorageACT2*, ppwszdevicename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, ppwszdevicename)
+  end
+  def is_device_removable(this : IEnhancedStorageACT2*, pisdeviceremovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_device_removable.call(this, pisdeviceremovable)
+  end
+end
+struct LibWin32::IEnhancedStorageACT3
+  def query_interface(this : IEnhancedStorageACT3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnhancedStorageACT3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnhancedStorageACT3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def authorize(this : IEnhancedStorageACT3*, hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.call(this, hwndparent, dwflags)
+  end
+  def unauthorize(this : IEnhancedStorageACT3*) : HRESULT
+    @lpVtbl.value.unauthorize.call(this)
+  end
+  def get_authorization_state(this : IEnhancedStorageACT3*, pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.call(this, pstate)
+  end
+  def get_matching_volume(this : IEnhancedStorageACT3*, ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.call(this, ppwszvolume)
+  end
+  def get_unique_identity(this : IEnhancedStorageACT3*, ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.call(this, ppwszidentity)
+  end
+  def get_silos(this : IEnhancedStorageACT3*, pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.call(this, pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+  def get_device_name(this : IEnhancedStorageACT3*, ppwszdevicename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, ppwszdevicename)
+  end
+  def is_device_removable(this : IEnhancedStorageACT3*, pisdeviceremovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_device_removable.call(this, pisdeviceremovable)
+  end
+  def unauthorize_ex(this : IEnhancedStorageACT3*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.unauthorize_ex.call(this, dwflags)
+  end
+  def is_queue_frozen(this : IEnhancedStorageACT3*, pisqueuefrozen : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_queue_frozen.call(this, pisqueuefrozen)
+  end
+  def get_shell_ext_support(this : IEnhancedStorageACT3*, pshellextsupport : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_shell_ext_support.call(this, pshellextsupport)
+  end
+end
+struct LibWin32::IEnhancedStorageSilo
+  def query_interface(this : IEnhancedStorageSilo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnhancedStorageSilo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnhancedStorageSilo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : IEnhancedStorageSilo*, psiloinfo : SILO_INFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, psiloinfo)
+  end
+  def get_actions(this : IEnhancedStorageSilo*, pppienhancedstoragesiloactions : IEnhancedStorageSiloAction**, pcenhancedstoragesiloactions : UInt32*) : HRESULT
+    @lpVtbl.value.get_actions.call(this, pppienhancedstoragesiloactions, pcenhancedstoragesiloactions)
+  end
+  def send_command(this : IEnhancedStorageSilo*, command : UInt8, pbcommandbuffer : UInt8*, cbcommandbuffer : UInt32, pbresponsebuffer : UInt8*, pcbresponsebuffer : UInt32*) : HRESULT
+    @lpVtbl.value.send_command.call(this, command, pbcommandbuffer, cbcommandbuffer, pbresponsebuffer, pcbresponsebuffer)
+  end
+  def get_portable_device(this : IEnhancedStorageSilo*, ppiportabledevice : IPortableDevice*) : HRESULT
+    @lpVtbl.value.get_portable_device.call(this, ppiportabledevice)
+  end
+  def get_device_path(this : IEnhancedStorageSilo*, ppwszsilodevicepath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_path.call(this, ppwszsilodevicepath)
+  end
+end
+struct LibWin32::IEnhancedStorageSiloAction
+  def query_interface(this : IEnhancedStorageSiloAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnhancedStorageSiloAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnhancedStorageSiloAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IEnhancedStorageSiloAction*, ppwszactionname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, ppwszactionname)
+  end
+  def get_description(this : IEnhancedStorageSiloAction*, ppwszactiondescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, ppwszactiondescription)
+  end
+  def invoke(this : IEnhancedStorageSiloAction*) : HRESULT
+    @lpVtbl.value.invoke.call(this)
+  end
+end

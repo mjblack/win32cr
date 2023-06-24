@@ -533,7 +533,7 @@ lib LibWin32
   fun SwDeviceCreate(pszenumeratorname : LibC::LPWSTR, pszparentdeviceinstance : LibC::LPWSTR, pcreateinfo : SW_DEVICE_CREATE_INFO*, cpropertycount : UInt32, pproperties : DEVPROPERTY*, pcallback : SW_DEVICE_CREATE_CALLBACK, pcontext : Void*, phswdevice : LibC::IntPtrT*) : HRESULT
 
   # Params # hswdevice : HSWDEVICE [In]
-  fun SwDeviceClose(hswdevice : HSWDEVICE)
+  fun SwDeviceClose(hswdevice : HSWDEVICE) : Void
 
   # Params # hswdevice : HSWDEVICE [In],lifetime : SW_DEVICE_LIFETIME [In]
   fun SwDeviceSetLifetime(hswdevice : HSWDEVICE, lifetime : SW_DEVICE_LIFETIME) : HRESULT
@@ -548,11 +548,633 @@ lib LibWin32
   fun SwDeviceInterfaceRegister(hswdevice : HSWDEVICE, pinterfaceclassguid : Guid*, pszreferencestring : LibC::LPWSTR, cpropertycount : UInt32, pproperties : DEVPROPERTY*, fenabled : LibC::BOOL, ppszdeviceinterfaceid : LibC::LPWSTR*) : HRESULT
 
   # Params # pmem : Void* [In]
-  fun SwMemFree(pmem : Void*)
+  fun SwMemFree(pmem : Void*) : Void
 
   # Params # hswdevice : HSWDEVICE [In],pszdeviceinterfaceid : LibC::LPWSTR [In],fenabled : LibC::BOOL [In]
   fun SwDeviceInterfaceSetState(hswdevice : HSWDEVICE, pszdeviceinterfaceid : LibC::LPWSTR, fenabled : LibC::BOOL) : HRESULT
 
   # Params # hswdevice : HSWDEVICE [In],pszdeviceinterfaceid : LibC::LPWSTR [In],cpropertycount : UInt32 [In],pproperties : DEVPROPERTY* [In]
   fun SwDeviceInterfacePropertySet(hswdevice : HSWDEVICE, pszdeviceinterfaceid : LibC::LPWSTR, cpropertycount : UInt32, pproperties : DEVPROPERTY*) : HRESULT
+end
+struct LibWin32::IUPnPDeviceFinder
+  def query_interface(this : IUPnPDeviceFinder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceFinder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceFinder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPDeviceFinder*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPDeviceFinder*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPDeviceFinder*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPDeviceFinder*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def find_by_type(this : IUPnPDeviceFinder*, bstrtypeuri : UInt8*, dwflags : UInt32, pdevices : IUPnPDevices*) : HRESULT
+    @lpVtbl.value.find_by_type.call(this, bstrtypeuri, dwflags, pdevices)
+  end
+  def create_async_find(this : IUPnPDeviceFinder*, bstrtypeuri : UInt8*, dwflags : UInt32, punkdevicefindercallback : IUnknown, plfinddata : Int32*) : HRESULT
+    @lpVtbl.value.create_async_find.call(this, bstrtypeuri, dwflags, punkdevicefindercallback, plfinddata)
+  end
+  def start_async_find(this : IUPnPDeviceFinder*, lfinddata : Int32) : HRESULT
+    @lpVtbl.value.start_async_find.call(this, lfinddata)
+  end
+  def cancel_async_find(this : IUPnPDeviceFinder*, lfinddata : Int32) : HRESULT
+    @lpVtbl.value.cancel_async_find.call(this, lfinddata)
+  end
+  def find_by_udn(this : IUPnPDeviceFinder*, bstrudn : UInt8*, pdevice : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.find_by_udn.call(this, bstrudn, pdevice)
+  end
+end
+struct LibWin32::IUPnPAddressFamilyControl
+  def query_interface(this : IUPnPAddressFamilyControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPAddressFamilyControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPAddressFamilyControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_address_family(this : IUPnPAddressFamilyControl*, dwflags : Int32) : HRESULT
+    @lpVtbl.value.set_address_family.call(this, dwflags)
+  end
+  def get_address_family(this : IUPnPAddressFamilyControl*, pdwflags : Int32*) : HRESULT
+    @lpVtbl.value.get_address_family.call(this, pdwflags)
+  end
+end
+struct LibWin32::IUPnPHttpHeaderControl
+  def query_interface(this : IUPnPHttpHeaderControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPHttpHeaderControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPHttpHeaderControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_request_headers(this : IUPnPHttpHeaderControl*, bstrhttpheaders : UInt8*) : HRESULT
+    @lpVtbl.value.add_request_headers.call(this, bstrhttpheaders)
+  end
+end
+struct LibWin32::IUPnPDeviceFinderCallback
+  def query_interface(this : IUPnPDeviceFinderCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceFinderCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceFinderCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def device_added(this : IUPnPDeviceFinderCallback*, lfinddata : Int32, pdevice : IUPnPDevice) : HRESULT
+    @lpVtbl.value.device_added.call(this, lfinddata, pdevice)
+  end
+  def device_removed(this : IUPnPDeviceFinderCallback*, lfinddata : Int32, bstrudn : UInt8*) : HRESULT
+    @lpVtbl.value.device_removed.call(this, lfinddata, bstrudn)
+  end
+  def search_complete(this : IUPnPDeviceFinderCallback*, lfinddata : Int32) : HRESULT
+    @lpVtbl.value.search_complete.call(this, lfinddata)
+  end
+end
+struct LibWin32::IUPnPServices
+  def query_interface(this : IUPnPServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPServices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPServices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPServices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPServices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IUPnPServices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IUPnPServices*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IUPnPServices*, bstrserviceid : UInt8*, ppservice : IUPnPService*) : HRESULT
+    @lpVtbl.value.get_item.call(this, bstrserviceid, ppservice)
+  end
+end
+struct LibWin32::IUPnPService
+  def query_interface(this : IUPnPService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPService*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPService*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPService*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPService*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def query_state_variable(this : IUPnPService*, bstrvariablename : UInt8*, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.query_state_variable.call(this, bstrvariablename, pvalue)
+  end
+  def invoke_action(this : IUPnPService*, bstractionname : UInt8*, vinactionargs : VARIANT, pvoutactionargs : VARIANT*, pvretval : VARIANT*) : HRESULT
+    @lpVtbl.value.invoke_action.call(this, bstractionname, vinactionargs, pvoutactionargs, pvretval)
+  end
+  def get_service_type_identifier(this : IUPnPService*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_type_identifier.call(this, pval)
+  end
+  def add_callback(this : IUPnPService*, punkcallback : IUnknown) : HRESULT
+    @lpVtbl.value.add_callback.call(this, punkcallback)
+  end
+  def get_id(this : IUPnPService*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_last_transport_status(this : IUPnPService*, plvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_last_transport_status.call(this, plvalue)
+  end
+end
+struct LibWin32::IUPnPAsyncResult
+  def query_interface(this : IUPnPAsyncResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPAsyncResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPAsyncResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def async_operation_complete(this : IUPnPAsyncResult*, ullrequestid : UInt64) : HRESULT
+    @lpVtbl.value.async_operation_complete.call(this, ullrequestid)
+  end
+end
+struct LibWin32::IUPnPServiceAsync
+  def query_interface(this : IUPnPServiceAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPServiceAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPServiceAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_invoke_action(this : IUPnPServiceAsync*, bstractionname : UInt8*, vinactionargs : VARIANT, pasyncresult : IUPnPAsyncResult, pullrequestid : UInt64*) : HRESULT
+    @lpVtbl.value.begin_invoke_action.call(this, bstractionname, vinactionargs, pasyncresult, pullrequestid)
+  end
+  def end_invoke_action(this : IUPnPServiceAsync*, ullrequestid : UInt64, pvoutactionargs : VARIANT*, pvretval : VARIANT*) : HRESULT
+    @lpVtbl.value.end_invoke_action.call(this, ullrequestid, pvoutactionargs, pvretval)
+  end
+  def begin_query_state_variable(this : IUPnPServiceAsync*, bstrvariablename : UInt8*, pasyncresult : IUPnPAsyncResult, pullrequestid : UInt64*) : HRESULT
+    @lpVtbl.value.begin_query_state_variable.call(this, bstrvariablename, pasyncresult, pullrequestid)
+  end
+  def end_query_state_variable(this : IUPnPServiceAsync*, ullrequestid : UInt64, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.end_query_state_variable.call(this, ullrequestid, pvalue)
+  end
+  def begin_subscribe_to_events(this : IUPnPServiceAsync*, punkcallback : IUnknown, pasyncresult : IUPnPAsyncResult, pullrequestid : UInt64*) : HRESULT
+    @lpVtbl.value.begin_subscribe_to_events.call(this, punkcallback, pasyncresult, pullrequestid)
+  end
+  def end_subscribe_to_events(this : IUPnPServiceAsync*, ullrequestid : UInt64) : HRESULT
+    @lpVtbl.value.end_subscribe_to_events.call(this, ullrequestid)
+  end
+  def begin_scpd_download(this : IUPnPServiceAsync*, pasyncresult : IUPnPAsyncResult, pullrequestid : UInt64*) : HRESULT
+    @lpVtbl.value.begin_scpd_download.call(this, pasyncresult, pullrequestid)
+  end
+  def end_scpd_download(this : IUPnPServiceAsync*, ullrequestid : UInt64, pbstrscpddoc : UInt8**) : HRESULT
+    @lpVtbl.value.end_scpd_download.call(this, ullrequestid, pbstrscpddoc)
+  end
+  def cancel_async_operation(this : IUPnPServiceAsync*, ullrequestid : UInt64) : HRESULT
+    @lpVtbl.value.cancel_async_operation.call(this, ullrequestid)
+  end
+end
+struct LibWin32::IUPnPServiceCallback
+  def query_interface(this : IUPnPServiceCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPServiceCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPServiceCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def state_variable_changed(this : IUPnPServiceCallback*, pus : IUPnPService, pcwszstatevarname : LibC::LPWSTR, vavalue : VARIANT) : HRESULT
+    @lpVtbl.value.state_variable_changed.call(this, pus, pcwszstatevarname, vavalue)
+  end
+  def service_instance_died(this : IUPnPServiceCallback*, pus : IUPnPService) : HRESULT
+    @lpVtbl.value.service_instance_died.call(this, pus)
+  end
+end
+struct LibWin32::IUPnPServiceEnumProperty
+  def query_interface(this : IUPnPServiceEnumProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPServiceEnumProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPServiceEnumProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_service_enum_property(this : IUPnPServiceEnumProperty*, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.set_service_enum_property.call(this, dwmask)
+  end
+end
+struct LibWin32::IUPnPServiceDocumentAccess
+  def query_interface(this : IUPnPServiceDocumentAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPServiceDocumentAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPServiceDocumentAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_url(this : IUPnPServiceDocumentAccess*, pbstrdocurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_url.call(this, pbstrdocurl)
+  end
+  def get_document(this : IUPnPServiceDocumentAccess*, pbstrdoc : UInt8**) : HRESULT
+    @lpVtbl.value.get_document.call(this, pbstrdoc)
+  end
+end
+struct LibWin32::IUPnPDevices
+  def query_interface(this : IUPnPDevices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDevices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDevices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPDevices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPDevices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPDevices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPDevices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IUPnPDevices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IUPnPDevices*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IUPnPDevices*, bstrudn : UInt8*, ppdevice : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.get_item.call(this, bstrudn, ppdevice)
+  end
+end
+struct LibWin32::IUPnPDevice
+  def query_interface(this : IUPnPDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPDevice*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPDevice*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPDevice*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPDevice*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_is_root_device(this : IUPnPDevice*, pvarb : Int16*) : HRESULT
+    @lpVtbl.value.get_is_root_device.call(this, pvarb)
+  end
+  def get_root_device(this : IUPnPDevice*, ppudrootdevice : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.get_root_device.call(this, ppudrootdevice)
+  end
+  def get_parent_device(this : IUPnPDevice*, ppuddeviceparent : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.get_parent_device.call(this, ppuddeviceparent)
+  end
+  def get_has_children(this : IUPnPDevice*, pvarb : Int16*) : HRESULT
+    @lpVtbl.value.get_has_children.call(this, pvarb)
+  end
+  def get_children(this : IUPnPDevice*, ppudchildren : IUPnPDevices*) : HRESULT
+    @lpVtbl.value.get_children.call(this, ppudchildren)
+  end
+  def get_unique_device_name(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_device_name.call(this, pbstr)
+  end
+  def get_friendly_name(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstr)
+  end
+  def get_type(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, pbstr)
+  end
+  def get_presentation_url(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentation_url.call(this, pbstr)
+  end
+  def get_manufacturer_name(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_manufacturer_name.call(this, pbstr)
+  end
+  def get_manufacturer_url(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_manufacturer_url.call(this, pbstr)
+  end
+  def get_model_name(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_model_name.call(this, pbstr)
+  end
+  def get_model_number(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_model_number.call(this, pbstr)
+  end
+  def get_description(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstr)
+  end
+  def get_model_url(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_model_url.call(this, pbstr)
+  end
+  def get_upc(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_upc.call(this, pbstr)
+  end
+  def get_serial_number(this : IUPnPDevice*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pbstr)
+  end
+  def icon_url(this : IUPnPDevice*, bstrencodingformat : UInt8*, lsizex : Int32, lsizey : Int32, lbitdepth : Int32, pbstriconurl : UInt8**) : HRESULT
+    @lpVtbl.value.icon_url.call(this, bstrencodingformat, lsizex, lsizey, lbitdepth, pbstriconurl)
+  end
+  def get_services(this : IUPnPDevice*, ppusservices : IUPnPServices*) : HRESULT
+    @lpVtbl.value.get_services.call(this, ppusservices)
+  end
+end
+struct LibWin32::IUPnPDeviceDocumentAccess
+  def query_interface(this : IUPnPDeviceDocumentAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceDocumentAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceDocumentAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_url(this : IUPnPDeviceDocumentAccess*, pbstrdocument : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_url.call(this, pbstrdocument)
+  end
+end
+struct LibWin32::IUPnPDeviceDocumentAccessEx
+  def query_interface(this : IUPnPDeviceDocumentAccessEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceDocumentAccessEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceDocumentAccessEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document(this : IUPnPDeviceDocumentAccessEx*, pbstrdocument : UInt8**) : HRESULT
+    @lpVtbl.value.get_document.call(this, pbstrdocument)
+  end
+end
+struct LibWin32::IUPnPDescriptionDocument
+  def query_interface(this : IUPnPDescriptionDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDescriptionDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDescriptionDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPDescriptionDocument*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPDescriptionDocument*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPDescriptionDocument*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPDescriptionDocument*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_ready_state(this : IUPnPDescriptionDocument*, plreadystate : Int32*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, plreadystate)
+  end
+  def load(this : IUPnPDescriptionDocument*, bstrurl : UInt8*) : HRESULT
+    @lpVtbl.value.load.call(this, bstrurl)
+  end
+  def load_async(this : IUPnPDescriptionDocument*, bstrurl : UInt8*, punkcallback : IUnknown) : HRESULT
+    @lpVtbl.value.load_async.call(this, bstrurl, punkcallback)
+  end
+  def get_load_result(this : IUPnPDescriptionDocument*, phrerror : Int32*) : HRESULT
+    @lpVtbl.value.get_load_result.call(this, phrerror)
+  end
+  def abort(this : IUPnPDescriptionDocument*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+  def root_device(this : IUPnPDescriptionDocument*, ppudrootdevice : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.root_device.call(this, ppudrootdevice)
+  end
+  def device_by_udn(this : IUPnPDescriptionDocument*, bstrudn : UInt8*, ppuddevice : IUPnPDevice*) : HRESULT
+    @lpVtbl.value.device_by_udn.call(this, bstrudn, ppuddevice)
+  end
+end
+struct LibWin32::IUPnPDeviceFinderAddCallbackWithInterface
+  def query_interface(this : IUPnPDeviceFinderAddCallbackWithInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceFinderAddCallbackWithInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceFinderAddCallbackWithInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def device_added_with_interface(this : IUPnPDeviceFinderAddCallbackWithInterface*, lfinddata : Int32, pdevice : IUPnPDevice, pguidinterface : Guid*) : HRESULT
+    @lpVtbl.value.device_added_with_interface.call(this, lfinddata, pdevice, pguidinterface)
+  end
+end
+struct LibWin32::IUPnPDescriptionDocumentCallback
+  def query_interface(this : IUPnPDescriptionDocumentCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDescriptionDocumentCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDescriptionDocumentCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_complete(this : IUPnPDescriptionDocumentCallback*, hrloadresult : HRESULT) : HRESULT
+    @lpVtbl.value.load_complete.call(this, hrloadresult)
+  end
+end
+struct LibWin32::IUPnPEventSink
+  def query_interface(this : IUPnPEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_state_changed(this : IUPnPEventSink*, cchanges : UInt32, rgdispidchanges : Int32*) : HRESULT
+    @lpVtbl.value.on_state_changed.call(this, cchanges, rgdispidchanges)
+  end
+  def on_state_changed_safe(this : IUPnPEventSink*, varsadispidchanges : VARIANT) : HRESULT
+    @lpVtbl.value.on_state_changed_safe.call(this, varsadispidchanges)
+  end
+end
+struct LibWin32::IUPnPEventSource
+  def query_interface(this : IUPnPEventSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPEventSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPEventSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise(this : IUPnPEventSource*, pessubscriber : IUPnPEventSink) : HRESULT
+    @lpVtbl.value.advise.call(this, pessubscriber)
+  end
+  def unadvise(this : IUPnPEventSource*, pessubscriber : IUPnPEventSink) : HRESULT
+    @lpVtbl.value.unadvise.call(this, pessubscriber)
+  end
+end
+struct LibWin32::IUPnPRegistrar
+  def query_interface(this : IUPnPRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_device(this : IUPnPRegistrar*, bstrxmldesc : UInt8*, bstrprogiddevicecontrolclass : UInt8*, bstrinitstring : UInt8*, bstrcontainerid : UInt8*, bstrresourcepath : UInt8*, nlifetime : Int32, pbstrdeviceidentifier : UInt8**) : HRESULT
+    @lpVtbl.value.register_device.call(this, bstrxmldesc, bstrprogiddevicecontrolclass, bstrinitstring, bstrcontainerid, bstrresourcepath, nlifetime, pbstrdeviceidentifier)
+  end
+  def register_running_device(this : IUPnPRegistrar*, bstrxmldesc : UInt8*, punkdevicecontrol : IUnknown, bstrinitstring : UInt8*, bstrresourcepath : UInt8*, nlifetime : Int32, pbstrdeviceidentifier : UInt8**) : HRESULT
+    @lpVtbl.value.register_running_device.call(this, bstrxmldesc, punkdevicecontrol, bstrinitstring, bstrresourcepath, nlifetime, pbstrdeviceidentifier)
+  end
+  def register_device_provider(this : IUPnPRegistrar*, bstrprovidername : UInt8*, bstrprogidproviderclass : UInt8*, bstrinitstring : UInt8*, bstrcontainerid : UInt8*) : HRESULT
+    @lpVtbl.value.register_device_provider.call(this, bstrprovidername, bstrprogidproviderclass, bstrinitstring, bstrcontainerid)
+  end
+  def get_unique_device_name(this : IUPnPRegistrar*, bstrdeviceidentifier : UInt8*, bstrtemplateudn : UInt8*, pbstrudn : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_device_name.call(this, bstrdeviceidentifier, bstrtemplateudn, pbstrudn)
+  end
+  def unregister_device(this : IUPnPRegistrar*, bstrdeviceidentifier : UInt8*, fpermanent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unregister_device.call(this, bstrdeviceidentifier, fpermanent)
+  end
+  def unregister_device_provider(this : IUPnPRegistrar*, bstrprovidername : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_device_provider.call(this, bstrprovidername)
+  end
+end
+struct LibWin32::IUPnPReregistrar
+  def query_interface(this : IUPnPReregistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPReregistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPReregistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reregister_device(this : IUPnPReregistrar*, bstrdeviceidentifier : UInt8*, bstrxmldesc : UInt8*, bstrprogiddevicecontrolclass : UInt8*, bstrinitstring : UInt8*, bstrcontainerid : UInt8*, bstrresourcepath : UInt8*, nlifetime : Int32) : HRESULT
+    @lpVtbl.value.reregister_device.call(this, bstrdeviceidentifier, bstrxmldesc, bstrprogiddevicecontrolclass, bstrinitstring, bstrcontainerid, bstrresourcepath, nlifetime)
+  end
+  def reregister_running_device(this : IUPnPReregistrar*, bstrdeviceidentifier : UInt8*, bstrxmldesc : UInt8*, punkdevicecontrol : IUnknown, bstrinitstring : UInt8*, bstrresourcepath : UInt8*, nlifetime : Int32) : HRESULT
+    @lpVtbl.value.reregister_running_device.call(this, bstrdeviceidentifier, bstrxmldesc, punkdevicecontrol, bstrinitstring, bstrresourcepath, nlifetime)
+  end
+end
+struct LibWin32::IUPnPDeviceControl
+  def query_interface(this : IUPnPDeviceControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IUPnPDeviceControl*, bstrxmldesc : UInt8*, bstrdeviceidentifier : UInt8*, bstrinitstring : UInt8*) : HRESULT
+    @lpVtbl.value.initialize.call(this, bstrxmldesc, bstrdeviceidentifier, bstrinitstring)
+  end
+  def get_service_object(this : IUPnPDeviceControl*, bstrudn : UInt8*, bstrserviceid : UInt8*, ppdispservice : IDispatch*) : HRESULT
+    @lpVtbl.value.get_service_object.call(this, bstrudn, bstrserviceid, ppdispservice)
+  end
+end
+struct LibWin32::IUPnPDeviceControlHttpHeaders
+  def query_interface(this : IUPnPDeviceControlHttpHeaders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceControlHttpHeaders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceControlHttpHeaders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_additional_response_headers(this : IUPnPDeviceControlHttpHeaders*, bstrhttpresponseheaders : UInt8**) : HRESULT
+    @lpVtbl.value.get_additional_response_headers.call(this, bstrhttpresponseheaders)
+  end
+end
+struct LibWin32::IUPnPDeviceProvider
+  def query_interface(this : IUPnPDeviceProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPDeviceProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPDeviceProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : IUPnPDeviceProvider*, bstrinitstring : UInt8*) : HRESULT
+    @lpVtbl.value.start.call(this, bstrinitstring)
+  end
+  def stop(this : IUPnPDeviceProvider*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+end
+struct LibWin32::IUPnPRemoteEndpointInfo
+  def query_interface(this : IUPnPRemoteEndpointInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPRemoteEndpointInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPRemoteEndpointInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dword_value(this : IUPnPRemoteEndpointInfo*, bstrvaluename : UInt8*, pdwvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_dword_value.call(this, bstrvaluename, pdwvalue)
+  end
+  def get_string_value(this : IUPnPRemoteEndpointInfo*, bstrvaluename : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_value.call(this, bstrvaluename, pbstrvalue)
+  end
+  def get_guid_value(this : IUPnPRemoteEndpointInfo*, bstrvaluename : UInt8*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid_value.call(this, bstrvaluename, pguidvalue)
+  end
 end

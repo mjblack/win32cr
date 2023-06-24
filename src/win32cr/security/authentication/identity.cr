@@ -3816,7 +3816,7 @@ lib LibWin32
     package_flags : UInt32
   end
   struct SECPKG_EXTENDED_INFORMATION
-    class : SECPKG_EXTENDED_INFORMATION_CLASS
+    class_ : SECPKG_EXTENDED_INFORMATION_CLASS
     info : SECPKG_EXTENDED_INFORMATION_Info_e__Union
   end
   struct SECPKG_TARGETINFO
@@ -4705,7 +4705,7 @@ lib LibWin32
   fun AuditQueryGlobalSaclA(objecttypename : PSTR, acl : ACL**) : BOOLEAN
 
   # Params # buffer : Void* [In]
-  fun AuditFree(buffer : Void*)
+  fun AuditFree(buffer : Void*) : Void
 
   # Params # pszprincipal : LibC::LPWSTR [In],pszpackage : LibC::LPWSTR [In],fcredentialuse : SECPKG_CRED [In],pvlogonid : Void* [In],pauthdata : Void* [In],pgetkeyfn : SEC_GET_KEY_FN [In],pvgetkeyargument : Void* [In],phcredential : SecHandle* [In],ptsexpiry : LARGE_INTEGER* [In]
   fun AcquireCredentialsHandleW(pszprincipal : LibC::LPWSTR, pszpackage : LibC::LPWSTR, fcredentialuse : SECPKG_CRED, pvlogonid : Void*, pauthdata : Void*, pgetkeyfn : SEC_GET_KEY_FN, pvgetkeyargument : Void*, phcredential : SecHandle*, ptsexpiry : LARGE_INTEGER*) : Int32
@@ -4903,13 +4903,13 @@ lib LibWin32
   fun SspiCopyAuthIdentity(authdata : Void*, authdatacopy : Void**) : Int32
 
   # Params # authdata : Void* [In]
-  fun SspiFreeAuthIdentity(authdata : Void*)
+  fun SspiFreeAuthIdentity(authdata : Void*) : Void
 
   # Params # authdata : Void* [In]
-  fun SspiZeroAuthIdentity(authdata : Void*)
+  fun SspiZeroAuthIdentity(authdata : Void*) : Void
 
   # Params # databuffer : Void* [In]
-  fun SspiLocalFree(databuffer : Void*)
+  fun SspiLocalFree(databuffer : Void*) : Void
 
   # Params # pszusername : LibC::LPWSTR [In],pszdomainname : LibC::LPWSTR [In],pszpackedcredentialsstring : LibC::LPWSTR [In],ppauthidentity : Void** [In]
   fun SspiEncodeStringsAsAuthIdentity(pszusername : LibC::LPWSTR, pszdomainname : LibC::LPWSTR, pszpackedcredentialsstring : LibC::LPWSTR, ppauthidentity : Void**) : Int32
@@ -4957,13 +4957,13 @@ lib LibWin32
   fun SslEmptyCacheW(psztargetname : LibC::LPWSTR, dwflags : UInt32) : LibC::BOOL
 
   # Params # prandomdata : UInt8* [In],crandomdata : Int32 [In]
-  fun SslGenerateRandomBits(prandomdata : UInt8*, crandomdata : Int32)
+  fun SslGenerateRandomBits(prandomdata : UInt8*, crandomdata : Int32) : Void
 
   # Params # pbcertificate : UInt8* [In],cbcertificate : UInt32 [In],dwflags : UInt32 [In],ppcertificate : X509Certificate** [In]
   fun SslCrackCertificate(pbcertificate : UInt8*, cbcertificate : UInt32, dwflags : UInt32, ppcertificate : X509Certificate**) : LibC::BOOL
 
   # Params # pcertificate : X509Certificate* [In]
-  fun SslFreeCertificate(pcertificate : X509Certificate*)
+  fun SslFreeCertificate(pcertificate : X509Certificate*) : Void
 
   # Params # reserved : UInt32 [In]
   fun SslGetMaximumKeySize(reserved : UInt32) : UInt32
@@ -5135,4 +5135,18 @@ lib LibWin32
 
   # Params # valuename : LibC::LPWSTR [In],valuetype : UInt32* [In],databuffer : Void* [In],datasize : UInt32 [In],resultdatasize : UInt32* [In]
   fun SLQueryLicenseValueFromApp(valuename : LibC::LPWSTR, valuetype : UInt32*, databuffer : Void*, datasize : UInt32, resultdatasize : UInt32*) : HRESULT
+end
+struct LibWin32::ICcgDomainAuthCredentials
+  def query_interface(this : ICcgDomainAuthCredentials*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICcgDomainAuthCredentials*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICcgDomainAuthCredentials*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_password_credentials(this : ICcgDomainAuthCredentials*, plugininput : LibC::LPWSTR, domainname : LibC::LPWSTR*, username : LibC::LPWSTR*, password : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_password_credentials.call(this, plugininput, domainname, username, password)
+  end
 end

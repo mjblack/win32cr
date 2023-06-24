@@ -1592,3 +1592,2258 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IClockVectorElement
+  def query_interface(this : IClockVectorElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IClockVectorElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IClockVectorElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_replica_key(this : IClockVectorElement*, pdwreplicakey : UInt32*) : HRESULT
+    @lpVtbl.value.get_replica_key.call(this, pdwreplicakey)
+  end
+  def get_tick_count(this : IClockVectorElement*, pulltickcount : UInt64*) : HRESULT
+    @lpVtbl.value.get_tick_count.call(this, pulltickcount)
+  end
+end
+struct LibWin32::IFeedClockVectorElement
+  def query_interface(this : IFeedClockVectorElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFeedClockVectorElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFeedClockVectorElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_replica_key(this : IFeedClockVectorElement*, pdwreplicakey : UInt32*) : HRESULT
+    @lpVtbl.value.get_replica_key.call(this, pdwreplicakey)
+  end
+  def get_tick_count(this : IFeedClockVectorElement*, pulltickcount : UInt64*) : HRESULT
+    @lpVtbl.value.get_tick_count.call(this, pulltickcount)
+  end
+  def get_sync_time(this : IFeedClockVectorElement*, psynctime : SYNC_TIME*) : HRESULT
+    @lpVtbl.value.get_sync_time.call(this, psynctime)
+  end
+  def get_flags(this : IFeedClockVectorElement*, pbflags : UInt8*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pbflags)
+  end
+end
+struct LibWin32::IClockVector
+  def query_interface(this : IClockVector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IClockVector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IClockVector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_clock_vector_elements(this : IClockVector*, riid : Guid*, ppienumclockvector : Void**) : HRESULT
+    @lpVtbl.value.get_clock_vector_elements.call(this, riid, ppienumclockvector)
+  end
+  def get_clock_vector_element_count(this : IClockVector*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_clock_vector_element_count.call(this, pdwcount)
+  end
+end
+struct LibWin32::IFeedClockVector
+  def query_interface(this : IFeedClockVector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFeedClockVector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFeedClockVector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_clock_vector_elements(this : IFeedClockVector*, riid : Guid*, ppienumclockvector : Void**) : HRESULT
+    @lpVtbl.value.get_clock_vector_elements.call(this, riid, ppienumclockvector)
+  end
+  def get_clock_vector_element_count(this : IFeedClockVector*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_clock_vector_element_count.call(this, pdwcount)
+  end
+  def get_update_count(this : IFeedClockVector*, pdwupdatecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_update_count.call(this, pdwupdatecount)
+  end
+  def is_no_conflicts_specified(this : IFeedClockVector*, pfisnoconflictsspecified : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_no_conflicts_specified.call(this, pfisnoconflictsspecified)
+  end
+end
+struct LibWin32::IEnumClockVector
+  def query_interface(this : IEnumClockVector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumClockVector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumClockVector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumClockVector*, cclockvectorelements : UInt32, ppiclockvectorelements : IClockVectorElement*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cclockvectorelements, ppiclockvectorelements, pcfetched)
+  end
+  def skip(this : IEnumClockVector*, csyncversions : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, csyncversions)
+  end
+  def reset(this : IEnumClockVector*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumClockVector*, ppienum : IEnumClockVector*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+end
+struct LibWin32::IEnumFeedClockVector
+  def query_interface(this : IEnumFeedClockVector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumFeedClockVector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumFeedClockVector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumFeedClockVector*, cclockvectorelements : UInt32, ppiclockvectorelements : IFeedClockVectorElement*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cclockvectorelements, ppiclockvectorelements, pcfetched)
+  end
+  def skip(this : IEnumFeedClockVector*, csyncversions : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, csyncversions)
+  end
+  def reset(this : IEnumFeedClockVector*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumFeedClockVector*, ppienum : IEnumFeedClockVector*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppienum)
+  end
+end
+struct LibWin32::ICoreFragment
+  def query_interface(this : ICoreFragment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICoreFragment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICoreFragment*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next_column(this : ICoreFragment*, pchangeunitid : UInt8*, pchangeunitidsize : UInt32*) : HRESULT
+    @lpVtbl.value.next_column.call(this, pchangeunitid, pchangeunitidsize)
+  end
+  def next_range(this : ICoreFragment*, pitemid : UInt8*, pitemidsize : UInt32*, piclockvector : IClockVector*) : HRESULT
+    @lpVtbl.value.next_range.call(this, pitemid, pitemidsize, piclockvector)
+  end
+  def reset(this : ICoreFragment*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_column_count(this : ICoreFragment*, pcolumncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_column_count.call(this, pcolumncount)
+  end
+  def get_range_count(this : ICoreFragment*, prangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_range_count.call(this, prangecount)
+  end
+end
+struct LibWin32::ICoreFragmentInspector
+  def query_interface(this : ICoreFragmentInspector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICoreFragmentInspector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICoreFragmentInspector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next_core_fragments(this : ICoreFragmentInspector*, requestedcount : UInt32, ppicorefragments : ICoreFragment*, pfetchedcount : UInt32*) : HRESULT
+    @lpVtbl.value.next_core_fragments.call(this, requestedcount, ppicorefragments, pfetchedcount)
+  end
+  def reset(this : ICoreFragmentInspector*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IRangeException
+  def query_interface(this : IRangeException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRangeException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRangeException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_closed_range_start(this : IRangeException*, pbclosedrangestart : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_range_start.call(this, pbclosedrangestart, pcbidsize)
+  end
+  def get_closed_range_end(this : IRangeException*, pbclosedrangeend : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_range_end.call(this, pbclosedrangeend, pcbidsize)
+  end
+  def get_clock_vector(this : IRangeException*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_clock_vector.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IEnumRangeExceptions
+  def query_interface(this : IEnumRangeExceptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRangeExceptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRangeExceptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumRangeExceptions*, cexceptions : UInt32, pprangeexception : IRangeException*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cexceptions, pprangeexception, pcfetched)
+  end
+  def skip(this : IEnumRangeExceptions*, cexceptions : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cexceptions)
+  end
+  def reset(this : IEnumRangeExceptions*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumRangeExceptions*, ppenum : IEnumRangeExceptions*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::ISingleItemException
+  def query_interface(this : ISingleItemException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISingleItemException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISingleItemException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_id(this : ISingleItemException*, pbitemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_id.call(this, pbitemid, pcbidsize)
+  end
+  def get_clock_vector(this : ISingleItemException*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_clock_vector.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IEnumSingleItemExceptions
+  def query_interface(this : IEnumSingleItemExceptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSingleItemExceptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSingleItemExceptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSingleItemExceptions*, cexceptions : UInt32, ppsingleitemexception : ISingleItemException*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cexceptions, ppsingleitemexception, pcfetched)
+  end
+  def skip(this : IEnumSingleItemExceptions*, cexceptions : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cexceptions)
+  end
+  def reset(this : IEnumSingleItemExceptions*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSingleItemExceptions*, ppenum : IEnumSingleItemExceptions*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IChangeUnitException
+  def query_interface(this : IChangeUnitException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IChangeUnitException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IChangeUnitException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_id(this : IChangeUnitException*, pbitemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_id.call(this, pbitemid, pcbidsize)
+  end
+  def get_change_unit_id(this : IChangeUnitException*, pbchangeunitid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_change_unit_id.call(this, pbchangeunitid, pcbidsize)
+  end
+  def get_clock_vector(this : IChangeUnitException*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_clock_vector.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IEnumChangeUnitExceptions
+  def query_interface(this : IEnumChangeUnitExceptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumChangeUnitExceptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumChangeUnitExceptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumChangeUnitExceptions*, cexceptions : UInt32, ppchangeunitexception : IChangeUnitException*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cexceptions, ppchangeunitexception, pcfetched)
+  end
+  def skip(this : IEnumChangeUnitExceptions*, cexceptions : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cexceptions)
+  end
+  def reset(this : IEnumChangeUnitExceptions*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumChangeUnitExceptions*, ppenum : IEnumChangeUnitExceptions*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IReplicaKeyMap
+  def query_interface(this : IReplicaKeyMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReplicaKeyMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReplicaKeyMap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lookup_replica_key(this : IReplicaKeyMap*, pbreplicaid : UInt8*, pdwreplicakey : UInt32*) : HRESULT
+    @lpVtbl.value.lookup_replica_key.call(this, pbreplicaid, pdwreplicakey)
+  end
+  def lookup_replica_id(this : IReplicaKeyMap*, dwreplicakey : UInt32, pbreplicaid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.lookup_replica_id.call(this, dwreplicakey, pbreplicaid, pcbidsize)
+  end
+  def serialize(this : IReplicaKeyMap*, pbreplicakeymap : UInt8*, pcbreplicakeymap : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbreplicakeymap, pcbreplicakeymap)
+  end
+end
+struct LibWin32::IConstructReplicaKeyMap
+  def query_interface(this : IConstructReplicaKeyMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IConstructReplicaKeyMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IConstructReplicaKeyMap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def find_or_add_replica(this : IConstructReplicaKeyMap*, pbreplicaid : UInt8*, pdwreplicakey : UInt32*) : HRESULT
+    @lpVtbl.value.find_or_add_replica.call(this, pbreplicaid, pdwreplicakey)
+  end
+end
+struct LibWin32::ISyncKnowledge
+  def query_interface(this : ISyncKnowledge*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncKnowledge*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncKnowledge*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner_replica_id(this : ISyncKnowledge*, pbreplicaid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_replica_id.call(this, pbreplicaid, pcbidsize)
+  end
+  def serialize(this : ISyncKnowledge*, fserializereplicakeymap : LibC::BOOL, pbknowledge : UInt8*, pcbknowledge : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, fserializereplicakeymap, pbknowledge, pcbknowledge)
+  end
+  def set_local_tick_count(this : ISyncKnowledge*, ulltickcount : UInt64) : HRESULT
+    @lpVtbl.value.set_local_tick_count.call(this, ulltickcount)
+  end
+  def contains_change(this : ISyncKnowledge*, pbversionownerreplicaid : UInt8*, pgiditemid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change.call(this, pbversionownerreplicaid, pgiditemid, psyncversion)
+  end
+  def contains_change_unit(this : ISyncKnowledge*, pbversionownerreplicaid : UInt8*, pbitemid : UInt8*, pbchangeunitid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change_unit.call(this, pbversionownerreplicaid, pbitemid, pbchangeunitid, psyncversion)
+  end
+  def get_scope_vector(this : ISyncKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_scope_vector.call(this, riid, ppunk)
+  end
+  def get_replica_key_map(this : ISyncKnowledge*, ppreplicakeymap : IReplicaKeyMap*) : HRESULT
+    @lpVtbl.value.get_replica_key_map.call(this, ppreplicakeymap)
+  end
+  def clone(this : ISyncKnowledge*, ppclonedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppclonedknowledge)
+  end
+  def convert_version(this : ISyncKnowledge*, pknowledgein : ISyncKnowledge, pbcurrentownerid : UInt8*, pversionin : SYNC_VERSION*, pbnewownerid : UInt8*, pcbidsize : UInt32*, pversionout : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.convert_version.call(this, pknowledgein, pbcurrentownerid, pversionin, pbnewownerid, pcbidsize, pversionout)
+  end
+  def map_remote_to_local(this : ISyncKnowledge*, premoteknowledge : ISyncKnowledge, ppmappedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.map_remote_to_local.call(this, premoteknowledge, ppmappedknowledge)
+  end
+  def union(this : ISyncKnowledge*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.union.call(this, pknowledge)
+  end
+  def project_onto_item(this : ISyncKnowledge*, pbitemid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_item.call(this, pbitemid, ppknowledgeout)
+  end
+  def project_onto_change_unit(this : ISyncKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_change_unit.call(this, pbitemid, pbchangeunitid, ppknowledgeout)
+  end
+  def project_onto_range(this : ISyncKnowledge*, psrngsyncrange : SYNC_RANGE*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_range.call(this, psrngsyncrange, ppknowledgeout)
+  end
+  def exclude_item(this : ISyncKnowledge*, pbitemid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_item.call(this, pbitemid)
+  end
+  def exclude_change_unit(this : ISyncKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_change_unit.call(this, pbitemid, pbchangeunitid)
+  end
+  def contains_knowledge(this : ISyncKnowledge*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.contains_knowledge.call(this, pknowledge)
+  end
+  def find_min_tick_count_for_replica(this : ISyncKnowledge*, pbreplicaid : UInt8*, pullreplicatickcount : UInt64*) : HRESULT
+    @lpVtbl.value.find_min_tick_count_for_replica.call(this, pbreplicaid, pullreplicatickcount)
+  end
+  def get_range_exceptions(this : ISyncKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_range_exceptions.call(this, riid, ppunk)
+  end
+  def get_single_item_exceptions(this : ISyncKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_single_item_exceptions.call(this, riid, ppunk)
+  end
+  def get_change_unit_exceptions(this : ISyncKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_change_unit_exceptions.call(this, riid, ppunk)
+  end
+  def find_clock_vector_for_item(this : ISyncKnowledge*, pbitemid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_item.call(this, pbitemid, riid, ppunk)
+  end
+  def find_clock_vector_for_change_unit(this : ISyncKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_change_unit.call(this, pbitemid, pbchangeunitid, riid, ppunk)
+  end
+  def get_version(this : ISyncKnowledge*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+end
+struct LibWin32::IForgottenKnowledge
+  def query_interface(this : IForgottenKnowledge*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IForgottenKnowledge*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IForgottenKnowledge*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner_replica_id(this : IForgottenKnowledge*, pbreplicaid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_replica_id.call(this, pbreplicaid, pcbidsize)
+  end
+  def serialize(this : IForgottenKnowledge*, fserializereplicakeymap : LibC::BOOL, pbknowledge : UInt8*, pcbknowledge : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, fserializereplicakeymap, pbknowledge, pcbknowledge)
+  end
+  def set_local_tick_count(this : IForgottenKnowledge*, ulltickcount : UInt64) : HRESULT
+    @lpVtbl.value.set_local_tick_count.call(this, ulltickcount)
+  end
+  def contains_change(this : IForgottenKnowledge*, pbversionownerreplicaid : UInt8*, pgiditemid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change.call(this, pbversionownerreplicaid, pgiditemid, psyncversion)
+  end
+  def contains_change_unit(this : IForgottenKnowledge*, pbversionownerreplicaid : UInt8*, pbitemid : UInt8*, pbchangeunitid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change_unit.call(this, pbversionownerreplicaid, pbitemid, pbchangeunitid, psyncversion)
+  end
+  def get_scope_vector(this : IForgottenKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_scope_vector.call(this, riid, ppunk)
+  end
+  def get_replica_key_map(this : IForgottenKnowledge*, ppreplicakeymap : IReplicaKeyMap*) : HRESULT
+    @lpVtbl.value.get_replica_key_map.call(this, ppreplicakeymap)
+  end
+  def clone(this : IForgottenKnowledge*, ppclonedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppclonedknowledge)
+  end
+  def convert_version(this : IForgottenKnowledge*, pknowledgein : ISyncKnowledge, pbcurrentownerid : UInt8*, pversionin : SYNC_VERSION*, pbnewownerid : UInt8*, pcbidsize : UInt32*, pversionout : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.convert_version.call(this, pknowledgein, pbcurrentownerid, pversionin, pbnewownerid, pcbidsize, pversionout)
+  end
+  def map_remote_to_local(this : IForgottenKnowledge*, premoteknowledge : ISyncKnowledge, ppmappedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.map_remote_to_local.call(this, premoteknowledge, ppmappedknowledge)
+  end
+  def union(this : IForgottenKnowledge*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.union.call(this, pknowledge)
+  end
+  def project_onto_item(this : IForgottenKnowledge*, pbitemid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_item.call(this, pbitemid, ppknowledgeout)
+  end
+  def project_onto_change_unit(this : IForgottenKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_change_unit.call(this, pbitemid, pbchangeunitid, ppknowledgeout)
+  end
+  def project_onto_range(this : IForgottenKnowledge*, psrngsyncrange : SYNC_RANGE*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_range.call(this, psrngsyncrange, ppknowledgeout)
+  end
+  def exclude_item(this : IForgottenKnowledge*, pbitemid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_item.call(this, pbitemid)
+  end
+  def exclude_change_unit(this : IForgottenKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_change_unit.call(this, pbitemid, pbchangeunitid)
+  end
+  def contains_knowledge(this : IForgottenKnowledge*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.contains_knowledge.call(this, pknowledge)
+  end
+  def find_min_tick_count_for_replica(this : IForgottenKnowledge*, pbreplicaid : UInt8*, pullreplicatickcount : UInt64*) : HRESULT
+    @lpVtbl.value.find_min_tick_count_for_replica.call(this, pbreplicaid, pullreplicatickcount)
+  end
+  def get_range_exceptions(this : IForgottenKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_range_exceptions.call(this, riid, ppunk)
+  end
+  def get_single_item_exceptions(this : IForgottenKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_single_item_exceptions.call(this, riid, ppunk)
+  end
+  def get_change_unit_exceptions(this : IForgottenKnowledge*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_change_unit_exceptions.call(this, riid, ppunk)
+  end
+  def find_clock_vector_for_item(this : IForgottenKnowledge*, pbitemid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_item.call(this, pbitemid, riid, ppunk)
+  end
+  def find_clock_vector_for_change_unit(this : IForgottenKnowledge*, pbitemid : UInt8*, pbchangeunitid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_change_unit.call(this, pbitemid, pbchangeunitid, riid, ppunk)
+  end
+  def get_version(this : IForgottenKnowledge*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def forget_to_version(this : IForgottenKnowledge*, pknowledge : ISyncKnowledge, pversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.forget_to_version.call(this, pknowledge, pversion)
+  end
+end
+struct LibWin32::ISyncKnowledge2
+  def query_interface(this : ISyncKnowledge2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncKnowledge2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncKnowledge2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner_replica_id(this : ISyncKnowledge2*, pbreplicaid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_replica_id.call(this, pbreplicaid, pcbidsize)
+  end
+  def serialize(this : ISyncKnowledge2*, fserializereplicakeymap : LibC::BOOL, pbknowledge : UInt8*, pcbknowledge : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, fserializereplicakeymap, pbknowledge, pcbknowledge)
+  end
+  def set_local_tick_count(this : ISyncKnowledge2*, ulltickcount : UInt64) : HRESULT
+    @lpVtbl.value.set_local_tick_count.call(this, ulltickcount)
+  end
+  def contains_change(this : ISyncKnowledge2*, pbversionownerreplicaid : UInt8*, pgiditemid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change.call(this, pbversionownerreplicaid, pgiditemid, psyncversion)
+  end
+  def contains_change_unit(this : ISyncKnowledge2*, pbversionownerreplicaid : UInt8*, pbitemid : UInt8*, pbchangeunitid : UInt8*, psyncversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.contains_change_unit.call(this, pbversionownerreplicaid, pbitemid, pbchangeunitid, psyncversion)
+  end
+  def get_scope_vector(this : ISyncKnowledge2*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_scope_vector.call(this, riid, ppunk)
+  end
+  def get_replica_key_map(this : ISyncKnowledge2*, ppreplicakeymap : IReplicaKeyMap*) : HRESULT
+    @lpVtbl.value.get_replica_key_map.call(this, ppreplicakeymap)
+  end
+  def clone(this : ISyncKnowledge2*, ppclonedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppclonedknowledge)
+  end
+  def convert_version(this : ISyncKnowledge2*, pknowledgein : ISyncKnowledge, pbcurrentownerid : UInt8*, pversionin : SYNC_VERSION*, pbnewownerid : UInt8*, pcbidsize : UInt32*, pversionout : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.convert_version.call(this, pknowledgein, pbcurrentownerid, pversionin, pbnewownerid, pcbidsize, pversionout)
+  end
+  def map_remote_to_local(this : ISyncKnowledge2*, premoteknowledge : ISyncKnowledge, ppmappedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.map_remote_to_local.call(this, premoteknowledge, ppmappedknowledge)
+  end
+  def union(this : ISyncKnowledge2*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.union.call(this, pknowledge)
+  end
+  def project_onto_item(this : ISyncKnowledge2*, pbitemid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_item.call(this, pbitemid, ppknowledgeout)
+  end
+  def project_onto_change_unit(this : ISyncKnowledge2*, pbitemid : UInt8*, pbchangeunitid : UInt8*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_change_unit.call(this, pbitemid, pbchangeunitid, ppknowledgeout)
+  end
+  def project_onto_range(this : ISyncKnowledge2*, psrngsyncrange : SYNC_RANGE*, ppknowledgeout : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_range.call(this, psrngsyncrange, ppknowledgeout)
+  end
+  def exclude_item(this : ISyncKnowledge2*, pbitemid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_item.call(this, pbitemid)
+  end
+  def exclude_change_unit(this : ISyncKnowledge2*, pbitemid : UInt8*, pbchangeunitid : UInt8*) : HRESULT
+    @lpVtbl.value.exclude_change_unit.call(this, pbitemid, pbchangeunitid)
+  end
+  def contains_knowledge(this : ISyncKnowledge2*, pknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.contains_knowledge.call(this, pknowledge)
+  end
+  def find_min_tick_count_for_replica(this : ISyncKnowledge2*, pbreplicaid : UInt8*, pullreplicatickcount : UInt64*) : HRESULT
+    @lpVtbl.value.find_min_tick_count_for_replica.call(this, pbreplicaid, pullreplicatickcount)
+  end
+  def get_range_exceptions(this : ISyncKnowledge2*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_range_exceptions.call(this, riid, ppunk)
+  end
+  def get_single_item_exceptions(this : ISyncKnowledge2*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_single_item_exceptions.call(this, riid, ppunk)
+  end
+  def get_change_unit_exceptions(this : ISyncKnowledge2*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.get_change_unit_exceptions.call(this, riid, ppunk)
+  end
+  def find_clock_vector_for_item(this : ISyncKnowledge2*, pbitemid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_item.call(this, pbitemid, riid, ppunk)
+  end
+  def find_clock_vector_for_change_unit(this : ISyncKnowledge2*, pbitemid : UInt8*, pbchangeunitid : UInt8*, riid : Guid*, ppunk : Void**) : HRESULT
+    @lpVtbl.value.find_clock_vector_for_change_unit.call(this, pbitemid, pbchangeunitid, riid, ppunk)
+  end
+  def get_version(this : ISyncKnowledge2*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_id_parameters(this : ISyncKnowledge2*, pidparameters : ID_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_id_parameters.call(this, pidparameters)
+  end
+  def project_onto_column_set(this : ISyncKnowledge2*, ppcolumns : UInt8**, count : UInt32, ppiknowledgeout : ISyncKnowledge2*) : HRESULT
+    @lpVtbl.value.project_onto_column_set.call(this, ppcolumns, count, ppiknowledgeout)
+  end
+  def serialize_with_options(this : ISyncKnowledge2*, targetformatversion : SYNC_SERIALIZATION_VERSION, dwflags : UInt32, pbbuffer : UInt8*, pdwserializedsize : UInt32*) : HRESULT
+    @lpVtbl.value.serialize_with_options.call(this, targetformatversion, dwflags, pbbuffer, pdwserializedsize)
+  end
+  def get_lowest_uncontained_id(this : ISyncKnowledge2*, pisyncknowledge : ISyncKnowledge2, pbitemid : UInt8*, pcbitemidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_lowest_uncontained_id.call(this, pisyncknowledge, pbitemid, pcbitemidsize)
+  end
+  def get_inspector(this : ISyncKnowledge2*, riid : Guid*, ppiinspector : Void**) : HRESULT
+    @lpVtbl.value.get_inspector.call(this, riid, ppiinspector)
+  end
+  def get_minimum_supported_version(this : ISyncKnowledge2*, pversion : SYNC_SERIALIZATION_VERSION*) : HRESULT
+    @lpVtbl.value.get_minimum_supported_version.call(this, pversion)
+  end
+  def get_statistics(this : ISyncKnowledge2*, which : SYNC_STATISTICS, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, which, pvalue)
+  end
+  def contains_knowledge_for_item(this : ISyncKnowledge2*, pknowledge : ISyncKnowledge, pbitemid : UInt8*) : HRESULT
+    @lpVtbl.value.contains_knowledge_for_item.call(this, pknowledge, pbitemid)
+  end
+  def contains_knowledge_for_change_unit(this : ISyncKnowledge2*, pknowledge : ISyncKnowledge, pbitemid : UInt8*, pbchangeunitid : UInt8*) : HRESULT
+    @lpVtbl.value.contains_knowledge_for_change_unit.call(this, pknowledge, pbitemid, pbchangeunitid)
+  end
+  def project_onto_knowledge_with_prerequisite(this : ISyncKnowledge2*, pprerequisiteknowledge : ISyncKnowledge, ptemplateknowledge : ISyncKnowledge, ppprojectedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.project_onto_knowledge_with_prerequisite.call(this, pprerequisiteknowledge, ptemplateknowledge, ppprojectedknowledge)
+  end
+  def complement(this : ISyncKnowledge2*, psyncknowledge : ISyncKnowledge, ppcomplementedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.complement.call(this, psyncknowledge, ppcomplementedknowledge)
+  end
+  def intersects_with_knowledge(this : ISyncKnowledge2*, psyncknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.intersects_with_knowledge.call(this, psyncknowledge)
+  end
+  def get_knowledge_cookie(this : ISyncKnowledge2*, ppknowledgecookie : IUnknown*) : HRESULT
+    @lpVtbl.value.get_knowledge_cookie.call(this, ppknowledgecookie)
+  end
+  def compare_to_knowledge_cookie(this : ISyncKnowledge2*, pknowledgecookie : IUnknown, presult : KNOWLEDGE_COOKIE_COMPARISON_RESULT*) : HRESULT
+    @lpVtbl.value.compare_to_knowledge_cookie.call(this, pknowledgecookie, presult)
+  end
+end
+struct LibWin32::IRecoverableErrorData
+  def query_interface(this : IRecoverableErrorData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRecoverableErrorData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRecoverableErrorData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IRecoverableErrorData*, pcszitemdisplayname : LibC::LPWSTR, pcszerrordescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, pcszitemdisplayname, pcszerrordescription)
+  end
+  def get_item_display_name(this : IRecoverableErrorData*, pszitemdisplayname : LibC::LPWSTR, pcchitemdisplayname : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_display_name.call(this, pszitemdisplayname, pcchitemdisplayname)
+  end
+  def get_error_description(this : IRecoverableErrorData*, pszerrordescription : LibC::LPWSTR, pccherrordescription : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_description.call(this, pszerrordescription, pccherrordescription)
+  end
+end
+struct LibWin32::IRecoverableError
+  def query_interface(this : IRecoverableError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRecoverableError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRecoverableError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stage(this : IRecoverableError*, pstage : SYNC_PROGRESS_STAGE*) : HRESULT
+    @lpVtbl.value.get_stage.call(this, pstage)
+  end
+  def get_provider(this : IRecoverableError*, pproviderrole : SYNC_PROVIDER_ROLE*) : HRESULT
+    @lpVtbl.value.get_provider.call(this, pproviderrole)
+  end
+  def get_change_with_recoverable_error(this : IRecoverableError*, ppchangewithrecoverableerror : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_change_with_recoverable_error.call(this, ppchangewithrecoverableerror)
+  end
+  def get_recoverable_error_data_for_change(this : IRecoverableError*, phrerror : HRESULT*, pperrordata : IRecoverableErrorData*) : HRESULT
+    @lpVtbl.value.get_recoverable_error_data_for_change.call(this, phrerror, pperrordata)
+  end
+  def get_recoverable_error_data_for_change_unit(this : IRecoverableError*, pchangeunit : ISyncChangeUnit, phrerror : HRESULT*, pperrordata : IRecoverableErrorData*) : HRESULT
+    @lpVtbl.value.get_recoverable_error_data_for_change_unit.call(this, pchangeunit, phrerror, pperrordata)
+  end
+end
+struct LibWin32::IChangeConflict
+  def query_interface(this : IChangeConflict*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IChangeConflict*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IChangeConflict*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_destination_provider_conflicting_change(this : IChangeConflict*, ppconflictingchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_destination_provider_conflicting_change.call(this, ppconflictingchange)
+  end
+  def get_source_provider_conflicting_change(this : IChangeConflict*, ppconflictingchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_source_provider_conflicting_change.call(this, ppconflictingchange)
+  end
+  def get_destination_provider_conflicting_data(this : IChangeConflict*, ppconflictingdata : IUnknown*) : HRESULT
+    @lpVtbl.value.get_destination_provider_conflicting_data.call(this, ppconflictingdata)
+  end
+  def get_source_provider_conflicting_data(this : IChangeConflict*, ppconflictingdata : IUnknown*) : HRESULT
+    @lpVtbl.value.get_source_provider_conflicting_data.call(this, ppconflictingdata)
+  end
+  def get_resolve_action_for_change(this : IChangeConflict*, presolveaction : SYNC_RESOLVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_resolve_action_for_change.call(this, presolveaction)
+  end
+  def set_resolve_action_for_change(this : IChangeConflict*, resolveaction : SYNC_RESOLVE_ACTION) : HRESULT
+    @lpVtbl.value.set_resolve_action_for_change.call(this, resolveaction)
+  end
+  def get_resolve_action_for_change_unit(this : IChangeConflict*, pchangeunit : ISyncChangeUnit, presolveaction : SYNC_RESOLVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_resolve_action_for_change_unit.call(this, pchangeunit, presolveaction)
+  end
+  def set_resolve_action_for_change_unit(this : IChangeConflict*, pchangeunit : ISyncChangeUnit, resolveaction : SYNC_RESOLVE_ACTION) : HRESULT
+    @lpVtbl.value.set_resolve_action_for_change_unit.call(this, pchangeunit, resolveaction)
+  end
+end
+struct LibWin32::IConstraintConflict
+  def query_interface(this : IConstraintConflict*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IConstraintConflict*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IConstraintConflict*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_destination_provider_conflicting_change(this : IConstraintConflict*, ppconflictingchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_destination_provider_conflicting_change.call(this, ppconflictingchange)
+  end
+  def get_source_provider_conflicting_change(this : IConstraintConflict*, ppconflictingchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_source_provider_conflicting_change.call(this, ppconflictingchange)
+  end
+  def get_destination_provider_original_change(this : IConstraintConflict*, pporiginalchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_destination_provider_original_change.call(this, pporiginalchange)
+  end
+  def get_destination_provider_conflicting_data(this : IConstraintConflict*, ppconflictingdata : IUnknown*) : HRESULT
+    @lpVtbl.value.get_destination_provider_conflicting_data.call(this, ppconflictingdata)
+  end
+  def get_source_provider_conflicting_data(this : IConstraintConflict*, ppconflictingdata : IUnknown*) : HRESULT
+    @lpVtbl.value.get_source_provider_conflicting_data.call(this, ppconflictingdata)
+  end
+  def get_destination_provider_original_data(this : IConstraintConflict*, pporiginaldata : IUnknown*) : HRESULT
+    @lpVtbl.value.get_destination_provider_original_data.call(this, pporiginaldata)
+  end
+  def get_constraint_resolve_action_for_change(this : IConstraintConflict*, pconstraintresolveaction : SYNC_CONSTRAINT_RESOLVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_constraint_resolve_action_for_change.call(this, pconstraintresolveaction)
+  end
+  def set_constraint_resolve_action_for_change(this : IConstraintConflict*, constraintresolveaction : SYNC_CONSTRAINT_RESOLVE_ACTION) : HRESULT
+    @lpVtbl.value.set_constraint_resolve_action_for_change.call(this, constraintresolveaction)
+  end
+  def get_constraint_resolve_action_for_change_unit(this : IConstraintConflict*, pchangeunit : ISyncChangeUnit, pconstraintresolveaction : SYNC_CONSTRAINT_RESOLVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_constraint_resolve_action_for_change_unit.call(this, pchangeunit, pconstraintresolveaction)
+  end
+  def set_constraint_resolve_action_for_change_unit(this : IConstraintConflict*, pchangeunit : ISyncChangeUnit, constraintresolveaction : SYNC_CONSTRAINT_RESOLVE_ACTION) : HRESULT
+    @lpVtbl.value.set_constraint_resolve_action_for_change_unit.call(this, pchangeunit, constraintresolveaction)
+  end
+  def get_constraint_conflict_reason(this : IConstraintConflict*, pconstraintconflictreason : CONSTRAINT_CONFLICT_REASON*) : HRESULT
+    @lpVtbl.value.get_constraint_conflict_reason.call(this, pconstraintconflictreason)
+  end
+  def is_temporary(this : IConstraintConflict*) : HRESULT
+    @lpVtbl.value.is_temporary.call(this)
+  end
+end
+struct LibWin32::ISyncCallback
+  def query_interface(this : ISyncCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_progress(this : ISyncCallback*, provider : SYNC_PROVIDER_ROLE, syncstage : SYNC_PROGRESS_STAGE, dwcompletedwork : UInt32, dwtotalwork : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.call(this, provider, syncstage, dwcompletedwork, dwtotalwork)
+  end
+  def on_change(this : ISyncCallback*, psyncchange : ISyncChange) : HRESULT
+    @lpVtbl.value.on_change.call(this, psyncchange)
+  end
+  def on_conflict(this : ISyncCallback*, pconflict : IChangeConflict) : HRESULT
+    @lpVtbl.value.on_conflict.call(this, pconflict)
+  end
+  def on_full_enumeration_needed(this : ISyncCallback*, pfullenumerationaction : SYNC_FULL_ENUMERATION_ACTION*) : HRESULT
+    @lpVtbl.value.on_full_enumeration_needed.call(this, pfullenumerationaction)
+  end
+  def on_recoverable_error(this : ISyncCallback*, precoverableerror : IRecoverableError) : HRESULT
+    @lpVtbl.value.on_recoverable_error.call(this, precoverableerror)
+  end
+end
+struct LibWin32::ISyncCallback2
+  def query_interface(this : ISyncCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_progress(this : ISyncCallback2*, provider : SYNC_PROVIDER_ROLE, syncstage : SYNC_PROGRESS_STAGE, dwcompletedwork : UInt32, dwtotalwork : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.call(this, provider, syncstage, dwcompletedwork, dwtotalwork)
+  end
+  def on_change(this : ISyncCallback2*, psyncchange : ISyncChange) : HRESULT
+    @lpVtbl.value.on_change.call(this, psyncchange)
+  end
+  def on_conflict(this : ISyncCallback2*, pconflict : IChangeConflict) : HRESULT
+    @lpVtbl.value.on_conflict.call(this, pconflict)
+  end
+  def on_full_enumeration_needed(this : ISyncCallback2*, pfullenumerationaction : SYNC_FULL_ENUMERATION_ACTION*) : HRESULT
+    @lpVtbl.value.on_full_enumeration_needed.call(this, pfullenumerationaction)
+  end
+  def on_recoverable_error(this : ISyncCallback2*, precoverableerror : IRecoverableError) : HRESULT
+    @lpVtbl.value.on_recoverable_error.call(this, precoverableerror)
+  end
+  def on_change_applied(this : ISyncCallback2*, dwchangesapplied : UInt32, dwchangesfailed : UInt32) : HRESULT
+    @lpVtbl.value.on_change_applied.call(this, dwchangesapplied, dwchangesfailed)
+  end
+  def on_change_failed(this : ISyncCallback2*, dwchangesapplied : UInt32, dwchangesfailed : UInt32) : HRESULT
+    @lpVtbl.value.on_change_failed.call(this, dwchangesapplied, dwchangesfailed)
+  end
+end
+struct LibWin32::ISyncConstraintCallback
+  def query_interface(this : ISyncConstraintCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncConstraintCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncConstraintCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_constraint_conflict(this : ISyncConstraintCallback*, pconflict : IConstraintConflict) : HRESULT
+    @lpVtbl.value.on_constraint_conflict.call(this, pconflict)
+  end
+end
+struct LibWin32::ISyncProvider
+  def query_interface(this : ISyncProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id_parameters(this : ISyncProvider*, pidparameters : ID_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_id_parameters.call(this, pidparameters)
+  end
+end
+struct LibWin32::ISyncSessionState
+  def query_interface(this : ISyncSessionState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncSessionState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncSessionState*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_canceled(this : ISyncSessionState*, pfiscanceled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_canceled.call(this, pfiscanceled)
+  end
+  def get_info_for_change_application(this : ISyncSessionState*, pbchangeapplierinfo : UInt8*, pcbchangeapplierinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_info_for_change_application.call(this, pbchangeapplierinfo, pcbchangeapplierinfo)
+  end
+  def load_info_from_change_application(this : ISyncSessionState*, pbchangeapplierinfo : UInt8*, cbchangeapplierinfo : UInt32) : HRESULT
+    @lpVtbl.value.load_info_from_change_application.call(this, pbchangeapplierinfo, cbchangeapplierinfo)
+  end
+  def get_forgotten_knowledge_recovery_range_start(this : ISyncSessionState*, pbrangestart : UInt8*, pcbrangestart : UInt32*) : HRESULT
+    @lpVtbl.value.get_forgotten_knowledge_recovery_range_start.call(this, pbrangestart, pcbrangestart)
+  end
+  def get_forgotten_knowledge_recovery_range_end(this : ISyncSessionState*, pbrangeend : UInt8*, pcbrangeend : UInt32*) : HRESULT
+    @lpVtbl.value.get_forgotten_knowledge_recovery_range_end.call(this, pbrangeend, pcbrangeend)
+  end
+  def set_forgotten_knowledge_recovery_range(this : ISyncSessionState*, prange : SYNC_RANGE*) : HRESULT
+    @lpVtbl.value.set_forgotten_knowledge_recovery_range.call(this, prange)
+  end
+  def on_progress(this : ISyncSessionState*, provider : SYNC_PROVIDER_ROLE, syncstage : SYNC_PROGRESS_STAGE, dwcompletedwork : UInt32, dwtotalwork : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.call(this, provider, syncstage, dwcompletedwork, dwtotalwork)
+  end
+end
+struct LibWin32::ISyncSessionExtendedErrorInfo
+  def query_interface(this : ISyncSessionExtendedErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncSessionExtendedErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncSessionExtendedErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sync_provider_with_error(this : ISyncSessionExtendedErrorInfo*, ppproviderwitherror : ISyncProvider*) : HRESULT
+    @lpVtbl.value.get_sync_provider_with_error.call(this, ppproviderwitherror)
+  end
+end
+struct LibWin32::ISyncSessionState2
+  def query_interface(this : ISyncSessionState2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncSessionState2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncSessionState2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_canceled(this : ISyncSessionState2*, pfiscanceled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_canceled.call(this, pfiscanceled)
+  end
+  def get_info_for_change_application(this : ISyncSessionState2*, pbchangeapplierinfo : UInt8*, pcbchangeapplierinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_info_for_change_application.call(this, pbchangeapplierinfo, pcbchangeapplierinfo)
+  end
+  def load_info_from_change_application(this : ISyncSessionState2*, pbchangeapplierinfo : UInt8*, cbchangeapplierinfo : UInt32) : HRESULT
+    @lpVtbl.value.load_info_from_change_application.call(this, pbchangeapplierinfo, cbchangeapplierinfo)
+  end
+  def get_forgotten_knowledge_recovery_range_start(this : ISyncSessionState2*, pbrangestart : UInt8*, pcbrangestart : UInt32*) : HRESULT
+    @lpVtbl.value.get_forgotten_knowledge_recovery_range_start.call(this, pbrangestart, pcbrangestart)
+  end
+  def get_forgotten_knowledge_recovery_range_end(this : ISyncSessionState2*, pbrangeend : UInt8*, pcbrangeend : UInt32*) : HRESULT
+    @lpVtbl.value.get_forgotten_knowledge_recovery_range_end.call(this, pbrangeend, pcbrangeend)
+  end
+  def set_forgotten_knowledge_recovery_range(this : ISyncSessionState2*, prange : SYNC_RANGE*) : HRESULT
+    @lpVtbl.value.set_forgotten_knowledge_recovery_range.call(this, prange)
+  end
+  def on_progress(this : ISyncSessionState2*, provider : SYNC_PROVIDER_ROLE, syncstage : SYNC_PROGRESS_STAGE, dwcompletedwork : UInt32, dwtotalwork : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.call(this, provider, syncstage, dwcompletedwork, dwtotalwork)
+  end
+  def set_provider_with_error(this : ISyncSessionState2*, fself : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_provider_with_error.call(this, fself)
+  end
+  def get_session_error_status(this : ISyncSessionState2*, phrsessionerror : HRESULT*) : HRESULT
+    @lpVtbl.value.get_session_error_status.call(this, phrsessionerror)
+  end
+end
+struct LibWin32::ISyncFilterInfo
+  def query_interface(this : ISyncFilterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFilterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFilterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : ISyncFilterInfo*, pbbuffer : UInt8*, pcbbuffer : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbbuffer, pcbbuffer)
+  end
+end
+struct LibWin32::ISyncFilterInfo2
+  def query_interface(this : ISyncFilterInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFilterInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFilterInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : ISyncFilterInfo2*, pbbuffer : UInt8*, pcbbuffer : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbbuffer, pcbbuffer)
+  end
+  def get_flags(this : ISyncFilterInfo2*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+end
+struct LibWin32::IChangeUnitListFilterInfo
+  def query_interface(this : IChangeUnitListFilterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IChangeUnitListFilterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IChangeUnitListFilterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : IChangeUnitListFilterInfo*, pbbuffer : UInt8*, pcbbuffer : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbbuffer, pcbbuffer)
+  end
+  def initialize(this : IChangeUnitListFilterInfo*, ppbchangeunitids : UInt8**, dwchangeunitcount : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, ppbchangeunitids, dwchangeunitcount)
+  end
+  def get_change_unit_id_count(this : IChangeUnitListFilterInfo*, pdwchangeunitidcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_change_unit_id_count.call(this, pdwchangeunitidcount)
+  end
+  def get_change_unit_id(this : IChangeUnitListFilterInfo*, dwchangeunitidindex : UInt32, pbchangeunitid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_change_unit_id.call(this, dwchangeunitidindex, pbchangeunitid, pcbidsize)
+  end
+end
+struct LibWin32::ISyncFilter
+  def query_interface(this : ISyncFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_identical(this : ISyncFilter*, psyncfilter : ISyncFilter) : HRESULT
+    @lpVtbl.value.is_identical.call(this, psyncfilter)
+  end
+  def serialize(this : ISyncFilter*, pbsyncfilter : UInt8*, pcbsyncfilter : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbsyncfilter, pcbsyncfilter)
+  end
+end
+struct LibWin32::ISyncFilterDeserializer
+  def query_interface(this : ISyncFilterDeserializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFilterDeserializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFilterDeserializer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def deserialize_sync_filter(this : ISyncFilterDeserializer*, pbsyncfilter : UInt8*, dwcbsyncfilter : UInt32, ppisyncfilter : ISyncFilter*) : HRESULT
+    @lpVtbl.value.deserialize_sync_filter.call(this, pbsyncfilter, dwcbsyncfilter, ppisyncfilter)
+  end
+end
+struct LibWin32::ICustomFilterInfo
+  def query_interface(this : ICustomFilterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICustomFilterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICustomFilterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : ICustomFilterInfo*, pbbuffer : UInt8*, pcbbuffer : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbbuffer, pcbbuffer)
+  end
+  def get_sync_filter(this : ICustomFilterInfo*, pisyncfilter : ISyncFilter*) : HRESULT
+    @lpVtbl.value.get_sync_filter.call(this, pisyncfilter)
+  end
+end
+struct LibWin32::ICombinedFilterInfo
+  def query_interface(this : ICombinedFilterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICombinedFilterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICombinedFilterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : ICombinedFilterInfo*, pbbuffer : UInt8*, pcbbuffer : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbbuffer, pcbbuffer)
+  end
+  def get_filter_count(this : ICombinedFilterInfo*, pdwfiltercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filter_count.call(this, pdwfiltercount)
+  end
+  def get_filter_info(this : ICombinedFilterInfo*, dwfilterindex : UInt32, ppifilterinfo : ISyncFilterInfo*) : HRESULT
+    @lpVtbl.value.get_filter_info.call(this, dwfilterindex, ppifilterinfo)
+  end
+  def get_filter_combination_type(this : ICombinedFilterInfo*, pfiltercombinationtype : FILTER_COMBINATION_TYPE*) : HRESULT
+    @lpVtbl.value.get_filter_combination_type.call(this, pfiltercombinationtype)
+  end
+end
+struct LibWin32::IEnumSyncChanges
+  def query_interface(this : IEnumSyncChanges*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSyncChanges*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSyncChanges*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSyncChanges*, cchanges : UInt32, ppchange : ISyncChange*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cchanges, ppchange, pcfetched)
+  end
+  def skip(this : IEnumSyncChanges*, cchanges : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cchanges)
+  end
+  def reset(this : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSyncChanges*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::ISyncChangeBuilder
+  def query_interface(this : ISyncChangeBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_change_unit_metadata(this : ISyncChangeBuilder*, pbchangeunitid : UInt8*, pchangeunitversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.add_change_unit_metadata.call(this, pbchangeunitid, pchangeunitversion)
+  end
+end
+struct LibWin32::IFilterTrackingSyncChangeBuilder
+  def query_interface(this : IFilterTrackingSyncChangeBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilterTrackingSyncChangeBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilterTrackingSyncChangeBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_filter_change(this : IFilterTrackingSyncChangeBuilder*, dwfilterkey : UInt32, pfilterchange : SYNC_FILTER_CHANGE*) : HRESULT
+    @lpVtbl.value.add_filter_change.call(this, dwfilterkey, pfilterchange)
+  end
+  def set_all_change_units_present_flag(this : IFilterTrackingSyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.set_all_change_units_present_flag.call(this)
+  end
+end
+struct LibWin32::ISyncChangeBatchBase
+  def query_interface(this : ISyncChangeBatchBase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatchBase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatchBase*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncChangeBatchBase*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncChangeBatchBase*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncChangeBatchBase*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncChangeBatchBase*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncChangeBatchBase*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncChangeBatchBase*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncChangeBatchBase*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncChangeBatchBase*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeBatchBase*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncChangeBatchBase*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncChangeBatchBase*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncChangeBatchBase*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncChangeBatchBase*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncChangeBatchBase*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+end
+struct LibWin32::ISyncChangeBatch
+  def query_interface(this : ISyncChangeBatch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatch*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncChangeBatch*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncChangeBatch*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncChangeBatch*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncChangeBatch*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncChangeBatch*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncChangeBatch*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncChangeBatch*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncChangeBatch*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeBatch*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncChangeBatch*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncChangeBatch*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncChangeBatch*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncChangeBatch*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncChangeBatch*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def begin_unordered_group(this : ISyncChangeBatch*) : HRESULT
+    @lpVtbl.value.begin_unordered_group.call(this)
+  end
+  def end_unordered_group(this : ISyncChangeBatch*, pmadewithknowledge : ISyncKnowledge, fallchangesforknowledge : LibC::BOOL) : HRESULT
+    @lpVtbl.value.end_unordered_group.call(this, pmadewithknowledge, fallchangesforknowledge)
+  end
+  def add_logged_conflict(this : ISyncChangeBatch*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, pconflictknowledge : ISyncKnowledge, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_logged_conflict.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, pconflictknowledge, ppchangebuilder)
+  end
+end
+struct LibWin32::ISyncFullEnumerationChangeBatch
+  def query_interface(this : ISyncFullEnumerationChangeBatch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFullEnumerationChangeBatch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFullEnumerationChangeBatch*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncFullEnumerationChangeBatch*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncFullEnumerationChangeBatch*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncFullEnumerationChangeBatch*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncFullEnumerationChangeBatch*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncFullEnumerationChangeBatch*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncFullEnumerationChangeBatch*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncFullEnumerationChangeBatch*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncFullEnumerationChangeBatch*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncFullEnumerationChangeBatch*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncFullEnumerationChangeBatch*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncFullEnumerationChangeBatch*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncFullEnumerationChangeBatch*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncFullEnumerationChangeBatch*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncFullEnumerationChangeBatch*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def get_learned_knowledge_after_recovery_complete(this : ISyncFullEnumerationChangeBatch*, pplearnedknowledgeafterrecoverycomplete : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge_after_recovery_complete.call(this, pplearnedknowledgeafterrecoverycomplete)
+  end
+  def get_closed_lower_bound_item_id(this : ISyncFullEnumerationChangeBatch*, pbclosedlowerbounditemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_lower_bound_item_id.call(this, pbclosedlowerbounditemid, pcbidsize)
+  end
+  def get_closed_upper_bound_item_id(this : ISyncFullEnumerationChangeBatch*, pbclosedupperbounditemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_upper_bound_item_id.call(this, pbclosedupperbounditemid, pcbidsize)
+  end
+end
+struct LibWin32::ISyncChangeBatchWithPrerequisite
+  def query_interface(this : ISyncChangeBatchWithPrerequisite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatchWithPrerequisite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatchWithPrerequisite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncChangeBatchWithPrerequisite*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncChangeBatchWithPrerequisite*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncChangeBatchWithPrerequisite*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncChangeBatchWithPrerequisite*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncChangeBatchWithPrerequisite*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncChangeBatchWithPrerequisite*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncChangeBatchWithPrerequisite*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncChangeBatchWithPrerequisite*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeBatchWithPrerequisite*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncChangeBatchWithPrerequisite*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncChangeBatchWithPrerequisite*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncChangeBatchWithPrerequisite*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncChangeBatchWithPrerequisite*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncChangeBatchWithPrerequisite*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def set_prerequisite_knowledge(this : ISyncChangeBatchWithPrerequisite*, pprerequisiteknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.set_prerequisite_knowledge.call(this, pprerequisiteknowledge)
+  end
+  def get_learned_knowledge_with_prerequisite(this : ISyncChangeBatchWithPrerequisite*, pdestinationknowledge : ISyncKnowledge, pplearnedwithprerequisiteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge_with_prerequisite.call(this, pdestinationknowledge, pplearnedwithprerequisiteknowledge)
+  end
+  def get_learned_forgotten_knowledge(this : ISyncChangeBatchWithPrerequisite*, pplearnedforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_forgotten_knowledge.call(this, pplearnedforgottenknowledge)
+  end
+end
+struct LibWin32::ISyncChangeBatchBase2
+  def query_interface(this : ISyncChangeBatchBase2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatchBase2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatchBase2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncChangeBatchBase2*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncChangeBatchBase2*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncChangeBatchBase2*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncChangeBatchBase2*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncChangeBatchBase2*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncChangeBatchBase2*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncChangeBatchBase2*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncChangeBatchBase2*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeBatchBase2*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncChangeBatchBase2*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncChangeBatchBase2*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncChangeBatchBase2*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncChangeBatchBase2*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncChangeBatchBase2*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def serialize_with_options(this : ISyncChangeBatchBase2*, targetformatversion : SYNC_SERIALIZATION_VERSION, dwflags : UInt32, pbbuffer : UInt8*, pdwserializedsize : UInt32*) : HRESULT
+    @lpVtbl.value.serialize_with_options.call(this, targetformatversion, dwflags, pbbuffer, pdwserializedsize)
+  end
+end
+struct LibWin32::ISyncChangeBatchAdvanced
+  def query_interface(this : ISyncChangeBatchAdvanced*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatchAdvanced*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatchAdvanced*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_filter_info(this : ISyncChangeBatchAdvanced*, ppfilterinfo : ISyncFilterInfo*) : HRESULT
+    @lpVtbl.value.get_filter_info.call(this, ppfilterinfo)
+  end
+  def convert_full_enumeration_change_batch_to_regular_change_batch(this : ISyncChangeBatchAdvanced*, ppchangebatch : ISyncChangeBatch*) : HRESULT
+    @lpVtbl.value.convert_full_enumeration_change_batch_to_regular_change_batch.call(this, ppchangebatch)
+  end
+  def get_upper_bound_item_id(this : ISyncChangeBatchAdvanced*, pbitemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_upper_bound_item_id.call(this, pbitemid, pcbidsize)
+  end
+  def get_batch_level_knowledge_should_be_applied(this : ISyncChangeBatchAdvanced*, pfbatchknowledgeshouldbeapplied : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_batch_level_knowledge_should_be_applied.call(this, pfbatchknowledgeshouldbeapplied)
+  end
+end
+struct LibWin32::ISyncChangeBatch2
+  def query_interface(this : ISyncChangeBatch2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatch2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatch2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncChangeBatch2*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncChangeBatch2*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncChangeBatch2*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncChangeBatch2*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncChangeBatch2*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncChangeBatch2*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncChangeBatch2*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncChangeBatch2*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeBatch2*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncChangeBatch2*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncChangeBatch2*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncChangeBatch2*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncChangeBatch2*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncChangeBatch2*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def begin_unordered_group(this : ISyncChangeBatch2*) : HRESULT
+    @lpVtbl.value.begin_unordered_group.call(this)
+  end
+  def end_unordered_group(this : ISyncChangeBatch2*, pmadewithknowledge : ISyncKnowledge, fallchangesforknowledge : LibC::BOOL) : HRESULT
+    @lpVtbl.value.end_unordered_group.call(this, pmadewithknowledge, fallchangesforknowledge)
+  end
+  def add_logged_conflict(this : ISyncChangeBatch2*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, pconflictknowledge : ISyncKnowledge, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_logged_conflict.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, pconflictknowledge, ppchangebuilder)
+  end
+  def add_merge_tombstone_metadata_to_group(this : ISyncChangeBatch2*, pbownerreplicaid : UInt8*, pbwinneritemid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_merge_tombstone_metadata_to_group.call(this, pbownerreplicaid, pbwinneritemid, pbitemid, pchangeversion, pcreationversion, dwworkforchange, ppchangebuilder)
+  end
+  def add_merge_tombstone_logged_conflict(this : ISyncChangeBatch2*, pbownerreplicaid : UInt8*, pbwinneritemid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwworkforchange : UInt32, pconflictknowledge : ISyncKnowledge, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_merge_tombstone_logged_conflict.call(this, pbownerreplicaid, pbwinneritemid, pbitemid, pchangeversion, pcreationversion, dwworkforchange, pconflictknowledge, ppchangebuilder)
+  end
+end
+struct LibWin32::ISyncFullEnumerationChangeBatch2
+  def query_interface(this : ISyncFullEnumerationChangeBatch2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFullEnumerationChangeBatch2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFullEnumerationChangeBatch2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_change_enumerator(this : ISyncFullEnumerationChangeBatch2*, ppenum : IEnumSyncChanges*) : HRESULT
+    @lpVtbl.value.get_change_enumerator.call(this, ppenum)
+  end
+  def get_is_last_batch(this : ISyncFullEnumerationChangeBatch2*, pflastbatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_last_batch.call(this, pflastbatch)
+  end
+  def get_work_estimate_for_batch(this : ISyncFullEnumerationChangeBatch2*, pdwworkforbatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate_for_batch.call(this, pdwworkforbatch)
+  end
+  def get_remaining_work_estimate_for_session(this : ISyncFullEnumerationChangeBatch2*, pdwremainingworkforsession : UInt32*) : HRESULT
+    @lpVtbl.value.get_remaining_work_estimate_for_session.call(this, pdwremainingworkforsession)
+  end
+  def begin_ordered_group(this : ISyncFullEnumerationChangeBatch2*, pblowerbound : UInt8*) : HRESULT
+    @lpVtbl.value.begin_ordered_group.call(this, pblowerbound)
+  end
+  def end_ordered_group(this : ISyncFullEnumerationChangeBatch2*, pbupperbound : UInt8*, pmadewithknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.end_ordered_group.call(this, pbupperbound, pmadewithknowledge)
+  end
+  def add_item_metadata_to_group(this : ISyncFullEnumerationChangeBatch2*, pbownerreplicaid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwflags : UInt32, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_item_metadata_to_group.call(this, pbownerreplicaid, pbitemid, pchangeversion, pcreationversion, dwflags, dwworkforchange, ppchangebuilder)
+  end
+  def get_learned_knowledge(this : ISyncFullEnumerationChangeBatch2*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def get_prerequisite_knowledge(this : ISyncFullEnumerationChangeBatch2*, ppprerequisteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisteknowledge)
+  end
+  def get_source_forgotten_knowledge(this : ISyncFullEnumerationChangeBatch2*, ppsourceforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_source_forgotten_knowledge.call(this, ppsourceforgottenknowledge)
+  end
+  def set_last_batch(this : ISyncFullEnumerationChangeBatch2*) : HRESULT
+    @lpVtbl.value.set_last_batch.call(this)
+  end
+  def set_work_estimate_for_batch(this : ISyncFullEnumerationChangeBatch2*, dwworkforbatch : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate_for_batch.call(this, dwworkforbatch)
+  end
+  def set_remaining_work_estimate_for_session(this : ISyncFullEnumerationChangeBatch2*, dwremainingworkforsession : UInt32) : HRESULT
+    @lpVtbl.value.set_remaining_work_estimate_for_session.call(this, dwremainingworkforsession)
+  end
+  def serialize(this : ISyncFullEnumerationChangeBatch2*, pbchangebatch : UInt8*, pcbchangebatch : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbchangebatch, pcbchangebatch)
+  end
+  def get_learned_knowledge_after_recovery_complete(this : ISyncFullEnumerationChangeBatch2*, pplearnedknowledgeafterrecoverycomplete : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge_after_recovery_complete.call(this, pplearnedknowledgeafterrecoverycomplete)
+  end
+  def get_closed_lower_bound_item_id(this : ISyncFullEnumerationChangeBatch2*, pbclosedlowerbounditemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_lower_bound_item_id.call(this, pbclosedlowerbounditemid, pcbidsize)
+  end
+  def get_closed_upper_bound_item_id(this : ISyncFullEnumerationChangeBatch2*, pbclosedupperbounditemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_closed_upper_bound_item_id.call(this, pbclosedupperbounditemid, pcbidsize)
+  end
+  def add_merge_tombstone_metadata_to_group(this : ISyncFullEnumerationChangeBatch2*, pbownerreplicaid : UInt8*, pbwinneritemid : UInt8*, pbitemid : UInt8*, pchangeversion : SYNC_VERSION*, pcreationversion : SYNC_VERSION*, dwworkforchange : UInt32, ppchangebuilder : ISyncChangeBuilder*) : HRESULT
+    @lpVtbl.value.add_merge_tombstone_metadata_to_group.call(this, pbownerreplicaid, pbwinneritemid, pbitemid, pchangeversion, pcreationversion, dwworkforchange, ppchangebuilder)
+  end
+end
+struct LibWin32::IKnowledgeSyncProvider
+  def query_interface(this : IKnowledgeSyncProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IKnowledgeSyncProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IKnowledgeSyncProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id_parameters(this : IKnowledgeSyncProvider*, pidparameters : ID_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_id_parameters.call(this, pidparameters)
+  end
+  def begin_session(this : IKnowledgeSyncProvider*, role : SYNC_PROVIDER_ROLE, psessionstate : ISyncSessionState) : HRESULT
+    @lpVtbl.value.begin_session.call(this, role, psessionstate)
+  end
+  def get_sync_batch_parameters(this : IKnowledgeSyncProvider*, ppsyncknowledge : ISyncKnowledge*, pdwrequestedbatchsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_sync_batch_parameters.call(this, ppsyncknowledge, pdwrequestedbatchsize)
+  end
+  def get_change_batch(this : IKnowledgeSyncProvider*, dwbatchsize : UInt32, psyncknowledge : ISyncKnowledge, ppsyncchangebatch : ISyncChangeBatch*, ppunkdataretriever : IUnknown*) : HRESULT
+    @lpVtbl.value.get_change_batch.call(this, dwbatchsize, psyncknowledge, ppsyncchangebatch, ppunkdataretriever)
+  end
+  def get_full_enumeration_change_batch(this : IKnowledgeSyncProvider*, dwbatchsize : UInt32, pblowerenumerationbound : UInt8*, psyncknowledge : ISyncKnowledge, ppsyncchangebatch : ISyncFullEnumerationChangeBatch*, ppunkdataretriever : IUnknown*) : HRESULT
+    @lpVtbl.value.get_full_enumeration_change_batch.call(this, dwbatchsize, pblowerenumerationbound, psyncknowledge, ppsyncchangebatch, ppunkdataretriever)
+  end
+  def process_change_batch(this : IKnowledgeSyncProvider*, resolutionpolicy : CONFLICT_RESOLUTION_POLICY, psourcechangebatch : ISyncChangeBatch, punkdataretriever : IUnknown, pcallback : ISyncCallback, psyncsessionstatistics : SYNC_SESSION_STATISTICS*) : HRESULT
+    @lpVtbl.value.process_change_batch.call(this, resolutionpolicy, psourcechangebatch, punkdataretriever, pcallback, psyncsessionstatistics)
+  end
+  def process_full_enumeration_change_batch(this : IKnowledgeSyncProvider*, resolutionpolicy : CONFLICT_RESOLUTION_POLICY, psourcechangebatch : ISyncFullEnumerationChangeBatch, punkdataretriever : IUnknown, pcallback : ISyncCallback, psyncsessionstatistics : SYNC_SESSION_STATISTICS*) : HRESULT
+    @lpVtbl.value.process_full_enumeration_change_batch.call(this, resolutionpolicy, psourcechangebatch, punkdataretriever, pcallback, psyncsessionstatistics)
+  end
+  def end_session(this : IKnowledgeSyncProvider*, psessionstate : ISyncSessionState) : HRESULT
+    @lpVtbl.value.end_session.call(this, psessionstate)
+  end
+end
+struct LibWin32::ISyncChangeUnit
+  def query_interface(this : ISyncChangeUnit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeUnit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeUnit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_change(this : ISyncChangeUnit*, ppsyncchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_item_change.call(this, ppsyncchange)
+  end
+  def get_change_unit_id(this : ISyncChangeUnit*, pbchangeunitid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_change_unit_id.call(this, pbchangeunitid, pcbidsize)
+  end
+  def get_change_unit_version(this : ISyncChangeUnit*, pbcurrentreplicaid : UInt8*, pversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.get_change_unit_version.call(this, pbcurrentreplicaid, pversion)
+  end
+end
+struct LibWin32::IEnumSyncChangeUnits
+  def query_interface(this : IEnumSyncChangeUnits*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSyncChangeUnits*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSyncChangeUnits*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSyncChangeUnits*, cchanges : UInt32, ppchangeunit : ISyncChangeUnit*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cchanges, ppchangeunit, pcfetched)
+  end
+  def skip(this : IEnumSyncChangeUnits*, cchanges : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cchanges)
+  end
+  def reset(this : IEnumSyncChangeUnits*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSyncChangeUnits*, ppenum : IEnumSyncChangeUnits*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::ISyncChange
+  def query_interface(this : ISyncChange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner_replica_id(this : ISyncChange*, pbreplicaid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_replica_id.call(this, pbreplicaid, pcbidsize)
+  end
+  def get_root_item_id(this : ISyncChange*, pbrootitemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_root_item_id.call(this, pbrootitemid, pcbidsize)
+  end
+  def get_change_version(this : ISyncChange*, pbcurrentreplicaid : UInt8*, pversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.get_change_version.call(this, pbcurrentreplicaid, pversion)
+  end
+  def get_creation_version(this : ISyncChange*, pbcurrentreplicaid : UInt8*, pversion : SYNC_VERSION*) : HRESULT
+    @lpVtbl.value.get_creation_version.call(this, pbcurrentreplicaid, pversion)
+  end
+  def get_flags(this : ISyncChange*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def get_work_estimate(this : ISyncChange*, pdwwork : UInt32*) : HRESULT
+    @lpVtbl.value.get_work_estimate.call(this, pdwwork)
+  end
+  def get_change_units(this : ISyncChange*, ppenum : IEnumSyncChangeUnits*) : HRESULT
+    @lpVtbl.value.get_change_units.call(this, ppenum)
+  end
+  def get_made_with_knowledge(this : ISyncChange*, ppmadewithknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_made_with_knowledge.call(this, ppmadewithknowledge)
+  end
+  def get_learned_knowledge(this : ISyncChange*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge.call(this, pplearnedknowledge)
+  end
+  def set_work_estimate(this : ISyncChange*, dwwork : UInt32) : HRESULT
+    @lpVtbl.value.set_work_estimate.call(this, dwwork)
+  end
+end
+struct LibWin32::ISyncChangeWithPrerequisite
+  def query_interface(this : ISyncChangeWithPrerequisite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeWithPrerequisite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeWithPrerequisite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prerequisite_knowledge(this : ISyncChangeWithPrerequisite*, ppprerequisiteknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_prerequisite_knowledge.call(this, ppprerequisiteknowledge)
+  end
+  def get_learned_knowledge_with_prerequisite(this : ISyncChangeWithPrerequisite*, pdestinationknowledge : ISyncKnowledge, pplearnedknowledgewithprerequisite : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge_with_prerequisite.call(this, pdestinationknowledge, pplearnedknowledgewithprerequisite)
+  end
+end
+struct LibWin32::ISyncFullEnumerationChange
+  def query_interface(this : ISyncFullEnumerationChange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncFullEnumerationChange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncFullEnumerationChange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_learned_knowledge_after_recovery_complete(this : ISyncFullEnumerationChange*, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_knowledge_after_recovery_complete.call(this, pplearnedknowledge)
+  end
+  def get_learned_forgotten_knowledge(this : ISyncFullEnumerationChange*, pplearnedforgottenknowledge : IForgottenKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_forgotten_knowledge.call(this, pplearnedforgottenknowledge)
+  end
+end
+struct LibWin32::ISyncMergeTombstoneChange
+  def query_interface(this : ISyncMergeTombstoneChange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncMergeTombstoneChange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncMergeTombstoneChange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_winner_item_id(this : ISyncMergeTombstoneChange*, pbwinneritemid : UInt8*, pcbidsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_winner_item_id.call(this, pbwinneritemid, pcbidsize)
+  end
+end
+struct LibWin32::IEnumItemIds
+  def query_interface(this : IEnumItemIds*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumItemIds*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumItemIds*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumItemIds*, pbitemid : UInt8*, pcbitemidsize : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, pbitemid, pcbitemidsize)
+  end
+end
+struct LibWin32::IFilterKeyMap
+  def query_interface(this : IFilterKeyMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilterKeyMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilterKeyMap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IFilterKeyMap*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pdwcount)
+  end
+  def add_filter(this : IFilterKeyMap*, pisyncfilter : ISyncFilter, pdwfilterkey : UInt32*) : HRESULT
+    @lpVtbl.value.add_filter.call(this, pisyncfilter, pdwfilterkey)
+  end
+  def get_filter(this : IFilterKeyMap*, dwfilterkey : UInt32, ppisyncfilter : ISyncFilter*) : HRESULT
+    @lpVtbl.value.get_filter.call(this, dwfilterkey, ppisyncfilter)
+  end
+  def serialize(this : IFilterKeyMap*, pbfilterkeymap : UInt8*, pcbfilterkeymap : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pbfilterkeymap, pcbfilterkeymap)
+  end
+end
+struct LibWin32::ISyncChangeWithFilterKeyMap
+  def query_interface(this : ISyncChangeWithFilterKeyMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeWithFilterKeyMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeWithFilterKeyMap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_filter_count(this : ISyncChangeWithFilterKeyMap*, pdwfiltercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filter_count.call(this, pdwfiltercount)
+  end
+  def get_filter_change(this : ISyncChangeWithFilterKeyMap*, dwfilterkey : UInt32, pfilterchange : SYNC_FILTER_CHANGE*) : HRESULT
+    @lpVtbl.value.get_filter_change.call(this, dwfilterkey, pfilterchange)
+  end
+  def get_all_change_units_present_flag(this : ISyncChangeWithFilterKeyMap*, pfallchangeunitspresent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_all_change_units_present_flag.call(this, pfallchangeunitspresent)
+  end
+  def get_filter_forgotten_knowledge(this : ISyncChangeWithFilterKeyMap*, dwfilterkey : UInt32, ppifilterforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filter_forgotten_knowledge.call(this, dwfilterkey, ppifilterforgottenknowledge)
+  end
+  def get_filtered_replica_learned_knowledge(this : ISyncChangeWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_knowledge.call(this, pdestinationknowledge, pnewmoveins, pplearnedknowledge)
+  end
+  def get_learned_filter_forgotten_knowledge(this : ISyncChangeWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, dwfilterkey : UInt32, pplearnedfilterforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_filter_forgotten_knowledge.call(this, pdestinationknowledge, pnewmoveins, dwfilterkey, pplearnedfilterforgottenknowledge)
+  end
+  def get_filtered_replica_learned_forgotten_knowledge(this : ISyncChangeWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_forgotten_knowledge.call(this, pdestinationknowledge, pnewmoveins, pplearnedforgottenknowledge)
+  end
+  def get_filtered_replica_learned_forgotten_knowledge_after_recovery_complete(this : ISyncChangeWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_forgotten_knowledge_after_recovery_complete.call(this, pdestinationknowledge, pnewmoveins, pplearnedforgottenknowledge)
+  end
+  def get_learned_filter_forgotten_knowledge_after_recovery_complete(this : ISyncChangeWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, dwfilterkey : UInt32, pplearnedfilterforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_filter_forgotten_knowledge_after_recovery_complete.call(this, pdestinationknowledge, pnewmoveins, dwfilterkey, pplearnedfilterforgottenknowledge)
+  end
+end
+struct LibWin32::ISyncChangeBatchWithFilterKeyMap
+  def query_interface(this : ISyncChangeBatchWithFilterKeyMap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncChangeBatchWithFilterKeyMap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncChangeBatchWithFilterKeyMap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_filter_key_map(this : ISyncChangeBatchWithFilterKeyMap*, ppifilterkeymap : IFilterKeyMap*) : HRESULT
+    @lpVtbl.value.get_filter_key_map.call(this, ppifilterkeymap)
+  end
+  def set_filter_key_map(this : ISyncChangeBatchWithFilterKeyMap*, pifilterkeymap : IFilterKeyMap) : HRESULT
+    @lpVtbl.value.set_filter_key_map.call(this, pifilterkeymap)
+  end
+  def set_filter_forgotten_knowledge(this : ISyncChangeBatchWithFilterKeyMap*, dwfilterkey : UInt32, pfilterforgottenknowledge : ISyncKnowledge) : HRESULT
+    @lpVtbl.value.set_filter_forgotten_knowledge.call(this, dwfilterkey, pfilterforgottenknowledge)
+  end
+  def get_filtered_replica_learned_knowledge(this : ISyncChangeBatchWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_knowledge.call(this, pdestinationknowledge, pnewmoveins, pplearnedforgottenknowledge)
+  end
+  def get_learned_filter_forgotten_knowledge(this : ISyncChangeBatchWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, dwfilterkey : UInt32, pplearnedfilterforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_filter_forgotten_knowledge.call(this, pdestinationknowledge, pnewmoveins, dwfilterkey, pplearnedfilterforgottenknowledge)
+  end
+  def get_filtered_replica_learned_forgotten_knowledge(this : ISyncChangeBatchWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_forgotten_knowledge.call(this, pdestinationknowledge, pnewmoveins, pplearnedforgottenknowledge)
+  end
+  def get_filtered_replica_learned_forgotten_knowledge_after_recovery_complete(this : ISyncChangeBatchWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, pplearnedforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_filtered_replica_learned_forgotten_knowledge_after_recovery_complete.call(this, pdestinationknowledge, pnewmoveins, pplearnedforgottenknowledge)
+  end
+  def get_learned_filter_forgotten_knowledge_after_recovery_complete(this : ISyncChangeBatchWithFilterKeyMap*, pdestinationknowledge : ISyncKnowledge, pnewmoveins : IEnumItemIds, dwfilterkey : UInt32, pplearnedfilterforgottenknowledge : ISyncKnowledge*) : HRESULT
+    @lpVtbl.value.get_learned_filter_forgotten_knowledge_after_recovery_complete.call(this, pdestinationknowledge, pnewmoveins, dwfilterkey, pplearnedfilterforgottenknowledge)
+  end
+end
+struct LibWin32::IDataRetrieverCallback
+  def query_interface(this : IDataRetrieverCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataRetrieverCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataRetrieverCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_change_data_complete(this : IDataRetrieverCallback*, punkdata : IUnknown) : HRESULT
+    @lpVtbl.value.load_change_data_complete.call(this, punkdata)
+  end
+  def load_change_data_error(this : IDataRetrieverCallback*, hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.load_change_data_error.call(this, hrerror)
+  end
+end
+struct LibWin32::ILoadChangeContext
+  def query_interface(this : ILoadChangeContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILoadChangeContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILoadChangeContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sync_change(this : ILoadChangeContext*, ppsyncchange : ISyncChange*) : HRESULT
+    @lpVtbl.value.get_sync_change.call(this, ppsyncchange)
+  end
+  def set_recoverable_error_on_change(this : ILoadChangeContext*, hrerror : HRESULT, perrordata : IRecoverableErrorData) : HRESULT
+    @lpVtbl.value.set_recoverable_error_on_change.call(this, hrerror, perrordata)
+  end
+  def set_recoverable_error_on_change_unit(this : ILoadChangeContext*, hrerror : HRESULT, pchangeunit : ISyncChangeUnit, perrordata : IRecoverableErrorData) : HRESULT
+    @lpVtbl.value.set_recoverable_error_on_change_unit.call(this, hrerror, pchangeunit, perrordata)
+  end
+end
+struct LibWin32::ISynchronousDataRetriever
+  def query_interface(this : ISynchronousDataRetriever*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISynchronousDataRetriever*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISynchronousDataRetriever*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id_parameters(this : ISynchronousDataRetriever*, pidparameters : ID_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_id_parameters.call(this, pidparameters)
+  end
+  def load_change_data(this : ISynchronousDataRetriever*, ploadchangecontext : ILoadChangeContext, ppunkdata : IUnknown*) : HRESULT
+    @lpVtbl.value.load_change_data.call(this, ploadchangecontext, ppunkdata)
+  end
+end
+struct LibWin32::IAsynchronousDataRetriever
+  def query_interface(this : IAsynchronousDataRetriever*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAsynchronousDataRetriever*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAsynchronousDataRetriever*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id_parameters(this : IAsynchronousDataRetriever*, pidparameters : ID_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_id_parameters.call(this, pidparameters)
+  end
+  def register_callback(this : IAsynchronousDataRetriever*, pdataretrievercallback : IDataRetrieverCallback) : HRESULT
+    @lpVtbl.value.register_callback.call(this, pdataretrievercallback)
+  end
+  def revoke_callback(this : IAsynchronousDataRetriever*, pdataretrievercallback : IDataRetrieverCallback) : HRESULT
+    @lpVtbl.value.revoke_callback.call(this, pdataretrievercallback)
+  end
+  def load_change_data(this : IAsynchronousDataRetriever*, ploadchangecontext : ILoadChangeContext) : HRESULT
+    @lpVtbl.value.load_change_data.call(this, ploadchangecontext)
+  end
+end
+struct LibWin32::IFilterRequestCallback
+  def query_interface(this : IFilterRequestCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilterRequestCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilterRequestCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request_filter(this : IFilterRequestCallback*, pfilter : IUnknown, filteringtype : FILTERING_TYPE) : HRESULT
+    @lpVtbl.value.request_filter.call(this, pfilter, filteringtype)
+  end
+end
+struct LibWin32::IRequestFilteredSync
+  def query_interface(this : IRequestFilteredSync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRequestFilteredSync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRequestFilteredSync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def specify_filter(this : IRequestFilteredSync*, pcallback : IFilterRequestCallback) : HRESULT
+    @lpVtbl.value.specify_filter.call(this, pcallback)
+  end
+end
+struct LibWin32::ISupportFilteredSync
+  def query_interface(this : ISupportFilteredSync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISupportFilteredSync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISupportFilteredSync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_filter(this : ISupportFilteredSync*, pfilter : IUnknown, filteringtype : FILTERING_TYPE) : HRESULT
+    @lpVtbl.value.add_filter.call(this, pfilter, filteringtype)
+  end
+end
+struct LibWin32::IFilterTrackingRequestCallback
+  def query_interface(this : IFilterTrackingRequestCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilterTrackingRequestCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilterTrackingRequestCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request_tracked_filter(this : IFilterTrackingRequestCallback*, pfilter : ISyncFilter) : HRESULT
+    @lpVtbl.value.request_tracked_filter.call(this, pfilter)
+  end
+end
+struct LibWin32::IFilterTrackingProvider
+  def query_interface(this : IFilterTrackingProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFilterTrackingProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFilterTrackingProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def specify_tracked_filters(this : IFilterTrackingProvider*, pcallback : IFilterTrackingRequestCallback) : HRESULT
+    @lpVtbl.value.specify_tracked_filters.call(this, pcallback)
+  end
+  def add_tracked_filter(this : IFilterTrackingProvider*, pfilter : ISyncFilter) : HRESULT
+    @lpVtbl.value.add_tracked_filter.call(this, pfilter)
+  end
+end
+struct LibWin32::ISupportLastWriteTime
+  def query_interface(this : ISupportLastWriteTime*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISupportLastWriteTime*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISupportLastWriteTime*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_change_time(this : ISupportLastWriteTime*, pbitemid : UInt8*, pulltimestamp : UInt64*) : HRESULT
+    @lpVtbl.value.get_item_change_time.call(this, pbitemid, pulltimestamp)
+  end
+  def get_change_unit_change_time(this : ISupportLastWriteTime*, pbitemid : UInt8*, pbchangeunitid : UInt8*, pulltimestamp : UInt64*) : HRESULT
+    @lpVtbl.value.get_change_unit_change_time.call(this, pbitemid, pbchangeunitid, pulltimestamp)
+  end
+end
+struct LibWin32::IProviderConverter
+  def query_interface(this : IProviderConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProviderConverter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProviderConverter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IProviderConverter*, pisyncprovider : ISyncProvider) : HRESULT
+    @lpVtbl.value.initialize.call(this, pisyncprovider)
+  end
+end
+struct LibWin32::ISyncDataConverter
+  def query_interface(this : ISyncDataConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncDataConverter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncDataConverter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def convert_data_retriever_from_provider_format(this : ISyncDataConverter*, punkdataretrieverin : IUnknown, penumsyncchanges : IEnumSyncChanges, ppunkdataout : IUnknown*) : HRESULT
+    @lpVtbl.value.convert_data_retriever_from_provider_format.call(this, punkdataretrieverin, penumsyncchanges, ppunkdataout)
+  end
+  def convert_data_retriever_to_provider_format(this : ISyncDataConverter*, punkdataretrieverin : IUnknown, penumsyncchanges : IEnumSyncChanges, ppunkdataout : IUnknown*) : HRESULT
+    @lpVtbl.value.convert_data_retriever_to_provider_format.call(this, punkdataretrieverin, penumsyncchanges, ppunkdataout)
+  end
+  def convert_data_from_provider_format(this : ISyncDataConverter*, pdatacontext : ILoadChangeContext, punkdatain : IUnknown, ppunkdataout : IUnknown*) : HRESULT
+    @lpVtbl.value.convert_data_from_provider_format.call(this, pdatacontext, punkdatain, ppunkdataout)
+  end
+  def convert_data_to_provider_format(this : ISyncDataConverter*, pdatacontext : ILoadChangeContext, punkdataout : IUnknown, ppunkdataout : IUnknown*) : HRESULT
+    @lpVtbl.value.convert_data_to_provider_format.call(this, pdatacontext, punkdataout, ppunkdataout)
+  end
+end
+struct LibWin32::ISyncProviderRegistration
+  def query_interface(this : ISyncProviderRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncProviderRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncProviderRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_sync_provider_config_ui_registration_instance(this : ISyncProviderRegistration*, pconfiguiconfig : SyncProviderConfigUIConfiguration*, ppconfiguiinfo : ISyncProviderConfigUIInfo*) : HRESULT
+    @lpVtbl.value.create_sync_provider_config_ui_registration_instance.call(this, pconfiguiconfig, ppconfiguiinfo)
+  end
+  def unregister_sync_provider_config_ui(this : ISyncProviderRegistration*, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_sync_provider_config_ui.call(this, pguidinstanceid)
+  end
+  def enumerate_sync_provider_config_u_is(this : ISyncProviderRegistration*, pguidcontenttype : Guid*, dwsupportedarchitecture : UInt32, ppenumsyncproviderconfiguiinfos : IEnumSyncProviderConfigUIInfos*) : HRESULT
+    @lpVtbl.value.enumerate_sync_provider_config_u_is.call(this, pguidcontenttype, dwsupportedarchitecture, ppenumsyncproviderconfiguiinfos)
+  end
+  def create_sync_provider_registration_instance(this : ISyncProviderRegistration*, pproviderconfiguration : SyncProviderConfiguration*, ppproviderinfo : ISyncProviderInfo*) : HRESULT
+    @lpVtbl.value.create_sync_provider_registration_instance.call(this, pproviderconfiguration, ppproviderinfo)
+  end
+  def unregister_sync_provider(this : ISyncProviderRegistration*, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_sync_provider.call(this, pguidinstanceid)
+  end
+  def get_sync_provider_config_ui_infofor_provider(this : ISyncProviderRegistration*, pguidproviderinstanceid : Guid*, ppproviderconfiguiinfo : ISyncProviderConfigUIInfo*) : HRESULT
+    @lpVtbl.value.get_sync_provider_config_ui_infofor_provider.call(this, pguidproviderinstanceid, ppproviderconfiguiinfo)
+  end
+  def enumerate_sync_providers(this : ISyncProviderRegistration*, pguidcontenttype : Guid*, dwstateflagstofiltermask : UInt32, dwstateflagstofilter : UInt32, refproviderclsid : Guid*, dwsupportedarchitecture : UInt32, ppenumsyncproviderinfos : IEnumSyncProviderInfos*) : HRESULT
+    @lpVtbl.value.enumerate_sync_providers.call(this, pguidcontenttype, dwstateflagstofiltermask, dwstateflagstofilter, refproviderclsid, dwsupportedarchitecture, ppenumsyncproviderinfos)
+  end
+  def get_sync_provider_info(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, ppproviderinfo : ISyncProviderInfo*) : HRESULT
+    @lpVtbl.value.get_sync_provider_info.call(this, pguidinstanceid, ppproviderinfo)
+  end
+  def get_sync_provider_from_instance_id(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, dwclscontext : UInt32, ppsyncprovider : IRegisteredSyncProvider*) : HRESULT
+    @lpVtbl.value.get_sync_provider_from_instance_id.call(this, pguidinstanceid, dwclscontext, ppsyncprovider)
+  end
+  def get_sync_provider_config_ui_info(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, ppconfiguiinfo : ISyncProviderConfigUIInfo*) : HRESULT
+    @lpVtbl.value.get_sync_provider_config_ui_info.call(this, pguidinstanceid, ppconfiguiinfo)
+  end
+  def get_sync_provider_config_ui_from_instance_id(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, dwclscontext : UInt32, ppconfigui : ISyncProviderConfigUI*) : HRESULT
+    @lpVtbl.value.get_sync_provider_config_ui_from_instance_id.call(this, pguidinstanceid, dwclscontext, ppconfigui)
+  end
+  def get_sync_provider_state(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, pdwstateflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_sync_provider_state.call(this, pguidinstanceid, pdwstateflags)
+  end
+  def set_sync_provider_state(this : ISyncProviderRegistration*, pguidinstanceid : Guid*, dwstateflagsmask : UInt32, dwstateflags : UInt32) : HRESULT
+    @lpVtbl.value.set_sync_provider_state.call(this, pguidinstanceid, dwstateflagsmask, dwstateflags)
+  end
+  def register_for_event(this : ISyncProviderRegistration*, phevent : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.register_for_event.call(this, phevent)
+  end
+  def revoke_event(this : ISyncProviderRegistration*, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.revoke_event.call(this, hevent)
+  end
+  def get_change(this : ISyncProviderRegistration*, hevent : LibC::HANDLE, ppchange : ISyncRegistrationChange*) : HRESULT
+    @lpVtbl.value.get_change.call(this, hevent, ppchange)
+  end
+end
+struct LibWin32::IEnumSyncProviderConfigUIInfos
+  def query_interface(this : IEnumSyncProviderConfigUIInfos*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSyncProviderConfigUIInfos*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSyncProviderConfigUIInfos*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSyncProviderConfigUIInfos*, cfactories : UInt32, ppsyncproviderconfiguiinfo : ISyncProviderConfigUIInfo*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfactories, ppsyncproviderconfiguiinfo, pcfetched)
+  end
+  def skip(this : IEnumSyncProviderConfigUIInfos*, cfactories : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cfactories)
+  end
+  def reset(this : IEnumSyncProviderConfigUIInfos*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSyncProviderConfigUIInfos*, ppenum : IEnumSyncProviderConfigUIInfos*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumSyncProviderInfos
+  def query_interface(this : IEnumSyncProviderInfos*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSyncProviderInfos*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSyncProviderInfos*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSyncProviderInfos*, cinstances : UInt32, ppsyncproviderinfo : ISyncProviderInfo*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cinstances, ppsyncproviderinfo, pcfetched)
+  end
+  def skip(this : IEnumSyncProviderInfos*, cinstances : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cinstances)
+  end
+  def reset(this : IEnumSyncProviderInfos*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSyncProviderInfos*, ppenum : IEnumSyncProviderInfos*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::ISyncProviderInfo
+  def query_interface(this : ISyncProviderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncProviderInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncProviderInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : ISyncProviderInfo*, cprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, cprops)
+  end
+  def get_at(this : ISyncProviderInfo*, iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, iprop, pkey)
+  end
+  def get_value(this : ISyncProviderInfo*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, pv)
+  end
+  def set_value(this : ISyncProviderInfo*, key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, propvar)
+  end
+  def commit(this : ISyncProviderInfo*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_sync_provider(this : ISyncProviderInfo*, dwclscontext : UInt32, ppsyncprovider : IRegisteredSyncProvider*) : HRESULT
+    @lpVtbl.value.get_sync_provider.call(this, dwclscontext, ppsyncprovider)
+  end
+end
+struct LibWin32::ISyncProviderConfigUIInfo
+  def query_interface(this : ISyncProviderConfigUIInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncProviderConfigUIInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncProviderConfigUIInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : ISyncProviderConfigUIInfo*, cprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, cprops)
+  end
+  def get_at(this : ISyncProviderConfigUIInfo*, iprop : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, iprop, pkey)
+  end
+  def get_value(this : ISyncProviderConfigUIInfo*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, pv)
+  end
+  def set_value(this : ISyncProviderConfigUIInfo*, key : PROPERTYKEY*, propvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, propvar)
+  end
+  def commit(this : ISyncProviderConfigUIInfo*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_sync_provider_config_ui(this : ISyncProviderConfigUIInfo*, dwclscontext : UInt32, ppsyncproviderconfigui : ISyncProviderConfigUI*) : HRESULT
+    @lpVtbl.value.get_sync_provider_config_ui.call(this, dwclscontext, ppsyncproviderconfigui)
+  end
+end
+struct LibWin32::ISyncProviderConfigUI
+  def query_interface(this : ISyncProviderConfigUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncProviderConfigUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncProviderConfigUI*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : ISyncProviderConfigUI*, pguidinstanceid : Guid*, pguidcontenttype : Guid*, pconfigurationproperties : IPropertyStore) : HRESULT
+    @lpVtbl.value.init.call(this, pguidinstanceid, pguidcontenttype, pconfigurationproperties)
+  end
+  def get_registered_properties(this : ISyncProviderConfigUI*, ppconfiguiproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_registered_properties.call(this, ppconfiguiproperties)
+  end
+  def create_and_register_new_sync_provider(this : ISyncProviderConfigUI*, hwndparent : LibC::HANDLE, punkcontext : IUnknown, ppproviderinfo : ISyncProviderInfo*) : HRESULT
+    @lpVtbl.value.create_and_register_new_sync_provider.call(this, hwndparent, punkcontext, ppproviderinfo)
+  end
+  def modify_sync_provider(this : ISyncProviderConfigUI*, hwndparent : LibC::HANDLE, punkcontext : IUnknown, pproviderinfo : ISyncProviderInfo) : HRESULT
+    @lpVtbl.value.modify_sync_provider.call(this, hwndparent, punkcontext, pproviderinfo)
+  end
+end
+struct LibWin32::IRegisteredSyncProvider
+  def query_interface(this : IRegisteredSyncProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRegisteredSyncProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRegisteredSyncProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : IRegisteredSyncProvider*, pguidinstanceid : Guid*, pguidcontenttype : Guid*, pcontextpropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.init.call(this, pguidinstanceid, pguidcontenttype, pcontextpropertystore)
+  end
+  def get_instance_id(this : IRegisteredSyncProvider*, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.get_instance_id.call(this, pguidinstanceid)
+  end
+  def reset(this : IRegisteredSyncProvider*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::ISyncRegistrationChange
+  def query_interface(this : ISyncRegistrationChange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISyncRegistrationChange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISyncRegistrationChange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : ISyncRegistrationChange*, psreevent : SYNC_REGISTRATION_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.call(this, psreevent)
+  end
+  def get_instance_id(this : ISyncRegistrationChange*, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.get_instance_id.call(this, pguidinstanceid)
+  end
+end

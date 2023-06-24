@@ -66,3 +66,112 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWICImageEncoder
+  def query_interface(this : IWICImageEncoder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWICImageEncoder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWICImageEncoder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def write_frame(this : IWICImageEncoder*, pimage : ID2D1Image, pframeencode : IWICBitmapFrameEncode, pimageparameters : WICImageParameters*) : HRESULT
+    @lpVtbl.value.write_frame.call(this, pimage, pframeencode, pimageparameters)
+  end
+  def write_frame_thumbnail(this : IWICImageEncoder*, pimage : ID2D1Image, pframeencode : IWICBitmapFrameEncode, pimageparameters : WICImageParameters*) : HRESULT
+    @lpVtbl.value.write_frame_thumbnail.call(this, pimage, pframeencode, pimageparameters)
+  end
+  def write_thumbnail(this : IWICImageEncoder*, pimage : ID2D1Image, pencoder : IWICBitmapEncoder, pimageparameters : WICImageParameters*) : HRESULT
+    @lpVtbl.value.write_thumbnail.call(this, pimage, pencoder, pimageparameters)
+  end
+end
+struct LibWin32::IWICImagingFactory2
+  def query_interface(this : IWICImagingFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWICImagingFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWICImagingFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_decoder_from_filename(this : IWICImagingFactory2*, wzfilename : LibC::LPWSTR, pguidvendor : Guid*, dwdesiredaccess : UInt32, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
+    @lpVtbl.value.create_decoder_from_filename.call(this, wzfilename, pguidvendor, dwdesiredaccess, metadataoptions, ppidecoder)
+  end
+  def create_decoder_from_stream(this : IWICImagingFactory2*, pistream : IStream, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
+    @lpVtbl.value.create_decoder_from_stream.call(this, pistream, pguidvendor, metadataoptions, ppidecoder)
+  end
+  def create_decoder_from_file_handle(this : IWICImagingFactory2*, hfile : LibC::UINT_PTR, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
+    @lpVtbl.value.create_decoder_from_file_handle.call(this, hfile, pguidvendor, metadataoptions, ppidecoder)
+  end
+  def create_component_info(this : IWICImagingFactory2*, clsidcomponent : Guid*, ppiinfo : IWICComponentInfo*) : HRESULT
+    @lpVtbl.value.create_component_info.call(this, clsidcomponent, ppiinfo)
+  end
+  def create_decoder(this : IWICImagingFactory2*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppidecoder : IWICBitmapDecoder*) : HRESULT
+    @lpVtbl.value.create_decoder.call(this, guidcontainerformat, pguidvendor, ppidecoder)
+  end
+  def create_encoder(this : IWICImagingFactory2*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppiencoder : IWICBitmapEncoder*) : HRESULT
+    @lpVtbl.value.create_encoder.call(this, guidcontainerformat, pguidvendor, ppiencoder)
+  end
+  def create_palette(this : IWICImagingFactory2*, ppipalette : IWICPalette*) : HRESULT
+    @lpVtbl.value.create_palette.call(this, ppipalette)
+  end
+  def create_format_converter(this : IWICImagingFactory2*, ppiformatconverter : IWICFormatConverter*) : HRESULT
+    @lpVtbl.value.create_format_converter.call(this, ppiformatconverter)
+  end
+  def create_bitmap_scaler(this : IWICImagingFactory2*, ppibitmapscaler : IWICBitmapScaler*) : HRESULT
+    @lpVtbl.value.create_bitmap_scaler.call(this, ppibitmapscaler)
+  end
+  def create_bitmap_clipper(this : IWICImagingFactory2*, ppibitmapclipper : IWICBitmapClipper*) : HRESULT
+    @lpVtbl.value.create_bitmap_clipper.call(this, ppibitmapclipper)
+  end
+  def create_bitmap_flip_rotator(this : IWICImagingFactory2*, ppibitmapfliprotator : IWICBitmapFlipRotator*) : HRESULT
+    @lpVtbl.value.create_bitmap_flip_rotator.call(this, ppibitmapfliprotator)
+  end
+  def create_stream(this : IWICImagingFactory2*, ppiwicstream : IWICStream*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, ppiwicstream)
+  end
+  def create_color_context(this : IWICImagingFactory2*, ppiwiccolorcontext : IWICColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, ppiwiccolorcontext)
+  end
+  def create_color_transformer(this : IWICImagingFactory2*, ppiwiccolortransform : IWICColorTransform*) : HRESULT
+    @lpVtbl.value.create_color_transformer.call(this, ppiwiccolortransform)
+  end
+  def create_bitmap(this : IWICImagingFactory2*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, uiwidth, uiheight, pixelformat, option, ppibitmap)
+  end
+  def create_bitmap_from_source(this : IWICImagingFactory2*, pibitmapsource : IWICBitmapSource, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_source.call(this, pibitmapsource, option, ppibitmap)
+  end
+  def create_bitmap_from_source_rect(this : IWICImagingFactory2*, pibitmapsource : IWICBitmapSource, x : UInt32, y : UInt32, width : UInt32, height : UInt32, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_source_rect.call(this, pibitmapsource, x, y, width, height, ppibitmap)
+  end
+  def create_bitmap_from_memory(this : IWICImagingFactory2*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_memory.call(this, uiwidth, uiheight, pixelformat, cbstride, cbbuffersize, pbbuffer, ppibitmap)
+  end
+  def create_bitmap_from_hbitmap(this : IWICImagingFactory2*, hbitmap : HBITMAP, hpalette : HPALETTE, options : WICBitmapAlphaChannelOption, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_hbitmap.call(this, hbitmap, hpalette, options, ppibitmap)
+  end
+  def create_bitmap_from_hicon(this : IWICImagingFactory2*, hicon : LibC::HANDLE, ppibitmap : IWICBitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_hicon.call(this, hicon, ppibitmap)
+  end
+  def create_component_enumerator(this : IWICImagingFactory2*, componenttypes : UInt32, options : UInt32, ppienumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.create_component_enumerator.call(this, componenttypes, options, ppienumunknown)
+  end
+  def create_fast_metadata_encoder_from_decoder(this : IWICImagingFactory2*, pidecoder : IWICBitmapDecoder, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
+    @lpVtbl.value.create_fast_metadata_encoder_from_decoder.call(this, pidecoder, ppifastencoder)
+  end
+  def create_fast_metadata_encoder_from_frame_decode(this : IWICImagingFactory2*, piframedecoder : IWICBitmapFrameDecode, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
+    @lpVtbl.value.create_fast_metadata_encoder_from_frame_decode.call(this, piframedecoder, ppifastencoder)
+  end
+  def create_query_writer(this : IWICImagingFactory2*, guidmetadataformat : Guid*, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
+    @lpVtbl.value.create_query_writer.call(this, guidmetadataformat, pguidvendor, ppiquerywriter)
+  end
+  def create_query_writer_from_reader(this : IWICImagingFactory2*, piqueryreader : IWICMetadataQueryReader, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
+    @lpVtbl.value.create_query_writer_from_reader.call(this, piqueryreader, pguidvendor, ppiquerywriter)
+  end
+  def create_image_encoder(this : IWICImagingFactory2*, pd2ddevice : ID2D1Device, ppwicimageencoder : IWICImageEncoder*) : HRESULT
+    @lpVtbl.value.create_image_encoder.call(this, pd2ddevice, ppwicimageencoder)
+  end
+end

@@ -1068,3 +1068,1002 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IDummyMBNUCMExt
+  def query_interface(this : IDummyMBNUCMExt*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDummyMBNUCMExt*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDummyMBNUCMExt*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDummyMBNUCMExt*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDummyMBNUCMExt*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDummyMBNUCMExt*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDummyMBNUCMExt*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IMbnConnection
+  def query_interface(this : IMbnConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connection_id(this : IMbnConnection*, connectionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_connection_id.call(this, connectionid)
+  end
+  def get_interface_id(this : IMbnConnection*, interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.call(this, interfaceid)
+  end
+  def connect(this : IMbnConnection*, connectionmode : MBN_CONNECTION_MODE, strprofile : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.connect.call(this, connectionmode, strprofile, requestid)
+  end
+  def disconnect(this : IMbnConnection*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.disconnect.call(this, requestid)
+  end
+  def get_connection_state(this : IMbnConnection*, connectionstate : MBN_ACTIVATION_STATE*, profilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_connection_state.call(this, connectionstate, profilename)
+  end
+  def get_voice_call_state(this : IMbnConnection*, voicecallstate : MBN_VOICE_CALL_STATE*) : HRESULT
+    @lpVtbl.value.get_voice_call_state.call(this, voicecallstate)
+  end
+  def get_activation_network_error(this : IMbnConnection*, networkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_activation_network_error.call(this, networkerror)
+  end
+end
+struct LibWin32::IMbnConnectionEvents
+  def query_interface(this : IMbnConnectionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_connect_complete(this : IMbnConnectionEvents*, newconnection : IMbnConnection, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_connect_complete.call(this, newconnection, requestid, status)
+  end
+  def on_disconnect_complete(this : IMbnConnectionEvents*, newconnection : IMbnConnection, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_disconnect_complete.call(this, newconnection, requestid, status)
+  end
+  def on_connect_state_change(this : IMbnConnectionEvents*, newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connect_state_change.call(this, newconnection)
+  end
+  def on_voice_call_state_change(this : IMbnConnectionEvents*, newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_voice_call_state_change.call(this, newconnection)
+  end
+end
+struct LibWin32::IMbnInterface
+  def query_interface(this : IMbnInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interface_id(this : IMbnInterface*, interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.call(this, interfaceid)
+  end
+  def get_interface_capability(this : IMbnInterface*, interfacecaps : MBN_INTERFACE_CAPS*) : HRESULT
+    @lpVtbl.value.get_interface_capability.call(this, interfacecaps)
+  end
+  def get_subscriber_information(this : IMbnInterface*, subscriberinformation : IMbnSubscriberInformation*) : HRESULT
+    @lpVtbl.value.get_subscriber_information.call(this, subscriberinformation)
+  end
+  def get_ready_state(this : IMbnInterface*, readystate : MBN_READY_STATE*) : HRESULT
+    @lpVtbl.value.get_ready_state.call(this, readystate)
+  end
+  def in_emergency_mode(this : IMbnInterface*, emergencymode : Int16*) : HRESULT
+    @lpVtbl.value.in_emergency_mode.call(this, emergencymode)
+  end
+  def get_home_provider(this : IMbnInterface*, homeprovider : MBN_PROVIDER*) : HRESULT
+    @lpVtbl.value.get_home_provider.call(this, homeprovider)
+  end
+  def get_preferred_providers(this : IMbnInterface*, preferredproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_preferred_providers.call(this, preferredproviders)
+  end
+  def set_preferred_providers(this : IMbnInterface*, preferredproviders : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_preferred_providers.call(this, preferredproviders, requestid)
+  end
+  def get_visible_providers(this : IMbnInterface*, age : UInt32*, visibleproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_providers.call(this, age, visibleproviders)
+  end
+  def scan_network(this : IMbnInterface*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.scan_network.call(this, requestid)
+  end
+  def get_connection(this : IMbnInterface*, mbnconnection : IMbnConnection*) : HRESULT
+    @lpVtbl.value.get_connection.call(this, mbnconnection)
+  end
+end
+struct LibWin32::IMbnInterfaceEvents
+  def query_interface(this : IMbnInterfaceEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnInterfaceEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnInterfaceEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_interface_capability_available(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_capability_available.call(this, newinterface)
+  end
+  def on_subscriber_information_change(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_subscriber_information_change.call(this, newinterface)
+  end
+  def on_ready_state_change(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_ready_state_change.call(this, newinterface)
+  end
+  def on_emergency_mode_change(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_emergency_mode_change.call(this, newinterface)
+  end
+  def on_home_provider_available(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_home_provider_available.call(this, newinterface)
+  end
+  def on_preferred_providers_change(this : IMbnInterfaceEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_preferred_providers_change.call(this, newinterface)
+  end
+  def on_set_preferred_providers_complete(this : IMbnInterfaceEvents*, newinterface : IMbnInterface, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_preferred_providers_complete.call(this, newinterface, requestid, status)
+  end
+  def on_scan_network_complete(this : IMbnInterfaceEvents*, newinterface : IMbnInterface, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_scan_network_complete.call(this, newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnInterfaceManager
+  def query_interface(this : IMbnInterfaceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnInterfaceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnInterfaceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interface(this : IMbnInterfaceManager*, interfaceid : LibC::LPWSTR, mbninterface : IMbnInterface*) : HRESULT
+    @lpVtbl.value.get_interface.call(this, interfaceid, mbninterface)
+  end
+  def get_interfaces(this : IMbnInterfaceManager*, mbninterfaces : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_interfaces.call(this, mbninterfaces)
+  end
+end
+struct LibWin32::IMbnInterfaceManagerEvents
+  def query_interface(this : IMbnInterfaceManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnInterfaceManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnInterfaceManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_interface_arrival(this : IMbnInterfaceManagerEvents*, newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_arrival.call(this, newinterface)
+  end
+  def on_interface_removal(this : IMbnInterfaceManagerEvents*, oldinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_removal.call(this, oldinterface)
+  end
+end
+struct LibWin32::IMbnRegistration
+  def query_interface(this : IMbnRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_register_state(this : IMbnRegistration*, registerstate : MBN_REGISTER_STATE*) : HRESULT
+    @lpVtbl.value.get_register_state.call(this, registerstate)
+  end
+  def get_register_mode(this : IMbnRegistration*, registermode : MBN_REGISTER_MODE*) : HRESULT
+    @lpVtbl.value.get_register_mode.call(this, registermode)
+  end
+  def get_provider_id(this : IMbnRegistration*, providerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_id.call(this, providerid)
+  end
+  def get_provider_name(this : IMbnRegistration*, providername : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_name.call(this, providername)
+  end
+  def get_roaming_text(this : IMbnRegistration*, roamingtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_roaming_text.call(this, roamingtext)
+  end
+  def get_available_data_classes(this : IMbnRegistration*, availabledataclasses : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_data_classes.call(this, availabledataclasses)
+  end
+  def get_current_data_class(this : IMbnRegistration*, currentdataclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_data_class.call(this, currentdataclass)
+  end
+  def get_registration_network_error(this : IMbnRegistration*, registrationnetworkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_registration_network_error.call(this, registrationnetworkerror)
+  end
+  def get_packet_attach_network_error(this : IMbnRegistration*, packetattachnetworkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_packet_attach_network_error.call(this, packetattachnetworkerror)
+  end
+  def set_register_mode(this : IMbnRegistration*, registermode : MBN_REGISTER_MODE, providerid : LibC::LPWSTR, dataclass : UInt32, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_register_mode.call(this, registermode, providerid, dataclass, requestid)
+  end
+end
+struct LibWin32::IMbnRegistrationEvents
+  def query_interface(this : IMbnRegistrationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnRegistrationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnRegistrationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_register_mode_available(this : IMbnRegistrationEvents*, newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_register_mode_available.call(this, newinterface)
+  end
+  def on_register_state_change(this : IMbnRegistrationEvents*, newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_register_state_change.call(this, newinterface)
+  end
+  def on_packet_service_state_change(this : IMbnRegistrationEvents*, newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_packet_service_state_change.call(this, newinterface)
+  end
+  def on_set_register_mode_complete(this : IMbnRegistrationEvents*, newinterface : IMbnRegistration, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_register_mode_complete.call(this, newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnConnectionManager
+  def query_interface(this : IMbnConnectionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connection(this : IMbnConnectionManager*, connectionid : LibC::LPWSTR, mbnconnection : IMbnConnection*) : HRESULT
+    @lpVtbl.value.get_connection.call(this, connectionid, mbnconnection)
+  end
+  def get_connections(this : IMbnConnectionManager*, mbnconnections : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_connections.call(this, mbnconnections)
+  end
+end
+struct LibWin32::IMbnConnectionManagerEvents
+  def query_interface(this : IMbnConnectionManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_connection_arrival(this : IMbnConnectionManagerEvents*, newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connection_arrival.call(this, newconnection)
+  end
+  def on_connection_removal(this : IMbnConnectionManagerEvents*, oldconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connection_removal.call(this, oldconnection)
+  end
+end
+struct LibWin32::IMbnPinManager
+  def query_interface(this : IMbnPinManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnPinManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnPinManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_pin_list(this : IMbnPinManager*, pinlist : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_pin_list.call(this, pinlist)
+  end
+  def get_pin(this : IMbnPinManager*, pintype : MBN_PIN_TYPE, pin : IMbnPin*) : HRESULT
+    @lpVtbl.value.get_pin.call(this, pintype, pin)
+  end
+  def get_pin_state(this : IMbnPinManager*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_state.call(this, requestid)
+  end
+end
+struct LibWin32::IMbnPinManagerEvents
+  def query_interface(this : IMbnPinManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnPinManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnPinManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_pin_list_available(this : IMbnPinManagerEvents*, pinmanager : IMbnPinManager) : HRESULT
+    @lpVtbl.value.on_pin_list_available.call(this, pinmanager)
+  end
+  def on_get_pin_state_complete(this : IMbnPinManagerEvents*, pinmanager : IMbnPinManager, pininfo : MBN_PIN_INFO, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_get_pin_state_complete.call(this, pinmanager, pininfo, requestid, status)
+  end
+end
+struct LibWin32::IMbnPinEvents
+  def query_interface(this : IMbnPinEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnPinEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnPinEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_enable_complete(this : IMbnPinEvents*, pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_enable_complete.call(this, pin, pininfo, requestid, status)
+  end
+  def on_disable_complete(this : IMbnPinEvents*, pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_disable_complete.call(this, pin, pininfo, requestid, status)
+  end
+  def on_enter_complete(this : IMbnPinEvents*, pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_enter_complete.call(this, pin, pininfo, requestid, status)
+  end
+  def on_change_complete(this : IMbnPinEvents*, pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_change_complete.call(this, pin, pininfo, requestid, status)
+  end
+  def on_unblock_complete(this : IMbnPinEvents*, pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_unblock_complete.call(this, pin, pininfo, requestid, status)
+  end
+end
+struct LibWin32::IMbnSubscriberInformation
+  def query_interface(this : IMbnSubscriberInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSubscriberInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSubscriberInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_subscriber_id(this : IMbnSubscriberInformation*, subscriberid : UInt8**) : HRESULT
+    @lpVtbl.value.get_subscriber_id.call(this, subscriberid)
+  end
+  def get_sim_icc_id(this : IMbnSubscriberInformation*, simiccid : UInt8**) : HRESULT
+    @lpVtbl.value.get_sim_icc_id.call(this, simiccid)
+  end
+  def get_telephone_numbers(this : IMbnSubscriberInformation*, telephonenumbers : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_telephone_numbers.call(this, telephonenumbers)
+  end
+end
+struct LibWin32::IMbnSignal
+  def query_interface(this : IMbnSignal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSignal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSignal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_signal_strength(this : IMbnSignal*, signalstrength : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_strength.call(this, signalstrength)
+  end
+  def get_signal_error(this : IMbnSignal*, signalerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_error.call(this, signalerror)
+  end
+end
+struct LibWin32::IMbnSignalEvents
+  def query_interface(this : IMbnSignalEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSignalEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSignalEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_signal_state_change(this : IMbnSignalEvents*, newinterface : IMbnSignal) : HRESULT
+    @lpVtbl.value.on_signal_state_change.call(this, newinterface)
+  end
+end
+struct LibWin32::IMbnConnectionContext
+  def query_interface(this : IMbnConnectionContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provisioned_contexts(this : IMbnConnectionContext*, provisionedcontexts : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_provisioned_contexts.call(this, provisionedcontexts)
+  end
+  def set_provisioned_context(this : IMbnConnectionContext*, provisionedcontexts : MBN_CONTEXT, providerid : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_provisioned_context.call(this, provisionedcontexts, providerid, requestid)
+  end
+end
+struct LibWin32::IMbnConnectionContextEvents
+  def query_interface(this : IMbnConnectionContextEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionContextEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionContextEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_provisioned_context_list_change(this : IMbnConnectionContextEvents*, newinterface : IMbnConnectionContext) : HRESULT
+    @lpVtbl.value.on_provisioned_context_list_change.call(this, newinterface)
+  end
+  def on_set_provisioned_context_complete(this : IMbnConnectionContextEvents*, newinterface : IMbnConnectionContext, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_provisioned_context_complete.call(this, newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnConnectionProfileManager
+  def query_interface(this : IMbnConnectionProfileManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionProfileManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionProfileManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connection_profiles(this : IMbnConnectionProfileManager*, mbninterface : IMbnInterface, connectionprofiles : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_connection_profiles.call(this, mbninterface, connectionprofiles)
+  end
+  def get_connection_profile(this : IMbnConnectionProfileManager*, mbninterface : IMbnInterface, profilename : LibC::LPWSTR, connectionprofile : IMbnConnectionProfile*) : HRESULT
+    @lpVtbl.value.get_connection_profile.call(this, mbninterface, profilename, connectionprofile)
+  end
+  def create_connection_profile(this : IMbnConnectionProfileManager*, xmlprofile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_connection_profile.call(this, xmlprofile)
+  end
+end
+struct LibWin32::IMbnConnectionProfile
+  def query_interface(this : IMbnConnectionProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_profile_xml_data(this : IMbnConnectionProfile*, profiledata : UInt8**) : HRESULT
+    @lpVtbl.value.get_profile_xml_data.call(this, profiledata)
+  end
+  def update_profile(this : IMbnConnectionProfile*, strprofile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_profile.call(this, strprofile)
+  end
+  def delete(this : IMbnConnectionProfile*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IMbnConnectionProfileEvents
+  def query_interface(this : IMbnConnectionProfileEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionProfileEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionProfileEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_profile_update(this : IMbnConnectionProfileEvents*, newprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_profile_update.call(this, newprofile)
+  end
+end
+struct LibWin32::IMbnSmsConfiguration
+  def query_interface(this : IMbnSmsConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSmsConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSmsConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_service_center_address(this : IMbnSmsConfiguration*, scaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_center_address.call(this, scaddress)
+  end
+  def put_service_center_address(this : IMbnSmsConfiguration*, scaddress : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_service_center_address.call(this, scaddress)
+  end
+  def get_max_message_index(this : IMbnSmsConfiguration*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_message_index.call(this, index)
+  end
+  def get_cdma_short_msg_size(this : IMbnSmsConfiguration*, shortmsgsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_cdma_short_msg_size.call(this, shortmsgsize)
+  end
+  def get_sms_format(this : IMbnSmsConfiguration*, smsformat : MBN_SMS_FORMAT*) : HRESULT
+    @lpVtbl.value.get_sms_format.call(this, smsformat)
+  end
+  def put_sms_format(this : IMbnSmsConfiguration*, smsformat : MBN_SMS_FORMAT) : HRESULT
+    @lpVtbl.value.put_sms_format.call(this, smsformat)
+  end
+end
+struct LibWin32::IMbnSmsReadMsgPdu
+  def query_interface(this : IMbnSmsReadMsgPdu*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSmsReadMsgPdu*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSmsReadMsgPdu*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMbnSmsReadMsgPdu*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, index)
+  end
+  def get_status(this : IMbnSmsReadMsgPdu*, status : MBN_MSG_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_pdu_data(this : IMbnSmsReadMsgPdu*, pdudata : UInt8**) : HRESULT
+    @lpVtbl.value.get_pdu_data.call(this, pdudata)
+  end
+  def get_message(this : IMbnSmsReadMsgPdu*, message : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_message.call(this, message)
+  end
+end
+struct LibWin32::IMbnSmsReadMsgTextCdma
+  def query_interface(this : IMbnSmsReadMsgTextCdma*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSmsReadMsgTextCdma*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSmsReadMsgTextCdma*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMbnSmsReadMsgTextCdma*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, index)
+  end
+  def get_status(this : IMbnSmsReadMsgTextCdma*, status : MBN_MSG_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_address(this : IMbnSmsReadMsgTextCdma*, address : UInt8**) : HRESULT
+    @lpVtbl.value.get_address.call(this, address)
+  end
+  def get_timestamp(this : IMbnSmsReadMsgTextCdma*, timestamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, timestamp)
+  end
+  def get_encoding_id(this : IMbnSmsReadMsgTextCdma*, encodingid : MBN_SMS_CDMA_ENCODING*) : HRESULT
+    @lpVtbl.value.get_encoding_id.call(this, encodingid)
+  end
+  def get_language_id(this : IMbnSmsReadMsgTextCdma*, languageid : MBN_SMS_CDMA_LANG*) : HRESULT
+    @lpVtbl.value.get_language_id.call(this, languageid)
+  end
+  def get_size_in_characters(this : IMbnSmsReadMsgTextCdma*, sizeincharacters : UInt32*) : HRESULT
+    @lpVtbl.value.get_size_in_characters.call(this, sizeincharacters)
+  end
+  def get_message(this : IMbnSmsReadMsgTextCdma*, message : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_message.call(this, message)
+  end
+end
+struct LibWin32::IMbnSms
+  def query_interface(this : IMbnSms*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSms*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSms*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sms_configuration(this : IMbnSms*, smsconfiguration : IMbnSmsConfiguration*) : HRESULT
+    @lpVtbl.value.get_sms_configuration.call(this, smsconfiguration)
+  end
+  def set_sms_configuration(this : IMbnSms*, smsconfiguration : IMbnSmsConfiguration, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_sms_configuration.call(this, smsconfiguration, requestid)
+  end
+  def sms_send_pdu(this : IMbnSms*, pdudata : LibC::LPWSTR, size : UInt8, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_pdu.call(this, pdudata, size, requestid)
+  end
+  def sms_send_cdma(this : IMbnSms*, address : LibC::LPWSTR, encoding : MBN_SMS_CDMA_ENCODING, language : MBN_SMS_CDMA_LANG, sizeincharacters : UInt32, message : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_cdma.call(this, address, encoding, language, sizeincharacters, message, requestid)
+  end
+  def sms_send_cdma_pdu(this : IMbnSms*, message : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_cdma_pdu.call(this, message, requestid)
+  end
+  def sms_read(this : IMbnSms*, smsfilter : MBN_SMS_FILTER*, smsformat : MBN_SMS_FORMAT, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_read.call(this, smsfilter, smsformat, requestid)
+  end
+  def sms_delete(this : IMbnSms*, smsfilter : MBN_SMS_FILTER*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_delete.call(this, smsfilter, requestid)
+  end
+  def get_sms_status(this : IMbnSms*, smsstatusinfo : MBN_SMS_STATUS_INFO*) : HRESULT
+    @lpVtbl.value.get_sms_status.call(this, smsstatusinfo)
+  end
+end
+struct LibWin32::IMbnSmsEvents
+  def query_interface(this : IMbnSmsEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnSmsEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnSmsEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_sms_configuration_change(this : IMbnSmsEvents*, sms : IMbnSms) : HRESULT
+    @lpVtbl.value.on_sms_configuration_change.call(this, sms)
+  end
+  def on_set_sms_configuration_complete(this : IMbnSmsEvents*, sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_sms_configuration_complete.call(this, sms, requestid, status)
+  end
+  def on_sms_send_complete(this : IMbnSmsEvents*, sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_send_complete.call(this, sms, requestid, status)
+  end
+  def on_sms_read_complete(this : IMbnSmsEvents*, sms : IMbnSms, smsformat : MBN_SMS_FORMAT, readmsgs : SAFEARRAY*, moremsgs : Int16, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_read_complete.call(this, sms, smsformat, readmsgs, moremsgs, requestid, status)
+  end
+  def on_sms_new_class0_message(this : IMbnSmsEvents*, sms : IMbnSms, smsformat : MBN_SMS_FORMAT, readmsgs : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_sms_new_class0_message.call(this, sms, smsformat, readmsgs)
+  end
+  def on_sms_delete_complete(this : IMbnSmsEvents*, sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_delete_complete.call(this, sms, requestid, status)
+  end
+  def on_sms_status_change(this : IMbnSmsEvents*, sms : IMbnSms) : HRESULT
+    @lpVtbl.value.on_sms_status_change.call(this, sms)
+  end
+end
+struct LibWin32::IMbnServiceActivation
+  def query_interface(this : IMbnServiceActivation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnServiceActivation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnServiceActivation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : IMbnServiceActivation*, vendorspecificdata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.call(this, vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnServiceActivationEvents
+  def query_interface(this : IMbnServiceActivationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnServiceActivationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnServiceActivationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_activation_complete(this : IMbnServiceActivationEvents*, serviceactivation : IMbnServiceActivation, vendorspecificdata : SAFEARRAY*, requestid : UInt32, status : HRESULT, networkerror : UInt32) : HRESULT
+    @lpVtbl.value.on_activation_complete.call(this, serviceactivation, vendorspecificdata, requestid, status, networkerror)
+  end
+end
+struct LibWin32::IMbnVendorSpecificOperation
+  def query_interface(this : IMbnVendorSpecificOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnVendorSpecificOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnVendorSpecificOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_vendor_specific(this : IMbnVendorSpecificOperation*, vendorspecificdata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_vendor_specific.call(this, vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnVendorSpecificEvents
+  def query_interface(this : IMbnVendorSpecificEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnVendorSpecificEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnVendorSpecificEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_event_notification(this : IMbnVendorSpecificEvents*, vendoroperation : IMbnVendorSpecificOperation, vendorspecificdata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_event_notification.call(this, vendoroperation, vendorspecificdata)
+  end
+  def on_set_vendor_specific_complete(this : IMbnVendorSpecificEvents*, vendoroperation : IMbnVendorSpecificOperation, vendorspecificdata : SAFEARRAY*, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_vendor_specific_complete.call(this, vendoroperation, vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnConnectionProfileManagerEvents
+  def query_interface(this : IMbnConnectionProfileManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnConnectionProfileManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnConnectionProfileManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_connection_profile_arrival(this : IMbnConnectionProfileManagerEvents*, newconnectionprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_connection_profile_arrival.call(this, newconnectionprofile)
+  end
+  def on_connection_profile_removal(this : IMbnConnectionProfileManagerEvents*, oldconnectionprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_connection_profile_removal.call(this, oldconnectionprofile)
+  end
+end
+struct LibWin32::IMbnRadio
+  def query_interface(this : IMbnRadio*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnRadio*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnRadio*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_software_radio_state(this : IMbnRadio*, softwareradiostate : MBN_RADIO*) : HRESULT
+    @lpVtbl.value.get_software_radio_state.call(this, softwareradiostate)
+  end
+  def get_hardware_radio_state(this : IMbnRadio*, hardwareradiostate : MBN_RADIO*) : HRESULT
+    @lpVtbl.value.get_hardware_radio_state.call(this, hardwareradiostate)
+  end
+  def set_software_radio_state(this : IMbnRadio*, radiostate : MBN_RADIO, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_software_radio_state.call(this, radiostate, requestid)
+  end
+end
+struct LibWin32::IMbnRadioEvents
+  def query_interface(this : IMbnRadioEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnRadioEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnRadioEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_radio_state_change(this : IMbnRadioEvents*, newinterface : IMbnRadio) : HRESULT
+    @lpVtbl.value.on_radio_state_change.call(this, newinterface)
+  end
+  def on_set_software_radio_state_complete(this : IMbnRadioEvents*, newinterface : IMbnRadio, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_software_radio_state_complete.call(this, newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnMultiCarrier
+  def query_interface(this : IMbnMultiCarrier*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnMultiCarrier*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnMultiCarrier*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_home_provider(this : IMbnMultiCarrier*, homeprovider : MBN_PROVIDER2*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_home_provider.call(this, homeprovider, requestid)
+  end
+  def get_preferred_providers(this : IMbnMultiCarrier*, preferredmulticarrierproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_preferred_providers.call(this, preferredmulticarrierproviders)
+  end
+  def get_visible_providers(this : IMbnMultiCarrier*, age : UInt32*, visibleproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_providers.call(this, age, visibleproviders)
+  end
+  def get_supported_cellular_classes(this : IMbnMultiCarrier*, cellularclasses : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_cellular_classes.call(this, cellularclasses)
+  end
+  def get_current_cellular_class(this : IMbnMultiCarrier*, currentcellularclass : MBN_CELLULAR_CLASS*) : HRESULT
+    @lpVtbl.value.get_current_cellular_class.call(this, currentcellularclass)
+  end
+  def scan_network(this : IMbnMultiCarrier*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.scan_network.call(this, requestid)
+  end
+end
+struct LibWin32::IMbnMultiCarrierEvents
+  def query_interface(this : IMbnMultiCarrierEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnMultiCarrierEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnMultiCarrierEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_set_home_provider_complete(this : IMbnMultiCarrierEvents*, mbninterface : IMbnMultiCarrier, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_home_provider_complete.call(this, mbninterface, requestid, status)
+  end
+  def on_current_cellular_class_change(this : IMbnMultiCarrierEvents*, mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_current_cellular_class_change.call(this, mbninterface)
+  end
+  def on_preferred_providers_change(this : IMbnMultiCarrierEvents*, mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_preferred_providers_change.call(this, mbninterface)
+  end
+  def on_scan_network_complete(this : IMbnMultiCarrierEvents*, mbninterface : IMbnMultiCarrier, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_scan_network_complete.call(this, mbninterface, requestid, status)
+  end
+  def on_interface_capability_change(this : IMbnMultiCarrierEvents*, mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_interface_capability_change.call(this, mbninterface)
+  end
+end
+struct LibWin32::IMbnDeviceServiceStateEvents
+  def query_interface(this : IMbnDeviceServiceStateEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnDeviceServiceStateEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnDeviceServiceStateEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_sessions_state_change(this : IMbnDeviceServiceStateEvents*, interfaceid : UInt8*, statechange : MBN_DEVICE_SERVICE_SESSIONS_STATE) : HRESULT
+    @lpVtbl.value.on_sessions_state_change.call(this, interfaceid, statechange)
+  end
+end
+struct LibWin32::IMbnDeviceServicesManager
+  def query_interface(this : IMbnDeviceServicesManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnDeviceServicesManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnDeviceServicesManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_services_context(this : IMbnDeviceServicesManager*, networkinterfaceid : UInt8*, mbndevicescontext : IMbnDeviceServicesContext*) : HRESULT
+    @lpVtbl.value.get_device_services_context.call(this, networkinterfaceid, mbndevicescontext)
+  end
+end
+struct LibWin32::IMbnDeviceServicesContext
+  def query_interface(this : IMbnDeviceServicesContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnDeviceServicesContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnDeviceServicesContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enumerate_device_services(this : IMbnDeviceServicesContext*, deviceservices : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.enumerate_device_services.call(this, deviceservices)
+  end
+  def get_device_service(this : IMbnDeviceServicesContext*, deviceserviceid : UInt8*, mbndeviceservice : IMbnDeviceService*) : HRESULT
+    @lpVtbl.value.get_device_service.call(this, deviceserviceid, mbndeviceservice)
+  end
+  def get_max_command_size(this : IMbnDeviceServicesContext*, maxcommandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_command_size.call(this, maxcommandsize)
+  end
+  def get_max_data_size(this : IMbnDeviceServicesContext*, maxdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_data_size.call(this, maxdatasize)
+  end
+end
+struct LibWin32::IMbnDeviceServicesEvents
+  def query_interface(this : IMbnDeviceServicesEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnDeviceServicesEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnDeviceServicesEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_query_supported_commands_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, commandidlist : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_query_supported_commands_complete.call(this, deviceservice, commandidlist, status, requestid)
+  end
+  def on_open_command_session_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_open_command_session_complete.call(this, deviceservice, status, requestid)
+  end
+  def on_close_command_session_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_close_command_session_complete.call(this, deviceservice, status, requestid)
+  end
+  def on_set_command_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, responseid : UInt32, deviceservicedata : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_command_complete.call(this, deviceservice, responseid, deviceservicedata, status, requestid)
+  end
+  def on_query_command_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, responseid : UInt32, deviceservicedata : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_query_command_complete.call(this, deviceservice, responseid, deviceservicedata, status, requestid)
+  end
+  def on_event_notification(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, eventid : UInt32, deviceservicedata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_event_notification.call(this, deviceservice, eventid, deviceservicedata)
+  end
+  def on_open_data_session_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_open_data_session_complete.call(this, deviceservice, status, requestid)
+  end
+  def on_close_data_session_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_close_data_session_complete.call(this, deviceservice, status, requestid)
+  end
+  def on_write_data_complete(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_write_data_complete.call(this, deviceservice, status, requestid)
+  end
+  def on_read_data(this : IMbnDeviceServicesEvents*, deviceservice : IMbnDeviceService, deviceservicedata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_read_data.call(this, deviceservice, deviceservicedata)
+  end
+  def on_interface_state_change(this : IMbnDeviceServicesEvents*, interfaceid : UInt8*, statechange : MBN_DEVICE_SERVICES_INTERFACE_STATE) : HRESULT
+    @lpVtbl.value.on_interface_state_change.call(this, interfaceid, statechange)
+  end
+end
+struct LibWin32::IMbnDeviceService
+  def query_interface(this : IMbnDeviceService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnDeviceService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnDeviceService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_supported_commands(this : IMbnDeviceService*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.query_supported_commands.call(this, requestid)
+  end
+  def open_command_session(this : IMbnDeviceService*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.open_command_session.call(this, requestid)
+  end
+  def close_command_session(this : IMbnDeviceService*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.close_command_session.call(this, requestid)
+  end
+  def set_command(this : IMbnDeviceService*, commandid : UInt32, deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_command.call(this, commandid, deviceservicedata, requestid)
+  end
+  def query_command(this : IMbnDeviceService*, commandid : UInt32, deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.query_command.call(this, commandid, deviceservicedata, requestid)
+  end
+  def open_data_session(this : IMbnDeviceService*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.open_data_session.call(this, requestid)
+  end
+  def close_data_session(this : IMbnDeviceService*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.close_data_session.call(this, requestid)
+  end
+  def write_data(this : IMbnDeviceService*, deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.write_data.call(this, deviceservicedata, requestid)
+  end
+  def get_interface_id(this : IMbnDeviceService*, interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.call(this, interfaceid)
+  end
+  def get_device_service_id(this : IMbnDeviceService*, deviceserviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_service_id.call(this, deviceserviceid)
+  end
+  def get_is_command_session_open(this : IMbnDeviceService*, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_command_session_open.call(this, value)
+  end
+  def get_is_data_session_open(this : IMbnDeviceService*, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_data_session_open.call(this, value)
+  end
+end
+struct LibWin32::IMbnPin
+  def query_interface(this : IMbnPin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMbnPin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMbnPin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_pin_type(this : IMbnPin*, pintype : MBN_PIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_pin_type.call(this, pintype)
+  end
+  def get_pin_format(this : IMbnPin*, pinformat : MBN_PIN_FORMAT*) : HRESULT
+    @lpVtbl.value.get_pin_format.call(this, pinformat)
+  end
+  def get_pin_length_min(this : IMbnPin*, pinlengthmin : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_length_min.call(this, pinlengthmin)
+  end
+  def get_pin_length_max(this : IMbnPin*, pinlengthmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_length_max.call(this, pinlengthmax)
+  end
+  def get_pin_mode(this : IMbnPin*, pinmode : MBN_PIN_MODE*) : HRESULT
+    @lpVtbl.value.get_pin_mode.call(this, pinmode)
+  end
+  def enable(this : IMbnPin*, pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.enable.call(this, pin, requestid)
+  end
+  def disable(this : IMbnPin*, pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.disable.call(this, pin, requestid)
+  end
+  def enter(this : IMbnPin*, pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.enter.call(this, pin, requestid)
+  end
+  def change(this : IMbnPin*, pin : LibC::LPWSTR, newpin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.change.call(this, pin, newpin, requestid)
+  end
+  def unblock(this : IMbnPin*, puk : LibC::LPWSTR, newpin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.unblock.call(this, puk, newpin, requestid)
+  end
+  def get_pin_manager(this : IMbnPin*, pinmanager : IMbnPinManager*) : HRESULT
+    @lpVtbl.value.get_pin_manager.call(this, pinmanager)
+  end
+end

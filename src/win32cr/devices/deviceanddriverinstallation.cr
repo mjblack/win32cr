@@ -2140,7 +2140,7 @@ lib LibWin32
   fun SetupOpenAppendInfFileA(filename : PSTR, infhandle : Void*, errorline : UInt32*) : LibC::BOOL
 
   # Params # infhandle : Void* [In]
-  fun SetupCloseInfFile(infhandle : Void*)
+  fun SetupCloseInfFile(infhandle : Void*) : Void
 
   # Params # infhandle : Void* [In],section : PSTR [In],key : PSTR [In],context : INFCONTEXT* [In]
   fun SetupFindFirstLineA(infhandle : Void*, section : PSTR, key : PSTR, context : INFCONTEXT*) : LibC::BOOL
@@ -2512,7 +2512,7 @@ lib LibWin32
   fun SetupInitDefaultQueueCallbackEx(ownerwindow : LibC::HANDLE, alternateprogresswindow : LibC::HANDLE, progressmessage : UInt32, reserved1 : UInt32, reserved2 : Void*) : Void*
 
   # Params # context : Void* [In]
-  fun SetupTermDefaultQueueCallback(context : Void*)
+  fun SetupTermDefaultQueueCallback(context : Void*) : Void
 
   # Params # context : Void* [In],notification : UInt32 [In],param1 : LibC::UINT_PTR [In],param2 : LibC::UINT_PTR [In]
   fun SetupDefaultQueueCallbackA(context : Void*, notification : UInt32, param1 : LibC::UINT_PTR, param2 : LibC::UINT_PTR) : UInt32
@@ -2545,10 +2545,10 @@ lib LibWin32
   fun SetupInstallServicesFromInfSectionExW(infhandle : Void*, sectionname : LibC::LPWSTR, flags : UInt32, deviceinfoset : Void*, deviceinfodata : SP_DEVINFO_DATA*, reserved1 : Void*, reserved2 : Void*) : LibC::BOOL
 
   # Params # window : LibC::HANDLE [In],modulehandle : HINSTANCE [In],commandline : PSTR [In],showcommand : Int32 [In]
-  fun InstallHinfSectionA(window : LibC::HANDLE, modulehandle : HINSTANCE, commandline : PSTR, showcommand : Int32)
+  fun InstallHinfSectionA(window : LibC::HANDLE, modulehandle : HINSTANCE, commandline : PSTR, showcommand : Int32) : Void
 
   # Params # window : LibC::HANDLE [In],modulehandle : HINSTANCE [In],commandline : LibC::LPWSTR [In],showcommand : Int32 [In]
-  fun InstallHinfSectionW(window : LibC::HANDLE, modulehandle : HINSTANCE, commandline : LibC::LPWSTR, showcommand : Int32)
+  fun InstallHinfSectionW(window : LibC::HANDLE, modulehandle : HINSTANCE, commandline : LibC::LPWSTR, showcommand : Int32) : Void
 
   # Params # logfilename : PSTR [In],flags : UInt32 [In]
   fun SetupInitializeFileLogA(logfilename : PSTR, flags : UInt32) : Void*
@@ -2587,22 +2587,22 @@ lib LibWin32
   fun SetupLogErrorW(messagestring : LibC::LPWSTR, severity : UInt32) : LibC::BOOL
 
   # Params # 
-  fun SetupCloseLog
+  fun SetupCloseLog : Void
 
   # Params # 
   fun SetupGetThreadLogToken : UInt64
 
   # Params # logtoken : UInt64 [In]
-  fun SetupSetThreadLogToken(logtoken : UInt64)
+  fun SetupSetThreadLogToken(logtoken : UInt64) : Void
 
   # Params # logtoken : UInt64 [In],category : UInt32 [In],flags : UInt32 [In],messagestr : PSTR [In]
-  fun SetupWriteTextLog(logtoken : UInt64, category : UInt32, flags : UInt32, messagestr : PSTR)
+  fun SetupWriteTextLog(logtoken : UInt64, category : UInt32, flags : UInt32, messagestr : PSTR) : Void
 
   # Params # logtoken : UInt64 [In],category : UInt32 [In],logflags : UInt32 [In],error : UInt32 [In],messagestr : PSTR [In]
-  fun SetupWriteTextLogError(logtoken : UInt64, category : UInt32, logflags : UInt32, error : UInt32, messagestr : PSTR)
+  fun SetupWriteTextLogError(logtoken : UInt64, category : UInt32, logflags : UInt32, error : UInt32, messagestr : PSTR) : Void
 
   # Params # logtoken : UInt64 [In],flags : UInt32 [In],infhandle : Void* [In],context : INFCONTEXT* [In]
-  fun SetupWriteTextLogInfLine(logtoken : UInt64, flags : UInt32, infhandle : Void*, context : INFCONTEXT*)
+  fun SetupWriteTextLogInfLine(logtoken : UInt64, flags : UInt32, infhandle : Void*, context : INFCONTEXT*) : Void
 
   # Params # queuehandle : Void* [In],backupparams : SP_BACKUP_QUEUE_PARAMS_V2_A* [In]
   fun SetupGetBackupInformationA(queuehandle : Void*, backupparams : SP_BACKUP_QUEUE_PARAMS_V2_A*) : LibC::BOOL

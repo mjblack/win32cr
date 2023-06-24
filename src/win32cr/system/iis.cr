@@ -1705,3 +1705,659 @@ lib LibWin32
   # Params # pver : HTTP_FILTER_VERSION* [In]
   fun GetFilterVersion(pver : HTTP_FILTER_VERSION*) : LibC::BOOL
 end
+struct LibWin32::IFtpProviderConstruct
+  def query_interface(this : IFtpProviderConstruct*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpProviderConstruct*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpProviderConstruct*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def construct(this : IFtpProviderConstruct*, configurationentries : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.construct.call(this, configurationentries)
+  end
+end
+struct LibWin32::IFtpAuthenticationProvider
+  def query_interface(this : IFtpAuthenticationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpAuthenticationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpAuthenticationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def authenticate_user(this : IFtpAuthenticationProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR, ppszcanonicalusername : LibC::LPWSTR*, pfauthenticated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.authenticate_user.call(this, pszsessionid, pszsitename, pszusername, pszpassword, ppszcanonicalusername, pfauthenticated)
+  end
+end
+struct LibWin32::AsyncIFtpAuthenticationProvider
+  def query_interface(this : AsyncIFtpAuthenticationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpAuthenticationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpAuthenticationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_authenticate_user(this : AsyncIFtpAuthenticationProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_authenticate_user.call(this, pszsessionid, pszsitename, pszusername, pszpassword)
+  end
+  def finish_authenticate_user(this : AsyncIFtpAuthenticationProvider*, ppszcanonicalusername : LibC::LPWSTR*, pfauthenticated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_authenticate_user.call(this, ppszcanonicalusername, pfauthenticated)
+  end
+end
+struct LibWin32::IFtpRoleProvider
+  def query_interface(this : IFtpRoleProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpRoleProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpRoleProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_user_in_role(this : IFtpRoleProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszrole : LibC::LPWSTR, pfisinrole : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_user_in_role.call(this, pszsessionid, pszsitename, pszusername, pszrole, pfisinrole)
+  end
+end
+struct LibWin32::AsyncIFtpRoleProvider
+  def query_interface(this : AsyncIFtpRoleProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpRoleProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpRoleProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_is_user_in_role(this : AsyncIFtpRoleProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszrole : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_is_user_in_role.call(this, pszsessionid, pszsitename, pszusername, pszrole)
+  end
+  def finish_is_user_in_role(this : AsyncIFtpRoleProvider*, pfisinrole : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_is_user_in_role.call(this, pfisinrole)
+  end
+end
+struct LibWin32::IFtpHomeDirectoryProvider
+  def query_interface(this : IFtpHomeDirectoryProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpHomeDirectoryProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpHomeDirectoryProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_user_home_directory_data(this : IFtpHomeDirectoryProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, ppszhomedirectorydata : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user_home_directory_data.call(this, pszsessionid, pszsitename, pszusername, ppszhomedirectorydata)
+  end
+end
+struct LibWin32::AsyncIFtpHomeDirectoryProvider
+  def query_interface(this : AsyncIFtpHomeDirectoryProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpHomeDirectoryProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpHomeDirectoryProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_get_user_home_directory_data(this : AsyncIFtpHomeDirectoryProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_get_user_home_directory_data.call(this, pszsessionid, pszsitename, pszusername)
+  end
+  def finish_get_user_home_directory_data(this : AsyncIFtpHomeDirectoryProvider*, ppszhomedirectorydata : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.finish_get_user_home_directory_data.call(this, ppszhomedirectorydata)
+  end
+end
+struct LibWin32::IFtpLogProvider
+  def query_interface(this : IFtpLogProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpLogProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpLogProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def log(this : IFtpLogProvider*, ploggingparameters : LOGGING_PARAMETERS*) : HRESULT
+    @lpVtbl.value.log.call(this, ploggingparameters)
+  end
+end
+struct LibWin32::AsyncIFtpLogProvider
+  def query_interface(this : AsyncIFtpLogProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpLogProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpLogProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_log(this : AsyncIFtpLogProvider*, ploggingparameters : LOGGING_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_log.call(this, ploggingparameters)
+  end
+  def finish_log(this : AsyncIFtpLogProvider*) : HRESULT
+    @lpVtbl.value.finish_log.call(this)
+  end
+end
+struct LibWin32::IFtpAuthorizationProvider
+  def query_interface(this : IFtpAuthorizationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpAuthorizationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpAuthorizationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_user_access_permission(this : IFtpAuthorizationProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszvirtualpath : LibC::LPWSTR, pszusername : LibC::LPWSTR, pftpaccess : FTP_ACCESS*) : HRESULT
+    @lpVtbl.value.get_user_access_permission.call(this, pszsessionid, pszsitename, pszvirtualpath, pszusername, pftpaccess)
+  end
+end
+struct LibWin32::AsyncIFtpAuthorizationProvider
+  def query_interface(this : AsyncIFtpAuthorizationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpAuthorizationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpAuthorizationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_get_user_access_permission(this : AsyncIFtpAuthorizationProvider*, pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszvirtualpath : LibC::LPWSTR, pszusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_get_user_access_permission.call(this, pszsessionid, pszsitename, pszvirtualpath, pszusername)
+  end
+  def finish_get_user_access_permission(this : AsyncIFtpAuthorizationProvider*, pftpaccess : FTP_ACCESS*) : HRESULT
+    @lpVtbl.value.finish_get_user_access_permission.call(this, pftpaccess)
+  end
+end
+struct LibWin32::IFtpPreprocessProvider
+  def query_interface(this : IFtpPreprocessProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpPreprocessProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpPreprocessProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_preprocess(this : IFtpPreprocessProvider*, ppreprocessparameters : PRE_PROCESS_PARAMETERS*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.handle_preprocess.call(this, ppreprocessparameters, pftpprocessstatus)
+  end
+end
+struct LibWin32::AsyncIFtpPreprocessProvider
+  def query_interface(this : AsyncIFtpPreprocessProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpPreprocessProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpPreprocessProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_handle_preprocess(this : AsyncIFtpPreprocessProvider*, ppreprocessparameters : PRE_PROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_handle_preprocess.call(this, ppreprocessparameters)
+  end
+  def finish_handle_preprocess(this : AsyncIFtpPreprocessProvider*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.finish_handle_preprocess.call(this, pftpprocessstatus)
+  end
+end
+struct LibWin32::IFtpPostprocessProvider
+  def query_interface(this : IFtpPostprocessProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFtpPostprocessProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFtpPostprocessProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_postprocess(this : IFtpPostprocessProvider*, ppostprocessparameters : POST_PROCESS_PARAMETERS*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.handle_postprocess.call(this, ppostprocessparameters, pftpprocessstatus)
+  end
+end
+struct LibWin32::AsyncIFtpPostprocessProvider
+  def query_interface(this : AsyncIFtpPostprocessProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIFtpPostprocessProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIFtpPostprocessProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_handle_postprocess(this : AsyncIFtpPostprocessProvider*, ppostprocessparameters : POST_PROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_handle_postprocess.call(this, ppostprocessparameters)
+  end
+  def finish_handle_postprocess(this : AsyncIFtpPostprocessProvider*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.finish_handle_postprocess.call(this, pftpprocessstatus)
+  end
+end
+struct LibWin32::IADMEXT
+  def query_interface(this : IADMEXT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IADMEXT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IADMEXT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IADMEXT*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
+  end
+  def enum_dcom_clsi_ds(this : IADMEXT*, pclsiddcom : Guid*, dwenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_dcom_clsi_ds.call(this, pclsiddcom, dwenumindex)
+  end
+  def terminate(this : IADMEXT*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+end
+struct LibWin32::IMSAdminBaseW
+  def query_interface(this : IMSAdminBaseW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSAdminBaseW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSAdminBaseW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_key(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_key(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.call(this, hmdhandle, pszmdpath)
+  end
+  def enum_keys(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.call(this, hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(this : IMSAdminBaseW*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.call(this, hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.call(this, hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.call(this, hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.call(this, hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.call(this, hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.call(this, hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(this : IMSAdminBaseW*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.call(this, hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(this : IMSAdminBaseW*, hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.call(this, hmdhandle)
+  end
+  def change_permissions(this : IMSAdminBaseW*, hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.call(this, hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data(this : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.save_data.call(this)
+  end
+  def get_handle_info(this : IMSAdminBaseW*, hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.call(this, hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(this : IMSAdminBaseW*, pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.call(this, pdwsystemchangenumber)
+  end
+  def get_data_set_number(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.call(this, hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(this : IMSAdminBaseW*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1(this : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.key_exchange_phase1.call(this)
+  end
+  def key_exchange_phase2(this : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.key_exchange_phase2.call(this)
+  end
+  def backup(this : IMSAdminBaseW*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(this : IMSAdminBaseW*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(this : IMSAdminBaseW*, pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.call(this, pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(this : IMSAdminBaseW*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.call(this, pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(this : IMSAdminBaseW*, piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.call(this, piadmbwinterface)
+  end
+  def get_server_guid(this : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.get_server_guid.call(this)
+  end
+end
+struct LibWin32::IMSAdminBase2W
+  def query_interface(this : IMSAdminBase2W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSAdminBase2W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSAdminBase2W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_key(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_key(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.call(this, hmdhandle, pszmdpath)
+  end
+  def enum_keys(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.call(this, hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(this : IMSAdminBase2W*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.call(this, hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.call(this, hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.call(this, hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.call(this, hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.call(this, hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.call(this, hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(this : IMSAdminBase2W*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.call(this, hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(this : IMSAdminBase2W*, hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.call(this, hmdhandle)
+  end
+  def change_permissions(this : IMSAdminBase2W*, hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.call(this, hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data(this : IMSAdminBase2W*) : HRESULT
+    @lpVtbl.value.save_data.call(this)
+  end
+  def get_handle_info(this : IMSAdminBase2W*, hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.call(this, hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(this : IMSAdminBase2W*, pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.call(this, pdwsystemchangenumber)
+  end
+  def get_data_set_number(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.call(this, hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(this : IMSAdminBase2W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1(this : IMSAdminBase2W*) : HRESULT
+    @lpVtbl.value.key_exchange_phase1.call(this)
+  end
+  def key_exchange_phase2(this : IMSAdminBase2W*) : HRESULT
+    @lpVtbl.value.key_exchange_phase2.call(this)
+  end
+  def backup(this : IMSAdminBase2W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(this : IMSAdminBase2W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(this : IMSAdminBase2W*, pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.call(this, pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(this : IMSAdminBase2W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.call(this, pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(this : IMSAdminBase2W*, piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.call(this, piadmbwinterface)
+  end
+  def get_server_guid(this : IMSAdminBase2W*) : HRESULT
+    @lpVtbl.value.get_server_guid.call(this)
+  end
+  def backup_with_passwd(this : IMSAdminBase2W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.backup_with_passwd.call(this, pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def restore_with_passwd(this : IMSAdminBase2W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.restore_with_passwd.call(this, pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def export(this : IMSAdminBase2W*, pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.export.call(this, pszpasswd, pszfilename, pszsourcepath, dwmdflags)
+  end
+  def import(this : IMSAdminBase2W*, pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, pszdestpath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.import.call(this, pszpasswd, pszfilename, pszsourcepath, pszdestpath, dwmdflags)
+  end
+  def restore_history(this : IMSAdminBase2W*, pszmdhistorylocation : LibC::LPWSTR, dwmdmajorversion : UInt32, dwmdminorversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore_history.call(this, pszmdhistorylocation, dwmdmajorversion, dwmdminorversion, dwmdflags)
+  end
+  def enum_history(this : IMSAdminBase2W*, pszmdhistorylocation : Char*, pdwmdmajorversion : UInt32*, pdwmdminorversion : UInt32*, pftmdhistorytime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_history.call(this, pszmdhistorylocation, pdwmdmajorversion, pdwmdminorversion, pftmdhistorytime, dwmdenumindex)
+  end
+end
+struct LibWin32::IMSAdminBase3W
+  def query_interface(this : IMSAdminBase3W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSAdminBase3W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSAdminBase3W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_key(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_key(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.call(this, hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.call(this, hmdhandle, pszmdpath)
+  end
+  def enum_keys(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.call(this, hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(this : IMSAdminBase3W*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.call(this, hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.call(this, hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.call(this, hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.call(this, hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.call(this, hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.call(this, hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(this : IMSAdminBase3W*, hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.call(this, hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.call(this, hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.call(this, hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(this : IMSAdminBase3W*, hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.call(this, hmdhandle)
+  end
+  def change_permissions(this : IMSAdminBase3W*, hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.call(this, hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data(this : IMSAdminBase3W*) : HRESULT
+    @lpVtbl.value.save_data.call(this)
+  end
+  def get_handle_info(this : IMSAdminBase3W*, hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.call(this, hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(this : IMSAdminBase3W*, pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.call(this, pdwsystemchangenumber)
+  end
+  def get_data_set_number(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.call(this, hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.call(this, hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1(this : IMSAdminBase3W*) : HRESULT
+    @lpVtbl.value.key_exchange_phase1.call(this)
+  end
+  def key_exchange_phase2(this : IMSAdminBase3W*) : HRESULT
+    @lpVtbl.value.key_exchange_phase2.call(this)
+  end
+  def backup(this : IMSAdminBase3W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(this : IMSAdminBase3W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.call(this, pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(this : IMSAdminBase3W*, pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.call(this, pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(this : IMSAdminBase3W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.call(this, pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(this : IMSAdminBase3W*, piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.call(this, piadmbwinterface)
+  end
+  def get_server_guid(this : IMSAdminBase3W*) : HRESULT
+    @lpVtbl.value.get_server_guid.call(this)
+  end
+  def backup_with_passwd(this : IMSAdminBase3W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.backup_with_passwd.call(this, pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def restore_with_passwd(this : IMSAdminBase3W*, pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.restore_with_passwd.call(this, pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def export(this : IMSAdminBase3W*, pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.export.call(this, pszpasswd, pszfilename, pszsourcepath, dwmdflags)
+  end
+  def import(this : IMSAdminBase3W*, pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, pszdestpath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.import.call(this, pszpasswd, pszfilename, pszsourcepath, pszdestpath, dwmdflags)
+  end
+  def restore_history(this : IMSAdminBase3W*, pszmdhistorylocation : LibC::LPWSTR, dwmdmajorversion : UInt32, dwmdminorversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore_history.call(this, pszmdhistorylocation, dwmdmajorversion, dwmdminorversion, dwmdflags)
+  end
+  def enum_history(this : IMSAdminBase3W*, pszmdhistorylocation : Char*, pdwmdmajorversion : UInt32*, pdwmdminorversion : UInt32*, pftmdhistorytime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_history.call(this, pszmdhistorylocation, pdwmdmajorversion, pdwmdminorversion, pftmdhistorytime, dwmdenumindex)
+  end
+  def get_child_paths(this : IMSAdminBase3W*, hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, cchmdbuffersize : UInt32, pszbuffer : Char*, pcchmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_child_paths.call(this, hmdhandle, pszmdpath, cchmdbuffersize, pszbuffer, pcchmdrequiredbuffersize)
+  end
+end
+struct LibWin32::IMSImpExpHelpW
+  def query_interface(this : IMSImpExpHelpW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSImpExpHelpW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSImpExpHelpW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enumerate_paths_in_file(this : IMSImpExpHelpW*, pszfilename : LibC::LPWSTR, pszkeytype : LibC::LPWSTR, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.enumerate_paths_in_file.call(this, pszfilename, pszkeytype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+end
+struct LibWin32::IMSAdminBaseSinkW
+  def query_interface(this : IMSAdminBaseSinkW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSAdminBaseSinkW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSAdminBaseSinkW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def sink_notify(this : IMSAdminBaseSinkW*, dwmdnumelements : UInt32, pcochangelist : MD_CHANGE_OBJECT_W*) : HRESULT
+    @lpVtbl.value.sink_notify.call(this, dwmdnumelements, pcochangelist)
+  end
+  def shutdown_notify(this : IMSAdminBaseSinkW*) : HRESULT
+    @lpVtbl.value.shutdown_notify.call(this)
+  end
+end
+struct LibWin32::AsyncIMSAdminBaseSinkW
+  def query_interface(this : AsyncIMSAdminBaseSinkW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIMSAdminBaseSinkW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIMSAdminBaseSinkW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_sink_notify(this : AsyncIMSAdminBaseSinkW*, dwmdnumelements : UInt32, pcochangelist : MD_CHANGE_OBJECT_W*) : HRESULT
+    @lpVtbl.value.begin_sink_notify.call(this, dwmdnumelements, pcochangelist)
+  end
+  def finish_sink_notify(this : AsyncIMSAdminBaseSinkW*) : HRESULT
+    @lpVtbl.value.finish_sink_notify.call(this)
+  end
+  def begin_shutdown_notify(this : AsyncIMSAdminBaseSinkW*) : HRESULT
+    @lpVtbl.value.begin_shutdown_notify.call(this)
+  end
+  def finish_shutdown_notify(this : AsyncIMSAdminBaseSinkW*) : HRESULT
+    @lpVtbl.value.finish_shutdown_notify.call(this)
+  end
+end

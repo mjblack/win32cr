@@ -118,7 +118,7 @@ lib LibWin32
     add_cubic : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, HRESULT)
     add_sinusoidal : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, HRESULT)
     add_repeat : Proc(IDCompositionAnimation*, Float64, Float64, HRESULT)
-    rend : Proc(IDCompositionAnimation*, Float64, Float32, HRESULT)
+    end_ : Proc(IDCompositionAnimation*, Float64, Float32, HRESULT)
   end
 
   IDCompositionAnimation_GUID = "cbfd91d9-51b2-45e4-b3de-d19ccfb863c5"
@@ -1106,4 +1106,1771 @@ lib LibWin32
 
   # Params # count : UInt32 [In],handles : LibC::HANDLE* [In],timeoutinms : UInt32 [In]
   fun DCompositionWaitForCompositorClock(count : UInt32, handles : LibC::HANDLE*, timeoutinms : UInt32) : UInt32
+end
+struct LibWin32::IDCompositionAnimation
+  def query_interface(this : IDCompositionAnimation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionAnimation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionAnimation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def set_absolute_begin_time(this : IDCompositionAnimation*, begintime : LARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_absolute_begin_time.call(this, begintime)
+  end
+  def add_cubic(this : IDCompositionAnimation*, beginoffset : Float64, constantcoefficient : Float32, linearcoefficient : Float32, quadraticcoefficient : Float32, cubiccoefficient : Float32) : HRESULT
+    @lpVtbl.value.add_cubic.call(this, beginoffset, constantcoefficient, linearcoefficient, quadraticcoefficient, cubiccoefficient)
+  end
+  def add_sinusoidal(this : IDCompositionAnimation*, beginoffset : Float64, bias : Float32, amplitude : Float32, frequency : Float32, phase : Float32) : HRESULT
+    @lpVtbl.value.add_sinusoidal.call(this, beginoffset, bias, amplitude, frequency, phase)
+  end
+  def add_repeat(this : IDCompositionAnimation*, beginoffset : Float64, durationtorepeat : Float64) : HRESULT
+    @lpVtbl.value.add_repeat.call(this, beginoffset, durationtorepeat)
+  end
+  def end_(this : IDCompositionAnimation*, endoffset : Float64, endvalue : Float32) : HRESULT
+    @lpVtbl.value.end_.call(this, endoffset, endvalue)
+  end
+end
+struct LibWin32::IDCompositionDevice
+  def query_interface(this : IDCompositionDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : IDCompositionDevice*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def wait_for_commit_completion(this : IDCompositionDevice*) : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.call(this)
+  end
+  def get_frame_statistics(this : IDCompositionDevice*, statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.call(this, statistics)
+  end
+  def create_target_for_hwnd(this : IDCompositionDevice*, hwnd : LibC::HANDLE, topmost : LibC::BOOL, target : IDCompositionTarget*) : HRESULT
+    @lpVtbl.value.create_target_for_hwnd.call(this, hwnd, topmost, target)
+  end
+  def create_visual(this : IDCompositionDevice*, visual : IDCompositionVisual*) : HRESULT
+    @lpVtbl.value.create_visual.call(this, visual)
+  end
+  def create_surface(this : IDCompositionDevice*, width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(this : IDCompositionDevice*, initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.call(this, initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_surface_from_handle(this : IDCompositionDevice*, handle : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_handle.call(this, handle, surface)
+  end
+  def create_surface_from_hwnd(this : IDCompositionDevice*, hwnd : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_hwnd.call(this, hwnd, surface)
+  end
+  def create_translate_transform(this : IDCompositionDevice*, translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.call(this, translatetransform)
+  end
+  def create_scale_transform(this : IDCompositionDevice*, scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.call(this, scaletransform)
+  end
+  def create_rotate_transform(this : IDCompositionDevice*, rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.call(this, rotatetransform)
+  end
+  def create_skew_transform(this : IDCompositionDevice*, skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.call(this, skewtransform)
+  end
+  def create_matrix_transform(this : IDCompositionDevice*, matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrixtransform)
+  end
+  def create_transform_group(this : IDCompositionDevice*, transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.call(this, transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(this : IDCompositionDevice*, translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.call(this, translatetransform3d)
+  end
+  def create_scale_transform3_d(this : IDCompositionDevice*, scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.call(this, scaletransform3d)
+  end
+  def create_rotate_transform3_d(this : IDCompositionDevice*, rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.call(this, rotatetransform3d)
+  end
+  def create_matrix_transform3_d(this : IDCompositionDevice*, matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.call(this, matrixtransform3d)
+  end
+  def create_transform3_d_group(this : IDCompositionDevice*, transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.call(this, transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(this : IDCompositionDevice*, effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.call(this, effectgroup)
+  end
+  def create_rectangle_clip(this : IDCompositionDevice*, clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.call(this, clip)
+  end
+  def create_animation(this : IDCompositionDevice*, animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.call(this, animation)
+  end
+  def check_device_state(this : IDCompositionDevice*, pfvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_device_state.call(this, pfvalid)
+  end
+end
+struct LibWin32::IDCompositionTarget
+  def query_interface(this : IDCompositionTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_root(this : IDCompositionTarget*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_root.call(this, visual)
+  end
+end
+struct LibWin32::IDCompositionVisual
+  def query_interface(this : IDCompositionVisual*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionVisual*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionVisual*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionVisual*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionVisual*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionVisual*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionVisual*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+  def set_transform(this : IDCompositionVisual*, transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_transform2(this : IDCompositionVisual*, matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.call(this, matrix)
+  end
+  def set_transform_parent(this : IDCompositionVisual*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.call(this, visual)
+  end
+  def set_effect(this : IDCompositionVisual*, effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.call(this, effect)
+  end
+  def set_bitmap_interpolation_mode(this : IDCompositionVisual*, interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_border_mode(this : IDCompositionVisual*, bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, bordermode)
+  end
+  def set_clip(this : IDCompositionVisual*, clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.call(this, clip)
+  end
+  def set_clip2(this : IDCompositionVisual*, rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.call(this, rect)
+  end
+  def set_content(this : IDCompositionVisual*, content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.call(this, content)
+  end
+  def add_visual(this : IDCompositionVisual*, visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.call(this, visual, insertabove, referencevisual)
+  end
+  def remove_visual(this : IDCompositionVisual*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.call(this, visual)
+  end
+  def remove_all_visuals(this : IDCompositionVisual*) : HRESULT
+    @lpVtbl.value.remove_all_visuals.call(this)
+  end
+  def set_composite_mode(this : IDCompositionVisual*, compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.call(this, compositemode)
+  end
+end
+struct LibWin32::IDCompositionEffect
+  def query_interface(this : IDCompositionEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDCompositionTransform3D
+  def query_interface(this : IDCompositionTransform3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTransform3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTransform3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDCompositionTransform
+  def query_interface(this : IDCompositionTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDCompositionTranslateTransform
+  def query_interface(this : IDCompositionTranslateTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTranslateTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTranslateTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionTranslateTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionTranslateTransform*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionTranslateTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionTranslateTransform*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+end
+struct LibWin32::IDCompositionScaleTransform
+  def query_interface(this : IDCompositionScaleTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionScaleTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionScaleTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_scale_x(this : IDCompositionScaleTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_x.call(this, animation)
+  end
+  def set_scale_x2(this : IDCompositionScaleTransform*, scalex : Float32) : HRESULT
+    @lpVtbl.value.set_scale_x2.call(this, scalex)
+  end
+  def set_scale_y(this : IDCompositionScaleTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_y.call(this, animation)
+  end
+  def set_scale_y2(this : IDCompositionScaleTransform*, scaley : Float32) : HRESULT
+    @lpVtbl.value.set_scale_y2.call(this, scaley)
+  end
+  def set_center_x(this : IDCompositionScaleTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.call(this, animation)
+  end
+  def set_center_x2(this : IDCompositionScaleTransform*, centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.call(this, centerx)
+  end
+  def set_center_y(this : IDCompositionScaleTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.call(this, animation)
+  end
+  def set_center_y2(this : IDCompositionScaleTransform*, centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.call(this, centery)
+  end
+end
+struct LibWin32::IDCompositionRotateTransform
+  def query_interface(this : IDCompositionRotateTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionRotateTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionRotateTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_angle(this : IDCompositionRotateTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.call(this, animation)
+  end
+  def set_angle2(this : IDCompositionRotateTransform*, angle : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.call(this, angle)
+  end
+  def set_center_x(this : IDCompositionRotateTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.call(this, animation)
+  end
+  def set_center_x2(this : IDCompositionRotateTransform*, centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.call(this, centerx)
+  end
+  def set_center_y(this : IDCompositionRotateTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.call(this, animation)
+  end
+  def set_center_y2(this : IDCompositionRotateTransform*, centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.call(this, centery)
+  end
+end
+struct LibWin32::IDCompositionSkewTransform
+  def query_interface(this : IDCompositionSkewTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionSkewTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionSkewTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_angle_x(this : IDCompositionSkewTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle_x.call(this, animation)
+  end
+  def set_angle_x2(this : IDCompositionSkewTransform*, anglex : Float32) : HRESULT
+    @lpVtbl.value.set_angle_x2.call(this, anglex)
+  end
+  def set_angle_y(this : IDCompositionSkewTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle_y.call(this, animation)
+  end
+  def set_angle_y2(this : IDCompositionSkewTransform*, angley : Float32) : HRESULT
+    @lpVtbl.value.set_angle_y2.call(this, angley)
+  end
+  def set_center_x(this : IDCompositionSkewTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.call(this, animation)
+  end
+  def set_center_x2(this : IDCompositionSkewTransform*, centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.call(this, centerx)
+  end
+  def set_center_y(this : IDCompositionSkewTransform*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.call(this, animation)
+  end
+  def set_center_y2(this : IDCompositionSkewTransform*, centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.call(this, centery)
+  end
+end
+struct LibWin32::IDCompositionMatrixTransform
+  def query_interface(this : IDCompositionMatrixTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionMatrixTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionMatrixTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_matrix(this : IDCompositionMatrixTransform*, matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_matrix.call(this, matrix)
+  end
+  def set_matrix_element(this : IDCompositionMatrixTransform*, row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.call(this, row, column, animation)
+  end
+  def set_matrix_element2(this : IDCompositionMatrixTransform*, row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.call(this, row, column, value)
+  end
+end
+struct LibWin32::IDCompositionEffectGroup
+  def query_interface(this : IDCompositionEffectGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionEffectGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionEffectGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_opacity(this : IDCompositionEffectGroup*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, animation)
+  end
+  def set_opacity2(this : IDCompositionEffectGroup*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity2.call(this, opacity)
+  end
+  def set_transform3_d(this : IDCompositionEffectGroup*, transform3d : IDCompositionTransform3D) : HRESULT
+    @lpVtbl.value.set_transform3_d.call(this, transform3d)
+  end
+end
+struct LibWin32::IDCompositionTranslateTransform3D
+  def query_interface(this : IDCompositionTranslateTransform3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTranslateTransform3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTranslateTransform3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionTranslateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionTranslateTransform3D*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionTranslateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionTranslateTransform3D*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+  def set_offset_z(this : IDCompositionTranslateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_z.call(this, animation)
+  end
+  def set_offset_z2(this : IDCompositionTranslateTransform3D*, offsetz : Float32) : HRESULT
+    @lpVtbl.value.set_offset_z2.call(this, offsetz)
+  end
+end
+struct LibWin32::IDCompositionScaleTransform3D
+  def query_interface(this : IDCompositionScaleTransform3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionScaleTransform3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionScaleTransform3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_scale_x(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_x.call(this, animation)
+  end
+  def set_scale_x2(this : IDCompositionScaleTransform3D*, scalex : Float32) : HRESULT
+    @lpVtbl.value.set_scale_x2.call(this, scalex)
+  end
+  def set_scale_y(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_y.call(this, animation)
+  end
+  def set_scale_y2(this : IDCompositionScaleTransform3D*, scaley : Float32) : HRESULT
+    @lpVtbl.value.set_scale_y2.call(this, scaley)
+  end
+  def set_scale_z(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_z.call(this, animation)
+  end
+  def set_scale_z2(this : IDCompositionScaleTransform3D*, scalez : Float32) : HRESULT
+    @lpVtbl.value.set_scale_z2.call(this, scalez)
+  end
+  def set_center_x(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.call(this, animation)
+  end
+  def set_center_x2(this : IDCompositionScaleTransform3D*, centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.call(this, centerx)
+  end
+  def set_center_y(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.call(this, animation)
+  end
+  def set_center_y2(this : IDCompositionScaleTransform3D*, centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.call(this, centery)
+  end
+  def set_center_z(this : IDCompositionScaleTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_z.call(this, animation)
+  end
+  def set_center_z2(this : IDCompositionScaleTransform3D*, centerz : Float32) : HRESULT
+    @lpVtbl.value.set_center_z2.call(this, centerz)
+  end
+end
+struct LibWin32::IDCompositionRotateTransform3D
+  def query_interface(this : IDCompositionRotateTransform3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionRotateTransform3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionRotateTransform3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_angle(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.call(this, animation)
+  end
+  def set_angle2(this : IDCompositionRotateTransform3D*, angle : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.call(this, angle)
+  end
+  def set_axis_x(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_x.call(this, animation)
+  end
+  def set_axis_x2(this : IDCompositionRotateTransform3D*, axisx : Float32) : HRESULT
+    @lpVtbl.value.set_axis_x2.call(this, axisx)
+  end
+  def set_axis_y(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_y.call(this, animation)
+  end
+  def set_axis_y2(this : IDCompositionRotateTransform3D*, axisy : Float32) : HRESULT
+    @lpVtbl.value.set_axis_y2.call(this, axisy)
+  end
+  def set_axis_z(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_z.call(this, animation)
+  end
+  def set_axis_z2(this : IDCompositionRotateTransform3D*, axisz : Float32) : HRESULT
+    @lpVtbl.value.set_axis_z2.call(this, axisz)
+  end
+  def set_center_x(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.call(this, animation)
+  end
+  def set_center_x2(this : IDCompositionRotateTransform3D*, centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.call(this, centerx)
+  end
+  def set_center_y(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.call(this, animation)
+  end
+  def set_center_y2(this : IDCompositionRotateTransform3D*, centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.call(this, centery)
+  end
+  def set_center_z(this : IDCompositionRotateTransform3D*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_z.call(this, animation)
+  end
+  def set_center_z2(this : IDCompositionRotateTransform3D*, centerz : Float32) : HRESULT
+    @lpVtbl.value.set_center_z2.call(this, centerz)
+  end
+end
+struct LibWin32::IDCompositionMatrixTransform3D
+  def query_interface(this : IDCompositionMatrixTransform3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionMatrixTransform3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionMatrixTransform3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_matrix(this : IDCompositionMatrixTransform3D*, matrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.set_matrix.call(this, matrix)
+  end
+  def set_matrix_element(this : IDCompositionMatrixTransform3D*, row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.call(this, row, column, animation)
+  end
+  def set_matrix_element2(this : IDCompositionMatrixTransform3D*, row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.call(this, row, column, value)
+  end
+end
+struct LibWin32::IDCompositionClip
+  def query_interface(this : IDCompositionClip*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionClip*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionClip*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDCompositionRectangleClip
+  def query_interface(this : IDCompositionRectangleClip*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionRectangleClip*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionRectangleClip*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_left(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_left.call(this, animation)
+  end
+  def set_left2(this : IDCompositionRectangleClip*, left : Float32) : HRESULT
+    @lpVtbl.value.set_left2.call(this, left)
+  end
+  def set_top(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top.call(this, animation)
+  end
+  def set_top2(this : IDCompositionRectangleClip*, top : Float32) : HRESULT
+    @lpVtbl.value.set_top2.call(this, top)
+  end
+  def set_right(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_right.call(this, animation)
+  end
+  def set_right2(this : IDCompositionRectangleClip*, right : Float32) : HRESULT
+    @lpVtbl.value.set_right2.call(this, right)
+  end
+  def set_bottom(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom.call(this, animation)
+  end
+  def set_bottom2(this : IDCompositionRectangleClip*, bottom : Float32) : HRESULT
+    @lpVtbl.value.set_bottom2.call(this, bottom)
+  end
+  def set_top_left_radius_x(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_left_radius_x.call(this, animation)
+  end
+  def set_top_left_radius_x2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_left_radius_x2.call(this, radius)
+  end
+  def set_top_left_radius_y(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_left_radius_y.call(this, animation)
+  end
+  def set_top_left_radius_y2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_left_radius_y2.call(this, radius)
+  end
+  def set_top_right_radius_x(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_right_radius_x.call(this, animation)
+  end
+  def set_top_right_radius_x2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_right_radius_x2.call(this, radius)
+  end
+  def set_top_right_radius_y(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_right_radius_y.call(this, animation)
+  end
+  def set_top_right_radius_y2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_right_radius_y2.call(this, radius)
+  end
+  def set_bottom_left_radius_x(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_x.call(this, animation)
+  end
+  def set_bottom_left_radius_x2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_x2.call(this, radius)
+  end
+  def set_bottom_left_radius_y(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_y.call(this, animation)
+  end
+  def set_bottom_left_radius_y2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_y2.call(this, radius)
+  end
+  def set_bottom_right_radius_x(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_x.call(this, animation)
+  end
+  def set_bottom_right_radius_x2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_x2.call(this, radius)
+  end
+  def set_bottom_right_radius_y(this : IDCompositionRectangleClip*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_y.call(this, animation)
+  end
+  def set_bottom_right_radius_y2(this : IDCompositionRectangleClip*, radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_y2.call(this, radius)
+  end
+end
+struct LibWin32::IDCompositionSurface
+  def query_interface(this : IDCompositionSurface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionSurface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionSurface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : IDCompositionSurface*, updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw(this : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def suspend_draw(this : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.suspend_draw.call(this)
+  end
+  def resume_draw(this : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.resume_draw.call(this)
+  end
+  def scroll(this : IDCompositionSurface*, scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollrect, cliprect, offsetx, offsety)
+  end
+end
+struct LibWin32::IDCompositionVirtualSurface
+  def query_interface(this : IDCompositionVirtualSurface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionVirtualSurface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionVirtualSurface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : IDCompositionVirtualSurface*, updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw(this : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def suspend_draw(this : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.suspend_draw.call(this)
+  end
+  def resume_draw(this : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.resume_draw.call(this)
+  end
+  def scroll(this : IDCompositionVirtualSurface*, scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollrect, cliprect, offsetx, offsety)
+  end
+  def resize(this : IDCompositionVirtualSurface*, width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def trim(this : IDCompositionVirtualSurface*, rectangles : RECT*, count : UInt32) : HRESULT
+    @lpVtbl.value.trim.call(this, rectangles, count)
+  end
+end
+struct LibWin32::IDCompositionDevice2
+  def query_interface(this : IDCompositionDevice2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDevice2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDevice2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : IDCompositionDevice2*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def wait_for_commit_completion(this : IDCompositionDevice2*) : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.call(this)
+  end
+  def get_frame_statistics(this : IDCompositionDevice2*, statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.call(this, statistics)
+  end
+  def create_visual(this : IDCompositionDevice2*, visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.call(this, visual)
+  end
+  def create_surface_factory(this : IDCompositionDevice2*, renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.call(this, renderingdevice, surfacefactory)
+  end
+  def create_surface(this : IDCompositionDevice2*, width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(this : IDCompositionDevice2*, initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.call(this, initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(this : IDCompositionDevice2*, translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.call(this, translatetransform)
+  end
+  def create_scale_transform(this : IDCompositionDevice2*, scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.call(this, scaletransform)
+  end
+  def create_rotate_transform(this : IDCompositionDevice2*, rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.call(this, rotatetransform)
+  end
+  def create_skew_transform(this : IDCompositionDevice2*, skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.call(this, skewtransform)
+  end
+  def create_matrix_transform(this : IDCompositionDevice2*, matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrixtransform)
+  end
+  def create_transform_group(this : IDCompositionDevice2*, transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.call(this, transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(this : IDCompositionDevice2*, translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.call(this, translatetransform3d)
+  end
+  def create_scale_transform3_d(this : IDCompositionDevice2*, scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.call(this, scaletransform3d)
+  end
+  def create_rotate_transform3_d(this : IDCompositionDevice2*, rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.call(this, rotatetransform3d)
+  end
+  def create_matrix_transform3_d(this : IDCompositionDevice2*, matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.call(this, matrixtransform3d)
+  end
+  def create_transform3_d_group(this : IDCompositionDevice2*, transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.call(this, transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(this : IDCompositionDevice2*, effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.call(this, effectgroup)
+  end
+  def create_rectangle_clip(this : IDCompositionDevice2*, clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.call(this, clip)
+  end
+  def create_animation(this : IDCompositionDevice2*, animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.call(this, animation)
+  end
+end
+struct LibWin32::IDCompositionDesktopDevice
+  def query_interface(this : IDCompositionDesktopDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDesktopDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDesktopDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : IDCompositionDesktopDevice*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def wait_for_commit_completion(this : IDCompositionDesktopDevice*) : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.call(this)
+  end
+  def get_frame_statistics(this : IDCompositionDesktopDevice*, statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.call(this, statistics)
+  end
+  def create_visual(this : IDCompositionDesktopDevice*, visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.call(this, visual)
+  end
+  def create_surface_factory(this : IDCompositionDesktopDevice*, renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.call(this, renderingdevice, surfacefactory)
+  end
+  def create_surface(this : IDCompositionDesktopDevice*, width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(this : IDCompositionDesktopDevice*, initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.call(this, initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(this : IDCompositionDesktopDevice*, translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.call(this, translatetransform)
+  end
+  def create_scale_transform(this : IDCompositionDesktopDevice*, scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.call(this, scaletransform)
+  end
+  def create_rotate_transform(this : IDCompositionDesktopDevice*, rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.call(this, rotatetransform)
+  end
+  def create_skew_transform(this : IDCompositionDesktopDevice*, skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.call(this, skewtransform)
+  end
+  def create_matrix_transform(this : IDCompositionDesktopDevice*, matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrixtransform)
+  end
+  def create_transform_group(this : IDCompositionDesktopDevice*, transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.call(this, transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(this : IDCompositionDesktopDevice*, translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.call(this, translatetransform3d)
+  end
+  def create_scale_transform3_d(this : IDCompositionDesktopDevice*, scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.call(this, scaletransform3d)
+  end
+  def create_rotate_transform3_d(this : IDCompositionDesktopDevice*, rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.call(this, rotatetransform3d)
+  end
+  def create_matrix_transform3_d(this : IDCompositionDesktopDevice*, matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.call(this, matrixtransform3d)
+  end
+  def create_transform3_d_group(this : IDCompositionDesktopDevice*, transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.call(this, transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(this : IDCompositionDesktopDevice*, effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.call(this, effectgroup)
+  end
+  def create_rectangle_clip(this : IDCompositionDesktopDevice*, clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.call(this, clip)
+  end
+  def create_animation(this : IDCompositionDesktopDevice*, animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.call(this, animation)
+  end
+  def create_target_for_hwnd(this : IDCompositionDesktopDevice*, hwnd : LibC::HANDLE, topmost : LibC::BOOL, target : IDCompositionTarget*) : HRESULT
+    @lpVtbl.value.create_target_for_hwnd.call(this, hwnd, topmost, target)
+  end
+  def create_surface_from_handle(this : IDCompositionDesktopDevice*, handle : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_handle.call(this, handle, surface)
+  end
+  def create_surface_from_hwnd(this : IDCompositionDesktopDevice*, hwnd : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_hwnd.call(this, hwnd, surface)
+  end
+end
+struct LibWin32::IDCompositionDeviceDebug
+  def query_interface(this : IDCompositionDeviceDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDeviceDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDeviceDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable_debug_counters(this : IDCompositionDeviceDebug*) : HRESULT
+    @lpVtbl.value.enable_debug_counters.call(this)
+  end
+  def disable_debug_counters(this : IDCompositionDeviceDebug*) : HRESULT
+    @lpVtbl.value.disable_debug_counters.call(this)
+  end
+end
+struct LibWin32::IDCompositionSurfaceFactory
+  def query_interface(this : IDCompositionSurfaceFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionSurfaceFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionSurfaceFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_surface(this : IDCompositionSurfaceFactory*, width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(this : IDCompositionSurfaceFactory*, initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.call(this, initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+end
+struct LibWin32::IDCompositionVisual2
+  def query_interface(this : IDCompositionVisual2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionVisual2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionVisual2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionVisual2*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionVisual2*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionVisual2*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionVisual2*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+  def set_transform(this : IDCompositionVisual2*, transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_transform2(this : IDCompositionVisual2*, matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.call(this, matrix)
+  end
+  def set_transform_parent(this : IDCompositionVisual2*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.call(this, visual)
+  end
+  def set_effect(this : IDCompositionVisual2*, effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.call(this, effect)
+  end
+  def set_bitmap_interpolation_mode(this : IDCompositionVisual2*, interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_border_mode(this : IDCompositionVisual2*, bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, bordermode)
+  end
+  def set_clip(this : IDCompositionVisual2*, clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.call(this, clip)
+  end
+  def set_clip2(this : IDCompositionVisual2*, rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.call(this, rect)
+  end
+  def set_content(this : IDCompositionVisual2*, content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.call(this, content)
+  end
+  def add_visual(this : IDCompositionVisual2*, visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.call(this, visual, insertabove, referencevisual)
+  end
+  def remove_visual(this : IDCompositionVisual2*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.call(this, visual)
+  end
+  def remove_all_visuals(this : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.remove_all_visuals.call(this)
+  end
+  def set_composite_mode(this : IDCompositionVisual2*, compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.call(this, compositemode)
+  end
+  def set_opacity_mode(this : IDCompositionVisual2*, mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.call(this, mode)
+  end
+  def set_back_face_visibility(this : IDCompositionVisual2*, visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.call(this, visibility)
+  end
+end
+struct LibWin32::IDCompositionVisualDebug
+  def query_interface(this : IDCompositionVisualDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionVisualDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionVisualDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionVisualDebug*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionVisualDebug*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionVisualDebug*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionVisualDebug*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+  def set_transform(this : IDCompositionVisualDebug*, transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_transform2(this : IDCompositionVisualDebug*, matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.call(this, matrix)
+  end
+  def set_transform_parent(this : IDCompositionVisualDebug*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.call(this, visual)
+  end
+  def set_effect(this : IDCompositionVisualDebug*, effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.call(this, effect)
+  end
+  def set_bitmap_interpolation_mode(this : IDCompositionVisualDebug*, interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_border_mode(this : IDCompositionVisualDebug*, bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, bordermode)
+  end
+  def set_clip(this : IDCompositionVisualDebug*, clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.call(this, clip)
+  end
+  def set_clip2(this : IDCompositionVisualDebug*, rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.call(this, rect)
+  end
+  def set_content(this : IDCompositionVisualDebug*, content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.call(this, content)
+  end
+  def add_visual(this : IDCompositionVisualDebug*, visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.call(this, visual, insertabove, referencevisual)
+  end
+  def remove_visual(this : IDCompositionVisualDebug*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.call(this, visual)
+  end
+  def remove_all_visuals(this : IDCompositionVisualDebug*) : HRESULT
+    @lpVtbl.value.remove_all_visuals.call(this)
+  end
+  def set_composite_mode(this : IDCompositionVisualDebug*, compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.call(this, compositemode)
+  end
+  def set_opacity_mode(this : IDCompositionVisualDebug*, mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.call(this, mode)
+  end
+  def set_back_face_visibility(this : IDCompositionVisualDebug*, visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.call(this, visibility)
+  end
+  def enable_heat_map(this : IDCompositionVisualDebug*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.enable_heat_map.call(this, color)
+  end
+  def disable_heat_map(this : IDCompositionVisualDebug*) : HRESULT
+    @lpVtbl.value.disable_heat_map.call(this)
+  end
+  def enable_redraw_regions(this : IDCompositionVisualDebug*) : HRESULT
+    @lpVtbl.value.enable_redraw_regions.call(this)
+  end
+  def disable_redraw_regions(this : IDCompositionVisualDebug*) : HRESULT
+    @lpVtbl.value.disable_redraw_regions.call(this)
+  end
+end
+struct LibWin32::IDCompositionVisual3
+  def query_interface(this : IDCompositionVisual3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionVisual3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionVisual3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_offset_x(this : IDCompositionVisual3*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.call(this, animation)
+  end
+  def set_offset_x2(this : IDCompositionVisual3*, offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.call(this, offsetx)
+  end
+  def set_offset_y(this : IDCompositionVisual3*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.call(this, animation)
+  end
+  def set_offset_y2(this : IDCompositionVisual3*, offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.call(this, offsety)
+  end
+  def set_transform(this : IDCompositionVisual3*, transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_transform2(this : IDCompositionVisual3*, matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.call(this, matrix)
+  end
+  def set_transform_parent(this : IDCompositionVisual3*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.call(this, visual)
+  end
+  def set_effect(this : IDCompositionVisual3*, effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.call(this, effect)
+  end
+  def set_bitmap_interpolation_mode(this : IDCompositionVisual3*, interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_border_mode(this : IDCompositionVisual3*, bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, bordermode)
+  end
+  def set_clip(this : IDCompositionVisual3*, clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.call(this, clip)
+  end
+  def set_clip2(this : IDCompositionVisual3*, rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.call(this, rect)
+  end
+  def set_content(this : IDCompositionVisual3*, content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.call(this, content)
+  end
+  def add_visual(this : IDCompositionVisual3*, visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.call(this, visual, insertabove, referencevisual)
+  end
+  def remove_visual(this : IDCompositionVisual3*, visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.call(this, visual)
+  end
+  def remove_all_visuals(this : IDCompositionVisual3*) : HRESULT
+    @lpVtbl.value.remove_all_visuals.call(this)
+  end
+  def set_composite_mode(this : IDCompositionVisual3*, compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.call(this, compositemode)
+  end
+  def set_opacity_mode(this : IDCompositionVisual3*, mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.call(this, mode)
+  end
+  def set_back_face_visibility(this : IDCompositionVisual3*, visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.call(this, visibility)
+  end
+  def enable_heat_map(this : IDCompositionVisual3*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.enable_heat_map.call(this, color)
+  end
+  def disable_heat_map(this : IDCompositionVisual3*) : HRESULT
+    @lpVtbl.value.disable_heat_map.call(this)
+  end
+  def enable_redraw_regions(this : IDCompositionVisual3*) : HRESULT
+    @lpVtbl.value.enable_redraw_regions.call(this)
+  end
+  def disable_redraw_regions(this : IDCompositionVisual3*) : HRESULT
+    @lpVtbl.value.disable_redraw_regions.call(this)
+  end
+  def set_depth_mode(this : IDCompositionVisual3*, mode : DCOMPOSITION_DEPTH_MODE) : HRESULT
+    @lpVtbl.value.set_depth_mode.call(this, mode)
+  end
+  def set_offset_z(this : IDCompositionVisual3*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_z.call(this, animation)
+  end
+  def set_offset_z2(this : IDCompositionVisual3*, offsetz : Float32) : HRESULT
+    @lpVtbl.value.set_offset_z2.call(this, offsetz)
+  end
+  def set_opacity(this : IDCompositionVisual3*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, animation)
+  end
+  def set_opacity2(this : IDCompositionVisual3*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity2.call(this, opacity)
+  end
+  def set_transform3(this : IDCompositionVisual3*, transform : IDCompositionTransform3D) : HRESULT
+    @lpVtbl.value.set_transform3.call(this, transform)
+  end
+  def set_transform22(this : IDCompositionVisual3*, matrix : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.set_transform22.call(this, matrix)
+  end
+  def set_visible(this : IDCompositionVisual3*, visible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_visible.call(this, visible)
+  end
+end
+struct LibWin32::IDCompositionDevice3
+  def query_interface(this : IDCompositionDevice3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDevice3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDevice3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : IDCompositionDevice3*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def wait_for_commit_completion(this : IDCompositionDevice3*) : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.call(this)
+  end
+  def get_frame_statistics(this : IDCompositionDevice3*, statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.call(this, statistics)
+  end
+  def create_visual(this : IDCompositionDevice3*, visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.call(this, visual)
+  end
+  def create_surface_factory(this : IDCompositionDevice3*, renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.call(this, renderingdevice, surfacefactory)
+  end
+  def create_surface(this : IDCompositionDevice3*, width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(this : IDCompositionDevice3*, initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.call(this, initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(this : IDCompositionDevice3*, translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.call(this, translatetransform)
+  end
+  def create_scale_transform(this : IDCompositionDevice3*, scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.call(this, scaletransform)
+  end
+  def create_rotate_transform(this : IDCompositionDevice3*, rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.call(this, rotatetransform)
+  end
+  def create_skew_transform(this : IDCompositionDevice3*, skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.call(this, skewtransform)
+  end
+  def create_matrix_transform(this : IDCompositionDevice3*, matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrixtransform)
+  end
+  def create_transform_group(this : IDCompositionDevice3*, transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.call(this, transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(this : IDCompositionDevice3*, translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.call(this, translatetransform3d)
+  end
+  def create_scale_transform3_d(this : IDCompositionDevice3*, scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.call(this, scaletransform3d)
+  end
+  def create_rotate_transform3_d(this : IDCompositionDevice3*, rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.call(this, rotatetransform3d)
+  end
+  def create_matrix_transform3_d(this : IDCompositionDevice3*, matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.call(this, matrixtransform3d)
+  end
+  def create_transform3_d_group(this : IDCompositionDevice3*, transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.call(this, transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(this : IDCompositionDevice3*, effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.call(this, effectgroup)
+  end
+  def create_rectangle_clip(this : IDCompositionDevice3*, clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.call(this, clip)
+  end
+  def create_animation(this : IDCompositionDevice3*, animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.call(this, animation)
+  end
+  def create_gaussian_blur_effect(this : IDCompositionDevice3*, gaussianblureffect : IDCompositionGaussianBlurEffect*) : HRESULT
+    @lpVtbl.value.create_gaussian_blur_effect.call(this, gaussianblureffect)
+  end
+  def create_brightness_effect(this : IDCompositionDevice3*, brightnesseffect : IDCompositionBrightnessEffect*) : HRESULT
+    @lpVtbl.value.create_brightness_effect.call(this, brightnesseffect)
+  end
+  def create_color_matrix_effect(this : IDCompositionDevice3*, colormatrixeffect : IDCompositionColorMatrixEffect*) : HRESULT
+    @lpVtbl.value.create_color_matrix_effect.call(this, colormatrixeffect)
+  end
+  def create_shadow_effect(this : IDCompositionDevice3*, shadoweffect : IDCompositionShadowEffect*) : HRESULT
+    @lpVtbl.value.create_shadow_effect.call(this, shadoweffect)
+  end
+  def create_hue_rotation_effect(this : IDCompositionDevice3*, huerotationeffect : IDCompositionHueRotationEffect*) : HRESULT
+    @lpVtbl.value.create_hue_rotation_effect.call(this, huerotationeffect)
+  end
+  def create_saturation_effect(this : IDCompositionDevice3*, saturationeffect : IDCompositionSaturationEffect*) : HRESULT
+    @lpVtbl.value.create_saturation_effect.call(this, saturationeffect)
+  end
+  def create_turbulence_effect(this : IDCompositionDevice3*, turbulenceeffect : IDCompositionTurbulenceEffect*) : HRESULT
+    @lpVtbl.value.create_turbulence_effect.call(this, turbulenceeffect)
+  end
+  def create_linear_transfer_effect(this : IDCompositionDevice3*, lineartransfereffect : IDCompositionLinearTransferEffect*) : HRESULT
+    @lpVtbl.value.create_linear_transfer_effect.call(this, lineartransfereffect)
+  end
+  def create_table_transfer_effect(this : IDCompositionDevice3*, tabletransfereffect : IDCompositionTableTransferEffect*) : HRESULT
+    @lpVtbl.value.create_table_transfer_effect.call(this, tabletransfereffect)
+  end
+  def create_composite_effect(this : IDCompositionDevice3*, compositeeffect : IDCompositionCompositeEffect*) : HRESULT
+    @lpVtbl.value.create_composite_effect.call(this, compositeeffect)
+  end
+  def create_blend_effect(this : IDCompositionDevice3*, blendeffect : IDCompositionBlendEffect*) : HRESULT
+    @lpVtbl.value.create_blend_effect.call(this, blendeffect)
+  end
+  def create_arithmetic_composite_effect(this : IDCompositionDevice3*, arithmeticcompositeeffect : IDCompositionArithmeticCompositeEffect*) : HRESULT
+    @lpVtbl.value.create_arithmetic_composite_effect.call(this, arithmeticcompositeeffect)
+  end
+  def create_affine_transform2_d_effect(this : IDCompositionDevice3*, affinetransform2deffect : IDCompositionAffineTransform2DEffect*) : HRESULT
+    @lpVtbl.value.create_affine_transform2_d_effect.call(this, affinetransform2deffect)
+  end
+end
+struct LibWin32::IDCompositionFilterEffect
+  def query_interface(this : IDCompositionFilterEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionFilterEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionFilterEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionFilterEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+end
+struct LibWin32::IDCompositionGaussianBlurEffect
+  def query_interface(this : IDCompositionGaussianBlurEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionGaussianBlurEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionGaussianBlurEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionGaussianBlurEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_standard_deviation(this : IDCompositionGaussianBlurEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_standard_deviation.call(this, animation)
+  end
+  def set_standard_deviation2(this : IDCompositionGaussianBlurEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_standard_deviation2.call(this, amount)
+  end
+  def set_border_mode(this : IDCompositionGaussianBlurEffect*, mode : D2D1_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, mode)
+  end
+end
+struct LibWin32::IDCompositionBrightnessEffect
+  def query_interface(this : IDCompositionBrightnessEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionBrightnessEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionBrightnessEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionBrightnessEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_white_point(this : IDCompositionBrightnessEffect*, whitepoint : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_white_point.call(this, whitepoint)
+  end
+  def set_black_point(this : IDCompositionBrightnessEffect*, blackpoint : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_black_point.call(this, blackpoint)
+  end
+  def set_white_point_x(this : IDCompositionBrightnessEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_white_point_x.call(this, animation)
+  end
+  def set_white_point_x2(this : IDCompositionBrightnessEffect*, whitepointx : Float32) : HRESULT
+    @lpVtbl.value.set_white_point_x2.call(this, whitepointx)
+  end
+  def set_white_point_y(this : IDCompositionBrightnessEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_white_point_y.call(this, animation)
+  end
+  def set_white_point_y2(this : IDCompositionBrightnessEffect*, whitepointy : Float32) : HRESULT
+    @lpVtbl.value.set_white_point_y2.call(this, whitepointy)
+  end
+  def set_black_point_x(this : IDCompositionBrightnessEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_black_point_x.call(this, animation)
+  end
+  def set_black_point_x2(this : IDCompositionBrightnessEffect*, blackpointx : Float32) : HRESULT
+    @lpVtbl.value.set_black_point_x2.call(this, blackpointx)
+  end
+  def set_black_point_y(this : IDCompositionBrightnessEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_black_point_y.call(this, animation)
+  end
+  def set_black_point_y2(this : IDCompositionBrightnessEffect*, blackpointy : Float32) : HRESULT
+    @lpVtbl.value.set_black_point_y2.call(this, blackpointy)
+  end
+end
+struct LibWin32::IDCompositionColorMatrixEffect
+  def query_interface(this : IDCompositionColorMatrixEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionColorMatrixEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionColorMatrixEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionColorMatrixEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_matrix(this : IDCompositionColorMatrixEffect*, matrix : D2D_MATRIX_5X4_F*) : HRESULT
+    @lpVtbl.value.set_matrix.call(this, matrix)
+  end
+  def set_matrix_element(this : IDCompositionColorMatrixEffect*, row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.call(this, row, column, animation)
+  end
+  def set_matrix_element2(this : IDCompositionColorMatrixEffect*, row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.call(this, row, column, value)
+  end
+  def set_alpha_mode(this : IDCompositionColorMatrixEffect*, mode : D2D1_COLORMATRIX_ALPHA_MODE) : HRESULT
+    @lpVtbl.value.set_alpha_mode.call(this, mode)
+  end
+  def set_clamp_output(this : IDCompositionColorMatrixEffect*, clamp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.call(this, clamp)
+  end
+end
+struct LibWin32::IDCompositionShadowEffect
+  def query_interface(this : IDCompositionShadowEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionShadowEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionShadowEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionShadowEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_standard_deviation(this : IDCompositionShadowEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_standard_deviation.call(this, animation)
+  end
+  def set_standard_deviation2(this : IDCompositionShadowEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_standard_deviation2.call(this, amount)
+  end
+  def set_color(this : IDCompositionShadowEffect*, color : D2D_VECTOR_4F*) : HRESULT
+    @lpVtbl.value.set_color.call(this, color)
+  end
+  def set_red(this : IDCompositionShadowEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red.call(this, animation)
+  end
+  def set_red2(this : IDCompositionShadowEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_red2.call(this, amount)
+  end
+  def set_green(this : IDCompositionShadowEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green.call(this, animation)
+  end
+  def set_green2(this : IDCompositionShadowEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_green2.call(this, amount)
+  end
+  def set_blue(this : IDCompositionShadowEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue.call(this, animation)
+  end
+  def set_blue2(this : IDCompositionShadowEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_blue2.call(this, amount)
+  end
+  def set_alpha(this : IDCompositionShadowEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha.call(this, animation)
+  end
+  def set_alpha2(this : IDCompositionShadowEffect*, amount : Float32) : HRESULT
+    @lpVtbl.value.set_alpha2.call(this, amount)
+  end
+end
+struct LibWin32::IDCompositionHueRotationEffect
+  def query_interface(this : IDCompositionHueRotationEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionHueRotationEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionHueRotationEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionHueRotationEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_angle(this : IDCompositionHueRotationEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.call(this, animation)
+  end
+  def set_angle2(this : IDCompositionHueRotationEffect*, amountdegrees : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.call(this, amountdegrees)
+  end
+end
+struct LibWin32::IDCompositionSaturationEffect
+  def query_interface(this : IDCompositionSaturationEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionSaturationEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionSaturationEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionSaturationEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_saturation(this : IDCompositionSaturationEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_saturation.call(this, animation)
+  end
+  def set_saturation2(this : IDCompositionSaturationEffect*, ratio : Float32) : HRESULT
+    @lpVtbl.value.set_saturation2.call(this, ratio)
+  end
+end
+struct LibWin32::IDCompositionTurbulenceEffect
+  def query_interface(this : IDCompositionTurbulenceEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTurbulenceEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTurbulenceEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionTurbulenceEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_offset(this : IDCompositionTurbulenceEffect*, offset : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def set_base_frequency(this : IDCompositionTurbulenceEffect*, frequency : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_base_frequency.call(this, frequency)
+  end
+  def set_size(this : IDCompositionTurbulenceEffect*, size : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_size.call(this, size)
+  end
+  def set_num_octaves(this : IDCompositionTurbulenceEffect*, numoctaves : UInt32) : HRESULT
+    @lpVtbl.value.set_num_octaves.call(this, numoctaves)
+  end
+  def set_seed(this : IDCompositionTurbulenceEffect*, seed : UInt32) : HRESULT
+    @lpVtbl.value.set_seed.call(this, seed)
+  end
+  def set_noise(this : IDCompositionTurbulenceEffect*, noise : D2D1_TURBULENCE_NOISE) : HRESULT
+    @lpVtbl.value.set_noise.call(this, noise)
+  end
+  def set_stitchable(this : IDCompositionTurbulenceEffect*, stitchable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stitchable.call(this, stitchable)
+  end
+end
+struct LibWin32::IDCompositionLinearTransferEffect
+  def query_interface(this : IDCompositionLinearTransferEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionLinearTransferEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionLinearTransferEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionLinearTransferEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_red_y_intercept(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_y_intercept.call(this, animation)
+  end
+  def set_red_y_intercept2(this : IDCompositionLinearTransferEffect*, redyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_red_y_intercept2.call(this, redyintercept)
+  end
+  def set_red_slope(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_slope.call(this, animation)
+  end
+  def set_red_slope2(this : IDCompositionLinearTransferEffect*, redslope : Float32) : HRESULT
+    @lpVtbl.value.set_red_slope2.call(this, redslope)
+  end
+  def set_red_disable(this : IDCompositionLinearTransferEffect*, reddisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_red_disable.call(this, reddisable)
+  end
+  def set_green_y_intercept(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_y_intercept.call(this, animation)
+  end
+  def set_green_y_intercept2(this : IDCompositionLinearTransferEffect*, greenyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_green_y_intercept2.call(this, greenyintercept)
+  end
+  def set_green_slope(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_slope.call(this, animation)
+  end
+  def set_green_slope2(this : IDCompositionLinearTransferEffect*, greenslope : Float32) : HRESULT
+    @lpVtbl.value.set_green_slope2.call(this, greenslope)
+  end
+  def set_green_disable(this : IDCompositionLinearTransferEffect*, greendisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_green_disable.call(this, greendisable)
+  end
+  def set_blue_y_intercept(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_y_intercept.call(this, animation)
+  end
+  def set_blue_y_intercept2(this : IDCompositionLinearTransferEffect*, blueyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_blue_y_intercept2.call(this, blueyintercept)
+  end
+  def set_blue_slope(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_slope.call(this, animation)
+  end
+  def set_blue_slope2(this : IDCompositionLinearTransferEffect*, blueslope : Float32) : HRESULT
+    @lpVtbl.value.set_blue_slope2.call(this, blueslope)
+  end
+  def set_blue_disable(this : IDCompositionLinearTransferEffect*, bluedisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_blue_disable.call(this, bluedisable)
+  end
+  def set_alpha_y_intercept(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_y_intercept.call(this, animation)
+  end
+  def set_alpha_y_intercept2(this : IDCompositionLinearTransferEffect*, alphayintercept : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_y_intercept2.call(this, alphayintercept)
+  end
+  def set_alpha_slope(this : IDCompositionLinearTransferEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_slope.call(this, animation)
+  end
+  def set_alpha_slope2(this : IDCompositionLinearTransferEffect*, alphaslope : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_slope2.call(this, alphaslope)
+  end
+  def set_alpha_disable(this : IDCompositionLinearTransferEffect*, alphadisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_alpha_disable.call(this, alphadisable)
+  end
+  def set_clamp_output(this : IDCompositionLinearTransferEffect*, clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.call(this, clampoutput)
+  end
+end
+struct LibWin32::IDCompositionTableTransferEffect
+  def query_interface(this : IDCompositionTableTransferEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionTableTransferEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionTableTransferEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionTableTransferEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_red_table(this : IDCompositionTableTransferEffect*, tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_red_table.call(this, tablevalues, count)
+  end
+  def set_green_table(this : IDCompositionTableTransferEffect*, tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_green_table.call(this, tablevalues, count)
+  end
+  def set_blue_table(this : IDCompositionTableTransferEffect*, tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_blue_table.call(this, tablevalues, count)
+  end
+  def set_alpha_table(this : IDCompositionTableTransferEffect*, tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_alpha_table.call(this, tablevalues, count)
+  end
+  def set_red_disable(this : IDCompositionTableTransferEffect*, reddisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_red_disable.call(this, reddisable)
+  end
+  def set_green_disable(this : IDCompositionTableTransferEffect*, greendisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_green_disable.call(this, greendisable)
+  end
+  def set_blue_disable(this : IDCompositionTableTransferEffect*, bluedisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_blue_disable.call(this, bluedisable)
+  end
+  def set_alpha_disable(this : IDCompositionTableTransferEffect*, alphadisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_alpha_disable.call(this, alphadisable)
+  end
+  def set_clamp_output(this : IDCompositionTableTransferEffect*, clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.call(this, clampoutput)
+  end
+  def set_red_table_value(this : IDCompositionTableTransferEffect*, index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_table_value.call(this, index, animation)
+  end
+  def set_red_table_value2(this : IDCompositionTableTransferEffect*, index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_red_table_value2.call(this, index, value)
+  end
+  def set_green_table_value(this : IDCompositionTableTransferEffect*, index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_table_value.call(this, index, animation)
+  end
+  def set_green_table_value2(this : IDCompositionTableTransferEffect*, index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_green_table_value2.call(this, index, value)
+  end
+  def set_blue_table_value(this : IDCompositionTableTransferEffect*, index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_table_value.call(this, index, animation)
+  end
+  def set_blue_table_value2(this : IDCompositionTableTransferEffect*, index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_blue_table_value2.call(this, index, value)
+  end
+  def set_alpha_table_value(this : IDCompositionTableTransferEffect*, index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_table_value.call(this, index, animation)
+  end
+  def set_alpha_table_value2(this : IDCompositionTableTransferEffect*, index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_table_value2.call(this, index, value)
+  end
+end
+struct LibWin32::IDCompositionCompositeEffect
+  def query_interface(this : IDCompositionCompositeEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionCompositeEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionCompositeEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionCompositeEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_mode(this : IDCompositionCompositeEffect*, mode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_mode.call(this, mode)
+  end
+end
+struct LibWin32::IDCompositionBlendEffect
+  def query_interface(this : IDCompositionBlendEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionBlendEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionBlendEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionBlendEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_mode(this : IDCompositionBlendEffect*, mode : D2D1_BLEND_MODE) : HRESULT
+    @lpVtbl.value.set_mode.call(this, mode)
+  end
+end
+struct LibWin32::IDCompositionArithmeticCompositeEffect
+  def query_interface(this : IDCompositionArithmeticCompositeEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionArithmeticCompositeEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionArithmeticCompositeEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionArithmeticCompositeEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_coefficients(this : IDCompositionArithmeticCompositeEffect*, coefficients : D2D_VECTOR_4F*) : HRESULT
+    @lpVtbl.value.set_coefficients.call(this, coefficients)
+  end
+  def set_clamp_output(this : IDCompositionArithmeticCompositeEffect*, clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.call(this, clampoutput)
+  end
+  def set_coefficient1(this : IDCompositionArithmeticCompositeEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient1.call(this, animation)
+  end
+  def set_coefficient12(this : IDCompositionArithmeticCompositeEffect*, coeffcient1 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient12.call(this, coeffcient1)
+  end
+  def set_coefficient2(this : IDCompositionArithmeticCompositeEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient2.call(this, animation)
+  end
+  def set_coefficient22(this : IDCompositionArithmeticCompositeEffect*, coefficient2 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient22.call(this, coefficient2)
+  end
+  def set_coefficient3(this : IDCompositionArithmeticCompositeEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient3.call(this, animation)
+  end
+  def set_coefficient32(this : IDCompositionArithmeticCompositeEffect*, coefficient3 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient32.call(this, coefficient3)
+  end
+  def set_coefficient4(this : IDCompositionArithmeticCompositeEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient4.call(this, animation)
+  end
+  def set_coefficient42(this : IDCompositionArithmeticCompositeEffect*, coefficient4 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient42.call(this, coefficient4)
+  end
+end
+struct LibWin32::IDCompositionAffineTransform2DEffect
+  def query_interface(this : IDCompositionAffineTransform2DEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionAffineTransform2DEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionAffineTransform2DEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input(this : IDCompositionAffineTransform2DEffect*, index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.call(this, index, input, flags)
+  end
+  def set_interpolation_mode(this : IDCompositionAffineTransform2DEffect*, interpolationmode : D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_border_mode(this : IDCompositionAffineTransform2DEffect*, bordermode : D2D1_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.call(this, bordermode)
+  end
+  def set_transform_matrix(this : IDCompositionAffineTransform2DEffect*, transformmatrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform_matrix.call(this, transformmatrix)
+  end
+  def set_transform_matrix_element(this : IDCompositionAffineTransform2DEffect*, row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_transform_matrix_element.call(this, row, column, animation)
+  end
+  def set_transform_matrix_element2(this : IDCompositionAffineTransform2DEffect*, row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_transform_matrix_element2.call(this, row, column, value)
+  end
+  def set_sharpness(this : IDCompositionAffineTransform2DEffect*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_sharpness.call(this, animation)
+  end
+  def set_sharpness2(this : IDCompositionAffineTransform2DEffect*, sharpness : Float32) : HRESULT
+    @lpVtbl.value.set_sharpness2.call(this, sharpness)
+  end
+end
+struct LibWin32::IDCompositionDelegatedInkTrail
+  def query_interface(this : IDCompositionDelegatedInkTrail*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionDelegatedInkTrail*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionDelegatedInkTrail*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_trail_points(this : IDCompositionDelegatedInkTrail*, inkpoints : DCompositionInkTrailPoint*, inkpointscount : UInt32, generationid : UInt32*) : HRESULT
+    @lpVtbl.value.add_trail_points.call(this, inkpoints, inkpointscount, generationid)
+  end
+  def add_trail_points_with_prediction(this : IDCompositionDelegatedInkTrail*, inkpoints : DCompositionInkTrailPoint*, inkpointscount : UInt32, predictedinkpoints : DCompositionInkTrailPoint*, predictedinkpointscount : UInt32, generationid : UInt32*) : HRESULT
+    @lpVtbl.value.add_trail_points_with_prediction.call(this, inkpoints, inkpointscount, predictedinkpoints, predictedinkpointscount, generationid)
+  end
+  def remove_trail_points(this : IDCompositionDelegatedInkTrail*, generationid : UInt32) : HRESULT
+    @lpVtbl.value.remove_trail_points.call(this, generationid)
+  end
+  def start_new_trail(this : IDCompositionDelegatedInkTrail*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.start_new_trail.call(this, color)
+  end
+end
+struct LibWin32::IDCompositionInkTrailDevice
+  def query_interface(this : IDCompositionInkTrailDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDCompositionInkTrailDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDCompositionInkTrailDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_delegated_ink_trail(this : IDCompositionInkTrailDevice*, inktrail : IDCompositionDelegatedInkTrail*) : HRESULT
+    @lpVtbl.value.create_delegated_ink_trail.call(this, inktrail)
+  end
+  def create_delegated_ink_trail_for_swap_chain(this : IDCompositionInkTrailDevice*, swapchain : IUnknown, inktrail : IDCompositionDelegatedInkTrail*) : HRESULT
+    @lpVtbl.value.create_delegated_ink_trail_for_swap_chain.call(this, swapchain, inktrail)
+  end
 end

@@ -26,3 +26,20 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IGraphicsCaptureItemInterop
+  def query_interface(this : IGraphicsCaptureItemInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGraphicsCaptureItemInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGraphicsCaptureItemInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_for_window(this : IGraphicsCaptureItemInterop*, window : LibC::HANDLE, riid : Guid*, result : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.call(this, window, riid, result)
+  end
+  def create_for_monitor(this : IGraphicsCaptureItemInterop*, monitor : HMONITOR, riid : Guid*, result : Void**) : HRESULT
+    @lpVtbl.value.create_for_monitor.call(this, monitor, riid, result)
+  end
+end

@@ -6977,7 +6977,7 @@ lib LibWin32
   end
   struct DXVA2_VideoSample
     start : Int64
-    rend : Int64
+    end_ : Int64
     sample_format : DXVA2_ExtendedFormat
     src_surface : IDirect3DSurface9
     src_rect : RECT
@@ -12289,7 +12289,7 @@ lib LibWin32
     process_sample : Proc(IMFASFMultiplexer*, UInt16, IMFSample, Int64, HRESULT)
     get_next_packet : Proc(IMFASFMultiplexer*, UInt32*, IMFSample*, HRESULT)
     flush : Proc(IMFASFMultiplexer*, HRESULT)
-    rend : Proc(IMFASFMultiplexer*, IMFASFContentInfo, HRESULT)
+    end_ : Proc(IMFASFMultiplexer*, IMFASFContentInfo, HRESULT)
     get_statistics : Proc(IMFASFMultiplexer*, UInt16, ASF_MUX_STATISTICS*, HRESULT)
     set_sync_tolerance : Proc(IMFASFMultiplexer*, UInt32, HRESULT)
   end
@@ -13107,8 +13107,8 @@ lib LibWin32
     query_interface : Proc(IMFCdmSuspendNotify*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFCdmSuspendNotify*, UInt32)
     release : Proc(IMFCdmSuspendNotify*, UInt32)
-    rbegin : Proc(IMFCdmSuspendNotify*, HRESULT)
-    rend : Proc(IMFCdmSuspendNotify*, HRESULT)
+    begin_ : Proc(IMFCdmSuspendNotify*, HRESULT)
+    end_ : Proc(IMFCdmSuspendNotify*, HRESULT)
   end
 
   IMFCdmSuspendNotify_GUID = "7a5645d2-43bd-47fd-87b7-dcd24cc7d692"
@@ -15227,7 +15227,7 @@ lib LibWin32
   fun MFHeapAlloc(nsize : LibC::UINT_PTR, dwflags : UInt32, pszfile : PSTR, line : Int32, eat : EAllocationType) : Void*
 
   # Params # pv : Void* [In]
-  fun MFHeapFree(pv : Void*)
+  fun MFHeapFree(pv : Void*) : Void
 
   # Params # a : Int64 [In],b : Int64 [In],c : Int64 [In],d : Int64 [In]
   fun MFllMulDiv(a : Int64, b : Int64, c : Int64, d : Int64) : Int64
@@ -15294,4 +15294,11808 @@ lib LibWin32
 
   # Params # phdcpstatus : OPM_HDCP_STATUS* [In],phdcptype : OPM_HDCP_TYPE* [In]
   fun OPMXboxGetHDCPStatusAndType(phdcpstatus : OPM_HDCP_STATUS*, phdcptype : OPM_HDCP_TYPE*) : HRESULT
+end
+struct LibWin32::ICodecAPI
+  def query_interface(this : ICodecAPI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICodecAPI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICodecAPI*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_supported(this : ICodecAPI*, api : Guid*) : HRESULT
+    @lpVtbl.value.is_supported.call(this, api)
+  end
+  def is_modifiable(this : ICodecAPI*, api : Guid*) : HRESULT
+    @lpVtbl.value.is_modifiable.call(this, api)
+  end
+  def get_parameter_range(this : ICodecAPI*, api : Guid*, valuemin : VARIANT*, valuemax : VARIANT*, steppingdelta : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameter_range.call(this, api, valuemin, valuemax, steppingdelta)
+  end
+  def get_parameter_values(this : ICodecAPI*, api : Guid*, values : VARIANT**, valuescount : UInt32*) : HRESULT
+    @lpVtbl.value.get_parameter_values.call(this, api, values, valuescount)
+  end
+  def get_default_value(this : ICodecAPI*, api : Guid*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_default_value.call(this, api, value)
+  end
+  def get_value(this : ICodecAPI*, api : Guid*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, api, value)
+  end
+  def set_value(this : ICodecAPI*, api : Guid*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, api, value)
+  end
+  def register_for_event(this : ICodecAPI*, api : Guid*, userdata : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.register_for_event.call(this, api, userdata)
+  end
+  def unregister_for_event(this : ICodecAPI*, api : Guid*) : HRESULT
+    @lpVtbl.value.unregister_for_event.call(this, api)
+  end
+  def set_all_defaults(this : ICodecAPI*) : HRESULT
+    @lpVtbl.value.set_all_defaults.call(this)
+  end
+  def set_value_with_notify(this : ICodecAPI*, api : Guid*, value : VARIANT*, changedparam : Guid**, changedparamcount : UInt32*) : HRESULT
+    @lpVtbl.value.set_value_with_notify.call(this, api, value, changedparam, changedparamcount)
+  end
+  def set_all_defaults_with_notify(this : ICodecAPI*, changedparam : Guid**, changedparamcount : UInt32*) : HRESULT
+    @lpVtbl.value.set_all_defaults_with_notify.call(this, changedparam, changedparamcount)
+  end
+  def get_all_settings(this : ICodecAPI*, midl__icodecapi0000 : IStream) : HRESULT
+    @lpVtbl.value.get_all_settings.call(this, midl__icodecapi0000)
+  end
+  def set_all_settings(this : ICodecAPI*, midl__icodecapi0001 : IStream) : HRESULT
+    @lpVtbl.value.set_all_settings.call(this, midl__icodecapi0001)
+  end
+  def set_all_settings_with_notify(this : ICodecAPI*, midl__icodecapi0002 : IStream, changedparam : Guid**, changedparamcount : UInt32*) : HRESULT
+    @lpVtbl.value.set_all_settings_with_notify.call(this, midl__icodecapi0002, changedparam, changedparamcount)
+  end
+end
+struct LibWin32::IDirect3D9ExOverlayExtension
+  def query_interface(this : IDirect3D9ExOverlayExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3D9ExOverlayExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3D9ExOverlayExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_device_overlay_type(this : IDirect3D9ExOverlayExtension*, adapter : UInt32, devtype : D3DDEVTYPE, overlaywidth : UInt32, overlayheight : UInt32, overlayformat : D3DFORMAT, pdisplaymode : D3DDISPLAYMODEEX*, displayrotation : D3DDISPLAYROTATION, poverlaycaps : D3DOVERLAYCAPS*) : HRESULT
+    @lpVtbl.value.check_device_overlay_type.call(this, adapter, devtype, overlaywidth, overlayheight, overlayformat, pdisplaymode, displayrotation, poverlaycaps)
+  end
+end
+struct LibWin32::IDirect3DDevice9Video
+  def query_interface(this : IDirect3DDevice9Video*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDevice9Video*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDevice9Video*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_content_protection_caps(this : IDirect3DDevice9Video*, pcryptotype : Guid*, pdecodeprofile : Guid*, pcaps : D3DCONTENTPROTECTIONCAPS*) : HRESULT
+    @lpVtbl.value.get_content_protection_caps.call(this, pcryptotype, pdecodeprofile, pcaps)
+  end
+  def create_authenticated_channel(this : IDirect3DDevice9Video*, channeltype : D3DAUTHENTICATEDCHANNELTYPE, ppauthenticatedchannel : IDirect3DAuthenticatedChannel9*, pchannelhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_authenticated_channel.call(this, channeltype, ppauthenticatedchannel, pchannelhandle)
+  end
+  def create_crypto_session(this : IDirect3DDevice9Video*, pcryptotype : Guid*, pdecodeprofile : Guid*, ppcryptosession : IDirect3DCryptoSession9*, pcryptohandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_crypto_session.call(this, pcryptotype, pdecodeprofile, ppcryptosession, pcryptohandle)
+  end
+end
+struct LibWin32::IDirect3DAuthenticatedChannel9
+  def query_interface(this : IDirect3DAuthenticatedChannel9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DAuthenticatedChannel9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DAuthenticatedChannel9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_certificate_size(this : IDirect3DAuthenticatedChannel9*, pcertificatesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_certificate_size.call(this, pcertificatesize)
+  end
+  def get_certificate(this : IDirect3DAuthenticatedChannel9*, certifactesize : UInt32, ppcertificate : UInt8*) : HRESULT
+    @lpVtbl.value.get_certificate.call(this, certifactesize, ppcertificate)
+  end
+  def negotiate_key_exchange(this : IDirect3DAuthenticatedChannel9*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_key_exchange.call(this, datasize, pdata)
+  end
+  def query(this : IDirect3DAuthenticatedChannel9*, inputsize : UInt32, pinput : Void*, outputsize : UInt32, poutput : Void*) : HRESULT
+    @lpVtbl.value.query.call(this, inputsize, pinput, outputsize, poutput)
+  end
+  def configure(this : IDirect3DAuthenticatedChannel9*, inputsize : UInt32, pinput : Void*, poutput : D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT*) : HRESULT
+    @lpVtbl.value.configure.call(this, inputsize, pinput, poutput)
+  end
+end
+struct LibWin32::IDirect3DCryptoSession9
+  def query_interface(this : IDirect3DCryptoSession9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DCryptoSession9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DCryptoSession9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_certificate_size(this : IDirect3DCryptoSession9*, pcertificatesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_certificate_size.call(this, pcertificatesize)
+  end
+  def get_certificate(this : IDirect3DCryptoSession9*, certifactesize : UInt32, ppcertificate : UInt8*) : HRESULT
+    @lpVtbl.value.get_certificate.call(this, certifactesize, ppcertificate)
+  end
+  def negotiate_key_exchange(this : IDirect3DCryptoSession9*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_key_exchange.call(this, datasize, pdata)
+  end
+  def encryption_blt(this : IDirect3DCryptoSession9*, psrcsurface : IDirect3DSurface9, pdstsurface : IDirect3DSurface9, dstsurfacesize : UInt32, piv : Void*) : HRESULT
+    @lpVtbl.value.encryption_blt.call(this, psrcsurface, pdstsurface, dstsurfacesize, piv)
+  end
+  def decryption_blt(this : IDirect3DCryptoSession9*, psrcsurface : IDirect3DSurface9, pdstsurface : IDirect3DSurface9, srcsurfacesize : UInt32, pencryptedblockinfo : D3DENCRYPTED_BLOCK_INFO*, pcontentkey : Void*, piv : Void*) : HRESULT
+    @lpVtbl.value.decryption_blt.call(this, psrcsurface, pdstsurface, srcsurfacesize, pencryptedblockinfo, pcontentkey, piv)
+  end
+  def get_surface_pitch(this : IDirect3DCryptoSession9*, psrcsurface : IDirect3DSurface9, psurfacepitch : UInt32*) : HRESULT
+    @lpVtbl.value.get_surface_pitch.call(this, psrcsurface, psurfacepitch)
+  end
+  def start_session_key_refresh(this : IDirect3DCryptoSession9*, prandomnumber : Void*, randomnumbersize : UInt32) : HRESULT
+    @lpVtbl.value.start_session_key_refresh.call(this, prandomnumber, randomnumbersize)
+  end
+  def finish_session_key_refresh(this : IDirect3DCryptoSession9*) : HRESULT
+    @lpVtbl.value.finish_session_key_refresh.call(this)
+  end
+  def get_encryption_blt_key(this : IDirect3DCryptoSession9*, preadbackkey : Void*, keysize : UInt32) : HRESULT
+    @lpVtbl.value.get_encryption_blt_key.call(this, preadbackkey, keysize)
+  end
+end
+struct LibWin32::ID3D12VideoDecoderHeap
+  def query_interface(this : ID3D12VideoDecoderHeap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecoderHeap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecoderHeap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecoderHeap*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecoderHeap*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecoderHeap*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecoderHeap*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecoderHeap*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoDecoderHeap*) : D3D12_VIDEO_DECODER_HEAP_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+end
+struct LibWin32::ID3D12VideoDevice
+  def query_interface(this : ID3D12VideoDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_feature_support(this : ID3D12VideoDevice*, featurevideo : D3D12_FEATURE_VIDEO, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, featurevideo, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_video_decoder(this : ID3D12VideoDevice*, pdesc : D3D12_VIDEO_DECODER_DESC*, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder.call(this, pdesc, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap(this : ID3D12VideoDevice*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap.call(this, pvideodecoderheapdesc, riid, ppvideodecoderheap)
+  end
+  def create_video_processor(this : ID3D12VideoDevice*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, riid, ppvideoprocessor)
+  end
+end
+struct LibWin32::ID3D12VideoDecoder
+  def query_interface(this : ID3D12VideoDecoder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecoder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecoder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecoder*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecoder*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecoder*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecoder*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecoder*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoDecoder*) : D3D12_VIDEO_DECODER_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+end
+struct LibWin32::ID3D12VideoProcessor
+  def query_interface(this : ID3D12VideoProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoProcessor*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoProcessor*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoProcessor*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoProcessor*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoProcessor*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_node_mask(this : ID3D12VideoProcessor*) : UInt32
+    @lpVtbl.value.get_node_mask.call(this)
+  end
+  def get_num_input_stream_descs(this : ID3D12VideoProcessor*) : UInt32
+    @lpVtbl.value.get_num_input_stream_descs.call(this)
+  end
+  def get_input_stream_descs(this : ID3D12VideoProcessor*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*) : HRESULT
+    @lpVtbl.value.get_input_stream_descs.call(this, numinputstreamdescs, pinputstreamdescs)
+  end
+  def get_output_stream_desc(this : ID3D12VideoProcessor*) : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC
+    @lpVtbl.value.get_output_stream_desc.call(this)
+  end
+end
+struct LibWin32::ID3D12VideoDecodeCommandList
+  def query_interface(this : ID3D12VideoDecodeCommandList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecodeCommandList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecodeCommandList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecodeCommandList*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecodeCommandList*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecodeCommandList*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecodeCommandList*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecodeCommandList*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoDecodeCommandList*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoDecodeCommandList*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoDecodeCommandList*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoDecodeCommandList*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoDecodeCommandList*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoDecodeCommandList*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoDecodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoDecodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoDecodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoDecodeCommandList*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoDecodeCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoDecodeCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoDecodeCommandList*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def decode_frame(this : ID3D12VideoDecodeCommandList*, pdecoder : ID3D12VideoDecoder, poutputarguments : D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pinputarguments : D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.decode_frame.call(this, pdecoder, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoDecodeCommandList*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+end
+struct LibWin32::ID3D12VideoProcessCommandList
+  def query_interface(this : ID3D12VideoProcessCommandList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoProcessCommandList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoProcessCommandList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoProcessCommandList*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoProcessCommandList*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoProcessCommandList*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoProcessCommandList*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoProcessCommandList*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoProcessCommandList*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoProcessCommandList*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoProcessCommandList*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoProcessCommandList*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoProcessCommandList*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoProcessCommandList*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoProcessCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoProcessCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoProcessCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoProcessCommandList*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoProcessCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoProcessCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoProcessCommandList*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def process_frames(this : ID3D12VideoProcessCommandList*, pvideoprocessor : ID3D12VideoProcessor, poutputarguments : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, numinputstreams : UInt32, pinputarguments : D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.process_frames.call(this, pvideoprocessor, poutputarguments, numinputstreams, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoProcessCommandList*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+end
+struct LibWin32::ID3D12VideoDecodeCommandList1
+  def query_interface(this : ID3D12VideoDecodeCommandList1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecodeCommandList1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecodeCommandList1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecodeCommandList1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecodeCommandList1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecodeCommandList1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecodeCommandList1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecodeCommandList1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoDecodeCommandList1*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoDecodeCommandList1*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoDecodeCommandList1*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoDecodeCommandList1*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoDecodeCommandList1*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoDecodeCommandList1*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoDecodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoDecodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoDecodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoDecodeCommandList1*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoDecodeCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoDecodeCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoDecodeCommandList1*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def decode_frame(this : ID3D12VideoDecodeCommandList1*, pdecoder : ID3D12VideoDecoder, poutputarguments : D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pinputarguments : D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.decode_frame.call(this, pdecoder, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoDecodeCommandList1*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def decode_frame1(this : ID3D12VideoDecodeCommandList1*, pdecoder : ID3D12VideoDecoder, poutputarguments : D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, pinputarguments : D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.decode_frame1.call(this, pdecoder, poutputarguments, pinputarguments)
+  end
+end
+struct LibWin32::ID3D12VideoProcessCommandList1
+  def query_interface(this : ID3D12VideoProcessCommandList1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoProcessCommandList1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoProcessCommandList1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoProcessCommandList1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoProcessCommandList1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoProcessCommandList1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoProcessCommandList1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoProcessCommandList1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoProcessCommandList1*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoProcessCommandList1*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoProcessCommandList1*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoProcessCommandList1*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoProcessCommandList1*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoProcessCommandList1*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoProcessCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoProcessCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoProcessCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoProcessCommandList1*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoProcessCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoProcessCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoProcessCommandList1*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def process_frames(this : ID3D12VideoProcessCommandList1*, pvideoprocessor : ID3D12VideoProcessor, poutputarguments : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, numinputstreams : UInt32, pinputarguments : D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.process_frames.call(this, pvideoprocessor, poutputarguments, numinputstreams, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoProcessCommandList1*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def process_frames1(this : ID3D12VideoProcessCommandList1*, pvideoprocessor : ID3D12VideoProcessor, poutputarguments : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, numinputstreams : UInt32, pinputarguments : D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*) : Void
+    @lpVtbl.value.process_frames1.call(this, pvideoprocessor, poutputarguments, numinputstreams, pinputarguments)
+  end
+end
+struct LibWin32::ID3D12VideoMotionEstimator
+  def query_interface(this : ID3D12VideoMotionEstimator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoMotionEstimator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoMotionEstimator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoMotionEstimator*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoMotionEstimator*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoMotionEstimator*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoMotionEstimator*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoMotionEstimator*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoMotionEstimator*) : D3D12_VIDEO_MOTION_ESTIMATOR_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoMotionEstimator*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoMotionVectorHeap
+  def query_interface(this : ID3D12VideoMotionVectorHeap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoMotionVectorHeap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoMotionVectorHeap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoMotionVectorHeap*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoMotionVectorHeap*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoMotionVectorHeap*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoMotionVectorHeap*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoMotionVectorHeap*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoMotionVectorHeap*) : D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoMotionVectorHeap*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoDevice1
+  def query_interface(this : ID3D12VideoDevice1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDevice1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDevice1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_feature_support(this : ID3D12VideoDevice1*, featurevideo : D3D12_FEATURE_VIDEO, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, featurevideo, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_video_decoder(this : ID3D12VideoDevice1*, pdesc : D3D12_VIDEO_DECODER_DESC*, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder.call(this, pdesc, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap(this : ID3D12VideoDevice1*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap.call(this, pvideodecoderheapdesc, riid, ppvideodecoderheap)
+  end
+  def create_video_processor(this : ID3D12VideoDevice1*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, riid, ppvideoprocessor)
+  end
+  def create_video_motion_estimator(this : ID3D12VideoDevice1*, pdesc : D3D12_VIDEO_MOTION_ESTIMATOR_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionestimator : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_estimator.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionestimator)
+  end
+  def create_video_motion_vector_heap(this : ID3D12VideoDevice1*, pdesc : D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionvectorheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_vector_heap.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionvectorheap)
+  end
+end
+struct LibWin32::ID3D12VideoEncodeCommandList
+  def query_interface(this : ID3D12VideoEncodeCommandList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoEncodeCommandList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoEncodeCommandList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoEncodeCommandList*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoEncodeCommandList*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoEncodeCommandList*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoEncodeCommandList*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoEncodeCommandList*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoEncodeCommandList*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoEncodeCommandList*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoEncodeCommandList*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoEncodeCommandList*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoEncodeCommandList*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoEncodeCommandList*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoEncodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoEncodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoEncodeCommandList*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoEncodeCommandList*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoEncodeCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoEncodeCommandList*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoEncodeCommandList*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def estimate_motion(this : ID3D12VideoEncodeCommandList*, pmotionestimator : ID3D12VideoMotionEstimator, poutputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, pinputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*) : Void
+    @lpVtbl.value.estimate_motion.call(this, pmotionestimator, poutputarguments, pinputarguments)
+  end
+  def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList*, poutputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pinputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
+    @lpVtbl.value.resolve_motion_vector_heap.call(this, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoEncodeCommandList*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def set_protected_resource_session(this : ID3D12VideoEncodeCommandList*, pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.call(this, pprotectedresourcesession)
+  end
+end
+struct LibWin32::ID3D12VideoDecoder1
+  def query_interface(this : ID3D12VideoDecoder1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecoder1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecoder1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecoder1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecoder1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecoder1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecoder1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecoder1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoDecoder1*) : D3D12_VIDEO_DECODER_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoDecoder1*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoDecoderHeap1
+  def query_interface(this : ID3D12VideoDecoderHeap1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecoderHeap1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecoderHeap1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecoderHeap1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecoderHeap1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecoderHeap1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecoderHeap1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecoderHeap1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoDecoderHeap1*) : D3D12_VIDEO_DECODER_HEAP_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoDecoderHeap1*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoProcessor1
+  def query_interface(this : ID3D12VideoProcessor1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoProcessor1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoProcessor1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoProcessor1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoProcessor1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoProcessor1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoProcessor1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoProcessor1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_node_mask(this : ID3D12VideoProcessor1*) : UInt32
+    @lpVtbl.value.get_node_mask.call(this)
+  end
+  def get_num_input_stream_descs(this : ID3D12VideoProcessor1*) : UInt32
+    @lpVtbl.value.get_num_input_stream_descs.call(this)
+  end
+  def get_input_stream_descs(this : ID3D12VideoProcessor1*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*) : HRESULT
+    @lpVtbl.value.get_input_stream_descs.call(this, numinputstreamdescs, pinputstreamdescs)
+  end
+  def get_output_stream_desc(this : ID3D12VideoProcessor1*) : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC
+    @lpVtbl.value.get_output_stream_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoProcessor1*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoExtensionCommand
+  def query_interface(this : ID3D12VideoExtensionCommand*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoExtensionCommand*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoExtensionCommand*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoExtensionCommand*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoExtensionCommand*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoExtensionCommand*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoExtensionCommand*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoExtensionCommand*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_desc(this : ID3D12VideoExtensionCommand*) : D3D12_VIDEO_EXTENSION_COMMAND_DESC
+    @lpVtbl.value.get_desc.call(this)
+  end
+  def get_protected_resource_session(this : ID3D12VideoExtensionCommand*, riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.call(this, riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12VideoDevice2
+  def query_interface(this : ID3D12VideoDevice2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDevice2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDevice2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_feature_support(this : ID3D12VideoDevice2*, featurevideo : D3D12_FEATURE_VIDEO, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, featurevideo, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_video_decoder(this : ID3D12VideoDevice2*, pdesc : D3D12_VIDEO_DECODER_DESC*, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder.call(this, pdesc, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap(this : ID3D12VideoDevice2*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap.call(this, pvideodecoderheapdesc, riid, ppvideodecoderheap)
+  end
+  def create_video_processor(this : ID3D12VideoDevice2*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, riid, ppvideoprocessor)
+  end
+  def create_video_motion_estimator(this : ID3D12VideoDevice2*, pdesc : D3D12_VIDEO_MOTION_ESTIMATOR_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionestimator : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_estimator.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionestimator)
+  end
+  def create_video_motion_vector_heap(this : ID3D12VideoDevice2*, pdesc : D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionvectorheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_vector_heap.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionvectorheap)
+  end
+  def create_video_decoder1(this : ID3D12VideoDevice2*, pdesc : D3D12_VIDEO_DECODER_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder1.call(this, pdesc, pprotectedresourcesession, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap1(this : ID3D12VideoDevice2*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap1.call(this, pvideodecoderheapdesc, pprotectedresourcesession, riid, ppvideodecoderheap)
+  end
+  def create_video_processor1(this : ID3D12VideoDevice2*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor1.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, pprotectedresourcesession, riid, ppvideoprocessor)
+  end
+  def create_video_extension_command(this : ID3D12VideoDevice2*, pdesc : D3D12_VIDEO_EXTENSION_COMMAND_DESC*, pcreationparameters : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideoextensioncommand : Void**) : HRESULT
+    @lpVtbl.value.create_video_extension_command.call(this, pdesc, pcreationparameters, creationparametersdatasizeinbytes, pprotectedresourcesession, riid, ppvideoextensioncommand)
+  end
+  def execute_extension_command(this : ID3D12VideoDevice2*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR, poutputdata : Void*, outputdatasizeinbytes : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes, poutputdata, outputdatasizeinbytes)
+  end
+end
+struct LibWin32::ID3D12VideoDecodeCommandList2
+  def query_interface(this : ID3D12VideoDecodeCommandList2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDecodeCommandList2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDecodeCommandList2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoDecodeCommandList2*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoDecodeCommandList2*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoDecodeCommandList2*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoDecodeCommandList2*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoDecodeCommandList2*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoDecodeCommandList2*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoDecodeCommandList2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoDecodeCommandList2*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoDecodeCommandList2*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoDecodeCommandList2*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoDecodeCommandList2*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoDecodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoDecodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoDecodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoDecodeCommandList2*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoDecodeCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoDecodeCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoDecodeCommandList2*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def decode_frame(this : ID3D12VideoDecodeCommandList2*, pdecoder : ID3D12VideoDecoder, poutputarguments : D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS*, pinputarguments : D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.decode_frame.call(this, pdecoder, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoDecodeCommandList2*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def decode_frame1(this : ID3D12VideoDecodeCommandList2*, pdecoder : ID3D12VideoDecoder, poutputarguments : D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, pinputarguments : D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.decode_frame1.call(this, pdecoder, poutputarguments, pinputarguments)
+  end
+  def set_protected_resource_session(this : ID3D12VideoDecodeCommandList2*, pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.call(this, pprotectedresourcesession)
+  end
+  def initialize_extension_command(this : ID3D12VideoDecodeCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pinitializationparameters : Void*, initializationparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_extension_command.call(this, pextensioncommand, pinitializationparameters, initializationparameterssizeinbytes)
+  end
+  def execute_extension_command(this : ID3D12VideoDecodeCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes)
+  end
+end
+struct LibWin32::ID3D12VideoProcessCommandList2
+  def query_interface(this : ID3D12VideoProcessCommandList2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoProcessCommandList2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoProcessCommandList2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoProcessCommandList2*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoProcessCommandList2*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoProcessCommandList2*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoProcessCommandList2*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoProcessCommandList2*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoProcessCommandList2*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoProcessCommandList2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoProcessCommandList2*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoProcessCommandList2*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoProcessCommandList2*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoProcessCommandList2*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoProcessCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoProcessCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoProcessCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoProcessCommandList2*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoProcessCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoProcessCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoProcessCommandList2*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def process_frames(this : ID3D12VideoProcessCommandList2*, pvideoprocessor : ID3D12VideoProcessor, poutputarguments : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, numinputstreams : UInt32, pinputarguments : D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS*) : Void
+    @lpVtbl.value.process_frames.call(this, pvideoprocessor, poutputarguments, numinputstreams, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoProcessCommandList2*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def process_frames1(this : ID3D12VideoProcessCommandList2*, pvideoprocessor : ID3D12VideoProcessor, poutputarguments : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, numinputstreams : UInt32, pinputarguments : D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*) : Void
+    @lpVtbl.value.process_frames1.call(this, pvideoprocessor, poutputarguments, numinputstreams, pinputarguments)
+  end
+  def set_protected_resource_session(this : ID3D12VideoProcessCommandList2*, pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.call(this, pprotectedresourcesession)
+  end
+  def initialize_extension_command(this : ID3D12VideoProcessCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pinitializationparameters : Void*, initializationparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_extension_command.call(this, pextensioncommand, pinitializationparameters, initializationparameterssizeinbytes)
+  end
+  def execute_extension_command(this : ID3D12VideoProcessCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes)
+  end
+end
+struct LibWin32::ID3D12VideoEncodeCommandList1
+  def query_interface(this : ID3D12VideoEncodeCommandList1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoEncodeCommandList1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoEncodeCommandList1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoEncodeCommandList1*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoEncodeCommandList1*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoEncodeCommandList1*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoEncodeCommandList1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoEncodeCommandList1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoEncodeCommandList1*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoEncodeCommandList1*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoEncodeCommandList1*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoEncodeCommandList1*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoEncodeCommandList1*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoEncodeCommandList1*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoEncodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoEncodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoEncodeCommandList1*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoEncodeCommandList1*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoEncodeCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoEncodeCommandList1*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoEncodeCommandList1*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def estimate_motion(this : ID3D12VideoEncodeCommandList1*, pmotionestimator : ID3D12VideoMotionEstimator, poutputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, pinputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*) : Void
+    @lpVtbl.value.estimate_motion.call(this, pmotionestimator, poutputarguments, pinputarguments)
+  end
+  def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList1*, poutputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pinputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
+    @lpVtbl.value.resolve_motion_vector_heap.call(this, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoEncodeCommandList1*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def set_protected_resource_session(this : ID3D12VideoEncodeCommandList1*, pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.call(this, pprotectedresourcesession)
+  end
+  def initialize_extension_command(this : ID3D12VideoEncodeCommandList1*, pextensioncommand : ID3D12VideoExtensionCommand, pinitializationparameters : Void*, initializationparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_extension_command.call(this, pextensioncommand, pinitializationparameters, initializationparameterssizeinbytes)
+  end
+  def execute_extension_command(this : ID3D12VideoEncodeCommandList1*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes)
+  end
+end
+struct LibWin32::ID3D12VideoEncoder
+  def query_interface(this : ID3D12VideoEncoder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoEncoder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoEncoder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoEncoder*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoEncoder*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoEncoder*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoEncoder*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoEncoder*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_node_mask(this : ID3D12VideoEncoder*) : UInt32
+    @lpVtbl.value.get_node_mask.call(this)
+  end
+  def get_encoder_flags(this : ID3D12VideoEncoder*) : D3D12_VIDEO_ENCODER_FLAGS
+    @lpVtbl.value.get_encoder_flags.call(this)
+  end
+  def get_codec(this : ID3D12VideoEncoder*) : D3D12_VIDEO_ENCODER_CODEC
+    @lpVtbl.value.get_codec.call(this)
+  end
+  def get_codec_profile(this : ID3D12VideoEncoder*, dstprofile : D3D12_VIDEO_ENCODER_PROFILE_DESC) : HRESULT
+    @lpVtbl.value.get_codec_profile.call(this, dstprofile)
+  end
+  def get_codec_configuration(this : ID3D12VideoEncoder*, dstcodecconfig : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION) : HRESULT
+    @lpVtbl.value.get_codec_configuration.call(this, dstcodecconfig)
+  end
+  def get_input_format(this : ID3D12VideoEncoder*) : DXGI_FORMAT
+    @lpVtbl.value.get_input_format.call(this)
+  end
+  def get_max_motion_estimation_precision(this : ID3D12VideoEncoder*) : D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE
+    @lpVtbl.value.get_max_motion_estimation_precision.call(this)
+  end
+end
+struct LibWin32::ID3D12VideoEncoderHeap
+  def query_interface(this : ID3D12VideoEncoderHeap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoEncoderHeap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoEncoderHeap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoEncoderHeap*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoEncoderHeap*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoEncoderHeap*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoEncoderHeap*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoEncoderHeap*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_node_mask(this : ID3D12VideoEncoderHeap*) : UInt32
+    @lpVtbl.value.get_node_mask.call(this)
+  end
+  def get_encoder_heap_flags(this : ID3D12VideoEncoderHeap*) : D3D12_VIDEO_ENCODER_HEAP_FLAGS
+    @lpVtbl.value.get_encoder_heap_flags.call(this)
+  end
+  def get_codec(this : ID3D12VideoEncoderHeap*) : D3D12_VIDEO_ENCODER_CODEC
+    @lpVtbl.value.get_codec.call(this)
+  end
+  def get_codec_profile(this : ID3D12VideoEncoderHeap*, dstprofile : D3D12_VIDEO_ENCODER_PROFILE_DESC) : HRESULT
+    @lpVtbl.value.get_codec_profile.call(this, dstprofile)
+  end
+  def get_codec_level(this : ID3D12VideoEncoderHeap*, dstlevel : D3D12_VIDEO_ENCODER_LEVEL_SETTING) : HRESULT
+    @lpVtbl.value.get_codec_level.call(this, dstlevel)
+  end
+  def get_resolution_list_count(this : ID3D12VideoEncoderHeap*) : UInt32
+    @lpVtbl.value.get_resolution_list_count.call(this)
+  end
+  def get_resolution_list(this : ID3D12VideoEncoderHeap*, resolutionslistcount : UInt32, presolutionlist : D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*) : HRESULT
+    @lpVtbl.value.get_resolution_list.call(this, resolutionslistcount, presolutionlist)
+  end
+end
+struct LibWin32::ID3D12VideoDevice3
+  def query_interface(this : ID3D12VideoDevice3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoDevice3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoDevice3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_feature_support(this : ID3D12VideoDevice3*, featurevideo : D3D12_FEATURE_VIDEO, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, featurevideo, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_video_decoder(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_DECODER_DESC*, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder.call(this, pdesc, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap(this : ID3D12VideoDevice3*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap.call(this, pvideodecoderheapdesc, riid, ppvideodecoderheap)
+  end
+  def create_video_processor(this : ID3D12VideoDevice3*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, riid, ppvideoprocessor)
+  end
+  def create_video_motion_estimator(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_MOTION_ESTIMATOR_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionestimator : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_estimator.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionestimator)
+  end
+  def create_video_motion_vector_heap(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideomotionvectorheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_motion_vector_heap.call(this, pdesc, pprotectedresourcesession, riid, ppvideomotionvectorheap)
+  end
+  def create_video_decoder1(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_DECODER_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideodecoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder1.call(this, pdesc, pprotectedresourcesession, riid, ppvideodecoder)
+  end
+  def create_video_decoder_heap1(this : ID3D12VideoDevice3*, pvideodecoderheapdesc : D3D12_VIDEO_DECODER_HEAP_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideodecoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_decoder_heap1.call(this, pvideodecoderheapdesc, pprotectedresourcesession, riid, ppvideodecoderheap)
+  end
+  def create_video_processor1(this : ID3D12VideoDevice3*, nodemask : UInt32, poutputstreamdesc : D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, numinputstreamdescs : UInt32, pinputstreamdescs : D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideoprocessor : Void**) : HRESULT
+    @lpVtbl.value.create_video_processor1.call(this, nodemask, poutputstreamdesc, numinputstreamdescs, pinputstreamdescs, pprotectedresourcesession, riid, ppvideoprocessor)
+  end
+  def create_video_extension_command(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_EXTENSION_COMMAND_DESC*, pcreationparameters : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, pprotectedresourcesession : ID3D12ProtectedResourceSession, riid : Guid*, ppvideoextensioncommand : Void**) : HRESULT
+    @lpVtbl.value.create_video_extension_command.call(this, pdesc, pcreationparameters, creationparametersdatasizeinbytes, pprotectedresourcesession, riid, ppvideoextensioncommand)
+  end
+  def execute_extension_command(this : ID3D12VideoDevice3*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR, poutputdata : Void*, outputdatasizeinbytes : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes, poutputdata, outputdatasizeinbytes)
+  end
+  def create_video_encoder(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_ENCODER_DESC*, riid : Guid*, ppvideoencoder : Void**) : HRESULT
+    @lpVtbl.value.create_video_encoder.call(this, pdesc, riid, ppvideoencoder)
+  end
+  def create_video_encoder_heap(this : ID3D12VideoDevice3*, pdesc : D3D12_VIDEO_ENCODER_HEAP_DESC*, riid : Guid*, ppvideoencoderheap : Void**) : HRESULT
+    @lpVtbl.value.create_video_encoder_heap.call(this, pdesc, riid, ppvideoencoderheap)
+  end
+end
+struct LibWin32::ID3D12VideoEncodeCommandList2
+  def query_interface(this : ID3D12VideoEncodeCommandList2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D12VideoEncodeCommandList2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D12VideoEncodeCommandList2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : ID3D12VideoEncodeCommandList2*, guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, pdatasize, pdata)
+  end
+  def set_private_data(this : ID3D12VideoEncodeCommandList2*, guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, pdata)
+  end
+  def set_private_data_interface(this : ID3D12VideoEncodeCommandList2*, guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, pdata)
+  end
+  def set_name(this : ID3D12VideoEncodeCommandList2*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : ID3D12VideoEncodeCommandList2*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppvdevice)
+  end
+  def get_type(this : ID3D12VideoEncodeCommandList2*) : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def close(this : ID3D12VideoEncodeCommandList2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def reset(this : ID3D12VideoEncodeCommandList2*, pallocator : ID3D12CommandAllocator) : HRESULT
+    @lpVtbl.value.reset.call(this, pallocator)
+  end
+  def clear_state(this : ID3D12VideoEncodeCommandList2*) : Void
+    @lpVtbl.value.clear_state.call(this)
+  end
+  def resource_barrier(this : ID3D12VideoEncodeCommandList2*, numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.call(this, numbarriers, pbarriers)
+  end
+  def discard_resource(this : ID3D12VideoEncodeCommandList2*, presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.call(this, presource, pregion)
+  end
+  def begin_query(this : ID3D12VideoEncodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.call(this, pqueryheap, type, index)
+  end
+  def end_query(this : ID3D12VideoEncodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.call(this, pqueryheap, type, index)
+  end
+  def resolve_query_data(this : ID3D12VideoEncodeCommandList2*, pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.call(this, pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(this : ID3D12VideoEncodeCommandList2*, pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.call(this, pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(this : ID3D12VideoEncodeCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.call(this, metadata, pdata, size)
+  end
+  def begin_event(this : ID3D12VideoEncodeCommandList2*, metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.call(this, metadata, pdata, size)
+  end
+  def end_event(this : ID3D12VideoEncodeCommandList2*) : Void
+    @lpVtbl.value.end_event.call(this)
+  end
+  def estimate_motion(this : ID3D12VideoEncodeCommandList2*, pmotionestimator : ID3D12VideoMotionEstimator, poutputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT*, pinputarguments : D3D12_VIDEO_MOTION_ESTIMATOR_INPUT*) : Void
+    @lpVtbl.value.estimate_motion.call(this, pmotionestimator, poutputarguments, pinputarguments)
+  end
+  def resolve_motion_vector_heap(this : ID3D12VideoEncodeCommandList2*, poutputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_OUTPUT*, pinputarguments : D3D12_RESOLVE_VIDEO_MOTION_VECTOR_HEAP_INPUT*) : Void
+    @lpVtbl.value.resolve_motion_vector_heap.call(this, poutputarguments, pinputarguments)
+  end
+  def write_buffer_immediate(this : ID3D12VideoEncodeCommandList2*, count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.call(this, count, pparams, pmodes)
+  end
+  def set_protected_resource_session(this : ID3D12VideoEncodeCommandList2*, pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.call(this, pprotectedresourcesession)
+  end
+  def initialize_extension_command(this : ID3D12VideoEncodeCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pinitializationparameters : Void*, initializationparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_extension_command.call(this, pextensioncommand, pinitializationparameters, initializationparameterssizeinbytes)
+  end
+  def execute_extension_command(this : ID3D12VideoEncodeCommandList2*, pextensioncommand : ID3D12VideoExtensionCommand, pexecutionparameters : Void*, executionparameterssizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_extension_command.call(this, pextensioncommand, pexecutionparameters, executionparameterssizeinbytes)
+  end
+  def encode_frame(this : ID3D12VideoEncodeCommandList2*, pencoder : ID3D12VideoEncoder, pheap : ID3D12VideoEncoderHeap, pinputarguments : D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS*, poutputarguments : D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS*) : Void
+    @lpVtbl.value.encode_frame.call(this, pencoder, pheap, pinputarguments, poutputarguments)
+  end
+  def resolve_encoder_output_metadata(this : ID3D12VideoEncodeCommandList2*, pinputarguments : D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, poutputarguments : D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*) : Void
+    @lpVtbl.value.resolve_encoder_output_metadata.call(this, pinputarguments, poutputarguments)
+  end
+end
+struct LibWin32::IWMValidate
+  def query_interface(this : IWMValidate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMValidate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMValidate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_identifier(this : IWMValidate*, guidvalidationid : Guid) : HRESULT
+    @lpVtbl.value.set_identifier.call(this, guidvalidationid)
+  end
+end
+struct LibWin32::IValidateBinding
+  def query_interface(this : IValidateBinding*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IValidateBinding*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IValidateBinding*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_identifier(this : IValidateBinding*, guidlicensorid : Guid, pbephemeron : UInt8*, cbephemeron : UInt32, ppbblobvalidationid : UInt8**, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identifier.call(this, guidlicensorid, pbephemeron, cbephemeron, ppbblobvalidationid, pcbblobsize)
+  end
+end
+struct LibWin32::IWMVideoDecoderHurryup
+  def query_interface(this : IWMVideoDecoderHurryup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMVideoDecoderHurryup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMVideoDecoderHurryup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_hurryup(this : IWMVideoDecoderHurryup*, lhurryup : Int32) : HRESULT
+    @lpVtbl.value.set_hurryup.call(this, lhurryup)
+  end
+  def get_hurryup(this : IWMVideoDecoderHurryup*, plhurryup : Int32*) : HRESULT
+    @lpVtbl.value.get_hurryup.call(this, plhurryup)
+  end
+end
+struct LibWin32::IWMVideoForceKeyFrame
+  def query_interface(this : IWMVideoForceKeyFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMVideoForceKeyFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMVideoForceKeyFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_key_frame(this : IWMVideoForceKeyFrame*) : HRESULT
+    @lpVtbl.value.set_key_frame.call(this)
+  end
+end
+struct LibWin32::IWMCodecStrings
+  def query_interface(this : IWMCodecStrings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecStrings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecStrings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IWMCodecStrings*, pmt : DMO_MEDIA_TYPE*, cchlength : UInt32, szname : Char*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_name.call(this, pmt, cchlength, szname, pcchlength)
+  end
+  def get_description(this : IWMCodecStrings*, pmt : DMO_MEDIA_TYPE*, cchlength : UInt32, szdescription : Char*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pmt, cchlength, szdescription, pcchlength)
+  end
+end
+struct LibWin32::IWMCodecProps
+  def query_interface(this : IWMCodecProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_format_prop(this : IWMCodecProps*, pmt : DMO_MEDIA_TYPE*, pszname : LibC::LPWSTR, ptype : WMT_PROP_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_prop.call(this, pmt, pszname, ptype, pvalue, pdwsize)
+  end
+  def get_codec_prop(this : IWMCodecProps*, dwformat : UInt32, pszname : LibC::LPWSTR, ptype : WMT_PROP_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_prop.call(this, dwformat, pszname, ptype, pvalue, pdwsize)
+  end
+end
+struct LibWin32::IWMCodecLeakyBucket
+  def query_interface(this : IWMCodecLeakyBucket*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecLeakyBucket*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecLeakyBucket*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_buffer_size_bits(this : IWMCodecLeakyBucket*, ulbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_size_bits.call(this, ulbuffersize)
+  end
+  def get_buffer_size_bits(this : IWMCodecLeakyBucket*, pulbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_size_bits.call(this, pulbuffersize)
+  end
+  def set_buffer_fullness_bits(this : IWMCodecLeakyBucket*, ulbufferfullness : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_fullness_bits.call(this, ulbufferfullness)
+  end
+  def get_buffer_fullness_bits(this : IWMCodecLeakyBucket*, pulbufferfullness : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_fullness_bits.call(this, pulbufferfullness)
+  end
+end
+struct LibWin32::IWMCodecOutputTimestamp
+  def query_interface(this : IWMCodecOutputTimestamp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecOutputTimestamp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecOutputTimestamp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_output_time(this : IWMCodecOutputTimestamp*, prttime : Int64*) : HRESULT
+    @lpVtbl.value.get_next_output_time.call(this, prttime)
+  end
+end
+struct LibWin32::IWMVideoDecoderReconBuffer
+  def query_interface(this : IWMVideoDecoderReconBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMVideoDecoderReconBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMVideoDecoderReconBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_reconstructed_video_frame_size(this : IWMVideoDecoderReconBuffer*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_reconstructed_video_frame_size.call(this, pdwsize)
+  end
+  def get_reconstructed_video_frame(this : IWMVideoDecoderReconBuffer*, pbuf : IMediaBuffer) : HRESULT
+    @lpVtbl.value.get_reconstructed_video_frame.call(this, pbuf)
+  end
+  def set_reconstructed_video_frame(this : IWMVideoDecoderReconBuffer*, pbuf : IMediaBuffer) : HRESULT
+    @lpVtbl.value.set_reconstructed_video_frame.call(this, pbuf)
+  end
+end
+struct LibWin32::IWMCodecPrivateData
+  def query_interface(this : IWMCodecPrivateData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecPrivateData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecPrivateData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_partial_output_type(this : IWMCodecPrivateData*, pmt : DMO_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.set_partial_output_type.call(this, pmt)
+  end
+  def get_private_data(this : IWMCodecPrivateData*, pbdata : UInt8*, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, pbdata, pcbdata)
+  end
+end
+struct LibWin32::IWMSampleExtensionSupport
+  def query_interface(this : IWMSampleExtensionSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSampleExtensionSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSampleExtensionSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_use_sample_extensions(this : IWMSampleExtensionSupport*, fuseextensions : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_use_sample_extensions.call(this, fuseextensions)
+  end
+end
+struct LibWin32::IWMResamplerProps
+  def query_interface(this : IWMResamplerProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMResamplerProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMResamplerProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_half_filter_length(this : IWMResamplerProps*, lhalffilterlen : Int32) : HRESULT
+    @lpVtbl.value.set_half_filter_length.call(this, lhalffilterlen)
+  end
+  def set_user_channel_mtx(this : IWMResamplerProps*, userchannelmtx : Float32*) : HRESULT
+    @lpVtbl.value.set_user_channel_mtx.call(this, userchannelmtx)
+  end
+end
+struct LibWin32::IWMResizerProps
+  def query_interface(this : IWMResizerProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMResizerProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMResizerProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_resizer_quality(this : IWMResizerProps*, lquality : Int32) : HRESULT
+    @lpVtbl.value.set_resizer_quality.call(this, lquality)
+  end
+  def set_interlace_mode(this : IWMResizerProps*, lmode : Int32) : HRESULT
+    @lpVtbl.value.set_interlace_mode.call(this, lmode)
+  end
+  def set_clip_region(this : IWMResizerProps*, lcliporixsrc : Int32, lcliporiysrc : Int32, lclipwidthsrc : Int32, lclipheightsrc : Int32) : HRESULT
+    @lpVtbl.value.set_clip_region.call(this, lcliporixsrc, lcliporiysrc, lclipwidthsrc, lclipheightsrc)
+  end
+  def set_full_crop_region(this : IWMResizerProps*, lcliporixsrc : Int32, lcliporiysrc : Int32, lclipwidthsrc : Int32, lclipheightsrc : Int32, lcliporixdst : Int32, lcliporiydst : Int32, lclipwidthdst : Int32, lclipheightdst : Int32) : HRESULT
+    @lpVtbl.value.set_full_crop_region.call(this, lcliporixsrc, lcliporiysrc, lclipwidthsrc, lclipheightsrc, lcliporixdst, lcliporiydst, lclipwidthdst, lclipheightdst)
+  end
+  def get_full_crop_region(this : IWMResizerProps*, lcliporixsrc : Int32*, lcliporiysrc : Int32*, lclipwidthsrc : Int32*, lclipheightsrc : Int32*, lcliporixdst : Int32*, lcliporiydst : Int32*, lclipwidthdst : Int32*, lclipheightdst : Int32*) : HRESULT
+    @lpVtbl.value.get_full_crop_region.call(this, lcliporixsrc, lcliporiysrc, lclipwidthsrc, lclipheightsrc, lcliporixdst, lcliporiydst, lclipwidthdst, lclipheightdst)
+  end
+end
+struct LibWin32::IWMColorLegalizerProps
+  def query_interface(this : IWMColorLegalizerProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMColorLegalizerProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMColorLegalizerProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_color_legalizer_quality(this : IWMColorLegalizerProps*, lquality : Int32) : HRESULT
+    @lpVtbl.value.set_color_legalizer_quality.call(this, lquality)
+  end
+end
+struct LibWin32::IWMInterlaceProps
+  def query_interface(this : IWMInterlaceProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMInterlaceProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMInterlaceProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_process_type(this : IWMInterlaceProps*, iprocesstype : Int32) : HRESULT
+    @lpVtbl.value.set_process_type.call(this, iprocesstype)
+  end
+  def set_init_inverse_tele_cine_pattern(this : IWMInterlaceProps*, iinitpattern : Int32) : HRESULT
+    @lpVtbl.value.set_init_inverse_tele_cine_pattern.call(this, iinitpattern)
+  end
+  def set_last_frame(this : IWMInterlaceProps*) : HRESULT
+    @lpVtbl.value.set_last_frame.call(this)
+  end
+end
+struct LibWin32::IWMFrameInterpProps
+  def query_interface(this : IWMFrameInterpProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMFrameInterpProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMFrameInterpProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_frame_rate_in(this : IWMFrameInterpProps*, lframerate : Int32, lscale : Int32) : HRESULT
+    @lpVtbl.value.set_frame_rate_in.call(this, lframerate, lscale)
+  end
+  def set_frame_rate_out(this : IWMFrameInterpProps*, lframerate : Int32, lscale : Int32) : HRESULT
+    @lpVtbl.value.set_frame_rate_out.call(this, lframerate, lscale)
+  end
+  def set_frame_interp_enabled(this : IWMFrameInterpProps*, bfienabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_frame_interp_enabled.call(this, bfienabled)
+  end
+  def set_complexity_level(this : IWMFrameInterpProps*, icomplexity : Int32) : HRESULT
+    @lpVtbl.value.set_complexity_level.call(this, icomplexity)
+  end
+end
+struct LibWin32::IWMColorConvProps
+  def query_interface(this : IWMColorConvProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMColorConvProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMColorConvProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_mode(this : IWMColorConvProps*, lmode : Int32) : HRESULT
+    @lpVtbl.value.set_mode.call(this, lmode)
+  end
+  def set_full_cropping_param(this : IWMColorConvProps*, lsrccropleft : Int32, lsrccroptop : Int32, ldstcropleft : Int32, ldstcroptop : Int32, lcropwidth : Int32, lcropheight : Int32) : HRESULT
+    @lpVtbl.value.set_full_cropping_param.call(this, lsrccropleft, lsrccroptop, ldstcropleft, ldstcroptop, lcropwidth, lcropheight)
+  end
+end
+struct LibWin32::ITocEntry
+  def query_interface(this : ITocEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITocEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITocEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_title(this : ITocEntry*, pwsztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.call(this, pwsztitle)
+  end
+  def get_title(this : ITocEntry*, pwtitlesize : UInt16*, pwsztitle : Char*) : HRESULT
+    @lpVtbl.value.get_title.call(this, pwtitlesize, pwsztitle)
+  end
+  def set_descriptor(this : ITocEntry*, pdescriptor : TOC_ENTRY_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.set_descriptor.call(this, pdescriptor)
+  end
+  def get_descriptor(this : ITocEntry*, pdescriptor : TOC_ENTRY_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.get_descriptor.call(this, pdescriptor)
+  end
+  def set_sub_entries(this : ITocEntry*, dwnumsubentries : UInt32, pwsubentryindices : UInt16*) : HRESULT
+    @lpVtbl.value.set_sub_entries.call(this, dwnumsubentries, pwsubentryindices)
+  end
+  def get_sub_entries(this : ITocEntry*, pdwnumsubentries : UInt32*, pwsubentryindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_sub_entries.call(this, pdwnumsubentries, pwsubentryindices)
+  end
+  def set_description_data(this : ITocEntry*, dwdescriptiondatasize : UInt32, pbtdescriptiondata : UInt8*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.set_description_data.call(this, dwdescriptiondatasize, pbtdescriptiondata, pguidtype)
+  end
+  def get_description_data(this : ITocEntry*, pdwdescriptiondatasize : UInt32*, pbtdescriptiondata : UInt8*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_description_data.call(this, pdwdescriptiondatasize, pbtdescriptiondata, pguidtype)
+  end
+end
+struct LibWin32::ITocEntryList
+  def query_interface(this : ITocEntryList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITocEntryList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITocEntryList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_entry_count(this : ITocEntryList*, pdwentrycount : UInt32*) : HRESULT
+    @lpVtbl.value.get_entry_count.call(this, pdwentrycount)
+  end
+  def get_entry_by_index(this : ITocEntryList*, dwentryindex : UInt32, ppentry : ITocEntry*) : HRESULT
+    @lpVtbl.value.get_entry_by_index.call(this, dwentryindex, ppentry)
+  end
+  def add_entry(this : ITocEntryList*, pentry : ITocEntry, pdwentryindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_entry.call(this, pentry, pdwentryindex)
+  end
+  def add_entry_by_index(this : ITocEntryList*, dwentryindex : UInt32, pentry : ITocEntry) : HRESULT
+    @lpVtbl.value.add_entry_by_index.call(this, dwentryindex, pentry)
+  end
+  def remove_entry_by_index(this : ITocEntryList*, dwentryindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_entry_by_index.call(this, dwentryindex)
+  end
+end
+struct LibWin32::IToc
+  def query_interface(this : IToc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IToc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IToc*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_descriptor(this : IToc*, pdescriptor : TOC_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.set_descriptor.call(this, pdescriptor)
+  end
+  def get_descriptor(this : IToc*, pdescriptor : TOC_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.get_descriptor.call(this, pdescriptor)
+  end
+  def set_description(this : IToc*, pwszdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pwszdescription)
+  end
+  def get_description(this : IToc*, pwdescriptionsize : UInt16*, pwszdescription : Char*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pwdescriptionsize, pwszdescription)
+  end
+  def set_context(this : IToc*, dwcontextsize : UInt32, pbtcontext : UInt8*) : HRESULT
+    @lpVtbl.value.set_context.call(this, dwcontextsize, pbtcontext)
+  end
+  def get_context(this : IToc*, pdwcontextsize : UInt32*, pbtcontext : UInt8*) : HRESULT
+    @lpVtbl.value.get_context.call(this, pdwcontextsize, pbtcontext)
+  end
+  def get_entry_list_count(this : IToc*, pwcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_entry_list_count.call(this, pwcount)
+  end
+  def get_entry_list_by_index(this : IToc*, wentrylistindex : UInt16, ppentrylist : ITocEntryList*) : HRESULT
+    @lpVtbl.value.get_entry_list_by_index.call(this, wentrylistindex, ppentrylist)
+  end
+  def add_entry_list(this : IToc*, pentrylist : ITocEntryList, pwentrylistindex : UInt16*) : HRESULT
+    @lpVtbl.value.add_entry_list.call(this, pentrylist, pwentrylistindex)
+  end
+  def add_entry_list_by_index(this : IToc*, wentrylistindex : UInt16, pentrylist : ITocEntryList) : HRESULT
+    @lpVtbl.value.add_entry_list_by_index.call(this, wentrylistindex, pentrylist)
+  end
+  def remove_entry_list_by_index(this : IToc*, wentrylistindex : UInt16) : HRESULT
+    @lpVtbl.value.remove_entry_list_by_index.call(this, wentrylistindex)
+  end
+end
+struct LibWin32::ITocCollection
+  def query_interface(this : ITocCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITocCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITocCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_entry_count(this : ITocCollection*, pdwentrycount : UInt32*) : HRESULT
+    @lpVtbl.value.get_entry_count.call(this, pdwentrycount)
+  end
+  def get_entry_by_index(this : ITocCollection*, dwentryindex : UInt32, pptoc : IToc*) : HRESULT
+    @lpVtbl.value.get_entry_by_index.call(this, dwentryindex, pptoc)
+  end
+  def add_entry(this : ITocCollection*, ptoc : IToc, pdwentryindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_entry.call(this, ptoc, pdwentryindex)
+  end
+  def add_entry_by_index(this : ITocCollection*, dwentryindex : UInt32, ptoc : IToc) : HRESULT
+    @lpVtbl.value.add_entry_by_index.call(this, dwentryindex, ptoc)
+  end
+  def remove_entry_by_index(this : ITocCollection*, dwentryindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_entry_by_index.call(this, dwentryindex)
+  end
+end
+struct LibWin32::ITocParser
+  def query_interface(this : ITocParser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITocParser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITocParser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : ITocParser*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.init.call(this, pwszfilename)
+  end
+  def get_toc_count(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, pdwtoccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_toc_count.call(this, enumtocpostype, pdwtoccount)
+  end
+  def get_toc_by_index(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, dwtocindex : UInt32, pptoc : IToc*) : HRESULT
+    @lpVtbl.value.get_toc_by_index.call(this, enumtocpostype, dwtocindex, pptoc)
+  end
+  def get_toc_by_type(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, guidtoctype : Guid, pptocs : ITocCollection*) : HRESULT
+    @lpVtbl.value.get_toc_by_type.call(this, enumtocpostype, guidtoctype, pptocs)
+  end
+  def add_toc(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, ptoc : IToc, pdwtocindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_toc.call(this, enumtocpostype, ptoc, pdwtocindex)
+  end
+  def remove_toc_by_index(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, dwtocindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_toc_by_index.call(this, enumtocpostype, dwtocindex)
+  end
+  def remove_toc_by_type(this : ITocParser*, enumtocpostype : TOC_POS_TYPE, guidtoctype : Guid) : HRESULT
+    @lpVtbl.value.remove_toc_by_type.call(this, enumtocpostype, guidtoctype)
+  end
+  def commit(this : ITocParser*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+end
+struct LibWin32::IFileIo
+  def query_interface(this : IFileIo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFileIo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFileIo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IFileIo*, eaccessmode : FILE_ACCESSMODE, eopenmode : FILE_OPENMODE, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, eaccessmode, eopenmode, pwszfilename)
+  end
+  def get_length(this : IFileIo*, pqwlength : UInt64*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pqwlength)
+  end
+  def set_length(this : IFileIo*, qwlength : UInt64) : HRESULT
+    @lpVtbl.value.set_length.call(this, qwlength)
+  end
+  def get_current_position(this : IFileIo*, pqwposition : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pqwposition)
+  end
+  def set_current_position(this : IFileIo*, qwposition : UInt64) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, qwposition)
+  end
+  def is_end_of_stream(this : IFileIo*, pbendofstream : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_end_of_stream.call(this, pbendofstream)
+  end
+  def read(this : IFileIo*, pbt : UInt8*, ul : UInt32, pulread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pbt, ul, pulread)
+  end
+  def write(this : IFileIo*, pbt : UInt8*, ul : UInt32, pulwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pbt, ul, pulwritten)
+  end
+  def seek(this : IFileIo*, eseekorigin : SEEK_ORIGIN, qwseekoffset : UInt64, dwseekflags : UInt32, pqwcurrentposition : UInt64*) : HRESULT
+    @lpVtbl.value.seek.call(this, eseekorigin, qwseekoffset, dwseekflags, pqwcurrentposition)
+  end
+  def close(this : IFileIo*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IFileClient
+  def query_interface(this : IFileClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFileClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFileClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_disk_size(this : IFileClient*, pqwsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_object_disk_size.call(this, pqwsize)
+  end
+  def write(this : IFileClient*, pfio : IFileIo) : HRESULT
+    @lpVtbl.value.write.call(this, pfio)
+  end
+  def read(this : IFileClient*, pfio : IFileIo) : HRESULT
+    @lpVtbl.value.read.call(this, pfio)
+  end
+end
+struct LibWin32::IClusterDetector
+  def query_interface(this : IClusterDetector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IClusterDetector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IClusterDetector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IClusterDetector*, wbaseentrylevel : UInt16, wclusterentrylevel : UInt16) : HRESULT
+    @lpVtbl.value.initialize.call(this, wbaseentrylevel, wclusterentrylevel)
+  end
+  def detect(this : IClusterDetector*, dwmaxnumclusters : UInt32, fminclusterduration : Float32, fmaxclusterduration : Float32, psrctoc : IToc, ppdsttoc : IToc*) : HRESULT
+    @lpVtbl.value.detect.call(this, dwmaxnumclusters, fminclusterduration, fmaxclusterduration, psrctoc, ppdsttoc)
+  end
+end
+struct LibWin32::IDXVAHD_Device
+  def query_interface(this : IDXVAHD_Device*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDXVAHD_Device*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDXVAHD_Device*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_video_surface(this : IDXVAHD_Device*, width : UInt32, height : UInt32, format : D3DFORMAT, pool : D3DPOOL, usage : UInt32, type : DXVAHD_SURFACE_TYPE, numsurfaces : UInt32, ppsurfaces : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_video_surface.call(this, width, height, format, pool, usage, type, numsurfaces, ppsurfaces, psharedhandle)
+  end
+  def get_video_processor_device_caps(this : IDXVAHD_Device*, pcaps : DXVAHD_VPDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_device_caps.call(this, pcaps)
+  end
+  def get_video_processor_output_formats(this : IDXVAHD_Device*, count : UInt32, pformats : D3DFORMAT*) : HRESULT
+    @lpVtbl.value.get_video_processor_output_formats.call(this, count, pformats)
+  end
+  def get_video_processor_input_formats(this : IDXVAHD_Device*, count : UInt32, pformats : D3DFORMAT*) : HRESULT
+    @lpVtbl.value.get_video_processor_input_formats.call(this, count, pformats)
+  end
+  def get_video_processor_caps(this : IDXVAHD_Device*, count : UInt32, pcaps : DXVAHD_VPCAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.call(this, count, pcaps)
+  end
+  def get_video_processor_custom_rates(this : IDXVAHD_Device*, pvpguid : Guid*, count : UInt32, prates : DXVAHD_CUSTOM_RATE_DATA*) : HRESULT
+    @lpVtbl.value.get_video_processor_custom_rates.call(this, pvpguid, count, prates)
+  end
+  def get_video_processor_filter_range(this : IDXVAHD_Device*, filter : DXVAHD_FILTER, prange : DXVAHD_FILTER_RANGE_DATA*) : HRESULT
+    @lpVtbl.value.get_video_processor_filter_range.call(this, filter, prange)
+  end
+  def create_video_processor(this : IDXVAHD_Device*, pvpguid : Guid*, ppvideoprocessor : IDXVAHD_VideoProcessor*) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, pvpguid, ppvideoprocessor)
+  end
+end
+struct LibWin32::IDXVAHD_VideoProcessor
+  def query_interface(this : IDXVAHD_VideoProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDXVAHD_VideoProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDXVAHD_VideoProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_video_process_blt_state(this : IDXVAHD_VideoProcessor*, state : DXVAHD_BLT_STATE, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_video_process_blt_state.call(this, state, datasize, pdata)
+  end
+  def get_video_process_blt_state(this : IDXVAHD_VideoProcessor*, state : DXVAHD_BLT_STATE, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_video_process_blt_state.call(this, state, datasize, pdata)
+  end
+  def set_video_process_stream_state(this : IDXVAHD_VideoProcessor*, streamnumber : UInt32, state : DXVAHD_STREAM_STATE, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_video_process_stream_state.call(this, streamnumber, state, datasize, pdata)
+  end
+  def get_video_process_stream_state(this : IDXVAHD_VideoProcessor*, streamnumber : UInt32, state : DXVAHD_STREAM_STATE, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_video_process_stream_state.call(this, streamnumber, state, datasize, pdata)
+  end
+  def video_process_blt_hd(this : IDXVAHD_VideoProcessor*, poutputsurface : IDirect3DSurface9, outputframe : UInt32, streamcount : UInt32, pstreams : DXVAHD_STREAM_DATA*) : HRESULT
+    @lpVtbl.value.video_process_blt_hd.call(this, poutputsurface, outputframe, streamcount, pstreams)
+  end
+end
+struct LibWin32::IDirect3DDeviceManager9
+  def query_interface(this : IDirect3DDeviceManager9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDeviceManager9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDeviceManager9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset_device(this : IDirect3DDeviceManager9*, pdevice : IDirect3DDevice9, resettoken : UInt32) : HRESULT
+    @lpVtbl.value.reset_device.call(this, pdevice, resettoken)
+  end
+  def open_device_handle(this : IDirect3DDeviceManager9*, phdevice : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_device_handle.call(this, phdevice)
+  end
+  def close_device_handle(this : IDirect3DDeviceManager9*, hdevice : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.close_device_handle.call(this, hdevice)
+  end
+  def test_device(this : IDirect3DDeviceManager9*, hdevice : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.test_device.call(this, hdevice)
+  end
+  def lock_device(this : IDirect3DDeviceManager9*, hdevice : LibC::HANDLE, ppdevice : IDirect3DDevice9*, fblock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_device.call(this, hdevice, ppdevice, fblock)
+  end
+  def unlock_device(this : IDirect3DDeviceManager9*, hdevice : LibC::HANDLE, fsavestate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unlock_device.call(this, hdevice, fsavestate)
+  end
+  def get_video_service(this : IDirect3DDeviceManager9*, hdevice : LibC::HANDLE, riid : Guid*, ppservice : Void**) : HRESULT
+    @lpVtbl.value.get_video_service.call(this, hdevice, riid, ppservice)
+  end
+end
+struct LibWin32::IDirectXVideoAccelerationService
+  def query_interface(this : IDirectXVideoAccelerationService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoAccelerationService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoAccelerationService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_surface(this : IDirectXVideoAccelerationService*, width : UInt32, height : UInt32, backbuffers : UInt32, format : D3DFORMAT, pool : D3DPOOL, usage : UInt32, dxvatype : DXVA2_VideoRenderTargetType, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, backbuffers, format, pool, usage, dxvatype, ppsurface, psharedhandle)
+  end
+end
+struct LibWin32::IDirectXVideoDecoderService
+  def query_interface(this : IDirectXVideoDecoderService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoDecoderService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoDecoderService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_surface(this : IDirectXVideoDecoderService*, width : UInt32, height : UInt32, backbuffers : UInt32, format : D3DFORMAT, pool : D3DPOOL, usage : UInt32, dxvatype : DXVA2_VideoRenderTargetType, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, backbuffers, format, pool, usage, dxvatype, ppsurface, psharedhandle)
+  end
+  def get_decoder_device_guids(this : IDirectXVideoDecoderService*, pcount : UInt32*, pguids : Guid**) : HRESULT
+    @lpVtbl.value.get_decoder_device_guids.call(this, pcount, pguids)
+  end
+  def get_decoder_render_targets(this : IDirectXVideoDecoderService*, guid : Guid*, pcount : UInt32*, pformats : D3DFORMAT**) : HRESULT
+    @lpVtbl.value.get_decoder_render_targets.call(this, guid, pcount, pformats)
+  end
+  def get_decoder_configurations(this : IDirectXVideoDecoderService*, guid : Guid*, pvideodesc : DXVA2_VideoDesc*, preserved : Void*, pcount : UInt32*, ppconfigs : DXVA2_ConfigPictureDecode**) : HRESULT
+    @lpVtbl.value.get_decoder_configurations.call(this, guid, pvideodesc, preserved, pcount, ppconfigs)
+  end
+  def create_video_decoder(this : IDirectXVideoDecoderService*, guid : Guid*, pvideodesc : DXVA2_VideoDesc*, pconfig : DXVA2_ConfigPictureDecode*, ppdecoderrendertargets : IDirect3DSurface9*, numrendertargets : UInt32, ppdecode : IDirectXVideoDecoder*) : HRESULT
+    @lpVtbl.value.create_video_decoder.call(this, guid, pvideodesc, pconfig, ppdecoderrendertargets, numrendertargets, ppdecode)
+  end
+end
+struct LibWin32::IDirectXVideoProcessorService
+  def query_interface(this : IDirectXVideoProcessorService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoProcessorService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoProcessorService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_surface(this : IDirectXVideoProcessorService*, width : UInt32, height : UInt32, backbuffers : UInt32, format : D3DFORMAT, pool : D3DPOOL, usage : UInt32, dxvatype : DXVA2_VideoRenderTargetType, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_surface.call(this, width, height, backbuffers, format, pool, usage, dxvatype, ppsurface, psharedhandle)
+  end
+  def register_video_processor_software_device(this : IDirectXVideoProcessorService*, pcallbacks : Void*) : HRESULT
+    @lpVtbl.value.register_video_processor_software_device.call(this, pcallbacks)
+  end
+  def get_video_processor_device_guids(this : IDirectXVideoProcessorService*, pvideodesc : DXVA2_VideoDesc*, pcount : UInt32*, pguids : Guid**) : HRESULT
+    @lpVtbl.value.get_video_processor_device_guids.call(this, pvideodesc, pcount, pguids)
+  end
+  def get_video_processor_render_targets(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, pcount : UInt32*, pformats : D3DFORMAT**) : HRESULT
+    @lpVtbl.value.get_video_processor_render_targets.call(this, videoprocdeviceguid, pvideodesc, pcount, pformats)
+  end
+  def get_video_processor_sub_stream_formats(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, rendertargetformat : D3DFORMAT, pcount : UInt32*, pformats : D3DFORMAT**) : HRESULT
+    @lpVtbl.value.get_video_processor_sub_stream_formats.call(this, videoprocdeviceguid, pvideodesc, rendertargetformat, pcount, pformats)
+  end
+  def get_video_processor_caps(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, rendertargetformat : D3DFORMAT, pcaps : DXVA2_VideoProcessorCaps*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.call(this, videoprocdeviceguid, pvideodesc, rendertargetformat, pcaps)
+  end
+  def get_proc_amp_range(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, rendertargetformat : D3DFORMAT, procampcap : UInt32, prange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_proc_amp_range.call(this, videoprocdeviceguid, pvideodesc, rendertargetformat, procampcap, prange)
+  end
+  def get_filter_property_range(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, rendertargetformat : D3DFORMAT, filtersetting : UInt32, prange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_filter_property_range.call(this, videoprocdeviceguid, pvideodesc, rendertargetformat, filtersetting, prange)
+  end
+  def create_video_processor(this : IDirectXVideoProcessorService*, videoprocdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, rendertargetformat : D3DFORMAT, maxnumsubstreams : UInt32, ppvidprocess : IDirectXVideoProcessor*) : HRESULT
+    @lpVtbl.value.create_video_processor.call(this, videoprocdeviceguid, pvideodesc, rendertargetformat, maxnumsubstreams, ppvidprocess)
+  end
+end
+struct LibWin32::IDirectXVideoDecoder
+  def query_interface(this : IDirectXVideoDecoder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoDecoder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoDecoder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_video_decoder_service(this : IDirectXVideoDecoder*, ppservice : IDirectXVideoDecoderService*) : HRESULT
+    @lpVtbl.value.get_video_decoder_service.call(this, ppservice)
+  end
+  def get_creation_parameters(this : IDirectXVideoDecoder*, pdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, pconfig : DXVA2_ConfigPictureDecode*, pdecoderrendertargets : IDirect3DSurface9**, pnumsurfaces : UInt32*) : HRESULT
+    @lpVtbl.value.get_creation_parameters.call(this, pdeviceguid, pvideodesc, pconfig, pdecoderrendertargets, pnumsurfaces)
+  end
+  def get_buffer(this : IDirectXVideoDecoder*, buffertype : DXVA2_BufferfType, ppbuffer : Void**, pbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, buffertype, ppbuffer, pbuffersize)
+  end
+  def release_buffer(this : IDirectXVideoDecoder*, buffertype : UInt32) : HRESULT
+    @lpVtbl.value.release_buffer.call(this, buffertype)
+  end
+  def begin_frame(this : IDirectXVideoDecoder*, prendertarget : IDirect3DSurface9, pvpvpdata : Void*) : HRESULT
+    @lpVtbl.value.begin_frame.call(this, prendertarget, pvpvpdata)
+  end
+  def end_frame(this : IDirectXVideoDecoder*, phandlecomplete : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.end_frame.call(this, phandlecomplete)
+  end
+  def execute(this : IDirectXVideoDecoder*, pexecuteparams : DXVA2_DecodeExecuteParams*) : HRESULT
+    @lpVtbl.value.execute.call(this, pexecuteparams)
+  end
+end
+struct LibWin32::IDirectXVideoProcessor
+  def query_interface(this : IDirectXVideoProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_video_processor_service(this : IDirectXVideoProcessor*, ppservice : IDirectXVideoProcessorService*) : HRESULT
+    @lpVtbl.value.get_video_processor_service.call(this, ppservice)
+  end
+  def get_creation_parameters(this : IDirectXVideoProcessor*, pdeviceguid : Guid*, pvideodesc : DXVA2_VideoDesc*, prendertargetformat : D3DFORMAT*, pmaxnumsubstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_creation_parameters.call(this, pdeviceguid, pvideodesc, prendertargetformat, pmaxnumsubstreams)
+  end
+  def get_video_processor_caps(this : IDirectXVideoProcessor*, pcaps : DXVA2_VideoProcessorCaps*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.call(this, pcaps)
+  end
+  def get_proc_amp_range(this : IDirectXVideoProcessor*, procampcap : UInt32, prange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_proc_amp_range.call(this, procampcap, prange)
+  end
+  def get_filter_property_range(this : IDirectXVideoProcessor*, filtersetting : UInt32, prange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_filter_property_range.call(this, filtersetting, prange)
+  end
+  def video_process_blt(this : IDirectXVideoProcessor*, prendertarget : IDirect3DSurface9, pbltparams : DXVA2_VideoProcessBltParams*, psamples : DXVA2_VideoSample*, numsamples : UInt32, phandlecomplete : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.video_process_blt.call(this, prendertarget, pbltparams, psamples, numsamples, phandlecomplete)
+  end
+end
+struct LibWin32::IDirectXVideoMemoryConfiguration
+  def query_interface(this : IDirectXVideoMemoryConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectXVideoMemoryConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectXVideoMemoryConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_available_surface_type_by_index(this : IDirectXVideoMemoryConfiguration*, dwtypeindex : UInt32, pdwtype : DXVA2_SurfaceType*) : HRESULT
+    @lpVtbl.value.get_available_surface_type_by_index.call(this, dwtypeindex, pdwtype)
+  end
+  def set_surface_type(this : IDirectXVideoMemoryConfiguration*, dwtype : DXVA2_SurfaceType) : HRESULT
+    @lpVtbl.value.set_surface_type.call(this, dwtype)
+  end
+end
+struct LibWin32::IOPMVideoOutput
+  def query_interface(this : IOPMVideoOutput*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOPMVideoOutput*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOPMVideoOutput*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_initialization(this : IOPMVideoOutput*, prnrandomnumber : OPM_RANDOM_NUMBER*, ppbcertificate : UInt8**, pulcertificatelength : UInt32*) : HRESULT
+    @lpVtbl.value.start_initialization.call(this, prnrandomnumber, ppbcertificate, pulcertificatelength)
+  end
+  def finish_initialization(this : IOPMVideoOutput*, pparameters : OPM_ENCRYPTED_INITIALIZATION_PARAMETERS*) : HRESULT
+    @lpVtbl.value.finish_initialization.call(this, pparameters)
+  end
+  def get_information(this : IOPMVideoOutput*, pparameters : OPM_GET_INFO_PARAMETERS*, prequestedinformation : OPM_REQUESTED_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_information.call(this, pparameters, prequestedinformation)
+  end
+  def copp_compatible_get_information(this : IOPMVideoOutput*, pparameters : OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS*, prequestedinformation : OPM_REQUESTED_INFORMATION*) : HRESULT
+    @lpVtbl.value.copp_compatible_get_information.call(this, pparameters, prequestedinformation)
+  end
+  def configure(this : IOPMVideoOutput*, pparameters : OPM_CONFIGURE_PARAMETERS*, uladditionalparameterssize : UInt32, pbadditionalparameters : UInt8*) : HRESULT
+    @lpVtbl.value.configure.call(this, pparameters, uladditionalparameterssize, pbadditionalparameters)
+  end
+end
+struct LibWin32::IMFAttributes
+  def query_interface(this : IMFAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFAttributes*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFAttributes*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFAttributes*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFAttributes*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFAttributes*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFAttributes*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFAttributes*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFAttributes*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFAttributes*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFAttributes*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFAttributes*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFAttributes*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFAttributes*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFAttributes*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFAttributes*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFAttributes*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFAttributes*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFAttributes*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFAttributes*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFAttributes*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFAttributes*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFAttributes*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFAttributes*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFAttributes*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFAttributes*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFAttributes*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFAttributes*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFAttributes*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFAttributes*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFAttributes*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+end
+struct LibWin32::IMFMediaBuffer
+  def query_interface(this : IMFMediaBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock(this : IMFMediaBuffer*, ppbbuffer : UInt8**, pcbmaxlength : UInt32*, pcbcurrentlength : UInt32*) : HRESULT
+    @lpVtbl.value.lock.call(this, ppbbuffer, pcbmaxlength, pcbcurrentlength)
+  end
+  def unlock(this : IMFMediaBuffer*) : HRESULT
+    @lpVtbl.value.unlock.call(this)
+  end
+  def get_current_length(this : IMFMediaBuffer*, pcbcurrentlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_length.call(this, pcbcurrentlength)
+  end
+  def set_current_length(this : IMFMediaBuffer*, cbcurrentlength : UInt32) : HRESULT
+    @lpVtbl.value.set_current_length.call(this, cbcurrentlength)
+  end
+  def get_max_length(this : IMFMediaBuffer*, pcbmaxlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pcbmaxlength)
+  end
+end
+struct LibWin32::IMFSample
+  def query_interface(this : IMFSample*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSample*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSample*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFSample*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFSample*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFSample*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFSample*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFSample*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFSample*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFSample*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFSample*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFSample*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFSample*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFSample*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFSample*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFSample*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFSample*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFSample*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFSample*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFSample*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFSample*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFSample*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFSample*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFSample*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFSample*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFSample*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFSample*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFSample*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFSample*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFSample*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFSample*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFSample*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFSample*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_sample_flags(this : IMFSample*, pdwsampleflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_sample_flags.call(this, pdwsampleflags)
+  end
+  def set_sample_flags(this : IMFSample*, dwsampleflags : UInt32) : HRESULT
+    @lpVtbl.value.set_sample_flags.call(this, dwsampleflags)
+  end
+  def get_sample_time(this : IMFSample*, phnssampletime : Int64*) : HRESULT
+    @lpVtbl.value.get_sample_time.call(this, phnssampletime)
+  end
+  def set_sample_time(this : IMFSample*, hnssampletime : Int64) : HRESULT
+    @lpVtbl.value.set_sample_time.call(this, hnssampletime)
+  end
+  def get_sample_duration(this : IMFSample*, phnssampleduration : Int64*) : HRESULT
+    @lpVtbl.value.get_sample_duration.call(this, phnssampleduration)
+  end
+  def set_sample_duration(this : IMFSample*, hnssampleduration : Int64) : HRESULT
+    @lpVtbl.value.set_sample_duration.call(this, hnssampleduration)
+  end
+  def get_buffer_count(this : IMFSample*, pdwbuffercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_count.call(this, pdwbuffercount)
+  end
+  def get_buffer_by_index(this : IMFSample*, dwindex : UInt32, ppbuffer : IMFMediaBuffer*) : HRESULT
+    @lpVtbl.value.get_buffer_by_index.call(this, dwindex, ppbuffer)
+  end
+  def convert_to_contiguous_buffer(this : IMFSample*, ppbuffer : IMFMediaBuffer*) : HRESULT
+    @lpVtbl.value.convert_to_contiguous_buffer.call(this, ppbuffer)
+  end
+  def add_buffer(this : IMFSample*, pbuffer : IMFMediaBuffer) : HRESULT
+    @lpVtbl.value.add_buffer.call(this, pbuffer)
+  end
+  def remove_buffer_by_index(this : IMFSample*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_buffer_by_index.call(this, dwindex)
+  end
+  def remove_all_buffers(this : IMFSample*) : HRESULT
+    @lpVtbl.value.remove_all_buffers.call(this)
+  end
+  def get_total_length(this : IMFSample*, pcbtotallength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.call(this, pcbtotallength)
+  end
+  def copy_to_buffer(this : IMFSample*, pbuffer : IMFMediaBuffer) : HRESULT
+    @lpVtbl.value.copy_to_buffer.call(this, pbuffer)
+  end
+end
+struct LibWin32::IMF2DBuffer
+  def query_interface(this : IMF2DBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMF2DBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMF2DBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock2_d(this : IMF2DBuffer*, ppbscanline0 : UInt8**, plpitch : Int32*) : HRESULT
+    @lpVtbl.value.lock2_d.call(this, ppbscanline0, plpitch)
+  end
+  def unlock2_d(this : IMF2DBuffer*) : HRESULT
+    @lpVtbl.value.unlock2_d.call(this)
+  end
+  def get_scanline0_and_pitch(this : IMF2DBuffer*, pbscanline0 : UInt8**, plpitch : Int32*) : HRESULT
+    @lpVtbl.value.get_scanline0_and_pitch.call(this, pbscanline0, plpitch)
+  end
+  def is_contiguous_format(this : IMF2DBuffer*, pfiscontiguous : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_contiguous_format.call(this, pfiscontiguous)
+  end
+  def get_contiguous_length(this : IMF2DBuffer*, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.get_contiguous_length.call(this, pcblength)
+  end
+  def contiguous_copy_to(this : IMF2DBuffer*, pbdestbuffer : UInt8*, cbdestbuffer : UInt32) : HRESULT
+    @lpVtbl.value.contiguous_copy_to.call(this, pbdestbuffer, cbdestbuffer)
+  end
+  def contiguous_copy_from(this : IMF2DBuffer*, pbsrcbuffer : UInt8*, cbsrcbuffer : UInt32) : HRESULT
+    @lpVtbl.value.contiguous_copy_from.call(this, pbsrcbuffer, cbsrcbuffer)
+  end
+end
+struct LibWin32::IMF2DBuffer2
+  def query_interface(this : IMF2DBuffer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMF2DBuffer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMF2DBuffer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock2_d(this : IMF2DBuffer2*, ppbscanline0 : UInt8**, plpitch : Int32*) : HRESULT
+    @lpVtbl.value.lock2_d.call(this, ppbscanline0, plpitch)
+  end
+  def unlock2_d(this : IMF2DBuffer2*) : HRESULT
+    @lpVtbl.value.unlock2_d.call(this)
+  end
+  def get_scanline0_and_pitch(this : IMF2DBuffer2*, pbscanline0 : UInt8**, plpitch : Int32*) : HRESULT
+    @lpVtbl.value.get_scanline0_and_pitch.call(this, pbscanline0, plpitch)
+  end
+  def is_contiguous_format(this : IMF2DBuffer2*, pfiscontiguous : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_contiguous_format.call(this, pfiscontiguous)
+  end
+  def get_contiguous_length(this : IMF2DBuffer2*, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.get_contiguous_length.call(this, pcblength)
+  end
+  def contiguous_copy_to(this : IMF2DBuffer2*, pbdestbuffer : UInt8*, cbdestbuffer : UInt32) : HRESULT
+    @lpVtbl.value.contiguous_copy_to.call(this, pbdestbuffer, cbdestbuffer)
+  end
+  def contiguous_copy_from(this : IMF2DBuffer2*, pbsrcbuffer : UInt8*, cbsrcbuffer : UInt32) : HRESULT
+    @lpVtbl.value.contiguous_copy_from.call(this, pbsrcbuffer, cbsrcbuffer)
+  end
+  def lock2_d_size(this : IMF2DBuffer2*, lockflags : MF2DBuffer_LockFlags, ppbscanline0 : UInt8**, plpitch : Int32*, ppbbufferstart : UInt8**, pcbbufferlength : UInt32*) : HRESULT
+    @lpVtbl.value.lock2_d_size.call(this, lockflags, ppbscanline0, plpitch, ppbbufferstart, pcbbufferlength)
+  end
+  def copy2_d_to(this : IMF2DBuffer2*, pdestbuffer : IMF2DBuffer2) : HRESULT
+    @lpVtbl.value.copy2_d_to.call(this, pdestbuffer)
+  end
+end
+struct LibWin32::IMFDXGIBuffer
+  def query_interface(this : IMFDXGIBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDXGIBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDXGIBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_resource(this : IMFDXGIBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_resource.call(this, riid, ppvobject)
+  end
+  def get_subresource_index(this : IMFDXGIBuffer*, pusubresource : UInt32*) : HRESULT
+    @lpVtbl.value.get_subresource_index.call(this, pusubresource)
+  end
+  def get_unknown(this : IMFDXGIBuffer*, guid : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guid, riid, ppvobject)
+  end
+  def set_unknown(this : IMFDXGIBuffer*, guid : Guid*, punkdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guid, punkdata)
+  end
+end
+struct LibWin32::IMFMediaType
+  def query_interface(this : IMFMediaType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFMediaType*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFMediaType*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFMediaType*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFMediaType*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFMediaType*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFMediaType*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFMediaType*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFMediaType*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFMediaType*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFMediaType*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFMediaType*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFMediaType*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFMediaType*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFMediaType*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFMediaType*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFMediaType*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFMediaType*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFMediaType*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFMediaType*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFMediaType*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFMediaType*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFMediaType*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFMediaType*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFMediaType*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFMediaType*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFMediaType*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFMediaType*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFMediaType*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_major_type(this : IMFMediaType*, pguidmajortype : Guid*) : HRESULT
+    @lpVtbl.value.get_major_type.call(this, pguidmajortype)
+  end
+  def is_compressed_format(this : IMFMediaType*, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_compressed_format.call(this, pfcompressed)
+  end
+  def is_equal(this : IMFMediaType*, pimediatype : IMFMediaType, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pimediatype, pdwflags)
+  end
+  def get_representation(this : IMFMediaType*, guidrepresentation : Guid, ppvrepresentation : Void**) : HRESULT
+    @lpVtbl.value.get_representation.call(this, guidrepresentation, ppvrepresentation)
+  end
+  def free_representation(this : IMFMediaType*, guidrepresentation : Guid, pvrepresentation : Void*) : HRESULT
+    @lpVtbl.value.free_representation.call(this, guidrepresentation, pvrepresentation)
+  end
+end
+struct LibWin32::IMFAudioMediaType
+  def query_interface(this : IMFAudioMediaType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAudioMediaType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAudioMediaType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFAudioMediaType*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFAudioMediaType*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFAudioMediaType*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFAudioMediaType*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFAudioMediaType*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFAudioMediaType*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFAudioMediaType*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFAudioMediaType*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFAudioMediaType*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFAudioMediaType*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFAudioMediaType*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFAudioMediaType*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFAudioMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFAudioMediaType*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFAudioMediaType*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFAudioMediaType*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFAudioMediaType*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFAudioMediaType*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFAudioMediaType*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFAudioMediaType*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFAudioMediaType*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFAudioMediaType*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFAudioMediaType*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFAudioMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFAudioMediaType*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFAudioMediaType*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFAudioMediaType*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFAudioMediaType*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFAudioMediaType*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFAudioMediaType*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_major_type(this : IMFAudioMediaType*, pguidmajortype : Guid*) : HRESULT
+    @lpVtbl.value.get_major_type.call(this, pguidmajortype)
+  end
+  def is_compressed_format(this : IMFAudioMediaType*, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_compressed_format.call(this, pfcompressed)
+  end
+  def is_equal(this : IMFAudioMediaType*, pimediatype : IMFMediaType, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pimediatype, pdwflags)
+  end
+  def get_representation(this : IMFAudioMediaType*, guidrepresentation : Guid, ppvrepresentation : Void**) : HRESULT
+    @lpVtbl.value.get_representation.call(this, guidrepresentation, ppvrepresentation)
+  end
+  def free_representation(this : IMFAudioMediaType*, guidrepresentation : Guid, pvrepresentation : Void*) : HRESULT
+    @lpVtbl.value.free_representation.call(this, guidrepresentation, pvrepresentation)
+  end
+  def get_audio_format(this : IMFAudioMediaType*) : WAVEFORMATEX*
+    @lpVtbl.value.get_audio_format.call(this)
+  end
+end
+struct LibWin32::IMFVideoMediaType
+  def query_interface(this : IMFVideoMediaType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoMediaType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoMediaType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFVideoMediaType*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFVideoMediaType*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFVideoMediaType*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFVideoMediaType*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFVideoMediaType*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFVideoMediaType*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFVideoMediaType*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFVideoMediaType*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFVideoMediaType*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFVideoMediaType*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFVideoMediaType*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFVideoMediaType*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFVideoMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFVideoMediaType*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFVideoMediaType*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFVideoMediaType*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFVideoMediaType*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFVideoMediaType*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFVideoMediaType*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFVideoMediaType*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFVideoMediaType*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFVideoMediaType*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFVideoMediaType*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFVideoMediaType*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFVideoMediaType*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFVideoMediaType*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFVideoMediaType*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFVideoMediaType*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFVideoMediaType*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFVideoMediaType*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_major_type(this : IMFVideoMediaType*, pguidmajortype : Guid*) : HRESULT
+    @lpVtbl.value.get_major_type.call(this, pguidmajortype)
+  end
+  def is_compressed_format(this : IMFVideoMediaType*, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_compressed_format.call(this, pfcompressed)
+  end
+  def is_equal(this : IMFVideoMediaType*, pimediatype : IMFMediaType, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pimediatype, pdwflags)
+  end
+  def get_representation(this : IMFVideoMediaType*, guidrepresentation : Guid, ppvrepresentation : Void**) : HRESULT
+    @lpVtbl.value.get_representation.call(this, guidrepresentation, ppvrepresentation)
+  end
+  def free_representation(this : IMFVideoMediaType*, guidrepresentation : Guid, pvrepresentation : Void*) : HRESULT
+    @lpVtbl.value.free_representation.call(this, guidrepresentation, pvrepresentation)
+  end
+  def get_video_format(this : IMFVideoMediaType*) : MFVIDEOFORMAT*
+    @lpVtbl.value.get_video_format.call(this)
+  end
+  def get_video_representation(this : IMFVideoMediaType*, guidrepresentation : Guid, ppvrepresentation : Void**, lstride : Int32) : HRESULT
+    @lpVtbl.value.get_video_representation.call(this, guidrepresentation, ppvrepresentation, lstride)
+  end
+end
+struct LibWin32::IMFAsyncResult
+  def query_interface(this : IMFAsyncResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAsyncResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAsyncResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_state(this : IMFAsyncResult*, ppunkstate : IUnknown*) : HRESULT
+    @lpVtbl.value.get_state.call(this, ppunkstate)
+  end
+  def get_status(this : IMFAsyncResult*) : HRESULT
+    @lpVtbl.value.get_status.call(this)
+  end
+  def set_status(this : IMFAsyncResult*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.set_status.call(this, hrstatus)
+  end
+  def get_object(this : IMFAsyncResult*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.call(this, ppobject)
+  end
+  def get_state_no_add_ref(this : IMFAsyncResult*) : IUnknown
+    @lpVtbl.value.get_state_no_add_ref.call(this)
+  end
+end
+struct LibWin32::IMFAsyncCallback
+  def query_interface(this : IMFAsyncCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAsyncCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAsyncCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_parameters(this : IMFAsyncCallback*, pdwflags : UInt32*, pdwqueue : UInt32*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, pdwflags, pdwqueue)
+  end
+  def invoke(this : IMFAsyncCallback*, pasyncresult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.invoke.call(this, pasyncresult)
+  end
+end
+struct LibWin32::IMFAsyncCallbackLogging
+  def query_interface(this : IMFAsyncCallbackLogging*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAsyncCallbackLogging*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAsyncCallbackLogging*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_parameters(this : IMFAsyncCallbackLogging*, pdwflags : UInt32*, pdwqueue : UInt32*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, pdwflags, pdwqueue)
+  end
+  def invoke(this : IMFAsyncCallbackLogging*, pasyncresult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.invoke.call(this, pasyncresult)
+  end
+  def get_object_pointer(this : IMFAsyncCallbackLogging*) : Void*
+    @lpVtbl.value.get_object_pointer.call(this)
+  end
+  def get_object_tag(this : IMFAsyncCallbackLogging*) : UInt32
+    @lpVtbl.value.get_object_tag.call(this)
+  end
+end
+struct LibWin32::IMFMediaEvent
+  def query_interface(this : IMFMediaEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFMediaEvent*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFMediaEvent*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFMediaEvent*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFMediaEvent*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFMediaEvent*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFMediaEvent*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFMediaEvent*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFMediaEvent*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFMediaEvent*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFMediaEvent*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFMediaEvent*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFMediaEvent*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFMediaEvent*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFMediaEvent*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFMediaEvent*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFMediaEvent*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFMediaEvent*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFMediaEvent*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFMediaEvent*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFMediaEvent*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFMediaEvent*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFMediaEvent*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFMediaEvent*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFMediaEvent*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFMediaEvent*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFMediaEvent*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFMediaEvent*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_type(this : IMFMediaEvent*, pmet : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pmet)
+  end
+  def get_extended_type(this : IMFMediaEvent*, pguidextendedtype : Guid*) : HRESULT
+    @lpVtbl.value.get_extended_type.call(this, pguidextendedtype)
+  end
+  def get_status(this : IMFMediaEvent*, phrstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this, phrstatus)
+  end
+  def get_value(this : IMFMediaEvent*, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvvalue)
+  end
+end
+struct LibWin32::IMFMediaEventGenerator
+  def query_interface(this : IMFMediaEventGenerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEventGenerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEventGenerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaEventGenerator*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaEventGenerator*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaEventGenerator*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaEventGenerator*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+end
+struct LibWin32::IMFRemoteAsyncCallback
+  def query_interface(this : IMFRemoteAsyncCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRemoteAsyncCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRemoteAsyncCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IMFRemoteAsyncCallback*, hr : HRESULT, premoteresult : IUnknown) : HRESULT
+    @lpVtbl.value.invoke.call(this, hr, premoteresult)
+  end
+end
+struct LibWin32::IMFByteStream
+  def query_interface(this : IMFByteStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IMFByteStream*, pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilities)
+  end
+  def get_length(this : IMFByteStream*, pqwlength : UInt64*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pqwlength)
+  end
+  def set_length(this : IMFByteStream*, qwlength : UInt64) : HRESULT
+    @lpVtbl.value.set_length.call(this, qwlength)
+  end
+  def get_current_position(this : IMFByteStream*, pqwposition : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, pqwposition)
+  end
+  def set_current_position(this : IMFByteStream*, qwposition : UInt64) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, qwposition)
+  end
+  def is_end_of_stream(this : IMFByteStream*, pfendofstream : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_end_of_stream.call(this, pfendofstream)
+  end
+  def read(this : IMFByteStream*, pb : UInt8*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pb, cb, pcbread)
+  end
+  def begin_read(this : IMFByteStream*, pb : UInt8*, cb : UInt32, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_read.call(this, pb, cb, pcallback, punkstate)
+  end
+  def end_read(this : IMFByteStream*, presult : IMFAsyncResult, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.end_read.call(this, presult, pcbread)
+  end
+  def write(this : IMFByteStream*, pb : UInt8*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pb, cb, pcbwritten)
+  end
+  def begin_write(this : IMFByteStream*, pb : UInt8*, cb : UInt32, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_write.call(this, pb, cb, pcallback, punkstate)
+  end
+  def end_write(this : IMFByteStream*, presult : IMFAsyncResult, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.end_write.call(this, presult, pcbwritten)
+  end
+  def seek(this : IMFByteStream*, seekorigin : MFBYTESTREAM_SEEK_ORIGIN, llseekoffset : Int64, dwseekflags : UInt32, pqwcurrentposition : UInt64*) : HRESULT
+    @lpVtbl.value.seek.call(this, seekorigin, llseekoffset, dwseekflags, pqwcurrentposition)
+  end
+  def flush(this : IMFByteStream*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def close(this : IMFByteStream*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMFByteStreamProxyClassFactory
+  def query_interface(this : IMFByteStreamProxyClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamProxyClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamProxyClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_byte_stream_proxy(this : IMFByteStreamProxyClassFactory*, pbytestream : IMFByteStream, pattributes : IMFAttributes, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_byte_stream_proxy.call(this, pbytestream, pattributes, riid, ppvobject)
+  end
+end
+struct LibWin32::IMFSampleOutputStream
+  def query_interface(this : IMFSampleOutputStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSampleOutputStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSampleOutputStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_write_sample(this : IMFSampleOutputStream*, psample : IMFSample, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_write_sample.call(this, psample, pcallback, punkstate)
+  end
+  def end_write_sample(this : IMFSampleOutputStream*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_write_sample.call(this, presult)
+  end
+  def close(this : IMFSampleOutputStream*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMFCollection
+  def query_interface(this : IMFCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_element_count(this : IMFCollection*, pcelements : UInt32*) : HRESULT
+    @lpVtbl.value.get_element_count.call(this, pcelements)
+  end
+  def get_element(this : IMFCollection*, dwelementindex : UInt32, ppunkelement : IUnknown*) : HRESULT
+    @lpVtbl.value.get_element.call(this, dwelementindex, ppunkelement)
+  end
+  def add_element(this : IMFCollection*, punkelement : IUnknown) : HRESULT
+    @lpVtbl.value.add_element.call(this, punkelement)
+  end
+  def remove_element(this : IMFCollection*, dwelementindex : UInt32, ppunkelement : IUnknown*) : HRESULT
+    @lpVtbl.value.remove_element.call(this, dwelementindex, ppunkelement)
+  end
+  def insert_element_at(this : IMFCollection*, dwindex : UInt32, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.insert_element_at.call(this, dwindex, punknown)
+  end
+  def remove_all_elements(this : IMFCollection*) : HRESULT
+    @lpVtbl.value.remove_all_elements.call(this)
+  end
+end
+struct LibWin32::IMFMediaEventQueue
+  def query_interface(this : IMFMediaEventQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEventQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEventQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaEventQueue*, dwflags : UInt32, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaEventQueue*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaEventQueue*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaEventQueue*, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.queue_event.call(this, pevent)
+  end
+  def queue_event_param_var(this : IMFMediaEventQueue*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event_param_var.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def queue_event_param_unk(this : IMFMediaEventQueue*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, punk : IUnknown) : HRESULT
+    @lpVtbl.value.queue_event_param_unk.call(this, met, guidextendedtype, hrstatus, punk)
+  end
+  def shutdown(this : IMFMediaEventQueue*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFActivate
+  def query_interface(this : IMFActivate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFActivate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFActivate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFActivate*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFActivate*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFActivate*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFActivate*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFActivate*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFActivate*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFActivate*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFActivate*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFActivate*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFActivate*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFActivate*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFActivate*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFActivate*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFActivate*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFActivate*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFActivate*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFActivate*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFActivate*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFActivate*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFActivate*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFActivate*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFActivate*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFActivate*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFActivate*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFActivate*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFActivate*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFActivate*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFActivate*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFActivate*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFActivate*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def activate_object(this : IMFActivate*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.activate_object.call(this, riid, ppv)
+  end
+  def shutdown_object(this : IMFActivate*) : HRESULT
+    @lpVtbl.value.shutdown_object.call(this)
+  end
+  def detach_object(this : IMFActivate*) : HRESULT
+    @lpVtbl.value.detach_object.call(this)
+  end
+end
+struct LibWin32::IMFPluginControl
+  def query_interface(this : IMFPluginControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPluginControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPluginControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_preferred_clsid(this : IMFPluginControl*, plugintype : UInt32, selector : LibC::LPWSTR, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_preferred_clsid.call(this, plugintype, selector, clsid)
+  end
+  def get_preferred_clsid_by_index(this : IMFPluginControl*, plugintype : UInt32, index : UInt32, selector : LibC::LPWSTR*, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_preferred_clsid_by_index.call(this, plugintype, index, selector, clsid)
+  end
+  def set_preferred_clsid(this : IMFPluginControl*, plugintype : UInt32, selector : LibC::LPWSTR, clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_preferred_clsid.call(this, plugintype, selector, clsid)
+  end
+  def is_disabled(this : IMFPluginControl*, plugintype : UInt32, clsid : Guid*) : HRESULT
+    @lpVtbl.value.is_disabled.call(this, plugintype, clsid)
+  end
+  def get_disabled_by_index(this : IMFPluginControl*, plugintype : UInt32, index : UInt32, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_disabled_by_index.call(this, plugintype, index, clsid)
+  end
+  def set_disabled(this : IMFPluginControl*, plugintype : UInt32, clsid : Guid*, disabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_disabled.call(this, plugintype, clsid, disabled)
+  end
+end
+struct LibWin32::IMFPluginControl2
+  def query_interface(this : IMFPluginControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPluginControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPluginControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_preferred_clsid(this : IMFPluginControl2*, plugintype : UInt32, selector : LibC::LPWSTR, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_preferred_clsid.call(this, plugintype, selector, clsid)
+  end
+  def get_preferred_clsid_by_index(this : IMFPluginControl2*, plugintype : UInt32, index : UInt32, selector : LibC::LPWSTR*, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_preferred_clsid_by_index.call(this, plugintype, index, selector, clsid)
+  end
+  def set_preferred_clsid(this : IMFPluginControl2*, plugintype : UInt32, selector : LibC::LPWSTR, clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_preferred_clsid.call(this, plugintype, selector, clsid)
+  end
+  def is_disabled(this : IMFPluginControl2*, plugintype : UInt32, clsid : Guid*) : HRESULT
+    @lpVtbl.value.is_disabled.call(this, plugintype, clsid)
+  end
+  def get_disabled_by_index(this : IMFPluginControl2*, plugintype : UInt32, index : UInt32, clsid : Guid*) : HRESULT
+    @lpVtbl.value.get_disabled_by_index.call(this, plugintype, index, clsid)
+  end
+  def set_disabled(this : IMFPluginControl2*, plugintype : UInt32, clsid : Guid*, disabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_disabled.call(this, plugintype, clsid, disabled)
+  end
+  def set_policy(this : IMFPluginControl2*, policy : MF_PLUGIN_CONTROL_POLICY) : HRESULT
+    @lpVtbl.value.set_policy.call(this, policy)
+  end
+end
+struct LibWin32::IMFDXGIDeviceManager
+  def query_interface(this : IMFDXGIDeviceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDXGIDeviceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDXGIDeviceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close_device_handle(this : IMFDXGIDeviceManager*, hdevice : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.close_device_handle.call(this, hdevice)
+  end
+  def get_video_service(this : IMFDXGIDeviceManager*, hdevice : LibC::HANDLE, riid : Guid*, ppservice : Void**) : HRESULT
+    @lpVtbl.value.get_video_service.call(this, hdevice, riid, ppservice)
+  end
+  def lock_device(this : IMFDXGIDeviceManager*, hdevice : LibC::HANDLE, riid : Guid*, ppunkdevice : Void**, fblock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_device.call(this, hdevice, riid, ppunkdevice, fblock)
+  end
+  def open_device_handle(this : IMFDXGIDeviceManager*, phdevice : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_device_handle.call(this, phdevice)
+  end
+  def reset_device(this : IMFDXGIDeviceManager*, punkdevice : IUnknown, resettoken : UInt32) : HRESULT
+    @lpVtbl.value.reset_device.call(this, punkdevice, resettoken)
+  end
+  def test_device(this : IMFDXGIDeviceManager*, hdevice : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.test_device.call(this, hdevice)
+  end
+  def unlock_device(this : IMFDXGIDeviceManager*, hdevice : LibC::HANDLE, fsavestate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unlock_device.call(this, hdevice, fsavestate)
+  end
+end
+struct LibWin32::IMFMuxStreamAttributesManager
+  def query_interface(this : IMFMuxStreamAttributesManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMuxStreamAttributesManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMuxStreamAttributesManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMFMuxStreamAttributesManager*, pdwmuxstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pdwmuxstreamcount)
+  end
+  def get_attributes(this : IMFMuxStreamAttributesManager*, dwmuxstreamindex : UInt32, ppstreamattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, dwmuxstreamindex, ppstreamattributes)
+  end
+end
+struct LibWin32::IMFMuxStreamMediaTypeManager
+  def query_interface(this : IMFMuxStreamMediaTypeManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMuxStreamMediaTypeManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMuxStreamMediaTypeManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMFMuxStreamMediaTypeManager*, pdwmuxstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pdwmuxstreamcount)
+  end
+  def get_media_type(this : IMFMuxStreamMediaTypeManager*, dwmuxstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, dwmuxstreamindex, ppmediatype)
+  end
+  def get_stream_configuration_count(this : IMFMuxStreamMediaTypeManager*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_configuration_count.call(this, pdwcount)
+  end
+  def add_stream_configuration(this : IMFMuxStreamMediaTypeManager*, ullstreammask : UInt64) : HRESULT
+    @lpVtbl.value.add_stream_configuration.call(this, ullstreammask)
+  end
+  def remove_stream_configuration(this : IMFMuxStreamMediaTypeManager*, ullstreammask : UInt64) : HRESULT
+    @lpVtbl.value.remove_stream_configuration.call(this, ullstreammask)
+  end
+  def get_stream_configuration(this : IMFMuxStreamMediaTypeManager*, ulindex : UInt32, pullstreammask : UInt64*) : HRESULT
+    @lpVtbl.value.get_stream_configuration.call(this, ulindex, pullstreammask)
+  end
+end
+struct LibWin32::IMFMuxStreamSampleManager
+  def query_interface(this : IMFMuxStreamSampleManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMuxStreamSampleManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMuxStreamSampleManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMFMuxStreamSampleManager*, pdwmuxstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pdwmuxstreamcount)
+  end
+  def get_sample(this : IMFMuxStreamSampleManager*, dwmuxstreamindex : UInt32, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.get_sample.call(this, dwmuxstreamindex, ppsample)
+  end
+  def get_stream_configuration(this : IMFMuxStreamSampleManager*) : UInt64
+    @lpVtbl.value.get_stream_configuration.call(this)
+  end
+end
+struct LibWin32::IMFSecureBuffer
+  def query_interface(this : IMFSecureBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSecureBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSecureBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_identifier(this : IMFSecureBuffer*, pguididentifier : Guid*) : HRESULT
+    @lpVtbl.value.get_identifier.call(this, pguididentifier)
+  end
+end
+struct LibWin32::IMFTransform
+  def query_interface(this : IMFTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_limits(this : IMFTransform*, pdwinputminimum : UInt32*, pdwinputmaximum : UInt32*, pdwoutputminimum : UInt32*, pdwoutputmaximum : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_limits.call(this, pdwinputminimum, pdwinputmaximum, pdwoutputminimum, pdwoutputmaximum)
+  end
+  def get_stream_count(this : IMFTransform*, pcinputstreams : UInt32*, pcoutputstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcinputstreams, pcoutputstreams)
+  end
+  def get_stream_i_ds(this : IMFTransform*, dwinputidarraysize : UInt32, pdwinputids : UInt32*, dwoutputidarraysize : UInt32, pdwoutputids : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_i_ds.call(this, dwinputidarraysize, pdwinputids, dwoutputidarraysize, pdwoutputids)
+  end
+  def get_input_stream_info(this : IMFTransform*, dwinputstreamid : UInt32, pstreaminfo : MFT_INPUT_STREAM_INFO*) : HRESULT
+    @lpVtbl.value.get_input_stream_info.call(this, dwinputstreamid, pstreaminfo)
+  end
+  def get_output_stream_info(this : IMFTransform*, dwoutputstreamid : UInt32, pstreaminfo : MFT_OUTPUT_STREAM_INFO*) : HRESULT
+    @lpVtbl.value.get_output_stream_info.call(this, dwoutputstreamid, pstreaminfo)
+  end
+  def get_attributes(this : IMFTransform*, pattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pattributes)
+  end
+  def get_input_stream_attributes(this : IMFTransform*, dwinputstreamid : UInt32, pattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_input_stream_attributes.call(this, dwinputstreamid, pattributes)
+  end
+  def get_output_stream_attributes(this : IMFTransform*, dwoutputstreamid : UInt32, pattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_output_stream_attributes.call(this, dwoutputstreamid, pattributes)
+  end
+  def delete_input_stream(this : IMFTransform*, dwstreamid : UInt32) : HRESULT
+    @lpVtbl.value.delete_input_stream.call(this, dwstreamid)
+  end
+  def add_input_streams(this : IMFTransform*, cstreams : UInt32, adwstreamids : UInt32*) : HRESULT
+    @lpVtbl.value.add_input_streams.call(this, cstreams, adwstreamids)
+  end
+  def get_input_available_type(this : IMFTransform*, dwinputstreamid : UInt32, dwtypeindex : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_available_type.call(this, dwinputstreamid, dwtypeindex, pptype)
+  end
+  def get_output_available_type(this : IMFTransform*, dwoutputstreamid : UInt32, dwtypeindex : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_available_type.call(this, dwoutputstreamid, dwtypeindex, pptype)
+  end
+  def set_input_type(this : IMFTransform*, dwinputstreamid : UInt32, ptype : IMFMediaType, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_input_type.call(this, dwinputstreamid, ptype, dwflags)
+  end
+  def set_output_type(this : IMFTransform*, dwoutputstreamid : UInt32, ptype : IMFMediaType, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_output_type.call(this, dwoutputstreamid, ptype, dwflags)
+  end
+  def get_input_current_type(this : IMFTransform*, dwinputstreamid : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_current_type.call(this, dwinputstreamid, pptype)
+  end
+  def get_output_current_type(this : IMFTransform*, dwoutputstreamid : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_current_type.call(this, dwoutputstreamid, pptype)
+  end
+  def get_input_status(this : IMFTransform*, dwinputstreamid : UInt32, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_status.call(this, dwinputstreamid, pdwflags)
+  end
+  def get_output_status(this : IMFTransform*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_status.call(this, pdwflags)
+  end
+  def set_output_bounds(this : IMFTransform*, hnslowerbound : Int64, hnsupperbound : Int64) : HRESULT
+    @lpVtbl.value.set_output_bounds.call(this, hnslowerbound, hnsupperbound)
+  end
+  def process_event(this : IMFTransform*, dwinputstreamid : UInt32, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.process_event.call(this, dwinputstreamid, pevent)
+  end
+  def process_message(this : IMFTransform*, emessage : MFT_MESSAGE_TYPE, ulparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.process_message.call(this, emessage, ulparam)
+  end
+  def process_input(this : IMFTransform*, dwinputstreamid : UInt32, psample : IMFSample, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.process_input.call(this, dwinputstreamid, psample, dwflags)
+  end
+  def process_output(this : IMFTransform*, dwflags : UInt32, coutputbuffercount : UInt32, poutputsamples : MFT_OUTPUT_DATA_BUFFER*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.process_output.call(this, dwflags, coutputbuffercount, poutputsamples, pdwstatus)
+  end
+end
+struct LibWin32::IMFMediaSession
+  def query_interface(this : IMFMediaSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaSession*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaSession*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaSession*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaSession*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def set_topology(this : IMFMediaSession*, dwsettopologyflags : UInt32, ptopology : IMFTopology) : HRESULT
+    @lpVtbl.value.set_topology.call(this, dwsettopologyflags, ptopology)
+  end
+  def clear_topologies(this : IMFMediaSession*) : HRESULT
+    @lpVtbl.value.clear_topologies.call(this)
+  end
+  def start(this : IMFMediaSession*, pguidtimeformat : Guid*, pvarstartposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.start.call(this, pguidtimeformat, pvarstartposition)
+  end
+  def pause(this : IMFMediaSession*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def stop(this : IMFMediaSession*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def close(this : IMFMediaSession*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def shutdown(this : IMFMediaSession*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_clock(this : IMFMediaSession*, ppclock : IMFClock*) : HRESULT
+    @lpVtbl.value.get_clock.call(this, ppclock)
+  end
+  def get_session_capabilities(this : IMFMediaSession*, pdwcaps : UInt32*) : HRESULT
+    @lpVtbl.value.get_session_capabilities.call(this, pdwcaps)
+  end
+  def get_full_topology(this : IMFMediaSession*, dwgetfulltopologyflags : UInt32, topoid : UInt64, ppfulltopology : IMFTopology*) : HRESULT
+    @lpVtbl.value.get_full_topology.call(this, dwgetfulltopologyflags, topoid, ppfulltopology)
+  end
+end
+struct LibWin32::IMFSourceResolver
+  def query_interface(this : IMFSourceResolver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceResolver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceResolver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_object_from_url(this : IMFSourceResolver*, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_object_from_url.call(this, pwszurl, dwflags, pprops, pobjecttype, ppobject)
+  end
+  def create_object_from_byte_stream(this : IMFSourceResolver*, pbytestream : IMFByteStream, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_object_from_byte_stream.call(this, pbytestream, pwszurl, dwflags, pprops, pobjecttype, ppobject)
+  end
+  def begin_create_object_from_url(this : IMFSourceResolver*, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, ppiunknowncancelcookie : IUnknown*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_create_object_from_url.call(this, pwszurl, dwflags, pprops, ppiunknowncancelcookie, pcallback, punkstate)
+  end
+  def end_create_object_from_url(this : IMFSourceResolver*, presult : IMFAsyncResult, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.end_create_object_from_url.call(this, presult, pobjecttype, ppobject)
+  end
+  def begin_create_object_from_byte_stream(this : IMFSourceResolver*, pbytestream : IMFByteStream, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, ppiunknowncancelcookie : IUnknown*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_create_object_from_byte_stream.call(this, pbytestream, pwszurl, dwflags, pprops, ppiunknowncancelcookie, pcallback, punkstate)
+  end
+  def end_create_object_from_byte_stream(this : IMFSourceResolver*, presult : IMFAsyncResult, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.end_create_object_from_byte_stream.call(this, presult, pobjecttype, ppobject)
+  end
+  def cancel_object_creation(this : IMFSourceResolver*, piunknowncancelcookie : IUnknown) : HRESULT
+    @lpVtbl.value.cancel_object_creation.call(this, piunknowncancelcookie)
+  end
+end
+struct LibWin32::IMFMediaSource
+  def query_interface(this : IMFMediaSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaSource*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaSource*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaSource*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaSource*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_characteristics(this : IMFMediaSource*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
+  end
+  def create_presentation_descriptor(this : IMFMediaSource*, pppresentationdescriptor : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.create_presentation_descriptor.call(this, pppresentationdescriptor)
+  end
+  def start(this : IMFMediaSource*, ppresentationdescriptor : IMFPresentationDescriptor, pguidtimeformat : Guid*, pvarstartposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.start.call(this, ppresentationdescriptor, pguidtimeformat, pvarstartposition)
+  end
+  def stop(this : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def pause(this : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def shutdown(this : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFMediaSourceEx
+  def query_interface(this : IMFMediaSourceEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourceEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourceEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaSourceEx*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaSourceEx*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaSourceEx*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaSourceEx*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_characteristics(this : IMFMediaSourceEx*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
+  end
+  def create_presentation_descriptor(this : IMFMediaSourceEx*, pppresentationdescriptor : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.create_presentation_descriptor.call(this, pppresentationdescriptor)
+  end
+  def start(this : IMFMediaSourceEx*, ppresentationdescriptor : IMFPresentationDescriptor, pguidtimeformat : Guid*, pvarstartposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.start.call(this, ppresentationdescriptor, pguidtimeformat, pvarstartposition)
+  end
+  def stop(this : IMFMediaSourceEx*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def pause(this : IMFMediaSourceEx*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def shutdown(this : IMFMediaSourceEx*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_source_attributes(this : IMFMediaSourceEx*, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_source_attributes.call(this, ppattributes)
+  end
+  def get_stream_attributes(this : IMFMediaSourceEx*, dwstreamidentifier : UInt32, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_stream_attributes.call(this, dwstreamidentifier, ppattributes)
+  end
+  def set_d3_d_manager(this : IMFMediaSourceEx*, pmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_d3_d_manager.call(this, pmanager)
+  end
+end
+struct LibWin32::IMFClockConsumer
+  def query_interface(this : IMFClockConsumer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFClockConsumer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFClockConsumer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_presentation_clock(this : IMFClockConsumer*, ppresentationclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.set_presentation_clock.call(this, ppresentationclock)
+  end
+  def get_presentation_clock(this : IMFClockConsumer*, pppresentationclock : IMFPresentationClock*) : HRESULT
+    @lpVtbl.value.get_presentation_clock.call(this, pppresentationclock)
+  end
+end
+struct LibWin32::IMFMediaStream
+  def query_interface(this : IMFMediaStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaStream*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaStream*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaStream*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaStream*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_media_source(this : IMFMediaStream*, ppmediasource : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.get_media_source.call(this, ppmediasource)
+  end
+  def get_stream_descriptor(this : IMFMediaStream*, ppstreamdescriptor : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.get_stream_descriptor.call(this, ppstreamdescriptor)
+  end
+  def request_sample(this : IMFMediaStream*, ptoken : IUnknown) : HRESULT
+    @lpVtbl.value.request_sample.call(this, ptoken)
+  end
+end
+struct LibWin32::IMFMediaSink
+  def query_interface(this : IMFMediaSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_characteristics(this : IMFMediaSink*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
+  end
+  def add_stream_sink(this : IMFMediaSink*, dwstreamsinkidentifier : UInt32, pmediatype : IMFMediaType, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.add_stream_sink.call(this, dwstreamsinkidentifier, pmediatype, ppstreamsink)
+  end
+  def remove_stream_sink(this : IMFMediaSink*, dwstreamsinkidentifier : UInt32) : HRESULT
+    @lpVtbl.value.remove_stream_sink.call(this, dwstreamsinkidentifier)
+  end
+  def get_stream_sink_count(this : IMFMediaSink*, pcstreamsinkcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_sink_count.call(this, pcstreamsinkcount)
+  end
+  def get_stream_sink_by_index(this : IMFMediaSink*, dwindex : UInt32, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.get_stream_sink_by_index.call(this, dwindex, ppstreamsink)
+  end
+  def get_stream_sink_by_id(this : IMFMediaSink*, dwstreamsinkidentifier : UInt32, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.get_stream_sink_by_id.call(this, dwstreamsinkidentifier, ppstreamsink)
+  end
+  def set_presentation_clock(this : IMFMediaSink*, ppresentationclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.set_presentation_clock.call(this, ppresentationclock)
+  end
+  def get_presentation_clock(this : IMFMediaSink*, pppresentationclock : IMFPresentationClock*) : HRESULT
+    @lpVtbl.value.get_presentation_clock.call(this, pppresentationclock)
+  end
+  def shutdown(this : IMFMediaSink*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFStreamSink
+  def query_interface(this : IMFStreamSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFStreamSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFStreamSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFStreamSink*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFStreamSink*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFStreamSink*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFStreamSink*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_media_sink(this : IMFStreamSink*, ppmediasink : IMFMediaSink*) : HRESULT
+    @lpVtbl.value.get_media_sink.call(this, ppmediasink)
+  end
+  def get_identifier(this : IMFStreamSink*, pdwidentifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_identifier.call(this, pdwidentifier)
+  end
+  def get_media_type_handler(this : IMFStreamSink*, pphandler : IMFMediaTypeHandler*) : HRESULT
+    @lpVtbl.value.get_media_type_handler.call(this, pphandler)
+  end
+  def process_sample(this : IMFStreamSink*, psample : IMFSample) : HRESULT
+    @lpVtbl.value.process_sample.call(this, psample)
+  end
+  def place_marker(this : IMFStreamSink*, emarkertype : MFSTREAMSINK_MARKER_TYPE, pvarmarkervalue : PROPVARIANT*, pvarcontextvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.place_marker.call(this, emarkertype, pvarmarkervalue, pvarcontextvalue)
+  end
+  def flush(this : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end
+struct LibWin32::IMFVideoSampleAllocator
+  def query_interface(this : IMFVideoSampleAllocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoSampleAllocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoSampleAllocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_direct_x_manager(this : IMFVideoSampleAllocator*, pmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_direct_x_manager.call(this, pmanager)
+  end
+  def uninitialize_sample_allocator(this : IMFVideoSampleAllocator*) : HRESULT
+    @lpVtbl.value.uninitialize_sample_allocator.call(this)
+  end
+  def initialize_sample_allocator(this : IMFVideoSampleAllocator*, crequestedframes : UInt32, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.initialize_sample_allocator.call(this, crequestedframes, pmediatype)
+  end
+  def allocate_sample(this : IMFVideoSampleAllocator*, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.allocate_sample.call(this, ppsample)
+  end
+end
+struct LibWin32::IMFVideoSampleAllocatorNotify
+  def query_interface(this : IMFVideoSampleAllocatorNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoSampleAllocatorNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoSampleAllocatorNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_release(this : IMFVideoSampleAllocatorNotify*) : HRESULT
+    @lpVtbl.value.notify_release.call(this)
+  end
+end
+struct LibWin32::IMFVideoSampleAllocatorNotifyEx
+  def query_interface(this : IMFVideoSampleAllocatorNotifyEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoSampleAllocatorNotifyEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoSampleAllocatorNotifyEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_release(this : IMFVideoSampleAllocatorNotifyEx*) : HRESULT
+    @lpVtbl.value.notify_release.call(this)
+  end
+  def notify_prune(this : IMFVideoSampleAllocatorNotifyEx*, midl__imfvideosampleallocatornotifyex0000 : IMFSample) : HRESULT
+    @lpVtbl.value.notify_prune.call(this, midl__imfvideosampleallocatornotifyex0000)
+  end
+end
+struct LibWin32::IMFVideoSampleAllocatorCallback
+  def query_interface(this : IMFVideoSampleAllocatorCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoSampleAllocatorCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoSampleAllocatorCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_callback(this : IMFVideoSampleAllocatorCallback*, pnotify : IMFVideoSampleAllocatorNotify) : HRESULT
+    @lpVtbl.value.set_callback.call(this, pnotify)
+  end
+  def get_free_sample_count(this : IMFVideoSampleAllocatorCallback*, plsamples : Int32*) : HRESULT
+    @lpVtbl.value.get_free_sample_count.call(this, plsamples)
+  end
+end
+struct LibWin32::IMFVideoSampleAllocatorEx
+  def query_interface(this : IMFVideoSampleAllocatorEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoSampleAllocatorEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoSampleAllocatorEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_direct_x_manager(this : IMFVideoSampleAllocatorEx*, pmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_direct_x_manager.call(this, pmanager)
+  end
+  def uninitialize_sample_allocator(this : IMFVideoSampleAllocatorEx*) : HRESULT
+    @lpVtbl.value.uninitialize_sample_allocator.call(this)
+  end
+  def initialize_sample_allocator(this : IMFVideoSampleAllocatorEx*, crequestedframes : UInt32, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.initialize_sample_allocator.call(this, crequestedframes, pmediatype)
+  end
+  def allocate_sample(this : IMFVideoSampleAllocatorEx*, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.allocate_sample.call(this, ppsample)
+  end
+  def initialize_sample_allocator_ex(this : IMFVideoSampleAllocatorEx*, cinitialsamples : UInt32, cmaximumsamples : UInt32, pattributes : IMFAttributes, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.initialize_sample_allocator_ex.call(this, cinitialsamples, cmaximumsamples, pattributes, pmediatype)
+  end
+end
+struct LibWin32::IMFDXGIDeviceManagerSource
+  def query_interface(this : IMFDXGIDeviceManagerSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDXGIDeviceManagerSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDXGIDeviceManagerSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_manager(this : IMFDXGIDeviceManagerSource*, ppmanager : IMFDXGIDeviceManager*) : HRESULT
+    @lpVtbl.value.get_manager.call(this, ppmanager)
+  end
+end
+struct LibWin32::IMFVideoProcessorControl
+  def query_interface(this : IMFVideoProcessorControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoProcessorControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoProcessorControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_border_color(this : IMFVideoProcessorControl*, pbordercolor : MFARGB*) : HRESULT
+    @lpVtbl.value.set_border_color.call(this, pbordercolor)
+  end
+  def set_source_rectangle(this : IMFVideoProcessorControl*, psrcrect : RECT*) : HRESULT
+    @lpVtbl.value.set_source_rectangle.call(this, psrcrect)
+  end
+  def set_destination_rectangle(this : IMFVideoProcessorControl*, pdstrect : RECT*) : HRESULT
+    @lpVtbl.value.set_destination_rectangle.call(this, pdstrect)
+  end
+  def set_mirror(this : IMFVideoProcessorControl*, emirror : MF_VIDEO_PROCESSOR_MIRROR) : HRESULT
+    @lpVtbl.value.set_mirror.call(this, emirror)
+  end
+  def set_rotation(this : IMFVideoProcessorControl*, erotation : MF_VIDEO_PROCESSOR_ROTATION) : HRESULT
+    @lpVtbl.value.set_rotation.call(this, erotation)
+  end
+  def set_constriction_size(this : IMFVideoProcessorControl*, pconstrictionsize : SIZE*) : HRESULT
+    @lpVtbl.value.set_constriction_size.call(this, pconstrictionsize)
+  end
+end
+struct LibWin32::IMFVideoProcessorControl2
+  def query_interface(this : IMFVideoProcessorControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoProcessorControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoProcessorControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_border_color(this : IMFVideoProcessorControl2*, pbordercolor : MFARGB*) : HRESULT
+    @lpVtbl.value.set_border_color.call(this, pbordercolor)
+  end
+  def set_source_rectangle(this : IMFVideoProcessorControl2*, psrcrect : RECT*) : HRESULT
+    @lpVtbl.value.set_source_rectangle.call(this, psrcrect)
+  end
+  def set_destination_rectangle(this : IMFVideoProcessorControl2*, pdstrect : RECT*) : HRESULT
+    @lpVtbl.value.set_destination_rectangle.call(this, pdstrect)
+  end
+  def set_mirror(this : IMFVideoProcessorControl2*, emirror : MF_VIDEO_PROCESSOR_MIRROR) : HRESULT
+    @lpVtbl.value.set_mirror.call(this, emirror)
+  end
+  def set_rotation(this : IMFVideoProcessorControl2*, erotation : MF_VIDEO_PROCESSOR_ROTATION) : HRESULT
+    @lpVtbl.value.set_rotation.call(this, erotation)
+  end
+  def set_constriction_size(this : IMFVideoProcessorControl2*, pconstrictionsize : SIZE*) : HRESULT
+    @lpVtbl.value.set_constriction_size.call(this, pconstrictionsize)
+  end
+  def set_rotation_override(this : IMFVideoProcessorControl2*, uirotation : UInt32) : HRESULT
+    @lpVtbl.value.set_rotation_override.call(this, uirotation)
+  end
+  def enable_hardware_effects(this : IMFVideoProcessorControl2*, fenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_hardware_effects.call(this, fenabled)
+  end
+  def get_supported_hardware_effects(this : IMFVideoProcessorControl2*, puisupport : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_hardware_effects.call(this, puisupport)
+  end
+end
+struct LibWin32::IMFVideoProcessorControl3
+  def query_interface(this : IMFVideoProcessorControl3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoProcessorControl3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoProcessorControl3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_border_color(this : IMFVideoProcessorControl3*, pbordercolor : MFARGB*) : HRESULT
+    @lpVtbl.value.set_border_color.call(this, pbordercolor)
+  end
+  def set_source_rectangle(this : IMFVideoProcessorControl3*, psrcrect : RECT*) : HRESULT
+    @lpVtbl.value.set_source_rectangle.call(this, psrcrect)
+  end
+  def set_destination_rectangle(this : IMFVideoProcessorControl3*, pdstrect : RECT*) : HRESULT
+    @lpVtbl.value.set_destination_rectangle.call(this, pdstrect)
+  end
+  def set_mirror(this : IMFVideoProcessorControl3*, emirror : MF_VIDEO_PROCESSOR_MIRROR) : HRESULT
+    @lpVtbl.value.set_mirror.call(this, emirror)
+  end
+  def set_rotation(this : IMFVideoProcessorControl3*, erotation : MF_VIDEO_PROCESSOR_ROTATION) : HRESULT
+    @lpVtbl.value.set_rotation.call(this, erotation)
+  end
+  def set_constriction_size(this : IMFVideoProcessorControl3*, pconstrictionsize : SIZE*) : HRESULT
+    @lpVtbl.value.set_constriction_size.call(this, pconstrictionsize)
+  end
+  def set_rotation_override(this : IMFVideoProcessorControl3*, uirotation : UInt32) : HRESULT
+    @lpVtbl.value.set_rotation_override.call(this, uirotation)
+  end
+  def enable_hardware_effects(this : IMFVideoProcessorControl3*, fenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_hardware_effects.call(this, fenabled)
+  end
+  def get_supported_hardware_effects(this : IMFVideoProcessorControl3*, puisupport : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_hardware_effects.call(this, puisupport)
+  end
+  def get_natural_output_type(this : IMFVideoProcessorControl3*, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_natural_output_type.call(this, pptype)
+  end
+  def enable_spherical_video_processing(this : IMFVideoProcessorControl3*, fenable : LibC::BOOL, eformat : MFVideoSphericalFormat, eprojectionmode : MFVideoSphericalProjectionMode) : HRESULT
+    @lpVtbl.value.enable_spherical_video_processing.call(this, fenable, eformat, eprojectionmode)
+  end
+  def set_spherical_video_properties(this : IMFVideoProcessorControl3*, x : Float32, y : Float32, z : Float32, w : Float32, fieldofview : Float32) : HRESULT
+    @lpVtbl.value.set_spherical_video_properties.call(this, x, y, z, w, fieldofview)
+  end
+  def set_output_device(this : IMFVideoProcessorControl3*, poutputdevice : IUnknown) : HRESULT
+    @lpVtbl.value.set_output_device.call(this, poutputdevice)
+  end
+end
+struct LibWin32::IMFVideoRendererEffectControl
+  def query_interface(this : IMFVideoRendererEffectControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoRendererEffectControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoRendererEffectControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_app_service_connection_established(this : IMFVideoRendererEffectControl*, pappserviceconnection : IUnknown) : HRESULT
+    @lpVtbl.value.on_app_service_connection_established.call(this, pappserviceconnection)
+  end
+end
+struct LibWin32::IMFTopology
+  def query_interface(this : IMFTopology*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopology*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopology*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFTopology*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFTopology*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFTopology*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFTopology*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFTopology*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFTopology*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFTopology*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFTopology*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFTopology*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFTopology*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFTopology*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFTopology*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFTopology*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFTopology*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFTopology*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFTopology*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFTopology*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFTopology*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFTopology*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFTopology*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFTopology*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFTopology*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFTopology*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFTopology*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFTopology*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFTopology*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFTopology*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFTopology*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFTopology*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFTopology*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_topology_id(this : IMFTopology*, pid : UInt64*) : HRESULT
+    @lpVtbl.value.get_topology_id.call(this, pid)
+  end
+  def add_node(this : IMFTopology*, pnode : IMFTopologyNode) : HRESULT
+    @lpVtbl.value.add_node.call(this, pnode)
+  end
+  def remove_node(this : IMFTopology*, pnode : IMFTopologyNode) : HRESULT
+    @lpVtbl.value.remove_node.call(this, pnode)
+  end
+  def get_node_count(this : IMFTopology*, pwnodes : UInt16*) : HRESULT
+    @lpVtbl.value.get_node_count.call(this, pwnodes)
+  end
+  def get_node(this : IMFTopology*, windex : UInt16, ppnode : IMFTopologyNode*) : HRESULT
+    @lpVtbl.value.get_node.call(this, windex, ppnode)
+  end
+  def clear(this : IMFTopology*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def clone_from(this : IMFTopology*, ptopology : IMFTopology) : HRESULT
+    @lpVtbl.value.clone_from.call(this, ptopology)
+  end
+  def get_node_by_id(this : IMFTopology*, qwtoponodeid : UInt64, ppnode : IMFTopologyNode*) : HRESULT
+    @lpVtbl.value.get_node_by_id.call(this, qwtoponodeid, ppnode)
+  end
+  def get_source_node_collection(this : IMFTopology*, ppcollection : IMFCollection*) : HRESULT
+    @lpVtbl.value.get_source_node_collection.call(this, ppcollection)
+  end
+  def get_output_node_collection(this : IMFTopology*, ppcollection : IMFCollection*) : HRESULT
+    @lpVtbl.value.get_output_node_collection.call(this, ppcollection)
+  end
+end
+struct LibWin32::IMFTopologyNode
+  def query_interface(this : IMFTopologyNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopologyNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopologyNode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFTopologyNode*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFTopologyNode*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFTopologyNode*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFTopologyNode*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFTopologyNode*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFTopologyNode*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFTopologyNode*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFTopologyNode*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFTopologyNode*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFTopologyNode*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFTopologyNode*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFTopologyNode*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFTopologyNode*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFTopologyNode*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFTopologyNode*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFTopologyNode*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFTopologyNode*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFTopologyNode*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFTopologyNode*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFTopologyNode*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFTopologyNode*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFTopologyNode*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFTopologyNode*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFTopologyNode*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFTopologyNode*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFTopologyNode*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFTopologyNode*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFTopologyNode*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFTopologyNode*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFTopologyNode*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def set_object(this : IMFTopologyNode*, pobject : IUnknown) : HRESULT
+    @lpVtbl.value.set_object.call(this, pobject)
+  end
+  def get_object(this : IMFTopologyNode*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.call(this, ppobject)
+  end
+  def get_node_type(this : IMFTopologyNode*, ptype : MF_TOPOLOGY_TYPE*) : HRESULT
+    @lpVtbl.value.get_node_type.call(this, ptype)
+  end
+  def get_topo_node_id(this : IMFTopologyNode*, pid : UInt64*) : HRESULT
+    @lpVtbl.value.get_topo_node_id.call(this, pid)
+  end
+  def set_topo_node_id(this : IMFTopologyNode*, ulltopoid : UInt64) : HRESULT
+    @lpVtbl.value.set_topo_node_id.call(this, ulltopoid)
+  end
+  def get_input_count(this : IMFTopologyNode*, pcinputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_count.call(this, pcinputs)
+  end
+  def get_output_count(this : IMFTopologyNode*, pcoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_count.call(this, pcoutputs)
+  end
+  def connect_output(this : IMFTopologyNode*, dwoutputindex : UInt32, pdownstreamnode : IMFTopologyNode, dwinputindexondownstreamnode : UInt32) : HRESULT
+    @lpVtbl.value.connect_output.call(this, dwoutputindex, pdownstreamnode, dwinputindexondownstreamnode)
+  end
+  def disconnect_output(this : IMFTopologyNode*, dwoutputindex : UInt32) : HRESULT
+    @lpVtbl.value.disconnect_output.call(this, dwoutputindex)
+  end
+  def get_input(this : IMFTopologyNode*, dwinputindex : UInt32, ppupstreamnode : IMFTopologyNode*, pdwoutputindexonupstreamnode : UInt32*) : HRESULT
+    @lpVtbl.value.get_input.call(this, dwinputindex, ppupstreamnode, pdwoutputindexonupstreamnode)
+  end
+  def get_output(this : IMFTopologyNode*, dwoutputindex : UInt32, ppdownstreamnode : IMFTopologyNode*, pdwinputindexondownstreamnode : UInt32*) : HRESULT
+    @lpVtbl.value.get_output.call(this, dwoutputindex, ppdownstreamnode, pdwinputindexondownstreamnode)
+  end
+  def set_output_pref_type(this : IMFTopologyNode*, dwoutputindex : UInt32, ptype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_output_pref_type.call(this, dwoutputindex, ptype)
+  end
+  def get_output_pref_type(this : IMFTopologyNode*, dwoutputindex : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_pref_type.call(this, dwoutputindex, pptype)
+  end
+  def set_input_pref_type(this : IMFTopologyNode*, dwinputindex : UInt32, ptype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_input_pref_type.call(this, dwinputindex, ptype)
+  end
+  def get_input_pref_type(this : IMFTopologyNode*, dwinputindex : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_pref_type.call(this, dwinputindex, pptype)
+  end
+  def clone_from(this : IMFTopologyNode*, pnode : IMFTopologyNode) : HRESULT
+    @lpVtbl.value.clone_from.call(this, pnode)
+  end
+end
+struct LibWin32::IMFGetService
+  def query_interface(this : IMFGetService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFGetService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFGetService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_service(this : IMFGetService*, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_service.call(this, guidservice, riid, ppvobject)
+  end
+end
+struct LibWin32::IMFClock
+  def query_interface(this : IMFClock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFClock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFClock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_clock_characteristics(this : IMFClock*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_clock_characteristics.call(this, pdwcharacteristics)
+  end
+  def get_correlated_time(this : IMFClock*, dwreserved : UInt32, pllclocktime : Int64*, phnssystemtime : Int64*) : HRESULT
+    @lpVtbl.value.get_correlated_time.call(this, dwreserved, pllclocktime, phnssystemtime)
+  end
+  def get_continuity_key(this : IMFClock*, pdwcontinuitykey : UInt32*) : HRESULT
+    @lpVtbl.value.get_continuity_key.call(this, pdwcontinuitykey)
+  end
+  def get_state(this : IMFClock*, dwreserved : UInt32, peclockstate : MFCLOCK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwreserved, peclockstate)
+  end
+  def get_properties(this : IMFClock*, pclockproperties : MFCLOCK_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pclockproperties)
+  end
+end
+struct LibWin32::IMFPresentationClock
+  def query_interface(this : IMFPresentationClock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPresentationClock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPresentationClock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_clock_characteristics(this : IMFPresentationClock*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_clock_characteristics.call(this, pdwcharacteristics)
+  end
+  def get_correlated_time(this : IMFPresentationClock*, dwreserved : UInt32, pllclocktime : Int64*, phnssystemtime : Int64*) : HRESULT
+    @lpVtbl.value.get_correlated_time.call(this, dwreserved, pllclocktime, phnssystemtime)
+  end
+  def get_continuity_key(this : IMFPresentationClock*, pdwcontinuitykey : UInt32*) : HRESULT
+    @lpVtbl.value.get_continuity_key.call(this, pdwcontinuitykey)
+  end
+  def get_state(this : IMFPresentationClock*, dwreserved : UInt32, peclockstate : MFCLOCK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwreserved, peclockstate)
+  end
+  def get_properties(this : IMFPresentationClock*, pclockproperties : MFCLOCK_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pclockproperties)
+  end
+  def set_time_source(this : IMFPresentationClock*, ptimesource : IMFPresentationTimeSource) : HRESULT
+    @lpVtbl.value.set_time_source.call(this, ptimesource)
+  end
+  def get_time_source(this : IMFPresentationClock*, pptimesource : IMFPresentationTimeSource*) : HRESULT
+    @lpVtbl.value.get_time_source.call(this, pptimesource)
+  end
+  def get_time(this : IMFPresentationClock*, phnsclocktime : Int64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, phnsclocktime)
+  end
+  def add_clock_state_sink(this : IMFPresentationClock*, pstatesink : IMFClockStateSink) : HRESULT
+    @lpVtbl.value.add_clock_state_sink.call(this, pstatesink)
+  end
+  def remove_clock_state_sink(this : IMFPresentationClock*, pstatesink : IMFClockStateSink) : HRESULT
+    @lpVtbl.value.remove_clock_state_sink.call(this, pstatesink)
+  end
+  def start(this : IMFPresentationClock*, llclockstartoffset : Int64) : HRESULT
+    @lpVtbl.value.start.call(this, llclockstartoffset)
+  end
+  def stop(this : IMFPresentationClock*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def pause(this : IMFPresentationClock*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+end
+struct LibWin32::IMFPresentationTimeSource
+  def query_interface(this : IMFPresentationTimeSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPresentationTimeSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPresentationTimeSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_clock_characteristics(this : IMFPresentationTimeSource*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_clock_characteristics.call(this, pdwcharacteristics)
+  end
+  def get_correlated_time(this : IMFPresentationTimeSource*, dwreserved : UInt32, pllclocktime : Int64*, phnssystemtime : Int64*) : HRESULT
+    @lpVtbl.value.get_correlated_time.call(this, dwreserved, pllclocktime, phnssystemtime)
+  end
+  def get_continuity_key(this : IMFPresentationTimeSource*, pdwcontinuitykey : UInt32*) : HRESULT
+    @lpVtbl.value.get_continuity_key.call(this, pdwcontinuitykey)
+  end
+  def get_state(this : IMFPresentationTimeSource*, dwreserved : UInt32, peclockstate : MFCLOCK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwreserved, peclockstate)
+  end
+  def get_properties(this : IMFPresentationTimeSource*, pclockproperties : MFCLOCK_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pclockproperties)
+  end
+  def get_underlying_clock(this : IMFPresentationTimeSource*, ppclock : IMFClock*) : HRESULT
+    @lpVtbl.value.get_underlying_clock.call(this, ppclock)
+  end
+end
+struct LibWin32::IMFClockStateSink
+  def query_interface(this : IMFClockStateSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFClockStateSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFClockStateSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_clock_start(this : IMFClockStateSink*, hnssystemtime : Int64, llclockstartoffset : Int64) : HRESULT
+    @lpVtbl.value.on_clock_start.call(this, hnssystemtime, llclockstartoffset)
+  end
+  def on_clock_stop(this : IMFClockStateSink*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_stop.call(this, hnssystemtime)
+  end
+  def on_clock_pause(this : IMFClockStateSink*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_pause.call(this, hnssystemtime)
+  end
+  def on_clock_restart(this : IMFClockStateSink*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_restart.call(this, hnssystemtime)
+  end
+  def on_clock_set_rate(this : IMFClockStateSink*, hnssystemtime : Int64, flrate : Float32) : HRESULT
+    @lpVtbl.value.on_clock_set_rate.call(this, hnssystemtime, flrate)
+  end
+end
+struct LibWin32::IMFPresentationDescriptor
+  def query_interface(this : IMFPresentationDescriptor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPresentationDescriptor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPresentationDescriptor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFPresentationDescriptor*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFPresentationDescriptor*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFPresentationDescriptor*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFPresentationDescriptor*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFPresentationDescriptor*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFPresentationDescriptor*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFPresentationDescriptor*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFPresentationDescriptor*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFPresentationDescriptor*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFPresentationDescriptor*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFPresentationDescriptor*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFPresentationDescriptor*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFPresentationDescriptor*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFPresentationDescriptor*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFPresentationDescriptor*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFPresentationDescriptor*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFPresentationDescriptor*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFPresentationDescriptor*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFPresentationDescriptor*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFPresentationDescriptor*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFPresentationDescriptor*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFPresentationDescriptor*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFPresentationDescriptor*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFPresentationDescriptor*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFPresentationDescriptor*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFPresentationDescriptor*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFPresentationDescriptor*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_stream_descriptor_count(this : IMFPresentationDescriptor*, pdwdescriptorcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_descriptor_count.call(this, pdwdescriptorcount)
+  end
+  def get_stream_descriptor_by_index(this : IMFPresentationDescriptor*, dwindex : UInt32, pfselected : LibC::BOOL*, ppdescriptor : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.get_stream_descriptor_by_index.call(this, dwindex, pfselected, ppdescriptor)
+  end
+  def select_stream(this : IMFPresentationDescriptor*, dwdescriptorindex : UInt32) : HRESULT
+    @lpVtbl.value.select_stream.call(this, dwdescriptorindex)
+  end
+  def deselect_stream(this : IMFPresentationDescriptor*, dwdescriptorindex : UInt32) : HRESULT
+    @lpVtbl.value.deselect_stream.call(this, dwdescriptorindex)
+  end
+  def clone(this : IMFPresentationDescriptor*, pppresentationdescriptor : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.clone.call(this, pppresentationdescriptor)
+  end
+end
+struct LibWin32::IMFStreamDescriptor
+  def query_interface(this : IMFStreamDescriptor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFStreamDescriptor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFStreamDescriptor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFStreamDescriptor*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFStreamDescriptor*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFStreamDescriptor*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFStreamDescriptor*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFStreamDescriptor*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFStreamDescriptor*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFStreamDescriptor*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFStreamDescriptor*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFStreamDescriptor*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFStreamDescriptor*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFStreamDescriptor*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFStreamDescriptor*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFStreamDescriptor*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFStreamDescriptor*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFStreamDescriptor*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFStreamDescriptor*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFStreamDescriptor*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFStreamDescriptor*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFStreamDescriptor*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFStreamDescriptor*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFStreamDescriptor*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFStreamDescriptor*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFStreamDescriptor*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFStreamDescriptor*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFStreamDescriptor*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFStreamDescriptor*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFStreamDescriptor*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_stream_identifier(this : IMFStreamDescriptor*, pdwstreamidentifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_identifier.call(this, pdwstreamidentifier)
+  end
+  def get_media_type_handler(this : IMFStreamDescriptor*, ppmediatypehandler : IMFMediaTypeHandler*) : HRESULT
+    @lpVtbl.value.get_media_type_handler.call(this, ppmediatypehandler)
+  end
+end
+struct LibWin32::IMFMediaTypeHandler
+  def query_interface(this : IMFMediaTypeHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaTypeHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaTypeHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_media_type_supported(this : IMFMediaTypeHandler*, pmediatype : IMFMediaType, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.is_media_type_supported.call(this, pmediatype, ppmediatype)
+  end
+  def get_media_type_count(this : IMFMediaTypeHandler*, pdwtypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type_count.call(this, pdwtypecount)
+  end
+  def get_media_type_by_index(this : IMFMediaTypeHandler*, dwindex : UInt32, pptype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_media_type_by_index.call(this, dwindex, pptype)
+  end
+  def set_current_media_type(this : IMFMediaTypeHandler*, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_current_media_type.call(this, pmediatype)
+  end
+  def get_current_media_type(this : IMFMediaTypeHandler*, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_current_media_type.call(this, ppmediatype)
+  end
+  def get_major_type(this : IMFMediaTypeHandler*, pguidmajortype : Guid*) : HRESULT
+    @lpVtbl.value.get_major_type.call(this, pguidmajortype)
+  end
+end
+struct LibWin32::IMFTimer
+  def query_interface(this : IMFTimer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_timer(this : IMFTimer*, dwflags : UInt32, llclocktime : Int64, pcallback : IMFAsyncCallback, punkstate : IUnknown, ppunkkey : IUnknown*) : HRESULT
+    @lpVtbl.value.set_timer.call(this, dwflags, llclocktime, pcallback, punkstate, ppunkkey)
+  end
+  def cancel_timer(this : IMFTimer*, punkkey : IUnknown) : HRESULT
+    @lpVtbl.value.cancel_timer.call(this, punkkey)
+  end
+end
+struct LibWin32::IMFShutdown
+  def query_interface(this : IMFShutdown*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFShutdown*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFShutdown*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def shutdown(this : IMFShutdown*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_shutdown_status(this : IMFShutdown*, pstatus : MFSHUTDOWN_STATUS*) : HRESULT
+    @lpVtbl.value.get_shutdown_status.call(this, pstatus)
+  end
+end
+struct LibWin32::IMFTopoLoader
+  def query_interface(this : IMFTopoLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopoLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopoLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load(this : IMFTopoLoader*, pinputtopo : IMFTopology, ppoutputtopo : IMFTopology*, pcurrenttopo : IMFTopology) : HRESULT
+    @lpVtbl.value.load.call(this, pinputtopo, ppoutputtopo, pcurrenttopo)
+  end
+end
+struct LibWin32::IMFContentProtectionManager
+  def query_interface(this : IMFContentProtectionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentProtectionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentProtectionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_enable_content(this : IMFContentProtectionManager*, penableractivate : IMFActivate, ptopo : IMFTopology, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_enable_content.call(this, penableractivate, ptopo, pcallback, punkstate)
+  end
+  def end_enable_content(this : IMFContentProtectionManager*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_enable_content.call(this, presult)
+  end
+end
+struct LibWin32::IMFContentEnabler
+  def query_interface(this : IMFContentEnabler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentEnabler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentEnabler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_enable_type(this : IMFContentEnabler*, ptype : Guid*) : HRESULT
+    @lpVtbl.value.get_enable_type.call(this, ptype)
+  end
+  def get_enable_url(this : IMFContentEnabler*, ppwszurl : LibC::LPWSTR*, pcchurl : UInt32*, ptruststatus : MF_URL_TRUST_STATUS*) : HRESULT
+    @lpVtbl.value.get_enable_url.call(this, ppwszurl, pcchurl, ptruststatus)
+  end
+  def get_enable_data(this : IMFContentEnabler*, ppbdata : UInt8**, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_enable_data.call(this, ppbdata, pcbdata)
+  end
+  def is_automatic_supported(this : IMFContentEnabler*, pfautomatic : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_automatic_supported.call(this, pfautomatic)
+  end
+  def automatic_enable(this : IMFContentEnabler*) : HRESULT
+    @lpVtbl.value.automatic_enable.call(this)
+  end
+  def monitor_enable(this : IMFContentEnabler*) : HRESULT
+    @lpVtbl.value.monitor_enable.call(this)
+  end
+  def cancel(this : IMFContentEnabler*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IMFMetadata
+  def query_interface(this : IMFMetadata*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMetadata*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMetadata*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_language(this : IMFMetadata*, pwszrfc1766 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, pwszrfc1766)
+  end
+  def get_language(this : IMFMetadata*, ppwszrfc1766 : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, ppwszrfc1766)
+  end
+  def get_all_languages(this : IMFMetadata*, ppvlanguages : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_all_languages.call(this, ppvlanguages)
+  end
+  def set_property(this : IMFMetadata*, pwszname : LibC::LPWSTR, ppvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwszname, ppvvalue)
+  end
+  def get_property(this : IMFMetadata*, pwszname : LibC::LPWSTR, ppvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwszname, ppvvalue)
+  end
+  def delete_property(this : IMFMetadata*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_property.call(this, pwszname)
+  end
+  def get_all_property_names(this : IMFMetadata*, ppvnames : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_all_property_names.call(this, ppvnames)
+  end
+end
+struct LibWin32::IMFMetadataProvider
+  def query_interface(this : IMFMetadataProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMetadataProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMetadataProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_mf_metadata(this : IMFMetadataProvider*, ppresentationdescriptor : IMFPresentationDescriptor, dwstreamidentifier : UInt32, dwflags : UInt32, ppmfmetadata : IMFMetadata*) : HRESULT
+    @lpVtbl.value.get_mf_metadata.call(this, ppresentationdescriptor, dwstreamidentifier, dwflags, ppmfmetadata)
+  end
+end
+struct LibWin32::IMFRateSupport
+  def query_interface(this : IMFRateSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRateSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRateSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_slowest_rate(this : IMFRateSupport*, edirection : MFRATE_DIRECTION, fthin : LibC::BOOL, pflrate : Float32*) : HRESULT
+    @lpVtbl.value.get_slowest_rate.call(this, edirection, fthin, pflrate)
+  end
+  def get_fastest_rate(this : IMFRateSupport*, edirection : MFRATE_DIRECTION, fthin : LibC::BOOL, pflrate : Float32*) : HRESULT
+    @lpVtbl.value.get_fastest_rate.call(this, edirection, fthin, pflrate)
+  end
+  def is_rate_supported(this : IMFRateSupport*, fthin : LibC::BOOL, flrate : Float32, pflnearestsupportedrate : Float32*) : HRESULT
+    @lpVtbl.value.is_rate_supported.call(this, fthin, flrate, pflnearestsupportedrate)
+  end
+end
+struct LibWin32::IMFRateControl
+  def query_interface(this : IMFRateControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRateControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRateControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_rate(this : IMFRateControl*, fthin : LibC::BOOL, flrate : Float32) : HRESULT
+    @lpVtbl.value.set_rate.call(this, fthin, flrate)
+  end
+  def get_rate(this : IMFRateControl*, pfthin : LibC::BOOL*, pflrate : Float32*) : HRESULT
+    @lpVtbl.value.get_rate.call(this, pfthin, pflrate)
+  end
+end
+struct LibWin32::IMFTimecodeTranslate
+  def query_interface(this : IMFTimecodeTranslate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimecodeTranslate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimecodeTranslate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_convert_timecode_to_hns(this : IMFTimecodeTranslate*, ppropvartimecode : PROPVARIANT*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_convert_timecode_to_hns.call(this, ppropvartimecode, pcallback, punkstate)
+  end
+  def end_convert_timecode_to_hns(this : IMFTimecodeTranslate*, presult : IMFAsyncResult, phnstime : Int64*) : HRESULT
+    @lpVtbl.value.end_convert_timecode_to_hns.call(this, presult, phnstime)
+  end
+  def begin_convert_hns_to_timecode(this : IMFTimecodeTranslate*, hnstime : Int64, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_convert_hns_to_timecode.call(this, hnstime, pcallback, punkstate)
+  end
+  def end_convert_hns_to_timecode(this : IMFTimecodeTranslate*, presult : IMFAsyncResult, ppropvartimecode : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.end_convert_hns_to_timecode.call(this, presult, ppropvartimecode)
+  end
+end
+struct LibWin32::IMFSeekInfo
+  def query_interface(this : IMFSeekInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSeekInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSeekInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_nearest_key_frames(this : IMFSeekInfo*, pguidtimeformat : Guid*, pvarstartposition : PROPVARIANT*, pvarpreviouskeyframe : PROPVARIANT*, pvarnextkeyframe : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_nearest_key_frames.call(this, pguidtimeformat, pvarstartposition, pvarpreviouskeyframe, pvarnextkeyframe)
+  end
+end
+struct LibWin32::IMFSimpleAudioVolume
+  def query_interface(this : IMFSimpleAudioVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSimpleAudioVolume*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSimpleAudioVolume*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_master_volume(this : IMFSimpleAudioVolume*, flevel : Float32) : HRESULT
+    @lpVtbl.value.set_master_volume.call(this, flevel)
+  end
+  def get_master_volume(this : IMFSimpleAudioVolume*, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_master_volume.call(this, pflevel)
+  end
+  def set_mute(this : IMFSimpleAudioVolume*, bmute : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_mute.call(this, bmute)
+  end
+  def get_mute(this : IMFSimpleAudioVolume*, pbmute : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pbmute)
+  end
+end
+struct LibWin32::IMFAudioStreamVolume
+  def query_interface(this : IMFAudioStreamVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAudioStreamVolume*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAudioStreamVolume*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_channel_count(this : IMFAudioStreamVolume*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_count.call(this, pdwcount)
+  end
+  def set_channel_volume(this : IMFAudioStreamVolume*, dwindex : UInt32, flevel : Float32) : HRESULT
+    @lpVtbl.value.set_channel_volume.call(this, dwindex, flevel)
+  end
+  def get_channel_volume(this : IMFAudioStreamVolume*, dwindex : UInt32, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volume.call(this, dwindex, pflevel)
+  end
+  def set_all_volumes(this : IMFAudioStreamVolume*, dwcount : UInt32, pfvolumes : Float32*) : HRESULT
+    @lpVtbl.value.set_all_volumes.call(this, dwcount, pfvolumes)
+  end
+  def get_all_volumes(this : IMFAudioStreamVolume*, dwcount : UInt32, pfvolumes : Float32*) : HRESULT
+    @lpVtbl.value.get_all_volumes.call(this, dwcount, pfvolumes)
+  end
+end
+struct LibWin32::IMFAudioPolicy
+  def query_interface(this : IMFAudioPolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFAudioPolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFAudioPolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_grouping_param(this : IMFAudioPolicy*, rguidclass : Guid*) : HRESULT
+    @lpVtbl.value.set_grouping_param.call(this, rguidclass)
+  end
+  def get_grouping_param(this : IMFAudioPolicy*, pguidclass : Guid*) : HRESULT
+    @lpVtbl.value.get_grouping_param.call(this, pguidclass)
+  end
+  def set_display_name(this : IMFAudioPolicy*, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, pszname)
+  end
+  def get_display_name(this : IMFAudioPolicy*, pszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pszname)
+  end
+  def set_icon_path(this : IMFAudioPolicy*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_icon_path.call(this, pszpath)
+  end
+  def get_icon_path(this : IMFAudioPolicy*, pszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_icon_path.call(this, pszpath)
+  end
+end
+struct LibWin32::IMFSampleGrabberSinkCallback
+  def query_interface(this : IMFSampleGrabberSinkCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSampleGrabberSinkCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSampleGrabberSinkCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_clock_start(this : IMFSampleGrabberSinkCallback*, hnssystemtime : Int64, llclockstartoffset : Int64) : HRESULT
+    @lpVtbl.value.on_clock_start.call(this, hnssystemtime, llclockstartoffset)
+  end
+  def on_clock_stop(this : IMFSampleGrabberSinkCallback*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_stop.call(this, hnssystemtime)
+  end
+  def on_clock_pause(this : IMFSampleGrabberSinkCallback*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_pause.call(this, hnssystemtime)
+  end
+  def on_clock_restart(this : IMFSampleGrabberSinkCallback*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_restart.call(this, hnssystemtime)
+  end
+  def on_clock_set_rate(this : IMFSampleGrabberSinkCallback*, hnssystemtime : Int64, flrate : Float32) : HRESULT
+    @lpVtbl.value.on_clock_set_rate.call(this, hnssystemtime, flrate)
+  end
+  def on_set_presentation_clock(this : IMFSampleGrabberSinkCallback*, ppresentationclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.on_set_presentation_clock.call(this, ppresentationclock)
+  end
+  def on_process_sample(this : IMFSampleGrabberSinkCallback*, guidmajormediatype : Guid*, dwsampleflags : UInt32, llsampletime : Int64, llsampleduration : Int64, psamplebuffer : UInt8*, dwsamplesize : UInt32) : HRESULT
+    @lpVtbl.value.on_process_sample.call(this, guidmajormediatype, dwsampleflags, llsampletime, llsampleduration, psamplebuffer, dwsamplesize)
+  end
+  def on_shutdown(this : IMFSampleGrabberSinkCallback*) : HRESULT
+    @lpVtbl.value.on_shutdown.call(this)
+  end
+end
+struct LibWin32::IMFSampleGrabberSinkCallback2
+  def query_interface(this : IMFSampleGrabberSinkCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSampleGrabberSinkCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSampleGrabberSinkCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_clock_start(this : IMFSampleGrabberSinkCallback2*, hnssystemtime : Int64, llclockstartoffset : Int64) : HRESULT
+    @lpVtbl.value.on_clock_start.call(this, hnssystemtime, llclockstartoffset)
+  end
+  def on_clock_stop(this : IMFSampleGrabberSinkCallback2*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_stop.call(this, hnssystemtime)
+  end
+  def on_clock_pause(this : IMFSampleGrabberSinkCallback2*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_pause.call(this, hnssystemtime)
+  end
+  def on_clock_restart(this : IMFSampleGrabberSinkCallback2*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_restart.call(this, hnssystemtime)
+  end
+  def on_clock_set_rate(this : IMFSampleGrabberSinkCallback2*, hnssystemtime : Int64, flrate : Float32) : HRESULT
+    @lpVtbl.value.on_clock_set_rate.call(this, hnssystemtime, flrate)
+  end
+  def on_set_presentation_clock(this : IMFSampleGrabberSinkCallback2*, ppresentationclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.on_set_presentation_clock.call(this, ppresentationclock)
+  end
+  def on_process_sample(this : IMFSampleGrabberSinkCallback2*, guidmajormediatype : Guid*, dwsampleflags : UInt32, llsampletime : Int64, llsampleduration : Int64, psamplebuffer : UInt8*, dwsamplesize : UInt32) : HRESULT
+    @lpVtbl.value.on_process_sample.call(this, guidmajormediatype, dwsampleflags, llsampletime, llsampleduration, psamplebuffer, dwsamplesize)
+  end
+  def on_shutdown(this : IMFSampleGrabberSinkCallback2*) : HRESULT
+    @lpVtbl.value.on_shutdown.call(this)
+  end
+  def on_process_sample_ex(this : IMFSampleGrabberSinkCallback2*, guidmajormediatype : Guid*, dwsampleflags : UInt32, llsampletime : Int64, llsampleduration : Int64, psamplebuffer : UInt8*, dwsamplesize : UInt32, pattributes : IMFAttributes) : HRESULT
+    @lpVtbl.value.on_process_sample_ex.call(this, guidmajormediatype, dwsampleflags, llsampletime, llsampleduration, psamplebuffer, dwsamplesize, pattributes)
+  end
+end
+struct LibWin32::IMFWorkQueueServices
+  def query_interface(this : IMFWorkQueueServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFWorkQueueServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFWorkQueueServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_register_topology_work_queues_with_mmcss(this : IMFWorkQueueServices*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_register_topology_work_queues_with_mmcss.call(this, pcallback, pstate)
+  end
+  def end_register_topology_work_queues_with_mmcss(this : IMFWorkQueueServices*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_register_topology_work_queues_with_mmcss.call(this, presult)
+  end
+  def begin_unregister_topology_work_queues_with_mmcss(this : IMFWorkQueueServices*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_unregister_topology_work_queues_with_mmcss.call(this, pcallback, pstate)
+  end
+  def end_unregister_topology_work_queues_with_mmcss(this : IMFWorkQueueServices*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_unregister_topology_work_queues_with_mmcss.call(this, presult)
+  end
+  def get_topology_work_queue_mmcss_class(this : IMFWorkQueueServices*, dwtopologyworkqueueid : UInt32, pwszclass : Char*, pcchclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_topology_work_queue_mmcss_class.call(this, dwtopologyworkqueueid, pwszclass, pcchclass)
+  end
+  def get_topology_work_queue_mmcss_task_id(this : IMFWorkQueueServices*, dwtopologyworkqueueid : UInt32, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.get_topology_work_queue_mmcss_task_id.call(this, dwtopologyworkqueueid, pdwtaskid)
+  end
+  def begin_register_platform_work_queue_with_mmcss(this : IMFWorkQueueServices*, dwplatformworkqueue : UInt32, wszclass : LibC::LPWSTR, dwtaskid : UInt32, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_register_platform_work_queue_with_mmcss.call(this, dwplatformworkqueue, wszclass, dwtaskid, pcallback, pstate)
+  end
+  def end_register_platform_work_queue_with_mmcss(this : IMFWorkQueueServices*, presult : IMFAsyncResult, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.end_register_platform_work_queue_with_mmcss.call(this, presult, pdwtaskid)
+  end
+  def begin_unregister_platform_work_queue_with_mmcss(this : IMFWorkQueueServices*, dwplatformworkqueue : UInt32, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_unregister_platform_work_queue_with_mmcss.call(this, dwplatformworkqueue, pcallback, pstate)
+  end
+  def end_unregister_platform_work_queue_with_mmcss(this : IMFWorkQueueServices*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_unregister_platform_work_queue_with_mmcss.call(this, presult)
+  end
+  def get_plaftorm_work_queue_mmcss_class(this : IMFWorkQueueServices*, dwplatformworkqueueid : UInt32, pwszclass : Char*, pcchclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_plaftorm_work_queue_mmcss_class.call(this, dwplatformworkqueueid, pwszclass, pcchclass)
+  end
+  def get_platform_work_queue_mmcss_task_id(this : IMFWorkQueueServices*, dwplatformworkqueueid : UInt32, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.get_platform_work_queue_mmcss_task_id.call(this, dwplatformworkqueueid, pdwtaskid)
+  end
+end
+struct LibWin32::IMFWorkQueueServicesEx
+  def query_interface(this : IMFWorkQueueServicesEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFWorkQueueServicesEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFWorkQueueServicesEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_register_topology_work_queues_with_mmcss(this : IMFWorkQueueServicesEx*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_register_topology_work_queues_with_mmcss.call(this, pcallback, pstate)
+  end
+  def end_register_topology_work_queues_with_mmcss(this : IMFWorkQueueServicesEx*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_register_topology_work_queues_with_mmcss.call(this, presult)
+  end
+  def begin_unregister_topology_work_queues_with_mmcss(this : IMFWorkQueueServicesEx*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_unregister_topology_work_queues_with_mmcss.call(this, pcallback, pstate)
+  end
+  def end_unregister_topology_work_queues_with_mmcss(this : IMFWorkQueueServicesEx*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_unregister_topology_work_queues_with_mmcss.call(this, presult)
+  end
+  def get_topology_work_queue_mmcss_class(this : IMFWorkQueueServicesEx*, dwtopologyworkqueueid : UInt32, pwszclass : Char*, pcchclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_topology_work_queue_mmcss_class.call(this, dwtopologyworkqueueid, pwszclass, pcchclass)
+  end
+  def get_topology_work_queue_mmcss_task_id(this : IMFWorkQueueServicesEx*, dwtopologyworkqueueid : UInt32, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.get_topology_work_queue_mmcss_task_id.call(this, dwtopologyworkqueueid, pdwtaskid)
+  end
+  def begin_register_platform_work_queue_with_mmcss(this : IMFWorkQueueServicesEx*, dwplatformworkqueue : UInt32, wszclass : LibC::LPWSTR, dwtaskid : UInt32, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_register_platform_work_queue_with_mmcss.call(this, dwplatformworkqueue, wszclass, dwtaskid, pcallback, pstate)
+  end
+  def end_register_platform_work_queue_with_mmcss(this : IMFWorkQueueServicesEx*, presult : IMFAsyncResult, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.end_register_platform_work_queue_with_mmcss.call(this, presult, pdwtaskid)
+  end
+  def begin_unregister_platform_work_queue_with_mmcss(this : IMFWorkQueueServicesEx*, dwplatformworkqueue : UInt32, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_unregister_platform_work_queue_with_mmcss.call(this, dwplatformworkqueue, pcallback, pstate)
+  end
+  def end_unregister_platform_work_queue_with_mmcss(this : IMFWorkQueueServicesEx*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_unregister_platform_work_queue_with_mmcss.call(this, presult)
+  end
+  def get_plaftorm_work_queue_mmcss_class(this : IMFWorkQueueServicesEx*, dwplatformworkqueueid : UInt32, pwszclass : Char*, pcchclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_plaftorm_work_queue_mmcss_class.call(this, dwplatformworkqueueid, pwszclass, pcchclass)
+  end
+  def get_platform_work_queue_mmcss_task_id(this : IMFWorkQueueServicesEx*, dwplatformworkqueueid : UInt32, pdwtaskid : UInt32*) : HRESULT
+    @lpVtbl.value.get_platform_work_queue_mmcss_task_id.call(this, dwplatformworkqueueid, pdwtaskid)
+  end
+  def get_topology_work_queue_mmcss_priority(this : IMFWorkQueueServicesEx*, dwtopologyworkqueueid : UInt32, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_topology_work_queue_mmcss_priority.call(this, dwtopologyworkqueueid, plpriority)
+  end
+  def begin_register_platform_work_queue_with_mmcss_ex(this : IMFWorkQueueServicesEx*, dwplatformworkqueue : UInt32, wszclass : LibC::LPWSTR, dwtaskid : UInt32, lpriority : Int32, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_register_platform_work_queue_with_mmcss_ex.call(this, dwplatformworkqueue, wszclass, dwtaskid, lpriority, pcallback, pstate)
+  end
+  def get_platform_work_queue_mmcss_priority(this : IMFWorkQueueServicesEx*, dwplatformworkqueueid : UInt32, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_platform_work_queue_mmcss_priority.call(this, dwplatformworkqueueid, plpriority)
+  end
+end
+struct LibWin32::IMFQualityManager
+  def query_interface(this : IMFQualityManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFQualityManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFQualityManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_topology(this : IMFQualityManager*, ptopology : IMFTopology) : HRESULT
+    @lpVtbl.value.notify_topology.call(this, ptopology)
+  end
+  def notify_presentation_clock(this : IMFQualityManager*, pclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.notify_presentation_clock.call(this, pclock)
+  end
+  def notify_process_input(this : IMFQualityManager*, pnode : IMFTopologyNode, linputindex : Int32, psample : IMFSample) : HRESULT
+    @lpVtbl.value.notify_process_input.call(this, pnode, linputindex, psample)
+  end
+  def notify_process_output(this : IMFQualityManager*, pnode : IMFTopologyNode, loutputindex : Int32, psample : IMFSample) : HRESULT
+    @lpVtbl.value.notify_process_output.call(this, pnode, loutputindex, psample)
+  end
+  def notify_quality_event(this : IMFQualityManager*, pobject : IUnknown, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.notify_quality_event.call(this, pobject, pevent)
+  end
+  def shutdown(this : IMFQualityManager*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFQualityAdvise
+  def query_interface(this : IMFQualityAdvise*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFQualityAdvise*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFQualityAdvise*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_drop_mode(this : IMFQualityAdvise*, edropmode : MF_QUALITY_DROP_MODE) : HRESULT
+    @lpVtbl.value.set_drop_mode.call(this, edropmode)
+  end
+  def set_quality_level(this : IMFQualityAdvise*, equalitylevel : MF_QUALITY_LEVEL) : HRESULT
+    @lpVtbl.value.set_quality_level.call(this, equalitylevel)
+  end
+  def get_drop_mode(this : IMFQualityAdvise*, pedropmode : MF_QUALITY_DROP_MODE*) : HRESULT
+    @lpVtbl.value.get_drop_mode.call(this, pedropmode)
+  end
+  def get_quality_level(this : IMFQualityAdvise*, pequalitylevel : MF_QUALITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_quality_level.call(this, pequalitylevel)
+  end
+  def drop_time(this : IMFQualityAdvise*, hnsamounttodrop : Int64) : HRESULT
+    @lpVtbl.value.drop_time.call(this, hnsamounttodrop)
+  end
+end
+struct LibWin32::IMFQualityAdvise2
+  def query_interface(this : IMFQualityAdvise2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFQualityAdvise2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFQualityAdvise2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_drop_mode(this : IMFQualityAdvise2*, edropmode : MF_QUALITY_DROP_MODE) : HRESULT
+    @lpVtbl.value.set_drop_mode.call(this, edropmode)
+  end
+  def set_quality_level(this : IMFQualityAdvise2*, equalitylevel : MF_QUALITY_LEVEL) : HRESULT
+    @lpVtbl.value.set_quality_level.call(this, equalitylevel)
+  end
+  def get_drop_mode(this : IMFQualityAdvise2*, pedropmode : MF_QUALITY_DROP_MODE*) : HRESULT
+    @lpVtbl.value.get_drop_mode.call(this, pedropmode)
+  end
+  def get_quality_level(this : IMFQualityAdvise2*, pequalitylevel : MF_QUALITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_quality_level.call(this, pequalitylevel)
+  end
+  def drop_time(this : IMFQualityAdvise2*, hnsamounttodrop : Int64) : HRESULT
+    @lpVtbl.value.drop_time.call(this, hnsamounttodrop)
+  end
+  def notify_quality_event(this : IMFQualityAdvise2*, pevent : IMFMediaEvent, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.notify_quality_event.call(this, pevent, pdwflags)
+  end
+end
+struct LibWin32::IMFQualityAdviseLimits
+  def query_interface(this : IMFQualityAdviseLimits*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFQualityAdviseLimits*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFQualityAdviseLimits*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_maximum_drop_mode(this : IMFQualityAdviseLimits*, pedropmode : MF_QUALITY_DROP_MODE*) : HRESULT
+    @lpVtbl.value.get_maximum_drop_mode.call(this, pedropmode)
+  end
+  def get_minimum_quality_level(this : IMFQualityAdviseLimits*, pequalitylevel : MF_QUALITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_minimum_quality_level.call(this, pequalitylevel)
+  end
+end
+struct LibWin32::IMFRealTimeClient
+  def query_interface(this : IMFRealTimeClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRealTimeClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRealTimeClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_threads(this : IMFRealTimeClient*, dwtaskindex : UInt32, wszclass : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_threads.call(this, dwtaskindex, wszclass)
+  end
+  def unregister_threads(this : IMFRealTimeClient*) : HRESULT
+    @lpVtbl.value.unregister_threads.call(this)
+  end
+  def set_work_queue(this : IMFRealTimeClient*, dwworkqueueid : UInt32) : HRESULT
+    @lpVtbl.value.set_work_queue.call(this, dwworkqueueid)
+  end
+end
+struct LibWin32::IMFRealTimeClientEx
+  def query_interface(this : IMFRealTimeClientEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRealTimeClientEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRealTimeClientEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_threads_ex(this : IMFRealTimeClientEx*, pdwtaskindex : UInt32*, wszclassname : LibC::LPWSTR, lbasepriority : Int32) : HRESULT
+    @lpVtbl.value.register_threads_ex.call(this, pdwtaskindex, wszclassname, lbasepriority)
+  end
+  def unregister_threads(this : IMFRealTimeClientEx*) : HRESULT
+    @lpVtbl.value.unregister_threads.call(this)
+  end
+  def set_work_queue_ex(this : IMFRealTimeClientEx*, dwmultithreadedworkqueueid : UInt32, lworkitembasepriority : Int32) : HRESULT
+    @lpVtbl.value.set_work_queue_ex.call(this, dwmultithreadedworkqueueid, lworkitembasepriority)
+  end
+end
+struct LibWin32::IMFSequencerSource
+  def query_interface(this : IMFSequencerSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSequencerSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSequencerSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def append_topology(this : IMFSequencerSource*, ptopology : IMFTopology, dwflags : UInt32, pdwid : UInt32*) : HRESULT
+    @lpVtbl.value.append_topology.call(this, ptopology, dwflags, pdwid)
+  end
+  def delete_topology(this : IMFSequencerSource*, dwid : UInt32) : HRESULT
+    @lpVtbl.value.delete_topology.call(this, dwid)
+  end
+  def get_presentation_context(this : IMFSequencerSource*, ppd : IMFPresentationDescriptor, pid : UInt32*, pptopology : IMFTopology*) : HRESULT
+    @lpVtbl.value.get_presentation_context.call(this, ppd, pid, pptopology)
+  end
+  def update_topology(this : IMFSequencerSource*, dwid : UInt32, ptopology : IMFTopology) : HRESULT
+    @lpVtbl.value.update_topology.call(this, dwid, ptopology)
+  end
+  def update_topology_flags(this : IMFSequencerSource*, dwid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.update_topology_flags.call(this, dwid, dwflags)
+  end
+end
+struct LibWin32::IMFMediaSourceTopologyProvider
+  def query_interface(this : IMFMediaSourceTopologyProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourceTopologyProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourceTopologyProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_media_source_topology(this : IMFMediaSourceTopologyProvider*, ppresentationdescriptor : IMFPresentationDescriptor, pptopology : IMFTopology*) : HRESULT
+    @lpVtbl.value.get_media_source_topology.call(this, ppresentationdescriptor, pptopology)
+  end
+end
+struct LibWin32::IMFMediaSourcePresentationProvider
+  def query_interface(this : IMFMediaSourcePresentationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourcePresentationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourcePresentationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def force_end_of_presentation(this : IMFMediaSourcePresentationProvider*, ppresentationdescriptor : IMFPresentationDescriptor) : HRESULT
+    @lpVtbl.value.force_end_of_presentation.call(this, ppresentationdescriptor)
+  end
+end
+struct LibWin32::IMFTopologyNodeAttributeEditor
+  def query_interface(this : IMFTopologyNodeAttributeEditor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopologyNodeAttributeEditor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopologyNodeAttributeEditor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update_node_attributes(this : IMFTopologyNodeAttributeEditor*, topoid : UInt64, cupdates : UInt32, pupdates : MFTOPONODE_ATTRIBUTE_UPDATE*) : HRESULT
+    @lpVtbl.value.update_node_attributes.call(this, topoid, cupdates, pupdates)
+  end
+end
+struct LibWin32::IMFByteStreamBuffering
+  def query_interface(this : IMFByteStreamBuffering*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamBuffering*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamBuffering*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_buffering_params(this : IMFByteStreamBuffering*, pparams : MFBYTESTREAM_BUFFERING_PARAMS*) : HRESULT
+    @lpVtbl.value.set_buffering_params.call(this, pparams)
+  end
+  def enable_buffering(this : IMFByteStreamBuffering*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_buffering.call(this, fenable)
+  end
+  def stop_buffering(this : IMFByteStreamBuffering*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+end
+struct LibWin32::IMFByteStreamCacheControl
+  def query_interface(this : IMFByteStreamCacheControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamCacheControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamCacheControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def stop_background_transfer(this : IMFByteStreamCacheControl*) : HRESULT
+    @lpVtbl.value.stop_background_transfer.call(this)
+  end
+end
+struct LibWin32::IMFByteStreamTimeSeek
+  def query_interface(this : IMFByteStreamTimeSeek*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamTimeSeek*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamTimeSeek*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_time_seek_supported(this : IMFByteStreamTimeSeek*, pftimeseekissupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_time_seek_supported.call(this, pftimeseekissupported)
+  end
+  def time_seek(this : IMFByteStreamTimeSeek*, qwtimeposition : UInt64) : HRESULT
+    @lpVtbl.value.time_seek.call(this, qwtimeposition)
+  end
+  def get_time_seek_result(this : IMFByteStreamTimeSeek*, pqwstarttime : UInt64*, pqwstoptime : UInt64*, pqwduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_time_seek_result.call(this, pqwstarttime, pqwstoptime, pqwduration)
+  end
+end
+struct LibWin32::IMFByteStreamCacheControl2
+  def query_interface(this : IMFByteStreamCacheControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamCacheControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamCacheControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def stop_background_transfer(this : IMFByteStreamCacheControl2*) : HRESULT
+    @lpVtbl.value.stop_background_transfer.call(this)
+  end
+  def get_byte_ranges(this : IMFByteStreamCacheControl2*, pcranges : UInt32*, ppranges : MF_BYTE_STREAM_CACHE_RANGE**) : HRESULT
+    @lpVtbl.value.get_byte_ranges.call(this, pcranges, ppranges)
+  end
+  def set_cache_limit(this : IMFByteStreamCacheControl2*, qwbytes : UInt64) : HRESULT
+    @lpVtbl.value.set_cache_limit.call(this, qwbytes)
+  end
+  def is_background_transfer_active(this : IMFByteStreamCacheControl2*, pfactive : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_background_transfer_active.call(this, pfactive)
+  end
+end
+struct LibWin32::IMFNetCredential
+  def query_interface(this : IMFNetCredential*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetCredential*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetCredential*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user(this : IMFNetCredential*, pbdata : UInt8*, cbdata : UInt32, fdataisencrypted : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user.call(this, pbdata, cbdata, fdataisencrypted)
+  end
+  def set_password(this : IMFNetCredential*, pbdata : UInt8*, cbdata : UInt32, fdataisencrypted : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_password.call(this, pbdata, cbdata, fdataisencrypted)
+  end
+  def get_user(this : IMFNetCredential*, pbdata : UInt8*, pcbdata : UInt32*, fencryptdata : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_user.call(this, pbdata, pcbdata, fencryptdata)
+  end
+  def get_password(this : IMFNetCredential*, pbdata : UInt8*, pcbdata : UInt32*, fencryptdata : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_password.call(this, pbdata, pcbdata, fencryptdata)
+  end
+  def logged_on_user(this : IMFNetCredential*, pfloggedonuser : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.logged_on_user.call(this, pfloggedonuser)
+  end
+end
+struct LibWin32::IMFNetCredentialManager
+  def query_interface(this : IMFNetCredentialManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetCredentialManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetCredentialManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_get_credentials(this : IMFNetCredentialManager*, pparam : MFNetCredentialManagerGetParam*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_credentials.call(this, pparam, pcallback, pstate)
+  end
+  def end_get_credentials(this : IMFNetCredentialManager*, presult : IMFAsyncResult, ppcred : IMFNetCredential*) : HRESULT
+    @lpVtbl.value.end_get_credentials.call(this, presult, ppcred)
+  end
+  def set_good(this : IMFNetCredentialManager*, pcred : IMFNetCredential, fgood : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_good.call(this, pcred, fgood)
+  end
+end
+struct LibWin32::IMFNetCredentialCache
+  def query_interface(this : IMFNetCredentialCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetCredentialCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetCredentialCache*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_credential(this : IMFNetCredentialCache*, pszurl : LibC::LPWSTR, pszrealm : LibC::LPWSTR, dwauthenticationflags : UInt32, ppcred : IMFNetCredential*, pdwrequirementsflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_credential.call(this, pszurl, pszrealm, dwauthenticationflags, ppcred, pdwrequirementsflags)
+  end
+  def set_good(this : IMFNetCredentialCache*, pcred : IMFNetCredential, fgood : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_good.call(this, pcred, fgood)
+  end
+  def set_user_options(this : IMFNetCredentialCache*, pcred : IMFNetCredential, dwoptionsflags : UInt32) : HRESULT
+    @lpVtbl.value.set_user_options.call(this, pcred, dwoptionsflags)
+  end
+end
+struct LibWin32::IMFSSLCertificateManager
+  def query_interface(this : IMFSSLCertificateManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSSLCertificateManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSSLCertificateManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client_certificate(this : IMFSSLCertificateManager*, pszurl : LibC::LPWSTR, ppbdata : UInt8**, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_certificate.call(this, pszurl, ppbdata, pcbdata)
+  end
+  def begin_get_client_certificate(this : IMFSSLCertificateManager*, pszurl : LibC::LPWSTR, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_client_certificate.call(this, pszurl, pcallback, pstate)
+  end
+  def end_get_client_certificate(this : IMFSSLCertificateManager*, presult : IMFAsyncResult, ppbdata : UInt8**, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.end_get_client_certificate.call(this, presult, ppbdata, pcbdata)
+  end
+  def get_certificate_policy(this : IMFSSLCertificateManager*, pszurl : LibC::LPWSTR, pfoverrideautomaticcheck : LibC::BOOL*, pfclientcertificateavailable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_certificate_policy.call(this, pszurl, pfoverrideautomaticcheck, pfclientcertificateavailable)
+  end
+  def on_server_certificate(this : IMFSSLCertificateManager*, pszurl : LibC::LPWSTR, pbdata : UInt8*, cbdata : UInt32, pfisgood : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_server_certificate.call(this, pszurl, pbdata, cbdata, pfisgood)
+  end
+end
+struct LibWin32::IMFNetResourceFilter
+  def query_interface(this : IMFNetResourceFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetResourceFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetResourceFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_redirect(this : IMFNetResourceFilter*, pszurl : LibC::LPWSTR, pvbcancel : Int16*) : HRESULT
+    @lpVtbl.value.on_redirect.call(this, pszurl, pvbcancel)
+  end
+  def on_sending_request(this : IMFNetResourceFilter*, pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_sending_request.call(this, pszurl)
+  end
+end
+struct LibWin32::IMFSourceOpenMonitor
+  def query_interface(this : IMFSourceOpenMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceOpenMonitor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceOpenMonitor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_source_event(this : IMFSourceOpenMonitor*, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.on_source_event.call(this, pevent)
+  end
+end
+struct LibWin32::IMFNetProxyLocator
+  def query_interface(this : IMFNetProxyLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetProxyLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetProxyLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def find_first_proxy(this : IMFNetProxyLocator*, pszhost : LibC::LPWSTR, pszurl : LibC::LPWSTR, freserved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.find_first_proxy.call(this, pszhost, pszurl, freserved)
+  end
+  def find_next_proxy(this : IMFNetProxyLocator*) : HRESULT
+    @lpVtbl.value.find_next_proxy.call(this)
+  end
+  def register_proxy_result(this : IMFNetProxyLocator*, hrop : HRESULT) : HRESULT
+    @lpVtbl.value.register_proxy_result.call(this, hrop)
+  end
+  def get_current_proxy(this : IMFNetProxyLocator*, pszstr : Char*, pcchstr : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_proxy.call(this, pszstr, pcchstr)
+  end
+  def clone(this : IMFNetProxyLocator*, ppproxylocator : IMFNetProxyLocator*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppproxylocator)
+  end
+end
+struct LibWin32::IMFNetProxyLocatorFactory
+  def query_interface(this : IMFNetProxyLocatorFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetProxyLocatorFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetProxyLocatorFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_proxy_locator(this : IMFNetProxyLocatorFactory*, pszprotocol : LibC::LPWSTR, ppproxylocator : IMFNetProxyLocator*) : HRESULT
+    @lpVtbl.value.create_proxy_locator.call(this, pszprotocol, ppproxylocator)
+  end
+end
+struct LibWin32::IMFSaveJob
+  def query_interface(this : IMFSaveJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSaveJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSaveJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_save(this : IMFSaveJob*, pstream : IMFByteStream, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_save.call(this, pstream, pcallback, pstate)
+  end
+  def end_save(this : IMFSaveJob*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_save.call(this, presult)
+  end
+  def cancel_save(this : IMFSaveJob*) : HRESULT
+    @lpVtbl.value.cancel_save.call(this)
+  end
+  def get_progress(this : IMFSaveJob*, pdwpercentcomplete : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pdwpercentcomplete)
+  end
+end
+struct LibWin32::IMFNetSchemeHandlerConfig
+  def query_interface(this : IMFNetSchemeHandlerConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetSchemeHandlerConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetSchemeHandlerConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_of_supported_protocols(this : IMFNetSchemeHandlerConfig*, pcprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_supported_protocols.call(this, pcprotocols)
+  end
+  def get_supported_protocol_type(this : IMFNetSchemeHandlerConfig*, nprotocolindex : UInt32, pnprotocoltype : MFNETSOURCE_PROTOCOL_TYPE*) : HRESULT
+    @lpVtbl.value.get_supported_protocol_type.call(this, nprotocolindex, pnprotocoltype)
+  end
+  def reset_protocol_rollover_settings(this : IMFNetSchemeHandlerConfig*) : HRESULT
+    @lpVtbl.value.reset_protocol_rollover_settings.call(this)
+  end
+end
+struct LibWin32::IMFSchemeHandler
+  def query_interface(this : IMFSchemeHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSchemeHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSchemeHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_create_object(this : IMFSchemeHandler*, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, ppiunknowncancelcookie : IUnknown*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_create_object.call(this, pwszurl, dwflags, pprops, ppiunknowncancelcookie, pcallback, punkstate)
+  end
+  def end_create_object(this : IMFSchemeHandler*, presult : IMFAsyncResult, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.end_create_object.call(this, presult, pobjecttype, ppobject)
+  end
+  def cancel_object_creation(this : IMFSchemeHandler*, piunknowncancelcookie : IUnknown) : HRESULT
+    @lpVtbl.value.cancel_object_creation.call(this, piunknowncancelcookie)
+  end
+end
+struct LibWin32::IMFByteStreamHandler
+  def query_interface(this : IMFByteStreamHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFByteStreamHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFByteStreamHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_create_object(this : IMFByteStreamHandler*, pbytestream : IMFByteStream, pwszurl : LibC::LPWSTR, dwflags : UInt32, pprops : IPropertyStore, ppiunknowncancelcookie : IUnknown*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_create_object.call(this, pbytestream, pwszurl, dwflags, pprops, ppiunknowncancelcookie, pcallback, punkstate)
+  end
+  def end_create_object(this : IMFByteStreamHandler*, presult : IMFAsyncResult, pobjecttype : MF_OBJECT_TYPE*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.end_create_object.call(this, presult, pobjecttype, ppobject)
+  end
+  def cancel_object_creation(this : IMFByteStreamHandler*, piunknowncancelcookie : IUnknown) : HRESULT
+    @lpVtbl.value.cancel_object_creation.call(this, piunknowncancelcookie)
+  end
+  def get_max_number_of_bytes_required_for_resolution(this : IMFByteStreamHandler*, pqwbytes : UInt64*) : HRESULT
+    @lpVtbl.value.get_max_number_of_bytes_required_for_resolution.call(this, pqwbytes)
+  end
+end
+struct LibWin32::IMFTrustedInput
+  def query_interface(this : IMFTrustedInput*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTrustedInput*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTrustedInput*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_trust_authority(this : IMFTrustedInput*, dwstreamid : UInt32, riid : Guid*, ppunkobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_input_trust_authority.call(this, dwstreamid, riid, ppunkobject)
+  end
+end
+struct LibWin32::IMFInputTrustAuthority
+  def query_interface(this : IMFInputTrustAuthority*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFInputTrustAuthority*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFInputTrustAuthority*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_decrypter(this : IMFInputTrustAuthority*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_decrypter.call(this, riid, ppv)
+  end
+  def request_access(this : IMFInputTrustAuthority*, action : MFPOLICYMANAGER_ACTION, ppcontentenableractivate : IMFActivate*) : HRESULT
+    @lpVtbl.value.request_access.call(this, action, ppcontentenableractivate)
+  end
+  def get_policy(this : IMFInputTrustAuthority*, action : MFPOLICYMANAGER_ACTION, pppolicy : IMFOutputPolicy*) : HRESULT
+    @lpVtbl.value.get_policy.call(this, action, pppolicy)
+  end
+  def bind_access(this : IMFInputTrustAuthority*, pparam : MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS*) : HRESULT
+    @lpVtbl.value.bind_access.call(this, pparam)
+  end
+  def update_access(this : IMFInputTrustAuthority*, pparam : MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS*) : HRESULT
+    @lpVtbl.value.update_access.call(this, pparam)
+  end
+  def reset(this : IMFInputTrustAuthority*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IMFTrustedOutput
+  def query_interface(this : IMFTrustedOutput*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTrustedOutput*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTrustedOutput*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_trust_authority_count(this : IMFTrustedOutput*, pcoutputtrustauthorities : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_trust_authority_count.call(this, pcoutputtrustauthorities)
+  end
+  def get_output_trust_authority_by_index(this : IMFTrustedOutput*, dwindex : UInt32, ppauthority : IMFOutputTrustAuthority*) : HRESULT
+    @lpVtbl.value.get_output_trust_authority_by_index.call(this, dwindex, ppauthority)
+  end
+  def is_final(this : IMFTrustedOutput*, pfisfinal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_final.call(this, pfisfinal)
+  end
+end
+struct LibWin32::IMFOutputTrustAuthority
+  def query_interface(this : IMFOutputTrustAuthority*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFOutputTrustAuthority*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFOutputTrustAuthority*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_action(this : IMFOutputTrustAuthority*, paction : MFPOLICYMANAGER_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.call(this, paction)
+  end
+  def set_policy(this : IMFOutputTrustAuthority*, pppolicy : IMFOutputPolicy*, npolicy : UInt32, ppbticket : UInt8**, pcbticket : UInt32*) : HRESULT
+    @lpVtbl.value.set_policy.call(this, pppolicy, npolicy, ppbticket, pcbticket)
+  end
+end
+struct LibWin32::IMFOutputPolicy
+  def query_interface(this : IMFOutputPolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFOutputPolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFOutputPolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFOutputPolicy*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFOutputPolicy*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFOutputPolicy*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFOutputPolicy*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFOutputPolicy*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFOutputPolicy*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFOutputPolicy*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFOutputPolicy*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFOutputPolicy*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFOutputPolicy*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFOutputPolicy*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFOutputPolicy*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFOutputPolicy*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFOutputPolicy*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFOutputPolicy*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFOutputPolicy*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFOutputPolicy*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFOutputPolicy*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFOutputPolicy*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFOutputPolicy*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFOutputPolicy*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFOutputPolicy*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFOutputPolicy*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFOutputPolicy*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFOutputPolicy*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFOutputPolicy*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFOutputPolicy*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFOutputPolicy*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFOutputPolicy*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFOutputPolicy*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def generate_required_schemas(this : IMFOutputPolicy*, dwattributes : UInt32, guidoutputsubtype : Guid, rgguidprotectionschemassupported : Guid*, cprotectionschemassupported : UInt32, pprequiredprotectionschemas : IMFCollection*) : HRESULT
+    @lpVtbl.value.generate_required_schemas.call(this, dwattributes, guidoutputsubtype, rgguidprotectionschemassupported, cprotectionschemassupported, pprequiredprotectionschemas)
+  end
+  def get_originator_id(this : IMFOutputPolicy*, pguidoriginatorid : Guid*) : HRESULT
+    @lpVtbl.value.get_originator_id.call(this, pguidoriginatorid)
+  end
+  def get_minimum_grl_version(this : IMFOutputPolicy*, pdwminimumgrlversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_grl_version.call(this, pdwminimumgrlversion)
+  end
+end
+struct LibWin32::IMFOutputSchema
+  def query_interface(this : IMFOutputSchema*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFOutputSchema*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFOutputSchema*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFOutputSchema*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFOutputSchema*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFOutputSchema*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFOutputSchema*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFOutputSchema*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFOutputSchema*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFOutputSchema*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFOutputSchema*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFOutputSchema*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFOutputSchema*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFOutputSchema*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFOutputSchema*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFOutputSchema*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFOutputSchema*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFOutputSchema*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFOutputSchema*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFOutputSchema*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFOutputSchema*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFOutputSchema*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFOutputSchema*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFOutputSchema*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFOutputSchema*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFOutputSchema*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFOutputSchema*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFOutputSchema*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFOutputSchema*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFOutputSchema*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFOutputSchema*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFOutputSchema*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFOutputSchema*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_schema_type(this : IMFOutputSchema*, pguidschematype : Guid*) : HRESULT
+    @lpVtbl.value.get_schema_type.call(this, pguidschematype)
+  end
+  def get_configuration_data(this : IMFOutputSchema*, pdwval : UInt32*) : HRESULT
+    @lpVtbl.value.get_configuration_data.call(this, pdwval)
+  end
+  def get_originator_id(this : IMFOutputSchema*, pguidoriginatorid : Guid*) : HRESULT
+    @lpVtbl.value.get_originator_id.call(this, pguidoriginatorid)
+  end
+end
+struct LibWin32::IMFSecureChannel
+  def query_interface(this : IMFSecureChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSecureChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSecureChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_certificate(this : IMFSecureChannel*, ppcert : UInt8**, pcbcert : UInt32*) : HRESULT
+    @lpVtbl.value.get_certificate.call(this, ppcert, pcbcert)
+  end
+  def setup_session(this : IMFSecureChannel*, pbencryptedsessionkey : UInt8*, cbsessionkey : UInt32) : HRESULT
+    @lpVtbl.value.setup_session.call(this, pbencryptedsessionkey, cbsessionkey)
+  end
+end
+struct LibWin32::IMFSampleProtection
+  def query_interface(this : IMFSampleProtection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSampleProtection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSampleProtection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_protection_version(this : IMFSampleProtection*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_protection_version.call(this, pdwversion)
+  end
+  def get_output_protection_version(this : IMFSampleProtection*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_protection_version.call(this, pdwversion)
+  end
+  def get_protection_certificate(this : IMFSampleProtection*, dwversion : UInt32, ppcert : UInt8**, pcbcert : UInt32*) : HRESULT
+    @lpVtbl.value.get_protection_certificate.call(this, dwversion, ppcert, pcbcert)
+  end
+  def init_output_protection(this : IMFSampleProtection*, dwversion : UInt32, dwoutputid : UInt32, pbcert : UInt8*, cbcert : UInt32, ppbseed : UInt8**, pcbseed : UInt32*) : HRESULT
+    @lpVtbl.value.init_output_protection.call(this, dwversion, dwoutputid, pbcert, cbcert, ppbseed, pcbseed)
+  end
+  def init_input_protection(this : IMFSampleProtection*, dwversion : UInt32, dwinputid : UInt32, pbseed : UInt8*, cbseed : UInt32) : HRESULT
+    @lpVtbl.value.init_input_protection.call(this, dwversion, dwinputid, pbseed, cbseed)
+  end
+end
+struct LibWin32::IMFMediaSinkPreroll
+  def query_interface(this : IMFMediaSinkPreroll*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSinkPreroll*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSinkPreroll*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_preroll(this : IMFMediaSinkPreroll*, hnsupcomingstarttime : Int64) : HRESULT
+    @lpVtbl.value.notify_preroll.call(this, hnsupcomingstarttime)
+  end
+end
+struct LibWin32::IMFFinalizableMediaSink
+  def query_interface(this : IMFFinalizableMediaSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFFinalizableMediaSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFFinalizableMediaSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_characteristics(this : IMFFinalizableMediaSink*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
+  end
+  def add_stream_sink(this : IMFFinalizableMediaSink*, dwstreamsinkidentifier : UInt32, pmediatype : IMFMediaType, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.add_stream_sink.call(this, dwstreamsinkidentifier, pmediatype, ppstreamsink)
+  end
+  def remove_stream_sink(this : IMFFinalizableMediaSink*, dwstreamsinkidentifier : UInt32) : HRESULT
+    @lpVtbl.value.remove_stream_sink.call(this, dwstreamsinkidentifier)
+  end
+  def get_stream_sink_count(this : IMFFinalizableMediaSink*, pcstreamsinkcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_sink_count.call(this, pcstreamsinkcount)
+  end
+  def get_stream_sink_by_index(this : IMFFinalizableMediaSink*, dwindex : UInt32, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.get_stream_sink_by_index.call(this, dwindex, ppstreamsink)
+  end
+  def get_stream_sink_by_id(this : IMFFinalizableMediaSink*, dwstreamsinkidentifier : UInt32, ppstreamsink : IMFStreamSink*) : HRESULT
+    @lpVtbl.value.get_stream_sink_by_id.call(this, dwstreamsinkidentifier, ppstreamsink)
+  end
+  def set_presentation_clock(this : IMFFinalizableMediaSink*, ppresentationclock : IMFPresentationClock) : HRESULT
+    @lpVtbl.value.set_presentation_clock.call(this, ppresentationclock)
+  end
+  def get_presentation_clock(this : IMFFinalizableMediaSink*, pppresentationclock : IMFPresentationClock*) : HRESULT
+    @lpVtbl.value.get_presentation_clock.call(this, pppresentationclock)
+  end
+  def shutdown(this : IMFFinalizableMediaSink*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def begin_finalize(this : IMFFinalizableMediaSink*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_finalize.call(this, pcallback, punkstate)
+  end
+  def end_finalize(this : IMFFinalizableMediaSink*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_finalize.call(this, presult)
+  end
+end
+struct LibWin32::IMFStreamingSinkConfig
+  def query_interface(this : IMFStreamingSinkConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFStreamingSinkConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFStreamingSinkConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_streaming(this : IMFStreamingSinkConfig*, fseekoffsetisbyteoffset : LibC::BOOL, qwseekoffset : UInt64) : HRESULT
+    @lpVtbl.value.start_streaming.call(this, fseekoffsetisbyteoffset, qwseekoffset)
+  end
+end
+struct LibWin32::IMFRemoteProxy
+  def query_interface(this : IMFRemoteProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRemoteProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRemoteProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_object(this : IMFRemoteProxy*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_remote_object.call(this, riid, ppv)
+  end
+  def get_remote_host(this : IMFRemoteProxy*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_remote_host.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IMFObjectReferenceStream
+  def query_interface(this : IMFObjectReferenceStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFObjectReferenceStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFObjectReferenceStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def save_reference(this : IMFObjectReferenceStream*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.save_reference.call(this, riid, punk)
+  end
+  def load_reference(this : IMFObjectReferenceStream*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.load_reference.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IMFPMPHost
+  def query_interface(this : IMFPMPHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMPHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMPHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock_process(this : IMFPMPHost*) : HRESULT
+    @lpVtbl.value.lock_process.call(this)
+  end
+  def unlock_process(this : IMFPMPHost*) : HRESULT
+    @lpVtbl.value.unlock_process.call(this)
+  end
+  def create_object_by_clsid(this : IMFPMPHost*, clsid : Guid*, pstream : IStream, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_object_by_clsid.call(this, clsid, pstream, riid, ppv)
+  end
+end
+struct LibWin32::IMFPMPClient
+  def query_interface(this : IMFPMPClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMPClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMPClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_pmp_host(this : IMFPMPClient*, ppmphost : IMFPMPHost) : HRESULT
+    @lpVtbl.value.set_pmp_host.call(this, ppmphost)
+  end
+end
+struct LibWin32::IMFPMPServer
+  def query_interface(this : IMFPMPServer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMPServer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMPServer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock_process(this : IMFPMPServer*) : HRESULT
+    @lpVtbl.value.lock_process.call(this)
+  end
+  def unlock_process(this : IMFPMPServer*) : HRESULT
+    @lpVtbl.value.unlock_process.call(this)
+  end
+  def create_object_by_clsid(this : IMFPMPServer*, clsid : Guid*, riid : Guid*, ppobject : Void**) : HRESULT
+    @lpVtbl.value.create_object_by_clsid.call(this, clsid, riid, ppobject)
+  end
+end
+struct LibWin32::IMFRemoteDesktopPlugin
+  def query_interface(this : IMFRemoteDesktopPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRemoteDesktopPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRemoteDesktopPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update_topology(this : IMFRemoteDesktopPlugin*, ptopology : IMFTopology) : HRESULT
+    @lpVtbl.value.update_topology.call(this, ptopology)
+  end
+end
+struct LibWin32::IMFSAMIStyle
+  def query_interface(this : IMFSAMIStyle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSAMIStyle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSAMIStyle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_style_count(this : IMFSAMIStyle*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_style_count.call(this, pdwcount)
+  end
+  def get_styles(this : IMFSAMIStyle*, ppropvarstylearray : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_styles.call(this, ppropvarstylearray)
+  end
+  def set_selected_style(this : IMFSAMIStyle*, pwszstyle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_selected_style.call(this, pwszstyle)
+  end
+  def get_selected_style(this : IMFSAMIStyle*, ppwszstyle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_selected_style.call(this, ppwszstyle)
+  end
+end
+struct LibWin32::IMFTranscodeProfile
+  def query_interface(this : IMFTranscodeProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTranscodeProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTranscodeProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_audio_attributes(this : IMFTranscodeProfile*, pattrs : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_audio_attributes.call(this, pattrs)
+  end
+  def get_audio_attributes(this : IMFTranscodeProfile*, ppattrs : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_audio_attributes.call(this, ppattrs)
+  end
+  def set_video_attributes(this : IMFTranscodeProfile*, pattrs : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_video_attributes.call(this, pattrs)
+  end
+  def get_video_attributes(this : IMFTranscodeProfile*, ppattrs : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_video_attributes.call(this, ppattrs)
+  end
+  def set_container_attributes(this : IMFTranscodeProfile*, pattrs : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_container_attributes.call(this, pattrs)
+  end
+  def get_container_attributes(this : IMFTranscodeProfile*, ppattrs : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_container_attributes.call(this, ppattrs)
+  end
+end
+struct LibWin32::IMFTranscodeSinkInfoProvider
+  def query_interface(this : IMFTranscodeSinkInfoProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTranscodeSinkInfoProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTranscodeSinkInfoProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_output_file(this : IMFTranscodeSinkInfoProvider*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_file.call(this, pwszfilename)
+  end
+  def set_output_byte_stream(this : IMFTranscodeSinkInfoProvider*, pbytestreamactivate : IMFActivate) : HRESULT
+    @lpVtbl.value.set_output_byte_stream.call(this, pbytestreamactivate)
+  end
+  def set_profile(this : IMFTranscodeSinkInfoProvider*, pprofile : IMFTranscodeProfile) : HRESULT
+    @lpVtbl.value.set_profile.call(this, pprofile)
+  end
+  def get_sink_info(this : IMFTranscodeSinkInfoProvider*, psinkinfo : MF_TRANSCODE_SINK_INFO*) : HRESULT
+    @lpVtbl.value.get_sink_info.call(this, psinkinfo)
+  end
+end
+struct LibWin32::IMFFieldOfUseMFTUnlock
+  def query_interface(this : IMFFieldOfUseMFTUnlock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFFieldOfUseMFTUnlock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFFieldOfUseMFTUnlock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def unlock(this : IMFFieldOfUseMFTUnlock*, punkmft : IUnknown) : HRESULT
+    @lpVtbl.value.unlock.call(this, punkmft)
+  end
+end
+struct LibWin32::IMFLocalMFTRegistration
+  def query_interface(this : IMFLocalMFTRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFLocalMFTRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFLocalMFTRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_mf_ts(this : IMFLocalMFTRegistration*, pmfts : MFT_REGISTRATION_INFO*, cmfts : UInt32) : HRESULT
+    @lpVtbl.value.register_mf_ts.call(this, pmfts, cmfts)
+  end
+end
+struct LibWin32::IMFCapturePhotoConfirmation
+  def query_interface(this : IMFCapturePhotoConfirmation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCapturePhotoConfirmation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCapturePhotoConfirmation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_photo_confirmation_callback(this : IMFCapturePhotoConfirmation*, pnotificationcallback : IMFAsyncCallback) : HRESULT
+    @lpVtbl.value.set_photo_confirmation_callback.call(this, pnotificationcallback)
+  end
+  def set_pixel_format(this : IMFCapturePhotoConfirmation*, subtype : Guid) : HRESULT
+    @lpVtbl.value.set_pixel_format.call(this, subtype)
+  end
+  def get_pixel_format(this : IMFCapturePhotoConfirmation*, subtype : Guid*) : HRESULT
+    @lpVtbl.value.get_pixel_format.call(this, subtype)
+  end
+end
+struct LibWin32::IMFPMPHostApp
+  def query_interface(this : IMFPMPHostApp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMPHostApp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMPHostApp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock_process(this : IMFPMPHostApp*) : HRESULT
+    @lpVtbl.value.lock_process.call(this)
+  end
+  def unlock_process(this : IMFPMPHostApp*) : HRESULT
+    @lpVtbl.value.unlock_process.call(this)
+  end
+  def activate_class_by_id(this : IMFPMPHostApp*, id : LibC::LPWSTR, pstream : IStream, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.activate_class_by_id.call(this, id, pstream, riid, ppv)
+  end
+end
+struct LibWin32::IMFPMPClientApp
+  def query_interface(this : IMFPMPClientApp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMPClientApp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMPClientApp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_pmp_host(this : IMFPMPClientApp*, ppmphost : IMFPMPHostApp) : HRESULT
+    @lpVtbl.value.set_pmp_host.call(this, ppmphost)
+  end
+end
+struct LibWin32::IMFMediaStreamSourceSampleRequest
+  def query_interface(this : IMFMediaStreamSourceSampleRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaStreamSourceSampleRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaStreamSourceSampleRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_sample(this : IMFMediaStreamSourceSampleRequest*, value : IMFSample) : HRESULT
+    @lpVtbl.value.set_sample.call(this, value)
+  end
+end
+struct LibWin32::IMFTrackedSample
+  def query_interface(this : IMFTrackedSample*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTrackedSample*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTrackedSample*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_allocator(this : IMFTrackedSample*, psampleallocator : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.set_allocator.call(this, psampleallocator, punkstate)
+  end
+end
+struct LibWin32::IMFProtectedEnvironmentAccess
+  def query_interface(this : IMFProtectedEnvironmentAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFProtectedEnvironmentAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFProtectedEnvironmentAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def call(this : IMFProtectedEnvironmentAccess*, inputlength : UInt32, input : UInt8*, outputlength : UInt32, output : UInt8*) : HRESULT
+    @lpVtbl.value.call.call(this, inputlength, input, outputlength, output)
+  end
+  def read_grl(this : IMFProtectedEnvironmentAccess*, outputlength : UInt32*, output : UInt8**) : HRESULT
+    @lpVtbl.value.read_grl.call(this, outputlength, output)
+  end
+end
+struct LibWin32::IMFSignedLibrary
+  def query_interface(this : IMFSignedLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSignedLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSignedLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_procedure_address(this : IMFSignedLibrary*, name : PSTR, address : Void**) : HRESULT
+    @lpVtbl.value.get_procedure_address.call(this, name, address)
+  end
+end
+struct LibWin32::IMFSystemId
+  def query_interface(this : IMFSystemId*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSystemId*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSystemId*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data(this : IMFSystemId*, size : UInt32*, data : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, size, data)
+  end
+  def setup(this : IMFSystemId*, stage : UInt32, cbin : UInt32, pbin : UInt8*, pcbout : UInt32*, ppbout : UInt8**) : HRESULT
+    @lpVtbl.value.setup.call(this, stage, cbin, pbin, pcbout, ppbout)
+  end
+end
+struct LibWin32::IMFContentProtectionDevice
+  def query_interface(this : IMFContentProtectionDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentProtectionDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentProtectionDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke_function(this : IMFContentProtectionDevice*, functionid : UInt32, inputbufferbytecount : UInt32, inputbuffer : UInt8*, outputbufferbytecount : UInt32*, outputbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.invoke_function.call(this, functionid, inputbufferbytecount, inputbuffer, outputbufferbytecount, outputbuffer)
+  end
+  def get_private_data_byte_count(this : IMFContentProtectionDevice*, privateinputbytecount : UInt32*, privateoutputbytecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data_byte_count.call(this, privateinputbytecount, privateoutputbytecount)
+  end
+end
+struct LibWin32::IMFContentDecryptorContext
+  def query_interface(this : IMFContentDecryptorContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptorContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptorContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_hardware_key(this : IMFContentDecryptorContext*, inputprivatedatabytecount : UInt32, inputprivatedata : Void*, outputprivatedata : UInt64*) : HRESULT
+    @lpVtbl.value.initialize_hardware_key.call(this, inputprivatedatabytecount, inputprivatedata, outputprivatedata)
+  end
+end
+struct LibWin32::IMFNetCrossOriginSupport
+  def query_interface(this : IMFNetCrossOriginSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFNetCrossOriginSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFNetCrossOriginSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cross_origin_policy(this : IMFNetCrossOriginSupport*, ppolicy : MF_CROSS_ORIGIN_POLICY*) : HRESULT
+    @lpVtbl.value.get_cross_origin_policy.call(this, ppolicy)
+  end
+  def get_source_origin(this : IMFNetCrossOriginSupport*, wszsourceorigin : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_source_origin.call(this, wszsourceorigin)
+  end
+  def is_same_origin(this : IMFNetCrossOriginSupport*, wszurl : LibC::LPWSTR, pfissameorigin : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_same_origin.call(this, wszurl, pfissameorigin)
+  end
+end
+struct LibWin32::IMFHttpDownloadRequest
+  def query_interface(this : IMFHttpDownloadRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFHttpDownloadRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFHttpDownloadRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_header(this : IMFHttpDownloadRequest*, szheader : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_header.call(this, szheader)
+  end
+  def begin_send_request(this : IMFHttpDownloadRequest*, pbpayload : UInt8*, cbpayload : UInt32, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_send_request.call(this, pbpayload, cbpayload, pcallback, punkstate)
+  end
+  def end_send_request(this : IMFHttpDownloadRequest*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_send_request.call(this, presult)
+  end
+  def begin_receive_response(this : IMFHttpDownloadRequest*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_receive_response.call(this, pcallback, punkstate)
+  end
+  def end_receive_response(this : IMFHttpDownloadRequest*, presult : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.end_receive_response.call(this, presult)
+  end
+  def begin_read_payload(this : IMFHttpDownloadRequest*, pb : UInt8*, cb : UInt32, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_read_payload.call(this, pb, cb, pcallback, punkstate)
+  end
+  def end_read_payload(this : IMFHttpDownloadRequest*, presult : IMFAsyncResult, pqwoffset : UInt64*, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.end_read_payload.call(this, presult, pqwoffset, pcbread)
+  end
+  def query_header(this : IMFHttpDownloadRequest*, szheadername : LibC::LPWSTR, dwindex : UInt32, ppszheadervalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.query_header.call(this, szheadername, dwindex, ppszheadervalue)
+  end
+  def get_url(this : IMFHttpDownloadRequest*, ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_url.call(this, ppszurl)
+  end
+  def has_null_source_origin(this : IMFHttpDownloadRequest*, pfnullsourceorigin : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_null_source_origin.call(this, pfnullsourceorigin)
+  end
+  def get_time_seek_result(this : IMFHttpDownloadRequest*, pqwstarttime : UInt64*, pqwstoptime : UInt64*, pqwduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_time_seek_result.call(this, pqwstarttime, pqwstoptime, pqwduration)
+  end
+  def get_http_status(this : IMFHttpDownloadRequest*, pdwhttpstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_http_status.call(this, pdwhttpstatus)
+  end
+  def get_at_end_of_payload(this : IMFHttpDownloadRequest*, pfatendofpayload : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_at_end_of_payload.call(this, pfatendofpayload)
+  end
+  def get_total_length(this : IMFHttpDownloadRequest*, pqwtotallength : UInt64*) : HRESULT
+    @lpVtbl.value.get_total_length.call(this, pqwtotallength)
+  end
+  def get_range_end_offset(this : IMFHttpDownloadRequest*, pqwrangeend : UInt64*) : HRESULT
+    @lpVtbl.value.get_range_end_offset.call(this, pqwrangeend)
+  end
+  def close(this : IMFHttpDownloadRequest*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMFHttpDownloadSession
+  def query_interface(this : IMFHttpDownloadSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFHttpDownloadSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFHttpDownloadSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_server(this : IMFHttpDownloadSession*, szservername : LibC::LPWSTR, nport : UInt32) : HRESULT
+    @lpVtbl.value.set_server.call(this, szservername, nport)
+  end
+  def create_request(this : IMFHttpDownloadSession*, szobjectname : LibC::LPWSTR, fbypassproxycache : LibC::BOOL, fsecure : LibC::BOOL, szverb : LibC::LPWSTR, szreferrer : LibC::LPWSTR, pprequest : IMFHttpDownloadRequest*) : HRESULT
+    @lpVtbl.value.create_request.call(this, szobjectname, fbypassproxycache, fsecure, szverb, szreferrer, pprequest)
+  end
+  def close(this : IMFHttpDownloadSession*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMFHttpDownloadSessionProvider
+  def query_interface(this : IMFHttpDownloadSessionProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFHttpDownloadSessionProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFHttpDownloadSessionProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_http_download_session(this : IMFHttpDownloadSessionProvider*, wszscheme : LibC::LPWSTR, ppdownloadsession : IMFHttpDownloadSession*) : HRESULT
+    @lpVtbl.value.create_http_download_session.call(this, wszscheme, ppdownloadsession)
+  end
+end
+struct LibWin32::IMFMediaSource2
+  def query_interface(this : IMFMediaSource2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSource2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSource2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaSource2*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaSource2*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaSource2*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaSource2*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_characteristics(this : IMFMediaSource2*, pdwcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
+  end
+  def create_presentation_descriptor(this : IMFMediaSource2*, pppresentationdescriptor : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.create_presentation_descriptor.call(this, pppresentationdescriptor)
+  end
+  def start(this : IMFMediaSource2*, ppresentationdescriptor : IMFPresentationDescriptor, pguidtimeformat : Guid*, pvarstartposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.start.call(this, ppresentationdescriptor, pguidtimeformat, pvarstartposition)
+  end
+  def stop(this : IMFMediaSource2*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def pause(this : IMFMediaSource2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def shutdown(this : IMFMediaSource2*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_source_attributes(this : IMFMediaSource2*, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_source_attributes.call(this, ppattributes)
+  end
+  def get_stream_attributes(this : IMFMediaSource2*, dwstreamidentifier : UInt32, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_stream_attributes.call(this, dwstreamidentifier, ppattributes)
+  end
+  def set_d3_d_manager(this : IMFMediaSource2*, pmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_d3_d_manager.call(this, pmanager)
+  end
+  def set_media_type(this : IMFMediaSource2*, dwstreamid : UInt32, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, dwstreamid, pmediatype)
+  end
+end
+struct LibWin32::IMFMediaStream2
+  def query_interface(this : IMFMediaStream2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaStream2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaStream2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event(this : IMFMediaStream2*, dwflags : MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.get_event.call(this, dwflags, ppevent)
+  end
+  def begin_get_event(this : IMFMediaStream2*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_event.call(this, pcallback, punkstate)
+  end
+  def end_get_event(this : IMFMediaStream2*, presult : IMFAsyncResult, ppevent : IMFMediaEvent*) : HRESULT
+    @lpVtbl.value.end_get_event.call(this, presult, ppevent)
+  end
+  def queue_event(this : IMFMediaStream2*, met : UInt32, guidextendedtype : Guid*, hrstatus : HRESULT, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.queue_event.call(this, met, guidextendedtype, hrstatus, pvvalue)
+  end
+  def get_media_source(this : IMFMediaStream2*, ppmediasource : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.get_media_source.call(this, ppmediasource)
+  end
+  def get_stream_descriptor(this : IMFMediaStream2*, ppstreamdescriptor : IMFStreamDescriptor*) : HRESULT
+    @lpVtbl.value.get_stream_descriptor.call(this, ppstreamdescriptor)
+  end
+  def request_sample(this : IMFMediaStream2*, ptoken : IUnknown) : HRESULT
+    @lpVtbl.value.request_sample.call(this, ptoken)
+  end
+  def set_stream_state(this : IMFMediaStream2*, value : MF_STREAM_STATE) : HRESULT
+    @lpVtbl.value.set_stream_state.call(this, value)
+  end
+  def get_stream_state(this : IMFMediaStream2*, value : MF_STREAM_STATE*) : HRESULT
+    @lpVtbl.value.get_stream_state.call(this, value)
+  end
+end
+struct LibWin32::IMFSensorDevice
+  def query_interface(this : IMFSensorDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_id(this : IMFSensorDevice*, pdeviceid : UInt64*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pdeviceid)
+  end
+  def get_device_type(this : IMFSensorDevice*, ptype : MFSensorDeviceType*) : HRESULT
+    @lpVtbl.value.get_device_type.call(this, ptype)
+  end
+  def get_flags(this : IMFSensorDevice*, pflags : UInt64*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def get_symbolic_link(this : IMFSensorDevice*, symboliclink : Char*, cchsymboliclink : Int32, pcchwritten : Int32*) : HRESULT
+    @lpVtbl.value.get_symbolic_link.call(this, symboliclink, cchsymboliclink, pcchwritten)
+  end
+  def get_device_attributes(this : IMFSensorDevice*, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_device_attributes.call(this, ppattributes)
+  end
+  def get_stream_attributes_count(this : IMFSensorDevice*, etype : MFSensorStreamType, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_attributes_count.call(this, etype, pdwcount)
+  end
+  def get_stream_attributes(this : IMFSensorDevice*, etype : MFSensorStreamType, dwindex : UInt32, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_stream_attributes.call(this, etype, dwindex, ppattributes)
+  end
+  def set_sensor_device_mode(this : IMFSensorDevice*, emode : MFSensorDeviceMode) : HRESULT
+    @lpVtbl.value.set_sensor_device_mode.call(this, emode)
+  end
+  def get_sensor_device_mode(this : IMFSensorDevice*, pemode : MFSensorDeviceMode*) : HRESULT
+    @lpVtbl.value.get_sensor_device_mode.call(this, pemode)
+  end
+end
+struct LibWin32::IMFSensorGroup
+  def query_interface(this : IMFSensorGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbolic_link(this : IMFSensorGroup*, symboliclink : Char*, cchsymboliclink : Int32, pcchwritten : Int32*) : HRESULT
+    @lpVtbl.value.get_symbolic_link.call(this, symboliclink, cchsymboliclink, pcchwritten)
+  end
+  def get_flags(this : IMFSensorGroup*, pflags : UInt64*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def get_sensor_group_attributes(this : IMFSensorGroup*, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_sensor_group_attributes.call(this, ppattributes)
+  end
+  def get_sensor_device_count(this : IMFSensorGroup*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_sensor_device_count.call(this, pdwcount)
+  end
+  def get_sensor_device(this : IMFSensorGroup*, dwindex : UInt32, ppdevice : IMFSensorDevice*) : HRESULT
+    @lpVtbl.value.get_sensor_device.call(this, dwindex, ppdevice)
+  end
+  def set_default_sensor_device_index(this : IMFSensorGroup*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.set_default_sensor_device_index.call(this, dwindex)
+  end
+  def get_default_sensor_device_index(this : IMFSensorGroup*, pdwindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_sensor_device_index.call(this, pdwindex)
+  end
+  def create_media_source(this : IMFSensorGroup*, ppsource : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.create_media_source.call(this, ppsource)
+  end
+end
+struct LibWin32::IMFSensorStream
+  def query_interface(this : IMFSensorStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFSensorStream*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFSensorStream*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFSensorStream*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFSensorStream*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFSensorStream*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFSensorStream*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFSensorStream*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFSensorStream*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFSensorStream*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFSensorStream*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFSensorStream*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFSensorStream*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFSensorStream*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFSensorStream*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFSensorStream*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFSensorStream*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFSensorStream*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFSensorStream*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFSensorStream*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFSensorStream*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFSensorStream*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFSensorStream*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFSensorStream*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFSensorStream*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFSensorStream*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFSensorStream*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFSensorStream*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFSensorStream*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFSensorStream*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFSensorStream*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_media_type_count(this : IMFSensorStream*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type_count.call(this, pdwcount)
+  end
+  def get_media_type(this : IMFSensorStream*, dwindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, dwindex, ppmediatype)
+  end
+  def clone_sensor_stream(this : IMFSensorStream*, ppstream : IMFSensorStream*) : HRESULT
+    @lpVtbl.value.clone_sensor_stream.call(this, ppstream)
+  end
+end
+struct LibWin32::IMFSensorTransformFactory
+  def query_interface(this : IMFSensorTransformFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorTransformFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorTransformFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory_attributes(this : IMFSensorTransformFactory*, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_factory_attributes.call(this, ppattributes)
+  end
+  def initialize_factory(this : IMFSensorTransformFactory*, dwmaxtransformcount : UInt32, psensordevices : IMFCollection, pattributes : IMFAttributes) : HRESULT
+    @lpVtbl.value.initialize_factory.call(this, dwmaxtransformcount, psensordevices, pattributes)
+  end
+  def get_transform_count(this : IMFSensorTransformFactory*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_transform_count.call(this, pdwcount)
+  end
+  def get_transform_information(this : IMFSensorTransformFactory*, transformindex : UInt32, pguidtransformid : Guid*, ppattributes : IMFAttributes*, ppstreaminformation : IMFCollection*) : HRESULT
+    @lpVtbl.value.get_transform_information.call(this, transformindex, pguidtransformid, ppattributes, ppstreaminformation)
+  end
+  def create_transform(this : IMFSensorTransformFactory*, guidsensortransformid : Guid*, pattributes : IMFAttributes, ppdevicemft : IMFDeviceTransform*) : HRESULT
+    @lpVtbl.value.create_transform.call(this, guidsensortransformid, pattributes, ppdevicemft)
+  end
+end
+struct LibWin32::IMFSensorProfile
+  def query_interface(this : IMFSensorProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_profile_id(this : IMFSensorProfile*, pid : SENSORPROFILEID*) : HRESULT
+    @lpVtbl.value.get_profile_id.call(this, pid)
+  end
+  def add_profile_filter(this : IMFSensorProfile*, streamid : UInt32, wzfiltersetstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_profile_filter.call(this, streamid, wzfiltersetstring)
+  end
+  def is_media_type_supported(this : IMFSensorProfile*, streamid : UInt32, pmediatype : IMFMediaType, pfsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_media_type_supported.call(this, streamid, pmediatype, pfsupported)
+  end
+  def add_blocked_control(this : IMFSensorProfile*, wzblockedcontrol : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_blocked_control.call(this, wzblockedcontrol)
+  end
+end
+struct LibWin32::IMFSensorProfileCollection
+  def query_interface(this : IMFSensorProfileCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorProfileCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorProfileCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_profile_count(this : IMFSensorProfileCollection*) : UInt32
+    @lpVtbl.value.get_profile_count.call(this)
+  end
+  def get_profile(this : IMFSensorProfileCollection*, index : UInt32, ppprofile : IMFSensorProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, index, ppprofile)
+  end
+  def add_profile(this : IMFSensorProfileCollection*, pprofile : IMFSensorProfile) : HRESULT
+    @lpVtbl.value.add_profile.call(this, pprofile)
+  end
+  def find_profile(this : IMFSensorProfileCollection*, profileid : SENSORPROFILEID*, ppprofile : IMFSensorProfile*) : HRESULT
+    @lpVtbl.value.find_profile.call(this, profileid, ppprofile)
+  end
+  def remove_profile_by_index(this : IMFSensorProfileCollection*, index : UInt32) : Void
+    @lpVtbl.value.remove_profile_by_index.call(this, index)
+  end
+  def remove_profile(this : IMFSensorProfileCollection*, profileid : SENSORPROFILEID*) : Void
+    @lpVtbl.value.remove_profile.call(this, profileid)
+  end
+end
+struct LibWin32::IMFSensorProcessActivity
+  def query_interface(this : IMFSensorProcessActivity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorProcessActivity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorProcessActivity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_process_id(this : IMFSensorProcessActivity*, ppid : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id.call(this, ppid)
+  end
+  def get_streaming_state(this : IMFSensorProcessActivity*, pfstreaming : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_streaming_state.call(this, pfstreaming)
+  end
+  def get_streaming_mode(this : IMFSensorProcessActivity*, pmode : MFSensorDeviceMode*) : HRESULT
+    @lpVtbl.value.get_streaming_mode.call(this, pmode)
+  end
+  def get_report_time(this : IMFSensorProcessActivity*, pft : FILETIME*) : HRESULT
+    @lpVtbl.value.get_report_time.call(this, pft)
+  end
+end
+struct LibWin32::IMFSensorActivityReport
+  def query_interface(this : IMFSensorActivityReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorActivityReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorActivityReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_friendly_name(this : IMFSensorActivityReport*, friendlyname : Char*, cchfriendlyname : UInt32, pcchwritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, friendlyname, cchfriendlyname, pcchwritten)
+  end
+  def get_symbolic_link(this : IMFSensorActivityReport*, symboliclink : Char*, cchsymboliclink : UInt32, pcchwritten : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbolic_link.call(this, symboliclink, cchsymboliclink, pcchwritten)
+  end
+  def get_process_count(this : IMFSensorActivityReport*, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_count.call(this, pccount)
+  end
+  def get_process_activity(this : IMFSensorActivityReport*, index : UInt32, ppprocessactivity : IMFSensorProcessActivity*) : HRESULT
+    @lpVtbl.value.get_process_activity.call(this, index, ppprocessactivity)
+  end
+end
+struct LibWin32::IMFSensorActivitiesReport
+  def query_interface(this : IMFSensorActivitiesReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorActivitiesReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorActivitiesReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IMFSensorActivitiesReport*, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pccount)
+  end
+  def get_activity_report(this : IMFSensorActivitiesReport*, index : UInt32, sensoractivityreport : IMFSensorActivityReport*) : HRESULT
+    @lpVtbl.value.get_activity_report.call(this, index, sensoractivityreport)
+  end
+  def get_activity_report_by_device_name(this : IMFSensorActivitiesReport*, symbolicname : LibC::LPWSTR, sensoractivityreport : IMFSensorActivityReport*) : HRESULT
+    @lpVtbl.value.get_activity_report_by_device_name.call(this, symbolicname, sensoractivityreport)
+  end
+end
+struct LibWin32::IMFSensorActivitiesReportCallback
+  def query_interface(this : IMFSensorActivitiesReportCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorActivitiesReportCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorActivitiesReportCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_activities_report(this : IMFSensorActivitiesReportCallback*, sensoractivitiesreport : IMFSensorActivitiesReport) : HRESULT
+    @lpVtbl.value.on_activities_report.call(this, sensoractivitiesreport)
+  end
+end
+struct LibWin32::IMFSensorActivityMonitor
+  def query_interface(this : IMFSensorActivityMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSensorActivityMonitor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSensorActivityMonitor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : IMFSensorActivityMonitor*) : HRESULT
+    @lpVtbl.value.start.call(this)
+  end
+  def stop(this : IMFSensorActivityMonitor*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+end
+struct LibWin32::IMFExtendedCameraIntrinsicModel
+  def query_interface(this : IMFExtendedCameraIntrinsicModel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraIntrinsicModel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraIntrinsicModel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_model(this : IMFExtendedCameraIntrinsicModel*, pintrinsicmodel : MFExtendedCameraIntrinsic_IntrinsicModel*) : HRESULT
+    @lpVtbl.value.get_model.call(this, pintrinsicmodel)
+  end
+  def set_model(this : IMFExtendedCameraIntrinsicModel*, pintrinsicmodel : MFExtendedCameraIntrinsic_IntrinsicModel*) : HRESULT
+    @lpVtbl.value.set_model.call(this, pintrinsicmodel)
+  end
+  def get_distortion_model_type(this : IMFExtendedCameraIntrinsicModel*, pdistortionmodeltype : MFCameraIntrinsic_DistortionModelType*) : HRESULT
+    @lpVtbl.value.get_distortion_model_type.call(this, pdistortionmodeltype)
+  end
+end
+struct LibWin32::IMFExtendedCameraIntrinsicsDistortionModel6KT
+  def query_interface(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_distortion_model(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*, pdistortionmodel : MFCameraIntrinsic_DistortionModel6KT*) : HRESULT
+    @lpVtbl.value.get_distortion_model.call(this, pdistortionmodel)
+  end
+  def set_distortion_model(this : IMFExtendedCameraIntrinsicsDistortionModel6KT*, pdistortionmodel : MFCameraIntrinsic_DistortionModel6KT*) : HRESULT
+    @lpVtbl.value.set_distortion_model.call(this, pdistortionmodel)
+  end
+end
+struct LibWin32::IMFExtendedCameraIntrinsicsDistortionModelArcTan
+  def query_interface(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_distortion_model(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*, pdistortionmodel : MFCameraIntrinsic_DistortionModelArcTan*) : HRESULT
+    @lpVtbl.value.get_distortion_model.call(this, pdistortionmodel)
+  end
+  def set_distortion_model(this : IMFExtendedCameraIntrinsicsDistortionModelArcTan*, pdistortionmodel : MFCameraIntrinsic_DistortionModelArcTan*) : HRESULT
+    @lpVtbl.value.set_distortion_model.call(this, pdistortionmodel)
+  end
+end
+struct LibWin32::IMFExtendedCameraIntrinsics
+  def query_interface(this : IMFExtendedCameraIntrinsics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraIntrinsics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraIntrinsics*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_from_buffer(this : IMFExtendedCameraIntrinsics*, pbbuffer : UInt8*, dwbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.initialize_from_buffer.call(this, pbbuffer, dwbuffersize)
+  end
+  def get_buffer_size(this : IMFExtendedCameraIntrinsics*, pdwbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_size.call(this, pdwbuffersize)
+  end
+  def serialize_to_buffer(this : IMFExtendedCameraIntrinsics*, pbbuffer : UInt8*, pdwbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.serialize_to_buffer.call(this, pbbuffer, pdwbuffersize)
+  end
+  def get_intrinsic_model_count(this : IMFExtendedCameraIntrinsics*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_intrinsic_model_count.call(this, pdwcount)
+  end
+  def get_intrinsic_model_by_index(this : IMFExtendedCameraIntrinsics*, dwindex : UInt32, ppintrinsicmodel : IMFExtendedCameraIntrinsicModel*) : HRESULT
+    @lpVtbl.value.get_intrinsic_model_by_index.call(this, dwindex, ppintrinsicmodel)
+  end
+  def add_intrinsic_model(this : IMFExtendedCameraIntrinsics*, pintrinsicmodel : IMFExtendedCameraIntrinsicModel) : HRESULT
+    @lpVtbl.value.add_intrinsic_model.call(this, pintrinsicmodel)
+  end
+end
+struct LibWin32::IMFExtendedCameraControl
+  def query_interface(this : IMFExtendedCameraControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IMFExtendedCameraControl*) : UInt64
+    @lpVtbl.value.get_capabilities.call(this)
+  end
+  def set_flags(this : IMFExtendedCameraControl*, ulflags : UInt64) : HRESULT
+    @lpVtbl.value.set_flags.call(this, ulflags)
+  end
+  def get_flags(this : IMFExtendedCameraControl*) : UInt64
+    @lpVtbl.value.get_flags.call(this)
+  end
+  def lock_payload(this : IMFExtendedCameraControl*, pppayload : UInt8**, pulpayload : UInt32*) : HRESULT
+    @lpVtbl.value.lock_payload.call(this, pppayload, pulpayload)
+  end
+  def unlock_payload(this : IMFExtendedCameraControl*) : HRESULT
+    @lpVtbl.value.unlock_payload.call(this)
+  end
+  def commit_settings(this : IMFExtendedCameraControl*) : HRESULT
+    @lpVtbl.value.commit_settings.call(this)
+  end
+end
+struct LibWin32::IMFExtendedCameraController
+  def query_interface(this : IMFExtendedCameraController*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedCameraController*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedCameraController*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_extended_camera_control(this : IMFExtendedCameraController*, dwstreamindex : UInt32, ulpropertyid : UInt32, ppcontrol : IMFExtendedCameraControl*) : HRESULT
+    @lpVtbl.value.get_extended_camera_control.call(this, dwstreamindex, ulpropertyid, ppcontrol)
+  end
+end
+struct LibWin32::IMFRelativePanelReport
+  def query_interface(this : IMFRelativePanelReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRelativePanelReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRelativePanelReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_relative_panel(this : IMFRelativePanelReport*, panel : UInt32*) : HRESULT
+    @lpVtbl.value.get_relative_panel.call(this, panel)
+  end
+end
+struct LibWin32::IMFRelativePanelWatcher
+  def query_interface(this : IMFRelativePanelWatcher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFRelativePanelWatcher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFRelativePanelWatcher*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def shutdown(this : IMFRelativePanelWatcher*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_shutdown_status(this : IMFRelativePanelWatcher*, pstatus : MFSHUTDOWN_STATUS*) : HRESULT
+    @lpVtbl.value.get_shutdown_status.call(this, pstatus)
+  end
+  def begin_get_report(this : IMFRelativePanelWatcher*, pcallback : IMFAsyncCallback, pstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_get_report.call(this, pcallback, pstate)
+  end
+  def end_get_report(this : IMFRelativePanelWatcher*, presult : IMFAsyncResult, pprelativepanelreport : IMFRelativePanelReport*) : HRESULT
+    @lpVtbl.value.end_get_report.call(this, presult, pprelativepanelreport)
+  end
+  def get_report(this : IMFRelativePanelWatcher*, pprelativepanelreport : IMFRelativePanelReport*) : HRESULT
+    @lpVtbl.value.get_report.call(this, pprelativepanelreport)
+  end
+end
+struct LibWin32::IMFCameraOcclusionStateReport
+  def query_interface(this : IMFCameraOcclusionStateReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCameraOcclusionStateReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCameraOcclusionStateReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_occlusion_state(this : IMFCameraOcclusionStateReport*, occlusionstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_occlusion_state.call(this, occlusionstate)
+  end
+end
+struct LibWin32::IMFCameraOcclusionStateReportCallback
+  def query_interface(this : IMFCameraOcclusionStateReportCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCameraOcclusionStateReportCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCameraOcclusionStateReportCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_occlusion_state_report(this : IMFCameraOcclusionStateReportCallback*, occlusionstatereport : IMFCameraOcclusionStateReport) : HRESULT
+    @lpVtbl.value.on_occlusion_state_report.call(this, occlusionstatereport)
+  end
+end
+struct LibWin32::IMFCameraOcclusionStateMonitor
+  def query_interface(this : IMFCameraOcclusionStateMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCameraOcclusionStateMonitor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCameraOcclusionStateMonitor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : IMFCameraOcclusionStateMonitor*) : HRESULT
+    @lpVtbl.value.start.call(this)
+  end
+  def stop(this : IMFCameraOcclusionStateMonitor*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def get_supported_states(this : IMFCameraOcclusionStateMonitor*) : UInt32
+    @lpVtbl.value.get_supported_states.call(this)
+  end
+end
+struct LibWin32::IMFVideoCaptureSampleAllocator
+  def query_interface(this : IMFVideoCaptureSampleAllocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoCaptureSampleAllocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoCaptureSampleAllocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_direct_x_manager(this : IMFVideoCaptureSampleAllocator*, pmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_direct_x_manager.call(this, pmanager)
+  end
+  def uninitialize_sample_allocator(this : IMFVideoCaptureSampleAllocator*) : HRESULT
+    @lpVtbl.value.uninitialize_sample_allocator.call(this)
+  end
+  def initialize_sample_allocator(this : IMFVideoCaptureSampleAllocator*, crequestedframes : UInt32, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.initialize_sample_allocator.call(this, crequestedframes, pmediatype)
+  end
+  def allocate_sample(this : IMFVideoCaptureSampleAllocator*, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.allocate_sample.call(this, ppsample)
+  end
+  def initialize_capture_sample_allocator(this : IMFVideoCaptureSampleAllocator*, cbsamplesize : UInt32, cbcapturemetadatasize : UInt32, cbalignment : UInt32, cminimumsamples : UInt32, pattributes : IMFAttributes, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.initialize_capture_sample_allocator.call(this, cbsamplesize, cbcapturemetadatasize, cbalignment, cminimumsamples, pattributes, pmediatype)
+  end
+end
+struct LibWin32::IMFSampleAllocatorControl
+  def query_interface(this : IMFSampleAllocatorControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSampleAllocatorControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSampleAllocatorControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_default_allocator(this : IMFSampleAllocatorControl*, dwoutputstreamid : UInt32, pallocator : IUnknown) : HRESULT
+    @lpVtbl.value.set_default_allocator.call(this, dwoutputstreamid, pallocator)
+  end
+  def get_allocator_usage(this : IMFSampleAllocatorControl*, dwoutputstreamid : UInt32, pdwinputstreamid : UInt32*, peusage : MFSampleAllocatorUsage*) : HRESULT
+    @lpVtbl.value.get_allocator_usage.call(this, dwoutputstreamid, pdwinputstreamid, peusage)
+  end
+end
+struct LibWin32::IMFASFContentInfo
+  def query_interface(this : IMFASFContentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFContentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFContentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_header_size(this : IMFASFContentInfo*, pistartofcontent : IMFMediaBuffer, cbheadersize : UInt64*) : HRESULT
+    @lpVtbl.value.get_header_size.call(this, pistartofcontent, cbheadersize)
+  end
+  def parse_header(this : IMFASFContentInfo*, piheaderbuffer : IMFMediaBuffer, cboffsetwithinheader : UInt64) : HRESULT
+    @lpVtbl.value.parse_header.call(this, piheaderbuffer, cboffsetwithinheader)
+  end
+  def generate_header(this : IMFASFContentInfo*, piheader : IMFMediaBuffer, pcbheader : UInt32*) : HRESULT
+    @lpVtbl.value.generate_header.call(this, piheader, pcbheader)
+  end
+  def get_profile(this : IMFASFContentInfo*, ppiprofile : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppiprofile)
+  end
+  def set_profile(this : IMFASFContentInfo*, piprofile : IMFASFProfile) : HRESULT
+    @lpVtbl.value.set_profile.call(this, piprofile)
+  end
+  def generate_presentation_descriptor(this : IMFASFContentInfo*, ppipresentationdescriptor : IMFPresentationDescriptor*) : HRESULT
+    @lpVtbl.value.generate_presentation_descriptor.call(this, ppipresentationdescriptor)
+  end
+  def get_encoding_configuration_property_store(this : IMFASFContentInfo*, wstreamnumber : UInt16, ppistore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_encoding_configuration_property_store.call(this, wstreamnumber, ppistore)
+  end
+end
+struct LibWin32::IMFASFProfile
+  def query_interface(this : IMFASFProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFASFProfile*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFASFProfile*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFASFProfile*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFASFProfile*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFASFProfile*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFASFProfile*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFASFProfile*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFASFProfile*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFASFProfile*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFASFProfile*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFASFProfile*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFASFProfile*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFASFProfile*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFASFProfile*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFASFProfile*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFASFProfile*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFASFProfile*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFASFProfile*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFASFProfile*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFASFProfile*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFASFProfile*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFASFProfile*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFASFProfile*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFASFProfile*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFASFProfile*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFASFProfile*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFASFProfile*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_stream_count(this : IMFASFProfile*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcstreams)
+  end
+  def get_stream(this : IMFASFProfile*, dwstreamindex : UInt32, pwstreamnumber : UInt16*, ppistream : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, dwstreamindex, pwstreamnumber, ppistream)
+  end
+  def get_stream_by_number(this : IMFASFProfile*, wstreamnumber : UInt16, ppistream : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream_by_number.call(this, wstreamnumber, ppistream)
+  end
+  def set_stream(this : IMFASFProfile*, pistream : IMFASFStreamConfig) : HRESULT
+    @lpVtbl.value.set_stream.call(this, pistream)
+  end
+  def remove_stream(this : IMFASFProfile*, wstreamnumber : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, wstreamnumber)
+  end
+  def create_stream(this : IMFASFProfile*, pimediatype : IMFMediaType, ppistream : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, pimediatype, ppistream)
+  end
+  def get_mutual_exclusion_count(this : IMFASFProfile*, pcmutexs : UInt32*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion_count.call(this, pcmutexs)
+  end
+  def get_mutual_exclusion(this : IMFASFProfile*, dwmutexindex : UInt32, ppimutex : IMFASFMutualExclusion*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion.call(this, dwmutexindex, ppimutex)
+  end
+  def add_mutual_exclusion(this : IMFASFProfile*, pimutex : IMFASFMutualExclusion) : HRESULT
+    @lpVtbl.value.add_mutual_exclusion.call(this, pimutex)
+  end
+  def remove_mutual_exclusion(this : IMFASFProfile*, dwmutexindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_mutual_exclusion.call(this, dwmutexindex)
+  end
+  def create_mutual_exclusion(this : IMFASFProfile*, ppimutex : IMFASFMutualExclusion*) : HRESULT
+    @lpVtbl.value.create_mutual_exclusion.call(this, ppimutex)
+  end
+  def get_stream_prioritization(this : IMFASFProfile*, ppistreamprioritization : IMFASFStreamPrioritization*) : HRESULT
+    @lpVtbl.value.get_stream_prioritization.call(this, ppistreamprioritization)
+  end
+  def add_stream_prioritization(this : IMFASFProfile*, pistreamprioritization : IMFASFStreamPrioritization) : HRESULT
+    @lpVtbl.value.add_stream_prioritization.call(this, pistreamprioritization)
+  end
+  def remove_stream_prioritization(this : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.remove_stream_prioritization.call(this)
+  end
+  def create_stream_prioritization(this : IMFASFProfile*, ppistreamprioritization : IMFASFStreamPrioritization*) : HRESULT
+    @lpVtbl.value.create_stream_prioritization.call(this, ppistreamprioritization)
+  end
+  def clone(this : IMFASFProfile*, ppiprofile : IMFASFProfile*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppiprofile)
+  end
+end
+struct LibWin32::IMFASFStreamConfig
+  def query_interface(this : IMFASFStreamConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFStreamConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFStreamConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFASFStreamConfig*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFASFStreamConfig*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFASFStreamConfig*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFASFStreamConfig*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFASFStreamConfig*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFASFStreamConfig*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFASFStreamConfig*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFASFStreamConfig*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFASFStreamConfig*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFASFStreamConfig*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFASFStreamConfig*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFASFStreamConfig*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFASFStreamConfig*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFASFStreamConfig*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFASFStreamConfig*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFASFStreamConfig*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFASFStreamConfig*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFASFStreamConfig*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFASFStreamConfig*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFASFStreamConfig*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFASFStreamConfig*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFASFStreamConfig*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFASFStreamConfig*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFASFStreamConfig*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFASFStreamConfig*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFASFStreamConfig*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFASFStreamConfig*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_stream_type(this : IMFASFStreamConfig*, pguidstreamtype : Guid*) : HRESULT
+    @lpVtbl.value.get_stream_type.call(this, pguidstreamtype)
+  end
+  def get_stream_number(this : IMFASFStreamConfig*) : UInt16
+    @lpVtbl.value.get_stream_number.call(this)
+  end
+  def set_stream_number(this : IMFASFStreamConfig*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.set_stream_number.call(this, wstreamnum)
+  end
+  def get_media_type(this : IMFASFStreamConfig*, ppimediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, ppimediatype)
+  end
+  def set_media_type(this : IMFASFStreamConfig*, pimediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, pimediatype)
+  end
+  def get_payload_extension_count(this : IMFASFStreamConfig*, pcpayloadextensions : UInt16*) : HRESULT
+    @lpVtbl.value.get_payload_extension_count.call(this, pcpayloadextensions)
+  end
+  def get_payload_extension(this : IMFASFStreamConfig*, wpayloadextensionnumber : UInt16, pguidextensionsystemid : Guid*, pcbextensiondatasize : UInt16*, pbextensionsysteminfo : UInt8*, pcbextensionsysteminfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_payload_extension.call(this, wpayloadextensionnumber, pguidextensionsystemid, pcbextensiondatasize, pbextensionsysteminfo, pcbextensionsysteminfo)
+  end
+  def add_payload_extension(this : IMFASFStreamConfig*, guidextensionsystemid : Guid, cbextensiondatasize : UInt16, pbextensionsysteminfo : UInt8*, cbextensionsysteminfo : UInt32) : HRESULT
+    @lpVtbl.value.add_payload_extension.call(this, guidextensionsystemid, cbextensiondatasize, pbextensionsysteminfo, cbextensionsysteminfo)
+  end
+  def remove_all_payload_extensions(this : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.remove_all_payload_extensions.call(this)
+  end
+  def clone(this : IMFASFStreamConfig*, ppistreamconfig : IMFASFStreamConfig*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppistreamconfig)
+  end
+end
+struct LibWin32::IMFASFMutualExclusion
+  def query_interface(this : IMFASFMutualExclusion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFMutualExclusion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFMutualExclusion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IMFASFMutualExclusion*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def set_type(this : IMFASFMutualExclusion*, guidtype : Guid*) : HRESULT
+    @lpVtbl.value.set_type.call(this, guidtype)
+  end
+  def get_record_count(this : IMFASFMutualExclusion*, pdwrecordcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_record_count.call(this, pdwrecordcount)
+  end
+  def get_streams_for_record(this : IMFASFMutualExclusion*, dwrecordnumber : UInt32, pwstreamnumarray : UInt16*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_streams_for_record.call(this, dwrecordnumber, pwstreamnumarray, pcstreams)
+  end
+  def add_stream_for_record(this : IMFASFMutualExclusion*, dwrecordnumber : UInt32, wstreamnumber : UInt16) : HRESULT
+    @lpVtbl.value.add_stream_for_record.call(this, dwrecordnumber, wstreamnumber)
+  end
+  def remove_stream_from_record(this : IMFASFMutualExclusion*, dwrecordnumber : UInt32, wstreamnumber : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream_from_record.call(this, dwrecordnumber, wstreamnumber)
+  end
+  def remove_record(this : IMFASFMutualExclusion*, dwrecordnumber : UInt32) : HRESULT
+    @lpVtbl.value.remove_record.call(this, dwrecordnumber)
+  end
+  def add_record(this : IMFASFMutualExclusion*, pdwrecordnumber : UInt32*) : HRESULT
+    @lpVtbl.value.add_record.call(this, pdwrecordnumber)
+  end
+  def clone(this : IMFASFMutualExclusion*, ppimutex : IMFASFMutualExclusion*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppimutex)
+  end
+end
+struct LibWin32::IMFASFStreamPrioritization
+  def query_interface(this : IMFASFStreamPrioritization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFStreamPrioritization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFStreamPrioritization*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMFASFStreamPrioritization*, pdwstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pdwstreamcount)
+  end
+  def get_stream(this : IMFASFStreamPrioritization*, dwstreamindex : UInt32, pwstreamnumber : UInt16*, pwstreamflags : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, dwstreamindex, pwstreamnumber, pwstreamflags)
+  end
+  def add_stream(this : IMFASFStreamPrioritization*, wstreamnumber : UInt16, wstreamflags : UInt16) : HRESULT
+    @lpVtbl.value.add_stream.call(this, wstreamnumber, wstreamflags)
+  end
+  def remove_stream(this : IMFASFStreamPrioritization*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, dwstreamindex)
+  end
+  def clone(this : IMFASFStreamPrioritization*, ppistreamprioritization : IMFASFStreamPrioritization*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppistreamprioritization)
+  end
+end
+struct LibWin32::IMFASFIndexer
+  def query_interface(this : IMFASFIndexer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFIndexer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFIndexer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_flags(this : IMFASFIndexer*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwflags)
+  end
+  def get_flags(this : IMFASFIndexer*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def initialize(this : IMFASFIndexer*, picontentinfo : IMFASFContentInfo) : HRESULT
+    @lpVtbl.value.initialize.call(this, picontentinfo)
+  end
+  def get_index_position(this : IMFASFIndexer*, picontentinfo : IMFASFContentInfo, pcbindexoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_index_position.call(this, picontentinfo, pcbindexoffset)
+  end
+  def set_index_byte_streams(this : IMFASFIndexer*, ppibytestreams : IMFByteStream*, cbytestreams : UInt32) : HRESULT
+    @lpVtbl.value.set_index_byte_streams.call(this, ppibytestreams, cbytestreams)
+  end
+  def get_index_byte_stream_count(this : IMFASFIndexer*, pcbytestreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_byte_stream_count.call(this, pcbytestreams)
+  end
+  def get_index_status(this : IMFASFIndexer*, pindexidentifier : ASF_INDEX_IDENTIFIER*, pfisindexed : LibC::BOOL*, pbindexdescriptor : UInt8*, pcbindexdescriptor : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_status.call(this, pindexidentifier, pfisindexed, pbindexdescriptor, pcbindexdescriptor)
+  end
+  def set_index_status(this : IMFASFIndexer*, pbindexdescriptor : UInt8*, cbindexdescriptor : UInt32, fgenerateindex : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_index_status.call(this, pbindexdescriptor, cbindexdescriptor, fgenerateindex)
+  end
+  def get_seek_position_for_value(this : IMFASFIndexer*, pvarvalue : PROPVARIANT*, pindexidentifier : ASF_INDEX_IDENTIFIER*, pcboffsetwithindata : UInt64*, phnsapproxtime : Int64*, pdwpayloadnumberofstreamwithinpacket : UInt32*) : HRESULT
+    @lpVtbl.value.get_seek_position_for_value.call(this, pvarvalue, pindexidentifier, pcboffsetwithindata, phnsapproxtime, pdwpayloadnumberofstreamwithinpacket)
+  end
+  def generate_index_entries(this : IMFASFIndexer*, piasfpacketsample : IMFSample) : HRESULT
+    @lpVtbl.value.generate_index_entries.call(this, piasfpacketsample)
+  end
+  def commit_index(this : IMFASFIndexer*, picontentinfo : IMFASFContentInfo) : HRESULT
+    @lpVtbl.value.commit_index.call(this, picontentinfo)
+  end
+  def get_index_write_space(this : IMFASFIndexer*, pcbindexwritespace : UInt64*) : HRESULT
+    @lpVtbl.value.get_index_write_space.call(this, pcbindexwritespace)
+  end
+  def get_completed_index(this : IMFASFIndexer*, piindexbuffer : IMFMediaBuffer, cboffsetwithinindex : UInt64) : HRESULT
+    @lpVtbl.value.get_completed_index.call(this, piindexbuffer, cboffsetwithinindex)
+  end
+end
+struct LibWin32::IMFASFSplitter
+  def query_interface(this : IMFASFSplitter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFSplitter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFSplitter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IMFASFSplitter*, picontentinfo : IMFASFContentInfo) : HRESULT
+    @lpVtbl.value.initialize.call(this, picontentinfo)
+  end
+  def set_flags(this : IMFASFSplitter*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwflags)
+  end
+  def get_flags(this : IMFASFSplitter*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def select_streams(this : IMFASFSplitter*, pwstreamnumbers : UInt16*, wnumstreams : UInt16) : HRESULT
+    @lpVtbl.value.select_streams.call(this, pwstreamnumbers, wnumstreams)
+  end
+  def get_selected_streams(this : IMFASFSplitter*, pwstreamnumbers : UInt16*, pwnumstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_selected_streams.call(this, pwstreamnumbers, pwnumstreams)
+  end
+  def parse_data(this : IMFASFSplitter*, pibuffer : IMFMediaBuffer, cbbufferoffset : UInt32, cblength : UInt32) : HRESULT
+    @lpVtbl.value.parse_data.call(this, pibuffer, cbbufferoffset, cblength)
+  end
+  def get_next_sample(this : IMFASFSplitter*, pdwstatusflags : ASF_STATUSFLAGS*, pwstreamnumber : UInt16*, ppisample : IMFSample*) : HRESULT
+    @lpVtbl.value.get_next_sample.call(this, pdwstatusflags, pwstreamnumber, ppisample)
+  end
+  def flush(this : IMFASFSplitter*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def get_last_send_time(this : IMFASFSplitter*, pdwlastsendtime : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_send_time.call(this, pdwlastsendtime)
+  end
+end
+struct LibWin32::IMFASFMultiplexer
+  def query_interface(this : IMFASFMultiplexer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFMultiplexer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFMultiplexer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IMFASFMultiplexer*, picontentinfo : IMFASFContentInfo) : HRESULT
+    @lpVtbl.value.initialize.call(this, picontentinfo)
+  end
+  def set_flags(this : IMFASFMultiplexer*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwflags)
+  end
+  def get_flags(this : IMFASFMultiplexer*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def process_sample(this : IMFASFMultiplexer*, wstreamnumber : UInt16, pisample : IMFSample, hnstimestampadjust : Int64) : HRESULT
+    @lpVtbl.value.process_sample.call(this, wstreamnumber, pisample, hnstimestampadjust)
+  end
+  def get_next_packet(this : IMFASFMultiplexer*, pdwstatusflags : UInt32*, ppipacket : IMFSample*) : HRESULT
+    @lpVtbl.value.get_next_packet.call(this, pdwstatusflags, ppipacket)
+  end
+  def flush(this : IMFASFMultiplexer*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def end_(this : IMFASFMultiplexer*, picontentinfo : IMFASFContentInfo) : HRESULT
+    @lpVtbl.value.end_.call(this, picontentinfo)
+  end
+  def get_statistics(this : IMFASFMultiplexer*, wstreamnumber : UInt16, pmuxstats : ASF_MUX_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, wstreamnumber, pmuxstats)
+  end
+  def set_sync_tolerance(this : IMFASFMultiplexer*, mssynctolerance : UInt32) : HRESULT
+    @lpVtbl.value.set_sync_tolerance.call(this, mssynctolerance)
+  end
+end
+struct LibWin32::IMFASFStreamSelector
+  def query_interface(this : IMFASFStreamSelector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFASFStreamSelector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFASFStreamSelector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMFASFStreamSelector*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcstreams)
+  end
+  def get_output_count(this : IMFASFStreamSelector*, pcoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_count.call(this, pcoutputs)
+  end
+  def get_output_stream_count(this : IMFASFStreamSelector*, dwoutputnum : UInt32, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_stream_count.call(this, dwoutputnum, pcstreams)
+  end
+  def get_output_stream_numbers(this : IMFASFStreamSelector*, dwoutputnum : UInt32, rgwstreamnumbers : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_stream_numbers.call(this, dwoutputnum, rgwstreamnumbers)
+  end
+  def get_output_from_stream(this : IMFASFStreamSelector*, wstreamnum : UInt16, pdwoutput : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_from_stream.call(this, wstreamnum, pdwoutput)
+  end
+  def get_output_override(this : IMFASFStreamSelector*, dwoutputnum : UInt32, pselection : ASF_SELECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_output_override.call(this, dwoutputnum, pselection)
+  end
+  def set_output_override(this : IMFASFStreamSelector*, dwoutputnum : UInt32, selection : ASF_SELECTION_STATUS) : HRESULT
+    @lpVtbl.value.set_output_override.call(this, dwoutputnum, selection)
+  end
+  def get_output_mutex_count(this : IMFASFStreamSelector*, dwoutputnum : UInt32, pcmutexes : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mutex_count.call(this, dwoutputnum, pcmutexes)
+  end
+  def get_output_mutex(this : IMFASFStreamSelector*, dwoutputnum : UInt32, dwmutexnum : UInt32, ppmutex : IUnknown*) : HRESULT
+    @lpVtbl.value.get_output_mutex.call(this, dwoutputnum, dwmutexnum, ppmutex)
+  end
+  def set_output_mutex_selection(this : IMFASFStreamSelector*, dwoutputnum : UInt32, dwmutexnum : UInt32, wselectedrecord : UInt16) : HRESULT
+    @lpVtbl.value.set_output_mutex_selection.call(this, dwoutputnum, dwmutexnum, wselectedrecord)
+  end
+  def get_bandwidth_step_count(this : IMFASFStreamSelector*, pcstepcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_bandwidth_step_count.call(this, pcstepcount)
+  end
+  def get_bandwidth_step(this : IMFASFStreamSelector*, dwstepnum : UInt32, pdwbitrate : UInt32*, rgwstreamnumbers : UInt16*, rgselections : ASF_SELECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_bandwidth_step.call(this, dwstepnum, pdwbitrate, rgwstreamnumbers, rgselections)
+  end
+  def bitrate_to_step_number(this : IMFASFStreamSelector*, dwbitrate : UInt32, pdwstepnum : UInt32*) : HRESULT
+    @lpVtbl.value.bitrate_to_step_number.call(this, dwbitrate, pdwstepnum)
+  end
+  def set_stream_selector_flags(this : IMFASFStreamSelector*, dwstreamselectorflags : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_selector_flags.call(this, dwstreamselectorflags)
+  end
+end
+struct LibWin32::IMFDRMNetHelper
+  def query_interface(this : IMFDRMNetHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDRMNetHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDRMNetHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def process_license_request(this : IMFDRMNetHelper*, plicenserequest : UInt8*, cblicenserequest : UInt32, pplicenseresponse : UInt8**, pcblicenseresponse : UInt32*, pbstrkid : UInt8**) : HRESULT
+    @lpVtbl.value.process_license_request.call(this, plicenserequest, cblicenserequest, pplicenseresponse, pcblicenseresponse, pbstrkid)
+  end
+  def get_chained_license_response(this : IMFDRMNetHelper*, pplicenseresponse : UInt8**, pcblicenseresponse : UInt32*) : HRESULT
+    @lpVtbl.value.get_chained_license_response.call(this, pplicenseresponse, pcblicenseresponse)
+  end
+end
+struct LibWin32::IMFCaptureEngineOnEventCallback
+  def query_interface(this : IMFCaptureEngineOnEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureEngineOnEventCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureEngineOnEventCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_event(this : IMFCaptureEngineOnEventCallback*, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.on_event.call(this, pevent)
+  end
+end
+struct LibWin32::IMFCaptureEngineOnSampleCallback
+  def query_interface(this : IMFCaptureEngineOnSampleCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureEngineOnSampleCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureEngineOnSampleCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_sample(this : IMFCaptureEngineOnSampleCallback*, psample : IMFSample) : HRESULT
+    @lpVtbl.value.on_sample.call(this, psample)
+  end
+end
+struct LibWin32::IMFCaptureSink
+  def query_interface(this : IMFCaptureSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_media_type(this : IMFCaptureSink*, dwsinkstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_media_type.call(this, dwsinkstreamindex, ppmediatype)
+  end
+  def get_service(this : IMFCaptureSink*, dwsinkstreamindex : UInt32, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, dwsinkstreamindex, rguidservice, riid, ppunknown)
+  end
+  def add_stream(this : IMFCaptureSink*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType, pattributes : IMFAttributes, pdwsinkstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, dwsourcestreamindex, pmediatype, pattributes, pdwsinkstreamindex)
+  end
+  def prepare(this : IMFCaptureSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def remove_all_streams(this : IMFCaptureSink*) : HRESULT
+    @lpVtbl.value.remove_all_streams.call(this)
+  end
+end
+struct LibWin32::IMFCaptureRecordSink
+  def query_interface(this : IMFCaptureRecordSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureRecordSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureRecordSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_media_type(this : IMFCaptureRecordSink*, dwsinkstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_media_type.call(this, dwsinkstreamindex, ppmediatype)
+  end
+  def get_service(this : IMFCaptureRecordSink*, dwsinkstreamindex : UInt32, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, dwsinkstreamindex, rguidservice, riid, ppunknown)
+  end
+  def add_stream(this : IMFCaptureRecordSink*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType, pattributes : IMFAttributes, pdwsinkstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, dwsourcestreamindex, pmediatype, pattributes, pdwsinkstreamindex)
+  end
+  def prepare(this : IMFCaptureRecordSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def remove_all_streams(this : IMFCaptureRecordSink*) : HRESULT
+    @lpVtbl.value.remove_all_streams.call(this)
+  end
+  def set_output_byte_stream(this : IMFCaptureRecordSink*, pbytestream : IMFByteStream, guidcontainertype : Guid*) : HRESULT
+    @lpVtbl.value.set_output_byte_stream.call(this, pbytestream, guidcontainertype)
+  end
+  def set_output_file_name(this : IMFCaptureRecordSink*, filename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_file_name.call(this, filename)
+  end
+  def set_sample_callback(this : IMFCaptureRecordSink*, dwstreamsinkindex : UInt32, pcallback : IMFCaptureEngineOnSampleCallback) : HRESULT
+    @lpVtbl.value.set_sample_callback.call(this, dwstreamsinkindex, pcallback)
+  end
+  def set_custom_sink(this : IMFCaptureRecordSink*, pmediasink : IMFMediaSink) : HRESULT
+    @lpVtbl.value.set_custom_sink.call(this, pmediasink)
+  end
+  def get_rotation(this : IMFCaptureRecordSink*, dwstreamindex : UInt32, pdwrotationvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_rotation.call(this, dwstreamindex, pdwrotationvalue)
+  end
+  def set_rotation(this : IMFCaptureRecordSink*, dwstreamindex : UInt32, dwrotationvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_rotation.call(this, dwstreamindex, dwrotationvalue)
+  end
+end
+struct LibWin32::IMFCapturePreviewSink
+  def query_interface(this : IMFCapturePreviewSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCapturePreviewSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCapturePreviewSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_media_type(this : IMFCapturePreviewSink*, dwsinkstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_media_type.call(this, dwsinkstreamindex, ppmediatype)
+  end
+  def get_service(this : IMFCapturePreviewSink*, dwsinkstreamindex : UInt32, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, dwsinkstreamindex, rguidservice, riid, ppunknown)
+  end
+  def add_stream(this : IMFCapturePreviewSink*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType, pattributes : IMFAttributes, pdwsinkstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, dwsourcestreamindex, pmediatype, pattributes, pdwsinkstreamindex)
+  end
+  def prepare(this : IMFCapturePreviewSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def remove_all_streams(this : IMFCapturePreviewSink*) : HRESULT
+    @lpVtbl.value.remove_all_streams.call(this)
+  end
+  def set_render_handle(this : IMFCapturePreviewSink*, handle : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_render_handle.call(this, handle)
+  end
+  def set_render_surface(this : IMFCapturePreviewSink*, psurface : IUnknown) : HRESULT
+    @lpVtbl.value.set_render_surface.call(this, psurface)
+  end
+  def update_video(this : IMFCapturePreviewSink*, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : UInt32*) : HRESULT
+    @lpVtbl.value.update_video.call(this, psrc, pdst, pborderclr)
+  end
+  def set_sample_callback(this : IMFCapturePreviewSink*, dwstreamsinkindex : UInt32, pcallback : IMFCaptureEngineOnSampleCallback) : HRESULT
+    @lpVtbl.value.set_sample_callback.call(this, dwstreamsinkindex, pcallback)
+  end
+  def get_mirror_state(this : IMFCapturePreviewSink*, pfmirrorstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mirror_state.call(this, pfmirrorstate)
+  end
+  def set_mirror_state(this : IMFCapturePreviewSink*, fmirrorstate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_mirror_state.call(this, fmirrorstate)
+  end
+  def get_rotation(this : IMFCapturePreviewSink*, dwstreamindex : UInt32, pdwrotationvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_rotation.call(this, dwstreamindex, pdwrotationvalue)
+  end
+  def set_rotation(this : IMFCapturePreviewSink*, dwstreamindex : UInt32, dwrotationvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_rotation.call(this, dwstreamindex, dwrotationvalue)
+  end
+  def set_custom_sink(this : IMFCapturePreviewSink*, pmediasink : IMFMediaSink) : HRESULT
+    @lpVtbl.value.set_custom_sink.call(this, pmediasink)
+  end
+end
+struct LibWin32::IMFCapturePhotoSink
+  def query_interface(this : IMFCapturePhotoSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCapturePhotoSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCapturePhotoSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_media_type(this : IMFCapturePhotoSink*, dwsinkstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_media_type.call(this, dwsinkstreamindex, ppmediatype)
+  end
+  def get_service(this : IMFCapturePhotoSink*, dwsinkstreamindex : UInt32, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, dwsinkstreamindex, rguidservice, riid, ppunknown)
+  end
+  def add_stream(this : IMFCapturePhotoSink*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType, pattributes : IMFAttributes, pdwsinkstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, dwsourcestreamindex, pmediatype, pattributes, pdwsinkstreamindex)
+  end
+  def prepare(this : IMFCapturePhotoSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def remove_all_streams(this : IMFCapturePhotoSink*) : HRESULT
+    @lpVtbl.value.remove_all_streams.call(this)
+  end
+  def set_output_file_name(this : IMFCapturePhotoSink*, filename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_file_name.call(this, filename)
+  end
+  def set_sample_callback(this : IMFCapturePhotoSink*, pcallback : IMFCaptureEngineOnSampleCallback) : HRESULT
+    @lpVtbl.value.set_sample_callback.call(this, pcallback)
+  end
+  def set_output_byte_stream(this : IMFCapturePhotoSink*, pbytestream : IMFByteStream) : HRESULT
+    @lpVtbl.value.set_output_byte_stream.call(this, pbytestream)
+  end
+end
+struct LibWin32::IMFCaptureSource
+  def query_interface(this : IMFCaptureSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capture_device_source(this : IMFCaptureSource*, mfcaptureenginedevicetype : MF_CAPTURE_ENGINE_DEVICE_TYPE, ppmediasource : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.get_capture_device_source.call(this, mfcaptureenginedevicetype, ppmediasource)
+  end
+  def get_capture_device_activate(this : IMFCaptureSource*, mfcaptureenginedevicetype : MF_CAPTURE_ENGINE_DEVICE_TYPE, ppactivate : IMFActivate*) : HRESULT
+    @lpVtbl.value.get_capture_device_activate.call(this, mfcaptureenginedevicetype, ppactivate)
+  end
+  def get_service(this : IMFCaptureSource*, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, rguidservice, riid, ppunknown)
+  end
+  def add_effect(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.add_effect.call(this, dwsourcestreamindex, punknown)
+  end
+  def remove_effect(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.remove_effect.call(this, dwsourcestreamindex, punknown)
+  end
+  def remove_all_effects(this : IMFCaptureSource*, dwsourcestreamindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_all_effects.call(this, dwsourcestreamindex)
+  end
+  def get_available_device_media_type(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, dwmediatypeindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_available_device_media_type.call(this, dwsourcestreamindex, dwmediatypeindex, ppmediatype)
+  end
+  def set_current_device_media_type(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_current_device_media_type.call(this, dwsourcestreamindex, pmediatype)
+  end
+  def get_current_device_media_type(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_current_device_media_type.call(this, dwsourcestreamindex, ppmediatype)
+  end
+  def get_device_stream_count(this : IMFCaptureSource*, pdwstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_stream_count.call(this, pdwstreamcount)
+  end
+  def get_device_stream_category(this : IMFCaptureSource*, dwsourcestreamindex : UInt32, pstreamcategory : MF_CAPTURE_ENGINE_STREAM_CATEGORY*) : HRESULT
+    @lpVtbl.value.get_device_stream_category.call(this, dwsourcestreamindex, pstreamcategory)
+  end
+  def get_mirror_state(this : IMFCaptureSource*, dwstreamindex : UInt32, pfmirrorstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mirror_state.call(this, dwstreamindex, pfmirrorstate)
+  end
+  def set_mirror_state(this : IMFCaptureSource*, dwstreamindex : UInt32, fmirrorstate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_mirror_state.call(this, dwstreamindex, fmirrorstate)
+  end
+  def get_stream_index_from_friendly_name(this : IMFCaptureSource*, uifriendlyname : UInt32, pdwactualstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_index_from_friendly_name.call(this, uifriendlyname, pdwactualstreamindex)
+  end
+end
+struct LibWin32::IMFCaptureEngine
+  def query_interface(this : IMFCaptureEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IMFCaptureEngine*, peventcallback : IMFCaptureEngineOnEventCallback, pattributes : IMFAttributes, paudiosource : IUnknown, pvideosource : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.call(this, peventcallback, pattributes, paudiosource, pvideosource)
+  end
+  def start_preview(this : IMFCaptureEngine*) : HRESULT
+    @lpVtbl.value.start_preview.call(this)
+  end
+  def stop_preview(this : IMFCaptureEngine*) : HRESULT
+    @lpVtbl.value.stop_preview.call(this)
+  end
+  def start_record(this : IMFCaptureEngine*) : HRESULT
+    @lpVtbl.value.start_record.call(this)
+  end
+  def stop_record(this : IMFCaptureEngine*, bfinalize : LibC::BOOL, bflushunprocessedsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.stop_record.call(this, bfinalize, bflushunprocessedsamples)
+  end
+  def take_photo(this : IMFCaptureEngine*) : HRESULT
+    @lpVtbl.value.take_photo.call(this)
+  end
+  def get_sink(this : IMFCaptureEngine*, mfcaptureenginesinktype : MF_CAPTURE_ENGINE_SINK_TYPE, ppsink : IMFCaptureSink*) : HRESULT
+    @lpVtbl.value.get_sink.call(this, mfcaptureenginesinktype, ppsink)
+  end
+  def get_source(this : IMFCaptureEngine*, ppsource : IMFCaptureSource*) : HRESULT
+    @lpVtbl.value.get_source.call(this, ppsource)
+  end
+end
+struct LibWin32::IMFCaptureEngineClassFactory
+  def query_interface(this : IMFCaptureEngineClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureEngineClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureEngineClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IMFCaptureEngineClassFactory*, clsid : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance.call(this, clsid, riid, ppvobject)
+  end
+end
+struct LibWin32::IMFCaptureEngineOnSampleCallback2
+  def query_interface(this : IMFCaptureEngineOnSampleCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureEngineOnSampleCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureEngineOnSampleCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_sample(this : IMFCaptureEngineOnSampleCallback2*, psample : IMFSample) : HRESULT
+    @lpVtbl.value.on_sample.call(this, psample)
+  end
+  def on_synchronized_event(this : IMFCaptureEngineOnSampleCallback2*, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.on_synchronized_event.call(this, pevent)
+  end
+end
+struct LibWin32::IMFCaptureSink2
+  def query_interface(this : IMFCaptureSink2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCaptureSink2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCaptureSink2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_media_type(this : IMFCaptureSink2*, dwsinkstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_media_type.call(this, dwsinkstreamindex, ppmediatype)
+  end
+  def get_service(this : IMFCaptureSink2*, dwsinkstreamindex : UInt32, rguidservice : Guid*, riid : Guid*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.call(this, dwsinkstreamindex, rguidservice, riid, ppunknown)
+  end
+  def add_stream(this : IMFCaptureSink2*, dwsourcestreamindex : UInt32, pmediatype : IMFMediaType, pattributes : IMFAttributes, pdwsinkstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, dwsourcestreamindex, pmediatype, pattributes, pdwsinkstreamindex)
+  end
+  def prepare(this : IMFCaptureSink2*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def remove_all_streams(this : IMFCaptureSink2*) : HRESULT
+    @lpVtbl.value.remove_all_streams.call(this)
+  end
+  def set_output_media_type(this : IMFCaptureSink2*, dwstreamindex : UInt32, pmediatype : IMFMediaType, pencodingattributes : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_output_media_type.call(this, dwstreamindex, pmediatype, pencodingattributes)
+  end
+end
+struct LibWin32::IMFD3D12SynchronizationObjectCommands
+  def query_interface(this : IMFD3D12SynchronizationObjectCommands*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFD3D12SynchronizationObjectCommands*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFD3D12SynchronizationObjectCommands*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enqueue_resource_ready(this : IMFD3D12SynchronizationObjectCommands*, pproducercommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.enqueue_resource_ready.call(this, pproducercommandqueue)
+  end
+  def enqueue_resource_ready_wait(this : IMFD3D12SynchronizationObjectCommands*, pconsumercommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.enqueue_resource_ready_wait.call(this, pconsumercommandqueue)
+  end
+  def signal_event_on_resource_ready(this : IMFD3D12SynchronizationObjectCommands*, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.signal_event_on_resource_ready.call(this, hevent)
+  end
+  def enqueue_resource_release(this : IMFD3D12SynchronizationObjectCommands*, pconsumercommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.enqueue_resource_release.call(this, pconsumercommandqueue)
+  end
+end
+struct LibWin32::IMFD3D12SynchronizationObject
+  def query_interface(this : IMFD3D12SynchronizationObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFD3D12SynchronizationObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFD3D12SynchronizationObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def signal_event_on_final_resource_release(this : IMFD3D12SynchronizationObject*, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.signal_event_on_final_resource_release.call(this, hevent)
+  end
+  def reset(this : IMFD3D12SynchronizationObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::MFASYNCRESULT
+  def query_interface(this : MFASYNCRESULT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : MFASYNCRESULT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : MFASYNCRESULT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_state(this : MFASYNCRESULT*, ppunkstate : IUnknown*) : HRESULT
+    @lpVtbl.value.get_state.call(this, ppunkstate)
+  end
+  def get_status(this : MFASYNCRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this)
+  end
+  def set_status(this : MFASYNCRESULT*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.set_status.call(this, hrstatus)
+  end
+  def get_object(this : MFASYNCRESULT*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.call(this, ppobject)
+  end
+  def get_state_no_add_ref(this : MFASYNCRESULT*) : IUnknown
+    @lpVtbl.value.get_state_no_add_ref.call(this)
+  end
+end
+struct LibWin32::IMFMediaError
+  def query_interface(this : IMFMediaError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error_code(this : IMFMediaError*) : UInt16
+    @lpVtbl.value.get_error_code.call(this)
+  end
+  def get_extended_error_code(this : IMFMediaError*) : HRESULT
+    @lpVtbl.value.get_extended_error_code.call(this)
+  end
+  def set_error_code(this : IMFMediaError*, error : MF_MEDIA_ENGINE_ERR) : HRESULT
+    @lpVtbl.value.set_error_code.call(this, error)
+  end
+  def set_extended_error_code(this : IMFMediaError*, error : HRESULT) : HRESULT
+    @lpVtbl.value.set_extended_error_code.call(this, error)
+  end
+end
+struct LibWin32::IMFMediaTimeRange
+  def query_interface(this : IMFMediaTimeRange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaTimeRange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaTimeRange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFMediaTimeRange*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_start(this : IMFMediaTimeRange*, index : UInt32, pstart : Float64*) : HRESULT
+    @lpVtbl.value.get_start.call(this, index, pstart)
+  end
+  def get_end(this : IMFMediaTimeRange*, index : UInt32, pend : Float64*) : HRESULT
+    @lpVtbl.value.get_end.call(this, index, pend)
+  end
+  def contains_time(this : IMFMediaTimeRange*, time : Float64) : LibC::BOOL
+    @lpVtbl.value.contains_time.call(this, time)
+  end
+  def add_range(this : IMFMediaTimeRange*, starttime : Float64, endtime : Float64) : HRESULT
+    @lpVtbl.value.add_range.call(this, starttime, endtime)
+  end
+  def clear(this : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IMFMediaEngineNotify
+  def query_interface(this : IMFMediaEngineNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def event_notify(this : IMFMediaEngineNotify*, event : UInt32, param1 : LibC::UINT_PTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.event_notify.call(this, event, param1, param2)
+  end
+end
+struct LibWin32::IMFMediaEngineSrcElements
+  def query_interface(this : IMFMediaEngineSrcElements*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineSrcElements*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineSrcElements*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFMediaEngineSrcElements*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_url(this : IMFMediaEngineSrcElements*, index : UInt32, purl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, index, purl)
+  end
+  def get_type(this : IMFMediaEngineSrcElements*, index : UInt32, ptype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, index, ptype)
+  end
+  def get_media(this : IMFMediaEngineSrcElements*, index : UInt32, pmedia : UInt8**) : HRESULT
+    @lpVtbl.value.get_media.call(this, index, pmedia)
+  end
+  def add_element(this : IMFMediaEngineSrcElements*, purl : UInt8*, ptype : UInt8*, pmedia : UInt8*) : HRESULT
+    @lpVtbl.value.add_element.call(this, purl, ptype, pmedia)
+  end
+  def remove_all_elements(this : IMFMediaEngineSrcElements*) : HRESULT
+    @lpVtbl.value.remove_all_elements.call(this)
+  end
+end
+struct LibWin32::IMFMediaEngine
+  def query_interface(this : IMFMediaEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IMFMediaEngine*, pperror : IMFMediaError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def set_error_code(this : IMFMediaEngine*, error : MF_MEDIA_ENGINE_ERR) : HRESULT
+    @lpVtbl.value.set_error_code.call(this, error)
+  end
+  def set_source_elements(this : IMFMediaEngine*, psrcelements : IMFMediaEngineSrcElements) : HRESULT
+    @lpVtbl.value.set_source_elements.call(this, psrcelements)
+  end
+  def set_source(this : IMFMediaEngine*, purl : UInt8*) : HRESULT
+    @lpVtbl.value.set_source.call(this, purl)
+  end
+  def get_current_source(this : IMFMediaEngine*, ppurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_source.call(this, ppurl)
+  end
+  def get_network_state(this : IMFMediaEngine*) : UInt16
+    @lpVtbl.value.get_network_state.call(this)
+  end
+  def get_preload(this : IMFMediaEngine*) : MF_MEDIA_ENGINE_PRELOAD
+    @lpVtbl.value.get_preload.call(this)
+  end
+  def set_preload(this : IMFMediaEngine*, preload : MF_MEDIA_ENGINE_PRELOAD) : HRESULT
+    @lpVtbl.value.set_preload.call(this, preload)
+  end
+  def get_buffered(this : IMFMediaEngine*, ppbuffered : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_buffered.call(this, ppbuffered)
+  end
+  def load(this : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.load.call(this)
+  end
+  def can_play_type(this : IMFMediaEngine*, type : UInt8*, panswer : MF_MEDIA_ENGINE_CANPLAY*) : HRESULT
+    @lpVtbl.value.can_play_type.call(this, type, panswer)
+  end
+  def get_ready_state(this : IMFMediaEngine*) : UInt16
+    @lpVtbl.value.get_ready_state.call(this)
+  end
+  def is_seeking(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.is_seeking.call(this)
+  end
+  def get_current_time(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_current_time.call(this)
+  end
+  def set_current_time(this : IMFMediaEngine*, seektime : Float64) : HRESULT
+    @lpVtbl.value.set_current_time.call(this, seektime)
+  end
+  def get_start_time(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_start_time.call(this)
+  end
+  def get_duration(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_duration.call(this)
+  end
+  def is_paused(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.is_paused.call(this)
+  end
+  def get_default_playback_rate(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_default_playback_rate.call(this)
+  end
+  def set_default_playback_rate(this : IMFMediaEngine*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_default_playback_rate.call(this, rate)
+  end
+  def get_playback_rate(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_playback_rate.call(this)
+  end
+  def set_playback_rate(this : IMFMediaEngine*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_playback_rate.call(this, rate)
+  end
+  def get_played(this : IMFMediaEngine*, ppplayed : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_played.call(this, ppplayed)
+  end
+  def get_seekable(this : IMFMediaEngine*, ppseekable : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_seekable.call(this, ppseekable)
+  end
+  def is_ended(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.is_ended.call(this)
+  end
+  def get_auto_play(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.get_auto_play.call(this)
+  end
+  def set_auto_play(this : IMFMediaEngine*, autoplay : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_auto_play.call(this, autoplay)
+  end
+  def get_loop(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.get_loop.call(this)
+  end
+  def set_loop(this : IMFMediaEngine*, loop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_loop.call(this, loop)
+  end
+  def play(this : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def pause(this : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def get_muted(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.get_muted.call(this)
+  end
+  def set_muted(this : IMFMediaEngine*, muted : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_muted.call(this, muted)
+  end
+  def get_volume(this : IMFMediaEngine*) : Float64
+    @lpVtbl.value.get_volume.call(this)
+  end
+  def set_volume(this : IMFMediaEngine*, volume : Float64) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume)
+  end
+  def has_video(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.has_video.call(this)
+  end
+  def has_audio(this : IMFMediaEngine*) : LibC::BOOL
+    @lpVtbl.value.has_audio.call(this)
+  end
+  def get_native_video_size(this : IMFMediaEngine*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_native_video_size.call(this, cx, cy)
+  end
+  def get_video_aspect_ratio(this : IMFMediaEngine*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_aspect_ratio.call(this, cx, cy)
+  end
+  def shutdown(this : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def transfer_video_frame(this : IMFMediaEngine*, pdstsurf : IUnknown, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : MFARGB*) : HRESULT
+    @lpVtbl.value.transfer_video_frame.call(this, pdstsurf, psrc, pdst, pborderclr)
+  end
+  def on_video_stream_tick(this : IMFMediaEngine*, ppts : Int64*) : HRESULT
+    @lpVtbl.value.on_video_stream_tick.call(this, ppts)
+  end
+end
+struct LibWin32::IMFMediaEngineEx
+  def query_interface(this : IMFMediaEngineEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IMFMediaEngineEx*, pperror : IMFMediaError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def set_error_code(this : IMFMediaEngineEx*, error : MF_MEDIA_ENGINE_ERR) : HRESULT
+    @lpVtbl.value.set_error_code.call(this, error)
+  end
+  def set_source_elements(this : IMFMediaEngineEx*, psrcelements : IMFMediaEngineSrcElements) : HRESULT
+    @lpVtbl.value.set_source_elements.call(this, psrcelements)
+  end
+  def set_source(this : IMFMediaEngineEx*, purl : UInt8*) : HRESULT
+    @lpVtbl.value.set_source.call(this, purl)
+  end
+  def get_current_source(this : IMFMediaEngineEx*, ppurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_source.call(this, ppurl)
+  end
+  def get_network_state(this : IMFMediaEngineEx*) : UInt16
+    @lpVtbl.value.get_network_state.call(this)
+  end
+  def get_preload(this : IMFMediaEngineEx*) : MF_MEDIA_ENGINE_PRELOAD
+    @lpVtbl.value.get_preload.call(this)
+  end
+  def set_preload(this : IMFMediaEngineEx*, preload : MF_MEDIA_ENGINE_PRELOAD) : HRESULT
+    @lpVtbl.value.set_preload.call(this, preload)
+  end
+  def get_buffered(this : IMFMediaEngineEx*, ppbuffered : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_buffered.call(this, ppbuffered)
+  end
+  def load(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.load.call(this)
+  end
+  def can_play_type(this : IMFMediaEngineEx*, type : UInt8*, panswer : MF_MEDIA_ENGINE_CANPLAY*) : HRESULT
+    @lpVtbl.value.can_play_type.call(this, type, panswer)
+  end
+  def get_ready_state(this : IMFMediaEngineEx*) : UInt16
+    @lpVtbl.value.get_ready_state.call(this)
+  end
+  def is_seeking(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.is_seeking.call(this)
+  end
+  def get_current_time(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_current_time.call(this)
+  end
+  def set_current_time(this : IMFMediaEngineEx*, seektime : Float64) : HRESULT
+    @lpVtbl.value.set_current_time.call(this, seektime)
+  end
+  def get_start_time(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_start_time.call(this)
+  end
+  def get_duration(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_duration.call(this)
+  end
+  def is_paused(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.is_paused.call(this)
+  end
+  def get_default_playback_rate(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_default_playback_rate.call(this)
+  end
+  def set_default_playback_rate(this : IMFMediaEngineEx*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_default_playback_rate.call(this, rate)
+  end
+  def get_playback_rate(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_playback_rate.call(this)
+  end
+  def set_playback_rate(this : IMFMediaEngineEx*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_playback_rate.call(this, rate)
+  end
+  def get_played(this : IMFMediaEngineEx*, ppplayed : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_played.call(this, ppplayed)
+  end
+  def get_seekable(this : IMFMediaEngineEx*, ppseekable : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_seekable.call(this, ppseekable)
+  end
+  def is_ended(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.is_ended.call(this)
+  end
+  def get_auto_play(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.get_auto_play.call(this)
+  end
+  def set_auto_play(this : IMFMediaEngineEx*, autoplay : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_auto_play.call(this, autoplay)
+  end
+  def get_loop(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.get_loop.call(this)
+  end
+  def set_loop(this : IMFMediaEngineEx*, loop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_loop.call(this, loop)
+  end
+  def play(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def pause(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def get_muted(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.get_muted.call(this)
+  end
+  def set_muted(this : IMFMediaEngineEx*, muted : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_muted.call(this, muted)
+  end
+  def get_volume(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_volume.call(this)
+  end
+  def set_volume(this : IMFMediaEngineEx*, volume : Float64) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume)
+  end
+  def has_video(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.has_video.call(this)
+  end
+  def has_audio(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.has_audio.call(this)
+  end
+  def get_native_video_size(this : IMFMediaEngineEx*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_native_video_size.call(this, cx, cy)
+  end
+  def get_video_aspect_ratio(this : IMFMediaEngineEx*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_aspect_ratio.call(this, cx, cy)
+  end
+  def shutdown(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def transfer_video_frame(this : IMFMediaEngineEx*, pdstsurf : IUnknown, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : MFARGB*) : HRESULT
+    @lpVtbl.value.transfer_video_frame.call(this, pdstsurf, psrc, pdst, pborderclr)
+  end
+  def on_video_stream_tick(this : IMFMediaEngineEx*, ppts : Int64*) : HRESULT
+    @lpVtbl.value.on_video_stream_tick.call(this, ppts)
+  end
+  def set_source_from_byte_stream(this : IMFMediaEngineEx*, pbytestream : IMFByteStream, purl : UInt8*) : HRESULT
+    @lpVtbl.value.set_source_from_byte_stream.call(this, pbytestream, purl)
+  end
+  def get_statistics(this : IMFMediaEngineEx*, statisticid : MF_MEDIA_ENGINE_STATISTIC, pstatistic : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, statisticid, pstatistic)
+  end
+  def update_video_stream(this : IMFMediaEngineEx*, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : MFARGB*) : HRESULT
+    @lpVtbl.value.update_video_stream.call(this, psrc, pdst, pborderclr)
+  end
+  def get_balance(this : IMFMediaEngineEx*) : Float64
+    @lpVtbl.value.get_balance.call(this)
+  end
+  def set_balance(this : IMFMediaEngineEx*, balance : Float64) : HRESULT
+    @lpVtbl.value.set_balance.call(this, balance)
+  end
+  def is_playback_rate_supported(this : IMFMediaEngineEx*, rate : Float64) : LibC::BOOL
+    @lpVtbl.value.is_playback_rate_supported.call(this, rate)
+  end
+  def frame_step(this : IMFMediaEngineEx*, forward : LibC::BOOL) : HRESULT
+    @lpVtbl.value.frame_step.call(this, forward)
+  end
+  def get_resource_characteristics(this : IMFMediaEngineEx*, pcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_resource_characteristics.call(this, pcharacteristics)
+  end
+  def get_presentation_attribute(this : IMFMediaEngineEx*, guidmfattribute : Guid*, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_presentation_attribute.call(this, guidmfattribute, pvvalue)
+  end
+  def get_number_of_streams(this : IMFMediaEngineEx*, pdwstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_streams.call(this, pdwstreamcount)
+  end
+  def get_stream_attribute(this : IMFMediaEngineEx*, dwstreamindex : UInt32, guidmfattribute : Guid*, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_stream_attribute.call(this, dwstreamindex, guidmfattribute, pvvalue)
+  end
+  def get_stream_selection(this : IMFMediaEngineEx*, dwstreamindex : UInt32, penabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_stream_selection.call(this, dwstreamindex, penabled)
+  end
+  def set_stream_selection(this : IMFMediaEngineEx*, dwstreamindex : UInt32, enabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stream_selection.call(this, dwstreamindex, enabled)
+  end
+  def apply_stream_selections(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.apply_stream_selections.call(this)
+  end
+  def is_protected(this : IMFMediaEngineEx*, pprotected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_protected.call(this, pprotected)
+  end
+  def insert_video_effect(this : IMFMediaEngineEx*, peffect : IUnknown, foptional : LibC::BOOL) : HRESULT
+    @lpVtbl.value.insert_video_effect.call(this, peffect, foptional)
+  end
+  def insert_audio_effect(this : IMFMediaEngineEx*, peffect : IUnknown, foptional : LibC::BOOL) : HRESULT
+    @lpVtbl.value.insert_audio_effect.call(this, peffect, foptional)
+  end
+  def remove_all_effects(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.remove_all_effects.call(this)
+  end
+  def set_timeline_marker_timer(this : IMFMediaEngineEx*, timetofire : Float64) : HRESULT
+    @lpVtbl.value.set_timeline_marker_timer.call(this, timetofire)
+  end
+  def get_timeline_marker_timer(this : IMFMediaEngineEx*, ptimetofire : Float64*) : HRESULT
+    @lpVtbl.value.get_timeline_marker_timer.call(this, ptimetofire)
+  end
+  def cancel_timeline_marker_timer(this : IMFMediaEngineEx*) : HRESULT
+    @lpVtbl.value.cancel_timeline_marker_timer.call(this)
+  end
+  def is_stereo3_d(this : IMFMediaEngineEx*) : LibC::BOOL
+    @lpVtbl.value.is_stereo3_d.call(this)
+  end
+  def get_stereo3_d_frame_packing_mode(this : IMFMediaEngineEx*, packmode : MF_MEDIA_ENGINE_S3D_PACKING_MODE*) : HRESULT
+    @lpVtbl.value.get_stereo3_d_frame_packing_mode.call(this, packmode)
+  end
+  def set_stereo3_d_frame_packing_mode(this : IMFMediaEngineEx*, packmode : MF_MEDIA_ENGINE_S3D_PACKING_MODE) : HRESULT
+    @lpVtbl.value.set_stereo3_d_frame_packing_mode.call(this, packmode)
+  end
+  def get_stereo3_d_render_mode(this : IMFMediaEngineEx*, outputtype : MF3DVideoOutputType*) : HRESULT
+    @lpVtbl.value.get_stereo3_d_render_mode.call(this, outputtype)
+  end
+  def set_stereo3_d_render_mode(this : IMFMediaEngineEx*, outputtype : MF3DVideoOutputType) : HRESULT
+    @lpVtbl.value.set_stereo3_d_render_mode.call(this, outputtype)
+  end
+  def enable_windowless_swapchain_mode(this : IMFMediaEngineEx*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_windowless_swapchain_mode.call(this, fenable)
+  end
+  def get_video_swapchain_handle(this : IMFMediaEngineEx*, phswapchain : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_video_swapchain_handle.call(this, phswapchain)
+  end
+  def enable_horizontal_mirror_mode(this : IMFMediaEngineEx*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_horizontal_mirror_mode.call(this, fenable)
+  end
+  def get_audio_stream_category(this : IMFMediaEngineEx*, pcategory : UInt32*) : HRESULT
+    @lpVtbl.value.get_audio_stream_category.call(this, pcategory)
+  end
+  def set_audio_stream_category(this : IMFMediaEngineEx*, category : UInt32) : HRESULT
+    @lpVtbl.value.set_audio_stream_category.call(this, category)
+  end
+  def get_audio_endpoint_role(this : IMFMediaEngineEx*, prole : UInt32*) : HRESULT
+    @lpVtbl.value.get_audio_endpoint_role.call(this, prole)
+  end
+  def set_audio_endpoint_role(this : IMFMediaEngineEx*, role : UInt32) : HRESULT
+    @lpVtbl.value.set_audio_endpoint_role.call(this, role)
+  end
+  def get_real_time_mode(this : IMFMediaEngineEx*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_real_time_mode.call(this, pfenabled)
+  end
+  def set_real_time_mode(this : IMFMediaEngineEx*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_real_time_mode.call(this, fenable)
+  end
+  def set_current_time_ex(this : IMFMediaEngineEx*, seektime : Float64, seekmode : MF_MEDIA_ENGINE_SEEK_MODE) : HRESULT
+    @lpVtbl.value.set_current_time_ex.call(this, seektime, seekmode)
+  end
+  def enable_time_update_timer(this : IMFMediaEngineEx*, fenabletimer : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_time_update_timer.call(this, fenabletimer)
+  end
+end
+struct LibWin32::IMFMediaEngineAudioEndpointId
+  def query_interface(this : IMFMediaEngineAudioEndpointId*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineAudioEndpointId*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineAudioEndpointId*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_audio_endpoint_id(this : IMFMediaEngineAudioEndpointId*, pszendpointid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_audio_endpoint_id.call(this, pszendpointid)
+  end
+  def get_audio_endpoint_id(this : IMFMediaEngineAudioEndpointId*, ppszendpointid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_audio_endpoint_id.call(this, ppszendpointid)
+  end
+end
+struct LibWin32::IMFMediaEngineExtension
+  def query_interface(this : IMFMediaEngineExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def can_play_type(this : IMFMediaEngineExtension*, audioonly : LibC::BOOL, mimetype : UInt8*, panswer : MF_MEDIA_ENGINE_CANPLAY*) : HRESULT
+    @lpVtbl.value.can_play_type.call(this, audioonly, mimetype, panswer)
+  end
+  def begin_create_object(this : IMFMediaEngineExtension*, bstrurl : UInt8*, pbytestream : IMFByteStream, type : MF_OBJECT_TYPE, ppiunknowncancelcookie : IUnknown*, pcallback : IMFAsyncCallback, punkstate : IUnknown) : HRESULT
+    @lpVtbl.value.begin_create_object.call(this, bstrurl, pbytestream, type, ppiunknowncancelcookie, pcallback, punkstate)
+  end
+  def cancel_object_creation(this : IMFMediaEngineExtension*, piunknowncancelcookie : IUnknown) : HRESULT
+    @lpVtbl.value.cancel_object_creation.call(this, piunknowncancelcookie)
+  end
+  def end_create_object(this : IMFMediaEngineExtension*, presult : IMFAsyncResult, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.end_create_object.call(this, presult, ppobject)
+  end
+end
+struct LibWin32::IMFMediaEngineProtectedContent
+  def query_interface(this : IMFMediaEngineProtectedContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineProtectedContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineProtectedContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def share_resources(this : IMFMediaEngineProtectedContent*, punkdevicecontext : IUnknown) : HRESULT
+    @lpVtbl.value.share_resources.call(this, punkdevicecontext)
+  end
+  def get_required_protections(this : IMFMediaEngineProtectedContent*, pframeprotectionflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_required_protections.call(this, pframeprotectionflags)
+  end
+  def set_opm_window(this : IMFMediaEngineProtectedContent*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_opm_window.call(this, hwnd)
+  end
+  def transfer_video_frame(this : IMFMediaEngineProtectedContent*, pdstsurf : IUnknown, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : MFARGB*, pframeprotectionflags : UInt32*) : HRESULT
+    @lpVtbl.value.transfer_video_frame.call(this, pdstsurf, psrc, pdst, pborderclr, pframeprotectionflags)
+  end
+  def set_content_protection_manager(this : IMFMediaEngineProtectedContent*, pcpm : IMFContentProtectionManager) : HRESULT
+    @lpVtbl.value.set_content_protection_manager.call(this, pcpm)
+  end
+  def set_application_certificate(this : IMFMediaEngineProtectedContent*, pbblob : UInt8*, cbblob : UInt32) : HRESULT
+    @lpVtbl.value.set_application_certificate.call(this, pbblob, cbblob)
+  end
+end
+struct LibWin32::IAudioSourceProvider
+  def query_interface(this : IAudioSourceProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioSourceProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioSourceProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def provide_input(this : IAudioSourceProvider*, dwsamplecount : UInt32, pdwchannelcount : UInt32*, pinterleavedaudiodata : Float32*) : HRESULT
+    @lpVtbl.value.provide_input.call(this, dwsamplecount, pdwchannelcount, pinterleavedaudiodata)
+  end
+end
+struct LibWin32::IMFMediaEngineWebSupport
+  def query_interface(this : IMFMediaEngineWebSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineWebSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineWebSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def should_delay_the_load_event(this : IMFMediaEngineWebSupport*) : LibC::BOOL
+    @lpVtbl.value.should_delay_the_load_event.call(this)
+  end
+  def connect_web_audio(this : IMFMediaEngineWebSupport*, dwsamplerate : UInt32, ppsourceprovider : IAudioSourceProvider*) : HRESULT
+    @lpVtbl.value.connect_web_audio.call(this, dwsamplerate, ppsourceprovider)
+  end
+  def disconnect_web_audio(this : IMFMediaEngineWebSupport*) : HRESULT
+    @lpVtbl.value.disconnect_web_audio.call(this)
+  end
+end
+struct LibWin32::IMFMediaSourceExtensionNotify
+  def query_interface(this : IMFMediaSourceExtensionNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourceExtensionNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourceExtensionNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_source_open(this : IMFMediaSourceExtensionNotify*) : Void
+    @lpVtbl.value.on_source_open.call(this)
+  end
+  def on_source_ended(this : IMFMediaSourceExtensionNotify*) : Void
+    @lpVtbl.value.on_source_ended.call(this)
+  end
+  def on_source_close(this : IMFMediaSourceExtensionNotify*) : Void
+    @lpVtbl.value.on_source_close.call(this)
+  end
+end
+struct LibWin32::IMFBufferListNotify
+  def query_interface(this : IMFBufferListNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFBufferListNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFBufferListNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_add_source_buffer(this : IMFBufferListNotify*) : Void
+    @lpVtbl.value.on_add_source_buffer.call(this)
+  end
+  def on_remove_source_buffer(this : IMFBufferListNotify*) : Void
+    @lpVtbl.value.on_remove_source_buffer.call(this)
+  end
+end
+struct LibWin32::IMFSourceBufferNotify
+  def query_interface(this : IMFSourceBufferNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceBufferNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceBufferNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_update_start(this : IMFSourceBufferNotify*) : Void
+    @lpVtbl.value.on_update_start.call(this)
+  end
+  def on_abort(this : IMFSourceBufferNotify*) : Void
+    @lpVtbl.value.on_abort.call(this)
+  end
+  def on_error(this : IMFSourceBufferNotify*, hr : HRESULT) : Void
+    @lpVtbl.value.on_error.call(this, hr)
+  end
+  def on_update(this : IMFSourceBufferNotify*) : Void
+    @lpVtbl.value.on_update.call(this)
+  end
+  def on_update_end(this : IMFSourceBufferNotify*) : Void
+    @lpVtbl.value.on_update_end.call(this)
+  end
+end
+struct LibWin32::IMFSourceBuffer
+  def query_interface(this : IMFSourceBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_updating(this : IMFSourceBuffer*) : LibC::BOOL
+    @lpVtbl.value.get_updating.call(this)
+  end
+  def get_buffered(this : IMFSourceBuffer*, ppbuffered : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_buffered.call(this, ppbuffered)
+  end
+  def get_time_stamp_offset(this : IMFSourceBuffer*) : Float64
+    @lpVtbl.value.get_time_stamp_offset.call(this)
+  end
+  def set_time_stamp_offset(this : IMFSourceBuffer*, offset : Float64) : HRESULT
+    @lpVtbl.value.set_time_stamp_offset.call(this, offset)
+  end
+  def get_append_window_start(this : IMFSourceBuffer*) : Float64
+    @lpVtbl.value.get_append_window_start.call(this)
+  end
+  def set_append_window_start(this : IMFSourceBuffer*, time : Float64) : HRESULT
+    @lpVtbl.value.set_append_window_start.call(this, time)
+  end
+  def get_append_window_end(this : IMFSourceBuffer*) : Float64
+    @lpVtbl.value.get_append_window_end.call(this)
+  end
+  def set_append_window_end(this : IMFSourceBuffer*, time : Float64) : HRESULT
+    @lpVtbl.value.set_append_window_end.call(this, time)
+  end
+  def append(this : IMFSourceBuffer*, pdata : UInt8*, len : UInt32) : HRESULT
+    @lpVtbl.value.append.call(this, pdata, len)
+  end
+  def append_byte_stream(this : IMFSourceBuffer*, pstream : IMFByteStream, pmaxlen : UInt64*) : HRESULT
+    @lpVtbl.value.append_byte_stream.call(this, pstream, pmaxlen)
+  end
+  def abort(this : IMFSourceBuffer*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+  def remove(this : IMFSourceBuffer*, start : Float64, end_ : Float64) : HRESULT
+    @lpVtbl.value.remove.call(this, start, end_)
+  end
+end
+struct LibWin32::IMFSourceBufferAppendMode
+  def query_interface(this : IMFSourceBufferAppendMode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceBufferAppendMode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceBufferAppendMode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_append_mode(this : IMFSourceBufferAppendMode*) : MF_MSE_APPEND_MODE
+    @lpVtbl.value.get_append_mode.call(this)
+  end
+  def set_append_mode(this : IMFSourceBufferAppendMode*, mode : MF_MSE_APPEND_MODE) : HRESULT
+    @lpVtbl.value.set_append_mode.call(this, mode)
+  end
+end
+struct LibWin32::IMFSourceBufferList
+  def query_interface(this : IMFSourceBufferList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceBufferList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceBufferList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFSourceBufferList*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_source_buffer(this : IMFSourceBufferList*, index : UInt32) : IMFSourceBuffer
+    @lpVtbl.value.get_source_buffer.call(this, index)
+  end
+end
+struct LibWin32::IMFMediaSourceExtension
+  def query_interface(this : IMFMediaSourceExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourceExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourceExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_source_buffers(this : IMFMediaSourceExtension*) : IMFSourceBufferList
+    @lpVtbl.value.get_source_buffers.call(this)
+  end
+  def get_active_source_buffers(this : IMFMediaSourceExtension*) : IMFSourceBufferList
+    @lpVtbl.value.get_active_source_buffers.call(this)
+  end
+  def get_ready_state(this : IMFMediaSourceExtension*) : MF_MSE_READY
+    @lpVtbl.value.get_ready_state.call(this)
+  end
+  def get_duration(this : IMFMediaSourceExtension*) : Float64
+    @lpVtbl.value.get_duration.call(this)
+  end
+  def set_duration(this : IMFMediaSourceExtension*, duration : Float64) : HRESULT
+    @lpVtbl.value.set_duration.call(this, duration)
+  end
+  def add_source_buffer(this : IMFMediaSourceExtension*, type : UInt8*, pnotify : IMFSourceBufferNotify, ppsourcebuffer : IMFSourceBuffer*) : HRESULT
+    @lpVtbl.value.add_source_buffer.call(this, type, pnotify, ppsourcebuffer)
+  end
+  def remove_source_buffer(this : IMFMediaSourceExtension*, psourcebuffer : IMFSourceBuffer) : HRESULT
+    @lpVtbl.value.remove_source_buffer.call(this, psourcebuffer)
+  end
+  def set_end_of_stream(this : IMFMediaSourceExtension*, error : MF_MSE_ERROR) : HRESULT
+    @lpVtbl.value.set_end_of_stream.call(this, error)
+  end
+  def is_type_supported(this : IMFMediaSourceExtension*, type : UInt8*) : LibC::BOOL
+    @lpVtbl.value.is_type_supported.call(this, type)
+  end
+  def get_source_buffer(this : IMFMediaSourceExtension*, dwstreamindex : UInt32) : IMFSourceBuffer
+    @lpVtbl.value.get_source_buffer.call(this, dwstreamindex)
+  end
+end
+struct LibWin32::IMFMediaSourceExtensionLiveSeekableRange
+  def query_interface(this : IMFMediaSourceExtensionLiveSeekableRange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSourceExtensionLiveSeekableRange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSourceExtensionLiveSeekableRange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_live_seekable_range(this : IMFMediaSourceExtensionLiveSeekableRange*, start : Float64, end_ : Float64) : HRESULT
+    @lpVtbl.value.set_live_seekable_range.call(this, start, end_)
+  end
+  def clear_live_seekable_range(this : IMFMediaSourceExtensionLiveSeekableRange*) : HRESULT
+    @lpVtbl.value.clear_live_seekable_range.call(this)
+  end
+end
+struct LibWin32::IMFMediaEngineEME
+  def query_interface(this : IMFMediaEngineEME*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineEME*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineEME*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_keys(this : IMFMediaEngineEME*, keys : IMFMediaKeys*) : HRESULT
+    @lpVtbl.value.get_keys.call(this, keys)
+  end
+  def set_media_keys(this : IMFMediaEngineEME*, keys : IMFMediaKeys) : HRESULT
+    @lpVtbl.value.set_media_keys.call(this, keys)
+  end
+end
+struct LibWin32::IMFMediaEngineSrcElementsEx
+  def query_interface(this : IMFMediaEngineSrcElementsEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineSrcElementsEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineSrcElementsEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFMediaEngineSrcElementsEx*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_url(this : IMFMediaEngineSrcElementsEx*, index : UInt32, purl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, index, purl)
+  end
+  def get_type(this : IMFMediaEngineSrcElementsEx*, index : UInt32, ptype : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, index, ptype)
+  end
+  def get_media(this : IMFMediaEngineSrcElementsEx*, index : UInt32, pmedia : UInt8**) : HRESULT
+    @lpVtbl.value.get_media.call(this, index, pmedia)
+  end
+  def add_element(this : IMFMediaEngineSrcElementsEx*, purl : UInt8*, ptype : UInt8*, pmedia : UInt8*) : HRESULT
+    @lpVtbl.value.add_element.call(this, purl, ptype, pmedia)
+  end
+  def remove_all_elements(this : IMFMediaEngineSrcElementsEx*) : HRESULT
+    @lpVtbl.value.remove_all_elements.call(this)
+  end
+  def add_element_ex(this : IMFMediaEngineSrcElementsEx*, purl : UInt8*, ptype : UInt8*, pmedia : UInt8*, keysystem : UInt8*) : HRESULT
+    @lpVtbl.value.add_element_ex.call(this, purl, ptype, pmedia, keysystem)
+  end
+  def get_key_system(this : IMFMediaEngineSrcElementsEx*, index : UInt32, ptype : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, index, ptype)
+  end
+end
+struct LibWin32::IMFMediaEngineNeedKeyNotify
+  def query_interface(this : IMFMediaEngineNeedKeyNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineNeedKeyNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineNeedKeyNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def need_key(this : IMFMediaEngineNeedKeyNotify*, initdata : UInt8*, cb : UInt32) : Void
+    @lpVtbl.value.need_key.call(this, initdata, cb)
+  end
+end
+struct LibWin32::IMFMediaKeys
+  def query_interface(this : IMFMediaKeys*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeys*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeys*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_session(this : IMFMediaKeys*, mimetype : UInt8*, initdata : UInt8*, cb : UInt32, customdata : UInt8*, cbcustomdata : UInt32, notify : IMFMediaKeySessionNotify, ppsession : IMFMediaKeySession*) : HRESULT
+    @lpVtbl.value.create_session.call(this, mimetype, initdata, cb, customdata, cbcustomdata, notify, ppsession)
+  end
+  def get_key_system(this : IMFMediaKeys*, keysystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, keysystem)
+  end
+  def shutdown(this : IMFMediaKeys*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_suspend_notify(this : IMFMediaKeys*, notify : IMFCdmSuspendNotify*) : HRESULT
+    @lpVtbl.value.get_suspend_notify.call(this, notify)
+  end
+end
+struct LibWin32::IMFMediaKeySession
+  def query_interface(this : IMFMediaKeySession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeySession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeySession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IMFMediaKeySession*, code : UInt16*, systemcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_error.call(this, code, systemcode)
+  end
+  def get_key_system(this : IMFMediaKeySession*, keysystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, keysystem)
+  end
+  def get_session_id(this : IMFMediaKeySession*, sessionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_session_id.call(this, sessionid)
+  end
+  def update(this : IMFMediaKeySession*, key : UInt8*, cb : UInt32) : HRESULT
+    @lpVtbl.value.update.call(this, key, cb)
+  end
+  def close(this : IMFMediaKeySession*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMFMediaKeySessionNotify
+  def query_interface(this : IMFMediaKeySessionNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeySessionNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeySessionNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def key_message(this : IMFMediaKeySessionNotify*, destinationurl : UInt8*, message : UInt8*, cb : UInt32) : Void
+    @lpVtbl.value.key_message.call(this, destinationurl, message, cb)
+  end
+  def key_added(this : IMFMediaKeySessionNotify*) : Void
+    @lpVtbl.value.key_added.call(this)
+  end
+  def key_error(this : IMFMediaKeySessionNotify*, code : UInt16, systemcode : UInt32) : Void
+    @lpVtbl.value.key_error.call(this, code, systemcode)
+  end
+end
+struct LibWin32::IMFCdmSuspendNotify
+  def query_interface(this : IMFCdmSuspendNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCdmSuspendNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCdmSuspendNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IMFCdmSuspendNotify*) : HRESULT
+    @lpVtbl.value.begin_.call(this)
+  end
+  def end_(this : IMFCdmSuspendNotify*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+end
+struct LibWin32::IMFHDCPStatus
+  def query_interface(this : IMFHDCPStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFHDCPStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFHDCPStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query(this : IMFHDCPStatus*, pstatus : MF_HDCP_STATUS*, pfstatus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query.call(this, pstatus, pfstatus)
+  end
+  def set(this : IMFHDCPStatus*, status : MF_HDCP_STATUS) : HRESULT
+    @lpVtbl.value.set.call(this, status)
+  end
+end
+struct LibWin32::IMFMediaEngineOPMInfo
+  def query_interface(this : IMFMediaEngineOPMInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineOPMInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineOPMInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_opm_info(this : IMFMediaEngineOPMInfo*, pstatus : MF_MEDIA_ENGINE_OPM_STATUS*, pconstricted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_opm_info.call(this, pstatus, pconstricted)
+  end
+end
+struct LibWin32::IMFMediaEngineClassFactory
+  def query_interface(this : IMFMediaEngineClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IMFMediaEngineClassFactory*, dwflags : UInt32, pattr : IMFAttributes, ppplayer : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, dwflags, pattr, ppplayer)
+  end
+  def create_time_range(this : IMFMediaEngineClassFactory*, pptimerange : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.create_time_range.call(this, pptimerange)
+  end
+  def create_error(this : IMFMediaEngineClassFactory*, pperror : IMFMediaError*) : HRESULT
+    @lpVtbl.value.create_error.call(this, pperror)
+  end
+end
+struct LibWin32::IMFMediaEngineClassFactoryEx
+  def query_interface(this : IMFMediaEngineClassFactoryEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineClassFactoryEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineClassFactoryEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IMFMediaEngineClassFactoryEx*, dwflags : UInt32, pattr : IMFAttributes, ppplayer : IMFMediaEngine*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, dwflags, pattr, ppplayer)
+  end
+  def create_time_range(this : IMFMediaEngineClassFactoryEx*, pptimerange : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.create_time_range.call(this, pptimerange)
+  end
+  def create_error(this : IMFMediaEngineClassFactoryEx*, pperror : IMFMediaError*) : HRESULT
+    @lpVtbl.value.create_error.call(this, pperror)
+  end
+  def create_media_source_extension(this : IMFMediaEngineClassFactoryEx*, dwflags : UInt32, pattr : IMFAttributes, ppmse : IMFMediaSourceExtension*) : HRESULT
+    @lpVtbl.value.create_media_source_extension.call(this, dwflags, pattr, ppmse)
+  end
+  def create_media_keys(this : IMFMediaEngineClassFactoryEx*, keysystem : UInt8*, cdmstorepath : UInt8*, ppkeys : IMFMediaKeys*) : HRESULT
+    @lpVtbl.value.create_media_keys.call(this, keysystem, cdmstorepath, ppkeys)
+  end
+  def is_type_supported(this : IMFMediaEngineClassFactoryEx*, type : UInt8*, keysystem : UInt8*, issupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_type_supported.call(this, type, keysystem, issupported)
+  end
+end
+struct LibWin32::IMFMediaEngineClassFactory2
+  def query_interface(this : IMFMediaEngineClassFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineClassFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineClassFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_media_keys2(this : IMFMediaEngineClassFactory2*, keysystem : UInt8*, defaultcdmstorepath : UInt8*, inprivatecdmstorepath : UInt8*, ppkeys : IMFMediaKeys*) : HRESULT
+    @lpVtbl.value.create_media_keys2.call(this, keysystem, defaultcdmstorepath, inprivatecdmstorepath, ppkeys)
+  end
+end
+struct LibWin32::IMFExtendedDRMTypeSupport
+  def query_interface(this : IMFExtendedDRMTypeSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFExtendedDRMTypeSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFExtendedDRMTypeSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_type_supported_ex(this : IMFExtendedDRMTypeSupport*, type : UInt8*, keysystem : UInt8*, panswer : MF_MEDIA_ENGINE_CANPLAY*) : HRESULT
+    @lpVtbl.value.is_type_supported_ex.call(this, type, keysystem, panswer)
+  end
+end
+struct LibWin32::IMFMediaEngineSupportsSourceTransfer
+  def query_interface(this : IMFMediaEngineSupportsSourceTransfer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineSupportsSourceTransfer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineSupportsSourceTransfer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def should_transfer_source(this : IMFMediaEngineSupportsSourceTransfer*, pfshouldtransfer : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.should_transfer_source.call(this, pfshouldtransfer)
+  end
+  def detach_media_source(this : IMFMediaEngineSupportsSourceTransfer*, ppbytestream : IMFByteStream*, ppmediasource : IMFMediaSource*, ppmse : IMFMediaSourceExtension*) : HRESULT
+    @lpVtbl.value.detach_media_source.call(this, ppbytestream, ppmediasource, ppmse)
+  end
+  def attach_media_source(this : IMFMediaEngineSupportsSourceTransfer*, pbytestream : IMFByteStream, pmediasource : IMFMediaSource, pmse : IMFMediaSourceExtension) : HRESULT
+    @lpVtbl.value.attach_media_source.call(this, pbytestream, pmediasource, pmse)
+  end
+end
+struct LibWin32::IMFMediaEngineTransferSource
+  def query_interface(this : IMFMediaEngineTransferSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineTransferSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineTransferSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_source_to_media_engine(this : IMFMediaEngineTransferSource*, destination : IMFMediaEngine) : HRESULT
+    @lpVtbl.value.transfer_source_to_media_engine.call(this, destination)
+  end
+end
+struct LibWin32::IMFTimedText
+  def query_interface(this : IMFTimedText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedText*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_notifications(this : IMFTimedText*, notify : IMFTimedTextNotify) : HRESULT
+    @lpVtbl.value.register_notifications.call(this, notify)
+  end
+  def select_track(this : IMFTimedText*, trackid : UInt32, selected : LibC::BOOL) : HRESULT
+    @lpVtbl.value.select_track.call(this, trackid, selected)
+  end
+  def add_data_source(this : IMFTimedText*, bytestream : IMFByteStream, label : LibC::LPWSTR, language : LibC::LPWSTR, kind : MF_TIMED_TEXT_TRACK_KIND, isdefault : LibC::BOOL, trackid : UInt32*) : HRESULT
+    @lpVtbl.value.add_data_source.call(this, bytestream, label, language, kind, isdefault, trackid)
+  end
+  def add_data_source_from_url(this : IMFTimedText*, url : LibC::LPWSTR, label : LibC::LPWSTR, language : LibC::LPWSTR, kind : MF_TIMED_TEXT_TRACK_KIND, isdefault : LibC::BOOL, trackid : UInt32*) : HRESULT
+    @lpVtbl.value.add_data_source_from_url.call(this, url, label, language, kind, isdefault, trackid)
+  end
+  def add_track(this : IMFTimedText*, label : LibC::LPWSTR, language : LibC::LPWSTR, kind : MF_TIMED_TEXT_TRACK_KIND, track : IMFTimedTextTrack*) : HRESULT
+    @lpVtbl.value.add_track.call(this, label, language, kind, track)
+  end
+  def remove_track(this : IMFTimedText*, track : IMFTimedTextTrack) : HRESULT
+    @lpVtbl.value.remove_track.call(this, track)
+  end
+  def get_cue_time_offset(this : IMFTimedText*, offset : Float64*) : HRESULT
+    @lpVtbl.value.get_cue_time_offset.call(this, offset)
+  end
+  def set_cue_time_offset(this : IMFTimedText*, offset : Float64) : HRESULT
+    @lpVtbl.value.set_cue_time_offset.call(this, offset)
+  end
+  def get_tracks(this : IMFTimedText*, tracks : IMFTimedTextTrackList*) : HRESULT
+    @lpVtbl.value.get_tracks.call(this, tracks)
+  end
+  def get_active_tracks(this : IMFTimedText*, activetracks : IMFTimedTextTrackList*) : HRESULT
+    @lpVtbl.value.get_active_tracks.call(this, activetracks)
+  end
+  def get_text_tracks(this : IMFTimedText*, texttracks : IMFTimedTextTrackList*) : HRESULT
+    @lpVtbl.value.get_text_tracks.call(this, texttracks)
+  end
+  def get_metadata_tracks(this : IMFTimedText*, metadatatracks : IMFTimedTextTrackList*) : HRESULT
+    @lpVtbl.value.get_metadata_tracks.call(this, metadatatracks)
+  end
+  def set_in_band_enabled(this : IMFTimedText*, enabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_in_band_enabled.call(this, enabled)
+  end
+  def is_in_band_enabled(this : IMFTimedText*) : LibC::BOOL
+    @lpVtbl.value.is_in_band_enabled.call(this)
+  end
+end
+struct LibWin32::IMFTimedTextNotify
+  def query_interface(this : IMFTimedTextNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def track_added(this : IMFTimedTextNotify*, trackid : UInt32) : Void
+    @lpVtbl.value.track_added.call(this, trackid)
+  end
+  def track_removed(this : IMFTimedTextNotify*, trackid : UInt32) : Void
+    @lpVtbl.value.track_removed.call(this, trackid)
+  end
+  def track_selected(this : IMFTimedTextNotify*, trackid : UInt32, selected : LibC::BOOL) : Void
+    @lpVtbl.value.track_selected.call(this, trackid, selected)
+  end
+  def track_ready_state_changed(this : IMFTimedTextNotify*, trackid : UInt32) : Void
+    @lpVtbl.value.track_ready_state_changed.call(this, trackid)
+  end
+  def error(this : IMFTimedTextNotify*, errorcode : MF_TIMED_TEXT_ERROR_CODE, extendederrorcode : HRESULT, sourcetrackid : UInt32) : Void
+    @lpVtbl.value.error.call(this, errorcode, extendederrorcode, sourcetrackid)
+  end
+  def cue(this : IMFTimedTextNotify*, cueevent : MF_TIMED_TEXT_CUE_EVENT, currenttime : Float64, cue : IMFTimedTextCue) : Void
+    @lpVtbl.value.cue.call(this, cueevent, currenttime, cue)
+  end
+  def reset(this : IMFTimedTextNotify*) : Void
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IMFTimedTextTrack
+  def query_interface(this : IMFTimedTextTrack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextTrack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextTrack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IMFTimedTextTrack*) : UInt32
+    @lpVtbl.value.get_id.call(this)
+  end
+  def get_label(this : IMFTimedTextTrack*, label : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_label.call(this, label)
+  end
+  def set_label(this : IMFTimedTextTrack*, label : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_label.call(this, label)
+  end
+  def get_language(this : IMFTimedTextTrack*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def get_track_kind(this : IMFTimedTextTrack*) : MF_TIMED_TEXT_TRACK_KIND
+    @lpVtbl.value.get_track_kind.call(this)
+  end
+  def is_in_band(this : IMFTimedTextTrack*) : LibC::BOOL
+    @lpVtbl.value.is_in_band.call(this)
+  end
+  def get_in_band_metadata_track_dispatch_type(this : IMFTimedTextTrack*, dispatchtype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_in_band_metadata_track_dispatch_type.call(this, dispatchtype)
+  end
+  def is_active(this : IMFTimedTextTrack*) : LibC::BOOL
+    @lpVtbl.value.is_active.call(this)
+  end
+  def get_error_code(this : IMFTimedTextTrack*) : MF_TIMED_TEXT_ERROR_CODE
+    @lpVtbl.value.get_error_code.call(this)
+  end
+  def get_extended_error_code(this : IMFTimedTextTrack*) : HRESULT
+    @lpVtbl.value.get_extended_error_code.call(this)
+  end
+  def get_data_format(this : IMFTimedTextTrack*, format : Guid*) : HRESULT
+    @lpVtbl.value.get_data_format.call(this, format)
+  end
+  def get_ready_state(this : IMFTimedTextTrack*) : MF_TIMED_TEXT_TRACK_READY_STATE
+    @lpVtbl.value.get_ready_state.call(this)
+  end
+  def get_cue_list(this : IMFTimedTextTrack*, cues : IMFTimedTextCueList*) : HRESULT
+    @lpVtbl.value.get_cue_list.call(this, cues)
+  end
+end
+struct LibWin32::IMFTimedTextTrackList
+  def query_interface(this : IMFTimedTextTrackList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextTrackList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextTrackList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFTimedTextTrackList*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_track(this : IMFTimedTextTrackList*, index : UInt32, track : IMFTimedTextTrack*) : HRESULT
+    @lpVtbl.value.get_track.call(this, index, track)
+  end
+  def get_track_by_id(this : IMFTimedTextTrackList*, trackid : UInt32, track : IMFTimedTextTrack*) : HRESULT
+    @lpVtbl.value.get_track_by_id.call(this, trackid, track)
+  end
+end
+struct LibWin32::IMFTimedTextCue
+  def query_interface(this : IMFTimedTextCue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextCue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextCue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IMFTimedTextCue*) : UInt32
+    @lpVtbl.value.get_id.call(this)
+  end
+  def get_original_id(this : IMFTimedTextCue*, originalid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_original_id.call(this, originalid)
+  end
+  def get_cue_kind(this : IMFTimedTextCue*) : MF_TIMED_TEXT_TRACK_KIND
+    @lpVtbl.value.get_cue_kind.call(this)
+  end
+  def get_start_time(this : IMFTimedTextCue*) : Float64
+    @lpVtbl.value.get_start_time.call(this)
+  end
+  def get_duration(this : IMFTimedTextCue*) : Float64
+    @lpVtbl.value.get_duration.call(this)
+  end
+  def get_track_id(this : IMFTimedTextCue*) : UInt32
+    @lpVtbl.value.get_track_id.call(this)
+  end
+  def get_data(this : IMFTimedTextCue*, data : IMFTimedTextBinary*) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
+  end
+  def get_region(this : IMFTimedTextCue*, region : IMFTimedTextRegion*) : HRESULT
+    @lpVtbl.value.get_region.call(this, region)
+  end
+  def get_style(this : IMFTimedTextCue*, style : IMFTimedTextStyle*) : HRESULT
+    @lpVtbl.value.get_style.call(this, style)
+  end
+  def get_line_count(this : IMFTimedTextCue*) : UInt32
+    @lpVtbl.value.get_line_count.call(this)
+  end
+  def get_line(this : IMFTimedTextCue*, index : UInt32, line : IMFTimedTextFormattedText*) : HRESULT
+    @lpVtbl.value.get_line.call(this, index, line)
+  end
+end
+struct LibWin32::IMFTimedTextFormattedText
+  def query_interface(this : IMFTimedTextFormattedText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextFormattedText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextFormattedText*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text(this : IMFTimedTextFormattedText*, text : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_text.call(this, text)
+  end
+  def get_subformatting_count(this : IMFTimedTextFormattedText*) : UInt32
+    @lpVtbl.value.get_subformatting_count.call(this)
+  end
+  def get_subformatting(this : IMFTimedTextFormattedText*, index : UInt32, firstchar : UInt32*, charlength : UInt32*, style : IMFTimedTextStyle*) : HRESULT
+    @lpVtbl.value.get_subformatting.call(this, index, firstchar, charlength, style)
+  end
+end
+struct LibWin32::IMFTimedTextStyle
+  def query_interface(this : IMFTimedTextStyle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextStyle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextStyle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IMFTimedTextStyle*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def is_external(this : IMFTimedTextStyle*) : LibC::BOOL
+    @lpVtbl.value.is_external.call(this)
+  end
+  def get_font_family(this : IMFTimedTextStyle*, fontfamily : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, fontfamily)
+  end
+  def get_font_size(this : IMFTimedTextStyle*, fontsize : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_font_size.call(this, fontsize, unittype)
+  end
+  def get_color(this : IMFTimedTextStyle*, color : MFARGB*) : HRESULT
+    @lpVtbl.value.get_color.call(this, color)
+  end
+  def get_background_color(this : IMFTimedTextStyle*, bgcolor : MFARGB*) : HRESULT
+    @lpVtbl.value.get_background_color.call(this, bgcolor)
+  end
+  def get_show_background_always(this : IMFTimedTextStyle*, showbackgroundalways : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_show_background_always.call(this, showbackgroundalways)
+  end
+  def get_font_style(this : IMFTimedTextStyle*, fontstyle : MF_TIMED_TEXT_FONT_STYLE*) : HRESULT
+    @lpVtbl.value.get_font_style.call(this, fontstyle)
+  end
+  def get_bold(this : IMFTimedTextStyle*, bold : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bold.call(this, bold)
+  end
+  def get_right_to_left(this : IMFTimedTextStyle*, righttoleft : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_right_to_left.call(this, righttoleft)
+  end
+  def get_text_alignment(this : IMFTimedTextStyle*, textalign : MF_TIMED_TEXT_ALIGNMENT*) : HRESULT
+    @lpVtbl.value.get_text_alignment.call(this, textalign)
+  end
+  def get_text_decoration(this : IMFTimedTextStyle*, textdecoration : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_decoration.call(this, textdecoration)
+  end
+  def get_text_outline(this : IMFTimedTextStyle*, color : MFARGB*, thickness : Float64*, blurradius : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_text_outline.call(this, color, thickness, blurradius, unittype)
+  end
+end
+struct LibWin32::IMFTimedTextRegion
+  def query_interface(this : IMFTimedTextRegion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextRegion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextRegion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IMFTimedTextRegion*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_position(this : IMFTimedTextRegion*, px : Float64*, py : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_position.call(this, px, py, unittype)
+  end
+  def get_extent(this : IMFTimedTextRegion*, pwidth : Float64*, pheight : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_extent.call(this, pwidth, pheight, unittype)
+  end
+  def get_background_color(this : IMFTimedTextRegion*, bgcolor : MFARGB*) : HRESULT
+    @lpVtbl.value.get_background_color.call(this, bgcolor)
+  end
+  def get_writing_mode(this : IMFTimedTextRegion*, writingmode : MF_TIMED_TEXT_WRITING_MODE*) : HRESULT
+    @lpVtbl.value.get_writing_mode.call(this, writingmode)
+  end
+  def get_display_alignment(this : IMFTimedTextRegion*, displayalign : MF_TIMED_TEXT_DISPLAY_ALIGNMENT*) : HRESULT
+    @lpVtbl.value.get_display_alignment.call(this, displayalign)
+  end
+  def get_line_height(this : IMFTimedTextRegion*, plineheight : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_line_height.call(this, plineheight, unittype)
+  end
+  def get_clip_overflow(this : IMFTimedTextRegion*, clipoverflow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clip_overflow.call(this, clipoverflow)
+  end
+  def get_padding(this : IMFTimedTextRegion*, before : Float64*, start : Float64*, after : Float64*, end_ : Float64*, unittype : MF_TIMED_TEXT_UNIT_TYPE*) : HRESULT
+    @lpVtbl.value.get_padding.call(this, before, start, after, end_, unittype)
+  end
+  def get_wrap(this : IMFTimedTextRegion*, wrap : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_wrap.call(this, wrap)
+  end
+  def get_z_index(this : IMFTimedTextRegion*, zindex : Int32*) : HRESULT
+    @lpVtbl.value.get_z_index.call(this, zindex)
+  end
+  def get_scroll_mode(this : IMFTimedTextRegion*, scrollmode : MF_TIMED_TEXT_SCROLL_MODE*) : HRESULT
+    @lpVtbl.value.get_scroll_mode.call(this, scrollmode)
+  end
+end
+struct LibWin32::IMFTimedTextBinary
+  def query_interface(this : IMFTimedTextBinary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextBinary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextBinary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data(this : IMFTimedTextBinary*, data : UInt8**, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.call(this, data, length)
+  end
+end
+struct LibWin32::IMFTimedTextCueList
+  def query_interface(this : IMFTimedTextCueList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextCueList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextCueList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IMFTimedTextCueList*) : UInt32
+    @lpVtbl.value.get_length.call(this)
+  end
+  def get_cue_by_index(this : IMFTimedTextCueList*, index : UInt32, cue : IMFTimedTextCue*) : HRESULT
+    @lpVtbl.value.get_cue_by_index.call(this, index, cue)
+  end
+  def get_cue_by_id(this : IMFTimedTextCueList*, id : UInt32, cue : IMFTimedTextCue*) : HRESULT
+    @lpVtbl.value.get_cue_by_id.call(this, id, cue)
+  end
+  def get_cue_by_original_id(this : IMFTimedTextCueList*, originalid : LibC::LPWSTR, cue : IMFTimedTextCue*) : HRESULT
+    @lpVtbl.value.get_cue_by_original_id.call(this, originalid, cue)
+  end
+  def add_text_cue(this : IMFTimedTextCueList*, start : Float64, duration : Float64, text : LibC::LPWSTR, cue : IMFTimedTextCue*) : HRESULT
+    @lpVtbl.value.add_text_cue.call(this, start, duration, text, cue)
+  end
+  def add_data_cue(this : IMFTimedTextCueList*, start : Float64, duration : Float64, data : UInt8*, datasize : UInt32, cue : IMFTimedTextCue*) : HRESULT
+    @lpVtbl.value.add_data_cue.call(this, start, duration, data, datasize, cue)
+  end
+  def remove_cue(this : IMFTimedTextCueList*, cue : IMFTimedTextCue) : HRESULT
+    @lpVtbl.value.remove_cue.call(this, cue)
+  end
+end
+struct LibWin32::IMFTimedTextRuby
+  def query_interface(this : IMFTimedTextRuby*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextRuby*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextRuby*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_ruby_text(this : IMFTimedTextRuby*, rubytext : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_ruby_text.call(this, rubytext)
+  end
+  def get_ruby_position(this : IMFTimedTextRuby*, value : MF_TIMED_TEXT_RUBY_POSITION*) : HRESULT
+    @lpVtbl.value.get_ruby_position.call(this, value)
+  end
+  def get_ruby_align(this : IMFTimedTextRuby*, value : MF_TIMED_TEXT_RUBY_ALIGN*) : HRESULT
+    @lpVtbl.value.get_ruby_align.call(this, value)
+  end
+  def get_ruby_reserve(this : IMFTimedTextRuby*, value : MF_TIMED_TEXT_RUBY_RESERVE*) : HRESULT
+    @lpVtbl.value.get_ruby_reserve.call(this, value)
+  end
+end
+struct LibWin32::IMFTimedTextBouten
+  def query_interface(this : IMFTimedTextBouten*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextBouten*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextBouten*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_bouten_type(this : IMFTimedTextBouten*, value : MF_TIMED_TEXT_BOUTEN_TYPE*) : HRESULT
+    @lpVtbl.value.get_bouten_type.call(this, value)
+  end
+  def get_bouten_color(this : IMFTimedTextBouten*, value : MFARGB*) : HRESULT
+    @lpVtbl.value.get_bouten_color.call(this, value)
+  end
+  def get_bouten_position(this : IMFTimedTextBouten*, value : MF_TIMED_TEXT_BOUTEN_POSITION*) : HRESULT
+    @lpVtbl.value.get_bouten_position.call(this, value)
+  end
+end
+struct LibWin32::IMFTimedTextStyle2
+  def query_interface(this : IMFTimedTextStyle2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTimedTextStyle2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTimedTextStyle2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_ruby(this : IMFTimedTextStyle2*, ruby : IMFTimedTextRuby*) : HRESULT
+    @lpVtbl.value.get_ruby.call(this, ruby)
+  end
+  def get_bouten(this : IMFTimedTextStyle2*, bouten : IMFTimedTextBouten*) : HRESULT
+    @lpVtbl.value.get_bouten.call(this, bouten)
+  end
+  def is_text_combined(this : IMFTimedTextStyle2*, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_text_combined.call(this, value)
+  end
+  def get_font_angle_in_degrees(this : IMFTimedTextStyle2*, value : Float64*) : HRESULT
+    @lpVtbl.value.get_font_angle_in_degrees.call(this, value)
+  end
+end
+struct LibWin32::IMFMediaEngineEMENotify
+  def query_interface(this : IMFMediaEngineEMENotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineEMENotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineEMENotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encrypted(this : IMFMediaEngineEMENotify*, pbinitdata : UInt8*, cb : UInt32, bstrinitdatatype : UInt8*) : Void
+    @lpVtbl.value.encrypted.call(this, pbinitdata, cb, bstrinitdatatype)
+  end
+  def waiting_for_key(this : IMFMediaEngineEMENotify*) : Void
+    @lpVtbl.value.waiting_for_key.call(this)
+  end
+end
+struct LibWin32::IMFMediaKeySessionNotify2
+  def query_interface(this : IMFMediaKeySessionNotify2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeySessionNotify2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeySessionNotify2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def key_message(this : IMFMediaKeySessionNotify2*, destinationurl : UInt8*, message : UInt8*, cb : UInt32) : Void
+    @lpVtbl.value.key_message.call(this, destinationurl, message, cb)
+  end
+  def key_added(this : IMFMediaKeySessionNotify2*) : Void
+    @lpVtbl.value.key_added.call(this)
+  end
+  def key_error(this : IMFMediaKeySessionNotify2*, code : UInt16, systemcode : UInt32) : Void
+    @lpVtbl.value.key_error.call(this, code, systemcode)
+  end
+  def key_message2(this : IMFMediaKeySessionNotify2*, emessagetype : MF_MEDIAKEYSESSION_MESSAGETYPE, destinationurl : UInt8*, pbmessage : UInt8*, cbmessage : UInt32) : Void
+    @lpVtbl.value.key_message2.call(this, emessagetype, destinationurl, pbmessage, cbmessage)
+  end
+  def key_status_change(this : IMFMediaKeySessionNotify2*) : Void
+    @lpVtbl.value.key_status_change.call(this)
+  end
+end
+struct LibWin32::IMFMediaKeySystemAccess
+  def query_interface(this : IMFMediaKeySystemAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeySystemAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeySystemAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_media_keys(this : IMFMediaKeySystemAccess*, pcdmcustomconfig : IPropertyStore, ppkeys : IMFMediaKeys2*) : HRESULT
+    @lpVtbl.value.create_media_keys.call(this, pcdmcustomconfig, ppkeys)
+  end
+  def get_supported_configuration(this : IMFMediaKeySystemAccess*, ppsupportedconfiguration : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_supported_configuration.call(this, ppsupportedconfiguration)
+  end
+  def get_key_system(this : IMFMediaKeySystemAccess*, pkeysystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, pkeysystem)
+  end
+end
+struct LibWin32::IMFMediaEngineClassFactory3
+  def query_interface(this : IMFMediaEngineClassFactory3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineClassFactory3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineClassFactory3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_media_key_system_access(this : IMFMediaEngineClassFactory3*, keysystem : UInt8*, ppsupportedconfigurationsarray : IPropertyStore*, usize : UInt32, ppkeyaccess : IMFMediaKeySystemAccess*) : HRESULT
+    @lpVtbl.value.create_media_key_system_access.call(this, keysystem, ppsupportedconfigurationsarray, usize, ppkeyaccess)
+  end
+end
+struct LibWin32::IMFMediaKeys2
+  def query_interface(this : IMFMediaKeys2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeys2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeys2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_session(this : IMFMediaKeys2*, mimetype : UInt8*, initdata : UInt8*, cb : UInt32, customdata : UInt8*, cbcustomdata : UInt32, notify : IMFMediaKeySessionNotify, ppsession : IMFMediaKeySession*) : HRESULT
+    @lpVtbl.value.create_session.call(this, mimetype, initdata, cb, customdata, cbcustomdata, notify, ppsession)
+  end
+  def get_key_system(this : IMFMediaKeys2*, keysystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, keysystem)
+  end
+  def shutdown(this : IMFMediaKeys2*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def get_suspend_notify(this : IMFMediaKeys2*, notify : IMFCdmSuspendNotify*) : HRESULT
+    @lpVtbl.value.get_suspend_notify.call(this, notify)
+  end
+  def create_session2(this : IMFMediaKeys2*, esessiontype : MF_MEDIAKEYSESSION_TYPE, pmfmediakeysessionnotify2 : IMFMediaKeySessionNotify2, ppsession : IMFMediaKeySession2*) : HRESULT
+    @lpVtbl.value.create_session2.call(this, esessiontype, pmfmediakeysessionnotify2, ppsession)
+  end
+  def set_server_certificate(this : IMFMediaKeys2*, pbservercertificate : UInt8*, cb : UInt32) : HRESULT
+    @lpVtbl.value.set_server_certificate.call(this, pbservercertificate, cb)
+  end
+  def get_dom_exception(this : IMFMediaKeys2*, systemcode : HRESULT, code : HRESULT*) : HRESULT
+    @lpVtbl.value.get_dom_exception.call(this, systemcode, code)
+  end
+end
+struct LibWin32::IMFMediaKeySession2
+  def query_interface(this : IMFMediaKeySession2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaKeySession2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaKeySession2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IMFMediaKeySession2*, code : UInt16*, systemcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_error.call(this, code, systemcode)
+  end
+  def get_key_system(this : IMFMediaKeySession2*, keysystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, keysystem)
+  end
+  def get_session_id(this : IMFMediaKeySession2*, sessionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_session_id.call(this, sessionid)
+  end
+  def update(this : IMFMediaKeySession2*, key : UInt8*, cb : UInt32) : HRESULT
+    @lpVtbl.value.update.call(this, key, cb)
+  end
+  def close(this : IMFMediaKeySession2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_key_statuses(this : IMFMediaKeySession2*, pkeystatusesarray : MFMediaKeyStatus**, pusize : UInt32*) : HRESULT
+    @lpVtbl.value.get_key_statuses.call(this, pkeystatusesarray, pusize)
+  end
+  def load(this : IMFMediaKeySession2*, bstrsessionid : UInt8*, pfloaded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.load.call(this, bstrsessionid, pfloaded)
+  end
+  def generate_request(this : IMFMediaKeySession2*, initdatatype : UInt8*, pbinitdata : UInt8*, cb : UInt32) : HRESULT
+    @lpVtbl.value.generate_request.call(this, initdatatype, pbinitdata, cb)
+  end
+  def get_expiration(this : IMFMediaKeySession2*, dblexpiration : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration.call(this, dblexpiration)
+  end
+  def remove(this : IMFMediaKeySession2*) : HRESULT
+    @lpVtbl.value.remove.call(this)
+  end
+  def shutdown(this : IMFMediaKeySession2*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFMediaEngineClassFactory4
+  def query_interface(this : IMFMediaEngineClassFactory4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaEngineClassFactory4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaEngineClassFactory4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_content_decryption_module_factory(this : IMFMediaEngineClassFactory4*, keysystem : LibC::LPWSTR, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_content_decryption_module_factory.call(this, keysystem, riid, ppvobject)
+  end
+end
+struct LibWin32::IMFDLNASinkInit
+  def query_interface(this : IMFDLNASinkInit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDLNASinkInit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDLNASinkInit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IMFDLNASinkInit*, pbytestream : IMFByteStream, fpal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.initialize.call(this, pbytestream, fpal)
+  end
+end
+struct LibWin32::IMFReadWriteClassFactory
+  def query_interface(this : IMFReadWriteClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFReadWriteClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFReadWriteClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance_from_url(this : IMFReadWriteClassFactory*, clsid : Guid*, pwszurl : LibC::LPWSTR, pattributes : IMFAttributes, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance_from_url.call(this, clsid, pwszurl, pattributes, riid, ppvobject)
+  end
+  def create_instance_from_object(this : IMFReadWriteClassFactory*, clsid : Guid*, punkobject : IUnknown, pattributes : IMFAttributes, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance_from_object.call(this, clsid, punkobject, pattributes, riid, ppvobject)
+  end
+end
+struct LibWin32::IMFSourceReader
+  def query_interface(this : IMFSourceReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_selection(this : IMFSourceReader*, dwstreamindex : UInt32, pfselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_stream_selection.call(this, dwstreamindex, pfselected)
+  end
+  def set_stream_selection(this : IMFSourceReader*, dwstreamindex : UInt32, fselected : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stream_selection.call(this, dwstreamindex, fselected)
+  end
+  def get_native_media_type(this : IMFSourceReader*, dwstreamindex : UInt32, dwmediatypeindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_native_media_type.call(this, dwstreamindex, dwmediatypeindex, ppmediatype)
+  end
+  def get_current_media_type(this : IMFSourceReader*, dwstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_current_media_type.call(this, dwstreamindex, ppmediatype)
+  end
+  def set_current_media_type(this : IMFSourceReader*, dwstreamindex : UInt32, pdwreserved : UInt32*, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_current_media_type.call(this, dwstreamindex, pdwreserved, pmediatype)
+  end
+  def set_current_position(this : IMFSourceReader*, guidtimeformat : Guid*, varposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, guidtimeformat, varposition)
+  end
+  def read_sample(this : IMFSourceReader*, dwstreamindex : UInt32, dwcontrolflags : UInt32, pdwactualstreamindex : UInt32*, pdwstreamflags : UInt32*, plltimestamp : Int64*, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.read_sample.call(this, dwstreamindex, dwcontrolflags, pdwactualstreamindex, pdwstreamflags, plltimestamp, ppsample)
+  end
+  def flush(this : IMFSourceReader*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.flush.call(this, dwstreamindex)
+  end
+  def get_service_for_stream(this : IMFSourceReader*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)
+  end
+  def get_presentation_attribute(this : IMFSourceReader*, dwstreamindex : UInt32, guidattribute : Guid*, pvarattribute : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_presentation_attribute.call(this, dwstreamindex, guidattribute, pvarattribute)
+  end
+end
+struct LibWin32::IMFSourceReaderEx
+  def query_interface(this : IMFSourceReaderEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceReaderEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceReaderEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_selection(this : IMFSourceReaderEx*, dwstreamindex : UInt32, pfselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_stream_selection.call(this, dwstreamindex, pfselected)
+  end
+  def set_stream_selection(this : IMFSourceReaderEx*, dwstreamindex : UInt32, fselected : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stream_selection.call(this, dwstreamindex, fselected)
+  end
+  def get_native_media_type(this : IMFSourceReaderEx*, dwstreamindex : UInt32, dwmediatypeindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_native_media_type.call(this, dwstreamindex, dwmediatypeindex, ppmediatype)
+  end
+  def get_current_media_type(this : IMFSourceReaderEx*, dwstreamindex : UInt32, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_current_media_type.call(this, dwstreamindex, ppmediatype)
+  end
+  def set_current_media_type(this : IMFSourceReaderEx*, dwstreamindex : UInt32, pdwreserved : UInt32*, pmediatype : IMFMediaType) : HRESULT
+    @lpVtbl.value.set_current_media_type.call(this, dwstreamindex, pdwreserved, pmediatype)
+  end
+  def set_current_position(this : IMFSourceReaderEx*, guidtimeformat : Guid*, varposition : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_current_position.call(this, guidtimeformat, varposition)
+  end
+  def read_sample(this : IMFSourceReaderEx*, dwstreamindex : UInt32, dwcontrolflags : UInt32, pdwactualstreamindex : UInt32*, pdwstreamflags : UInt32*, plltimestamp : Int64*, ppsample : IMFSample*) : HRESULT
+    @lpVtbl.value.read_sample.call(this, dwstreamindex, dwcontrolflags, pdwactualstreamindex, pdwstreamflags, plltimestamp, ppsample)
+  end
+  def flush(this : IMFSourceReaderEx*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.flush.call(this, dwstreamindex)
+  end
+  def get_service_for_stream(this : IMFSourceReaderEx*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)
+  end
+  def get_presentation_attribute(this : IMFSourceReaderEx*, dwstreamindex : UInt32, guidattribute : Guid*, pvarattribute : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_presentation_attribute.call(this, dwstreamindex, guidattribute, pvarattribute)
+  end
+  def set_native_media_type(this : IMFSourceReaderEx*, dwstreamindex : UInt32, pmediatype : IMFMediaType, pdwstreamflags : UInt32*) : HRESULT
+    @lpVtbl.value.set_native_media_type.call(this, dwstreamindex, pmediatype, pdwstreamflags)
+  end
+  def add_transform_for_stream(this : IMFSourceReaderEx*, dwstreamindex : UInt32, ptransformoractivate : IUnknown) : HRESULT
+    @lpVtbl.value.add_transform_for_stream.call(this, dwstreamindex, ptransformoractivate)
+  end
+  def remove_all_transforms_for_stream(this : IMFSourceReaderEx*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_all_transforms_for_stream.call(this, dwstreamindex)
+  end
+  def get_transform_for_stream(this : IMFSourceReaderEx*, dwstreamindex : UInt32, dwtransformindex : UInt32, pguidcategory : Guid*, pptransform : IMFTransform*) : HRESULT
+    @lpVtbl.value.get_transform_for_stream.call(this, dwstreamindex, dwtransformindex, pguidcategory, pptransform)
+  end
+end
+struct LibWin32::IMFSourceReaderCallback
+  def query_interface(this : IMFSourceReaderCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceReaderCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceReaderCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_read_sample(this : IMFSourceReaderCallback*, hrstatus : HRESULT, dwstreamindex : UInt32, dwstreamflags : UInt32, lltimestamp : Int64, psample : IMFSample) : HRESULT
+    @lpVtbl.value.on_read_sample.call(this, hrstatus, dwstreamindex, dwstreamflags, lltimestamp, psample)
+  end
+  def on_flush(this : IMFSourceReaderCallback*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.on_flush.call(this, dwstreamindex)
+  end
+  def on_event(this : IMFSourceReaderCallback*, dwstreamindex : UInt32, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.on_event.call(this, dwstreamindex, pevent)
+  end
+end
+struct LibWin32::IMFSourceReaderCallback2
+  def query_interface(this : IMFSourceReaderCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSourceReaderCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSourceReaderCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_read_sample(this : IMFSourceReaderCallback2*, hrstatus : HRESULT, dwstreamindex : UInt32, dwstreamflags : UInt32, lltimestamp : Int64, psample : IMFSample) : HRESULT
+    @lpVtbl.value.on_read_sample.call(this, hrstatus, dwstreamindex, dwstreamflags, lltimestamp, psample)
+  end
+  def on_flush(this : IMFSourceReaderCallback2*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.on_flush.call(this, dwstreamindex)
+  end
+  def on_event(this : IMFSourceReaderCallback2*, dwstreamindex : UInt32, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.on_event.call(this, dwstreamindex, pevent)
+  end
+  def on_transform_change(this : IMFSourceReaderCallback2*) : HRESULT
+    @lpVtbl.value.on_transform_change.call(this)
+  end
+  def on_stream_error(this : IMFSourceReaderCallback2*, dwstreamindex : UInt32, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_stream_error.call(this, dwstreamindex, hrstatus)
+  end
+end
+struct LibWin32::IMFSinkWriter
+  def query_interface(this : IMFSinkWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSinkWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSinkWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_stream(this : IMFSinkWriter*, ptargetmediatype : IMFMediaType, pdwstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, ptargetmediatype, pdwstreamindex)
+  end
+  def set_input_media_type(this : IMFSinkWriter*, dwstreamindex : UInt32, pinputmediatype : IMFMediaType, pencodingparameters : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_input_media_type.call(this, dwstreamindex, pinputmediatype, pencodingparameters)
+  end
+  def begin_writing(this : IMFSinkWriter*) : HRESULT
+    @lpVtbl.value.begin_writing.call(this)
+  end
+  def write_sample(this : IMFSinkWriter*, dwstreamindex : UInt32, psample : IMFSample) : HRESULT
+    @lpVtbl.value.write_sample.call(this, dwstreamindex, psample)
+  end
+  def send_stream_tick(this : IMFSinkWriter*, dwstreamindex : UInt32, lltimestamp : Int64) : HRESULT
+    @lpVtbl.value.send_stream_tick.call(this, dwstreamindex, lltimestamp)
+  end
+  def place_marker(this : IMFSinkWriter*, dwstreamindex : UInt32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.place_marker.call(this, dwstreamindex, pvcontext)
+  end
+  def notify_end_of_segment(this : IMFSinkWriter*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.notify_end_of_segment.call(this, dwstreamindex)
+  end
+  def flush(this : IMFSinkWriter*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.flush.call(this, dwstreamindex)
+  end
+  def finalize(this : IMFSinkWriter*) : HRESULT
+    @lpVtbl.value.finalize.call(this)
+  end
+  def get_service_for_stream(this : IMFSinkWriter*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)
+  end
+  def get_statistics(this : IMFSinkWriter*, dwstreamindex : UInt32, pstats : MF_SINK_WRITER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, dwstreamindex, pstats)
+  end
+end
+struct LibWin32::IMFSinkWriterEx
+  def query_interface(this : IMFSinkWriterEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSinkWriterEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSinkWriterEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_stream(this : IMFSinkWriterEx*, ptargetmediatype : IMFMediaType, pdwstreamindex : UInt32*) : HRESULT
+    @lpVtbl.value.add_stream.call(this, ptargetmediatype, pdwstreamindex)
+  end
+  def set_input_media_type(this : IMFSinkWriterEx*, dwstreamindex : UInt32, pinputmediatype : IMFMediaType, pencodingparameters : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_input_media_type.call(this, dwstreamindex, pinputmediatype, pencodingparameters)
+  end
+  def begin_writing(this : IMFSinkWriterEx*) : HRESULT
+    @lpVtbl.value.begin_writing.call(this)
+  end
+  def write_sample(this : IMFSinkWriterEx*, dwstreamindex : UInt32, psample : IMFSample) : HRESULT
+    @lpVtbl.value.write_sample.call(this, dwstreamindex, psample)
+  end
+  def send_stream_tick(this : IMFSinkWriterEx*, dwstreamindex : UInt32, lltimestamp : Int64) : HRESULT
+    @lpVtbl.value.send_stream_tick.call(this, dwstreamindex, lltimestamp)
+  end
+  def place_marker(this : IMFSinkWriterEx*, dwstreamindex : UInt32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.place_marker.call(this, dwstreamindex, pvcontext)
+  end
+  def notify_end_of_segment(this : IMFSinkWriterEx*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.notify_end_of_segment.call(this, dwstreamindex)
+  end
+  def flush(this : IMFSinkWriterEx*, dwstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.flush.call(this, dwstreamindex)
+  end
+  def finalize(this : IMFSinkWriterEx*) : HRESULT
+    @lpVtbl.value.finalize.call(this)
+  end
+  def get_service_for_stream(this : IMFSinkWriterEx*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)
+  end
+  def get_statistics(this : IMFSinkWriterEx*, dwstreamindex : UInt32, pstats : MF_SINK_WRITER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, dwstreamindex, pstats)
+  end
+  def get_transform_for_stream(this : IMFSinkWriterEx*, dwstreamindex : UInt32, dwtransformindex : UInt32, pguidcategory : Guid*, pptransform : IMFTransform*) : HRESULT
+    @lpVtbl.value.get_transform_for_stream.call(this, dwstreamindex, dwtransformindex, pguidcategory, pptransform)
+  end
+end
+struct LibWin32::IMFSinkWriterEncoderConfig
+  def query_interface(this : IMFSinkWriterEncoderConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSinkWriterEncoderConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSinkWriterEncoderConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_target_media_type(this : IMFSinkWriterEncoderConfig*, dwstreamindex : UInt32, ptargetmediatype : IMFMediaType, pencodingparameters : IMFAttributes) : HRESULT
+    @lpVtbl.value.set_target_media_type.call(this, dwstreamindex, ptargetmediatype, pencodingparameters)
+  end
+  def place_encoding_parameters(this : IMFSinkWriterEncoderConfig*, dwstreamindex : UInt32, pencodingparameters : IMFAttributes) : HRESULT
+    @lpVtbl.value.place_encoding_parameters.call(this, dwstreamindex, pencodingparameters)
+  end
+end
+struct LibWin32::IMFSinkWriterCallback
+  def query_interface(this : IMFSinkWriterCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSinkWriterCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSinkWriterCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_finalize(this : IMFSinkWriterCallback*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_finalize.call(this, hrstatus)
+  end
+  def on_marker(this : IMFSinkWriterCallback*, dwstreamindex : UInt32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_marker.call(this, dwstreamindex, pvcontext)
+  end
+end
+struct LibWin32::IMFSinkWriterCallback2
+  def query_interface(this : IMFSinkWriterCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSinkWriterCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSinkWriterCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_finalize(this : IMFSinkWriterCallback2*, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_finalize.call(this, hrstatus)
+  end
+  def on_marker(this : IMFSinkWriterCallback2*, dwstreamindex : UInt32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_marker.call(this, dwstreamindex, pvcontext)
+  end
+  def on_transform_change(this : IMFSinkWriterCallback2*) : HRESULT
+    @lpVtbl.value.on_transform_change.call(this)
+  end
+  def on_stream_error(this : IMFSinkWriterCallback2*, dwstreamindex : UInt32, hrstatus : HRESULT) : HRESULT
+    @lpVtbl.value.on_stream_error.call(this, dwstreamindex, hrstatus)
+  end
+end
+struct LibWin32::IMFVideoPositionMapper
+  def query_interface(this : IMFVideoPositionMapper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoPositionMapper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoPositionMapper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def map_output_coordinate_to_input_stream(this : IMFVideoPositionMapper*, xout : Float32, yout : Float32, dwoutputstreamindex : UInt32, dwinputstreamindex : UInt32, pxin : Float32*, pyin : Float32*) : HRESULT
+    @lpVtbl.value.map_output_coordinate_to_input_stream.call(this, xout, yout, dwoutputstreamindex, dwinputstreamindex, pxin, pyin)
+  end
+end
+struct LibWin32::IMFVideoDeviceID
+  def query_interface(this : IMFVideoDeviceID*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoDeviceID*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoDeviceID*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_id(this : IMFVideoDeviceID*, pdeviceid : Guid*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pdeviceid)
+  end
+end
+struct LibWin32::IMFVideoDisplayControl
+  def query_interface(this : IMFVideoDisplayControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoDisplayControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoDisplayControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_native_video_size(this : IMFVideoDisplayControl*, pszvideo : SIZE*, pszarvideo : SIZE*) : HRESULT
+    @lpVtbl.value.get_native_video_size.call(this, pszvideo, pszarvideo)
+  end
+  def get_ideal_video_size(this : IMFVideoDisplayControl*, pszmin : SIZE*, pszmax : SIZE*) : HRESULT
+    @lpVtbl.value.get_ideal_video_size.call(this, pszmin, pszmax)
+  end
+  def set_video_position(this : IMFVideoDisplayControl*, pnrcsource : MFVideoNormalizedRect*, prcdest : RECT*) : HRESULT
+    @lpVtbl.value.set_video_position.call(this, pnrcsource, prcdest)
+  end
+  def get_video_position(this : IMFVideoDisplayControl*, pnrcsource : MFVideoNormalizedRect*, prcdest : RECT*) : HRESULT
+    @lpVtbl.value.get_video_position.call(this, pnrcsource, prcdest)
+  end
+  def set_aspect_ratio_mode(this : IMFVideoDisplayControl*, dwaspectratiomode : UInt32) : HRESULT
+    @lpVtbl.value.set_aspect_ratio_mode.call(this, dwaspectratiomode)
+  end
+  def get_aspect_ratio_mode(this : IMFVideoDisplayControl*, pdwaspectratiomode : UInt32*) : HRESULT
+    @lpVtbl.value.get_aspect_ratio_mode.call(this, pdwaspectratiomode)
+  end
+  def set_video_window(this : IMFVideoDisplayControl*, hwndvideo : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_video_window.call(this, hwndvideo)
+  end
+  def get_video_window(this : IMFVideoDisplayControl*, phwndvideo : HANDLE*) : HRESULT
+    @lpVtbl.value.get_video_window.call(this, phwndvideo)
+  end
+  def repaint_video(this : IMFVideoDisplayControl*) : HRESULT
+    @lpVtbl.value.repaint_video.call(this)
+  end
+  def get_current_image(this : IMFVideoDisplayControl*, pbih : BITMAPINFOHEADER*, pdib : UInt8**, pcbdib : UInt32*, ptimestamp : Int64*) : HRESULT
+    @lpVtbl.value.get_current_image.call(this, pbih, pdib, pcbdib, ptimestamp)
+  end
+  def set_border_color(this : IMFVideoDisplayControl*, clr : UInt32) : HRESULT
+    @lpVtbl.value.set_border_color.call(this, clr)
+  end
+  def get_border_color(this : IMFVideoDisplayControl*, pclr : UInt32*) : HRESULT
+    @lpVtbl.value.get_border_color.call(this, pclr)
+  end
+  def set_rendering_prefs(this : IMFVideoDisplayControl*, dwrenderflags : UInt32) : HRESULT
+    @lpVtbl.value.set_rendering_prefs.call(this, dwrenderflags)
+  end
+  def get_rendering_prefs(this : IMFVideoDisplayControl*, pdwrenderflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_rendering_prefs.call(this, pdwrenderflags)
+  end
+  def set_fullscreen(this : IMFVideoDisplayControl*, ffullscreen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_fullscreen.call(this, ffullscreen)
+  end
+  def get_fullscreen(this : IMFVideoDisplayControl*, pffullscreen : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_fullscreen.call(this, pffullscreen)
+  end
+end
+struct LibWin32::IMFVideoPresenter
+  def query_interface(this : IMFVideoPresenter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoPresenter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoPresenter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_clock_start(this : IMFVideoPresenter*, hnssystemtime : Int64, llclockstartoffset : Int64) : HRESULT
+    @lpVtbl.value.on_clock_start.call(this, hnssystemtime, llclockstartoffset)
+  end
+  def on_clock_stop(this : IMFVideoPresenter*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_stop.call(this, hnssystemtime)
+  end
+  def on_clock_pause(this : IMFVideoPresenter*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_pause.call(this, hnssystemtime)
+  end
+  def on_clock_restart(this : IMFVideoPresenter*, hnssystemtime : Int64) : HRESULT
+    @lpVtbl.value.on_clock_restart.call(this, hnssystemtime)
+  end
+  def on_clock_set_rate(this : IMFVideoPresenter*, hnssystemtime : Int64, flrate : Float32) : HRESULT
+    @lpVtbl.value.on_clock_set_rate.call(this, hnssystemtime, flrate)
+  end
+  def process_message(this : IMFVideoPresenter*, emessage : MFVP_MESSAGE_TYPE, ulparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.process_message.call(this, emessage, ulparam)
+  end
+  def get_current_media_type(this : IMFVideoPresenter*, ppmediatype : IMFVideoMediaType*) : HRESULT
+    @lpVtbl.value.get_current_media_type.call(this, ppmediatype)
+  end
+end
+struct LibWin32::IMFDesiredSample
+  def query_interface(this : IMFDesiredSample*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDesiredSample*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDesiredSample*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_desired_sample_time_and_duration(this : IMFDesiredSample*, phnssampletime : Int64*, phnssampleduration : Int64*) : HRESULT
+    @lpVtbl.value.get_desired_sample_time_and_duration.call(this, phnssampletime, phnssampleduration)
+  end
+  def set_desired_sample_time_and_duration(this : IMFDesiredSample*, hnssampletime : Int64, hnssampleduration : Int64) : Void
+    @lpVtbl.value.set_desired_sample_time_and_duration.call(this, hnssampletime, hnssampleduration)
+  end
+  def clear(this : IMFDesiredSample*) : Void
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IMFVideoMixerControl
+  def query_interface(this : IMFVideoMixerControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoMixerControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoMixerControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_stream_z_order(this : IMFVideoMixerControl*, dwstreamid : UInt32, dwz : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_z_order.call(this, dwstreamid, dwz)
+  end
+  def get_stream_z_order(this : IMFVideoMixerControl*, dwstreamid : UInt32, pdwz : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_z_order.call(this, dwstreamid, pdwz)
+  end
+  def set_stream_output_rect(this : IMFVideoMixerControl*, dwstreamid : UInt32, pnrcoutput : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.set_stream_output_rect.call(this, dwstreamid, pnrcoutput)
+  end
+  def get_stream_output_rect(this : IMFVideoMixerControl*, dwstreamid : UInt32, pnrcoutput : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.get_stream_output_rect.call(this, dwstreamid, pnrcoutput)
+  end
+end
+struct LibWin32::IMFVideoMixerControl2
+  def query_interface(this : IMFVideoMixerControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoMixerControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoMixerControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_stream_z_order(this : IMFVideoMixerControl2*, dwstreamid : UInt32, dwz : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_z_order.call(this, dwstreamid, dwz)
+  end
+  def get_stream_z_order(this : IMFVideoMixerControl2*, dwstreamid : UInt32, pdwz : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_z_order.call(this, dwstreamid, pdwz)
+  end
+  def set_stream_output_rect(this : IMFVideoMixerControl2*, dwstreamid : UInt32, pnrcoutput : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.set_stream_output_rect.call(this, dwstreamid, pnrcoutput)
+  end
+  def get_stream_output_rect(this : IMFVideoMixerControl2*, dwstreamid : UInt32, pnrcoutput : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.get_stream_output_rect.call(this, dwstreamid, pnrcoutput)
+  end
+  def set_mixing_prefs(this : IMFVideoMixerControl2*, dwmixflags : UInt32) : HRESULT
+    @lpVtbl.value.set_mixing_prefs.call(this, dwmixflags)
+  end
+  def get_mixing_prefs(this : IMFVideoMixerControl2*, pdwmixflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_mixing_prefs.call(this, pdwmixflags)
+  end
+end
+struct LibWin32::IMFVideoRenderer
+  def query_interface(this : IMFVideoRenderer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoRenderer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoRenderer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_renderer(this : IMFVideoRenderer*, pvideomixer : IMFTransform, pvideopresenter : IMFVideoPresenter) : HRESULT
+    @lpVtbl.value.initialize_renderer.call(this, pvideomixer, pvideopresenter)
+  end
+end
+struct LibWin32::IEVRFilterConfig
+  def query_interface(this : IEVRFilterConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEVRFilterConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEVRFilterConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_number_of_streams(this : IEVRFilterConfig*, dwmaxstreams : UInt32) : HRESULT
+    @lpVtbl.value.set_number_of_streams.call(this, dwmaxstreams)
+  end
+  def get_number_of_streams(this : IEVRFilterConfig*, pdwmaxstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_streams.call(this, pdwmaxstreams)
+  end
+end
+struct LibWin32::IEVRFilterConfigEx
+  def query_interface(this : IEVRFilterConfigEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEVRFilterConfigEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEVRFilterConfigEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_number_of_streams(this : IEVRFilterConfigEx*, dwmaxstreams : UInt32) : HRESULT
+    @lpVtbl.value.set_number_of_streams.call(this, dwmaxstreams)
+  end
+  def get_number_of_streams(this : IEVRFilterConfigEx*, pdwmaxstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_streams.call(this, pdwmaxstreams)
+  end
+  def set_config_prefs(this : IEVRFilterConfigEx*, dwconfigflags : UInt32) : HRESULT
+    @lpVtbl.value.set_config_prefs.call(this, dwconfigflags)
+  end
+  def get_config_prefs(this : IEVRFilterConfigEx*, pdwconfigflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_config_prefs.call(this, pdwconfigflags)
+  end
+end
+struct LibWin32::IMFTopologyServiceLookup
+  def query_interface(this : IMFTopologyServiceLookup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopologyServiceLookup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopologyServiceLookup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lookup_service(this : IMFTopologyServiceLookup*, type : MF_SERVICE_LOOKUP_TYPE, dwindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobjects : Void**, pnobjects : UInt32*) : HRESULT
+    @lpVtbl.value.lookup_service.call(this, type, dwindex, guidservice, riid, ppvobjects, pnobjects)
+  end
+end
+struct LibWin32::IMFTopologyServiceLookupClient
+  def query_interface(this : IMFTopologyServiceLookupClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFTopologyServiceLookupClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFTopologyServiceLookupClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_service_pointers(this : IMFTopologyServiceLookupClient*, plookup : IMFTopologyServiceLookup) : HRESULT
+    @lpVtbl.value.init_service_pointers.call(this, plookup)
+  end
+  def release_service_pointers(this : IMFTopologyServiceLookupClient*) : HRESULT
+    @lpVtbl.value.release_service_pointers.call(this)
+  end
+end
+struct LibWin32::IEVRTrustedVideoPlugin
+  def query_interface(this : IEVRTrustedVideoPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEVRTrustedVideoPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEVRTrustedVideoPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_in_trusted_video_mode(this : IEVRTrustedVideoPlugin*, pyes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_in_trusted_video_mode.call(this, pyes)
+  end
+  def can_constrict(this : IEVRTrustedVideoPlugin*, pyes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_constrict.call(this, pyes)
+  end
+  def set_constriction(this : IEVRTrustedVideoPlugin*, dwkpix : UInt32) : HRESULT
+    @lpVtbl.value.set_constriction.call(this, dwkpix)
+  end
+  def disable_image_export(this : IEVRTrustedVideoPlugin*, bdisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.disable_image_export.call(this, bdisable)
+  end
+end
+struct LibWin32::IMFPMediaPlayer
+  def query_interface(this : IMFPMediaPlayer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMediaPlayer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMediaPlayer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def play(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def pause(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def stop(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def frame_step(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.frame_step.call(this)
+  end
+  def set_position(this : IMFPMediaPlayer*, guidpositiontype : Guid*, pvpositionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_position.call(this, guidpositiontype, pvpositionvalue)
+  end
+  def get_position(this : IMFPMediaPlayer*, guidpositiontype : Guid*, pvpositionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_position.call(this, guidpositiontype, pvpositionvalue)
+  end
+  def get_duration(this : IMFPMediaPlayer*, guidpositiontype : Guid*, pvdurationvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, guidpositiontype, pvdurationvalue)
+  end
+  def set_rate(this : IMFPMediaPlayer*, flrate : Float32) : HRESULT
+    @lpVtbl.value.set_rate.call(this, flrate)
+  end
+  def get_rate(this : IMFPMediaPlayer*, pflrate : Float32*) : HRESULT
+    @lpVtbl.value.get_rate.call(this, pflrate)
+  end
+  def get_supported_rates(this : IMFPMediaPlayer*, fforwarddirection : LibC::BOOL, pflslowestrate : Float32*, pflfastestrate : Float32*) : HRESULT
+    @lpVtbl.value.get_supported_rates.call(this, fforwarddirection, pflslowestrate, pflfastestrate)
+  end
+  def get_state(this : IMFPMediaPlayer*, pestate : MFP_MEDIAPLAYER_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pestate)
+  end
+  def create_media_item_from_url(this : IMFPMediaPlayer*, pwszurl : LibC::LPWSTR, fsync : LibC::BOOL, dwuserdata : LibC::UINT_PTR, ppmediaitem : IMFPMediaItem*) : HRESULT
+    @lpVtbl.value.create_media_item_from_url.call(this, pwszurl, fsync, dwuserdata, ppmediaitem)
+  end
+  def create_media_item_from_object(this : IMFPMediaPlayer*, piunknownobj : IUnknown, fsync : LibC::BOOL, dwuserdata : LibC::UINT_PTR, ppmediaitem : IMFPMediaItem*) : HRESULT
+    @lpVtbl.value.create_media_item_from_object.call(this, piunknownobj, fsync, dwuserdata, ppmediaitem)
+  end
+  def set_media_item(this : IMFPMediaPlayer*, pimfpmediaitem : IMFPMediaItem) : HRESULT
+    @lpVtbl.value.set_media_item.call(this, pimfpmediaitem)
+  end
+  def clear_media_item(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.clear_media_item.call(this)
+  end
+  def get_media_item(this : IMFPMediaPlayer*, ppimfpmediaitem : IMFPMediaItem*) : HRESULT
+    @lpVtbl.value.get_media_item.call(this, ppimfpmediaitem)
+  end
+  def get_volume(this : IMFPMediaPlayer*, pflvolume : Float32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, pflvolume)
+  end
+  def set_volume(this : IMFPMediaPlayer*, flvolume : Float32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, flvolume)
+  end
+  def get_balance(this : IMFPMediaPlayer*, pflbalance : Float32*) : HRESULT
+    @lpVtbl.value.get_balance.call(this, pflbalance)
+  end
+  def set_balance(this : IMFPMediaPlayer*, flbalance : Float32) : HRESULT
+    @lpVtbl.value.set_balance.call(this, flbalance)
+  end
+  def get_mute(this : IMFPMediaPlayer*, pfmute : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pfmute)
+  end
+  def set_mute(this : IMFPMediaPlayer*, fmute : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_mute.call(this, fmute)
+  end
+  def get_native_video_size(this : IMFPMediaPlayer*, pszvideo : SIZE*, pszarvideo : SIZE*) : HRESULT
+    @lpVtbl.value.get_native_video_size.call(this, pszvideo, pszarvideo)
+  end
+  def get_ideal_video_size(this : IMFPMediaPlayer*, pszmin : SIZE*, pszmax : SIZE*) : HRESULT
+    @lpVtbl.value.get_ideal_video_size.call(this, pszmin, pszmax)
+  end
+  def set_video_source_rect(this : IMFPMediaPlayer*, pnrcsource : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.set_video_source_rect.call(this, pnrcsource)
+  end
+  def get_video_source_rect(this : IMFPMediaPlayer*, pnrcsource : MFVideoNormalizedRect*) : HRESULT
+    @lpVtbl.value.get_video_source_rect.call(this, pnrcsource)
+  end
+  def set_aspect_ratio_mode(this : IMFPMediaPlayer*, dwaspectratiomode : UInt32) : HRESULT
+    @lpVtbl.value.set_aspect_ratio_mode.call(this, dwaspectratiomode)
+  end
+  def get_aspect_ratio_mode(this : IMFPMediaPlayer*, pdwaspectratiomode : UInt32*) : HRESULT
+    @lpVtbl.value.get_aspect_ratio_mode.call(this, pdwaspectratiomode)
+  end
+  def get_video_window(this : IMFPMediaPlayer*, phwndvideo : HANDLE*) : HRESULT
+    @lpVtbl.value.get_video_window.call(this, phwndvideo)
+  end
+  def update_video(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.update_video.call(this)
+  end
+  def set_border_color(this : IMFPMediaPlayer*, clr : UInt32) : HRESULT
+    @lpVtbl.value.set_border_color.call(this, clr)
+  end
+  def get_border_color(this : IMFPMediaPlayer*, pclr : UInt32*) : HRESULT
+    @lpVtbl.value.get_border_color.call(this, pclr)
+  end
+  def insert_effect(this : IMFPMediaPlayer*, peffect : IUnknown, foptional : LibC::BOOL) : HRESULT
+    @lpVtbl.value.insert_effect.call(this, peffect, foptional)
+  end
+  def remove_effect(this : IMFPMediaPlayer*, peffect : IUnknown) : HRESULT
+    @lpVtbl.value.remove_effect.call(this, peffect)
+  end
+  def remove_all_effects(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.remove_all_effects.call(this)
+  end
+  def shutdown(this : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFPMediaItem
+  def query_interface(this : IMFPMediaItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMediaItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMediaItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_media_player(this : IMFPMediaItem*, ppmediaplayer : IMFPMediaPlayer*) : HRESULT
+    @lpVtbl.value.get_media_player.call(this, ppmediaplayer)
+  end
+  def get_url(this : IMFPMediaItem*, ppwszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_url.call(this, ppwszurl)
+  end
+  def get_object(this : IMFPMediaItem*, ppiunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.call(this, ppiunknown)
+  end
+  def get_user_data(this : IMFPMediaItem*, pdwuserdata : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_user_data.call(this, pdwuserdata)
+  end
+  def set_user_data(this : IMFPMediaItem*, dwuserdata : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set_user_data.call(this, dwuserdata)
+  end
+  def get_start_stop_position(this : IMFPMediaItem*, pguidstartpositiontype : Guid*, pvstartvalue : PROPVARIANT*, pguidstoppositiontype : Guid*, pvstopvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_start_stop_position.call(this, pguidstartpositiontype, pvstartvalue, pguidstoppositiontype, pvstopvalue)
+  end
+  def set_start_stop_position(this : IMFPMediaItem*, pguidstartpositiontype : Guid*, pvstartvalue : PROPVARIANT*, pguidstoppositiontype : Guid*, pvstopvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_start_stop_position.call(this, pguidstartpositiontype, pvstartvalue, pguidstoppositiontype, pvstopvalue)
+  end
+  def has_video(this : IMFPMediaItem*, pfhasvideo : LibC::BOOL*, pfselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_video.call(this, pfhasvideo, pfselected)
+  end
+  def has_audio(this : IMFPMediaItem*, pfhasaudio : LibC::BOOL*, pfselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_audio.call(this, pfhasaudio, pfselected)
+  end
+  def is_protected(this : IMFPMediaItem*, pfprotected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_protected.call(this, pfprotected)
+  end
+  def get_duration(this : IMFPMediaItem*, guidpositiontype : Guid*, pvdurationvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, guidpositiontype, pvdurationvalue)
+  end
+  def get_number_of_streams(this : IMFPMediaItem*, pdwstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_streams.call(this, pdwstreamcount)
+  end
+  def get_stream_selection(this : IMFPMediaItem*, dwstreamindex : UInt32, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_stream_selection.call(this, dwstreamindex, pfenabled)
+  end
+  def set_stream_selection(this : IMFPMediaItem*, dwstreamindex : UInt32, fenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stream_selection.call(this, dwstreamindex, fenabled)
+  end
+  def get_stream_attribute(this : IMFPMediaItem*, dwstreamindex : UInt32, guidmfattribute : Guid*, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_stream_attribute.call(this, dwstreamindex, guidmfattribute, pvvalue)
+  end
+  def get_presentation_attribute(this : IMFPMediaItem*, guidmfattribute : Guid*, pvvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_presentation_attribute.call(this, guidmfattribute, pvvalue)
+  end
+  def get_characteristics(this : IMFPMediaItem*, pcharacteristics : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pcharacteristics)
+  end
+  def set_stream_sink(this : IMFPMediaItem*, dwstreamindex : UInt32, pmediasink : IUnknown) : HRESULT
+    @lpVtbl.value.set_stream_sink.call(this, dwstreamindex, pmediasink)
+  end
+  def get_metadata(this : IMFPMediaItem*, ppmetadatastore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, ppmetadatastore)
+  end
+end
+struct LibWin32::IMFPMediaPlayerCallback
+  def query_interface(this : IMFPMediaPlayerCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFPMediaPlayerCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFPMediaPlayerCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_media_player_event(this : IMFPMediaPlayerCallback*, peventheader : MFP_EVENT_HEADER*) : Void
+    @lpVtbl.value.on_media_player_event.call(this, peventheader)
+  end
+end
+struct LibWin32::IMFSharingEngineClassFactory
+  def query_interface(this : IMFSharingEngineClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IMFSharingEngineClassFactory*, dwflags : UInt32, pattr : IMFAttributes, ppengine : IUnknown*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, dwflags, pattr, ppengine)
+  end
+end
+struct LibWin32::IMFMediaSharingEngine
+  def query_interface(this : IMFMediaSharingEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSharingEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSharingEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IMFMediaSharingEngine*, pperror : IMFMediaError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def set_error_code(this : IMFMediaSharingEngine*, error : MF_MEDIA_ENGINE_ERR) : HRESULT
+    @lpVtbl.value.set_error_code.call(this, error)
+  end
+  def set_source_elements(this : IMFMediaSharingEngine*, psrcelements : IMFMediaEngineSrcElements) : HRESULT
+    @lpVtbl.value.set_source_elements.call(this, psrcelements)
+  end
+  def set_source(this : IMFMediaSharingEngine*, purl : UInt8*) : HRESULT
+    @lpVtbl.value.set_source.call(this, purl)
+  end
+  def get_current_source(this : IMFMediaSharingEngine*, ppurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_source.call(this, ppurl)
+  end
+  def get_network_state(this : IMFMediaSharingEngine*) : UInt16
+    @lpVtbl.value.get_network_state.call(this)
+  end
+  def get_preload(this : IMFMediaSharingEngine*) : MF_MEDIA_ENGINE_PRELOAD
+    @lpVtbl.value.get_preload.call(this)
+  end
+  def set_preload(this : IMFMediaSharingEngine*, preload : MF_MEDIA_ENGINE_PRELOAD) : HRESULT
+    @lpVtbl.value.set_preload.call(this, preload)
+  end
+  def get_buffered(this : IMFMediaSharingEngine*, ppbuffered : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_buffered.call(this, ppbuffered)
+  end
+  def load(this : IMFMediaSharingEngine*) : HRESULT
+    @lpVtbl.value.load.call(this)
+  end
+  def can_play_type(this : IMFMediaSharingEngine*, type : UInt8*, panswer : MF_MEDIA_ENGINE_CANPLAY*) : HRESULT
+    @lpVtbl.value.can_play_type.call(this, type, panswer)
+  end
+  def get_ready_state(this : IMFMediaSharingEngine*) : UInt16
+    @lpVtbl.value.get_ready_state.call(this)
+  end
+  def is_seeking(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.is_seeking.call(this)
+  end
+  def get_current_time(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_current_time.call(this)
+  end
+  def set_current_time(this : IMFMediaSharingEngine*, seektime : Float64) : HRESULT
+    @lpVtbl.value.set_current_time.call(this, seektime)
+  end
+  def get_start_time(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_start_time.call(this)
+  end
+  def get_duration(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_duration.call(this)
+  end
+  def is_paused(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.is_paused.call(this)
+  end
+  def get_default_playback_rate(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_default_playback_rate.call(this)
+  end
+  def set_default_playback_rate(this : IMFMediaSharingEngine*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_default_playback_rate.call(this, rate)
+  end
+  def get_playback_rate(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_playback_rate.call(this)
+  end
+  def set_playback_rate(this : IMFMediaSharingEngine*, rate : Float64) : HRESULT
+    @lpVtbl.value.set_playback_rate.call(this, rate)
+  end
+  def get_played(this : IMFMediaSharingEngine*, ppplayed : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_played.call(this, ppplayed)
+  end
+  def get_seekable(this : IMFMediaSharingEngine*, ppseekable : IMFMediaTimeRange*) : HRESULT
+    @lpVtbl.value.get_seekable.call(this, ppseekable)
+  end
+  def is_ended(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.is_ended.call(this)
+  end
+  def get_auto_play(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.get_auto_play.call(this)
+  end
+  def set_auto_play(this : IMFMediaSharingEngine*, autoplay : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_auto_play.call(this, autoplay)
+  end
+  def get_loop(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.get_loop.call(this)
+  end
+  def set_loop(this : IMFMediaSharingEngine*, loop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_loop.call(this, loop)
+  end
+  def play(this : IMFMediaSharingEngine*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def pause(this : IMFMediaSharingEngine*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def get_muted(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.get_muted.call(this)
+  end
+  def set_muted(this : IMFMediaSharingEngine*, muted : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_muted.call(this, muted)
+  end
+  def get_volume(this : IMFMediaSharingEngine*) : Float64
+    @lpVtbl.value.get_volume.call(this)
+  end
+  def set_volume(this : IMFMediaSharingEngine*, volume : Float64) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume)
+  end
+  def has_video(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.has_video.call(this)
+  end
+  def has_audio(this : IMFMediaSharingEngine*) : LibC::BOOL
+    @lpVtbl.value.has_audio.call(this)
+  end
+  def get_native_video_size(this : IMFMediaSharingEngine*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_native_video_size.call(this, cx, cy)
+  end
+  def get_video_aspect_ratio(this : IMFMediaSharingEngine*, cx : UInt32*, cy : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_aspect_ratio.call(this, cx, cy)
+  end
+  def shutdown(this : IMFMediaSharingEngine*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def transfer_video_frame(this : IMFMediaSharingEngine*, pdstsurf : IUnknown, psrc : MFVideoNormalizedRect*, pdst : RECT*, pborderclr : MFARGB*) : HRESULT
+    @lpVtbl.value.transfer_video_frame.call(this, pdstsurf, psrc, pdst, pborderclr)
+  end
+  def on_video_stream_tick(this : IMFMediaSharingEngine*, ppts : Int64*) : HRESULT
+    @lpVtbl.value.on_video_stream_tick.call(this, ppts)
+  end
+  def get_device(this : IMFMediaSharingEngine*, pdevice : DEVICE_INFO*) : HRESULT
+    @lpVtbl.value.get_device.call(this, pdevice)
+  end
+end
+struct LibWin32::IMFMediaSharingEngineClassFactory
+  def query_interface(this : IMFMediaSharingEngineClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFMediaSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFMediaSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IMFMediaSharingEngineClassFactory*, dwflags : UInt32, pattr : IMFAttributes, ppengine : IMFMediaSharingEngine*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, dwflags, pattr, ppengine)
+  end
+end
+struct LibWin32::IMFImageSharingEngine
+  def query_interface(this : IMFImageSharingEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFImageSharingEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFImageSharingEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_source(this : IMFImageSharingEngine*, pstream : IUnknown) : HRESULT
+    @lpVtbl.value.set_source.call(this, pstream)
+  end
+  def get_device(this : IMFImageSharingEngine*, pdevice : DEVICE_INFO*) : HRESULT
+    @lpVtbl.value.get_device.call(this, pdevice)
+  end
+  def shutdown(this : IMFImageSharingEngine*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFImageSharingEngineClassFactory
+  def query_interface(this : IMFImageSharingEngineClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFImageSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFImageSharingEngineClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance_from_udn(this : IMFImageSharingEngineClassFactory*, puniquedevicename : UInt8*, ppengine : IMFImageSharingEngine*) : HRESULT
+    @lpVtbl.value.create_instance_from_udn.call(this, puniquedevicename, ppengine)
+  end
+end
+struct LibWin32::IPlayToControl
+  def query_interface(this : IPlayToControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPlayToControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPlayToControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect(this : IPlayToControl*, pfactory : IMFSharingEngineClassFactory) : HRESULT
+    @lpVtbl.value.connect.call(this, pfactory)
+  end
+  def disconnect(this : IPlayToControl*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+end
+struct LibWin32::IPlayToControlWithCapabilities
+  def query_interface(this : IPlayToControlWithCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPlayToControlWithCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPlayToControlWithCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect(this : IPlayToControlWithCapabilities*, pfactory : IMFSharingEngineClassFactory) : HRESULT
+    @lpVtbl.value.connect.call(this, pfactory)
+  end
+  def disconnect(this : IPlayToControlWithCapabilities*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def get_capabilities(this : IPlayToControlWithCapabilities*, pcapabilities : PLAYTO_SOURCE_CREATEFLAGS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pcapabilities)
+  end
+end
+struct LibWin32::IPlayToSourceClassFactory
+  def query_interface(this : IPlayToSourceClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPlayToSourceClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPlayToSourceClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IPlayToSourceClassFactory*, dwflags : UInt32, pcontrol : IPlayToControl, ppsource : IInspectable*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, dwflags, pcontrol, ppsource)
+  end
+end
+struct LibWin32::IEVRVideoStreamControl
+  def query_interface(this : IEVRVideoStreamControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEVRVideoStreamControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEVRVideoStreamControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_stream_active_state(this : IEVRVideoStreamControl*, factive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stream_active_state.call(this, factive)
+  end
+  def get_stream_active_state(this : IEVRVideoStreamControl*, lpfactive : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_stream_active_state.call(this, lpfactive)
+  end
+end
+struct LibWin32::IMFVideoProcessor
+  def query_interface(this : IMFVideoProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_available_video_processor_modes(this : IMFVideoProcessor*, lpdwnumprocessingmodes : UInt32*, ppvideoprocessingmodes : Guid**) : HRESULT
+    @lpVtbl.value.get_available_video_processor_modes.call(this, lpdwnumprocessingmodes, ppvideoprocessingmodes)
+  end
+  def get_video_processor_caps(this : IMFVideoProcessor*, lpvideoprocessormode : Guid*, lpvideoprocessorcaps : DXVA2_VideoProcessorCaps*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.call(this, lpvideoprocessormode, lpvideoprocessorcaps)
+  end
+  def get_video_processor_mode(this : IMFVideoProcessor*, lpmode : Guid*) : HRESULT
+    @lpVtbl.value.get_video_processor_mode.call(this, lpmode)
+  end
+  def set_video_processor_mode(this : IMFVideoProcessor*, lpmode : Guid*) : HRESULT
+    @lpVtbl.value.set_video_processor_mode.call(this, lpmode)
+  end
+  def get_proc_amp_range(this : IMFVideoProcessor*, dwproperty : UInt32, pproprange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_proc_amp_range.call(this, dwproperty, pproprange)
+  end
+  def get_proc_amp_values(this : IMFVideoProcessor*, dwflags : UInt32, values : DXVA2_ProcAmpValues*) : HRESULT
+    @lpVtbl.value.get_proc_amp_values.call(this, dwflags, values)
+  end
+  def set_proc_amp_values(this : IMFVideoProcessor*, dwflags : UInt32, pvalues : DXVA2_ProcAmpValues*) : HRESULT
+    @lpVtbl.value.set_proc_amp_values.call(this, dwflags, pvalues)
+  end
+  def get_filtering_range(this : IMFVideoProcessor*, dwproperty : UInt32, pproprange : DXVA2_ValueRange*) : HRESULT
+    @lpVtbl.value.get_filtering_range.call(this, dwproperty, pproprange)
+  end
+  def get_filtering_value(this : IMFVideoProcessor*, dwproperty : UInt32, pvalue : DXVA2_Fixed32*) : HRESULT
+    @lpVtbl.value.get_filtering_value.call(this, dwproperty, pvalue)
+  end
+  def set_filtering_value(this : IMFVideoProcessor*, dwproperty : UInt32, pvalue : DXVA2_Fixed32*) : HRESULT
+    @lpVtbl.value.set_filtering_value.call(this, dwproperty, pvalue)
+  end
+  def get_background_color(this : IMFVideoProcessor*, lpclrbkg : UInt32*) : HRESULT
+    @lpVtbl.value.get_background_color.call(this, lpclrbkg)
+  end
+  def set_background_color(this : IMFVideoProcessor*, clrbkg : UInt32) : HRESULT
+    @lpVtbl.value.set_background_color.call(this, clrbkg)
+  end
+end
+struct LibWin32::IMFVideoMixerBitmap
+  def query_interface(this : IMFVideoMixerBitmap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVideoMixerBitmap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVideoMixerBitmap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_alpha_bitmap(this : IMFVideoMixerBitmap*, pbmpparms : MFVideoAlphaBitmap*) : HRESULT
+    @lpVtbl.value.set_alpha_bitmap.call(this, pbmpparms)
+  end
+  def clear_alpha_bitmap(this : IMFVideoMixerBitmap*) : HRESULT
+    @lpVtbl.value.clear_alpha_bitmap.call(this)
+  end
+  def update_alpha_bitmap_parameters(this : IMFVideoMixerBitmap*, pbmpparms : MFVideoAlphaBitmapParams*) : HRESULT
+    @lpVtbl.value.update_alpha_bitmap_parameters.call(this, pbmpparms)
+  end
+  def get_alpha_bitmap_parameters(this : IMFVideoMixerBitmap*, pbmpparms : MFVideoAlphaBitmapParams*) : HRESULT
+    @lpVtbl.value.get_alpha_bitmap_parameters.call(this, pbmpparms)
+  end
+end
+struct LibWin32::IAdvancedMediaCaptureInitializationSettings
+  def query_interface(this : IAdvancedMediaCaptureInitializationSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAdvancedMediaCaptureInitializationSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAdvancedMediaCaptureInitializationSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_directx_device_manager(this : IAdvancedMediaCaptureInitializationSettings*, value : IMFDXGIDeviceManager) : HRESULT
+    @lpVtbl.value.set_directx_device_manager.call(this, value)
+  end
+end
+struct LibWin32::IAdvancedMediaCaptureSettings
+  def query_interface(this : IAdvancedMediaCaptureSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAdvancedMediaCaptureSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAdvancedMediaCaptureSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_directx_device_manager(this : IAdvancedMediaCaptureSettings*, value : IMFDXGIDeviceManager*) : HRESULT
+    @lpVtbl.value.get_directx_device_manager.call(this, value)
+  end
+end
+struct LibWin32::IAdvancedMediaCapture
+  def query_interface(this : IAdvancedMediaCapture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAdvancedMediaCapture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAdvancedMediaCapture*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_advanced_media_capture_settings(this : IAdvancedMediaCapture*, value : IAdvancedMediaCaptureSettings*) : HRESULT
+    @lpVtbl.value.get_advanced_media_capture_settings.call(this, value)
+  end
+end
+struct LibWin32::IMFSpatialAudioObjectBuffer
+  def query_interface(this : IMFSpatialAudioObjectBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSpatialAudioObjectBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSpatialAudioObjectBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock(this : IMFSpatialAudioObjectBuffer*, ppbbuffer : UInt8**, pcbmaxlength : UInt32*, pcbcurrentlength : UInt32*) : HRESULT
+    @lpVtbl.value.lock.call(this, ppbbuffer, pcbmaxlength, pcbcurrentlength)
+  end
+  def unlock(this : IMFSpatialAudioObjectBuffer*) : HRESULT
+    @lpVtbl.value.unlock.call(this)
+  end
+  def get_current_length(this : IMFSpatialAudioObjectBuffer*, pcbcurrentlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_length.call(this, pcbcurrentlength)
+  end
+  def set_current_length(this : IMFSpatialAudioObjectBuffer*, cbcurrentlength : UInt32) : HRESULT
+    @lpVtbl.value.set_current_length.call(this, cbcurrentlength)
+  end
+  def get_max_length(this : IMFSpatialAudioObjectBuffer*, pcbmaxlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pcbmaxlength)
+  end
+  def set_id(this : IMFSpatialAudioObjectBuffer*, u32id : UInt32) : HRESULT
+    @lpVtbl.value.set_id.call(this, u32id)
+  end
+  def get_id(this : IMFSpatialAudioObjectBuffer*, pu32id : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pu32id)
+  end
+  def set_type(this : IMFSpatialAudioObjectBuffer*, type : AudioObjectType) : HRESULT
+    @lpVtbl.value.set_type.call(this, type)
+  end
+  def get_type(this : IMFSpatialAudioObjectBuffer*, ptype : AudioObjectType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_metadata_items(this : IMFSpatialAudioObjectBuffer*, ppmetadataitems : ISpatialAudioMetadataItems*) : HRESULT
+    @lpVtbl.value.get_metadata_items.call(this, ppmetadataitems)
+  end
+end
+struct LibWin32::IMFSpatialAudioSample
+  def query_interface(this : IMFSpatialAudioSample*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFSpatialAudioSample*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFSpatialAudioSample*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFSpatialAudioSample*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFSpatialAudioSample*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFSpatialAudioSample*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFSpatialAudioSample*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFSpatialAudioSample*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFSpatialAudioSample*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFSpatialAudioSample*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFSpatialAudioSample*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFSpatialAudioSample*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFSpatialAudioSample*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFSpatialAudioSample*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFSpatialAudioSample*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFSpatialAudioSample*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFSpatialAudioSample*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFSpatialAudioSample*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFSpatialAudioSample*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFSpatialAudioSample*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFSpatialAudioSample*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFSpatialAudioSample*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFSpatialAudioSample*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFSpatialAudioSample*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFSpatialAudioSample*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFSpatialAudioSample*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFSpatialAudioSample*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFSpatialAudioSample*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFSpatialAudioSample*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFSpatialAudioSample*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFSpatialAudioSample*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFSpatialAudioSample*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFSpatialAudioSample*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def get_sample_flags(this : IMFSpatialAudioSample*, pdwsampleflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_sample_flags.call(this, pdwsampleflags)
+  end
+  def set_sample_flags(this : IMFSpatialAudioSample*, dwsampleflags : UInt32) : HRESULT
+    @lpVtbl.value.set_sample_flags.call(this, dwsampleflags)
+  end
+  def get_sample_time(this : IMFSpatialAudioSample*, phnssampletime : Int64*) : HRESULT
+    @lpVtbl.value.get_sample_time.call(this, phnssampletime)
+  end
+  def set_sample_time(this : IMFSpatialAudioSample*, hnssampletime : Int64) : HRESULT
+    @lpVtbl.value.set_sample_time.call(this, hnssampletime)
+  end
+  def get_sample_duration(this : IMFSpatialAudioSample*, phnssampleduration : Int64*) : HRESULT
+    @lpVtbl.value.get_sample_duration.call(this, phnssampleduration)
+  end
+  def set_sample_duration(this : IMFSpatialAudioSample*, hnssampleduration : Int64) : HRESULT
+    @lpVtbl.value.set_sample_duration.call(this, hnssampleduration)
+  end
+  def get_buffer_count(this : IMFSpatialAudioSample*, pdwbuffercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_count.call(this, pdwbuffercount)
+  end
+  def get_buffer_by_index(this : IMFSpatialAudioSample*, dwindex : UInt32, ppbuffer : IMFMediaBuffer*) : HRESULT
+    @lpVtbl.value.get_buffer_by_index.call(this, dwindex, ppbuffer)
+  end
+  def convert_to_contiguous_buffer(this : IMFSpatialAudioSample*, ppbuffer : IMFMediaBuffer*) : HRESULT
+    @lpVtbl.value.convert_to_contiguous_buffer.call(this, ppbuffer)
+  end
+  def add_buffer(this : IMFSpatialAudioSample*, pbuffer : IMFMediaBuffer) : HRESULT
+    @lpVtbl.value.add_buffer.call(this, pbuffer)
+  end
+  def remove_buffer_by_index(this : IMFSpatialAudioSample*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_buffer_by_index.call(this, dwindex)
+  end
+  def remove_all_buffers(this : IMFSpatialAudioSample*) : HRESULT
+    @lpVtbl.value.remove_all_buffers.call(this)
+  end
+  def get_total_length(this : IMFSpatialAudioSample*, pcbtotallength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.call(this, pcbtotallength)
+  end
+  def copy_to_buffer(this : IMFSpatialAudioSample*, pbuffer : IMFMediaBuffer) : HRESULT
+    @lpVtbl.value.copy_to_buffer.call(this, pbuffer)
+  end
+  def get_object_count(this : IMFSpatialAudioSample*, pdwobjectcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_count.call(this, pdwobjectcount)
+  end
+  def add_spatial_audio_object(this : IMFSpatialAudioSample*, paudioobjbuffer : IMFSpatialAudioObjectBuffer) : HRESULT
+    @lpVtbl.value.add_spatial_audio_object.call(this, paudioobjbuffer)
+  end
+  def get_spatial_audio_object_by_index(this : IMFSpatialAudioSample*, dwindex : UInt32, ppaudioobjbuffer : IMFSpatialAudioObjectBuffer*) : HRESULT
+    @lpVtbl.value.get_spatial_audio_object_by_index.call(this, dwindex, ppaudioobjbuffer)
+  end
+end
+struct LibWin32::IMFContentDecryptionModuleSession
+  def query_interface(this : IMFContentDecryptionModuleSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptionModuleSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptionModuleSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_session_id(this : IMFContentDecryptionModuleSession*, sessionid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_session_id.call(this, sessionid)
+  end
+  def get_expiration(this : IMFContentDecryptionModuleSession*, expiration : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration.call(this, expiration)
+  end
+  def get_key_statuses(this : IMFContentDecryptionModuleSession*, keystatuses : MFMediaKeyStatus**, numkeystatuses : UInt32*) : HRESULT
+    @lpVtbl.value.get_key_statuses.call(this, keystatuses, numkeystatuses)
+  end
+  def load(this : IMFContentDecryptionModuleSession*, sessionid : LibC::LPWSTR, loaded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.load.call(this, sessionid, loaded)
+  end
+  def generate_request(this : IMFContentDecryptionModuleSession*, initdatatype : LibC::LPWSTR, initdata : UInt8*, initdatasize : UInt32) : HRESULT
+    @lpVtbl.value.generate_request.call(this, initdatatype, initdata, initdatasize)
+  end
+  def update(this : IMFContentDecryptionModuleSession*, response : UInt8*, responsesize : UInt32) : HRESULT
+    @lpVtbl.value.update.call(this, response, responsesize)
+  end
+  def close(this : IMFContentDecryptionModuleSession*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def remove(this : IMFContentDecryptionModuleSession*) : HRESULT
+    @lpVtbl.value.remove.call(this)
+  end
+end
+struct LibWin32::IMFContentDecryptionModuleSessionCallbacks
+  def query_interface(this : IMFContentDecryptionModuleSessionCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptionModuleSessionCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptionModuleSessionCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def key_message(this : IMFContentDecryptionModuleSessionCallbacks*, messagetype : MF_MEDIAKEYSESSION_MESSAGETYPE, message : UInt8*, messagesize : UInt32, destinationurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.key_message.call(this, messagetype, message, messagesize, destinationurl)
+  end
+  def key_status_changed(this : IMFContentDecryptionModuleSessionCallbacks*) : HRESULT
+    @lpVtbl.value.key_status_changed.call(this)
+  end
+end
+struct LibWin32::IMFContentDecryptionModule
+  def query_interface(this : IMFContentDecryptionModule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptionModule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptionModule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_content_enabler(this : IMFContentDecryptionModule*, contentenabler : IMFContentEnabler, result : IMFAsyncResult) : HRESULT
+    @lpVtbl.value.set_content_enabler.call(this, contentenabler, result)
+  end
+  def get_suspend_notify(this : IMFContentDecryptionModule*, notify : IMFCdmSuspendNotify*) : HRESULT
+    @lpVtbl.value.get_suspend_notify.call(this, notify)
+  end
+  def set_pmp_host_app(this : IMFContentDecryptionModule*, pmphostapp : IMFPMPHostApp) : HRESULT
+    @lpVtbl.value.set_pmp_host_app.call(this, pmphostapp)
+  end
+  def create_session(this : IMFContentDecryptionModule*, sessiontype : MF_MEDIAKEYSESSION_TYPE, callbacks : IMFContentDecryptionModuleSessionCallbacks, session : IMFContentDecryptionModuleSession*) : HRESULT
+    @lpVtbl.value.create_session.call(this, sessiontype, callbacks, session)
+  end
+  def set_server_certificate(this : IMFContentDecryptionModule*, certificate : UInt8*, certificatesize : UInt32) : HRESULT
+    @lpVtbl.value.set_server_certificate.call(this, certificate, certificatesize)
+  end
+  def create_trusted_input(this : IMFContentDecryptionModule*, contentinitdata : UInt8*, contentinitdatasize : UInt32, trustedinput : IMFTrustedInput*) : HRESULT
+    @lpVtbl.value.create_trusted_input.call(this, contentinitdata, contentinitdatasize, trustedinput)
+  end
+  def get_protection_system_ids(this : IMFContentDecryptionModule*, systemids : Guid**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_protection_system_ids.call(this, systemids, count)
+  end
+end
+struct LibWin32::IMFContentDecryptionModuleAccess
+  def query_interface(this : IMFContentDecryptionModuleAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptionModuleAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptionModuleAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_content_decryption_module(this : IMFContentDecryptionModuleAccess*, contentdecryptionmoduleproperties : IPropertyStore, contentdecryptionmodule : IMFContentDecryptionModule*) : HRESULT
+    @lpVtbl.value.create_content_decryption_module.call(this, contentdecryptionmoduleproperties, contentdecryptionmodule)
+  end
+  def get_configuration(this : IMFContentDecryptionModuleAccess*, configuration : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, configuration)
+  end
+  def get_key_system(this : IMFContentDecryptionModuleAccess*, keysystem : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_key_system.call(this, keysystem)
+  end
+end
+struct LibWin32::IMFContentDecryptionModuleFactory
+  def query_interface(this : IMFContentDecryptionModuleFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFContentDecryptionModuleFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFContentDecryptionModuleFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_type_supported(this : IMFContentDecryptionModuleFactory*, keysystem : LibC::LPWSTR, contenttype : LibC::LPWSTR) : LibC::BOOL
+    @lpVtbl.value.is_type_supported.call(this, keysystem, contenttype)
+  end
+  def create_content_decryption_module_access(this : IMFContentDecryptionModuleFactory*, keysystem : LibC::LPWSTR, configurations : IPropertyStore*, numconfigurations : UInt32, contentdecryptionmoduleaccess : IMFContentDecryptionModuleAccess*) : HRESULT
+    @lpVtbl.value.create_content_decryption_module_access.call(this, keysystem, configurations, numconfigurations, contentdecryptionmoduleaccess)
+  end
+end
+struct LibWin32::IMFCameraSyncObject
+  def query_interface(this : IMFCameraSyncObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFCameraSyncObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFCameraSyncObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def wait_on_signal(this : IMFCameraSyncObject*, timeoutinms : UInt32) : HRESULT
+    @lpVtbl.value.wait_on_signal.call(this, timeoutinms)
+  end
+  def shutdown(this : IMFCameraSyncObject*) : Void
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IMFVirtualCamera
+  def query_interface(this : IMFVirtualCamera*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFVirtualCamera*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFVirtualCamera*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IMFVirtualCamera*, guidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, guidkey, pvalue)
+  end
+  def get_item_type(this : IMFVirtualCamera*, guidkey : Guid*, ptype : MF_ATTRIBUTE_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, guidkey, ptype)
+  end
+  def compare_item(this : IMFVirtualCamera*, guidkey : Guid*, value : PROPVARIANT*, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_item.call(this, guidkey, value, pbresult)
+  end
+  def compare(this : IMFVirtualCamera*, ptheirs : IMFAttributes, matchtype : MF_ATTRIBUTES_MATCH_TYPE, pbresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, ptheirs, matchtype, pbresult)
+  end
+  def get_uint32(this : IMFVirtualCamera*, guidkey : Guid*, punvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_uint32.call(this, guidkey, punvalue)
+  end
+  def get_uint64(this : IMFVirtualCamera*, guidkey : Guid*, punvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_uint64.call(this, guidkey, punvalue)
+  end
+  def get_double(this : IMFVirtualCamera*, guidkey : Guid*, pfvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_double.call(this, guidkey, pfvalue)
+  end
+  def get_guid(this : IMFVirtualCamera*, guidkey : Guid*, pguidvalue : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidkey, pguidvalue)
+  end
+  def get_string_length(this : IMFVirtualCamera*, guidkey : Guid*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, guidkey, pcchlength)
+  end
+  def get_string(this : IMFVirtualCamera*, guidkey : Guid*, pwszvalue : Char*, cchbufsize : UInt32, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_string.call(this, guidkey, pwszvalue, cchbufsize, pcchlength)
+  end
+  def get_allocated_string(this : IMFVirtualCamera*, guidkey : Guid*, ppwszvalue : LibC::LPWSTR*, pcchlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_string.call(this, guidkey, ppwszvalue, pcchlength)
+  end
+  def get_blob_size(this : IMFVirtualCamera*, guidkey : Guid*, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob_size.call(this, guidkey, pcbblobsize)
+  end
+  def get_blob(this : IMFVirtualCamera*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32, pcbblobsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_blob.call(this, guidkey, pbuf, cbbufsize, pcbblobsize)
+  end
+  def get_allocated_blob(this : IMFVirtualCamera*, guidkey : Guid*, ppbuf : UInt8**, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_allocated_blob.call(this, guidkey, ppbuf, pcbsize)
+  end
+  def get_unknown(this : IMFVirtualCamera*, guidkey : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_unknown.call(this, guidkey, riid, ppv)
+  end
+  def set_item(this : IMFVirtualCamera*, guidkey : Guid*, value : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_item.call(this, guidkey, value)
+  end
+  def delete_item(this : IMFVirtualCamera*, guidkey : Guid*) : HRESULT
+    @lpVtbl.value.delete_item.call(this, guidkey)
+  end
+  def delete_all_items(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.delete_all_items.call(this)
+  end
+  def set_uint32(this : IMFVirtualCamera*, guidkey : Guid*, unvalue : UInt32) : HRESULT
+    @lpVtbl.value.set_uint32.call(this, guidkey, unvalue)
+  end
+  def set_uint64(this : IMFVirtualCamera*, guidkey : Guid*, unvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_uint64.call(this, guidkey, unvalue)
+  end
+  def set_double(this : IMFVirtualCamera*, guidkey : Guid*, fvalue : Float64) : HRESULT
+    @lpVtbl.value.set_double.call(this, guidkey, fvalue)
+  end
+  def set_guid(this : IMFVirtualCamera*, guidkey : Guid*, guidvalue : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guidkey, guidvalue)
+  end
+  def set_string(this : IMFVirtualCamera*, guidkey : Guid*, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_string.call(this, guidkey, wszvalue)
+  end
+  def set_blob(this : IMFVirtualCamera*, guidkey : Guid*, pbuf : UInt8*, cbbufsize : UInt32) : HRESULT
+    @lpVtbl.value.set_blob.call(this, guidkey, pbuf, cbbufsize)
+  end
+  def set_unknown(this : IMFVirtualCamera*, guidkey : Guid*, punknown : IUnknown) : HRESULT
+    @lpVtbl.value.set_unknown.call(this, guidkey, punknown)
+  end
+  def lock_store(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.lock_store.call(this)
+  end
+  def unlock_store(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.unlock_store.call(this)
+  end
+  def get_count(this : IMFVirtualCamera*, pcitems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcitems)
+  end
+  def get_item_by_index(this : IMFVirtualCamera*, unindex : UInt32, pguidkey : Guid*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_item_by_index.call(this, unindex, pguidkey, pvalue)
+  end
+  def copy_all_items(this : IMFVirtualCamera*, pdest : IMFAttributes) : HRESULT
+    @lpVtbl.value.copy_all_items.call(this, pdest)
+  end
+  def add_device_source_info(this : IMFVirtualCamera*, devicesourceinfo : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_device_source_info.call(this, devicesourceinfo)
+  end
+  def add_property(this : IMFVirtualCamera*, pkey : DEVPROPKEY*, type : UInt32, pbdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.add_property.call(this, pkey, type, pbdata, cbdata)
+  end
+  def add_registry_entry(this : IMFVirtualCamera*, entryname : LibC::LPWSTR, subkeypath : LibC::LPWSTR, dwregtype : UInt32, pbdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.add_registry_entry.call(this, entryname, subkeypath, dwregtype, pbdata, cbdata)
+  end
+  def start(this : IMFVirtualCamera*, pcallback : IMFAsyncCallback) : HRESULT
+    @lpVtbl.value.start.call(this, pcallback)
+  end
+  def stop(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def remove(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.remove.call(this)
+  end
+  def get_media_source(this : IMFVirtualCamera*, ppmediasource : IMFMediaSource*) : HRESULT
+    @lpVtbl.value.get_media_source.call(this, ppmediasource)
+  end
+  def send_camera_property(this : IMFVirtualCamera*, propertyset : Guid*, propertyid : UInt32, propertyflags : UInt32, propertypayload : Void*, propertypayloadlength : UInt32, data : Void*, datalength : UInt32, datawritten : UInt32*) : HRESULT
+    @lpVtbl.value.send_camera_property.call(this, propertyset, propertyid, propertyflags, propertypayload, propertypayloadlength, data, datalength, datawritten)
+  end
+  def create_sync_event(this : IMFVirtualCamera*, kseventset : Guid*, kseventid : UInt32, kseventflags : UInt32, eventhandle : LibC::HANDLE, camerasyncobject : IMFCameraSyncObject*) : HRESULT
+    @lpVtbl.value.create_sync_event.call(this, kseventset, kseventid, kseventflags, eventhandle, camerasyncobject)
+  end
+  def create_sync_semaphore(this : IMFVirtualCamera*, kseventset : Guid*, kseventid : UInt32, kseventflags : UInt32, semaphorehandle : LibC::HANDLE, semaphoreadjustment : Int32, camerasyncobject : IMFCameraSyncObject*) : HRESULT
+    @lpVtbl.value.create_sync_semaphore.call(this, kseventset, kseventid, kseventflags, semaphorehandle, semaphoreadjustment, camerasyncobject)
+  end
+  def shutdown(this : IMFVirtualCamera*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
 end

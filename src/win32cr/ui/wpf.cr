@@ -372,3 +372,469 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IMILBitmapEffectConnectorInfo
+  def query_interface(this : IMILBitmapEffectConnectorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectConnectorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectConnectorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMILBitmapEffectConnectorInfo*, puiindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, puiindex)
+  end
+  def get_optimal_format(this : IMILBitmapEffectConnectorInfo*, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_optimal_format.call(this, pformat)
+  end
+  def get_number_formats(this : IMILBitmapEffectConnectorInfo*, pulnumberformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_formats.call(this, pulnumberformats)
+  end
+  def get_format(this : IMILBitmapEffectConnectorInfo*, ulindex : UInt32, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_format.call(this, ulindex, pformat)
+  end
+end
+struct LibWin32::IMILBitmapEffectConnectionsInfo
+  def query_interface(this : IMILBitmapEffectConnectionsInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectConnectionsInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectConnectionsInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_inputs(this : IMILBitmapEffectConnectionsInfo*, puinuminputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_inputs.call(this, puinuminputs)
+  end
+  def get_number_outputs(this : IMILBitmapEffectConnectionsInfo*, puinumoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_outputs.call(this, puinumoutputs)
+  end
+  def get_input_connector_info(this : IMILBitmapEffectConnectionsInfo*, uiindex : UInt32, ppconnectorinfo : IMILBitmapEffectConnectorInfo*) : HRESULT
+    @lpVtbl.value.get_input_connector_info.call(this, uiindex, ppconnectorinfo)
+  end
+  def get_output_connector_info(this : IMILBitmapEffectConnectionsInfo*, uiindex : UInt32, ppconnectorinfo : IMILBitmapEffectConnectorInfo*) : HRESULT
+    @lpVtbl.value.get_output_connector_info.call(this, uiindex, ppconnectorinfo)
+  end
+end
+struct LibWin32::IMILBitmapEffectConnections
+  def query_interface(this : IMILBitmapEffectConnections*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectConnections*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectConnections*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_connector(this : IMILBitmapEffectConnections*, uiindex : UInt32, ppconnector : IMILBitmapEffectInputConnector*) : HRESULT
+    @lpVtbl.value.get_input_connector.call(this, uiindex, ppconnector)
+  end
+  def get_output_connector(this : IMILBitmapEffectConnections*, uiindex : UInt32, ppconnector : IMILBitmapEffectOutputConnector*) : HRESULT
+    @lpVtbl.value.get_output_connector.call(this, uiindex, ppconnector)
+  end
+end
+struct LibWin32::IMILBitmapEffect
+  def query_interface(this : IMILBitmapEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output(this : IMILBitmapEffect*, uiindex : UInt32, pcontext : IMILBitmapEffectRenderContext, ppbitmapsource : IWICBitmapSource*) : HRESULT
+    @lpVtbl.value.get_output.call(this, uiindex, pcontext, ppbitmapsource)
+  end
+  def get_parent_effect(this : IMILBitmapEffect*, ppparenteffect : IMILBitmapEffectGroup*) : HRESULT
+    @lpVtbl.value.get_parent_effect.call(this, ppparenteffect)
+  end
+  def set_input_source(this : IMILBitmapEffect*, uiindex : UInt32, pbitmapsource : IWICBitmapSource) : HRESULT
+    @lpVtbl.value.set_input_source.call(this, uiindex, pbitmapsource)
+  end
+end
+struct LibWin32::IMILBitmapEffectImpl
+  def query_interface(this : IMILBitmapEffectImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_in_place_modification_allowed(this : IMILBitmapEffectImpl*, poutputconnector : IMILBitmapEffectOutputConnector, pfmodifyinplace : Int16*) : HRESULT
+    @lpVtbl.value.is_in_place_modification_allowed.call(this, poutputconnector, pfmodifyinplace)
+  end
+  def set_parent_effect(this : IMILBitmapEffectImpl*, pparenteffect : IMILBitmapEffectGroup) : HRESULT
+    @lpVtbl.value.set_parent_effect.call(this, pparenteffect)
+  end
+  def get_input_source(this : IMILBitmapEffectImpl*, uiindex : UInt32, ppbitmapsource : IWICBitmapSource*) : HRESULT
+    @lpVtbl.value.get_input_source.call(this, uiindex, ppbitmapsource)
+  end
+  def get_input_source_bounds(this : IMILBitmapEffectImpl*, uiindex : UInt32, prect : MilRectD*) : HRESULT
+    @lpVtbl.value.get_input_source_bounds.call(this, uiindex, prect)
+  end
+  def get_input_bitmap_source(this : IMILBitmapEffectImpl*, uiindex : UInt32, prendercontext : IMILBitmapEffectRenderContext, pfmodifyinplace : Int16*, ppbitmapsource : IWICBitmapSource*) : HRESULT
+    @lpVtbl.value.get_input_bitmap_source.call(this, uiindex, prendercontext, pfmodifyinplace, ppbitmapsource)
+  end
+  def get_output_bitmap_source(this : IMILBitmapEffectImpl*, uiindex : UInt32, prendercontext : IMILBitmapEffectRenderContext, pfmodifyinplace : Int16*, ppbitmapsource : IWICBitmapSource*) : HRESULT
+    @lpVtbl.value.get_output_bitmap_source.call(this, uiindex, prendercontext, pfmodifyinplace, ppbitmapsource)
+  end
+  def initialize(this : IMILBitmapEffectImpl*, pinner : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.call(this, pinner)
+  end
+end
+struct LibWin32::IMILBitmapEffectGroup
+  def query_interface(this : IMILBitmapEffectGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interior_input_connector(this : IMILBitmapEffectGroup*, uiindex : UInt32, ppconnector : IMILBitmapEffectOutputConnector*) : HRESULT
+    @lpVtbl.value.get_interior_input_connector.call(this, uiindex, ppconnector)
+  end
+  def get_interior_output_connector(this : IMILBitmapEffectGroup*, uiindex : UInt32, ppconnector : IMILBitmapEffectInputConnector*) : HRESULT
+    @lpVtbl.value.get_interior_output_connector.call(this, uiindex, ppconnector)
+  end
+  def add(this : IMILBitmapEffectGroup*, peffect : IMILBitmapEffect) : HRESULT
+    @lpVtbl.value.add.call(this, peffect)
+  end
+end
+struct LibWin32::IMILBitmapEffectGroupImpl
+  def query_interface(this : IMILBitmapEffectGroupImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectGroupImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectGroupImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def preprocess(this : IMILBitmapEffectGroupImpl*, pcontext : IMILBitmapEffectRenderContext) : HRESULT
+    @lpVtbl.value.preprocess.call(this, pcontext)
+  end
+  def get_number_children(this : IMILBitmapEffectGroupImpl*, puinumberchildren : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_children.call(this, puinumberchildren)
+  end
+  def get_children(this : IMILBitmapEffectGroupImpl*, pchildren : IMILBitmapEffects*) : HRESULT
+    @lpVtbl.value.get_children.call(this, pchildren)
+  end
+end
+struct LibWin32::IMILBitmapEffectRenderContext
+  def query_interface(this : IMILBitmapEffectRenderContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectRenderContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectRenderContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_output_pixel_format(this : IMILBitmapEffectRenderContext*, format : Guid*) : HRESULT
+    @lpVtbl.value.set_output_pixel_format.call(this, format)
+  end
+  def get_output_pixel_format(this : IMILBitmapEffectRenderContext*, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_output_pixel_format.call(this, pformat)
+  end
+  def set_use_software_renderer(this : IMILBitmapEffectRenderContext*, fsoftware : Int16) : HRESULT
+    @lpVtbl.value.set_use_software_renderer.call(this, fsoftware)
+  end
+  def set_initial_transform(this : IMILBitmapEffectRenderContext*, pmatrix : MILMatrixF*) : HRESULT
+    @lpVtbl.value.set_initial_transform.call(this, pmatrix)
+  end
+  def get_final_transform(this : IMILBitmapEffectRenderContext*, pmatrix : MILMatrixF*) : HRESULT
+    @lpVtbl.value.get_final_transform.call(this, pmatrix)
+  end
+  def set_output_dpi(this : IMILBitmapEffectRenderContext*, dbldpix : Float64, dbldpiy : Float64) : HRESULT
+    @lpVtbl.value.set_output_dpi.call(this, dbldpix, dbldpiy)
+  end
+  def get_output_dpi(this : IMILBitmapEffectRenderContext*, pdbldpix : Float64*, pdbldpiy : Float64*) : HRESULT
+    @lpVtbl.value.get_output_dpi.call(this, pdbldpix, pdbldpiy)
+  end
+  def set_region_of_interest(this : IMILBitmapEffectRenderContext*, prect : MilRectD*) : HRESULT
+    @lpVtbl.value.set_region_of_interest.call(this, prect)
+  end
+end
+struct LibWin32::IMILBitmapEffectRenderContextImpl
+  def query_interface(this : IMILBitmapEffectRenderContextImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectRenderContextImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectRenderContextImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_use_software_renderer(this : IMILBitmapEffectRenderContextImpl*, pfsoftware : Int16*) : HRESULT
+    @lpVtbl.value.get_use_software_renderer.call(this, pfsoftware)
+  end
+  def get_transform(this : IMILBitmapEffectRenderContextImpl*, pmatrix : MILMatrixF*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, pmatrix)
+  end
+  def update_transform(this : IMILBitmapEffectRenderContextImpl*, pmatrix : MILMatrixF*) : HRESULT
+    @lpVtbl.value.update_transform.call(this, pmatrix)
+  end
+  def get_output_bounds(this : IMILBitmapEffectRenderContextImpl*, prect : MilRectD*) : HRESULT
+    @lpVtbl.value.get_output_bounds.call(this, prect)
+  end
+  def update_output_bounds(this : IMILBitmapEffectRenderContextImpl*, prect : MilRectD*) : HRESULT
+    @lpVtbl.value.update_output_bounds.call(this, prect)
+  end
+end
+struct LibWin32::IMILBitmapEffectFactory
+  def query_interface(this : IMILBitmapEffectFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_effect(this : IMILBitmapEffectFactory*, pguideffect : Guid*, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, pguideffect, ppeffect)
+  end
+  def create_context(this : IMILBitmapEffectFactory*, ppcontext : IMILBitmapEffectRenderContext*) : HRESULT
+    @lpVtbl.value.create_context.call(this, ppcontext)
+  end
+  def create_effect_outer(this : IMILBitmapEffectFactory*, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.create_effect_outer.call(this, ppeffect)
+  end
+end
+struct LibWin32::IMILBitmapEffectPrimitive
+  def query_interface(this : IMILBitmapEffectPrimitive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectPrimitive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectPrimitive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, pcontext : IMILBitmapEffectRenderContext, pfmodifyinplace : Int16*, ppbitmapsource : IWICBitmapSource*) : HRESULT
+    @lpVtbl.value.get_output.call(this, uiindex, pcontext, pfmodifyinplace, ppbitmapsource)
+  end
+  def transform_point(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, p : MilPoint2D*, fforwardtransform : Int16, pcontext : IMILBitmapEffectRenderContext, pfpointtransformed : Int16*) : HRESULT
+    @lpVtbl.value.transform_point.call(this, uiindex, p, fforwardtransform, pcontext, pfpointtransformed)
+  end
+  def transform_rect(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, p : MilRectD*, fforwardtransform : Int16, pcontext : IMILBitmapEffectRenderContext) : HRESULT
+    @lpVtbl.value.transform_rect.call(this, uiindex, p, fforwardtransform, pcontext)
+  end
+  def has_affine_transform(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, pfaffine : Int16*) : HRESULT
+    @lpVtbl.value.has_affine_transform.call(this, uiindex, pfaffine)
+  end
+  def has_inverse_transform(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, pfhasinverse : Int16*) : HRESULT
+    @lpVtbl.value.has_inverse_transform.call(this, uiindex, pfhasinverse)
+  end
+  def get_affine_matrix(this : IMILBitmapEffectPrimitive*, uiindex : UInt32, pmatrix : MilMatrix3x2D*) : HRESULT
+    @lpVtbl.value.get_affine_matrix.call(this, uiindex, pmatrix)
+  end
+end
+struct LibWin32::IMILBitmapEffectPrimitiveImpl
+  def query_interface(this : IMILBitmapEffectPrimitiveImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectPrimitiveImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectPrimitiveImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_dirty(this : IMILBitmapEffectPrimitiveImpl*, uioutputindex : UInt32, pfdirty : Int16*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this, uioutputindex, pfdirty)
+  end
+  def is_volatile(this : IMILBitmapEffectPrimitiveImpl*, uioutputindex : UInt32, pfvolatile : Int16*) : HRESULT
+    @lpVtbl.value.is_volatile.call(this, uioutputindex, pfvolatile)
+  end
+end
+struct LibWin32::IMILBitmapEffects
+  def query_interface(this : IMILBitmapEffects*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffects*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffects*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def _new_enum(this : IMILBitmapEffects*, ppiureturn : IUnknown*) : HRESULT
+    @lpVtbl.value._new_enum.call(this, ppiureturn)
+  end
+  def get_parent(this : IMILBitmapEffects*, ppeffect : IMILBitmapEffectGroup*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppeffect)
+  end
+  def item(this : IMILBitmapEffects*, uindex : UInt32, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.item.call(this, uindex, ppeffect)
+  end
+  def get_count(this : IMILBitmapEffects*, puicount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, puicount)
+  end
+end
+struct LibWin32::IMILBitmapEffectConnector
+  def query_interface(this : IMILBitmapEffectConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMILBitmapEffectConnector*, puiindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, puiindex)
+  end
+  def get_optimal_format(this : IMILBitmapEffectConnector*, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_optimal_format.call(this, pformat)
+  end
+  def get_number_formats(this : IMILBitmapEffectConnector*, pulnumberformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_formats.call(this, pulnumberformats)
+  end
+  def get_format(this : IMILBitmapEffectConnector*, ulindex : UInt32, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_format.call(this, ulindex, pformat)
+  end
+  def is_connected(this : IMILBitmapEffectConnector*, pfconnected : Int16*) : HRESULT
+    @lpVtbl.value.is_connected.call(this, pfconnected)
+  end
+  def get_bitmap_effect(this : IMILBitmapEffectConnector*, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.get_bitmap_effect.call(this, ppeffect)
+  end
+end
+struct LibWin32::IMILBitmapEffectInputConnector
+  def query_interface(this : IMILBitmapEffectInputConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectInputConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectInputConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMILBitmapEffectInputConnector*, puiindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, puiindex)
+  end
+  def get_optimal_format(this : IMILBitmapEffectInputConnector*, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_optimal_format.call(this, pformat)
+  end
+  def get_number_formats(this : IMILBitmapEffectInputConnector*, pulnumberformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_formats.call(this, pulnumberformats)
+  end
+  def get_format(this : IMILBitmapEffectInputConnector*, ulindex : UInt32, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_format.call(this, ulindex, pformat)
+  end
+  def is_connected(this : IMILBitmapEffectInputConnector*, pfconnected : Int16*) : HRESULT
+    @lpVtbl.value.is_connected.call(this, pfconnected)
+  end
+  def get_bitmap_effect(this : IMILBitmapEffectInputConnector*, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.get_bitmap_effect.call(this, ppeffect)
+  end
+  def connect_to(this : IMILBitmapEffectInputConnector*, pconnector : IMILBitmapEffectOutputConnector) : HRESULT
+    @lpVtbl.value.connect_to.call(this, pconnector)
+  end
+  def get_connection(this : IMILBitmapEffectInputConnector*, ppconnector : IMILBitmapEffectOutputConnector*) : HRESULT
+    @lpVtbl.value.get_connection.call(this, ppconnector)
+  end
+end
+struct LibWin32::IMILBitmapEffectOutputConnector
+  def query_interface(this : IMILBitmapEffectOutputConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectOutputConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectOutputConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_index(this : IMILBitmapEffectOutputConnector*, puiindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, puiindex)
+  end
+  def get_optimal_format(this : IMILBitmapEffectOutputConnector*, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_optimal_format.call(this, pformat)
+  end
+  def get_number_formats(this : IMILBitmapEffectOutputConnector*, pulnumberformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_formats.call(this, pulnumberformats)
+  end
+  def get_format(this : IMILBitmapEffectOutputConnector*, ulindex : UInt32, pformat : Guid*) : HRESULT
+    @lpVtbl.value.get_format.call(this, ulindex, pformat)
+  end
+  def is_connected(this : IMILBitmapEffectOutputConnector*, pfconnected : Int16*) : HRESULT
+    @lpVtbl.value.is_connected.call(this, pfconnected)
+  end
+  def get_bitmap_effect(this : IMILBitmapEffectOutputConnector*, ppeffect : IMILBitmapEffect*) : HRESULT
+    @lpVtbl.value.get_bitmap_effect.call(this, ppeffect)
+  end
+  def get_number_connections(this : IMILBitmapEffectOutputConnector*, puinumberconnections : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_connections.call(this, puinumberconnections)
+  end
+  def get_connection(this : IMILBitmapEffectOutputConnector*, uiindex : UInt32, ppconnection : IMILBitmapEffectInputConnector*) : HRESULT
+    @lpVtbl.value.get_connection.call(this, uiindex, ppconnection)
+  end
+end
+struct LibWin32::IMILBitmapEffectOutputConnectorImpl
+  def query_interface(this : IMILBitmapEffectOutputConnectorImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectOutputConnectorImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectOutputConnectorImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_back_link(this : IMILBitmapEffectOutputConnectorImpl*, pconnection : IMILBitmapEffectInputConnector) : HRESULT
+    @lpVtbl.value.add_back_link.call(this, pconnection)
+  end
+  def remove_back_link(this : IMILBitmapEffectOutputConnectorImpl*, pconnection : IMILBitmapEffectInputConnector) : HRESULT
+    @lpVtbl.value.remove_back_link.call(this, pconnection)
+  end
+end
+struct LibWin32::IMILBitmapEffectInteriorInputConnector
+  def query_interface(this : IMILBitmapEffectInteriorInputConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectInteriorInputConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectInteriorInputConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_connector(this : IMILBitmapEffectInteriorInputConnector*, pinputconnector : IMILBitmapEffectInputConnector*) : HRESULT
+    @lpVtbl.value.get_input_connector.call(this, pinputconnector)
+  end
+end
+struct LibWin32::IMILBitmapEffectInteriorOutputConnector
+  def query_interface(this : IMILBitmapEffectInteriorOutputConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectInteriorOutputConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectInteriorOutputConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_connector(this : IMILBitmapEffectInteriorOutputConnector*, poutputconnector : IMILBitmapEffectOutputConnector*) : HRESULT
+    @lpVtbl.value.get_output_connector.call(this, poutputconnector)
+  end
+end
+struct LibWin32::IMILBitmapEffectEvents
+  def query_interface(this : IMILBitmapEffectEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMILBitmapEffectEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMILBitmapEffectEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def property_change(this : IMILBitmapEffectEvents*, peffect : IMILBitmapEffect, bstrpropertyname : UInt8*) : HRESULT
+    @lpVtbl.value.property_change.call(this, peffect, bstrpropertyname)
+  end
+  def dirty_region(this : IMILBitmapEffectEvents*, peffect : IMILBitmapEffect, prect : MilRectD*) : HRESULT
+    @lpVtbl.value.dirty_region.call(this, peffect, prect)
+  end
+end

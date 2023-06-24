@@ -491,3 +491,576 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IDirectManipulationManager
+  def query_interface(this : IDirectManipulationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : IDirectManipulationManager*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
+  end
+  def deactivate(this : IDirectManipulationManager*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
+  end
+  def register_hit_test_target(this : IDirectManipulationManager*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
+  end
+  def process_input(this : IDirectManipulationManager*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
+  end
+  def get_update_manager(this : IDirectManipulationManager*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
+  end
+  def create_viewport(this : IDirectManipulationManager*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
+  end
+  def create_content(this : IDirectManipulationManager*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
+  end
+end
+struct LibWin32::IDirectManipulationManager2
+  def query_interface(this : IDirectManipulationManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : IDirectManipulationManager2*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
+  end
+  def deactivate(this : IDirectManipulationManager2*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
+  end
+  def register_hit_test_target(this : IDirectManipulationManager2*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
+  end
+  def process_input(this : IDirectManipulationManager2*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
+  end
+  def get_update_manager(this : IDirectManipulationManager2*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
+  end
+  def create_viewport(this : IDirectManipulationManager2*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
+  end
+  def create_content(this : IDirectManipulationManager2*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
+  end
+  def create_behavior(this : IDirectManipulationManager2*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_behavior.call(this, clsid, riid, object)
+  end
+end
+struct LibWin32::IDirectManipulationManager3
+  def query_interface(this : IDirectManipulationManager3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationManager3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationManager3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : IDirectManipulationManager3*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.activate.call(this, window)
+  end
+  def deactivate(this : IDirectManipulationManager3*, window : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.deactivate.call(this, window)
+  end
+  def register_hit_test_target(this : IDirectManipulationManager3*, window : LibC::HANDLE, hittestwindow : LibC::HANDLE, type : DIRECTMANIPULATION_HITTEST_TYPE) : HRESULT
+    @lpVtbl.value.register_hit_test_target.call(this, window, hittestwindow, type)
+  end
+  def process_input(this : IDirectManipulationManager3*, message : MSG*, handled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_input.call(this, message, handled)
+  end
+  def get_update_manager(this : IDirectManipulationManager3*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_update_manager.call(this, riid, object)
+  end
+  def create_viewport(this : IDirectManipulationManager3*, frameinfo : IDirectManipulationFrameInfoProvider, window : LibC::HANDLE, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_viewport.call(this, frameinfo, window, riid, object)
+  end
+  def create_content(this : IDirectManipulationManager3*, frameinfo : IDirectManipulationFrameInfoProvider, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_content.call(this, frameinfo, clsid, riid, object)
+  end
+  def create_behavior(this : IDirectManipulationManager3*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.create_behavior.call(this, clsid, riid, object)
+  end
+  def get_service(this : IDirectManipulationManager3*, clsid : Guid*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_service.call(this, clsid, riid, object)
+  end
+end
+struct LibWin32::IDirectManipulationViewport
+  def query_interface(this : IDirectManipulationViewport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationViewport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationViewport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+  def set_contact(this : IDirectManipulationViewport*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.set_contact.call(this, pointerid)
+  end
+  def release_contact(this : IDirectManipulationViewport*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.release_contact.call(this, pointerid)
+  end
+  def release_all_contacts(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.release_all_contacts.call(this)
+  end
+  def get_status(this : IDirectManipulationViewport*, status : DIRECTMANIPULATION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_tag(this : IDirectManipulationViewport*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
+  end
+  def set_tag(this : IDirectManipulationViewport*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_viewport_rect(this : IDirectManipulationViewport*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.get_viewport_rect.call(this, viewport)
+  end
+  def set_viewport_rect(this : IDirectManipulationViewport*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.set_viewport_rect.call(this, viewport)
+  end
+  def zoom_to_rect(this : IDirectManipulationViewport*, left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.zoom_to_rect.call(this, left, top, right, bottom, animate)
+  end
+  def set_viewport_transform(this : IDirectManipulationViewport*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_viewport_transform.call(this, matrix, pointcount)
+  end
+  def sync_display_transform(this : IDirectManipulationViewport*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_display_transform.call(this, matrix, pointcount)
+  end
+  def get_primary_content(this : IDirectManipulationViewport*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_primary_content.call(this, riid, object)
+  end
+  def add_content(this : IDirectManipulationViewport*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.add_content.call(this, content)
+  end
+  def remove_content(this : IDirectManipulationViewport*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
+  end
+  def set_viewport_options(this : IDirectManipulationViewport*, options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
+    @lpVtbl.value.set_viewport_options.call(this, options)
+  end
+  def add_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.add_configuration.call(this, configuration)
+  end
+  def remove_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.remove_configuration.call(this, configuration)
+  end
+  def activate_configuration(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.activate_configuration.call(this, configuration)
+  end
+  def set_manual_gesture(this : IDirectManipulationViewport*, configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_manual_gesture.call(this, configuration)
+  end
+  def set_chaining(this : IDirectManipulationViewport*, enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
+    @lpVtbl.value.set_chaining.call(this, enabledtypes)
+  end
+  def add_event_handler(this : IDirectManipulationViewport*, window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_event_handler.call(this, window, eventhandler, cookie)
+  end
+  def remove_event_handler(this : IDirectManipulationViewport*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_event_handler.call(this, cookie)
+  end
+  def set_input_mode(this : IDirectManipulationViewport*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_input_mode.call(this, mode)
+  end
+  def set_update_mode(this : IDirectManipulationViewport*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_update_mode.call(this, mode)
+  end
+  def stop(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def abandon(this : IDirectManipulationViewport*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
+  end
+end
+struct LibWin32::IDirectManipulationViewport2
+  def query_interface(this : IDirectManipulationViewport2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationViewport2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationViewport2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+  def set_contact(this : IDirectManipulationViewport2*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.set_contact.call(this, pointerid)
+  end
+  def release_contact(this : IDirectManipulationViewport2*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.release_contact.call(this, pointerid)
+  end
+  def release_all_contacts(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.release_all_contacts.call(this)
+  end
+  def get_status(this : IDirectManipulationViewport2*, status : DIRECTMANIPULATION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_tag(this : IDirectManipulationViewport2*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
+  end
+  def set_tag(this : IDirectManipulationViewport2*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_viewport_rect(this : IDirectManipulationViewport2*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.get_viewport_rect.call(this, viewport)
+  end
+  def set_viewport_rect(this : IDirectManipulationViewport2*, viewport : RECT*) : HRESULT
+    @lpVtbl.value.set_viewport_rect.call(this, viewport)
+  end
+  def zoom_to_rect(this : IDirectManipulationViewport2*, left : Float32, top : Float32, right : Float32, bottom : Float32, animate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.zoom_to_rect.call(this, left, top, right, bottom, animate)
+  end
+  def set_viewport_transform(this : IDirectManipulationViewport2*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_viewport_transform.call(this, matrix, pointcount)
+  end
+  def sync_display_transform(this : IDirectManipulationViewport2*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_display_transform.call(this, matrix, pointcount)
+  end
+  def get_primary_content(this : IDirectManipulationViewport2*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_primary_content.call(this, riid, object)
+  end
+  def add_content(this : IDirectManipulationViewport2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.add_content.call(this, content)
+  end
+  def remove_content(this : IDirectManipulationViewport2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
+  end
+  def set_viewport_options(this : IDirectManipulationViewport2*, options : DIRECTMANIPULATION_VIEWPORT_OPTIONS) : HRESULT
+    @lpVtbl.value.set_viewport_options.call(this, options)
+  end
+  def add_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.add_configuration.call(this, configuration)
+  end
+  def remove_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.remove_configuration.call(this, configuration)
+  end
+  def activate_configuration(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_CONFIGURATION) : HRESULT
+    @lpVtbl.value.activate_configuration.call(this, configuration)
+  end
+  def set_manual_gesture(this : IDirectManipulationViewport2*, configuration : DIRECTMANIPULATION_GESTURE_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_manual_gesture.call(this, configuration)
+  end
+  def set_chaining(this : IDirectManipulationViewport2*, enabledtypes : DIRECTMANIPULATION_MOTION_TYPES) : HRESULT
+    @lpVtbl.value.set_chaining.call(this, enabledtypes)
+  end
+  def add_event_handler(this : IDirectManipulationViewport2*, window : LibC::HANDLE, eventhandler : IDirectManipulationViewportEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_event_handler.call(this, window, eventhandler, cookie)
+  end
+  def remove_event_handler(this : IDirectManipulationViewport2*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_event_handler.call(this, cookie)
+  end
+  def set_input_mode(this : IDirectManipulationViewport2*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_input_mode.call(this, mode)
+  end
+  def set_update_mode(this : IDirectManipulationViewport2*, mode : DIRECTMANIPULATION_INPUT_MODE) : HRESULT
+    @lpVtbl.value.set_update_mode.call(this, mode)
+  end
+  def stop(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def abandon(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
+  end
+  def add_behavior(this : IDirectManipulationViewport2*, behavior : IUnknown, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_behavior.call(this, behavior, cookie)
+  end
+  def remove_behavior(this : IDirectManipulationViewport2*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_behavior.call(this, cookie)
+  end
+  def remove_all_behaviors(this : IDirectManipulationViewport2*) : HRESULT
+    @lpVtbl.value.remove_all_behaviors.call(this)
+  end
+end
+struct LibWin32::IDirectManipulationViewportEventHandler
+  def query_interface(this : IDirectManipulationViewportEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationViewportEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationViewportEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_viewport_status_changed(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport, current : DIRECTMANIPULATION_STATUS, previous : DIRECTMANIPULATION_STATUS) : HRESULT
+    @lpVtbl.value.on_viewport_status_changed.call(this, viewport, current, previous)
+  end
+  def on_viewport_updated(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport) : HRESULT
+    @lpVtbl.value.on_viewport_updated.call(this, viewport)
+  end
+  def on_content_updated(this : IDirectManipulationViewportEventHandler*, viewport : IDirectManipulationViewport, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.on_content_updated.call(this, viewport, content)
+  end
+end
+struct LibWin32::IDirectManipulationContent
+  def query_interface(this : IDirectManipulationContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_content_rect(this : IDirectManipulationContent*, contentsize : RECT*) : HRESULT
+    @lpVtbl.value.get_content_rect.call(this, contentsize)
+  end
+  def set_content_rect(this : IDirectManipulationContent*, contentsize : RECT*) : HRESULT
+    @lpVtbl.value.set_content_rect.call(this, contentsize)
+  end
+  def get_viewport(this : IDirectManipulationContent*, riid : Guid*, object : Void**) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, riid, object)
+  end
+  def get_tag(this : IDirectManipulationContent*, riid : Guid*, object : Void**, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, riid, object, id)
+  end
+  def set_tag(this : IDirectManipulationContent*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_output_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_output_transform.call(this, matrix, pointcount)
+  end
+  def get_content_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_content_transform.call(this, matrix, pointcount)
+  end
+  def sync_content_transform(this : IDirectManipulationContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.sync_content_transform.call(this, matrix, pointcount)
+  end
+end
+struct LibWin32::IDirectManipulationPrimaryContent
+  def query_interface(this : IDirectManipulationPrimaryContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationPrimaryContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationPrimaryContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_snap_interval(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, interval : Float32, offset : Float32) : HRESULT
+    @lpVtbl.value.set_snap_interval.call(this, motion, interval, offset)
+  end
+  def set_snap_points(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, points : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.set_snap_points.call(this, motion, points, pointcount)
+  end
+  def set_snap_type(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, type : DIRECTMANIPULATION_SNAPPOINT_TYPE) : HRESULT
+    @lpVtbl.value.set_snap_type.call(this, motion, type)
+  end
+  def set_snap_coordinate(this : IDirectManipulationPrimaryContent*, motion : DIRECTMANIPULATION_MOTION_TYPES, coordinate : DIRECTMANIPULATION_SNAPPOINT_COORDINATE, origin : Float32) : HRESULT
+    @lpVtbl.value.set_snap_coordinate.call(this, motion, coordinate, origin)
+  end
+  def set_zoom_boundaries(this : IDirectManipulationPrimaryContent*, zoomminimum : Float32, zoommaximum : Float32) : HRESULT
+    @lpVtbl.value.set_zoom_boundaries.call(this, zoomminimum, zoommaximum)
+  end
+  def set_horizontal_alignment(this : IDirectManipulationPrimaryContent*, alignment : DIRECTMANIPULATION_HORIZONTALALIGNMENT) : HRESULT
+    @lpVtbl.value.set_horizontal_alignment.call(this, alignment)
+  end
+  def set_vertical_alignment(this : IDirectManipulationPrimaryContent*, alignment : DIRECTMANIPULATION_VERTICALALIGNMENT) : HRESULT
+    @lpVtbl.value.set_vertical_alignment.call(this, alignment)
+  end
+  def get_inertia_end_transform(this : IDirectManipulationPrimaryContent*, matrix : Float32*, pointcount : UInt32) : HRESULT
+    @lpVtbl.value.get_inertia_end_transform.call(this, matrix, pointcount)
+  end
+  def get_center_point(this : IDirectManipulationPrimaryContent*, centerx : Float32*, centery : Float32*) : HRESULT
+    @lpVtbl.value.get_center_point.call(this, centerx, centery)
+  end
+end
+struct LibWin32::IDirectManipulationDragDropEventHandler
+  def query_interface(this : IDirectManipulationDragDropEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationDragDropEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationDragDropEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_drag_drop_status_change(this : IDirectManipulationDragDropEventHandler*, viewport : IDirectManipulationViewport2, current : DIRECTMANIPULATION_DRAG_DROP_STATUS, previous : DIRECTMANIPULATION_DRAG_DROP_STATUS) : HRESULT
+    @lpVtbl.value.on_drag_drop_status_change.call(this, viewport, current, previous)
+  end
+end
+struct LibWin32::IDirectManipulationDragDropBehavior
+  def query_interface(this : IDirectManipulationDragDropBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationDragDropBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationDragDropBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_configuration(this : IDirectManipulationDragDropBehavior*, configuration : DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, configuration)
+  end
+  def get_status(this : IDirectManipulationDragDropBehavior*, status : DIRECTMANIPULATION_DRAG_DROP_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+end
+struct LibWin32::IDirectManipulationInteractionEventHandler
+  def query_interface(this : IDirectManipulationInteractionEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationInteractionEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationInteractionEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_interaction(this : IDirectManipulationInteractionEventHandler*, viewport : IDirectManipulationViewport2, interaction : DIRECTMANIPULATION_INTERACTION_TYPE) : HRESULT
+    @lpVtbl.value.on_interaction.call(this, viewport, interaction)
+  end
+end
+struct LibWin32::IDirectManipulationFrameInfoProvider
+  def query_interface(this : IDirectManipulationFrameInfoProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationFrameInfoProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationFrameInfoProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_frame_info(this : IDirectManipulationFrameInfoProvider*, time : UInt64*, processtime : UInt64*, compositiontime : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_frame_info.call(this, time, processtime, compositiontime)
+  end
+end
+struct LibWin32::IDirectManipulationCompositor
+  def query_interface(this : IDirectManipulationCompositor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationCompositor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationCompositor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_content(this : IDirectManipulationCompositor*, content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content.call(this, content, device, parentvisual, childvisual)
+  end
+  def remove_content(this : IDirectManipulationCompositor*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
+  end
+  def set_update_manager(this : IDirectManipulationCompositor*, updatemanager : IDirectManipulationUpdateManager) : HRESULT
+    @lpVtbl.value.set_update_manager.call(this, updatemanager)
+  end
+  def flush(this : IDirectManipulationCompositor*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end
+struct LibWin32::IDirectManipulationCompositor2
+  def query_interface(this : IDirectManipulationCompositor2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationCompositor2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationCompositor2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_content(this : IDirectManipulationCompositor2*, content : IDirectManipulationContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content.call(this, content, device, parentvisual, childvisual)
+  end
+  def remove_content(this : IDirectManipulationCompositor2*, content : IDirectManipulationContent) : HRESULT
+    @lpVtbl.value.remove_content.call(this, content)
+  end
+  def set_update_manager(this : IDirectManipulationCompositor2*, updatemanager : IDirectManipulationUpdateManager) : HRESULT
+    @lpVtbl.value.set_update_manager.call(this, updatemanager)
+  end
+  def flush(this : IDirectManipulationCompositor2*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def add_content_with_cross_process_chaining(this : IDirectManipulationCompositor2*, content : IDirectManipulationPrimaryContent, device : IUnknown, parentvisual : IUnknown, childvisual : IUnknown) : HRESULT
+    @lpVtbl.value.add_content_with_cross_process_chaining.call(this, content, device, parentvisual, childvisual)
+  end
+end
+struct LibWin32::IDirectManipulationUpdateHandler
+  def query_interface(this : IDirectManipulationUpdateHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationUpdateHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationUpdateHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update(this : IDirectManipulationUpdateHandler*) : HRESULT
+    @lpVtbl.value.update.call(this)
+  end
+end
+struct LibWin32::IDirectManipulationUpdateManager
+  def query_interface(this : IDirectManipulationUpdateManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationUpdateManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationUpdateManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_wait_handle_callback(this : IDirectManipulationUpdateManager*, handle : LibC::HANDLE, eventhandler : IDirectManipulationUpdateHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_wait_handle_callback.call(this, handle, eventhandler, cookie)
+  end
+  def unregister_wait_handle_callback(this : IDirectManipulationUpdateManager*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_wait_handle_callback.call(this, cookie)
+  end
+  def update(this : IDirectManipulationUpdateManager*, frameinfo : IDirectManipulationFrameInfoProvider) : HRESULT
+    @lpVtbl.value.update.call(this, frameinfo)
+  end
+end
+struct LibWin32::IDirectManipulationAutoScrollBehavior
+  def query_interface(this : IDirectManipulationAutoScrollBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationAutoScrollBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationAutoScrollBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_configuration(this : IDirectManipulationAutoScrollBehavior*, motiontypes : DIRECTMANIPULATION_MOTION_TYPES, scrollmotion : DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, motiontypes, scrollmotion)
+  end
+end
+struct LibWin32::IDirectManipulationDeferContactService
+  def query_interface(this : IDirectManipulationDeferContactService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectManipulationDeferContactService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectManipulationDeferContactService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def defer_contact(this : IDirectManipulationDeferContactService*, pointerid : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.defer_contact.call(this, pointerid, timeout)
+  end
+  def cancel_contact(this : IDirectManipulationDeferContactService*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.cancel_contact.call(this, pointerid)
+  end
+  def cancel_deferral(this : IDirectManipulationDeferContactService*, pointerid : UInt32) : HRESULT
+    @lpVtbl.value.cancel_deferral.call(this, pointerid)
+  end
+end

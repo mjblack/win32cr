@@ -115,3 +115,46 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ISceSvcAttachmentPersistInfo
+  def query_interface(this : ISceSvcAttachmentPersistInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISceSvcAttachmentPersistInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISceSvcAttachmentPersistInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def save(this : ISceSvcAttachmentPersistInfo*, lptemplatename : Int8*, scesvchandle : Void**, ppvdata : Void**, pboverwriteall : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.save.call(this, lptemplatename, scesvchandle, ppvdata, pboverwriteall)
+  end
+  def is_dirty(this : ISceSvcAttachmentPersistInfo*, lptemplatename : Int8*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this, lptemplatename)
+  end
+  def free_buffer(this : ISceSvcAttachmentPersistInfo*, pvdata : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.call(this, pvdata)
+  end
+end
+struct LibWin32::ISceSvcAttachmentData
+  def query_interface(this : ISceSvcAttachmentData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISceSvcAttachmentData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISceSvcAttachmentData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data(this : ISceSvcAttachmentData*, scesvchandle : Void*, scetype : SCESVC_INFO_TYPE, ppvdata : Void**, psceenumhandle : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.call(this, scesvchandle, scetype, ppvdata, psceenumhandle)
+  end
+  def initialize(this : ISceSvcAttachmentData*, lpservicename : Int8*, lptemplatename : Int8*, lpscesvcpersistinfo : ISceSvcAttachmentPersistInfo, pscesvchandle : Void**) : HRESULT
+    @lpVtbl.value.initialize.call(this, lpservicename, lptemplatename, lpscesvcpersistinfo, pscesvchandle)
+  end
+  def free_buffer(this : ISceSvcAttachmentData*, pvdata : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.call(this, pvdata)
+  end
+  def close_handle(this : ISceSvcAttachmentData*, scesvchandle : Void*) : HRESULT
+    @lpVtbl.value.close_handle.call(this, scesvchandle)
+  end
+end

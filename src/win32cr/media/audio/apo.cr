@@ -480,3 +480,281 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IAudioMediaType
+  def query_interface(this : IAudioMediaType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioMediaType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioMediaType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_compressed_format(this : IAudioMediaType*, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_compressed_format.call(this, pfcompressed)
+  end
+  def is_equal(this : IAudioMediaType*, piaudiotype : IAudioMediaType, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, piaudiotype, pdwflags)
+  end
+  def get_audio_format(this : IAudioMediaType*) : WAVEFORMATEX*
+    @lpVtbl.value.get_audio_format.call(this)
+  end
+  def get_uncompressed_audio_format(this : IAudioMediaType*, puncompressedaudioformat : UNCOMPRESSEDAUDIOFORMAT*) : HRESULT
+    @lpVtbl.value.get_uncompressed_audio_format.call(this, puncompressedaudioformat)
+  end
+end
+struct LibWin32::IAudioProcessingObjectRT
+  def query_interface(this : IAudioProcessingObjectRT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectRT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectRT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def apo_process(this : IAudioProcessingObjectRT*, u32numinputconnections : UInt32, ppinputconnections : APO_CONNECTION_PROPERTY**, u32numoutputconnections : UInt32, ppoutputconnections : APO_CONNECTION_PROPERTY**) : Void
+    @lpVtbl.value.apo_process.call(this, u32numinputconnections, ppinputconnections, u32numoutputconnections, ppoutputconnections)
+  end
+  def calc_input_frames(this : IAudioProcessingObjectRT*, u32outputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_input_frames.call(this, u32outputframecount)
+  end
+  def calc_output_frames(this : IAudioProcessingObjectRT*, u32inputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_output_frames.call(this, u32inputframecount)
+  end
+end
+struct LibWin32::IAudioProcessingObjectVBR
+  def query_interface(this : IAudioProcessingObjectVBR*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectVBR*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectVBR*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def calc_max_input_frames(this : IAudioProcessingObjectVBR*, u32maxoutputframecount : UInt32, pu32inputframecount : UInt32*) : HRESULT
+    @lpVtbl.value.calc_max_input_frames.call(this, u32maxoutputframecount, pu32inputframecount)
+  end
+  def calc_max_output_frames(this : IAudioProcessingObjectVBR*, u32maxinputframecount : UInt32, pu32outputframecount : UInt32*) : HRESULT
+    @lpVtbl.value.calc_max_output_frames.call(this, u32maxinputframecount, pu32outputframecount)
+  end
+end
+struct LibWin32::IAudioProcessingObjectConfiguration
+  def query_interface(this : IAudioProcessingObjectConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock_for_process(this : IAudioProcessingObjectConfiguration*, u32numinputconnections : UInt32, ppinputconnections : APO_CONNECTION_DESCRIPTOR**, u32numoutputconnections : UInt32, ppoutputconnections : APO_CONNECTION_DESCRIPTOR**) : HRESULT
+    @lpVtbl.value.lock_for_process.call(this, u32numinputconnections, ppinputconnections, u32numoutputconnections, ppoutputconnections)
+  end
+  def unlock_for_process(this : IAudioProcessingObjectConfiguration*) : HRESULT
+    @lpVtbl.value.unlock_for_process.call(this)
+  end
+end
+struct LibWin32::IAudioProcessingObject
+  def query_interface(this : IAudioProcessingObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IAudioProcessingObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_latency(this : IAudioProcessingObject*, ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_latency.call(this, ptime)
+  end
+  def get_registration_properties(this : IAudioProcessingObject*, ppregprops : APO_REG_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_registration_properties.call(this, ppregprops)
+  end
+  def initialize(this : IAudioProcessingObject*, cbdatasize : UInt32, pbydata : UInt8*) : HRESULT
+    @lpVtbl.value.initialize.call(this, cbdatasize, pbydata)
+  end
+  def is_input_format_supported(this : IAudioProcessingObject*, poppositeformat : IAudioMediaType, prequestedinputformat : IAudioMediaType, ppsupportedinputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_input_format_supported.call(this, poppositeformat, prequestedinputformat, ppsupportedinputformat)
+  end
+  def is_output_format_supported(this : IAudioProcessingObject*, poppositeformat : IAudioMediaType, prequestedoutputformat : IAudioMediaType, ppsupportedoutputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_output_format_supported.call(this, poppositeformat, prequestedoutputformat, ppsupportedoutputformat)
+  end
+  def get_input_channel_count(this : IAudioProcessingObject*, pu32channelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_channel_count.call(this, pu32channelcount)
+  end
+end
+struct LibWin32::IAudioDeviceModulesClient
+  def query_interface(this : IAudioDeviceModulesClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioDeviceModulesClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioDeviceModulesClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_audio_device_modules_manager(this : IAudioDeviceModulesClient*, paudiodevicemodulesmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_audio_device_modules_manager.call(this, paudiodevicemodulesmanager)
+  end
+end
+struct LibWin32::IAudioSystemEffects
+  def query_interface(this : IAudioSystemEffects*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioSystemEffects*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioSystemEffects*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IAudioSystemEffects2
+  def query_interface(this : IAudioSystemEffects2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioSystemEffects2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioSystemEffects2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_effects_list(this : IAudioSystemEffects2*, ppeffectsids : Guid**, pceffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_effects_list.call(this, ppeffectsids, pceffects, event)
+  end
+end
+struct LibWin32::IAudioSystemEffectsCustomFormats
+  def query_interface(this : IAudioSystemEffectsCustomFormats*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioSystemEffectsCustomFormats*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioSystemEffectsCustomFormats*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_format_count(this : IAudioSystemEffectsCustomFormats*, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_count.call(this, pcformats)
+  end
+  def get_format(this : IAudioSystemEffectsCustomFormats*, nformat : UInt32, ppformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.get_format.call(this, nformat, ppformat)
+  end
+  def get_format_representation(this : IAudioSystemEffectsCustomFormats*, nformat : UInt32, ppwstrformatrep : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_format_representation.call(this, nformat, ppwstrformatrep)
+  end
+end
+struct LibWin32::IApoAuxiliaryInputConfiguration
+  def query_interface(this : IApoAuxiliaryInputConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApoAuxiliaryInputConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApoAuxiliaryInputConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_auxiliary_input(this : IApoAuxiliaryInputConfiguration*, dwinputid : UInt32, cbdatasize : UInt32, pbydata : UInt8*, pinputconnection : APO_CONNECTION_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.add_auxiliary_input.call(this, dwinputid, cbdatasize, pbydata, pinputconnection)
+  end
+  def remove_auxiliary_input(this : IApoAuxiliaryInputConfiguration*, dwinputid : UInt32) : HRESULT
+    @lpVtbl.value.remove_auxiliary_input.call(this, dwinputid)
+  end
+  def is_input_format_supported(this : IApoAuxiliaryInputConfiguration*, prequestedinputformat : IAudioMediaType, ppsupportedinputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_input_format_supported.call(this, prequestedinputformat, ppsupportedinputformat)
+  end
+end
+struct LibWin32::IApoAuxiliaryInputRT
+  def query_interface(this : IApoAuxiliaryInputRT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApoAuxiliaryInputRT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApoAuxiliaryInputRT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def accept_input(this : IApoAuxiliaryInputRT*, dwinputid : UInt32, pinputconnection : APO_CONNECTION_PROPERTY*) : Void
+    @lpVtbl.value.accept_input.call(this, dwinputid, pinputconnection)
+  end
+end
+struct LibWin32::IApoAcousticEchoCancellation
+  def query_interface(this : IApoAcousticEchoCancellation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApoAcousticEchoCancellation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApoAcousticEchoCancellation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IAudioSystemEffects3
+  def query_interface(this : IAudioSystemEffects3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioSystemEffects3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioSystemEffects3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_effects_list(this : IAudioSystemEffects3*, ppeffectsids : Guid**, pceffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_effects_list.call(this, ppeffectsids, pceffects, event)
+  end
+  def get_controllable_system_effects_list(this : IAudioSystemEffects3*, effects : AUDIO_SYSTEMEFFECT**, numeffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_controllable_system_effects_list.call(this, effects, numeffects, event)
+  end
+  def set_audio_system_effect_state(this : IAudioSystemEffects3*, effectid : Guid, state : AUDIO_SYSTEMEFFECT_STATE) : HRESULT
+    @lpVtbl.value.set_audio_system_effect_state.call(this, effectid, state)
+  end
+end
+struct LibWin32::IAudioProcessingObjectRTQueueService
+  def query_interface(this : IAudioProcessingObjectRTQueueService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectRTQueueService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectRTQueueService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_real_time_work_queue(this : IAudioProcessingObjectRTQueueService*, workqueueid : UInt32*) : HRESULT
+    @lpVtbl.value.get_real_time_work_queue.call(this, workqueueid)
+  end
+end
+struct LibWin32::IAudioProcessingObjectLoggingService
+  def query_interface(this : IAudioProcessingObjectLoggingService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectLoggingService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectLoggingService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def apo_log(this : IAudioProcessingObjectLoggingService*, level : APO_LOG_LEVEL, format : LibC::LPWSTR) : Void
+    @lpVtbl.value.apo_log.call(this, level, format)
+  end
+end
+struct LibWin32::IAudioProcessingObjectNotifications
+  def query_interface(this : IAudioProcessingObjectNotifications*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioProcessingObjectNotifications*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioProcessingObjectNotifications*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_apo_notification_registration_info(this : IAudioProcessingObjectNotifications*, aponotifications : APO_NOTIFICATION_DESCRIPTOR**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_apo_notification_registration_info.call(this, aponotifications, count)
+  end
+  def handle_notification(this : IAudioProcessingObjectNotifications*, aponotification : APO_NOTIFICATION*) : Void
+    @lpVtbl.value.handle_notification.call(this, aponotification)
+  end
+end

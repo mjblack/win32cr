@@ -1255,19 +1255,19 @@ lib LibWin32
   fun MAPIInitIdle(lpvreserved : Void*) : Int32
 
   # Params # 
-  fun MAPIDeinitIdle
+  fun MAPIDeinitIdle : Void
 
   # Params # lpfnidle : PFNIDLE [In],lpvidleparam : Void* [In],priidle : Int16 [In],csecidle : UInt32 [In],iroidle : UInt16 [In]
   fun FtgRegisterIdleRoutine(lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16) : Void*
 
   # Params # ftg : Void* [In]
-  fun DeregisterIdleRoutine(ftg : Void*)
+  fun DeregisterIdleRoutine(ftg : Void*) : Void
 
   # Params # ftg : Void* [In],fenable : LibC::BOOL [In]
-  fun EnableIdleRoutine(ftg : Void*, fenable : LibC::BOOL)
+  fun EnableIdleRoutine(ftg : Void*, fenable : LibC::BOOL) : Void
 
   # Params # ftg : Void* [In],lpfnidle : PFNIDLE [In],lpvidleparam : Void* [In],priidle : Int16 [In],csecidle : UInt32 [In],iroidle : UInt16 [In],ircidle : UInt16 [In]
-  fun ChangeIdleRoutine(ftg : Void*, lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16, ircidle : UInt16)
+  fun ChangeIdleRoutine(ftg : Void*, lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16, ircidle : UInt16) : Void
 
   # Params # 
   fun MAPIGetDefaultMalloc : IMalloc
@@ -1354,10 +1354,10 @@ lib LibWin32
   fun PpropFindProp(lpproparray : SPropValue*, cvalues : UInt32, ulproptag : UInt32) : SPropValue*
 
   # Params # lpadrlist : ADRLIST* [In]
-  fun FreePadrlist(lpadrlist : ADRLIST*)
+  fun FreePadrlist(lpadrlist : ADRLIST*) : Void
 
   # Params # lprows : SRowSet* [In]
-  fun FreeProws(lprows : SRowSet*)
+  fun FreeProws(lprows : SRowSet*) : Void
 
   # Params # lptable : IMAPITable [In],lpproptags : SPropTagArray* [In],lprestriction : SRestriction* [In],lpsortorderset : SSortOrderSet* [In],crowsmax : Int32 [In],lpprows : SRowSet** [In]
   fun HrQueryAllRows(lptable : IMAPITable, lpproptags : SPropTagArray*, lprestriction : SRestriction*, lpsortorderset : SSortOrderSet*, crowsmax : Int32, lpprows : SRowSet**) : HRESULT
@@ -1414,5 +1414,1153 @@ lib LibWin32
   fun ScInitMapiUtil(ulflags : UInt32) : Int32
 
   # Params # 
-  fun DeinitMapiUtil
+  fun DeinitMapiUtil : Void
+end
+struct LibWin32::IMAPIAdviseSink
+  def query_interface(this : IMAPIAdviseSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIAdviseSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIAdviseSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_notify(this : IMAPIAdviseSink*, cnotif : UInt32, lpnotifications : NOTIFICATION*) : UInt32
+    @lpVtbl.value.on_notify.call(this, cnotif, lpnotifications)
+  end
+end
+struct LibWin32::IMAPIProgress
+  def query_interface(this : IMAPIProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def progress(this : IMAPIProgress*, ulvalue : UInt32, ulcount : UInt32, ultotal : UInt32) : HRESULT
+    @lpVtbl.value.progress.call(this, ulvalue, ulcount, ultotal)
+  end
+  def get_flags(this : IMAPIProgress*, lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, lpulflags)
+  end
+  def get_max(this : IMAPIProgress*, lpulmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max.call(this, lpulmax)
+  end
+  def get_min(this : IMAPIProgress*, lpulmin : UInt32*) : HRESULT
+    @lpVtbl.value.get_min.call(this, lpulmin)
+  end
+  def set_limits(this : IMAPIProgress*, lpulmin : UInt32*, lpulmax : UInt32*, lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.set_limits.call(this, lpulmin, lpulmax, lpulflags)
+  end
+end
+struct LibWin32::IMAPIProp
+  def query_interface(this : IMAPIProp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIProp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIProp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPIProp*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMAPIProp*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMAPIProp*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMAPIProp*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMAPIProp*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMAPIProp*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMAPIProp*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMAPIProp*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMAPIProp*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMAPIProp*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMAPIProp*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPITable
+  def query_interface(this : IMAPITable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPITable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPITable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPITable*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def advise(this : IMAPITable*, uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(this : IMAPITable*, ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, ulconnection)
+  end
+  def get_status(this : IMAPITable*, lpultablestatus : UInt32*, lpultabletype : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, lpultablestatus, lpultabletype)
+  end
+  def set_columns(this : IMAPITable*, lpproptagarray : SPropTagArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_columns.call(this, lpproptagarray, ulflags)
+  end
+  def query_columns(this : IMAPITable*, ulflags : UInt32, lpproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.query_columns.call(this, ulflags, lpproptagarray)
+  end
+  def get_row_count(this : IMAPITable*, ulflags : UInt32, lpulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_row_count.call(this, ulflags, lpulcount)
+  end
+  def seek_row(this : IMAPITable*, bkorigin : UInt32, lrowcount : Int32, lplrowssought : Int32*) : HRESULT
+    @lpVtbl.value.seek_row.call(this, bkorigin, lrowcount, lplrowssought)
+  end
+  def seek_row_approx(this : IMAPITable*, ulnumerator : UInt32, uldenominator : UInt32) : HRESULT
+    @lpVtbl.value.seek_row_approx.call(this, ulnumerator, uldenominator)
+  end
+  def query_position(this : IMAPITable*, lpulrow : UInt32*, lpulnumerator : UInt32*, lpuldenominator : UInt32*) : HRESULT
+    @lpVtbl.value.query_position.call(this, lpulrow, lpulnumerator, lpuldenominator)
+  end
+  def find_row(this : IMAPITable*, lprestriction : SRestriction*, bkorigin : UInt32, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.find_row.call(this, lprestriction, bkorigin, ulflags)
+  end
+  def restrict(this : IMAPITable*, lprestriction : SRestriction*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.restrict.call(this, lprestriction, ulflags)
+  end
+  def create_bookmark(this : IMAPITable*, lpbkposition : UInt32*) : HRESULT
+    @lpVtbl.value.create_bookmark.call(this, lpbkposition)
+  end
+  def free_bookmark(this : IMAPITable*, bkposition : UInt32) : HRESULT
+    @lpVtbl.value.free_bookmark.call(this, bkposition)
+  end
+  def sort_table(this : IMAPITable*, lpsortcriteria : SSortOrderSet*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.sort_table.call(this, lpsortcriteria, ulflags)
+  end
+  def query_sort_order(this : IMAPITable*, lppsortcriteria : SSortOrderSet**) : HRESULT
+    @lpVtbl.value.query_sort_order.call(this, lppsortcriteria)
+  end
+  def query_rows(this : IMAPITable*, lrowcount : Int32, ulflags : UInt32, lpprows : SRowSet**) : HRESULT
+    @lpVtbl.value.query_rows.call(this, lrowcount, ulflags, lpprows)
+  end
+  def abort(this : IMAPITable*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+  def expand_row(this : IMAPITable*, cbinstancekey : UInt32, pbinstancekey : UInt8*, ulrowcount : UInt32, ulflags : UInt32, lpprows : SRowSet**, lpulmorerows : UInt32*) : HRESULT
+    @lpVtbl.value.expand_row.call(this, cbinstancekey, pbinstancekey, ulrowcount, ulflags, lpprows, lpulmorerows)
+  end
+  def collapse_row(this : IMAPITable*, cbinstancekey : UInt32, pbinstancekey : UInt8*, ulflags : UInt32, lpulrowcount : UInt32*) : HRESULT
+    @lpVtbl.value.collapse_row.call(this, cbinstancekey, pbinstancekey, ulflags, lpulrowcount)
+  end
+  def wait_for_completion(this : IMAPITable*, ulflags : UInt32, ultimeout : UInt32, lpultablestatus : UInt32*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, ulflags, ultimeout, lpultablestatus)
+  end
+  def get_collapse_state(this : IMAPITable*, ulflags : UInt32, cbinstancekey : UInt32, lpbinstancekey : UInt8*, lpcbcollapsestate : UInt32*, lppbcollapsestate : UInt8**) : HRESULT
+    @lpVtbl.value.get_collapse_state.call(this, ulflags, cbinstancekey, lpbinstancekey, lpcbcollapsestate, lppbcollapsestate)
+  end
+  def set_collapse_state(this : IMAPITable*, ulflags : UInt32, cbcollapsestate : UInt32, pbcollapsestate : UInt8*, lpbklocation : UInt32*) : HRESULT
+    @lpVtbl.value.set_collapse_state.call(this, ulflags, cbcollapsestate, pbcollapsestate, lpbklocation)
+  end
+end
+struct LibWin32::IProfSect
+  def query_interface(this : IProfSect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProfSect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProfSect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IProfSect*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IProfSect*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IProfSect*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IProfSect*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IProfSect*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IProfSect*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IProfSect*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IProfSect*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IProfSect*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IProfSect*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IProfSect*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPIStatus
+  def query_interface(this : IMAPIStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPIStatus*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMAPIStatus*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMAPIStatus*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMAPIStatus*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMAPIStatus*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMAPIStatus*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMAPIStatus*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMAPIStatus*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMAPIStatus*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMAPIStatus*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMAPIStatus*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def validate_state(this : IMAPIStatus*, uluiparam : LibC::UINT_PTR, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.validate_state.call(this, uluiparam, ulflags)
+  end
+  def settings_dialog(this : IMAPIStatus*, uluiparam : LibC::UINT_PTR, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.settings_dialog.call(this, uluiparam, ulflags)
+  end
+  def change_password(this : IMAPIStatus*, lpoldpass : Int8*, lpnewpass : Int8*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.change_password.call(this, lpoldpass, lpnewpass, ulflags)
+  end
+  def flush_queues(this : IMAPIStatus*, uluiparam : LibC::UINT_PTR, cbtargettransport : UInt32, lptargettransport : ENTRYID*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.flush_queues.call(this, uluiparam, cbtargettransport, lptargettransport, ulflags)
+  end
+end
+struct LibWin32::IMAPIContainer
+  def query_interface(this : IMAPIContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPIContainer*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMAPIContainer*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMAPIContainer*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMAPIContainer*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMAPIContainer*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMAPIContainer*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMAPIContainer*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMAPIContainer*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMAPIContainer*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMAPIContainer*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMAPIContainer*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(this : IMAPIContainer*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.call(this, ulflags, lpptable)
+  end
+  def get_hierarchy_table(this : IMAPIContainer*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.call(this, ulflags, lpptable)
+  end
+  def open_entry(this : IMAPIContainer*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(this : IMAPIContainer*, lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.call(this, lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(this : IMAPIContainer*, ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.call(this, ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+end
+struct LibWin32::IABContainer
+  def query_interface(this : IABContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IABContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IABContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IABContainer*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IABContainer*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IABContainer*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IABContainer*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IABContainer*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IABContainer*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IABContainer*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IABContainer*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IABContainer*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IABContainer*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IABContainer*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(this : IABContainer*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.call(this, ulflags, lpptable)
+  end
+  def get_hierarchy_table(this : IABContainer*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.call(this, ulflags, lpptable)
+  end
+  def open_entry(this : IABContainer*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(this : IABContainer*, lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.call(this, lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(this : IABContainer*, ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.call(this, ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_entry(this : IABContainer*, cbentryid : UInt32, lpentryid : ENTRYID*, ulcreateflags : UInt32, lppmapipropentry : IMAPIProp*) : HRESULT
+    @lpVtbl.value.create_entry.call(this, cbentryid, lpentryid, ulcreateflags, lppmapipropentry)
+  end
+  def copy_entries(this : IABContainer*, lpentries : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_entries.call(this, lpentries, uluiparam, lpprogress, ulflags)
+  end
+  def delete_entries(this : IABContainer*, lpentries : SBinaryArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_entries.call(this, lpentries, ulflags)
+  end
+  def resolve_names(this : IABContainer*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpadrlist : ADRLIST*, lpflaglist : Flaglist*) : HRESULT
+    @lpVtbl.value.resolve_names.call(this, lpproptagarray, ulflags, lpadrlist, lpflaglist)
+  end
+end
+struct LibWin32::IMailUser
+  def query_interface(this : IMailUser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMailUser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMailUser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMailUser*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMailUser*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMailUser*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMailUser*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMailUser*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMailUser*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMailUser*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMailUser*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMailUser*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMailUser*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMailUser*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IDistList
+  def query_interface(this : IDistList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDistList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDistList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IDistList*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IDistList*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IDistList*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IDistList*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IDistList*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IDistList*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IDistList*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IDistList*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IDistList*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IDistList*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IDistList*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(this : IDistList*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.call(this, ulflags, lpptable)
+  end
+  def get_hierarchy_table(this : IDistList*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.call(this, ulflags, lpptable)
+  end
+  def open_entry(this : IDistList*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(this : IDistList*, lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.call(this, lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(this : IDistList*, ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.call(this, ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_entry(this : IDistList*, cbentryid : UInt32, lpentryid : ENTRYID*, ulcreateflags : UInt32, lppmapipropentry : IMAPIProp*) : HRESULT
+    @lpVtbl.value.create_entry.call(this, cbentryid, lpentryid, ulcreateflags, lppmapipropentry)
+  end
+  def copy_entries(this : IDistList*, lpentries : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_entries.call(this, lpentries, uluiparam, lpprogress, ulflags)
+  end
+  def delete_entries(this : IDistList*, lpentries : SBinaryArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_entries.call(this, lpentries, ulflags)
+  end
+  def resolve_names(this : IDistList*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpadrlist : ADRLIST*, lpflaglist : Flaglist*) : HRESULT
+    @lpVtbl.value.resolve_names.call(this, lpproptagarray, ulflags, lpadrlist, lpflaglist)
+  end
+end
+struct LibWin32::IMAPIFolder
+  def query_interface(this : IMAPIFolder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIFolder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIFolder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPIFolder*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMAPIFolder*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMAPIFolder*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMAPIFolder*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMAPIFolder*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMAPIFolder*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMAPIFolder*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMAPIFolder*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMAPIFolder*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMAPIFolder*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMAPIFolder*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(this : IMAPIFolder*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.call(this, ulflags, lpptable)
+  end
+  def get_hierarchy_table(this : IMAPIFolder*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.call(this, ulflags, lpptable)
+  end
+  def open_entry(this : IMAPIFolder*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(this : IMAPIFolder*, lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.call(this, lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(this : IMAPIFolder*, ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.call(this, ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_message(this : IMAPIFolder*, lpinterface : Guid*, ulflags : UInt32, lppmessage : IMessage*) : HRESULT
+    @lpVtbl.value.create_message.call(this, lpinterface, ulflags, lppmessage)
+  end
+  def copy_messages(this : IMAPIFolder*, lpmsglist : SBinaryArray*, lpinterface : Guid*, lpdestfolder : Void*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_messages.call(this, lpmsglist, lpinterface, lpdestfolder, uluiparam, lpprogress, ulflags)
+  end
+  def delete_messages(this : IMAPIFolder*, lpmsglist : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_messages.call(this, lpmsglist, uluiparam, lpprogress, ulflags)
+  end
+  def create_folder(this : IMAPIFolder*, ulfoldertype : UInt32, lpszfoldername : Int8*, lpszfoldercomment : Int8*, lpinterface : Guid*, ulflags : UInt32, lppfolder : IMAPIFolder*) : HRESULT
+    @lpVtbl.value.create_folder.call(this, ulfoldertype, lpszfoldername, lpszfoldercomment, lpinterface, ulflags, lppfolder)
+  end
+  def copy_folder(this : IMAPIFolder*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, lpdestfolder : Void*, lpsznewfoldername : Int8*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_folder.call(this, cbentryid, lpentryid, lpinterface, lpdestfolder, lpsznewfoldername, uluiparam, lpprogress, ulflags)
+  end
+  def delete_folder(this : IMAPIFolder*, cbentryid : UInt32, lpentryid : ENTRYID*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_folder.call(this, cbentryid, lpentryid, uluiparam, lpprogress, ulflags)
+  end
+  def set_read_flags(this : IMAPIFolder*, lpmsglist : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_read_flags.call(this, lpmsglist, uluiparam, lpprogress, ulflags)
+  end
+  def get_message_status(this : IMAPIFolder*, cbentryid : UInt32, lpentryid : ENTRYID*, ulflags : UInt32, lpulmessagestatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_message_status.call(this, cbentryid, lpentryid, ulflags, lpulmessagestatus)
+  end
+  def set_message_status(this : IMAPIFolder*, cbentryid : UInt32, lpentryid : ENTRYID*, ulnewstatus : UInt32, ulnewstatusmask : UInt32, lpuloldstatus : UInt32*) : HRESULT
+    @lpVtbl.value.set_message_status.call(this, cbentryid, lpentryid, ulnewstatus, ulnewstatusmask, lpuloldstatus)
+  end
+  def save_contents_sort(this : IMAPIFolder*, lpsortcriteria : SSortOrderSet*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_contents_sort.call(this, lpsortcriteria, ulflags)
+  end
+  def empty_folder(this : IMAPIFolder*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.empty_folder.call(this, uluiparam, lpprogress, ulflags)
+  end
+end
+struct LibWin32::IMsgStore
+  def query_interface(this : IMsgStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsgStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsgStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMsgStore*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMsgStore*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMsgStore*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMsgStore*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMsgStore*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMsgStore*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMsgStore*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMsgStore*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMsgStore*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMsgStore*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMsgStore*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def advise(this : IMsgStore*, cbentryid : UInt32, lpentryid : ENTRYID*, uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, cbentryid, lpentryid, uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(this : IMsgStore*, ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, ulconnection)
+  end
+  def compare_entry_i_ds(this : IMsgStore*, cbentryid1 : UInt32, lpentryid1 : ENTRYID*, cbentryid2 : UInt32, lpentryid2 : ENTRYID*, ulflags : UInt32, lpulresult : UInt32*) : HRESULT
+    @lpVtbl.value.compare_entry_i_ds.call(this, cbentryid1, lpentryid1, cbentryid2, lpentryid2, ulflags, lpulresult)
+  end
+  def open_entry(this : IMsgStore*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, ppunk)
+  end
+  def set_receive_folder(this : IMsgStore*, lpszmessageclass : Int8*, ulflags : UInt32, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_receive_folder.call(this, lpszmessageclass, ulflags, cbentryid, lpentryid)
+  end
+  def get_receive_folder(this : IMsgStore*, lpszmessageclass : Int8*, ulflags : UInt32, lpcbentryid : UInt32*, lppentryid : ENTRYID**, lppszexplicitclass : Int8**) : HRESULT
+    @lpVtbl.value.get_receive_folder.call(this, lpszmessageclass, ulflags, lpcbentryid, lppentryid, lppszexplicitclass)
+  end
+  def get_receive_folder_table(this : IMsgStore*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_receive_folder_table.call(this, ulflags, lpptable)
+  end
+  def store_logoff(this : IMsgStore*, lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.store_logoff.call(this, lpulflags)
+  end
+  def abort_submit(this : IMsgStore*, cbentryid : UInt32, lpentryid : ENTRYID*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.abort_submit.call(this, cbentryid, lpentryid, ulflags)
+  end
+  def get_outgoing_queue(this : IMsgStore*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.call(this, ulflags, lpptable)
+  end
+  def set_lock_state(this : IMsgStore*, lpmessage : IMessage, ullockstate : UInt32) : HRESULT
+    @lpVtbl.value.set_lock_state.call(this, lpmessage, ullockstate)
+  end
+  def finished_msg(this : IMsgStore*, ulflags : UInt32, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.finished_msg.call(this, ulflags, cbentryid, lpentryid)
+  end
+  def notify_new_mail(this : IMsgStore*, lpnotification : NOTIFICATION*) : HRESULT
+    @lpVtbl.value.notify_new_mail.call(this, lpnotification)
+  end
+end
+struct LibWin32::IMessage
+  def query_interface(this : IMessage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMessage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMessage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMessage*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IMessage*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IMessage*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IMessage*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IMessage*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IMessage*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IMessage*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IMessage*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IMessage*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IMessage*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IMessage*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_attachment_table(this : IMessage*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_attachment_table.call(this, ulflags, lpptable)
+  end
+  def open_attach(this : IMessage*, ulattachmentnum : UInt32, lpinterface : Guid*, ulflags : UInt32, lppattach : IAttach*) : HRESULT
+    @lpVtbl.value.open_attach.call(this, ulattachmentnum, lpinterface, ulflags, lppattach)
+  end
+  def create_attach(this : IMessage*, lpinterface : Guid*, ulflags : UInt32, lpulattachmentnum : UInt32*, lppattach : IAttach*) : HRESULT
+    @lpVtbl.value.create_attach.call(this, lpinterface, ulflags, lpulattachmentnum, lppattach)
+  end
+  def delete_attach(this : IMessage*, ulattachmentnum : UInt32, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_attach.call(this, ulattachmentnum, uluiparam, lpprogress, ulflags)
+  end
+  def get_recipient_table(this : IMessage*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_recipient_table.call(this, ulflags, lpptable)
+  end
+  def modify_recipients(this : IMessage*, ulflags : UInt32, lpmods : ADRLIST*) : HRESULT
+    @lpVtbl.value.modify_recipients.call(this, ulflags, lpmods)
+  end
+  def submit_message(this : IMessage*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.submit_message.call(this, ulflags)
+  end
+  def set_read_flag(this : IMessage*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_read_flag.call(this, ulflags)
+  end
+end
+struct LibWin32::IAttach
+  def query_interface(this : IAttach*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAttach*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAttach*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IAttach*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IAttach*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IAttach*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IAttach*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IAttach*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IAttach*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IAttach*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IAttach*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IAttach*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IAttach*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IAttach*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPIControl
+  def query_interface(this : IMAPIControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMAPIControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMAPIControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IMAPIControl*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def activate(this : IMAPIControl*, ulflags : UInt32, uluiparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.activate.call(this, ulflags, uluiparam)
+  end
+  def get_state(this : IMAPIControl*, ulflags : UInt32, lpulstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, ulflags, lpulstate)
+  end
+end
+struct LibWin32::IProviderAdmin
+  def query_interface(this : IProviderAdmin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProviderAdmin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProviderAdmin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IProviderAdmin*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def get_provider_table(this : IProviderAdmin*, ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_provider_table.call(this, ulflags, lpptable)
+  end
+  def create_provider(this : IProviderAdmin*, lpszprovider : Int8*, cvalues : UInt32, lpprops : SPropValue*, uluiparam : LibC::UINT_PTR, ulflags : UInt32, lpuid : MAPIUID*) : HRESULT
+    @lpVtbl.value.create_provider.call(this, lpszprovider, cvalues, lpprops, uluiparam, ulflags, lpuid)
+  end
+  def delete_provider(this : IProviderAdmin*, lpuid : MAPIUID*) : HRESULT
+    @lpVtbl.value.delete_provider.call(this, lpuid)
+  end
+  def open_profile_section(this : IProviderAdmin*, lpuid : MAPIUID*, lpinterface : Guid*, ulflags : UInt32, lppprofsect : IProfSect*) : HRESULT
+    @lpVtbl.value.open_profile_section.call(this, lpuid, lpinterface, ulflags, lppprofsect)
+  end
+end
+struct LibWin32::ITableData
+  def query_interface(this : ITableData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITableData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITableData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def hr_get_view(this : ITableData*, lpssortorderset : SSortOrderSet*, lpfcallerrelease : CALLERRELEASE*, ulcallerdata : UInt32, lppmapitable : IMAPITable*) : HRESULT
+    @lpVtbl.value.hr_get_view.call(this, lpssortorderset, lpfcallerrelease, ulcallerdata, lppmapitable)
+  end
+  def hr_modify_row(this : ITableData*, param0 : SRow*) : HRESULT
+    @lpVtbl.value.hr_modify_row.call(this, param0)
+  end
+  def hr_delete_row(this : ITableData*, lpspropvalue : SPropValue*) : HRESULT
+    @lpVtbl.value.hr_delete_row.call(this, lpspropvalue)
+  end
+  def hr_query_row(this : ITableData*, lpspropvalue : SPropValue*, lppsrow : SRow**, lpulirow : UInt32*) : HRESULT
+    @lpVtbl.value.hr_query_row.call(this, lpspropvalue, lppsrow, lpulirow)
+  end
+  def hr_enum_row(this : ITableData*, ulrownumber : UInt32, lppsrow : SRow**) : HRESULT
+    @lpVtbl.value.hr_enum_row.call(this, ulrownumber, lppsrow)
+  end
+  def hr_notify(this : ITableData*, ulflags : UInt32, cvalues : UInt32, lpspropvalue : SPropValue*) : HRESULT
+    @lpVtbl.value.hr_notify.call(this, ulflags, cvalues, lpspropvalue)
+  end
+  def hr_insert_row(this : ITableData*, ulirow : UInt32, lpsrow : SRow*) : HRESULT
+    @lpVtbl.value.hr_insert_row.call(this, ulirow, lpsrow)
+  end
+  def hr_modify_rows(this : ITableData*, ulflags : UInt32, lpsrowset : SRowSet*) : HRESULT
+    @lpVtbl.value.hr_modify_rows.call(this, ulflags, lpsrowset)
+  end
+  def hr_delete_rows(this : ITableData*, ulflags : UInt32, lprowsettodelete : SRowSet*, crowsdeleted : UInt32*) : HRESULT
+    @lpVtbl.value.hr_delete_rows.call(this, ulflags, lprowsettodelete, crowsdeleted)
+  end
+end
+struct LibWin32::IPropData
+  def query_interface(this : IPropData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IPropData*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IPropData*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IPropData*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IPropData*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IPropData*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IPropData*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IPropData*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IPropData*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IPropData*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IPropData*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IPropData*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def hr_set_obj_access(this : IPropData*, ulaccess : UInt32) : HRESULT
+    @lpVtbl.value.hr_set_obj_access.call(this, ulaccess)
+  end
+  def hr_set_prop_access(this : IPropData*, lpproptagarray : SPropTagArray*, rgulaccess : UInt32*) : HRESULT
+    @lpVtbl.value.hr_set_prop_access.call(this, lpproptagarray, rgulaccess)
+  end
+  def hr_get_prop_access(this : IPropData*, lppproptagarray : SPropTagArray**, lprgulaccess : UInt32**) : HRESULT
+    @lpVtbl.value.hr_get_prop_access.call(this, lppproptagarray, lprgulaccess)
+  end
+  def hr_add_obj_props(this : IPropData*, lppproptagarray : SPropTagArray*, lprgulaccess : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.hr_add_obj_props.call(this, lppproptagarray, lprgulaccess)
+  end
+end
+struct LibWin32::IAddrBook
+  def query_interface(this : IAddrBook*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAddrBook*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAddrBook*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IAddrBook*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def save_changes(this : IAddrBook*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.call(this, ulflags)
+  end
+  def get_props(this : IAddrBook*, lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.call(this, lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(this : IAddrBook*, ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.call(this, ulflags, lppproptagarray)
+  end
+  def open_property(this : IAddrBook*, ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.call(this, ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(this : IAddrBook*, cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.call(this, cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(this : IAddrBook*, lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.call(this, lpproptagarray, lppproblems)
+  end
+  def copy_to(this : IAddrBook*, ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(this : IAddrBook*, lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.call(this, lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(this : IAddrBook*, lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.call(this, lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(this : IAddrBook*, cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.call(this, cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def open_entry(this : IAddrBook*, cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.call(this, cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def compare_entry_i_ds(this : IAddrBook*, cbentryid1 : UInt32, lpentryid1 : ENTRYID*, cbentryid2 : UInt32, lpentryid2 : ENTRYID*, ulflags : UInt32, lpulresult : UInt32*) : HRESULT
+    @lpVtbl.value.compare_entry_i_ds.call(this, cbentryid1, lpentryid1, cbentryid2, lpentryid2, ulflags, lpulresult)
+  end
+  def advise(this : IAddrBook*, cbentryid : UInt32, lpentryid : ENTRYID*, uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, cbentryid, lpentryid, uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(this : IAddrBook*, ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, ulconnection)
+  end
+  def create_one_off(this : IAddrBook*, lpszname : Int8*, lpszadrtype : Int8*, lpszaddress : Int8*, ulflags : UInt32, lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.create_one_off.call(this, lpszname, lpszadrtype, lpszaddress, ulflags, lpcbentryid, lppentryid)
+  end
+  def new_entry(this : IAddrBook*, uluiparam : UInt32, ulflags : UInt32, cbeidcontainer : UInt32, lpeidcontainer : ENTRYID*, cbeidnewentrytpl : UInt32, lpeidnewentrytpl : ENTRYID*, lpcbeidnewentry : UInt32*, lppeidnewentry : ENTRYID**) : HRESULT
+    @lpVtbl.value.new_entry.call(this, uluiparam, ulflags, cbeidcontainer, lpeidcontainer, cbeidnewentrytpl, lpeidnewentrytpl, lpcbeidnewentry, lppeidnewentry)
+  end
+  def resolve_name(this : IAddrBook*, uluiparam : LibC::UINT_PTR, ulflags : UInt32, lpsznewentrytitle : Int8*, lpadrlist : ADRLIST*) : HRESULT
+    @lpVtbl.value.resolve_name.call(this, uluiparam, ulflags, lpsznewentrytitle, lpadrlist)
+  end
+  def address(this : IAddrBook*, lpuluiparam : UInt32*, lpadrparms : ADRPARM*, lppadrlist : ADRLIST**) : HRESULT
+    @lpVtbl.value.address.call(this, lpuluiparam, lpadrparms, lppadrlist)
+  end
+  def details(this : IAddrBook*, lpuluiparam : LibC::UINT_PTR*, lpfndismiss : LPFNDISMISS, lpvdismisscontext : Void*, cbentryid : UInt32, lpentryid : ENTRYID*, lpfbuttoncallback : LPFNBUTTON, lpvbuttoncontext : Void*, lpszbuttontext : Int8*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.details.call(this, lpuluiparam, lpfndismiss, lpvdismisscontext, cbentryid, lpentryid, lpfbuttoncallback, lpvbuttoncontext, lpszbuttontext, ulflags)
+  end
+  def recip_options(this : IAddrBook*, uluiparam : UInt32, ulflags : UInt32, lprecip : ADRENTRY*) : HRESULT
+    @lpVtbl.value.recip_options.call(this, uluiparam, ulflags, lprecip)
+  end
+  def query_default_recip_opt(this : IAddrBook*, lpszadrtype : Int8*, ulflags : UInt32, lpcvalues : UInt32*, lppoptions : SPropValue**) : HRESULT
+    @lpVtbl.value.query_default_recip_opt.call(this, lpszadrtype, ulflags, lpcvalues, lppoptions)
+  end
+  def get_pab(this : IAddrBook*, lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.get_pab.call(this, lpcbentryid, lppentryid)
+  end
+  def set_pab(this : IAddrBook*, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_pab.call(this, cbentryid, lpentryid)
+  end
+  def get_default_dir(this : IAddrBook*, lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.get_default_dir.call(this, lpcbentryid, lppentryid)
+  end
+  def set_default_dir(this : IAddrBook*, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_default_dir.call(this, cbentryid, lpentryid)
+  end
+  def get_search_path(this : IAddrBook*, ulflags : UInt32, lppsearchpath : SRowSet**) : HRESULT
+    @lpVtbl.value.get_search_path.call(this, ulflags, lppsearchpath)
+  end
+  def set_search_path(this : IAddrBook*, ulflags : UInt32, lpsearchpath : SRowSet*) : HRESULT
+    @lpVtbl.value.set_search_path.call(this, ulflags, lpsearchpath)
+  end
+  def prepare_recips(this : IAddrBook*, ulflags : UInt32, lpproptagarray : SPropTagArray*, lpreciplist : ADRLIST*) : HRESULT
+    @lpVtbl.value.prepare_recips.call(this, ulflags, lpproptagarray, lpreciplist)
+  end
+end
+struct LibWin32::IWABObject
+  def query_interface(this : IWABObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWABObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWABObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IWABObject*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def allocate_buffer(this : IWABObject*, cbsize : UInt32, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_buffer.call(this, cbsize, lppbuffer)
+  end
+  def allocate_more(this : IWABObject*, cbsize : UInt32, lpobject : Void*, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_more.call(this, cbsize, lpobject, lppbuffer)
+  end
+  def free_buffer(this : IWABObject*, lpbuffer : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.call(this, lpbuffer)
+  end
+  def backup(this : IWABObject*, lpfilename : PSTR) : HRESULT
+    @lpVtbl.value.backup.call(this, lpfilename)
+  end
+  def import(this : IWABObject*, lpwip : PSTR) : HRESULT
+    @lpVtbl.value.import.call(this, lpwip)
+  end
+  def find(this : IWABObject*, lpiab : IAddrBook, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.find.call(this, lpiab, hwnd)
+  end
+  def v_card_display(this : IWABObject*, lpiab : IAddrBook, hwnd : LibC::HANDLE, lpszfilename : PSTR) : HRESULT
+    @lpVtbl.value.v_card_display.call(this, lpiab, hwnd, lpszfilename)
+  end
+  def ldap_url(this : IWABObject*, lpiab : IAddrBook, hwnd : LibC::HANDLE, ulflags : UInt32, lpszurl : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.ldap_url.call(this, lpiab, hwnd, ulflags, lpszurl, lppmailuser)
+  end
+  def v_card_create(this : IWABObject*, lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lpmailuser : IMailUser) : HRESULT
+    @lpVtbl.value.v_card_create.call(this, lpiab, ulflags, lpszvcard, lpmailuser)
+  end
+  def v_card_retrieve(this : IWABObject*, lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.v_card_retrieve.call(this, lpiab, ulflags, lpszvcard, lppmailuser)
+  end
+  def get_me(this : IWABObject*, lpiab : IAddrBook, ulflags : UInt32, lpdwaction : UInt32*, lpsbeid : SBinary*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_me.call(this, lpiab, ulflags, lpdwaction, lpsbeid, hwnd)
+  end
+  def set_me(this : IWABObject*, lpiab : IAddrBook, ulflags : UInt32, sbeid : SBinary, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_me.call(this, lpiab, ulflags, sbeid, hwnd)
+  end
+end
+struct LibWin32::IWABOBJECT_
+  def query_interface(this : IWABOBJECT_*, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobj)
+  end
+  def add_ref(this : IWABOBJECT_*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWABOBJECT_*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_last_error(this : IWABOBJECT_*, hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, hresult, ulflags, lppmapierror)
+  end
+  def allocate_buffer(this : IWABOBJECT_*, cbsize : UInt32, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_buffer.call(this, cbsize, lppbuffer)
+  end
+  def allocate_more(this : IWABOBJECT_*, cbsize : UInt32, lpobject : Void*, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_more.call(this, cbsize, lpobject, lppbuffer)
+  end
+  def free_buffer(this : IWABOBJECT_*, lpbuffer : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.call(this, lpbuffer)
+  end
+  def backup(this : IWABOBJECT_*, lpfilename : PSTR) : HRESULT
+    @lpVtbl.value.backup.call(this, lpfilename)
+  end
+  def import(this : IWABOBJECT_*, lpwip : PSTR) : HRESULT
+    @lpVtbl.value.import.call(this, lpwip)
+  end
+  def find(this : IWABOBJECT_*, lpiab : IAddrBook, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.find.call(this, lpiab, hwnd)
+  end
+  def v_card_display(this : IWABOBJECT_*, lpiab : IAddrBook, hwnd : LibC::HANDLE, lpszfilename : PSTR) : HRESULT
+    @lpVtbl.value.v_card_display.call(this, lpiab, hwnd, lpszfilename)
+  end
+  def ldap_url(this : IWABOBJECT_*, lpiab : IAddrBook, hwnd : LibC::HANDLE, ulflags : UInt32, lpszurl : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.ldap_url.call(this, lpiab, hwnd, ulflags, lpszurl, lppmailuser)
+  end
+  def v_card_create(this : IWABOBJECT_*, lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lpmailuser : IMailUser) : HRESULT
+    @lpVtbl.value.v_card_create.call(this, lpiab, ulflags, lpszvcard, lpmailuser)
+  end
+  def v_card_retrieve(this : IWABOBJECT_*, lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.v_card_retrieve.call(this, lpiab, ulflags, lpszvcard, lppmailuser)
+  end
+  def get_me(this : IWABOBJECT_*, lpiab : IAddrBook, ulflags : UInt32, lpdwaction : UInt32*, lpsbeid : SBinary*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_me.call(this, lpiab, ulflags, lpdwaction, lpsbeid, hwnd)
+  end
+  def set_me(this : IWABOBJECT_*, lpiab : IAddrBook, ulflags : UInt32, sbeid : SBinary, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_me.call(this, lpiab, ulflags, sbeid, hwnd)
+  end
+end
+struct LibWin32::IWABExtInit
+  def query_interface(this : IWABExtInit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWABExtInit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWABExtInit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IWABExtInit*, lpwabextdisplay : WABEXTDISPLAY*) : HRESULT
+    @lpVtbl.value.initialize.call(this, lpwabextdisplay)
+  end
 end

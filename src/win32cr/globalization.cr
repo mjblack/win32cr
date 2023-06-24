@@ -4801,7 +4801,7 @@ lib LibWin32
   fun SetThreadPreferredUILanguages2(flags : UInt32, languages : LibC::LPWSTR, numlanguagesset : UInt32*, snapshot : HSAVEDUILANGUAGES*) : LibC::BOOL
 
   # Params # snapshot : HSAVEDUILANGUAGES [In]
-  fun RestoreThreadPreferredUILanguages(snapshot : HSAVEDUILANGUAGES)
+  fun RestoreThreadPreferredUILanguages(snapshot : HSAVEDUILANGUAGES) : Void
 
   # Params # dwflags : UInt32 [In],pcwstrnewlanguage : LibC::LPWSTR [In],pcwstrpreviouslanguage : LibC::LPWSTR [In],dwreserved : UInt32 [In],pdwstatusrtrn : UInt32* [In]
   fun NotifyUILanguageChange(dwflags : UInt32, pcwstrnewlanguage : LibC::LPWSTR, pcwstrpreviouslanguage : LibC::LPWSTR, dwreserved : UInt32, pdwstatusrtrn : UInt32*) : LibC::BOOL
@@ -5065,31 +5065,31 @@ lib LibWin32
   fun utf8_back1SafeBody(s : UInt8*, start : Int32, i : Int32) : Int32
 
   # Params # versionarray : UInt8* [In],versionstring : PSTR [In]
-  fun u_versionFromString(versionarray : UInt8*, versionstring : PSTR)
+  fun u_versionFromString(versionarray : UInt8*, versionstring : PSTR) : Void
 
   # Params # versionarray : UInt8* [In],versionstring : UInt16* [In]
-  fun u_versionFromUString(versionarray : UInt8*, versionstring : UInt16*)
+  fun u_versionFromUString(versionarray : UInt8*, versionstring : UInt16*) : Void
 
   # Params # versionarray : UInt8* [In],versionstring : PSTR [In]
-  fun u_versionToString(versionarray : UInt8*, versionstring : PSTR)
+  fun u_versionToString(versionarray : UInt8*, versionstring : PSTR) : Void
 
   # Params # versionarray : UInt8* [In]
-  fun u_getVersion(versionarray : UInt8*)
+  fun u_getVersion(versionarray : UInt8*) : Void
 
   # Params # code : UErrorCode [In]
   fun u_errorName(code : UErrorCode) : PSTR
 
   # Params # tracelevel : Int32 [In]
-  fun utrace_setLevel(tracelevel : Int32)
+  fun utrace_setLevel(tracelevel : Int32) : Void
 
   # Params # 
   fun utrace_getLevel : Int32
 
   # Params # context : Void* [In],e : UTraceEntry [In],x : UTraceExit [In],d : UTraceData [In]
-  fun utrace_setFunctions(context : Void*, e : UTraceEntry, x : UTraceExit, d : UTraceData)
+  fun utrace_setFunctions(context : Void*, e : UTraceEntry, x : UTraceExit, d : UTraceData) : Void
 
   # Params # context : Void** [In],e : UTraceEntry* [In],x : UTraceExit* [In],d : UTraceData* [In]
-  fun utrace_getFunctions(context : Void**, e : UTraceEntry*, x : UTraceExit*, d : UTraceData*)
+  fun utrace_getFunctions(context : Void**, e : UTraceEntry*, x : UTraceExit*, d : UTraceData*) : Void
 
   # Params # outbuf : PSTR [In],capacity : Int32 [In],indent : Int32 [In],fmt : PSTR [In],args : Int8* [In]
   fun utrace_vformat(outbuf : PSTR, capacity : Int32, indent : Int32, fmt : PSTR, args : Int8*) : Int32
@@ -5149,19 +5149,19 @@ lib LibWin32
   fun uiter_getState(iter : UCharIterator*) : UInt32
 
   # Params # iter : UCharIterator* [In],state : UInt32 [In],perrorcode : UErrorCode* [In]
-  fun uiter_setState(iter : UCharIterator*, state : UInt32, perrorcode : UErrorCode*)
+  fun uiter_setState(iter : UCharIterator*, state : UInt32, perrorcode : UErrorCode*) : Void
 
   # Params # iter : UCharIterator* [In],s : UInt16* [In],length : Int32 [In]
-  fun uiter_setString(iter : UCharIterator*, s : UInt16*, length : Int32)
+  fun uiter_setString(iter : UCharIterator*, s : UInt16*, length : Int32) : Void
 
   # Params # iter : UCharIterator* [In],s : PSTR [In],length : Int32 [In]
-  fun uiter_setUTF16BE(iter : UCharIterator*, s : PSTR, length : Int32)
+  fun uiter_setUTF16BE(iter : UCharIterator*, s : PSTR, length : Int32) : Void
 
   # Params # iter : UCharIterator* [In],s : PSTR [In],length : Int32 [In]
-  fun uiter_setUTF8(iter : UCharIterator*, s : PSTR, length : Int32)
+  fun uiter_setUTF8(iter : UCharIterator*, s : PSTR, length : Int32) : Void
 
   # Params # en : UEnumeration* [In]
-  fun uenum_close(en : UEnumeration*)
+  fun uenum_close(en : UEnumeration*) : Void
 
   # Params # en : UEnumeration* [In],status : UErrorCode* [In]
   fun uenum_count(en : UEnumeration*, status : UErrorCode*) : Int32
@@ -5173,7 +5173,7 @@ lib LibWin32
   fun uenum_next(en : UEnumeration*, resultlength : Int32*, status : UErrorCode*) : PSTR
 
   # Params # en : UEnumeration* [In],status : UErrorCode* [In]
-  fun uenum_reset(en : UEnumeration*, status : UErrorCode*)
+  fun uenum_reset(en : UEnumeration*, status : UErrorCode*) : Void
 
   # Params # strings : UInt16** [In],count : Int32 [In],ec : UErrorCode* [In]
   fun uenum_openUCharStringsEnumeration(strings : UInt16**, count : Int32, ec : UErrorCode*) : UEnumeration*
@@ -5185,7 +5185,7 @@ lib LibWin32
   fun uloc_getDefault : PSTR
 
   # Params # localeid : PSTR [In],status : UErrorCode* [In]
-  fun uloc_setDefault(localeid : PSTR, status : UErrorCode*)
+  fun uloc_setDefault(localeid : PSTR, status : UErrorCode*) : Void
 
   # Params # localeid : PSTR [In],language : PSTR [In],languagecapacity : Int32 [In],err : UErrorCode* [In]
   fun uloc_getLanguage(localeid : PSTR, language : PSTR, languagecapacity : Int32, err : UErrorCode*) : Int32
@@ -5317,10 +5317,10 @@ lib LibWin32
   fun ures_openU(packagename : UInt16*, locale : PSTR, status : UErrorCode*) : UResourceBundle*
 
   # Params # resourcebundle : UResourceBundle* [In]
-  fun ures_close(resourcebundle : UResourceBundle*)
+  fun ures_close(resourcebundle : UResourceBundle*) : Void
 
   # Params # resb : UResourceBundle* [In],versioninfo : UInt8* [In]
-  fun ures_getVersion(resb : UResourceBundle*, versioninfo : UInt8*)
+  fun ures_getVersion(resb : UResourceBundle*, versioninfo : UInt8*) : Void
 
   # Params # resourcebundle : UResourceBundle* [In],type : ULocDataLocaleType [In],status : UErrorCode* [In]
   fun ures_getLocaleByType(resourcebundle : UResourceBundle*, type : ULocDataLocaleType, status : UErrorCode*) : PSTR
@@ -5353,7 +5353,7 @@ lib LibWin32
   fun ures_getKey(resourcebundle : UResourceBundle*) : PSTR
 
   # Params # resourcebundle : UResourceBundle* [In]
-  fun ures_resetIterator(resourcebundle : UResourceBundle*)
+  fun ures_resetIterator(resourcebundle : UResourceBundle*) : Void
 
   # Params # resourcebundle : UResourceBundle* [In]
   fun ures_hasNext(resourcebundle : UResourceBundle*) : Int8
@@ -5389,7 +5389,7 @@ lib LibWin32
   fun uldn_open(locale : PSTR, dialecthandling : UDialectHandling, perrorcode : UErrorCode*) : ULocaleDisplayNames*
 
   # Params # ldn : ULocaleDisplayNames* [In]
-  fun uldn_close(ldn : ULocaleDisplayNames*)
+  fun uldn_close(ldn : ULocaleDisplayNames*) : Void
 
   # Params # ldn : ULocaleDisplayNames* [In]
   fun uldn_getLocale(ldn : ULocaleDisplayNames*) : PSTR
@@ -5482,7 +5482,7 @@ lib LibWin32
   fun ucptrie_openFromBinary(type : UCPTrieType, valuewidth : UCPTrieValueWidth, data : Void*, length : Int32, pactuallength : Int32*, perrorcode : UErrorCode*) : UCPTrie*
 
   # Params # trie : UCPTrie* [In]
-  fun ucptrie_close(trie : UCPTrie*)
+  fun ucptrie_close(trie : UCPTrie*) : Void
 
   # Params # trie : UCPTrie* [In]
   fun ucptrie_getType(trie : UCPTrie*) : UCPTrieType
@@ -5515,7 +5515,7 @@ lib LibWin32
   fun umutablecptrie_clone(other : UMutableCPTrie*, perrorcode : UErrorCode*) : UMutableCPTrie*
 
   # Params # trie : UMutableCPTrie* [In]
-  fun umutablecptrie_close(trie : UMutableCPTrie*)
+  fun umutablecptrie_close(trie : UMutableCPTrie*) : Void
 
   # Params # map : UCPMap* [In],perrorcode : UErrorCode* [In]
   fun umutablecptrie_fromUCPMap(map : UCPMap*, perrorcode : UErrorCode*) : UMutableCPTrie*
@@ -5530,37 +5530,37 @@ lib LibWin32
   fun umutablecptrie_getRange(trie : UMutableCPTrie*, start : Int32, option : UCPMapRangeOption, surrogatevalue : UInt32, filter : UCPMapValueFilter*, context : Void*, pvalue : UInt32*) : Int32
 
   # Params # trie : UMutableCPTrie* [In],c : Int32 [In],value : UInt32 [In],perrorcode : UErrorCode* [In]
-  fun umutablecptrie_set(trie : UMutableCPTrie*, c : Int32, value : UInt32, perrorcode : UErrorCode*)
+  fun umutablecptrie_set(trie : UMutableCPTrie*, c : Int32, value : UInt32, perrorcode : UErrorCode*) : Void
 
   # Params # trie : UMutableCPTrie* [In],start : Int32 [In],end : Int32 [In],value : UInt32 [In],perrorcode : UErrorCode* [In]
-  fun umutablecptrie_setRange(trie : UMutableCPTrie*, start : Int32, end : Int32, value : UInt32, perrorcode : UErrorCode*)
+  fun umutablecptrie_setRange(trie : UMutableCPTrie*, start : Int32, end : Int32, value : UInt32, perrorcode : UErrorCode*) : Void
 
   # Params # trie : UMutableCPTrie* [In],type : UCPTrieType [In],valuewidth : UCPTrieValueWidth [In],perrorcode : UErrorCode* [In]
   fun umutablecptrie_buildImmutable(trie : UMutableCPTrie*, type : UCPTrieType, valuewidth : UCPTrieValueWidth, perrorcode : UErrorCode*) : UCPTrie*
 
   # Params # context : Void* [In],fromuargs : UConverterFromUnicodeArgs* [In],codeunits : UInt16* [In],length : Int32 [In],codepoint : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_FROM_U_CALLBACK_STOP(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_FROM_U_CALLBACK_STOP(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],touargs : UConverterToUnicodeArgs* [In],codeunits : PSTR [In],length : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_TO_U_CALLBACK_STOP(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_TO_U_CALLBACK_STOP(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],fromuargs : UConverterFromUnicodeArgs* [In],codeunits : UInt16* [In],length : Int32 [In],codepoint : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_FROM_U_CALLBACK_SKIP(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_FROM_U_CALLBACK_SKIP(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],fromuargs : UConverterFromUnicodeArgs* [In],codeunits : UInt16* [In],length : Int32 [In],codepoint : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_FROM_U_CALLBACK_SUBSTITUTE(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_FROM_U_CALLBACK_SUBSTITUTE(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],fromuargs : UConverterFromUnicodeArgs* [In],codeunits : UInt16* [In],length : Int32 [In],codepoint : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_FROM_U_CALLBACK_ESCAPE(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_FROM_U_CALLBACK_ESCAPE(context : Void*, fromuargs : UConverterFromUnicodeArgs*, codeunits : UInt16*, length : Int32, codepoint : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],touargs : UConverterToUnicodeArgs* [In],codeunits : PSTR [In],length : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_TO_U_CALLBACK_SKIP(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_TO_U_CALLBACK_SKIP(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],touargs : UConverterToUnicodeArgs* [In],codeunits : PSTR [In],length : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_TO_U_CALLBACK_SUBSTITUTE(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_TO_U_CALLBACK_SUBSTITUTE(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # context : Void* [In],touargs : UConverterToUnicodeArgs* [In],codeunits : PSTR [In],length : Int32 [In],reason : UConverterCallbackReason [In],err : UErrorCode* [In]
-  fun UCNV_TO_U_CALLBACK_ESCAPE(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*)
+  fun UCNV_TO_U_CALLBACK_ESCAPE(context : Void*, touargs : UConverterToUnicodeArgs*, codeunits : PSTR, length : Int32, reason : UConverterCallbackReason, err : UErrorCode*) : Void
 
   # Params # name1 : PSTR [In],name2 : PSTR [In]
   fun ucnv_compareNames(name1 : PSTR, name2 : PSTR) : Int32
@@ -5581,31 +5581,31 @@ lib LibWin32
   fun ucnv_safeClone(cnv : UConverter*, stackbuffer : Void*, pbuffersize : Int32*, status : UErrorCode*) : UConverter*
 
   # Params # converter : UConverter* [In]
-  fun ucnv_close(converter : UConverter*)
+  fun ucnv_close(converter : UConverter*) : Void
 
   # Params # converter : UConverter* [In],subchars : PSTR [In],len : Int8* [In],err : UErrorCode* [In]
-  fun ucnv_getSubstChars(converter : UConverter*, subchars : PSTR, len : Int8*, err : UErrorCode*)
+  fun ucnv_getSubstChars(converter : UConverter*, subchars : PSTR, len : Int8*, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],subchars : PSTR [In],len : Int8 [In],err : UErrorCode* [In]
-  fun ucnv_setSubstChars(converter : UConverter*, subchars : PSTR, len : Int8, err : UErrorCode*)
+  fun ucnv_setSubstChars(converter : UConverter*, subchars : PSTR, len : Int8, err : UErrorCode*) : Void
 
   # Params # cnv : UConverter* [In],s : UInt16* [In],length : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_setSubstString(cnv : UConverter*, s : UInt16*, length : Int32, err : UErrorCode*)
+  fun ucnv_setSubstString(cnv : UConverter*, s : UInt16*, length : Int32, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],errbytes : PSTR [In],len : Int8* [In],err : UErrorCode* [In]
-  fun ucnv_getInvalidChars(converter : UConverter*, errbytes : PSTR, len : Int8*, err : UErrorCode*)
+  fun ucnv_getInvalidChars(converter : UConverter*, errbytes : PSTR, len : Int8*, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],erruchars : UInt16* [In],len : Int8* [In],err : UErrorCode* [In]
-  fun ucnv_getInvalidUChars(converter : UConverter*, erruchars : UInt16*, len : Int8*, err : UErrorCode*)
+  fun ucnv_getInvalidUChars(converter : UConverter*, erruchars : UInt16*, len : Int8*, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In]
-  fun ucnv_reset(converter : UConverter*)
+  fun ucnv_reset(converter : UConverter*) : Void
 
   # Params # converter : UConverter* [In]
-  fun ucnv_resetToUnicode(converter : UConverter*)
+  fun ucnv_resetToUnicode(converter : UConverter*) : Void
 
   # Params # converter : UConverter* [In]
-  fun ucnv_resetFromUnicode(converter : UConverter*)
+  fun ucnv_resetFromUnicode(converter : UConverter*) : Void
 
   # Params # converter : UConverter* [In]
   fun ucnv_getMaxCharSize(converter : UConverter*) : Int8
@@ -5629,28 +5629,28 @@ lib LibWin32
   fun ucnv_getType(converter : UConverter*) : UConverterType
 
   # Params # converter : UConverter* [In],starters : Int8* [In],err : UErrorCode* [In]
-  fun ucnv_getStarters(converter : UConverter*, starters : Int8*, err : UErrorCode*)
+  fun ucnv_getStarters(converter : UConverter*, starters : Int8*, err : UErrorCode*) : Void
 
   # Params # cnv : UConverter* [In],setfillin : USet* [In],whichset : UConverterUnicodeSet [In],perrorcode : UErrorCode* [In]
-  fun ucnv_getUnicodeSet(cnv : UConverter*, setfillin : USet*, whichset : UConverterUnicodeSet, perrorcode : UErrorCode*)
+  fun ucnv_getUnicodeSet(cnv : UConverter*, setfillin : USet*, whichset : UConverterUnicodeSet, perrorcode : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],action : UConverterToUCallback* [In],context : Void** [In]
-  fun ucnv_getToUCallBack(converter : UConverter*, action : UConverterToUCallback*, context : Void**)
+  fun ucnv_getToUCallBack(converter : UConverter*, action : UConverterToUCallback*, context : Void**) : Void
 
   # Params # converter : UConverter* [In],action : UConverterFromUCallback* [In],context : Void** [In]
-  fun ucnv_getFromUCallBack(converter : UConverter*, action : UConverterFromUCallback*, context : Void**)
+  fun ucnv_getFromUCallBack(converter : UConverter*, action : UConverterFromUCallback*, context : Void**) : Void
 
   # Params # converter : UConverter* [In],newaction : UConverterToUCallback [In],newcontext : Void* [In],oldaction : UConverterToUCallback* [In],oldcontext : Void** [In],err : UErrorCode* [In]
-  fun ucnv_setToUCallBack(converter : UConverter*, newaction : UConverterToUCallback, newcontext : Void*, oldaction : UConverterToUCallback*, oldcontext : Void**, err : UErrorCode*)
+  fun ucnv_setToUCallBack(converter : UConverter*, newaction : UConverterToUCallback, newcontext : Void*, oldaction : UConverterToUCallback*, oldcontext : Void**, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],newaction : UConverterFromUCallback [In],newcontext : Void* [In],oldaction : UConverterFromUCallback* [In],oldcontext : Void** [In],err : UErrorCode* [In]
-  fun ucnv_setFromUCallBack(converter : UConverter*, newaction : UConverterFromUCallback, newcontext : Void*, oldaction : UConverterFromUCallback*, oldcontext : Void**, err : UErrorCode*)
+  fun ucnv_setFromUCallBack(converter : UConverter*, newaction : UConverterFromUCallback, newcontext : Void*, oldaction : UConverterFromUCallback*, oldcontext : Void**, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],target : Int8** [In],targetlimit : PSTR [In],source : UInt16** [In],sourcelimit : UInt16* [In],offsets : Int32* [In],flush : Int8 [In],err : UErrorCode* [In]
-  fun ucnv_fromUnicode(converter : UConverter*, target : Int8**, targetlimit : PSTR, source : UInt16**, sourcelimit : UInt16*, offsets : Int32*, flush : Int8, err : UErrorCode*)
+  fun ucnv_fromUnicode(converter : UConverter*, target : Int8**, targetlimit : PSTR, source : UInt16**, sourcelimit : UInt16*, offsets : Int32*, flush : Int8, err : UErrorCode*) : Void
 
   # Params # converter : UConverter* [In],target : UInt16** [In],targetlimit : UInt16* [In],source : Int8** [In],sourcelimit : PSTR [In],offsets : Int32* [In],flush : Int8 [In],err : UErrorCode* [In]
-  fun ucnv_toUnicode(converter : UConverter*, target : UInt16**, targetlimit : UInt16*, source : Int8**, sourcelimit : PSTR, offsets : Int32*, flush : Int8, err : UErrorCode*)
+  fun ucnv_toUnicode(converter : UConverter*, target : UInt16**, targetlimit : UInt16*, source : Int8**, sourcelimit : PSTR, offsets : Int32*, flush : Int8, err : UErrorCode*) : Void
 
   # Params # cnv : UConverter* [In],dest : PSTR [In],destcapacity : Int32 [In],src : UInt16* [In],srclength : Int32 [In],perrorcode : UErrorCode* [In]
   fun ucnv_fromUChars(cnv : UConverter*, dest : PSTR, destcapacity : Int32, src : UInt16*, srclength : Int32, perrorcode : UErrorCode*) : Int32
@@ -5662,7 +5662,7 @@ lib LibWin32
   fun ucnv_getNextUChar(converter : UConverter*, source : Int8**, sourcelimit : PSTR, err : UErrorCode*) : Int32
 
   # Params # targetcnv : UConverter* [In],sourcecnv : UConverter* [In],target : Int8** [In],targetlimit : PSTR [In],source : Int8** [In],sourcelimit : PSTR [In],pivotstart : UInt16* [In],pivotsource : UInt16** [In],pivottarget : UInt16** [In],pivotlimit : UInt16* [In],reset : Int8 [In],flush : Int8 [In],perrorcode : UErrorCode* [In]
-  fun ucnv_convertEx(targetcnv : UConverter*, sourcecnv : UConverter*, target : Int8**, targetlimit : PSTR, source : Int8**, sourcelimit : PSTR, pivotstart : UInt16*, pivotsource : UInt16**, pivottarget : UInt16**, pivotlimit : UInt16*, reset : Int8, flush : Int8, perrorcode : UErrorCode*)
+  fun ucnv_convertEx(targetcnv : UConverter*, sourcecnv : UConverter*, target : Int8**, targetlimit : PSTR, source : Int8**, sourcelimit : PSTR, pivotstart : UInt16*, pivotsource : UInt16**, pivottarget : UInt16**, pivotlimit : UInt16*, reset : Int8, flush : Int8, perrorcode : UErrorCode*) : Void
 
   # Params # toconvertername : PSTR [In],fromconvertername : PSTR [In],target : PSTR [In],targetcapacity : Int32 [In],source : PSTR [In],sourcelength : Int32 [In],perrorcode : UErrorCode* [In]
   fun ucnv_convert(toconvertername : PSTR, fromconvertername : PSTR, target : PSTR, targetcapacity : Int32, source : PSTR, sourcelength : Int32, perrorcode : UErrorCode*) : Int32
@@ -5692,7 +5692,7 @@ lib LibWin32
   fun ucnv_getAlias(alias : PSTR, n : UInt16, perrorcode : UErrorCode*) : PSTR
 
   # Params # alias : PSTR [In],aliases : Int8** [In],perrorcode : UErrorCode* [In]
-  fun ucnv_getAliases(alias : PSTR, aliases : Int8**, perrorcode : UErrorCode*)
+  fun ucnv_getAliases(alias : PSTR, aliases : Int8**, perrorcode : UErrorCode*) : Void
 
   # Params # convname : PSTR [In],standard : PSTR [In],perrorcode : UErrorCode* [In]
   fun ucnv_openStandardNames(convname : PSTR, standard : PSTR, perrorcode : UErrorCode*) : UEnumeration*
@@ -5713,16 +5713,16 @@ lib LibWin32
   fun ucnv_getDefaultName : PSTR
 
   # Params # name : PSTR [In]
-  fun ucnv_setDefaultName(name : PSTR)
+  fun ucnv_setDefaultName(name : PSTR) : Void
 
   # Params # cnv : UConverter* [In],source : UInt16* [In],sourcelen : Int32 [In]
-  fun ucnv_fixFileSeparator(cnv : UConverter*, source : UInt16*, sourcelen : Int32)
+  fun ucnv_fixFileSeparator(cnv : UConverter*, source : UInt16*, sourcelen : Int32) : Void
 
   # Params # cnv : UConverter* [In]
   fun ucnv_isAmbiguous(cnv : UConverter*) : Int8
 
   # Params # cnv : UConverter* [In],usesfallback : Int8 [In]
-  fun ucnv_setFallback(cnv : UConverter*, usesfallback : Int8)
+  fun ucnv_setFallback(cnv : UConverter*, usesfallback : Int8) : Void
 
   # Params # cnv : UConverter* [In]
   fun ucnv_usesFallback(cnv : UConverter*) : Int8
@@ -5740,34 +5740,34 @@ lib LibWin32
   fun ucnv_isFixedWidth(cnv : UConverter*, status : UErrorCode*) : Int8
 
   # Params # args : UConverterFromUnicodeArgs* [In],source : PSTR [In],length : Int32 [In],offsetindex : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_cbFromUWriteBytes(args : UConverterFromUnicodeArgs*, source : PSTR, length : Int32, offsetindex : Int32, err : UErrorCode*)
+  fun ucnv_cbFromUWriteBytes(args : UConverterFromUnicodeArgs*, source : PSTR, length : Int32, offsetindex : Int32, err : UErrorCode*) : Void
 
   # Params # args : UConverterFromUnicodeArgs* [In],offsetindex : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_cbFromUWriteSub(args : UConverterFromUnicodeArgs*, offsetindex : Int32, err : UErrorCode*)
+  fun ucnv_cbFromUWriteSub(args : UConverterFromUnicodeArgs*, offsetindex : Int32, err : UErrorCode*) : Void
 
   # Params # args : UConverterFromUnicodeArgs* [In],source : UInt16** [In],sourcelimit : UInt16* [In],offsetindex : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_cbFromUWriteUChars(args : UConverterFromUnicodeArgs*, source : UInt16**, sourcelimit : UInt16*, offsetindex : Int32, err : UErrorCode*)
+  fun ucnv_cbFromUWriteUChars(args : UConverterFromUnicodeArgs*, source : UInt16**, sourcelimit : UInt16*, offsetindex : Int32, err : UErrorCode*) : Void
 
   # Params # args : UConverterToUnicodeArgs* [In],source : UInt16* [In],length : Int32 [In],offsetindex : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_cbToUWriteUChars(args : UConverterToUnicodeArgs*, source : UInt16*, length : Int32, offsetindex : Int32, err : UErrorCode*)
+  fun ucnv_cbToUWriteUChars(args : UConverterToUnicodeArgs*, source : UInt16*, length : Int32, offsetindex : Int32, err : UErrorCode*) : Void
 
   # Params # args : UConverterToUnicodeArgs* [In],offsetindex : Int32 [In],err : UErrorCode* [In]
-  fun ucnv_cbToUWriteSub(args : UConverterToUnicodeArgs*, offsetindex : Int32, err : UErrorCode*)
+  fun ucnv_cbToUWriteSub(args : UConverterToUnicodeArgs*, offsetindex : Int32, err : UErrorCode*) : Void
 
   # Params # status : UErrorCode* [In]
-  fun u_init(status : UErrorCode*)
+  fun u_init(status : UErrorCode*) : Void
 
   # Params # 
-  fun u_cleanup
+  fun u_cleanup : Void
 
   # Params # context : Void* [In],a : UMemAllocFn* [In],r : UMemReallocFn* [In],f : UMemFreeFn* [In],status : UErrorCode* [In]
-  fun u_setMemoryFunctions(context : Void*, a : UMemAllocFn*, r : UMemReallocFn*, f : UMemFreeFn*, status : UErrorCode*)
+  fun u_setMemoryFunctions(context : Void*, a : UMemAllocFn*, r : UMemReallocFn*, f : UMemFreeFn*, status : UErrorCode*) : Void
 
   # Params # name : PSTR [In],locale : PSTR [In],ec : UErrorCode* [In]
   fun u_catopen(name : PSTR, locale : PSTR, ec : UErrorCode*) : UResourceBundle*
 
   # Params # catd : UResourceBundle* [In]
-  fun u_catclose(catd : UResourceBundle*)
+  fun u_catclose(catd : UResourceBundle*) : Void
 
   # Params # catd : UResourceBundle* [In],set_num : Int32 [In],msg_num : Int32 [In],s : UInt16* [In],len : Int32* [In],ec : UErrorCode* [In]
   fun u_catgets(catd : UResourceBundle*, set_num : Int32, msg_num : Int32, s : UInt16*, len : Int32*, ec : UErrorCode*) : UInt16*
@@ -5875,7 +5875,7 @@ lib LibWin32
   fun u_charType(c : Int32) : Int8
 
   # Params # enumrange : UCharEnumTypeRange* [In],context : Void* [In]
-  fun u_enumCharTypes(enumrange : UCharEnumTypeRange*, context : Void*)
+  fun u_enumCharTypes(enumrange : UCharEnumTypeRange*, context : Void*) : Void
 
   # Params # c : Int32 [In]
   fun u_getCombiningClass(c : Int32) : UInt8
@@ -5893,7 +5893,7 @@ lib LibWin32
   fun u_charFromName(namechoice : UCharNameChoice, name : PSTR, perrorcode : UErrorCode*) : Int32
 
   # Params # start : Int32 [In],limit : Int32 [In],fn : UEnumCharNamesFn* [In],context : Void* [In],namechoice : UCharNameChoice [In],perrorcode : UErrorCode* [In]
-  fun u_enumCharNames(start : Int32, limit : Int32, fn : UEnumCharNamesFn*, context : Void*, namechoice : UCharNameChoice, perrorcode : UErrorCode*)
+  fun u_enumCharNames(start : Int32, limit : Int32, fn : UEnumCharNamesFn*, context : Void*, namechoice : UCharNameChoice, perrorcode : UErrorCode*) : Void
 
   # Params # property : UProperty [In],namechoice : UPropertyNameChoice [In]
   fun u_getPropertyName(property : UProperty, namechoice : UPropertyNameChoice) : PSTR
@@ -5941,10 +5941,10 @@ lib LibWin32
   fun u_forDigit(digit : Int32, radix : Int8) : Int32
 
   # Params # c : Int32 [In],versionarray : UInt8* [In]
-  fun u_charAge(c : Int32, versionarray : UInt8*)
+  fun u_charAge(c : Int32, versionarray : UInt8*) : Void
 
   # Params # versionarray : UInt8* [In]
-  fun u_getUnicodeVersion(versionarray : UInt8*)
+  fun u_getUnicodeVersion(versionarray : UInt8*) : Void
 
   # Params # c : Int32 [In],dest : UInt16* [In],destcapacity : Int32 [In],perrorcode : UErrorCode* [In]
   fun u_getFC_NFKC_Closure(c : Int32, dest : UInt16*, destcapacity : Int32, perrorcode : UErrorCode*) : Int32
@@ -5956,40 +5956,40 @@ lib LibWin32
   fun ubidi_openSized(maxlength : Int32, maxruncount : Int32, perrorcode : UErrorCode*) : UBiDi*
 
   # Params # pbidi : UBiDi* [In]
-  fun ubidi_close(pbidi : UBiDi*)
+  fun ubidi_close(pbidi : UBiDi*) : Void
 
   # Params # pbidi : UBiDi* [In],isinverse : Int8 [In]
-  fun ubidi_setInverse(pbidi : UBiDi*, isinverse : Int8)
+  fun ubidi_setInverse(pbidi : UBiDi*, isinverse : Int8) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_isInverse(pbidi : UBiDi*) : Int8
 
   # Params # pbidi : UBiDi* [In],orderparagraphsltr : Int8 [In]
-  fun ubidi_orderParagraphsLTR(pbidi : UBiDi*, orderparagraphsltr : Int8)
+  fun ubidi_orderParagraphsLTR(pbidi : UBiDi*, orderparagraphsltr : Int8) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_isOrderParagraphsLTR(pbidi : UBiDi*) : Int8
 
   # Params # pbidi : UBiDi* [In],reorderingmode : UBiDiReorderingMode [In]
-  fun ubidi_setReorderingMode(pbidi : UBiDi*, reorderingmode : UBiDiReorderingMode)
+  fun ubidi_setReorderingMode(pbidi : UBiDi*, reorderingmode : UBiDiReorderingMode) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_getReorderingMode(pbidi : UBiDi*) : UBiDiReorderingMode
 
   # Params # pbidi : UBiDi* [In],reorderingoptions : UInt32 [In]
-  fun ubidi_setReorderingOptions(pbidi : UBiDi*, reorderingoptions : UInt32)
+  fun ubidi_setReorderingOptions(pbidi : UBiDi*, reorderingoptions : UInt32) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_getReorderingOptions(pbidi : UBiDi*) : UInt32
 
   # Params # pbidi : UBiDi* [In],prologue : UInt16* [In],prolength : Int32 [In],epilogue : UInt16* [In],epilength : Int32 [In],perrorcode : UErrorCode* [In]
-  fun ubidi_setContext(pbidi : UBiDi*, prologue : UInt16*, prolength : Int32, epilogue : UInt16*, epilength : Int32, perrorcode : UErrorCode*)
+  fun ubidi_setContext(pbidi : UBiDi*, prologue : UInt16*, prolength : Int32, epilogue : UInt16*, epilength : Int32, perrorcode : UErrorCode*) : Void
 
   # Params # pbidi : UBiDi* [In],text : UInt16* [In],length : Int32 [In],paralevel : UInt8 [In],embeddinglevels : UInt8* [In],perrorcode : UErrorCode* [In]
-  fun ubidi_setPara(pbidi : UBiDi*, text : UInt16*, length : Int32, paralevel : UInt8, embeddinglevels : UInt8*, perrorcode : UErrorCode*)
+  fun ubidi_setPara(pbidi : UBiDi*, text : UInt16*, length : Int32, paralevel : UInt8, embeddinglevels : UInt8*, perrorcode : UErrorCode*) : Void
 
   # Params # pparabidi : UBiDi* [In],start : Int32 [In],limit : Int32 [In],plinebidi : UBiDi* [In],perrorcode : UErrorCode* [In]
-  fun ubidi_setLine(pparabidi : UBiDi*, start : Int32, limit : Int32, plinebidi : UBiDi*, perrorcode : UErrorCode*)
+  fun ubidi_setLine(pparabidi : UBiDi*, start : Int32, limit : Int32, plinebidi : UBiDi*, perrorcode : UErrorCode*) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_getDirection(pbidi : UBiDi*) : UBiDiDirection
@@ -6013,7 +6013,7 @@ lib LibWin32
   fun ubidi_getParagraph(pbidi : UBiDi*, charindex : Int32, pparastart : Int32*, pparalimit : Int32*, pparalevel : UInt8*, perrorcode : UErrorCode*) : Int32
 
   # Params # pbidi : UBiDi* [In],paraindex : Int32 [In],pparastart : Int32* [In],pparalimit : Int32* [In],pparalevel : UInt8* [In],perrorcode : UErrorCode* [In]
-  fun ubidi_getParagraphByIndex(pbidi : UBiDi*, paraindex : Int32, pparastart : Int32*, pparalimit : Int32*, pparalevel : UInt8*, perrorcode : UErrorCode*)
+  fun ubidi_getParagraphByIndex(pbidi : UBiDi*, paraindex : Int32, pparastart : Int32*, pparalimit : Int32*, pparalevel : UInt8*, perrorcode : UErrorCode*) : Void
 
   # Params # pbidi : UBiDi* [In],charindex : Int32 [In]
   fun ubidi_getLevelAt(pbidi : UBiDi*, charindex : Int32) : UInt8
@@ -6022,7 +6022,7 @@ lib LibWin32
   fun ubidi_getLevels(pbidi : UBiDi*, perrorcode : UErrorCode*) : UInt8*
 
   # Params # pbidi : UBiDi* [In],logicalposition : Int32 [In],plogicallimit : Int32* [In],plevel : UInt8* [In]
-  fun ubidi_getLogicalRun(pbidi : UBiDi*, logicalposition : Int32, plogicallimit : Int32*, plevel : UInt8*)
+  fun ubidi_getLogicalRun(pbidi : UBiDi*, logicalposition : Int32, plogicallimit : Int32*, plevel : UInt8*) : Void
 
   # Params # pbidi : UBiDi* [In],perrorcode : UErrorCode* [In]
   fun ubidi_countRuns(pbidi : UBiDi*, perrorcode : UErrorCode*) : Int32
@@ -6037,19 +6037,19 @@ lib LibWin32
   fun ubidi_getLogicalIndex(pbidi : UBiDi*, visualindex : Int32, perrorcode : UErrorCode*) : Int32
 
   # Params # pbidi : UBiDi* [In],indexmap : Int32* [In],perrorcode : UErrorCode* [In]
-  fun ubidi_getLogicalMap(pbidi : UBiDi*, indexmap : Int32*, perrorcode : UErrorCode*)
+  fun ubidi_getLogicalMap(pbidi : UBiDi*, indexmap : Int32*, perrorcode : UErrorCode*) : Void
 
   # Params # pbidi : UBiDi* [In],indexmap : Int32* [In],perrorcode : UErrorCode* [In]
-  fun ubidi_getVisualMap(pbidi : UBiDi*, indexmap : Int32*, perrorcode : UErrorCode*)
+  fun ubidi_getVisualMap(pbidi : UBiDi*, indexmap : Int32*, perrorcode : UErrorCode*) : Void
 
   # Params # levels : UInt8* [In],length : Int32 [In],indexmap : Int32* [In]
-  fun ubidi_reorderLogical(levels : UInt8*, length : Int32, indexmap : Int32*)
+  fun ubidi_reorderLogical(levels : UInt8*, length : Int32, indexmap : Int32*) : Void
 
   # Params # levels : UInt8* [In],length : Int32 [In],indexmap : Int32* [In]
-  fun ubidi_reorderVisual(levels : UInt8*, length : Int32, indexmap : Int32*)
+  fun ubidi_reorderVisual(levels : UInt8*, length : Int32, indexmap : Int32*) : Void
 
   # Params # srcmap : Int32* [In],destmap : Int32* [In],length : Int32 [In]
-  fun ubidi_invertMap(srcmap : Int32*, destmap : Int32*, length : Int32)
+  fun ubidi_invertMap(srcmap : Int32*, destmap : Int32*, length : Int32) : Void
 
   # Params # pbidi : UBiDi* [In]
   fun ubidi_getProcessedLength(pbidi : UBiDi*) : Int32
@@ -6061,10 +6061,10 @@ lib LibWin32
   fun ubidi_getCustomizedClass(pbidi : UBiDi*, c : Int32) : UCharDirection
 
   # Params # pbidi : UBiDi* [In],newfn : UBiDiClassCallback [In],newcontext : Void* [In],oldfn : UBiDiClassCallback* [In],oldcontext : Void** [In],perrorcode : UErrorCode* [In]
-  fun ubidi_setClassCallback(pbidi : UBiDi*, newfn : UBiDiClassCallback, newcontext : Void*, oldfn : UBiDiClassCallback*, oldcontext : Void**, perrorcode : UErrorCode*)
+  fun ubidi_setClassCallback(pbidi : UBiDi*, newfn : UBiDiClassCallback, newcontext : Void*, oldfn : UBiDiClassCallback*, oldcontext : Void**, perrorcode : UErrorCode*) : Void
 
   # Params # pbidi : UBiDi* [In],fn : UBiDiClassCallback* [In],context : Void** [In]
-  fun ubidi_getClassCallback(pbidi : UBiDi*, fn : UBiDiClassCallback*, context : Void**)
+  fun ubidi_getClassCallback(pbidi : UBiDi*, fn : UBiDiClassCallback*, context : Void**) : Void
 
   # Params # pbidi : UBiDi* [In],dest : UInt16* [In],destsize : Int32 [In],options : UInt16 [In],perrorcode : UErrorCode* [In]
   fun ubidi_writeReordered(pbidi : UBiDi*, dest : UInt16*, destsize : Int32, options : UInt16, perrorcode : UErrorCode*) : Int32
@@ -6079,7 +6079,7 @@ lib LibWin32
   fun ubiditransform_open(perrorcode : UErrorCode*) : UBiDiTransform*
 
   # Params # pbiditransform : UBiDiTransform* [In]
-  fun ubiditransform_close(pbiditransform : UBiDiTransform*)
+  fun ubiditransform_close(pbiditransform : UBiDiTransform*) : Void
 
   # Params # ut : UText* [In]
   fun utext_close(ut : UText*) : UText*
@@ -6124,7 +6124,7 @@ lib LibWin32
   fun utext_getNativeIndex(ut : UText*) : Int64
 
   # Params # ut : UText* [In],nativeindex : Int64 [In]
-  fun utext_setNativeIndex(ut : UText*, nativeindex : Int64)
+  fun utext_setNativeIndex(ut : UText*, nativeindex : Int64) : Void
 
   # Params # ut : UText* [In],delta : Int32 [In]
   fun utext_moveIndex32(ut : UText*, delta : Int32) : Int8
@@ -6145,10 +6145,10 @@ lib LibWin32
   fun utext_replace(ut : UText*, nativestart : Int64, nativelimit : Int64, replacementtext : UInt16*, replacementlength : Int32, status : UErrorCode*) : Int32
 
   # Params # ut : UText* [In],nativestart : Int64 [In],nativelimit : Int64 [In],destindex : Int64 [In],move : Int8 [In],status : UErrorCode* [In]
-  fun utext_copy(ut : UText*, nativestart : Int64, nativelimit : Int64, destindex : Int64, move : Int8, status : UErrorCode*)
+  fun utext_copy(ut : UText*, nativestart : Int64, nativelimit : Int64, destindex : Int64, move : Int8, status : UErrorCode*) : Void
 
   # Params # ut : UText* [In]
-  fun utext_freeze(ut : UText*)
+  fun utext_freeze(ut : UText*) : Void
 
   # Params # ut : UText* [In],extraspace : Int32 [In],status : UErrorCode* [In]
   fun utext_setup(ut : UText*, extraspace : Int32, status : UErrorCode*) : UText*
@@ -6166,7 +6166,7 @@ lib LibWin32
   fun uset_openPatternOptions(pattern : UInt16*, patternlength : Int32, options : UInt32, ec : UErrorCode*) : USet*
 
   # Params # set : USet* [In]
-  fun uset_close(set : USet*)
+  fun uset_close(set : USet*) : Void
 
   # Params # set : USet* [In]
   fun uset_clone(set : USet*) : USet*
@@ -6175,22 +6175,22 @@ lib LibWin32
   fun uset_isFrozen(set : USet*) : Int8
 
   # Params # set : USet* [In]
-  fun uset_freeze(set : USet*)
+  fun uset_freeze(set : USet*) : Void
 
   # Params # set : USet* [In]
   fun uset_cloneAsThawed(set : USet*) : USet*
 
   # Params # set : USet* [In],start : Int32 [In],end : Int32 [In]
-  fun uset_set(set : USet*, start : Int32, end : Int32)
+  fun uset_set(set : USet*, start : Int32, end : Int32) : Void
 
   # Params # set : USet* [In],pattern : UInt16* [In],patternlength : Int32 [In],options : UInt32 [In],status : UErrorCode* [In]
   fun uset_applyPattern(set : USet*, pattern : UInt16*, patternlength : Int32, options : UInt32, status : UErrorCode*) : Int32
 
   # Params # set : USet* [In],prop : UProperty [In],value : Int32 [In],ec : UErrorCode* [In]
-  fun uset_applyIntPropertyValue(set : USet*, prop : UProperty, value : Int32, ec : UErrorCode*)
+  fun uset_applyIntPropertyValue(set : USet*, prop : UProperty, value : Int32, ec : UErrorCode*) : Void
 
   # Params # set : USet* [In],prop : UInt16* [In],proplength : Int32 [In],value : UInt16* [In],valuelength : Int32 [In],ec : UErrorCode* [In]
-  fun uset_applyPropertyAlias(set : USet*, prop : UInt16*, proplength : Int32, value : UInt16*, valuelength : Int32, ec : UErrorCode*)
+  fun uset_applyPropertyAlias(set : USet*, prop : UInt16*, proplength : Int32, value : UInt16*, valuelength : Int32, ec : UErrorCode*) : Void
 
   # Params # pattern : UInt16* [In],patternlength : Int32 [In],pos : Int32 [In]
   fun uset_resemblesPattern(pattern : UInt16*, patternlength : Int32, pos : Int32) : Int8
@@ -6199,55 +6199,55 @@ lib LibWin32
   fun uset_toPattern(set : USet*, result : UInt16*, resultcapacity : Int32, escapeunprintable : Int8, ec : UErrorCode*) : Int32
 
   # Params # set : USet* [In],c : Int32 [In]
-  fun uset_add(set : USet*, c : Int32)
+  fun uset_add(set : USet*, c : Int32) : Void
 
   # Params # set : USet* [In],additionalset : USet* [In]
-  fun uset_addAll(set : USet*, additionalset : USet*)
+  fun uset_addAll(set : USet*, additionalset : USet*) : Void
 
   # Params # set : USet* [In],start : Int32 [In],end : Int32 [In]
-  fun uset_addRange(set : USet*, start : Int32, end : Int32)
+  fun uset_addRange(set : USet*, start : Int32, end : Int32) : Void
 
   # Params # set : USet* [In],str : UInt16* [In],strlen : Int32 [In]
-  fun uset_addString(set : USet*, str : UInt16*, strlen : Int32)
+  fun uset_addString(set : USet*, str : UInt16*, strlen : Int32) : Void
 
   # Params # set : USet* [In],str : UInt16* [In],strlen : Int32 [In]
-  fun uset_addAllCodePoints(set : USet*, str : UInt16*, strlen : Int32)
+  fun uset_addAllCodePoints(set : USet*, str : UInt16*, strlen : Int32) : Void
 
   # Params # set : USet* [In],c : Int32 [In]
-  fun uset_remove(set : USet*, c : Int32)
+  fun uset_remove(set : USet*, c : Int32) : Void
 
   # Params # set : USet* [In],start : Int32 [In],end : Int32 [In]
-  fun uset_removeRange(set : USet*, start : Int32, end : Int32)
+  fun uset_removeRange(set : USet*, start : Int32, end : Int32) : Void
 
   # Params # set : USet* [In],str : UInt16* [In],strlen : Int32 [In]
-  fun uset_removeString(set : USet*, str : UInt16*, strlen : Int32)
+  fun uset_removeString(set : USet*, str : UInt16*, strlen : Int32) : Void
 
   # Params # set : USet* [In],removeset : USet* [In]
-  fun uset_removeAll(set : USet*, removeset : USet*)
+  fun uset_removeAll(set : USet*, removeset : USet*) : Void
 
   # Params # set : USet* [In],start : Int32 [In],end : Int32 [In]
-  fun uset_retain(set : USet*, start : Int32, end : Int32)
+  fun uset_retain(set : USet*, start : Int32, end : Int32) : Void
 
   # Params # set : USet* [In],retain : USet* [In]
-  fun uset_retainAll(set : USet*, retain : USet*)
+  fun uset_retainAll(set : USet*, retain : USet*) : Void
 
   # Params # set : USet* [In]
-  fun uset_compact(set : USet*)
+  fun uset_compact(set : USet*) : Void
 
   # Params # set : USet* [In]
-  fun uset_complement(set : USet*)
+  fun uset_complement(set : USet*) : Void
 
   # Params # set : USet* [In],complement : USet* [In]
-  fun uset_complementAll(set : USet*, complement : USet*)
+  fun uset_complementAll(set : USet*, complement : USet*) : Void
 
   # Params # set : USet* [In]
-  fun uset_clear(set : USet*)
+  fun uset_clear(set : USet*) : Void
 
   # Params # set : USet* [In],attributes : Int32 [In]
-  fun uset_closeOver(set : USet*, attributes : Int32)
+  fun uset_closeOver(set : USet*, attributes : Int32) : Void
 
   # Params # set : USet* [In]
-  fun uset_removeAllStrings(set : USet*)
+  fun uset_removeAllStrings(set : USet*) : Void
 
   # Params # set : USet* [In]
   fun uset_isEmpty(set : USet*) : Int8
@@ -6310,7 +6310,7 @@ lib LibWin32
   fun uset_getSerializedSet(fillset : USerializedSet*, src : UInt16*, srclength : Int32) : Int8
 
   # Params # fillset : USerializedSet* [In],c : Int32 [In]
-  fun uset_setSerializedToOne(fillset : USerializedSet*, c : Int32)
+  fun uset_setSerializedToOne(fillset : USerializedSet*, c : Int32) : Void
 
   # Params # set : USerializedSet* [In],c : Int32 [In]
   fun uset_serializedContains(set : USerializedSet*, c : Int32) : Int8
@@ -6343,7 +6343,7 @@ lib LibWin32
   fun unorm2_openFiltered(norm2 : UNormalizer2*, filterset : USet*, perrorcode : UErrorCode*) : UNormalizer2*
 
   # Params # norm2 : UNormalizer2* [In]
-  fun unorm2_close(norm2 : UNormalizer2*)
+  fun unorm2_close(norm2 : UNormalizer2*) : Void
 
   # Params # norm2 : UNormalizer2* [In],src : UInt16* [In],length : Int32 [In],dest : UInt16* [In],capacity : Int32 [In],perrorcode : UErrorCode* [In]
   fun unorm2_normalize(norm2 : UNormalizer2*, src : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, perrorcode : UErrorCode*) : Int32
@@ -6391,7 +6391,7 @@ lib LibWin32
   fun ucnvsel_open(converterlist : Int8**, converterlistsize : Int32, excludedcodepoints : USet*, whichset : UConverterUnicodeSet, status : UErrorCode*) : UConverterSelector*
 
   # Params # sel : UConverterSelector* [In]
-  fun ucnvsel_close(sel : UConverterSelector*)
+  fun ucnvsel_close(sel : UConverterSelector*) : Void
 
   # Params # buffer : Void* [In],length : Int32 [In],status : UErrorCode* [In]
   fun ucnvsel_openFromSerialized(buffer : Void*, length : Int32, status : UErrorCode*) : UConverterSelector*
@@ -6406,10 +6406,10 @@ lib LibWin32
   fun ucnvsel_selectForUTF8(sel : UConverterSelector*, s : PSTR, length : Int32, status : UErrorCode*) : UEnumeration*
 
   # Params # cs : PSTR [In],us : UInt16* [In],length : Int32 [In]
-  fun u_charsToUChars(cs : PSTR, us : UInt16*, length : Int32)
+  fun u_charsToUChars(cs : PSTR, us : UInt16*, length : Int32) : Void
 
   # Params # us : UInt16* [In],cs : PSTR [In],length : Int32 [In]
-  fun u_UCharsToChars(us : UInt16*, cs : PSTR, length : Int32)
+  fun u_UCharsToChars(us : UInt16*, cs : PSTR, length : Int32) : Void
 
   # Params # s : UInt16* [In]
   fun u_strlen(s : UInt16*) : Int32
@@ -6598,7 +6598,7 @@ lib LibWin32
   fun ucasemap_open(locale : PSTR, options : UInt32, perrorcode : UErrorCode*) : UCaseMap*
 
   # Params # csm : UCaseMap* [In]
-  fun ucasemap_close(csm : UCaseMap*)
+  fun ucasemap_close(csm : UCaseMap*) : Void
 
   # Params # csm : UCaseMap* [In]
   fun ucasemap_getLocale(csm : UCaseMap*) : PSTR
@@ -6607,16 +6607,16 @@ lib LibWin32
   fun ucasemap_getOptions(csm : UCaseMap*) : UInt32
 
   # Params # csm : UCaseMap* [In],locale : PSTR [In],perrorcode : UErrorCode* [In]
-  fun ucasemap_setLocale(csm : UCaseMap*, locale : PSTR, perrorcode : UErrorCode*)
+  fun ucasemap_setLocale(csm : UCaseMap*, locale : PSTR, perrorcode : UErrorCode*) : Void
 
   # Params # csm : UCaseMap* [In],options : UInt32 [In],perrorcode : UErrorCode* [In]
-  fun ucasemap_setOptions(csm : UCaseMap*, options : UInt32, perrorcode : UErrorCode*)
+  fun ucasemap_setOptions(csm : UCaseMap*, options : UInt32, perrorcode : UErrorCode*) : Void
 
   # Params # csm : UCaseMap* [In]
   fun ucasemap_getBreakIterator(csm : UCaseMap*) : UBreakIterator*
 
   # Params # csm : UCaseMap* [In],itertoadopt : UBreakIterator* [In],perrorcode : UErrorCode* [In]
-  fun ucasemap_setBreakIterator(csm : UCaseMap*, itertoadopt : UBreakIterator*, perrorcode : UErrorCode*)
+  fun ucasemap_setBreakIterator(csm : UCaseMap*, itertoadopt : UBreakIterator*, perrorcode : UErrorCode*) : Void
 
   # Params # csm : UCaseMap* [In],dest : UInt16* [In],destcapacity : Int32 [In],src : UInt16* [In],srclength : Int32 [In],perrorcode : UErrorCode* [In]
   fun ucasemap_toTitle(csm : UCaseMap*, dest : UInt16*, destcapacity : Int32, src : UInt16*, srclength : Int32, perrorcode : UErrorCode*) : Int32
@@ -6640,7 +6640,7 @@ lib LibWin32
   fun usprep_openByType(type : UStringPrepProfileType, status : UErrorCode*) : UStringPrepProfile*
 
   # Params # profile : UStringPrepProfile* [In]
-  fun usprep_close(profile : UStringPrepProfile*)
+  fun usprep_close(profile : UStringPrepProfile*) : Void
 
   # Params # prep : UStringPrepProfile* [In],src : UInt16* [In],srclength : Int32 [In],dest : UInt16* [In],destcapacity : Int32 [In],options : Int32 [In],parseerror : UParseError* [In],status : UErrorCode* [In]
   fun usprep_prepare(prep : UStringPrepProfile*, src : UInt16*, srclength : Int32, dest : UInt16*, destcapacity : Int32, options : Int32, parseerror : UParseError*, status : UErrorCode*) : Int32
@@ -6649,7 +6649,7 @@ lib LibWin32
   fun uidna_openUTS46(options : UInt32, perrorcode : UErrorCode*) : UIDNA*
 
   # Params # idna : UIDNA* [In]
-  fun uidna_close(idna : UIDNA*)
+  fun uidna_close(idna : UIDNA*) : Void
 
   # Params # idna : UIDNA* [In],label : UInt16* [In],length : Int32 [In],dest : UInt16* [In],capacity : Int32 [In],pinfo : UIDNAInfo* [In],perrorcode : UErrorCode* [In]
   fun uidna_labelToASCII(idna : UIDNA*, label : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pinfo : UIDNAInfo*, perrorcode : UErrorCode*) : Int32
@@ -6688,13 +6688,13 @@ lib LibWin32
   fun ubrk_safeClone(bi : UBreakIterator*, stackbuffer : Void*, pbuffersize : Int32*, status : UErrorCode*) : UBreakIterator*
 
   # Params # bi : UBreakIterator* [In]
-  fun ubrk_close(bi : UBreakIterator*)
+  fun ubrk_close(bi : UBreakIterator*) : Void
 
   # Params # bi : UBreakIterator* [In],text : UInt16* [In],textlength : Int32 [In],status : UErrorCode* [In]
-  fun ubrk_setText(bi : UBreakIterator*, text : UInt16*, textlength : Int32, status : UErrorCode*)
+  fun ubrk_setText(bi : UBreakIterator*, text : UInt16*, textlength : Int32, status : UErrorCode*) : Void
 
   # Params # bi : UBreakIterator* [In],text : UText* [In],status : UErrorCode* [In]
-  fun ubrk_setUText(bi : UBreakIterator*, text : UText*, status : UErrorCode*)
+  fun ubrk_setUText(bi : UBreakIterator*, text : UText*, status : UErrorCode*) : Void
 
   # Params # bi : UBreakIterator* [In]
   fun ubrk_current(bi : UBreakIterator*) : Int32
@@ -6736,13 +6736,13 @@ lib LibWin32
   fun ubrk_getLocaleByType(bi : UBreakIterator*, type : ULocDataLocaleType, status : UErrorCode*) : PSTR
 
   # Params # bi : UBreakIterator* [In],text : UText* [In],status : UErrorCode* [In]
-  fun ubrk_refreshUText(bi : UBreakIterator*, text : UText*, status : UErrorCode*)
+  fun ubrk_refreshUText(bi : UBreakIterator*, text : UText*, status : UErrorCode*) : Void
 
   # Params # bi : UBreakIterator* [In],binaryrules : UInt8* [In],rulescapacity : Int32 [In],status : UErrorCode* [In]
   fun ubrk_getBinaryRules(bi : UBreakIterator*, binaryrules : UInt8*, rulescapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # dataversionfillin : UInt8* [In],status : UErrorCode* [In]
-  fun u_getDataVersion(dataversionfillin : UInt8*, status : UErrorCode*)
+  fun u_getDataVersion(dataversionfillin : UInt8*, status : UErrorCode*) : Void
 
   # Params # zonetype : USystemTimeZoneType [In],region : PSTR [In],rawoffset : Int32* [In],ec : UErrorCode* [In]
   fun ucal_openTimeZoneIDEnumeration(zonetype : USystemTimeZoneType, region : PSTR, rawoffset : Int32*, ec : UErrorCode*) : UEnumeration*
@@ -6757,7 +6757,7 @@ lib LibWin32
   fun ucal_getDefaultTimeZone(result : UInt16*, resultcapacity : Int32, ec : UErrorCode*) : Int32
 
   # Params # zoneid : UInt16* [In],ec : UErrorCode* [In]
-  fun ucal_setDefaultTimeZone(zoneid : UInt16*, ec : UErrorCode*)
+  fun ucal_setDefaultTimeZone(zoneid : UInt16*, ec : UErrorCode*) : Void
 
   # Params # result : UInt16* [In],resultcapacity : Int32 [In],ec : UErrorCode* [In]
   fun ucal_getHostTimeZone(result : UInt16*, resultcapacity : Int32, ec : UErrorCode*) : Int32
@@ -6772,13 +6772,13 @@ lib LibWin32
   fun ucal_open(zoneid : UInt16*, len : Int32, locale : PSTR, type : UCalendarType, status : UErrorCode*) : Void**
 
   # Params # cal : Void** [In]
-  fun ucal_close(cal : Void**)
+  fun ucal_close(cal : Void**) : Void
 
   # Params # cal : Void** [In],status : UErrorCode* [In]
   fun ucal_clone(cal : Void**, status : UErrorCode*) : Void**
 
   # Params # cal : Void** [In],zoneid : UInt16* [In],len : Int32 [In],status : UErrorCode* [In]
-  fun ucal_setTimeZone(cal : Void**, zoneid : UInt16*, len : Int32, status : UErrorCode*)
+  fun ucal_setTimeZone(cal : Void**, zoneid : UInt16*, len : Int32, status : UErrorCode*) : Void
 
   # Params # cal : Void** [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun ucal_getTimeZoneID(cal : Void**, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
@@ -6790,7 +6790,7 @@ lib LibWin32
   fun ucal_inDaylightTime(cal : Void**, status : UErrorCode*) : Int8
 
   # Params # cal : Void** [In],date : Float64 [In],perrorcode : UErrorCode* [In]
-  fun ucal_setGregorianChange(cal : Void**, date : Float64, perrorcode : UErrorCode*)
+  fun ucal_setGregorianChange(cal : Void**, date : Float64, perrorcode : UErrorCode*) : Void
 
   # Params # cal : Void** [In],perrorcode : UErrorCode* [In]
   fun ucal_getGregorianChange(cal : Void**, perrorcode : UErrorCode*) : Float64
@@ -6799,7 +6799,7 @@ lib LibWin32
   fun ucal_getAttribute(cal : Void**, attr : UCalendarAttribute) : Int32
 
   # Params # cal : Void** [In],attr : UCalendarAttribute [In],newvalue : Int32 [In]
-  fun ucal_setAttribute(cal : Void**, attr : UCalendarAttribute, newvalue : Int32)
+  fun ucal_setAttribute(cal : Void**, attr : UCalendarAttribute, newvalue : Int32) : Void
 
   # Params # localeindex : Int32 [In]
   fun ucal_getAvailable(localeindex : Int32) : PSTR
@@ -6811,37 +6811,37 @@ lib LibWin32
   fun ucal_getMillis(cal : Void**, status : UErrorCode*) : Float64
 
   # Params # cal : Void** [In],datetime : Float64 [In],status : UErrorCode* [In]
-  fun ucal_setMillis(cal : Void**, datetime : Float64, status : UErrorCode*)
+  fun ucal_setMillis(cal : Void**, datetime : Float64, status : UErrorCode*) : Void
 
   # Params # cal : Void** [In],year : Int32 [In],month : Int32 [In],date : Int32 [In],status : UErrorCode* [In]
-  fun ucal_setDate(cal : Void**, year : Int32, month : Int32, date : Int32, status : UErrorCode*)
+  fun ucal_setDate(cal : Void**, year : Int32, month : Int32, date : Int32, status : UErrorCode*) : Void
 
   # Params # cal : Void** [In],year : Int32 [In],month : Int32 [In],date : Int32 [In],hour : Int32 [In],minute : Int32 [In],second : Int32 [In],status : UErrorCode* [In]
-  fun ucal_setDateTime(cal : Void**, year : Int32, month : Int32, date : Int32, hour : Int32, minute : Int32, second : Int32, status : UErrorCode*)
+  fun ucal_setDateTime(cal : Void**, year : Int32, month : Int32, date : Int32, hour : Int32, minute : Int32, second : Int32, status : UErrorCode*) : Void
 
   # Params # cal1 : Void** [In],cal2 : Void** [In]
   fun ucal_equivalentTo(cal1 : Void**, cal2 : Void**) : Int8
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In],amount : Int32 [In],status : UErrorCode* [In]
-  fun ucal_add(cal : Void**, field : UCalendarDateFields, amount : Int32, status : UErrorCode*)
+  fun ucal_add(cal : Void**, field : UCalendarDateFields, amount : Int32, status : UErrorCode*) : Void
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In],amount : Int32 [In],status : UErrorCode* [In]
-  fun ucal_roll(cal : Void**, field : UCalendarDateFields, amount : Int32, status : UErrorCode*)
+  fun ucal_roll(cal : Void**, field : UCalendarDateFields, amount : Int32, status : UErrorCode*) : Void
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In],status : UErrorCode* [In]
   fun ucal_get(cal : Void**, field : UCalendarDateFields, status : UErrorCode*) : Int32
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In],value : Int32 [In]
-  fun ucal_set(cal : Void**, field : UCalendarDateFields, value : Int32)
+  fun ucal_set(cal : Void**, field : UCalendarDateFields, value : Int32) : Void
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In]
   fun ucal_isSet(cal : Void**, field : UCalendarDateFields) : Int8
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In]
-  fun ucal_clearField(cal : Void**, field : UCalendarDateFields)
+  fun ucal_clearField(cal : Void**, field : UCalendarDateFields) : Void
 
   # Params # calendar : Void** [In]
-  fun ucal_clear(calendar : Void**)
+  fun ucal_clear(calendar : Void**) : Void
 
   # Params # cal : Void** [In],field : UCalendarDateFields [In],type : UCalendarLimitType [In],status : UErrorCode* [In]
   fun ucal_getLimit(cal : Void**, field : UCalendarDateFields, type : UCalendarLimitType, status : UErrorCode*) : Int32
@@ -6889,10 +6889,10 @@ lib LibWin32
   fun ucol_openRules(rules : UInt16*, ruleslength : Int32, normalizationmode : UColAttributeValue, strength : UColAttributeValue, parseerror : UParseError*, status : UErrorCode*) : UCollator*
 
   # Params # coll : UCollator* [In],contractions : USet* [In],expansions : USet* [In],addprefixes : Int8 [In],status : UErrorCode* [In]
-  fun ucol_getContractionsAndExpansions(coll : UCollator*, contractions : USet*, expansions : USet*, addprefixes : Int8, status : UErrorCode*)
+  fun ucol_getContractionsAndExpansions(coll : UCollator*, contractions : USet*, expansions : USet*, addprefixes : Int8, status : UErrorCode*) : Void
 
   # Params # coll : UCollator* [In]
-  fun ucol_close(coll : UCollator*)
+  fun ucol_close(coll : UCollator*) : Void
 
   # Params # coll : UCollator* [In],source : UInt16* [In],sourcelength : Int32 [In],target : UInt16* [In],targetlength : Int32 [In]
   fun ucol_strcoll(coll : UCollator*, source : UInt16*, sourcelength : Int32, target : UInt16*, targetlength : Int32) : UCollationResult
@@ -6916,13 +6916,13 @@ lib LibWin32
   fun ucol_getStrength(coll : UCollator*) : UColAttributeValue
 
   # Params # coll : UCollator* [In],strength : UColAttributeValue [In]
-  fun ucol_setStrength(coll : UCollator*, strength : UColAttributeValue)
+  fun ucol_setStrength(coll : UCollator*, strength : UColAttributeValue) : Void
 
   # Params # coll : UCollator* [In],dest : Int32* [In],destcapacity : Int32 [In],perrorcode : UErrorCode* [In]
   fun ucol_getReorderCodes(coll : UCollator*, dest : Int32*, destcapacity : Int32, perrorcode : UErrorCode*) : Int32
 
   # Params # coll : UCollator* [In],reordercodes : Int32* [In],reordercodeslength : Int32 [In],perrorcode : UErrorCode* [In]
-  fun ucol_setReorderCodes(coll : UCollator*, reordercodes : Int32*, reordercodeslength : Int32, perrorcode : UErrorCode*)
+  fun ucol_setReorderCodes(coll : UCollator*, reordercodes : Int32*, reordercodeslength : Int32, perrorcode : UErrorCode*) : Void
 
   # Params # reordercode : Int32 [In],dest : Int32* [In],destcapacity : Int32 [In],perrorcode : UErrorCode* [In]
   fun ucol_getEquivalentReorderCodes(reordercode : Int32, dest : Int32*, destcapacity : Int32, perrorcode : UErrorCode*) : Int32
@@ -6964,22 +6964,22 @@ lib LibWin32
   fun ucol_getBound(source : UInt8*, sourcelength : Int32, boundtype : UColBoundMode, nooflevels : UInt32, result : UInt8*, resultlength : Int32, status : UErrorCode*) : Int32
 
   # Params # coll : UCollator* [In],info : UInt8* [In]
-  fun ucol_getVersion(coll : UCollator*, info : UInt8*)
+  fun ucol_getVersion(coll : UCollator*, info : UInt8*) : Void
 
   # Params # coll : UCollator* [In],info : UInt8* [In]
-  fun ucol_getUCAVersion(coll : UCollator*, info : UInt8*)
+  fun ucol_getUCAVersion(coll : UCollator*, info : UInt8*) : Void
 
   # Params # src1 : UInt8* [In],src1length : Int32 [In],src2 : UInt8* [In],src2length : Int32 [In],dest : UInt8* [In],destcapacity : Int32 [In]
   fun ucol_mergeSortkeys(src1 : UInt8*, src1length : Int32, src2 : UInt8*, src2length : Int32, dest : UInt8*, destcapacity : Int32) : Int32
 
   # Params # coll : UCollator* [In],attr : UColAttribute [In],value : UColAttributeValue [In],status : UErrorCode* [In]
-  fun ucol_setAttribute(coll : UCollator*, attr : UColAttribute, value : UColAttributeValue, status : UErrorCode*)
+  fun ucol_setAttribute(coll : UCollator*, attr : UColAttribute, value : UColAttributeValue, status : UErrorCode*) : Void
 
   # Params # coll : UCollator* [In],attr : UColAttribute [In],status : UErrorCode* [In]
   fun ucol_getAttribute(coll : UCollator*, attr : UColAttribute, status : UErrorCode*) : UColAttributeValue
 
   # Params # coll : UCollator* [In],group : UColReorderCode [In],perrorcode : UErrorCode* [In]
-  fun ucol_setMaxVariable(coll : UCollator*, group : UColReorderCode, perrorcode : UErrorCode*)
+  fun ucol_setMaxVariable(coll : UCollator*, group : UColReorderCode, perrorcode : UErrorCode*) : Void
 
   # Params # coll : UCollator* [In]
   fun ucol_getMaxVariable(coll : UCollator*) : UColReorderCode
@@ -7012,10 +7012,10 @@ lib LibWin32
   fun ucol_keyHashCode(key : UInt8*, length : Int32) : Int32
 
   # Params # elems : UCollationElements* [In]
-  fun ucol_closeElements(elems : UCollationElements*)
+  fun ucol_closeElements(elems : UCollationElements*) : Void
 
   # Params # elems : UCollationElements* [In]
-  fun ucol_reset(elems : UCollationElements*)
+  fun ucol_reset(elems : UCollationElements*) : Void
 
   # Params # elems : UCollationElements* [In],status : UErrorCode* [In]
   fun ucol_next(elems : UCollationElements*, status : UErrorCode*) : Int32
@@ -7027,13 +7027,13 @@ lib LibWin32
   fun ucol_getMaxExpansion(elems : UCollationElements*, order : Int32) : Int32
 
   # Params # elems : UCollationElements* [In],text : UInt16* [In],textlength : Int32 [In],status : UErrorCode* [In]
-  fun ucol_setText(elems : UCollationElements*, text : UInt16*, textlength : Int32, status : UErrorCode*)
+  fun ucol_setText(elems : UCollationElements*, text : UInt16*, textlength : Int32, status : UErrorCode*) : Void
 
   # Params # elems : UCollationElements* [In]
   fun ucol_getOffset(elems : UCollationElements*) : Int32
 
   # Params # elems : UCollationElements* [In],offset : Int32 [In],status : UErrorCode* [In]
-  fun ucol_setOffset(elems : UCollationElements*, offset : Int32, status : UErrorCode*)
+  fun ucol_setOffset(elems : UCollationElements*, offset : Int32, status : UErrorCode*) : Void
 
   # Params # order : Int32 [In]
   fun ucol_primaryOrder(order : Int32) : Int32
@@ -7048,13 +7048,13 @@ lib LibWin32
   fun ucsdet_open(status : UErrorCode*) : UCharsetDetector*
 
   # Params # ucsd : UCharsetDetector* [In]
-  fun ucsdet_close(ucsd : UCharsetDetector*)
+  fun ucsdet_close(ucsd : UCharsetDetector*) : Void
 
   # Params # ucsd : UCharsetDetector* [In],textin : PSTR [In],len : Int32 [In],status : UErrorCode* [In]
-  fun ucsdet_setText(ucsd : UCharsetDetector*, textin : PSTR, len : Int32, status : UErrorCode*)
+  fun ucsdet_setText(ucsd : UCharsetDetector*, textin : PSTR, len : Int32, status : UErrorCode*) : Void
 
   # Params # ucsd : UCharsetDetector* [In],encoding : PSTR [In],length : Int32 [In],status : UErrorCode* [In]
-  fun ucsdet_setDeclaredEncoding(ucsd : UCharsetDetector*, encoding : PSTR, length : Int32, status : UErrorCode*)
+  fun ucsdet_setDeclaredEncoding(ucsd : UCharsetDetector*, encoding : PSTR, length : Int32, status : UErrorCode*) : Void
 
   # Params # ucsd : UCharsetDetector* [In],status : UErrorCode* [In]
   fun ucsdet_detect(ucsd : UCharsetDetector*, status : UErrorCode*) : UCharsetMatch*
@@ -7087,7 +7087,7 @@ lib LibWin32
   fun ufieldpositer_open(status : UErrorCode*) : UFieldPositionIterator*
 
   # Params # fpositer : UFieldPositionIterator* [In]
-  fun ufieldpositer_close(fpositer : UFieldPositionIterator*)
+  fun ufieldpositer_close(fpositer : UFieldPositionIterator*) : Void
 
   # Params # fpositer : UFieldPositionIterator* [In],beginindex : Int32* [In],endindex : Int32* [In]
   fun ufieldpositer_next(fpositer : UFieldPositionIterator*, beginindex : Int32*, endindex : Int32*) : Int32
@@ -7096,7 +7096,7 @@ lib LibWin32
   fun ufmt_open(status : UErrorCode*) : Void**
 
   # Params # fmt : Void** [In]
-  fun ufmt_close(fmt : Void**)
+  fun ufmt_close(fmt : Void**) : Void
 
   # Params # fmt : Void** [In],status : UErrorCode* [In]
   fun ufmt_getType(fmt : Void**, status : UErrorCode*) : UFormattableType
@@ -7135,16 +7135,16 @@ lib LibWin32
   fun ucfpos_open(ec : UErrorCode*) : UConstrainedFieldPosition*
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],ec : UErrorCode* [In]
-  fun ucfpos_reset(ucfpos : UConstrainedFieldPosition*, ec : UErrorCode*)
+  fun ucfpos_reset(ucfpos : UConstrainedFieldPosition*, ec : UErrorCode*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In]
-  fun ucfpos_close(ucfpos : UConstrainedFieldPosition*)
+  fun ucfpos_close(ucfpos : UConstrainedFieldPosition*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],category : Int32 [In],ec : UErrorCode* [In]
-  fun ucfpos_constrainCategory(ucfpos : UConstrainedFieldPosition*, category : Int32, ec : UErrorCode*)
+  fun ucfpos_constrainCategory(ucfpos : UConstrainedFieldPosition*, category : Int32, ec : UErrorCode*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],category : Int32 [In],field : Int32 [In],ec : UErrorCode* [In]
-  fun ucfpos_constrainField(ucfpos : UConstrainedFieldPosition*, category : Int32, field : Int32, ec : UErrorCode*)
+  fun ucfpos_constrainField(ucfpos : UConstrainedFieldPosition*, category : Int32, field : Int32, ec : UErrorCode*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],ec : UErrorCode* [In]
   fun ucfpos_getCategory(ucfpos : UConstrainedFieldPosition*, ec : UErrorCode*) : Int32
@@ -7153,19 +7153,19 @@ lib LibWin32
   fun ucfpos_getField(ucfpos : UConstrainedFieldPosition*, ec : UErrorCode*) : Int32
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],pstart : Int32* [In],plimit : Int32* [In],ec : UErrorCode* [In]
-  fun ucfpos_getIndexes(ucfpos : UConstrainedFieldPosition*, pstart : Int32*, plimit : Int32*, ec : UErrorCode*)
+  fun ucfpos_getIndexes(ucfpos : UConstrainedFieldPosition*, pstart : Int32*, plimit : Int32*, ec : UErrorCode*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],ec : UErrorCode* [In]
   fun ucfpos_getInt64IterationContext(ucfpos : UConstrainedFieldPosition*, ec : UErrorCode*) : Int64
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],context : Int64 [In],ec : UErrorCode* [In]
-  fun ucfpos_setInt64IterationContext(ucfpos : UConstrainedFieldPosition*, context : Int64, ec : UErrorCode*)
+  fun ucfpos_setInt64IterationContext(ucfpos : UConstrainedFieldPosition*, context : Int64, ec : UErrorCode*) : Void
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],category : Int32 [In],field : Int32 [In],ec : UErrorCode* [In]
   fun ucfpos_matchesField(ucfpos : UConstrainedFieldPosition*, category : Int32, field : Int32, ec : UErrorCode*) : Int8
 
   # Params # ucfpos : UConstrainedFieldPosition* [In],category : Int32 [In],field : Int32 [In],start : Int32 [In],limit : Int32 [In],ec : UErrorCode* [In]
-  fun ucfpos_setState(ucfpos : UConstrainedFieldPosition*, category : Int32, field : Int32, start : Int32, limit : Int32, ec : UErrorCode*)
+  fun ucfpos_setState(ucfpos : UConstrainedFieldPosition*, category : Int32, field : Int32, start : Int32, limit : Int32, ec : UErrorCode*) : Void
 
   # Params # ufmtval : UFormattedValue* [In],plength : Int32* [In],ec : UErrorCode* [In]
   fun ufmtval_getString(ufmtval : UFormattedValue*, plength : Int32*, ec : UErrorCode*) : UInt16*
@@ -7177,7 +7177,7 @@ lib LibWin32
   fun udtitvfmt_open(locale : PSTR, skeleton : UInt16*, skeletonlength : Int32, tzid : UInt16*, tzidlength : Int32, status : UErrorCode*) : UDateIntervalFormat*
 
   # Params # formatter : UDateIntervalFormat* [In]
-  fun udtitvfmt_close(formatter : UDateIntervalFormat*)
+  fun udtitvfmt_close(formatter : UDateIntervalFormat*) : Void
 
   # Params # ec : UErrorCode* [In]
   fun udtitvfmt_openResult(ec : UErrorCode*) : UFormattedDateInterval*
@@ -7186,7 +7186,7 @@ lib LibWin32
   fun udtitvfmt_resultAsValue(uresult : UFormattedDateInterval*, ec : UErrorCode*) : UFormattedValue*
 
   # Params # uresult : UFormattedDateInterval* [In]
-  fun udtitvfmt_closeResult(uresult : UFormattedDateInterval*)
+  fun udtitvfmt_closeResult(uresult : UFormattedDateInterval*) : Void
 
   # Params # formatter : UDateIntervalFormat* [In],fromdate : Float64 [In],todate : Float64 [In],result : UInt16* [In],resultcapacity : Int32 [In],position : UFieldPosition* [In],status : UErrorCode* [In]
   fun udtitvfmt_format(formatter : UDateIntervalFormat*, fromdate : Float64, todate : Float64, result : UInt16*, resultcapacity : Int32, position : UFieldPosition*, status : UErrorCode*) : Int32
@@ -7204,7 +7204,7 @@ lib LibWin32
   fun ulistfmt_openForType(locale : PSTR, type : UListFormatterType, width : UListFormatterWidth, status : UErrorCode*) : UListFormatter*
 
   # Params # listfmt : UListFormatter* [In]
-  fun ulistfmt_close(listfmt : UListFormatter*)
+  fun ulistfmt_close(listfmt : UListFormatter*) : Void
 
   # Params # ec : UErrorCode* [In]
   fun ulistfmt_openResult(ec : UErrorCode*) : UFormattedList*
@@ -7213,22 +7213,22 @@ lib LibWin32
   fun ulistfmt_resultAsValue(uresult : UFormattedList*, ec : UErrorCode*) : UFormattedValue*
 
   # Params # uresult : UFormattedList* [In]
-  fun ulistfmt_closeResult(uresult : UFormattedList*)
+  fun ulistfmt_closeResult(uresult : UFormattedList*) : Void
 
   # Params # listfmt : UListFormatter* [In],strings : UInt16** [In],stringlengths : Int32* [In],stringcount : Int32 [In],result : UInt16* [In],resultcapacity : Int32 [In],status : UErrorCode* [In]
   fun ulistfmt_format(listfmt : UListFormatter*, strings : UInt16**, stringlengths : Int32*, stringcount : Int32, result : UInt16*, resultcapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # listfmt : UListFormatter* [In],strings : UInt16** [In],stringlengths : Int32* [In],stringcount : Int32 [In],uresult : UFormattedList* [In],status : UErrorCode* [In]
-  fun ulistfmt_formatStringsToResult(listfmt : UListFormatter*, strings : UInt16**, stringlengths : Int32*, stringcount : Int32, uresult : UFormattedList*, status : UErrorCode*)
+  fun ulistfmt_formatStringsToResult(listfmt : UListFormatter*, strings : UInt16**, stringlengths : Int32*, stringcount : Int32, uresult : UFormattedList*, status : UErrorCode*) : Void
 
   # Params # localeid : PSTR [In],status : UErrorCode* [In]
   fun ulocdata_open(localeid : PSTR, status : UErrorCode*) : ULocaleData*
 
   # Params # uld : ULocaleData* [In]
-  fun ulocdata_close(uld : ULocaleData*)
+  fun ulocdata_close(uld : ULocaleData*) : Void
 
   # Params # uld : ULocaleData* [In],setting : Int8 [In]
-  fun ulocdata_setNoSubstitute(uld : ULocaleData*, setting : Int8)
+  fun ulocdata_setNoSubstitute(uld : ULocaleData*, setting : Int8) : Void
 
   # Params # uld : ULocaleData* [In]
   fun ulocdata_getNoSubstitute(uld : ULocaleData*) : Int8
@@ -7243,10 +7243,10 @@ lib LibWin32
   fun ulocdata_getMeasurementSystem(localeid : PSTR, status : UErrorCode*) : UMeasurementSystem
 
   # Params # localeid : PSTR [In],height : Int32* [In],width : Int32* [In],status : UErrorCode* [In]
-  fun ulocdata_getPaperSize(localeid : PSTR, height : Int32*, width : Int32*, status : UErrorCode*)
+  fun ulocdata_getPaperSize(localeid : PSTR, height : Int32*, width : Int32*, status : UErrorCode*) : Void
 
   # Params # versionarray : UInt8* [In],status : UErrorCode* [In]
-  fun ulocdata_getCLDRVersion(versionarray : UInt8*, status : UErrorCode*)
+  fun ulocdata_getCLDRVersion(versionarray : UInt8*, status : UErrorCode*) : Void
 
   # Params # uld : ULocaleData* [In],pattern : UInt16* [In],patterncapacity : Int32 [In],status : UErrorCode* [In]
   fun ulocdata_getLocaleDisplayPattern(uld : ULocaleData*, pattern : UInt16*, patterncapacity : Int32, status : UErrorCode*) : Int32
@@ -7261,10 +7261,10 @@ lib LibWin32
   fun u_vformatMessage(locale : PSTR, pattern : UInt16*, patternlength : Int32, result : UInt16*, resultlength : Int32, ap : Int8*, status : UErrorCode*) : Int32
 
   # Params # locale : PSTR [In],pattern : UInt16* [In],patternlength : Int32 [In],source : UInt16* [In],sourcelength : Int32 [In],status : UErrorCode* [In]
-  fun u_parseMessage(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, status : UErrorCode*)
+  fun u_parseMessage(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, status : UErrorCode*) : Void
 
   # Params # locale : PSTR [In],pattern : UInt16* [In],patternlength : Int32 [In],source : UInt16* [In],sourcelength : Int32 [In],ap : Int8* [In],status : UErrorCode* [In]
-  fun u_vparseMessage(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, ap : Int8*, status : UErrorCode*)
+  fun u_vparseMessage(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, ap : Int8*, status : UErrorCode*) : Void
 
   # Params # locale : PSTR [In],pattern : UInt16* [In],patternlength : Int32 [In],result : UInt16* [In],resultlength : Int32 [In],parseerror : UParseError* [In],status : UErrorCode* [In]
   fun u_formatMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, result : UInt16*, resultlength : Int32, parseerror : UParseError*, status : UErrorCode*) : Int32
@@ -7273,28 +7273,28 @@ lib LibWin32
   fun u_vformatMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, result : UInt16*, resultlength : Int32, parseerror : UParseError*, ap : Int8*, status : UErrorCode*) : Int32
 
   # Params # locale : PSTR [In],pattern : UInt16* [In],patternlength : Int32 [In],source : UInt16* [In],sourcelength : Int32 [In],parseerror : UParseError* [In],status : UErrorCode* [In]
-  fun u_parseMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, parseerror : UParseError*, status : UErrorCode*)
+  fun u_parseMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, parseerror : UParseError*, status : UErrorCode*) : Void
 
   # Params # locale : PSTR [In],pattern : UInt16* [In],patternlength : Int32 [In],source : UInt16* [In],sourcelength : Int32 [In],ap : Int8* [In],parseerror : UParseError* [In],status : UErrorCode* [In]
-  fun u_vparseMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, ap : Int8*, parseerror : UParseError*, status : UErrorCode*)
+  fun u_vparseMessageWithError(locale : PSTR, pattern : UInt16*, patternlength : Int32, source : UInt16*, sourcelength : Int32, ap : Int8*, parseerror : UParseError*, status : UErrorCode*) : Void
 
   # Params # pattern : UInt16* [In],patternlength : Int32 [In],locale : PSTR [In],parseerror : UParseError* [In],status : UErrorCode* [In]
   fun umsg_open(pattern : UInt16*, patternlength : Int32, locale : PSTR, parseerror : UParseError*, status : UErrorCode*) : Void**
 
   # Params # format : Void** [In]
-  fun umsg_close(format : Void**)
+  fun umsg_close(format : Void**) : Void
 
   # Params # fmt : Void** [In],status : UErrorCode* [In]
   fun umsg_clone(fmt : Void**, status : UErrorCode*) : Void*
 
   # Params # fmt : Void** [In],locale : PSTR [In]
-  fun umsg_setLocale(fmt : Void**, locale : PSTR)
+  fun umsg_setLocale(fmt : Void**, locale : PSTR) : Void
 
   # Params # fmt : Void** [In]
   fun umsg_getLocale(fmt : Void**) : PSTR
 
   # Params # fmt : Void** [In],pattern : UInt16* [In],patternlength : Int32 [In],parseerror : UParseError* [In],status : UErrorCode* [In]
-  fun umsg_applyPattern(fmt : Void**, pattern : UInt16*, patternlength : Int32, parseerror : UParseError*, status : UErrorCode*)
+  fun umsg_applyPattern(fmt : Void**, pattern : UInt16*, patternlength : Int32, parseerror : UParseError*, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun umsg_toPattern(fmt : Void**, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
@@ -7306,10 +7306,10 @@ lib LibWin32
   fun umsg_vformat(fmt : Void**, result : UInt16*, resultlength : Int32, ap : Int8*, status : UErrorCode*) : Int32
 
   # Params # fmt : Void** [In],source : UInt16* [In],sourcelength : Int32 [In],count : Int32* [In],status : UErrorCode* [In]
-  fun umsg_parse(fmt : Void**, source : UInt16*, sourcelength : Int32, count : Int32*, status : UErrorCode*)
+  fun umsg_parse(fmt : Void**, source : UInt16*, sourcelength : Int32, count : Int32*, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],source : UInt16* [In],sourcelength : Int32 [In],count : Int32* [In],ap : Int8* [In],status : UErrorCode* [In]
-  fun umsg_vparse(fmt : Void**, source : UInt16*, sourcelength : Int32, count : Int32*, ap : Int8*, status : UErrorCode*)
+  fun umsg_vparse(fmt : Void**, source : UInt16*, sourcelength : Int32, count : Int32*, ap : Int8*, status : UErrorCode*) : Void
 
   # Params # pattern : UInt16* [In],patternlength : Int32 [In],dest : UInt16* [In],destcapacity : Int32 [In],ec : UErrorCode* [In]
   fun umsg_autoQuoteApostrophe(pattern : UInt16*, patternlength : Int32, dest : UInt16*, destcapacity : Int32, ec : UErrorCode*) : Int32
@@ -7318,7 +7318,7 @@ lib LibWin32
   fun unum_open(style : UNumberFormatStyle, pattern : UInt16*, patternlength : Int32, locale : PSTR, parseerr : UParseError*, status : UErrorCode*) : Void**
 
   # Params # fmt : Void** [In]
-  fun unum_close(fmt : Void**)
+  fun unum_close(fmt : Void**) : Void
 
   # Params # fmt : Void** [In],status : UErrorCode* [In]
   fun unum_clone(fmt : Void**, status : UErrorCode*) : Void**
@@ -7363,7 +7363,7 @@ lib LibWin32
   fun unum_parseToUFormattable(fmt : Void**, result : Void**, text : UInt16*, textlength : Int32, parsepos : Int32*, status : UErrorCode*) : Void**
 
   # Params # format : Void** [In],localized : Int8 [In],pattern : UInt16* [In],patternlength : Int32 [In],parseerror : UParseError* [In],status : UErrorCode* [In]
-  fun unum_applyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternlength : Int32, parseerror : UParseError*, status : UErrorCode*)
+  fun unum_applyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternlength : Int32, parseerror : UParseError*, status : UErrorCode*) : Void
 
   # Params # localeindex : Int32 [In]
   fun unum_getAvailable(localeindex : Int32) : PSTR
@@ -7375,19 +7375,19 @@ lib LibWin32
   fun unum_getAttribute(fmt : Void**, attr : UNumberFormatAttribute) : Int32
 
   # Params # fmt : Void** [In],attr : UNumberFormatAttribute [In],newvalue : Int32 [In]
-  fun unum_setAttribute(fmt : Void**, attr : UNumberFormatAttribute, newvalue : Int32)
+  fun unum_setAttribute(fmt : Void**, attr : UNumberFormatAttribute, newvalue : Int32) : Void
 
   # Params # fmt : Void** [In],attr : UNumberFormatAttribute [In]
   fun unum_getDoubleAttribute(fmt : Void**, attr : UNumberFormatAttribute) : Float64
 
   # Params # fmt : Void** [In],attr : UNumberFormatAttribute [In],newvalue : Float64 [In]
-  fun unum_setDoubleAttribute(fmt : Void**, attr : UNumberFormatAttribute, newvalue : Float64)
+  fun unum_setDoubleAttribute(fmt : Void**, attr : UNumberFormatAttribute, newvalue : Float64) : Void
 
   # Params # fmt : Void** [In],tag : UNumberFormatTextAttribute [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun unum_getTextAttribute(fmt : Void**, tag : UNumberFormatTextAttribute, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
 
   # Params # fmt : Void** [In],tag : UNumberFormatTextAttribute [In],newvalue : UInt16* [In],newvaluelength : Int32 [In],status : UErrorCode* [In]
-  fun unum_setTextAttribute(fmt : Void**, tag : UNumberFormatTextAttribute, newvalue : UInt16*, newvaluelength : Int32, status : UErrorCode*)
+  fun unum_setTextAttribute(fmt : Void**, tag : UNumberFormatTextAttribute, newvalue : UInt16*, newvaluelength : Int32, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],ispatternlocalized : Int8 [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun unum_toPattern(fmt : Void**, ispatternlocalized : Int8, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
@@ -7396,13 +7396,13 @@ lib LibWin32
   fun unum_getSymbol(fmt : Void**, symbol : UNumberFormatSymbol, buffer : UInt16*, size : Int32, status : UErrorCode*) : Int32
 
   # Params # fmt : Void** [In],symbol : UNumberFormatSymbol [In],value : UInt16* [In],length : Int32 [In],status : UErrorCode* [In]
-  fun unum_setSymbol(fmt : Void**, symbol : UNumberFormatSymbol, value : UInt16*, length : Int32, status : UErrorCode*)
+  fun unum_setSymbol(fmt : Void**, symbol : UNumberFormatSymbol, value : UInt16*, length : Int32, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],type : ULocDataLocaleType [In],status : UErrorCode* [In]
   fun unum_getLocaleByType(fmt : Void**, type : ULocDataLocaleType, status : UErrorCode*) : PSTR
 
   # Params # fmt : Void** [In],value : UDisplayContext [In],status : UErrorCode* [In]
-  fun unum_setContext(fmt : Void**, value : UDisplayContext, status : UErrorCode*)
+  fun unum_setContext(fmt : Void**, value : UDisplayContext, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],type : UDisplayContextType [In],status : UErrorCode* [In]
   fun unum_getContext(fmt : Void**, type : UDisplayContextType, status : UErrorCode*) : UDisplayContext
@@ -7414,13 +7414,13 @@ lib LibWin32
   fun udat_open(timestyle : UDateFormatStyle, datestyle : UDateFormatStyle, locale : PSTR, tzid : UInt16*, tzidlength : Int32, pattern : UInt16*, patternlength : Int32, status : UErrorCode*) : Void**
 
   # Params # format : Void** [In]
-  fun udat_close(format : Void**)
+  fun udat_close(format : Void**) : Void
 
   # Params # fmt : Void** [In],attr : UDateFormatBooleanAttribute [In],status : UErrorCode* [In]
   fun udat_getBooleanAttribute(fmt : Void**, attr : UDateFormatBooleanAttribute, status : UErrorCode*) : Int8
 
   # Params # fmt : Void** [In],attr : UDateFormatBooleanAttribute [In],newvalue : Int8 [In],status : UErrorCode* [In]
-  fun udat_setBooleanAttribute(fmt : Void**, attr : UDateFormatBooleanAttribute, newvalue : Int8, status : UErrorCode*)
+  fun udat_setBooleanAttribute(fmt : Void**, attr : UDateFormatBooleanAttribute, newvalue : Int8, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],status : UErrorCode* [In]
   fun udat_clone(fmt : Void**, status : UErrorCode*) : Void**
@@ -7441,19 +7441,19 @@ lib LibWin32
   fun udat_parse(format : Void**, text : UInt16*, textlength : Int32, parsepos : Int32*, status : UErrorCode*) : Float64
 
   # Params # format : Void** [In],calendar : Void** [In],text : UInt16* [In],textlength : Int32 [In],parsepos : Int32* [In],status : UErrorCode* [In]
-  fun udat_parseCalendar(format : Void**, calendar : Void**, text : UInt16*, textlength : Int32, parsepos : Int32*, status : UErrorCode*)
+  fun udat_parseCalendar(format : Void**, calendar : Void**, text : UInt16*, textlength : Int32, parsepos : Int32*, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In]
   fun udat_isLenient(fmt : Void**) : Int8
 
   # Params # fmt : Void** [In],islenient : Int8 [In]
-  fun udat_setLenient(fmt : Void**, islenient : Int8)
+  fun udat_setLenient(fmt : Void**, islenient : Int8) : Void
 
   # Params # fmt : Void** [In]
   fun udat_getCalendar(fmt : Void**) : Void**
 
   # Params # fmt : Void** [In],calendartoset : Void** [In]
-  fun udat_setCalendar(fmt : Void**, calendartoset : Void**)
+  fun udat_setCalendar(fmt : Void**, calendartoset : Void**) : Void
 
   # Params # fmt : Void** [In]
   fun udat_getNumberFormat(fmt : Void**) : Void**
@@ -7462,13 +7462,13 @@ lib LibWin32
   fun udat_getNumberFormatForField(fmt : Void**, field : UInt16) : Void**
 
   # Params # fmt : Void** [In],fields : UInt16* [In],numberformattoset : Void** [In],status : UErrorCode* [In]
-  fun udat_adoptNumberFormatForFields(fmt : Void**, fields : UInt16*, numberformattoset : Void**, status : UErrorCode*)
+  fun udat_adoptNumberFormatForFields(fmt : Void**, fields : UInt16*, numberformattoset : Void**, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],numberformattoset : Void** [In]
-  fun udat_setNumberFormat(fmt : Void**, numberformattoset : Void**)
+  fun udat_setNumberFormat(fmt : Void**, numberformattoset : Void**) : Void
 
   # Params # fmt : Void** [In],numberformattoadopt : Void** [In]
-  fun udat_adoptNumberFormat(fmt : Void**, numberformattoadopt : Void**)
+  fun udat_adoptNumberFormat(fmt : Void**, numberformattoadopt : Void**) : Void
 
   # Params # localeindex : Int32 [In]
   fun udat_getAvailable(localeindex : Int32) : PSTR
@@ -7480,13 +7480,13 @@ lib LibWin32
   fun udat_get2DigitYearStart(fmt : Void**, status : UErrorCode*) : Float64
 
   # Params # fmt : Void** [In],d : Float64 [In],status : UErrorCode* [In]
-  fun udat_set2DigitYearStart(fmt : Void**, d : Float64, status : UErrorCode*)
+  fun udat_set2DigitYearStart(fmt : Void**, d : Float64, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],localized : Int8 [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun udat_toPattern(fmt : Void**, localized : Int8, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
 
   # Params # format : Void** [In],localized : Int8 [In],pattern : UInt16* [In],patternlength : Int32 [In]
-  fun udat_applyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternlength : Int32)
+  fun udat_applyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternlength : Int32) : Void
 
   # Params # fmt : Void** [In],type : UDateFormatSymbolType [In],symbolindex : Int32 [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun udat_getSymbols(fmt : Void**, type : UDateFormatSymbolType, symbolindex : Int32, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
@@ -7495,13 +7495,13 @@ lib LibWin32
   fun udat_countSymbols(fmt : Void**, type : UDateFormatSymbolType) : Int32
 
   # Params # format : Void** [In],type : UDateFormatSymbolType [In],symbolindex : Int32 [In],value : UInt16* [In],valuelength : Int32 [In],status : UErrorCode* [In]
-  fun udat_setSymbols(format : Void**, type : UDateFormatSymbolType, symbolindex : Int32, value : UInt16*, valuelength : Int32, status : UErrorCode*)
+  fun udat_setSymbols(format : Void**, type : UDateFormatSymbolType, symbolindex : Int32, value : UInt16*, valuelength : Int32, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],type : ULocDataLocaleType [In],status : UErrorCode* [In]
   fun udat_getLocaleByType(fmt : Void**, type : ULocDataLocaleType, status : UErrorCode*) : PSTR
 
   # Params # fmt : Void** [In],value : UDisplayContext [In],status : UErrorCode* [In]
-  fun udat_setContext(fmt : Void**, value : UDisplayContext, status : UErrorCode*)
+  fun udat_setContext(fmt : Void**, value : UDisplayContext, status : UErrorCode*) : Void
 
   # Params # fmt : Void** [In],type : UDisplayContextType [In],status : UErrorCode* [In]
   fun udat_getContext(fmt : Void**, type : UDisplayContextType, status : UErrorCode*) : UDisplayContext
@@ -7513,7 +7513,7 @@ lib LibWin32
   fun udatpg_openEmpty(perrorcode : UErrorCode*) : Void**
 
   # Params # dtpg : Void** [In]
-  fun udatpg_close(dtpg : Void**)
+  fun udatpg_close(dtpg : Void**) : Void
 
   # Params # dtpg : Void** [In],perrorcode : UErrorCode* [In]
   fun udatpg_clone(dtpg : Void**, perrorcode : UErrorCode*) : Void**
@@ -7534,13 +7534,13 @@ lib LibWin32
   fun udatpg_addPattern(dtpg : Void**, pattern : UInt16*, patternlength : Int32, override : Int8, conflictingpattern : UInt16*, capacity : Int32, plength : Int32*, perrorcode : UErrorCode*) : UDateTimePatternConflict
 
   # Params # dtpg : Void** [In],field : UDateTimePatternField [In],value : UInt16* [In],length : Int32 [In]
-  fun udatpg_setAppendItemFormat(dtpg : Void**, field : UDateTimePatternField, value : UInt16*, length : Int32)
+  fun udatpg_setAppendItemFormat(dtpg : Void**, field : UDateTimePatternField, value : UInt16*, length : Int32) : Void
 
   # Params # dtpg : Void** [In],field : UDateTimePatternField [In],plength : Int32* [In]
   fun udatpg_getAppendItemFormat(dtpg : Void**, field : UDateTimePatternField, plength : Int32*) : UInt16*
 
   # Params # dtpg : Void** [In],field : UDateTimePatternField [In],value : UInt16* [In],length : Int32 [In]
-  fun udatpg_setAppendItemName(dtpg : Void**, field : UDateTimePatternField, value : UInt16*, length : Int32)
+  fun udatpg_setAppendItemName(dtpg : Void**, field : UDateTimePatternField, value : UInt16*, length : Int32) : Void
 
   # Params # dtpg : Void** [In],field : UDateTimePatternField [In],plength : Int32* [In]
   fun udatpg_getAppendItemName(dtpg : Void**, field : UDateTimePatternField, plength : Int32*) : UInt16*
@@ -7549,13 +7549,13 @@ lib LibWin32
   fun udatpg_getFieldDisplayName(dtpg : Void**, field : UDateTimePatternField, width : UDateTimePGDisplayWidth, fieldname : UInt16*, capacity : Int32, perrorcode : UErrorCode*) : Int32
 
   # Params # dtpg : Void** [In],dtformat : UInt16* [In],length : Int32 [In]
-  fun udatpg_setDateTimeFormat(dtpg : Void**, dtformat : UInt16*, length : Int32)
+  fun udatpg_setDateTimeFormat(dtpg : Void**, dtformat : UInt16*, length : Int32) : Void
 
   # Params # dtpg : Void** [In],plength : Int32* [In]
   fun udatpg_getDateTimeFormat(dtpg : Void**, plength : Int32*) : UInt16*
 
   # Params # dtpg : Void** [In],decimal : UInt16* [In],length : Int32 [In]
-  fun udatpg_setDecimal(dtpg : Void**, decimal : UInt16*, length : Int32)
+  fun udatpg_setDecimal(dtpg : Void**, decimal : UInt16*, length : Int32) : Void
 
   # Params # dtpg : Void** [In],plength : Int32* [In]
   fun udatpg_getDecimal(dtpg : Void**, plength : Int32*) : UInt16*
@@ -7585,13 +7585,13 @@ lib LibWin32
   fun unumf_openResult(ec : UErrorCode*) : UFormattedNumber*
 
   # Params # uformatter : UNumberFormatter* [In],value : Int64 [In],uresult : UFormattedNumber* [In],ec : UErrorCode* [In]
-  fun unumf_formatInt(uformatter : UNumberFormatter*, value : Int64, uresult : UFormattedNumber*, ec : UErrorCode*)
+  fun unumf_formatInt(uformatter : UNumberFormatter*, value : Int64, uresult : UFormattedNumber*, ec : UErrorCode*) : Void
 
   # Params # uformatter : UNumberFormatter* [In],value : Float64 [In],uresult : UFormattedNumber* [In],ec : UErrorCode* [In]
-  fun unumf_formatDouble(uformatter : UNumberFormatter*, value : Float64, uresult : UFormattedNumber*, ec : UErrorCode*)
+  fun unumf_formatDouble(uformatter : UNumberFormatter*, value : Float64, uresult : UFormattedNumber*, ec : UErrorCode*) : Void
 
   # Params # uformatter : UNumberFormatter* [In],value : PSTR [In],valuelen : Int32 [In],uresult : UFormattedNumber* [In],ec : UErrorCode* [In]
-  fun unumf_formatDecimal(uformatter : UNumberFormatter*, value : PSTR, valuelen : Int32, uresult : UFormattedNumber*, ec : UErrorCode*)
+  fun unumf_formatDecimal(uformatter : UNumberFormatter*, value : PSTR, valuelen : Int32, uresult : UFormattedNumber*, ec : UErrorCode*) : Void
 
   # Params # uresult : UFormattedNumber* [In],ec : UErrorCode* [In]
   fun unumf_resultAsValue(uresult : UFormattedNumber*, ec : UErrorCode*) : UFormattedValue*
@@ -7603,13 +7603,13 @@ lib LibWin32
   fun unumf_resultNextFieldPosition(uresult : UFormattedNumber*, ufpos : UFieldPosition*, ec : UErrorCode*) : Int8
 
   # Params # uresult : UFormattedNumber* [In],ufpositer : UFieldPositionIterator* [In],ec : UErrorCode* [In]
-  fun unumf_resultGetAllFieldPositions(uresult : UFormattedNumber*, ufpositer : UFieldPositionIterator*, ec : UErrorCode*)
+  fun unumf_resultGetAllFieldPositions(uresult : UFormattedNumber*, ufpositer : UFieldPositionIterator*, ec : UErrorCode*) : Void
 
   # Params # uformatter : UNumberFormatter* [In]
-  fun unumf_close(uformatter : UNumberFormatter*)
+  fun unumf_close(uformatter : UNumberFormatter*) : Void
 
   # Params # uresult : UFormattedNumber* [In]
-  fun unumf_closeResult(uresult : UFormattedNumber*)
+  fun unumf_closeResult(uresult : UFormattedNumber*) : Void
 
   # Params # locale : PSTR [In],status : UErrorCode* [In]
   fun unumsys_open(locale : PSTR, status : UErrorCode*) : UNumberingSystem*
@@ -7618,7 +7618,7 @@ lib LibWin32
   fun unumsys_openByName(name : PSTR, status : UErrorCode*) : UNumberingSystem*
 
   # Params # unumsys : UNumberingSystem* [In]
-  fun unumsys_close(unumsys : UNumberingSystem*)
+  fun unumsys_close(unumsys : UNumberingSystem*) : Void
 
   # Params # status : UErrorCode* [In]
   fun unumsys_openAvailableNames(status : UErrorCode*) : UEnumeration*
@@ -7642,7 +7642,7 @@ lib LibWin32
   fun uplrules_openForType(locale : PSTR, type : UPluralType, status : UErrorCode*) : UPluralRules*
 
   # Params # uplrules : UPluralRules* [In]
-  fun uplrules_close(uplrules : UPluralRules*)
+  fun uplrules_close(uplrules : UPluralRules*) : Void
 
   # Params # uplrules : UPluralRules* [In],number : Float64 [In],keyword : UInt16* [In],capacity : Int32 [In],status : UErrorCode* [In]
   fun uplrules_select(uplrules : UPluralRules*, number : Float64, keyword : UInt16*, capacity : Int32, status : UErrorCode*) : Int32
@@ -7663,7 +7663,7 @@ lib LibWin32
   fun uregex_openC(pattern : PSTR, flags : UInt32, pe : UParseError*, status : UErrorCode*) : URegularExpression*
 
   # Params # regexp : URegularExpression* [In]
-  fun uregex_close(regexp : URegularExpression*)
+  fun uregex_close(regexp : URegularExpression*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_clone(regexp : URegularExpression*, status : UErrorCode*) : URegularExpression*
@@ -7678,10 +7678,10 @@ lib LibWin32
   fun uregex_flags(regexp : URegularExpression*, status : UErrorCode*) : Int32
 
   # Params # regexp : URegularExpression* [In],text : UInt16* [In],textlength : Int32 [In],status : UErrorCode* [In]
-  fun uregex_setText(regexp : URegularExpression*, text : UInt16*, textlength : Int32, status : UErrorCode*)
+  fun uregex_setText(regexp : URegularExpression*, text : UInt16*, textlength : Int32, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],text : UText* [In],status : UErrorCode* [In]
-  fun uregex_setUText(regexp : URegularExpression*, text : UText*, status : UErrorCode*)
+  fun uregex_setUText(regexp : URegularExpression*, text : UText*, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],textlength : Int32* [In],status : UErrorCode* [In]
   fun uregex_getText(regexp : URegularExpression*, textlength : Int32*, status : UErrorCode*) : UInt16*
@@ -7690,7 +7690,7 @@ lib LibWin32
   fun uregex_getUText(regexp : URegularExpression*, dest : UText*, status : UErrorCode*) : UText*
 
   # Params # regexp : URegularExpression* [In],text : UText* [In],status : UErrorCode* [In]
-  fun uregex_refreshUText(regexp : URegularExpression*, text : UText*, status : UErrorCode*)
+  fun uregex_refreshUText(regexp : URegularExpression*, text : UText*, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],startindex : Int32 [In],status : UErrorCode* [In]
   fun uregex_matches(regexp : URegularExpression*, startindex : Int32, status : UErrorCode*) : Int8
@@ -7741,19 +7741,19 @@ lib LibWin32
   fun uregex_end64(regexp : URegularExpression*, groupnum : Int32, status : UErrorCode*) : Int64
 
   # Params # regexp : URegularExpression* [In],index : Int32 [In],status : UErrorCode* [In]
-  fun uregex_reset(regexp : URegularExpression*, index : Int32, status : UErrorCode*)
+  fun uregex_reset(regexp : URegularExpression*, index : Int32, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],index : Int64 [In],status : UErrorCode* [In]
-  fun uregex_reset64(regexp : URegularExpression*, index : Int64, status : UErrorCode*)
+  fun uregex_reset64(regexp : URegularExpression*, index : Int64, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],regionstart : Int32 [In],regionlimit : Int32 [In],status : UErrorCode* [In]
-  fun uregex_setRegion(regexp : URegularExpression*, regionstart : Int32, regionlimit : Int32, status : UErrorCode*)
+  fun uregex_setRegion(regexp : URegularExpression*, regionstart : Int32, regionlimit : Int32, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],regionstart : Int64 [In],regionlimit : Int64 [In],status : UErrorCode* [In]
-  fun uregex_setRegion64(regexp : URegularExpression*, regionstart : Int64, regionlimit : Int64, status : UErrorCode*)
+  fun uregex_setRegion64(regexp : URegularExpression*, regionstart : Int64, regionlimit : Int64, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],regionstart : Int64 [In],regionlimit : Int64 [In],startindex : Int64 [In],status : UErrorCode* [In]
-  fun uregex_setRegionAndStart(regexp : URegularExpression*, regionstart : Int64, regionlimit : Int64, startindex : Int64, status : UErrorCode*)
+  fun uregex_setRegionAndStart(regexp : URegularExpression*, regionstart : Int64, regionlimit : Int64, startindex : Int64, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_regionStart(regexp : URegularExpression*, status : UErrorCode*) : Int32
@@ -7771,13 +7771,13 @@ lib LibWin32
   fun uregex_hasTransparentBounds(regexp : URegularExpression*, status : UErrorCode*) : Int8
 
   # Params # regexp : URegularExpression* [In],b : Int8 [In],status : UErrorCode* [In]
-  fun uregex_useTransparentBounds(regexp : URegularExpression*, b : Int8, status : UErrorCode*)
+  fun uregex_useTransparentBounds(regexp : URegularExpression*, b : Int8, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_hasAnchoringBounds(regexp : URegularExpression*, status : UErrorCode*) : Int8
 
   # Params # regexp : URegularExpression* [In],b : Int8 [In],status : UErrorCode* [In]
-  fun uregex_useAnchoringBounds(regexp : URegularExpression*, b : Int8, status : UErrorCode*)
+  fun uregex_useAnchoringBounds(regexp : URegularExpression*, b : Int8, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_hitEnd(regexp : URegularExpression*, status : UErrorCode*) : Int8
@@ -7801,7 +7801,7 @@ lib LibWin32
   fun uregex_appendReplacement(regexp : URegularExpression*, replacementtext : UInt16*, replacementlength : Int32, destbuf : UInt16**, destcapacity : Int32*, status : UErrorCode*) : Int32
 
   # Params # regexp : URegularExpression* [In],replacementtext : UText* [In],dest : UText* [In],status : UErrorCode* [In]
-  fun uregex_appendReplacementUText(regexp : URegularExpression*, replacementtext : UText*, dest : UText*, status : UErrorCode*)
+  fun uregex_appendReplacementUText(regexp : URegularExpression*, replacementtext : UText*, dest : UText*, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],destbuf : UInt16** [In],destcapacity : Int32* [In],status : UErrorCode* [In]
   fun uregex_appendTail(regexp : URegularExpression*, destbuf : UInt16**, destcapacity : Int32*, status : UErrorCode*) : Int32
@@ -7816,28 +7816,28 @@ lib LibWin32
   fun uregex_splitUText(regexp : URegularExpression*, destfields : UText**, destfieldscapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # regexp : URegularExpression* [In],limit : Int32 [In],status : UErrorCode* [In]
-  fun uregex_setTimeLimit(regexp : URegularExpression*, limit : Int32, status : UErrorCode*)
+  fun uregex_setTimeLimit(regexp : URegularExpression*, limit : Int32, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_getTimeLimit(regexp : URegularExpression*, status : UErrorCode*) : Int32
 
   # Params # regexp : URegularExpression* [In],limit : Int32 [In],status : UErrorCode* [In]
-  fun uregex_setStackLimit(regexp : URegularExpression*, limit : Int32, status : UErrorCode*)
+  fun uregex_setStackLimit(regexp : URegularExpression*, limit : Int32, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],status : UErrorCode* [In]
   fun uregex_getStackLimit(regexp : URegularExpression*, status : UErrorCode*) : Int32
 
   # Params # regexp : URegularExpression* [In],callback : URegexMatchCallback [In],context : Void* [In],status : UErrorCode* [In]
-  fun uregex_setMatchCallback(regexp : URegularExpression*, callback : URegexMatchCallback, context : Void*, status : UErrorCode*)
+  fun uregex_setMatchCallback(regexp : URegularExpression*, callback : URegexMatchCallback, context : Void*, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],callback : URegexMatchCallback* [In],context : Void** [In],status : UErrorCode* [In]
-  fun uregex_getMatchCallback(regexp : URegularExpression*, callback : URegexMatchCallback*, context : Void**, status : UErrorCode*)
+  fun uregex_getMatchCallback(regexp : URegularExpression*, callback : URegexMatchCallback*, context : Void**, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],callback : URegexFindProgressCallback [In],context : Void* [In],status : UErrorCode* [In]
-  fun uregex_setFindProgressCallback(regexp : URegularExpression*, callback : URegexFindProgressCallback, context : Void*, status : UErrorCode*)
+  fun uregex_setFindProgressCallback(regexp : URegularExpression*, callback : URegexFindProgressCallback, context : Void*, status : UErrorCode*) : Void
 
   # Params # regexp : URegularExpression* [In],callback : URegexFindProgressCallback* [In],context : Void** [In],status : UErrorCode* [In]
-  fun uregex_getFindProgressCallback(regexp : URegularExpression*, callback : URegexFindProgressCallback*, context : Void**, status : UErrorCode*)
+  fun uregex_getFindProgressCallback(regexp : URegularExpression*, callback : URegexFindProgressCallback*, context : Void**, status : UErrorCode*) : Void
 
   # Params # regioncode : PSTR [In],status : UErrorCode* [In]
   fun uregion_getRegionFromCode(regioncode : PSTR, status : UErrorCode*) : URegion*
@@ -7882,7 +7882,7 @@ lib LibWin32
   fun ureldatefmt_open(locale : PSTR, nftoadopt : Void**, width : UDateRelativeDateTimeFormatterStyle, capitalizationcontext : UDisplayContext, status : UErrorCode*) : URelativeDateTimeFormatter*
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In]
-  fun ureldatefmt_close(reldatefmt : URelativeDateTimeFormatter*)
+  fun ureldatefmt_close(reldatefmt : URelativeDateTimeFormatter*) : Void
 
   # Params # ec : UErrorCode* [In]
   fun ureldatefmt_openResult(ec : UErrorCode*) : UFormattedRelativeDateTime*
@@ -7891,19 +7891,19 @@ lib LibWin32
   fun ureldatefmt_resultAsValue(ufrdt : UFormattedRelativeDateTime*, ec : UErrorCode*) : UFormattedValue*
 
   # Params # ufrdt : UFormattedRelativeDateTime* [In]
-  fun ureldatefmt_closeResult(ufrdt : UFormattedRelativeDateTime*)
+  fun ureldatefmt_closeResult(ufrdt : UFormattedRelativeDateTime*) : Void
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In],offset : Float64 [In],unit : URelativeDateTimeUnit [In],result : UInt16* [In],resultcapacity : Int32 [In],status : UErrorCode* [In]
   fun ureldatefmt_formatNumeric(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UInt16*, resultcapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In],offset : Float64 [In],unit : URelativeDateTimeUnit [In],result : UFormattedRelativeDateTime* [In],status : UErrorCode* [In]
-  fun ureldatefmt_formatNumericToResult(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UFormattedRelativeDateTime*, status : UErrorCode*)
+  fun ureldatefmt_formatNumericToResult(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UFormattedRelativeDateTime*, status : UErrorCode*) : Void
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In],offset : Float64 [In],unit : URelativeDateTimeUnit [In],result : UInt16* [In],resultcapacity : Int32 [In],status : UErrorCode* [In]
   fun ureldatefmt_format(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UInt16*, resultcapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In],offset : Float64 [In],unit : URelativeDateTimeUnit [In],result : UFormattedRelativeDateTime* [In],status : UErrorCode* [In]
-  fun ureldatefmt_formatToResult(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UFormattedRelativeDateTime*, status : UErrorCode*)
+  fun ureldatefmt_formatToResult(reldatefmt : URelativeDateTimeFormatter*, offset : Float64, unit : URelativeDateTimeUnit, result : UFormattedRelativeDateTime*, status : UErrorCode*) : Void
 
   # Params # reldatefmt : URelativeDateTimeFormatter* [In],relativedatestring : UInt16* [In],relativedatestringlen : Int32 [In],timestring : UInt16* [In],timestringlen : Int32 [In],result : UInt16* [In],resultcapacity : Int32 [In],status : UErrorCode* [In]
   fun ureldatefmt_combineDateAndTime(reldatefmt : URelativeDateTimeFormatter*, relativedatestring : UInt16*, relativedatestringlen : Int32, timestring : UInt16*, timestringlen : Int32, result : UInt16*, resultcapacity : Int32, status : UErrorCode*) : Int32
@@ -7915,16 +7915,16 @@ lib LibWin32
   fun usearch_openFromCollator(pattern : UInt16*, patternlength : Int32, text : UInt16*, textlength : Int32, collator : UCollator*, breakiter : UBreakIterator*, status : UErrorCode*) : UStringSearch*
 
   # Params # searchiter : UStringSearch* [In]
-  fun usearch_close(searchiter : UStringSearch*)
+  fun usearch_close(searchiter : UStringSearch*) : Void
 
   # Params # strsrch : UStringSearch* [In],position : Int32 [In],status : UErrorCode* [In]
-  fun usearch_setOffset(strsrch : UStringSearch*, position : Int32, status : UErrorCode*)
+  fun usearch_setOffset(strsrch : UStringSearch*, position : Int32, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In]
   fun usearch_getOffset(strsrch : UStringSearch*) : Int32
 
   # Params # strsrch : UStringSearch* [In],attribute : USearchAttribute [In],value : USearchAttributeValue [In],status : UErrorCode* [In]
-  fun usearch_setAttribute(strsrch : UStringSearch*, attribute : USearchAttribute, value : USearchAttributeValue, status : UErrorCode*)
+  fun usearch_setAttribute(strsrch : UStringSearch*, attribute : USearchAttribute, value : USearchAttributeValue, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In],attribute : USearchAttribute [In]
   fun usearch_getAttribute(strsrch : UStringSearch*, attribute : USearchAttribute) : USearchAttributeValue
@@ -7939,13 +7939,13 @@ lib LibWin32
   fun usearch_getMatchedText(strsrch : UStringSearch*, result : UInt16*, resultcapacity : Int32, status : UErrorCode*) : Int32
 
   # Params # strsrch : UStringSearch* [In],breakiter : UBreakIterator* [In],status : UErrorCode* [In]
-  fun usearch_setBreakIterator(strsrch : UStringSearch*, breakiter : UBreakIterator*, status : UErrorCode*)
+  fun usearch_setBreakIterator(strsrch : UStringSearch*, breakiter : UBreakIterator*, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In]
   fun usearch_getBreakIterator(strsrch : UStringSearch*) : UBreakIterator*
 
   # Params # strsrch : UStringSearch* [In],text : UInt16* [In],textlength : Int32 [In],status : UErrorCode* [In]
-  fun usearch_setText(strsrch : UStringSearch*, text : UInt16*, textlength : Int32, status : UErrorCode*)
+  fun usearch_setText(strsrch : UStringSearch*, text : UInt16*, textlength : Int32, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In],length : Int32* [In]
   fun usearch_getText(strsrch : UStringSearch*, length : Int32*) : UInt16*
@@ -7954,10 +7954,10 @@ lib LibWin32
   fun usearch_getCollator(strsrch : UStringSearch*) : UCollator*
 
   # Params # strsrch : UStringSearch* [In],collator : UCollator* [In],status : UErrorCode* [In]
-  fun usearch_setCollator(strsrch : UStringSearch*, collator : UCollator*, status : UErrorCode*)
+  fun usearch_setCollator(strsrch : UStringSearch*, collator : UCollator*, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In],pattern : UInt16* [In],patternlength : Int32 [In],status : UErrorCode* [In]
-  fun usearch_setPattern(strsrch : UStringSearch*, pattern : UInt16*, patternlength : Int32, status : UErrorCode*)
+  fun usearch_setPattern(strsrch : UStringSearch*, pattern : UInt16*, patternlength : Int32, status : UErrorCode*) : Void
 
   # Params # strsrch : UStringSearch* [In],length : Int32* [In]
   fun usearch_getPattern(strsrch : UStringSearch*, length : Int32*) : UInt16*
@@ -7981,7 +7981,7 @@ lib LibWin32
   fun usearch_previous(strsrch : UStringSearch*, status : UErrorCode*) : Int32
 
   # Params # strsrch : UStringSearch* [In]
-  fun usearch_reset(strsrch : UStringSearch*)
+  fun usearch_reset(strsrch : UStringSearch*) : Void
 
   # Params # status : UErrorCode* [In]
   fun uspoof_open(status : UErrorCode*) : USpoofChecker*
@@ -7993,31 +7993,31 @@ lib LibWin32
   fun uspoof_openFromSource(confusables : PSTR, confusableslen : Int32, confusableswholescript : PSTR, confusableswholescriptlen : Int32, errtype : Int32*, pe : UParseError*, status : UErrorCode*) : USpoofChecker*
 
   # Params # sc : USpoofChecker* [In]
-  fun uspoof_close(sc : USpoofChecker*)
+  fun uspoof_close(sc : USpoofChecker*) : Void
 
   # Params # sc : USpoofChecker* [In],status : UErrorCode* [In]
   fun uspoof_clone(sc : USpoofChecker*, status : UErrorCode*) : USpoofChecker*
 
   # Params # sc : USpoofChecker* [In],checks : Int32 [In],status : UErrorCode* [In]
-  fun uspoof_setChecks(sc : USpoofChecker*, checks : Int32, status : UErrorCode*)
+  fun uspoof_setChecks(sc : USpoofChecker*, checks : Int32, status : UErrorCode*) : Void
 
   # Params # sc : USpoofChecker* [In],status : UErrorCode* [In]
   fun uspoof_getChecks(sc : USpoofChecker*, status : UErrorCode*) : Int32
 
   # Params # sc : USpoofChecker* [In],restrictionlevel : URestrictionLevel [In]
-  fun uspoof_setRestrictionLevel(sc : USpoofChecker*, restrictionlevel : URestrictionLevel)
+  fun uspoof_setRestrictionLevel(sc : USpoofChecker*, restrictionlevel : URestrictionLevel) : Void
 
   # Params # sc : USpoofChecker* [In]
   fun uspoof_getRestrictionLevel(sc : USpoofChecker*) : URestrictionLevel
 
   # Params # sc : USpoofChecker* [In],localeslist : PSTR [In],status : UErrorCode* [In]
-  fun uspoof_setAllowedLocales(sc : USpoofChecker*, localeslist : PSTR, status : UErrorCode*)
+  fun uspoof_setAllowedLocales(sc : USpoofChecker*, localeslist : PSTR, status : UErrorCode*) : Void
 
   # Params # sc : USpoofChecker* [In],status : UErrorCode* [In]
   fun uspoof_getAllowedLocales(sc : USpoofChecker*, status : UErrorCode*) : PSTR
 
   # Params # sc : USpoofChecker* [In],chars : USet* [In],status : UErrorCode* [In]
-  fun uspoof_setAllowedChars(sc : USpoofChecker*, chars : USet*, status : UErrorCode*)
+  fun uspoof_setAllowedChars(sc : USpoofChecker*, chars : USet*, status : UErrorCode*) : Void
 
   # Params # sc : USpoofChecker* [In],status : UErrorCode* [In]
   fun uspoof_getAllowedChars(sc : USpoofChecker*, status : UErrorCode*) : USet*
@@ -8038,7 +8038,7 @@ lib LibWin32
   fun uspoof_openCheckResult(status : UErrorCode*) : USpoofCheckResult*
 
   # Params # checkresult : USpoofCheckResult* [In]
-  fun uspoof_closeCheckResult(checkresult : USpoofCheckResult*)
+  fun uspoof_closeCheckResult(checkresult : USpoofCheckResult*) : Void
 
   # Params # checkresult : USpoofCheckResult* [In],status : UErrorCode* [In]
   fun uspoof_getCheckResultChecks(checkresult : USpoofCheckResult*, status : UErrorCode*) : Int32
@@ -8089,19 +8089,19 @@ lib LibWin32
   fun utrans_clone(trans : Void**, status : UErrorCode*) : Void**
 
   # Params # trans : Void** [In]
-  fun utrans_close(trans : Void**)
+  fun utrans_close(trans : Void**) : Void
 
   # Params # trans : Void** [In],resultlength : Int32* [In]
   fun utrans_getUnicodeID(trans : Void**, resultlength : Int32*) : UInt16*
 
   # Params # adoptedtrans : Void** [In],status : UErrorCode* [In]
-  fun utrans_register(adoptedtrans : Void**, status : UErrorCode*)
+  fun utrans_register(adoptedtrans : Void**, status : UErrorCode*) : Void
 
   # Params # id : UInt16* [In],idlength : Int32 [In]
-  fun utrans_unregisterID(id : UInt16*, idlength : Int32)
+  fun utrans_unregisterID(id : UInt16*, idlength : Int32) : Void
 
   # Params # trans : Void** [In],filterpattern : UInt16* [In],filterpatternlen : Int32 [In],status : UErrorCode* [In]
-  fun utrans_setFilter(trans : Void**, filterpattern : UInt16*, filterpatternlen : Int32, status : UErrorCode*)
+  fun utrans_setFilter(trans : Void**, filterpattern : UInt16*, filterpatternlen : Int32, status : UErrorCode*) : Void
 
   # Params # 
   fun utrans_countAvailableIDs : Int32
@@ -8110,16 +8110,16 @@ lib LibWin32
   fun utrans_openIDs(perrorcode : UErrorCode*) : UEnumeration*
 
   # Params # trans : Void** [In],rep : Void** [In],repfunc : UReplaceableCallbacks* [In],start : Int32 [In],limit : Int32* [In],status : UErrorCode* [In]
-  fun utrans_trans(trans : Void**, rep : Void**, repfunc : UReplaceableCallbacks*, start : Int32, limit : Int32*, status : UErrorCode*)
+  fun utrans_trans(trans : Void**, rep : Void**, repfunc : UReplaceableCallbacks*, start : Int32, limit : Int32*, status : UErrorCode*) : Void
 
   # Params # trans : Void** [In],rep : Void** [In],repfunc : UReplaceableCallbacks* [In],pos : UTransPosition* [In],status : UErrorCode* [In]
-  fun utrans_transIncremental(trans : Void**, rep : Void**, repfunc : UReplaceableCallbacks*, pos : UTransPosition*, status : UErrorCode*)
+  fun utrans_transIncremental(trans : Void**, rep : Void**, repfunc : UReplaceableCallbacks*, pos : UTransPosition*, status : UErrorCode*) : Void
 
   # Params # trans : Void** [In],text : UInt16* [In],textlength : Int32* [In],textcapacity : Int32 [In],start : Int32 [In],limit : Int32* [In],status : UErrorCode* [In]
-  fun utrans_transUChars(trans : Void**, text : UInt16*, textlength : Int32*, textcapacity : Int32, start : Int32, limit : Int32*, status : UErrorCode*)
+  fun utrans_transUChars(trans : Void**, text : UInt16*, textlength : Int32*, textcapacity : Int32, start : Int32, limit : Int32*, status : UErrorCode*) : Void
 
   # Params # trans : Void** [In],text : UInt16* [In],textlength : Int32* [In],textcapacity : Int32 [In],pos : UTransPosition* [In],status : UErrorCode* [In]
-  fun utrans_transIncrementalUChars(trans : Void**, text : UInt16*, textlength : Int32*, textcapacity : Int32, pos : UTransPosition*, status : UErrorCode*)
+  fun utrans_transIncrementalUChars(trans : Void**, text : UInt16*, textlength : Int32*, textcapacity : Int32, pos : UTransPosition*, status : UErrorCode*) : Void
 
   # Params # trans : Void** [In],escapeunprintable : Int8 [In],result : UInt16* [In],resultlength : Int32 [In],status : UErrorCode* [In]
   fun utrans_toRules(trans : Void**, escapeunprintable : Int8, result : UInt16*, resultlength : Int32, status : UErrorCode*) : Int32
@@ -8174,4 +8174,937 @@ lib LibWin32
 
   # Params # lpv : Void* [In],isize : Int32 [In],lpiresult : IS_TEXT_UNICODE_RESULT* [In]
   fun IsTextUnicode(lpv : Void*, isize : Int32, lpiresult : IS_TEXT_UNICODE_RESULT*) : LibC::BOOL
+end
+struct LibWin32::ISpellingError
+  def query_interface(this : ISpellingError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellingError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellingError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_start_index(this : ISpellingError*, value : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_index.call(this, value)
+  end
+  def get_length(this : ISpellingError*, value : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, value)
+  end
+  def get_corrective_action(this : ISpellingError*, value : CORRECTIVE_ACTION*) : HRESULT
+    @lpVtbl.value.get_corrective_action.call(this, value)
+  end
+  def get_replacement(this : ISpellingError*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_replacement.call(this, value)
+  end
+end
+struct LibWin32::IEnumSpellingError
+  def query_interface(this : IEnumSpellingError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSpellingError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSpellingError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSpellingError*, value : ISpellingError*) : HRESULT
+    @lpVtbl.value.next.call(this, value)
+  end
+end
+struct LibWin32::IOptionDescription
+  def query_interface(this : IOptionDescription*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOptionDescription*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOptionDescription*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
+  end
+  def get_heading(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_heading.call(this, value)
+  end
+  def get_description(this : IOptionDescription*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, value)
+  end
+  def get_labels(this : IOptionDescription*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_labels.call(this, value)
+  end
+end
+struct LibWin32::ISpellCheckerChangedEventHandler
+  def query_interface(this : ISpellCheckerChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellCheckerChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellCheckerChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : ISpellCheckerChangedEventHandler*, sender : ISpellChecker) : HRESULT
+    @lpVtbl.value.invoke.call(this, sender)
+  end
+end
+struct LibWin32::ISpellChecker
+  def query_interface(this : ISpellChecker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellChecker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellChecker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_tag(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
+  end
+  def check(this : ISpellChecker*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
+  end
+  def suggest(this : ISpellChecker*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
+  end
+  def add(this : ISpellChecker*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, word)
+  end
+  def ignore(this : ISpellChecker*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.ignore.call(this, word)
+  end
+  def auto_correct(this : ISpellChecker*, from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.auto_correct.call(this, from, to)
+  end
+  def get_option_value(this : ISpellChecker*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
+  end
+  def get_option_ids(this : ISpellChecker*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
+  end
+  def get_id(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
+  end
+  def get_localized_name(this : ISpellChecker*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
+  end
+  def add_spell_checker_changed(this : ISpellChecker*, handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_spell_checker_changed.call(this, handler, eventcookie)
+  end
+  def remove_spell_checker_changed(this : ISpellChecker*, eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_spell_checker_changed.call(this, eventcookie)
+  end
+  def get_option_description(this : ISpellChecker*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
+  end
+  def comprehensive_check(this : ISpellChecker*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
+  end
+end
+struct LibWin32::ISpellChecker2
+  def query_interface(this : ISpellChecker2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellChecker2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellChecker2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_tag(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
+  end
+  def check(this : ISpellChecker2*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
+  end
+  def suggest(this : ISpellChecker2*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
+  end
+  def add(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add.call(this, word)
+  end
+  def ignore(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.ignore.call(this, word)
+  end
+  def auto_correct(this : ISpellChecker2*, from : LibC::LPWSTR, to : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.auto_correct.call(this, from, to)
+  end
+  def get_option_value(this : ISpellChecker2*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
+  end
+  def get_option_ids(this : ISpellChecker2*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
+  end
+  def get_id(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
+  end
+  def get_localized_name(this : ISpellChecker2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
+  end
+  def add_spell_checker_changed(this : ISpellChecker2*, handler : ISpellCheckerChangedEventHandler, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_spell_checker_changed.call(this, handler, eventcookie)
+  end
+  def remove_spell_checker_changed(this : ISpellChecker2*, eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_spell_checker_changed.call(this, eventcookie)
+  end
+  def get_option_description(this : ISpellChecker2*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
+  end
+  def comprehensive_check(this : ISpellChecker2*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
+  end
+  def remove(this : ISpellChecker2*, word : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove.call(this, word)
+  end
+end
+struct LibWin32::ISpellCheckerFactory
+  def query_interface(this : ISpellCheckerFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellCheckerFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellCheckerFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supported_languages(this : ISpellCheckerFactory*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_supported_languages.call(this, value)
+  end
+  def is_supported(this : ISpellCheckerFactory*, languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_supported.call(this, languagetag, value)
+  end
+  def create_spell_checker(this : ISpellCheckerFactory*, languagetag : LibC::LPWSTR, value : ISpellChecker*) : HRESULT
+    @lpVtbl.value.create_spell_checker.call(this, languagetag, value)
+  end
+end
+struct LibWin32::IUserDictionariesRegistrar
+  def query_interface(this : IUserDictionariesRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserDictionariesRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserDictionariesRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_user_dictionary(this : IUserDictionariesRegistrar*, dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_user_dictionary.call(this, dictionarypath, languagetag)
+  end
+  def unregister_user_dictionary(this : IUserDictionariesRegistrar*, dictionarypath : LibC::LPWSTR, languagetag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_user_dictionary.call(this, dictionarypath, languagetag)
+  end
+end
+struct LibWin32::ISpellCheckProvider
+  def query_interface(this : ISpellCheckProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellCheckProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellCheckProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_tag(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language_tag.call(this, value)
+  end
+  def check(this : ISpellCheckProvider*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.check.call(this, text, value)
+  end
+  def suggest(this : ISpellCheckProvider*, word : LibC::LPWSTR, value : IEnumString*) : HRESULT
+    @lpVtbl.value.suggest.call(this, word, value)
+  end
+  def get_option_value(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : UInt8*) : HRESULT
+    @lpVtbl.value.get_option_value.call(this, optionid, value)
+  end
+  def set_option_value(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : UInt8) : HRESULT
+    @lpVtbl.value.set_option_value.call(this, optionid, value)
+  end
+  def get_option_ids(this : ISpellCheckProvider*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_option_ids.call(this, value)
+  end
+  def get_id(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, value)
+  end
+  def get_localized_name(this : ISpellCheckProvider*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_localized_name.call(this, value)
+  end
+  def get_option_description(this : ISpellCheckProvider*, optionid : LibC::LPWSTR, value : IOptionDescription*) : HRESULT
+    @lpVtbl.value.get_option_description.call(this, optionid, value)
+  end
+  def initialize_wordlist(this : ISpellCheckProvider*, wordlisttype : WORDLIST_TYPE, words : IEnumString) : HRESULT
+    @lpVtbl.value.initialize_wordlist.call(this, wordlisttype, words)
+  end
+end
+struct LibWin32::IComprehensiveSpellCheckProvider
+  def query_interface(this : IComprehensiveSpellCheckProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IComprehensiveSpellCheckProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IComprehensiveSpellCheckProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def comprehensive_check(this : IComprehensiveSpellCheckProvider*, text : LibC::LPWSTR, value : IEnumSpellingError*) : HRESULT
+    @lpVtbl.value.comprehensive_check.call(this, text, value)
+  end
+end
+struct LibWin32::ISpellCheckProviderFactory
+  def query_interface(this : ISpellCheckProviderFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpellCheckProviderFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpellCheckProviderFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supported_languages(this : ISpellCheckProviderFactory*, value : IEnumString*) : HRESULT
+    @lpVtbl.value.get_supported_languages.call(this, value)
+  end
+  def is_supported(this : ISpellCheckProviderFactory*, languagetag : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_supported.call(this, languagetag, value)
+  end
+  def create_spell_check_provider(this : ISpellCheckProviderFactory*, languagetag : LibC::LPWSTR, value : ISpellCheckProvider*) : HRESULT
+    @lpVtbl.value.create_spell_check_provider.call(this, languagetag, value)
+  end
+end
+struct LibWin32::IMLangStringBufW
+  def query_interface(this : IMLangStringBufW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangStringBufW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangStringBufW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IMLangStringBufW*, plflags : Int32*, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plflags, pcchbuf)
+  end
+  def lock_buf(this : IMLangStringBufW*, cchoffset : Int32, cchmaxlock : Int32, ppszbuf : UInt16**, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.lock_buf.call(this, cchoffset, cchmaxlock, ppszbuf, pcchbuf)
+  end
+  def unlock_buf(this : IMLangStringBufW*, pszbuf : LibC::LPWSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
+    @lpVtbl.value.unlock_buf.call(this, pszbuf, cchoffset, cchwrite)
+  end
+  def insert(this : IMLangStringBufW*, cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
+    @lpVtbl.value.insert.call(this, cchoffset, cchmaxinsert, pcchactual)
+  end
+  def delete(this : IMLangStringBufW*, cchoffset : Int32, cchdelete : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, cchoffset, cchdelete)
+  end
+end
+struct LibWin32::IMLangStringBufA
+  def query_interface(this : IMLangStringBufA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangStringBufA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangStringBufA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IMLangStringBufA*, plflags : Int32*, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, plflags, pcchbuf)
+  end
+  def lock_buf(this : IMLangStringBufA*, cchoffset : Int32, cchmaxlock : Int32, ppszbuf : CHAR**, pcchbuf : Int32*) : HRESULT
+    @lpVtbl.value.lock_buf.call(this, cchoffset, cchmaxlock, ppszbuf, pcchbuf)
+  end
+  def unlock_buf(this : IMLangStringBufA*, pszbuf : PSTR, cchoffset : Int32, cchwrite : Int32) : HRESULT
+    @lpVtbl.value.unlock_buf.call(this, pszbuf, cchoffset, cchwrite)
+  end
+  def insert(this : IMLangStringBufA*, cchoffset : Int32, cchmaxinsert : Int32, pcchactual : Int32*) : HRESULT
+    @lpVtbl.value.insert.call(this, cchoffset, cchmaxinsert, pcchactual)
+  end
+  def delete(this : IMLangStringBufA*, cchoffset : Int32, cchdelete : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, cchoffset, cchdelete)
+  end
+end
+struct LibWin32::IMLangString
+  def query_interface(this : IMLangString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangString*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def sync(this : IMLangString*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
+  end
+  def get_length(this : IMLangString*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
+  end
+  def set_ml_str(this : IMLangString*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  end
+  def get_ml_str(this : IMLangString*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  end
+end
+struct LibWin32::IMLangStringWStr
+  def query_interface(this : IMLangStringWStr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangStringWStr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangStringWStr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def sync(this : IMLangStringWStr*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
+  end
+  def get_length(this : IMLangStringWStr*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
+  end
+  def set_ml_str(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  end
+  def get_ml_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  end
+  def set_w_str(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_w_str.call(this, ldestpos, ldestlen, pszsrc, cchsrc, pcchactual, plactuallen)
+  end
+  def set_str_buf_w(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, psrcbuf : IMLangStringBufW, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_str_buf_w.call(this, ldestpos, ldestlen, psrcbuf, pcchactual, plactuallen)
+  end
+  def get_w_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, pszdest : Char*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.get_w_str.call(this, lsrcpos, lsrclen, pszdest, cchdest, pcchactual, plactuallen)
+  end
+  def get_str_buf_w(this : IMLangStringWStr*, lsrcpos : Int32, lsrcmaxlen : Int32, ppdestbuf : IMLangStringBufW*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_str_buf_w.call(this, lsrcpos, lsrcmaxlen, ppdestbuf, pldestlen)
+  end
+  def lock_w_str(this : IMLangStringWStr*, lsrcpos : Int32, lsrclen : Int32, lflags : Int32, cchrequest : Int32, ppszdest : LibC::LPWSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.lock_w_str.call(this, lsrcpos, lsrclen, lflags, cchrequest, ppszdest, pcchdest, pldestlen)
+  end
+  def unlock_w_str(this : IMLangStringWStr*, pszsrc : Char*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.unlock_w_str.call(this, pszsrc, cchsrc, pcchactual, plactuallen)
+  end
+  def set_locale(this : IMLangStringWStr*, ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
+    @lpVtbl.value.set_locale.call(this, ldestpos, ldestlen, locale)
+  end
+  def get_locale(this : IMLangStringWStr*, lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
+    @lpVtbl.value.get_locale.call(this, lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
+  end
+end
+struct LibWin32::IMLangStringAStr
+  def query_interface(this : IMLangStringAStr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangStringAStr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangStringAStr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def sync(this : IMLangStringAStr*, fnoaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.sync.call(this, fnoaccess)
+  end
+  def get_length(this : IMLangStringAStr*, pllen : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pllen)
+  end
+  def set_ml_str(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, psrcmlstr : IUnknown, lsrcpos : Int32, lsrclen : Int32) : HRESULT
+    @lpVtbl.value.set_ml_str.call(this, ldestpos, ldestlen, psrcmlstr, lsrcpos, lsrclen)
+  end
+  def get_ml_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, punkouter : IUnknown, dwclscontext : UInt32, piid : Guid*, ppdestmlstr : IUnknown*, pldestpos : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_ml_str.call(this, lsrcpos, lsrclen, punkouter, dwclscontext, piid, ppdestmlstr, pldestpos, pldestlen)
+  end
+  def set_a_str(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_a_str.call(this, ldestpos, ldestlen, ucodepage, pszsrc, cchsrc, pcchactual, plactuallen)
+  end
+  def set_str_buf_a(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, ucodepage : UInt32, psrcbuf : IMLangStringBufA, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.set_str_buf_a.call(this, ldestpos, ldestlen, ucodepage, psrcbuf, pcchactual, plactuallen)
+  end
+  def get_a_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, ucodepagein : UInt32, pucodepageout : UInt32*, pszdest : UInt8*, cchdest : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.get_a_str.call(this, lsrcpos, lsrclen, ucodepagein, pucodepageout, pszdest, cchdest, pcchactual, plactuallen)
+  end
+  def get_str_buf_a(this : IMLangStringAStr*, lsrcpos : Int32, lsrcmaxlen : Int32, pudestcodepage : UInt32*, ppdestbuf : IMLangStringBufA*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.get_str_buf_a.call(this, lsrcpos, lsrcmaxlen, pudestcodepage, ppdestbuf, pldestlen)
+  end
+  def lock_a_str(this : IMLangStringAStr*, lsrcpos : Int32, lsrclen : Int32, lflags : Int32, ucodepagein : UInt32, cchrequest : Int32, pucodepageout : UInt32*, ppszdest : PSTR*, pcchdest : Int32*, pldestlen : Int32*) : HRESULT
+    @lpVtbl.value.lock_a_str.call(this, lsrcpos, lsrclen, lflags, ucodepagein, cchrequest, pucodepageout, ppszdest, pcchdest, pldestlen)
+  end
+  def unlock_a_str(this : IMLangStringAStr*, pszsrc : UInt8*, cchsrc : Int32, pcchactual : Int32*, plactuallen : Int32*) : HRESULT
+    @lpVtbl.value.unlock_a_str.call(this, pszsrc, cchsrc, pcchactual, plactuallen)
+  end
+  def set_locale(this : IMLangStringAStr*, ldestpos : Int32, ldestlen : Int32, locale : UInt32) : HRESULT
+    @lpVtbl.value.set_locale.call(this, ldestpos, ldestlen, locale)
+  end
+  def get_locale(this : IMLangStringAStr*, lsrcpos : Int32, lsrcmaxlen : Int32, plocale : UInt32*, pllocalepos : Int32*, pllocalelen : Int32*) : HRESULT
+    @lpVtbl.value.get_locale.call(this, lsrcpos, lsrcmaxlen, plocale, pllocalepos, pllocalelen)
+  end
+end
+struct LibWin32::IMLangLineBreakConsole
+  def query_interface(this : IMLangLineBreakConsole*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangLineBreakConsole*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangLineBreakConsole*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def break_line_ml(this : IMLangLineBreakConsole*, psrcmlstr : IMLangString, lsrcpos : Int32, lsrclen : Int32, cmincolumns : Int32, cmaxcolumns : Int32, pllinelen : Int32*, plskiplen : Int32*) : HRESULT
+    @lpVtbl.value.break_line_ml.call(this, psrcmlstr, lsrcpos, lsrclen, cmincolumns, cmaxcolumns, pllinelen, plskiplen)
+  end
+  def break_line_w(this : IMLangLineBreakConsole*, locale : UInt32, pszsrc : Char*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
+    @lpVtbl.value.break_line_w.call(this, locale, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
+  end
+  def break_line_a(this : IMLangLineBreakConsole*, locale : UInt32, ucodepage : UInt32, pszsrc : UInt8*, cchsrc : Int32, cmaxcolumns : Int32, pcchline : Int32*, pcchskip : Int32*) : HRESULT
+    @lpVtbl.value.break_line_a.call(this, locale, ucodepage, pszsrc, cchsrc, cmaxcolumns, pcchline, pcchskip)
+  end
+end
+struct LibWin32::IEnumCodePage
+  def query_interface(this : IEnumCodePage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumCodePage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumCodePage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumCodePage*, ppenum : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumCodePage*, celt : UInt32, rgelt : MIMECPINFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def reset(this : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumCodePage*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+end
+struct LibWin32::IEnumRfc1766
+  def query_interface(this : IEnumRfc1766*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRfc1766*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRfc1766*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumRfc1766*, ppenum : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumRfc1766*, celt : UInt32, rgelt : RFC1766INFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def reset(this : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumRfc1766*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+end
+struct LibWin32::IEnumScript
+  def query_interface(this : IEnumScript*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumScript*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumScript*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumScript*, ppenum : IEnumScript*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumScript*, celt : UInt32, rgelt : SCRIPTINFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def reset(this : IEnumScript*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumScript*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+end
+struct LibWin32::IMLangConvertCharset
+  def query_interface(this : IMLangConvertCharset*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangConvertCharset*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangConvertCharset*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IMLangConvertCharset*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, uisrccodepage, uidstcodepage, dwproperty)
+  end
+  def get_source_code_page(this : IMLangConvertCharset*, puisrccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_code_page.call(this, puisrccodepage)
+  end
+  def get_destination_code_page(this : IMLangConvertCharset*, puidstcodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_destination_code_page.call(this, puidstcodepage)
+  end
+  def get_property(this : IMLangConvertCharset*, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pdwproperty)
+  end
+  def do_conversion(this : IMLangConvertCharset*, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def do_conversion_to_unicode(this : IMLangConvertCharset*, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion_to_unicode.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def do_conversion_from_unicode(this : IMLangConvertCharset*, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.do_conversion_from_unicode.call(this, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+end
+struct LibWin32::IMultiLanguage
+  def query_interface(this : IMultiLanguage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMultiLanguage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMultiLanguage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_of_code_page_info(this : IMultiLanguage*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
+  end
+  def get_code_page_info(this : IMultiLanguage*, uicodepage : UInt32, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, pcodepageinfo)
+  end
+  def get_family_code_page(this : IMultiLanguage*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
+  end
+  def enum_code_pages(this : IMultiLanguage*, grfflags : UInt32, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, ppenumcodepage)
+  end
+  def get_charset_info(this : IMultiLanguage*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
+  end
+  def is_convertible(this : IMultiLanguage*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
+  end
+  def convert_string(this : IMultiLanguage*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_to_unicode(this : IMultiLanguage*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_from_unicode(this : IMultiLanguage*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_reset(this : IMultiLanguage*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
+  end
+  def get_rfc1766_from_lcid(this : IMultiLanguage*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
+  end
+  def get_lcid_from_rfc1766(this : IMultiLanguage*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
+  end
+  def enum_rfc1766(this : IMultiLanguage*, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, ppenumrfc1766)
+  end
+  def get_rfc1766_info(this : IMultiLanguage*, locale : UInt32, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, prfc1766info)
+  end
+  def create_convert_charset(this : IMultiLanguage*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  end
+end
+struct LibWin32::IMultiLanguage2
+  def query_interface(this : IMultiLanguage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMultiLanguage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMultiLanguage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_of_code_page_info(this : IMultiLanguage2*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
+  end
+  def get_code_page_info(this : IMultiLanguage2*, uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, langid, pcodepageinfo)
+  end
+  def get_family_code_page(this : IMultiLanguage2*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
+  end
+  def enum_code_pages(this : IMultiLanguage2*, grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, langid, ppenumcodepage)
+  end
+  def get_charset_info(this : IMultiLanguage2*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
+  end
+  def is_convertible(this : IMultiLanguage2*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
+  end
+  def convert_string(this : IMultiLanguage2*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_to_unicode(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_from_unicode(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_reset(this : IMultiLanguage2*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
+  end
+  def get_rfc1766_from_lcid(this : IMultiLanguage2*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
+  end
+  def get_lcid_from_rfc1766(this : IMultiLanguage2*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
+  end
+  def enum_rfc1766(this : IMultiLanguage2*, langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, langid, ppenumrfc1766)
+  end
+  def get_rfc1766_info(this : IMultiLanguage2*, locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, langid, prfc1766info)
+  end
+  def create_convert_charset(this : IMultiLanguage2*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  end
+  def convert_string_in_i_stream(this : IMultiLanguage2*, pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
+    @lpVtbl.value.convert_string_in_i_stream.call(this, pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
+  end
+  def convert_string_to_unicode_ex(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  end
+  def convert_string_from_unicode_ex(this : IMultiLanguage2*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  end
+  def detect_codepage_in_i_stream(this : IMultiLanguage2*, dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_codepage_in_i_stream.call(this, dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
+  end
+  def detect_input_codepage(this : IMultiLanguage2*, dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_input_codepage.call(this, dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
+  end
+  def validate_code_page(this : IMultiLanguage2*, uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.validate_code_page.call(this, uicodepage, hwnd)
+  end
+  def get_code_page_description(this : IMultiLanguage2*, uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
+    @lpVtbl.value.get_code_page_description.call(this, uicodepage, lcid, lpwidecharstr, cchwidechar)
+  end
+  def is_code_page_installable(this : IMultiLanguage2*, uicodepage : UInt32) : HRESULT
+    @lpVtbl.value.is_code_page_installable.call(this, uicodepage)
+  end
+  def set_mime_db_source(this : IMultiLanguage2*, dwsource : MIMECONTF) : HRESULT
+    @lpVtbl.value.set_mime_db_source.call(this, dwsource)
+  end
+  def get_number_of_scripts(this : IMultiLanguage2*, pnscripts : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_scripts.call(this, pnscripts)
+  end
+  def enum_scripts(this : IMultiLanguage2*, dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
+    @lpVtbl.value.enum_scripts.call(this, dwflags, langid, ppenumscript)
+  end
+  def validate_code_page_ex(this : IMultiLanguage2*, uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
+    @lpVtbl.value.validate_code_page_ex.call(this, uicodepage, hwnd, dwfiodcontrol)
+  end
+end
+struct LibWin32::IMLangCodePages
+  def query_interface(this : IMLangCodePages*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangCodePages*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangCodePages*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_char_code_pages(this : IMLangCodePages*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
+  end
+  def get_str_code_pages(this : IMLangCodePages*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  end
+  def code_page_to_code_pages(this : IMLangCodePages*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
+  end
+  def code_pages_to_code_page(this : IMLangCodePages*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
+  end
+end
+struct LibWin32::IMLangFontLink
+  def query_interface(this : IMLangFontLink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangFontLink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangFontLink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_char_code_pages(this : IMLangFontLink*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
+  end
+  def get_str_code_pages(this : IMLangFontLink*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  end
+  def code_page_to_code_pages(this : IMLangFontLink*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
+  end
+  def code_pages_to_code_page(this : IMLangFontLink*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
+  end
+  def get_font_code_pages(this : IMLangFontLink*, hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_code_pages.call(this, hdc, hfont, pdwcodepages)
+  end
+  def map_font(this : IMLangFontLink*, hdc : HDC, dwcodepages : UInt32, hsrcfont : HFONT, phdestfont : HFONT*) : HRESULT
+    @lpVtbl.value.map_font.call(this, hdc, dwcodepages, hsrcfont, phdestfont)
+  end
+  def release_font(this : IMLangFontLink*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.release_font.call(this, hfont)
+  end
+  def reset_font_mapping(this : IMLangFontLink*) : HRESULT
+    @lpVtbl.value.reset_font_mapping.call(this)
+  end
+end
+struct LibWin32::IMLangFontLink2
+  def query_interface(this : IMLangFontLink2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMLangFontLink2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMLangFontLink2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_char_code_pages(this : IMLangFontLink2*, chsrc : Char, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_char_code_pages.call(this, chsrc, pdwcodepages)
+  end
+  def get_str_code_pages(this : IMLangFontLink2*, pszsrc : Char*, cchsrc : Int32, dwprioritycodepages : UInt32, pdwcodepages : UInt32*, pcchcodepages : Int32*) : HRESULT
+    @lpVtbl.value.get_str_code_pages.call(this, pszsrc, cchsrc, dwprioritycodepages, pdwcodepages, pcchcodepages)
+  end
+  def code_page_to_code_pages(this : IMLangFontLink2*, ucodepage : UInt32, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.code_page_to_code_pages.call(this, ucodepage, pdwcodepages)
+  end
+  def code_pages_to_code_page(this : IMLangFontLink2*, dwcodepages : UInt32, udefaultcodepage : UInt32, pucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.code_pages_to_code_page.call(this, dwcodepages, udefaultcodepage, pucodepage)
+  end
+  def get_font_code_pages(this : IMLangFontLink2*, hdc : HDC, hfont : HFONT, pdwcodepages : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_code_pages.call(this, hdc, hfont, pdwcodepages)
+  end
+  def release_font(this : IMLangFontLink2*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.release_font.call(this, hfont)
+  end
+  def reset_font_mapping(this : IMLangFontLink2*) : HRESULT
+    @lpVtbl.value.reset_font_mapping.call(this)
+  end
+  def map_font(this : IMLangFontLink2*, hdc : HDC, dwcodepages : UInt32, chsrc : Char, pfont : HFONT*) : HRESULT
+    @lpVtbl.value.map_font.call(this, hdc, dwcodepages, chsrc, pfont)
+  end
+  def get_font_unicode_ranges(this : IMLangFontLink2*, hdc : HDC, puiranges : UInt32*, puranges : UNICODERANGE*) : HRESULT
+    @lpVtbl.value.get_font_unicode_ranges.call(this, hdc, puiranges, puranges)
+  end
+  def get_script_font_info(this : IMLangFontLink2*, sid : UInt8, dwflags : UInt32, puifonts : UInt32*, pscriptfont : Tagscripfontinfo*) : HRESULT
+    @lpVtbl.value.get_script_font_info.call(this, sid, dwflags, puifonts, pscriptfont)
+  end
+  def code_page_to_script_id(this : IMLangFontLink2*, uicodepage : UInt32, psid : UInt8*) : HRESULT
+    @lpVtbl.value.code_page_to_script_id.call(this, uicodepage, psid)
+  end
+end
+struct LibWin32::IMultiLanguage3
+  def query_interface(this : IMultiLanguage3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMultiLanguage3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMultiLanguage3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_of_code_page_info(this : IMultiLanguage3*, pccodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_code_page_info.call(this, pccodepage)
+  end
+  def get_code_page_info(this : IMultiLanguage3*, uicodepage : UInt32, langid : UInt16, pcodepageinfo : MIMECPINFO*) : HRESULT
+    @lpVtbl.value.get_code_page_info.call(this, uicodepage, langid, pcodepageinfo)
+  end
+  def get_family_code_page(this : IMultiLanguage3*, uicodepage : UInt32, puifamilycodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_family_code_page.call(this, uicodepage, puifamilycodepage)
+  end
+  def enum_code_pages(this : IMultiLanguage3*, grfflags : UInt32, langid : UInt16, ppenumcodepage : IEnumCodePage*) : HRESULT
+    @lpVtbl.value.enum_code_pages.call(this, grfflags, langid, ppenumcodepage)
+  end
+  def get_charset_info(this : IMultiLanguage3*, charset : UInt8*, pcharsetinfo : MIMECSETINFO*) : HRESULT
+    @lpVtbl.value.get_charset_info.call(this, charset, pcharsetinfo)
+  end
+  def is_convertible(this : IMultiLanguage3*, dwsrcencoding : UInt32, dwdstencoding : UInt32) : HRESULT
+    @lpVtbl.value.is_convertible.call(this, dwsrcencoding, dwdstencoding)
+  end
+  def convert_string(this : IMultiLanguage3*, pdwmode : UInt32*, dwsrcencoding : UInt32, dwdstencoding : UInt32, psrcstr : UInt8*, pcsrcsize : UInt32*, pdststr : UInt8*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string.call(this, pdwmode, dwsrcencoding, dwdstencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_to_unicode(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_from_unicode(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize)
+  end
+  def convert_string_reset(this : IMultiLanguage3*) : HRESULT
+    @lpVtbl.value.convert_string_reset.call(this)
+  end
+  def get_rfc1766_from_lcid(this : IMultiLanguage3*, locale : UInt32, pbstrrfc1766 : UInt8**) : HRESULT
+    @lpVtbl.value.get_rfc1766_from_lcid.call(this, locale, pbstrrfc1766)
+  end
+  def get_lcid_from_rfc1766(this : IMultiLanguage3*, plocale : UInt32*, bstrrfc1766 : UInt8*) : HRESULT
+    @lpVtbl.value.get_lcid_from_rfc1766.call(this, plocale, bstrrfc1766)
+  end
+  def enum_rfc1766(this : IMultiLanguage3*, langid : UInt16, ppenumrfc1766 : IEnumRfc1766*) : HRESULT
+    @lpVtbl.value.enum_rfc1766.call(this, langid, ppenumrfc1766)
+  end
+  def get_rfc1766_info(this : IMultiLanguage3*, locale : UInt32, langid : UInt16, prfc1766info : RFC1766INFO*) : HRESULT
+    @lpVtbl.value.get_rfc1766_info.call(this, locale, langid, prfc1766info)
+  end
+  def create_convert_charset(this : IMultiLanguage3*, uisrccodepage : UInt32, uidstcodepage : UInt32, dwproperty : UInt32, ppmlangconvertcharset : IMLangConvertCharset*) : HRESULT
+    @lpVtbl.value.create_convert_charset.call(this, uisrccodepage, uidstcodepage, dwproperty, ppmlangconvertcharset)
+  end
+  def convert_string_in_i_stream(this : IMultiLanguage3*, pdwmode : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR, dwsrcencoding : UInt32, dwdstencoding : UInt32, pstmin : IStream, pstmout : IStream) : HRESULT
+    @lpVtbl.value.convert_string_in_i_stream.call(this, pdwmode, dwflag, lpfallback, dwsrcencoding, dwdstencoding, pstmin, pstmout)
+  end
+  def convert_string_to_unicode_ex(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : PSTR, pcsrcsize : UInt32*, pdststr : Char*, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_to_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  end
+  def convert_string_from_unicode_ex(this : IMultiLanguage3*, pdwmode : UInt32*, dwencoding : UInt32, psrcstr : Char*, pcsrcsize : UInt32*, pdststr : PSTR, pcdstsize : UInt32*, dwflag : UInt32, lpfallback : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.convert_string_from_unicode_ex.call(this, pdwmode, dwencoding, psrcstr, pcsrcsize, pdststr, pcdstsize, dwflag, lpfallback)
+  end
+  def detect_codepage_in_i_stream(this : IMultiLanguage3*, dwflag : UInt32, dwprefwincodepage : UInt32, pstmin : IStream, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_codepage_in_i_stream.call(this, dwflag, dwprefwincodepage, pstmin, lpencoding, pnscores)
+  end
+  def detect_input_codepage(this : IMultiLanguage3*, dwflag : UInt32, dwprefwincodepage : UInt32, psrcstr : PSTR, pcsrcsize : Int32*, lpencoding : DetectEncodingInfo*, pnscores : Int32*) : HRESULT
+    @lpVtbl.value.detect_input_codepage.call(this, dwflag, dwprefwincodepage, psrcstr, pcsrcsize, lpencoding, pnscores)
+  end
+  def validate_code_page(this : IMultiLanguage3*, uicodepage : UInt32, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.validate_code_page.call(this, uicodepage, hwnd)
+  end
+  def get_code_page_description(this : IMultiLanguage3*, uicodepage : UInt32, lcid : UInt32, lpwidecharstr : Char*, cchwidechar : Int32) : HRESULT
+    @lpVtbl.value.get_code_page_description.call(this, uicodepage, lcid, lpwidecharstr, cchwidechar)
+  end
+  def is_code_page_installable(this : IMultiLanguage3*, uicodepage : UInt32) : HRESULT
+    @lpVtbl.value.is_code_page_installable.call(this, uicodepage)
+  end
+  def set_mime_db_source(this : IMultiLanguage3*, dwsource : MIMECONTF) : HRESULT
+    @lpVtbl.value.set_mime_db_source.call(this, dwsource)
+  end
+  def get_number_of_scripts(this : IMultiLanguage3*, pnscripts : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_scripts.call(this, pnscripts)
+  end
+  def enum_scripts(this : IMultiLanguage3*, dwflags : UInt32, langid : UInt16, ppenumscript : IEnumScript*) : HRESULT
+    @lpVtbl.value.enum_scripts.call(this, dwflags, langid, ppenumscript)
+  end
+  def validate_code_page_ex(this : IMultiLanguage3*, uicodepage : UInt32, hwnd : LibC::HANDLE, dwfiodcontrol : UInt32) : HRESULT
+    @lpVtbl.value.validate_code_page_ex.call(this, uicodepage, hwnd, dwfiodcontrol)
+  end
+  def detect_outbound_code_page(this : IMultiLanguage3*, dwflags : UInt32, lpwidecharstr : Char*, cchwidechar : UInt32, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.detect_outbound_code_page.call(this, dwflags, lpwidecharstr, cchwidechar, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
+  end
+  def detect_outbound_code_page_in_i_stream(this : IMultiLanguage3*, dwflags : UInt32, pstrin : IStream, puipreferredcodepages : UInt32*, npreferredcodepages : UInt32, puidetectedcodepages : UInt32*, pndetectedcodepages : UInt32*, lpspecialchar : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.detect_outbound_code_page_in_i_stream.call(this, dwflags, pstrin, puipreferredcodepages, npreferredcodepages, puidetectedcodepages, pndetectedcodepages, lpspecialchar)
+  end
 end

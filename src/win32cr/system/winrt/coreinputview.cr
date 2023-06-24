@@ -27,3 +27,26 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ICoreFrameworkInputViewInterop
+  def query_interface(this : ICoreFrameworkInputViewInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICoreFrameworkInputViewInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICoreFrameworkInputViewInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ICoreFrameworkInputViewInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ICoreFrameworkInputViewInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ICoreFrameworkInputViewInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : ICoreFrameworkInputViewInterop*, appwindow : LibC::HANDLE, riid : Guid*, coreframeworkinputview : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, coreframeworkinputview)
+  end
+end

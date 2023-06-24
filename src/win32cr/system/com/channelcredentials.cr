@@ -37,3 +37,56 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IChannelCredentials
+  def query_interface(this : IChannelCredentials*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IChannelCredentials*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IChannelCredentials*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IChannelCredentials*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IChannelCredentials*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IChannelCredentials*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IChannelCredentials*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def set_windows_credential(this : IChannelCredentials*, domain : UInt8*, username : UInt8*, password : UInt8*, impersonationlevel : Int32, allowntlm : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_windows_credential.call(this, domain, username, password, impersonationlevel, allowntlm)
+  end
+  def set_user_name_credential(this : IChannelCredentials*, username : UInt8*, password : UInt8*) : HRESULT
+    @lpVtbl.value.set_user_name_credential.call(this, username, password)
+  end
+  def set_client_certificate_from_store(this : IChannelCredentials*, storelocation : UInt8*, storename : UInt8*, findyype : UInt8*, findvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_store.call(this, storelocation, storename, findyype, findvalue)
+  end
+  def set_client_certificate_from_store_by_name(this : IChannelCredentials*, subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_store_by_name.call(this, subjectname, storelocation, storename)
+  end
+  def set_client_certificate_from_file(this : IChannelCredentials*, filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_from_file.call(this, filename, password, keystorageflags)
+  end
+  def set_default_service_certificate_from_store(this : IChannelCredentials*, storelocation : UInt8*, storename : UInt8*, findtype : UInt8*, findvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_store.call(this, storelocation, storename, findtype, findvalue)
+  end
+  def set_default_service_certificate_from_store_by_name(this : IChannelCredentials*, subjectname : UInt8*, storelocation : UInt8*, storename : UInt8*) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_store_by_name.call(this, subjectname, storelocation, storename)
+  end
+  def set_default_service_certificate_from_file(this : IChannelCredentials*, filename : UInt8*, password : UInt8*, keystorageflags : UInt8*) : HRESULT
+    @lpVtbl.value.set_default_service_certificate_from_file.call(this, filename, password, keystorageflags)
+  end
+  def set_service_certificate_authentication(this : IChannelCredentials*, storelocation : UInt8*, revocationmode : UInt8*, certificatevalidationmode : UInt8*) : HRESULT
+    @lpVtbl.value.set_service_certificate_authentication.call(this, storelocation, revocationmode, certificatevalidationmode)
+  end
+  def set_issued_token(this : IChannelCredentials*, localissueraddres : UInt8*, localissuerbindingtype : UInt8*, localissuerbinding : UInt8*) : HRESULT
+    @lpVtbl.value.set_issued_token.call(this, localissueraddres, localissuerbindingtype, localissuerbinding)
+  end
+end

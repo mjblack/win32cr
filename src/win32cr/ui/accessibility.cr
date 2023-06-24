@@ -5312,7 +5312,7 @@ lib LibWin32
   fun GetStateTextW(lstatebit : UInt32, lpszstate : Char*, cchstate : UInt32) : UInt32
 
   # Params # pver : UInt32* [In],pbuild : UInt32* [In]
-  fun GetOleaccVersionInfo(pver : UInt32*, pbuild : UInt32*)
+  fun GetOleaccVersionInfo(pver : UInt32*, pbuild : UInt32*) : Void
 
   # Params # hwnd : LibC::HANDLE [In],idobject : Int32 [In],riid : Guid* [In],ppvobject : Void** [In]
   fun CreateStdAccessibleObject(hwnd : LibC::HANDLE, idobject : Int32, riid : Guid*, ppvobject : Void**) : HRESULT
@@ -5381,7 +5381,7 @@ lib LibWin32
   fun UiaGetRootNode(phnode : HUIANODE*) : HRESULT
 
   # Params # pcallback : UiaProviderCallback* [In]
-  fun UiaRegisterProviderCallback(pcallback : UiaProviderCallback*)
+  fun UiaRegisterProviderCallback(pcallback : UiaProviderCallback*) : Void
 
   # Params # type : AutomationIdentifierType [In],pguid : Guid* [In]
   fun UiaLookupId(type : AutomationIdentifierType, pguid : Guid*) : Int32
@@ -5636,7 +5636,7 @@ lib LibWin32
   fun UnregisterPointerInputTargetEx(hwnd : LibC::HANDLE, pointertype : POINTER_INPUT_TYPE) : LibC::BOOL
 
   # Params # event : UInt32 [In],hwnd : LibC::HANDLE [In],idobject : Int32 [In],idchild : Int32 [In]
-  fun NotifyWinEvent(event : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32)
+  fun NotifyWinEvent(event : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32) : Void
 
   # Params # eventmin : UInt32 [In],eventmax : UInt32 [In],hmodwineventproc : HINSTANCE [In],pfnwineventproc : WINEVENTPROC [In],idprocess : UInt32 [In],idthread : UInt32 [In],dwflags : UInt32 [In]
   fun SetWinEventHook(eventmin : UInt32, eventmax : UInt32, hmodwineventproc : HINSTANCE, pfnwineventproc : WINEVENTPROC, idprocess : UInt32, idthread : UInt32, dwflags : UInt32) : HWINEVENTHOOK
@@ -5646,4 +5646,7401 @@ lib LibWin32
 
   # Params # hwineventhook : HWINEVENTHOOK [In]
   fun UnhookWinEvent(hwineventhook : HWINEVENTHOOK) : LibC::BOOL
+end
+struct LibWin32::IRicheditWindowlessAccessibility
+  def query_interface(this : IRicheditWindowlessAccessibility*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRicheditWindowlessAccessibility*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRicheditWindowlessAccessibility*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_provider(this : IRicheditWindowlessAccessibility*, psite : IRawElementProviderWindowlessSite, ppprovider : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.create_provider.call(this, psite, ppprovider)
+  end
+end
+struct LibWin32::IRichEditUiaInformation
+  def query_interface(this : IRichEditUiaInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRichEditUiaInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRichEditUiaInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_boundary_rectangle(this : IRichEditUiaInformation*, puiarect : UiaRect*) : HRESULT
+    @lpVtbl.value.get_boundary_rectangle.call(this, puiarect)
+  end
+  def is_visible(this : IRichEditUiaInformation*) : HRESULT
+    @lpVtbl.value.is_visible.call(this)
+  end
+end
+struct LibWin32::IAccessible
+  def query_interface(this : IAccessible*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccessible*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccessible*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAccessible*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAccessible*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAccessible*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAccessible*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_acc_parent(this : IAccessible*, ppdispparent : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_parent.call(this, ppdispparent)
+  end
+  def get_acc_child_count(this : IAccessible*, pcountchildren : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_child_count.call(this, pcountchildren)
+  end
+  def get_acc_child(this : IAccessible*, varchild : VARIANT, ppdispchild : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_child.call(this, varchild, ppdispchild)
+  end
+  def get_acc_name(this : IAccessible*, varchild : VARIANT, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_name.call(this, varchild, pszname)
+  end
+  def get_acc_value(this : IAccessible*, varchild : VARIANT, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_value.call(this, varchild, pszvalue)
+  end
+  def get_acc_description(this : IAccessible*, varchild : VARIANT, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_description.call(this, varchild, pszdescription)
+  end
+  def get_acc_role(this : IAccessible*, varchild : VARIANT, pvarrole : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_role.call(this, varchild, pvarrole)
+  end
+  def get_acc_state(this : IAccessible*, varchild : VARIANT, pvarstate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_state.call(this, varchild, pvarstate)
+  end
+  def get_acc_help(this : IAccessible*, varchild : VARIANT, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_help.call(this, varchild, pszhelp)
+  end
+  def get_acc_help_topic(this : IAccessible*, pszhelpfile : UInt8**, varchild : VARIANT, pidtopic : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_help_topic.call(this, pszhelpfile, varchild, pidtopic)
+  end
+  def get_acc_keyboard_shortcut(this : IAccessible*, varchild : VARIANT, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_keyboard_shortcut.call(this, varchild, pszkeyboardshortcut)
+  end
+  def get_acc_focus(this : IAccessible*, pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_focus.call(this, pvarchild)
+  end
+  def get_acc_selection(this : IAccessible*, pvarchildren : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_selection.call(this, pvarchildren)
+  end
+  def get_acc_default_action(this : IAccessible*, varchild : VARIANT, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_default_action.call(this, varchild, pszdefaultaction)
+  end
+  def acc_select(this : IAccessible*, flagsselect : Int32, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_select.call(this, flagsselect, varchild)
+  end
+  def acc_location(this : IAccessible*, pxleft : Int32*, pytop : Int32*, pcxwidth : Int32*, pcyheight : Int32*, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_location.call(this, pxleft, pytop, pcxwidth, pcyheight, varchild)
+  end
+  def acc_navigate(this : IAccessible*, navdir : Int32, varstart : VARIANT, pvarendupat : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_navigate.call(this, navdir, varstart, pvarendupat)
+  end
+  def acc_hit_test(this : IAccessible*, xleft : Int32, ytop : Int32, pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_hit_test.call(this, xleft, ytop, pvarchild)
+  end
+  def acc_do_default_action(this : IAccessible*, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_do_default_action.call(this, varchild)
+  end
+  def put_acc_name(this : IAccessible*, varchild : VARIANT, szname : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_name.call(this, varchild, szname)
+  end
+  def put_acc_value(this : IAccessible*, varchild : VARIANT, szvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_value.call(this, varchild, szvalue)
+  end
+end
+struct LibWin32::IAccessibleHandler
+  def query_interface(this : IAccessibleHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccessibleHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccessibleHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def accessible_object_from_id(this : IAccessibleHandler*, hwnd : Int32, lobjectid : Int32, piaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.accessible_object_from_id.call(this, hwnd, lobjectid, piaccessible)
+  end
+end
+struct LibWin32::IAccessibleWindowlessSite
+  def query_interface(this : IAccessibleWindowlessSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccessibleWindowlessSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccessibleWindowlessSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_object_id_range(this : IAccessibleWindowlessSite*, rangesize : Int32, prangeowner : IAccessibleHandler, prangebase : Int32*) : HRESULT
+    @lpVtbl.value.acquire_object_id_range.call(this, rangesize, prangeowner, prangebase)
+  end
+  def release_object_id_range(this : IAccessibleWindowlessSite*, rangebase : Int32, prangeowner : IAccessibleHandler) : HRESULT
+    @lpVtbl.value.release_object_id_range.call(this, rangebase, prangeowner)
+  end
+  def query_object_id_ranges(this : IAccessibleWindowlessSite*, prangesowner : IAccessibleHandler, psaranges : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.query_object_id_ranges.call(this, prangesowner, psaranges)
+  end
+  def get_parent_accessible(this : IAccessibleWindowlessSite*, ppparent : IAccessible*) : HRESULT
+    @lpVtbl.value.get_parent_accessible.call(this, ppparent)
+  end
+end
+struct LibWin32::IAccIdentity
+  def query_interface(this : IAccIdentity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccIdentity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccIdentity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_identity_string(this : IAccIdentity*, dwidchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_string.call(this, dwidchild, ppidstring, pdwidstringlen)
+  end
+end
+struct LibWin32::IAccPropServer
+  def query_interface(this : IAccPropServer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccPropServer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccPropServer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prop_value(this : IAccPropServer*, pidstring : UInt8*, dwidstringlen : UInt32, idprop : Guid, pvarvalue : VARIANT*, pfhasprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_prop_value.call(this, pidstring, dwidstringlen, idprop, pvarvalue, pfhasprop)
+  end
+end
+struct LibWin32::IAccPropServices
+  def query_interface(this : IAccPropServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccPropServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccPropServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_prop_value(this : IAccPropServices*, pidstring : UInt8*, dwidstringlen : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_prop_value.call(this, pidstring, dwidstringlen, idprop, var)
+  end
+  def set_prop_server(this : IAccPropServices*, pidstring : UInt8*, dwidstringlen : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_prop_server.call(this, pidstring, dwidstringlen, paprops, cprops, pserver, annoscope)
+  end
+  def clear_props(this : IAccPropServices*, pidstring : UInt8*, dwidstringlen : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_props.call(this, pidstring, dwidstringlen, paprops, cprops)
+  end
+  def set_hwnd_prop(this : IAccPropServices*, hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_hwnd_prop.call(this, hwnd, idobject, idchild, idprop, var)
+  end
+  def set_hwnd_prop_str(this : IAccPropServices*, hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, idprop : Guid, str : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_hwnd_prop_str.call(this, hwnd, idobject, idchild, idprop, str)
+  end
+  def set_hwnd_prop_server(this : IAccPropServices*, hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_hwnd_prop_server.call(this, hwnd, idobject, idchild, paprops, cprops, pserver, annoscope)
+  end
+  def clear_hwnd_props(this : IAccPropServices*, hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_hwnd_props.call(this, hwnd, idobject, idchild, paprops, cprops)
+  end
+  def compose_hwnd_identity_string(this : IAccPropServices*, hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.compose_hwnd_identity_string.call(this, hwnd, idobject, idchild, ppidstring, pdwidstringlen)
+  end
+  def decompose_hwnd_identity_string(this : IAccPropServices*, pidstring : UInt8*, dwidstringlen : UInt32, phwnd : HANDLE*, pidobject : UInt32*, pidchild : UInt32*) : HRESULT
+    @lpVtbl.value.decompose_hwnd_identity_string.call(this, pidstring, dwidstringlen, phwnd, pidobject, pidchild)
+  end
+  def set_hmenu_prop(this : IAccPropServices*, hmenu : LibC::HANDLE, idchild : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_hmenu_prop.call(this, hmenu, idchild, idprop, var)
+  end
+  def set_hmenu_prop_str(this : IAccPropServices*, hmenu : LibC::HANDLE, idchild : UInt32, idprop : Guid, str : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_hmenu_prop_str.call(this, hmenu, idchild, idprop, str)
+  end
+  def set_hmenu_prop_server(this : IAccPropServices*, hmenu : LibC::HANDLE, idchild : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_hmenu_prop_server.call(this, hmenu, idchild, paprops, cprops, pserver, annoscope)
+  end
+  def clear_hmenu_props(this : IAccPropServices*, hmenu : LibC::HANDLE, idchild : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_hmenu_props.call(this, hmenu, idchild, paprops, cprops)
+  end
+  def compose_hmenu_identity_string(this : IAccPropServices*, hmenu : LibC::HANDLE, idchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.compose_hmenu_identity_string.call(this, hmenu, idchild, ppidstring, pdwidstringlen)
+  end
+  def decompose_hmenu_identity_string(this : IAccPropServices*, pidstring : UInt8*, dwidstringlen : UInt32, phmenu : HANDLE*, pidchild : UInt32*) : HRESULT
+    @lpVtbl.value.decompose_hmenu_identity_string.call(this, pidstring, dwidstringlen, phmenu, pidchild)
+  end
+end
+struct LibWin32::IRawElementProviderSimple
+  def query_interface(this : IRawElementProviderSimple*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderSimple*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderSimple*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider_options(this : IRawElementProviderSimple*, pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.call(this, pretval)
+  end
+  def get_pattern_provider(this : IRawElementProviderSimple*, patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.call(this, patternid, pretval)
+  end
+  def get_property_value(this : IRawElementProviderSimple*, propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, propertyid, pretval)
+  end
+  def get_host_raw_element_provider(this : IRawElementProviderSimple*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.call(this, pretval)
+  end
+end
+struct LibWin32::IAccessibleEx
+  def query_interface(this : IAccessibleEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccessibleEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccessibleEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_for_child(this : IAccessibleEx*, idchild : Int32, pretval : IAccessibleEx*) : HRESULT
+    @lpVtbl.value.get_object_for_child.call(this, idchild, pretval)
+  end
+  def get_i_accessible_pair(this : IAccessibleEx*, ppacc : IAccessible*, pidchild : Int32*) : HRESULT
+    @lpVtbl.value.get_i_accessible_pair.call(this, ppacc, pidchild)
+  end
+  def get_runtime_id(this : IAccessibleEx*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, pretval)
+  end
+  def convert_returned_element(this : IAccessibleEx*, pin : IRawElementProviderSimple, ppretvalout : IAccessibleEx*) : HRESULT
+    @lpVtbl.value.convert_returned_element.call(this, pin, ppretvalout)
+  end
+end
+struct LibWin32::IRawElementProviderSimple2
+  def query_interface(this : IRawElementProviderSimple2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderSimple2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderSimple2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider_options(this : IRawElementProviderSimple2*, pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.call(this, pretval)
+  end
+  def get_pattern_provider(this : IRawElementProviderSimple2*, patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.call(this, patternid, pretval)
+  end
+  def get_property_value(this : IRawElementProviderSimple2*, propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, propertyid, pretval)
+  end
+  def get_host_raw_element_provider(this : IRawElementProviderSimple2*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.call(this, pretval)
+  end
+  def show_context_menu(this : IRawElementProviderSimple2*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+end
+struct LibWin32::IRawElementProviderSimple3
+  def query_interface(this : IRawElementProviderSimple3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderSimple3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderSimple3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider_options(this : IRawElementProviderSimple3*, pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.call(this, pretval)
+  end
+  def get_pattern_provider(this : IRawElementProviderSimple3*, patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.call(this, patternid, pretval)
+  end
+  def get_property_value(this : IRawElementProviderSimple3*, propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, propertyid, pretval)
+  end
+  def get_host_raw_element_provider(this : IRawElementProviderSimple3*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.call(this, pretval)
+  end
+  def show_context_menu(this : IRawElementProviderSimple3*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_metadata_value(this : IRawElementProviderSimple3*, targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_metadata_value.call(this, targetid, metadataid, returnval)
+  end
+end
+struct LibWin32::IRawElementProviderFragmentRoot
+  def query_interface(this : IRawElementProviderFragmentRoot*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderFragmentRoot*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderFragmentRoot*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def element_provider_from_point(this : IRawElementProviderFragmentRoot*, x : Float64, y : Float64, pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.element_provider_from_point.call(this, x, y, pretval)
+  end
+  def get_focus(this : IRawElementProviderFragmentRoot*, pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.get_focus.call(this, pretval)
+  end
+end
+struct LibWin32::IRawElementProviderFragment
+  def query_interface(this : IRawElementProviderFragment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderFragment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderFragment*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def navigate(this : IRawElementProviderFragment*, direction : NavigateDirection, pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.navigate.call(this, direction, pretval)
+  end
+  def get_runtime_id(this : IRawElementProviderFragment*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, pretval)
+  end
+  def get_bounding_rectangle(this : IRawElementProviderFragment*, pretval : UiaRect*) : HRESULT
+    @lpVtbl.value.get_bounding_rectangle.call(this, pretval)
+  end
+  def get_embedded_fragment_roots(this : IRawElementProviderFragment*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_fragment_roots.call(this, pretval)
+  end
+  def set_focus(this : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_fragment_root(this : IRawElementProviderFragment*, pretval : IRawElementProviderFragmentRoot*) : HRESULT
+    @lpVtbl.value.get_fragment_root.call(this, pretval)
+  end
+end
+struct LibWin32::IRawElementProviderAdviseEvents
+  def query_interface(this : IRawElementProviderAdviseEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderAdviseEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderAdviseEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_event_added(this : IRawElementProviderAdviseEvents*, eventid : Int32, propertyids : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.advise_event_added.call(this, eventid, propertyids)
+  end
+  def advise_event_removed(this : IRawElementProviderAdviseEvents*, eventid : Int32, propertyids : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.advise_event_removed.call(this, eventid, propertyids)
+  end
+end
+struct LibWin32::IRawElementProviderHwndOverride
+  def query_interface(this : IRawElementProviderHwndOverride*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderHwndOverride*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderHwndOverride*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_override_provider_for_hwnd(this : IRawElementProviderHwndOverride*, hwnd : LibC::HANDLE, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_override_provider_for_hwnd.call(this, hwnd, pretval)
+  end
+end
+struct LibWin32::IProxyProviderWinEventSink
+  def query_interface(this : IProxyProviderWinEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProxyProviderWinEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProxyProviderWinEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_automation_property_changed_event(this : IProxyProviderWinEventSink*, pprovider : IRawElementProviderSimple, id : Int32, newvalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_automation_property_changed_event.call(this, pprovider, id, newvalue)
+  end
+  def add_automation_event(this : IProxyProviderWinEventSink*, pprovider : IRawElementProviderSimple, id : Int32) : HRESULT
+    @lpVtbl.value.add_automation_event.call(this, pprovider, id)
+  end
+  def add_structure_changed_event(this : IProxyProviderWinEventSink*, pprovider : IRawElementProviderSimple, structurechangetype : StructureChangeType, runtimeid : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_structure_changed_event.call(this, pprovider, structurechangetype, runtimeid)
+  end
+end
+struct LibWin32::IProxyProviderWinEventHandler
+  def query_interface(this : IProxyProviderWinEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProxyProviderWinEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProxyProviderWinEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def respond_to_win_event(this : IProxyProviderWinEventHandler*, idwinevent : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32, psink : IProxyProviderWinEventSink) : HRESULT
+    @lpVtbl.value.respond_to_win_event.call(this, idwinevent, hwnd, idobject, idchild, psink)
+  end
+end
+struct LibWin32::IRawElementProviderWindowlessSite
+  def query_interface(this : IRawElementProviderWindowlessSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderWindowlessSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderWindowlessSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_adjacent_fragment(this : IRawElementProviderWindowlessSite*, direction : NavigateDirection, ppparent : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.get_adjacent_fragment.call(this, direction, ppparent)
+  end
+  def get_runtime_id_prefix(this : IRawElementProviderWindowlessSite*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id_prefix.call(this, pretval)
+  end
+end
+struct LibWin32::IAccessibleHostingElementProviders
+  def query_interface(this : IAccessibleHostingElementProviders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccessibleHostingElementProviders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccessibleHostingElementProviders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_embedded_fragment_roots(this : IAccessibleHostingElementProviders*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_fragment_roots.call(this, pretval)
+  end
+  def get_object_id_for_provider(this : IAccessibleHostingElementProviders*, pprovider : IRawElementProviderSimple, pidobject : Int32*) : HRESULT
+    @lpVtbl.value.get_object_id_for_provider.call(this, pprovider, pidobject)
+  end
+end
+struct LibWin32::IRawElementProviderHostingAccessibles
+  def query_interface(this : IRawElementProviderHostingAccessibles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawElementProviderHostingAccessibles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawElementProviderHostingAccessibles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_embedded_accessibles(this : IRawElementProviderHostingAccessibles*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_accessibles.call(this, pretval)
+  end
+end
+struct LibWin32::IDockProvider
+  def query_interface(this : IDockProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDockProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDockProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_dock_position(this : IDockProvider*, dockposition : DockPosition) : HRESULT
+    @lpVtbl.value.set_dock_position.call(this, dockposition)
+  end
+  def get_dock_position(this : IDockProvider*, pretval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_dock_position.call(this, pretval)
+  end
+end
+struct LibWin32::IExpandCollapseProvider
+  def query_interface(this : IExpandCollapseProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IExpandCollapseProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IExpandCollapseProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def expand(this : IExpandCollapseProvider*) : HRESULT
+    @lpVtbl.value.expand.call(this)
+  end
+  def collapse(this : IExpandCollapseProvider*) : HRESULT
+    @lpVtbl.value.collapse.call(this)
+  end
+  def get_expand_collapse_state(this : IExpandCollapseProvider*, pretval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_expand_collapse_state.call(this, pretval)
+  end
+end
+struct LibWin32::IGridProvider
+  def query_interface(this : IGridProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGridProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGridProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IGridProvider*, row : Int32, column : Int32, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_item.call(this, row, column, pretval)
+  end
+  def get_row_count(this : IGridProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row_count.call(this, pretval)
+  end
+  def get_column_count(this : IGridProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column_count.call(this, pretval)
+  end
+end
+struct LibWin32::IGridItemProvider
+  def query_interface(this : IGridItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGridItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGridItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_row(this : IGridItemProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row.call(this, pretval)
+  end
+  def get_column(this : IGridItemProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column.call(this, pretval)
+  end
+  def get_row_span(this : IGridItemProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row_span.call(this, pretval)
+  end
+  def get_column_span(this : IGridItemProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column_span.call(this, pretval)
+  end
+  def get_containing_grid(this : IGridItemProvider*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_containing_grid.call(this, pretval)
+  end
+end
+struct LibWin32::IInvokeProvider
+  def query_interface(this : IInvokeProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInvokeProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInvokeProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IInvokeProvider*) : HRESULT
+    @lpVtbl.value.invoke.call(this)
+  end
+end
+struct LibWin32::IMultipleViewProvider
+  def query_interface(this : IMultipleViewProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMultipleViewProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMultipleViewProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_view_name(this : IMultipleViewProvider*, viewid : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_view_name.call(this, viewid, pretval)
+  end
+  def set_current_view(this : IMultipleViewProvider*, viewid : Int32) : HRESULT
+    @lpVtbl.value.set_current_view.call(this, viewid)
+  end
+  def get_current_view(this : IMultipleViewProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_view.call(this, pretval)
+  end
+  def get_supported_views(this : IMultipleViewProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_views.call(this, pretval)
+  end
+end
+struct LibWin32::IRangeValueProvider
+  def query_interface(this : IRangeValueProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRangeValueProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRangeValueProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_value(this : IRangeValueProvider*, val : Float64) : HRESULT
+    @lpVtbl.value.set_value.call(this, val)
+  end
+  def get_value(this : IRangeValueProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pretval)
+  end
+  def get_is_read_only(this : IRangeValueProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_read_only.call(this, pretval)
+  end
+  def get_maximum(this : IRangeValueProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_maximum.call(this, pretval)
+  end
+  def get_minimum(this : IRangeValueProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_minimum.call(this, pretval)
+  end
+  def get_large_change(this : IRangeValueProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_large_change.call(this, pretval)
+  end
+  def get_small_change(this : IRangeValueProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_small_change.call(this, pretval)
+  end
+end
+struct LibWin32::IScrollItemProvider
+  def query_interface(this : IScrollItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScrollItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScrollItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll_into_view(this : IScrollItemProvider*) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this)
+  end
+end
+struct LibWin32::ISelectionProvider
+  def query_interface(this : ISelectionProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISelectionProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISelectionProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection(this : ISelectionProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pretval)
+  end
+  def get_can_select_multiple(this : ISelectionProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_select_multiple.call(this, pretval)
+  end
+  def get_is_selection_required(this : ISelectionProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selection_required.call(this, pretval)
+  end
+end
+struct LibWin32::ISelectionProvider2
+  def query_interface(this : ISelectionProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISelectionProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISelectionProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection(this : ISelectionProvider2*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pretval)
+  end
+  def get_can_select_multiple(this : ISelectionProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_select_multiple.call(this, pretval)
+  end
+  def get_is_selection_required(this : ISelectionProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selection_required.call(this, pretval)
+  end
+  def get_first_selected_item(this : ISelectionProvider2*, retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_first_selected_item.call(this, retval)
+  end
+  def get_last_selected_item(this : ISelectionProvider2*, retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_last_selected_item.call(this, retval)
+  end
+  def get_current_selected_item(this : ISelectionProvider2*, retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_current_selected_item.call(this, retval)
+  end
+  def get_item_count(this : ISelectionProvider2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_item_count.call(this, retval)
+  end
+end
+struct LibWin32::IScrollProvider
+  def query_interface(this : IScrollProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScrollProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScrollProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll(this : IScrollProvider*, horizontalamount : ScrollAmount, verticalamount : ScrollAmount) : HRESULT
+    @lpVtbl.value.scroll.call(this, horizontalamount, verticalamount)
+  end
+  def set_scroll_percent(this : IScrollProvider*, horizontalpercent : Float64, verticalpercent : Float64) : HRESULT
+    @lpVtbl.value.set_scroll_percent.call(this, horizontalpercent, verticalpercent)
+  end
+  def get_horizontal_scroll_percent(this : IScrollProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_horizontal_scroll_percent.call(this, pretval)
+  end
+  def get_vertical_scroll_percent(this : IScrollProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_vertical_scroll_percent.call(this, pretval)
+  end
+  def get_horizontal_view_size(this : IScrollProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_horizontal_view_size.call(this, pretval)
+  end
+  def get_vertical_view_size(this : IScrollProvider*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_vertical_view_size.call(this, pretval)
+  end
+  def get_horizontally_scrollable(this : IScrollProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_horizontally_scrollable.call(this, pretval)
+  end
+  def get_vertically_scrollable(this : IScrollProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_vertically_scrollable.call(this, pretval)
+  end
+end
+struct LibWin32::ISelectionItemProvider
+  def query_interface(this : ISelectionItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISelectionItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISelectionItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def select(this : ISelectionItemProvider*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : ISelectionItemProvider*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : ISelectionItemProvider*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def get_is_selected(this : ISelectionItemProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selected.call(this, pretval)
+  end
+  def get_selection_container(this : ISelectionItemProvider*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_selection_container.call(this, pretval)
+  end
+end
+struct LibWin32::ISynchronizedInputProvider
+  def query_interface(this : ISynchronizedInputProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISynchronizedInputProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISynchronizedInputProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_listening(this : ISynchronizedInputProvider*, inputtype : SynchronizedInputType) : HRESULT
+    @lpVtbl.value.start_listening.call(this, inputtype)
+  end
+  def cancel(this : ISynchronizedInputProvider*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::ITableProvider
+  def query_interface(this : ITableProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITableProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITableProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_row_headers(this : ITableProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_row_headers.call(this, pretval)
+  end
+  def get_column_headers(this : ITableProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_column_headers.call(this, pretval)
+  end
+  def get_row_or_column_major(this : ITableProvider*, pretval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_row_or_column_major.call(this, pretval)
+  end
+end
+struct LibWin32::ITableItemProvider
+  def query_interface(this : ITableItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITableItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITableItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_row_header_items(this : ITableItemProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_row_header_items.call(this, pretval)
+  end
+  def get_column_header_items(this : ITableItemProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_column_header_items.call(this, pretval)
+  end
+end
+struct LibWin32::IToggleProvider
+  def query_interface(this : IToggleProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IToggleProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IToggleProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def toggle(this : IToggleProvider*) : HRESULT
+    @lpVtbl.value.toggle.call(this)
+  end
+  def get_toggle_state(this : IToggleProvider*, pretval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_toggle_state.call(this, pretval)
+  end
+end
+struct LibWin32::ITransformProvider
+  def query_interface(this : ITransformProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransformProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransformProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move(this : ITransformProvider*, x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.call(this, x, y)
+  end
+  def resize(this : ITransformProvider*, width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def rotate(this : ITransformProvider*, degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees)
+  end
+  def get_can_move(this : ITransformProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_move.call(this, pretval)
+  end
+  def get_can_resize(this : ITransformProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_resize.call(this, pretval)
+  end
+  def get_can_rotate(this : ITransformProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_rotate.call(this, pretval)
+  end
+end
+struct LibWin32::IValueProvider
+  def query_interface(this : IValueProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IValueProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IValueProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_value(this : IValueProvider*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.call(this, val)
+  end
+  def get_value(this : IValueProvider*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, pretval)
+  end
+  def get_is_read_only(this : IValueProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_read_only.call(this, pretval)
+  end
+end
+struct LibWin32::IWindowProvider
+  def query_interface(this : IWindowProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_visual_state(this : IWindowProvider*, state : WindowVisualState) : HRESULT
+    @lpVtbl.value.set_visual_state.call(this, state)
+  end
+  def close(this : IWindowProvider*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def wait_for_input_idle(this : IWindowProvider*, milliseconds : Int32, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.wait_for_input_idle.call(this, milliseconds, pretval)
+  end
+  def get_can_maximize(this : IWindowProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_maximize.call(this, pretval)
+  end
+  def get_can_minimize(this : IWindowProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_minimize.call(this, pretval)
+  end
+  def get_is_modal(this : IWindowProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_modal.call(this, pretval)
+  end
+  def get_window_visual_state(this : IWindowProvider*, pretval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_window_visual_state.call(this, pretval)
+  end
+  def get_window_interaction_state(this : IWindowProvider*, pretval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_window_interaction_state.call(this, pretval)
+  end
+  def get_is_topmost(this : IWindowProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_topmost.call(this, pretval)
+  end
+end
+struct LibWin32::ILegacyIAccessibleProvider
+  def query_interface(this : ILegacyIAccessibleProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILegacyIAccessibleProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILegacyIAccessibleProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def select(this : ILegacyIAccessibleProvider*, flagsselect : Int32) : HRESULT
+    @lpVtbl.value.select.call(this, flagsselect)
+  end
+  def do_default_action(this : ILegacyIAccessibleProvider*) : HRESULT
+    @lpVtbl.value.do_default_action.call(this)
+  end
+  def set_value(this : ILegacyIAccessibleProvider*, szvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.call(this, szvalue)
+  end
+  def get_i_accessible(this : ILegacyIAccessibleProvider*, ppaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.get_i_accessible.call(this, ppaccessible)
+  end
+  def get_child_id(this : ILegacyIAccessibleProvider*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_child_id.call(this, pretval)
+  end
+  def get_name(this : ILegacyIAccessibleProvider*, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pszname)
+  end
+  def get_value(this : ILegacyIAccessibleProvider*, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, pszvalue)
+  end
+  def get_description(this : ILegacyIAccessibleProvider*, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pszdescription)
+  end
+  def get_role(this : ILegacyIAccessibleProvider*, pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_role.call(this, pdwrole)
+  end
+  def get_state(this : ILegacyIAccessibleProvider*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pdwstate)
+  end
+  def get_help(this : ILegacyIAccessibleProvider*, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_help.call(this, pszhelp)
+  end
+  def get_keyboard_shortcut(this : ILegacyIAccessibleProvider*, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_keyboard_shortcut.call(this, pszkeyboardshortcut)
+  end
+  def get_selection(this : ILegacyIAccessibleProvider*, pvarselectedchildren : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pvarselectedchildren)
+  end
+  def get_default_action(this : ILegacyIAccessibleProvider*, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_action.call(this, pszdefaultaction)
+  end
+end
+struct LibWin32::IItemContainerProvider
+  def query_interface(this : IItemContainerProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IItemContainerProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IItemContainerProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def find_item_by_property(this : IItemContainerProvider*, pstartafter : IRawElementProviderSimple, propertyid : Int32, value : VARIANT, pfound : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.find_item_by_property.call(this, pstartafter, propertyid, value, pfound)
+  end
+end
+struct LibWin32::IVirtualizedItemProvider
+  def query_interface(this : IVirtualizedItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVirtualizedItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVirtualizedItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def realize(this : IVirtualizedItemProvider*) : HRESULT
+    @lpVtbl.value.realize.call(this)
+  end
+end
+struct LibWin32::IObjectModelProvider
+  def query_interface(this : IObjectModelProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectModelProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectModelProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_underlying_object_model(this : IObjectModelProvider*, ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_underlying_object_model.call(this, ppunknown)
+  end
+end
+struct LibWin32::IAnnotationProvider
+  def query_interface(this : IAnnotationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAnnotationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAnnotationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_annotation_type_id(this : IAnnotationProvider*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_annotation_type_id.call(this, retval)
+  end
+  def get_annotation_type_name(this : IAnnotationProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_annotation_type_name.call(this, retval)
+  end
+  def get_author(this : IAnnotationProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, retval)
+  end
+  def get_date_time(this : IAnnotationProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_date_time.call(this, retval)
+  end
+  def get_target(this : IAnnotationProvider*, retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_target.call(this, retval)
+  end
+end
+struct LibWin32::IStylesProvider
+  def query_interface(this : IStylesProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStylesProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStylesProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_style_id(this : IStylesProvider*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_style_id.call(this, retval)
+  end
+  def get_style_name(this : IStylesProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_style_name.call(this, retval)
+  end
+  def get_fill_color(this : IStylesProvider*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_fill_color.call(this, retval)
+  end
+  def get_fill_pattern_style(this : IStylesProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_fill_pattern_style.call(this, retval)
+  end
+  def get_shape(this : IStylesProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_shape.call(this, retval)
+  end
+  def get_fill_pattern_color(this : IStylesProvider*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_fill_pattern_color.call(this, retval)
+  end
+  def get_extended_properties(this : IStylesProvider*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_properties.call(this, retval)
+  end
+end
+struct LibWin32::ISpreadsheetProvider
+  def query_interface(this : ISpreadsheetProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpreadsheetProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpreadsheetProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_by_name(this : ISpreadsheetProvider*, name : LibC::LPWSTR, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_item_by_name.call(this, name, pretval)
+  end
+end
+struct LibWin32::ISpreadsheetItemProvider
+  def query_interface(this : ISpreadsheetItemProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpreadsheetItemProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpreadsheetItemProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_formula(this : ISpreadsheetItemProvider*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_formula.call(this, pretval)
+  end
+  def get_annotation_objects(this : ISpreadsheetItemProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_annotation_objects.call(this, pretval)
+  end
+  def get_annotation_types(this : ISpreadsheetItemProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_annotation_types.call(this, pretval)
+  end
+end
+struct LibWin32::ITransformProvider2
+  def query_interface(this : ITransformProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransformProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransformProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move(this : ITransformProvider2*, x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.call(this, x, y)
+  end
+  def resize(this : ITransformProvider2*, width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def rotate(this : ITransformProvider2*, degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees)
+  end
+  def get_can_move(this : ITransformProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_move.call(this, pretval)
+  end
+  def get_can_resize(this : ITransformProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_resize.call(this, pretval)
+  end
+  def get_can_rotate(this : ITransformProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_rotate.call(this, pretval)
+  end
+  def zoom(this : ITransformProvider2*, zoom : Float64) : HRESULT
+    @lpVtbl.value.zoom.call(this, zoom)
+  end
+  def get_can_zoom(this : ITransformProvider2*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_zoom.call(this, pretval)
+  end
+  def get_zoom_level(this : ITransformProvider2*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_level.call(this, pretval)
+  end
+  def get_zoom_minimum(this : ITransformProvider2*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_minimum.call(this, pretval)
+  end
+  def get_zoom_maximum(this : ITransformProvider2*, pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_maximum.call(this, pretval)
+  end
+  def zoom_by_unit(this : ITransformProvider2*, zoomunit : ZoomUnit) : HRESULT
+    @lpVtbl.value.zoom_by_unit.call(this, zoomunit)
+  end
+end
+struct LibWin32::IDragProvider
+  def query_interface(this : IDragProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDragProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDragProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_grabbed(this : IDragProvider*, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_grabbed.call(this, pretval)
+  end
+  def get_drop_effect(this : IDragProvider*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_drop_effect.call(this, pretval)
+  end
+  def get_drop_effects(this : IDragProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_drop_effects.call(this, pretval)
+  end
+  def get_grabbed_items(this : IDragProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_grabbed_items.call(this, pretval)
+  end
+end
+struct LibWin32::IDropTargetProvider
+  def query_interface(this : IDropTargetProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDropTargetProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDropTargetProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_drop_target_effect(this : IDropTargetProvider*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_drop_target_effect.call(this, pretval)
+  end
+  def get_drop_target_effects(this : IDropTargetProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_drop_target_effects.call(this, pretval)
+  end
+end
+struct LibWin32::ITextRangeProvider
+  def query_interface(this : ITextRangeProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextRangeProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextRangeProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : ITextRangeProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.clone.call(this, pretval)
+  end
+  def compare(this : ITextRangeProvider*, range : ITextRangeProvider, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, range, pretval)
+  end
+  def compare_endpoints(this : ITextRangeProvider*, endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint, pretval : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.call(this, endpoint, targetrange, targetendpoint, pretval)
+  end
+  def expand_to_enclosing_unit(this : ITextRangeProvider*, unit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.call(this, unit)
+  end
+  def find_attribute(this : ITextRangeProvider*, attributeid : Int32, val : VARIANT, backward : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_attribute.call(this, attributeid, val, backward, pretval)
+  end
+  def find_text(this : ITextRangeProvider*, text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_text.call(this, text, backward, ignorecase, pretval)
+  end
+  def get_attribute_value(this : ITextRangeProvider*, attributeid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, attributeid, pretval)
+  end
+  def get_bounding_rectangles(this : ITextRangeProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.call(this, pretval)
+  end
+  def get_enclosing_element(this : ITextRangeProvider*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.call(this, pretval)
+  end
+  def get_text(this : ITextRangeProvider*, maxlength : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, maxlength, pretval)
+  end
+  def move(this : ITextRangeProvider*, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pretval)
+  end
+  def move_endpoint_by_unit(this : ITextRangeProvider*, endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.call(this, endpoint, unit, count, pretval)
+  end
+  def move_endpoint_by_range(this : ITextRangeProvider*, endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.call(this, endpoint, targetrange, targetendpoint)
+  end
+  def select(this : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def scroll_into_view(this : ITextRangeProvider*, aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, aligntotop)
+  end
+  def get_children(this : ITextRangeProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.call(this, pretval)
+  end
+end
+struct LibWin32::ITextProvider
+  def query_interface(this : ITextProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection(this : ITextProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pretval)
+  end
+  def get_visible_ranges(this : ITextProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, pretval)
+  end
+  def range_from_child(this : ITextProvider*, childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, childelement, pretval)
+  end
+  def range_from_point(this : ITextProvider*, point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, point, pretval)
+  end
+  def get_document_range(this : ITextProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, pretval)
+  end
+  def get_supported_text_selection(this : ITextProvider*, pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, pretval)
+  end
+end
+struct LibWin32::ITextProvider2
+  def query_interface(this : ITextProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection(this : ITextProvider2*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pretval)
+  end
+  def get_visible_ranges(this : ITextProvider2*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, pretval)
+  end
+  def range_from_child(this : ITextProvider2*, childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, childelement, pretval)
+  end
+  def range_from_point(this : ITextProvider2*, point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, point, pretval)
+  end
+  def get_document_range(this : ITextProvider2*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, pretval)
+  end
+  def get_supported_text_selection(this : ITextProvider2*, pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, pretval)
+  end
+  def range_from_annotation(this : ITextProvider2*, annotationelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_annotation.call(this, annotationelement, pretval)
+  end
+  def get_caret_range(this : ITextProvider2*, isactive : LibC::BOOL*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_caret_range.call(this, isactive, pretval)
+  end
+end
+struct LibWin32::ITextEditProvider
+  def query_interface(this : ITextEditProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextEditProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextEditProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection(this : ITextEditProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.call(this, pretval)
+  end
+  def get_visible_ranges(this : ITextEditProvider*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, pretval)
+  end
+  def range_from_child(this : ITextEditProvider*, childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, childelement, pretval)
+  end
+  def range_from_point(this : ITextEditProvider*, point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, point, pretval)
+  end
+  def get_document_range(this : ITextEditProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, pretval)
+  end
+  def get_supported_text_selection(this : ITextEditProvider*, pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, pretval)
+  end
+  def get_active_composition(this : ITextEditProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_active_composition.call(this, pretval)
+  end
+  def get_conversion_target(this : ITextEditProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_conversion_target.call(this, pretval)
+  end
+end
+struct LibWin32::ITextRangeProvider2
+  def query_interface(this : ITextRangeProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextRangeProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextRangeProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : ITextRangeProvider2*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.clone.call(this, pretval)
+  end
+  def compare(this : ITextRangeProvider2*, range : ITextRangeProvider, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, range, pretval)
+  end
+  def compare_endpoints(this : ITextRangeProvider2*, endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint, pretval : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.call(this, endpoint, targetrange, targetendpoint, pretval)
+  end
+  def expand_to_enclosing_unit(this : ITextRangeProvider2*, unit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.call(this, unit)
+  end
+  def find_attribute(this : ITextRangeProvider2*, attributeid : Int32, val : VARIANT, backward : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_attribute.call(this, attributeid, val, backward, pretval)
+  end
+  def find_text(this : ITextRangeProvider2*, text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_text.call(this, text, backward, ignorecase, pretval)
+  end
+  def get_attribute_value(this : ITextRangeProvider2*, attributeid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, attributeid, pretval)
+  end
+  def get_bounding_rectangles(this : ITextRangeProvider2*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.call(this, pretval)
+  end
+  def get_enclosing_element(this : ITextRangeProvider2*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.call(this, pretval)
+  end
+  def get_text(this : ITextRangeProvider2*, maxlength : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, maxlength, pretval)
+  end
+  def move(this : ITextRangeProvider2*, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pretval)
+  end
+  def move_endpoint_by_unit(this : ITextRangeProvider2*, endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.call(this, endpoint, unit, count, pretval)
+  end
+  def move_endpoint_by_range(this : ITextRangeProvider2*, endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.call(this, endpoint, targetrange, targetendpoint)
+  end
+  def select(this : ITextRangeProvider2*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : ITextRangeProvider2*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : ITextRangeProvider2*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def scroll_into_view(this : ITextRangeProvider2*, aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, aligntotop)
+  end
+  def get_children(this : ITextRangeProvider2*, pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.call(this, pretval)
+  end
+  def show_context_menu(this : ITextRangeProvider2*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+end
+struct LibWin32::ITextChildProvider
+  def query_interface(this : ITextChildProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextChildProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextChildProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text_container(this : ITextChildProvider*, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_text_container.call(this, pretval)
+  end
+  def get_text_range(this : ITextChildProvider*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_text_range.call(this, pretval)
+  end
+end
+struct LibWin32::ICustomNavigationProvider
+  def query_interface(this : ICustomNavigationProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICustomNavigationProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICustomNavigationProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def navigate(this : ICustomNavigationProvider*, direction : NavigateDirection, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.navigate.call(this, direction, pretval)
+  end
+end
+struct LibWin32::IUIAutomationPatternInstance
+  def query_interface(this : IUIAutomationPatternInstance*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationPatternInstance*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationPatternInstance*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property(this : IUIAutomationPatternInstance*, index : UInt32, cached : LibC::BOOL, type : UIAutomationType, pptr : Void*) : HRESULT
+    @lpVtbl.value.get_property.call(this, index, cached, type, pptr)
+  end
+  def call_method(this : IUIAutomationPatternInstance*, index : UInt32, pparams : UIAutomationParameter*, cparams : UInt32) : HRESULT
+    @lpVtbl.value.call_method.call(this, index, pparams, cparams)
+  end
+end
+struct LibWin32::IUIAutomationPatternHandler
+  def query_interface(this : IUIAutomationPatternHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationPatternHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationPatternHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_client_wrapper(this : IUIAutomationPatternHandler*, ppatterninstance : IUIAutomationPatternInstance, pclientwrapper : IUnknown*) : HRESULT
+    @lpVtbl.value.create_client_wrapper.call(this, ppatterninstance, pclientwrapper)
+  end
+  def dispatch(this : IUIAutomationPatternHandler*, ptarget : IUnknown, index : UInt32, pparams : UIAutomationParameter*, cparams : UInt32) : HRESULT
+    @lpVtbl.value.dispatch.call(this, ptarget, index, pparams, cparams)
+  end
+end
+struct LibWin32::IUIAutomationRegistrar
+  def query_interface(this : IUIAutomationRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_property(this : IUIAutomationRegistrar*, property : UIAutomationPropertyInfo*, propertyid : Int32*) : HRESULT
+    @lpVtbl.value.register_property.call(this, property, propertyid)
+  end
+  def register_event(this : IUIAutomationRegistrar*, event : UIAutomationEventInfo*, eventid : Int32*) : HRESULT
+    @lpVtbl.value.register_event.call(this, event, eventid)
+  end
+  def register_pattern(this : IUIAutomationRegistrar*, pattern : UIAutomationPatternInfo*, ppatternid : Int32*, ppatternavailablepropertyid : Int32*, propertyidcount : UInt32, ppropertyids : Int32*, eventidcount : UInt32, peventids : Int32*) : HRESULT
+    @lpVtbl.value.register_pattern.call(this, pattern, ppatternid, ppatternavailablepropertyid, propertyidcount, ppropertyids, eventidcount, peventids)
+  end
+end
+struct LibWin32::IUIAutomationElement
+  def query_interface(this : IUIAutomationElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+end
+struct LibWin32::IUIAutomationElementArray
+  def query_interface(this : IUIAutomationElementArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElementArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElementArray*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IUIAutomationElementArray*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
+  end
+  def get_element(this : IUIAutomationElementArray*, index : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_element.call(this, index, element)
+  end
+end
+struct LibWin32::IUIAutomationCondition
+  def query_interface(this : IUIAutomationCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IUIAutomationBoolCondition
+  def query_interface(this : IUIAutomationBoolCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationBoolCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationBoolCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_boolean_value(this : IUIAutomationBoolCondition*, boolval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_boolean_value.call(this, boolval)
+  end
+end
+struct LibWin32::IUIAutomationPropertyCondition
+  def query_interface(this : IUIAutomationPropertyCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationPropertyCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationPropertyCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_id(this : IUIAutomationPropertyCondition*, propertyid : Int32*) : HRESULT
+    @lpVtbl.value.get_property_id.call(this, propertyid)
+  end
+  def get_property_value(this : IUIAutomationPropertyCondition*, propertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, propertyvalue)
+  end
+  def get_property_condition_flags(this : IUIAutomationPropertyCondition*, flags : PropertyConditionFlags*) : HRESULT
+    @lpVtbl.value.get_property_condition_flags.call(this, flags)
+  end
+end
+struct LibWin32::IUIAutomationAndCondition
+  def query_interface(this : IUIAutomationAndCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationAndCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationAndCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_child_count(this : IUIAutomationAndCondition*, childcount : Int32*) : HRESULT
+    @lpVtbl.value.get_child_count.call(this, childcount)
+  end
+  def get_children_as_native_array(this : IUIAutomationAndCondition*, childarray : IUIAutomationCondition**, childarraycount : Int32*) : HRESULT
+    @lpVtbl.value.get_children_as_native_array.call(this, childarray, childarraycount)
+  end
+  def get_children(this : IUIAutomationAndCondition*, childarray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.call(this, childarray)
+  end
+end
+struct LibWin32::IUIAutomationOrCondition
+  def query_interface(this : IUIAutomationOrCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationOrCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationOrCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_child_count(this : IUIAutomationOrCondition*, childcount : Int32*) : HRESULT
+    @lpVtbl.value.get_child_count.call(this, childcount)
+  end
+  def get_children_as_native_array(this : IUIAutomationOrCondition*, childarray : IUIAutomationCondition**, childarraycount : Int32*) : HRESULT
+    @lpVtbl.value.get_children_as_native_array.call(this, childarray, childarraycount)
+  end
+  def get_children(this : IUIAutomationOrCondition*, childarray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.call(this, childarray)
+  end
+end
+struct LibWin32::IUIAutomationNotCondition
+  def query_interface(this : IUIAutomationNotCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationNotCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationNotCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_child(this : IUIAutomationNotCondition*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_child.call(this, condition)
+  end
+end
+struct LibWin32::IUIAutomationCacheRequest
+  def query_interface(this : IUIAutomationCacheRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationCacheRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationCacheRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_property(this : IUIAutomationCacheRequest*, propertyid : Int32) : HRESULT
+    @lpVtbl.value.add_property.call(this, propertyid)
+  end
+  def add_pattern(this : IUIAutomationCacheRequest*, patternid : Int32) : HRESULT
+    @lpVtbl.value.add_pattern.call(this, patternid)
+  end
+  def clone(this : IUIAutomationCacheRequest*, clonedrequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.clone.call(this, clonedrequest)
+  end
+  def get_tree_scope(this : IUIAutomationCacheRequest*, scope : TreeScope*) : HRESULT
+    @lpVtbl.value.get_tree_scope.call(this, scope)
+  end
+  def put_tree_scope(this : IUIAutomationCacheRequest*, scope : TreeScope) : HRESULT
+    @lpVtbl.value.put_tree_scope.call(this, scope)
+  end
+  def get_tree_filter(this : IUIAutomationCacheRequest*, filter : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_tree_filter.call(this, filter)
+  end
+  def put_tree_filter(this : IUIAutomationCacheRequest*, filter : IUIAutomationCondition) : HRESULT
+    @lpVtbl.value.put_tree_filter.call(this, filter)
+  end
+  def get_automation_element_mode(this : IUIAutomationCacheRequest*, mode : AutomationElementMode*) : HRESULT
+    @lpVtbl.value.get_automation_element_mode.call(this, mode)
+  end
+  def put_automation_element_mode(this : IUIAutomationCacheRequest*, mode : AutomationElementMode) : HRESULT
+    @lpVtbl.value.put_automation_element_mode.call(this, mode)
+  end
+end
+struct LibWin32::IUIAutomationTreeWalker
+  def query_interface(this : IUIAutomationTreeWalker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTreeWalker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTreeWalker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_parent_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_parent_element.call(this, element, parent)
+  end
+  def get_first_child_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, first : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_first_child_element.call(this, element, first)
+  end
+  def get_last_child_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, last : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_last_child_element.call(this, element, last)
+  end
+  def get_next_sibling_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element.call(this, element, next)
+  end
+  def get_previous_sibling_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, previous : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_previous_sibling_element.call(this, element, previous)
+  end
+  def normalize_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, normalized : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.normalize_element.call(this, element, normalized)
+  end
+  def get_parent_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_parent_element_build_cache.call(this, element, cacherequest, parent)
+  end
+  def get_first_child_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, first : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_first_child_element_build_cache.call(this, element, cacherequest, first)
+  end
+  def get_last_child_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, last : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_last_child_element_build_cache.call(this, element, cacherequest, last)
+  end
+  def get_next_sibling_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element_build_cache.call(this, element, cacherequest, next)
+  end
+  def get_previous_sibling_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, previous : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_previous_sibling_element_build_cache.call(this, element, cacherequest, previous)
+  end
+  def normalize_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, normalized : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.normalize_element_build_cache.call(this, element, cacherequest, normalized)
+  end
+  def get_condition(this : IUIAutomationTreeWalker*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_condition.call(this, condition)
+  end
+end
+struct LibWin32::IUIAutomationEventHandler
+  def query_interface(this : IUIAutomationEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_automation_event(this : IUIAutomationEventHandler*, sender : IUIAutomationElement, eventid : Int32) : HRESULT
+    @lpVtbl.value.handle_automation_event.call(this, sender, eventid)
+  end
+end
+struct LibWin32::IUIAutomationPropertyChangedEventHandler
+  def query_interface(this : IUIAutomationPropertyChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationPropertyChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationPropertyChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_property_changed_event(this : IUIAutomationPropertyChangedEventHandler*, sender : IUIAutomationElement, propertyid : Int32, newvalue : VARIANT) : HRESULT
+    @lpVtbl.value.handle_property_changed_event.call(this, sender, propertyid, newvalue)
+  end
+end
+struct LibWin32::IUIAutomationStructureChangedEventHandler
+  def query_interface(this : IUIAutomationStructureChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationStructureChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationStructureChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_structure_changed_event(this : IUIAutomationStructureChangedEventHandler*, sender : IUIAutomationElement, changetype : StructureChangeType, runtimeid : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.handle_structure_changed_event.call(this, sender, changetype, runtimeid)
+  end
+end
+struct LibWin32::IUIAutomationFocusChangedEventHandler
+  def query_interface(this : IUIAutomationFocusChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationFocusChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationFocusChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_focus_changed_event(this : IUIAutomationFocusChangedEventHandler*, sender : IUIAutomationElement) : HRESULT
+    @lpVtbl.value.handle_focus_changed_event.call(this, sender)
+  end
+end
+struct LibWin32::IUIAutomationTextEditTextChangedEventHandler
+  def query_interface(this : IUIAutomationTextEditTextChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextEditTextChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextEditTextChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_text_edit_text_changed_event(this : IUIAutomationTextEditTextChangedEventHandler*, sender : IUIAutomationElement, texteditchangetype : TextEditChangeType, eventstrings : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.handle_text_edit_text_changed_event.call(this, sender, texteditchangetype, eventstrings)
+  end
+end
+struct LibWin32::IUIAutomationChangesEventHandler
+  def query_interface(this : IUIAutomationChangesEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationChangesEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationChangesEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_changes_event(this : IUIAutomationChangesEventHandler*, sender : IUIAutomationElement, uiachanges : UiaChangeInfo*, changescount : Int32) : HRESULT
+    @lpVtbl.value.handle_changes_event.call(this, sender, uiachanges, changescount)
+  end
+end
+struct LibWin32::IUIAutomationNotificationEventHandler
+  def query_interface(this : IUIAutomationNotificationEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationNotificationEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationNotificationEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_notification_event(this : IUIAutomationNotificationEventHandler*, sender : IUIAutomationElement, notificationkind : NotificationKind, notificationprocessing : NotificationProcessing, displaystring : UInt8*, activityid : UInt8*) : HRESULT
+    @lpVtbl.value.handle_notification_event.call(this, sender, notificationkind, notificationprocessing, displaystring, activityid)
+  end
+end
+struct LibWin32::IUIAutomationInvokePattern
+  def query_interface(this : IUIAutomationInvokePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationInvokePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationInvokePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IUIAutomationInvokePattern*) : HRESULT
+    @lpVtbl.value.invoke.call(this)
+  end
+end
+struct LibWin32::IUIAutomationDockPattern
+  def query_interface(this : IUIAutomationDockPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationDockPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationDockPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_dock_position(this : IUIAutomationDockPattern*, dockpos : DockPosition) : HRESULT
+    @lpVtbl.value.set_dock_position.call(this, dockpos)
+  end
+  def get_current_dock_position(this : IUIAutomationDockPattern*, retval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_current_dock_position.call(this, retval)
+  end
+  def get_cached_dock_position(this : IUIAutomationDockPattern*, retval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_cached_dock_position.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationExpandCollapsePattern
+  def query_interface(this : IUIAutomationExpandCollapsePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationExpandCollapsePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationExpandCollapsePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def expand(this : IUIAutomationExpandCollapsePattern*) : HRESULT
+    @lpVtbl.value.expand.call(this)
+  end
+  def collapse(this : IUIAutomationExpandCollapsePattern*) : HRESULT
+    @lpVtbl.value.collapse.call(this)
+  end
+  def get_current_expand_collapse_state(this : IUIAutomationExpandCollapsePattern*, retval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_current_expand_collapse_state.call(this, retval)
+  end
+  def get_cached_expand_collapse_state(this : IUIAutomationExpandCollapsePattern*, retval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_cached_expand_collapse_state.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationGridPattern
+  def query_interface(this : IUIAutomationGridPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationGridPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationGridPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item(this : IUIAutomationGridPattern*, row : Int32, column : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_item.call(this, row, column, element)
+  end
+  def get_current_row_count(this : IUIAutomationGridPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row_count.call(this, retval)
+  end
+  def get_current_column_count(this : IUIAutomationGridPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column_count.call(this, retval)
+  end
+  def get_cached_row_count(this : IUIAutomationGridPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row_count.call(this, retval)
+  end
+  def get_cached_column_count(this : IUIAutomationGridPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column_count.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationGridItemPattern
+  def query_interface(this : IUIAutomationGridItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationGridItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationGridItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_containing_grid(this : IUIAutomationGridItemPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_containing_grid.call(this, retval)
+  end
+  def get_current_row(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row.call(this, retval)
+  end
+  def get_current_column(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column.call(this, retval)
+  end
+  def get_current_row_span(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row_span.call(this, retval)
+  end
+  def get_current_column_span(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column_span.call(this, retval)
+  end
+  def get_cached_containing_grid(this : IUIAutomationGridItemPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_containing_grid.call(this, retval)
+  end
+  def get_cached_row(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row.call(this, retval)
+  end
+  def get_cached_column(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column.call(this, retval)
+  end
+  def get_cached_row_span(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row_span.call(this, retval)
+  end
+  def get_cached_column_span(this : IUIAutomationGridItemPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column_span.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationMultipleViewPattern
+  def query_interface(this : IUIAutomationMultipleViewPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationMultipleViewPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationMultipleViewPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_view_name(this : IUIAutomationMultipleViewPattern*, view : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_view_name.call(this, view, name)
+  end
+  def set_current_view(this : IUIAutomationMultipleViewPattern*, view : Int32) : HRESULT
+    @lpVtbl.value.set_current_view.call(this, view)
+  end
+  def get_current_current_view(this : IUIAutomationMultipleViewPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_current_view.call(this, retval)
+  end
+  def get_current_supported_views(this : IUIAutomationMultipleViewPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_supported_views.call(this, retval)
+  end
+  def get_cached_current_view(this : IUIAutomationMultipleViewPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_current_view.call(this, retval)
+  end
+  def get_cached_supported_views(this : IUIAutomationMultipleViewPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_supported_views.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationObjectModelPattern
+  def query_interface(this : IUIAutomationObjectModelPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationObjectModelPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationObjectModelPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_underlying_object_model(this : IUIAutomationObjectModelPattern*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_underlying_object_model.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationRangeValuePattern
+  def query_interface(this : IUIAutomationRangeValuePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationRangeValuePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationRangeValuePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_value(this : IUIAutomationRangeValuePattern*, val : Float64) : HRESULT
+    @lpVtbl.value.set_value.call(this, val)
+  end
+  def get_current_value(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_value.call(this, retval)
+  end
+  def get_current_is_read_only(this : IUIAutomationRangeValuePattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_read_only.call(this, retval)
+  end
+  def get_current_maximum(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_maximum.call(this, retval)
+  end
+  def get_current_minimum(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_minimum.call(this, retval)
+  end
+  def get_current_large_change(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_large_change.call(this, retval)
+  end
+  def get_current_small_change(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_small_change.call(this, retval)
+  end
+  def get_cached_value(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_value.call(this, retval)
+  end
+  def get_cached_is_read_only(this : IUIAutomationRangeValuePattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_read_only.call(this, retval)
+  end
+  def get_cached_maximum(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_maximum.call(this, retval)
+  end
+  def get_cached_minimum(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_minimum.call(this, retval)
+  end
+  def get_cached_large_change(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_large_change.call(this, retval)
+  end
+  def get_cached_small_change(this : IUIAutomationRangeValuePattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_small_change.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationScrollPattern
+  def query_interface(this : IUIAutomationScrollPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationScrollPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationScrollPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll(this : IUIAutomationScrollPattern*, horizontalamount : ScrollAmount, verticalamount : ScrollAmount) : HRESULT
+    @lpVtbl.value.scroll.call(this, horizontalamount, verticalamount)
+  end
+  def set_scroll_percent(this : IUIAutomationScrollPattern*, horizontalpercent : Float64, verticalpercent : Float64) : HRESULT
+    @lpVtbl.value.set_scroll_percent.call(this, horizontalpercent, verticalpercent)
+  end
+  def get_current_horizontal_scroll_percent(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_horizontal_scroll_percent.call(this, retval)
+  end
+  def get_current_vertical_scroll_percent(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_vertical_scroll_percent.call(this, retval)
+  end
+  def get_current_horizontal_view_size(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_horizontal_view_size.call(this, retval)
+  end
+  def get_current_vertical_view_size(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_vertical_view_size.call(this, retval)
+  end
+  def get_current_horizontally_scrollable(this : IUIAutomationScrollPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_horizontally_scrollable.call(this, retval)
+  end
+  def get_current_vertically_scrollable(this : IUIAutomationScrollPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_vertically_scrollable.call(this, retval)
+  end
+  def get_cached_horizontal_scroll_percent(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_horizontal_scroll_percent.call(this, retval)
+  end
+  def get_cached_vertical_scroll_percent(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_vertical_scroll_percent.call(this, retval)
+  end
+  def get_cached_horizontal_view_size(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_horizontal_view_size.call(this, retval)
+  end
+  def get_cached_vertical_view_size(this : IUIAutomationScrollPattern*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_vertical_view_size.call(this, retval)
+  end
+  def get_cached_horizontally_scrollable(this : IUIAutomationScrollPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_horizontally_scrollable.call(this, retval)
+  end
+  def get_cached_vertically_scrollable(this : IUIAutomationScrollPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_vertically_scrollable.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationScrollItemPattern
+  def query_interface(this : IUIAutomationScrollItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationScrollItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationScrollItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll_into_view(this : IUIAutomationScrollItemPattern*) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this)
+  end
+end
+struct LibWin32::IUIAutomationSelectionPattern
+  def query_interface(this : IUIAutomationSelectionPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSelectionPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSelectionPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_selection(this : IUIAutomationSelectionPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.call(this, retval)
+  end
+  def get_current_can_select_multiple(this : IUIAutomationSelectionPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_select_multiple.call(this, retval)
+  end
+  def get_current_is_selection_required(this : IUIAutomationSelectionPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selection_required.call(this, retval)
+  end
+  def get_cached_selection(this : IUIAutomationSelectionPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.call(this, retval)
+  end
+  def get_cached_can_select_multiple(this : IUIAutomationSelectionPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_select_multiple.call(this, retval)
+  end
+  def get_cached_is_selection_required(this : IUIAutomationSelectionPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selection_required.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationSelectionPattern2
+  def query_interface(this : IUIAutomationSelectionPattern2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSelectionPattern2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSelectionPattern2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_selection(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.call(this, retval)
+  end
+  def get_current_can_select_multiple(this : IUIAutomationSelectionPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_select_multiple.call(this, retval)
+  end
+  def get_current_is_selection_required(this : IUIAutomationSelectionPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selection_required.call(this, retval)
+  end
+  def get_cached_selection(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.call(this, retval)
+  end
+  def get_cached_can_select_multiple(this : IUIAutomationSelectionPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_select_multiple.call(this, retval)
+  end
+  def get_cached_is_selection_required(this : IUIAutomationSelectionPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selection_required.call(this, retval)
+  end
+  def get_current_first_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_first_selected_item.call(this, retval)
+  end
+  def get_current_last_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_last_selected_item.call(this, retval)
+  end
+  def get_current_current_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_current_selected_item.call(this, retval)
+  end
+  def get_current_item_count(this : IUIAutomationSelectionPattern2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_item_count.call(this, retval)
+  end
+  def get_cached_first_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_first_selected_item.call(this, retval)
+  end
+  def get_cached_last_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_last_selected_item.call(this, retval)
+  end
+  def get_cached_current_selected_item(this : IUIAutomationSelectionPattern2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_current_selected_item.call(this, retval)
+  end
+  def get_cached_item_count(this : IUIAutomationSelectionPattern2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_item_count.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationSelectionItemPattern
+  def query_interface(this : IUIAutomationSelectionItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSelectionItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSelectionItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def select(this : IUIAutomationSelectionItemPattern*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : IUIAutomationSelectionItemPattern*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : IUIAutomationSelectionItemPattern*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def get_current_is_selected(this : IUIAutomationSelectionItemPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selected.call(this, retval)
+  end
+  def get_current_selection_container(this : IUIAutomationSelectionItemPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_selection_container.call(this, retval)
+  end
+  def get_cached_is_selected(this : IUIAutomationSelectionItemPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selected.call(this, retval)
+  end
+  def get_cached_selection_container(this : IUIAutomationSelectionItemPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_selection_container.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationSynchronizedInputPattern
+  def query_interface(this : IUIAutomationSynchronizedInputPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSynchronizedInputPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSynchronizedInputPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_listening(this : IUIAutomationSynchronizedInputPattern*, inputtype : SynchronizedInputType) : HRESULT
+    @lpVtbl.value.start_listening.call(this, inputtype)
+  end
+  def cancel(this : IUIAutomationSynchronizedInputPattern*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IUIAutomationTablePattern
+  def query_interface(this : IUIAutomationTablePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTablePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTablePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_row_headers(this : IUIAutomationTablePattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_row_headers.call(this, retval)
+  end
+  def get_current_column_headers(this : IUIAutomationTablePattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_column_headers.call(this, retval)
+  end
+  def get_current_row_or_column_major(this : IUIAutomationTablePattern*, retval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_current_row_or_column_major.call(this, retval)
+  end
+  def get_cached_row_headers(this : IUIAutomationTablePattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_row_headers.call(this, retval)
+  end
+  def get_cached_column_headers(this : IUIAutomationTablePattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_column_headers.call(this, retval)
+  end
+  def get_cached_row_or_column_major(this : IUIAutomationTablePattern*, retval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_cached_row_or_column_major.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTableItemPattern
+  def query_interface(this : IUIAutomationTableItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTableItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTableItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_row_header_items(this : IUIAutomationTableItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_row_header_items.call(this, retval)
+  end
+  def get_current_column_header_items(this : IUIAutomationTableItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_column_header_items.call(this, retval)
+  end
+  def get_cached_row_header_items(this : IUIAutomationTableItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_row_header_items.call(this, retval)
+  end
+  def get_cached_column_header_items(this : IUIAutomationTableItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_column_header_items.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTogglePattern
+  def query_interface(this : IUIAutomationTogglePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTogglePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTogglePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def toggle(this : IUIAutomationTogglePattern*) : HRESULT
+    @lpVtbl.value.toggle.call(this)
+  end
+  def get_current_toggle_state(this : IUIAutomationTogglePattern*, retval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_current_toggle_state.call(this, retval)
+  end
+  def get_cached_toggle_state(this : IUIAutomationTogglePattern*, retval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_cached_toggle_state.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTransformPattern
+  def query_interface(this : IUIAutomationTransformPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTransformPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTransformPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move(this : IUIAutomationTransformPattern*, x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.call(this, x, y)
+  end
+  def resize(this : IUIAutomationTransformPattern*, width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def rotate(this : IUIAutomationTransformPattern*, degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees)
+  end
+  def get_current_can_move(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_move.call(this, retval)
+  end
+  def get_current_can_resize(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_resize.call(this, retval)
+  end
+  def get_current_can_rotate(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_rotate.call(this, retval)
+  end
+  def get_cached_can_move(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_move.call(this, retval)
+  end
+  def get_cached_can_resize(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_resize.call(this, retval)
+  end
+  def get_cached_can_rotate(this : IUIAutomationTransformPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_rotate.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationValuePattern
+  def query_interface(this : IUIAutomationValuePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationValuePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationValuePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_value(this : IUIAutomationValuePattern*, val : UInt8*) : HRESULT
+    @lpVtbl.value.set_value.call(this, val)
+  end
+  def get_current_value(this : IUIAutomationValuePattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_value.call(this, retval)
+  end
+  def get_current_is_read_only(this : IUIAutomationValuePattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_read_only.call(this, retval)
+  end
+  def get_cached_value(this : IUIAutomationValuePattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_value.call(this, retval)
+  end
+  def get_cached_is_read_only(this : IUIAutomationValuePattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_read_only.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationWindowPattern
+  def query_interface(this : IUIAutomationWindowPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationWindowPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationWindowPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close(this : IUIAutomationWindowPattern*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def wait_for_input_idle(this : IUIAutomationWindowPattern*, milliseconds : Int32, success : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.wait_for_input_idle.call(this, milliseconds, success)
+  end
+  def set_window_visual_state(this : IUIAutomationWindowPattern*, state : WindowVisualState) : HRESULT
+    @lpVtbl.value.set_window_visual_state.call(this, state)
+  end
+  def get_current_can_maximize(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_maximize.call(this, retval)
+  end
+  def get_current_can_minimize(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_minimize.call(this, retval)
+  end
+  def get_current_is_modal(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_modal.call(this, retval)
+  end
+  def get_current_is_topmost(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_topmost.call(this, retval)
+  end
+  def get_current_window_visual_state(this : IUIAutomationWindowPattern*, retval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_current_window_visual_state.call(this, retval)
+  end
+  def get_current_window_interaction_state(this : IUIAutomationWindowPattern*, retval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_current_window_interaction_state.call(this, retval)
+  end
+  def get_cached_can_maximize(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_maximize.call(this, retval)
+  end
+  def get_cached_can_minimize(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_minimize.call(this, retval)
+  end
+  def get_cached_is_modal(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_modal.call(this, retval)
+  end
+  def get_cached_is_topmost(this : IUIAutomationWindowPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_topmost.call(this, retval)
+  end
+  def get_cached_window_visual_state(this : IUIAutomationWindowPattern*, retval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_cached_window_visual_state.call(this, retval)
+  end
+  def get_cached_window_interaction_state(this : IUIAutomationWindowPattern*, retval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_cached_window_interaction_state.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTextRange
+  def query_interface(this : IUIAutomationTextRange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextRange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextRange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IUIAutomationTextRange*, clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.call(this, clonedrange)
+  end
+  def compare(this : IUIAutomationTextRange*, range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, range, aresame)
+  end
+  def compare_endpoints(this : IUIAutomationTextRange*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.call(this, srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(this : IUIAutomationTextRange*, textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.call(this, textunit)
+  end
+  def find_attribute(this : IUIAutomationTextRange*, attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.call(this, attr, val, backward, found)
+  end
+  def find_text(this : IUIAutomationTextRange*, text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.call(this, text, backward, ignorecase, found)
+  end
+  def get_attribute_value(this : IUIAutomationTextRange*, attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, attr, value)
+  end
+  def get_bounding_rectangles(this : IUIAutomationTextRange*, boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.call(this, boundingrects)
+  end
+  def get_enclosing_element(this : IUIAutomationTextRange*, enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.call(this, enclosingelement)
+  end
+  def get_text(this : IUIAutomationTextRange*, maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, maxlength, text)
+  end
+  def move(this : IUIAutomationTextRange*, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, moved)
+  end
+  def move_endpoint_by_unit(this : IUIAutomationTextRange*, endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.call(this, endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(this : IUIAutomationTextRange*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.call(this, srcendpoint, range, targetendpoint)
+  end
+  def select(this : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def scroll_into_view(this : IUIAutomationTextRange*, aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, aligntotop)
+  end
+  def get_children(this : IUIAutomationTextRange*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.call(this, children)
+  end
+end
+struct LibWin32::IUIAutomationTextRange2
+  def query_interface(this : IUIAutomationTextRange2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextRange2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextRange2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IUIAutomationTextRange2*, clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.call(this, clonedrange)
+  end
+  def compare(this : IUIAutomationTextRange2*, range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, range, aresame)
+  end
+  def compare_endpoints(this : IUIAutomationTextRange2*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.call(this, srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(this : IUIAutomationTextRange2*, textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.call(this, textunit)
+  end
+  def find_attribute(this : IUIAutomationTextRange2*, attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.call(this, attr, val, backward, found)
+  end
+  def find_text(this : IUIAutomationTextRange2*, text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.call(this, text, backward, ignorecase, found)
+  end
+  def get_attribute_value(this : IUIAutomationTextRange2*, attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, attr, value)
+  end
+  def get_bounding_rectangles(this : IUIAutomationTextRange2*, boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.call(this, boundingrects)
+  end
+  def get_enclosing_element(this : IUIAutomationTextRange2*, enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.call(this, enclosingelement)
+  end
+  def get_text(this : IUIAutomationTextRange2*, maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, maxlength, text)
+  end
+  def move(this : IUIAutomationTextRange2*, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, moved)
+  end
+  def move_endpoint_by_unit(this : IUIAutomationTextRange2*, endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.call(this, endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(this : IUIAutomationTextRange2*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.call(this, srcendpoint, range, targetendpoint)
+  end
+  def select(this : IUIAutomationTextRange2*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : IUIAutomationTextRange2*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : IUIAutomationTextRange2*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def scroll_into_view(this : IUIAutomationTextRange2*, aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, aligntotop)
+  end
+  def get_children(this : IUIAutomationTextRange2*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.call(this, children)
+  end
+  def show_context_menu(this : IUIAutomationTextRange2*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+end
+struct LibWin32::IUIAutomationTextRange3
+  def query_interface(this : IUIAutomationTextRange3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextRange3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextRange3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IUIAutomationTextRange3*, clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.call(this, clonedrange)
+  end
+  def compare(this : IUIAutomationTextRange3*, range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.call(this, range, aresame)
+  end
+  def compare_endpoints(this : IUIAutomationTextRange3*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.call(this, srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(this : IUIAutomationTextRange3*, textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.call(this, textunit)
+  end
+  def find_attribute(this : IUIAutomationTextRange3*, attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.call(this, attr, val, backward, found)
+  end
+  def find_text(this : IUIAutomationTextRange3*, text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.call(this, text, backward, ignorecase, found)
+  end
+  def get_attribute_value(this : IUIAutomationTextRange3*, attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, attr, value)
+  end
+  def get_bounding_rectangles(this : IUIAutomationTextRange3*, boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.call(this, boundingrects)
+  end
+  def get_enclosing_element(this : IUIAutomationTextRange3*, enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.call(this, enclosingelement)
+  end
+  def get_text(this : IUIAutomationTextRange3*, maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, maxlength, text)
+  end
+  def move(this : IUIAutomationTextRange3*, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, moved)
+  end
+  def move_endpoint_by_unit(this : IUIAutomationTextRange3*, endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.call(this, endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(this : IUIAutomationTextRange3*, srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.call(this, srcendpoint, range, targetendpoint)
+  end
+  def select(this : IUIAutomationTextRange3*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def add_to_selection(this : IUIAutomationTextRange3*) : HRESULT
+    @lpVtbl.value.add_to_selection.call(this)
+  end
+  def remove_from_selection(this : IUIAutomationTextRange3*) : HRESULT
+    @lpVtbl.value.remove_from_selection.call(this)
+  end
+  def scroll_into_view(this : IUIAutomationTextRange3*, aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, aligntotop)
+  end
+  def get_children(this : IUIAutomationTextRange3*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.call(this, children)
+  end
+  def show_context_menu(this : IUIAutomationTextRange3*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_enclosing_element_build_cache(this : IUIAutomationTextRange3*, cacherequest : IUIAutomationCacheRequest, enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element_build_cache.call(this, cacherequest, enclosingelement)
+  end
+  def get_children_build_cache(this : IUIAutomationTextRange3*, cacherequest : IUIAutomationCacheRequest, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children_build_cache.call(this, cacherequest, children)
+  end
+  def get_attribute_values(this : IUIAutomationTextRange3*, attributeids : Int32*, attributeidcount : Int32, attributevalues : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_attribute_values.call(this, attributeids, attributeidcount, attributevalues)
+  end
+end
+struct LibWin32::IUIAutomationTextRangeArray
+  def query_interface(this : IUIAutomationTextRangeArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextRangeArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextRangeArray*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : IUIAutomationTextRangeArray*, length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, length)
+  end
+  def get_element(this : IUIAutomationTextRangeArray*, index : Int32, element : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_element.call(this, index, element)
+  end
+end
+struct LibWin32::IUIAutomationTextPattern
+  def query_interface(this : IUIAutomationTextPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def range_from_point(this : IUIAutomationTextPattern*, pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, pt, range)
+  end
+  def range_from_child(this : IUIAutomationTextPattern*, child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, child, range)
+  end
+  def get_selection(this : IUIAutomationTextPattern*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ranges)
+  end
+  def get_visible_ranges(this : IUIAutomationTextPattern*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, ranges)
+  end
+  def get_document_range(this : IUIAutomationTextPattern*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, range)
+  end
+  def get_supported_text_selection(this : IUIAutomationTextPattern*, supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, supportedtextselection)
+  end
+end
+struct LibWin32::IUIAutomationTextPattern2
+  def query_interface(this : IUIAutomationTextPattern2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextPattern2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextPattern2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def range_from_point(this : IUIAutomationTextPattern2*, pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, pt, range)
+  end
+  def range_from_child(this : IUIAutomationTextPattern2*, child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, child, range)
+  end
+  def get_selection(this : IUIAutomationTextPattern2*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ranges)
+  end
+  def get_visible_ranges(this : IUIAutomationTextPattern2*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, ranges)
+  end
+  def get_document_range(this : IUIAutomationTextPattern2*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, range)
+  end
+  def get_supported_text_selection(this : IUIAutomationTextPattern2*, supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, supportedtextselection)
+  end
+  def range_from_annotation(this : IUIAutomationTextPattern2*, annotation : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_annotation.call(this, annotation, range)
+  end
+  def get_caret_range(this : IUIAutomationTextPattern2*, isactive : LibC::BOOL*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_caret_range.call(this, isactive, range)
+  end
+end
+struct LibWin32::IUIAutomationTextEditPattern
+  def query_interface(this : IUIAutomationTextEditPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextEditPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextEditPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def range_from_point(this : IUIAutomationTextEditPattern*, pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, pt, range)
+  end
+  def range_from_child(this : IUIAutomationTextEditPattern*, child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.call(this, child, range)
+  end
+  def get_selection(this : IUIAutomationTextEditPattern*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ranges)
+  end
+  def get_visible_ranges(this : IUIAutomationTextEditPattern*, ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.call(this, ranges)
+  end
+  def get_document_range(this : IUIAutomationTextEditPattern*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.call(this, range)
+  end
+  def get_supported_text_selection(this : IUIAutomationTextEditPattern*, supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.call(this, supportedtextselection)
+  end
+  def get_active_composition(this : IUIAutomationTextEditPattern*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_active_composition.call(this, range)
+  end
+  def get_conversion_target(this : IUIAutomationTextEditPattern*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_conversion_target.call(this, range)
+  end
+end
+struct LibWin32::IUIAutomationCustomNavigationPattern
+  def query_interface(this : IUIAutomationCustomNavigationPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationCustomNavigationPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationCustomNavigationPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def navigate(this : IUIAutomationCustomNavigationPattern*, direction : NavigateDirection, pretval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.navigate.call(this, direction, pretval)
+  end
+end
+struct LibWin32::IUIAutomationActiveTextPositionChangedEventHandler
+  def query_interface(this : IUIAutomationActiveTextPositionChangedEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationActiveTextPositionChangedEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationActiveTextPositionChangedEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_active_text_position_changed_event(this : IUIAutomationActiveTextPositionChangedEventHandler*, sender : IUIAutomationElement, range : IUIAutomationTextRange) : HRESULT
+    @lpVtbl.value.handle_active_text_position_changed_event.call(this, sender, range)
+  end
+end
+struct LibWin32::IUIAutomationLegacyIAccessiblePattern
+  def query_interface(this : IUIAutomationLegacyIAccessiblePattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationLegacyIAccessiblePattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationLegacyIAccessiblePattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def select(this : IUIAutomationLegacyIAccessiblePattern*, flagsselect : Int32) : HRESULT
+    @lpVtbl.value.select.call(this, flagsselect)
+  end
+  def do_default_action(this : IUIAutomationLegacyIAccessiblePattern*) : HRESULT
+    @lpVtbl.value.do_default_action.call(this)
+  end
+  def set_value(this : IUIAutomationLegacyIAccessiblePattern*, szvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.call(this, szvalue)
+  end
+  def get_current_child_id(this : IUIAutomationLegacyIAccessiblePattern*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_child_id.call(this, pretval)
+  end
+  def get_current_name(this : IUIAutomationLegacyIAccessiblePattern*, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, pszname)
+  end
+  def get_current_value(this : IUIAutomationLegacyIAccessiblePattern*, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_value.call(this, pszvalue)
+  end
+  def get_current_description(this : IUIAutomationLegacyIAccessiblePattern*, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_description.call(this, pszdescription)
+  end
+  def get_current_role(this : IUIAutomationLegacyIAccessiblePattern*, pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_role.call(this, pdwrole)
+  end
+  def get_current_state(this : IUIAutomationLegacyIAccessiblePattern*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_state.call(this, pdwstate)
+  end
+  def get_current_help(this : IUIAutomationLegacyIAccessiblePattern*, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help.call(this, pszhelp)
+  end
+  def get_current_keyboard_shortcut(this : IUIAutomationLegacyIAccessiblePattern*, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_keyboard_shortcut.call(this, pszkeyboardshortcut)
+  end
+  def get_current_selection(this : IUIAutomationLegacyIAccessiblePattern*, pvarselectedchildren : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.call(this, pvarselectedchildren)
+  end
+  def get_current_default_action(this : IUIAutomationLegacyIAccessiblePattern*, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_default_action.call(this, pszdefaultaction)
+  end
+  def get_cached_child_id(this : IUIAutomationLegacyIAccessiblePattern*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_child_id.call(this, pretval)
+  end
+  def get_cached_name(this : IUIAutomationLegacyIAccessiblePattern*, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, pszname)
+  end
+  def get_cached_value(this : IUIAutomationLegacyIAccessiblePattern*, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_value.call(this, pszvalue)
+  end
+  def get_cached_description(this : IUIAutomationLegacyIAccessiblePattern*, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_description.call(this, pszdescription)
+  end
+  def get_cached_role(this : IUIAutomationLegacyIAccessiblePattern*, pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_cached_role.call(this, pdwrole)
+  end
+  def get_cached_state(this : IUIAutomationLegacyIAccessiblePattern*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_cached_state.call(this, pdwstate)
+  end
+  def get_cached_help(this : IUIAutomationLegacyIAccessiblePattern*, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help.call(this, pszhelp)
+  end
+  def get_cached_keyboard_shortcut(this : IUIAutomationLegacyIAccessiblePattern*, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_keyboard_shortcut.call(this, pszkeyboardshortcut)
+  end
+  def get_cached_selection(this : IUIAutomationLegacyIAccessiblePattern*, pvarselectedchildren : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.call(this, pvarselectedchildren)
+  end
+  def get_cached_default_action(this : IUIAutomationLegacyIAccessiblePattern*, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_default_action.call(this, pszdefaultaction)
+  end
+  def get_i_accessible(this : IUIAutomationLegacyIAccessiblePattern*, ppaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.get_i_accessible.call(this, ppaccessible)
+  end
+end
+struct LibWin32::IUIAutomationItemContainerPattern
+  def query_interface(this : IUIAutomationItemContainerPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationItemContainerPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationItemContainerPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def find_item_by_property(this : IUIAutomationItemContainerPattern*, pstartafter : IUIAutomationElement, propertyid : Int32, value : VARIANT, pfound : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_item_by_property.call(this, pstartafter, propertyid, value, pfound)
+  end
+end
+struct LibWin32::IUIAutomationVirtualizedItemPattern
+  def query_interface(this : IUIAutomationVirtualizedItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationVirtualizedItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationVirtualizedItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def realize(this : IUIAutomationVirtualizedItemPattern*) : HRESULT
+    @lpVtbl.value.realize.call(this)
+  end
+end
+struct LibWin32::IUIAutomationAnnotationPattern
+  def query_interface(this : IUIAutomationAnnotationPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationAnnotationPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationAnnotationPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_annotation_type_id(this : IUIAutomationAnnotationPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_annotation_type_id.call(this, retval)
+  end
+  def get_current_annotation_type_name(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_annotation_type_name.call(this, retval)
+  end
+  def get_current_author(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_author.call(this, retval)
+  end
+  def get_current_date_time(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_date_time.call(this, retval)
+  end
+  def get_current_target(this : IUIAutomationAnnotationPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_target.call(this, retval)
+  end
+  def get_cached_annotation_type_id(this : IUIAutomationAnnotationPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_type_id.call(this, retval)
+  end
+  def get_cached_annotation_type_name(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_type_name.call(this, retval)
+  end
+  def get_cached_author(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_author.call(this, retval)
+  end
+  def get_cached_date_time(this : IUIAutomationAnnotationPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_date_time.call(this, retval)
+  end
+  def get_cached_target(this : IUIAutomationAnnotationPattern*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_target.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationStylesPattern
+  def query_interface(this : IUIAutomationStylesPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationStylesPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationStylesPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_style_id(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_style_id.call(this, retval)
+  end
+  def get_current_style_name(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_style_name.call(this, retval)
+  end
+  def get_current_fill_color(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_fill_color.call(this, retval)
+  end
+  def get_current_fill_pattern_style(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_fill_pattern_style.call(this, retval)
+  end
+  def get_current_shape(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_shape.call(this, retval)
+  end
+  def get_current_fill_pattern_color(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_fill_pattern_color.call(this, retval)
+  end
+  def get_current_extended_properties(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_extended_properties.call(this, retval)
+  end
+  def get_current_extended_properties_as_array(this : IUIAutomationStylesPattern*, propertyarray : ExtendedProperty**, propertycount : Int32*) : HRESULT
+    @lpVtbl.value.get_current_extended_properties_as_array.call(this, propertyarray, propertycount)
+  end
+  def get_cached_style_id(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_style_id.call(this, retval)
+  end
+  def get_cached_style_name(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_style_name.call(this, retval)
+  end
+  def get_cached_fill_color(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_fill_color.call(this, retval)
+  end
+  def get_cached_fill_pattern_style(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_fill_pattern_style.call(this, retval)
+  end
+  def get_cached_shape(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_shape.call(this, retval)
+  end
+  def get_cached_fill_pattern_color(this : IUIAutomationStylesPattern*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_fill_pattern_color.call(this, retval)
+  end
+  def get_cached_extended_properties(this : IUIAutomationStylesPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_extended_properties.call(this, retval)
+  end
+  def get_cached_extended_properties_as_array(this : IUIAutomationStylesPattern*, propertyarray : ExtendedProperty**, propertycount : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_extended_properties_as_array.call(this, propertyarray, propertycount)
+  end
+end
+struct LibWin32::IUIAutomationSpreadsheetPattern
+  def query_interface(this : IUIAutomationSpreadsheetPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSpreadsheetPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSpreadsheetPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_by_name(this : IUIAutomationSpreadsheetPattern*, name : UInt8*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_item_by_name.call(this, name, element)
+  end
+end
+struct LibWin32::IUIAutomationSpreadsheetItemPattern
+  def query_interface(this : IUIAutomationSpreadsheetItemPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationSpreadsheetItemPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationSpreadsheetItemPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_formula(this : IUIAutomationSpreadsheetItemPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_formula.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationSpreadsheetItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationSpreadsheetItemPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_cached_formula(this : IUIAutomationSpreadsheetItemPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_formula.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationSpreadsheetItemPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationSpreadsheetItemPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTransformPattern2
+  def query_interface(this : IUIAutomationTransformPattern2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTransformPattern2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTransformPattern2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move(this : IUIAutomationTransformPattern2*, x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.call(this, x, y)
+  end
+  def resize(this : IUIAutomationTransformPattern2*, width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def rotate(this : IUIAutomationTransformPattern2*, degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees)
+  end
+  def get_current_can_move(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_move.call(this, retval)
+  end
+  def get_current_can_resize(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_resize.call(this, retval)
+  end
+  def get_current_can_rotate(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_rotate.call(this, retval)
+  end
+  def get_cached_can_move(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_move.call(this, retval)
+  end
+  def get_cached_can_resize(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_resize.call(this, retval)
+  end
+  def get_cached_can_rotate(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_rotate.call(this, retval)
+  end
+  def zoom(this : IUIAutomationTransformPattern2*, zoomvalue : Float64) : HRESULT
+    @lpVtbl.value.zoom.call(this, zoomvalue)
+  end
+  def zoom_by_unit(this : IUIAutomationTransformPattern2*, zoomunit : ZoomUnit) : HRESULT
+    @lpVtbl.value.zoom_by_unit.call(this, zoomunit)
+  end
+  def get_current_can_zoom(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_zoom.call(this, retval)
+  end
+  def get_cached_can_zoom(this : IUIAutomationTransformPattern2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_zoom.call(this, retval)
+  end
+  def get_current_zoom_level(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_level.call(this, retval)
+  end
+  def get_cached_zoom_level(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_level.call(this, retval)
+  end
+  def get_current_zoom_minimum(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_minimum.call(this, retval)
+  end
+  def get_cached_zoom_minimum(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_minimum.call(this, retval)
+  end
+  def get_current_zoom_maximum(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_maximum.call(this, retval)
+  end
+  def get_cached_zoom_maximum(this : IUIAutomationTransformPattern2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_maximum.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationTextChildPattern
+  def query_interface(this : IUIAutomationTextChildPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationTextChildPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationTextChildPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text_container(this : IUIAutomationTextChildPattern*, container : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_text_container.call(this, container)
+  end
+  def get_text_range(this : IUIAutomationTextChildPattern*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_text_range.call(this, range)
+  end
+end
+struct LibWin32::IUIAutomationDragPattern
+  def query_interface(this : IUIAutomationDragPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationDragPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationDragPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_is_grabbed(this : IUIAutomationDragPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_grabbed.call(this, retval)
+  end
+  def get_cached_is_grabbed(this : IUIAutomationDragPattern*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_grabbed.call(this, retval)
+  end
+  def get_current_drop_effect(this : IUIAutomationDragPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_drop_effect.call(this, retval)
+  end
+  def get_cached_drop_effect(this : IUIAutomationDragPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_drop_effect.call(this, retval)
+  end
+  def get_current_drop_effects(this : IUIAutomationDragPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_drop_effects.call(this, retval)
+  end
+  def get_cached_drop_effects(this : IUIAutomationDragPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_drop_effects.call(this, retval)
+  end
+  def get_current_grabbed_items(this : IUIAutomationDragPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_grabbed_items.call(this, retval)
+  end
+  def get_cached_grabbed_items(this : IUIAutomationDragPattern*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_grabbed_items.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationDropTargetPattern
+  def query_interface(this : IUIAutomationDropTargetPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationDropTargetPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationDropTargetPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_drop_target_effect(this : IUIAutomationDropTargetPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_drop_target_effect.call(this, retval)
+  end
+  def get_cached_drop_target_effect(this : IUIAutomationDropTargetPattern*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_drop_target_effect.call(this, retval)
+  end
+  def get_current_drop_target_effects(this : IUIAutomationDropTargetPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_drop_target_effects.call(this, retval)
+  end
+  def get_cached_drop_target_effects(this : IUIAutomationDropTargetPattern*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_drop_target_effects.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement2
+  def query_interface(this : IUIAutomationElement2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement2*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement2*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement2*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement2*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement2*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement2*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement2*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement2*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement2*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement2*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement2*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement2*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement2*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement2*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement2*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement2*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement2*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement2*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement2*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement2*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement2*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement2*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement2*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement2*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement2*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement2*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement2*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement2*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement2*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement3
+  def query_interface(this : IUIAutomationElement3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement3*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement3*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement3*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement3*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement3*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement3*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement3*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement3*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement3*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement3*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement3*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement3*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement3*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement3*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement3*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement3*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement3*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement3*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement3*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement3*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement3*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement3*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement3*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement3*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement3*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement3*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement3*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement3*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement3*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement3*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement3*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement4
+  def query_interface(this : IUIAutomationElement4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement4*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement4*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement4*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement4*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement4*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement4*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement4*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement4*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement4*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement4*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement4*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement4*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement4*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement4*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement4*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement4*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement4*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement4*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement4*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement4*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement4*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement4*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement4*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement4*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement4*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement4*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement4*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement4*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement4*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement4*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement4*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement4*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement4*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement5
+  def query_interface(this : IUIAutomationElement5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement5*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement5*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement5*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement5*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement5*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement5*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement5*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement5*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement5*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement5*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement5*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement5*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement5*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement5*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement5*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement5*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement5*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement5*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement5*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement5*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement5*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement5*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement5*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement5*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement5*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement5*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement5*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement5*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement5*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement5*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement5*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement5*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement5*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_current_landmark_type(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.call(this, retval)
+  end
+  def get_current_localized_landmark_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.call(this, retval)
+  end
+  def get_cached_landmark_type(this : IUIAutomationElement5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.call(this, retval)
+  end
+  def get_cached_localized_landmark_type(this : IUIAutomationElement5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement6
+  def query_interface(this : IUIAutomationElement6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement6*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement6*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement6*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement6*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement6*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement6*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement6*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement6*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement6*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement6*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement6*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement6*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement6*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement6*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement6*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement6*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement6*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement6*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement6*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement6*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement6*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement6*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement6*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement6*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement6*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement6*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement6*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement6*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement6*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement6*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement6*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement6*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement6*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_current_landmark_type(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.call(this, retval)
+  end
+  def get_current_localized_landmark_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.call(this, retval)
+  end
+  def get_cached_landmark_type(this : IUIAutomationElement6*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.call(this, retval)
+  end
+  def get_cached_localized_landmark_type(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.call(this, retval)
+  end
+  def get_current_full_description(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.call(this, retval)
+  end
+  def get_cached_full_description(this : IUIAutomationElement6*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement7
+  def query_interface(this : IUIAutomationElement7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement7*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement7*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement7*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement7*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement7*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement7*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement7*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement7*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement7*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement7*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement7*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement7*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement7*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement7*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement7*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement7*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement7*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement7*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement7*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement7*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement7*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement7*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement7*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement7*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement7*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement7*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement7*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement7*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement7*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_current_landmark_type(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.call(this, retval)
+  end
+  def get_current_localized_landmark_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.call(this, retval)
+  end
+  def get_cached_landmark_type(this : IUIAutomationElement7*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.call(this, retval)
+  end
+  def get_cached_localized_landmark_type(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.call(this, retval)
+  end
+  def get_current_full_description(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.call(this, retval)
+  end
+  def get_cached_full_description(this : IUIAutomationElement7*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.call(this, retval)
+  end
+  def find_first_with_options(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(this : IUIAutomationElement7*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(this : IUIAutomationElement7*, targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.call(this, targetid, metadataid, returnval)
+  end
+end
+struct LibWin32::IUIAutomationElement8
+  def query_interface(this : IUIAutomationElement8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement8*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement8*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement8*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement8*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement8*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement8*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement8*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement8*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement8*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement8*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement8*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement8*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement8*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement8*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement8*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement8*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement8*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement8*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement8*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement8*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement8*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement8*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement8*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement8*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement8*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement8*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement8*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement8*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement8*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement8*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_current_landmark_type(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.call(this, retval)
+  end
+  def get_current_localized_landmark_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.call(this, retval)
+  end
+  def get_cached_landmark_type(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.call(this, retval)
+  end
+  def get_cached_localized_landmark_type(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.call(this, retval)
+  end
+  def get_current_full_description(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.call(this, retval)
+  end
+  def get_cached_full_description(this : IUIAutomationElement8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.call(this, retval)
+  end
+  def find_first_with_options(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(this : IUIAutomationElement8*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(this : IUIAutomationElement8*, targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.call(this, targetid, metadataid, returnval)
+  end
+  def get_current_heading_level(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_heading_level.call(this, retval)
+  end
+  def get_cached_heading_level(this : IUIAutomationElement8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_heading_level.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationElement9
+  def query_interface(this : IUIAutomationElement9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationElement9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationElement9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_focus(this : IUIAutomationElement9*) : HRESULT
+    @lpVtbl.value.set_focus.call(this)
+  end
+  def get_runtime_id(this : IUIAutomationElement9*, runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.call(this, runtimeid)
+  end
+  def find_first(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.call(this, scope, condition, found)
+  end
+  def find_all(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.call(this, scope, condition, found)
+  end
+  def find_first_build_cache(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.call(this, scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(this : IUIAutomationElement9*, cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.call(this, cacherequest, updatedelement)
+  end
+  def get_current_property_value(this : IUIAutomationElement9*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.call(this, propertyid, retval)
+  end
+  def get_current_property_value_ex(this : IUIAutomationElement9*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(this : IUIAutomationElement9*, propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.call(this, propertyid, retval)
+  end
+  def get_cached_property_value_ex(this : IUIAutomationElement9*, propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.call(this, propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(this : IUIAutomationElement9*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(this : IUIAutomationElement9*, patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.call(this, patternid, riid, patternobject)
+  end
+  def get_current_pattern(this : IUIAutomationElement9*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_pattern(this : IUIAutomationElement9*, patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.call(this, patternid, patternobject)
+  end
+  def get_cached_parent(this : IUIAutomationElement9*, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.call(this, parent)
+  end
+  def get_cached_children(this : IUIAutomationElement9*, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.call(this, children)
+  end
+  def get_current_process_id(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, retval)
+  end
+  def get_current_control_type(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.call(this, retval)
+  end
+  def get_current_localized_control_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.call(this, retval)
+  end
+  def get_current_name(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.call(this, retval)
+  end
+  def get_current_accelerator_key(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.call(this, retval)
+  end
+  def get_current_access_key(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.call(this, retval)
+  end
+  def get_current_has_keyboard_focus(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.call(this, retval)
+  end
+  def get_current_is_keyboard_focusable(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.call(this, retval)
+  end
+  def get_current_is_enabled(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.call(this, retval)
+  end
+  def get_current_automation_id(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.call(this, retval)
+  end
+  def get_current_class_name(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.call(this, retval)
+  end
+  def get_current_help_text(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.call(this, retval)
+  end
+  def get_current_culture(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.call(this, retval)
+  end
+  def get_current_is_control_element(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.call(this, retval)
+  end
+  def get_current_is_content_element(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.call(this, retval)
+  end
+  def get_current_is_password(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.call(this, retval)
+  end
+  def get_current_native_window_handle(this : IUIAutomationElement9*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.call(this, retval)
+  end
+  def get_current_item_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.call(this, retval)
+  end
+  def get_current_is_offscreen(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.call(this, retval)
+  end
+  def get_current_orientation(this : IUIAutomationElement9*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.call(this, retval)
+  end
+  def get_current_framework_id(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.call(this, retval)
+  end
+  def get_current_is_required_for_form(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.call(this, retval)
+  end
+  def get_current_item_status(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.call(this, retval)
+  end
+  def get_current_bounding_rectangle(this : IUIAutomationElement9*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.call(this, retval)
+  end
+  def get_current_labeled_by(this : IUIAutomationElement9*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.call(this, retval)
+  end
+  def get_current_aria_role(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.call(this, retval)
+  end
+  def get_current_aria_properties(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.call(this, retval)
+  end
+  def get_current_is_data_valid_for_form(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.call(this, retval)
+  end
+  def get_current_controller_for(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.call(this, retval)
+  end
+  def get_current_described_by(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.call(this, retval)
+  end
+  def get_current_flows_to(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.call(this, retval)
+  end
+  def get_current_provider_description(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.call(this, retval)
+  end
+  def get_cached_process_id(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.call(this, retval)
+  end
+  def get_cached_control_type(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.call(this, retval)
+  end
+  def get_cached_localized_control_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.call(this, retval)
+  end
+  def get_cached_name(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.call(this, retval)
+  end
+  def get_cached_accelerator_key(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.call(this, retval)
+  end
+  def get_cached_access_key(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.call(this, retval)
+  end
+  def get_cached_has_keyboard_focus(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.call(this, retval)
+  end
+  def get_cached_is_keyboard_focusable(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.call(this, retval)
+  end
+  def get_cached_is_enabled(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.call(this, retval)
+  end
+  def get_cached_automation_id(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.call(this, retval)
+  end
+  def get_cached_class_name(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.call(this, retval)
+  end
+  def get_cached_help_text(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.call(this, retval)
+  end
+  def get_cached_culture(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.call(this, retval)
+  end
+  def get_cached_is_control_element(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.call(this, retval)
+  end
+  def get_cached_is_content_element(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.call(this, retval)
+  end
+  def get_cached_is_password(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.call(this, retval)
+  end
+  def get_cached_native_window_handle(this : IUIAutomationElement9*, retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.call(this, retval)
+  end
+  def get_cached_item_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.call(this, retval)
+  end
+  def get_cached_is_offscreen(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.call(this, retval)
+  end
+  def get_cached_orientation(this : IUIAutomationElement9*, retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.call(this, retval)
+  end
+  def get_cached_framework_id(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.call(this, retval)
+  end
+  def get_cached_is_required_for_form(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.call(this, retval)
+  end
+  def get_cached_item_status(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.call(this, retval)
+  end
+  def get_cached_bounding_rectangle(this : IUIAutomationElement9*, retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.call(this, retval)
+  end
+  def get_cached_labeled_by(this : IUIAutomationElement9*, retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.call(this, retval)
+  end
+  def get_cached_aria_role(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.call(this, retval)
+  end
+  def get_cached_aria_properties(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.call(this, retval)
+  end
+  def get_cached_is_data_valid_for_form(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.call(this, retval)
+  end
+  def get_cached_controller_for(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.call(this, retval)
+  end
+  def get_cached_described_by(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.call(this, retval)
+  end
+  def get_cached_flows_to(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.call(this, retval)
+  end
+  def get_cached_provider_description(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.call(this, retval)
+  end
+  def get_clickable_point(this : IUIAutomationElement9*, clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.call(this, clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.call(this, retval)
+  end
+  def get_cached_optimize_for_visual_content(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.call(this, retval)
+  end
+  def get_current_live_setting(this : IUIAutomationElement9*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.call(this, retval)
+  end
+  def get_cached_live_setting(this : IUIAutomationElement9*, retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.call(this, retval)
+  end
+  def get_current_flows_from(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.call(this, retval)
+  end
+  def get_cached_flows_from(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.call(this, retval)
+  end
+  def show_context_menu(this : IUIAutomationElement9*) : HRESULT
+    @lpVtbl.value.show_context_menu.call(this)
+  end
+  def get_current_is_peripheral(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.call(this, retval)
+  end
+  def get_cached_is_peripheral(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.call(this, retval)
+  end
+  def get_current_position_in_set(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.call(this, retval)
+  end
+  def get_current_size_of_set(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.call(this, retval)
+  end
+  def get_current_level(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.call(this, retval)
+  end
+  def get_current_annotation_types(this : IUIAutomationElement9*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.call(this, retval)
+  end
+  def get_current_annotation_objects(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.call(this, retval)
+  end
+  def get_cached_position_in_set(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.call(this, retval)
+  end
+  def get_cached_size_of_set(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.call(this, retval)
+  end
+  def get_cached_level(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.call(this, retval)
+  end
+  def get_cached_annotation_types(this : IUIAutomationElement9*, retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.call(this, retval)
+  end
+  def get_cached_annotation_objects(this : IUIAutomationElement9*, retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.call(this, retval)
+  end
+  def get_current_landmark_type(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.call(this, retval)
+  end
+  def get_current_localized_landmark_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.call(this, retval)
+  end
+  def get_cached_landmark_type(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.call(this, retval)
+  end
+  def get_cached_localized_landmark_type(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.call(this, retval)
+  end
+  def get_current_full_description(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.call(this, retval)
+  end
+  def get_cached_full_description(this : IUIAutomationElement9*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.call(this, retval)
+  end
+  def find_first_with_options(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.call(this, scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(this : IUIAutomationElement9*, scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.call(this, scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(this : IUIAutomationElement9*, targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.call(this, targetid, metadataid, returnval)
+  end
+  def get_current_heading_level(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_heading_level.call(this, retval)
+  end
+  def get_cached_heading_level(this : IUIAutomationElement9*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_heading_level.call(this, retval)
+  end
+  def get_current_is_dialog(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_dialog.call(this, retval)
+  end
+  def get_cached_is_dialog(this : IUIAutomationElement9*, retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_dialog.call(this, retval)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactory
+  def query_interface(this : IUIAutomationProxyFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationProxyFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationProxyFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_provider(this : IUIAutomationProxyFactory*, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32, provider : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.create_provider.call(this, hwnd, idobject, idchild, provider)
+  end
+  def get_proxy_factory_id(this : IUIAutomationProxyFactory*, factoryid : UInt8**) : HRESULT
+    @lpVtbl.value.get_proxy_factory_id.call(this, factoryid)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactoryEntry
+  def query_interface(this : IUIAutomationProxyFactoryEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationProxyFactoryEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationProxyFactoryEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_proxy_factory(this : IUIAutomationProxyFactoryEntry*, factory : IUIAutomationProxyFactory*) : HRESULT
+    @lpVtbl.value.get_proxy_factory.call(this, factory)
+  end
+  def get_class_name(this : IUIAutomationProxyFactoryEntry*, classname : UInt8**) : HRESULT
+    @lpVtbl.value.get_class_name.call(this, classname)
+  end
+  def get_image_name(this : IUIAutomationProxyFactoryEntry*, imagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.call(this, imagename)
+  end
+  def get_allow_substring_match(this : IUIAutomationProxyFactoryEntry*, allowsubstringmatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allow_substring_match.call(this, allowsubstringmatch)
+  end
+  def get_can_check_base_class(this : IUIAutomationProxyFactoryEntry*, cancheckbaseclass : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_check_base_class.call(this, cancheckbaseclass)
+  end
+  def get_needs_advise_events(this : IUIAutomationProxyFactoryEntry*, adviseevents : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_needs_advise_events.call(this, adviseevents)
+  end
+  def put_class_name(this : IUIAutomationProxyFactoryEntry*, classname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_class_name.call(this, classname)
+  end
+  def put_image_name(this : IUIAutomationProxyFactoryEntry*, imagename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_image_name.call(this, imagename)
+  end
+  def put_allow_substring_match(this : IUIAutomationProxyFactoryEntry*, allowsubstringmatch : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_allow_substring_match.call(this, allowsubstringmatch)
+  end
+  def put_can_check_base_class(this : IUIAutomationProxyFactoryEntry*, cancheckbaseclass : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_can_check_base_class.call(this, cancheckbaseclass)
+  end
+  def put_needs_advise_events(this : IUIAutomationProxyFactoryEntry*, adviseevents : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_needs_advise_events.call(this, adviseevents)
+  end
+  def set_win_events_for_automation_event(this : IUIAutomationProxyFactoryEntry*, eventid : Int32, propertyid : Int32, winevents : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.set_win_events_for_automation_event.call(this, eventid, propertyid, winevents)
+  end
+  def get_win_events_for_automation_event(this : IUIAutomationProxyFactoryEntry*, eventid : Int32, propertyid : Int32, winevents : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_win_events_for_automation_event.call(this, eventid, propertyid, winevents)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactoryMapping
+  def query_interface(this : IUIAutomationProxyFactoryMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationProxyFactoryMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationProxyFactoryMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IUIAutomationProxyFactoryMapping*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_table(this : IUIAutomationProxyFactoryMapping*, table : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_table.call(this, table)
+  end
+  def get_entry(this : IUIAutomationProxyFactoryMapping*, index : UInt32, entry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.get_entry.call(this, index, entry)
+  end
+  def set_table(this : IUIAutomationProxyFactoryMapping*, factorylist : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.set_table.call(this, factorylist)
+  end
+  def insert_entries(this : IUIAutomationProxyFactoryMapping*, before : UInt32, factorylist : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.insert_entries.call(this, before, factorylist)
+  end
+  def insert_entry(this : IUIAutomationProxyFactoryMapping*, before : UInt32, factory : IUIAutomationProxyFactoryEntry) : HRESULT
+    @lpVtbl.value.insert_entry.call(this, before, factory)
+  end
+  def remove_entry(this : IUIAutomationProxyFactoryMapping*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_entry.call(this, index)
+  end
+  def clear_table(this : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.clear_table.call(this)
+  end
+  def restore_default_table(this : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.restore_default_table.call(this)
+  end
+end
+struct LibWin32::IUIAutomationEventHandlerGroup
+  def query_interface(this : IUIAutomationEventHandlerGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomationEventHandlerGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomationEventHandlerGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_active_text_position_changed_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_active_text_position_changed_event_handler.call(this, scope, cacherequest, handler)
+  end
+  def add_automation_event_handler(this : IUIAutomationEventHandlerGroup*, eventid : Int32, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, scope, cacherequest, handler)
+  end
+  def add_changes_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, changetypes : Int32*, changescount : Int32, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.call(this, scope, changetypes, changescount, cacherequest, handler)
+  end
+  def add_notification_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.call(this, scope, cacherequest, handler)
+  end
+  def add_property_changed_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, scope, cacherequest, handler)
+  end
+  def add_text_edit_text_changed_event_handler(this : IUIAutomationEventHandlerGroup*, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.call(this, scope, texteditchangetype, cacherequest, handler)
+  end
+end
+struct LibWin32::IUIAutomation
+  def query_interface(this : IUIAutomation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+end
+struct LibWin32::IUIAutomation2
+  def query_interface(this : IUIAutomation2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation2*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation2*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation2*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation2*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation2*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation2*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation2*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation2*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation2*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation2*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation2*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation2*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation2*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation2*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation2*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation2*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation2*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation2*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation2*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation2*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation2*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation2*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation2*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation2*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation2*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation2*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation2*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation2*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation2*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation2*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation2*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation2*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation2*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation2*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation2*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation2*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation2*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation2*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation2*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation2*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation2*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation2*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation2*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation2*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation2*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation2*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation2*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation2*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation2*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation2*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation2*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation2*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation2*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation2*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation2*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(this : IUIAutomation2*, autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.call(this, autosetfocus)
+  end
+  def put_auto_set_focus(this : IUIAutomation2*, autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.call(this, autosetfocus)
+  end
+  def get_connection_timeout(this : IUIAutomation2*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.call(this, timeout)
+  end
+  def put_connection_timeout(this : IUIAutomation2*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.call(this, timeout)
+  end
+  def get_transaction_timeout(this : IUIAutomation2*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.call(this, timeout)
+  end
+  def put_transaction_timeout(this : IUIAutomation2*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.call(this, timeout)
+  end
+end
+struct LibWin32::IUIAutomation3
+  def query_interface(this : IUIAutomation3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation3*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation3*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation3*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation3*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation3*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation3*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation3*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation3*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation3*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation3*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation3*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation3*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation3*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation3*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation3*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation3*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation3*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation3*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation3*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation3*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation3*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation3*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation3*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation3*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation3*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation3*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation3*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation3*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation3*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation3*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation3*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation3*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation3*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation3*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation3*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation3*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation3*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation3*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation3*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation3*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation3*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation3*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation3*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation3*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation3*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation3*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation3*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation3*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation3*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation3*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation3*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(this : IUIAutomation3*, autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.call(this, autosetfocus)
+  end
+  def put_auto_set_focus(this : IUIAutomation3*, autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.call(this, autosetfocus)
+  end
+  def get_connection_timeout(this : IUIAutomation3*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.call(this, timeout)
+  end
+  def put_connection_timeout(this : IUIAutomation3*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.call(this, timeout)
+  end
+  def get_transaction_timeout(this : IUIAutomation3*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.call(this, timeout)
+  end
+  def put_transaction_timeout(this : IUIAutomation3*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.call(this, timeout)
+  end
+  def add_text_edit_text_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.call(this, element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(this : IUIAutomation3*, element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.call(this, element, handler)
+  end
+end
+struct LibWin32::IUIAutomation4
+  def query_interface(this : IUIAutomation4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation4*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation4*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation4*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation4*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation4*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation4*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation4*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation4*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation4*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation4*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation4*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation4*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation4*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation4*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation4*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation4*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation4*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation4*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation4*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation4*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation4*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation4*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation4*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation4*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation4*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation4*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation4*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation4*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation4*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation4*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation4*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation4*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation4*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation4*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation4*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation4*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation4*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation4*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation4*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation4*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation4*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation4*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation4*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation4*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation4*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation4*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation4*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation4*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation4*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation4*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation4*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(this : IUIAutomation4*, autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.call(this, autosetfocus)
+  end
+  def put_auto_set_focus(this : IUIAutomation4*, autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.call(this, autosetfocus)
+  end
+  def get_connection_timeout(this : IUIAutomation4*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.call(this, timeout)
+  end
+  def put_connection_timeout(this : IUIAutomation4*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.call(this, timeout)
+  end
+  def get_transaction_timeout(this : IUIAutomation4*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.call(this, timeout)
+  end
+  def put_transaction_timeout(this : IUIAutomation4*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.call(this, timeout)
+  end
+  def add_text_edit_text_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.call(this, element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.call(this, element, handler)
+  end
+  def add_changes_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.call(this, element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(this : IUIAutomation4*, element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.call(this, element, handler)
+  end
+end
+struct LibWin32::IUIAutomation5
+  def query_interface(this : IUIAutomation5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation5*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation5*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation5*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation5*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation5*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation5*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation5*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation5*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation5*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation5*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation5*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation5*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation5*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation5*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation5*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation5*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation5*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation5*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation5*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation5*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation5*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation5*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation5*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation5*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation5*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation5*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation5*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation5*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation5*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation5*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation5*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation5*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation5*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation5*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation5*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation5*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation5*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation5*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation5*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation5*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation5*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation5*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation5*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation5*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation5*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation5*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation5*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation5*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation5*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation5*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(this : IUIAutomation5*, autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.call(this, autosetfocus)
+  end
+  def put_auto_set_focus(this : IUIAutomation5*, autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.call(this, autosetfocus)
+  end
+  def get_connection_timeout(this : IUIAutomation5*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.call(this, timeout)
+  end
+  def put_connection_timeout(this : IUIAutomation5*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.call(this, timeout)
+  end
+  def get_transaction_timeout(this : IUIAutomation5*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.call(this, timeout)
+  end
+  def put_transaction_timeout(this : IUIAutomation5*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.call(this, timeout)
+  end
+  def add_text_edit_text_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.call(this, element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.call(this, element, handler)
+  end
+  def add_changes_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.call(this, element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.call(this, element, handler)
+  end
+  def add_notification_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_notification_event_handler(this : IUIAutomation5*, element : IUIAutomationElement, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.remove_notification_event_handler.call(this, element, handler)
+  end
+end
+struct LibWin32::IUIAutomation6
+  def query_interface(this : IUIAutomation6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAutomation6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAutomation6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_elements(this : IUIAutomation6*, el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.call(this, el1, el2, aresame)
+  end
+  def compare_runtime_ids(this : IUIAutomation6*, runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.call(this, runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(this : IUIAutomation6*, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.call(this, root)
+  end
+  def element_from_handle(this : IUIAutomation6*, hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.call(this, hwnd, element)
+  end
+  def element_from_point(this : IUIAutomation6*, pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.call(this, pt, element)
+  end
+  def get_focused_element(this : IUIAutomation6*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.call(this, element)
+  end
+  def get_root_element_build_cache(this : IUIAutomation6*, cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.call(this, cacherequest, root)
+  end
+  def element_from_handle_build_cache(this : IUIAutomation6*, hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.call(this, hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(this : IUIAutomation6*, pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.call(this, pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(this : IUIAutomation6*, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.call(this, cacherequest, element)
+  end
+  def create_tree_walker(this : IUIAutomation6*, pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.call(this, pcondition, walker)
+  end
+  def get_control_view_walker(this : IUIAutomation6*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.call(this, walker)
+  end
+  def get_content_view_walker(this : IUIAutomation6*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.call(this, walker)
+  end
+  def get_raw_view_walker(this : IUIAutomation6*, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.call(this, walker)
+  end
+  def get_raw_view_condition(this : IUIAutomation6*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.call(this, condition)
+  end
+  def get_control_view_condition(this : IUIAutomation6*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.call(this, condition)
+  end
+  def get_content_view_condition(this : IUIAutomation6*, condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.call(this, condition)
+  end
+  def create_cache_request(this : IUIAutomation6*, cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.call(this, cacherequest)
+  end
+  def create_true_condition(this : IUIAutomation6*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.call(this, newcondition)
+  end
+  def create_false_condition(this : IUIAutomation6*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.call(this, newcondition)
+  end
+  def create_property_condition(this : IUIAutomation6*, propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(this : IUIAutomation6*, propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.call(this, propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(this : IUIAutomation6*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(this : IUIAutomation6*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(this : IUIAutomation6*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(this : IUIAutomation6*, condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.call(this, condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(this : IUIAutomation6*, conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.call(this, conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(this : IUIAutomation6*, conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.call(this, conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(this : IUIAutomation6*, condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.call(this, condition, newcondition)
+  end
+  def add_automation_event_handler(this : IUIAutomation6*, eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.call(this, eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(this : IUIAutomation6*, eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.call(this, eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.call(this, element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.call(this, element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.call(this, element, handler)
+  end
+  def add_structure_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.call(this, element, handler)
+  end
+  def add_focus_changed_event_handler(this : IUIAutomation6*, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.call(this, cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(this : IUIAutomation6*, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.call(this, handler)
+  end
+  def remove_all_event_handlers(this : IUIAutomation6*) : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.call(this)
+  end
+  def int_native_array_to_safe_array(this : IUIAutomation6*, array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.call(this, array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(this : IUIAutomation6*, intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.call(this, intarray, array, arraycount)
+  end
+  def rect_to_variant(this : IUIAutomation6*, rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.call(this, rc, var)
+  end
+  def variant_to_rect(this : IUIAutomation6*, var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.call(this, var, rc)
+  end
+  def safe_array_to_rect_native_array(this : IUIAutomation6*, rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.call(this, rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(this : IUIAutomation6*, factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.call(this, factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(this : IUIAutomation6*, factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.call(this, factorymapping)
+  end
+  def get_property_programmatic_name(this : IUIAutomation6*, property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.call(this, property, name)
+  end
+  def get_pattern_programmatic_name(this : IUIAutomation6*, pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.call(this, pattern, name)
+  end
+  def poll_for_potential_supported_patterns(this : IUIAutomation6*, pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.call(this, pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(this : IUIAutomation6*, pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.call(this, pelement, propertyids, propertynames)
+  end
+  def check_not_supported(this : IUIAutomation6*, value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.call(this, value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(this : IUIAutomation6*, notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.call(this, notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(this : IUIAutomation6*, mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.call(this, mixedattributevalue)
+  end
+  def element_from_i_accessible(this : IUIAutomation6*, accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.call(this, accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(this : IUIAutomation6*, accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.call(this, accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(this : IUIAutomation6*, autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.call(this, autosetfocus)
+  end
+  def put_auto_set_focus(this : IUIAutomation6*, autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.call(this, autosetfocus)
+  end
+  def get_connection_timeout(this : IUIAutomation6*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.call(this, timeout)
+  end
+  def put_connection_timeout(this : IUIAutomation6*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.call(this, timeout)
+  end
+  def get_transaction_timeout(this : IUIAutomation6*, timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.call(this, timeout)
+  end
+  def put_transaction_timeout(this : IUIAutomation6*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.call(this, timeout)
+  end
+  def add_text_edit_text_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.call(this, element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.call(this, element, handler)
+  end
+  def add_changes_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.call(this, element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.call(this, element, handler)
+  end
+  def add_notification_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_notification_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.remove_notification_event_handler.call(this, element, handler)
+  end
+  def create_event_handler_group(this : IUIAutomation6*, handlergroup : IUIAutomationEventHandlerGroup*) : HRESULT
+    @lpVtbl.value.create_event_handler_group.call(this, handlergroup)
+  end
+  def add_event_handler_group(this : IUIAutomation6*, element : IUIAutomationElement, handlergroup : IUIAutomationEventHandlerGroup) : HRESULT
+    @lpVtbl.value.add_event_handler_group.call(this, element, handlergroup)
+  end
+  def remove_event_handler_group(this : IUIAutomation6*, element : IUIAutomationElement, handlergroup : IUIAutomationEventHandlerGroup) : HRESULT
+    @lpVtbl.value.remove_event_handler_group.call(this, element, handlergroup)
+  end
+  def get_connection_recovery_behavior(this : IUIAutomation6*, connectionrecoverybehavioroptions : ConnectionRecoveryBehaviorOptions*) : HRESULT
+    @lpVtbl.value.get_connection_recovery_behavior.call(this, connectionrecoverybehavioroptions)
+  end
+  def put_connection_recovery_behavior(this : IUIAutomation6*, connectionrecoverybehavioroptions : ConnectionRecoveryBehaviorOptions) : HRESULT
+    @lpVtbl.value.put_connection_recovery_behavior.call(this, connectionrecoverybehavioroptions)
+  end
+  def get_coalesce_events(this : IUIAutomation6*, coalesceeventsoptions : CoalesceEventsOptions*) : HRESULT
+    @lpVtbl.value.get_coalesce_events.call(this, coalesceeventsoptions)
+  end
+  def put_coalesce_events(this : IUIAutomation6*, coalesceeventsoptions : CoalesceEventsOptions) : HRESULT
+    @lpVtbl.value.put_coalesce_events.call(this, coalesceeventsoptions)
+  end
+  def add_active_text_position_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_active_text_position_changed_event_handler.call(this, element, scope, cacherequest, handler)
+  end
+  def remove_active_text_position_changed_event_handler(this : IUIAutomation6*, element : IUIAutomationElement, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_active_text_position_changed_event_handler.call(this, element, handler)
+  end
 end

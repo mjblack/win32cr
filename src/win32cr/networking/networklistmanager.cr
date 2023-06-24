@@ -325,3 +325,360 @@ lib LibWin32
   end
 
 end
+struct LibWin32::INetworkListManager
+  def query_interface(this : INetworkListManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkListManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkListManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetworkListManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetworkListManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetworkListManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetworkListManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_networks(this : INetworkListManager*, flags : NLM_ENUM_NETWORK, ppenumnetwork : IEnumNetworks*) : HRESULT
+    @lpVtbl.value.get_networks.call(this, flags, ppenumnetwork)
+  end
+  def get_network(this : INetworkListManager*, gdnetworkid : Guid, ppnetwork : INetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, gdnetworkid, ppnetwork)
+  end
+  def get_network_connections(this : INetworkListManager*, ppenum : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.get_network_connections.call(this, ppenum)
+  end
+  def get_network_connection(this : INetworkListManager*, gdnetworkconnectionid : Guid, ppnetworkconnection : INetworkConnection*) : HRESULT
+    @lpVtbl.value.get_network_connection.call(this, gdnetworkconnectionid, ppnetworkconnection)
+  end
+  def get_is_connected_to_internet(this : INetworkListManager*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.call(this, pbisconnected)
+  end
+  def get_is_connected(this : INetworkListManager*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.call(this, pbisconnected)
+  end
+  def get_connectivity(this : INetworkListManager*, pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.call(this, pconnectivity)
+  end
+  def set_simulated_profile_info(this : INetworkListManager*, psimulatedinfo : NLM_SIMULATED_PROFILE_INFO*) : HRESULT
+    @lpVtbl.value.set_simulated_profile_info.call(this, psimulatedinfo)
+  end
+  def clear_simulated_profile_info(this : INetworkListManager*) : HRESULT
+    @lpVtbl.value.clear_simulated_profile_info.call(this)
+  end
+end
+struct LibWin32::INetworkListManagerEvents
+  def query_interface(this : INetworkListManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkListManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkListManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connectivity_changed(this : INetworkListManagerEvents*, newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.connectivity_changed.call(this, newconnectivity)
+  end
+end
+struct LibWin32::INetwork
+  def query_interface(this : INetwork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetwork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetwork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetwork*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetwork*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetwork*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetwork*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetwork*, psznetworkname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, psznetworkname)
+  end
+  def set_name(this : INetwork*, sznetworknewname : UInt8*) : HRESULT
+    @lpVtbl.value.set_name.call(this, sznetworknewname)
+  end
+  def get_description(this : INetwork*, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pszdescription)
+  end
+  def set_description(this : INetwork*, szdescription : UInt8*) : HRESULT
+    @lpVtbl.value.set_description.call(this, szdescription)
+  end
+  def get_network_id(this : INetwork*, pgdguidnetworkid : Guid*) : HRESULT
+    @lpVtbl.value.get_network_id.call(this, pgdguidnetworkid)
+  end
+  def get_domain_type(this : INetwork*, pnetworktype : NLM_DOMAIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.call(this, pnetworktype)
+  end
+  def get_network_connections(this : INetwork*, ppenumnetworkconnection : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.get_network_connections.call(this, ppenumnetworkconnection)
+  end
+  def get_time_created_and_connected(this : INetwork*, pdwlowdatetimecreated : UInt32*, pdwhighdatetimecreated : UInt32*, pdwlowdatetimeconnected : UInt32*, pdwhighdatetimeconnected : UInt32*) : HRESULT
+    @lpVtbl.value.get_time_created_and_connected.call(this, pdwlowdatetimecreated, pdwhighdatetimecreated, pdwlowdatetimeconnected, pdwhighdatetimeconnected)
+  end
+  def get_is_connected_to_internet(this : INetwork*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.call(this, pbisconnected)
+  end
+  def get_is_connected(this : INetwork*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.call(this, pbisconnected)
+  end
+  def get_connectivity(this : INetwork*, pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.call(this, pconnectivity)
+  end
+  def get_category(this : INetwork*, pcategory : NLM_NETWORK_CATEGORY*) : HRESULT
+    @lpVtbl.value.get_category.call(this, pcategory)
+  end
+  def set_category(this : INetwork*, newcategory : NLM_NETWORK_CATEGORY) : HRESULT
+    @lpVtbl.value.set_category.call(this, newcategory)
+  end
+end
+struct LibWin32::IEnumNetworks
+  def query_interface(this : IEnumNetworks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetworks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetworks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IEnumNetworks*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IEnumNetworks*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IEnumNetworks*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IEnumNetworks*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IEnumNetworks*, ppenumvar : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumvar)
+  end
+  def next(this : IEnumNetworks*, celt : UInt32, rgelt : INetwork*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumNetworks*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetworks*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetworks*, ppenumnetwork : IEnumNetworks*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumnetwork)
+  end
+end
+struct LibWin32::INetworkEvents
+  def query_interface(this : INetworkEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def network_added(this : INetworkEvents*, networkid : Guid) : HRESULT
+    @lpVtbl.value.network_added.call(this, networkid)
+  end
+  def network_deleted(this : INetworkEvents*, networkid : Guid) : HRESULT
+    @lpVtbl.value.network_deleted.call(this, networkid)
+  end
+  def network_connectivity_changed(this : INetworkEvents*, networkid : Guid, newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.network_connectivity_changed.call(this, networkid, newconnectivity)
+  end
+  def network_property_changed(this : INetworkEvents*, networkid : Guid, flags : NLM_NETWORK_PROPERTY_CHANGE) : HRESULT
+    @lpVtbl.value.network_property_changed.call(this, networkid, flags)
+  end
+end
+struct LibWin32::INetworkConnection
+  def query_interface(this : INetworkConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetworkConnection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetworkConnection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetworkConnection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetworkConnection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_network(this : INetworkConnection*, ppnetwork : INetwork*) : HRESULT
+    @lpVtbl.value.get_network.call(this, ppnetwork)
+  end
+  def get_is_connected_to_internet(this : INetworkConnection*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.call(this, pbisconnected)
+  end
+  def get_is_connected(this : INetworkConnection*, pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.call(this, pbisconnected)
+  end
+  def get_connectivity(this : INetworkConnection*, pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.call(this, pconnectivity)
+  end
+  def get_connection_id(this : INetworkConnection*, pgdconnectionid : Guid*) : HRESULT
+    @lpVtbl.value.get_connection_id.call(this, pgdconnectionid)
+  end
+  def get_adapter_id(this : INetworkConnection*, pgdadapterid : Guid*) : HRESULT
+    @lpVtbl.value.get_adapter_id.call(this, pgdadapterid)
+  end
+  def get_domain_type(this : INetworkConnection*, pdomaintype : NLM_DOMAIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.call(this, pdomaintype)
+  end
+end
+struct LibWin32::IEnumNetworkConnections
+  def query_interface(this : IEnumNetworkConnections*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetworkConnections*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetworkConnections*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IEnumNetworkConnections*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IEnumNetworkConnections*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IEnumNetworkConnections*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IEnumNetworkConnections*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IEnumNetworkConnections*, ppenumvar : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumvar)
+  end
+  def next(this : IEnumNetworkConnections*, celt : UInt32, rgelt : INetworkConnection*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumNetworkConnections*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetworkConnections*, ppenumnetwork : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumnetwork)
+  end
+end
+struct LibWin32::INetworkConnectionEvents
+  def query_interface(this : INetworkConnectionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkConnectionEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkConnectionEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def network_connection_connectivity_changed(this : INetworkConnectionEvents*, connectionid : Guid, newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.network_connection_connectivity_changed.call(this, connectionid, newconnectivity)
+  end
+  def network_connection_property_changed(this : INetworkConnectionEvents*, connectionid : Guid, flags : NLM_CONNECTION_PROPERTY_CHANGE) : HRESULT
+    @lpVtbl.value.network_connection_property_changed.call(this, connectionid, flags)
+  end
+end
+struct LibWin32::INetworkCostManager
+  def query_interface(this : INetworkCostManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkCostManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkCostManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cost(this : INetworkCostManager*, pcost : UInt32*, pdestipaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.get_cost.call(this, pcost, pdestipaddr)
+  end
+  def get_data_plan_status(this : INetworkCostManager*, pdataplanstatus : NLM_DATAPLAN_STATUS*, pdestipaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.get_data_plan_status.call(this, pdataplanstatus, pdestipaddr)
+  end
+  def set_destination_addresses(this : INetworkCostManager*, length : UInt32, pdestipaddrlist : NLM_SOCKADDR*, bappend : Int16) : HRESULT
+    @lpVtbl.value.set_destination_addresses.call(this, length, pdestipaddrlist, bappend)
+  end
+end
+struct LibWin32::INetworkCostManagerEvents
+  def query_interface(this : INetworkCostManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkCostManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkCostManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cost_changed(this : INetworkCostManagerEvents*, newcost : UInt32, pdestaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.cost_changed.call(this, newcost, pdestaddr)
+  end
+  def data_plan_status_changed(this : INetworkCostManagerEvents*, pdestaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.data_plan_status_changed.call(this, pdestaddr)
+  end
+end
+struct LibWin32::INetworkConnectionCost
+  def query_interface(this : INetworkConnectionCost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkConnectionCost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkConnectionCost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cost(this : INetworkConnectionCost*, pcost : UInt32*) : HRESULT
+    @lpVtbl.value.get_cost.call(this, pcost)
+  end
+  def get_data_plan_status(this : INetworkConnectionCost*, pdataplanstatus : NLM_DATAPLAN_STATUS*) : HRESULT
+    @lpVtbl.value.get_data_plan_status.call(this, pdataplanstatus)
+  end
+end
+struct LibWin32::INetworkConnectionCostEvents
+  def query_interface(this : INetworkConnectionCostEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkConnectionCostEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkConnectionCostEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connection_cost_changed(this : INetworkConnectionCostEvents*, connectionid : Guid, newcost : UInt32) : HRESULT
+    @lpVtbl.value.connection_cost_changed.call(this, connectionid, newcost)
+  end
+  def connection_data_plan_status_changed(this : INetworkConnectionCostEvents*, connectionid : Guid) : HRESULT
+    @lpVtbl.value.connection_data_plan_status_changed.call(this, connectionid)
+  end
+end

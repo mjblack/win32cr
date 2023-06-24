@@ -3388,10 +3388,10 @@ lib LibWin32
   fun CreateActCtxW(pactctx : ACTCTXW*) : LibC::HANDLE
 
   # Params # hactctx : LibC::HANDLE [In]
-  fun AddRefActCtx(hactctx : LibC::HANDLE)
+  fun AddRefActCtx(hactctx : LibC::HANDLE) : Void
 
   # Params # hactctx : LibC::HANDLE [In]
-  fun ReleaseActCtx(hactctx : LibC::HANDLE)
+  fun ReleaseActCtx(hactctx : LibC::HANDLE) : Void
 
   # Params # hactctx : LibC::HANDLE [In]
   fun ZombifyActCtx(hactctx : LibC::HANDLE) : LibC::BOOL
@@ -3419,4 +3419,1420 @@ lib LibWin32
 
   # Params # dwflags : UInt32 [In],hactctx : LibC::HANDLE [In],settingsnamespace : LibC::LPWSTR [In],settingname : LibC::LPWSTR [In],pvbuffer : LibC::LPWSTR [In],dwbuffer : LibC::UINT_PTR [In],pdwwrittenorrequired : LibC::UINT_PTR* [In]
   fun QueryActCtxSettingsW(dwflags : UInt32, hactctx : LibC::HANDLE, settingsnamespace : LibC::LPWSTR, settingname : LibC::LPWSTR, pvbuffer : LibC::LPWSTR, dwbuffer : LibC::UINT_PTR, pdwwrittenorrequired : LibC::UINT_PTR*) : LibC::BOOL
+end
+struct LibWin32::IValidate
+  def query_interface(this : IValidate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IValidate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IValidate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open_database(this : IValidate*, szdatabase : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open_database.call(this, szdatabase)
+  end
+  def open_cub(this : IValidate*, szcubfile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open_cub.call(this, szcubfile)
+  end
+  def close_database(this : IValidate*) : HRESULT
+    @lpVtbl.value.close_database.call(this)
+  end
+  def close_cub(this : IValidate*) : HRESULT
+    @lpVtbl.value.close_cub.call(this)
+  end
+  def set_display(this : IValidate*, pdisplayfunction : LPDISPLAYVAL, pcontext : Void*) : HRESULT
+    @lpVtbl.value.set_display.call(this, pdisplayfunction, pcontext)
+  end
+  def set_status(this : IValidate*, pstatusfunction : LPEVALCOMCALLBACK, pcontext : Void*) : HRESULT
+    @lpVtbl.value.set_status.call(this, pstatusfunction, pcontext)
+  end
+  def validate(this : IValidate*, wzices : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.validate.call(this, wzices)
+  end
+end
+struct LibWin32::IEnumMsmString
+  def query_interface(this : IEnumMsmString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumMsmString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumMsmString*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumMsmString*, cfetch : UInt32, rgbstrstrings : UInt8**, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgbstrstrings, pcfetched)
+  end
+  def skip(this : IEnumMsmString*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
+  end
+  def reset(this : IEnumMsmString*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumMsmString*, pemsmstrings : IEnumMsmString*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmstrings)
+  end
+end
+struct LibWin32::IMsmStrings
+  def query_interface(this : IMsmStrings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmStrings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmStrings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmStrings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmStrings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmStrings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmStrings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IMsmStrings*, item : Int32, return : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
+  end
+  def get_count(this : IMsmStrings*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IMsmStrings*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::IMsmError
+  def query_interface(this : IMsmError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmError*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmError*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmError*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmError*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IMsmError*, errortype : Msmerrortype*) : HRESULT
+    @lpVtbl.value.get_type.call(this, errortype)
+  end
+  def get_path(this : IMsmError*, errorpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, errorpath)
+  end
+  def get_language(this : IMsmError*, errorlanguage : Int16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, errorlanguage)
+  end
+  def get_database_table(this : IMsmError*, errortable : UInt8**) : HRESULT
+    @lpVtbl.value.get_database_table.call(this, errortable)
+  end
+  def get_database_keys(this : IMsmError*, errorkeys : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_database_keys.call(this, errorkeys)
+  end
+  def get_module_table(this : IMsmError*, errortable : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_table.call(this, errortable)
+  end
+  def get_module_keys(this : IMsmError*, errorkeys : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_module_keys.call(this, errorkeys)
+  end
+end
+struct LibWin32::IEnumMsmError
+  def query_interface(this : IEnumMsmError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumMsmError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumMsmError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumMsmError*, cfetch : UInt32, rgmsmerrors : IMsmError*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgmsmerrors, pcfetched)
+  end
+  def skip(this : IEnumMsmError*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
+  end
+  def reset(this : IEnumMsmError*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumMsmError*, pemsmerrors : IEnumMsmError*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmerrors)
+  end
+end
+struct LibWin32::IMsmErrors
+  def query_interface(this : IMsmErrors*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmErrors*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmErrors*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmErrors*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmErrors*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmErrors*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmErrors*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IMsmErrors*, item : Int32, return : IMsmError*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
+  end
+  def get_count(this : IMsmErrors*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IMsmErrors*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::IMsmDependency
+  def query_interface(this : IMsmDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmDependency*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmDependency*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmDependency*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmDependency*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_module(this : IMsmDependency*, module_ : UInt8**) : HRESULT
+    @lpVtbl.value.get_module.call(this, module_)
+  end
+  def get_language(this : IMsmDependency*, language : Int16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def get_version(this : IMsmDependency*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+end
+struct LibWin32::IEnumMsmDependency
+  def query_interface(this : IEnumMsmDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumMsmDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumMsmDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumMsmDependency*, cfetch : UInt32, rgmsmdependencies : IMsmDependency*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cfetch, rgmsmdependencies, pcfetched)
+  end
+  def skip(this : IEnumMsmDependency*, cskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cskip)
+  end
+  def reset(this : IEnumMsmDependency*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumMsmDependency*, pemsmdependencies : IEnumMsmDependency*) : HRESULT
+    @lpVtbl.value.clone.call(this, pemsmdependencies)
+  end
+end
+struct LibWin32::IMsmDependencies
+  def query_interface(this : IMsmDependencies*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmDependencies*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmDependencies*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmDependencies*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmDependencies*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmDependencies*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmDependencies*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IMsmDependencies*, item : Int32, return : IMsmDependency*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, return)
+  end
+  def get_count(this : IMsmDependencies*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IMsmDependencies*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::IMsmMerge
+  def query_interface(this : IMsmMerge*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmMerge*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmMerge*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmMerge*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmMerge*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmMerge*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmMerge*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def open_database(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.open_database.call(this, path)
+  end
+  def open_module(this : IMsmMerge*, path : UInt8*, language : Int16) : HRESULT
+    @lpVtbl.value.open_module.call(this, path, language)
+  end
+  def close_database(this : IMsmMerge*, commit : Int16) : HRESULT
+    @lpVtbl.value.close_database.call(this, commit)
+  end
+  def close_module(this : IMsmMerge*) : HRESULT
+    @lpVtbl.value.close_module.call(this)
+  end
+  def open_log(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.open_log.call(this, path)
+  end
+  def close_log(this : IMsmMerge*) : HRESULT
+    @lpVtbl.value.close_log.call(this)
+  end
+  def log(this : IMsmMerge*, message : UInt8*) : HRESULT
+    @lpVtbl.value.log.call(this, message)
+  end
+  def get_errors(this : IMsmMerge*, errors : IMsmErrors*) : HRESULT
+    @lpVtbl.value.get_errors.call(this, errors)
+  end
+  def get_dependencies(this : IMsmMerge*, dependencies : IMsmDependencies*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, dependencies)
+  end
+  def merge(this : IMsmMerge*, feature : UInt8*, redirectdir : UInt8*) : HRESULT
+    @lpVtbl.value.merge.call(this, feature, redirectdir)
+  end
+  def connect(this : IMsmMerge*, feature : UInt8*) : HRESULT
+    @lpVtbl.value.connect.call(this, feature)
+  end
+  def extract_cab(this : IMsmMerge*, filename : UInt8*) : HRESULT
+    @lpVtbl.value.extract_cab.call(this, filename)
+  end
+  def extract_files(this : IMsmMerge*, path : UInt8*) : HRESULT
+    @lpVtbl.value.extract_files.call(this, path)
+  end
+end
+struct LibWin32::IMsmGetFiles
+  def query_interface(this : IMsmGetFiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMsmGetFiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMsmGetFiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMsmGetFiles*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMsmGetFiles*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMsmGetFiles*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMsmGetFiles*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_module_files(this : IMsmGetFiles*, files : IMsmStrings*) : HRESULT
+    @lpVtbl.value.get_module_files.call(this, files)
+  end
+end
+struct LibWin32::IAssemblyName
+  def query_interface(this : IAssemblyName*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAssemblyName*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAssemblyName*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_property(this : IAssemblyName*, propertyid : UInt32, pvproperty : Void*, cbproperty : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, pvproperty, cbproperty)
+  end
+  def get_property(this : IAssemblyName*, propertyid : UInt32, pvproperty : Void*, pcbproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, pvproperty, pcbproperty)
+  end
+  def finalize(this : IAssemblyName*) : HRESULT
+    @lpVtbl.value.finalize.call(this)
+  end
+  def get_display_name(this : IAssemblyName*, szdisplayname : Char*, pccdisplayname : UInt32*, dwdisplayflags : UInt32) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, szdisplayname, pccdisplayname, dwdisplayflags)
+  end
+  def reserved(this : IAssemblyName*, refiid : Guid*, punkreserved1 : IUnknown, punkreserved2 : IUnknown, szreserved : LibC::LPWSTR, llreserved : Int64, pvreserved : Void*, cbreserved : UInt32, ppreserved : Void**) : HRESULT
+    @lpVtbl.value.reserved.call(this, refiid, punkreserved1, punkreserved2, szreserved, llreserved, pvreserved, cbreserved, ppreserved)
+  end
+  def get_name(this : IAssemblyName*, lpcwbuffer : UInt32*, pwzname : Char*) : HRESULT
+    @lpVtbl.value.get_name.call(this, lpcwbuffer, pwzname)
+  end
+  def get_version(this : IAssemblyName*, pdwversionhi : UInt32*, pdwversionlow : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversionhi, pdwversionlow)
+  end
+  def is_equal(this : IAssemblyName*, pname : IAssemblyName, dwcmpflags : UInt32) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pname, dwcmpflags)
+  end
+  def clone(this : IAssemblyName*, pname : IAssemblyName*) : HRESULT
+    @lpVtbl.value.clone.call(this, pname)
+  end
+end
+struct LibWin32::IAssemblyCacheItem
+  def query_interface(this : IAssemblyCacheItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAssemblyCacheItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAssemblyCacheItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream(this : IAssemblyCacheItem*, dwflags : UInt32, pszstreamname : LibC::LPWSTR, dwformat : UInt32, dwformatflags : UInt32, ppistream : IStream*, pulimaxsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, dwflags, pszstreamname, dwformat, dwformatflags, ppistream, pulimaxsize)
+  end
+  def commit(this : IAssemblyCacheItem*, dwflags : UInt32, puldisposition : UInt32*) : HRESULT
+    @lpVtbl.value.commit.call(this, dwflags, puldisposition)
+  end
+  def abort_item(this : IAssemblyCacheItem*) : HRESULT
+    @lpVtbl.value.abort_item.call(this)
+  end
+end
+struct LibWin32::IAssemblyCache
+  def query_interface(this : IAssemblyCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAssemblyCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAssemblyCache*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def uninstall_assembly(this : IAssemblyCache*, dwflags : UInt32, pszassemblyname : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*, puldisposition : IASSEMBLYCACHE_UNINSTALL_DISPOSITION*) : HRESULT
+    @lpVtbl.value.uninstall_assembly.call(this, dwflags, pszassemblyname, prefdata, puldisposition)
+  end
+  def query_assembly_info(this : IAssemblyCache*, dwflags : QUERYASMINFO_FLAGS, pszassemblyname : LibC::LPWSTR, pasminfo : ASSEMBLY_INFO*) : HRESULT
+    @lpVtbl.value.query_assembly_info.call(this, dwflags, pszassemblyname, pasminfo)
+  end
+  def create_assembly_cache_item(this : IAssemblyCache*, dwflags : UInt32, pvreserved : Void*, ppasmitem : IAssemblyCacheItem*, pszassemblyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_assembly_cache_item.call(this, dwflags, pvreserved, ppasmitem, pszassemblyname)
+  end
+  def reserved(this : IAssemblyCache*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.reserved.call(this, ppunk)
+  end
+  def install_assembly(this : IAssemblyCache*, dwflags : UInt32, pszmanifestfilepath : LibC::LPWSTR, prefdata : FUSION_INSTALL_REFERENCE*) : HRESULT
+    @lpVtbl.value.install_assembly.call(this, dwflags, pszmanifestfilepath, prefdata)
+  end
+end
+struct LibWin32::IPMApplicationInfo
+  def query_interface(this : IPMApplicationInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMApplicationInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMApplicationInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMApplicationInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_instance_id(this : IPMApplicationInfo*, pinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.get_instance_id.call(this, pinstanceid)
+  end
+  def get_offer_id(this : IPMApplicationInfo*, pofferid : Guid*) : HRESULT
+    @lpVtbl.value.get_offer_id.call(this, pofferid)
+  end
+  def get_default_task(this : IPMApplicationInfo*, pdefaulttask : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_task.call(this, pdefaulttask)
+  end
+  def get_app_title(this : IPMApplicationInfo*, papptitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_app_title.call(this, papptitle)
+  end
+  def get_icon_path(this : IPMApplicationInfo*, pappiconpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_icon_path.call(this, pappiconpath)
+  end
+  def get_notification_state(this : IPMApplicationInfo*, pisnotified : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_notification_state.call(this, pisnotified)
+  end
+  def get_app_install_type(this : IPMApplicationInfo*, pappinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
+    @lpVtbl.value.get_app_install_type.call(this, pappinstalltype)
+  end
+  def get_state(this : IPMApplicationInfo*, pstate : PM_APPLICATION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def get_is_revoked(this : IPMApplicationInfo*, pisrevoked : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_revoked.call(this, pisrevoked)
+  end
+  def get_update_available(this : IPMApplicationInfo*, pisupdateavailable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_update_available.call(this, pisupdateavailable)
+  end
+  def get_install_date(this : IPMApplicationInfo*, pinstalldate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_install_date.call(this, pinstalldate)
+  end
+  def get_is_uninstallable(this : IPMApplicationInfo*, pisuninstallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, pisuninstallable)
+  end
+  def get_is_themable(this : IPMApplicationInfo*, pisthemable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_themable.call(this, pisthemable)
+  end
+  def get_is_trial(this : IPMApplicationInfo*, pistrial : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_trial.call(this, pistrial)
+  end
+  def get_install_path(this : IPMApplicationInfo*, pinstallpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_install_path.call(this, pinstallpath)
+  end
+  def get_data_root(this : IPMApplicationInfo*, pdataroot : UInt8**) : HRESULT
+    @lpVtbl.value.get_data_root.call(this, pdataroot)
+  end
+  def get_genre(this : IPMApplicationInfo*, pgenre : PM_APP_GENRE*) : HRESULT
+    @lpVtbl.value.get_genre.call(this, pgenre)
+  end
+  def get_publisher(this : IPMApplicationInfo*, ppublisher : UInt8**) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, ppublisher)
+  end
+  def get_author(this : IPMApplicationInfo*, pauthor : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, pauthor)
+  end
+  def get_description(this : IPMApplicationInfo*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pdescription)
+  end
+  def get_version(this : IPMApplicationInfo*, pversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pversion)
+  end
+  def get_invocation_info(this : IPMApplicationInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+  def get_app_plat_major_version(this : IPMApplicationInfo*, pmajorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_major_version.call(this, pmajorver)
+  end
+  def get_app_plat_minor_version(this : IPMApplicationInfo*, pminorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_minor_version.call(this, pminorver)
+  end
+  def get_publisher_id(this : IPMApplicationInfo*, ppublisherid : Guid*) : HRESULT
+    @lpVtbl.value.get_publisher_id.call(this, ppublisherid)
+  end
+  def get_is_multi_core(this : IPMApplicationInfo*, pismulticore : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_multi_core.call(this, pismulticore)
+  end
+  def get_sid(this : IPMApplicationInfo*, psid : UInt8**) : HRESULT
+    @lpVtbl.value.get_sid.call(this, psid)
+  end
+  def get_app_plat_major_version_light_up(this : IPMApplicationInfo*, pmajorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_major_version_light_up.call(this, pmajorver)
+  end
+  def get_app_plat_minor_version_light_up(this : IPMApplicationInfo*, pminorver : UInt8*) : HRESULT
+    @lpVtbl.value.get_app_plat_minor_version_light_up.call(this, pminorver)
+  end
+  def set_update_available(this : IPMApplicationInfo*, isupdateavailable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_update_available.call(this, isupdateavailable)
+  end
+  def set_notification_state(this : IPMApplicationInfo*, isnotified : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_notification_state.call(this, isnotified)
+  end
+  def set_icon_path(this : IPMApplicationInfo*, appiconpath : UInt8*) : HRESULT
+    @lpVtbl.value.set_icon_path.call(this, appiconpath)
+  end
+  def set_uninstallable_state(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_uninstallable_state.call(this, isuninstallable)
+  end
+  def get_is_pinable_on_kid_zone(this : IPMApplicationInfo*, pispinable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_pinable_on_kid_zone.call(this, pispinable)
+  end
+  def get_is_originally_pre_installed(this : IPMApplicationInfo*, pispreinstalled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_originally_pre_installed.call(this, pispreinstalled)
+  end
+  def get_is_install_on_sd(this : IPMApplicationInfo*, pisinstallonsd : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_install_on_sd.call(this, pisinstallonsd)
+  end
+  def get_is_optout_on_sd(this : IPMApplicationInfo*, pisoptoutonsd : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optout_on_sd.call(this, pisoptoutonsd)
+  end
+  def get_is_optout_backup_restore(this : IPMApplicationInfo*, pisoptoutbackuprestore : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optout_backup_restore.call(this, pisoptoutbackuprestore)
+  end
+  def set_enterprise_disabled(this : IPMApplicationInfo*, isdisabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enterprise_disabled.call(this, isdisabled)
+  end
+  def set_enterprise_uninstallable(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enterprise_uninstallable.call(this, isuninstallable)
+  end
+  def get_enterprise_disabled(this : IPMApplicationInfo*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enterprise_disabled.call(this, isdisabled)
+  end
+  def get_enterprise_uninstallable(this : IPMApplicationInfo*, isuninstallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enterprise_uninstallable.call(this, isuninstallable)
+  end
+  def get_is_visible_on_app_list(this : IPMApplicationInfo*, pisvisible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_visible_on_app_list.call(this, pisvisible)
+  end
+  def get_is_inbox_app(this : IPMApplicationInfo*, pisinboxapp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_inbox_app.call(this, pisinboxapp)
+  end
+  def get_storage_id(this : IPMApplicationInfo*, pstorageid : Guid*) : HRESULT
+    @lpVtbl.value.get_storage_id.call(this, pstorageid)
+  end
+  def get_start_app_blob(this : IPMApplicationInfo*, pblob : PM_STARTAPPBLOB*) : HRESULT
+    @lpVtbl.value.get_start_app_blob.call(this, pblob)
+  end
+  def get_is_movable(this : IPMApplicationInfo*, pismovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_movable.call(this, pismovable)
+  end
+  def get_deployment_app_enumeration_hub_filter(this : IPMApplicationInfo*, hubtype : PM_TILE_HUBTYPE*) : HRESULT
+    @lpVtbl.value.get_deployment_app_enumeration_hub_filter.call(this, hubtype)
+  end
+  def get_modified_date(this : IPMApplicationInfo*, pmodifieddate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_modified_date.call(this, pmodifieddate)
+  end
+  def get_is_originally_restored(this : IPMApplicationInfo*, pisrestored : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_originally_restored.call(this, pisrestored)
+  end
+  def get_should_defer_mdil_bind(this : IPMApplicationInfo*, pfdefermdilbind : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_should_defer_mdil_bind.call(this, pfdefermdilbind)
+  end
+  def get_is_fully_pre_install(this : IPMApplicationInfo*, pfisfullypreinstall : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_fully_pre_install.call(this, pfisfullypreinstall)
+  end
+  def set_is_mdil_maintenance_needed(this : IPMApplicationInfo*, fismdilmaintenanceneeded : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_mdil_maintenance_needed.call(this, fismdilmaintenanceneeded)
+  end
+  def set_title(this : IPMApplicationInfo*, apptitle : UInt8*) : HRESULT
+    @lpVtbl.value.set_title.call(this, apptitle)
+  end
+end
+struct LibWin32::IPMTilePropertyInfo
+  def query_interface(this : IPMTilePropertyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTilePropertyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTilePropertyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_id(this : IPMTilePropertyInfo*, ppropid : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_id.call(this, ppropid)
+  end
+  def get_property_value(this : IPMTilePropertyInfo*, ppropvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, ppropvalue)
+  end
+  def set_property(this : IPMTilePropertyInfo*, propvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_property.call(this, propvalue)
+  end
+end
+struct LibWin32::IPMTilePropertyEnumerator
+  def query_interface(this : IPMTilePropertyEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTilePropertyEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTilePropertyEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMTilePropertyEnumerator*, pppropinfo : IPMTilePropertyInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pppropinfo)
+  end
+end
+struct LibWin32::IPMTileInfo
+  def query_interface(this : IPMTileInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTileInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTileInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMTileInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_tile_id(this : IPMTileInfo*, ptileid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tile_id.call(this, ptileid)
+  end
+  def get_template_type(this : IPMTileInfo*, ptemplatetype : TILE_TEMPLATE_TYPE*) : HRESULT
+    @lpVtbl.value.get_template_type.call(this, ptemplatetype)
+  end
+  def get_hub_pinned_state(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, ppinned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_hub_pinned_state.call(this, hubtype, ppinned)
+  end
+  def get_hub_position(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, pposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_hub_position.call(this, hubtype, pposition)
+  end
+  def get_is_notified(this : IPMTileInfo*, pisnotified : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_notified.call(this, pisnotified)
+  end
+  def get_is_default(this : IPMTileInfo*, pisdefault : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_default.call(this, pisdefault)
+  end
+  def get_task_id(this : IPMTileInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
+  end
+  def get_tile_type(this : IPMTileInfo*, pstarttiletype : PM_STARTTILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_tile_type.call(this, pstarttiletype)
+  end
+  def get_is_themable(this : IPMTileInfo*, pisthemable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_themable.call(this, pisthemable)
+  end
+  def get_property_by_id(this : IPMTileInfo*, propid : UInt32, pppropinfo : IPMTilePropertyInfo*) : HRESULT
+    @lpVtbl.value.get_property_by_id.call(this, propid, pppropinfo)
+  end
+  def get_invocation_info(this : IPMTileInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+  def get_property_enum(this : IPMTileInfo*, pptilepropenum : IPMTilePropertyEnumerator*) : HRESULT
+    @lpVtbl.value.get_property_enum.call(this, pptilepropenum)
+  end
+  def get_hub_tile_size(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, psize : PM_TILE_SIZE*) : HRESULT
+    @lpVtbl.value.get_hub_tile_size.call(this, hubtype, psize)
+  end
+  def set_hub_position(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, position : UInt32) : HRESULT
+    @lpVtbl.value.set_hub_position.call(this, hubtype, position)
+  end
+  def set_notified_state(this : IPMTileInfo*, notified : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_notified_state.call(this, notified)
+  end
+  def set_hub_pinned_state(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, pinned : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_hub_pinned_state.call(this, hubtype, pinned)
+  end
+  def set_hub_tile_size(this : IPMTileInfo*, hubtype : PM_TILE_HUBTYPE, size : PM_TILE_SIZE) : HRESULT
+    @lpVtbl.value.set_hub_tile_size.call(this, hubtype, size)
+  end
+  def set_invocation_info(this : IPMTileInfo*, taskname : UInt8*, taskparameters : UInt8*) : HRESULT
+    @lpVtbl.value.set_invocation_info.call(this, taskname, taskparameters)
+  end
+  def get_start_tile_blob(this : IPMTileInfo*, pblob : PM_STARTTILEBLOB*) : HRESULT
+    @lpVtbl.value.get_start_tile_blob.call(this, pblob)
+  end
+  def get_is_restoring(this : IPMTileInfo*, pisrestoring : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_restoring.call(this, pisrestoring)
+  end
+  def get_is_auto_restore_disabled(this : IPMTileInfo*, pisautorestoredisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_auto_restore_disabled.call(this, pisautorestoredisabled)
+  end
+  def set_is_restoring(this : IPMTileInfo*, restoring : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_restoring.call(this, restoring)
+  end
+  def set_is_auto_restore_disabled(this : IPMTileInfo*, autorestoredisabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_auto_restore_disabled.call(this, autorestoredisabled)
+  end
+end
+struct LibWin32::IPMTileInfoEnumerator
+  def query_interface(this : IPMTileInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTileInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTileInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMTileInfoEnumerator*, pptileinfo : IPMTileInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pptileinfo)
+  end
+end
+struct LibWin32::IPMApplicationInfoEnumerator
+  def query_interface(this : IPMApplicationInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMApplicationInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMApplicationInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMApplicationInfoEnumerator*, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppappinfo)
+  end
+end
+struct LibWin32::IPMLiveTileJobInfo
+  def query_interface(this : IPMLiveTileJobInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMLiveTileJobInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMLiveTileJobInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMLiveTileJobInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_tile_id(this : IPMLiveTileJobInfo*, ptileid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tile_id.call(this, ptileid)
+  end
+  def get_next_schedule(this : IPMLiveTileJobInfo*, pnextschedule : FILETIME*) : HRESULT
+    @lpVtbl.value.get_next_schedule.call(this, pnextschedule)
+  end
+  def set_next_schedule(this : IPMLiveTileJobInfo*, ftnextschedule : FILETIME) : HRESULT
+    @lpVtbl.value.set_next_schedule.call(this, ftnextschedule)
+  end
+  def get_start_schedule(this : IPMLiveTileJobInfo*, pstartschedule : FILETIME*) : HRESULT
+    @lpVtbl.value.get_start_schedule.call(this, pstartschedule)
+  end
+  def set_start_schedule(this : IPMLiveTileJobInfo*, ftstartschedule : FILETIME) : HRESULT
+    @lpVtbl.value.set_start_schedule.call(this, ftstartschedule)
+  end
+  def get_interval_duration(this : IPMLiveTileJobInfo*, pintervalduration : UInt32*) : HRESULT
+    @lpVtbl.value.get_interval_duration.call(this, pintervalduration)
+  end
+  def set_interval_duration(this : IPMLiveTileJobInfo*, ulintervalduration : UInt32) : HRESULT
+    @lpVtbl.value.set_interval_duration.call(this, ulintervalduration)
+  end
+  def get_run_forever(this : IPMLiveTileJobInfo*, isrunforever : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_run_forever.call(this, isrunforever)
+  end
+  def set_run_forever(this : IPMLiveTileJobInfo*, frunforever : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_run_forever.call(this, frunforever)
+  end
+  def get_max_run_count(this : IPMLiveTileJobInfo*, pmaxruncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_run_count.call(this, pmaxruncount)
+  end
+  def set_max_run_count(this : IPMLiveTileJobInfo*, ulmaxruncount : UInt32) : HRESULT
+    @lpVtbl.value.set_max_run_count.call(this, ulmaxruncount)
+  end
+  def get_run_count(this : IPMLiveTileJobInfo*, pruncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_run_count.call(this, pruncount)
+  end
+  def set_run_count(this : IPMLiveTileJobInfo*, ulruncount : UInt32) : HRESULT
+    @lpVtbl.value.set_run_count.call(this, ulruncount)
+  end
+  def get_recurrence_type(this : IPMLiveTileJobInfo*, precurrencetype : UInt32*) : HRESULT
+    @lpVtbl.value.get_recurrence_type.call(this, precurrencetype)
+  end
+  def set_recurrence_type(this : IPMLiveTileJobInfo*, ulrecurrencetype : UInt32) : HRESULT
+    @lpVtbl.value.set_recurrence_type.call(this, ulrecurrencetype)
+  end
+  def get_tile_xml(this : IPMLiveTileJobInfo*, ptilexml : UInt8**, pcbtilexml : UInt32*) : HRESULT
+    @lpVtbl.value.get_tile_xml.call(this, ptilexml, pcbtilexml)
+  end
+  def set_tile_xml(this : IPMLiveTileJobInfo*, ptilexml : UInt8*, cbtilexml : UInt32) : HRESULT
+    @lpVtbl.value.set_tile_xml.call(this, ptilexml, cbtilexml)
+  end
+  def get_url_xml(this : IPMLiveTileJobInfo*, purlxml : UInt8**, pcburlxml : UInt32*) : HRESULT
+    @lpVtbl.value.get_url_xml.call(this, purlxml, pcburlxml)
+  end
+  def set_url_xml(this : IPMLiveTileJobInfo*, purlxml : UInt8*, cburlxml : UInt32) : HRESULT
+    @lpVtbl.value.set_url_xml.call(this, purlxml, cburlxml)
+  end
+  def get_attempt_count(this : IPMLiveTileJobInfo*, pattemptcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attempt_count.call(this, pattemptcount)
+  end
+  def set_attempt_count(this : IPMLiveTileJobInfo*, ulattemptcount : UInt32) : HRESULT
+    @lpVtbl.value.set_attempt_count.call(this, ulattemptcount)
+  end
+  def get_download_state(this : IPMLiveTileJobInfo*, pdownloadstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_download_state.call(this, pdownloadstate)
+  end
+  def set_download_state(this : IPMLiveTileJobInfo*, uldownloadstate : UInt32) : HRESULT
+    @lpVtbl.value.set_download_state.call(this, uldownloadstate)
+  end
+end
+struct LibWin32::IPMLiveTileJobInfoEnumerator
+  def query_interface(this : IPMLiveTileJobInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMLiveTileJobInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMLiveTileJobInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMLiveTileJobInfoEnumerator*, pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pplivetilejobinfo)
+  end
+end
+struct LibWin32::IPMDeploymentManager
+  def query_interface(this : IPMDeploymentManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMDeploymentManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMDeploymentManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def report_download_begin(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_download_begin.call(this, productid)
+  end
+  def report_download_progress(this : IPMDeploymentManager*, productid : Guid, usprogress : UInt16) : HRESULT
+    @lpVtbl.value.report_download_progress.call(this, productid, usprogress)
+  end
+  def report_download_complete(this : IPMDeploymentManager*, productid : Guid, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.report_download_complete.call(this, productid, hrresult)
+  end
+  def begin_install(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, pinstallinfo)
+  end
+  def begin_update(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_update.call(this, pupdateinfo)
+  end
+  def begin_deploy_package(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_deploy_package.call(this, pinstallinfo)
+  end
+  def begin_update_deployed_package_legacy(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO_LEGACY*) : HRESULT
+    @lpVtbl.value.begin_update_deployed_package_legacy.call(this, pupdateinfo)
+  end
+  def begin_uninstall(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, productid)
+  end
+  def begin_enterprise_app_install(this : IPMDeploymentManager*, pinstallinfo : PM_INSTALLINFO*) : HRESULT
+    @lpVtbl.value.begin_enterprise_app_install.call(this, pinstallinfo)
+  end
+  def begin_enterprise_app_update(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_enterprise_app_update.call(this, pupdateinfo)
+  end
+  def begin_update_license(this : IPMDeploymentManager*, productid : Guid, offerid : Guid, pblicense : UInt8*, cblicense : UInt32) : HRESULT
+    @lpVtbl.value.begin_update_license.call(this, productid, offerid, pblicense, cblicense)
+  end
+  def get_license_challenge(this : IPMDeploymentManager*, packagepath : UInt8*, ppbchallenge : UInt8**, pcbchallenge : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge.call(this, packagepath, ppbchallenge, pcbchallenge, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
+  end
+  def get_license_challenge_by_product_id(this : IPMDeploymentManager*, productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge_by_product_id.call(this, productid, ppbchallenge, pcblicense)
+  end
+  def get_license_challenge_by_product_id2(this : IPMDeploymentManager*, productid : Guid, ppbchallenge : UInt8**, pcblicense : UInt32*, ppbkid : UInt8**, pcbkid : UInt32*, ppbdeviceid : UInt8**, pcbdeviceid : UInt32*, ppbsaltvalue : UInt8**, pcbsaltvalue : UInt32*, ppbkgvvalue : UInt8**, pcbkgvvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_license_challenge_by_product_id2.call(this, productid, ppbchallenge, pcblicense, ppbkid, pcbkid, ppbdeviceid, pcbdeviceid, ppbsaltvalue, pcbsaltvalue, ppbkgvvalue, pcbkgvvalue)
+  end
+  def revoke_license(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.revoke_license.call(this, productid)
+  end
+  def rebind_mdil_binaries(this : IPMDeploymentManager*, productid : Guid, filenames : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.rebind_mdil_binaries.call(this, productid, filenames)
+  end
+  def rebind_all_mdil_binaries(this : IPMDeploymentManager*, productid : Guid, instanceid : Guid) : HRESULT
+    @lpVtbl.value.rebind_all_mdil_binaries.call(this, productid, instanceid)
+  end
+  def regenerate_xbf(this : IPMDeploymentManager*, productid : Guid, assemblypaths : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.regenerate_xbf.call(this, productid, assemblypaths)
+  end
+  def generate_xbf_for_current_locale(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.generate_xbf_for_current_locale.call(this, productid)
+  end
+  def begin_provision(this : IPMDeploymentManager*, productid : Guid, xmlpath : UInt8*) : HRESULT
+    @lpVtbl.value.begin_provision.call(this, productid, xmlpath)
+  end
+  def begin_deprovision(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.begin_deprovision.call(this, productid)
+  end
+  def reindex_sqlce_databases(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.reindex_sqlce_databases.call(this, productid)
+  end
+  def set_applications_need_maintenance(this : IPMDeploymentManager*, requiredmaintenanceoperations : UInt32, pcapplications : UInt32*) : HRESULT
+    @lpVtbl.value.set_applications_need_maintenance.call(this, requiredmaintenanceoperations, pcapplications)
+  end
+  def update_chamber_profile(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.update_chamber_profile.call(this, productid)
+  end
+  def enterprise_policy_is_application_allowed(this : IPMDeploymentManager*, productid : Guid, publishername : LibC::LPWSTR, pisallowed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.enterprise_policy_is_application_allowed.call(this, productid, publishername, pisallowed)
+  end
+  def begin_update_deployed_package(this : IPMDeploymentManager*, pupdateinfo : PM_UPDATEINFO*) : HRESULT
+    @lpVtbl.value.begin_update_deployed_package.call(this, pupdateinfo)
+  end
+  def report_restore_cancelled(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_restore_cancelled.call(this, productid)
+  end
+  def resolve_resource_string(this : IPMDeploymentManager*, resourcestring : LibC::LPWSTR, presolvedresourcestring : UInt8**) : HRESULT
+    @lpVtbl.value.resolve_resource_string.call(this, resourcestring, presolvedresourcestring)
+  end
+  def update_capabilities_for_modern_apps(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.update_capabilities_for_modern_apps.call(this)
+  end
+  def report_download_status_update(this : IPMDeploymentManager*, productid : Guid) : HRESULT
+    @lpVtbl.value.report_download_status_update.call(this, productid)
+  end
+  def begin_uninstall_with_options(this : IPMDeploymentManager*, productid : Guid, removaloptions : UInt32) : HRESULT
+    @lpVtbl.value.begin_uninstall_with_options.call(this, productid, removaloptions)
+  end
+  def bind_deferred_mdil_binaries(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.bind_deferred_mdil_binaries.call(this)
+  end
+  def generate_xaml_lightup_xbf_for_current_locale(this : IPMDeploymentManager*, packagefamilyname : UInt8*) : HRESULT
+    @lpVtbl.value.generate_xaml_lightup_xbf_for_current_locale.call(this, packagefamilyname)
+  end
+  def add_license_for_appx(this : IPMDeploymentManager*, productid : Guid, pblicense : UInt8*, cblicense : UInt32, pbplayreadyheader : UInt8*, cbplayreadyheader : UInt32) : HRESULT
+    @lpVtbl.value.add_license_for_appx.call(this, productid, pblicense, cblicense, pbplayreadyheader, cbplayreadyheader)
+  end
+  def fix_junctions_for_apps_on_sd_card(this : IPMDeploymentManager*) : HRESULT
+    @lpVtbl.value.fix_junctions_for_apps_on_sd_card.call(this)
+  end
+end
+struct LibWin32::IPMEnumerationManager
+  def query_interface(this : IPMEnumerationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMEnumerationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMEnumerationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_all_applications(this : IPMEnumerationManager*, ppappenum : IPMApplicationInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_applications.call(this, ppappenum, filter)
+  end
+  def get_all_tiles(this : IPMEnumerationManager*, pptileenum : IPMTileInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_tiles.call(this, pptileenum, filter)
+  end
+  def get_all_tasks(this : IPMEnumerationManager*, pptaskenum : IPMTaskInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_tasks.call(this, pptaskenum, filter)
+  end
+  def get_all_extensions(this : IPMEnumerationManager*, ppextensionenum : IPMExtensionInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_extensions.call(this, ppextensionenum, filter)
+  end
+  def get_all_background_service_agents(this : IPMEnumerationManager*, ppbsaenum : IPMBackgroundServiceAgentInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_background_service_agents.call(this, ppbsaenum, filter)
+  end
+  def get_all_background_workers(this : IPMEnumerationManager*, ppbswenum : IPMBackgroundWorkerInfoEnumerator*, filter : PM_ENUM_FILTER) : HRESULT
+    @lpVtbl.value.get_all_background_workers.call(this, ppbswenum, filter)
+  end
+  def get_application_info(this : IPMEnumerationManager*, productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info.call(this, productid, ppappinfo)
+  end
+  def get_tile_info(this : IPMEnumerationManager*, productid : Guid, tileid : UInt8*, pptileinfo : IPMTileInfo*) : HRESULT
+    @lpVtbl.value.get_tile_info.call(this, productid, tileid, pptileinfo)
+  end
+  def get_task_info(this : IPMEnumerationManager*, productid : Guid, taskid : UInt8*, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_task_info.call(this, productid, taskid, pptaskinfo)
+  end
+  def get_task_info_ex(this : IPMEnumerationManager*, productid : Guid, taskid : LibC::LPWSTR, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_task_info_ex.call(this, productid, taskid, pptaskinfo)
+  end
+  def get_background_service_agent_info(this : IPMEnumerationManager*, bsaid : UInt32, pptaskinfo : IPMBackgroundServiceAgentInfo*) : HRESULT
+    @lpVtbl.value.get_background_service_agent_info.call(this, bsaid, pptaskinfo)
+  end
+  def get_all_live_tile_jobs(this : IPMEnumerationManager*, pplivetilejobenum : IPMLiveTileJobInfoEnumerator*) : HRESULT
+    @lpVtbl.value.get_all_live_tile_jobs.call(this, pplivetilejobenum)
+  end
+  def get_live_tile_job(this : IPMEnumerationManager*, productid : Guid, tileid : UInt8*, recurrencetype : PM_LIVETILE_RECURRENCE_TYPE, pplivetilejobinfo : IPMLiveTileJobInfo*) : HRESULT
+    @lpVtbl.value.get_live_tile_job.call(this, productid, tileid, recurrencetype, pplivetilejobinfo)
+  end
+  def get_application_info_external(this : IPMEnumerationManager*, productid : Guid, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info_external.call(this, productid, ppappinfo)
+  end
+  def get_file_handler_generic_logo(this : IPMEnumerationManager*, filetype : UInt8*, logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_handler_generic_logo.call(this, filetype, logosize, plogo)
+  end
+  def get_application_info_from_access_claims(this : IPMEnumerationManager*, sysappid0 : UInt8*, sysappid1 : UInt8*, ppappinfo : IPMApplicationInfo*) : HRESULT
+    @lpVtbl.value.get_application_info_from_access_claims.call(this, sysappid0, sysappid1, ppappinfo)
+  end
+  def get_start_tile_enumerator_blob(this : IPMEnumerationManager*, filter : PM_ENUM_FILTER, pctiles : UInt32*, pptileblobs : PM_STARTTILEBLOB**) : HRESULT
+    @lpVtbl.value.get_start_tile_enumerator_blob.call(this, filter, pctiles, pptileblobs)
+  end
+  def get_start_app_enumerator_blob(this : IPMEnumerationManager*, filter : PM_ENUM_FILTER, pcapps : UInt32*, ppappblobs : PM_STARTAPPBLOB**) : HRESULT
+    @lpVtbl.value.get_start_app_enumerator_blob.call(this, filter, pcapps, ppappblobs)
+  end
+end
+struct LibWin32::IPMTaskInfo
+  def query_interface(this : IPMTaskInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTaskInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTaskInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMTaskInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_task_id(this : IPMTaskInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
+  end
+  def get_navigation_page(this : IPMTaskInfo*, pnavigationpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_navigation_page.call(this, pnavigationpage)
+  end
+  def get_task_transition(this : IPMTaskInfo*, ptasktransition : PM_TASK_TRANSITION*) : HRESULT
+    @lpVtbl.value.get_task_transition.call(this, ptasktransition)
+  end
+  def get_runtime_type(this : IPMTaskInfo*, pruntimetype : PACKMAN_RUNTIME*) : HRESULT
+    @lpVtbl.value.get_runtime_type.call(this, pruntimetype)
+  end
+  def get_activation_policy(this : IPMTaskInfo*, pactivationpolicy : PM_ACTIVATION_POLICY*) : HRESULT
+    @lpVtbl.value.get_activation_policy.call(this, pactivationpolicy)
+  end
+  def get_task_type(this : IPMTaskInfo*, ptasktype : PM_TASK_TYPE*) : HRESULT
+    @lpVtbl.value.get_task_type.call(this, ptasktype)
+  end
+  def get_invocation_info(this : IPMTaskInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+  def get_image_path(this : IPMTaskInfo*, pimagepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, pimagepath)
+  end
+  def get_image_params(this : IPMTaskInfo*, pimageparams : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_params.call(this, pimageparams)
+  end
+  def get_install_root_folder(this : IPMTaskInfo*, pinstallrootfolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_install_root_folder.call(this, pinstallrootfolder)
+  end
+  def get_data_root_folder(this : IPMTaskInfo*, pdatarootfolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_data_root_folder.call(this, pdatarootfolder)
+  end
+  def get_is_single_instance_host(this : IPMTaskInfo*, pissingleinstancehost : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_single_instance_host.call(this, pissingleinstancehost)
+  end
+  def get_is_interop_enabled(this : IPMTaskInfo*, pisinteropenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_interop_enabled.call(this, pisinteropenabled)
+  end
+  def get_application_state(this : IPMTaskInfo*, papplicationstate : PM_APPLICATION_STATE*) : HRESULT
+    @lpVtbl.value.get_application_state.call(this, papplicationstate)
+  end
+  def get_install_type(this : IPMTaskInfo*, pinstalltype : PM_APPLICATION_INSTALL_TYPE*) : HRESULT
+    @lpVtbl.value.get_install_type.call(this, pinstalltype)
+  end
+  def get_version(this : IPMTaskInfo*, ptargetmajorversion : UInt8*, ptargetminorversion : UInt8*) : HRESULT
+    @lpVtbl.value.get_version.call(this, ptargetmajorversion, ptargetminorversion)
+  end
+  def get_bits_per_pixel(this : IPMTaskInfo*, pbitsperpixel : UInt16*) : HRESULT
+    @lpVtbl.value.get_bits_per_pixel.call(this, pbitsperpixel)
+  end
+  def get_suppresses_dehydration(this : IPMTaskInfo*, psuppressesdehydration : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_suppresses_dehydration.call(this, psuppressesdehydration)
+  end
+  def get_background_execution_abilities(this : IPMTaskInfo*, pbackgroundexecutionabilities : UInt8**) : HRESULT
+    @lpVtbl.value.get_background_execution_abilities.call(this, pbackgroundexecutionabilities)
+  end
+  def get_is_opted_for_extended_mem(this : IPMTaskInfo*, pisoptedin : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_opted_for_extended_mem.call(this, pisoptedin)
+  end
+end
+struct LibWin32::IPMTaskInfoEnumerator
+  def query_interface(this : IPMTaskInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMTaskInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMTaskInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMTaskInfoEnumerator*, pptaskinfo : IPMTaskInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, pptaskinfo)
+  end
+end
+struct LibWin32::IPMExtensionInfo
+  def query_interface(this : IPMExtensionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supplier_pid(this : IPMExtensionInfo*, psupplierpid : Guid*) : HRESULT
+    @lpVtbl.value.get_supplier_pid.call(this, psupplierpid)
+  end
+  def get_supplier_task_id(this : IPMExtensionInfo*, psuppliertid : UInt8**) : HRESULT
+    @lpVtbl.value.get_supplier_task_id.call(this, psuppliertid)
+  end
+  def get_title(this : IPMExtensionInfo*, ptitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, ptitle)
+  end
+  def get_icon_path(this : IPMExtensionInfo*, piconpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_icon_path.call(this, piconpath)
+  end
+  def get_extra_file(this : IPMExtensionInfo*, pfilepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_extra_file.call(this, pfilepath)
+  end
+  def get_invocation_info(this : IPMExtensionInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+end
+struct LibWin32::IPMExtensionFileExtensionInfo
+  def query_interface(this : IPMExtensionFileExtensionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionFileExtensionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionFileExtensionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IPMExtensionFileExtensionInfo*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_display_name(this : IPMExtensionFileExtensionInfo*, pdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pdisplayname)
+  end
+  def get_logo(this : IPMExtensionFileExtensionInfo*, logosize : PM_LOGO_SIZE, plogo : UInt8**) : HRESULT
+    @lpVtbl.value.get_logo.call(this, logosize, plogo)
+  end
+  def get_content_type(this : IPMExtensionFileExtensionInfo*, filetype : UInt8*, pcontenttype : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, filetype, pcontenttype)
+  end
+  def get_file_type(this : IPMExtensionFileExtensionInfo*, contenttype : UInt8*, pfiletype : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_type.call(this, contenttype, pfiletype)
+  end
+  def get_invocation_info(this : IPMExtensionFileExtensionInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+  def get_all_file_types(this : IPMExtensionFileExtensionInfo*, pcbtypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pcbtypes, pptypes)
+  end
+end
+struct LibWin32::IPMExtensionProtocolInfo
+  def query_interface(this : IPMExtensionProtocolInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionProtocolInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionProtocolInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_protocol(this : IPMExtensionProtocolInfo*, pprotocol : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, pprotocol)
+  end
+  def get_invocation_info(this : IPMExtensionProtocolInfo*, pimageurn : UInt8**, pparameters : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, pimageurn, pparameters)
+  end
+end
+struct LibWin32::IPMExtensionShareTargetInfo
+  def query_interface(this : IPMExtensionShareTargetInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionShareTargetInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionShareTargetInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_all_file_types(this : IPMExtensionShareTargetInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
+  end
+  def get_all_data_formats(this : IPMExtensionShareTargetInfo*, pcdataformats : UInt32*, ppdataformats : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_data_formats.call(this, pcdataformats, ppdataformats)
+  end
+  def get_supports_all_file_types(this : IPMExtensionShareTargetInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
+  end
+end
+struct LibWin32::IPMExtensionContractInfo
+  def query_interface(this : IPMExtensionContractInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionContractInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionContractInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_invocation_info(this : IPMExtensionContractInfo*, paumid : UInt8**, pargs : UInt8**) : HRESULT
+    @lpVtbl.value.get_invocation_info.call(this, paumid, pargs)
+  end
+end
+struct LibWin32::IPMExtensionFileOpenPickerInfo
+  def query_interface(this : IPMExtensionFileOpenPickerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionFileOpenPickerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionFileOpenPickerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_all_file_types(this : IPMExtensionFileOpenPickerInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
+  end
+  def get_supports_all_file_types(this : IPMExtensionFileOpenPickerInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
+  end
+end
+struct LibWin32::IPMExtensionFileSavePickerInfo
+  def query_interface(this : IPMExtensionFileSavePickerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionFileSavePickerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionFileSavePickerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_all_file_types(this : IPMExtensionFileSavePickerInfo*, pctypes : UInt32*, pptypes : UInt8***) : HRESULT
+    @lpVtbl.value.get_all_file_types.call(this, pctypes, pptypes)
+  end
+  def get_supports_all_file_types(this : IPMExtensionFileSavePickerInfo*, psupportsalltypes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_all_file_types.call(this, psupportsalltypes)
+  end
+end
+struct LibWin32::IPMExtensionCachedFileUpdaterInfo
+  def query_interface(this : IPMExtensionCachedFileUpdaterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionCachedFileUpdaterInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionCachedFileUpdaterInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supports_updates(this : IPMExtensionCachedFileUpdaterInfo*, psupportsupdates : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_supports_updates.call(this, psupportsupdates)
+  end
+end
+struct LibWin32::IPMExtensionInfoEnumerator
+  def query_interface(this : IPMExtensionInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMExtensionInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMExtensionInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMExtensionInfoEnumerator*, ppextensioninfo : IPMExtensionInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppextensioninfo)
+  end
+end
+struct LibWin32::IPMBackgroundServiceAgentInfo
+  def query_interface(this : IPMBackgroundServiceAgentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMBackgroundServiceAgentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMBackgroundServiceAgentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMBackgroundServiceAgentInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_task_id(this : IPMBackgroundServiceAgentInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
+  end
+  def get_bsaid(this : IPMBackgroundServiceAgentInfo*, pbsaid : UInt32*) : HRESULT
+    @lpVtbl.value.get_bsaid.call(this, pbsaid)
+  end
+  def get_bg_specifier(this : IPMBackgroundServiceAgentInfo*, pbgspecifier : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_specifier.call(this, pbgspecifier)
+  end
+  def get_bg_name(this : IPMBackgroundServiceAgentInfo*, pbgname : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_name.call(this, pbgname)
+  end
+  def get_bg_source(this : IPMBackgroundServiceAgentInfo*, pbgsource : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_source.call(this, pbgsource)
+  end
+  def get_bg_type(this : IPMBackgroundServiceAgentInfo*, pbgtype : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_type.call(this, pbgtype)
+  end
+  def get_is_periodic(this : IPMBackgroundServiceAgentInfo*, pisperiodic : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_periodic.call(this, pisperiodic)
+  end
+  def get_is_scheduled(this : IPMBackgroundServiceAgentInfo*, pisscheduled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_scheduled.call(this, pisscheduled)
+  end
+  def get_is_schedule_allowed(this : IPMBackgroundServiceAgentInfo*, pisscheduleallowed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_schedule_allowed.call(this, pisscheduleallowed)
+  end
+  def get_description(this : IPMBackgroundServiceAgentInfo*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pdescription)
+  end
+  def get_is_launch_on_boot(this : IPMBackgroundServiceAgentInfo*, plaunchonboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_launch_on_boot.call(this, plaunchonboot)
+  end
+  def set_is_scheduled(this : IPMBackgroundServiceAgentInfo*, isscheduled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_scheduled.call(this, isscheduled)
+  end
+  def set_is_schedule_allowed(this : IPMBackgroundServiceAgentInfo*, isscheduleallowed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_schedule_allowed.call(this, isscheduleallowed)
+  end
+end
+struct LibWin32::IPMBackgroundWorkerInfo
+  def query_interface(this : IPMBackgroundWorkerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMBackgroundWorkerInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMBackgroundWorkerInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_product_id(this : IPMBackgroundWorkerInfo*, pproductid : Guid*) : HRESULT
+    @lpVtbl.value.get_product_id.call(this, pproductid)
+  end
+  def get_task_id(this : IPMBackgroundWorkerInfo*, ptaskid : UInt8**) : HRESULT
+    @lpVtbl.value.get_task_id.call(this, ptaskid)
+  end
+  def get_bg_name(this : IPMBackgroundWorkerInfo*, pbgname : UInt8**) : HRESULT
+    @lpVtbl.value.get_bg_name.call(this, pbgname)
+  end
+  def get_max_startup_latency(this : IPMBackgroundWorkerInfo*, pmaxstartuplatency : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_startup_latency.call(this, pmaxstartuplatency)
+  end
+  def get_expected_runtime(this : IPMBackgroundWorkerInfo*, pexpectedruntime : UInt32*) : HRESULT
+    @lpVtbl.value.get_expected_runtime.call(this, pexpectedruntime)
+  end
+  def get_is_boot_worker(this : IPMBackgroundWorkerInfo*, pisbootworker : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_boot_worker.call(this, pisbootworker)
+  end
+end
+struct LibWin32::IPMBackgroundServiceAgentInfoEnumerator
+  def query_interface(this : IPMBackgroundServiceAgentInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMBackgroundServiceAgentInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMBackgroundServiceAgentInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMBackgroundServiceAgentInfoEnumerator*, ppbsainfo : IPMBackgroundServiceAgentInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppbsainfo)
+  end
+end
+struct LibWin32::IPMBackgroundWorkerInfoEnumerator
+  def query_interface(this : IPMBackgroundWorkerInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPMBackgroundWorkerInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPMBackgroundWorkerInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IPMBackgroundWorkerInfoEnumerator*, ppbwinfo : IPMBackgroundWorkerInfo*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppbwinfo)
+  end
 end

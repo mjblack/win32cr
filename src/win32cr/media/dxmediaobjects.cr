@@ -263,3 +263,183 @@ lib LibWin32
   # Params # ppmtdest : DMO_MEDIA_TYPE** [In],pmtsrc : DMO_MEDIA_TYPE* [In]
   fun MoDuplicateMediaType(ppmtdest : DMO_MEDIA_TYPE**, pmtsrc : DMO_MEDIA_TYPE*) : HRESULT
 end
+struct LibWin32::IMediaBuffer
+  def query_interface(this : IMediaBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMediaBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMediaBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_length(this : IMediaBuffer*, cblength : UInt32) : HRESULT
+    @lpVtbl.value.set_length.call(this, cblength)
+  end
+  def get_max_length(this : IMediaBuffer*, pcbmaxlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pcbmaxlength)
+  end
+  def get_buffer_and_length(this : IMediaBuffer*, ppbuffer : UInt8**, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_and_length.call(this, ppbuffer, pcblength)
+  end
+end
+struct LibWin32::IMediaObject
+  def query_interface(this : IMediaObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMediaObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMediaObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_count(this : IMediaObject*, pcinputstreams : UInt32*, pcoutputstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcinputstreams, pcoutputstreams)
+  end
+  def get_input_stream_info(this : IMediaObject*, dwinputstreamindex : UInt32, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_stream_info.call(this, dwinputstreamindex, pdwflags)
+  end
+  def get_output_stream_info(this : IMediaObject*, dwoutputstreamindex : UInt32, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_stream_info.call(this, dwoutputstreamindex, pdwflags)
+  end
+  def get_input_type(this : IMediaObject*, dwinputstreamindex : UInt32, dwtypeindex : UInt32, pmt : DMO_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.get_input_type.call(this, dwinputstreamindex, dwtypeindex, pmt)
+  end
+  def get_output_type(this : IMediaObject*, dwoutputstreamindex : UInt32, dwtypeindex : UInt32, pmt : DMO_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.get_output_type.call(this, dwoutputstreamindex, dwtypeindex, pmt)
+  end
+  def set_input_type(this : IMediaObject*, dwinputstreamindex : UInt32, pmt : DMO_MEDIA_TYPE*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_input_type.call(this, dwinputstreamindex, pmt, dwflags)
+  end
+  def set_output_type(this : IMediaObject*, dwoutputstreamindex : UInt32, pmt : DMO_MEDIA_TYPE*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_output_type.call(this, dwoutputstreamindex, pmt, dwflags)
+  end
+  def get_input_current_type(this : IMediaObject*, dwinputstreamindex : UInt32, pmt : DMO_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.get_input_current_type.call(this, dwinputstreamindex, pmt)
+  end
+  def get_output_current_type(this : IMediaObject*, dwoutputstreamindex : UInt32, pmt : DMO_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.get_output_current_type.call(this, dwoutputstreamindex, pmt)
+  end
+  def get_input_size_info(this : IMediaObject*, dwinputstreamindex : UInt32, pcbsize : UInt32*, pcbmaxlookahead : UInt32*, pcbalignment : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_size_info.call(this, dwinputstreamindex, pcbsize, pcbmaxlookahead, pcbalignment)
+  end
+  def get_output_size_info(this : IMediaObject*, dwoutputstreamindex : UInt32, pcbsize : UInt32*, pcbalignment : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_size_info.call(this, dwoutputstreamindex, pcbsize, pcbalignment)
+  end
+  def get_input_max_latency(this : IMediaObject*, dwinputstreamindex : UInt32, prtmaxlatency : Int64*) : HRESULT
+    @lpVtbl.value.get_input_max_latency.call(this, dwinputstreamindex, prtmaxlatency)
+  end
+  def set_input_max_latency(this : IMediaObject*, dwinputstreamindex : UInt32, rtmaxlatency : Int64) : HRESULT
+    @lpVtbl.value.set_input_max_latency.call(this, dwinputstreamindex, rtmaxlatency)
+  end
+  def flush(this : IMediaObject*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def discontinuity(this : IMediaObject*, dwinputstreamindex : UInt32) : HRESULT
+    @lpVtbl.value.discontinuity.call(this, dwinputstreamindex)
+  end
+  def allocate_streaming_resources(this : IMediaObject*) : HRESULT
+    @lpVtbl.value.allocate_streaming_resources.call(this)
+  end
+  def free_streaming_resources(this : IMediaObject*) : HRESULT
+    @lpVtbl.value.free_streaming_resources.call(this)
+  end
+  def get_input_status(this : IMediaObject*, dwinputstreamindex : UInt32, dwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_status.call(this, dwinputstreamindex, dwflags)
+  end
+  def process_input(this : IMediaObject*, dwinputstreamindex : UInt32, pbuffer : IMediaBuffer, dwflags : UInt32, rttimestamp : Int64, rttimelength : Int64) : HRESULT
+    @lpVtbl.value.process_input.call(this, dwinputstreamindex, pbuffer, dwflags, rttimestamp, rttimelength)
+  end
+  def process_output(this : IMediaObject*, dwflags : UInt32, coutputbuffercount : UInt32, poutputbuffers : DMO_OUTPUT_DATA_BUFFER*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.process_output.call(this, dwflags, coutputbuffercount, poutputbuffers, pdwstatus)
+  end
+  def lock(this : IMediaObject*, block : Int32) : HRESULT
+    @lpVtbl.value.lock.call(this, block)
+  end
+end
+struct LibWin32::IEnumDMO
+  def query_interface(this : IEnumDMO*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDMO*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDMO*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDMO*, citemstofetch : UInt32, pclsid : Guid*, names : LibC::LPWSTR*, pcitemsfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, citemstofetch, pclsid, names, pcitemsfetched)
+  end
+  def skip(this : IEnumDMO*, citemstoskip : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, citemstoskip)
+  end
+  def reset(this : IEnumDMO*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDMO*, ppenum : IEnumDMO*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IMediaObjectInPlace
+  def query_interface(this : IMediaObjectInPlace*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMediaObjectInPlace*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMediaObjectInPlace*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def process(this : IMediaObjectInPlace*, ulsize : UInt32, pdata : UInt8*, reftimestart : Int64, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.process.call(this, ulsize, pdata, reftimestart, dwflags)
+  end
+  def clone(this : IMediaObjectInPlace*, ppmediaobject : IMediaObjectInPlace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppmediaobject)
+  end
+  def get_latency(this : IMediaObjectInPlace*, platencytime : Int64*) : HRESULT
+    @lpVtbl.value.get_latency.call(this, platencytime)
+  end
+end
+struct LibWin32::IDMOQualityControl
+  def query_interface(this : IDMOQualityControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMOQualityControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMOQualityControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_now(this : IDMOQualityControl*, rtnow : Int64) : HRESULT
+    @lpVtbl.value.set_now.call(this, rtnow)
+  end
+  def set_status(this : IDMOQualityControl*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_status.call(this, dwflags)
+  end
+  def get_status(this : IDMOQualityControl*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwflags)
+  end
+end
+struct LibWin32::IDMOVideoOutputOptimizations
+  def query_interface(this : IDMOVideoOutputOptimizations*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMOVideoOutputOptimizations*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMOVideoOutputOptimizations*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_operation_mode_preferences(this : IDMOVideoOutputOptimizations*, uloutputstreamindex : UInt32, pdwrequestedcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.query_operation_mode_preferences.call(this, uloutputstreamindex, pdwrequestedcapabilities)
+  end
+  def set_operation_mode(this : IDMOVideoOutputOptimizations*, uloutputstreamindex : UInt32, dwenabledfeatures : UInt32) : HRESULT
+    @lpVtbl.value.set_operation_mode.call(this, uloutputstreamindex, dwenabledfeatures)
+  end
+  def get_current_operation_mode(this : IDMOVideoOutputOptimizations*, uloutputstreamindex : UInt32, pdwenabledfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_operation_mode.call(this, uloutputstreamindex, pdwenabledfeatures)
+  end
+  def get_current_sample_requirements(this : IDMOVideoOutputOptimizations*, uloutputstreamindex : UInt32, pdwrequestedfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_sample_requirements.call(this, uloutputstreamindex, pdwrequestedfeatures)
+  end
+end

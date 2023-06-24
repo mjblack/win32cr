@@ -2218,46 +2218,46 @@ lib LibWin32
   fun LookupSecurityDescriptorPartsW(ppowner : TRUSTEE_W**, ppgroup : TRUSTEE_W**, pccountofaccessentries : UInt32*, pplistofaccessentries : EXPLICIT_ACCESS_W**, pccountofauditentries : UInt32*, pplistofauditentries : EXPLICIT_ACCESS_W**, psd : SECURITY_DESCRIPTOR*) : UInt32
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_A* [In],ptrusteename : PSTR [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : ACE_FLAGS [In]
-  fun BuildExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS)
+  fun BuildExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_W* [In],ptrusteename : LibC::LPWSTR [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : ACE_FLAGS [In]
-  fun BuildExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS)
+  fun BuildExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_A* [In],ptrusteename : PSTR [In],ptrustee : TRUSTEE_A* [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : UInt32 [In]
-  fun BuildImpersonateExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, ptrustee : TRUSTEE_A*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32)
+  fun BuildImpersonateExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, ptrustee : TRUSTEE_A*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_W* [In],ptrusteename : LibC::LPWSTR [In],ptrustee : TRUSTEE_W* [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : UInt32 [In]
-  fun BuildImpersonateExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, ptrustee : TRUSTEE_W*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32)
+  fun BuildImpersonateExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, ptrustee : TRUSTEE_W*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pname : PSTR [In]
-  fun BuildTrusteeWithNameA(ptrustee : TRUSTEE_A*, pname : PSTR)
+  fun BuildTrusteeWithNameA(ptrustee : TRUSTEE_A*, pname : PSTR) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pname : LibC::LPWSTR [In]
-  fun BuildTrusteeWithNameW(ptrustee : TRUSTEE_W*, pname : LibC::LPWSTR)
+  fun BuildTrusteeWithNameW(ptrustee : TRUSTEE_W*, pname : LibC::LPWSTR) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pimpersonatetrustee : TRUSTEE_A* [In]
-  fun BuildImpersonateTrusteeA(ptrustee : TRUSTEE_A*, pimpersonatetrustee : TRUSTEE_A*)
+  fun BuildImpersonateTrusteeA(ptrustee : TRUSTEE_A*, pimpersonatetrustee : TRUSTEE_A*) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pimpersonatetrustee : TRUSTEE_W* [In]
-  fun BuildImpersonateTrusteeW(ptrustee : TRUSTEE_W*, pimpersonatetrustee : TRUSTEE_W*)
+  fun BuildImpersonateTrusteeW(ptrustee : TRUSTEE_W*, pimpersonatetrustee : TRUSTEE_W*) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],psid : PSID [In]
-  fun BuildTrusteeWithSidA(ptrustee : TRUSTEE_A*, psid : PSID)
+  fun BuildTrusteeWithSidA(ptrustee : TRUSTEE_A*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],psid : PSID [In]
-  fun BuildTrusteeWithSidW(ptrustee : TRUSTEE_W*, psid : PSID)
+  fun BuildTrusteeWithSidW(ptrustee : TRUSTEE_W*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pobjsid : OBJECTS_AND_SID* [In],pobjectguid : Guid* [In],pinheritedobjectguid : Guid* [In],psid : PSID [In]
-  fun BuildTrusteeWithObjectsAndSidA(ptrustee : TRUSTEE_A*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID)
+  fun BuildTrusteeWithObjectsAndSidA(ptrustee : TRUSTEE_A*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pobjsid : OBJECTS_AND_SID* [In],pobjectguid : Guid* [In],pinheritedobjectguid : Guid* [In],psid : PSID [In]
-  fun BuildTrusteeWithObjectsAndSidW(ptrustee : TRUSTEE_W*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID)
+  fun BuildTrusteeWithObjectsAndSidW(ptrustee : TRUSTEE_W*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pobjname : OBJECTS_AND_NAME_A* [In],objecttype : SE_OBJECT_TYPE [In],objecttypename : PSTR [In],inheritedobjecttypename : PSTR [In],name : PSTR [In]
-  fun BuildTrusteeWithObjectsAndNameA(ptrustee : TRUSTEE_A*, pobjname : OBJECTS_AND_NAME_A*, objecttype : SE_OBJECT_TYPE, objecttypename : PSTR, inheritedobjecttypename : PSTR, name : PSTR)
+  fun BuildTrusteeWithObjectsAndNameA(ptrustee : TRUSTEE_A*, pobjname : OBJECTS_AND_NAME_A*, objecttype : SE_OBJECT_TYPE, objecttypename : PSTR, inheritedobjecttypename : PSTR, name : PSTR) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pobjname : OBJECTS_AND_NAME_W* [In],objecttype : SE_OBJECT_TYPE [In],objecttypename : LibC::LPWSTR [In],inheritedobjecttypename : LibC::LPWSTR [In],name : LibC::LPWSTR [In]
-  fun BuildTrusteeWithObjectsAndNameW(ptrustee : TRUSTEE_W*, pobjname : OBJECTS_AND_NAME_W*, objecttype : SE_OBJECT_TYPE, objecttypename : LibC::LPWSTR, inheritedobjecttypename : LibC::LPWSTR, name : LibC::LPWSTR)
+  fun BuildTrusteeWithObjectsAndNameW(ptrustee : TRUSTEE_W*, pobjname : OBJECTS_AND_NAME_W*, objecttype : SE_OBJECT_TYPE, objecttypename : LibC::LPWSTR, inheritedobjecttypename : LibC::LPWSTR, name : LibC::LPWSTR) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In]
   fun GetTrusteeNameA(ptrustee : TRUSTEE_A*) : PSTR
@@ -2312,4 +2312,3153 @@ lib LibWin32
 
   # Params # securitydescriptor : SECURITY_DESCRIPTOR* [In],requestedstringsdrevision : UInt32 [In],securityinformation : UInt32 [In],stringsecuritydescriptor : LibC::LPWSTR* [In],stringsecuritydescriptorlen : UInt32* [In]
   fun ConvertSecurityDescriptorToStringSecurityDescriptorW(securitydescriptor : SECURITY_DESCRIPTOR*, requestedstringsdrevision : UInt32, securityinformation : UInt32, stringsecuritydescriptor : LibC::LPWSTR*, stringsecuritydescriptorlen : UInt32*) : LibC::BOOL
+end
+struct LibWin32::IAzAuthorizationStore
+  def query_interface(this : IAzAuthorizationStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzAuthorizationStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzAuthorizationStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzAuthorizationStore*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzAuthorizationStore*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzAuthorizationStore*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzAuthorizationStore*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(this : IAzAuthorizationStore*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzAuthorizationStore*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzAuthorizationStore*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzAuthorizationStore*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_domain_timeout(this : IAzAuthorizationStore*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.call(this, plprop)
+  end
+  def put_domain_timeout(this : IAzAuthorizationStore*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.call(this, lprop)
+  end
+  def get_script_engine_timeout(this : IAzAuthorizationStore*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.call(this, plprop)
+  end
+  def put_script_engine_timeout(this : IAzAuthorizationStore*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.call(this, lprop)
+  end
+  def get_max_script_engines(this : IAzAuthorizationStore*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.call(this, plprop)
+  end
+  def put_max_script_engines(this : IAzAuthorizationStore*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.call(this, lprop)
+  end
+  def get_generate_audits(this : IAzAuthorizationStore*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzAuthorizationStore*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_writable(this : IAzAuthorizationStore*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzAuthorizationStore*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzAuthorizationStore*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzAuthorizationStore*, lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzAuthorizationStore*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzAuthorizationStore*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzAuthorizationStore*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzAuthorizationStore*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzAuthorizationStore*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzAuthorizationStore*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzAuthorizationStore*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def initialize(this : IAzAuthorizationStore*, lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.call(this, lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(this : IAzAuthorizationStore*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.call(this, varreserved)
+  end
+  def delete(this : IAzAuthorizationStore*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.call(this, varreserved)
+  end
+  def get_applications(this : IAzAuthorizationStore*, ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, ppappcollection)
+  end
+  def open_application(this : IAzAuthorizationStore*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(this : IAzAuthorizationStore*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(this : IAzAuthorizationStore*, bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.call(this, bstrapplicationname, varreserved)
+  end
+  def get_application_groups(this : IAzAuthorizationStore*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def create_application_group(this : IAzAuthorizationStore*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(this : IAzAuthorizationStore*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzAuthorizationStore*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def submit(this : IAzAuthorizationStore*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def get_delegated_policy_users(this : IAzAuthorizationStore*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzAuthorizationStore*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzAuthorizationStore*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(this : IAzAuthorizationStore*, pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.call(this, pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(this : IAzAuthorizationStore*, pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbapplystoresacl)
+  end
+  def put_apply_store_sacl(this : IAzAuthorizationStore*, bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bapplystoresacl)
+  end
+  def get_policy_administrators_name(this : IAzAuthorizationStore*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzAuthorizationStore*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzAuthorizationStore*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzAuthorizationStore*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzAuthorizationStore*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzAuthorizationStore*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzAuthorizationStore*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(this : IAzAuthorizationStore*, bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.call(this, bstrapplicationname, lflag)
+  end
+end
+struct LibWin32::IAzAuthorizationStore2
+  def query_interface(this : IAzAuthorizationStore2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzAuthorizationStore2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzAuthorizationStore2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzAuthorizationStore2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzAuthorizationStore2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzAuthorizationStore2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzAuthorizationStore2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(this : IAzAuthorizationStore2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzAuthorizationStore2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzAuthorizationStore2*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzAuthorizationStore2*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_domain_timeout(this : IAzAuthorizationStore2*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.call(this, plprop)
+  end
+  def put_domain_timeout(this : IAzAuthorizationStore2*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.call(this, lprop)
+  end
+  def get_script_engine_timeout(this : IAzAuthorizationStore2*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.call(this, plprop)
+  end
+  def put_script_engine_timeout(this : IAzAuthorizationStore2*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.call(this, lprop)
+  end
+  def get_max_script_engines(this : IAzAuthorizationStore2*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.call(this, plprop)
+  end
+  def put_max_script_engines(this : IAzAuthorizationStore2*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.call(this, lprop)
+  end
+  def get_generate_audits(this : IAzAuthorizationStore2*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzAuthorizationStore2*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_writable(this : IAzAuthorizationStore2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzAuthorizationStore2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzAuthorizationStore2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzAuthorizationStore2*, lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzAuthorizationStore2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzAuthorizationStore2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzAuthorizationStore2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzAuthorizationStore2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzAuthorizationStore2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzAuthorizationStore2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzAuthorizationStore2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def initialize(this : IAzAuthorizationStore2*, lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.call(this, lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(this : IAzAuthorizationStore2*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.call(this, varreserved)
+  end
+  def delete(this : IAzAuthorizationStore2*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.call(this, varreserved)
+  end
+  def get_applications(this : IAzAuthorizationStore2*, ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, ppappcollection)
+  end
+  def open_application(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.call(this, bstrapplicationname, varreserved)
+  end
+  def get_application_groups(this : IAzAuthorizationStore2*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def create_application_group(this : IAzAuthorizationStore2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(this : IAzAuthorizationStore2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzAuthorizationStore2*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def submit(this : IAzAuthorizationStore2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def get_delegated_policy_users(this : IAzAuthorizationStore2*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzAuthorizationStore2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzAuthorizationStore2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(this : IAzAuthorizationStore2*, pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.call(this, pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(this : IAzAuthorizationStore2*, pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbapplystoresacl)
+  end
+  def put_apply_store_sacl(this : IAzAuthorizationStore2*, bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bapplystoresacl)
+  end
+  def get_policy_administrators_name(this : IAzAuthorizationStore2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzAuthorizationStore2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzAuthorizationStore2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzAuthorizationStore2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzAuthorizationStore2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzAuthorizationStore2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzAuthorizationStore2*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.call(this, bstrapplicationname, lflag)
+  end
+  def open_application2(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.open_application2.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application2(this : IAzAuthorizationStore2*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.create_application2.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+end
+struct LibWin32::IAzAuthorizationStore3
+  def query_interface(this : IAzAuthorizationStore3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzAuthorizationStore3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzAuthorizationStore3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzAuthorizationStore3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzAuthorizationStore3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzAuthorizationStore3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzAuthorizationStore3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(this : IAzAuthorizationStore3*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzAuthorizationStore3*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzAuthorizationStore3*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzAuthorizationStore3*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_domain_timeout(this : IAzAuthorizationStore3*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.call(this, plprop)
+  end
+  def put_domain_timeout(this : IAzAuthorizationStore3*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.call(this, lprop)
+  end
+  def get_script_engine_timeout(this : IAzAuthorizationStore3*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.call(this, plprop)
+  end
+  def put_script_engine_timeout(this : IAzAuthorizationStore3*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.call(this, lprop)
+  end
+  def get_max_script_engines(this : IAzAuthorizationStore3*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.call(this, plprop)
+  end
+  def put_max_script_engines(this : IAzAuthorizationStore3*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.call(this, lprop)
+  end
+  def get_generate_audits(this : IAzAuthorizationStore3*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzAuthorizationStore3*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_writable(this : IAzAuthorizationStore3*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzAuthorizationStore3*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzAuthorizationStore3*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzAuthorizationStore3*, lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzAuthorizationStore3*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzAuthorizationStore3*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzAuthorizationStore3*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzAuthorizationStore3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzAuthorizationStore3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzAuthorizationStore3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzAuthorizationStore3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def initialize(this : IAzAuthorizationStore3*, lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.call(this, lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(this : IAzAuthorizationStore3*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.call(this, varreserved)
+  end
+  def delete(this : IAzAuthorizationStore3*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.call(this, varreserved)
+  end
+  def get_applications(this : IAzAuthorizationStore3*, ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, ppappcollection)
+  end
+  def open_application(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.call(this, bstrapplicationname, varreserved)
+  end
+  def get_application_groups(this : IAzAuthorizationStore3*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def create_application_group(this : IAzAuthorizationStore3*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(this : IAzAuthorizationStore3*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzAuthorizationStore3*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def submit(this : IAzAuthorizationStore3*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def get_delegated_policy_users(this : IAzAuthorizationStore3*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzAuthorizationStore3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzAuthorizationStore3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(this : IAzAuthorizationStore3*, pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.call(this, pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(this : IAzAuthorizationStore3*, pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbapplystoresacl)
+  end
+  def put_apply_store_sacl(this : IAzAuthorizationStore3*, bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bapplystoresacl)
+  end
+  def get_policy_administrators_name(this : IAzAuthorizationStore3*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzAuthorizationStore3*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzAuthorizationStore3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzAuthorizationStore3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzAuthorizationStore3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzAuthorizationStore3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzAuthorizationStore3*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.call(this, bstrapplicationname, lflag)
+  end
+  def open_application2(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.open_application2.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application2(this : IAzAuthorizationStore3*, bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.create_application2.call(this, bstrapplicationname, varreserved, ppapplication)
+  end
+  def is_update_needed(this : IAzAuthorizationStore3*, pbisupdateneeded : Int16*) : HRESULT
+    @lpVtbl.value.is_update_needed.call(this, pbisupdateneeded)
+  end
+  def bizrule_group_supported(this : IAzAuthorizationStore3*, pbsupported : Int16*) : HRESULT
+    @lpVtbl.value.bizrule_group_supported.call(this, pbsupported)
+  end
+  def upgrade_stores_functional_level(this : IAzAuthorizationStore3*, lfunctionallevel : Int32) : HRESULT
+    @lpVtbl.value.upgrade_stores_functional_level.call(this, lfunctionallevel)
+  end
+  def is_functional_level_upgrade_supported(this : IAzAuthorizationStore3*, lfunctionallevel : Int32, pbsupported : Int16*) : HRESULT
+    @lpVtbl.value.is_functional_level_upgrade_supported.call(this, lfunctionallevel, pbsupported)
+  end
+  def get_schema_version(this : IAzAuthorizationStore3*, plmajorversion : Int32*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_schema_version.call(this, plmajorversion, plminorversion)
+  end
+end
+struct LibWin32::IAzApplication
+  def query_interface(this : IAzApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzApplication*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzApplication*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzApplication*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzApplication*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzApplication*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzApplication*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(this : IAzApplication*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.call(this, pbstrprop)
+  end
+  def put_authz_interface_clsid(this : IAzApplication*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.call(this, bstrprop)
+  end
+  def get_version(this : IAzApplication*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pbstrprop)
+  end
+  def put_version(this : IAzApplication*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, bstrprop)
+  end
+  def get_generate_audits(this : IAzApplication*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzApplication*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_apply_store_sacl(this : IAzApplication*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbprop)
+  end
+  def put_apply_store_sacl(this : IAzApplication*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bprop)
+  end
+  def get_writable(this : IAzApplication*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzApplication*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzApplication*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzApplication*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzApplication*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzApplication*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzApplication*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzApplication*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzApplication*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def get_scopes(this : IAzApplication*, ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.call(this, ppscopecollection)
+  end
+  def open_scope(this : IAzApplication*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(this : IAzApplication*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(this : IAzApplication*, bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.call(this, bstrscopename, varreserved)
+  end
+  def get_operations(this : IAzApplication*, ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, ppoperationcollection)
+  end
+  def open_operation(this : IAzApplication*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(this : IAzApplication*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(this : IAzApplication*, bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstroperationname, varreserved)
+  end
+  def get_tasks(this : IAzApplication*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pptaskcollection)
+  end
+  def open_task(this : IAzApplication*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def create_task(this : IAzApplication*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(this : IAzApplication*, bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtaskname, varreserved)
+  end
+  def get_application_groups(this : IAzApplication*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def open_application_group(this : IAzApplication*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(this : IAzApplication*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzApplication*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def get_roles(this : IAzApplication*, pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, pprolecollection)
+  end
+  def open_role(this : IAzApplication*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def create_role(this : IAzApplication*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def delete_role(this : IAzApplication*, bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.call(this, bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(this : IAzApplication*, ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.call(this, ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(this : IAzApplication*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzApplication*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzApplication*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def initialize_client_context_from_name(this : IAzApplication*, clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.call(this, clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(this : IAzApplication*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzApplication*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzApplication*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(this : IAzApplication*, sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.call(this, sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(this : IAzApplication*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzApplication*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzApplication*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzApplication*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzApplication*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzApplication*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzApplication*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzApplication*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzApplication*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+end
+struct LibWin32::IAzApplication2
+  def query_interface(this : IAzApplication2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplication2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplication2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplication2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplication2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplication2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplication2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzApplication2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzApplication2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzApplication2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzApplication2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzApplication2*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzApplication2*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(this : IAzApplication2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.call(this, pbstrprop)
+  end
+  def put_authz_interface_clsid(this : IAzApplication2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.call(this, bstrprop)
+  end
+  def get_version(this : IAzApplication2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pbstrprop)
+  end
+  def put_version(this : IAzApplication2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, bstrprop)
+  end
+  def get_generate_audits(this : IAzApplication2*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzApplication2*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_apply_store_sacl(this : IAzApplication2*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbprop)
+  end
+  def put_apply_store_sacl(this : IAzApplication2*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bprop)
+  end
+  def get_writable(this : IAzApplication2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzApplication2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzApplication2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzApplication2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzApplication2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzApplication2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzApplication2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzApplication2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzApplication2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def get_scopes(this : IAzApplication2*, ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.call(this, ppscopecollection)
+  end
+  def open_scope(this : IAzApplication2*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(this : IAzApplication2*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(this : IAzApplication2*, bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.call(this, bstrscopename, varreserved)
+  end
+  def get_operations(this : IAzApplication2*, ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, ppoperationcollection)
+  end
+  def open_operation(this : IAzApplication2*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(this : IAzApplication2*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(this : IAzApplication2*, bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstroperationname, varreserved)
+  end
+  def get_tasks(this : IAzApplication2*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pptaskcollection)
+  end
+  def open_task(this : IAzApplication2*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def create_task(this : IAzApplication2*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(this : IAzApplication2*, bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtaskname, varreserved)
+  end
+  def get_application_groups(this : IAzApplication2*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def open_application_group(this : IAzApplication2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(this : IAzApplication2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzApplication2*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def get_roles(this : IAzApplication2*, pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, pprolecollection)
+  end
+  def open_role(this : IAzApplication2*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def create_role(this : IAzApplication2*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def delete_role(this : IAzApplication2*, bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.call(this, bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(this : IAzApplication2*, ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.call(this, ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(this : IAzApplication2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzApplication2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzApplication2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def initialize_client_context_from_name(this : IAzApplication2*, clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.call(this, clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(this : IAzApplication2*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzApplication2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzApplication2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(this : IAzApplication2*, sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.call(this, sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(this : IAzApplication2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzApplication2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzApplication2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzApplication2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzApplication2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzApplication2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzApplication2*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzApplication2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzApplication2*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_token2(this : IAzApplication2*, ultokenhandlelowpart : UInt32, ultokenhandlehighpart : UInt32, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token2.call(this, ultokenhandlelowpart, ultokenhandlehighpart, varreserved, ppclientcontext)
+  end
+  def initialize_client_context2(this : IAzApplication2*, identifyingstring : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context2.call(this, identifyingstring, varreserved, ppclientcontext)
+  end
+end
+struct LibWin32::IAzApplications
+  def query_interface(this : IAzApplications*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplications*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplications*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplications*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplications*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplications*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplications*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzApplications*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzApplications*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzApplications*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzOperation
+  def query_interface(this : IAzOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzOperation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzOperation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzOperation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzOperation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzOperation*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzOperation*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzOperation*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzOperation*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzOperation*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzOperation*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_operation_id(this : IAzOperation*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_operation_id.call(this, plprop)
+  end
+  def put_operation_id(this : IAzOperation*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_operation_id.call(this, lprop)
+  end
+  def get_writable(this : IAzOperation*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzOperation*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzOperation*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzOperation*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+end
+struct LibWin32::IAzOperations
+  def query_interface(this : IAzOperations*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzOperations*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzOperations*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzOperations*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzOperations*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzOperations*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzOperations*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzOperations*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzOperations*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzOperations*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzTask
+  def query_interface(this : IAzTask*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzTask*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzTask*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzTask*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzTask*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzTask*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzTask*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzTask*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzTask*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzTask*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzTask*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzTask*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzTask*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_biz_rule(this : IAzTask*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.call(this, pbstrprop)
+  end
+  def put_biz_rule(this : IAzTask*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.call(this, bstrprop)
+  end
+  def get_biz_rule_language(this : IAzTask*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.call(this, pbstrprop)
+  end
+  def put_biz_rule_language(this : IAzTask*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.call(this, bstrprop)
+  end
+  def get_biz_rule_imported_path(this : IAzTask*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.call(this, pbstrprop)
+  end
+  def put_biz_rule_imported_path(this : IAzTask*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.call(this, bstrprop)
+  end
+  def get_is_role_definition(this : IAzTask*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.call(this, pfprop)
+  end
+  def put_is_role_definition(this : IAzTask*, fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.call(this, fprop)
+  end
+  def get_operations(this : IAzTask*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, pvarprop)
+  end
+  def get_tasks(this : IAzTask*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pvarprop)
+  end
+  def add_operation(this : IAzTask*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.call(this, bstrop, varreserved)
+  end
+  def delete_operation(this : IAzTask*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstrop, varreserved)
+  end
+  def add_task(this : IAzTask*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.call(this, bstrtask, varreserved)
+  end
+  def delete_task(this : IAzTask*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtask, varreserved)
+  end
+  def get_writable(this : IAzTask*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzTask*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzTask*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzTask*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzTask*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzTask*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+end
+struct LibWin32::IAzTasks
+  def query_interface(this : IAzTasks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzTasks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzTasks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzTasks*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzTasks*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzTasks*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzTasks*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzTasks*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzTasks*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzTasks*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzScope
+  def query_interface(this : IAzScope*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzScope*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzScope*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzScope*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzScope*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzScope*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzScope*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzScope*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzScope*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzScope*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzScope*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzScope*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzScope*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_writable(this : IAzScope*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzScope*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzScope*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzScope*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzScope*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzScope*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzScope*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzScope*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzScope*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzScope*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzScope*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def get_application_groups(this : IAzScope*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def open_application_group(this : IAzScope*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(this : IAzScope*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzScope*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def get_roles(this : IAzScope*, pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, pprolecollection)
+  end
+  def open_role(this : IAzScope*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def create_role(this : IAzScope*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def delete_role(this : IAzScope*, bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.call(this, bstrrolename, varreserved)
+  end
+  def get_tasks(this : IAzScope*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pptaskcollection)
+  end
+  def open_task(this : IAzScope*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def create_task(this : IAzScope*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(this : IAzScope*, bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtaskname, varreserved)
+  end
+  def submit(this : IAzScope*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def get_can_be_delegated(this : IAzScope*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_be_delegated.call(this, pfprop)
+  end
+  def get_bizrules_writable(this : IAzScope*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bizrules_writable.call(this, pfprop)
+  end
+  def get_policy_administrators_name(this : IAzScope*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzScope*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzScope*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzScope*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzScope*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzScope*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+end
+struct LibWin32::IAzScopes
+  def query_interface(this : IAzScopes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzScopes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzScopes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzScopes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzScopes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzScopes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzScopes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzScopes*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzScopes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzScopes*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzApplicationGroup
+  def query_interface(this : IAzApplicationGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplicationGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplicationGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplicationGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplicationGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplicationGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplicationGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzApplicationGroup*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzApplicationGroup*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_type(this : IAzApplicationGroup*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, plprop)
+  end
+  def put_type(this : IAzApplicationGroup*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_type.call(this, lprop)
+  end
+  def get_ldap_query(this : IAzApplicationGroup*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query.call(this, pbstrprop)
+  end
+  def put_ldap_query(this : IAzApplicationGroup*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query.call(this, bstrprop)
+  end
+  def get_app_members(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.call(this, pvarprop)
+  end
+  def get_app_non_members(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_non_members.call(this, pvarprop)
+  end
+  def get_members(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.call(this, pvarprop)
+  end
+  def get_non_members(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members.call(this, pvarprop)
+  end
+  def get_description(this : IAzApplicationGroup*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzApplicationGroup*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def add_app_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.call(this, bstrprop, varreserved)
+  end
+  def add_app_non_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_non_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_non_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_non_member.call(this, bstrprop, varreserved)
+  end
+  def add_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.call(this, bstrprop, varreserved)
+  end
+  def delete_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.call(this, bstrprop, varreserved)
+  end
+  def add_non_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member.call(this, bstrprop, varreserved)
+  end
+  def delete_non_member(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member.call(this, bstrprop, varreserved)
+  end
+  def get_writable(this : IAzApplicationGroup*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzApplicationGroup*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzApplicationGroup*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzApplicationGroup*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzApplicationGroup*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzApplicationGroup*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def add_member_name(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_member_name(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.call(this, bstrprop, varreserved)
+  end
+  def add_non_member_name(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_non_member_name(this : IAzApplicationGroup*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member_name.call(this, bstrprop, varreserved)
+  end
+  def get_members_name(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.call(this, pvarprop)
+  end
+  def get_non_members_name(this : IAzApplicationGroup*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members_name.call(this, pvarprop)
+  end
+end
+struct LibWin32::IAzApplicationGroups
+  def query_interface(this : IAzApplicationGroups*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplicationGroups*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplicationGroups*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplicationGroups*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplicationGroups*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplicationGroups*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplicationGroups*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzApplicationGroups*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzApplicationGroups*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzApplicationGroups*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzRole
+  def query_interface(this : IAzRole*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRole*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRole*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRole*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRole*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRole*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRole*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzRole*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzRole*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzRole*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzRole*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzRole*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzRole*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def add_app_member(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_member(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.call(this, bstrprop, varreserved)
+  end
+  def add_task(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.call(this, bstrprop, varreserved)
+  end
+  def delete_task(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrprop, varreserved)
+  end
+  def add_operation(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.call(this, bstrprop, varreserved)
+  end
+  def delete_operation(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstrprop, varreserved)
+  end
+  def add_member(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.call(this, bstrprop, varreserved)
+  end
+  def delete_member(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.call(this, bstrprop, varreserved)
+  end
+  def get_writable(this : IAzRole*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzRole*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzRole*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def get_app_members(this : IAzRole*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.call(this, pvarprop)
+  end
+  def get_members(this : IAzRole*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.call(this, pvarprop)
+  end
+  def get_operations(this : IAzRole*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, pvarprop)
+  end
+  def get_tasks(this : IAzRole*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pvarprop)
+  end
+  def add_property_item(this : IAzRole*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzRole*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzRole*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def add_member_name(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_member_name(this : IAzRole*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.call(this, bstrprop, varreserved)
+  end
+  def get_members_name(this : IAzRole*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.call(this, pvarprop)
+  end
+end
+struct LibWin32::IAzRoles
+  def query_interface(this : IAzRoles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRoles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRoles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRoles*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRoles*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRoles*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRoles*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzRoles*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzRoles*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzRoles*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzClientContext
+  def query_interface(this : IAzClientContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzClientContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzClientContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzClientContext*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzClientContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzClientContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzClientContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(this : IAzClientContext*, bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.call(this, bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(this : IAzClientContext*, pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.call(this, pbstrbusinessrulestring)
+  end
+  def get_user_dn(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.call(this, pbstrprop)
+  end
+  def get_user_sam_compat(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.call(this, pbstrprop)
+  end
+  def get_user_display(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.call(this, pbstrprop)
+  end
+  def get_user_guid(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.call(this, pbstrprop)
+  end
+  def get_user_canonical(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.call(this, pbstrprop)
+  end
+  def get_user_upn(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.call(this, pbstrprop)
+  end
+  def get_user_dns_sam_compat(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.call(this, pbstrprop)
+  end
+  def get_property(this : IAzClientContext*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def get_roles(this : IAzClientContext*, bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(this : IAzClientContext*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.call(this, pbstrprop)
+  end
+  def put_role_for_access_check(this : IAzClientContext*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.call(this, bstrprop)
+  end
+end
+struct LibWin32::IAzClientContext2
+  def query_interface(this : IAzClientContext2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzClientContext2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzClientContext2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzClientContext2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzClientContext2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzClientContext2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzClientContext2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(this : IAzClientContext2*, bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.call(this, bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(this : IAzClientContext2*, pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.call(this, pbstrbusinessrulestring)
+  end
+  def get_user_dn(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.call(this, pbstrprop)
+  end
+  def get_user_sam_compat(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.call(this, pbstrprop)
+  end
+  def get_user_display(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.call(this, pbstrprop)
+  end
+  def get_user_guid(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.call(this, pbstrprop)
+  end
+  def get_user_canonical(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.call(this, pbstrprop)
+  end
+  def get_user_upn(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.call(this, pbstrprop)
+  end
+  def get_user_dns_sam_compat(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.call(this, pbstrprop)
+  end
+  def get_property(this : IAzClientContext2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def get_roles(this : IAzClientContext2*, bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(this : IAzClientContext2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.call(this, pbstrprop)
+  end
+  def put_role_for_access_check(this : IAzClientContext2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.call(this, bstrprop)
+  end
+  def get_assigned_scopes_page(this : IAzClientContext2*, loptions : Int32, pagesize : Int32, pvarcursor : VARIANT*, pvarscopenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_assigned_scopes_page.call(this, loptions, pagesize, pvarcursor, pvarscopenames)
+  end
+  def add_roles(this : IAzClientContext2*, varroles : VARIANT, bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.add_roles.call(this, varroles, bstrscopename)
+  end
+  def add_application_groups(this : IAzClientContext2*, varapplicationgroups : VARIANT) : HRESULT
+    @lpVtbl.value.add_application_groups.call(this, varapplicationgroups)
+  end
+  def add_string_sids(this : IAzClientContext2*, varstringsids : VARIANT) : HRESULT
+    @lpVtbl.value.add_string_sids.call(this, varstringsids)
+  end
+  def put_ldap_query_dn(this : IAzClientContext2*, bstrldapquerydn : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query_dn.call(this, bstrldapquerydn)
+  end
+  def get_ldap_query_dn(this : IAzClientContext2*, pbstrldapquerydn : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query_dn.call(this, pbstrldapquerydn)
+  end
+end
+struct LibWin32::IAzBizRuleContext
+  def query_interface(this : IAzBizRuleContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzBizRuleContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzBizRuleContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzBizRuleContext*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzBizRuleContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzBizRuleContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzBizRuleContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_business_rule_result(this : IAzBizRuleContext*, bresult : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_business_rule_result.call(this, bresult)
+  end
+  def put_business_rule_string(this : IAzBizRuleContext*, bstrbusinessrulestring : UInt8*) : HRESULT
+    @lpVtbl.value.put_business_rule_string.call(this, bstrbusinessrulestring)
+  end
+  def get_business_rule_string(this : IAzBizRuleContext*, pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.call(this, pbstrbusinessrulestring)
+  end
+  def get_parameter(this : IAzBizRuleContext*, bstrparametername : UInt8*, pvarparametervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameter.call(this, bstrparametername, pvarparametervalue)
+  end
+end
+struct LibWin32::IAzBizRuleParameters
+  def query_interface(this : IAzBizRuleParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzBizRuleParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzBizRuleParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzBizRuleParameters*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzBizRuleParameters*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzBizRuleParameters*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzBizRuleParameters*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_parameter(this : IAzBizRuleParameters*, bstrparametername : UInt8*, varparametervalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_parameter.call(this, bstrparametername, varparametervalue)
+  end
+  def add_parameters(this : IAzBizRuleParameters*, varparameternames : VARIANT, varparametervalues : VARIANT) : HRESULT
+    @lpVtbl.value.add_parameters.call(this, varparameternames, varparametervalues)
+  end
+  def get_parameter_value(this : IAzBizRuleParameters*, bstrparametername : UInt8*, pvarparametervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameter_value.call(this, bstrparametername, pvarparametervalue)
+  end
+  def remove(this : IAzBizRuleParameters*, varparametername : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, varparametername)
+  end
+  def remove_all(this : IAzBizRuleParameters*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
+  end
+  def get_count(this : IAzBizRuleParameters*, plcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IAzBizRuleInterfaces
+  def query_interface(this : IAzBizRuleInterfaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzBizRuleInterfaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzBizRuleInterfaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzBizRuleInterfaces*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzBizRuleInterfaces*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzBizRuleInterfaces*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzBizRuleInterfaces*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_interface(this : IAzBizRuleInterfaces*, bstrinterfacename : UInt8*, linterfaceflag : Int32, varinterface : VARIANT) : HRESULT
+    @lpVtbl.value.add_interface.call(this, bstrinterfacename, linterfaceflag, varinterface)
+  end
+  def add_interfaces(this : IAzBizRuleInterfaces*, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT) : HRESULT
+    @lpVtbl.value.add_interfaces.call(this, varinterfacenames, varinterfaceflags, varinterfaces)
+  end
+  def get_interface_value(this : IAzBizRuleInterfaces*, bstrinterfacename : UInt8*, linterfaceflag : Int32*, varinterface : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interface_value.call(this, bstrinterfacename, linterfaceflag, varinterface)
+  end
+  def remove(this : IAzBizRuleInterfaces*, bstrinterfacename : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, bstrinterfacename)
+  end
+  def remove_all(this : IAzBizRuleInterfaces*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
+  end
+  def get_count(this : IAzBizRuleInterfaces*, plcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IAzClientContext3
+  def query_interface(this : IAzClientContext3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzClientContext3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzClientContext3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzClientContext3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzClientContext3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzClientContext3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzClientContext3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(this : IAzClientContext3*, bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.call(this, bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(this : IAzClientContext3*, pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.call(this, pbstrbusinessrulestring)
+  end
+  def get_user_dn(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.call(this, pbstrprop)
+  end
+  def get_user_sam_compat(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.call(this, pbstrprop)
+  end
+  def get_user_display(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.call(this, pbstrprop)
+  end
+  def get_user_guid(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.call(this, pbstrprop)
+  end
+  def get_user_canonical(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.call(this, pbstrprop)
+  end
+  def get_user_upn(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.call(this, pbstrprop)
+  end
+  def get_user_dns_sam_compat(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.call(this, pbstrprop)
+  end
+  def get_property(this : IAzClientContext3*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def get_roles(this : IAzClientContext3*, bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(this : IAzClientContext3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.call(this, pbstrprop)
+  end
+  def put_role_for_access_check(this : IAzClientContext3*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.call(this, bstrprop)
+  end
+  def get_assigned_scopes_page(this : IAzClientContext3*, loptions : Int32, pagesize : Int32, pvarcursor : VARIANT*, pvarscopenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_assigned_scopes_page.call(this, loptions, pagesize, pvarcursor, pvarscopenames)
+  end
+  def add_roles(this : IAzClientContext3*, varroles : VARIANT, bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.add_roles.call(this, varroles, bstrscopename)
+  end
+  def add_application_groups(this : IAzClientContext3*, varapplicationgroups : VARIANT) : HRESULT
+    @lpVtbl.value.add_application_groups.call(this, varapplicationgroups)
+  end
+  def add_string_sids(this : IAzClientContext3*, varstringsids : VARIANT) : HRESULT
+    @lpVtbl.value.add_string_sids.call(this, varstringsids)
+  end
+  def put_ldap_query_dn(this : IAzClientContext3*, bstrldapquerydn : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query_dn.call(this, bstrldapquerydn)
+  end
+  def get_ldap_query_dn(this : IAzClientContext3*, pbstrldapquerydn : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query_dn.call(this, pbstrldapquerydn)
+  end
+  def access_check2(this : IAzClientContext3*, bstrobjectname : UInt8*, bstrscopename : UInt8*, loperation : Int32, plresult : UInt32*) : HRESULT
+    @lpVtbl.value.access_check2.call(this, bstrobjectname, bstrscopename, loperation, plresult)
+  end
+  def is_in_role_assignment(this : IAzClientContext3*, bstrscopename : UInt8*, bstrrolename : UInt8*, pbisinrole : Int16*) : HRESULT
+    @lpVtbl.value.is_in_role_assignment.call(this, bstrscopename, bstrrolename, pbisinrole)
+  end
+  def get_operations(this : IAzClientContext3*, bstrscopename : UInt8*, ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, bstrscopename, ppoperationcollection)
+  end
+  def get_tasks(this : IAzClientContext3*, bstrscopename : UInt8*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, bstrscopename, pptaskcollection)
+  end
+  def get_biz_rule_parameters(this : IAzClientContext3*, ppbizruleparam : IAzBizRuleParameters*) : HRESULT
+    @lpVtbl.value.get_biz_rule_parameters.call(this, ppbizruleparam)
+  end
+  def get_biz_rule_interfaces(this : IAzClientContext3*, ppbizruleinterfaces : IAzBizRuleInterfaces*) : HRESULT
+    @lpVtbl.value.get_biz_rule_interfaces.call(this, ppbizruleinterfaces)
+  end
+  def get_groups(this : IAzClientContext3*, bstrscopename : UInt8*, uloptions : AZ_PROP_CONSTANTS, pgrouparray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, bstrscopename, uloptions, pgrouparray)
+  end
+  def get_sids(this : IAzClientContext3*, pstringsidarray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sids.call(this, pstringsidarray)
+  end
+end
+struct LibWin32::IAzScope2
+  def query_interface(this : IAzScope2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzScope2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzScope2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzScope2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzScope2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzScope2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzScope2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzScope2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzScope2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzScope2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzScope2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzScope2*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzScope2*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_writable(this : IAzScope2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzScope2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzScope2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzScope2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzScope2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzScope2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzScope2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzScope2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzScope2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzScope2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzScope2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def get_application_groups(this : IAzScope2*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def open_application_group(this : IAzScope2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(this : IAzScope2*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzScope2*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def get_roles(this : IAzScope2*, pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, pprolecollection)
+  end
+  def open_role(this : IAzScope2*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def create_role(this : IAzScope2*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def delete_role(this : IAzScope2*, bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.call(this, bstrrolename, varreserved)
+  end
+  def get_tasks(this : IAzScope2*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pptaskcollection)
+  end
+  def open_task(this : IAzScope2*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def create_task(this : IAzScope2*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(this : IAzScope2*, bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtaskname, varreserved)
+  end
+  def submit(this : IAzScope2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def get_can_be_delegated(this : IAzScope2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_be_delegated.call(this, pfprop)
+  end
+  def get_bizrules_writable(this : IAzScope2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bizrules_writable.call(this, pfprop)
+  end
+  def get_policy_administrators_name(this : IAzScope2*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzScope2*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzScope2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzScope2*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzScope2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzScope2*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_role_definitions(this : IAzScope2*, pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.call(this, pproledefinitions)
+  end
+  def create_role_definition(this : IAzScope2*, bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.create_role_definition.call(this, bstrroledefinitionname, pproledefinitions)
+  end
+  def open_role_definition(this : IAzScope2*, bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.open_role_definition.call(this, bstrroledefinitionname, pproledefinitions)
+  end
+  def delete_role_definition(this : IAzScope2*, bstrroledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.call(this, bstrroledefinitionname)
+  end
+  def get_role_assignments(this : IAzScope2*, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.get_role_assignments.call(this, pproleassignments)
+  end
+  def create_role_assignment(this : IAzScope2*, bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.create_role_assignment.call(this, bstrroleassignmentname, pproleassignment)
+  end
+  def open_role_assignment(this : IAzScope2*, bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.open_role_assignment.call(this, bstrroleassignmentname, pproleassignment)
+  end
+  def delete_role_assignment(this : IAzScope2*, bstrroleassignmentname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_assignment.call(this, bstrroleassignmentname)
+  end
+end
+struct LibWin32::IAzApplication3
+  def query_interface(this : IAzApplication3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplication3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplication3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplication3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplication3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplication3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplication3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzApplication3*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzApplication3*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzApplication3*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzApplication3*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzApplication3*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzApplication3*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(this : IAzApplication3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.call(this, pbstrprop)
+  end
+  def put_authz_interface_clsid(this : IAzApplication3*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.call(this, bstrprop)
+  end
+  def get_version(this : IAzApplication3*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pbstrprop)
+  end
+  def put_version(this : IAzApplication3*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, bstrprop)
+  end
+  def get_generate_audits(this : IAzApplication3*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.call(this, pbprop)
+  end
+  def put_generate_audits(this : IAzApplication3*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.call(this, bprop)
+  end
+  def get_apply_store_sacl(this : IAzApplication3*, pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.call(this, pbprop)
+  end
+  def put_apply_store_sacl(this : IAzApplication3*, bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.call(this, bprop)
+  end
+  def get_writable(this : IAzApplication3*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzApplication3*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzApplication3*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(this : IAzApplication3*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.call(this, pvaradmins)
+  end
+  def get_policy_readers(this : IAzApplication3*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.call(this, pvarreaders)
+  end
+  def add_policy_administrator(this : IAzApplication3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator(this : IAzApplication3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader(this : IAzApplication3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader(this : IAzApplication3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.call(this, bstrreader, varreserved)
+  end
+  def get_scopes(this : IAzApplication3*, ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.call(this, ppscopecollection)
+  end
+  def open_scope(this : IAzApplication3*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(this : IAzApplication3*, bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.call(this, bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(this : IAzApplication3*, bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.call(this, bstrscopename, varreserved)
+  end
+  def get_operations(this : IAzApplication3*, ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, ppoperationcollection)
+  end
+  def open_operation(this : IAzApplication3*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(this : IAzApplication3*, bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.call(this, bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(this : IAzApplication3*, bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstroperationname, varreserved)
+  end
+  def get_tasks(this : IAzApplication3*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pptaskcollection)
+  end
+  def open_task(this : IAzApplication3*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def create_task(this : IAzApplication3*, bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.call(this, bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(this : IAzApplication3*, bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtaskname, varreserved)
+  end
+  def get_application_groups(this : IAzApplication3*, ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.call(this, ppgroupcollection)
+  end
+  def open_application_group(this : IAzApplication3*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(this : IAzApplication3*, bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.call(this, bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(this : IAzApplication3*, bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.call(this, bstrgroupname, varreserved)
+  end
+  def get_roles(this : IAzApplication3*, pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.call(this, pprolecollection)
+  end
+  def open_role(this : IAzApplication3*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def create_role(this : IAzApplication3*, bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.call(this, bstrrolename, varreserved, pprole)
+  end
+  def delete_role(this : IAzApplication3*, bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.call(this, bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(this : IAzApplication3*, ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.call(this, ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(this : IAzApplication3*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzApplication3*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzApplication3*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def initialize_client_context_from_name(this : IAzApplication3*, clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.call(this, clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(this : IAzApplication3*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(this : IAzApplication3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(this : IAzApplication3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(this : IAzApplication3*, sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.call(this, sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(this : IAzApplication3*, pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.call(this, pvaradmins)
+  end
+  def get_policy_readers_name(this : IAzApplication3*, pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.call(this, pvarreaders)
+  end
+  def add_policy_administrator_name(this : IAzApplication3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(this : IAzApplication3*, bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.call(this, bstradmin, varreserved)
+  end
+  def add_policy_reader_name(this : IAzApplication3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(this : IAzApplication3*, bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.call(this, bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(this : IAzApplication3*, pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.call(this, pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(this : IAzApplication3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(this : IAzApplication3*, bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.call(this, bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_token2(this : IAzApplication3*, ultokenhandlelowpart : UInt32, ultokenhandlehighpart : UInt32, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token2.call(this, ultokenhandlelowpart, ultokenhandlehighpart, varreserved, ppclientcontext)
+  end
+  def initialize_client_context2(this : IAzApplication3*, identifyingstring : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context2.call(this, identifyingstring, varreserved, ppclientcontext)
+  end
+  def scope_exists(this : IAzApplication3*, bstrscopename : UInt8*, pbexist : Int16*) : HRESULT
+    @lpVtbl.value.scope_exists.call(this, bstrscopename, pbexist)
+  end
+  def open_scope2(this : IAzApplication3*, bstrscopename : UInt8*, ppscope2 : IAzScope2*) : HRESULT
+    @lpVtbl.value.open_scope2.call(this, bstrscopename, ppscope2)
+  end
+  def create_scope2(this : IAzApplication3*, bstrscopename : UInt8*, ppscope2 : IAzScope2*) : HRESULT
+    @lpVtbl.value.create_scope2.call(this, bstrscopename, ppscope2)
+  end
+  def delete_scope2(this : IAzApplication3*, bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.delete_scope2.call(this, bstrscopename)
+  end
+  def get_role_definitions(this : IAzApplication3*, pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.call(this, pproledefinitions)
+  end
+  def create_role_definition(this : IAzApplication3*, bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.create_role_definition.call(this, bstrroledefinitionname, pproledefinitions)
+  end
+  def open_role_definition(this : IAzApplication3*, bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.open_role_definition.call(this, bstrroledefinitionname, pproledefinitions)
+  end
+  def delete_role_definition(this : IAzApplication3*, bstrroledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.call(this, bstrroledefinitionname)
+  end
+  def get_role_assignments(this : IAzApplication3*, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.get_role_assignments.call(this, pproleassignments)
+  end
+  def create_role_assignment(this : IAzApplication3*, bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.create_role_assignment.call(this, bstrroleassignmentname, pproleassignment)
+  end
+  def open_role_assignment(this : IAzApplication3*, bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.open_role_assignment.call(this, bstrroleassignmentname, pproleassignment)
+  end
+  def delete_role_assignment(this : IAzApplication3*, bstrroleassignmentname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_assignment.call(this, bstrroleassignmentname)
+  end
+  def get_biz_rules_enabled(this : IAzApplication3*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_biz_rules_enabled.call(this, pbenabled)
+  end
+  def put_biz_rules_enabled(this : IAzApplication3*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_biz_rules_enabled.call(this, benabled)
+  end
+end
+struct LibWin32::IAzOperation2
+  def query_interface(this : IAzOperation2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzOperation2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzOperation2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzOperation2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzOperation2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzOperation2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzOperation2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzOperation2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzOperation2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzOperation2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzOperation2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzOperation2*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzOperation2*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_operation_id(this : IAzOperation2*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_operation_id.call(this, plprop)
+  end
+  def put_operation_id(this : IAzOperation2*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_operation_id.call(this, lprop)
+  end
+  def get_writable(this : IAzOperation2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzOperation2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzOperation2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzOperation2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def role_assignments(this : IAzOperation2*, bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.call(this, bstrscopename, brecursive, pproleassignments)
+  end
+end
+struct LibWin32::IAzRoleDefinitions
+  def query_interface(this : IAzRoleDefinitions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRoleDefinitions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRoleDefinitions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRoleDefinitions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRoleDefinitions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRoleDefinitions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRoleDefinitions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzRoleDefinitions*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzRoleDefinitions*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzRoleDefinitions*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzRoleDefinition
+  def query_interface(this : IAzRoleDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRoleDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRoleDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRoleDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRoleDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRoleDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRoleDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzRoleDefinition*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzRoleDefinition*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzRoleDefinition*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzRoleDefinition*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzRoleDefinition*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzRoleDefinition*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_biz_rule(this : IAzRoleDefinition*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.call(this, pbstrprop)
+  end
+  def put_biz_rule(this : IAzRoleDefinition*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.call(this, bstrprop)
+  end
+  def get_biz_rule_language(this : IAzRoleDefinition*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.call(this, pbstrprop)
+  end
+  def put_biz_rule_language(this : IAzRoleDefinition*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.call(this, bstrprop)
+  end
+  def get_biz_rule_imported_path(this : IAzRoleDefinition*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.call(this, pbstrprop)
+  end
+  def put_biz_rule_imported_path(this : IAzRoleDefinition*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.call(this, bstrprop)
+  end
+  def get_is_role_definition(this : IAzRoleDefinition*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.call(this, pfprop)
+  end
+  def put_is_role_definition(this : IAzRoleDefinition*, fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.call(this, fprop)
+  end
+  def get_operations(this : IAzRoleDefinition*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, pvarprop)
+  end
+  def get_tasks(this : IAzRoleDefinition*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pvarprop)
+  end
+  def add_operation(this : IAzRoleDefinition*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.call(this, bstrop, varreserved)
+  end
+  def delete_operation(this : IAzRoleDefinition*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstrop, varreserved)
+  end
+  def add_task(this : IAzRoleDefinition*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.call(this, bstrtask, varreserved)
+  end
+  def delete_task(this : IAzRoleDefinition*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtask, varreserved)
+  end
+  def get_writable(this : IAzRoleDefinition*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzRoleDefinition*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzRoleDefinition*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzRoleDefinition*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzRoleDefinition*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzRoleDefinition*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def role_assignments(this : IAzRoleDefinition*, bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.call(this, bstrscopename, brecursive, pproleassignments)
+  end
+  def add_role_definition(this : IAzRoleDefinition*, bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.add_role_definition.call(this, bstrroledefinition)
+  end
+  def delete_role_definition(this : IAzRoleDefinition*, bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.call(this, bstrroledefinition)
+  end
+  def get_role_definitions(this : IAzRoleDefinition*, pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.call(this, pproledefinitions)
+  end
+end
+struct LibWin32::IAzRoleAssignment
+  def query_interface(this : IAzRoleAssignment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRoleAssignment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRoleAssignment*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRoleAssignment*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRoleAssignment*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRoleAssignment*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRoleAssignment*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzRoleAssignment*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzRoleAssignment*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzRoleAssignment*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzRoleAssignment*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzRoleAssignment*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzRoleAssignment*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def add_app_member(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_member(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.call(this, bstrprop, varreserved)
+  end
+  def add_task(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.call(this, bstrprop, varreserved)
+  end
+  def delete_task(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrprop, varreserved)
+  end
+  def add_operation(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.call(this, bstrprop, varreserved)
+  end
+  def delete_operation(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstrprop, varreserved)
+  end
+  def add_member(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.call(this, bstrprop, varreserved)
+  end
+  def delete_member(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.call(this, bstrprop, varreserved)
+  end
+  def get_writable(this : IAzRoleAssignment*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzRoleAssignment*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzRoleAssignment*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def get_app_members(this : IAzRoleAssignment*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.call(this, pvarprop)
+  end
+  def get_members(this : IAzRoleAssignment*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.call(this, pvarprop)
+  end
+  def get_operations(this : IAzRoleAssignment*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, pvarprop)
+  end
+  def get_tasks(this : IAzRoleAssignment*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pvarprop)
+  end
+  def add_property_item(this : IAzRoleAssignment*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzRoleAssignment*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzRoleAssignment*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def add_member_name(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_member_name(this : IAzRoleAssignment*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.call(this, bstrprop, varreserved)
+  end
+  def get_members_name(this : IAzRoleAssignment*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.call(this, pvarprop)
+  end
+  def add_role_definition(this : IAzRoleAssignment*, bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.add_role_definition.call(this, bstrroledefinition)
+  end
+  def delete_role_definition(this : IAzRoleAssignment*, bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.call(this, bstrroledefinition)
+  end
+  def get_role_definitions(this : IAzRoleAssignment*, pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.call(this, pproledefinitions)
+  end
+  def get_scope(this : IAzRoleAssignment*, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, ppscope)
+  end
+end
+struct LibWin32::IAzRoleAssignments
+  def query_interface(this : IAzRoleAssignments*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzRoleAssignments*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzRoleAssignments*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzRoleAssignments*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzRoleAssignments*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzRoleAssignments*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzRoleAssignments*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IAzRoleAssignments*, index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvarobtptr)
+  end
+  def get_count(this : IAzRoleAssignments*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : IAzRoleAssignments*, ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumptr)
+  end
+end
+struct LibWin32::IAzPrincipalLocator
+  def query_interface(this : IAzPrincipalLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzPrincipalLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzPrincipalLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzPrincipalLocator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzPrincipalLocator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzPrincipalLocator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzPrincipalLocator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name_resolver(this : IAzPrincipalLocator*, ppnameresolver : IAzNameResolver*) : HRESULT
+    @lpVtbl.value.get_name_resolver.call(this, ppnameresolver)
+  end
+  def get_object_picker(this : IAzPrincipalLocator*, ppobjectpicker : IAzObjectPicker*) : HRESULT
+    @lpVtbl.value.get_object_picker.call(this, ppobjectpicker)
+  end
+end
+struct LibWin32::IAzNameResolver
+  def query_interface(this : IAzNameResolver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzNameResolver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzNameResolver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzNameResolver*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzNameResolver*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzNameResolver*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzNameResolver*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def name_from_sid(this : IAzNameResolver*, bstrsid : UInt8*, psidtype : Int32*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.name_from_sid.call(this, bstrsid, psidtype, pbstrname)
+  end
+  def names_from_sids(this : IAzNameResolver*, vsids : VARIANT, pvsidtypes : VARIANT*, pvnames : VARIANT*) : HRESULT
+    @lpVtbl.value.names_from_sids.call(this, vsids, pvsidtypes, pvnames)
+  end
+end
+struct LibWin32::IAzObjectPicker
+  def query_interface(this : IAzObjectPicker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzObjectPicker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzObjectPicker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzObjectPicker*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzObjectPicker*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzObjectPicker*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzObjectPicker*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_principals(this : IAzObjectPicker*, hparentwnd : LibC::HANDLE, bstrtitle : UInt8*, pvsidtypes : VARIANT*, pvnames : VARIANT*, pvsids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_principals.call(this, hparentwnd, bstrtitle, pvsidtypes, pvnames, pvsids)
+  end
+  def get_name(this : IAzObjectPicker*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+end
+struct LibWin32::IAzApplicationGroup2
+  def query_interface(this : IAzApplicationGroup2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzApplicationGroup2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzApplicationGroup2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzApplicationGroup2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzApplicationGroup2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzApplicationGroup2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzApplicationGroup2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzApplicationGroup2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzApplicationGroup2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_type(this : IAzApplicationGroup2*, plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, plprop)
+  end
+  def put_type(this : IAzApplicationGroup2*, lprop : Int32) : HRESULT
+    @lpVtbl.value.put_type.call(this, lprop)
+  end
+  def get_ldap_query(this : IAzApplicationGroup2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query.call(this, pbstrprop)
+  end
+  def put_ldap_query(this : IAzApplicationGroup2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query.call(this, bstrprop)
+  end
+  def get_app_members(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.call(this, pvarprop)
+  end
+  def get_app_non_members(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_non_members.call(this, pvarprop)
+  end
+  def get_members(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.call(this, pvarprop)
+  end
+  def get_non_members(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members.call(this, pvarprop)
+  end
+  def get_description(this : IAzApplicationGroup2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzApplicationGroup2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def add_app_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.call(this, bstrprop, varreserved)
+  end
+  def add_app_non_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_non_member.call(this, bstrprop, varreserved)
+  end
+  def delete_app_non_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_non_member.call(this, bstrprop, varreserved)
+  end
+  def add_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.call(this, bstrprop, varreserved)
+  end
+  def delete_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.call(this, bstrprop, varreserved)
+  end
+  def add_non_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member.call(this, bstrprop, varreserved)
+  end
+  def delete_non_member(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member.call(this, bstrprop, varreserved)
+  end
+  def get_writable(this : IAzApplicationGroup2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzApplicationGroup2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzApplicationGroup2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzApplicationGroup2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzApplicationGroup2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzApplicationGroup2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def add_member_name(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_member_name(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.call(this, bstrprop, varreserved)
+  end
+  def add_non_member_name(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member_name.call(this, bstrprop, varreserved)
+  end
+  def delete_non_member_name(this : IAzApplicationGroup2*, bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member_name.call(this, bstrprop, varreserved)
+  end
+  def get_members_name(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.call(this, pvarprop)
+  end
+  def get_non_members_name(this : IAzApplicationGroup2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members_name.call(this, pvarprop)
+  end
+  def get_biz_rule(this : IAzApplicationGroup2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.call(this, pbstrprop)
+  end
+  def put_biz_rule(this : IAzApplicationGroup2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.call(this, bstrprop)
+  end
+  def get_biz_rule_language(this : IAzApplicationGroup2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.call(this, pbstrprop)
+  end
+  def put_biz_rule_language(this : IAzApplicationGroup2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.call(this, bstrprop)
+  end
+  def get_biz_rule_imported_path(this : IAzApplicationGroup2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.call(this, pbstrprop)
+  end
+  def put_biz_rule_imported_path(this : IAzApplicationGroup2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.call(this, bstrprop)
+  end
+  def role_assignments(this : IAzApplicationGroup2*, bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.call(this, bstrscopename, brecursive, pproleassignments)
+  end
+end
+struct LibWin32::IAzTask2
+  def query_interface(this : IAzTask2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAzTask2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAzTask2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAzTask2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAzTask2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAzTask2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAzTask2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IAzTask2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IAzTask2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_description(this : IAzTask2*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IAzTask2*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_application_data(this : IAzTask2*, pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.call(this, pbstrapplicationdata)
+  end
+  def put_application_data(this : IAzTask2*, bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.call(this, bstrapplicationdata)
+  end
+  def get_biz_rule(this : IAzTask2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.call(this, pbstrprop)
+  end
+  def put_biz_rule(this : IAzTask2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.call(this, bstrprop)
+  end
+  def get_biz_rule_language(this : IAzTask2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.call(this, pbstrprop)
+  end
+  def put_biz_rule_language(this : IAzTask2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.call(this, bstrprop)
+  end
+  def get_biz_rule_imported_path(this : IAzTask2*, pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.call(this, pbstrprop)
+  end
+  def put_biz_rule_imported_path(this : IAzTask2*, bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.call(this, bstrprop)
+  end
+  def get_is_role_definition(this : IAzTask2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.call(this, pfprop)
+  end
+  def put_is_role_definition(this : IAzTask2*, fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.call(this, fprop)
+  end
+  def get_operations(this : IAzTask2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.call(this, pvarprop)
+  end
+  def get_tasks(this : IAzTask2*, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, pvarprop)
+  end
+  def add_operation(this : IAzTask2*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.call(this, bstrop, varreserved)
+  end
+  def delete_operation(this : IAzTask2*, bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.call(this, bstrop, varreserved)
+  end
+  def add_task(this : IAzTask2*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.call(this, bstrtask, varreserved)
+  end
+  def delete_task(this : IAzTask2*, bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.call(this, bstrtask, varreserved)
+  end
+  def get_writable(this : IAzTask2*, pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.call(this, pfprop)
+  end
+  def get_property(this : IAzTask2*, lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, lpropid, varreserved, pvarprop)
+  end
+  def set_property(this : IAzTask2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.call(this, lpropid, varprop, varreserved)
+  end
+  def add_property_item(this : IAzTask2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def delete_property_item(this : IAzTask2*, lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.call(this, lpropid, varprop, varreserved)
+  end
+  def submit(this : IAzTask2*, lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.call(this, lflags, varreserved)
+  end
+  def role_assignments(this : IAzTask2*, bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.call(this, bstrscopename, brecursive, pproleassignments)
+  end
 end

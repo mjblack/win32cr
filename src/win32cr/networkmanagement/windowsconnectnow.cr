@@ -404,3 +404,64 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWCNDevice
+  def query_interface(this : IWCNDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCNDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCNDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_password(this : IWCNDevice*, type : WCN_PASSWORD_TYPE, dwpasswordlength : UInt32, pbpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.call(this, type, dwpasswordlength, pbpassword)
+  end
+  def connect(this : IWCNDevice*, pnotify : IWCNConnectNotify) : HRESULT
+    @lpVtbl.value.connect.call(this, pnotify)
+  end
+  def get_attribute(this : IWCNDevice*, attributetype : WCN_ATTRIBUTE_TYPE, dwmaxbuffersize : UInt32, pbbuffer : UInt8*, pdwbufferused : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, attributetype, dwmaxbuffersize, pbbuffer, pdwbufferused)
+  end
+  def get_integer_attribute(this : IWCNDevice*, attributetype : WCN_ATTRIBUTE_TYPE, puinteger : UInt32*) : HRESULT
+    @lpVtbl.value.get_integer_attribute.call(this, attributetype, puinteger)
+  end
+  def get_string_attribute(this : IWCNDevice*, attributetype : WCN_ATTRIBUTE_TYPE, cchmaxstring : UInt32, wszstring : Char*) : HRESULT
+    @lpVtbl.value.get_string_attribute.call(this, attributetype, cchmaxstring, wszstring)
+  end
+  def get_network_profile(this : IWCNDevice*, cchmaxstringlength : UInt32, wszprofile : Char*) : HRESULT
+    @lpVtbl.value.get_network_profile.call(this, cchmaxstringlength, wszprofile)
+  end
+  def set_network_profile(this : IWCNDevice*, pszprofilexml : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_network_profile.call(this, pszprofilexml)
+  end
+  def get_vendor_extension(this : IWCNDevice*, pvendorextspec : WCN_VENDOR_EXTENSION_SPEC*, dwmaxbuffersize : UInt32, pbbuffer : UInt8*, pdwbufferused : UInt32*) : HRESULT
+    @lpVtbl.value.get_vendor_extension.call(this, pvendorextspec, dwmaxbuffersize, pbbuffer, pdwbufferused)
+  end
+  def set_vendor_extension(this : IWCNDevice*, pvendorextspec : WCN_VENDOR_EXTENSION_SPEC*, cbbuffer : UInt32, pbbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.set_vendor_extension.call(this, pvendorextspec, cbbuffer, pbbuffer)
+  end
+  def unadvise(this : IWCNDevice*) : HRESULT
+    @lpVtbl.value.unadvise.call(this)
+  end
+  def set_nfc_password_params(this : IWCNDevice*, type : WCN_PASSWORD_TYPE, dwoobpasswordid : UInt32, dwpasswordlength : UInt32, pbpassword : UInt8*, dwremotepublickeyhashlength : UInt32, pbremotepublickeyhash : UInt8*, dwdhkeybloblength : UInt32, pbdhkeyblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_nfc_password_params.call(this, type, dwoobpasswordid, dwpasswordlength, pbpassword, dwremotepublickeyhashlength, pbremotepublickeyhash, dwdhkeybloblength, pbdhkeyblob)
+  end
+end
+struct LibWin32::IWCNConnectNotify
+  def query_interface(this : IWCNConnectNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCNConnectNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCNConnectNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect_succeeded(this : IWCNConnectNotify*) : HRESULT
+    @lpVtbl.value.connect_succeeded.call(this)
+  end
+  def connect_failed(this : IWCNConnectNotify*, hrfailure : HRESULT) : HRESULT
+    @lpVtbl.value.connect_failed.call(this, hrfailure)
+  end
+end

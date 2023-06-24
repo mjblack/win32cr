@@ -847,7 +847,7 @@ lib LibWin32
     get_object_total_size : Proc(IWMDMOperation*, UInt32*, UInt32*, HRESULT)
     set_object_total_size : Proc(IWMDMOperation*, UInt32, UInt32, HRESULT)
     transfer_object_data : Proc(IWMDMOperation*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation*, HRESULT*, IUnknown, HRESULT)
+    end_ : Proc(IWMDMOperation*, HRESULT*, IUnknown, HRESULT)
   end
 
   IWMDMOperation_GUID = "1dcb3a0b-33ed-11d3-8470-00c04f79dbc0"
@@ -869,7 +869,7 @@ lib LibWin32
     get_object_total_size : Proc(IWMDMOperation2*, UInt32*, UInt32*, HRESULT)
     set_object_total_size : Proc(IWMDMOperation2*, UInt32, UInt32, HRESULT)
     transfer_object_data : Proc(IWMDMOperation2*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation2*, HRESULT*, IUnknown, HRESULT)
+    end_ : Proc(IWMDMOperation2*, HRESULT*, IUnknown, HRESULT)
     set_object_attributes2 : Proc(IWMDMOperation2*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
     get_object_attributes2 : Proc(IWMDMOperation2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
   end
@@ -893,7 +893,7 @@ lib LibWin32
     get_object_total_size : Proc(IWMDMOperation3*, UInt32*, UInt32*, HRESULT)
     set_object_total_size : Proc(IWMDMOperation3*, UInt32, UInt32, HRESULT)
     transfer_object_data : Proc(IWMDMOperation3*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation3*, HRESULT*, IUnknown, HRESULT)
+    end_ : Proc(IWMDMOperation3*, HRESULT*, IUnknown, HRESULT)
     transfer_object_data_on_clear_channel : Proc(IWMDMOperation3*, UInt8*, UInt32*, HRESULT)
   end
 
@@ -907,9 +907,9 @@ lib LibWin32
     query_interface : Proc(IWMDMProgress*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWMDMProgress*, UInt32)
     release : Proc(IWMDMProgress*, UInt32)
-    rbegin : Proc(IWMDMProgress*, UInt32, HRESULT)
+    begin_ : Proc(IWMDMProgress*, UInt32, HRESULT)
     progress : Proc(IWMDMProgress*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress*, HRESULT)
+    end_ : Proc(IWMDMProgress*, HRESULT)
   end
 
   IWMDMProgress_GUID = "1dcb3a0c-33ed-11d3-8470-00c04f79dbc0"
@@ -922,9 +922,9 @@ lib LibWin32
     query_interface : Proc(IWMDMProgress2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWMDMProgress2*, UInt32)
     release : Proc(IWMDMProgress2*, UInt32)
-    rbegin : Proc(IWMDMProgress2*, UInt32, HRESULT)
+    begin_ : Proc(IWMDMProgress2*, UInt32, HRESULT)
     progress : Proc(IWMDMProgress2*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress2*, HRESULT)
+    end_ : Proc(IWMDMProgress2*, HRESULT)
     end2 : Proc(IWMDMProgress2*, HRESULT, HRESULT)
   end
 
@@ -938,9 +938,9 @@ lib LibWin32
     query_interface : Proc(IWMDMProgress3*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWMDMProgress3*, UInt32)
     release : Proc(IWMDMProgress3*, UInt32)
-    rbegin : Proc(IWMDMProgress3*, UInt32, HRESULT)
+    begin_ : Proc(IWMDMProgress3*, UInt32, HRESULT)
     progress : Proc(IWMDMProgress3*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress3*, HRESULT)
+    end_ : Proc(IWMDMProgress3*, HRESULT)
     end2 : Proc(IWMDMProgress3*, HRESULT, HRESULT)
     begin3 : Proc(IWMDMProgress3*, Guid, UInt32, OPAQUECOMMAND*, HRESULT)
     progress3 : Proc(IWMDMProgress3*, Guid, UInt32, OPAQUECOMMAND*, HRESULT)
@@ -1776,4 +1776,1962 @@ lib LibWin32
     lpVtbl : IWMDMLoggerVTbl*
   end
 
+end
+struct LibWin32::IWMDMMetaData
+  def query_interface(this : IWMDMMetaData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMMetaData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMMetaData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_item(this : IWMDMMetaData*, type : WMDM_TAG_DATATYPE, pwsztagname : LibC::LPWSTR, pvalue : UInt8*, ilength : UInt32) : HRESULT
+    @lpVtbl.value.add_item.call(this, type, pwsztagname, pvalue, ilength)
+  end
+  def query_by_name(this : IWMDMMetaData*, pwsztagname : LibC::LPWSTR, ptype : WMDM_TAG_DATATYPE*, pvalue : UInt8**, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.query_by_name.call(this, pwsztagname, ptype, pvalue, pcblength)
+  end
+  def query_by_index(this : IWMDMMetaData*, iindex : UInt32, ppwszname : UInt16**, ptype : WMDM_TAG_DATATYPE*, ppvalue : UInt8**, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.query_by_index.call(this, iindex, ppwszname, ptype, ppvalue, pcblength)
+  end
+  def get_item_count(this : IWMDMMetaData*, icount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_count.call(this, icount)
+  end
+end
+struct LibWin32::IWMDeviceManager
+  def query_interface(this : IWMDeviceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDeviceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDeviceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_revision(this : IWMDeviceManager*, pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.call(this, pdwrevision)
+  end
+  def get_device_count(this : IWMDeviceManager*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IWMDeviceManager*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+end
+struct LibWin32::IWMDeviceManager2
+  def query_interface(this : IWMDeviceManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDeviceManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDeviceManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_revision(this : IWMDeviceManager2*, pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.call(this, pdwrevision)
+  end
+  def get_device_count(this : IWMDeviceManager2*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IWMDeviceManager2*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+  def get_device_from_canonical_name(this : IWMDeviceManager2*, pwszcanonicalname : LibC::LPWSTR, ppdevice : IWMDMDevice*) : HRESULT
+    @lpVtbl.value.get_device_from_canonical_name.call(this, pwszcanonicalname, ppdevice)
+  end
+  def enum_devices2(this : IWMDeviceManager2*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices2.call(this, ppenumdevice)
+  end
+  def reinitialize(this : IWMDeviceManager2*) : HRESULT
+    @lpVtbl.value.reinitialize.call(this)
+  end
+end
+struct LibWin32::IWMDeviceManager3
+  def query_interface(this : IWMDeviceManager3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDeviceManager3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDeviceManager3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_revision(this : IWMDeviceManager3*, pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.call(this, pdwrevision)
+  end
+  def get_device_count(this : IWMDeviceManager3*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IWMDeviceManager3*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+  def get_device_from_canonical_name(this : IWMDeviceManager3*, pwszcanonicalname : LibC::LPWSTR, ppdevice : IWMDMDevice*) : HRESULT
+    @lpVtbl.value.get_device_from_canonical_name.call(this, pwszcanonicalname, ppdevice)
+  end
+  def enum_devices2(this : IWMDeviceManager3*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices2.call(this, ppenumdevice)
+  end
+  def reinitialize(this : IWMDeviceManager3*) : HRESULT
+    @lpVtbl.value.reinitialize.call(this)
+  end
+  def set_device_enum_preference(this : IWMDeviceManager3*, dwenumpref : UInt32) : HRESULT
+    @lpVtbl.value.set_device_enum_preference.call(this, dwenumpref)
+  end
+end
+struct LibWin32::IWMDMStorageGlobals
+  def query_interface(this : IWMDMStorageGlobals*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorageGlobals*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorageGlobals*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IWMDMStorageGlobals*, pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilities)
+  end
+  def get_serial_number(this : IWMDMStorageGlobals*, pserialnum : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnum, abmac)
+  end
+  def get_total_size(this : IWMDMStorageGlobals*, pdwtotalsizelow : UInt32*, pdwtotalsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_size.call(this, pdwtotalsizelow, pdwtotalsizehigh)
+  end
+  def get_total_free(this : IWMDMStorageGlobals*, pdwfreelow : UInt32*, pdwfreehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_free.call(this, pdwfreelow, pdwfreehigh)
+  end
+  def get_total_bad(this : IWMDMStorageGlobals*, pdwbadlow : UInt32*, pdwbadhigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_bad.call(this, pdwbadlow, pdwbadhigh)
+  end
+  def get_status(this : IWMDMStorageGlobals*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def initialize(this : IWMDMStorageGlobals*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.initialize.call(this, fumode, pprogress)
+  end
+end
+struct LibWin32::IWMDMStorage
+  def query_interface(this : IWMDMStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IWMDMStorage*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IWMDMStorage*, ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IWMDMStorage*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IWMDMStorage*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IWMDMStorage*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IWMDMStorage*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IWMDMStorage*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def enum_storage(this : IWMDMStorage*, penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, penumstorage)
+  end
+  def send_opaque_command(this : IWMDMStorage*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+end
+struct LibWin32::IWMDMStorage2
+  def query_interface(this : IWMDMStorage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IWMDMStorage2*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IWMDMStorage2*, ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IWMDMStorage2*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IWMDMStorage2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IWMDMStorage2*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IWMDMStorage2*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IWMDMStorage2*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def enum_storage(this : IWMDMStorage2*, penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, penumstorage)
+  end
+  def send_opaque_command(this : IWMDMStorage2*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IWMDMStorage2*, pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def set_attributes2(this : IWMDMStorage2*, dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(this : IWMDMStorage2*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IWMDMStorage3
+  def query_interface(this : IWMDMStorage3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorage3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorage3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IWMDMStorage3*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IWMDMStorage3*, ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IWMDMStorage3*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IWMDMStorage3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IWMDMStorage3*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IWMDMStorage3*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IWMDMStorage3*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def enum_storage(this : IWMDMStorage3*, penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, penumstorage)
+  end
+  def send_opaque_command(this : IWMDMStorage3*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IWMDMStorage3*, pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def set_attributes2(this : IWMDMStorage3*, dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(this : IWMDMStorage3*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(this : IWMDMStorage3*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, ppmetadata)
+  end
+  def set_metadata(this : IWMDMStorage3*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.call(this, pmetadata)
+  end
+  def create_empty_metadata_object(this : IWMDMStorage3*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.create_empty_metadata_object.call(this, ppmetadata)
+  end
+  def set_enum_preference(this : IWMDMStorage3*, pmode : WMDM_STORAGE_ENUM_MODE*, nviews : UInt32, pviews : WMDMMetadataView*) : HRESULT
+    @lpVtbl.value.set_enum_preference.call(this, pmode, nviews, pviews)
+  end
+end
+struct LibWin32::IWMDMStorage4
+  def query_interface(this : IWMDMStorage4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorage4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorage4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IWMDMStorage4*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IWMDMStorage4*, ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IWMDMStorage4*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IWMDMStorage4*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IWMDMStorage4*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IWMDMStorage4*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IWMDMStorage4*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def enum_storage(this : IWMDMStorage4*, penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, penumstorage)
+  end
+  def send_opaque_command(this : IWMDMStorage4*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IWMDMStorage4*, pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def set_attributes2(this : IWMDMStorage4*, dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(this : IWMDMStorage4*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(this : IWMDMStorage4*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, ppmetadata)
+  end
+  def set_metadata(this : IWMDMStorage4*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.call(this, pmetadata)
+  end
+  def create_empty_metadata_object(this : IWMDMStorage4*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.create_empty_metadata_object.call(this, ppmetadata)
+  end
+  def set_enum_preference(this : IWMDMStorage4*, pmode : WMDM_STORAGE_ENUM_MODE*, nviews : UInt32, pviews : WMDMMetadataView*) : HRESULT
+    @lpVtbl.value.set_enum_preference.call(this, pmode, nviews, pviews)
+  end
+  def set_references(this : IWMDMStorage4*, dwrefs : UInt32, ppiwmdmstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.set_references.call(this, dwrefs, ppiwmdmstorage)
+  end
+  def get_references(this : IWMDMStorage4*, pdwrefs : UInt32*, pppiwmdmstorage : IWMDMStorage**) : HRESULT
+    @lpVtbl.value.get_references.call(this, pdwrefs, pppiwmdmstorage)
+  end
+  def get_rights_with_progress(this : IWMDMStorage4*, piprogresscallback : IWMDMProgress3, pprights : WMDMRIGHTS**, pnrightscount : UInt32*) : HRESULT
+    @lpVtbl.value.get_rights_with_progress.call(this, piprogresscallback, pprights, pnrightscount)
+  end
+  def get_specified_metadata(this : IWMDMStorage4*, cproperties : UInt32, ppwszpropnames : LibC::LPWSTR*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_specified_metadata.call(this, cproperties, ppwszpropnames, ppmetadata)
+  end
+  def find_storage(this : IWMDMStorage4*, findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.find_storage.call(this, findscope, pwszuniqueid, ppstorage)
+  end
+  def get_parent(this : IWMDMStorage4*, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppstorage)
+  end
+end
+struct LibWin32::IWMDMOperation
+  def query_interface(this : IWMDMOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_read(this : IWMDMOperation*) : HRESULT
+    @lpVtbl.value.begin_read.call(this)
+  end
+  def begin_write(this : IWMDMOperation*) : HRESULT
+    @lpVtbl.value.begin_write.call(this)
+  end
+  def get_object_name(this : IWMDMOperation*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.call(this, pwszname, nmaxchars)
+  end
+  def set_object_name(this : IWMDMOperation*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.call(this, pwszname, nmaxchars)
+  end
+  def get_object_attributes(this : IWMDMOperation*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.call(this, pdwattributes, pformat)
+  end
+  def set_object_attributes(this : IWMDMOperation*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.call(this, dwattributes, pformat)
+  end
+  def get_object_total_size(this : IWMDMOperation*, pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.call(this, pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(this : IWMDMOperation*, dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.call(this, dwsize, dwsizehigh)
+  end
+  def transfer_object_data(this : IWMDMOperation*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def end_(this : IWMDMOperation*, phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.call(this, phcompletioncode, pnewobject)
+  end
+end
+struct LibWin32::IWMDMOperation2
+  def query_interface(this : IWMDMOperation2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMOperation2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMOperation2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_read(this : IWMDMOperation2*) : HRESULT
+    @lpVtbl.value.begin_read.call(this)
+  end
+  def begin_write(this : IWMDMOperation2*) : HRESULT
+    @lpVtbl.value.begin_write.call(this)
+  end
+  def get_object_name(this : IWMDMOperation2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.call(this, pwszname, nmaxchars)
+  end
+  def set_object_name(this : IWMDMOperation2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.call(this, pwszname, nmaxchars)
+  end
+  def get_object_attributes(this : IWMDMOperation2*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.call(this, pdwattributes, pformat)
+  end
+  def set_object_attributes(this : IWMDMOperation2*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.call(this, dwattributes, pformat)
+  end
+  def get_object_total_size(this : IWMDMOperation2*, pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.call(this, pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(this : IWMDMOperation2*, dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.call(this, dwsize, dwsizehigh)
+  end
+  def transfer_object_data(this : IWMDMOperation2*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def end_(this : IWMDMOperation2*, phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.call(this, phcompletioncode, pnewobject)
+  end
+  def set_object_attributes2(this : IWMDMOperation2*, dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_object_attributes2.call(this, dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_object_attributes2(this : IWMDMOperation2*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_object_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IWMDMOperation3
+  def query_interface(this : IWMDMOperation3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMOperation3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMOperation3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_read(this : IWMDMOperation3*) : HRESULT
+    @lpVtbl.value.begin_read.call(this)
+  end
+  def begin_write(this : IWMDMOperation3*) : HRESULT
+    @lpVtbl.value.begin_write.call(this)
+  end
+  def get_object_name(this : IWMDMOperation3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.call(this, pwszname, nmaxchars)
+  end
+  def set_object_name(this : IWMDMOperation3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.call(this, pwszname, nmaxchars)
+  end
+  def get_object_attributes(this : IWMDMOperation3*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.call(this, pdwattributes, pformat)
+  end
+  def set_object_attributes(this : IWMDMOperation3*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.call(this, dwattributes, pformat)
+  end
+  def get_object_total_size(this : IWMDMOperation3*, pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.call(this, pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(this : IWMDMOperation3*, dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.call(this, dwsize, dwsizehigh)
+  end
+  def transfer_object_data(this : IWMDMOperation3*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def end_(this : IWMDMOperation3*, phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.call(this, phcompletioncode, pnewobject)
+  end
+  def transfer_object_data_on_clear_channel(this : IWMDMOperation3*, pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.transfer_object_data_on_clear_channel.call(this, pdata, pdwsize)
+  end
+end
+struct LibWin32::IWMDMProgress
+  def query_interface(this : IWMDMProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IWMDMProgress*, dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.call(this, dwestimatedticks)
+  end
+  def progress(this : IWMDMProgress*, dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.call(this, dwtranspiredticks)
+  end
+  def end_(this : IWMDMProgress*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+end
+struct LibWin32::IWMDMProgress2
+  def query_interface(this : IWMDMProgress2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMProgress2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMProgress2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IWMDMProgress2*, dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.call(this, dwestimatedticks)
+  end
+  def progress(this : IWMDMProgress2*, dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.call(this, dwtranspiredticks)
+  end
+  def end_(this : IWMDMProgress2*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+  def end2(this : IWMDMProgress2*, hrcompletioncode : HRESULT) : HRESULT
+    @lpVtbl.value.end2.call(this, hrcompletioncode)
+  end
+end
+struct LibWin32::IWMDMProgress3
+  def query_interface(this : IWMDMProgress3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMProgress3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMProgress3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IWMDMProgress3*, dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.call(this, dwestimatedticks)
+  end
+  def progress(this : IWMDMProgress3*, dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.call(this, dwtranspiredticks)
+  end
+  def end_(this : IWMDMProgress3*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+  def end2(this : IWMDMProgress3*, hrcompletioncode : HRESULT) : HRESULT
+    @lpVtbl.value.end2.call(this, hrcompletioncode)
+  end
+  def begin3(this : IWMDMProgress3*, eventid : Guid, dwestimatedticks : UInt32, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.begin3.call(this, eventid, dwestimatedticks, pcontext)
+  end
+  def progress3(this : IWMDMProgress3*, eventid : Guid, dwtranspiredticks : UInt32, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.progress3.call(this, eventid, dwtranspiredticks, pcontext)
+  end
+  def end3(this : IWMDMProgress3*, eventid : Guid, hrcompletioncode : HRESULT, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.end3.call(this, eventid, hrcompletioncode, pcontext)
+  end
+end
+struct LibWin32::IWMDMDevice
+  def query_interface(this : IWMDMDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IWMDMDevice*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IWMDMDevice*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IWMDMDevice*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IWMDMDevice*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IWMDMDevice*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IWMDMDevice*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IWMDMDevice*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IWMDMDevice*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IWMDMDevice*, ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IWMDMDevice*, ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IWMDMDevice*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+end
+struct LibWin32::IWMDMDevice2
+  def query_interface(this : IWMDMDevice2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMDevice2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMDevice2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IWMDMDevice2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IWMDMDevice2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IWMDMDevice2*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IWMDMDevice2*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IWMDMDevice2*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IWMDMDevice2*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IWMDMDevice2*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IWMDMDevice2*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IWMDMDevice2*, ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IWMDMDevice2*, ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IWMDMDevice2*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IWMDMDevice2*, pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def get_format_support2(this : IWMDMDevice2*, dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.call(this, dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(this : IWMDMDevice2*, ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.call(this, ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(this : IWMDMDevice2*, pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, pwszpnpname, nmaxchars)
+  end
+end
+struct LibWin32::IWMDMDevice3
+  def query_interface(this : IWMDMDevice3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMDevice3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMDevice3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IWMDMDevice3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IWMDMDevice3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IWMDMDevice3*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IWMDMDevice3*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IWMDMDevice3*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IWMDMDevice3*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IWMDMDevice3*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IWMDMDevice3*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IWMDMDevice3*, ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IWMDMDevice3*, ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IWMDMDevice3*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IWMDMDevice3*, pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def get_format_support2(this : IWMDMDevice3*, dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.call(this, dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(this : IWMDMDevice3*, ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.call(this, ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(this : IWMDMDevice3*, pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, pwszpnpname, nmaxchars)
+  end
+  def get_property(this : IWMDMDevice3*, pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwszpropname, pvalue)
+  end
+  def set_property(this : IWMDMDevice3*, pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwszpropname, pvalue)
+  end
+  def get_format_capability(this : IWMDMDevice3*, format : WMDM_FORMATCODE, pformatsupport : WMDM_FORMAT_CAPABILITY*) : HRESULT
+    @lpVtbl.value.get_format_capability.call(this, format, pformatsupport)
+  end
+  def device_io_control(this : IWMDMDevice3*, dwiocontrolcode : UInt32, lpinbuffer : UInt8*, ninbuffersize : UInt32, lpoutbuffer : UInt8*, pnoutbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.device_io_control.call(this, dwiocontrolcode, lpinbuffer, ninbuffersize, lpoutbuffer, pnoutbuffersize)
+  end
+  def find_storage(this : IWMDMDevice3*, findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.find_storage.call(this, findscope, pwszuniqueid, ppstorage)
+  end
+end
+struct LibWin32::IWMDMDeviceSession
+  def query_interface(this : IWMDMDeviceSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMDeviceSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMDeviceSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_session(this : IWMDMDeviceSession*, type : WMDM_SESSION_TYPE, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.begin_session.call(this, type, pctx, dwsizectx)
+  end
+  def end_session(this : IWMDMDeviceSession*, type : WMDM_SESSION_TYPE, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, type, pctx, dwsizectx)
+  end
+end
+struct LibWin32::IWMDMEnumDevice
+  def query_interface(this : IWMDMEnumDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMEnumDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMEnumDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IWMDMEnumDevice*, celt : UInt32, ppdevice : IWMDMDevice*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppdevice, pceltfetched)
+  end
+  def skip(this : IWMDMEnumDevice*, celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.call(this, celt, pceltfetched)
+  end
+  def reset(this : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IWMDMEnumDevice*, ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumdevice)
+  end
+end
+struct LibWin32::IWMDMDeviceControl
+  def query_interface(this : IWMDMDeviceControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMDeviceControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMDeviceControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IWMDMDeviceControl*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_capabilities(this : IWMDMDeviceControl*, pdwcapabilitiesmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilitiesmask)
+  end
+  def play(this : IWMDMDeviceControl*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def record(this : IWMDMDeviceControl*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.record.call(this, pformat)
+  end
+  def pause(this : IWMDMDeviceControl*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IWMDMDeviceControl*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def stop(this : IWMDMDeviceControl*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def seek(this : IWMDMDeviceControl*, fumode : UInt32, noffset : Int32) : HRESULT
+    @lpVtbl.value.seek.call(this, fumode, noffset)
+  end
+end
+struct LibWin32::IWMDMEnumStorage
+  def query_interface(this : IWMDMEnumStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMEnumStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMEnumStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IWMDMEnumStorage*, celt : UInt32, ppstorage : IWMDMStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppstorage, pceltfetched)
+  end
+  def skip(this : IWMDMEnumStorage*, celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.call(this, celt, pceltfetched)
+  end
+  def reset(this : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IWMDMEnumStorage*, ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumstorage)
+  end
+end
+struct LibWin32::IWMDMStorageControl
+  def query_interface(this : IWMDMStorageControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorageControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorageControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def insert(this : IWMDMStorageControl*, fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.call(this, fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(this : IWMDMStorageControl*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.call(this, fumode, pprogress)
+  end
+  def rename(this : IWMDMStorageControl*, fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.call(this, fumode, pwsznewname, pprogress)
+  end
+  def read(this : IWMDMStorageControl*, fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.call(this, fumode, pwszfile, pprogress, poperation)
+  end
+  def move(this : IWMDMStorageControl*, fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.call(this, fumode, ptargetobject, pprogress)
+  end
+end
+struct LibWin32::IWMDMStorageControl2
+  def query_interface(this : IWMDMStorageControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorageControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorageControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def insert(this : IWMDMStorageControl2*, fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.call(this, fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(this : IWMDMStorageControl2*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.call(this, fumode, pprogress)
+  end
+  def rename(this : IWMDMStorageControl2*, fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.call(this, fumode, pwsznewname, pprogress)
+  end
+  def read(this : IWMDMStorageControl2*, fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.call(this, fumode, pwszfile, pprogress, poperation)
+  end
+  def move(this : IWMDMStorageControl2*, fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.call(this, fumode, ptargetobject, pprogress)
+  end
+  def insert2(this : IWMDMStorageControl2*, fumode : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert2.call(this, fumode, pwszfilesource, pwszfiledest, poperation, pprogress, punknown, ppnewobject)
+  end
+end
+struct LibWin32::IWMDMStorageControl3
+  def query_interface(this : IWMDMStorageControl3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMStorageControl3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMStorageControl3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def insert(this : IWMDMStorageControl3*, fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.call(this, fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(this : IWMDMStorageControl3*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.call(this, fumode, pprogress)
+  end
+  def rename(this : IWMDMStorageControl3*, fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.call(this, fumode, pwsznewname, pprogress)
+  end
+  def read(this : IWMDMStorageControl3*, fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.call(this, fumode, pwszfile, pprogress, poperation)
+  end
+  def move(this : IWMDMStorageControl3*, fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.call(this, fumode, ptargetobject, pprogress)
+  end
+  def insert2(this : IWMDMStorageControl3*, fumode : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert2.call(this, fumode, pwszfilesource, pwszfiledest, poperation, pprogress, punknown, ppnewobject)
+  end
+  def insert3(this : IWMDMStorageControl3*, fumode : UInt32, futype : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, pmetadata : IWMDMMetaData, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert3.call(this, fumode, futype, pwszfilesource, pwszfiledest, poperation, pprogress, pmetadata, punknown, ppnewobject)
+  end
+end
+struct LibWin32::IWMDMObjectInfo
+  def query_interface(this : IWMDMObjectInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMObjectInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMObjectInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_play_length(this : IWMDMObjectInfo*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_length.call(this, pdwlength)
+  end
+  def set_play_length(this : IWMDMObjectInfo*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_play_length.call(this, dwlength)
+  end
+  def get_play_offset(this : IWMDMObjectInfo*, pdwoffset : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_offset.call(this, pdwoffset)
+  end
+  def set_play_offset(this : IWMDMObjectInfo*, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.set_play_offset.call(this, dwoffset)
+  end
+  def get_total_length(this : IWMDMObjectInfo*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.call(this, pdwlength)
+  end
+  def get_last_play_position(this : IWMDMObjectInfo*, pdwlastpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_play_position.call(this, pdwlastpos)
+  end
+  def get_longest_play_position(this : IWMDMObjectInfo*, pdwlongestpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_longest_play_position.call(this, pdwlongestpos)
+  end
+end
+struct LibWin32::IWMDMRevoked
+  def query_interface(this : IWMDMRevoked*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMRevoked*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMRevoked*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_revocation_url(this : IWMDMRevoked*, ppwszrevocationurl : LibC::LPWSTR*, pdwbufferlen : UInt32*, pdwrevokedbitflag : UInt32*) : HRESULT
+    @lpVtbl.value.get_revocation_url.call(this, ppwszrevocationurl, pdwbufferlen, pdwrevokedbitflag)
+  end
+end
+struct LibWin32::IWMDMNotification
+  def query_interface(this : IWMDMNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def wmdm_message(this : IWMDMNotification*, dwmessagetype : UInt32, pwszcanonicalname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.wmdm_message.call(this, dwmessagetype, pwszcanonicalname)
+  end
+end
+struct LibWin32::IMDServiceProvider
+  def query_interface(this : IMDServiceProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDServiceProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDServiceProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_count(this : IMDServiceProvider*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IMDServiceProvider*, ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+end
+struct LibWin32::IMDServiceProvider2
+  def query_interface(this : IMDServiceProvider2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDServiceProvider2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDServiceProvider2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_count(this : IMDServiceProvider2*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IMDServiceProvider2*, ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+  def create_device(this : IMDServiceProvider2*, pwszdevicepath : LibC::LPWSTR, pdwcount : UInt32*, pppdevicearray : IMDSPDevice**) : HRESULT
+    @lpVtbl.value.create_device.call(this, pwszdevicepath, pdwcount, pppdevicearray)
+  end
+end
+struct LibWin32::IMDServiceProvider3
+  def query_interface(this : IMDServiceProvider3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDServiceProvider3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDServiceProvider3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_count(this : IMDServiceProvider3*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.call(this, pdwcount)
+  end
+  def enum_devices(this : IMDServiceProvider3*, ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, ppenumdevice)
+  end
+  def create_device(this : IMDServiceProvider3*, pwszdevicepath : LibC::LPWSTR, pdwcount : UInt32*, pppdevicearray : IMDSPDevice**) : HRESULT
+    @lpVtbl.value.create_device.call(this, pwszdevicepath, pdwcount, pppdevicearray)
+  end
+  def set_device_enum_preference(this : IMDServiceProvider3*, dwenumpref : UInt32) : HRESULT
+    @lpVtbl.value.set_device_enum_preference.call(this, dwenumpref)
+  end
+end
+struct LibWin32::IMDSPEnumDevice
+  def query_interface(this : IMDSPEnumDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPEnumDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPEnumDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IMDSPEnumDevice*, celt : UInt32, ppdevice : IMDSPDevice*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppdevice, pceltfetched)
+  end
+  def skip(this : IMDSPEnumDevice*, celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.call(this, celt, pceltfetched)
+  end
+  def reset(this : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IMDSPEnumDevice*, ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumdevice)
+  end
+end
+struct LibWin32::IMDSPDevice
+  def query_interface(this : IMDSPDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IMDSPDevice*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IMDSPDevice*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IMDSPDevice*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IMDSPDevice*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IMDSPDevice*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IMDSPDevice*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IMDSPDevice*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IMDSPDevice*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IMDSPDevice*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IMDSPDevice*, pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IMDSPDevice*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+end
+struct LibWin32::IMDSPDevice2
+  def query_interface(this : IMDSPDevice2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPDevice2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPDevice2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IMDSPDevice2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IMDSPDevice2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IMDSPDevice2*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IMDSPDevice2*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IMDSPDevice2*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IMDSPDevice2*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IMDSPDevice2*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IMDSPDevice2*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IMDSPDevice2*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IMDSPDevice2*, pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IMDSPDevice2*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IMDSPDevice2*, pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def get_format_support2(this : IMDSPDevice2*, dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.call(this, dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(this : IMDSPDevice2*, ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.call(this, ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(this : IMDSPDevice2*, pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, pwszpnpname, nmaxchars)
+  end
+end
+struct LibWin32::IMDSPDevice3
+  def query_interface(this : IMDSPDevice3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPDevice3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPDevice3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IMDSPDevice3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_manufacturer(this : IMDSPDevice3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.call(this, pwszname, nmaxchars)
+  end
+  def get_version(this : IMDSPDevice3*, pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_type(this : IMDSPDevice3*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pdwtype)
+  end
+  def get_serial_number(this : IMDSPDevice3*, pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnumber, abmac)
+  end
+  def get_power_source(this : IMDSPDevice3*, pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.call(this, pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(this : IMDSPDevice3*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def get_device_icon(this : IMDSPDevice3*, hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.call(this, hicon)
+  end
+  def enum_storage(this : IMDSPDevice3*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def get_format_support(this : IMDSPDevice3*, pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.call(this, pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(this : IMDSPDevice3*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IMDSPDevice3*, pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def get_format_support2(this : IMDSPDevice3*, dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.call(this, dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(this : IMDSPDevice3*, ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.call(this, ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(this : IMDSPDevice3*, pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.call(this, pwszpnpname, nmaxchars)
+  end
+  def get_property(this : IMDSPDevice3*, pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwszpropname, pvalue)
+  end
+  def set_property(this : IMDSPDevice3*, pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwszpropname, pvalue)
+  end
+  def get_format_capability(this : IMDSPDevice3*, format : WMDM_FORMATCODE, pformatsupport : WMDM_FORMAT_CAPABILITY*) : HRESULT
+    @lpVtbl.value.get_format_capability.call(this, format, pformatsupport)
+  end
+  def device_io_control(this : IMDSPDevice3*, dwiocontrolcode : UInt32, lpinbuffer : UInt8*, ninbuffersize : UInt32, lpoutbuffer : UInt8*, pnoutbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.device_io_control.call(this, dwiocontrolcode, lpinbuffer, ninbuffersize, lpoutbuffer, pnoutbuffersize)
+  end
+  def find_storage(this : IMDSPDevice3*, findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.find_storage.call(this, findscope, pwszuniqueid, ppstorage)
+  end
+end
+struct LibWin32::IMDSPDeviceControl
+  def query_interface(this : IMDSPDeviceControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPDeviceControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPDeviceControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dc_status(this : IMDSPDeviceControl*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_dc_status.call(this, pdwstatus)
+  end
+  def get_capabilities(this : IMDSPDeviceControl*, pdwcapabilitiesmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilitiesmask)
+  end
+  def play(this : IMDSPDeviceControl*) : HRESULT
+    @lpVtbl.value.play.call(this)
+  end
+  def record(this : IMDSPDeviceControl*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.record.call(this, pformat)
+  end
+  def pause(this : IMDSPDeviceControl*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IMDSPDeviceControl*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def stop(this : IMDSPDeviceControl*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def seek(this : IMDSPDeviceControl*, fumode : UInt32, noffset : Int32) : HRESULT
+    @lpVtbl.value.seek.call(this, fumode, noffset)
+  end
+end
+struct LibWin32::IMDSPEnumStorage
+  def query_interface(this : IMDSPEnumStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPEnumStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPEnumStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IMDSPEnumStorage*, celt : UInt32, ppstorage : IMDSPStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppstorage, pceltfetched)
+  end
+  def skip(this : IMDSPEnumStorage*, celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.call(this, celt, pceltfetched)
+  end
+  def reset(this : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IMDSPEnumStorage*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumstorage)
+  end
+end
+struct LibWin32::IMDSPStorage
+  def query_interface(this : IMDSPStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IMDSPStorage*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IMDSPStorage*, ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IMDSPStorage*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IMDSPStorage*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IMDSPStorage*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IMDSPStorage*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IMDSPStorage*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def create_storage(this : IMDSPStorage*, dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.call(this, dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(this : IMDSPStorage*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def send_opaque_command(this : IMDSPStorage*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+end
+struct LibWin32::IMDSPStorage2
+  def query_interface(this : IMDSPStorage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPStorage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPStorage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IMDSPStorage2*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IMDSPStorage2*, ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IMDSPStorage2*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IMDSPStorage2*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IMDSPStorage2*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IMDSPStorage2*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IMDSPStorage2*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def create_storage(this : IMDSPStorage2*, dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.call(this, dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(this : IMDSPStorage2*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def send_opaque_command(this : IMDSPStorage2*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IMDSPStorage2*, pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def create_storage2(this : IMDSPStorage2*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(this : IMDSPStorage2*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(this : IMDSPStorage2*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IMDSPStorage3
+  def query_interface(this : IMDSPStorage3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPStorage3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPStorage3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IMDSPStorage3*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IMDSPStorage3*, ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IMDSPStorage3*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IMDSPStorage3*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IMDSPStorage3*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IMDSPStorage3*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IMDSPStorage3*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def create_storage(this : IMDSPStorage3*, dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.call(this, dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(this : IMDSPStorage3*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def send_opaque_command(this : IMDSPStorage3*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IMDSPStorage3*, pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def create_storage2(this : IMDSPStorage3*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(this : IMDSPStorage3*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(this : IMDSPStorage3*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(this : IMDSPStorage3*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, pmetadata)
+  end
+  def set_metadata(this : IMDSPStorage3*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.call(this, pmetadata)
+  end
+end
+struct LibWin32::IMDSPStorage4
+  def query_interface(this : IMDSPStorage4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPStorage4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPStorage4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_attributes(this : IMDSPStorage4*, dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.call(this, dwattributes, pformat)
+  end
+  def get_storage_globals(this : IMDSPStorage4*, ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.call(this, ppstorageglobals)
+  end
+  def get_attributes(this : IMDSPStorage4*, pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattributes, pformat)
+  end
+  def get_name(this : IMDSPStorage4*, pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, nmaxchars)
+  end
+  def get_date(this : IMDSPStorage4*, pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdatetimeutc)
+  end
+  def get_size(this : IMDSPStorage4*, pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(this : IMDSPStorage4*, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pprights, pnrightscount, abmac)
+  end
+  def create_storage(this : IMDSPStorage4*, dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.call(this, dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(this : IMDSPStorage4*, ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.call(this, ppenumstorage)
+  end
+  def send_opaque_command(this : IMDSPStorage4*, pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.call(this, pcommand)
+  end
+  def get_storage(this : IMDSPStorage4*, pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.call(this, pszstoragename, ppstorage)
+  end
+  def create_storage2(this : IMDSPStorage4*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(this : IMDSPStorage4*, dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.call(this, dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(this : IMDSPStorage4*, pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.call(this, pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(this : IMDSPStorage4*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_metadata.call(this, pmetadata)
+  end
+  def set_metadata(this : IMDSPStorage4*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.call(this, pmetadata)
+  end
+  def set_references(this : IMDSPStorage4*, dwrefs : UInt32, ppispstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.set_references.call(this, dwrefs, ppispstorage)
+  end
+  def get_references(this : IMDSPStorage4*, pdwrefs : UInt32*, pppispstorage : IMDSPStorage**) : HRESULT
+    @lpVtbl.value.get_references.call(this, pdwrefs, pppispstorage)
+  end
+  def create_storage_with_metadata(this : IMDSPStorage4*, dwattributes : UInt32, pwszname : LibC::LPWSTR, pmetadata : IWMDMMetaData, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage_with_metadata.call(this, dwattributes, pwszname, pmetadata, qwfilesize, ppnewstorage)
+  end
+  def get_specified_metadata(this : IMDSPStorage4*, cproperties : UInt32, ppwszpropnames : LibC::LPWSTR*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_specified_metadata.call(this, cproperties, ppwszpropnames, pmetadata)
+  end
+  def find_storage(this : IMDSPStorage4*, findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.find_storage.call(this, findscope, pwszuniqueid, ppstorage)
+  end
+  def get_parent(this : IMDSPStorage4*, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppstorage)
+  end
+end
+struct LibWin32::IMDSPStorageGlobals
+  def query_interface(this : IMDSPStorageGlobals*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPStorageGlobals*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPStorageGlobals*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IMDSPStorageGlobals*, pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdwcapabilities)
+  end
+  def get_serial_number(this : IMDSPStorageGlobals*, pserialnum : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, pserialnum, abmac)
+  end
+  def get_total_size(this : IMDSPStorageGlobals*, pdwtotalsizelow : UInt32*, pdwtotalsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_size.call(this, pdwtotalsizelow, pdwtotalsizehigh)
+  end
+  def get_total_free(this : IMDSPStorageGlobals*, pdwfreelow : UInt32*, pdwfreehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_free.call(this, pdwfreelow, pdwfreehigh)
+  end
+  def get_total_bad(this : IMDSPStorageGlobals*, pdwbadlow : UInt32*, pdwbadhigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_bad.call(this, pdwbadlow, pdwbadhigh)
+  end
+  def get_status(this : IMDSPStorageGlobals*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def initialize(this : IMDSPStorageGlobals*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.initialize.call(this, fumode, pprogress)
+  end
+  def get_device(this : IMDSPStorageGlobals*, ppdevice : IMDSPDevice*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_root_storage(this : IMDSPStorageGlobals*, pproot : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_root_storage.call(this, pproot)
+  end
+end
+struct LibWin32::IMDSPObjectInfo
+  def query_interface(this : IMDSPObjectInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPObjectInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPObjectInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_play_length(this : IMDSPObjectInfo*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_length.call(this, pdwlength)
+  end
+  def set_play_length(this : IMDSPObjectInfo*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_play_length.call(this, dwlength)
+  end
+  def get_play_offset(this : IMDSPObjectInfo*, pdwoffset : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_offset.call(this, pdwoffset)
+  end
+  def set_play_offset(this : IMDSPObjectInfo*, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.set_play_offset.call(this, dwoffset)
+  end
+  def get_total_length(this : IMDSPObjectInfo*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.call(this, pdwlength)
+  end
+  def get_last_play_position(this : IMDSPObjectInfo*, pdwlastpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_play_position.call(this, pdwlastpos)
+  end
+  def get_longest_play_position(this : IMDSPObjectInfo*, pdwlongestpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_longest_play_position.call(this, pdwlongestpos)
+  end
+end
+struct LibWin32::IMDSPObject
+  def query_interface(this : IMDSPObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IMDSPObject*, fumode : UInt32) : HRESULT
+    @lpVtbl.value.open.call(this, fumode)
+  end
+  def read(this : IMDSPObject*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.read.call(this, pdata, pdwsize, abmac)
+  end
+  def write(this : IMDSPObject*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.write.call(this, pdata, pdwsize, abmac)
+  end
+  def delete(this : IMDSPObject*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.call(this, fumode, pprogress)
+  end
+  def seek(this : IMDSPObject*, fuflags : UInt32, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.seek.call(this, fuflags, dwoffset)
+  end
+  def rename(this : IMDSPObject*, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.call(this, pwsznewname, pprogress)
+  end
+  def move(this : IMDSPObject*, fumode : UInt32, pprogress : IWMDMProgress, ptarget : IMDSPStorage) : HRESULT
+    @lpVtbl.value.move.call(this, fumode, pprogress, ptarget)
+  end
+  def close(this : IMDSPObject*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IMDSPObject2
+  def query_interface(this : IMDSPObject2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPObject2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPObject2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IMDSPObject2*, fumode : UInt32) : HRESULT
+    @lpVtbl.value.open.call(this, fumode)
+  end
+  def read(this : IMDSPObject2*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.read.call(this, pdata, pdwsize, abmac)
+  end
+  def write(this : IMDSPObject2*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.write.call(this, pdata, pdwsize, abmac)
+  end
+  def delete(this : IMDSPObject2*, fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.call(this, fumode, pprogress)
+  end
+  def seek(this : IMDSPObject2*, fuflags : UInt32, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.seek.call(this, fuflags, dwoffset)
+  end
+  def rename(this : IMDSPObject2*, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.call(this, pwsznewname, pprogress)
+  end
+  def move(this : IMDSPObject2*, fumode : UInt32, pprogress : IWMDMProgress, ptarget : IMDSPStorage) : HRESULT
+    @lpVtbl.value.move.call(this, fumode, pprogress, ptarget)
+  end
+  def close(this : IMDSPObject2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def read_on_clear_channel(this : IMDSPObject2*, pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.read_on_clear_channel.call(this, pdata, pdwsize)
+  end
+  def write_on_clear_channel(this : IMDSPObject2*, pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.write_on_clear_channel.call(this, pdata, pdwsize)
+  end
+end
+struct LibWin32::IMDSPDirectTransfer
+  def query_interface(this : IMDSPDirectTransfer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPDirectTransfer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPDirectTransfer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_to_device(this : IMDSPDirectTransfer*, pwszsourcefilepath : LibC::LPWSTR, psourceoperation : IWMDMOperation, fuflags : UInt32, pwszdestinationname : LibC::LPWSTR, psourcemetadata : IWMDMMetaData, ptransferprogress : IWMDMProgress, ppnewobject : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.transfer_to_device.call(this, pwszsourcefilepath, psourceoperation, fuflags, pwszdestinationname, psourcemetadata, ptransferprogress, ppnewobject)
+  end
+end
+struct LibWin32::IMDSPRevoked
+  def query_interface(this : IMDSPRevoked*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMDSPRevoked*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMDSPRevoked*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_revocation_url(this : IMDSPRevoked*, ppwszrevocationurl : LibC::LPWSTR*, pdwbufferlen : UInt32*) : HRESULT
+    @lpVtbl.value.get_revocation_url.call(this, ppwszrevocationurl, pdwbufferlen)
+  end
+end
+struct LibWin32::ISCPSecureAuthenticate
+  def query_interface(this : ISCPSecureAuthenticate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureAuthenticate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureAuthenticate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_secure_query(this : ISCPSecureAuthenticate*, ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.call(this, ppsecurequery)
+  end
+end
+struct LibWin32::ISCPSecureAuthenticate2
+  def query_interface(this : ISCPSecureAuthenticate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureAuthenticate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureAuthenticate2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_secure_query(this : ISCPSecureAuthenticate2*, ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.call(this, ppsecurequery)
+  end
+  def get_scp_session(this : ISCPSecureAuthenticate2*, ppscpsession : ISCPSession*) : HRESULT
+    @lpVtbl.value.get_scp_session.call(this, ppscpsession)
+  end
+end
+struct LibWin32::ISCPSecureQuery
+  def query_interface(this : ISCPSecureQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data_demands(this : ISCPSecureQuery*, pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.call(this, pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(this : ISCPSecureQuery*, fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.call(this, fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(this : ISCPSecureQuery*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(this : ISCPSecureQuery*, pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+end
+struct LibWin32::ISCPSecureQuery2
+  def query_interface(this : ISCPSecureQuery2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureQuery2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureQuery2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data_demands(this : ISCPSecureQuery2*, pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.call(this, pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(this : ISCPSecureQuery2*, fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.call(this, fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(this : ISCPSecureQuery2*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(this : ISCPSecureQuery2*, pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+  def make_decision2(this : ISCPSecureQuery2*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision2.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange, abmac)
+  end
+end
+struct LibWin32::ISCPSecureExchange
+  def query_interface(this : ISCPSecureExchange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureExchange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureExchange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_container_data(this : ISCPSecureExchange*, pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.call(this, pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(this : ISCPSecureExchange*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def transfer_complete(this : ISCPSecureExchange*) : HRESULT
+    @lpVtbl.value.transfer_complete.call(this)
+  end
+end
+struct LibWin32::ISCPSecureExchange2
+  def query_interface(this : ISCPSecureExchange2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureExchange2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureExchange2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_container_data(this : ISCPSecureExchange2*, pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.call(this, pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(this : ISCPSecureExchange2*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def transfer_complete(this : ISCPSecureExchange2*) : HRESULT
+    @lpVtbl.value.transfer_complete.call(this)
+  end
+  def transfer_container_data2(this : ISCPSecureExchange2*, pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data2.call(this, pdata, dwsize, pprogresscallback, pfureadyflags, abmac)
+  end
+end
+struct LibWin32::ISCPSecureExchange3
+  def query_interface(this : ISCPSecureExchange3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureExchange3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureExchange3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transfer_container_data(this : ISCPSecureExchange3*, pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.call(this, pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(this : ISCPSecureExchange3*, pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.call(this, pdata, pdwsize, abmac)
+  end
+  def transfer_complete(this : ISCPSecureExchange3*) : HRESULT
+    @lpVtbl.value.transfer_complete.call(this)
+  end
+  def transfer_container_data2(this : ISCPSecureExchange3*, pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data2.call(this, pdata, dwsize, pprogresscallback, pfureadyflags, abmac)
+  end
+  def transfer_container_data_on_clear_channel(this : ISCPSecureExchange3*, pdevice : IMDSPDevice, pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*) : HRESULT
+    @lpVtbl.value.transfer_container_data_on_clear_channel.call(this, pdevice, pdata, dwsize, pprogresscallback, pfureadyflags)
+  end
+  def get_object_data_on_clear_channel(this : ISCPSecureExchange3*, pdevice : IMDSPDevice, pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_data_on_clear_channel.call(this, pdevice, pdata, pdwsize)
+  end
+  def transfer_complete_for_device(this : ISCPSecureExchange3*, pdevice : IMDSPDevice) : HRESULT
+    @lpVtbl.value.transfer_complete_for_device.call(this, pdevice)
+  end
+end
+struct LibWin32::ISCPSession
+  def query_interface(this : ISCPSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_session(this : ISCPSession*, pidevice : IMDSPDevice, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.begin_session.call(this, pidevice, pctx, dwsizectx)
+  end
+  def end_session(this : ISCPSession*, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, pctx, dwsizectx)
+  end
+  def get_secure_query(this : ISCPSession*, ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.call(this, ppsecurequery)
+  end
+end
+struct LibWin32::ISCPSecureQuery3
+  def query_interface(this : ISCPSecureQuery3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCPSecureQuery3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCPSecureQuery3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data_demands(this : ISCPSecureQuery3*, pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.call(this, pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(this : ISCPSecureQuery3*, fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.call(this, fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(this : ISCPSecureQuery3*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(this : ISCPSecureQuery3*, pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.call(this, pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+  def make_decision2(this : ISCPSecureQuery3*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision2.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange, abmac)
+  end
+  def get_rights_on_clear_channel(this : ISCPSecureQuery3*, pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprogresscallback : IWMDMProgress3, pprights : WMDMRIGHTS**, pnrightscount : UInt32*) : HRESULT
+    @lpVtbl.value.get_rights_on_clear_channel.call(this, pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprogresscallback, pprights, pnrightscount)
+  end
+  def make_decision_on_clear_channel(this : ISCPSecureQuery3*, fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pprogresscallback : IWMDMProgress3, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*) : HRESULT
+    @lpVtbl.value.make_decision_on_clear_channel.call(this, fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pprogresscallback, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange)
+  end
+end
+struct LibWin32::IComponentAuthenticate
+  def query_interface(this : IComponentAuthenticate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IComponentAuthenticate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IComponentAuthenticate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def sac_auth(this : IComponentAuthenticate*, dwprotocolid : UInt32, dwpass : UInt32, pbdatain : UInt8*, dwdatainlen : UInt32, ppbdataout : UInt8**, pdwdataoutlen : UInt32*) : HRESULT
+    @lpVtbl.value.sac_auth.call(this, dwprotocolid, dwpass, pbdatain, dwdatainlen, ppbdataout, pdwdataoutlen)
+  end
+  def sac_get_protocols(this : IComponentAuthenticate*, ppdwprotocols : UInt32**, pdwprotocolcount : UInt32*) : HRESULT
+    @lpVtbl.value.sac_get_protocols.call(this, ppdwprotocols, pdwprotocolcount)
+  end
+end
+struct LibWin32::IWMDMLogger
+  def query_interface(this : IWMDMLogger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDMLogger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDMLogger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_enabled(this : IWMDMLogger*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled.call(this, pfenabled)
+  end
+  def enable(this : IWMDMLogger*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable.call(this, fenable)
+  end
+  def get_log_file_name(this : IWMDMLogger*, pszfilename : PSTR, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_log_file_name.call(this, pszfilename, nmaxchars)
+  end
+  def set_log_file_name(this : IWMDMLogger*, pszfilename : PSTR) : HRESULT
+    @lpVtbl.value.set_log_file_name.call(this, pszfilename)
+  end
+  def log_string(this : IWMDMLogger*, dwflags : UInt32, pszsrcname : PSTR, pszlog : PSTR) : HRESULT
+    @lpVtbl.value.log_string.call(this, dwflags, pszsrcname, pszlog)
+  end
+  def log_dword(this : IWMDMLogger*, dwflags : UInt32, pszsrcname : PSTR, pszlogformat : PSTR, dwlog : UInt32) : HRESULT
+    @lpVtbl.value.log_dword.call(this, dwflags, pszsrcname, pszlogformat, dwlog)
+  end
+  def reset(this : IWMDMLogger*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_size_params(this : IWMDMLogger*, pdwmaxsize : UInt32*, pdwshrinktosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_size_params.call(this, pdwmaxsize, pdwshrinktosize)
+  end
+  def set_size_params(this : IWMDMLogger*, dwmaxsize : UInt32, dwshrinktosize : UInt32) : HRESULT
+    @lpVtbl.value.set_size_params.call(this, dwmaxsize, dwshrinktosize)
+  end
 end

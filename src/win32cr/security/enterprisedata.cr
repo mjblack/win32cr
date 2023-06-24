@@ -135,11 +135,110 @@ lib LibWin32
   fun SrpHostingInitialize(version : SRPHOSTING_VERSION, type : SRPHOSTING_TYPE, pvdata : Void*, cbdata : UInt32) : HRESULT
 
   # Params # type : SRPHOSTING_TYPE [In]
-  fun SrpHostingTerminate(type : SRPHOSTING_TYPE)
+  fun SrpHostingTerminate(type : SRPHOSTING_TYPE) : Void
 
   # Params # fileorfolderpath : LibC::LPWSTR [In],identity : LibC::LPWSTR [In]
   fun ProtectFileToEnterpriseIdentity(fileorfolderpath : LibC::LPWSTR, identity : LibC::LPWSTR) : HRESULT
 
   # Params # fileorfolderpath : LibC::LPWSTR [In],options : FILE_UNPROTECT_OPTIONS* [In]
   fun UnprotectFile(fileorfolderpath : LibC::LPWSTR, options : FILE_UNPROTECT_OPTIONS*) : HRESULT
+end
+struct LibWin32::IProtectionPolicyManagerInterop
+  def query_interface(this : IProtectionPolicyManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProtectionPolicyManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProtectionPolicyManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IProtectionPolicyManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IProtectionPolicyManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IProtectionPolicyManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def request_access_for_window_async(this : IProtectionPolicyManagerInterop*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, targetidentity : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_for_window_async.call(this, appwindow, sourceidentity, targetidentity, riid, asyncoperation)
+  end
+  def get_for_window(this : IProtectionPolicyManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, result : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, result)
+  end
+end
+struct LibWin32::IProtectionPolicyManagerInterop2
+  def query_interface(this : IProtectionPolicyManagerInterop2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProtectionPolicyManagerInterop2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProtectionPolicyManagerInterop2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IProtectionPolicyManagerInterop2*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IProtectionPolicyManagerInterop2*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IProtectionPolicyManagerInterop2*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def request_access_for_app_with_window_async(this : IProtectionPolicyManagerInterop2*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, apppackagefamilyname : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_for_app_with_window_async.call(this, appwindow, sourceidentity, apppackagefamilyname, riid, asyncoperation)
+  end
+  def request_access_with_auditing_info_for_window_async(this : IProtectionPolicyManagerInterop2*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, targetidentity : HSTRING, auditinfounk : IUnknown, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_with_auditing_info_for_window_async.call(this, appwindow, sourceidentity, targetidentity, auditinfounk, riid, asyncoperation)
+  end
+  def request_access_with_message_for_window_async(this : IProtectionPolicyManagerInterop2*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, targetidentity : HSTRING, auditinfounk : IUnknown, messagefromapp : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_with_message_for_window_async.call(this, appwindow, sourceidentity, targetidentity, auditinfounk, messagefromapp, riid, asyncoperation)
+  end
+  def request_access_for_app_with_auditing_info_for_window_async(this : IProtectionPolicyManagerInterop2*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, apppackagefamilyname : HSTRING, auditinfounk : IUnknown, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_for_app_with_auditing_info_for_window_async.call(this, appwindow, sourceidentity, apppackagefamilyname, auditinfounk, riid, asyncoperation)
+  end
+  def request_access_for_app_with_message_for_window_async(this : IProtectionPolicyManagerInterop2*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, apppackagefamilyname : HSTRING, auditinfounk : IUnknown, messagefromapp : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_for_app_with_message_for_window_async.call(this, appwindow, sourceidentity, apppackagefamilyname, auditinfounk, messagefromapp, riid, asyncoperation)
+  end
+end
+struct LibWin32::IProtectionPolicyManagerInterop3
+  def query_interface(this : IProtectionPolicyManagerInterop3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProtectionPolicyManagerInterop3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProtectionPolicyManagerInterop3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IProtectionPolicyManagerInterop3*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IProtectionPolicyManagerInterop3*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IProtectionPolicyManagerInterop3*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def request_access_with_behavior_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, targetidentity : HSTRING, auditinfounk : IUnknown, messagefromapp : HSTRING, behavior : UInt32, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_with_behavior_for_window_async.call(this, appwindow, sourceidentity, targetidentity, auditinfounk, messagefromapp, behavior, riid, asyncoperation)
+  end
+  def request_access_for_app_with_behavior_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceidentity : HSTRING, apppackagefamilyname : HSTRING, auditinfounk : IUnknown, messagefromapp : HSTRING, behavior : UInt32, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_for_app_with_behavior_for_window_async.call(this, appwindow, sourceidentity, apppackagefamilyname, auditinfounk, messagefromapp, behavior, riid, asyncoperation)
+  end
+  def request_access_to_files_for_app_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceitemlistunk : IUnknown, apppackagefamilyname : HSTRING, auditinfounk : IUnknown, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_to_files_for_app_for_window_async.call(this, appwindow, sourceitemlistunk, apppackagefamilyname, auditinfounk, riid, asyncoperation)
+  end
+  def request_access_to_files_for_app_with_message_and_behavior_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceitemlistunk : IUnknown, apppackagefamilyname : HSTRING, auditinfounk : IUnknown, messagefromapp : HSTRING, behavior : UInt32, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_to_files_for_app_with_message_and_behavior_for_window_async.call(this, appwindow, sourceitemlistunk, apppackagefamilyname, auditinfounk, messagefromapp, behavior, riid, asyncoperation)
+  end
+  def request_access_to_files_for_process_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceitemlistunk : IUnknown, processid : UInt32, auditinfounk : IUnknown, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_to_files_for_process_for_window_async.call(this, appwindow, sourceitemlistunk, processid, auditinfounk, riid, asyncoperation)
+  end
+  def request_access_to_files_for_process_with_message_and_behavior_for_window_async(this : IProtectionPolicyManagerInterop3*, appwindow : LibC::HANDLE, sourceitemlistunk : IUnknown, processid : UInt32, auditinfounk : IUnknown, messagefromapp : HSTRING, behavior : UInt32, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_access_to_files_for_process_with_message_and_behavior_for_window_async.call(this, appwindow, sourceitemlistunk, processid, auditinfounk, messagefromapp, behavior, riid, asyncoperation)
+  end
 end

@@ -3469,3 +3469,4032 @@ lib LibWin32
   # Params # 
   fun UninitLocalMsCtfMonitor : HRESULT
 end
+struct LibWin32::ITextStoreACP
+  def query_interface(this : ITextStoreACP*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACP*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACP*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_sink(this : ITextStoreACP*, riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.call(this, riid, punk, dwmask)
+  end
+  def unadvise_sink(this : ITextStoreACP*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.call(this, punk)
+  end
+  def request_lock(this : ITextStoreACP*, dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.call(this, dwlockflags, phrsession)
+  end
+  def get_status(this : ITextStoreACP*, pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdcs)
+  end
+  def query_insert(this : ITextStoreACP*, acpteststart : Int32, acptestend : Int32, cch : UInt32, pacpresultstart : Int32*, pacpresultend : Int32*) : HRESULT
+    @lpVtbl.value.query_insert.call(this, acpteststart, acptestend, cch, pacpresultstart, pacpresultend)
+  end
+  def get_selection(this : ITextStoreACP*, ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ACP*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(this : ITextStoreACP*, ulcount : UInt32, pselection : TS_SELECTION_ACP*) : HRESULT
+    @lpVtbl.value.set_selection.call(this, ulcount, pselection)
+  end
+  def get_text(this : ITextStoreACP*, acpstart : Int32, acpend : Int32, pchplain : Char*, cchplainreq : UInt32, pcchplainret : UInt32*, prgruninfo : TS_RUNINFO*, cruninforeq : UInt32, pcruninforet : UInt32*, pacpnext : Int32*) : HRESULT
+    @lpVtbl.value.get_text.call(this, acpstart, acpend, pchplain, cchplainreq, pcchplainret, prgruninfo, cruninforeq, pcruninforet, pacpnext)
+  end
+  def set_text(this : ITextStoreACP*, dwflags : UInt32, acpstart : Int32, acpend : Int32, pchtext : Char*, cch : UInt32, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.set_text.call(this, dwflags, acpstart, acpend, pchtext, cch, pchange)
+  end
+  def get_formatted_text(this : ITextStoreACP*, acpstart : Int32, acpend : Int32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, acpstart, acpend, ppdataobject)
+  end
+  def get_embedded(this : ITextStoreACP*, acppos : Int32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.call(this, acppos, rguidservice, riid, ppunk)
+  end
+  def query_insert_embedded(this : ITextStoreACP*, pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.call(this, pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_embedded(this : ITextStoreACP*, dwflags : UInt32, acpstart : Int32, acpend : Int32, pdataobject : IDataObject, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded.call(this, dwflags, acpstart, acpend, pdataobject, pchange)
+  end
+  def insert_text_at_selection(this : ITextStoreACP*, dwflags : UInt32, pchtext : Char*, cch : UInt32, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.call(this, dwflags, pchtext, cch, pacpstart, pacpend, pchange)
+  end
+  def insert_embedded_at_selection(this : ITextStoreACP*, dwflags : UInt32, pdataobject : IDataObject, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.call(this, dwflags, pdataobject, pacpstart, pacpend, pchange)
+  end
+  def request_supported_attrs(this : ITextStoreACP*, dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.call(this, dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(this : ITextStoreACP*, acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.call(this, acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(this : ITextStoreACP*, acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.call(this, acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(this : ITextStoreACP*, acpstart : Int32, acphalt : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pacpnext : Int32*, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.call(this, acpstart, acphalt, cfilterattrs, pafilterattrs, dwflags, pacpnext, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(this : ITextStoreACP*, ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.call(this, ulcount, paattrvals, pcfetched)
+  end
+  def get_end_acp(this : ITextStoreACP*, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_end_acp.call(this, pacp)
+  end
+  def get_active_view(this : ITextStoreACP*, pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.call(this, pvcview)
+  end
+  def get_acp_from_point(this : ITextStoreACP*, vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.call(this, vcview, ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(this : ITextStoreACP*, vcview : UInt32, acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.call(this, vcview, acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(this : ITextStoreACP*, vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.call(this, vcview, prc)
+  end
+  def get_wnd(this : ITextStoreACP*, vcview : UInt32, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.call(this, vcview, phwnd)
+  end
+end
+struct LibWin32::ITextStoreACP2
+  def query_interface(this : ITextStoreACP2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACP2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACP2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_sink(this : ITextStoreACP2*, riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.call(this, riid, punk, dwmask)
+  end
+  def unadvise_sink(this : ITextStoreACP2*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.call(this, punk)
+  end
+  def request_lock(this : ITextStoreACP2*, dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.call(this, dwlockflags, phrsession)
+  end
+  def get_status(this : ITextStoreACP2*, pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdcs)
+  end
+  def query_insert(this : ITextStoreACP2*, acpteststart : Int32, acptestend : Int32, cch : UInt32, pacpresultstart : Int32*, pacpresultend : Int32*) : HRESULT
+    @lpVtbl.value.query_insert.call(this, acpteststart, acptestend, cch, pacpresultstart, pacpresultend)
+  end
+  def get_selection(this : ITextStoreACP2*, ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ACP*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(this : ITextStoreACP2*, ulcount : UInt32, pselection : TS_SELECTION_ACP*) : HRESULT
+    @lpVtbl.value.set_selection.call(this, ulcount, pselection)
+  end
+  def get_text(this : ITextStoreACP2*, acpstart : Int32, acpend : Int32, pchplain : Char*, cchplainreq : UInt32, pcchplainret : UInt32*, prgruninfo : TS_RUNINFO*, cruninforeq : UInt32, pcruninforet : UInt32*, pacpnext : Int32*) : HRESULT
+    @lpVtbl.value.get_text.call(this, acpstart, acpend, pchplain, cchplainreq, pcchplainret, prgruninfo, cruninforeq, pcruninforet, pacpnext)
+  end
+  def set_text(this : ITextStoreACP2*, dwflags : UInt32, acpstart : Int32, acpend : Int32, pchtext : Char*, cch : UInt32, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.set_text.call(this, dwflags, acpstart, acpend, pchtext, cch, pchange)
+  end
+  def get_formatted_text(this : ITextStoreACP2*, acpstart : Int32, acpend : Int32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, acpstart, acpend, ppdataobject)
+  end
+  def get_embedded(this : ITextStoreACP2*, acppos : Int32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.call(this, acppos, rguidservice, riid, ppunk)
+  end
+  def query_insert_embedded(this : ITextStoreACP2*, pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.call(this, pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_embedded(this : ITextStoreACP2*, dwflags : UInt32, acpstart : Int32, acpend : Int32, pdataobject : IDataObject, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded.call(this, dwflags, acpstart, acpend, pdataobject, pchange)
+  end
+  def insert_text_at_selection(this : ITextStoreACP2*, dwflags : UInt32, pchtext : Char*, cch : UInt32, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.call(this, dwflags, pchtext, cch, pacpstart, pacpend, pchange)
+  end
+  def insert_embedded_at_selection(this : ITextStoreACP2*, dwflags : UInt32, pdataobject : IDataObject, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.call(this, dwflags, pdataobject, pacpstart, pacpend, pchange)
+  end
+  def request_supported_attrs(this : ITextStoreACP2*, dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.call(this, dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(this : ITextStoreACP2*, acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.call(this, acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(this : ITextStoreACP2*, acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.call(this, acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(this : ITextStoreACP2*, acpstart : Int32, acphalt : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pacpnext : Int32*, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.call(this, acpstart, acphalt, cfilterattrs, pafilterattrs, dwflags, pacpnext, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(this : ITextStoreACP2*, ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.call(this, ulcount, paattrvals, pcfetched)
+  end
+  def get_end_acp(this : ITextStoreACP2*, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_end_acp.call(this, pacp)
+  end
+  def get_active_view(this : ITextStoreACP2*, pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.call(this, pvcview)
+  end
+  def get_acp_from_point(this : ITextStoreACP2*, vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.call(this, vcview, ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(this : ITextStoreACP2*, vcview : UInt32, acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.call(this, vcview, acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(this : ITextStoreACP2*, vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.call(this, vcview, prc)
+  end
+end
+struct LibWin32::ITextStoreACPSink
+  def query_interface(this : ITextStoreACPSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACPSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACPSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_text_change(this : ITextStoreACPSink*, dwflags : TEXT_STORE_TEXT_CHANGE_FLAGS, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.on_text_change.call(this, dwflags, pchange)
+  end
+  def on_selection_change(this : ITextStoreACPSink*) : HRESULT
+    @lpVtbl.value.on_selection_change.call(this)
+  end
+  def on_layout_change(this : ITextStoreACPSink*, lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this, lcode, vcview)
+  end
+  def on_status_change(this : ITextStoreACPSink*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def on_attrs_change(this : ITextStoreACPSink*, acpstart : Int32, acpend : Int32, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.call(this, acpstart, acpend, cattrs, paattrs)
+  end
+  def on_lock_granted(this : ITextStoreACPSink*, dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.call(this, dwlockflags)
+  end
+  def on_start_edit_transaction(this : ITextStoreACPSink*) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.call(this)
+  end
+  def on_end_edit_transaction(this : ITextStoreACPSink*) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.call(this)
+  end
+end
+struct LibWin32::IAnchor
+  def query_interface(this : IAnchor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAnchor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAnchor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_gravity(this : IAnchor*, gravity : TsGravity) : HRESULT
+    @lpVtbl.value.set_gravity.call(this, gravity)
+  end
+  def get_gravity(this : IAnchor*, pgravity : TsGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.call(this, pgravity)
+  end
+  def is_equal(this : IAnchor*, pawith : IAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pawith, pfequal)
+  end
+  def compare(this : IAnchor*, pawith : IAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare.call(this, pawith, plresult)
+  end
+  def shift(this : IAnchor*, dwflags : UInt32, cchreq : Int32, pcch : Int32*, pahaltanchor : IAnchor) : HRESULT
+    @lpVtbl.value.shift.call(this, dwflags, cchreq, pcch, pahaltanchor)
+  end
+  def shift_to(this : IAnchor*, pasite : IAnchor) : HRESULT
+    @lpVtbl.value.shift_to.call(this, pasite)
+  end
+  def shift_region(this : IAnchor*, dwflags : UInt32, dir : TsShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_region.call(this, dwflags, dir, pfnoregion)
+  end
+  def set_change_history_mask(this : IAnchor*, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.set_change_history_mask.call(this, dwmask)
+  end
+  def get_change_history(this : IAnchor*, pdwhistory : ANCHOR_CHANGE_HISTORY_FLAGS*) : HRESULT
+    @lpVtbl.value.get_change_history.call(this, pdwhistory)
+  end
+  def clear_change_history(this : IAnchor*) : HRESULT
+    @lpVtbl.value.clear_change_history.call(this)
+  end
+  def clone(this : IAnchor*, ppaclone : IAnchor*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppaclone)
+  end
+end
+struct LibWin32::ITextStoreAnchor
+  def query_interface(this : ITextStoreAnchor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreAnchor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreAnchor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_sink(this : ITextStoreAnchor*, riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.call(this, riid, punk, dwmask)
+  end
+  def unadvise_sink(this : ITextStoreAnchor*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.call(this, punk)
+  end
+  def request_lock(this : ITextStoreAnchor*, dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.call(this, dwlockflags, phrsession)
+  end
+  def get_status(this : ITextStoreAnchor*, pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdcs)
+  end
+  def query_insert(this : ITextStoreAnchor*, pateststart : IAnchor, patestend : IAnchor, cch : UInt32, pparesultstart : IAnchor*, pparesultend : IAnchor*) : HRESULT
+    @lpVtbl.value.query_insert.call(this, pateststart, patestend, cch, pparesultstart, pparesultend)
+  end
+  def get_selection(this : ITextStoreAnchor*, ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ANCHOR*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(this : ITextStoreAnchor*, ulcount : UInt32, pselection : TS_SELECTION_ANCHOR*) : HRESULT
+    @lpVtbl.value.set_selection.call(this, ulcount, pselection)
+  end
+  def get_text(this : ITextStoreAnchor*, dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pchtext : Char*, cchreq : UInt32, pcch : UInt32*, fupdateanchor : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_text.call(this, dwflags, pastart, paend, pchtext, cchreq, pcch, fupdateanchor)
+  end
+  def set_text(this : ITextStoreAnchor*, dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pchtext : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_text.call(this, dwflags, pastart, paend, pchtext, cch)
+  end
+  def get_formatted_text(this : ITextStoreAnchor*, pastart : IAnchor, paend : IAnchor, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, pastart, paend, ppdataobject)
+  end
+  def get_embedded(this : ITextStoreAnchor*, dwflags : UInt32, papos : IAnchor, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.call(this, dwflags, papos, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(this : ITextStoreAnchor*, dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.call(this, dwflags, pastart, paend, pdataobject)
+  end
+  def request_supported_attrs(this : ITextStoreAnchor*, dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.call(this, dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(this : ITextStoreAnchor*, papos : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.call(this, papos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(this : ITextStoreAnchor*, papos : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.call(this, papos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(this : ITextStoreAnchor*, pastart : IAnchor, pahalt : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.call(this, pastart, pahalt, cfilterattrs, pafilterattrs, dwflags, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(this : ITextStoreAnchor*, ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.call(this, ulcount, paattrvals, pcfetched)
+  end
+  def get_start(this : ITextStoreAnchor*, ppastart : IAnchor*) : HRESULT
+    @lpVtbl.value.get_start.call(this, ppastart)
+  end
+  def get_end(this : ITextStoreAnchor*, ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.get_end.call(this, ppaend)
+  end
+  def get_active_view(this : ITextStoreAnchor*, pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.call(this, pvcview)
+  end
+  def get_anchor_from_point(this : ITextStoreAnchor*, vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, ppasite : IAnchor*) : HRESULT
+    @lpVtbl.value.get_anchor_from_point.call(this, vcview, ptscreen, dwflags, ppasite)
+  end
+  def get_text_ext(this : ITextStoreAnchor*, vcview : UInt32, pastart : IAnchor, paend : IAnchor, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.call(this, vcview, pastart, paend, prc, pfclipped)
+  end
+  def get_screen_ext(this : ITextStoreAnchor*, vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.call(this, vcview, prc)
+  end
+  def get_wnd(this : ITextStoreAnchor*, vcview : UInt32, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.call(this, vcview, phwnd)
+  end
+  def query_insert_embedded(this : ITextStoreAnchor*, pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.call(this, pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_text_at_selection(this : ITextStoreAnchor*, dwflags : UInt32, pchtext : Char*, cch : UInt32, ppastart : IAnchor*, ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.call(this, dwflags, pchtext, cch, ppastart, ppaend)
+  end
+  def insert_embedded_at_selection(this : ITextStoreAnchor*, dwflags : UInt32, pdataobject : IDataObject, ppastart : IAnchor*, ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.call(this, dwflags, pdataobject, ppastart, ppaend)
+  end
+end
+struct LibWin32::ITextStoreAnchorSink
+  def query_interface(this : ITextStoreAnchorSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreAnchorSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreAnchorSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_text_change(this : ITextStoreAnchorSink*, dwflags : TEXT_STORE_CHANGE_FLAGS, pastart : IAnchor, paend : IAnchor) : HRESULT
+    @lpVtbl.value.on_text_change.call(this, dwflags, pastart, paend)
+  end
+  def on_selection_change(this : ITextStoreAnchorSink*) : HRESULT
+    @lpVtbl.value.on_selection_change.call(this)
+  end
+  def on_layout_change(this : ITextStoreAnchorSink*, lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this, lcode, vcview)
+  end
+  def on_status_change(this : ITextStoreAnchorSink*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def on_attrs_change(this : ITextStoreAnchorSink*, pastart : IAnchor, paend : IAnchor, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.call(this, pastart, paend, cattrs, paattrs)
+  end
+  def on_lock_granted(this : ITextStoreAnchorSink*, dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.call(this, dwlockflags)
+  end
+  def on_start_edit_transaction(this : ITextStoreAnchorSink*) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.call(this)
+  end
+  def on_end_edit_transaction(this : ITextStoreAnchorSink*) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.call(this)
+  end
+end
+struct LibWin32::ITfLangBarMgr
+  def query_interface(this : ITfLangBarMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_event_sink(this : ITfLangBarMgr*, psink : ITfLangBarEventSink, hwnd : LibC::HANDLE, dwflags : UInt32, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_event_sink.call(this, psink, hwnd, dwflags, pdwcookie)
+  end
+  def unadvise_event_sink(this : ITfLangBarMgr*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_event_sink.call(this, dwcookie)
+  end
+  def get_thread_marshal_interface(this : ITfLangBarMgr*, dwthreadid : UInt32, dwtype : UInt32, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_thread_marshal_interface.call(this, dwthreadid, dwtype, riid, ppunk)
+  end
+  def get_thread_lang_bar_item_mgr(this : ITfLangBarMgr*, dwthreadid : UInt32, pplbi : ITfLangBarItemMgr*, pdwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_lang_bar_item_mgr.call(this, dwthreadid, pplbi, pdwthreadid)
+  end
+  def get_input_processor_profiles(this : ITfLangBarMgr*, dwthreadid : UInt32, ppaip : ITfInputProcessorProfiles*, pdwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_processor_profiles.call(this, dwthreadid, ppaip, pdwthreadid)
+  end
+  def restore_last_focus(this : ITfLangBarMgr*, pdwthreadid : UInt32*, fprev : LibC::BOOL) : HRESULT
+    @lpVtbl.value.restore_last_focus.call(this, pdwthreadid, fprev)
+  end
+  def set_modal_input(this : ITfLangBarMgr*, psink : ITfLangBarEventSink, dwthreadid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_modal_input.call(this, psink, dwthreadid, dwflags)
+  end
+  def show_floating(this : ITfLangBarMgr*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.show_floating.call(this, dwflags)
+  end
+  def get_show_floating_status(this : ITfLangBarMgr*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_show_floating_status.call(this, pdwflags)
+  end
+end
+struct LibWin32::ITfLangBarEventSink
+  def query_interface(this : ITfLangBarEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_set_focus(this : ITfLangBarEventSink*, dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_focus.call(this, dwthreadid)
+  end
+  def on_thread_terminate(this : ITfLangBarEventSink*, dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_thread_terminate.call(this, dwthreadid)
+  end
+  def on_thread_item_change(this : ITfLangBarEventSink*, dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_thread_item_change.call(this, dwthreadid)
+  end
+  def on_modal_input(this : ITfLangBarEventSink*, dwthreadid : UInt32, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_modal_input.call(this, dwthreadid, umsg, wparam, lparam)
+  end
+  def show_floating(this : ITfLangBarEventSink*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.show_floating.call(this, dwflags)
+  end
+  def get_item_floating_rect(this : ITfLangBarEventSink*, dwthreadid : UInt32, rguid : Guid*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_item_floating_rect.call(this, dwthreadid, rguid, prc)
+  end
+end
+struct LibWin32::ITfLangBarItemSink
+  def query_interface(this : ITfLangBarItemSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_update(this : ITfLangBarItemSink*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_update.call(this, dwflags)
+  end
+end
+struct LibWin32::IEnumTfLangBarItems
+  def query_interface(this : IEnumTfLangBarItems*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfLangBarItems*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfLangBarItems*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfLangBarItems*, ppenum : IEnumTfLangBarItems*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfLangBarItems*, ulcount : UInt32, ppitem : ITfLangBarItem*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, ppitem, pcfetched)
+  end
+  def reset(this : IEnumTfLangBarItems*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfLangBarItems*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfLangBarItemMgr
+  def query_interface(this : ITfLangBarItemMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_items(this : ITfLangBarItemMgr*, ppenum : IEnumTfLangBarItems*) : HRESULT
+    @lpVtbl.value.enum_items.call(this, ppenum)
+  end
+  def get_item(this : ITfLangBarItemMgr*, rguid : Guid*, ppitem : ITfLangBarItem*) : HRESULT
+    @lpVtbl.value.get_item.call(this, rguid, ppitem)
+  end
+  def add_item(this : ITfLangBarItemMgr*, punk : ITfLangBarItem) : HRESULT
+    @lpVtbl.value.add_item.call(this, punk)
+  end
+  def remove_item(this : ITfLangBarItemMgr*, punk : ITfLangBarItem) : HRESULT
+    @lpVtbl.value.remove_item.call(this, punk)
+  end
+  def advise_item_sink(this : ITfLangBarItemMgr*, punk : ITfLangBarItemSink, pdwcookie : UInt32*, rguiditem : Guid*) : HRESULT
+    @lpVtbl.value.advise_item_sink.call(this, punk, pdwcookie, rguiditem)
+  end
+  def unadvise_item_sink(this : ITfLangBarItemMgr*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_item_sink.call(this, dwcookie)
+  end
+  def get_item_floating_rect(this : ITfLangBarItemMgr*, dwthreadid : UInt32, rguid : Guid*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_item_floating_rect.call(this, dwthreadid, rguid, prc)
+  end
+  def get_items_status(this : ITfLangBarItemMgr*, ulcount : UInt32, prgguid : Guid*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_items_status.call(this, ulcount, prgguid, pdwstatus)
+  end
+  def get_item_num(this : ITfLangBarItemMgr*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_num.call(this, pulcount)
+  end
+  def get_items(this : ITfLangBarItemMgr*, ulcount : UInt32, ppitem : ITfLangBarItem*, pinfo : TF_LANGBARITEMINFO*, pdwstatus : UInt32*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_items.call(this, ulcount, ppitem, pinfo, pdwstatus, pcfetched)
+  end
+  def advise_items_sink(this : ITfLangBarItemMgr*, ulcount : UInt32, ppunk : ITfLangBarItemSink*, pguiditem : Guid*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_items_sink.call(this, ulcount, ppunk, pguiditem, pdwcookie)
+  end
+  def unadvise_items_sink(this : ITfLangBarItemMgr*, ulcount : UInt32, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.unadvise_items_sink.call(this, ulcount, pdwcookie)
+  end
+end
+struct LibWin32::ITfLangBarItem
+  def query_interface(this : ITfLangBarItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ITfLangBarItem*, pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_status(this : ITfLangBarItem*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def show(this : ITfLangBarItem*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def get_tooltip_string(this : ITfLangBarItem*, pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.call(this, pbstrtooltip)
+  end
+end
+struct LibWin32::ITfSystemLangBarItemSink
+  def query_interface(this : ITfSystemLangBarItemSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSystemLangBarItemSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSystemLangBarItemSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_menu(this : ITfSystemLangBarItemSink*, pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.call(this, pmenu)
+  end
+  def on_menu_select(this : ITfSystemLangBarItemSink*, wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.call(this, wid)
+  end
+end
+struct LibWin32::ITfSystemLangBarItem
+  def query_interface(this : ITfSystemLangBarItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSystemLangBarItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSystemLangBarItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_icon(this : ITfSystemLangBarItem*, hicon : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_icon.call(this, hicon)
+  end
+  def set_tooltip_string(this : ITfSystemLangBarItem*, pchtooltip : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_tooltip_string.call(this, pchtooltip, cch)
+  end
+end
+struct LibWin32::ITfSystemLangBarItemText
+  def query_interface(this : ITfSystemLangBarItemText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSystemLangBarItemText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSystemLangBarItemText*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_item_text(this : ITfSystemLangBarItemText*, pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_item_text.call(this, pch, cch)
+  end
+  def get_item_text(this : ITfSystemLangBarItemText*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_text.call(this, pbstrtext)
+  end
+end
+struct LibWin32::ITfSystemDeviceTypeLangBarItem
+  def query_interface(this : ITfSystemDeviceTypeLangBarItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSystemDeviceTypeLangBarItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSystemDeviceTypeLangBarItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_icon_mode(this : ITfSystemDeviceTypeLangBarItem*, dwflags : LANG_BAR_ITEM_ICON_MODE_FLAGS) : HRESULT
+    @lpVtbl.value.set_icon_mode.call(this, dwflags)
+  end
+  def get_icon_mode(this : ITfSystemDeviceTypeLangBarItem*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_icon_mode.call(this, pdwflags)
+  end
+end
+struct LibWin32::ITfLangBarItemButton
+  def query_interface(this : ITfLangBarItemButton*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemButton*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemButton*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ITfLangBarItemButton*, pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_status(this : ITfLangBarItemButton*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def show(this : ITfLangBarItemButton*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def get_tooltip_string(this : ITfLangBarItemButton*, pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.call(this, pbstrtooltip)
+  end
+  def on_click(this : ITfLangBarItemButton*, click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.call(this, click, pt, prcarea)
+  end
+  def init_menu(this : ITfLangBarItemButton*, pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.call(this, pmenu)
+  end
+  def on_menu_select(this : ITfLangBarItemButton*, wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.call(this, wid)
+  end
+  def get_icon(this : ITfLangBarItemButton*, phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_icon.call(this, phicon)
+  end
+  def get_text(this : ITfLangBarItemButton*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstrtext)
+  end
+end
+struct LibWin32::ITfLangBarItemBitmapButton
+  def query_interface(this : ITfLangBarItemBitmapButton*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemBitmapButton*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemBitmapButton*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ITfLangBarItemBitmapButton*, pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_status(this : ITfLangBarItemBitmapButton*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def show(this : ITfLangBarItemBitmapButton*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def get_tooltip_string(this : ITfLangBarItemBitmapButton*, pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.call(this, pbstrtooltip)
+  end
+  def on_click(this : ITfLangBarItemBitmapButton*, click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.call(this, click, pt, prcarea)
+  end
+  def init_menu(this : ITfLangBarItemBitmapButton*, pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.call(this, pmenu)
+  end
+  def on_menu_select(this : ITfLangBarItemBitmapButton*, wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.call(this, wid)
+  end
+  def get_preferred_size(this : ITfLangBarItemBitmapButton*, pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.call(this, pszdefault, psz)
+  end
+  def draw_bitmap(this : ITfLangBarItemBitmapButton*, bmwidth : Int32, bmheight : Int32, dwflags : UInt32, phbmp : HBITMAP*, phbmpmask : HBITMAP*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bmwidth, bmheight, dwflags, phbmp, phbmpmask)
+  end
+  def get_text(this : ITfLangBarItemBitmapButton*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstrtext)
+  end
+end
+struct LibWin32::ITfLangBarItemBitmap
+  def query_interface(this : ITfLangBarItemBitmap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemBitmap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemBitmap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ITfLangBarItemBitmap*, pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_status(this : ITfLangBarItemBitmap*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def show(this : ITfLangBarItemBitmap*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def get_tooltip_string(this : ITfLangBarItemBitmap*, pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.call(this, pbstrtooltip)
+  end
+  def on_click(this : ITfLangBarItemBitmap*, click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.call(this, click, pt, prcarea)
+  end
+  def get_preferred_size(this : ITfLangBarItemBitmap*, pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.call(this, pszdefault, psz)
+  end
+  def draw_bitmap(this : ITfLangBarItemBitmap*, bmwidth : Int32, bmheight : Int32, dwflags : UInt32, phbmp : HBITMAP*, phbmpmask : HBITMAP*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bmwidth, bmheight, dwflags, phbmp, phbmpmask)
+  end
+end
+struct LibWin32::ITfLangBarItemBalloon
+  def query_interface(this : ITfLangBarItemBalloon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLangBarItemBalloon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLangBarItemBalloon*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ITfLangBarItemBalloon*, pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_status(this : ITfLangBarItemBalloon*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus)
+  end
+  def show(this : ITfLangBarItemBalloon*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def get_tooltip_string(this : ITfLangBarItemBalloon*, pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.call(this, pbstrtooltip)
+  end
+  def on_click(this : ITfLangBarItemBalloon*, click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.call(this, click, pt, prcarea)
+  end
+  def get_preferred_size(this : ITfLangBarItemBalloon*, pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.call(this, pszdefault, psz)
+  end
+  def get_balloon_info(this : ITfLangBarItemBalloon*, pinfo : TF_LBBALLOONINFO*) : HRESULT
+    @lpVtbl.value.get_balloon_info.call(this, pinfo)
+  end
+end
+struct LibWin32::ITfMenu
+  def query_interface(this : ITfMenu*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMenu*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMenu*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_menu_item(this : ITfMenu*, uid : UInt32, dwflags : UInt32, hbmp : HBITMAP, hbmpmask : HBITMAP, pch : Char*, cch : UInt32, ppmenu : ITfMenu*) : HRESULT
+    @lpVtbl.value.add_menu_item.call(this, uid, dwflags, hbmp, hbmpmask, pch, cch, ppmenu)
+  end
+end
+struct LibWin32::ITfThreadMgr
+  def query_interface(this : ITfThreadMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfThreadMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfThreadMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : ITfThreadMgr*, ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.call(this, ptid)
+  end
+  def deactivate(this : ITfThreadMgr*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def create_document_mgr(this : ITfThreadMgr*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.call(this, ppdim)
+  end
+  def enum_document_mgrs(this : ITfThreadMgr*, ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.call(this, ppenum)
+  end
+  def get_focus(this : ITfThreadMgr*, ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.call(this, ppdimfocus)
+  end
+  def set_focus(this : ITfThreadMgr*, pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.call(this, pdimfocus)
+  end
+  def associate_focus(this : ITfThreadMgr*, hwnd : LibC::HANDLE, pdimnew : ITfDocumentMgr, ppdimprev : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.associate_focus.call(this, hwnd, pdimnew, ppdimprev)
+  end
+  def is_thread_focus(this : ITfThreadMgr*, pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.call(this, pfthreadfocus)
+  end
+  def get_function_provider(this : ITfThreadMgr*, clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.call(this, clsid, ppfuncprov)
+  end
+  def enum_function_providers(this : ITfThreadMgr*, ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.call(this, ppenum)
+  end
+  def get_global_compartment(this : ITfThreadMgr*, ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.call(this, ppcompmgr)
+  end
+end
+struct LibWin32::ITfThreadMgrEx
+  def query_interface(this : ITfThreadMgrEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfThreadMgrEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfThreadMgrEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : ITfThreadMgrEx*, ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.call(this, ptid)
+  end
+  def deactivate(this : ITfThreadMgrEx*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def create_document_mgr(this : ITfThreadMgrEx*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.call(this, ppdim)
+  end
+  def enum_document_mgrs(this : ITfThreadMgrEx*, ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.call(this, ppenum)
+  end
+  def get_focus(this : ITfThreadMgrEx*, ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.call(this, ppdimfocus)
+  end
+  def set_focus(this : ITfThreadMgrEx*, pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.call(this, pdimfocus)
+  end
+  def associate_focus(this : ITfThreadMgrEx*, hwnd : LibC::HANDLE, pdimnew : ITfDocumentMgr, ppdimprev : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.associate_focus.call(this, hwnd, pdimnew, ppdimprev)
+  end
+  def is_thread_focus(this : ITfThreadMgrEx*, pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.call(this, pfthreadfocus)
+  end
+  def get_function_provider(this : ITfThreadMgrEx*, clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.call(this, clsid, ppfuncprov)
+  end
+  def enum_function_providers(this : ITfThreadMgrEx*, ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.call(this, ppenum)
+  end
+  def get_global_compartment(this : ITfThreadMgrEx*, ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.call(this, ppcompmgr)
+  end
+  def activate_ex(this : ITfThreadMgrEx*, ptid : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.call(this, ptid, dwflags)
+  end
+  def get_active_flags(this : ITfThreadMgrEx*, lpdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_flags.call(this, lpdwflags)
+  end
+end
+struct LibWin32::ITfThreadMgr2
+  def query_interface(this : ITfThreadMgr2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfThreadMgr2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfThreadMgr2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : ITfThreadMgr2*, ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.call(this, ptid)
+  end
+  def deactivate(this : ITfThreadMgr2*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def create_document_mgr(this : ITfThreadMgr2*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.call(this, ppdim)
+  end
+  def enum_document_mgrs(this : ITfThreadMgr2*, ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.call(this, ppenum)
+  end
+  def get_focus(this : ITfThreadMgr2*, ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.call(this, ppdimfocus)
+  end
+  def set_focus(this : ITfThreadMgr2*, pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.call(this, pdimfocus)
+  end
+  def is_thread_focus(this : ITfThreadMgr2*, pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.call(this, pfthreadfocus)
+  end
+  def get_function_provider(this : ITfThreadMgr2*, clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.call(this, clsid, ppfuncprov)
+  end
+  def enum_function_providers(this : ITfThreadMgr2*, ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.call(this, ppenum)
+  end
+  def get_global_compartment(this : ITfThreadMgr2*, ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.call(this, ppcompmgr)
+  end
+  def activate_ex(this : ITfThreadMgr2*, ptid : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.call(this, ptid, dwflags)
+  end
+  def get_active_flags(this : ITfThreadMgr2*, lpdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_flags.call(this, lpdwflags)
+  end
+  def suspend_keystroke_handling(this : ITfThreadMgr2*) : HRESULT
+    @lpVtbl.value.suspend_keystroke_handling.call(this)
+  end
+  def resume_keystroke_handling(this : ITfThreadMgr2*) : HRESULT
+    @lpVtbl.value.resume_keystroke_handling.call(this)
+  end
+end
+struct LibWin32::ITfThreadMgrEventSink
+  def query_interface(this : ITfThreadMgrEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfThreadMgrEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfThreadMgrEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_init_document_mgr(this : ITfThreadMgrEventSink*, pdim : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_init_document_mgr.call(this, pdim)
+  end
+  def on_uninit_document_mgr(this : ITfThreadMgrEventSink*, pdim : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_uninit_document_mgr.call(this, pdim)
+  end
+  def on_set_focus(this : ITfThreadMgrEventSink*, pdimfocus : ITfDocumentMgr, pdimprevfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_set_focus.call(this, pdimfocus, pdimprevfocus)
+  end
+  def on_push_context(this : ITfThreadMgrEventSink*, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_push_context.call(this, pic)
+  end
+  def on_pop_context(this : ITfThreadMgrEventSink*, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_pop_context.call(this, pic)
+  end
+end
+struct LibWin32::ITfConfigureSystemKeystrokeFeed
+  def query_interface(this : ITfConfigureSystemKeystrokeFeed*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfConfigureSystemKeystrokeFeed*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfConfigureSystemKeystrokeFeed*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def disable_system_keystroke_feed(this : ITfConfigureSystemKeystrokeFeed*) : HRESULT
+    @lpVtbl.value.disable_system_keystroke_feed.call(this)
+  end
+  def enable_system_keystroke_feed(this : ITfConfigureSystemKeystrokeFeed*) : HRESULT
+    @lpVtbl.value.enable_system_keystroke_feed.call(this)
+  end
+end
+struct LibWin32::IEnumTfDocumentMgrs
+  def query_interface(this : IEnumTfDocumentMgrs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfDocumentMgrs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfDocumentMgrs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfDocumentMgrs*, ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfDocumentMgrs*, ulcount : UInt32, rgdocumentmgr : ITfDocumentMgr*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgdocumentmgr, pcfetched)
+  end
+  def reset(this : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfDocumentMgrs*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfDocumentMgr
+  def query_interface(this : ITfDocumentMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfDocumentMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfDocumentMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_context(this : ITfDocumentMgr*, tidowner : UInt32, dwflags : UInt32, punk : IUnknown, ppic : ITfContext*, pectextstore : UInt32*) : HRESULT
+    @lpVtbl.value.create_context.call(this, tidowner, dwflags, punk, ppic, pectextstore)
+  end
+  def push(this : ITfDocumentMgr*, pic : ITfContext) : HRESULT
+    @lpVtbl.value.push.call(this, pic)
+  end
+  def pop(this : ITfDocumentMgr*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.pop.call(this, dwflags)
+  end
+  def get_top(this : ITfDocumentMgr*, ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_top.call(this, ppic)
+  end
+  def get_base(this : ITfDocumentMgr*, ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_base.call(this, ppic)
+  end
+  def enum_contexts(this : ITfDocumentMgr*, ppenum : IEnumTfContexts*) : HRESULT
+    @lpVtbl.value.enum_contexts.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumTfContexts
+  def query_interface(this : IEnumTfContexts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfContexts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfContexts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfContexts*, ppenum : IEnumTfContexts*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfContexts*, ulcount : UInt32, rgcontext : ITfContext*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgcontext, pcfetched)
+  end
+  def reset(this : IEnumTfContexts*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfContexts*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfCompositionView
+  def query_interface(this : ITfCompositionView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCompositionView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCompositionView*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner_clsid(this : ITfCompositionView*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_owner_clsid.call(this, pclsid)
+  end
+  def get_range(this : ITfCompositionView*, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range.call(this, pprange)
+  end
+end
+struct LibWin32::IEnumITfCompositionView
+  def query_interface(this : IEnumITfCompositionView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumITfCompositionView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumITfCompositionView*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumITfCompositionView*, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumITfCompositionView*, ulcount : UInt32, rgcompositionview : ITfCompositionView*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgcompositionview, pcfetched)
+  end
+  def reset(this : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumITfCompositionView*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfComposition
+  def query_interface(this : ITfComposition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfComposition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfComposition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_range(this : ITfComposition*, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range.call(this, pprange)
+  end
+  def shift_start(this : ITfComposition*, ecwrite : UInt32, pnewstart : ITfRange) : HRESULT
+    @lpVtbl.value.shift_start.call(this, ecwrite, pnewstart)
+  end
+  def shift_end(this : ITfComposition*, ecwrite : UInt32, pnewend : ITfRange) : HRESULT
+    @lpVtbl.value.shift_end.call(this, ecwrite, pnewend)
+  end
+  def end_composition(this : ITfComposition*, ecwrite : UInt32) : HRESULT
+    @lpVtbl.value.end_composition.call(this, ecwrite)
+  end
+end
+struct LibWin32::ITfCompositionSink
+  def query_interface(this : ITfCompositionSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCompositionSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCompositionSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_composition_terminated(this : ITfCompositionSink*, ecwrite : UInt32, pcomposition : ITfComposition) : HRESULT
+    @lpVtbl.value.on_composition_terminated.call(this, ecwrite, pcomposition)
+  end
+end
+struct LibWin32::ITfContextComposition
+  def query_interface(this : ITfContextComposition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextComposition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextComposition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_composition(this : ITfContextComposition*, ecwrite : UInt32, pcompositionrange : ITfRange, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.start_composition.call(this, ecwrite, pcompositionrange, psink, ppcomposition)
+  end
+  def enum_compositions(this : ITfContextComposition*, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.enum_compositions.call(this, ppenum)
+  end
+  def find_composition(this : ITfContextComposition*, ecread : UInt32, ptestrange : ITfRange, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.find_composition.call(this, ecread, ptestrange, ppenum)
+  end
+  def take_ownership(this : ITfContextComposition*, ecwrite : UInt32, pcomposition : ITfCompositionView, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this, ecwrite, pcomposition, psink, ppcomposition)
+  end
+end
+struct LibWin32::ITfContextOwnerCompositionServices
+  def query_interface(this : ITfContextOwnerCompositionServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextOwnerCompositionServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextOwnerCompositionServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_composition(this : ITfContextOwnerCompositionServices*, ecwrite : UInt32, pcompositionrange : ITfRange, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.start_composition.call(this, ecwrite, pcompositionrange, psink, ppcomposition)
+  end
+  def enum_compositions(this : ITfContextOwnerCompositionServices*, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.enum_compositions.call(this, ppenum)
+  end
+  def find_composition(this : ITfContextOwnerCompositionServices*, ecread : UInt32, ptestrange : ITfRange, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.find_composition.call(this, ecread, ptestrange, ppenum)
+  end
+  def take_ownership(this : ITfContextOwnerCompositionServices*, ecwrite : UInt32, pcomposition : ITfCompositionView, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this, ecwrite, pcomposition, psink, ppcomposition)
+  end
+  def terminate_composition(this : ITfContextOwnerCompositionServices*, pcomposition : ITfCompositionView) : HRESULT
+    @lpVtbl.value.terminate_composition.call(this, pcomposition)
+  end
+end
+struct LibWin32::ITfContextOwnerCompositionSink
+  def query_interface(this : ITfContextOwnerCompositionSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextOwnerCompositionSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextOwnerCompositionSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_start_composition(this : ITfContextOwnerCompositionSink*, pcomposition : ITfCompositionView, pfok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_start_composition.call(this, pcomposition, pfok)
+  end
+  def on_update_composition(this : ITfContextOwnerCompositionSink*, pcomposition : ITfCompositionView, prangenew : ITfRange) : HRESULT
+    @lpVtbl.value.on_update_composition.call(this, pcomposition, prangenew)
+  end
+  def on_end_composition(this : ITfContextOwnerCompositionSink*, pcomposition : ITfCompositionView) : HRESULT
+    @lpVtbl.value.on_end_composition.call(this, pcomposition)
+  end
+end
+struct LibWin32::ITfContextView
+  def query_interface(this : ITfContextView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextView*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_range_from_point(this : ITfContextView*, ec : UInt32, ppt : POINT*, dwflags : UInt32, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range_from_point.call(this, ec, ppt, dwflags, pprange)
+  end
+  def get_text_ext(this : ITfContextView*, ec : UInt32, prange : ITfRange, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.call(this, ec, prange, prc, pfclipped)
+  end
+  def get_screen_ext(this : ITfContextView*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.call(this, prc)
+  end
+  def get_wnd(this : ITfContextView*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.call(this, phwnd)
+  end
+end
+struct LibWin32::IEnumTfContextViews
+  def query_interface(this : IEnumTfContextViews*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfContextViews*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfContextViews*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfContextViews*, ppenum : IEnumTfContextViews*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfContextViews*, ulcount : UInt32, rgviews : ITfContextView*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgviews, pcfetched)
+  end
+  def reset(this : IEnumTfContextViews*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfContextViews*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfContext
+  def query_interface(this : ITfContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request_edit_session(this : ITfContext*, tid : UInt32, pes : ITfEditSession, dwflags : TF_CONTEXT_EDIT_CONTEXT_FLAGS, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_edit_session.call(this, tid, pes, dwflags, phrsession)
+  end
+  def in_write_session(this : ITfContext*, tid : UInt32, pfwritesession : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.in_write_session.call(this, tid, pfwritesession)
+  end
+  def get_selection(this : ITfContext*, ec : UInt32, ulindex : UInt32, ulcount : UInt32, pselection : TF_SELECTION*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ec, ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(this : ITfContext*, ec : UInt32, ulcount : UInt32, pselection : TF_SELECTION*) : HRESULT
+    @lpVtbl.value.set_selection.call(this, ec, ulcount, pselection)
+  end
+  def get_start(this : ITfContext*, ec : UInt32, ppstart : ITfRange*) : HRESULT
+    @lpVtbl.value.get_start.call(this, ec, ppstart)
+  end
+  def get_end(this : ITfContext*, ec : UInt32, ppend : ITfRange*) : HRESULT
+    @lpVtbl.value.get_end.call(this, ec, ppend)
+  end
+  def get_active_view(this : ITfContext*, ppview : ITfContextView*) : HRESULT
+    @lpVtbl.value.get_active_view.call(this, ppview)
+  end
+  def enum_views(this : ITfContext*, ppenum : IEnumTfContextViews*) : HRESULT
+    @lpVtbl.value.enum_views.call(this, ppenum)
+  end
+  def get_status(this : ITfContext*, pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdcs)
+  end
+  def get_property(this : ITfContext*, guidprop : Guid*, ppprop : ITfProperty*) : HRESULT
+    @lpVtbl.value.get_property.call(this, guidprop, ppprop)
+  end
+  def get_app_property(this : ITfContext*, guidprop : Guid*, ppprop : ITfReadOnlyProperty*) : HRESULT
+    @lpVtbl.value.get_app_property.call(this, guidprop, ppprop)
+  end
+  def track_properties(this : ITfContext*, prgprop : Guid**, cprop : UInt32, prgappprop : Guid**, cappprop : UInt32, ppproperty : ITfReadOnlyProperty*) : HRESULT
+    @lpVtbl.value.track_properties.call(this, prgprop, cprop, prgappprop, cappprop, ppproperty)
+  end
+  def enum_properties(this : ITfContext*, ppenum : IEnumTfProperties*) : HRESULT
+    @lpVtbl.value.enum_properties.call(this, ppenum)
+  end
+  def get_document_mgr(this : ITfContext*, ppdm : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.call(this, ppdm)
+  end
+  def create_range_backup(this : ITfContext*, ec : UInt32, prange : ITfRange, ppbackup : ITfRangeBackup*) : HRESULT
+    @lpVtbl.value.create_range_backup.call(this, ec, prange, ppbackup)
+  end
+end
+struct LibWin32::ITfQueryEmbedded
+  def query_interface(this : ITfQueryEmbedded*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfQueryEmbedded*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfQueryEmbedded*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_insert_embedded(this : ITfQueryEmbedded*, pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.call(this, pguidservice, pformatetc, pfinsertable)
+  end
+end
+struct LibWin32::ITfInsertAtSelection
+  def query_interface(this : ITfInsertAtSelection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInsertAtSelection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInsertAtSelection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def insert_text_at_selection(this : ITfInsertAtSelection*, ec : UInt32, dwflags : INSERT_TEXT_AT_SELECTION_FLAGS, pchtext : Char*, cch : Int32, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.call(this, ec, dwflags, pchtext, cch, pprange)
+  end
+  def insert_embedded_at_selection(this : ITfInsertAtSelection*, ec : UInt32, dwflags : UInt32, pdataobject : IDataObject, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.call(this, ec, dwflags, pdataobject, pprange)
+  end
+end
+struct LibWin32::ITfCleanupContextSink
+  def query_interface(this : ITfCleanupContextSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCleanupContextSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCleanupContextSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_cleanup_context(this : ITfCleanupContextSink*, ecwrite : UInt32, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_cleanup_context.call(this, ecwrite, pic)
+  end
+end
+struct LibWin32::ITfCleanupContextDurationSink
+  def query_interface(this : ITfCleanupContextDurationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCleanupContextDurationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCleanupContextDurationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_start_cleanup_context(this : ITfCleanupContextDurationSink*) : HRESULT
+    @lpVtbl.value.on_start_cleanup_context.call(this)
+  end
+  def on_end_cleanup_context(this : ITfCleanupContextDurationSink*) : HRESULT
+    @lpVtbl.value.on_end_cleanup_context.call(this)
+  end
+end
+struct LibWin32::ITfReadOnlyProperty
+  def query_interface(this : ITfReadOnlyProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfReadOnlyProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfReadOnlyProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : ITfReadOnlyProperty*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguid)
+  end
+  def enum_ranges(this : ITfReadOnlyProperty*, ec : UInt32, ppenum : IEnumTfRanges*, ptargetrange : ITfRange) : HRESULT
+    @lpVtbl.value.enum_ranges.call(this, ec, ppenum, ptargetrange)
+  end
+  def get_value(this : ITfReadOnlyProperty*, ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, ec, prange, pvarvalue)
+  end
+  def get_context(this : ITfReadOnlyProperty*, ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
+  end
+end
+struct LibWin32::IEnumTfPropertyValue
+  def query_interface(this : IEnumTfPropertyValue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfPropertyValue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfPropertyValue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfPropertyValue*, ppenum : IEnumTfPropertyValue*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfPropertyValue*, ulcount : UInt32, rgvalues : TF_PROPERTYVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgvalues, pcfetched)
+  end
+  def reset(this : IEnumTfPropertyValue*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfPropertyValue*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfMouseTracker
+  def query_interface(this : ITfMouseTracker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMouseTracker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMouseTracker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_mouse_sink(this : ITfMouseTracker*, range : ITfRange, psink : ITfMouseSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_mouse_sink.call(this, range, psink, pdwcookie)
+  end
+  def unadvise_mouse_sink(this : ITfMouseTracker*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_mouse_sink.call(this, dwcookie)
+  end
+end
+struct LibWin32::ITfMouseTrackerACP
+  def query_interface(this : ITfMouseTrackerACP*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMouseTrackerACP*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMouseTrackerACP*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_mouse_sink(this : ITfMouseTrackerACP*, range : ITfRangeACP, psink : ITfMouseSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_mouse_sink.call(this, range, psink, pdwcookie)
+  end
+  def unadvise_mouse_sink(this : ITfMouseTrackerACP*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_mouse_sink.call(this, dwcookie)
+  end
+end
+struct LibWin32::ITfMouseSink
+  def query_interface(this : ITfMouseSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMouseSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMouseSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_mouse_event(this : ITfMouseSink*, uedge : UInt32, uquadrant : UInt32, dwbtnstatus : UInt32, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_mouse_event.call(this, uedge, uquadrant, dwbtnstatus, pfeaten)
+  end
+end
+struct LibWin32::ITfEditRecord
+  def query_interface(this : ITfEditRecord*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfEditRecord*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfEditRecord*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selection_status(this : ITfEditRecord*, pfchanged : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_selection_status.call(this, pfchanged)
+  end
+  def get_text_and_property_updates(this : ITfEditRecord*, dwflags : GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, prgproperties : Guid**, cproperties : UInt32, ppenum : IEnumTfRanges*) : HRESULT
+    @lpVtbl.value.get_text_and_property_updates.call(this, dwflags, prgproperties, cproperties, ppenum)
+  end
+end
+struct LibWin32::ITfTextEditSink
+  def query_interface(this : ITfTextEditSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTextEditSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTextEditSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_end_edit(this : ITfTextEditSink*, pic : ITfContext, ecreadonly : UInt32, peditrecord : ITfEditRecord) : HRESULT
+    @lpVtbl.value.on_end_edit.call(this, pic, ecreadonly, peditrecord)
+  end
+end
+struct LibWin32::ITfTextLayoutSink
+  def query_interface(this : ITfTextLayoutSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTextLayoutSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTextLayoutSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_layout_change(this : ITfTextLayoutSink*, pic : ITfContext, lcode : TfLayoutCode, pview : ITfContextView) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this, pic, lcode, pview)
+  end
+end
+struct LibWin32::ITfStatusSink
+  def query_interface(this : ITfStatusSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfStatusSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfStatusSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status_change(this : ITfStatusSink*, pic : ITfContext, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, pic, dwflags)
+  end
+end
+struct LibWin32::ITfEditTransactionSink
+  def query_interface(this : ITfEditTransactionSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfEditTransactionSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfEditTransactionSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_start_edit_transaction(this : ITfEditTransactionSink*, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.call(this, pic)
+  end
+  def on_end_edit_transaction(this : ITfEditTransactionSink*, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.call(this, pic)
+  end
+end
+struct LibWin32::ITfContextOwner
+  def query_interface(this : ITfContextOwner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextOwner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextOwner*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_acp_from_point(this : ITfContextOwner*, ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.call(this, ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(this : ITfContextOwner*, acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.call(this, acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(this : ITfContextOwner*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.call(this, prc)
+  end
+  def get_status(this : ITfContextOwner*, pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdcs)
+  end
+  def get_wnd(this : ITfContextOwner*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.call(this, phwnd)
+  end
+  def get_attribute(this : ITfContextOwner*, rguidattribute : Guid*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.call(this, rguidattribute, pvarvalue)
+  end
+end
+struct LibWin32::ITfContextOwnerServices
+  def query_interface(this : ITfContextOwnerServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextOwnerServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextOwnerServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_layout_change(this : ITfContextOwnerServices*) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this)
+  end
+  def on_status_change(this : ITfContextOwnerServices*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def on_attribute_change(this : ITfContextOwnerServices*, rguidattribute : Guid*) : HRESULT
+    @lpVtbl.value.on_attribute_change.call(this, rguidattribute)
+  end
+  def serialize(this : ITfContextOwnerServices*, pprop : ITfProperty, prange : ITfRange, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream) : HRESULT
+    @lpVtbl.value.serialize.call(this, pprop, prange, phdr, pstream)
+  end
+  def unserialize(this : ITfContextOwnerServices*, pprop : ITfProperty, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream, ploader : ITfPersistentPropertyLoaderACP) : HRESULT
+    @lpVtbl.value.unserialize.call(this, pprop, phdr, pstream, ploader)
+  end
+  def force_load_property(this : ITfContextOwnerServices*, pprop : ITfProperty) : HRESULT
+    @lpVtbl.value.force_load_property.call(this, pprop)
+  end
+  def create_range(this : ITfContextOwnerServices*, acpstart : Int32, acpend : Int32, pprange : ITfRangeACP*) : HRESULT
+    @lpVtbl.value.create_range.call(this, acpstart, acpend, pprange)
+  end
+end
+struct LibWin32::ITfContextKeyEventSink
+  def query_interface(this : ITfContextKeyEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfContextKeyEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfContextKeyEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_key_down(this : ITfContextKeyEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.call(this, wparam, lparam, pfeaten)
+  end
+  def on_key_up(this : ITfContextKeyEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_up.call(this, wparam, lparam, pfeaten)
+  end
+  def on_test_key_down(this : ITfContextKeyEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_down.call(this, wparam, lparam, pfeaten)
+  end
+  def on_test_key_up(this : ITfContextKeyEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_up.call(this, wparam, lparam, pfeaten)
+  end
+end
+struct LibWin32::ITfEditSession
+  def query_interface(this : ITfEditSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfEditSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfEditSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def do_edit_session(this : ITfEditSession*, ec : UInt32) : HRESULT
+    @lpVtbl.value.do_edit_session.call(this, ec)
+  end
+end
+struct LibWin32::ITfRange
+  def query_interface(this : ITfRange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfRange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfRange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text(this : ITfRange*, ec : UInt32, dwflags : UInt32, pchtext : Char*, cchmax : UInt32, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_text.call(this, ec, dwflags, pchtext, cchmax, pcch)
+  end
+  def set_text(this : ITfRange*, ec : UInt32, dwflags : UInt32, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.set_text.call(this, ec, dwflags, pchtext, cch)
+  end
+  def get_formatted_text(this : ITfRange*, ec : UInt32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, ec, ppdataobject)
+  end
+  def get_embedded(this : ITfRange*, ec : UInt32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.call(this, ec, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(this : ITfRange*, ec : UInt32, dwflags : UInt32, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.call(this, ec, dwflags, pdataobject)
+  end
+  def shift_start(this : ITfRange*, ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_start.call(this, ec, cchreq, pcch, phalt)
+  end
+  def shift_end(this : ITfRange*, ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_end.call(this, ec, cchreq, pcch, phalt)
+  end
+  def shift_start_to_range(this : ITfRange*, ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_start_to_range.call(this, ec, prange, apos)
+  end
+  def shift_end_to_range(this : ITfRange*, ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_end_to_range.call(this, ec, prange, apos)
+  end
+  def shift_start_region(this : ITfRange*, ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_start_region.call(this, ec, dir, pfnoregion)
+  end
+  def shift_end_region(this : ITfRange*, ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_end_region.call(this, ec, dir, pfnoregion)
+  end
+  def is_empty(this : ITfRange*, ec : UInt32, pfempty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_empty.call(this, ec, pfempty)
+  end
+  def collapse(this : ITfRange*, ec : UInt32, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.collapse.call(this, ec, apos)
+  end
+  def is_equal_start(this : ITfRange*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_start.call(this, ec, pwith, apos, pfequal)
+  end
+  def is_equal_end(this : ITfRange*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_end.call(this, ec, pwith, apos, pfequal)
+  end
+  def compare_start(this : ITfRange*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_start.call(this, ec, pwith, apos, plresult)
+  end
+  def compare_end(this : ITfRange*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_end.call(this, ec, pwith, apos, plresult)
+  end
+  def adjust_for_insert(this : ITfRange*, ec : UInt32, cchinsert : UInt32, pfinsertok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.adjust_for_insert.call(this, ec, cchinsert, pfinsertok)
+  end
+  def get_gravity(this : ITfRange*, pgstart : TfGravity*, pgend : TfGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.call(this, pgstart, pgend)
+  end
+  def set_gravity(this : ITfRange*, ec : UInt32, gstart : TfGravity, gend : TfGravity) : HRESULT
+    @lpVtbl.value.set_gravity.call(this, ec, gstart, gend)
+  end
+  def clone(this : ITfRange*, ppclone : ITfRange*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppclone)
+  end
+  def get_context(this : ITfRange*, ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
+  end
+end
+struct LibWin32::ITfRangeACP
+  def query_interface(this : ITfRangeACP*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfRangeACP*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfRangeACP*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text(this : ITfRangeACP*, ec : UInt32, dwflags : UInt32, pchtext : Char*, cchmax : UInt32, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_text.call(this, ec, dwflags, pchtext, cchmax, pcch)
+  end
+  def set_text(this : ITfRangeACP*, ec : UInt32, dwflags : UInt32, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.set_text.call(this, ec, dwflags, pchtext, cch)
+  end
+  def get_formatted_text(this : ITfRangeACP*, ec : UInt32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, ec, ppdataobject)
+  end
+  def get_embedded(this : ITfRangeACP*, ec : UInt32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.call(this, ec, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(this : ITfRangeACP*, ec : UInt32, dwflags : UInt32, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.call(this, ec, dwflags, pdataobject)
+  end
+  def shift_start(this : ITfRangeACP*, ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_start.call(this, ec, cchreq, pcch, phalt)
+  end
+  def shift_end(this : ITfRangeACP*, ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_end.call(this, ec, cchreq, pcch, phalt)
+  end
+  def shift_start_to_range(this : ITfRangeACP*, ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_start_to_range.call(this, ec, prange, apos)
+  end
+  def shift_end_to_range(this : ITfRangeACP*, ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_end_to_range.call(this, ec, prange, apos)
+  end
+  def shift_start_region(this : ITfRangeACP*, ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_start_region.call(this, ec, dir, pfnoregion)
+  end
+  def shift_end_region(this : ITfRangeACP*, ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_end_region.call(this, ec, dir, pfnoregion)
+  end
+  def is_empty(this : ITfRangeACP*, ec : UInt32, pfempty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_empty.call(this, ec, pfempty)
+  end
+  def collapse(this : ITfRangeACP*, ec : UInt32, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.collapse.call(this, ec, apos)
+  end
+  def is_equal_start(this : ITfRangeACP*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_start.call(this, ec, pwith, apos, pfequal)
+  end
+  def is_equal_end(this : ITfRangeACP*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_end.call(this, ec, pwith, apos, pfequal)
+  end
+  def compare_start(this : ITfRangeACP*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_start.call(this, ec, pwith, apos, plresult)
+  end
+  def compare_end(this : ITfRangeACP*, ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_end.call(this, ec, pwith, apos, plresult)
+  end
+  def adjust_for_insert(this : ITfRangeACP*, ec : UInt32, cchinsert : UInt32, pfinsertok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.adjust_for_insert.call(this, ec, cchinsert, pfinsertok)
+  end
+  def get_gravity(this : ITfRangeACP*, pgstart : TfGravity*, pgend : TfGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.call(this, pgstart, pgend)
+  end
+  def set_gravity(this : ITfRangeACP*, ec : UInt32, gstart : TfGravity, gend : TfGravity) : HRESULT
+    @lpVtbl.value.set_gravity.call(this, ec, gstart, gend)
+  end
+  def clone(this : ITfRangeACP*, ppclone : ITfRange*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppclone)
+  end
+  def get_context(this : ITfRangeACP*, ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
+  end
+  def get_extent(this : ITfRangeACP*, pacpanchor : Int32*, pcch : Int32*) : HRESULT
+    @lpVtbl.value.get_extent.call(this, pacpanchor, pcch)
+  end
+  def set_extent(this : ITfRangeACP*, acpanchor : Int32, cch : Int32) : HRESULT
+    @lpVtbl.value.set_extent.call(this, acpanchor, cch)
+  end
+end
+struct LibWin32::ITextStoreACPServices
+  def query_interface(this : ITextStoreACPServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACPServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACPServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def serialize(this : ITextStoreACPServices*, pprop : ITfProperty, prange : ITfRange, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream) : HRESULT
+    @lpVtbl.value.serialize.call(this, pprop, prange, phdr, pstream)
+  end
+  def unserialize(this : ITextStoreACPServices*, pprop : ITfProperty, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream, ploader : ITfPersistentPropertyLoaderACP) : HRESULT
+    @lpVtbl.value.unserialize.call(this, pprop, phdr, pstream, ploader)
+  end
+  def force_load_property(this : ITextStoreACPServices*, pprop : ITfProperty) : HRESULT
+    @lpVtbl.value.force_load_property.call(this, pprop)
+  end
+  def create_range(this : ITextStoreACPServices*, acpstart : Int32, acpend : Int32, pprange : ITfRangeACP*) : HRESULT
+    @lpVtbl.value.create_range.call(this, acpstart, acpend, pprange)
+  end
+end
+struct LibWin32::ITfRangeBackup
+  def query_interface(this : ITfRangeBackup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfRangeBackup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfRangeBackup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def restore(this : ITfRangeBackup*, ec : UInt32, prange : ITfRange) : HRESULT
+    @lpVtbl.value.restore.call(this, ec, prange)
+  end
+end
+struct LibWin32::ITfPropertyStore
+  def query_interface(this : ITfPropertyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfPropertyStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfPropertyStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : ITfPropertyStore*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguid)
+  end
+  def get_data_type(this : ITfPropertyStore*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_type.call(this, pdwreserved)
+  end
+  def get_data(this : ITfPropertyStore*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data.call(this, pvarvalue)
+  end
+  def on_text_updated(this : ITfPropertyStore*, dwflags : UInt32, prangenew : ITfRange, pfaccept : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_text_updated.call(this, dwflags, prangenew, pfaccept)
+  end
+  def shrink(this : ITfPropertyStore*, prangenew : ITfRange, pffree : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shrink.call(this, prangenew, pffree)
+  end
+  def divide(this : ITfPropertyStore*, prangethis : ITfRange, prangenew : ITfRange, pppropstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.divide.call(this, prangethis, prangenew, pppropstore)
+  end
+  def clone(this : ITfPropertyStore*, ppropstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppropstore)
+  end
+  def get_property_range_creator(this : ITfPropertyStore*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_property_range_creator.call(this, pclsid)
+  end
+  def serialize(this : ITfPropertyStore*, pstream : IStream, pcb : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.call(this, pstream, pcb)
+  end
+end
+struct LibWin32::IEnumTfRanges
+  def query_interface(this : IEnumTfRanges*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfRanges*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfRanges*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfRanges*, ppenum : IEnumTfRanges*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfRanges*, ulcount : UInt32, pprange : ITfRange*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, pprange, pcfetched)
+  end
+  def reset(this : IEnumTfRanges*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfRanges*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfCreatePropertyStore
+  def query_interface(this : ITfCreatePropertyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCreatePropertyStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCreatePropertyStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_store_serializable(this : ITfCreatePropertyStore*, guidprop : Guid*, prange : ITfRange, ppropstore : ITfPropertyStore, pfserializable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_store_serializable.call(this, guidprop, prange, ppropstore, pfserializable)
+  end
+  def create_property_store(this : ITfCreatePropertyStore*, guidprop : Guid*, prange : ITfRange, cb : UInt32, pstream : IStream, ppstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.create_property_store.call(this, guidprop, prange, cb, pstream, ppstore)
+  end
+end
+struct LibWin32::ITfPersistentPropertyLoaderACP
+  def query_interface(this : ITfPersistentPropertyLoaderACP*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfPersistentPropertyLoaderACP*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfPersistentPropertyLoaderACP*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_property(this : ITfPersistentPropertyLoaderACP*, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.load_property.call(this, phdr, ppstream)
+  end
+end
+struct LibWin32::ITfProperty
+  def query_interface(this : ITfProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : ITfProperty*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguid)
+  end
+  def enum_ranges(this : ITfProperty*, ec : UInt32, ppenum : IEnumTfRanges*, ptargetrange : ITfRange) : HRESULT
+    @lpVtbl.value.enum_ranges.call(this, ec, ppenum, ptargetrange)
+  end
+  def get_value(this : ITfProperty*, ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, ec, prange, pvarvalue)
+  end
+  def get_context(this : ITfProperty*, ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
+  end
+  def find_range(this : ITfProperty*, ec : UInt32, prange : ITfRange, pprange : ITfRange*, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.find_range.call(this, ec, prange, pprange, apos)
+  end
+  def set_value_store(this : ITfProperty*, ec : UInt32, prange : ITfRange, ppropstore : ITfPropertyStore) : HRESULT
+    @lpVtbl.value.set_value_store.call(this, ec, prange, ppropstore)
+  end
+  def set_value(this : ITfProperty*, ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, ec, prange, pvarvalue)
+  end
+  def clear(this : ITfProperty*, ec : UInt32, prange : ITfRange) : HRESULT
+    @lpVtbl.value.clear.call(this, ec, prange)
+  end
+end
+struct LibWin32::IEnumTfProperties
+  def query_interface(this : IEnumTfProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfProperties*, ppenum : IEnumTfProperties*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfProperties*, ulcount : UInt32, ppprop : ITfProperty*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, ppprop, pcfetched)
+  end
+  def reset(this : IEnumTfProperties*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfProperties*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfCompartment
+  def query_interface(this : ITfCompartment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCompartment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCompartment*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_value(this : ITfCompartment*, tid : UInt32, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.call(this, tid, pvarvalue)
+  end
+  def get_value(this : ITfCompartment*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvarvalue)
+  end
+end
+struct LibWin32::ITfCompartmentEventSink
+  def query_interface(this : ITfCompartmentEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCompartmentEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCompartmentEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_change(this : ITfCompartmentEventSink*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.on_change.call(this, rguid)
+  end
+end
+struct LibWin32::ITfCompartmentMgr
+  def query_interface(this : ITfCompartmentMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCompartmentMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCompartmentMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_compartment(this : ITfCompartmentMgr*, rguid : Guid*, ppcomp : ITfCompartment*) : HRESULT
+    @lpVtbl.value.get_compartment.call(this, rguid, ppcomp)
+  end
+  def clear_compartment(this : ITfCompartmentMgr*, tid : UInt32, rguid : Guid*) : HRESULT
+    @lpVtbl.value.clear_compartment.call(this, tid, rguid)
+  end
+  def enum_compartments(this : ITfCompartmentMgr*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_compartments.call(this, ppenum)
+  end
+end
+struct LibWin32::ITfFunction
+  def query_interface(this : ITfFunction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFunction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFunction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFunction*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+end
+struct LibWin32::ITfFunctionProvider
+  def query_interface(this : ITfFunctionProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFunctionProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFunctionProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : ITfFunctionProvider*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguid)
+  end
+  def get_description(this : ITfFunctionProvider*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdesc)
+  end
+  def get_function(this : ITfFunctionProvider*, rguid : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_function.call(this, rguid, riid, ppunk)
+  end
+end
+struct LibWin32::IEnumTfFunctionProviders
+  def query_interface(this : IEnumTfFunctionProviders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfFunctionProviders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfFunctionProviders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfFunctionProviders*, ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfFunctionProviders*, ulcount : UInt32, ppcmdobj : ITfFunctionProvider*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, ppcmdobj, pcfetch)
+  end
+  def reset(this : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfFunctionProviders*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfInputProcessorProfiles
+  def query_interface(this : ITfInputProcessorProfiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputProcessorProfiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputProcessorProfiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register(this : ITfInputProcessorProfiles*, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.register.call(this, rclsid)
+  end
+  def unregister(this : ITfInputProcessorProfiles*, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister.call(this, rclsid)
+  end
+  def add_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32) : HRESULT
+    @lpVtbl.value.add_language_profile.call(this, rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex)
+  end
+  def remove_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*) : HRESULT
+    @lpVtbl.value.remove_language_profile.call(this, rclsid, langid, guidprofile)
+  end
+  def enum_input_processor_info(this : ITfInputProcessorProfiles*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_input_processor_info.call(this, ppenum)
+  end
+  def get_default_language_profile(this : ITfInputProcessorProfiles*, langid : UInt16, catid : Guid*, pclsid : Guid*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_default_language_profile.call(this, langid, catid, pclsid, pguidprofile)
+  end
+  def set_default_language_profile(this : ITfInputProcessorProfiles*, langid : UInt16, rclsid : Guid*, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.set_default_language_profile.call(this, langid, rclsid, guidprofiles)
+  end
+  def activate_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.activate_language_profile.call(this, rclsid, langid, guidprofiles)
+  end
+  def get_active_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, plangid : UInt16*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_active_language_profile.call(this, rclsid, plangid, pguidprofile)
+  end
+  def get_language_profile_description(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pbstrprofile : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_profile_description.call(this, rclsid, langid, guidprofile, pbstrprofile)
+  end
+  def get_current_language(this : ITfInputProcessorProfiles*, plangid : UInt16*) : HRESULT
+    @lpVtbl.value.get_current_language.call(this, plangid)
+  end
+  def change_current_language(this : ITfInputProcessorProfiles*, langid : UInt16) : HRESULT
+    @lpVtbl.value.change_current_language.call(this, langid)
+  end
+  def get_language_list(this : ITfInputProcessorProfiles*, pplangid : UInt16**, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_language_list.call(this, pplangid, pulcount)
+  end
+  def enum_language_profiles(this : ITfInputProcessorProfiles*, langid : UInt16, ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.enum_language_profiles.call(this, langid, ppenum)
+  end
+  def enable_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile.call(this, rclsid, langid, guidprofile, fenable)
+  end
+  def is_enabled_language_profile(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled_language_profile.call(this, rclsid, langid, guidprofile, pfenable)
+  end
+  def enable_language_profile_by_default(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile_by_default.call(this, rclsid, langid, guidprofile, fenable)
+  end
+  def substitute_keyboard_layout(this : ITfInputProcessorProfiles*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, hkl : HKL) : HRESULT
+    @lpVtbl.value.substitute_keyboard_layout.call(this, rclsid, langid, guidprofile, hkl)
+  end
+end
+struct LibWin32::ITfInputProcessorProfilesEx
+  def query_interface(this : ITfInputProcessorProfilesEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputProcessorProfilesEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputProcessorProfilesEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register(this : ITfInputProcessorProfilesEx*, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.register.call(this, rclsid)
+  end
+  def unregister(this : ITfInputProcessorProfilesEx*, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister.call(this, rclsid)
+  end
+  def add_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32) : HRESULT
+    @lpVtbl.value.add_language_profile.call(this, rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex)
+  end
+  def remove_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*) : HRESULT
+    @lpVtbl.value.remove_language_profile.call(this, rclsid, langid, guidprofile)
+  end
+  def enum_input_processor_info(this : ITfInputProcessorProfilesEx*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_input_processor_info.call(this, ppenum)
+  end
+  def get_default_language_profile(this : ITfInputProcessorProfilesEx*, langid : UInt16, catid : Guid*, pclsid : Guid*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_default_language_profile.call(this, langid, catid, pclsid, pguidprofile)
+  end
+  def set_default_language_profile(this : ITfInputProcessorProfilesEx*, langid : UInt16, rclsid : Guid*, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.set_default_language_profile.call(this, langid, rclsid, guidprofiles)
+  end
+  def activate_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.activate_language_profile.call(this, rclsid, langid, guidprofiles)
+  end
+  def get_active_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, plangid : UInt16*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_active_language_profile.call(this, rclsid, plangid, pguidprofile)
+  end
+  def get_language_profile_description(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pbstrprofile : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_profile_description.call(this, rclsid, langid, guidprofile, pbstrprofile)
+  end
+  def get_current_language(this : ITfInputProcessorProfilesEx*, plangid : UInt16*) : HRESULT
+    @lpVtbl.value.get_current_language.call(this, plangid)
+  end
+  def change_current_language(this : ITfInputProcessorProfilesEx*, langid : UInt16) : HRESULT
+    @lpVtbl.value.change_current_language.call(this, langid)
+  end
+  def get_language_list(this : ITfInputProcessorProfilesEx*, pplangid : UInt16**, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_language_list.call(this, pplangid, pulcount)
+  end
+  def enum_language_profiles(this : ITfInputProcessorProfilesEx*, langid : UInt16, ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.enum_language_profiles.call(this, langid, ppenum)
+  end
+  def enable_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile.call(this, rclsid, langid, guidprofile, fenable)
+  end
+  def is_enabled_language_profile(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled_language_profile.call(this, rclsid, langid, guidprofile, pfenable)
+  end
+  def enable_language_profile_by_default(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile_by_default.call(this, rclsid, langid, guidprofile, fenable)
+  end
+  def substitute_keyboard_layout(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, hkl : HKL) : HRESULT
+    @lpVtbl.value.substitute_keyboard_layout.call(this, rclsid, langid, guidprofile, hkl)
+  end
+  def set_language_profile_display_name(this : ITfInputProcessorProfilesEx*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchfile : Char*, cchfile : UInt32, uresid : UInt32) : HRESULT
+    @lpVtbl.value.set_language_profile_display_name.call(this, rclsid, langid, guidprofile, pchfile, cchfile, uresid)
+  end
+end
+struct LibWin32::ITfInputProcessorProfileSubstituteLayout
+  def query_interface(this : ITfInputProcessorProfileSubstituteLayout*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputProcessorProfileSubstituteLayout*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputProcessorProfileSubstituteLayout*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_substitute_keyboard_layout(this : ITfInputProcessorProfileSubstituteLayout*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, phkl : HKL*) : HRESULT
+    @lpVtbl.value.get_substitute_keyboard_layout.call(this, rclsid, langid, guidprofile, phkl)
+  end
+end
+struct LibWin32::ITfActiveLanguageProfileNotifySink
+  def query_interface(this : ITfActiveLanguageProfileNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfActiveLanguageProfileNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfActiveLanguageProfileNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_activated(this : ITfActiveLanguageProfileNotifySink*, clsid : Guid*, guidprofile : Guid*, factivated : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_activated.call(this, clsid, guidprofile, factivated)
+  end
+end
+struct LibWin32::IEnumTfLanguageProfiles
+  def query_interface(this : IEnumTfLanguageProfiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfLanguageProfiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfLanguageProfiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfLanguageProfiles*, ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfLanguageProfiles*, ulcount : UInt32, pprofile : TF_LANGUAGEPROFILE*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, pprofile, pcfetch)
+  end
+  def reset(this : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfLanguageProfiles*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfLanguageProfileNotifySink
+  def query_interface(this : ITfLanguageProfileNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLanguageProfileNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLanguageProfileNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_language_change(this : ITfLanguageProfileNotifySink*, langid : UInt16, pfaccept : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_language_change.call(this, langid, pfaccept)
+  end
+  def on_language_changed(this : ITfLanguageProfileNotifySink*) : HRESULT
+    @lpVtbl.value.on_language_changed.call(this)
+  end
+end
+struct LibWin32::ITfInputProcessorProfileMgr
+  def query_interface(this : ITfInputProcessorProfileMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputProcessorProfileMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputProcessorProfileMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate_profile(this : ITfInputProcessorProfileMgr*, dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_profile.call(this, dwprofiletype, langid, clsid, guidprofile, hkl, dwflags)
+  end
+  def deactivate_profile(this : ITfInputProcessorProfileMgr*, dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.deactivate_profile.call(this, dwprofiletype, langid, clsid, guidprofile, hkl, dwflags)
+  end
+  def get_profile(this : ITfInputProcessorProfileMgr*, dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, pprofile : TF_INPUTPROCESSORPROFILE*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, dwprofiletype, langid, clsid, guidprofile, hkl, pprofile)
+  end
+  def enum_profiles(this : ITfInputProcessorProfileMgr*, langid : UInt16, ppenum : IEnumTfInputProcessorProfiles*) : HRESULT
+    @lpVtbl.value.enum_profiles.call(this, langid, ppenum)
+  end
+  def release_input_processor(this : ITfInputProcessorProfileMgr*, rclsid : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.release_input_processor.call(this, rclsid, dwflags)
+  end
+  def register_profile(this : ITfInputProcessorProfileMgr*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32, hklsubstitute : HKL, dwpreferredlayout : UInt32, benabledbydefault : LibC::BOOL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.register_profile.call(this, rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex, hklsubstitute, dwpreferredlayout, benabledbydefault, dwflags)
+  end
+  def unregister_profile(this : ITfInputProcessorProfileMgr*, rclsid : Guid*, langid : UInt16, guidprofile : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.unregister_profile.call(this, rclsid, langid, guidprofile, dwflags)
+  end
+  def get_active_profile(this : ITfInputProcessorProfileMgr*, catid : Guid*, pprofile : TF_INPUTPROCESSORPROFILE*) : HRESULT
+    @lpVtbl.value.get_active_profile.call(this, catid, pprofile)
+  end
+end
+struct LibWin32::IEnumTfInputProcessorProfiles
+  def query_interface(this : IEnumTfInputProcessorProfiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfInputProcessorProfiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfInputProcessorProfiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfInputProcessorProfiles*, ppenum : IEnumTfInputProcessorProfiles*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfInputProcessorProfiles*, ulcount : UInt32, pprofile : TF_INPUTPROCESSORPROFILE*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, pprofile, pcfetch)
+  end
+  def reset(this : IEnumTfInputProcessorProfiles*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfInputProcessorProfiles*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfInputProcessorProfileActivationSink
+  def query_interface(this : ITfInputProcessorProfileActivationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputProcessorProfileActivationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputProcessorProfileActivationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_activated(this : ITfInputProcessorProfileActivationSink*, dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, catid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_activated.call(this, dwprofiletype, langid, clsid, catid, guidprofile, hkl, dwflags)
+  end
+end
+struct LibWin32::ITfKeystrokeMgr
+  def query_interface(this : ITfKeystrokeMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfKeystrokeMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfKeystrokeMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_key_event_sink(this : ITfKeystrokeMgr*, tid : UInt32, psink : ITfKeyEventSink, fforeground : LibC::BOOL) : HRESULT
+    @lpVtbl.value.advise_key_event_sink.call(this, tid, psink, fforeground)
+  end
+  def unadvise_key_event_sink(this : ITfKeystrokeMgr*, tid : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_key_event_sink.call(this, tid)
+  end
+  def get_foreground(this : ITfKeystrokeMgr*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_foreground.call(this, pclsid)
+  end
+  def test_key_down(this : ITfKeystrokeMgr*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.test_key_down.call(this, wparam, lparam, pfeaten)
+  end
+  def test_key_up(this : ITfKeystrokeMgr*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.test_key_up.call(this, wparam, lparam, pfeaten)
+  end
+  def key_down(this : ITfKeystrokeMgr*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.key_down.call(this, wparam, lparam, pfeaten)
+  end
+  def key_up(this : ITfKeystrokeMgr*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.key_up.call(this, wparam, lparam, pfeaten)
+  end
+  def get_preserved_key(this : ITfKeystrokeMgr*, pic : ITfContext, pprekey : TF_PRESERVEDKEY*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_preserved_key.call(this, pic, pprekey, pguid)
+  end
+  def is_preserved_key(this : ITfKeystrokeMgr*, rguid : Guid*, pprekey : TF_PRESERVEDKEY*, pfregistered : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_preserved_key.call(this, rguid, pprekey, pfregistered)
+  end
+  def preserve_key(this : ITfKeystrokeMgr*, tid : UInt32, rguid : Guid*, prekey : TF_PRESERVEDKEY*, pchdesc : Char*, cchdesc : UInt32) : HRESULT
+    @lpVtbl.value.preserve_key.call(this, tid, rguid, prekey, pchdesc, cchdesc)
+  end
+  def unpreserve_key(this : ITfKeystrokeMgr*, rguid : Guid*, pprekey : TF_PRESERVEDKEY*) : HRESULT
+    @lpVtbl.value.unpreserve_key.call(this, rguid, pprekey)
+  end
+  def set_preserved_key_description(this : ITfKeystrokeMgr*, rguid : Guid*, pchdesc : Char*, cchdesc : UInt32) : HRESULT
+    @lpVtbl.value.set_preserved_key_description.call(this, rguid, pchdesc, cchdesc)
+  end
+  def get_preserved_key_description(this : ITfKeystrokeMgr*, rguid : Guid*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_preserved_key_description.call(this, rguid, pbstrdesc)
+  end
+  def simulate_preserved_key(this : ITfKeystrokeMgr*, pic : ITfContext, rguid : Guid*, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.simulate_preserved_key.call(this, pic, rguid, pfeaten)
+  end
+end
+struct LibWin32::ITfKeyEventSink
+  def query_interface(this : ITfKeyEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfKeyEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfKeyEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_set_focus(this : ITfKeyEventSink*, fforeground : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_set_focus.call(this, fforeground)
+  end
+  def on_test_key_down(this : ITfKeyEventSink*, pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_down.call(this, pic, wparam, lparam, pfeaten)
+  end
+  def on_test_key_up(this : ITfKeyEventSink*, pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_up.call(this, pic, wparam, lparam, pfeaten)
+  end
+  def on_key_down(this : ITfKeyEventSink*, pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.call(this, pic, wparam, lparam, pfeaten)
+  end
+  def on_key_up(this : ITfKeyEventSink*, pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_up.call(this, pic, wparam, lparam, pfeaten)
+  end
+  def on_preserved_key(this : ITfKeyEventSink*, pic : ITfContext, rguid : Guid*, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_preserved_key.call(this, pic, rguid, pfeaten)
+  end
+end
+struct LibWin32::ITfKeyTraceEventSink
+  def query_interface(this : ITfKeyTraceEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfKeyTraceEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfKeyTraceEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_key_trace_down(this : ITfKeyTraceEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_key_trace_down.call(this, wparam, lparam)
+  end
+  def on_key_trace_up(this : ITfKeyTraceEventSink*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_key_trace_up.call(this, wparam, lparam)
+  end
+end
+struct LibWin32::ITfPreservedKeyNotifySink
+  def query_interface(this : ITfPreservedKeyNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfPreservedKeyNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfPreservedKeyNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_updated(this : ITfPreservedKeyNotifySink*, pprekey : TF_PRESERVEDKEY*) : HRESULT
+    @lpVtbl.value.on_updated.call(this, pprekey)
+  end
+end
+struct LibWin32::ITfMessagePump
+  def query_interface(this : ITfMessagePump*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMessagePump*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMessagePump*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def peek_message_a(this : ITfMessagePump*, pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, wremovemsg : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.peek_message_a.call(this, pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, wremovemsg, pfresult)
+  end
+  def get_message_a(this : ITfMessagePump*, pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_message_a.call(this, pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, pfresult)
+  end
+  def peek_message_w(this : ITfMessagePump*, pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, wremovemsg : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.peek_message_w.call(this, pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, wremovemsg, pfresult)
+  end
+  def get_message_w(this : ITfMessagePump*, pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_message_w.call(this, pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, pfresult)
+  end
+end
+struct LibWin32::ITfThreadFocusSink
+  def query_interface(this : ITfThreadFocusSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfThreadFocusSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfThreadFocusSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_set_thread_focus(this : ITfThreadFocusSink*) : HRESULT
+    @lpVtbl.value.on_set_thread_focus.call(this)
+  end
+  def on_kill_thread_focus(this : ITfThreadFocusSink*) : HRESULT
+    @lpVtbl.value.on_kill_thread_focus.call(this)
+  end
+end
+struct LibWin32::ITfTextInputProcessor
+  def query_interface(this : ITfTextInputProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTextInputProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTextInputProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : ITfTextInputProcessor*, ptim : ITfThreadMgr, tid : UInt32) : HRESULT
+    @lpVtbl.value.activate.call(this, ptim, tid)
+  end
+  def deactivate(this : ITfTextInputProcessor*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+end
+struct LibWin32::ITfTextInputProcessorEx
+  def query_interface(this : ITfTextInputProcessorEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTextInputProcessorEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTextInputProcessorEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : ITfTextInputProcessorEx*, ptim : ITfThreadMgr, tid : UInt32) : HRESULT
+    @lpVtbl.value.activate.call(this, ptim, tid)
+  end
+  def deactivate(this : ITfTextInputProcessorEx*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def activate_ex(this : ITfTextInputProcessorEx*, ptim : ITfThreadMgr, tid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.call(this, ptim, tid, dwflags)
+  end
+end
+struct LibWin32::ITfClientId
+  def query_interface(this : ITfClientId*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfClientId*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfClientId*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client_id(this : ITfClientId*, rclsid : Guid*, ptid : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_id.call(this, rclsid, ptid)
+  end
+end
+struct LibWin32::ITfDisplayAttributeInfo
+  def query_interface(this : ITfDisplayAttributeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfDisplayAttributeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfDisplayAttributeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_guid(this : ITfDisplayAttributeInfo*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def get_description(this : ITfDisplayAttributeInfo*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdesc)
+  end
+  def get_attribute_info(this : ITfDisplayAttributeInfo*, pda : TF_DISPLAYATTRIBUTE*) : HRESULT
+    @lpVtbl.value.get_attribute_info.call(this, pda)
+  end
+  def set_attribute_info(this : ITfDisplayAttributeInfo*, pda : TF_DISPLAYATTRIBUTE*) : HRESULT
+    @lpVtbl.value.set_attribute_info.call(this, pda)
+  end
+  def reset(this : ITfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IEnumTfDisplayAttributeInfo
+  def query_interface(this : IEnumTfDisplayAttributeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfDisplayAttributeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfDisplayAttributeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfDisplayAttributeInfo*, ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfDisplayAttributeInfo*, ulcount : UInt32, rginfo : ITfDisplayAttributeInfo*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rginfo, pcfetched)
+  end
+  def reset(this : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfDisplayAttributeInfo*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfDisplayAttributeProvider
+  def query_interface(this : ITfDisplayAttributeProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfDisplayAttributeProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfDisplayAttributeProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_display_attribute_info(this : ITfDisplayAttributeProvider*, ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.enum_display_attribute_info.call(this, ppenum)
+  end
+  def get_display_attribute_info(this : ITfDisplayAttributeProvider*, guid : Guid*, ppinfo : ITfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.get_display_attribute_info.call(this, guid, ppinfo)
+  end
+end
+struct LibWin32::ITfDisplayAttributeMgr
+  def query_interface(this : ITfDisplayAttributeMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfDisplayAttributeMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfDisplayAttributeMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_update_info(this : ITfDisplayAttributeMgr*) : HRESULT
+    @lpVtbl.value.on_update_info.call(this)
+  end
+  def enum_display_attribute_info(this : ITfDisplayAttributeMgr*, ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.enum_display_attribute_info.call(this, ppenum)
+  end
+  def get_display_attribute_info(this : ITfDisplayAttributeMgr*, guid : Guid*, ppinfo : ITfDisplayAttributeInfo*, pclsidowner : Guid*) : HRESULT
+    @lpVtbl.value.get_display_attribute_info.call(this, guid, ppinfo, pclsidowner)
+  end
+end
+struct LibWin32::ITfDisplayAttributeNotifySink
+  def query_interface(this : ITfDisplayAttributeNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfDisplayAttributeNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfDisplayAttributeNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_update_info(this : ITfDisplayAttributeNotifySink*) : HRESULT
+    @lpVtbl.value.on_update_info.call(this)
+  end
+end
+struct LibWin32::ITfCategoryMgr
+  def query_interface(this : ITfCategoryMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCategoryMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCategoryMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_category(this : ITfCategoryMgr*, rclsid : Guid*, rcatid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.register_category.call(this, rclsid, rcatid, rguid)
+  end
+  def unregister_category(this : ITfCategoryMgr*, rclsid : Guid*, rcatid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_category.call(this, rclsid, rcatid, rguid)
+  end
+  def enum_categories_in_item(this : ITfCategoryMgr*, rguid : Guid*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_categories_in_item.call(this, rguid, ppenum)
+  end
+  def enum_items_in_category(this : ITfCategoryMgr*, rcatid : Guid*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_items_in_category.call(this, rcatid, ppenum)
+  end
+  def find_closest_category(this : ITfCategoryMgr*, rguid : Guid*, pcatid : Guid*, ppcatidlist : Guid**, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.find_closest_category.call(this, rguid, pcatid, ppcatidlist, ulcount)
+  end
+  def register_guid_description(this : ITfCategoryMgr*, rclsid : Guid*, rguid : Guid*, pchdesc : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.register_guid_description.call(this, rclsid, rguid, pchdesc, cch)
+  end
+  def unregister_guid_description(this : ITfCategoryMgr*, rclsid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_guid_description.call(this, rclsid, rguid)
+  end
+  def get_guid_description(this : ITfCategoryMgr*, rguid : Guid*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid_description.call(this, rguid, pbstrdesc)
+  end
+  def register_guiddword(this : ITfCategoryMgr*, rclsid : Guid*, rguid : Guid*, dw : UInt32) : HRESULT
+    @lpVtbl.value.register_guiddword.call(this, rclsid, rguid, dw)
+  end
+  def unregister_guiddword(this : ITfCategoryMgr*, rclsid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_guiddword.call(this, rclsid, rguid)
+  end
+  def get_guiddword(this : ITfCategoryMgr*, rguid : Guid*, pdw : UInt32*) : HRESULT
+    @lpVtbl.value.get_guiddword.call(this, rguid, pdw)
+  end
+  def register_guid(this : ITfCategoryMgr*, rguid : Guid*, pguidatom : UInt32*) : HRESULT
+    @lpVtbl.value.register_guid.call(this, rguid, pguidatom)
+  end
+  def get_guid(this : ITfCategoryMgr*, guidatom : UInt32, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guidatom, pguid)
+  end
+  def is_equal_tf_guid_atom(this : ITfCategoryMgr*, guidatom : UInt32, rguid : Guid*, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_tf_guid_atom.call(this, guidatom, rguid, pfequal)
+  end
+end
+struct LibWin32::ITfSource
+  def query_interface(this : ITfSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_sink(this : ITfSource*, riid : Guid*, punk : IUnknown, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_sink.call(this, riid, punk, pdwcookie)
+  end
+  def unadvise_sink(this : ITfSource*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_sink.call(this, dwcookie)
+  end
+end
+struct LibWin32::ITfSourceSingle
+  def query_interface(this : ITfSourceSingle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSourceSingle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSourceSingle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_single_sink(this : ITfSourceSingle*, tid : UInt32, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.advise_single_sink.call(this, tid, riid, punk)
+  end
+  def unadvise_single_sink(this : ITfSourceSingle*, tid : UInt32, riid : Guid*) : HRESULT
+    @lpVtbl.value.unadvise_single_sink.call(this, tid, riid)
+  end
+end
+struct LibWin32::ITfUIElementMgr
+  def query_interface(this : ITfUIElementMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfUIElementMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfUIElementMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_ui_element(this : ITfUIElementMgr*, pelement : ITfUIElement, pbshow : LibC::BOOL*, pdwuielementid : UInt32*) : HRESULT
+    @lpVtbl.value.begin_ui_element.call(this, pelement, pbshow, pdwuielementid)
+  end
+  def update_ui_element(this : ITfUIElementMgr*, dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.update_ui_element.call(this, dwuielementid)
+  end
+  def end_ui_element(this : ITfUIElementMgr*, dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.end_ui_element.call(this, dwuielementid)
+  end
+  def get_ui_element(this : ITfUIElementMgr*, dwuielementid : UInt32, ppelement : ITfUIElement*) : HRESULT
+    @lpVtbl.value.get_ui_element.call(this, dwuielementid, ppelement)
+  end
+  def enum_ui_elements(this : ITfUIElementMgr*, ppenum : IEnumTfUIElements*) : HRESULT
+    @lpVtbl.value.enum_ui_elements.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumTfUIElements
+  def query_interface(this : IEnumTfUIElements*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfUIElements*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfUIElements*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfUIElements*, ppenum : IEnumTfUIElements*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfUIElements*, ulcount : UInt32, ppelement : ITfUIElement*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, ppelement, pcfetched)
+  end
+  def reset(this : IEnumTfUIElements*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfUIElements*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfUIElementSink
+  def query_interface(this : ITfUIElementSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfUIElementSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfUIElementSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_ui_element(this : ITfUIElementSink*, dwuielementid : UInt32, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.begin_ui_element.call(this, dwuielementid, pbshow)
+  end
+  def update_ui_element(this : ITfUIElementSink*, dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.update_ui_element.call(this, dwuielementid)
+  end
+  def end_ui_element(this : ITfUIElementSink*, dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.end_ui_element.call(this, dwuielementid)
+  end
+end
+struct LibWin32::ITfUIElement
+  def query_interface(this : ITfUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfUIElement*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfUIElement*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfUIElement*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfUIElement*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+end
+struct LibWin32::ITfCandidateListUIElement
+  def query_interface(this : ITfCandidateListUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCandidateListUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCandidateListUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfCandidateListUIElement*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfCandidateListUIElement*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfCandidateListUIElement*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfCandidateListUIElement*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+  def get_updated_flags(this : ITfCandidateListUIElement*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.call(this, pdwflags)
+  end
+  def get_document_mgr(this : ITfCandidateListUIElement*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.call(this, ppdim)
+  end
+  def get_count(this : ITfCandidateListUIElement*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+  def get_selection(this : ITfCandidateListUIElement*, puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, puindex)
+  end
+  def get_string(this : ITfCandidateListUIElement*, uindex : UInt32, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, uindex, pstr)
+  end
+  def get_page_index(this : ITfCandidateListUIElement*, pindex : UInt32*, usize : UInt32, pupagecnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_index.call(this, pindex, usize, pupagecnt)
+  end
+  def set_page_index(this : ITfCandidateListUIElement*, pindex : UInt32*, upagecnt : UInt32) : HRESULT
+    @lpVtbl.value.set_page_index.call(this, pindex, upagecnt)
+  end
+  def get_current_page(this : ITfCandidateListUIElement*, pupage : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, pupage)
+  end
+end
+struct LibWin32::ITfCandidateListUIElementBehavior
+  def query_interface(this : ITfCandidateListUIElementBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCandidateListUIElementBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCandidateListUIElementBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfCandidateListUIElementBehavior*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfCandidateListUIElementBehavior*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfCandidateListUIElementBehavior*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfCandidateListUIElementBehavior*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+  def get_updated_flags(this : ITfCandidateListUIElementBehavior*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.call(this, pdwflags)
+  end
+  def get_document_mgr(this : ITfCandidateListUIElementBehavior*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.call(this, ppdim)
+  end
+  def get_count(this : ITfCandidateListUIElementBehavior*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+  def get_selection(this : ITfCandidateListUIElementBehavior*, puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, puindex)
+  end
+  def get_string(this : ITfCandidateListUIElementBehavior*, uindex : UInt32, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, uindex, pstr)
+  end
+  def get_page_index(this : ITfCandidateListUIElementBehavior*, pindex : UInt32*, usize : UInt32, pupagecnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_index.call(this, pindex, usize, pupagecnt)
+  end
+  def set_page_index(this : ITfCandidateListUIElementBehavior*, pindex : UInt32*, upagecnt : UInt32) : HRESULT
+    @lpVtbl.value.set_page_index.call(this, pindex, upagecnt)
+  end
+  def get_current_page(this : ITfCandidateListUIElementBehavior*, pupage : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, pupage)
+  end
+  def set_selection(this : ITfCandidateListUIElementBehavior*, nindex : UInt32) : HRESULT
+    @lpVtbl.value.set_selection.call(this, nindex)
+  end
+  def finalize(this : ITfCandidateListUIElementBehavior*) : HRESULT
+    @lpVtbl.value.finalize.call(this)
+  end
+  def abort(this : ITfCandidateListUIElementBehavior*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+end
+struct LibWin32::ITfReadingInformationUIElement
+  def query_interface(this : ITfReadingInformationUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfReadingInformationUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfReadingInformationUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfReadingInformationUIElement*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfReadingInformationUIElement*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfReadingInformationUIElement*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfReadingInformationUIElement*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+  def get_updated_flags(this : ITfReadingInformationUIElement*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.call(this, pdwflags)
+  end
+  def get_context(this : ITfReadingInformationUIElement*, ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppic)
+  end
+  def get_string(this : ITfReadingInformationUIElement*, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, pstr)
+  end
+  def get_max_reading_string_length(this : ITfReadingInformationUIElement*, pcchmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_reading_string_length.call(this, pcchmax)
+  end
+  def get_error_index(this : ITfReadingInformationUIElement*, perrorindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_index.call(this, perrorindex)
+  end
+  def is_vertical_order_preferred(this : ITfReadingInformationUIElement*, pfvertical : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_vertical_order_preferred.call(this, pfvertical)
+  end
+end
+struct LibWin32::ITfTransitoryExtensionUIElement
+  def query_interface(this : ITfTransitoryExtensionUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTransitoryExtensionUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTransitoryExtensionUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfTransitoryExtensionUIElement*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfTransitoryExtensionUIElement*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfTransitoryExtensionUIElement*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfTransitoryExtensionUIElement*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+  def get_document_mgr(this : ITfTransitoryExtensionUIElement*, ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.call(this, ppdim)
+  end
+end
+struct LibWin32::ITfTransitoryExtensionSink
+  def query_interface(this : ITfTransitoryExtensionSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfTransitoryExtensionSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfTransitoryExtensionSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_transitory_extension_updated(this : ITfTransitoryExtensionSink*, pic : ITfContext, ecreadonly : UInt32, presultrange : ITfRange, pcompositionrange : ITfRange, pfdeleteresultrange : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_transitory_extension_updated.call(this, pic, ecreadonly, presultrange, pcompositionrange, pfdeleteresultrange)
+  end
+end
+struct LibWin32::ITfToolTipUIElement
+  def query_interface(this : ITfToolTipUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfToolTipUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfToolTipUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_description(this : ITfToolTipUIElement*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def get_guid(this : ITfToolTipUIElement*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def show(this : ITfToolTipUIElement*, bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, bshow)
+  end
+  def is_shown(this : ITfToolTipUIElement*, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.call(this, pbshow)
+  end
+  def get_string(this : ITfToolTipUIElement*, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, pstr)
+  end
+end
+struct LibWin32::ITfReverseConversionList
+  def query_interface(this : ITfReverseConversionList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfReverseConversionList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfReverseConversionList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : ITfReverseConversionList*, puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, puindex)
+  end
+  def get_string(this : ITfReverseConversionList*, uindex : UInt32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, uindex, pbstr)
+  end
+end
+struct LibWin32::ITfReverseConversion
+  def query_interface(this : ITfReverseConversion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfReverseConversion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfReverseConversion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def do_reverse_conversion(this : ITfReverseConversion*, lpstr : LibC::LPWSTR, pplist : ITfReverseConversionList*) : HRESULT
+    @lpVtbl.value.do_reverse_conversion.call(this, lpstr, pplist)
+  end
+end
+struct LibWin32::ITfReverseConversionMgr
+  def query_interface(this : ITfReverseConversionMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfReverseConversionMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfReverseConversionMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_reverse_conversion(this : ITfReverseConversionMgr*, langid : UInt16, guidprofile : Guid*, dwflag : UInt32, ppreverseconversion : ITfReverseConversion*) : HRESULT
+    @lpVtbl.value.get_reverse_conversion.call(this, langid, guidprofile, dwflag, ppreverseconversion)
+  end
+end
+struct LibWin32::ITfCandidateString
+  def query_interface(this : ITfCandidateString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCandidateString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCandidateString*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_string(this : ITfCandidateString*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, pbstr)
+  end
+  def get_index(this : ITfCandidateString*, pnindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, pnindex)
+  end
+end
+struct LibWin32::IEnumTfCandidates
+  def query_interface(this : IEnumTfCandidates*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfCandidates*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfCandidates*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfCandidates*, ppenum : IEnumTfCandidates*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfCandidates*, ulcount : UInt32, ppcand : ITfCandidateString*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, ppcand, pcfetched)
+  end
+  def reset(this : IEnumTfCandidates*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfCandidates*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfCandidateList
+  def query_interface(this : ITfCandidateList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfCandidateList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfCandidateList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_candidates(this : ITfCandidateList*, ppenum : IEnumTfCandidates*) : HRESULT
+    @lpVtbl.value.enum_candidates.call(this, ppenum)
+  end
+  def get_candidate(this : ITfCandidateList*, nindex : UInt32, ppcand : ITfCandidateString*) : HRESULT
+    @lpVtbl.value.get_candidate.call(this, nindex, ppcand)
+  end
+  def get_candidate_num(this : ITfCandidateList*, pncnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_num.call(this, pncnt)
+  end
+  def set_result(this : ITfCandidateList*, nindex : UInt32, imcr : TfCandidateResult) : HRESULT
+    @lpVtbl.value.set_result.call(this, nindex, imcr)
+  end
+end
+struct LibWin32::ITfFnReconversion
+  def query_interface(this : ITfFnReconversion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnReconversion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnReconversion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnReconversion*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def query_range(this : ITfFnReconversion*, prange : ITfRange, ppnewrange : ITfRange*, pfconvertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.call(this, prange, ppnewrange, pfconvertable)
+  end
+  def get_reconversion(this : ITfFnReconversion*, prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.call(this, prange, ppcandlist)
+  end
+  def reconvert(this : ITfFnReconversion*, prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.call(this, prange)
+  end
+end
+struct LibWin32::ITfFnPlayBack
+  def query_interface(this : ITfFnPlayBack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnPlayBack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnPlayBack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnPlayBack*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def query_range(this : ITfFnPlayBack*, prange : ITfRange, ppnewrange : ITfRange*, pfplayable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.call(this, prange, ppnewrange, pfplayable)
+  end
+  def play(this : ITfFnPlayBack*, prange : ITfRange) : HRESULT
+    @lpVtbl.value.play.call(this, prange)
+  end
+end
+struct LibWin32::ITfFnLangProfileUtil
+  def query_interface(this : ITfFnLangProfileUtil*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnLangProfileUtil*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnLangProfileUtil*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnLangProfileUtil*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def register_active_profiles(this : ITfFnLangProfileUtil*) : HRESULT
+    @lpVtbl.value.register_active_profiles.call(this)
+  end
+  def is_profile_available_for_lang(this : ITfFnLangProfileUtil*, langid : UInt16, pfavailable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_profile_available_for_lang.call(this, langid, pfavailable)
+  end
+end
+struct LibWin32::ITfFnConfigure
+  def query_interface(this : ITfFnConfigure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnConfigure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnConfigure*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnConfigure*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def show(this : ITfFnConfigure*, hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.show.call(this, hwndparent, langid, rguidprofile)
+  end
+end
+struct LibWin32::ITfFnConfigureRegisterWord
+  def query_interface(this : ITfFnConfigureRegisterWord*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnConfigureRegisterWord*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnConfigureRegisterWord*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnConfigureRegisterWord*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def show(this : ITfFnConfigureRegisterWord*, hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*, bstrregistered : UInt8*) : HRESULT
+    @lpVtbl.value.show.call(this, hwndparent, langid, rguidprofile, bstrregistered)
+  end
+end
+struct LibWin32::ITfFnConfigureRegisterEudc
+  def query_interface(this : ITfFnConfigureRegisterEudc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnConfigureRegisterEudc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnConfigureRegisterEudc*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnConfigureRegisterEudc*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def show(this : ITfFnConfigureRegisterEudc*, hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*, bstrregistered : UInt8*) : HRESULT
+    @lpVtbl.value.show.call(this, hwndparent, langid, rguidprofile, bstrregistered)
+  end
+end
+struct LibWin32::ITfFnShowHelp
+  def query_interface(this : ITfFnShowHelp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnShowHelp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnShowHelp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnShowHelp*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def show(this : ITfFnShowHelp*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show.call(this, hwndparent)
+  end
+end
+struct LibWin32::ITfFnBalloon
+  def query_interface(this : ITfFnBalloon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnBalloon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnBalloon*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update_balloon(this : ITfFnBalloon*, style : TfLBBalloonStyle, pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.update_balloon.call(this, style, pch, cch)
+  end
+end
+struct LibWin32::ITfFnGetSAPIObject
+  def query_interface(this : ITfFnGetSAPIObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnGetSAPIObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnGetSAPIObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnGetSAPIObject*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def get(this : ITfFnGetSAPIObject*, sobj : TfSapiObject, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get.call(this, sobj, ppunk)
+  end
+end
+struct LibWin32::ITfFnPropertyUIStatus
+  def query_interface(this : ITfFnPropertyUIStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnPropertyUIStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnPropertyUIStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnPropertyUIStatus*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def get_status(this : ITfFnPropertyUIStatus*, refguidprop : Guid*, pdw : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, refguidprop, pdw)
+  end
+  def set_status(this : ITfFnPropertyUIStatus*, refguidprop : Guid*, dw : UInt32) : HRESULT
+    @lpVtbl.value.set_status.call(this, refguidprop, dw)
+  end
+end
+struct LibWin32::IEnumSpeechCommands
+  def query_interface(this : IEnumSpeechCommands*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSpeechCommands*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSpeechCommands*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumSpeechCommands*, ppenum : IEnumSpeechCommands*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumSpeechCommands*, ulcount : UInt32, pspcmds : UInt16**, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, pspcmds, pcfetched)
+  end
+  def reset(this : IEnumSpeechCommands*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumSpeechCommands*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ISpeechCommandProvider
+  def query_interface(this : ISpeechCommandProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpeechCommandProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpeechCommandProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_speech_commands(this : ISpeechCommandProvider*, langid : UInt16, ppenum : IEnumSpeechCommands*) : HRESULT
+    @lpVtbl.value.enum_speech_commands.call(this, langid, ppenum)
+  end
+  def process_command(this : ISpeechCommandProvider*, pszcommand : Char*, cch : UInt32, langid : UInt16) : HRESULT
+    @lpVtbl.value.process_command.call(this, pszcommand, cch, langid)
+  end
+end
+struct LibWin32::ITfFnCustomSpeechCommand
+  def query_interface(this : ITfFnCustomSpeechCommand*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnCustomSpeechCommand*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnCustomSpeechCommand*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnCustomSpeechCommand*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def set_speech_command_provider(this : ITfFnCustomSpeechCommand*, pspcmdprovider : IUnknown) : HRESULT
+    @lpVtbl.value.set_speech_command_provider.call(this, pspcmdprovider)
+  end
+end
+struct LibWin32::ITfFnLMProcessor
+  def query_interface(this : ITfFnLMProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnLMProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnLMProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnLMProcessor*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def query_range(this : ITfFnLMProcessor*, prange : ITfRange, ppnewrange : ITfRange*, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.call(this, prange, ppnewrange, pfaccepted)
+  end
+  def query_lang_id(this : ITfFnLMProcessor*, langid : UInt16, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_lang_id.call(this, langid, pfaccepted)
+  end
+  def get_reconversion(this : ITfFnLMProcessor*, prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.call(this, prange, ppcandlist)
+  end
+  def reconvert(this : ITfFnLMProcessor*, prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.call(this, prange)
+  end
+  def query_key(this : ITfFnLMProcessor*, fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM, pfinterested : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_key.call(this, fup, vkey, lparamkeydata, pfinterested)
+  end
+  def invoke_key(this : ITfFnLMProcessor*, fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM) : HRESULT
+    @lpVtbl.value.invoke_key.call(this, fup, vkey, lparamkeydata)
+  end
+  def invoke_func(this : ITfFnLMProcessor*, pic : ITfContext, refguidfunc : Guid*) : HRESULT
+    @lpVtbl.value.invoke_func.call(this, pic, refguidfunc)
+  end
+end
+struct LibWin32::ITfFnLMInternal
+  def query_interface(this : ITfFnLMInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnLMInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnLMInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnLMInternal*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def query_range(this : ITfFnLMInternal*, prange : ITfRange, ppnewrange : ITfRange*, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.call(this, prange, ppnewrange, pfaccepted)
+  end
+  def query_lang_id(this : ITfFnLMInternal*, langid : UInt16, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_lang_id.call(this, langid, pfaccepted)
+  end
+  def get_reconversion(this : ITfFnLMInternal*, prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.call(this, prange, ppcandlist)
+  end
+  def reconvert(this : ITfFnLMInternal*, prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.call(this, prange)
+  end
+  def query_key(this : ITfFnLMInternal*, fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM, pfinterested : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_key.call(this, fup, vkey, lparamkeydata, pfinterested)
+  end
+  def invoke_key(this : ITfFnLMInternal*, fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM) : HRESULT
+    @lpVtbl.value.invoke_key.call(this, fup, vkey, lparamkeydata)
+  end
+  def invoke_func(this : ITfFnLMInternal*, pic : ITfContext, refguidfunc : Guid*) : HRESULT
+    @lpVtbl.value.invoke_func.call(this, pic, refguidfunc)
+  end
+  def process_lattice(this : ITfFnLMInternal*, prange : ITfRange) : HRESULT
+    @lpVtbl.value.process_lattice.call(this, prange)
+  end
+end
+struct LibWin32::IEnumTfLatticeElements
+  def query_interface(this : IEnumTfLatticeElements*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumTfLatticeElements*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumTfLatticeElements*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumTfLatticeElements*, ppenum : IEnumTfLatticeElements*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumTfLatticeElements*, ulcount : UInt32, rgselements : TF_LMLATTELEMENT*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgselements, pcfetched)
+  end
+  def reset(this : IEnumTfLatticeElements*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumTfLatticeElements*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::ITfLMLattice
+  def query_interface(this : ITfLMLattice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfLMLattice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfLMLattice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_type(this : ITfLMLattice*, rguidtype : Guid*, pfsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_type.call(this, rguidtype, pfsupported)
+  end
+  def enum_lattice_elements(this : ITfLMLattice*, dwframestart : UInt32, rguidtype : Guid*, ppenum : IEnumTfLatticeElements*) : HRESULT
+    @lpVtbl.value.enum_lattice_elements.call(this, dwframestart, rguidtype, ppenum)
+  end
+end
+struct LibWin32::ITfFnAdviseText
+  def query_interface(this : ITfFnAdviseText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnAdviseText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnAdviseText*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnAdviseText*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def on_text_update(this : ITfFnAdviseText*, prange : ITfRange, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.on_text_update.call(this, prange, pchtext, cch)
+  end
+  def on_lattice_update(this : ITfFnAdviseText*, prange : ITfRange, plattice : ITfLMLattice) : HRESULT
+    @lpVtbl.value.on_lattice_update.call(this, prange, plattice)
+  end
+end
+struct LibWin32::ITfFnSearchCandidateProvider
+  def query_interface(this : ITfFnSearchCandidateProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnSearchCandidateProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnSearchCandidateProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnSearchCandidateProvider*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def get_search_candidates(this : ITfFnSearchCandidateProvider*, bstrquery : UInt8*, bstrapplicationid : UInt8*, pplist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_search_candidates.call(this, bstrquery, bstrapplicationid, pplist)
+  end
+  def set_result(this : ITfFnSearchCandidateProvider*, bstrquery : UInt8*, bstrapplicationid : UInt8*, bstrresult : UInt8*) : HRESULT
+    @lpVtbl.value.set_result.call(this, bstrquery, bstrapplicationid, bstrresult)
+  end
+end
+struct LibWin32::ITfIntegratableCandidateListUIElement
+  def query_interface(this : ITfIntegratableCandidateListUIElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfIntegratableCandidateListUIElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfIntegratableCandidateListUIElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_integration_style(this : ITfIntegratableCandidateListUIElement*, guidintegrationstyle : Guid) : HRESULT
+    @lpVtbl.value.set_integration_style.call(this, guidintegrationstyle)
+  end
+  def get_selection_style(this : ITfIntegratableCandidateListUIElement*, ptfselectionstyle : TfIntegratableCandidateListSelectionStyle*) : HRESULT
+    @lpVtbl.value.get_selection_style.call(this, ptfselectionstyle)
+  end
+  def on_key_down(this : ITfIntegratableCandidateListUIElement*, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.call(this, wparam, lparam, pfeaten)
+  end
+  def show_candidate_numbers(this : ITfIntegratableCandidateListUIElement*, pfshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.show_candidate_numbers.call(this, pfshow)
+  end
+  def finalize_exact_composition_string(this : ITfIntegratableCandidateListUIElement*) : HRESULT
+    @lpVtbl.value.finalize_exact_composition_string.call(this)
+  end
+end
+struct LibWin32::ITfFnGetPreferredTouchKeyboardLayout
+  def query_interface(this : ITfFnGetPreferredTouchKeyboardLayout*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnGetPreferredTouchKeyboardLayout*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnGetPreferredTouchKeyboardLayout*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnGetPreferredTouchKeyboardLayout*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def get_layout(this : ITfFnGetPreferredTouchKeyboardLayout*, ptkblayouttype : TKBLayoutType*, pwpreferredlayoutid : UInt16*) : HRESULT
+    @lpVtbl.value.get_layout.call(this, ptkblayouttype, pwpreferredlayoutid)
+  end
+end
+struct LibWin32::ITfFnGetLinguisticAlternates
+  def query_interface(this : ITfFnGetLinguisticAlternates*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfFnGetLinguisticAlternates*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfFnGetLinguisticAlternates*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_name(this : ITfFnGetLinguisticAlternates*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pbstrname)
+  end
+  def get_alternates(this : ITfFnGetLinguisticAlternates*, prange : ITfRange, ppcandidatelist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_alternates.call(this, prange, ppcandidatelist)
+  end
+end
+struct LibWin32::IUIManagerEventSink
+  def query_interface(this : IUIManagerEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIManagerEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIManagerEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_window_opening(this : IUIManagerEventSink*, prcbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_opening.call(this, prcbounds)
+  end
+  def on_window_opened(this : IUIManagerEventSink*, prcbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_opened.call(this, prcbounds)
+  end
+  def on_window_updating(this : IUIManagerEventSink*, prcupdatedbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_updating.call(this, prcupdatedbounds)
+  end
+  def on_window_updated(this : IUIManagerEventSink*, prcupdatedbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_updated.call(this, prcupdatedbounds)
+  end
+  def on_window_closing(this : IUIManagerEventSink*) : HRESULT
+    @lpVtbl.value.on_window_closing.call(this)
+  end
+  def on_window_closed(this : IUIManagerEventSink*) : HRESULT
+    @lpVtbl.value.on_window_closed.call(this)
+  end
+end
+struct LibWin32::ITfInputScope
+  def query_interface(this : ITfInputScope*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputScope*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputScope*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_scopes(this : ITfInputScope*, pprginputscopes : InputScope**, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_scopes.call(this, pprginputscopes, pccount)
+  end
+  def get_phrase(this : ITfInputScope*, ppbstrphrases : UInt8***, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_phrase.call(this, ppbstrphrases, pccount)
+  end
+  def get_regular_expression(this : ITfInputScope*, pbstrregexp : UInt8**) : HRESULT
+    @lpVtbl.value.get_regular_expression.call(this, pbstrregexp)
+  end
+  def get_srgs(this : ITfInputScope*, pbstrsrgs : UInt8**) : HRESULT
+    @lpVtbl.value.get_srgs.call(this, pbstrsrgs)
+  end
+  def get_xml(this : ITfInputScope*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, pbstrxml)
+  end
+end
+struct LibWin32::ITfInputScope2
+  def query_interface(this : ITfInputScope2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfInputScope2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfInputScope2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_scopes(this : ITfInputScope2*, pprginputscopes : InputScope**, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_scopes.call(this, pprginputscopes, pccount)
+  end
+  def get_phrase(this : ITfInputScope2*, ppbstrphrases : UInt8***, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_phrase.call(this, ppbstrphrases, pccount)
+  end
+  def get_regular_expression(this : ITfInputScope2*, pbstrregexp : UInt8**) : HRESULT
+    @lpVtbl.value.get_regular_expression.call(this, pbstrregexp)
+  end
+  def get_srgs(this : ITfInputScope2*, pbstrsrgs : UInt8**) : HRESULT
+    @lpVtbl.value.get_srgs.call(this, pbstrsrgs)
+  end
+  def get_xml(this : ITfInputScope2*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, pbstrxml)
+  end
+  def enum_word_list(this : ITfInputScope2*, ppenumstring : IEnumString*) : HRESULT
+    @lpVtbl.value.enum_word_list.call(this, ppenumstring)
+  end
+end
+struct LibWin32::ITfMSAAControl
+  def query_interface(this : ITfMSAAControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfMSAAControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfMSAAControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def system_enable_msaa(this : ITfMSAAControl*) : HRESULT
+    @lpVtbl.value.system_enable_msaa.call(this)
+  end
+  def system_disable_msaa(this : ITfMSAAControl*) : HRESULT
+    @lpVtbl.value.system_disable_msaa.call(this)
+  end
+end
+struct LibWin32::IInternalDocWrap
+  def query_interface(this : IInternalDocWrap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInternalDocWrap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInternalDocWrap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_revoke(this : IInternalDocWrap*) : HRESULT
+    @lpVtbl.value.notify_revoke.call(this)
+  end
+end
+struct LibWin32::ITextStoreACPEx
+  def query_interface(this : ITextStoreACPEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACPEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACPEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll_to_rect(this : ITextStoreACPEx*, acpstart : Int32, acpend : Int32, rc : RECT, dwposition : UInt32) : HRESULT
+    @lpVtbl.value.scroll_to_rect.call(this, acpstart, acpend, rc, dwposition)
+  end
+end
+struct LibWin32::ITextStoreAnchorEx
+  def query_interface(this : ITextStoreAnchorEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreAnchorEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreAnchorEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def scroll_to_rect(this : ITextStoreAnchorEx*, pstart : IAnchor, pend : IAnchor, rc : RECT, dwposition : UInt32) : HRESULT
+    @lpVtbl.value.scroll_to_rect.call(this, pstart, pend, rc, dwposition)
+  end
+end
+struct LibWin32::ITextStoreACPSinkEx
+  def query_interface(this : ITextStoreACPSinkEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreACPSinkEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreACPSinkEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_text_change(this : ITextStoreACPSinkEx*, dwflags : TEXT_STORE_TEXT_CHANGE_FLAGS, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.on_text_change.call(this, dwflags, pchange)
+  end
+  def on_selection_change(this : ITextStoreACPSinkEx*) : HRESULT
+    @lpVtbl.value.on_selection_change.call(this)
+  end
+  def on_layout_change(this : ITextStoreACPSinkEx*, lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this, lcode, vcview)
+  end
+  def on_status_change(this : ITextStoreACPSinkEx*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def on_attrs_change(this : ITextStoreACPSinkEx*, acpstart : Int32, acpend : Int32, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.call(this, acpstart, acpend, cattrs, paattrs)
+  end
+  def on_lock_granted(this : ITextStoreACPSinkEx*, dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.call(this, dwlockflags)
+  end
+  def on_start_edit_transaction(this : ITextStoreACPSinkEx*) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.call(this)
+  end
+  def on_end_edit_transaction(this : ITextStoreACPSinkEx*) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.call(this)
+  end
+  def on_disconnect(this : ITextStoreACPSinkEx*) : HRESULT
+    @lpVtbl.value.on_disconnect.call(this)
+  end
+end
+struct LibWin32::ITextStoreSinkAnchorEx
+  def query_interface(this : ITextStoreSinkAnchorEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoreSinkAnchorEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoreSinkAnchorEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_text_change(this : ITextStoreSinkAnchorEx*, dwflags : TEXT_STORE_CHANGE_FLAGS, pastart : IAnchor, paend : IAnchor) : HRESULT
+    @lpVtbl.value.on_text_change.call(this, dwflags, pastart, paend)
+  end
+  def on_selection_change(this : ITextStoreSinkAnchorEx*) : HRESULT
+    @lpVtbl.value.on_selection_change.call(this)
+  end
+  def on_layout_change(this : ITextStoreSinkAnchorEx*, lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.call(this, lcode, vcview)
+  end
+  def on_status_change(this : ITextStoreSinkAnchorEx*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def on_attrs_change(this : ITextStoreSinkAnchorEx*, pastart : IAnchor, paend : IAnchor, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.call(this, pastart, paend, cattrs, paattrs)
+  end
+  def on_lock_granted(this : ITextStoreSinkAnchorEx*, dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.call(this, dwlockflags)
+  end
+  def on_start_edit_transaction(this : ITextStoreSinkAnchorEx*) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.call(this)
+  end
+  def on_end_edit_transaction(this : ITextStoreSinkAnchorEx*) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.call(this)
+  end
+  def on_disconnect(this : ITextStoreSinkAnchorEx*) : HRESULT
+    @lpVtbl.value.on_disconnect.call(this)
+  end
+end
+struct LibWin32::IAccDictionary
+  def query_interface(this : IAccDictionary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccDictionary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccDictionary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_localized_string(this : IAccDictionary*, term : Guid*, lcid : UInt32, presult : UInt8**, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_localized_string.call(this, term, lcid, presult, plcid)
+  end
+  def get_parent_term(this : IAccDictionary*, term : Guid*, pparentterm : Guid*) : HRESULT
+    @lpVtbl.value.get_parent_term.call(this, term, pparentterm)
+  end
+  def get_mnemonic_string(this : IAccDictionary*, term : Guid*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_mnemonic_string.call(this, term, presult)
+  end
+  def lookup_mnemonic_term(this : IAccDictionary*, bstrmnemonic : UInt8*, pterm : Guid*) : HRESULT
+    @lpVtbl.value.lookup_mnemonic_term.call(this, bstrmnemonic, pterm)
+  end
+  def convert_value_to_string(this : IAccDictionary*, term : Guid*, lcid : UInt32, varvalue : VARIANT, pbstrresult : UInt8**, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.convert_value_to_string.call(this, term, lcid, varvalue, pbstrresult, plcid)
+  end
+end
+struct LibWin32::IVersionInfo
+  def query_interface(this : IVersionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVersionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVersionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_subcomponent_count(this : IVersionInfo*, ulsub : UInt32, ulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_subcomponent_count.call(this, ulsub, ulcount)
+  end
+  def get_implementation_id(this : IVersionInfo*, ulsub : UInt32, implid : Guid*) : HRESULT
+    @lpVtbl.value.get_implementation_id.call(this, ulsub, implid)
+  end
+  def get_build_version(this : IVersionInfo*, ulsub : UInt32, pdwmajor : UInt32*, pdwminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_build_version.call(this, ulsub, pdwmajor, pdwminor)
+  end
+  def get_component_description(this : IVersionInfo*, ulsub : UInt32, pimplstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_description.call(this, ulsub, pimplstr)
+  end
+  def get_instance_description(this : IVersionInfo*, ulsub : UInt32, pimplstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_instance_description.call(this, ulsub, pimplstr)
+  end
+end
+struct LibWin32::ICoCreateLocally
+  def query_interface(this : ICoCreateLocally*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICoCreateLocally*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICoCreateLocally*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def co_create_locally(this : ICoCreateLocally*, rclsid : Guid*, dwclscontext : UInt32, riid : Guid*, punk : IUnknown*, riidparam : Guid*, punkparam : IUnknown, varparam : VARIANT) : HRESULT
+    @lpVtbl.value.co_create_locally.call(this, rclsid, dwclscontext, riid, punk, riidparam, punkparam, varparam)
+  end
+end
+struct LibWin32::ICoCreatedLocally
+  def query_interface(this : ICoCreatedLocally*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICoCreatedLocally*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICoCreatedLocally*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def local_init(this : ICoCreatedLocally*, punklocalobject : IUnknown, riidparam : Guid*, punkparam : IUnknown, varparam : VARIANT) : HRESULT
+    @lpVtbl.value.local_init.call(this, punklocalobject, riidparam, punkparam, varparam)
+  end
+end
+struct LibWin32::IAccStore
+  def query_interface(this : IAccStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register(this : IAccStore*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.register.call(this, riid, punk)
+  end
+  def unregister(this : IAccStore*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.unregister.call(this, punk)
+  end
+  def get_documents(this : IAccStore*, enumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_documents.call(this, enumunknown)
+  end
+  def lookup_by_hwnd(this : IAccStore*, hwnd : LibC::HANDLE, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_hwnd.call(this, hwnd, riid, ppunk)
+  end
+  def lookup_by_point(this : IAccStore*, pt : POINT, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_point.call(this, pt, riid, ppunk)
+  end
+  def on_document_focus(this : IAccStore*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.on_document_focus.call(this, punk)
+  end
+  def get_focused(this : IAccStore*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_focused.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IAccServerDocMgr
+  def query_interface(this : IAccServerDocMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccServerDocMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccServerDocMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def new_document(this : IAccServerDocMgr*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.new_document.call(this, riid, punk)
+  end
+  def revoke_document(this : IAccServerDocMgr*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.revoke_document.call(this, punk)
+  end
+  def on_document_focus(this : IAccServerDocMgr*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.on_document_focus.call(this, punk)
+  end
+end
+struct LibWin32::IAccClientDocMgr
+  def query_interface(this : IAccClientDocMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccClientDocMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccClientDocMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_documents(this : IAccClientDocMgr*, enumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_documents.call(this, enumunknown)
+  end
+  def lookup_by_hwnd(this : IAccClientDocMgr*, hwnd : LibC::HANDLE, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_hwnd.call(this, hwnd, riid, ppunk)
+  end
+  def lookup_by_point(this : IAccClientDocMgr*, pt : POINT, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_point.call(this, pt, riid, ppunk)
+  end
+  def get_focused(this : IAccClientDocMgr*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_focused.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IDocWrap
+  def query_interface(this : IDocWrap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDocWrap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDocWrap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_doc(this : IDocWrap*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_doc.call(this, riid, punk)
+  end
+  def get_wrapped_doc(this : IDocWrap*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_wrapped_doc.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IClonableWrapper
+  def query_interface(this : IClonableWrapper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IClonableWrapper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IClonableWrapper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone_new_wrapper(this : IClonableWrapper*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.clone_new_wrapper.call(this, riid, ppv)
+  end
+end
+struct LibWin32::ITfSpeechUIServer
+  def query_interface(this : ITfSpeechUIServer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITfSpeechUIServer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITfSpeechUIServer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : ITfSpeechUIServer*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
+  end
+  def show_ui(this : ITfSpeechUIServer*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_ui.call(this, fshow)
+  end
+  def update_balloon(this : ITfSpeechUIServer*, style : TfLBBalloonStyle, pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.update_balloon.call(this, style, pch, cch)
+  end
+end

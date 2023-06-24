@@ -721,3 +721,445 @@ lib LibWin32
   # Params # init : HrtfApoInit* [In],xapo : IXAPO* [In]
   fun CreateHrtfApo(init : HrtfApoInit*, xapo : IXAPO*) : HRESULT
 end
+struct LibWin32::IXAPO
+  def query_interface(this : IXAPO*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAPO*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAPO*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_registration_properties(this : IXAPO*, ppregistrationproperties : XAPO_REGISTRATION_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_registration_properties.call(this, ppregistrationproperties)
+  end
+  def is_input_format_supported(this : IXAPO*, poutputformat : WAVEFORMATEX*, prequestedinputformat : WAVEFORMATEX*, ppsupportedinputformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.is_input_format_supported.call(this, poutputformat, prequestedinputformat, ppsupportedinputformat)
+  end
+  def is_output_format_supported(this : IXAPO*, pinputformat : WAVEFORMATEX*, prequestedoutputformat : WAVEFORMATEX*, ppsupportedoutputformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.is_output_format_supported.call(this, pinputformat, prequestedoutputformat, ppsupportedoutputformat)
+  end
+  def initialize(this : IXAPO*, pdata : Void*, databytesize : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, pdata, databytesize)
+  end
+  def reset(this : IXAPO*) : Void
+    @lpVtbl.value.reset.call(this)
+  end
+  def lock_for_process(this : IXAPO*, inputlockedparametercount : UInt32, pinputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*, outputlockedparametercount : UInt32, poutputlockedparameters : XAPO_LOCKFORPROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.lock_for_process.call(this, inputlockedparametercount, pinputlockedparameters, outputlockedparametercount, poutputlockedparameters)
+  end
+  def unlock_for_process(this : IXAPO*) : Void
+    @lpVtbl.value.unlock_for_process.call(this)
+  end
+  def process(this : IXAPO*, inputprocessparametercount : UInt32, pinputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, outputprocessparametercount : UInt32, poutputprocessparameters : XAPO_PROCESS_BUFFER_PARAMETERS*, isenabled : LibC::BOOL) : Void
+    @lpVtbl.value.process.call(this, inputprocessparametercount, pinputprocessparameters, outputprocessparametercount, poutputprocessparameters, isenabled)
+  end
+  def calc_input_frames(this : IXAPO*, outputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_input_frames.call(this, outputframecount)
+  end
+  def calc_output_frames(this : IXAPO*, inputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_output_frames.call(this, inputframecount)
+  end
+end
+struct LibWin32::IXAPOParameters
+  def query_interface(this : IXAPOParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAPOParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAPOParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_parameters(this : IXAPOParameters*, pparameters : Void*, parameterbytesize : UInt32) : Void
+    @lpVtbl.value.set_parameters.call(this, pparameters, parameterbytesize)
+  end
+  def get_parameters(this : IXAPOParameters*, pparameters : Void*, parameterbytesize : UInt32) : Void
+    @lpVtbl.value.get_parameters.call(this, pparameters, parameterbytesize)
+  end
+end
+struct LibWin32::IXAudio2
+  def query_interface(this : IXAudio2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAudio2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAudio2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_for_callbacks(this : IXAudio2*, pcallback : IXAudio2EngineCallback) : HRESULT
+    @lpVtbl.value.register_for_callbacks.call(this, pcallback)
+  end
+  def unregister_for_callbacks(this : IXAudio2*, pcallback : IXAudio2EngineCallback) : Void
+    @lpVtbl.value.unregister_for_callbacks.call(this, pcallback)
+  end
+  def create_source_voice(this : IXAudio2*, ppsourcevoice : IXAudio2SourceVoice*, psourceformat : WAVEFORMATEX*, flags : UInt32, maxfrequencyratio : Float32, pcallback : IXAudio2VoiceCallback, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.create_source_voice.call(this, ppsourcevoice, psourceformat, flags, maxfrequencyratio, pcallback, psendlist, peffectchain)
+  end
+  def create_submix_voice(this : IXAudio2*, ppsubmixvoice : IXAudio2SubmixVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, processingstage : UInt32, psendlist : XAUDIO2_VOICE_SENDS*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.create_submix_voice.call(this, ppsubmixvoice, inputchannels, inputsamplerate, flags, processingstage, psendlist, peffectchain)
+  end
+  def create_mastering_voice(this : IXAudio2*, ppmasteringvoice : IXAudio2MasteringVoice*, inputchannels : UInt32, inputsamplerate : UInt32, flags : UInt32, szdeviceid : LibC::LPWSTR, peffectchain : XAUDIO2_EFFECT_CHAIN*, streamcategory : AUDIO_STREAM_CATEGORY) : HRESULT
+    @lpVtbl.value.create_mastering_voice.call(this, ppmasteringvoice, inputchannels, inputsamplerate, flags, szdeviceid, peffectchain, streamcategory)
+  end
+  def start_engine(this : IXAudio2*) : HRESULT
+    @lpVtbl.value.start_engine.call(this)
+  end
+  def stop_engine(this : IXAudio2*) : Void
+    @lpVtbl.value.stop_engine.call(this)
+  end
+  def commit_changes(this : IXAudio2*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.commit_changes.call(this, operationset)
+  end
+  def get_performance_data(this : IXAudio2*, pperfdata : XAUDIO2_PERFORMANCE_DATA*) : Void
+    @lpVtbl.value.get_performance_data.call(this, pperfdata)
+  end
+  def set_debug_configuration(this : IXAudio2*, pdebugconfiguration : XAUDIO2_DEBUG_CONFIGURATION*, preserved : Void*) : Void
+    @lpVtbl.value.set_debug_configuration.call(this, pdebugconfiguration, preserved)
+  end
+end
+struct LibWin32::IXAudio2Extension
+  def query_interface(this : IXAudio2Extension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAudio2Extension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAudio2Extension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_processing_quantum(this : IXAudio2Extension*, quantumnumerator : UInt32*, quantumdenominator : UInt32*) : Void
+    @lpVtbl.value.get_processing_quantum.call(this, quantumnumerator, quantumdenominator)
+  end
+  def get_processor(this : IXAudio2Extension*, processor : UInt32*) : Void
+    @lpVtbl.value.get_processor.call(this, processor)
+  end
+end
+struct LibWin32::IXAudio2Voice
+  def get_voice_details(this : IXAudio2Voice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
+  end
+  def set_output_voices(this : IXAudio2Voice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
+  end
+  def set_effect_chain(this : IXAudio2Voice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
+  end
+  def enable_effect(this : IXAudio2Voice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
+  end
+  def disable_effect(this : IXAudio2Voice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
+  end
+  def get_effect_state(this : IXAudio2Voice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
+  end
+  def set_effect_parameters(this : IXAudio2Voice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
+  end
+  def get_effect_parameters(this : IXAudio2Voice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
+  end
+  def set_filter_parameters(this : IXAudio2Voice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
+  end
+  def get_filter_parameters(this : IXAudio2Voice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
+  end
+  def set_output_filter_parameters(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
+  end
+  def get_output_filter_parameters(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
+  end
+  def set_volume(this : IXAudio2Voice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
+  end
+  def get_volume(this : IXAudio2Voice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
+  end
+  def set_channel_volumes(this : IXAudio2Voice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
+  end
+  def get_channel_volumes(this : IXAudio2Voice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
+  end
+  def set_output_matrix(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  end
+  def get_output_matrix(this : IXAudio2Voice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  end
+  def destroy_voice(this : IXAudio2Voice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
+  end
+end
+struct LibWin32::IXAudio2SourceVoice
+  def get_voice_details(this : IXAudio2SourceVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
+  end
+  def set_output_voices(this : IXAudio2SourceVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
+  end
+  def set_effect_chain(this : IXAudio2SourceVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
+  end
+  def enable_effect(this : IXAudio2SourceVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
+  end
+  def disable_effect(this : IXAudio2SourceVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
+  end
+  def get_effect_state(this : IXAudio2SourceVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
+  end
+  def set_effect_parameters(this : IXAudio2SourceVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
+  end
+  def get_effect_parameters(this : IXAudio2SourceVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
+  end
+  def set_filter_parameters(this : IXAudio2SourceVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
+  end
+  def get_filter_parameters(this : IXAudio2SourceVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
+  end
+  def set_output_filter_parameters(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
+  end
+  def get_output_filter_parameters(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
+  end
+  def set_volume(this : IXAudio2SourceVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
+  end
+  def get_volume(this : IXAudio2SourceVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
+  end
+  def set_channel_volumes(this : IXAudio2SourceVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
+  end
+  def get_channel_volumes(this : IXAudio2SourceVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
+  end
+  def set_output_matrix(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  end
+  def get_output_matrix(this : IXAudio2SourceVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  end
+  def destroy_voice(this : IXAudio2SourceVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
+  end
+  def start(this : IXAudio2SourceVoice*, flags : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.start.call(this, flags, operationset)
+  end
+  def stop(this : IXAudio2SourceVoice*, flags : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.stop.call(this, flags, operationset)
+  end
+  def submit_source_buffer(this : IXAudio2SourceVoice*, pbuffer : XAUDIO2_BUFFER*, pbufferwma : XAUDIO2_BUFFER_WMA*) : HRESULT
+    @lpVtbl.value.submit_source_buffer.call(this, pbuffer, pbufferwma)
+  end
+  def flush_source_buffers(this : IXAudio2SourceVoice*) : HRESULT
+    @lpVtbl.value.flush_source_buffers.call(this)
+  end
+  def discontinuity(this : IXAudio2SourceVoice*) : HRESULT
+    @lpVtbl.value.discontinuity.call(this)
+  end
+  def exit_loop(this : IXAudio2SourceVoice*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.exit_loop.call(this, operationset)
+  end
+  def get_state(this : IXAudio2SourceVoice*, pvoicestate : XAUDIO2_VOICE_STATE*, flags : UInt32) : Void
+    @lpVtbl.value.get_state.call(this, pvoicestate, flags)
+  end
+  def set_frequency_ratio(this : IXAudio2SourceVoice*, ratio : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_frequency_ratio.call(this, ratio, operationset)
+  end
+  def get_frequency_ratio(this : IXAudio2SourceVoice*, pratio : Float32*) : Void
+    @lpVtbl.value.get_frequency_ratio.call(this, pratio)
+  end
+  def set_source_sample_rate(this : IXAudio2SourceVoice*, newsourcesamplerate : UInt32) : HRESULT
+    @lpVtbl.value.set_source_sample_rate.call(this, newsourcesamplerate)
+  end
+end
+struct LibWin32::IXAudio2SubmixVoice
+  def get_voice_details(this : IXAudio2SubmixVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
+  end
+  def set_output_voices(this : IXAudio2SubmixVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
+  end
+  def set_effect_chain(this : IXAudio2SubmixVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
+  end
+  def enable_effect(this : IXAudio2SubmixVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
+  end
+  def disable_effect(this : IXAudio2SubmixVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
+  end
+  def get_effect_state(this : IXAudio2SubmixVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
+  end
+  def set_effect_parameters(this : IXAudio2SubmixVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
+  end
+  def get_effect_parameters(this : IXAudio2SubmixVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
+  end
+  def set_filter_parameters(this : IXAudio2SubmixVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
+  end
+  def get_filter_parameters(this : IXAudio2SubmixVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
+  end
+  def set_output_filter_parameters(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
+  end
+  def get_output_filter_parameters(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
+  end
+  def set_volume(this : IXAudio2SubmixVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
+  end
+  def get_volume(this : IXAudio2SubmixVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
+  end
+  def set_channel_volumes(this : IXAudio2SubmixVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
+  end
+  def get_channel_volumes(this : IXAudio2SubmixVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
+  end
+  def set_output_matrix(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  end
+  def get_output_matrix(this : IXAudio2SubmixVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  end
+  def destroy_voice(this : IXAudio2SubmixVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
+  end
+end
+struct LibWin32::IXAudio2MasteringVoice
+  def get_voice_details(this : IXAudio2MasteringVoice*, pvoicedetails : XAUDIO2_VOICE_DETAILS*) : Void
+    @lpVtbl.value.get_voice_details.call(this, pvoicedetails)
+  end
+  def set_output_voices(this : IXAudio2MasteringVoice*, psendlist : XAUDIO2_VOICE_SENDS*) : HRESULT
+    @lpVtbl.value.set_output_voices.call(this, psendlist)
+  end
+  def set_effect_chain(this : IXAudio2MasteringVoice*, peffectchain : XAUDIO2_EFFECT_CHAIN*) : HRESULT
+    @lpVtbl.value.set_effect_chain.call(this, peffectchain)
+  end
+  def enable_effect(this : IXAudio2MasteringVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.enable_effect.call(this, effectindex, operationset)
+  end
+  def disable_effect(this : IXAudio2MasteringVoice*, effectindex : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.disable_effect.call(this, effectindex, operationset)
+  end
+  def get_effect_state(this : IXAudio2MasteringVoice*, effectindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.get_effect_state.call(this, effectindex, penabled)
+  end
+  def set_effect_parameters(this : IXAudio2MasteringVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_parameters.call(this, effectindex, pparameters, parametersbytesize, operationset)
+  end
+  def get_effect_parameters(this : IXAudio2MasteringVoice*, effectindex : UInt32, pparameters : Void*, parametersbytesize : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_parameters.call(this, effectindex, pparameters, parametersbytesize)
+  end
+  def set_filter_parameters(this : IXAudio2MasteringVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_filter_parameters.call(this, pparameters, operationset)
+  end
+  def get_filter_parameters(this : IXAudio2MasteringVoice*, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_filter_parameters.call(this, pparameters)
+  end
+  def set_output_filter_parameters(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_filter_parameters.call(this, pdestinationvoice, pparameters, operationset)
+  end
+  def get_output_filter_parameters(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, pparameters : XAUDIO2_FILTER_PARAMETERS*) : Void
+    @lpVtbl.value.get_output_filter_parameters.call(this, pdestinationvoice, pparameters)
+  end
+  def set_volume(this : IXAudio2MasteringVoice*, volume : Float32, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_volume.call(this, volume, operationset)
+  end
+  def get_volume(this : IXAudio2MasteringVoice*, pvolume : Float32*) : Void
+    @lpVtbl.value.get_volume.call(this, pvolume)
+  end
+  def set_channel_volumes(this : IXAudio2MasteringVoice*, channels : UInt32, pvolumes : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, channels, pvolumes, operationset)
+  end
+  def get_channel_volumes(this : IXAudio2MasteringVoice*, channels : UInt32, pvolumes : Float32*) : Void
+    @lpVtbl.value.get_channel_volumes.call(this, channels, pvolumes)
+  end
+  def set_output_matrix(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*, operationset : UInt32) : HRESULT
+    @lpVtbl.value.set_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix, operationset)
+  end
+  def get_output_matrix(this : IXAudio2MasteringVoice*, pdestinationvoice : IXAudio2Voice, sourcechannels : UInt32, destinationchannels : UInt32, plevelmatrix : Float32*) : Void
+    @lpVtbl.value.get_output_matrix.call(this, pdestinationvoice, sourcechannels, destinationchannels, plevelmatrix)
+  end
+  def destroy_voice(this : IXAudio2MasteringVoice*) : Void
+    @lpVtbl.value.destroy_voice.call(this)
+  end
+  def get_channel_mask(this : IXAudio2MasteringVoice*, pchannelmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_mask.call(this, pchannelmask)
+  end
+end
+struct LibWin32::IXAudio2EngineCallback
+  def on_processing_pass_start(this : IXAudio2EngineCallback*) : Void
+    @lpVtbl.value.on_processing_pass_start.call(this)
+  end
+  def on_processing_pass_end(this : IXAudio2EngineCallback*) : Void
+    @lpVtbl.value.on_processing_pass_end.call(this)
+  end
+  def on_critical_error(this : IXAudio2EngineCallback*, error : HRESULT) : Void
+    @lpVtbl.value.on_critical_error.call(this, error)
+  end
+end
+struct LibWin32::IXAudio2VoiceCallback
+  def on_voice_processing_pass_start(this : IXAudio2VoiceCallback*, bytesrequired : UInt32) : Void
+    @lpVtbl.value.on_voice_processing_pass_start.call(this, bytesrequired)
+  end
+  def on_voice_processing_pass_end(this : IXAudio2VoiceCallback*) : Void
+    @lpVtbl.value.on_voice_processing_pass_end.call(this)
+  end
+  def on_stream_end(this : IXAudio2VoiceCallback*) : Void
+    @lpVtbl.value.on_stream_end.call(this)
+  end
+  def on_buffer_start(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_buffer_start.call(this, pbuffercontext)
+  end
+  def on_buffer_end(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_buffer_end.call(this, pbuffercontext)
+  end
+  def on_loop_end(this : IXAudio2VoiceCallback*, pbuffercontext : Void*) : Void
+    @lpVtbl.value.on_loop_end.call(this, pbuffercontext)
+  end
+  def on_voice_error(this : IXAudio2VoiceCallback*, pbuffercontext : Void*, error : HRESULT) : Void
+    @lpVtbl.value.on_voice_error.call(this, pbuffercontext, error)
+  end
+end
+struct LibWin32::IXAPOHrtfParameters
+  def query_interface(this : IXAPOHrtfParameters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAPOHrtfParameters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAPOHrtfParameters*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_source_position(this : IXAPOHrtfParameters*, position : HrtfPosition*) : HRESULT
+    @lpVtbl.value.set_source_position.call(this, position)
+  end
+  def set_source_orientation(this : IXAPOHrtfParameters*, orientation : HrtfOrientation*) : HRESULT
+    @lpVtbl.value.set_source_orientation.call(this, orientation)
+  end
+  def set_source_gain(this : IXAPOHrtfParameters*, gain : Float32) : HRESULT
+    @lpVtbl.value.set_source_gain.call(this, gain)
+  end
+  def set_environment(this : IXAPOHrtfParameters*, environment : HrtfEnvironment) : HRESULT
+    @lpVtbl.value.set_environment.call(this, environment)
+  end
+end

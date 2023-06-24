@@ -30,3 +30,23 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IXMLGraphBuilder
+  def query_interface(this : IXMLGraphBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXMLGraphBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXMLGraphBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def build_from_xml(this : IXMLGraphBuilder*, pgraph : IGraphBuilder, pxml : IXMLElement) : HRESULT
+    @lpVtbl.value.build_from_xml.call(this, pgraph, pxml)
+  end
+  def save_to_xml(this : IXMLGraphBuilder*, pgraph : IGraphBuilder, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.save_to_xml.call(this, pgraph, pbstrxml)
+  end
+  def build_from_xml_file(this : IXMLGraphBuilder*, pgraph : IGraphBuilder, wszfilename : LibC::LPWSTR, wszbaseurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.build_from_xml_file.call(this, pgraph, wszfilename, wszbaseurl)
+  end
+end

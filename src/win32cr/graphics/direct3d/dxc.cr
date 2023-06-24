@@ -518,3 +518,649 @@ lib LibWin32
   # Params # pmalloc : IMalloc [In],rclsid : Guid* [In],riid : Guid* [In],ppv : Void** [In]
   fun DxcCreateInstance2(pmalloc : IMalloc, rclsid : Guid*, riid : Guid*, ppv : Void**) : HRESULT
 end
+struct LibWin32::IDxcBlob
+  def query_interface(this : IDxcBlob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcBlob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcBlob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer_pointer(this : IDxcBlob*) : Void*
+    @lpVtbl.value.get_buffer_pointer.call(this)
+  end
+  def get_buffer_size(this : IDxcBlob*) : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.call(this)
+  end
+end
+struct LibWin32::IDxcBlobEncoding
+  def query_interface(this : IDxcBlobEncoding*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcBlobEncoding*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcBlobEncoding*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer_pointer(this : IDxcBlobEncoding*) : Void*
+    @lpVtbl.value.get_buffer_pointer.call(this)
+  end
+  def get_buffer_size(this : IDxcBlobEncoding*) : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.call(this)
+  end
+  def get_encoding(this : IDxcBlobEncoding*, pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.call(this, pknown, pcodepage)
+  end
+end
+struct LibWin32::IDxcBlobUtf16
+  def query_interface(this : IDxcBlobUtf16*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcBlobUtf16*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcBlobUtf16*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer_pointer(this : IDxcBlobUtf16*) : Void*
+    @lpVtbl.value.get_buffer_pointer.call(this)
+  end
+  def get_buffer_size(this : IDxcBlobUtf16*) : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.call(this)
+  end
+  def get_encoding(this : IDxcBlobUtf16*, pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.call(this, pknown, pcodepage)
+  end
+  def get_string_pointer(this : IDxcBlobUtf16*) : LibC::LPWSTR
+    @lpVtbl.value.get_string_pointer.call(this)
+  end
+  def get_string_length(this : IDxcBlobUtf16*) : LibC::UINT_PTR
+    @lpVtbl.value.get_string_length.call(this)
+  end
+end
+struct LibWin32::IDxcBlobUtf8
+  def query_interface(this : IDxcBlobUtf8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcBlobUtf8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcBlobUtf8*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer_pointer(this : IDxcBlobUtf8*) : Void*
+    @lpVtbl.value.get_buffer_pointer.call(this)
+  end
+  def get_buffer_size(this : IDxcBlobUtf8*) : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.call(this)
+  end
+  def get_encoding(this : IDxcBlobUtf8*, pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.call(this, pknown, pcodepage)
+  end
+  def get_string_pointer(this : IDxcBlobUtf8*) : PSTR
+    @lpVtbl.value.get_string_pointer.call(this)
+  end
+  def get_string_length(this : IDxcBlobUtf8*) : LibC::UINT_PTR
+    @lpVtbl.value.get_string_length.call(this)
+  end
+end
+struct LibWin32::IDxcIncludeHandler
+  def query_interface(this : IDxcIncludeHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcIncludeHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcIncludeHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_source(this : IDxcIncludeHandler*, pfilename : LibC::LPWSTR, ppincludesource : IDxcBlob*) : HRESULT
+    @lpVtbl.value.load_source.call(this, pfilename, ppincludesource)
+  end
+end
+struct LibWin32::IDxcCompilerArgs
+  def query_interface(this : IDxcCompilerArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcCompilerArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcCompilerArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_arguments(this : IDxcCompilerArgs*) : LibC::LPWSTR*
+    @lpVtbl.value.get_arguments.call(this)
+  end
+  def get_count(this : IDxcCompilerArgs*) : UInt32
+    @lpVtbl.value.get_count.call(this)
+  end
+  def add_arguments(this : IDxcCompilerArgs*, parguments : LibC::LPWSTR*, argcount : UInt32) : HRESULT
+    @lpVtbl.value.add_arguments.call(this, parguments, argcount)
+  end
+  def add_arguments_utf8(this : IDxcCompilerArgs*, parguments : PSTR*, argcount : UInt32) : HRESULT
+    @lpVtbl.value.add_arguments_utf8.call(this, parguments, argcount)
+  end
+  def add_defines(this : IDxcCompilerArgs*, pdefines : DxcDefine*, definecount : UInt32) : HRESULT
+    @lpVtbl.value.add_defines.call(this, pdefines, definecount)
+  end
+end
+struct LibWin32::IDxcLibrary
+  def query_interface(this : IDxcLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_malloc(this : IDxcLibrary*, pmalloc : IMalloc) : HRESULT
+    @lpVtbl.value.set_malloc.call(this, pmalloc)
+  end
+  def create_blob_from_blob(this : IDxcLibrary*, pblob : IDxcBlob, offset : UInt32, length : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.create_blob_from_blob.call(this, pblob, offset, length, ppresult)
+  end
+  def create_blob_from_file(this : IDxcLibrary*, pfilename : LibC::LPWSTR, codepage : DXC_CP*, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_from_file.call(this, pfilename, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_from_pinned(this : IDxcLibrary*, ptext : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_from_pinned.call(this, ptext, size, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_on_heap_copy(this : IDxcLibrary*, ptext : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_on_heap_copy.call(this, ptext, size, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_on_malloc(this : IDxcLibrary*, ptext : Void*, pimalloc : IMalloc, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_on_malloc.call(this, ptext, pimalloc, size, codepage, pblobencoding)
+  end
+  def create_include_handler(this : IDxcLibrary*, ppresult : IDxcIncludeHandler*) : HRESULT
+    @lpVtbl.value.create_include_handler.call(this, ppresult)
+  end
+  def create_stream_from_blob_read_only(this : IDxcLibrary*, pblob : IDxcBlob, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_blob_read_only.call(this, pblob, ppstream)
+  end
+  def get_blob_as_utf8(this : IDxcLibrary*, pblob : IDxcBlob, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf8.call(this, pblob, pblobencoding)
+  end
+  def get_blob_as_utf16(this : IDxcLibrary*, pblob : IDxcBlob, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf16.call(this, pblob, pblobencoding)
+  end
+end
+struct LibWin32::IDxcOperationResult
+  def query_interface(this : IDxcOperationResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcOperationResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcOperationResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IDxcOperationResult*, pstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_result(this : IDxcOperationResult*, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_result.call(this, ppresult)
+  end
+  def get_error_buffer(this : IDxcOperationResult*, pperrors : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_error_buffer.call(this, pperrors)
+  end
+end
+struct LibWin32::IDxcCompiler
+  def query_interface(this : IDxcCompiler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcCompiler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcCompiler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compile(this : IDxcCompiler*, psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.compile.call(this, psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def preprocess(this : IDxcCompiler*, psource : IDxcBlob, psourcename : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.preprocess.call(this, psource, psourcename, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def disassemble(this : IDxcCompiler*, psource : IDxcBlob, ppdisassembly : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, psource, ppdisassembly)
+  end
+end
+struct LibWin32::IDxcCompiler2
+  def query_interface(this : IDxcCompiler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcCompiler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcCompiler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compile(this : IDxcCompiler2*, psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.compile.call(this, psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def preprocess(this : IDxcCompiler2*, psource : IDxcBlob, psourcename : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.preprocess.call(this, psource, psourcename, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def disassemble(this : IDxcCompiler2*, psource : IDxcBlob, ppdisassembly : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, psource, ppdisassembly)
+  end
+  def compile_with_debug(this : IDxcCompiler2*, psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*, ppdebugblobname : LibC::LPWSTR*, ppdebugblob : IDxcBlob*) : HRESULT
+    @lpVtbl.value.compile_with_debug.call(this, psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult, ppdebugblobname, ppdebugblob)
+  end
+end
+struct LibWin32::IDxcLinker
+  def query_interface(this : IDxcLinker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcLinker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcLinker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_library(this : IDxcLinker*, plibname : LibC::LPWSTR, plib : IDxcBlob) : HRESULT
+    @lpVtbl.value.register_library.call(this, plibname, plib)
+  end
+  def link(this : IDxcLinker*, pentryname : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, plibnames : LibC::LPWSTR*, libcount : UInt32, parguments : LibC::LPWSTR*, argcount : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.link.call(this, pentryname, ptargetprofile, plibnames, libcount, parguments, argcount, ppresult)
+  end
+end
+struct LibWin32::IDxcUtils
+  def query_interface(this : IDxcUtils*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcUtils*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcUtils*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_blob_from_blob(this : IDxcUtils*, pblob : IDxcBlob, offset : UInt32, length : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.create_blob_from_blob.call(this, pblob, offset, length, ppresult)
+  end
+  def create_blob_from_pinned(this : IDxcUtils*, pdata : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_from_pinned.call(this, pdata, size, codepage, pblobencoding)
+  end
+  def move_to_blob(this : IDxcUtils*, pdata : Void*, pimalloc : IMalloc, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.move_to_blob.call(this, pdata, pimalloc, size, codepage, pblobencoding)
+  end
+  def create_blob(this : IDxcUtils*, pdata : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob.call(this, pdata, size, codepage, pblobencoding)
+  end
+  def load_file(this : IDxcUtils*, pfilename : LibC::LPWSTR, pcodepage : DXC_CP*, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.load_file.call(this, pfilename, pcodepage, pblobencoding)
+  end
+  def create_read_only_stream_from_blob(this : IDxcUtils*, pblob : IDxcBlob, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_from_blob.call(this, pblob, ppstream)
+  end
+  def create_default_include_handler(this : IDxcUtils*, ppresult : IDxcIncludeHandler*) : HRESULT
+    @lpVtbl.value.create_default_include_handler.call(this, ppresult)
+  end
+  def get_blob_as_utf8(this : IDxcUtils*, pblob : IDxcBlob, pblobencoding : IDxcBlobUtf8*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf8.call(this, pblob, pblobencoding)
+  end
+  def get_blob_as_utf16(this : IDxcUtils*, pblob : IDxcBlob, pblobencoding : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf16.call(this, pblob, pblobencoding)
+  end
+  def get_dxil_container_part(this : IDxcUtils*, pshader : DxcBuffer*, dxcpart : UInt32, pppartdata : Void**, ppartsizeinbytes : UInt32*) : HRESULT
+    @lpVtbl.value.get_dxil_container_part.call(this, pshader, dxcpart, pppartdata, ppartsizeinbytes)
+  end
+  def create_reflection(this : IDxcUtils*, pdata : DxcBuffer*, iid : Guid*, ppvreflection : Void**) : HRESULT
+    @lpVtbl.value.create_reflection.call(this, pdata, iid, ppvreflection)
+  end
+  def build_arguments(this : IDxcUtils*, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, ppargs : IDxcCompilerArgs*) : HRESULT
+    @lpVtbl.value.build_arguments.call(this, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, ppargs)
+  end
+  def get_pdb_contents(this : IDxcUtils*, ppdbblob : IDxcBlob, pphash : IDxcBlob*, ppcontainer : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_pdb_contents.call(this, ppdbblob, pphash, ppcontainer)
+  end
+end
+struct LibWin32::IDxcResult
+  def query_interface(this : IDxcResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IDxcResult*, pstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_result(this : IDxcResult*, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_result.call(this, ppresult)
+  end
+  def get_error_buffer(this : IDxcResult*, pperrors : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_error_buffer.call(this, pperrors)
+  end
+  def has_output(this : IDxcResult*, dxcoutkind : DXC_OUT_KIND) : LibC::BOOL
+    @lpVtbl.value.has_output.call(this, dxcoutkind)
+  end
+  def get_output(this : IDxcResult*, dxcoutkind : DXC_OUT_KIND, iid : Guid*, ppvobject : Void**, ppoutputname : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_output.call(this, dxcoutkind, iid, ppvobject, ppoutputname)
+  end
+  def get_num_outputs(this : IDxcResult*) : UInt32
+    @lpVtbl.value.get_num_outputs.call(this)
+  end
+  def get_output_by_index(this : IDxcResult*, index : UInt32) : DXC_OUT_KIND
+    @lpVtbl.value.get_output_by_index.call(this, index)
+  end
+  def primary_output(this : IDxcResult*) : DXC_OUT_KIND
+    @lpVtbl.value.primary_output.call(this)
+  end
+end
+struct LibWin32::IDxcExtraOutputs
+  def query_interface(this : IDxcExtraOutputs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcExtraOutputs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcExtraOutputs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_output_count(this : IDxcExtraOutputs*) : UInt32
+    @lpVtbl.value.get_output_count.call(this)
+  end
+  def get_output(this : IDxcExtraOutputs*, uindex : UInt32, iid : Guid*, ppvobject : Void**, ppoutputtype : IDxcBlobUtf16*, ppoutputname : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_output.call(this, uindex, iid, ppvobject, ppoutputtype, ppoutputname)
+  end
+end
+struct LibWin32::IDxcCompiler3
+  def query_interface(this : IDxcCompiler3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcCompiler3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcCompiler3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compile(this : IDxcCompiler3*, psource : DxcBuffer*, parguments : LibC::LPWSTR*, argcount : UInt32, pincludehandler : IDxcIncludeHandler, riid : Guid*, ppresult : Void**) : HRESULT
+    @lpVtbl.value.compile.call(this, psource, parguments, argcount, pincludehandler, riid, ppresult)
+  end
+  def disassemble(this : IDxcCompiler3*, pobject : DxcBuffer*, riid : Guid*, ppresult : Void**) : HRESULT
+    @lpVtbl.value.disassemble.call(this, pobject, riid, ppresult)
+  end
+end
+struct LibWin32::IDxcValidator
+  def query_interface(this : IDxcValidator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcValidator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcValidator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def validate(this : IDxcValidator*, pshader : IDxcBlob, flags : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate.call(this, pshader, flags, ppresult)
+  end
+end
+struct LibWin32::IDxcValidator2
+  def query_interface(this : IDxcValidator2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcValidator2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcValidator2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def validate(this : IDxcValidator2*, pshader : IDxcBlob, flags : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate.call(this, pshader, flags, ppresult)
+  end
+  def validate_with_debug(this : IDxcValidator2*, pshader : IDxcBlob, flags : UInt32, poptdebugbitcode : DxcBuffer*, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate_with_debug.call(this, pshader, flags, poptdebugbitcode, ppresult)
+  end
+end
+struct LibWin32::IDxcContainerBuilder
+  def query_interface(this : IDxcContainerBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcContainerBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcContainerBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load(this : IDxcContainerBuilder*, pdxilcontainerheader : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.call(this, pdxilcontainerheader)
+  end
+  def add_part(this : IDxcContainerBuilder*, fourcc : UInt32, psource : IDxcBlob) : HRESULT
+    @lpVtbl.value.add_part.call(this, fourcc, psource)
+  end
+  def remove_part(this : IDxcContainerBuilder*, fourcc : UInt32) : HRESULT
+    @lpVtbl.value.remove_part.call(this, fourcc)
+  end
+  def serialize_container(this : IDxcContainerBuilder*, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.serialize_container.call(this, ppresult)
+  end
+end
+struct LibWin32::IDxcAssembler
+  def query_interface(this : IDxcAssembler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcAssembler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcAssembler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def assemble_to_container(this : IDxcAssembler*, pshader : IDxcBlob, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.assemble_to_container.call(this, pshader, ppresult)
+  end
+end
+struct LibWin32::IDxcContainerReflection
+  def query_interface(this : IDxcContainerReflection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcContainerReflection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcContainerReflection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load(this : IDxcContainerReflection*, pcontainer : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.call(this, pcontainer)
+  end
+  def get_part_count(this : IDxcContainerReflection*, presult : UInt32*) : HRESULT
+    @lpVtbl.value.get_part_count.call(this, presult)
+  end
+  def get_part_kind(this : IDxcContainerReflection*, idx : UInt32, presult : UInt32*) : HRESULT
+    @lpVtbl.value.get_part_kind.call(this, idx, presult)
+  end
+  def get_part_content(this : IDxcContainerReflection*, idx : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_part_content.call(this, idx, ppresult)
+  end
+  def find_first_part_kind(this : IDxcContainerReflection*, kind : UInt32, presult : UInt32*) : HRESULT
+    @lpVtbl.value.find_first_part_kind.call(this, kind, presult)
+  end
+  def get_part_reflection(this : IDxcContainerReflection*, idx : UInt32, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_part_reflection.call(this, idx, iid, ppvobject)
+  end
+end
+struct LibWin32::IDxcOptimizerPass
+  def query_interface(this : IDxcOptimizerPass*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcOptimizerPass*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcOptimizerPass*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_option_name(this : IDxcOptimizerPass*, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_name.call(this, ppresult)
+  end
+  def get_description(this : IDxcOptimizerPass*, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, ppresult)
+  end
+  def get_option_arg_count(this : IDxcOptimizerPass*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_option_arg_count.call(this, pcount)
+  end
+  def get_option_arg_name(this : IDxcOptimizerPass*, argindex : UInt32, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_arg_name.call(this, argindex, ppresult)
+  end
+  def get_option_arg_description(this : IDxcOptimizerPass*, argindex : UInt32, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_arg_description.call(this, argindex, ppresult)
+  end
+end
+struct LibWin32::IDxcOptimizer
+  def query_interface(this : IDxcOptimizer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcOptimizer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcOptimizer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_available_pass_count(this : IDxcOptimizer*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_pass_count.call(this, pcount)
+  end
+  def get_available_pass(this : IDxcOptimizer*, index : UInt32, ppresult : IDxcOptimizerPass*) : HRESULT
+    @lpVtbl.value.get_available_pass.call(this, index, ppresult)
+  end
+  def run_optimizer(this : IDxcOptimizer*, pblob : IDxcBlob, ppoptions : LibC::LPWSTR*, optioncount : UInt32, poutputmodule : IDxcBlob*, ppoutputtext : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.run_optimizer.call(this, pblob, ppoptions, optioncount, poutputmodule, ppoutputtext)
+  end
+end
+struct LibWin32::IDxcVersionInfo
+  def query_interface(this : IDxcVersionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcVersionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcVersionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version(this : IDxcVersionInfo*, pmajor : UInt32*, pminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pmajor, pminor)
+  end
+  def get_flags(this : IDxcVersionInfo*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+end
+struct LibWin32::IDxcVersionInfo2
+  def query_interface(this : IDxcVersionInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcVersionInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcVersionInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version(this : IDxcVersionInfo2*, pmajor : UInt32*, pminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pmajor, pminor)
+  end
+  def get_flags(this : IDxcVersionInfo2*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def get_commit_info(this : IDxcVersionInfo2*, pcommitcount : UInt32*, pcommithash : Int8**) : HRESULT
+    @lpVtbl.value.get_commit_info.call(this, pcommitcount, pcommithash)
+  end
+end
+struct LibWin32::IDxcVersionInfo3
+  def query_interface(this : IDxcVersionInfo3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcVersionInfo3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcVersionInfo3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_custom_version_string(this : IDxcVersionInfo3*, pversionstring : Int8**) : HRESULT
+    @lpVtbl.value.get_custom_version_string.call(this, pversionstring)
+  end
+end
+struct LibWin32::IDxcPdbUtils
+  def query_interface(this : IDxcPdbUtils*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDxcPdbUtils*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDxcPdbUtils*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load(this : IDxcPdbUtils*, ppdbordxil : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.call(this, ppdbordxil)
+  end
+  def get_source_count(this : IDxcPdbUtils*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_count.call(this, pcount)
+  end
+  def get_source(this : IDxcPdbUtils*, uindex : UInt32, ppresult : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_source.call(this, uindex, ppresult)
+  end
+  def get_source_name(this : IDxcPdbUtils*, uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_name.call(this, uindex, presult)
+  end
+  def get_flag_count(this : IDxcPdbUtils*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_flag_count.call(this, pcount)
+  end
+  def get_flag(this : IDxcPdbUtils*, uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_flag.call(this, uindex, presult)
+  end
+  def get_arg_count(this : IDxcPdbUtils*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_arg_count.call(this, pcount)
+  end
+  def get_arg(this : IDxcPdbUtils*, uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_arg.call(this, uindex, presult)
+  end
+  def get_arg_pair_count(this : IDxcPdbUtils*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_arg_pair_count.call(this, pcount)
+  end
+  def get_arg_pair(this : IDxcPdbUtils*, uindex : UInt32, pname : UInt8**, pvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_arg_pair.call(this, uindex, pname, pvalue)
+  end
+  def get_define_count(this : IDxcPdbUtils*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_define_count.call(this, pcount)
+  end
+  def get_define(this : IDxcPdbUtils*, uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_define.call(this, uindex, presult)
+  end
+  def get_target_profile(this : IDxcPdbUtils*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_profile.call(this, presult)
+  end
+  def get_entry_point(this : IDxcPdbUtils*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_entry_point.call(this, presult)
+  end
+  def get_main_file_name(this : IDxcPdbUtils*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_main_file_name.call(this, presult)
+  end
+  def get_hash(this : IDxcPdbUtils*, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_hash.call(this, ppresult)
+  end
+  def get_name(this : IDxcPdbUtils*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, presult)
+  end
+  def is_full_pdb(this : IDxcPdbUtils*) : LibC::BOOL
+    @lpVtbl.value.is_full_pdb.call(this)
+  end
+  def get_full_pdb(this : IDxcPdbUtils*, ppfullpdb : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_full_pdb.call(this, ppfullpdb)
+  end
+  def get_version_info(this : IDxcPdbUtils*, ppversioninfo : IDxcVersionInfo*) : HRESULT
+    @lpVtbl.value.get_version_info.call(this, ppversioninfo)
+  end
+  def set_compiler(this : IDxcPdbUtils*, pcompiler : IDxcCompiler3) : HRESULT
+    @lpVtbl.value.set_compiler.call(this, pcompiler)
+  end
+  def compile_for_full_pdb(this : IDxcPdbUtils*, ppresult : IDxcResult*) : HRESULT
+    @lpVtbl.value.compile_for_full_pdb.call(this, ppresult)
+  end
+  def override_args(this : IDxcPdbUtils*, pargpairs : DxcArgPair*, unumargpairs : UInt32) : HRESULT
+    @lpVtbl.value.override_args.call(this, pargpairs, unumargpairs)
+  end
+  def override_root_signature(this : IDxcPdbUtils*, prootsignature : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.override_root_signature.call(this, prootsignature)
+  end
+end

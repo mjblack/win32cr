@@ -72,3 +72,17 @@ lib LibWin32
   # Params # pszappcontainername : LibC::LPWSTR [In],ppsidappcontainersid : PSID* [In]
   fun DeriveAppContainerSidFromAppContainerName(pszappcontainername : LibC::LPWSTR, ppsidappcontainersid : PSID*) : HRESULT
 end
+struct LibWin32::IIsolatedAppLauncher
+  def query_interface(this : IIsolatedAppLauncher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIsolatedAppLauncher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIsolatedAppLauncher*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def launch(this : IIsolatedAppLauncher*, appusermodelid : LibC::LPWSTR, arguments : LibC::LPWSTR, telemetryparameters : IsolatedAppLauncherTelemetryParameters*) : HRESULT
+    @lpVtbl.value.launch.call(this, appusermodelid, arguments, telemetryparameters)
+  end
+end

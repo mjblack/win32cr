@@ -48,3 +48,52 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ISoftwareBitmapNative
+  def query_interface(this : ISoftwareBitmapNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISoftwareBitmapNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISoftwareBitmapNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ISoftwareBitmapNative*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ISoftwareBitmapNative*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ISoftwareBitmapNative*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_data(this : ISoftwareBitmapNative*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_data.call(this, riid, ppv)
+  end
+end
+struct LibWin32::ISoftwareBitmapNativeFactory
+  def query_interface(this : ISoftwareBitmapNativeFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISoftwareBitmapNativeFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISoftwareBitmapNativeFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ISoftwareBitmapNativeFactory*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ISoftwareBitmapNativeFactory*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ISoftwareBitmapNativeFactory*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_from_wic_bitmap(this : ISoftwareBitmapNativeFactory*, data : IWICBitmap, forcereadonly : LibC::BOOL, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_from_wic_bitmap.call(this, data, forcereadonly, riid, ppv)
+  end
+  def create_from_mf2_d_buffer2(this : ISoftwareBitmapNativeFactory*, data : IMF2DBuffer2, subtype : Guid*, width : UInt32, height : UInt32, forcereadonly : LibC::BOOL, mindisplayaperture : MFVideoArea*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_from_mf2_d_buffer2.call(this, data, subtype, width, height, forcereadonly, mindisplayaperture, riid, ppv)
+  end
+end

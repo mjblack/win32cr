@@ -2439,7 +2439,7 @@ lib LibWin32
   fun GetIpInterfaceTable(family : UInt16, table : MIB_IPINTERFACE_TABLE**) : NTSTATUS
 
   # Params # row : MIB_IPINTERFACE_ROW* [In]
-  fun InitializeIpInterfaceEntry(row : MIB_IPINTERFACE_ROW*)
+  fun InitializeIpInterfaceEntry(row : MIB_IPINTERFACE_ROW*) : Void
 
   # Params # family : UInt16 [In],callback : PIPINTERFACE_CHANGE_CALLBACK [In],callercontext : Void* [In],initialnotification : BOOLEAN [In],notificationhandle : LibC::HANDLE* [In]
   fun NotifyIpInterfaceChange(family : UInt16, callback : PIPINTERFACE_CHANGE_CALLBACK, callercontext : Void*, initialnotification : BOOLEAN, notificationhandle : LibC::HANDLE*) : NTSTATUS
@@ -2463,7 +2463,7 @@ lib LibWin32
   fun GetUnicastIpAddressTable(family : UInt16, table : MIB_UNICASTIPADDRESS_TABLE**) : NTSTATUS
 
   # Params # row : MIB_UNICASTIPADDRESS_ROW* [In]
-  fun InitializeUnicastIpAddressEntry(row : MIB_UNICASTIPADDRESS_ROW*)
+  fun InitializeUnicastIpAddressEntry(row : MIB_UNICASTIPADDRESS_ROW*) : Void
 
   # Params # family : UInt16 [In],callback : PUNICAST_IPADDRESS_CHANGE_CALLBACK [In],callercontext : Void* [In],initialnotification : BOOLEAN [In],notificationhandle : LibC::HANDLE* [In]
   fun NotifyUnicastIpAddressChange(family : UInt16, callback : PUNICAST_IPADDRESS_CHANGE_CALLBACK, callercontext : Void*, initialnotification : BOOLEAN, notificationhandle : LibC::HANDLE*) : NTSTATUS
@@ -2508,7 +2508,7 @@ lib LibWin32
   fun GetIpForwardTable2(family : UInt16, table : MIB_IPFORWARD_TABLE2**) : NTSTATUS
 
   # Params # row : MIB_IPFORWARD_ROW2* [In]
-  fun InitializeIpForwardEntry(row : MIB_IPFORWARD_ROW2*)
+  fun InitializeIpForwardEntry(row : MIB_IPFORWARD_ROW2*) : Void
 
   # Params # addressfamily : UInt16 [In],callback : PIPFORWARD_CHANGE_CALLBACK [In],callercontext : Void* [In],initialnotification : BOOLEAN [In],notificationhandle : LibC::HANDLE* [In]
   fun NotifyRouteChange2(addressfamily : UInt16, callback : PIPFORWARD_CHANGE_CALLBACK, callercontext : Void*, initialnotification : BOOLEAN, notificationhandle : LibC::HANDLE*) : NTSTATUS
@@ -2556,7 +2556,7 @@ lib LibWin32
   fun CancelMibChangeNotify2(notificationhandle : LibC::HANDLE) : NTSTATUS
 
   # Params # memory : Void* [In]
-  fun FreeMibTable(memory : Void*)
+  fun FreeMibTable(memory : Void*) : Void
 
   # Params # sourceaddresslist : SOCKADDR_IN6* [In],sourceaddresscount : UInt32 [In],destinationaddresslist : SOCKADDR_IN6* [In],destinationaddresscount : UInt32 [In],addresssortoptions : UInt32 [In],sortedaddresspairlist : SOCKADDR_IN6_PAIR** [In],sortedaddresspaircount : UInt32* [In]
   fun CreateSortedAddressPairs(sourceaddresslist : SOCKADDR_IN6*, sourceaddresscount : UInt32, destinationaddresslist : SOCKADDR_IN6*, destinationaddresscount : UInt32, addresssortoptions : UInt32, sortedaddresspairlist : SOCKADDR_IN6_PAIR**, sortedaddresspaircount : UInt32*) : NTSTATUS
@@ -2610,7 +2610,7 @@ lib LibWin32
   fun SetCurrentThreadCompartmentId(compartmentid : UInt32) : NTSTATUS
 
   # Params # compartmentscope : UInt32* [In],compartmentid : UInt32* [In]
-  fun GetCurrentThreadCompartmentScope(compartmentscope : UInt32*, compartmentid : UInt32*)
+  fun GetCurrentThreadCompartmentScope(compartmentscope : UInt32*, compartmentid : UInt32*) : Void
 
   # Params # compartmentscope : UInt32 [In]
   fun SetCurrentThreadCompartmentScope(compartmentscope : UInt32) : NTSTATUS
@@ -2646,7 +2646,7 @@ lib LibWin32
   fun GetDnsSettings(settings : DNS_SETTINGS*) : NTSTATUS
 
   # Params # settings : DNS_SETTINGS* [In]
-  fun FreeDnsSettings(settings : DNS_SETTINGS*)
+  fun FreeDnsSettings(settings : DNS_SETTINGS*) : Void
 
   # Params # settings : DNS_SETTINGS* [In]
   fun SetDnsSettings(settings : DNS_SETTINGS*) : NTSTATUS
@@ -2655,7 +2655,7 @@ lib LibWin32
   fun GetInterfaceDnsSettings(interface : Guid, settings : DNS_INTERFACE_SETTINGS*) : NTSTATUS
 
   # Params # settings : DNS_INTERFACE_SETTINGS* [In]
-  fun FreeInterfaceDnsSettings(settings : DNS_INTERFACE_SETTINGS*)
+  fun FreeInterfaceDnsSettings(settings : DNS_INTERFACE_SETTINGS*) : Void
 
   # Params # interface : Guid [In],settings : DNS_INTERFACE_SETTINGS* [In]
   fun SetInterfaceDnsSettings(interface : Guid, settings : DNS_INTERFACE_SETTINGS*) : NTSTATUS
@@ -2901,7 +2901,7 @@ lib LibWin32
   fun RegisterInterfaceTimestampConfigChange(callback : PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, callercontext : Void*, notificationhandle : HIFTIMESTAMPCHANGE*) : UInt32
 
   # Params # notificationhandle : HIFTIMESTAMPCHANGE [In]
-  fun UnregisterInterfaceTimestampConfigChange(notificationhandle : HIFTIMESTAMPCHANGE)
+  fun UnregisterInterfaceTimestampConfigChange(notificationhandle : HIFTIMESTAMPCHANGE) : Void
 
   # Params # adapterinfo : IP_ADAPTER_INDEX_MAP* [In]
   fun IpReleaseAddress(adapterinfo : IP_ADAPTER_INDEX_MAP*) : UInt32

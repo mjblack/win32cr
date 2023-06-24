@@ -912,3 +912,64 @@ lib LibWin32
   # Params # targetadapterid : LUID [In],sourceid : UInt32 [In],scope : WCS_PROFILE_MANAGEMENT_SCOPE* [In]
   fun ColorProfileGetDisplayUserScope(targetadapterid : LUID, sourceid : UInt32, scope : WCS_PROFILE_MANAGEMENT_SCOPE*) : HRESULT
 end
+struct LibWin32::IDeviceModelPlugIn
+  def query_interface(this : IDeviceModelPlugIn*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDeviceModelPlugIn*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDeviceModelPlugIn*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IDeviceModelPlugIn*, bstrxml : UInt8*, cnummodels : UInt32, imodelposition : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, bstrxml, cnummodels, imodelposition)
+  end
+  def get_num_channels(this : IDeviceModelPlugIn*, pnumchannels : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_channels.call(this, pnumchannels)
+  end
+  def device_to_colorimetric_colors(this : IDeviceModelPlugIn*, ccolors : UInt32, cchannels : UInt32, pdevicevalues : Float32*, pxyzcolors : XYZColorF*) : HRESULT
+    @lpVtbl.value.device_to_colorimetric_colors.call(this, ccolors, cchannels, pdevicevalues, pxyzcolors)
+  end
+  def colorimetric_to_device_colors(this : IDeviceModelPlugIn*, ccolors : UInt32, cchannels : UInt32, pxyzcolors : XYZColorF*, pdevicevalues : Float32*) : HRESULT
+    @lpVtbl.value.colorimetric_to_device_colors.call(this, ccolors, cchannels, pxyzcolors, pdevicevalues)
+  end
+  def colorimetric_to_device_colors_with_black(this : IDeviceModelPlugIn*, ccolors : UInt32, cchannels : UInt32, pxyzcolors : XYZColorF*, pblackinformation : BlackInformation*, pdevicevalues : Float32*) : HRESULT
+    @lpVtbl.value.colorimetric_to_device_colors_with_black.call(this, ccolors, cchannels, pxyzcolors, pblackinformation, pdevicevalues)
+  end
+  def set_transform_device_model_info(this : IDeviceModelPlugIn*, imodelposition : UInt32, pidevicemodelother : IDeviceModelPlugIn) : HRESULT
+    @lpVtbl.value.set_transform_device_model_info.call(this, imodelposition, pidevicemodelother)
+  end
+  def get_primary_samples(this : IDeviceModelPlugIn*, pprimarycolor : PrimaryXYZColors*) : HRESULT
+    @lpVtbl.value.get_primary_samples.call(this, pprimarycolor)
+  end
+  def get_gamut_boundary_mesh_size(this : IDeviceModelPlugIn*, pnumvertices : UInt32*, pnumtriangles : UInt32*) : HRESULT
+    @lpVtbl.value.get_gamut_boundary_mesh_size.call(this, pnumvertices, pnumtriangles)
+  end
+  def get_gamut_boundary_mesh(this : IDeviceModelPlugIn*, cchannels : UInt32, cvertices : UInt32, ctriangles : UInt32, pvertices : Float32*, ptriangles : GamutShellTriangle*) : HRESULT
+    @lpVtbl.value.get_gamut_boundary_mesh.call(this, cchannels, cvertices, ctriangles, pvertices, ptriangles)
+  end
+  def get_neutral_axis_size(this : IDeviceModelPlugIn*, pccolors : UInt32*) : HRESULT
+    @lpVtbl.value.get_neutral_axis_size.call(this, pccolors)
+  end
+  def get_neutral_axis(this : IDeviceModelPlugIn*, ccolors : UInt32, pxyzcolors : XYZColorF*) : HRESULT
+    @lpVtbl.value.get_neutral_axis.call(this, ccolors, pxyzcolors)
+  end
+end
+struct LibWin32::IGamutMapModelPlugIn
+  def query_interface(this : IGamutMapModelPlugIn*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGamutMapModelPlugIn*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGamutMapModelPlugIn*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IGamutMapModelPlugIn*, bstrxml : UInt8*, psrcplugin : IDeviceModelPlugIn, pdestplugin : IDeviceModelPlugIn, psrcgbd : GamutBoundaryDescription*, pdestgbd : GamutBoundaryDescription*) : HRESULT
+    @lpVtbl.value.initialize.call(this, bstrxml, psrcplugin, pdestplugin, psrcgbd, pdestgbd)
+  end
+  def source_to_destination_appearance_colors(this : IGamutMapModelPlugIn*, ccolors : UInt32, pinputcolors : JChColorF*, poutputcolors : JChColorF*) : HRESULT
+    @lpVtbl.value.source_to_destination_appearance_colors.call(this, ccolors, pinputcolors, poutputcolors)
+  end
+end

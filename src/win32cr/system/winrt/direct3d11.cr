@@ -37,3 +37,17 @@ lib LibWin32
   # Params # dgxisurface : IDXGISurface [In],graphicssurface : IInspectable* [In]
   fun CreateDirect3D11SurfaceFromDXGISurface(dgxisurface : IDXGISurface, graphicssurface : IInspectable*) : HRESULT
 end
+struct LibWin32::IDirect3DDxgiInterfaceAccess
+  def query_interface(this : IDirect3DDxgiInterfaceAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDxgiInterfaceAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDxgiInterfaceAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interface(this : IDirect3DDxgiInterfaceAccess*, iid : Guid*, p : Void**) : HRESULT
+    @lpVtbl.value.get_interface.call(this, iid, p)
+  end
+end

@@ -2341,7 +2341,7 @@ lib LibWin32
     id : WS_SECURITY_BINDING_PROPERTY_ID
     allowed_values : Void*
     allowed_values_size : UInt32
-    out : WS_SECURITY_BINDING_PROPERTY_CONSTRAINT_out_e__Struct
+    out_ : WS_SECURITY_BINDING_PROPERTY_CONSTRAINT_out_e__Struct
   end
   struct WS_SECURITY_BINDING_PROPERTY_CONSTRAINT_out_e__Struct
     security_binding_property : WS_SECURITY_BINDING_PROPERTY
@@ -2353,7 +2353,7 @@ lib LibWin32
   end
   struct WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT
     binding_constraint : WS_SECURITY_BINDING_CONSTRAINT
-    out : WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_out_e__Struct
+    out_ : WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_out_e__Struct
   end
   struct WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_out_e__Struct
     client_cert_credential_required : LibC::BOOL
@@ -2380,7 +2380,7 @@ lib LibWin32
     id : WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID
     allowed_values : Void*
     allowed_values_size : UInt32
-    out : WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT_out_e__Struct
+    out_ : WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT_out_e__Struct
   end
   struct WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT_out_e__Struct
     request_security_token_property : WS_REQUEST_SECURITY_TOKEN_PROPERTY
@@ -2392,7 +2392,7 @@ lib LibWin32
     claim_constraint_count : UInt32
     request_security_token_property_constraints : WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT*
     request_security_token_property_constraint_count : UInt32
-    out : WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_out_e__Struct
+    out_ : WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_out_e__Struct
   end
   struct WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_out_e__Struct
     issuer_address : WS_ENDPOINT_ADDRESS*
@@ -2402,7 +2402,7 @@ lib LibWin32
     id : WS_SECURITY_PROPERTY_ID
     allowed_values : Void*
     allowed_values_size : UInt32
-    out : WS_SECURITY_PROPERTY_CONSTRAINT_out_e__Struct
+    out_ : WS_SECURITY_PROPERTY_CONSTRAINT_out_e__Struct
   end
   struct WS_SECURITY_PROPERTY_CONSTRAINT_out_e__Struct
     security_property : WS_SECURITY_PROPERTY
@@ -2422,7 +2422,7 @@ lib LibWin32
     id : WS_CHANNEL_PROPERTY_ID
     allowed_values : Void*
     allowed_values_size : UInt32
-    out : WS_CHANNEL_PROPERTY_CONSTRAINT_out_e__Struct
+    out_ : WS_CHANNEL_PROPERTY_CONSTRAINT_out_e__Struct
   end
   struct WS_CHANNEL_PROPERTY_CONSTRAINT_out_e__Struct
     channel_property : WS_CHANNEL_PROPERTY
@@ -2434,7 +2434,7 @@ lib LibWin32
     policy_extension : WS_POLICY_EXTENSION
     assertion_name : WS_XML_STRING*
     assertion_ns : WS_XML_STRING*
-    out : WS_ENDPOINT_POLICY_EXTENSION_out_e__Struct
+    out_ : WS_ENDPOINT_POLICY_EXTENSION_out_e__Struct
   end
   struct WS_ENDPOINT_POLICY_EXTENSION_out_e__Struct
     assertion_value : WS_XML_BUFFER*
@@ -2857,7 +2857,7 @@ lib LibWin32
   fun WsSetInputToBuffer(reader : WS_XML_READER*, buffer : WS_XML_BUFFER*, properties : WS_XML_READER_PROPERTY*, propertycount : UInt32, error : WS_ERROR*) : HRESULT
 
   # Params # reader : WS_XML_READER* [In]
-  fun WsFreeReader(reader : WS_XML_READER*)
+  fun WsFreeReader(reader : WS_XML_READER*) : Void
 
   # Params # reader : WS_XML_READER* [In],id : WS_XML_READER_PROPERTY_ID [In],value : Void* [In],valuesize : UInt32 [In],error : WS_ERROR* [In]
   fun WsGetReaderProperty(reader : WS_XML_READER*, id : WS_XML_READER_PROPERTY_ID, value : Void*, valuesize : UInt32, error : WS_ERROR*) : HRESULT
@@ -2920,7 +2920,7 @@ lib LibWin32
   fun WsCreateWriter(properties : WS_XML_WRITER_PROPERTY*, propertycount : UInt32, writer : WS_XML_WRITER**, error : WS_ERROR*) : HRESULT
 
   # Params # writer : WS_XML_WRITER* [In]
-  fun WsFreeWriter(writer : WS_XML_WRITER*)
+  fun WsFreeWriter(writer : WS_XML_WRITER*) : Void
 
   # Params # writer : WS_XML_WRITER* [In],encoding : WS_XML_WRITER_ENCODING* [In],output : WS_XML_WRITER_OUTPUT* [In],properties : WS_XML_WRITER_PROPERTY* [In],propertycount : UInt32 [In],error : WS_ERROR* [In]
   fun WsSetOutput(writer : WS_XML_WRITER*, encoding : WS_XML_WRITER_ENCODING*, output : WS_XML_WRITER_OUTPUT*, properties : WS_XML_WRITER_PROPERTY*, propertycount : UInt32, error : WS_ERROR*) : HRESULT
@@ -3082,7 +3082,7 @@ lib LibWin32
   fun WsAbortChannel(channel : WS_CHANNEL*, error : WS_ERROR*) : HRESULT
 
   # Params # channel : WS_CHANNEL* [In]
-  fun WsFreeChannel(channel : WS_CHANNEL*)
+  fun WsFreeChannel(channel : WS_CHANNEL*) : Void
 
   # Params # channel : WS_CHANNEL* [In],error : WS_ERROR* [In]
   fun WsResetChannel(channel : WS_CHANNEL*, error : WS_ERROR*) : HRESULT
@@ -3124,7 +3124,7 @@ lib LibWin32
   fun WsResetError(error : WS_ERROR*) : HRESULT
 
   # Params # error : WS_ERROR* [In]
-  fun WsFreeError(error : WS_ERROR*)
+  fun WsFreeError(error : WS_ERROR*) : Void
 
   # Params # error : WS_ERROR* [In],id : WS_FAULT_ERROR_PROPERTY_ID [In],buffer : Void* [In],buffersize : UInt32 [In]
   fun WsGetFaultErrorProperty(error : WS_ERROR*, id : WS_FAULT_ERROR_PROPERTY_ID, buffer : Void*, buffersize : UInt32) : HRESULT
@@ -3154,7 +3154,7 @@ lib LibWin32
   fun WsResetHeap(heap : WS_HEAP*, error : WS_ERROR*) : HRESULT
 
   # Params # heap : WS_HEAP* [In]
-  fun WsFreeHeap(heap : WS_HEAP*)
+  fun WsFreeHeap(heap : WS_HEAP*) : Void
 
   # Params # channeltype : WS_CHANNEL_TYPE [In],channelbinding : WS_CHANNEL_BINDING [In],properties : WS_LISTENER_PROPERTY* [In],propertycount : UInt32 [In],securitydescription : WS_SECURITY_DESCRIPTION* [In],listener : WS_LISTENER** [In],error : WS_ERROR* [In]
   fun WsCreateListener(channeltype : WS_CHANNEL_TYPE, channelbinding : WS_CHANNEL_BINDING, properties : WS_LISTENER_PROPERTY*, propertycount : UInt32, securitydescription : WS_SECURITY_DESCRIPTION*, listener : WS_LISTENER**, error : WS_ERROR*) : HRESULT
@@ -3175,7 +3175,7 @@ lib LibWin32
   fun WsResetListener(listener : WS_LISTENER*, error : WS_ERROR*) : HRESULT
 
   # Params # listener : WS_LISTENER* [In]
-  fun WsFreeListener(listener : WS_LISTENER*)
+  fun WsFreeListener(listener : WS_LISTENER*) : Void
 
   # Params # listener : WS_LISTENER* [In],id : WS_LISTENER_PROPERTY_ID [In],value : Void* [In],valuesize : UInt32 [In],error : WS_ERROR* [In]
   fun WsGetListenerProperty(listener : WS_LISTENER*, id : WS_LISTENER_PROPERTY_ID, value : Void*, valuesize : UInt32, error : WS_ERROR*) : HRESULT
@@ -3199,7 +3199,7 @@ lib LibWin32
   fun WsResetMessage(message : WS_MESSAGE*, error : WS_ERROR*) : HRESULT
 
   # Params # message : WS_MESSAGE* [In]
-  fun WsFreeMessage(message : WS_MESSAGE*)
+  fun WsFreeMessage(message : WS_MESSAGE*) : Void
 
   # Params # message : WS_MESSAGE* [In],reader : WS_XML_READER* [In],headerattributes : UInt32* [In],error : WS_ERROR* [In]
   fun WsGetHeaderAttributes(message : WS_MESSAGE*, reader : WS_XML_READER*, headerattributes : UInt32*, error : WS_ERROR*) : HRESULT
@@ -3280,7 +3280,7 @@ lib LibWin32
   fun WsCreateXmlSecurityToken(tokenxml : WS_XML_BUFFER*, tokenkey : WS_SECURITY_KEY_HANDLE*, properties : WS_XML_SECURITY_TOKEN_PROPERTY*, propertycount : UInt32, token : WS_SECURITY_TOKEN**, error : WS_ERROR*) : HRESULT
 
   # Params # token : WS_SECURITY_TOKEN* [In]
-  fun WsFreeSecurityToken(token : WS_SECURITY_TOKEN*)
+  fun WsFreeSecurityToken(token : WS_SECURITY_TOKEN*) : Void
 
   # Params # securitycontext : WS_SECURITY_CONTEXT* [In],error : WS_ERROR* [In]
   fun WsRevokeSecurityContext(securitycontext : WS_SECURITY_CONTEXT*, error : WS_ERROR*) : HRESULT
@@ -3325,7 +3325,7 @@ lib LibWin32
   fun WsAbortServiceHost(servicehost : WS_SERVICE_HOST*, error : WS_ERROR*) : HRESULT
 
   # Params # servicehost : WS_SERVICE_HOST* [In]
-  fun WsFreeServiceHost(servicehost : WS_SERVICE_HOST*)
+  fun WsFreeServiceHost(servicehost : WS_SERVICE_HOST*) : Void
 
   # Params # servicehost : WS_SERVICE_HOST* [In],error : WS_ERROR* [In]
   fun WsResetServiceHost(servicehost : WS_SERVICE_HOST*, error : WS_ERROR*) : HRESULT
@@ -3346,7 +3346,7 @@ lib LibWin32
   fun WsAbortServiceProxy(serviceproxy : WS_SERVICE_PROXY*, error : WS_ERROR*) : HRESULT
 
   # Params # serviceproxy : WS_SERVICE_PROXY* [In]
-  fun WsFreeServiceProxy(serviceproxy : WS_SERVICE_PROXY*)
+  fun WsFreeServiceProxy(serviceproxy : WS_SERVICE_PROXY*) : Void
 
   # Params # serviceproxy : WS_SERVICE_PROXY* [In],error : WS_ERROR* [In]
   fun WsResetServiceProxy(serviceproxy : WS_SERVICE_PROXY*, error : WS_ERROR*) : HRESULT
@@ -3379,7 +3379,7 @@ lib LibWin32
   fun WsReadMetadata(metadata : WS_METADATA*, reader : WS_XML_READER*, url : WS_STRING*, error : WS_ERROR*) : HRESULT
 
   # Params # metadata : WS_METADATA* [In]
-  fun WsFreeMetadata(metadata : WS_METADATA*)
+  fun WsFreeMetadata(metadata : WS_METADATA*) : Void
 
   # Params # metadata : WS_METADATA* [In],error : WS_ERROR* [In]
   fun WsResetMetadata(metadata : WS_METADATA*, error : WS_ERROR*) : HRESULT
@@ -3421,10 +3421,10 @@ lib LibWin32
   fun WebAuthNAuthenticatorGetAssertion(hwnd : LibC::HANDLE, pwszrpid : LibC::LPWSTR, pwebauthnclientdata : WEBAUTHN_CLIENT_DATA*, pwebauthngetassertionoptions : WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS*, ppwebauthnassertion : WEBAUTHN_ASSERTION**) : HRESULT
 
   # Params # pwebauthncredentialattestation : WEBAUTHN_CREDENTIAL_ATTESTATION* [In]
-  fun WebAuthNFreeCredentialAttestation(pwebauthncredentialattestation : WEBAUTHN_CREDENTIAL_ATTESTATION*)
+  fun WebAuthNFreeCredentialAttestation(pwebauthncredentialattestation : WEBAUTHN_CREDENTIAL_ATTESTATION*) : Void
 
   # Params # pwebauthnassertion : WEBAUTHN_ASSERTION* [In]
-  fun WebAuthNFreeAssertion(pwebauthnassertion : WEBAUTHN_ASSERTION*)
+  fun WebAuthNFreeAssertion(pwebauthnassertion : WEBAUTHN_ASSERTION*) : Void
 
   # Params # pcancellationid : Guid* [In]
   fun WebAuthNGetCancellationId(pcancellationid : Guid*) : HRESULT
@@ -3437,4 +3437,30 @@ lib LibWin32
 
   # Params # hr : HRESULT [In]
   fun WebAuthNGetW3CExceptionDOMError(hr : HRESULT) : HRESULT
+end
+struct LibWin32::IContentPrefetcherTaskTrigger
+  def query_interface(this : IContentPrefetcherTaskTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IContentPrefetcherTaskTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IContentPrefetcherTaskTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IContentPrefetcherTaskTrigger*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IContentPrefetcherTaskTrigger*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IContentPrefetcherTaskTrigger*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def trigger_content_prefetcher_task(this : IContentPrefetcherTaskTrigger*, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.trigger_content_prefetcher_task.call(this, packagefullname)
+  end
+  def is_registered_for_content_prefetch(this : IContentPrefetcherTaskTrigger*, packagefullname : LibC::LPWSTR, isregistered : UInt8*) : HRESULT
+    @lpVtbl.value.is_registered_for_content_prefetch.call(this, packagefullname, isregistered)
+  end
 end

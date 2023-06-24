@@ -93,3 +93,57 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWsbApplicationBackupSupport
+  def query_interface(this : IWsbApplicationBackupSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWsbApplicationBackupSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWsbApplicationBackupSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def check_consistency(this : IWsbApplicationBackupSupport*, wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, cvolumes : UInt32, rgwszsourcevolumepath : LibC::LPWSTR*, rgwszsnapshotvolumepath : LibC::LPWSTR*, ppasync : IWsbApplicationAsync*) : HRESULT
+    @lpVtbl.value.check_consistency.call(this, wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, cvolumes, rgwszsourcevolumepath, rgwszsnapshotvolumepath, ppasync)
+  end
+end
+struct LibWin32::IWsbApplicationRestoreSupport
+  def query_interface(this : IWsbApplicationRestoreSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWsbApplicationRestoreSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWsbApplicationRestoreSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def pre_restore(this : IWsbApplicationRestoreSupport*, wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, bnorollforward : BOOLEAN) : HRESULT
+    @lpVtbl.value.pre_restore.call(this, wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, bnorollforward)
+  end
+  def post_restore(this : IWsbApplicationRestoreSupport*, wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, bnorollforward : BOOLEAN) : HRESULT
+    @lpVtbl.value.post_restore.call(this, wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, bnorollforward)
+  end
+  def order_components(this : IWsbApplicationRestoreSupport*, ccomponents : UInt32, rgcomponentname : LibC::LPWSTR*, rgcomponentlogicalpaths : LibC::LPWSTR*, prgcomponentname : LibC::LPWSTR**, prgcomponentlogicalpath : LibC::LPWSTR**) : HRESULT
+    @lpVtbl.value.order_components.call(this, ccomponents, rgcomponentname, rgcomponentlogicalpaths, prgcomponentname, prgcomponentlogicalpath)
+  end
+  def is_roll_forward_supported(this : IWsbApplicationRestoreSupport*, pbrollforwardsupported : UInt8*) : HRESULT
+    @lpVtbl.value.is_roll_forward_supported.call(this, pbrollforwardsupported)
+  end
+end
+struct LibWin32::IWsbApplicationAsync
+  def query_interface(this : IWsbApplicationAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWsbApplicationAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWsbApplicationAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_status(this : IWsbApplicationAsync*, phrresult : HRESULT*) : HRESULT
+    @lpVtbl.value.query_status.call(this, phrresult)
+  end
+  def abort(this : IWsbApplicationAsync*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+end

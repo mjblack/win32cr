@@ -802,3 +802,977 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IRDPSRAPIDebug
+  def query_interface(this : IRDPSRAPIDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def put_clx_cmd_line(this : IRDPSRAPIDebug*, clxcmdline : UInt8*) : HRESULT
+    @lpVtbl.value.put_clx_cmd_line.call(this, clxcmdline)
+  end
+  def get_clx_cmd_line(this : IRDPSRAPIDebug*, pclxcmdline : UInt8**) : HRESULT
+    @lpVtbl.value.get_clx_cmd_line.call(this, pclxcmdline)
+  end
+end
+struct LibWin32::IRDPSRAPIPerfCounterLogger
+  def query_interface(this : IRDPSRAPIPerfCounterLogger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIPerfCounterLogger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIPerfCounterLogger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def log_value(this : IRDPSRAPIPerfCounterLogger*, lvalue : Int64) : HRESULT
+    @lpVtbl.value.log_value.call(this, lvalue)
+  end
+end
+struct LibWin32::IRDPSRAPIPerfCounterLoggingManager
+  def query_interface(this : IRDPSRAPIPerfCounterLoggingManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIPerfCounterLoggingManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIPerfCounterLoggingManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_logger(this : IRDPSRAPIPerfCounterLoggingManager*, bstrcountername : UInt8*, pplogger : IRDPSRAPIPerfCounterLogger*) : HRESULT
+    @lpVtbl.value.create_logger.call(this, bstrcountername, pplogger)
+  end
+end
+struct LibWin32::IRDPSRAPIAudioStream
+  def query_interface(this : IRDPSRAPIAudioStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIAudioStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIAudioStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IRDPSRAPIAudioStream*, pnperiodinhundrednsintervals : Int64*) : HRESULT
+    @lpVtbl.value.initialize.call(this, pnperiodinhundrednsintervals)
+  end
+  def start(this : IRDPSRAPIAudioStream*) : HRESULT
+    @lpVtbl.value.start.call(this)
+  end
+  def stop(this : IRDPSRAPIAudioStream*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def get_buffer(this : IRDPSRAPIAudioStream*, ppbdata : UInt8**, pcbdata : UInt32*, ptimestamp : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, ppbdata, pcbdata, ptimestamp)
+  end
+  def free_buffer(this : IRDPSRAPIAudioStream*) : HRESULT
+    @lpVtbl.value.free_buffer.call(this)
+  end
+end
+struct LibWin32::IRDPSRAPIClipboardUseEvents
+  def query_interface(this : IRDPSRAPIClipboardUseEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIClipboardUseEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIClipboardUseEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_paste_from_clipboard(this : IRDPSRAPIClipboardUseEvents*, clipboardformat : UInt32, pattendee : IDispatch, pretval : Int16*) : HRESULT
+    @lpVtbl.value.on_paste_from_clipboard.call(this, clipboardformat, pattendee, pretval)
+  end
+end
+struct LibWin32::IRDPSRAPIWindow
+  def query_interface(this : IRDPSRAPIWindow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIWindow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIWindow*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIWindow*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIWindow*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIWindow*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIWindow*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IRDPSRAPIWindow*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pretval)
+  end
+  def get_application(this : IRDPSRAPIWindow*, papplication : IRDPSRAPIApplication*) : HRESULT
+    @lpVtbl.value.get_application.call(this, papplication)
+  end
+  def get_shared(this : IRDPSRAPIWindow*, pretval : Int16*) : HRESULT
+    @lpVtbl.value.get_shared.call(this, pretval)
+  end
+  def put_shared(this : IRDPSRAPIWindow*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_shared.call(this, newval)
+  end
+  def get_name(this : IRDPSRAPIWindow*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pretval)
+  end
+  def show(this : IRDPSRAPIWindow*) : HRESULT
+    @lpVtbl.value.show.call(this)
+  end
+  def get_flags(this : IRDPSRAPIWindow*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+end
+struct LibWin32::IRDPSRAPIWindowList
+  def query_interface(this : IRDPSRAPIWindowList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIWindowList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIWindowList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIWindowList*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIWindowList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIWindowList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIWindowList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IRDPSRAPIWindowList*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : IRDPSRAPIWindowList*, item : Int32, pwindow : IRDPSRAPIWindow*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, pwindow)
+  end
+end
+struct LibWin32::IRDPSRAPIApplication
+  def query_interface(this : IRDPSRAPIApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_windows(this : IRDPSRAPIApplication*, pwindowlist : IRDPSRAPIWindowList*) : HRESULT
+    @lpVtbl.value.get_windows.call(this, pwindowlist)
+  end
+  def get_id(this : IRDPSRAPIApplication*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pretval)
+  end
+  def get_shared(this : IRDPSRAPIApplication*, pretval : Int16*) : HRESULT
+    @lpVtbl.value.get_shared.call(this, pretval)
+  end
+  def put_shared(this : IRDPSRAPIApplication*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_shared.call(this, newval)
+  end
+  def get_name(this : IRDPSRAPIApplication*, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pretval)
+  end
+  def get_flags(this : IRDPSRAPIApplication*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+end
+struct LibWin32::IRDPSRAPIApplicationList
+  def query_interface(this : IRDPSRAPIApplicationList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIApplicationList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIApplicationList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIApplicationList*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIApplicationList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIApplicationList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIApplicationList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IRDPSRAPIApplicationList*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : IRDPSRAPIApplicationList*, item : Int32, papplication : IRDPSRAPIApplication*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, papplication)
+  end
+end
+struct LibWin32::IRDPSRAPIApplicationFilter
+  def query_interface(this : IRDPSRAPIApplicationFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIApplicationFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIApplicationFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIApplicationFilter*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIApplicationFilter*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIApplicationFilter*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIApplicationFilter*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_applications(this : IRDPSRAPIApplicationFilter*, papplications : IRDPSRAPIApplicationList*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, papplications)
+  end
+  def get_windows(this : IRDPSRAPIApplicationFilter*, pwindows : IRDPSRAPIWindowList*) : HRESULT
+    @lpVtbl.value.get_windows.call(this, pwindows)
+  end
+  def get_enabled(this : IRDPSRAPIApplicationFilter*, pretval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pretval)
+  end
+  def put_enabled(this : IRDPSRAPIApplicationFilter*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, newval)
+  end
+end
+struct LibWin32::IRDPSRAPISessionProperties
+  def query_interface(this : IRDPSRAPISessionProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPISessionProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPISessionProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPISessionProperties*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPISessionProperties*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPISessionProperties*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPISessionProperties*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property(this : IRDPSRAPISessionProperties*, propertyname : UInt8*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyname, pval)
+  end
+  def put_property(this : IRDPSRAPISessionProperties*, propertyname : UInt8*, newval : VARIANT) : HRESULT
+    @lpVtbl.value.put_property.call(this, propertyname, newval)
+  end
+end
+struct LibWin32::IRDPSRAPIInvitation
+  def query_interface(this : IRDPSRAPIInvitation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIInvitation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIInvitation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIInvitation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIInvitation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIInvitation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIInvitation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_connection_string(this : IRDPSRAPIInvitation*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_connection_string.call(this, pbstrval)
+  end
+  def get_group_name(this : IRDPSRAPIInvitation*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_name.call(this, pbstrval)
+  end
+  def get_password(this : IRDPSRAPIInvitation*, pbstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_password.call(this, pbstrval)
+  end
+  def get_attendee_limit(this : IRDPSRAPIInvitation*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_attendee_limit.call(this, pretval)
+  end
+  def put_attendee_limit(this : IRDPSRAPIInvitation*, newval : Int32) : HRESULT
+    @lpVtbl.value.put_attendee_limit.call(this, newval)
+  end
+  def get_revoked(this : IRDPSRAPIInvitation*, pretval : Int16*) : HRESULT
+    @lpVtbl.value.get_revoked.call(this, pretval)
+  end
+  def put_revoked(this : IRDPSRAPIInvitation*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_revoked.call(this, newval)
+  end
+end
+struct LibWin32::IRDPSRAPIInvitationManager
+  def query_interface(this : IRDPSRAPIInvitationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIInvitationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIInvitationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIInvitationManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIInvitationManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIInvitationManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIInvitationManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IRDPSRAPIInvitationManager*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : IRDPSRAPIInvitationManager*, item : VARIANT, ppinvitation : IRDPSRAPIInvitation*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, ppinvitation)
+  end
+  def get_count(this : IRDPSRAPIInvitationManager*, pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pretval)
+  end
+  def create_invitation(this : IRDPSRAPIInvitationManager*, bstrauthstring : UInt8*, bstrgroupname : UInt8*, bstrpassword : UInt8*, attendeelimit : Int32, ppinvitation : IRDPSRAPIInvitation*) : HRESULT
+    @lpVtbl.value.create_invitation.call(this, bstrauthstring, bstrgroupname, bstrpassword, attendeelimit, ppinvitation)
+  end
+end
+struct LibWin32::IRDPSRAPITcpConnectionInfo
+  def query_interface(this : IRDPSRAPITcpConnectionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPITcpConnectionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPITcpConnectionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPITcpConnectionInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPITcpConnectionInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPITcpConnectionInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPITcpConnectionInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_protocol(this : IRDPSRAPITcpConnectionInfo*, plprotocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, plprotocol)
+  end
+  def get_local_port(this : IRDPSRAPITcpConnectionInfo*, plport : Int32*) : HRESULT
+    @lpVtbl.value.get_local_port.call(this, plport)
+  end
+  def get_local_ip(this : IRDPSRAPITcpConnectionInfo*, pbsrlocalip : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ip.call(this, pbsrlocalip)
+  end
+  def get_peer_port(this : IRDPSRAPITcpConnectionInfo*, plport : Int32*) : HRESULT
+    @lpVtbl.value.get_peer_port.call(this, plport)
+  end
+  def get_peer_ip(this : IRDPSRAPITcpConnectionInfo*, pbstrip : UInt8**) : HRESULT
+    @lpVtbl.value.get_peer_ip.call(this, pbstrip)
+  end
+end
+struct LibWin32::IRDPSRAPIAttendee
+  def query_interface(this : IRDPSRAPIAttendee*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIAttendee*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIAttendee*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIAttendee*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIAttendee*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIAttendee*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIAttendee*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IRDPSRAPIAttendee*, pid : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def get_remote_name(this : IRDPSRAPIAttendee*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_control_level(this : IRDPSRAPIAttendee*, pval : CTRL_LEVEL*) : HRESULT
+    @lpVtbl.value.get_control_level.call(this, pval)
+  end
+  def put_control_level(this : IRDPSRAPIAttendee*, pnewval : CTRL_LEVEL) : HRESULT
+    @lpVtbl.value.put_control_level.call(this, pnewval)
+  end
+  def get_invitation(this : IRDPSRAPIAttendee*, ppval : IRDPSRAPIInvitation*) : HRESULT
+    @lpVtbl.value.get_invitation.call(this, ppval)
+  end
+  def terminate_connection(this : IRDPSRAPIAttendee*) : HRESULT
+    @lpVtbl.value.terminate_connection.call(this)
+  end
+  def get_flags(this : IRDPSRAPIAttendee*, plflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, plflags)
+  end
+  def get_connectivity_info(this : IRDPSRAPIAttendee*, ppval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_connectivity_info.call(this, ppval)
+  end
+end
+struct LibWin32::IRDPSRAPIAttendeeManager
+  def query_interface(this : IRDPSRAPIAttendeeManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIAttendeeManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIAttendeeManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIAttendeeManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIAttendeeManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIAttendeeManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIAttendeeManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IRDPSRAPIAttendeeManager*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : IRDPSRAPIAttendeeManager*, id : Int32, ppitem : IRDPSRAPIAttendee*) : HRESULT
+    @lpVtbl.value.get_item.call(this, id, ppitem)
+  end
+end
+struct LibWin32::IRDPSRAPIAttendeeDisconnectInfo
+  def query_interface(this : IRDPSRAPIAttendeeDisconnectInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIAttendeeDisconnectInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIAttendeeDisconnectInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIAttendeeDisconnectInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIAttendeeDisconnectInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIAttendeeDisconnectInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIAttendeeDisconnectInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_attendee(this : IRDPSRAPIAttendeeDisconnectInfo*, retval : IRDPSRAPIAttendee*) : HRESULT
+    @lpVtbl.value.get_attendee.call(this, retval)
+  end
+  def get_reason(this : IRDPSRAPIAttendeeDisconnectInfo*, preason : ATTENDEE_DISCONNECT_REASON*) : HRESULT
+    @lpVtbl.value.get_reason.call(this, preason)
+  end
+  def get_code(this : IRDPSRAPIAttendeeDisconnectInfo*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_code.call(this, pval)
+  end
+end
+struct LibWin32::IRDPSRAPIVirtualChannel
+  def query_interface(this : IRDPSRAPIVirtualChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIVirtualChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIVirtualChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIVirtualChannel*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIVirtualChannel*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIVirtualChannel*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIVirtualChannel*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def send_data(this : IRDPSRAPIVirtualChannel*, bstrdata : UInt8*, lattendeeid : Int32, channelsendflags : UInt32) : HRESULT
+    @lpVtbl.value.send_data.call(this, bstrdata, lattendeeid, channelsendflags)
+  end
+  def set_access(this : IRDPSRAPIVirtualChannel*, lattendeeid : Int32, accesstype : CHANNEL_ACCESS_ENUM) : HRESULT
+    @lpVtbl.value.set_access.call(this, lattendeeid, accesstype)
+  end
+  def get_name(this : IRDPSRAPIVirtualChannel*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_flags(this : IRDPSRAPIVirtualChannel*, plflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, plflags)
+  end
+  def get_priority(this : IRDPSRAPIVirtualChannel*, ppriority : CHANNEL_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+end
+struct LibWin32::IRDPSRAPIVirtualChannelManager
+  def query_interface(this : IRDPSRAPIVirtualChannelManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIVirtualChannelManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIVirtualChannelManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIVirtualChannelManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIVirtualChannelManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIVirtualChannelManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIVirtualChannelManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IRDPSRAPIVirtualChannelManager*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : IRDPSRAPIVirtualChannelManager*, item : VARIANT, pchannel : IRDPSRAPIVirtualChannel*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, pchannel)
+  end
+  def create_virtual_channel(this : IRDPSRAPIVirtualChannelManager*, bstrchannelname : UInt8*, priority : CHANNEL_PRIORITY, channelflags : UInt32, ppchannel : IRDPSRAPIVirtualChannel*) : HRESULT
+    @lpVtbl.value.create_virtual_channel.call(this, bstrchannelname, priority, channelflags, ppchannel)
+  end
+end
+struct LibWin32::IRDPSRAPIViewer
+  def query_interface(this : IRDPSRAPIViewer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIViewer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIViewer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIViewer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIViewer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIViewer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIViewer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(this : IRDPSRAPIViewer*, bstrconnectionstring : UInt8*, bstrname : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.connect.call(this, bstrconnectionstring, bstrname, bstrpassword)
+  end
+  def disconnect(this : IRDPSRAPIViewer*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def get_attendees(this : IRDPSRAPIViewer*, ppval : IRDPSRAPIAttendeeManager*) : HRESULT
+    @lpVtbl.value.get_attendees.call(this, ppval)
+  end
+  def get_invitations(this : IRDPSRAPIViewer*, ppval : IRDPSRAPIInvitationManager*) : HRESULT
+    @lpVtbl.value.get_invitations.call(this, ppval)
+  end
+  def get_application_filter(this : IRDPSRAPIViewer*, ppval : IRDPSRAPIApplicationFilter*) : HRESULT
+    @lpVtbl.value.get_application_filter.call(this, ppval)
+  end
+  def get_virtual_channel_manager(this : IRDPSRAPIViewer*, ppval : IRDPSRAPIVirtualChannelManager*) : HRESULT
+    @lpVtbl.value.get_virtual_channel_manager.call(this, ppval)
+  end
+  def put_smart_sizing(this : IRDPSRAPIViewer*, vbsmartsizing : Int16) : HRESULT
+    @lpVtbl.value.put_smart_sizing.call(this, vbsmartsizing)
+  end
+  def get_smart_sizing(this : IRDPSRAPIViewer*, pvbsmartsizing : Int16*) : HRESULT
+    @lpVtbl.value.get_smart_sizing.call(this, pvbsmartsizing)
+  end
+  def request_control(this : IRDPSRAPIViewer*, ctrllevel : CTRL_LEVEL) : HRESULT
+    @lpVtbl.value.request_control.call(this, ctrllevel)
+  end
+  def put_disconnected_text(this : IRDPSRAPIViewer*, bstrdisconnectedtext : UInt8*) : HRESULT
+    @lpVtbl.value.put_disconnected_text.call(this, bstrdisconnectedtext)
+  end
+  def get_disconnected_text(this : IRDPSRAPIViewer*, pbstrdisconnectedtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_disconnected_text.call(this, pbstrdisconnectedtext)
+  end
+  def request_color_depth_change(this : IRDPSRAPIViewer*, bpp : Int32) : HRESULT
+    @lpVtbl.value.request_color_depth_change.call(this, bpp)
+  end
+  def get_properties(this : IRDPSRAPIViewer*, ppval : IRDPSRAPISessionProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppval)
+  end
+  def start_reverse_connect_listener(this : IRDPSRAPIViewer*, bstrconnectionstring : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, pbstrreverseconnectstring : UInt8**) : HRESULT
+    @lpVtbl.value.start_reverse_connect_listener.call(this, bstrconnectionstring, bstrusername, bstrpassword, pbstrreverseconnectstring)
+  end
+end
+struct LibWin32::IRDPViewerInputSink
+  def query_interface(this : IRDPViewerInputSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPViewerInputSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPViewerInputSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def send_mouse_button_event(this : IRDPViewerInputSink*, buttontype : RDPSRAPI_MOUSE_BUTTON_TYPE, vbbuttondown : Int16, xpos : UInt32, ypos : UInt32) : HRESULT
+    @lpVtbl.value.send_mouse_button_event.call(this, buttontype, vbbuttondown, xpos, ypos)
+  end
+  def send_mouse_move_event(this : IRDPViewerInputSink*, xpos : UInt32, ypos : UInt32) : HRESULT
+    @lpVtbl.value.send_mouse_move_event.call(this, xpos, ypos)
+  end
+  def send_mouse_wheel_event(this : IRDPViewerInputSink*, wheelrotation : UInt16) : HRESULT
+    @lpVtbl.value.send_mouse_wheel_event.call(this, wheelrotation)
+  end
+  def send_keyboard_event(this : IRDPViewerInputSink*, codetype : RDPSRAPI_KBD_CODE_TYPE, keycode : UInt16, vbkeyup : Int16, vbrepeat : Int16, vbextended : Int16) : HRESULT
+    @lpVtbl.value.send_keyboard_event.call(this, codetype, keycode, vbkeyup, vbrepeat, vbextended)
+  end
+  def send_sync_event(this : IRDPViewerInputSink*, syncflags : UInt32) : HRESULT
+    @lpVtbl.value.send_sync_event.call(this, syncflags)
+  end
+  def begin_touch_frame(this : IRDPViewerInputSink*) : HRESULT
+    @lpVtbl.value.begin_touch_frame.call(this)
+  end
+  def add_touch_input(this : IRDPViewerInputSink*, contactid : UInt32, event : UInt32, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.add_touch_input.call(this, contactid, event, x, y)
+  end
+  def end_touch_frame(this : IRDPViewerInputSink*) : HRESULT
+    @lpVtbl.value.end_touch_frame.call(this)
+  end
+end
+struct LibWin32::IRDPSRAPIFrameBuffer
+  def query_interface(this : IRDPSRAPIFrameBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPIFrameBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPIFrameBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPIFrameBuffer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPIFrameBuffer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPIFrameBuffer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPIFrameBuffer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_width(this : IRDPSRAPIFrameBuffer*, plwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, plwidth)
+  end
+  def get_height(this : IRDPSRAPIFrameBuffer*, plheight : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, plheight)
+  end
+  def get_bpp(this : IRDPSRAPIFrameBuffer*, plbpp : Int32*) : HRESULT
+    @lpVtbl.value.get_bpp.call(this, plbpp)
+  end
+  def get_frame_buffer_bits(this : IRDPSRAPIFrameBuffer*, x : Int32, y : Int32, width : Int32, heigth : Int32, ppbits : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_frame_buffer_bits.call(this, x, y, width, heigth, ppbits)
+  end
+end
+struct LibWin32::IRDPSRAPITransportStreamBuffer
+  def query_interface(this : IRDPSRAPITransportStreamBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPITransportStreamBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPITransportStreamBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_storage(this : IRDPSRAPITransportStreamBuffer*, ppbstorage : UInt8**) : HRESULT
+    @lpVtbl.value.get_storage.call(this, ppbstorage)
+  end
+  def get_storage_size(this : IRDPSRAPITransportStreamBuffer*, plmaxstore : Int32*) : HRESULT
+    @lpVtbl.value.get_storage_size.call(this, plmaxstore)
+  end
+  def get_payload_size(this : IRDPSRAPITransportStreamBuffer*, plretval : Int32*) : HRESULT
+    @lpVtbl.value.get_payload_size.call(this, plretval)
+  end
+  def put_payload_size(this : IRDPSRAPITransportStreamBuffer*, lval : Int32) : HRESULT
+    @lpVtbl.value.put_payload_size.call(this, lval)
+  end
+  def get_payload_offset(this : IRDPSRAPITransportStreamBuffer*, plretval : Int32*) : HRESULT
+    @lpVtbl.value.get_payload_offset.call(this, plretval)
+  end
+  def put_payload_offset(this : IRDPSRAPITransportStreamBuffer*, lretval : Int32) : HRESULT
+    @lpVtbl.value.put_payload_offset.call(this, lretval)
+  end
+  def get_flags(this : IRDPSRAPITransportStreamBuffer*, plflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, plflags)
+  end
+  def put_flags(this : IRDPSRAPITransportStreamBuffer*, lflags : Int32) : HRESULT
+    @lpVtbl.value.put_flags.call(this, lflags)
+  end
+  def get_context(this : IRDPSRAPITransportStreamBuffer*, ppcontext : IUnknown*) : HRESULT
+    @lpVtbl.value.get_context.call(this, ppcontext)
+  end
+  def put_context(this : IRDPSRAPITransportStreamBuffer*, pcontext : IUnknown) : HRESULT
+    @lpVtbl.value.put_context.call(this, pcontext)
+  end
+end
+struct LibWin32::IRDPSRAPITransportStreamEvents
+  def query_interface(this : IRDPSRAPITransportStreamEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPITransportStreamEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPITransportStreamEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_write_completed(this : IRDPSRAPITransportStreamEvents*, pbuffer : IRDPSRAPITransportStreamBuffer) : Void
+    @lpVtbl.value.on_write_completed.call(this, pbuffer)
+  end
+  def on_read_completed(this : IRDPSRAPITransportStreamEvents*, pbuffer : IRDPSRAPITransportStreamBuffer) : Void
+    @lpVtbl.value.on_read_completed.call(this, pbuffer)
+  end
+  def on_stream_closed(this : IRDPSRAPITransportStreamEvents*, hrreason : HRESULT) : Void
+    @lpVtbl.value.on_stream_closed.call(this, hrreason)
+  end
+end
+struct LibWin32::IRDPSRAPITransportStream
+  def query_interface(this : IRDPSRAPITransportStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPITransportStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPITransportStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def alloc_buffer(this : IRDPSRAPITransportStream*, maxpayload : Int32, ppbuffer : IRDPSRAPITransportStreamBuffer*) : HRESULT
+    @lpVtbl.value.alloc_buffer.call(this, maxpayload, ppbuffer)
+  end
+  def free_buffer(this : IRDPSRAPITransportStream*, pbuffer : IRDPSRAPITransportStreamBuffer) : HRESULT
+    @lpVtbl.value.free_buffer.call(this, pbuffer)
+  end
+  def write_buffer(this : IRDPSRAPITransportStream*, pbuffer : IRDPSRAPITransportStreamBuffer) : HRESULT
+    @lpVtbl.value.write_buffer.call(this, pbuffer)
+  end
+  def read_buffer(this : IRDPSRAPITransportStream*, pbuffer : IRDPSRAPITransportStreamBuffer) : HRESULT
+    @lpVtbl.value.read_buffer.call(this, pbuffer)
+  end
+  def open(this : IRDPSRAPITransportStream*, pcallbacks : IRDPSRAPITransportStreamEvents) : HRESULT
+    @lpVtbl.value.open.call(this, pcallbacks)
+  end
+  def close(this : IRDPSRAPITransportStream*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IRDPSRAPISharingSession
+  def query_interface(this : IRDPSRAPISharingSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPISharingSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPISharingSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPISharingSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPISharingSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPISharingSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPISharingSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def open(this : IRDPSRAPISharingSession*) : HRESULT
+    @lpVtbl.value.open.call(this)
+  end
+  def close(this : IRDPSRAPISharingSession*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def put_color_depth(this : IRDPSRAPISharingSession*, colordepth : Int32) : HRESULT
+    @lpVtbl.value.put_color_depth.call(this, colordepth)
+  end
+  def get_color_depth(this : IRDPSRAPISharingSession*, pcolordepth : Int32*) : HRESULT
+    @lpVtbl.value.get_color_depth.call(this, pcolordepth)
+  end
+  def get_properties(this : IRDPSRAPISharingSession*, ppval : IRDPSRAPISessionProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppval)
+  end
+  def get_attendees(this : IRDPSRAPISharingSession*, ppval : IRDPSRAPIAttendeeManager*) : HRESULT
+    @lpVtbl.value.get_attendees.call(this, ppval)
+  end
+  def get_invitations(this : IRDPSRAPISharingSession*, ppval : IRDPSRAPIInvitationManager*) : HRESULT
+    @lpVtbl.value.get_invitations.call(this, ppval)
+  end
+  def get_application_filter(this : IRDPSRAPISharingSession*, ppval : IRDPSRAPIApplicationFilter*) : HRESULT
+    @lpVtbl.value.get_application_filter.call(this, ppval)
+  end
+  def get_virtual_channel_manager(this : IRDPSRAPISharingSession*, ppval : IRDPSRAPIVirtualChannelManager*) : HRESULT
+    @lpVtbl.value.get_virtual_channel_manager.call(this, ppval)
+  end
+  def pause(this : IRDPSRAPISharingSession*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IRDPSRAPISharingSession*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def connect_to_client(this : IRDPSRAPISharingSession*, bstrconnectionstring : UInt8*) : HRESULT
+    @lpVtbl.value.connect_to_client.call(this, bstrconnectionstring)
+  end
+  def set_desktop_shared_rect(this : IRDPSRAPISharingSession*, left : Int32, top : Int32, right : Int32, bottom : Int32) : HRESULT
+    @lpVtbl.value.set_desktop_shared_rect.call(this, left, top, right, bottom)
+  end
+  def get_desktop_shared_rect(this : IRDPSRAPISharingSession*, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*) : HRESULT
+    @lpVtbl.value.get_desktop_shared_rect.call(this, pleft, ptop, pright, pbottom)
+  end
+end
+struct LibWin32::IRDPSRAPISharingSession2
+  def query_interface(this : IRDPSRAPISharingSession2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRDPSRAPISharingSession2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRDPSRAPISharingSession2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRDPSRAPISharingSession2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRDPSRAPISharingSession2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRDPSRAPISharingSession2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRDPSRAPISharingSession2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def open(this : IRDPSRAPISharingSession2*) : HRESULT
+    @lpVtbl.value.open.call(this)
+  end
+  def close(this : IRDPSRAPISharingSession2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def put_color_depth(this : IRDPSRAPISharingSession2*, colordepth : Int32) : HRESULT
+    @lpVtbl.value.put_color_depth.call(this, colordepth)
+  end
+  def get_color_depth(this : IRDPSRAPISharingSession2*, pcolordepth : Int32*) : HRESULT
+    @lpVtbl.value.get_color_depth.call(this, pcolordepth)
+  end
+  def get_properties(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPISessionProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppval)
+  end
+  def get_attendees(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPIAttendeeManager*) : HRESULT
+    @lpVtbl.value.get_attendees.call(this, ppval)
+  end
+  def get_invitations(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPIInvitationManager*) : HRESULT
+    @lpVtbl.value.get_invitations.call(this, ppval)
+  end
+  def get_application_filter(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPIApplicationFilter*) : HRESULT
+    @lpVtbl.value.get_application_filter.call(this, ppval)
+  end
+  def get_virtual_channel_manager(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPIVirtualChannelManager*) : HRESULT
+    @lpVtbl.value.get_virtual_channel_manager.call(this, ppval)
+  end
+  def pause(this : IRDPSRAPISharingSession2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IRDPSRAPISharingSession2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def connect_to_client(this : IRDPSRAPISharingSession2*, bstrconnectionstring : UInt8*) : HRESULT
+    @lpVtbl.value.connect_to_client.call(this, bstrconnectionstring)
+  end
+  def set_desktop_shared_rect(this : IRDPSRAPISharingSession2*, left : Int32, top : Int32, right : Int32, bottom : Int32) : HRESULT
+    @lpVtbl.value.set_desktop_shared_rect.call(this, left, top, right, bottom)
+  end
+  def get_desktop_shared_rect(this : IRDPSRAPISharingSession2*, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*) : HRESULT
+    @lpVtbl.value.get_desktop_shared_rect.call(this, pleft, ptop, pright, pbottom)
+  end
+  def connect_using_transport_stream(this : IRDPSRAPISharingSession2*, pstream : IRDPSRAPITransportStream, bstrgroup : UInt8*, bstrauthenticatedattendeename : UInt8*) : HRESULT
+    @lpVtbl.value.connect_using_transport_stream.call(this, pstream, bstrgroup, bstrauthenticatedattendeename)
+  end
+  def get_frame_buffer(this : IRDPSRAPISharingSession2*, ppval : IRDPSRAPIFrameBuffer*) : HRESULT
+    @lpVtbl.value.get_frame_buffer.call(this, ppval)
+  end
+  def send_control_level_change_response(this : IRDPSRAPISharingSession2*, pattendee : IRDPSRAPIAttendee, requestedlevel : CTRL_LEVEL, reasoncode : Int32) : HRESULT
+    @lpVtbl.value.send_control_level_change_response.call(this, pattendee, requestedlevel, reasoncode)
+  end
+end
+struct LibWin32::IIRDPSessionEvents
+  def query_interface(this : IIRDPSessionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIRDPSessionEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIRDPSessionEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIRDPSessionEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIRDPSessionEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIRDPSessionEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIRDPSessionEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end

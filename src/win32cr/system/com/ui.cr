@@ -41,3 +41,34 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IThumbnailExtractor
+  def query_interface(this : IThumbnailExtractor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IThumbnailExtractor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IThumbnailExtractor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def extract_thumbnail(this : IThumbnailExtractor*, pstg : IStorage, ullength : UInt32, ulheight : UInt32, puloutputlength : UInt32*, puloutputheight : UInt32*, phoutputbitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.extract_thumbnail.call(this, pstg, ullength, ulheight, puloutputlength, puloutputheight, phoutputbitmap)
+  end
+  def on_file_updated(this : IThumbnailExtractor*, pstg : IStorage) : HRESULT
+    @lpVtbl.value.on_file_updated.call(this, pstg)
+  end
+end
+struct LibWin32::IDummyHICONIncluder
+  def query_interface(this : IDummyHICONIncluder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDummyHICONIncluder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDummyHICONIncluder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def dummy(this : IDummyHICONIncluder*, h1 : LibC::HANDLE, h2 : HDC) : HRESULT
+    @lpVtbl.value.dummy.call(this, h1, h2)
+  end
+end

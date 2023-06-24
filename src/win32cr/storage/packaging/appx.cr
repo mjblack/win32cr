@@ -1719,10 +1719,10 @@ lib LibWin32
   fun ActivatePackageVirtualizationContext(context : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, cookie : LibC::UINT_PTR*) : HRESULT
 
   # Params # context : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* [In]
-  fun ReleasePackageVirtualizationContext(context : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*)
+  fun ReleasePackageVirtualizationContext(context : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*) : Void
 
   # Params # cookie : LibC::UINT_PTR [In]
-  fun DeactivatePackageVirtualizationContext(cookie : LibC::UINT_PTR)
+  fun DeactivatePackageVirtualizationContext(cookie : LibC::UINT_PTR) : Void
 
   # Params # sourcecontext : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* [In],destcontext : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__** [In]
   fun DuplicatePackageVirtualizationContext(sourcecontext : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__*, destcontext : PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__**) : HRESULT
@@ -1732,4 +1732,1684 @@ lib LibWin32
 
   # Params # packagefamilyname : LibC::LPWSTR [In],count : UInt32* [In],processes : LibC::HANDLE** [In]
   fun GetProcessesInVirtualizationContext(packagefamilyname : LibC::LPWSTR, count : UInt32*, processes : LibC::HANDLE**) : HRESULT
+end
+struct LibWin32::IAppxFactory
+  def query_interface(this : IAppxFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_package_writer(this : IAppxFactory*, outputstream : IStream, settings : APPX_PACKAGE_SETTINGS*, packagewriter : IAppxPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer.call(this, outputstream, settings, packagewriter)
+  end
+  def create_package_reader(this : IAppxFactory*, inputstream : IStream, packagereader : IAppxPackageReader*) : HRESULT
+    @lpVtbl.value.create_package_reader.call(this, inputstream, packagereader)
+  end
+  def create_manifest_reader(this : IAppxFactory*, inputstream : IStream, manifestreader : IAppxManifestReader*) : HRESULT
+    @lpVtbl.value.create_manifest_reader.call(this, inputstream, manifestreader)
+  end
+  def create_block_map_reader(this : IAppxFactory*, inputstream : IStream, blockmapreader : IAppxBlockMapReader*) : HRESULT
+    @lpVtbl.value.create_block_map_reader.call(this, inputstream, blockmapreader)
+  end
+  def create_validated_block_map_reader(this : IAppxFactory*, blockmapstream : IStream, signaturefilename : LibC::LPWSTR, blockmapreader : IAppxBlockMapReader*) : HRESULT
+    @lpVtbl.value.create_validated_block_map_reader.call(this, blockmapstream, signaturefilename, blockmapreader)
+  end
+end
+struct LibWin32::IAppxFactory2
+  def query_interface(this : IAppxFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_content_group_map_reader(this : IAppxFactory2*, inputstream : IStream, contentgroupmapreader : IAppxContentGroupMapReader*) : HRESULT
+    @lpVtbl.value.create_content_group_map_reader.call(this, inputstream, contentgroupmapreader)
+  end
+  def create_source_content_group_map_reader(this : IAppxFactory2*, inputstream : IStream, reader : IAppxSourceContentGroupMapReader*) : HRESULT
+    @lpVtbl.value.create_source_content_group_map_reader.call(this, inputstream, reader)
+  end
+  def create_content_group_map_writer(this : IAppxFactory2*, stream : IStream, contentgroupmapwriter : IAppxContentGroupMapWriter*) : HRESULT
+    @lpVtbl.value.create_content_group_map_writer.call(this, stream, contentgroupmapwriter)
+  end
+end
+struct LibWin32::IAppxPackageReader
+  def query_interface(this : IAppxPackageReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackageReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackageReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_block_map(this : IAppxPackageReader*, blockmapreader : IAppxBlockMapReader*) : HRESULT
+    @lpVtbl.value.get_block_map.call(this, blockmapreader)
+  end
+  def get_footprint_file(this : IAppxPackageReader*, type : APPX_FOOTPRINT_FILE_TYPE, file : IAppxFile*) : HRESULT
+    @lpVtbl.value.get_footprint_file.call(this, type, file)
+  end
+  def get_payload_file(this : IAppxPackageReader*, filename : LibC::LPWSTR, file : IAppxFile*) : HRESULT
+    @lpVtbl.value.get_payload_file.call(this, filename, file)
+  end
+  def get_payload_files(this : IAppxPackageReader*, filesenumerator : IAppxFilesEnumerator*) : HRESULT
+    @lpVtbl.value.get_payload_files.call(this, filesenumerator)
+  end
+  def get_manifest(this : IAppxPackageReader*, manifestreader : IAppxManifestReader*) : HRESULT
+    @lpVtbl.value.get_manifest.call(this, manifestreader)
+  end
+end
+struct LibWin32::IAppxPackageWriter
+  def query_interface(this : IAppxPackageWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackageWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackageWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_file(this : IAppxPackageWriter*, filename : LibC::LPWSTR, contenttype : LibC::LPWSTR, compressionoption : APPX_COMPRESSION_OPTION, inputstream : IStream) : HRESULT
+    @lpVtbl.value.add_payload_file.call(this, filename, contenttype, compressionoption, inputstream)
+  end
+  def close(this : IAppxPackageWriter*, manifest : IStream) : HRESULT
+    @lpVtbl.value.close.call(this, manifest)
+  end
+end
+struct LibWin32::IAppxPackageWriter2
+  def query_interface(this : IAppxPackageWriter2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackageWriter2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackageWriter2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close(this : IAppxPackageWriter2*, manifest : IStream, contentgroupmap : IStream) : HRESULT
+    @lpVtbl.value.close.call(this, manifest, contentgroupmap)
+  end
+end
+struct LibWin32::IAppxPackageWriter3
+  def query_interface(this : IAppxPackageWriter3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackageWriter3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackageWriter3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_files(this : IAppxPackageWriter3*, filecount : UInt32, payloadfiles : APPX_PACKAGE_WRITER_PAYLOAD_STREAM*, memorylimit : UInt64) : HRESULT
+    @lpVtbl.value.add_payload_files.call(this, filecount, payloadfiles, memorylimit)
+  end
+end
+struct LibWin32::IAppxFile
+  def query_interface(this : IAppxFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_compression_option(this : IAppxFile*, compressionoption : APPX_COMPRESSION_OPTION*) : HRESULT
+    @lpVtbl.value.get_compression_option.call(this, compressionoption)
+  end
+  def get_content_type(this : IAppxFile*, contenttype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, contenttype)
+  end
+  def get_name(this : IAppxFile*, filename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, filename)
+  end
+  def get_size(this : IAppxFile*, size : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_stream(this : IAppxFile*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+end
+struct LibWin32::IAppxFilesEnumerator
+  def query_interface(this : IAppxFilesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxFilesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxFilesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxFilesEnumerator*, file : IAppxFile*) : HRESULT
+    @lpVtbl.value.get_current.call(this, file)
+  end
+  def get_has_current(this : IAppxFilesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxFilesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxBlockMapReader
+  def query_interface(this : IAppxBlockMapReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBlockMapReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBlockMapReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_file(this : IAppxBlockMapReader*, filename : LibC::LPWSTR, file : IAppxBlockMapFile*) : HRESULT
+    @lpVtbl.value.get_file.call(this, filename, file)
+  end
+  def get_files(this : IAppxBlockMapReader*, enumerator : IAppxBlockMapFilesEnumerator*) : HRESULT
+    @lpVtbl.value.get_files.call(this, enumerator)
+  end
+  def get_hash_method(this : IAppxBlockMapReader*, hashmethod : IUri*) : HRESULT
+    @lpVtbl.value.get_hash_method.call(this, hashmethod)
+  end
+  def get_stream(this : IAppxBlockMapReader*, blockmapstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, blockmapstream)
+  end
+end
+struct LibWin32::IAppxBlockMapFile
+  def query_interface(this : IAppxBlockMapFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBlockMapFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBlockMapFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_blocks(this : IAppxBlockMapFile*, blocks : IAppxBlockMapBlocksEnumerator*) : HRESULT
+    @lpVtbl.value.get_blocks.call(this, blocks)
+  end
+  def get_local_file_header_size(this : IAppxBlockMapFile*, lfhsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_local_file_header_size.call(this, lfhsize)
+  end
+  def get_name(this : IAppxBlockMapFile*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_uncompressed_size(this : IAppxBlockMapFile*, size : UInt64*) : HRESULT
+    @lpVtbl.value.get_uncompressed_size.call(this, size)
+  end
+  def validate_file_hash(this : IAppxBlockMapFile*, filestream : IStream, isvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.validate_file_hash.call(this, filestream, isvalid)
+  end
+end
+struct LibWin32::IAppxBlockMapFilesEnumerator
+  def query_interface(this : IAppxBlockMapFilesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBlockMapFilesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBlockMapFilesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxBlockMapFilesEnumerator*, file : IAppxBlockMapFile*) : HRESULT
+    @lpVtbl.value.get_current.call(this, file)
+  end
+  def get_has_current(this : IAppxBlockMapFilesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxBlockMapFilesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hascurrent)
+  end
+end
+struct LibWin32::IAppxBlockMapBlock
+  def query_interface(this : IAppxBlockMapBlock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBlockMapBlock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBlockMapBlock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_hash(this : IAppxBlockMapBlock*, buffersize : UInt32*, buffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_hash.call(this, buffersize, buffer)
+  end
+  def get_compressed_size(this : IAppxBlockMapBlock*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_compressed_size.call(this, size)
+  end
+end
+struct LibWin32::IAppxBlockMapBlocksEnumerator
+  def query_interface(this : IAppxBlockMapBlocksEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBlockMapBlocksEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBlockMapBlocksEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxBlockMapBlocksEnumerator*, block : IAppxBlockMapBlock*) : HRESULT
+    @lpVtbl.value.get_current.call(this, block)
+  end
+  def get_has_current(this : IAppxBlockMapBlocksEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxBlockMapBlocksEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestReader
+  def query_interface(this : IAppxManifestReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxManifestReader*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_properties(this : IAppxManifestReader*, packageproperties : IAppxManifestProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, packageproperties)
+  end
+  def get_package_dependencies(this : IAppxManifestReader*, dependencies : IAppxManifestPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_dependencies.call(this, dependencies)
+  end
+  def get_capabilities(this : IAppxManifestReader*, capabilities : APPX_CAPABILITIES*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilities)
+  end
+  def get_resources(this : IAppxManifestReader*, resources : IAppxManifestResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, resources)
+  end
+  def get_device_capabilities(this : IAppxManifestReader*, devicecapabilities : IAppxManifestDeviceCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, devicecapabilities)
+  end
+  def get_prerequisite(this : IAppxManifestReader*, name : LibC::LPWSTR, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_prerequisite.call(this, name, value)
+  end
+  def get_applications(this : IAppxManifestReader*, applications : IAppxManifestApplicationsEnumerator*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, applications)
+  end
+  def get_stream(this : IAppxManifestReader*, manifeststream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, manifeststream)
+  end
+end
+struct LibWin32::IAppxManifestReader2
+  def query_interface(this : IAppxManifestReader2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxManifestReader2*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_properties(this : IAppxManifestReader2*, packageproperties : IAppxManifestProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, packageproperties)
+  end
+  def get_package_dependencies(this : IAppxManifestReader2*, dependencies : IAppxManifestPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_dependencies.call(this, dependencies)
+  end
+  def get_capabilities(this : IAppxManifestReader2*, capabilities : APPX_CAPABILITIES*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilities)
+  end
+  def get_resources(this : IAppxManifestReader2*, resources : IAppxManifestResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, resources)
+  end
+  def get_device_capabilities(this : IAppxManifestReader2*, devicecapabilities : IAppxManifestDeviceCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, devicecapabilities)
+  end
+  def get_prerequisite(this : IAppxManifestReader2*, name : LibC::LPWSTR, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_prerequisite.call(this, name, value)
+  end
+  def get_applications(this : IAppxManifestReader2*, applications : IAppxManifestApplicationsEnumerator*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, applications)
+  end
+  def get_stream(this : IAppxManifestReader2*, manifeststream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, manifeststream)
+  end
+  def get_qualified_resources(this : IAppxManifestReader2*, resources : IAppxManifestQualifiedResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_qualified_resources.call(this, resources)
+  end
+end
+struct LibWin32::IAppxManifestReader3
+  def query_interface(this : IAppxManifestReader3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxManifestReader3*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_properties(this : IAppxManifestReader3*, packageproperties : IAppxManifestProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, packageproperties)
+  end
+  def get_package_dependencies(this : IAppxManifestReader3*, dependencies : IAppxManifestPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_dependencies.call(this, dependencies)
+  end
+  def get_capabilities(this : IAppxManifestReader3*, capabilities : APPX_CAPABILITIES*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilities)
+  end
+  def get_resources(this : IAppxManifestReader3*, resources : IAppxManifestResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, resources)
+  end
+  def get_device_capabilities(this : IAppxManifestReader3*, devicecapabilities : IAppxManifestDeviceCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, devicecapabilities)
+  end
+  def get_prerequisite(this : IAppxManifestReader3*, name : LibC::LPWSTR, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_prerequisite.call(this, name, value)
+  end
+  def get_applications(this : IAppxManifestReader3*, applications : IAppxManifestApplicationsEnumerator*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, applications)
+  end
+  def get_stream(this : IAppxManifestReader3*, manifeststream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, manifeststream)
+  end
+  def get_qualified_resources(this : IAppxManifestReader3*, resources : IAppxManifestQualifiedResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_qualified_resources.call(this, resources)
+  end
+  def get_capabilities_by_capability_class(this : IAppxManifestReader3*, capabilityclass : APPX_CAPABILITY_CLASS_TYPE, capabilities : IAppxManifestCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_capabilities_by_capability_class.call(this, capabilityclass, capabilities)
+  end
+  def get_target_device_families(this : IAppxManifestReader3*, targetdevicefamilies : IAppxManifestTargetDeviceFamiliesEnumerator*) : HRESULT
+    @lpVtbl.value.get_target_device_families.call(this, targetdevicefamilies)
+  end
+end
+struct LibWin32::IAppxManifestReader4
+  def query_interface(this : IAppxManifestReader4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxManifestReader4*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_properties(this : IAppxManifestReader4*, packageproperties : IAppxManifestProperties*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, packageproperties)
+  end
+  def get_package_dependencies(this : IAppxManifestReader4*, dependencies : IAppxManifestPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_dependencies.call(this, dependencies)
+  end
+  def get_capabilities(this : IAppxManifestReader4*, capabilities : APPX_CAPABILITIES*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilities)
+  end
+  def get_resources(this : IAppxManifestReader4*, resources : IAppxManifestResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, resources)
+  end
+  def get_device_capabilities(this : IAppxManifestReader4*, devicecapabilities : IAppxManifestDeviceCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, devicecapabilities)
+  end
+  def get_prerequisite(this : IAppxManifestReader4*, name : LibC::LPWSTR, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_prerequisite.call(this, name, value)
+  end
+  def get_applications(this : IAppxManifestReader4*, applications : IAppxManifestApplicationsEnumerator*) : HRESULT
+    @lpVtbl.value.get_applications.call(this, applications)
+  end
+  def get_stream(this : IAppxManifestReader4*, manifeststream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, manifeststream)
+  end
+  def get_qualified_resources(this : IAppxManifestReader4*, resources : IAppxManifestQualifiedResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_qualified_resources.call(this, resources)
+  end
+  def get_capabilities_by_capability_class(this : IAppxManifestReader4*, capabilityclass : APPX_CAPABILITY_CLASS_TYPE, capabilities : IAppxManifestCapabilitiesEnumerator*) : HRESULT
+    @lpVtbl.value.get_capabilities_by_capability_class.call(this, capabilityclass, capabilities)
+  end
+  def get_target_device_families(this : IAppxManifestReader4*, targetdevicefamilies : IAppxManifestTargetDeviceFamiliesEnumerator*) : HRESULT
+    @lpVtbl.value.get_target_device_families.call(this, targetdevicefamilies)
+  end
+  def get_optional_package_info(this : IAppxManifestReader4*, optionalpackageinfo : IAppxManifestOptionalPackageInfo*) : HRESULT
+    @lpVtbl.value.get_optional_package_info.call(this, optionalpackageinfo)
+  end
+end
+struct LibWin32::IAppxManifestReader5
+  def query_interface(this : IAppxManifestReader5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_main_package_dependencies(this : IAppxManifestReader5*, mainpackagedependencies : IAppxManifestMainPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_main_package_dependencies.call(this, mainpackagedependencies)
+  end
+end
+struct LibWin32::IAppxManifestReader6
+  def query_interface(this : IAppxManifestReader6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_non_qualified_resource_package(this : IAppxManifestReader6*, isnonqualifiedresourcepackage : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_non_qualified_resource_package.call(this, isnonqualifiedresourcepackage)
+  end
+end
+struct LibWin32::IAppxManifestReader7
+  def query_interface(this : IAppxManifestReader7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestReader7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestReader7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_driver_dependencies(this : IAppxManifestReader7*, driverdependencies : IAppxManifestDriverDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_driver_dependencies.call(this, driverdependencies)
+  end
+  def get_os_package_dependencies(this : IAppxManifestReader7*, ospackagedependencies : IAppxManifestOSPackageDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_os_package_dependencies.call(this, ospackagedependencies)
+  end
+  def get_host_runtime_dependencies(this : IAppxManifestReader7*, hostruntimedependencies : IAppxManifestHostRuntimeDependenciesEnumerator*) : HRESULT
+    @lpVtbl.value.get_host_runtime_dependencies.call(this, hostruntimedependencies)
+  end
+end
+struct LibWin32::IAppxManifestDriverDependenciesEnumerator
+  def query_interface(this : IAppxManifestDriverDependenciesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestDriverDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestDriverDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestDriverDependenciesEnumerator*, driverdependency : IAppxManifestDriverDependency*) : HRESULT
+    @lpVtbl.value.get_current.call(this, driverdependency)
+  end
+  def get_has_current(this : IAppxManifestDriverDependenciesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestDriverDependenciesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestDriverDependency
+  def query_interface(this : IAppxManifestDriverDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestDriverDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestDriverDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_driver_constraints(this : IAppxManifestDriverDependency*, driverconstraints : IAppxManifestDriverConstraintsEnumerator*) : HRESULT
+    @lpVtbl.value.get_driver_constraints.call(this, driverconstraints)
+  end
+end
+struct LibWin32::IAppxManifestDriverConstraintsEnumerator
+  def query_interface(this : IAppxManifestDriverConstraintsEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestDriverConstraintsEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestDriverConstraintsEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestDriverConstraintsEnumerator*, driverconstraint : IAppxManifestDriverConstraint*) : HRESULT
+    @lpVtbl.value.get_current.call(this, driverconstraint)
+  end
+  def get_has_current(this : IAppxManifestDriverConstraintsEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestDriverConstraintsEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestDriverConstraint
+  def query_interface(this : IAppxManifestDriverConstraint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestDriverConstraint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestDriverConstraint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestDriverConstraint*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_min_version(this : IAppxManifestDriverConstraint*, minversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_min_version.call(this, minversion)
+  end
+  def get_min_date(this : IAppxManifestDriverConstraint*, mindate : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_min_date.call(this, mindate)
+  end
+end
+struct LibWin32::IAppxManifestOSPackageDependenciesEnumerator
+  def query_interface(this : IAppxManifestOSPackageDependenciesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestOSPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestOSPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestOSPackageDependenciesEnumerator*, ospackagedependency : IAppxManifestOSPackageDependency*) : HRESULT
+    @lpVtbl.value.get_current.call(this, ospackagedependency)
+  end
+  def get_has_current(this : IAppxManifestOSPackageDependenciesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestOSPackageDependenciesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestOSPackageDependency
+  def query_interface(this : IAppxManifestOSPackageDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestOSPackageDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestOSPackageDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestOSPackageDependency*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_version(this : IAppxManifestOSPackageDependency*, version : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+end
+struct LibWin32::IAppxManifestHostRuntimeDependenciesEnumerator
+  def query_interface(this : IAppxManifestHostRuntimeDependenciesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestHostRuntimeDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestHostRuntimeDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestHostRuntimeDependenciesEnumerator*, hostruntimedependency : IAppxManifestHostRuntimeDependency*) : HRESULT
+    @lpVtbl.value.get_current.call(this, hostruntimedependency)
+  end
+  def get_has_current(this : IAppxManifestHostRuntimeDependenciesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestHostRuntimeDependenciesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestHostRuntimeDependency
+  def query_interface(this : IAppxManifestHostRuntimeDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestHostRuntimeDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestHostRuntimeDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestHostRuntimeDependency*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_publisher(this : IAppxManifestHostRuntimeDependency*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_min_version(this : IAppxManifestHostRuntimeDependency*, minversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_min_version.call(this, minversion)
+  end
+end
+struct LibWin32::IAppxManifestHostRuntimeDependency2
+  def query_interface(this : IAppxManifestHostRuntimeDependency2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestHostRuntimeDependency2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestHostRuntimeDependency2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_family_name(this : IAppxManifestHostRuntimeDependency2*, packagefamilyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_family_name.call(this, packagefamilyname)
+  end
+end
+struct LibWin32::IAppxManifestOptionalPackageInfo
+  def query_interface(this : IAppxManifestOptionalPackageInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestOptionalPackageInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestOptionalPackageInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_optional_package(this : IAppxManifestOptionalPackageInfo*, isoptionalpackage : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optional_package.call(this, isoptionalpackage)
+  end
+  def get_main_package_name(this : IAppxManifestOptionalPackageInfo*, mainpackagename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_main_package_name.call(this, mainpackagename)
+  end
+end
+struct LibWin32::IAppxManifestMainPackageDependenciesEnumerator
+  def query_interface(this : IAppxManifestMainPackageDependenciesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestMainPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestMainPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestMainPackageDependenciesEnumerator*, mainpackagedependency : IAppxManifestMainPackageDependency*) : HRESULT
+    @lpVtbl.value.get_current.call(this, mainpackagedependency)
+  end
+  def get_has_current(this : IAppxManifestMainPackageDependenciesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestMainPackageDependenciesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestMainPackageDependency
+  def query_interface(this : IAppxManifestMainPackageDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestMainPackageDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestMainPackageDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestMainPackageDependency*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_publisher(this : IAppxManifestMainPackageDependency*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_package_family_name(this : IAppxManifestMainPackageDependency*, packagefamilyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_family_name.call(this, packagefamilyname)
+  end
+end
+struct LibWin32::IAppxManifestPackageId
+  def query_interface(this : IAppxManifestPackageId*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageId*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageId*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestPackageId*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_architecture(this : IAppxManifestPackageId*, architecture : APPX_PACKAGE_ARCHITECTURE*) : HRESULT
+    @lpVtbl.value.get_architecture.call(this, architecture)
+  end
+  def get_publisher(this : IAppxManifestPackageId*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_version(this : IAppxManifestPackageId*, packageversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, packageversion)
+  end
+  def get_resource_id(this : IAppxManifestPackageId*, resourceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_resource_id.call(this, resourceid)
+  end
+  def compare_publisher(this : IAppxManifestPackageId*, other : LibC::LPWSTR, issame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_publisher.call(this, other, issame)
+  end
+  def get_package_full_name(this : IAppxManifestPackageId*, packagefullname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_full_name.call(this, packagefullname)
+  end
+  def get_package_family_name(this : IAppxManifestPackageId*, packagefamilyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_family_name.call(this, packagefamilyname)
+  end
+end
+struct LibWin32::IAppxManifestPackageId2
+  def query_interface(this : IAppxManifestPackageId2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageId2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageId2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestPackageId2*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_architecture(this : IAppxManifestPackageId2*, architecture : APPX_PACKAGE_ARCHITECTURE*) : HRESULT
+    @lpVtbl.value.get_architecture.call(this, architecture)
+  end
+  def get_publisher(this : IAppxManifestPackageId2*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_version(this : IAppxManifestPackageId2*, packageversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, packageversion)
+  end
+  def get_resource_id(this : IAppxManifestPackageId2*, resourceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_resource_id.call(this, resourceid)
+  end
+  def compare_publisher(this : IAppxManifestPackageId2*, other : LibC::LPWSTR, issame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_publisher.call(this, other, issame)
+  end
+  def get_package_full_name(this : IAppxManifestPackageId2*, packagefullname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_full_name.call(this, packagefullname)
+  end
+  def get_package_family_name(this : IAppxManifestPackageId2*, packagefamilyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_package_family_name.call(this, packagefamilyname)
+  end
+  def get_architecture2(this : IAppxManifestPackageId2*, architecture : APPX_PACKAGE_ARCHITECTURE2*) : HRESULT
+    @lpVtbl.value.get_architecture2.call(this, architecture)
+  end
+end
+struct LibWin32::IAppxManifestProperties
+  def query_interface(this : IAppxManifestProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_bool_value(this : IAppxManifestProperties*, name : LibC::LPWSTR, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bool_value.call(this, name, value)
+  end
+  def get_string_value(this : IAppxManifestProperties*, name : LibC::LPWSTR, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_string_value.call(this, name, value)
+  end
+end
+struct LibWin32::IAppxManifestTargetDeviceFamiliesEnumerator
+  def query_interface(this : IAppxManifestTargetDeviceFamiliesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestTargetDeviceFamiliesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestTargetDeviceFamiliesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestTargetDeviceFamiliesEnumerator*, targetdevicefamily : IAppxManifestTargetDeviceFamily*) : HRESULT
+    @lpVtbl.value.get_current.call(this, targetdevicefamily)
+  end
+  def get_has_current(this : IAppxManifestTargetDeviceFamiliesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestTargetDeviceFamiliesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestTargetDeviceFamily
+  def query_interface(this : IAppxManifestTargetDeviceFamily*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestTargetDeviceFamily*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestTargetDeviceFamily*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestTargetDeviceFamily*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_min_version(this : IAppxManifestTargetDeviceFamily*, minversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_min_version.call(this, minversion)
+  end
+  def get_max_version_tested(this : IAppxManifestTargetDeviceFamily*, maxversiontested : UInt64*) : HRESULT
+    @lpVtbl.value.get_max_version_tested.call(this, maxversiontested)
+  end
+end
+struct LibWin32::IAppxManifestPackageDependenciesEnumerator
+  def query_interface(this : IAppxManifestPackageDependenciesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageDependenciesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestPackageDependenciesEnumerator*, dependency : IAppxManifestPackageDependency*) : HRESULT
+    @lpVtbl.value.get_current.call(this, dependency)
+  end
+  def get_has_current(this : IAppxManifestPackageDependenciesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestPackageDependenciesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestPackageDependency
+  def query_interface(this : IAppxManifestPackageDependency*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageDependency*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageDependency*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestPackageDependency*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_publisher(this : IAppxManifestPackageDependency*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_min_version(this : IAppxManifestPackageDependency*, minversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_min_version.call(this, minversion)
+  end
+end
+struct LibWin32::IAppxManifestPackageDependency2
+  def query_interface(this : IAppxManifestPackageDependency2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageDependency2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageDependency2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxManifestPackageDependency2*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_publisher(this : IAppxManifestPackageDependency2*, publisher : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_publisher.call(this, publisher)
+  end
+  def get_min_version(this : IAppxManifestPackageDependency2*, minversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_min_version.call(this, minversion)
+  end
+  def get_max_major_version_tested(this : IAppxManifestPackageDependency2*, maxmajorversiontested : UInt16*) : HRESULT
+    @lpVtbl.value.get_max_major_version_tested.call(this, maxmajorversiontested)
+  end
+end
+struct LibWin32::IAppxManifestPackageDependency3
+  def query_interface(this : IAppxManifestPackageDependency3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestPackageDependency3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestPackageDependency3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_optional(this : IAppxManifestPackageDependency3*, isoptional : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_optional.call(this, isoptional)
+  end
+end
+struct LibWin32::IAppxManifestResourcesEnumerator
+  def query_interface(this : IAppxManifestResourcesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestResourcesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestResourcesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestResourcesEnumerator*, resource : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_current.call(this, resource)
+  end
+  def get_has_current(this : IAppxManifestResourcesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestResourcesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestDeviceCapabilitiesEnumerator
+  def query_interface(this : IAppxManifestDeviceCapabilitiesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestDeviceCapabilitiesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestDeviceCapabilitiesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestDeviceCapabilitiesEnumerator*, devicecapability : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_current.call(this, devicecapability)
+  end
+  def get_has_current(this : IAppxManifestDeviceCapabilitiesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestDeviceCapabilitiesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestCapabilitiesEnumerator
+  def query_interface(this : IAppxManifestCapabilitiesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestCapabilitiesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestCapabilitiesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestCapabilitiesEnumerator*, capability : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_current.call(this, capability)
+  end
+  def get_has_current(this : IAppxManifestCapabilitiesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestCapabilitiesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestApplicationsEnumerator
+  def query_interface(this : IAppxManifestApplicationsEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestApplicationsEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestApplicationsEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestApplicationsEnumerator*, application : IAppxManifestApplication*) : HRESULT
+    @lpVtbl.value.get_current.call(this, application)
+  end
+  def get_has_current(this : IAppxManifestApplicationsEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestApplicationsEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestApplication
+  def query_interface(this : IAppxManifestApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_string_value(this : IAppxManifestApplication*, name : LibC::LPWSTR, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_string_value.call(this, name, value)
+  end
+  def get_app_user_model_id(this : IAppxManifestApplication*, appusermodelid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_app_user_model_id.call(this, appusermodelid)
+  end
+end
+struct LibWin32::IAppxManifestQualifiedResourcesEnumerator
+  def query_interface(this : IAppxManifestQualifiedResourcesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestQualifiedResourcesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestQualifiedResourcesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxManifestQualifiedResourcesEnumerator*, resource : IAppxManifestQualifiedResource*) : HRESULT
+    @lpVtbl.value.get_current.call(this, resource)
+  end
+  def get_has_current(this : IAppxManifestQualifiedResourcesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxManifestQualifiedResourcesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxManifestQualifiedResource
+  def query_interface(this : IAppxManifestQualifiedResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxManifestQualifiedResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxManifestQualifiedResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language(this : IAppxManifestQualifiedResource*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def get_scale(this : IAppxManifestQualifiedResource*, scale : UInt32*) : HRESULT
+    @lpVtbl.value.get_scale.call(this, scale)
+  end
+  def get_dx_feature_level(this : IAppxManifestQualifiedResource*, dxfeaturelevel : DX_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_dx_feature_level.call(this, dxfeaturelevel)
+  end
+end
+struct LibWin32::IAppxBundleFactory
+  def query_interface(this : IAppxBundleFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_bundle_writer(this : IAppxBundleFactory*, outputstream : IStream, bundleversion : UInt64, bundlewriter : IAppxBundleWriter*) : HRESULT
+    @lpVtbl.value.create_bundle_writer.call(this, outputstream, bundleversion, bundlewriter)
+  end
+  def create_bundle_reader(this : IAppxBundleFactory*, inputstream : IStream, bundlereader : IAppxBundleReader*) : HRESULT
+    @lpVtbl.value.create_bundle_reader.call(this, inputstream, bundlereader)
+  end
+  def create_bundle_manifest_reader(this : IAppxBundleFactory*, inputstream : IStream, manifestreader : IAppxBundleManifestReader*) : HRESULT
+    @lpVtbl.value.create_bundle_manifest_reader.call(this, inputstream, manifestreader)
+  end
+end
+struct LibWin32::IAppxBundleWriter
+  def query_interface(this : IAppxBundleWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_package(this : IAppxBundleWriter*, filename : LibC::LPWSTR, packagestream : IStream) : HRESULT
+    @lpVtbl.value.add_payload_package.call(this, filename, packagestream)
+  end
+  def close(this : IAppxBundleWriter*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IAppxBundleWriter2
+  def query_interface(this : IAppxBundleWriter2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleWriter2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleWriter2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_external_package_reference(this : IAppxBundleWriter2*, filename : LibC::LPWSTR, inputstream : IStream) : HRESULT
+    @lpVtbl.value.add_external_package_reference.call(this, filename, inputstream)
+  end
+end
+struct LibWin32::IAppxBundleWriter3
+  def query_interface(this : IAppxBundleWriter3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleWriter3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleWriter3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_package_reference(this : IAppxBundleWriter3*, filename : LibC::LPWSTR, inputstream : IStream) : HRESULT
+    @lpVtbl.value.add_package_reference.call(this, filename, inputstream)
+  end
+  def close(this : IAppxBundleWriter3*, hashmethodstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.close.call(this, hashmethodstring)
+  end
+end
+struct LibWin32::IAppxBundleWriter4
+  def query_interface(this : IAppxBundleWriter4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleWriter4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleWriter4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_package(this : IAppxBundleWriter4*, filename : LibC::LPWSTR, packagestream : IStream, isdefaultapplicablepackage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_payload_package.call(this, filename, packagestream, isdefaultapplicablepackage)
+  end
+  def add_package_reference(this : IAppxBundleWriter4*, filename : LibC::LPWSTR, inputstream : IStream, isdefaultapplicablepackage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_package_reference.call(this, filename, inputstream, isdefaultapplicablepackage)
+  end
+  def add_external_package_reference(this : IAppxBundleWriter4*, filename : LibC::LPWSTR, inputstream : IStream, isdefaultapplicablepackage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_external_package_reference.call(this, filename, inputstream, isdefaultapplicablepackage)
+  end
+end
+struct LibWin32::IAppxBundleReader
+  def query_interface(this : IAppxBundleReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_footprint_file(this : IAppxBundleReader*, filetype : APPX_BUNDLE_FOOTPRINT_FILE_TYPE, footprintfile : IAppxFile*) : HRESULT
+    @lpVtbl.value.get_footprint_file.call(this, filetype, footprintfile)
+  end
+  def get_block_map(this : IAppxBundleReader*, blockmapreader : IAppxBlockMapReader*) : HRESULT
+    @lpVtbl.value.get_block_map.call(this, blockmapreader)
+  end
+  def get_manifest(this : IAppxBundleReader*, manifestreader : IAppxBundleManifestReader*) : HRESULT
+    @lpVtbl.value.get_manifest.call(this, manifestreader)
+  end
+  def get_payload_packages(this : IAppxBundleReader*, payloadpackages : IAppxFilesEnumerator*) : HRESULT
+    @lpVtbl.value.get_payload_packages.call(this, payloadpackages)
+  end
+  def get_payload_package(this : IAppxBundleReader*, filename : LibC::LPWSTR, payloadpackage : IAppxFile*) : HRESULT
+    @lpVtbl.value.get_payload_package.call(this, filename, payloadpackage)
+  end
+end
+struct LibWin32::IAppxBundleManifestReader
+  def query_interface(this : IAppxBundleManifestReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxBundleManifestReader*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_package_info_items(this : IAppxBundleManifestReader*, packageinfoitems : IAppxBundleManifestPackageInfoEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_info_items.call(this, packageinfoitems)
+  end
+  def get_stream(this : IAppxBundleManifestReader*, manifeststream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, manifeststream)
+  end
+end
+struct LibWin32::IAppxBundleManifestReader2
+  def query_interface(this : IAppxBundleManifestReader2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestReader2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestReader2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_optional_bundles(this : IAppxBundleManifestReader2*, optionalbundles : IAppxBundleManifestOptionalBundleInfoEnumerator*) : HRESULT
+    @lpVtbl.value.get_optional_bundles.call(this, optionalbundles)
+  end
+end
+struct LibWin32::IAppxBundleManifestPackageInfoEnumerator
+  def query_interface(this : IAppxBundleManifestPackageInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestPackageInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestPackageInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxBundleManifestPackageInfoEnumerator*, packageinfo : IAppxBundleManifestPackageInfo*) : HRESULT
+    @lpVtbl.value.get_current.call(this, packageinfo)
+  end
+  def get_has_current(this : IAppxBundleManifestPackageInfoEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxBundleManifestPackageInfoEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxBundleManifestPackageInfo
+  def query_interface(this : IAppxBundleManifestPackageInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestPackageInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestPackageInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_type(this : IAppxBundleManifestPackageInfo*, packagetype : APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE*) : HRESULT
+    @lpVtbl.value.get_package_type.call(this, packagetype)
+  end
+  def get_package_id(this : IAppxBundleManifestPackageInfo*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_file_name(this : IAppxBundleManifestPackageInfo*, filename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_file_name.call(this, filename)
+  end
+  def get_offset(this : IAppxBundleManifestPackageInfo*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def get_size(this : IAppxBundleManifestPackageInfo*, size : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_resources(this : IAppxBundleManifestPackageInfo*, resources : IAppxManifestQualifiedResourcesEnumerator*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, resources)
+  end
+end
+struct LibWin32::IAppxBundleManifestPackageInfo2
+  def query_interface(this : IAppxBundleManifestPackageInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestPackageInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestPackageInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_package_reference(this : IAppxBundleManifestPackageInfo2*, ispackagereference : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_package_reference.call(this, ispackagereference)
+  end
+  def get_is_non_qualified_resource_package(this : IAppxBundleManifestPackageInfo2*, isnonqualifiedresourcepackage : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_non_qualified_resource_package.call(this, isnonqualifiedresourcepackage)
+  end
+  def get_is_default_applicable_package(this : IAppxBundleManifestPackageInfo2*, isdefaultapplicablepackage : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_default_applicable_package.call(this, isdefaultapplicablepackage)
+  end
+end
+struct LibWin32::IAppxBundleManifestPackageInfo3
+  def query_interface(this : IAppxBundleManifestPackageInfo3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestPackageInfo3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestPackageInfo3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_target_device_families(this : IAppxBundleManifestPackageInfo3*, targetdevicefamilies : IAppxManifestTargetDeviceFamiliesEnumerator*) : HRESULT
+    @lpVtbl.value.get_target_device_families.call(this, targetdevicefamilies)
+  end
+end
+struct LibWin32::IAppxBundleManifestPackageInfo4
+  def query_interface(this : IAppxBundleManifestPackageInfo4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestPackageInfo4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestPackageInfo4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_is_stub(this : IAppxBundleManifestPackageInfo4*, isstub : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_stub.call(this, isstub)
+  end
+end
+struct LibWin32::IAppxBundleManifestOptionalBundleInfoEnumerator
+  def query_interface(this : IAppxBundleManifestOptionalBundleInfoEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestOptionalBundleInfoEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestOptionalBundleInfoEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxBundleManifestOptionalBundleInfoEnumerator*, optionalbundle : IAppxBundleManifestOptionalBundleInfo*) : HRESULT
+    @lpVtbl.value.get_current.call(this, optionalbundle)
+  end
+  def get_has_current(this : IAppxBundleManifestOptionalBundleInfoEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxBundleManifestOptionalBundleInfoEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxBundleManifestOptionalBundleInfo
+  def query_interface(this : IAppxBundleManifestOptionalBundleInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxBundleManifestOptionalBundleInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxBundleManifestOptionalBundleInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_id(this : IAppxBundleManifestOptionalBundleInfo*, packageid : IAppxManifestPackageId*) : HRESULT
+    @lpVtbl.value.get_package_id.call(this, packageid)
+  end
+  def get_file_name(this : IAppxBundleManifestOptionalBundleInfo*, filename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_file_name.call(this, filename)
+  end
+  def get_package_info_items(this : IAppxBundleManifestOptionalBundleInfo*, packageinfoitems : IAppxBundleManifestPackageInfoEnumerator*) : HRESULT
+    @lpVtbl.value.get_package_info_items.call(this, packageinfoitems)
+  end
+end
+struct LibWin32::IAppxContentGroupFilesEnumerator
+  def query_interface(this : IAppxContentGroupFilesEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxContentGroupFilesEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxContentGroupFilesEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxContentGroupFilesEnumerator*, file : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_current.call(this, file)
+  end
+  def get_has_current(this : IAppxContentGroupFilesEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxContentGroupFilesEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxContentGroup
+  def query_interface(this : IAppxContentGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxContentGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxContentGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IAppxContentGroup*, groupname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, groupname)
+  end
+  def get_files(this : IAppxContentGroup*, enumerator : IAppxContentGroupFilesEnumerator*) : HRESULT
+    @lpVtbl.value.get_files.call(this, enumerator)
+  end
+end
+struct LibWin32::IAppxContentGroupsEnumerator
+  def query_interface(this : IAppxContentGroupsEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxContentGroupsEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxContentGroupsEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IAppxContentGroupsEnumerator*, stream : IAppxContentGroup*) : HRESULT
+    @lpVtbl.value.get_current.call(this, stream)
+  end
+  def get_has_current(this : IAppxContentGroupsEnumerator*, hascurrent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_has_current.call(this, hascurrent)
+  end
+  def move_next(this : IAppxContentGroupsEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+end
+struct LibWin32::IAppxContentGroupMapReader
+  def query_interface(this : IAppxContentGroupMapReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxContentGroupMapReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxContentGroupMapReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_required_group(this : IAppxContentGroupMapReader*, requiredgroup : IAppxContentGroup*) : HRESULT
+    @lpVtbl.value.get_required_group.call(this, requiredgroup)
+  end
+  def get_automatic_groups(this : IAppxContentGroupMapReader*, automaticgroupsenumerator : IAppxContentGroupsEnumerator*) : HRESULT
+    @lpVtbl.value.get_automatic_groups.call(this, automaticgroupsenumerator)
+  end
+end
+struct LibWin32::IAppxSourceContentGroupMapReader
+  def query_interface(this : IAppxSourceContentGroupMapReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxSourceContentGroupMapReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxSourceContentGroupMapReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_required_group(this : IAppxSourceContentGroupMapReader*, requiredgroup : IAppxContentGroup*) : HRESULT
+    @lpVtbl.value.get_required_group.call(this, requiredgroup)
+  end
+  def get_automatic_groups(this : IAppxSourceContentGroupMapReader*, automaticgroupsenumerator : IAppxContentGroupsEnumerator*) : HRESULT
+    @lpVtbl.value.get_automatic_groups.call(this, automaticgroupsenumerator)
+  end
+end
+struct LibWin32::IAppxContentGroupMapWriter
+  def query_interface(this : IAppxContentGroupMapWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxContentGroupMapWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxContentGroupMapWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_automatic_group(this : IAppxContentGroupMapWriter*, groupname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_automatic_group.call(this, groupname)
+  end
+  def add_automatic_file(this : IAppxContentGroupMapWriter*, filename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_automatic_file.call(this, filename)
+  end
+  def close(this : IAppxContentGroupMapWriter*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IAppxPackagingDiagnosticEventSink
+  def query_interface(this : IAppxPackagingDiagnosticEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackagingDiagnosticEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackagingDiagnosticEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def report_context_change(this : IAppxPackagingDiagnosticEventSink*, changetype : APPX_PACKAGING_CONTEXT_CHANGE_TYPE, contextid : Int32, contextname : PSTR, contextmessage : LibC::LPWSTR, detailsmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.report_context_change.call(this, changetype, contextid, contextname, contextmessage, detailsmessage)
+  end
+  def report_error(this : IAppxPackagingDiagnosticEventSink*, errormessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.report_error.call(this, errormessage)
+  end
+end
+struct LibWin32::IAppxPackagingDiagnosticEventSinkManager
+  def query_interface(this : IAppxPackagingDiagnosticEventSinkManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackagingDiagnosticEventSinkManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackagingDiagnosticEventSinkManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_sink_for_process(this : IAppxPackagingDiagnosticEventSinkManager*, sink : IAppxPackagingDiagnosticEventSink) : HRESULT
+    @lpVtbl.value.set_sink_for_process.call(this, sink)
+  end
+end
+struct LibWin32::IAppxEncryptionFactory
+  def query_interface(this : IAppxEncryptionFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptionFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptionFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encrypt_package(this : IAppxEncryptionFactory*, inputstream : IStream, outputstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*) : HRESULT
+    @lpVtbl.value.encrypt_package.call(this, inputstream, outputstream, settings, keyinfo, exemptedfiles)
+  end
+  def decrypt_package(this : IAppxEncryptionFactory*, inputstream : IStream, outputstream : IStream, keyinfo : APPX_KEY_INFO*) : HRESULT
+    @lpVtbl.value.decrypt_package.call(this, inputstream, outputstream, keyinfo)
+  end
+  def create_encrypted_package_writer(this : IAppxEncryptionFactory*, outputstream : IStream, manifeststream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, packagewriter : IAppxEncryptedPackageWriter*) : HRESULT
+    @lpVtbl.value.create_encrypted_package_writer.call(this, outputstream, manifeststream, settings, keyinfo, exemptedfiles, packagewriter)
+  end
+  def create_encrypted_package_reader(this : IAppxEncryptionFactory*, inputstream : IStream, keyinfo : APPX_KEY_INFO*, packagereader : IAppxPackageReader*) : HRESULT
+    @lpVtbl.value.create_encrypted_package_reader.call(this, inputstream, keyinfo, packagereader)
+  end
+  def encrypt_bundle(this : IAppxEncryptionFactory*, inputstream : IStream, outputstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*) : HRESULT
+    @lpVtbl.value.encrypt_bundle.call(this, inputstream, outputstream, settings, keyinfo, exemptedfiles)
+  end
+  def decrypt_bundle(this : IAppxEncryptionFactory*, inputstream : IStream, outputstream : IStream, keyinfo : APPX_KEY_INFO*) : HRESULT
+    @lpVtbl.value.decrypt_bundle.call(this, inputstream, outputstream, keyinfo)
+  end
+  def create_encrypted_bundle_writer(this : IAppxEncryptionFactory*, outputstream : IStream, bundleversion : UInt64, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, bundlewriter : IAppxEncryptedBundleWriter*) : HRESULT
+    @lpVtbl.value.create_encrypted_bundle_writer.call(this, outputstream, bundleversion, settings, keyinfo, exemptedfiles, bundlewriter)
+  end
+  def create_encrypted_bundle_reader(this : IAppxEncryptionFactory*, inputstream : IStream, keyinfo : APPX_KEY_INFO*, bundlereader : IAppxBundleReader*) : HRESULT
+    @lpVtbl.value.create_encrypted_bundle_reader.call(this, inputstream, keyinfo, bundlereader)
+  end
+end
+struct LibWin32::IAppxEncryptionFactory2
+  def query_interface(this : IAppxEncryptionFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptionFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptionFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_encrypted_package_writer(this : IAppxEncryptionFactory2*, outputstream : IStream, manifeststream : IStream, contentgroupmapstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, packagewriter : IAppxEncryptedPackageWriter*) : HRESULT
+    @lpVtbl.value.create_encrypted_package_writer.call(this, outputstream, manifeststream, contentgroupmapstream, settings, keyinfo, exemptedfiles, packagewriter)
+  end
+end
+struct LibWin32::IAppxEncryptionFactory3
+  def query_interface(this : IAppxEncryptionFactory3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptionFactory3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptionFactory3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encrypt_package(this : IAppxEncryptionFactory3*, inputstream : IStream, outputstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*) : HRESULT
+    @lpVtbl.value.encrypt_package.call(this, inputstream, outputstream, settings, keyinfo, exemptedfiles)
+  end
+  def create_encrypted_package_writer(this : IAppxEncryptionFactory3*, outputstream : IStream, manifeststream : IStream, contentgroupmapstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, packagewriter : IAppxEncryptedPackageWriter*) : HRESULT
+    @lpVtbl.value.create_encrypted_package_writer.call(this, outputstream, manifeststream, contentgroupmapstream, settings, keyinfo, exemptedfiles, packagewriter)
+  end
+  def encrypt_bundle(this : IAppxEncryptionFactory3*, inputstream : IStream, outputstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*) : HRESULT
+    @lpVtbl.value.encrypt_bundle.call(this, inputstream, outputstream, settings, keyinfo, exemptedfiles)
+  end
+  def create_encrypted_bundle_writer(this : IAppxEncryptionFactory3*, outputstream : IStream, bundleversion : UInt64, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, bundlewriter : IAppxEncryptedBundleWriter*) : HRESULT
+    @lpVtbl.value.create_encrypted_bundle_writer.call(this, outputstream, bundleversion, settings, keyinfo, exemptedfiles, bundlewriter)
+  end
+end
+struct LibWin32::IAppxEncryptionFactory4
+  def query_interface(this : IAppxEncryptionFactory4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptionFactory4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptionFactory4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encrypt_package(this : IAppxEncryptionFactory4*, inputstream : IStream, outputstream : IStream, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*, exemptedfiles : APPX_ENCRYPTED_EXEMPTIONS*, memorylimit : UInt64) : HRESULT
+    @lpVtbl.value.encrypt_package.call(this, inputstream, outputstream, settings, keyinfo, exemptedfiles, memorylimit)
+  end
+end
+struct LibWin32::IAppxEncryptedPackageWriter
+  def query_interface(this : IAppxEncryptedPackageWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptedPackageWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptedPackageWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_file_encrypted(this : IAppxEncryptedPackageWriter*, filename : LibC::LPWSTR, compressionoption : APPX_COMPRESSION_OPTION, inputstream : IStream) : HRESULT
+    @lpVtbl.value.add_payload_file_encrypted.call(this, filename, compressionoption, inputstream)
+  end
+  def close(this : IAppxEncryptedPackageWriter*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IAppxEncryptedPackageWriter2
+  def query_interface(this : IAppxEncryptedPackageWriter2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptedPackageWriter2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptedPackageWriter2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_files_encrypted(this : IAppxEncryptedPackageWriter2*, filecount : UInt32, payloadfiles : APPX_PACKAGE_WRITER_PAYLOAD_STREAM*, memorylimit : UInt64) : HRESULT
+    @lpVtbl.value.add_payload_files_encrypted.call(this, filecount, payloadfiles, memorylimit)
+  end
+end
+struct LibWin32::IAppxEncryptedBundleWriter
+  def query_interface(this : IAppxEncryptedBundleWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptedBundleWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptedBundleWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_package_encrypted(this : IAppxEncryptedBundleWriter*, filename : LibC::LPWSTR, packagestream : IStream) : HRESULT
+    @lpVtbl.value.add_payload_package_encrypted.call(this, filename, packagestream)
+  end
+  def close(this : IAppxEncryptedBundleWriter*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IAppxEncryptedBundleWriter2
+  def query_interface(this : IAppxEncryptedBundleWriter2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptedBundleWriter2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptedBundleWriter2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_external_package_reference(this : IAppxEncryptedBundleWriter2*, filename : LibC::LPWSTR, inputstream : IStream) : HRESULT
+    @lpVtbl.value.add_external_package_reference.call(this, filename, inputstream)
+  end
+end
+struct LibWin32::IAppxEncryptedBundleWriter3
+  def query_interface(this : IAppxEncryptedBundleWriter3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxEncryptedBundleWriter3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxEncryptedBundleWriter3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_payload_package_encrypted(this : IAppxEncryptedBundleWriter3*, filename : LibC::LPWSTR, packagestream : IStream, isdefaultapplicablepackage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_payload_package_encrypted.call(this, filename, packagestream, isdefaultapplicablepackage)
+  end
+  def add_external_package_reference(this : IAppxEncryptedBundleWriter3*, filename : LibC::LPWSTR, inputstream : IStream, isdefaultapplicablepackage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_external_package_reference.call(this, filename, inputstream, isdefaultapplicablepackage)
+  end
+end
+struct LibWin32::IAppxPackageEditor
+  def query_interface(this : IAppxPackageEditor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppxPackageEditor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppxPackageEditor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_working_directory(this : IAppxPackageEditor*, workingdirectory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_working_directory.call(this, workingdirectory)
+  end
+  def create_delta_package(this : IAppxPackageEditor*, updatedpackagestream : IStream, baselinepackagestream : IStream, deltapackagestream : IStream) : HRESULT
+    @lpVtbl.value.create_delta_package.call(this, updatedpackagestream, baselinepackagestream, deltapackagestream)
+  end
+  def create_delta_package_using_baseline_block_map(this : IAppxPackageEditor*, updatedpackagestream : IStream, baselineblockmapstream : IStream, baselinepackagefullname : LibC::LPWSTR, deltapackagestream : IStream) : HRESULT
+    @lpVtbl.value.create_delta_package_using_baseline_block_map.call(this, updatedpackagestream, baselineblockmapstream, baselinepackagefullname, deltapackagestream)
+  end
+  def update_package(this : IAppxPackageEditor*, baselinepackagestream : IStream, deltapackagestream : IStream, updateoption : APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION) : HRESULT
+    @lpVtbl.value.update_package.call(this, baselinepackagestream, deltapackagestream, updateoption)
+  end
+  def update_encrypted_package(this : IAppxPackageEditor*, baselineencryptedpackagestream : IStream, deltapackagestream : IStream, updateoption : APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION, settings : APPX_ENCRYPTED_PACKAGE_SETTINGS2*, keyinfo : APPX_KEY_INFO*) : HRESULT
+    @lpVtbl.value.update_encrypted_package.call(this, baselineencryptedpackagestream, deltapackagestream, updateoption, settings, keyinfo)
+  end
+  def update_package_manifest(this : IAppxPackageEditor*, packagestream : IStream, updatedmanifeststream : IStream, ispackageencrypted : LibC::BOOL, options : APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS) : HRESULT
+    @lpVtbl.value.update_package_manifest.call(this, packagestream, updatedmanifeststream, ispackageencrypted, options)
+  end
 end

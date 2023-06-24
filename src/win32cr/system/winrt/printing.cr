@@ -125,3 +125,161 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IPrinting3DManagerInterop
+  def query_interface(this : IPrinting3DManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrinting3DManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrinting3DManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IPrinting3DManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IPrinting3DManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IPrinting3DManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IPrinting3DManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, printmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, printmanager)
+  end
+  def show_print_ui_for_window_async(this : IPrinting3DManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.show_print_ui_for_window_async.call(this, appwindow, riid, asyncoperation)
+  end
+end
+struct LibWin32::IPrintManagerInterop
+  def query_interface(this : IPrintManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IPrintManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IPrintManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IPrintManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IPrintManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, printmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, printmanager)
+  end
+  def show_print_ui_for_window_async(this : IPrintManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.show_print_ui_for_window_async.call(this, appwindow, riid, asyncoperation)
+  end
+end
+struct LibWin32::IPrintWorkflowXpsReceiver
+  def query_interface(this : IPrintWorkflowXpsReceiver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintWorkflowXpsReceiver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintWorkflowXpsReceiver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_document_sequence_print_ticket(this : IPrintWorkflowXpsReceiver*, documentsequenceprintticket : IStream) : HRESULT
+    @lpVtbl.value.set_document_sequence_print_ticket.call(this, documentsequenceprintticket)
+  end
+  def set_document_sequence_uri(this : IPrintWorkflowXpsReceiver*, documentsequenceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_document_sequence_uri.call(this, documentsequenceuri)
+  end
+  def add_document_data(this : IPrintWorkflowXpsReceiver*, documentid : UInt32, documentprintticket : IStream, documenturi : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_document_data.call(this, documentid, documentprintticket, documenturi)
+  end
+  def add_page(this : IPrintWorkflowXpsReceiver*, documentid : UInt32, pageid : UInt32, pagereference : IXpsOMPageReference, pageuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_page.call(this, documentid, pageid, pagereference, pageuri)
+  end
+  def close(this : IPrintWorkflowXpsReceiver*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IPrintWorkflowXpsReceiver2
+  def query_interface(this : IPrintWorkflowXpsReceiver2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintWorkflowXpsReceiver2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintWorkflowXpsReceiver2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_document_sequence_print_ticket(this : IPrintWorkflowXpsReceiver2*, documentsequenceprintticket : IStream) : HRESULT
+    @lpVtbl.value.set_document_sequence_print_ticket.call(this, documentsequenceprintticket)
+  end
+  def set_document_sequence_uri(this : IPrintWorkflowXpsReceiver2*, documentsequenceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_document_sequence_uri.call(this, documentsequenceuri)
+  end
+  def add_document_data(this : IPrintWorkflowXpsReceiver2*, documentid : UInt32, documentprintticket : IStream, documenturi : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_document_data.call(this, documentid, documentprintticket, documenturi)
+  end
+  def add_page(this : IPrintWorkflowXpsReceiver2*, documentid : UInt32, pageid : UInt32, pagereference : IXpsOMPageReference, pageuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_page.call(this, documentid, pageid, pagereference, pageuri)
+  end
+  def close(this : IPrintWorkflowXpsReceiver2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def failed(this : IPrintWorkflowXpsReceiver2*, xpserror : HRESULT) : HRESULT
+    @lpVtbl.value.failed.call(this, xpserror)
+  end
+end
+struct LibWin32::IPrintWorkflowObjectModelSourceFileContentNative
+  def query_interface(this : IPrintWorkflowObjectModelSourceFileContentNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintWorkflowObjectModelSourceFileContentNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintWorkflowObjectModelSourceFileContentNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_xps_om_generation(this : IPrintWorkflowObjectModelSourceFileContentNative*, receiver : IPrintWorkflowXpsReceiver) : HRESULT
+    @lpVtbl.value.start_xps_om_generation.call(this, receiver)
+  end
+  def get_object_factory(this : IPrintWorkflowObjectModelSourceFileContentNative*, value : IXpsOMObjectFactory1*) : HRESULT
+    @lpVtbl.value.get_object_factory.call(this, value)
+  end
+end
+struct LibWin32::IPrintWorkflowXpsObjectModelTargetPackageNative
+  def query_interface(this : IPrintWorkflowXpsObjectModelTargetPackageNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintWorkflowXpsObjectModelTargetPackageNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintWorkflowXpsObjectModelTargetPackageNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_package_target(this : IPrintWorkflowXpsObjectModelTargetPackageNative*, value : IXpsDocumentPackageTarget*) : HRESULT
+    @lpVtbl.value.get_document_package_target.call(this, value)
+  end
+end
+struct LibWin32::IPrintWorkflowConfigurationNative
+  def query_interface(this : IPrintWorkflowConfigurationNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintWorkflowConfigurationNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintWorkflowConfigurationNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_printer_queue(this : IPrintWorkflowConfigurationNative*, value : IPrinterQueue*) : HRESULT
+    @lpVtbl.value.get_printer_queue.call(this, value)
+  end
+  def get_driver_properties(this : IPrintWorkflowConfigurationNative*, value : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_driver_properties.call(this, value)
+  end
+  def get_user_properties(this : IPrintWorkflowConfigurationNative*, value : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_user_properties.call(this, value)
+  end
+end

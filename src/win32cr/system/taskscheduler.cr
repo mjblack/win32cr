@@ -1577,3 +1577,2852 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ITaskTrigger
+  def query_interface(this : ITaskTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_trigger(this : ITaskTrigger*, ptrigger : TASK_TRIGGER*) : HRESULT
+    @lpVtbl.value.set_trigger.call(this, ptrigger)
+  end
+  def get_trigger(this : ITaskTrigger*, ptrigger : TASK_TRIGGER*) : HRESULT
+    @lpVtbl.value.get_trigger.call(this, ptrigger)
+  end
+  def get_trigger_string(this : ITaskTrigger*, ppwsztrigger : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_trigger_string.call(this, ppwsztrigger)
+  end
+end
+struct LibWin32::IScheduledWorkItem
+  def query_interface(this : IScheduledWorkItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScheduledWorkItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScheduledWorkItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_trigger(this : IScheduledWorkItem*, pinewtrigger : UInt16*, pptrigger : ITaskTrigger*) : HRESULT
+    @lpVtbl.value.create_trigger.call(this, pinewtrigger, pptrigger)
+  end
+  def delete_trigger(this : IScheduledWorkItem*, itrigger : UInt16) : HRESULT
+    @lpVtbl.value.delete_trigger.call(this, itrigger)
+  end
+  def get_trigger_count(this : IScheduledWorkItem*, pwcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_trigger_count.call(this, pwcount)
+  end
+  def get_trigger(this : IScheduledWorkItem*, itrigger : UInt16, pptrigger : ITaskTrigger*) : HRESULT
+    @lpVtbl.value.get_trigger.call(this, itrigger, pptrigger)
+  end
+  def get_trigger_string(this : IScheduledWorkItem*, itrigger : UInt16, ppwsztrigger : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_trigger_string.call(this, itrigger, ppwsztrigger)
+  end
+  def get_run_times(this : IScheduledWorkItem*, pstbegin : SYSTEMTIME*, pstend : SYSTEMTIME*, pcount : UInt16*, rgsttasktimes : SYSTEMTIME**) : HRESULT
+    @lpVtbl.value.get_run_times.call(this, pstbegin, pstend, pcount, rgsttasktimes)
+  end
+  def get_next_run_time(this : IScheduledWorkItem*, pstnextrun : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_next_run_time.call(this, pstnextrun)
+  end
+  def set_idle_wait(this : IScheduledWorkItem*, widleminutes : UInt16, wdeadlineminutes : UInt16) : HRESULT
+    @lpVtbl.value.set_idle_wait.call(this, widleminutes, wdeadlineminutes)
+  end
+  def get_idle_wait(this : IScheduledWorkItem*, pwidleminutes : UInt16*, pwdeadlineminutes : UInt16*) : HRESULT
+    @lpVtbl.value.get_idle_wait.call(this, pwidleminutes, pwdeadlineminutes)
+  end
+  def run(this : IScheduledWorkItem*) : HRESULT
+    @lpVtbl.value.run.call(this)
+  end
+  def terminate(this : IScheduledWorkItem*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+  def edit_work_item(this : IScheduledWorkItem*, hparent : LibC::HANDLE, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.edit_work_item.call(this, hparent, dwreserved)
+  end
+  def get_most_recent_run_time(this : IScheduledWorkItem*, pstlastrun : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_most_recent_run_time.call(this, pstlastrun)
+  end
+  def get_status(this : IScheduledWorkItem*, phrstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this, phrstatus)
+  end
+  def get_exit_code(this : IScheduledWorkItem*, pdwexitcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, pdwexitcode)
+  end
+  def set_comment(this : IScheduledWorkItem*, pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_comment.call(this, pwszcomment)
+  end
+  def get_comment(this : IScheduledWorkItem*, ppwszcomment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_comment.call(this, ppwszcomment)
+  end
+  def set_creator(this : IScheduledWorkItem*, pwszcreator : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_creator.call(this, pwszcreator)
+  end
+  def get_creator(this : IScheduledWorkItem*, ppwszcreator : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_creator.call(this, ppwszcreator)
+  end
+  def set_work_item_data(this : IScheduledWorkItem*, cbdata : UInt16, rgbdata : UInt8*) : HRESULT
+    @lpVtbl.value.set_work_item_data.call(this, cbdata, rgbdata)
+  end
+  def get_work_item_data(this : IScheduledWorkItem*, pcbdata : UInt16*, prgbdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_work_item_data.call(this, pcbdata, prgbdata)
+  end
+  def set_error_retry_count(this : IScheduledWorkItem*, wretrycount : UInt16) : HRESULT
+    @lpVtbl.value.set_error_retry_count.call(this, wretrycount)
+  end
+  def get_error_retry_count(this : IScheduledWorkItem*, pwretrycount : UInt16*) : HRESULT
+    @lpVtbl.value.get_error_retry_count.call(this, pwretrycount)
+  end
+  def set_error_retry_interval(this : IScheduledWorkItem*, wretryinterval : UInt16) : HRESULT
+    @lpVtbl.value.set_error_retry_interval.call(this, wretryinterval)
+  end
+  def get_error_retry_interval(this : IScheduledWorkItem*, pwretryinterval : UInt16*) : HRESULT
+    @lpVtbl.value.get_error_retry_interval.call(this, pwretryinterval)
+  end
+  def set_flags(this : IScheduledWorkItem*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwflags)
+  end
+  def get_flags(this : IScheduledWorkItem*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def set_account_information(this : IScheduledWorkItem*, pwszaccountname : LibC::LPWSTR, pwszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_account_information.call(this, pwszaccountname, pwszpassword)
+  end
+  def get_account_information(this : IScheduledWorkItem*, ppwszaccountname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_account_information.call(this, ppwszaccountname)
+  end
+end
+struct LibWin32::ITask
+  def query_interface(this : ITask*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITask*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITask*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_trigger(this : ITask*, pinewtrigger : UInt16*, pptrigger : ITaskTrigger*) : HRESULT
+    @lpVtbl.value.create_trigger.call(this, pinewtrigger, pptrigger)
+  end
+  def delete_trigger(this : ITask*, itrigger : UInt16) : HRESULT
+    @lpVtbl.value.delete_trigger.call(this, itrigger)
+  end
+  def get_trigger_count(this : ITask*, pwcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_trigger_count.call(this, pwcount)
+  end
+  def get_trigger(this : ITask*, itrigger : UInt16, pptrigger : ITaskTrigger*) : HRESULT
+    @lpVtbl.value.get_trigger.call(this, itrigger, pptrigger)
+  end
+  def get_trigger_string(this : ITask*, itrigger : UInt16, ppwsztrigger : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_trigger_string.call(this, itrigger, ppwsztrigger)
+  end
+  def get_run_times(this : ITask*, pstbegin : SYSTEMTIME*, pstend : SYSTEMTIME*, pcount : UInt16*, rgsttasktimes : SYSTEMTIME**) : HRESULT
+    @lpVtbl.value.get_run_times.call(this, pstbegin, pstend, pcount, rgsttasktimes)
+  end
+  def get_next_run_time(this : ITask*, pstnextrun : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_next_run_time.call(this, pstnextrun)
+  end
+  def set_idle_wait(this : ITask*, widleminutes : UInt16, wdeadlineminutes : UInt16) : HRESULT
+    @lpVtbl.value.set_idle_wait.call(this, widleminutes, wdeadlineminutes)
+  end
+  def get_idle_wait(this : ITask*, pwidleminutes : UInt16*, pwdeadlineminutes : UInt16*) : HRESULT
+    @lpVtbl.value.get_idle_wait.call(this, pwidleminutes, pwdeadlineminutes)
+  end
+  def run(this : ITask*) : HRESULT
+    @lpVtbl.value.run.call(this)
+  end
+  def terminate(this : ITask*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+  def edit_work_item(this : ITask*, hparent : LibC::HANDLE, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.edit_work_item.call(this, hparent, dwreserved)
+  end
+  def get_most_recent_run_time(this : ITask*, pstlastrun : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_most_recent_run_time.call(this, pstlastrun)
+  end
+  def get_status(this : ITask*, phrstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.call(this, phrstatus)
+  end
+  def get_exit_code(this : ITask*, pdwexitcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, pdwexitcode)
+  end
+  def set_comment(this : ITask*, pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_comment.call(this, pwszcomment)
+  end
+  def get_comment(this : ITask*, ppwszcomment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_comment.call(this, ppwszcomment)
+  end
+  def set_creator(this : ITask*, pwszcreator : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_creator.call(this, pwszcreator)
+  end
+  def get_creator(this : ITask*, ppwszcreator : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_creator.call(this, ppwszcreator)
+  end
+  def set_work_item_data(this : ITask*, cbdata : UInt16, rgbdata : UInt8*) : HRESULT
+    @lpVtbl.value.set_work_item_data.call(this, cbdata, rgbdata)
+  end
+  def get_work_item_data(this : ITask*, pcbdata : UInt16*, prgbdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_work_item_data.call(this, pcbdata, prgbdata)
+  end
+  def set_error_retry_count(this : ITask*, wretrycount : UInt16) : HRESULT
+    @lpVtbl.value.set_error_retry_count.call(this, wretrycount)
+  end
+  def get_error_retry_count(this : ITask*, pwretrycount : UInt16*) : HRESULT
+    @lpVtbl.value.get_error_retry_count.call(this, pwretrycount)
+  end
+  def set_error_retry_interval(this : ITask*, wretryinterval : UInt16) : HRESULT
+    @lpVtbl.value.set_error_retry_interval.call(this, wretryinterval)
+  end
+  def get_error_retry_interval(this : ITask*, pwretryinterval : UInt16*) : HRESULT
+    @lpVtbl.value.get_error_retry_interval.call(this, pwretryinterval)
+  end
+  def set_flags(this : ITask*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwflags)
+  end
+  def get_flags(this : ITask*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwflags)
+  end
+  def set_account_information(this : ITask*, pwszaccountname : LibC::LPWSTR, pwszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_account_information.call(this, pwszaccountname, pwszpassword)
+  end
+  def get_account_information(this : ITask*, ppwszaccountname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_account_information.call(this, ppwszaccountname)
+  end
+  def set_application_name(this : ITask*, pwszapplicationname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_application_name.call(this, pwszapplicationname)
+  end
+  def get_application_name(this : ITask*, ppwszapplicationname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_application_name.call(this, ppwszapplicationname)
+  end
+  def set_parameters(this : ITask*, pwszparameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_parameters.call(this, pwszparameters)
+  end
+  def get_parameters(this : ITask*, ppwszparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, ppwszparameters)
+  end
+  def set_working_directory(this : ITask*, pwszworkingdirectory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_working_directory.call(this, pwszworkingdirectory)
+  end
+  def get_working_directory(this : ITask*, ppwszworkingdirectory : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_working_directory.call(this, ppwszworkingdirectory)
+  end
+  def set_priority(this : ITask*, dwpriority : UInt32) : HRESULT
+    @lpVtbl.value.set_priority.call(this, dwpriority)
+  end
+  def get_priority(this : ITask*, pdwpriority : UInt32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pdwpriority)
+  end
+  def set_task_flags(this : ITask*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_task_flags.call(this, dwflags)
+  end
+  def get_task_flags(this : ITask*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_task_flags.call(this, pdwflags)
+  end
+  def set_max_run_time(this : ITask*, dwmaxruntimems : UInt32) : HRESULT
+    @lpVtbl.value.set_max_run_time.call(this, dwmaxruntimems)
+  end
+  def get_max_run_time(this : ITask*, pdwmaxruntimems : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_run_time.call(this, pdwmaxruntimems)
+  end
+end
+struct LibWin32::IEnumWorkItems
+  def query_interface(this : IEnumWorkItems*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumWorkItems*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumWorkItems*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumWorkItems*, celt : UInt32, rgpwsznames : LibC::LPWSTR**, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgpwsznames, pceltfetched)
+  end
+  def skip(this : IEnumWorkItems*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumWorkItems*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumWorkItems*, ppenumworkitems : IEnumWorkItems*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenumworkitems)
+  end
+end
+struct LibWin32::ITaskScheduler
+  def query_interface(this : ITaskScheduler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskScheduler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskScheduler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_target_computer(this : ITaskScheduler*, pwszcomputer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_target_computer.call(this, pwszcomputer)
+  end
+  def get_target_computer(this : ITaskScheduler*, ppwszcomputer : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_target_computer.call(this, ppwszcomputer)
+  end
+  def enum(this : ITaskScheduler*, ppenumworkitems : IEnumWorkItems*) : HRESULT
+    @lpVtbl.value.enum.call(this, ppenumworkitems)
+  end
+  def activate(this : ITaskScheduler*, pwszname : LibC::LPWSTR, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.activate.call(this, pwszname, riid, ppunk)
+  end
+  def delete(this : ITaskScheduler*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete.call(this, pwszname)
+  end
+  def new_work_item(this : ITaskScheduler*, pwsztaskname : LibC::LPWSTR, rclsid : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.new_work_item.call(this, pwsztaskname, rclsid, riid, ppunk)
+  end
+  def add_work_item(this : ITaskScheduler*, pwsztaskname : LibC::LPWSTR, pworkitem : IScheduledWorkItem) : HRESULT
+    @lpVtbl.value.add_work_item.call(this, pwsztaskname, pworkitem)
+  end
+  def is_of_type(this : ITaskScheduler*, pwszname : LibC::LPWSTR, riid : Guid*) : HRESULT
+    @lpVtbl.value.is_of_type.call(this, pwszname, riid)
+  end
+end
+struct LibWin32::IProvideTaskPage
+  def query_interface(this : IProvideTaskPage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideTaskPage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideTaskPage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_page(this : IProvideTaskPage*, tptype : TASKPAGE, fpersistchanges : LibC::BOOL, phpage : HPROPSHEETPAGE*) : HRESULT
+    @lpVtbl.value.get_page.call(this, tptype, fpersistchanges, phpage)
+  end
+end
+struct LibWin32::ITaskFolderCollection
+  def query_interface(this : ITaskFolderCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskFolderCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskFolderCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskFolderCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskFolderCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskFolderCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskFolderCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ITaskFolderCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : ITaskFolderCollection*, index : VARIANT, ppfolder : ITaskFolder*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, ppfolder)
+  end
+  def get__new_enum(this : ITaskFolderCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+end
+struct LibWin32::ITaskService
+  def query_interface(this : ITaskService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskService*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskService*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskService*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskService*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_folder(this : ITaskService*, path : UInt8*, ppfolder : ITaskFolder*) : HRESULT
+    @lpVtbl.value.get_folder.call(this, path, ppfolder)
+  end
+  def get_running_tasks(this : ITaskService*, flags : Int32, pprunningtasks : IRunningTaskCollection*) : HRESULT
+    @lpVtbl.value.get_running_tasks.call(this, flags, pprunningtasks)
+  end
+  def new_task(this : ITaskService*, flags : UInt32, ppdefinition : ITaskDefinition*) : HRESULT
+    @lpVtbl.value.new_task.call(this, flags, ppdefinition)
+  end
+  def connect(this : ITaskService*, servername : VARIANT, user : VARIANT, domain : VARIANT, password : VARIANT) : HRESULT
+    @lpVtbl.value.connect.call(this, servername, user, domain, password)
+  end
+  def get_connected(this : ITaskService*, pconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_connected.call(this, pconnected)
+  end
+  def get_target_server(this : ITaskService*, pserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_server.call(this, pserver)
+  end
+  def get_connected_user(this : ITaskService*, puser : UInt8**) : HRESULT
+    @lpVtbl.value.get_connected_user.call(this, puser)
+  end
+  def get_connected_domain(this : ITaskService*, pdomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_connected_domain.call(this, pdomain)
+  end
+  def get_highest_version(this : ITaskService*, pversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_highest_version.call(this, pversion)
+  end
+end
+struct LibWin32::ITaskHandler
+  def query_interface(this : ITaskHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : ITaskHandler*, phandlerservices : IUnknown, data : UInt8*) : HRESULT
+    @lpVtbl.value.start.call(this, phandlerservices, data)
+  end
+  def stop(this : ITaskHandler*, pretcode : HRESULT*) : HRESULT
+    @lpVtbl.value.stop.call(this, pretcode)
+  end
+  def pause(this : ITaskHandler*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : ITaskHandler*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+end
+struct LibWin32::ITaskHandlerStatus
+  def query_interface(this : ITaskHandlerStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskHandlerStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskHandlerStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update_status(this : ITaskHandlerStatus*, percentcomplete : Int16, statusmessage : UInt8*) : HRESULT
+    @lpVtbl.value.update_status.call(this, percentcomplete, statusmessage)
+  end
+  def task_completed(this : ITaskHandlerStatus*, taskerrcode : HRESULT) : HRESULT
+    @lpVtbl.value.task_completed.call(this, taskerrcode)
+  end
+end
+struct LibWin32::ITaskVariables
+  def query_interface(this : ITaskVariables*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskVariables*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskVariables*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input(this : ITaskVariables*, pinput : UInt8**) : HRESULT
+    @lpVtbl.value.get_input.call(this, pinput)
+  end
+  def set_output(this : ITaskVariables*, input : UInt8*) : HRESULT
+    @lpVtbl.value.set_output.call(this, input)
+  end
+  def get_context(this : ITaskVariables*, pcontext : UInt8**) : HRESULT
+    @lpVtbl.value.get_context.call(this, pcontext)
+  end
+end
+struct LibWin32::ITaskNamedValuePair
+  def query_interface(this : ITaskNamedValuePair*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskNamedValuePair*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskNamedValuePair*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskNamedValuePair*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskNamedValuePair*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskNamedValuePair*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskNamedValuePair*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ITaskNamedValuePair*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def put_name(this : ITaskNamedValuePair*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_value(this : ITaskNamedValuePair*, pvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvalue)
+  end
+  def put_value(this : ITaskNamedValuePair*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_value.call(this, value)
+  end
+end
+struct LibWin32::ITaskNamedValueCollection
+  def query_interface(this : ITaskNamedValueCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskNamedValueCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskNamedValueCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskNamedValueCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskNamedValueCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskNamedValueCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskNamedValueCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ITaskNamedValueCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : ITaskNamedValueCollection*, index : Int32, pppair : ITaskNamedValuePair*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pppair)
+  end
+  def get__new_enum(this : ITaskNamedValueCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+  def create(this : ITaskNamedValueCollection*, name : UInt8*, value : UInt8*, pppair : ITaskNamedValuePair*) : HRESULT
+    @lpVtbl.value.create.call(this, name, value, pppair)
+  end
+  def remove(this : ITaskNamedValueCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, index)
+  end
+  def clear(this : ITaskNamedValueCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IRunningTask
+  def query_interface(this : IRunningTask*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRunningTask*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRunningTask*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRunningTask*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRunningTask*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRunningTask*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRunningTask*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IRunningTask*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_instance_guid(this : IRunningTask*, pguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_instance_guid.call(this, pguid)
+  end
+  def get_path(this : IRunningTask*, ppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppath)
+  end
+  def get_state(this : IRunningTask*, pstate : TASK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def get_current_action(this : IRunningTask*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_action.call(this, pname)
+  end
+  def stop(this : IRunningTask*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def refresh(this : IRunningTask*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_engine_pid(this : IRunningTask*, ppid : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_pid.call(this, ppid)
+  end
+end
+struct LibWin32::IRunningTaskCollection
+  def query_interface(this : IRunningTaskCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRunningTaskCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRunningTaskCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRunningTaskCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRunningTaskCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRunningTaskCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRunningTaskCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IRunningTaskCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : IRunningTaskCollection*, index : VARIANT, pprunningtask : IRunningTask*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pprunningtask)
+  end
+  def get__new_enum(this : IRunningTaskCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+end
+struct LibWin32::IRegisteredTask
+  def query_interface(this : IRegisteredTask*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRegisteredTask*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRegisteredTask*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRegisteredTask*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRegisteredTask*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRegisteredTask*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRegisteredTask*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IRegisteredTask*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_path(this : IRegisteredTask*, ppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppath)
+  end
+  def get_state(this : IRegisteredTask*, pstate : TASK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def get_enabled(this : IRegisteredTask*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IRegisteredTask*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def run(this : IRegisteredTask*, params : VARIANT, pprunningtask : IRunningTask*) : HRESULT
+    @lpVtbl.value.run.call(this, params, pprunningtask)
+  end
+  def run_ex(this : IRegisteredTask*, params : VARIANT, flags : Int32, sessionid : Int32, user : UInt8*, pprunningtask : IRunningTask*) : HRESULT
+    @lpVtbl.value.run_ex.call(this, params, flags, sessionid, user, pprunningtask)
+  end
+  def get_instances(this : IRegisteredTask*, flags : Int32, pprunningtasks : IRunningTaskCollection*) : HRESULT
+    @lpVtbl.value.get_instances.call(this, flags, pprunningtasks)
+  end
+  def get_last_run_time(this : IRegisteredTask*, plastruntime : Float64*) : HRESULT
+    @lpVtbl.value.get_last_run_time.call(this, plastruntime)
+  end
+  def get_last_task_result(this : IRegisteredTask*, plasttaskresult : Int32*) : HRESULT
+    @lpVtbl.value.get_last_task_result.call(this, plasttaskresult)
+  end
+  def get_number_of_missed_runs(this : IRegisteredTask*, pnumberofmissedruns : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_missed_runs.call(this, pnumberofmissedruns)
+  end
+  def get_next_run_time(this : IRegisteredTask*, pnextruntime : Float64*) : HRESULT
+    @lpVtbl.value.get_next_run_time.call(this, pnextruntime)
+  end
+  def get_definition(this : IRegisteredTask*, ppdefinition : ITaskDefinition*) : HRESULT
+    @lpVtbl.value.get_definition.call(this, ppdefinition)
+  end
+  def get_xml(this : IRegisteredTask*, pxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, pxml)
+  end
+  def get_security_descriptor(this : IRegisteredTask*, securityinformation : Int32, psddl : UInt8**) : HRESULT
+    @lpVtbl.value.get_security_descriptor.call(this, securityinformation, psddl)
+  end
+  def set_security_descriptor(this : IRegisteredTask*, sddl : UInt8*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_security_descriptor.call(this, sddl, flags)
+  end
+  def stop(this : IRegisteredTask*, flags : Int32) : HRESULT
+    @lpVtbl.value.stop.call(this, flags)
+  end
+  def get_run_times(this : IRegisteredTask*, pststart : SYSTEMTIME*, pstend : SYSTEMTIME*, pcount : UInt32*, pruntimes : SYSTEMTIME**) : HRESULT
+    @lpVtbl.value.get_run_times.call(this, pststart, pstend, pcount, pruntimes)
+  end
+end
+struct LibWin32::ITrigger
+  def query_interface(this : ITrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : ITrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : ITrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : ITrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : ITrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : ITrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : ITrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : ITrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : ITrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : ITrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : ITrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : ITrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : ITrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ITrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+end
+struct LibWin32::IIdleTrigger
+  def query_interface(this : IIdleTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdleTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdleTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIdleTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIdleTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIdleTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIdleTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IIdleTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IIdleTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IIdleTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IIdleTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IIdleTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IIdleTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IIdleTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IIdleTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IIdleTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IIdleTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IIdleTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IIdleTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IIdleTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+end
+struct LibWin32::ILogonTrigger
+  def query_interface(this : ILogonTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILogonTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILogonTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ILogonTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ILogonTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ILogonTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ILogonTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : ILogonTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : ILogonTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : ILogonTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : ILogonTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : ILogonTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : ILogonTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : ILogonTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : ILogonTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : ILogonTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : ILogonTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : ILogonTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : ILogonTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ILogonTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delay(this : ILogonTrigger*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delay.call(this, pdelay)
+  end
+  def put_delay(this : ILogonTrigger*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delay.call(this, delay)
+  end
+  def get_user_id(this : ILogonTrigger*, puser : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_id.call(this, puser)
+  end
+  def put_user_id(this : ILogonTrigger*, user : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_id.call(this, user)
+  end
+end
+struct LibWin32::ISessionStateChangeTrigger
+  def query_interface(this : ISessionStateChangeTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISessionStateChangeTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISessionStateChangeTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISessionStateChangeTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISessionStateChangeTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISessionStateChangeTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISessionStateChangeTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : ISessionStateChangeTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : ISessionStateChangeTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : ISessionStateChangeTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : ISessionStateChangeTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : ISessionStateChangeTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : ISessionStateChangeTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : ISessionStateChangeTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : ISessionStateChangeTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : ISessionStateChangeTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : ISessionStateChangeTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : ISessionStateChangeTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : ISessionStateChangeTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ISessionStateChangeTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delay(this : ISessionStateChangeTrigger*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delay.call(this, pdelay)
+  end
+  def put_delay(this : ISessionStateChangeTrigger*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delay.call(this, delay)
+  end
+  def get_user_id(this : ISessionStateChangeTrigger*, puser : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_id.call(this, puser)
+  end
+  def put_user_id(this : ISessionStateChangeTrigger*, user : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_id.call(this, user)
+  end
+  def get_state_change(this : ISessionStateChangeTrigger*, ptype : TASK_SESSION_STATE_CHANGE_TYPE*) : HRESULT
+    @lpVtbl.value.get_state_change.call(this, ptype)
+  end
+  def put_state_change(this : ISessionStateChangeTrigger*, type : TASK_SESSION_STATE_CHANGE_TYPE) : HRESULT
+    @lpVtbl.value.put_state_change.call(this, type)
+  end
+end
+struct LibWin32::IEventTrigger
+  def query_interface(this : IEventTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEventTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEventTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IEventTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IEventTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IEventTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IEventTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IEventTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IEventTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IEventTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IEventTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IEventTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IEventTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IEventTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IEventTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IEventTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IEventTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IEventTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IEventTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IEventTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_subscription(this : IEventTrigger*, pquery : UInt8**) : HRESULT
+    @lpVtbl.value.get_subscription.call(this, pquery)
+  end
+  def put_subscription(this : IEventTrigger*, query : UInt8*) : HRESULT
+    @lpVtbl.value.put_subscription.call(this, query)
+  end
+  def get_delay(this : IEventTrigger*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delay.call(this, pdelay)
+  end
+  def put_delay(this : IEventTrigger*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delay.call(this, delay)
+  end
+  def get_value_queries(this : IEventTrigger*, ppnamedxpaths : ITaskNamedValueCollection*) : HRESULT
+    @lpVtbl.value.get_value_queries.call(this, ppnamedxpaths)
+  end
+  def put_value_queries(this : IEventTrigger*, pnamedxpaths : ITaskNamedValueCollection) : HRESULT
+    @lpVtbl.value.put_value_queries.call(this, pnamedxpaths)
+  end
+end
+struct LibWin32::ITimeTrigger
+  def query_interface(this : ITimeTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITimeTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITimeTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITimeTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITimeTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITimeTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITimeTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : ITimeTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : ITimeTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : ITimeTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : ITimeTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : ITimeTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : ITimeTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : ITimeTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : ITimeTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : ITimeTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : ITimeTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : ITimeTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : ITimeTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ITimeTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_random_delay(this : ITimeTrigger*, prandomdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_random_delay.call(this, prandomdelay)
+  end
+  def put_random_delay(this : ITimeTrigger*, randomdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_random_delay.call(this, randomdelay)
+  end
+end
+struct LibWin32::IDailyTrigger
+  def query_interface(this : IDailyTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDailyTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDailyTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDailyTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDailyTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDailyTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDailyTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IDailyTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IDailyTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IDailyTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IDailyTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IDailyTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IDailyTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IDailyTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IDailyTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IDailyTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IDailyTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IDailyTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IDailyTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IDailyTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_days_interval(this : IDailyTrigger*, pdays : Int16*) : HRESULT
+    @lpVtbl.value.get_days_interval.call(this, pdays)
+  end
+  def put_days_interval(this : IDailyTrigger*, days : Int16) : HRESULT
+    @lpVtbl.value.put_days_interval.call(this, days)
+  end
+  def get_random_delay(this : IDailyTrigger*, prandomdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_random_delay.call(this, prandomdelay)
+  end
+  def put_random_delay(this : IDailyTrigger*, randomdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_random_delay.call(this, randomdelay)
+  end
+end
+struct LibWin32::IWeeklyTrigger
+  def query_interface(this : IWeeklyTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWeeklyTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWeeklyTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWeeklyTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWeeklyTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWeeklyTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWeeklyTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWeeklyTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWeeklyTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IWeeklyTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IWeeklyTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IWeeklyTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IWeeklyTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IWeeklyTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IWeeklyTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IWeeklyTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IWeeklyTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IWeeklyTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IWeeklyTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IWeeklyTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_days_of_week(this : IWeeklyTrigger*, pdays : Int16*) : HRESULT
+    @lpVtbl.value.get_days_of_week.call(this, pdays)
+  end
+  def put_days_of_week(this : IWeeklyTrigger*, days : Int16) : HRESULT
+    @lpVtbl.value.put_days_of_week.call(this, days)
+  end
+  def get_weeks_interval(this : IWeeklyTrigger*, pweeks : Int16*) : HRESULT
+    @lpVtbl.value.get_weeks_interval.call(this, pweeks)
+  end
+  def put_weeks_interval(this : IWeeklyTrigger*, weeks : Int16) : HRESULT
+    @lpVtbl.value.put_weeks_interval.call(this, weeks)
+  end
+  def get_random_delay(this : IWeeklyTrigger*, prandomdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_random_delay.call(this, prandomdelay)
+  end
+  def put_random_delay(this : IWeeklyTrigger*, randomdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_random_delay.call(this, randomdelay)
+  end
+end
+struct LibWin32::IMonthlyTrigger
+  def query_interface(this : IMonthlyTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMonthlyTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMonthlyTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMonthlyTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMonthlyTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMonthlyTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMonthlyTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IMonthlyTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IMonthlyTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IMonthlyTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IMonthlyTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IMonthlyTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IMonthlyTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IMonthlyTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IMonthlyTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IMonthlyTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IMonthlyTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IMonthlyTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IMonthlyTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IMonthlyTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_days_of_month(this : IMonthlyTrigger*, pdays : Int32*) : HRESULT
+    @lpVtbl.value.get_days_of_month.call(this, pdays)
+  end
+  def put_days_of_month(this : IMonthlyTrigger*, days : Int32) : HRESULT
+    @lpVtbl.value.put_days_of_month.call(this, days)
+  end
+  def get_months_of_year(this : IMonthlyTrigger*, pmonths : Int16*) : HRESULT
+    @lpVtbl.value.get_months_of_year.call(this, pmonths)
+  end
+  def put_months_of_year(this : IMonthlyTrigger*, months : Int16) : HRESULT
+    @lpVtbl.value.put_months_of_year.call(this, months)
+  end
+  def get_run_on_last_day_of_month(this : IMonthlyTrigger*, plastday : Int16*) : HRESULT
+    @lpVtbl.value.get_run_on_last_day_of_month.call(this, plastday)
+  end
+  def put_run_on_last_day_of_month(this : IMonthlyTrigger*, lastday : Int16) : HRESULT
+    @lpVtbl.value.put_run_on_last_day_of_month.call(this, lastday)
+  end
+  def get_random_delay(this : IMonthlyTrigger*, prandomdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_random_delay.call(this, prandomdelay)
+  end
+  def put_random_delay(this : IMonthlyTrigger*, randomdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_random_delay.call(this, randomdelay)
+  end
+end
+struct LibWin32::IMonthlyDOWTrigger
+  def query_interface(this : IMonthlyDOWTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMonthlyDOWTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMonthlyDOWTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMonthlyDOWTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMonthlyDOWTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMonthlyDOWTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMonthlyDOWTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IMonthlyDOWTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IMonthlyDOWTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IMonthlyDOWTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IMonthlyDOWTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IMonthlyDOWTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IMonthlyDOWTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IMonthlyDOWTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IMonthlyDOWTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IMonthlyDOWTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IMonthlyDOWTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IMonthlyDOWTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IMonthlyDOWTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IMonthlyDOWTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_days_of_week(this : IMonthlyDOWTrigger*, pdays : Int16*) : HRESULT
+    @lpVtbl.value.get_days_of_week.call(this, pdays)
+  end
+  def put_days_of_week(this : IMonthlyDOWTrigger*, days : Int16) : HRESULT
+    @lpVtbl.value.put_days_of_week.call(this, days)
+  end
+  def get_weeks_of_month(this : IMonthlyDOWTrigger*, pweeks : Int16*) : HRESULT
+    @lpVtbl.value.get_weeks_of_month.call(this, pweeks)
+  end
+  def put_weeks_of_month(this : IMonthlyDOWTrigger*, weeks : Int16) : HRESULT
+    @lpVtbl.value.put_weeks_of_month.call(this, weeks)
+  end
+  def get_months_of_year(this : IMonthlyDOWTrigger*, pmonths : Int16*) : HRESULT
+    @lpVtbl.value.get_months_of_year.call(this, pmonths)
+  end
+  def put_months_of_year(this : IMonthlyDOWTrigger*, months : Int16) : HRESULT
+    @lpVtbl.value.put_months_of_year.call(this, months)
+  end
+  def get_run_on_last_week_of_month(this : IMonthlyDOWTrigger*, plastweek : Int16*) : HRESULT
+    @lpVtbl.value.get_run_on_last_week_of_month.call(this, plastweek)
+  end
+  def put_run_on_last_week_of_month(this : IMonthlyDOWTrigger*, lastweek : Int16) : HRESULT
+    @lpVtbl.value.put_run_on_last_week_of_month.call(this, lastweek)
+  end
+  def get_random_delay(this : IMonthlyDOWTrigger*, prandomdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_random_delay.call(this, prandomdelay)
+  end
+  def put_random_delay(this : IMonthlyDOWTrigger*, randomdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_random_delay.call(this, randomdelay)
+  end
+end
+struct LibWin32::IBootTrigger
+  def query_interface(this : IBootTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBootTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBootTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IBootTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IBootTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IBootTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IBootTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IBootTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IBootTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IBootTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IBootTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IBootTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IBootTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IBootTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IBootTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IBootTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IBootTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IBootTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IBootTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IBootTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delay(this : IBootTrigger*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delay.call(this, pdelay)
+  end
+  def put_delay(this : IBootTrigger*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delay.call(this, delay)
+  end
+end
+struct LibWin32::IRegistrationTrigger
+  def query_interface(this : IRegistrationTrigger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRegistrationTrigger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRegistrationTrigger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRegistrationTrigger*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRegistrationTrigger*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRegistrationTrigger*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRegistrationTrigger*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IRegistrationTrigger*, ptype : TASK_TRIGGER_TYPE2*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IRegistrationTrigger*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IRegistrationTrigger*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_repetition(this : IRegistrationTrigger*, pprepeat : IRepetitionPattern*) : HRESULT
+    @lpVtbl.value.get_repetition.call(this, pprepeat)
+  end
+  def put_repetition(this : IRegistrationTrigger*, prepeat : IRepetitionPattern) : HRESULT
+    @lpVtbl.value.put_repetition.call(this, prepeat)
+  end
+  def get_execution_time_limit(this : IRegistrationTrigger*, ptimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, ptimelimit)
+  end
+  def put_execution_time_limit(this : IRegistrationTrigger*, timelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, timelimit)
+  end
+  def get_start_boundary(this : IRegistrationTrigger*, pstart : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_boundary.call(this, pstart)
+  end
+  def put_start_boundary(this : IRegistrationTrigger*, start : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_boundary.call(this, start)
+  end
+  def get_end_boundary(this : IRegistrationTrigger*, pend : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_boundary.call(this, pend)
+  end
+  def put_end_boundary(this : IRegistrationTrigger*, end_ : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_boundary.call(this, end_)
+  end
+  def get_enabled(this : IRegistrationTrigger*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : IRegistrationTrigger*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delay(this : IRegistrationTrigger*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delay.call(this, pdelay)
+  end
+  def put_delay(this : IRegistrationTrigger*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delay.call(this, delay)
+  end
+end
+struct LibWin32::IAction
+  def query_interface(this : IAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IAction*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IAction*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IAction*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+end
+struct LibWin32::IExecAction
+  def query_interface(this : IExecAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IExecAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IExecAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IExecAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IExecAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IExecAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IExecAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IExecAction*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IExecAction*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IExecAction*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_path(this : IExecAction*, ppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppath)
+  end
+  def put_path(this : IExecAction*, path : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.call(this, path)
+  end
+  def get_arguments(this : IExecAction*, pargument : UInt8**) : HRESULT
+    @lpVtbl.value.get_arguments.call(this, pargument)
+  end
+  def put_arguments(this : IExecAction*, argument : UInt8*) : HRESULT
+    @lpVtbl.value.put_arguments.call(this, argument)
+  end
+  def get_working_directory(this : IExecAction*, pworkingdirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_working_directory.call(this, pworkingdirectory)
+  end
+  def put_working_directory(this : IExecAction*, workingdirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_working_directory.call(this, workingdirectory)
+  end
+end
+struct LibWin32::IExecAction2
+  def query_interface(this : IExecAction2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IExecAction2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IExecAction2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IExecAction2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IExecAction2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IExecAction2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IExecAction2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IExecAction2*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IExecAction2*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IExecAction2*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_path(this : IExecAction2*, ppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppath)
+  end
+  def put_path(this : IExecAction2*, path : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.call(this, path)
+  end
+  def get_arguments(this : IExecAction2*, pargument : UInt8**) : HRESULT
+    @lpVtbl.value.get_arguments.call(this, pargument)
+  end
+  def put_arguments(this : IExecAction2*, argument : UInt8*) : HRESULT
+    @lpVtbl.value.put_arguments.call(this, argument)
+  end
+  def get_working_directory(this : IExecAction2*, pworkingdirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_working_directory.call(this, pworkingdirectory)
+  end
+  def put_working_directory(this : IExecAction2*, workingdirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_working_directory.call(this, workingdirectory)
+  end
+  def get_hide_app_window(this : IExecAction2*, phideappwindow : Int16*) : HRESULT
+    @lpVtbl.value.get_hide_app_window.call(this, phideappwindow)
+  end
+  def put_hide_app_window(this : IExecAction2*, hideappwindow : Int16) : HRESULT
+    @lpVtbl.value.put_hide_app_window.call(this, hideappwindow)
+  end
+end
+struct LibWin32::IShowMessageAction
+  def query_interface(this : IShowMessageAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IShowMessageAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IShowMessageAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IShowMessageAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IShowMessageAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IShowMessageAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IShowMessageAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IShowMessageAction*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IShowMessageAction*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IShowMessageAction*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_title(this : IShowMessageAction*, ptitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, ptitle)
+  end
+  def put_title(this : IShowMessageAction*, title : UInt8*) : HRESULT
+    @lpVtbl.value.put_title.call(this, title)
+  end
+  def get_message_body(this : IShowMessageAction*, pmessagebody : UInt8**) : HRESULT
+    @lpVtbl.value.get_message_body.call(this, pmessagebody)
+  end
+  def put_message_body(this : IShowMessageAction*, messagebody : UInt8*) : HRESULT
+    @lpVtbl.value.put_message_body.call(this, messagebody)
+  end
+end
+struct LibWin32::IComHandlerAction
+  def query_interface(this : IComHandlerAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IComHandlerAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IComHandlerAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IComHandlerAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IComHandlerAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IComHandlerAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IComHandlerAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IComHandlerAction*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IComHandlerAction*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IComHandlerAction*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_class_id(this : IComHandlerAction*, pclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclsid)
+  end
+  def put_class_id(this : IComHandlerAction*, clsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_class_id.call(this, clsid)
+  end
+  def get_data(this : IComHandlerAction*, pdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata)
+  end
+  def put_data(this : IComHandlerAction*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
+  end
+end
+struct LibWin32::IEmailAction
+  def query_interface(this : IEmailAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEmailAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEmailAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IEmailAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IEmailAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IEmailAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IEmailAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IEmailAction*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IEmailAction*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_type(this : IEmailAction*, ptype : TASK_ACTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_server(this : IEmailAction*, pserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_server.call(this, pserver)
+  end
+  def put_server(this : IEmailAction*, server : UInt8*) : HRESULT
+    @lpVtbl.value.put_server.call(this, server)
+  end
+  def get_subject(this : IEmailAction*, psubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, psubject)
+  end
+  def put_subject(this : IEmailAction*, subject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.call(this, subject)
+  end
+  def get_to(this : IEmailAction*, pto : UInt8**) : HRESULT
+    @lpVtbl.value.get_to.call(this, pto)
+  end
+  def put_to(this : IEmailAction*, to : UInt8*) : HRESULT
+    @lpVtbl.value.put_to.call(this, to)
+  end
+  def get_cc(this : IEmailAction*, pcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_cc.call(this, pcc)
+  end
+  def put_cc(this : IEmailAction*, cc : UInt8*) : HRESULT
+    @lpVtbl.value.put_cc.call(this, cc)
+  end
+  def get_bcc(this : IEmailAction*, pbcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_bcc.call(this, pbcc)
+  end
+  def put_bcc(this : IEmailAction*, bcc : UInt8*) : HRESULT
+    @lpVtbl.value.put_bcc.call(this, bcc)
+  end
+  def get_reply_to(this : IEmailAction*, preplyto : UInt8**) : HRESULT
+    @lpVtbl.value.get_reply_to.call(this, preplyto)
+  end
+  def put_reply_to(this : IEmailAction*, replyto : UInt8*) : HRESULT
+    @lpVtbl.value.put_reply_to.call(this, replyto)
+  end
+  def get_from(this : IEmailAction*, pfrom : UInt8**) : HRESULT
+    @lpVtbl.value.get_from.call(this, pfrom)
+  end
+  def put_from(this : IEmailAction*, from : UInt8*) : HRESULT
+    @lpVtbl.value.put_from.call(this, from)
+  end
+  def get_header_fields(this : IEmailAction*, ppheaderfields : ITaskNamedValueCollection*) : HRESULT
+    @lpVtbl.value.get_header_fields.call(this, ppheaderfields)
+  end
+  def put_header_fields(this : IEmailAction*, pheaderfields : ITaskNamedValueCollection) : HRESULT
+    @lpVtbl.value.put_header_fields.call(this, pheaderfields)
+  end
+  def get_body(this : IEmailAction*, pbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.call(this, pbody)
+  end
+  def put_body(this : IEmailAction*, body : UInt8*) : HRESULT
+    @lpVtbl.value.put_body.call(this, body)
+  end
+  def get_attachments(this : IEmailAction*, pattachements : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_attachments.call(this, pattachements)
+  end
+  def put_attachments(this : IEmailAction*, pattachements : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_attachments.call(this, pattachements)
+  end
+end
+struct LibWin32::ITriggerCollection
+  def query_interface(this : ITriggerCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITriggerCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITriggerCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITriggerCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITriggerCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITriggerCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITriggerCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ITriggerCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : ITriggerCollection*, index : Int32, pptrigger : ITrigger*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pptrigger)
+  end
+  def get__new_enum(this : ITriggerCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+  def create(this : ITriggerCollection*, type : TASK_TRIGGER_TYPE2, pptrigger : ITrigger*) : HRESULT
+    @lpVtbl.value.create.call(this, type, pptrigger)
+  end
+  def remove(this : ITriggerCollection*, index : VARIANT) : HRESULT
+    @lpVtbl.value.remove.call(this, index)
+  end
+  def clear(this : ITriggerCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IActionCollection
+  def query_interface(this : IActionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IActionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IActionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IActionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IActionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IActionCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : IActionCollection*, index : Int32, ppaction : IAction*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, ppaction)
+  end
+  def get__new_enum(this : IActionCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+  def get_xml_text(this : IActionCollection*, ptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml_text.call(this, ptext)
+  end
+  def put_xml_text(this : IActionCollection*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_xml_text.call(this, text)
+  end
+  def create(this : IActionCollection*, type : TASK_ACTION_TYPE, ppaction : IAction*) : HRESULT
+    @lpVtbl.value.create.call(this, type, ppaction)
+  end
+  def remove(this : IActionCollection*, index : VARIANT) : HRESULT
+    @lpVtbl.value.remove.call(this, index)
+  end
+  def clear(this : IActionCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def get_context(this : IActionCollection*, pcontext : UInt8**) : HRESULT
+    @lpVtbl.value.get_context.call(this, pcontext)
+  end
+  def put_context(this : IActionCollection*, context : UInt8*) : HRESULT
+    @lpVtbl.value.put_context.call(this, context)
+  end
+end
+struct LibWin32::IPrincipal
+  def query_interface(this : IPrincipal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrincipal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrincipal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPrincipal*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPrincipal*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPrincipal*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPrincipal*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IPrincipal*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : IPrincipal*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+  def get_display_name(this : IPrincipal*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pname)
+  end
+  def put_display_name(this : IPrincipal*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.call(this, name)
+  end
+  def get_user_id(this : IPrincipal*, puser : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_id.call(this, puser)
+  end
+  def put_user_id(this : IPrincipal*, user : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_id.call(this, user)
+  end
+  def get_logon_type(this : IPrincipal*, plogon : TASK_LOGON_TYPE*) : HRESULT
+    @lpVtbl.value.get_logon_type.call(this, plogon)
+  end
+  def put_logon_type(this : IPrincipal*, logon : TASK_LOGON_TYPE) : HRESULT
+    @lpVtbl.value.put_logon_type.call(this, logon)
+  end
+  def get_group_id(this : IPrincipal*, pgroup : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_id.call(this, pgroup)
+  end
+  def put_group_id(this : IPrincipal*, group : UInt8*) : HRESULT
+    @lpVtbl.value.put_group_id.call(this, group)
+  end
+  def get_run_level(this : IPrincipal*, prunlevel : TASK_RUNLEVEL_TYPE*) : HRESULT
+    @lpVtbl.value.get_run_level.call(this, prunlevel)
+  end
+  def put_run_level(this : IPrincipal*, runlevel : TASK_RUNLEVEL_TYPE) : HRESULT
+    @lpVtbl.value.put_run_level.call(this, runlevel)
+  end
+end
+struct LibWin32::IPrincipal2
+  def query_interface(this : IPrincipal2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrincipal2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrincipal2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPrincipal2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPrincipal2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPrincipal2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPrincipal2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_process_token_sid_type(this : IPrincipal2*, pprocesstokensidtype : TASK_PROCESSTOKENSID_TYPE*) : HRESULT
+    @lpVtbl.value.get_process_token_sid_type.call(this, pprocesstokensidtype)
+  end
+  def put_process_token_sid_type(this : IPrincipal2*, processtokensidtype : TASK_PROCESSTOKENSID_TYPE) : HRESULT
+    @lpVtbl.value.put_process_token_sid_type.call(this, processtokensidtype)
+  end
+  def get_required_privilege_count(this : IPrincipal2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_required_privilege_count.call(this, pcount)
+  end
+  def get_required_privilege(this : IPrincipal2*, index : Int32, pprivilege : UInt8**) : HRESULT
+    @lpVtbl.value.get_required_privilege.call(this, index, pprivilege)
+  end
+  def add_required_privilege(this : IPrincipal2*, privilege : UInt8*) : HRESULT
+    @lpVtbl.value.add_required_privilege.call(this, privilege)
+  end
+end
+struct LibWin32::IRegistrationInfo
+  def query_interface(this : IRegistrationInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRegistrationInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRegistrationInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRegistrationInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRegistrationInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRegistrationInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRegistrationInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(this : IRegistrationInfo*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pdescription)
+  end
+  def put_description(this : IRegistrationInfo*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def get_author(this : IRegistrationInfo*, pauthor : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.call(this, pauthor)
+  end
+  def put_author(this : IRegistrationInfo*, author : UInt8*) : HRESULT
+    @lpVtbl.value.put_author.call(this, author)
+  end
+  def get_version(this : IRegistrationInfo*, pversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, pversion)
+  end
+  def put_version(this : IRegistrationInfo*, version : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, version)
+  end
+  def get_date(this : IRegistrationInfo*, pdate : UInt8**) : HRESULT
+    @lpVtbl.value.get_date.call(this, pdate)
+  end
+  def put_date(this : IRegistrationInfo*, date : UInt8*) : HRESULT
+    @lpVtbl.value.put_date.call(this, date)
+  end
+  def get_documentation(this : IRegistrationInfo*, pdocumentation : UInt8**) : HRESULT
+    @lpVtbl.value.get_documentation.call(this, pdocumentation)
+  end
+  def put_documentation(this : IRegistrationInfo*, documentation : UInt8*) : HRESULT
+    @lpVtbl.value.put_documentation.call(this, documentation)
+  end
+  def get_xml_text(this : IRegistrationInfo*, ptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml_text.call(this, ptext)
+  end
+  def put_xml_text(this : IRegistrationInfo*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_xml_text.call(this, text)
+  end
+  def get_uri(this : IRegistrationInfo*, puri : UInt8**) : HRESULT
+    @lpVtbl.value.get_uri.call(this, puri)
+  end
+  def put_uri(this : IRegistrationInfo*, uri : UInt8*) : HRESULT
+    @lpVtbl.value.put_uri.call(this, uri)
+  end
+  def get_security_descriptor(this : IRegistrationInfo*, psddl : VARIANT*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.call(this, psddl)
+  end
+  def put_security_descriptor(this : IRegistrationInfo*, sddl : VARIANT) : HRESULT
+    @lpVtbl.value.put_security_descriptor.call(this, sddl)
+  end
+  def get_source(this : IRegistrationInfo*, psource : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.call(this, psource)
+  end
+  def put_source(this : IRegistrationInfo*, source : UInt8*) : HRESULT
+    @lpVtbl.value.put_source.call(this, source)
+  end
+end
+struct LibWin32::ITaskDefinition
+  def query_interface(this : ITaskDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_registration_info(this : ITaskDefinition*, ppregistrationinfo : IRegistrationInfo*) : HRESULT
+    @lpVtbl.value.get_registration_info.call(this, ppregistrationinfo)
+  end
+  def put_registration_info(this : ITaskDefinition*, pregistrationinfo : IRegistrationInfo) : HRESULT
+    @lpVtbl.value.put_registration_info.call(this, pregistrationinfo)
+  end
+  def get_triggers(this : ITaskDefinition*, pptriggers : ITriggerCollection*) : HRESULT
+    @lpVtbl.value.get_triggers.call(this, pptriggers)
+  end
+  def put_triggers(this : ITaskDefinition*, ptriggers : ITriggerCollection) : HRESULT
+    @lpVtbl.value.put_triggers.call(this, ptriggers)
+  end
+  def get_settings(this : ITaskDefinition*, ppsettings : ITaskSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, ppsettings)
+  end
+  def put_settings(this : ITaskDefinition*, psettings : ITaskSettings) : HRESULT
+    @lpVtbl.value.put_settings.call(this, psettings)
+  end
+  def get_data(this : ITaskDefinition*, pdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata)
+  end
+  def put_data(this : ITaskDefinition*, data : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
+  end
+  def get_principal(this : ITaskDefinition*, ppprincipal : IPrincipal*) : HRESULT
+    @lpVtbl.value.get_principal.call(this, ppprincipal)
+  end
+  def put_principal(this : ITaskDefinition*, pprincipal : IPrincipal) : HRESULT
+    @lpVtbl.value.put_principal.call(this, pprincipal)
+  end
+  def get_actions(this : ITaskDefinition*, ppactions : IActionCollection*) : HRESULT
+    @lpVtbl.value.get_actions.call(this, ppactions)
+  end
+  def put_actions(this : ITaskDefinition*, pactions : IActionCollection) : HRESULT
+    @lpVtbl.value.put_actions.call(this, pactions)
+  end
+  def get_xml_text(this : ITaskDefinition*, pxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml_text.call(this, pxml)
+  end
+  def put_xml_text(this : ITaskDefinition*, xml : UInt8*) : HRESULT
+    @lpVtbl.value.put_xml_text.call(this, xml)
+  end
+end
+struct LibWin32::ITaskSettings
+  def query_interface(this : ITaskSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_allow_demand_start(this : ITaskSettings*, pallowdemandstart : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_demand_start.call(this, pallowdemandstart)
+  end
+  def put_allow_demand_start(this : ITaskSettings*, allowdemandstart : Int16) : HRESULT
+    @lpVtbl.value.put_allow_demand_start.call(this, allowdemandstart)
+  end
+  def get_restart_interval(this : ITaskSettings*, prestartinterval : UInt8**) : HRESULT
+    @lpVtbl.value.get_restart_interval.call(this, prestartinterval)
+  end
+  def put_restart_interval(this : ITaskSettings*, restartinterval : UInt8*) : HRESULT
+    @lpVtbl.value.put_restart_interval.call(this, restartinterval)
+  end
+  def get_restart_count(this : ITaskSettings*, prestartcount : Int32*) : HRESULT
+    @lpVtbl.value.get_restart_count.call(this, prestartcount)
+  end
+  def put_restart_count(this : ITaskSettings*, restartcount : Int32) : HRESULT
+    @lpVtbl.value.put_restart_count.call(this, restartcount)
+  end
+  def get_multiple_instances(this : ITaskSettings*, ppolicy : TASK_INSTANCES_POLICY*) : HRESULT
+    @lpVtbl.value.get_multiple_instances.call(this, ppolicy)
+  end
+  def put_multiple_instances(this : ITaskSettings*, policy : TASK_INSTANCES_POLICY) : HRESULT
+    @lpVtbl.value.put_multiple_instances.call(this, policy)
+  end
+  def get_stop_if_going_on_batteries(this : ITaskSettings*, pstopifonbatteries : Int16*) : HRESULT
+    @lpVtbl.value.get_stop_if_going_on_batteries.call(this, pstopifonbatteries)
+  end
+  def put_stop_if_going_on_batteries(this : ITaskSettings*, stopifonbatteries : Int16) : HRESULT
+    @lpVtbl.value.put_stop_if_going_on_batteries.call(this, stopifonbatteries)
+  end
+  def get_disallow_start_if_on_batteries(this : ITaskSettings*, pdisallowstart : Int16*) : HRESULT
+    @lpVtbl.value.get_disallow_start_if_on_batteries.call(this, pdisallowstart)
+  end
+  def put_disallow_start_if_on_batteries(this : ITaskSettings*, disallowstart : Int16) : HRESULT
+    @lpVtbl.value.put_disallow_start_if_on_batteries.call(this, disallowstart)
+  end
+  def get_allow_hard_terminate(this : ITaskSettings*, pallowhardterminate : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_hard_terminate.call(this, pallowhardterminate)
+  end
+  def put_allow_hard_terminate(this : ITaskSettings*, allowhardterminate : Int16) : HRESULT
+    @lpVtbl.value.put_allow_hard_terminate.call(this, allowhardterminate)
+  end
+  def get_start_when_available(this : ITaskSettings*, pstartwhenavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_start_when_available.call(this, pstartwhenavailable)
+  end
+  def put_start_when_available(this : ITaskSettings*, startwhenavailable : Int16) : HRESULT
+    @lpVtbl.value.put_start_when_available.call(this, startwhenavailable)
+  end
+  def get_xml_text(this : ITaskSettings*, ptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml_text.call(this, ptext)
+  end
+  def put_xml_text(this : ITaskSettings*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_xml_text.call(this, text)
+  end
+  def get_run_only_if_network_available(this : ITaskSettings*, prunonlyifnetworkavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_run_only_if_network_available.call(this, prunonlyifnetworkavailable)
+  end
+  def put_run_only_if_network_available(this : ITaskSettings*, runonlyifnetworkavailable : Int16) : HRESULT
+    @lpVtbl.value.put_run_only_if_network_available.call(this, runonlyifnetworkavailable)
+  end
+  def get_execution_time_limit(this : ITaskSettings*, pexecutiontimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, pexecutiontimelimit)
+  end
+  def put_execution_time_limit(this : ITaskSettings*, executiontimelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, executiontimelimit)
+  end
+  def get_enabled(this : ITaskSettings*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ITaskSettings*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delete_expired_task_after(this : ITaskSettings*, pexpirationdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delete_expired_task_after.call(this, pexpirationdelay)
+  end
+  def put_delete_expired_task_after(this : ITaskSettings*, expirationdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delete_expired_task_after.call(this, expirationdelay)
+  end
+  def get_priority(this : ITaskSettings*, ppriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def put_priority(this : ITaskSettings*, priority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, priority)
+  end
+  def get_compatibility(this : ITaskSettings*, pcompatlevel : TASK_COMPATIBILITY*) : HRESULT
+    @lpVtbl.value.get_compatibility.call(this, pcompatlevel)
+  end
+  def put_compatibility(this : ITaskSettings*, compatlevel : TASK_COMPATIBILITY) : HRESULT
+    @lpVtbl.value.put_compatibility.call(this, compatlevel)
+  end
+  def get_hidden(this : ITaskSettings*, phidden : Int16*) : HRESULT
+    @lpVtbl.value.get_hidden.call(this, phidden)
+  end
+  def put_hidden(this : ITaskSettings*, hidden : Int16) : HRESULT
+    @lpVtbl.value.put_hidden.call(this, hidden)
+  end
+  def get_idle_settings(this : ITaskSettings*, ppidlesettings : IIdleSettings*) : HRESULT
+    @lpVtbl.value.get_idle_settings.call(this, ppidlesettings)
+  end
+  def put_idle_settings(this : ITaskSettings*, pidlesettings : IIdleSettings) : HRESULT
+    @lpVtbl.value.put_idle_settings.call(this, pidlesettings)
+  end
+  def get_run_only_if_idle(this : ITaskSettings*, prunonlyifidle : Int16*) : HRESULT
+    @lpVtbl.value.get_run_only_if_idle.call(this, prunonlyifidle)
+  end
+  def put_run_only_if_idle(this : ITaskSettings*, runonlyifidle : Int16) : HRESULT
+    @lpVtbl.value.put_run_only_if_idle.call(this, runonlyifidle)
+  end
+  def get_wake_to_run(this : ITaskSettings*, pwake : Int16*) : HRESULT
+    @lpVtbl.value.get_wake_to_run.call(this, pwake)
+  end
+  def put_wake_to_run(this : ITaskSettings*, wake : Int16) : HRESULT
+    @lpVtbl.value.put_wake_to_run.call(this, wake)
+  end
+  def get_network_settings(this : ITaskSettings*, ppnetworksettings : INetworkSettings*) : HRESULT
+    @lpVtbl.value.get_network_settings.call(this, ppnetworksettings)
+  end
+  def put_network_settings(this : ITaskSettings*, pnetworksettings : INetworkSettings) : HRESULT
+    @lpVtbl.value.put_network_settings.call(this, pnetworksettings)
+  end
+end
+struct LibWin32::ITaskSettings2
+  def query_interface(this : ITaskSettings2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskSettings2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskSettings2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskSettings2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskSettings2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskSettings2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskSettings2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_disallow_start_on_remote_app_session(this : ITaskSettings2*, pdisallowstart : Int16*) : HRESULT
+    @lpVtbl.value.get_disallow_start_on_remote_app_session.call(this, pdisallowstart)
+  end
+  def put_disallow_start_on_remote_app_session(this : ITaskSettings2*, disallowstart : Int16) : HRESULT
+    @lpVtbl.value.put_disallow_start_on_remote_app_session.call(this, disallowstart)
+  end
+  def get_use_unified_scheduling_engine(this : ITaskSettings2*, puseunifiedengine : Int16*) : HRESULT
+    @lpVtbl.value.get_use_unified_scheduling_engine.call(this, puseunifiedengine)
+  end
+  def put_use_unified_scheduling_engine(this : ITaskSettings2*, useunifiedengine : Int16) : HRESULT
+    @lpVtbl.value.put_use_unified_scheduling_engine.call(this, useunifiedengine)
+  end
+end
+struct LibWin32::ITaskSettings3
+  def query_interface(this : ITaskSettings3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskSettings3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskSettings3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskSettings3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskSettings3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskSettings3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskSettings3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_allow_demand_start(this : ITaskSettings3*, pallowdemandstart : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_demand_start.call(this, pallowdemandstart)
+  end
+  def put_allow_demand_start(this : ITaskSettings3*, allowdemandstart : Int16) : HRESULT
+    @lpVtbl.value.put_allow_demand_start.call(this, allowdemandstart)
+  end
+  def get_restart_interval(this : ITaskSettings3*, prestartinterval : UInt8**) : HRESULT
+    @lpVtbl.value.get_restart_interval.call(this, prestartinterval)
+  end
+  def put_restart_interval(this : ITaskSettings3*, restartinterval : UInt8*) : HRESULT
+    @lpVtbl.value.put_restart_interval.call(this, restartinterval)
+  end
+  def get_restart_count(this : ITaskSettings3*, prestartcount : Int32*) : HRESULT
+    @lpVtbl.value.get_restart_count.call(this, prestartcount)
+  end
+  def put_restart_count(this : ITaskSettings3*, restartcount : Int32) : HRESULT
+    @lpVtbl.value.put_restart_count.call(this, restartcount)
+  end
+  def get_multiple_instances(this : ITaskSettings3*, ppolicy : TASK_INSTANCES_POLICY*) : HRESULT
+    @lpVtbl.value.get_multiple_instances.call(this, ppolicy)
+  end
+  def put_multiple_instances(this : ITaskSettings3*, policy : TASK_INSTANCES_POLICY) : HRESULT
+    @lpVtbl.value.put_multiple_instances.call(this, policy)
+  end
+  def get_stop_if_going_on_batteries(this : ITaskSettings3*, pstopifonbatteries : Int16*) : HRESULT
+    @lpVtbl.value.get_stop_if_going_on_batteries.call(this, pstopifonbatteries)
+  end
+  def put_stop_if_going_on_batteries(this : ITaskSettings3*, stopifonbatteries : Int16) : HRESULT
+    @lpVtbl.value.put_stop_if_going_on_batteries.call(this, stopifonbatteries)
+  end
+  def get_disallow_start_if_on_batteries(this : ITaskSettings3*, pdisallowstart : Int16*) : HRESULT
+    @lpVtbl.value.get_disallow_start_if_on_batteries.call(this, pdisallowstart)
+  end
+  def put_disallow_start_if_on_batteries(this : ITaskSettings3*, disallowstart : Int16) : HRESULT
+    @lpVtbl.value.put_disallow_start_if_on_batteries.call(this, disallowstart)
+  end
+  def get_allow_hard_terminate(this : ITaskSettings3*, pallowhardterminate : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_hard_terminate.call(this, pallowhardterminate)
+  end
+  def put_allow_hard_terminate(this : ITaskSettings3*, allowhardterminate : Int16) : HRESULT
+    @lpVtbl.value.put_allow_hard_terminate.call(this, allowhardterminate)
+  end
+  def get_start_when_available(this : ITaskSettings3*, pstartwhenavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_start_when_available.call(this, pstartwhenavailable)
+  end
+  def put_start_when_available(this : ITaskSettings3*, startwhenavailable : Int16) : HRESULT
+    @lpVtbl.value.put_start_when_available.call(this, startwhenavailable)
+  end
+  def get_xml_text(this : ITaskSettings3*, ptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml_text.call(this, ptext)
+  end
+  def put_xml_text(this : ITaskSettings3*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_xml_text.call(this, text)
+  end
+  def get_run_only_if_network_available(this : ITaskSettings3*, prunonlyifnetworkavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_run_only_if_network_available.call(this, prunonlyifnetworkavailable)
+  end
+  def put_run_only_if_network_available(this : ITaskSettings3*, runonlyifnetworkavailable : Int16) : HRESULT
+    @lpVtbl.value.put_run_only_if_network_available.call(this, runonlyifnetworkavailable)
+  end
+  def get_execution_time_limit(this : ITaskSettings3*, pexecutiontimelimit : UInt8**) : HRESULT
+    @lpVtbl.value.get_execution_time_limit.call(this, pexecutiontimelimit)
+  end
+  def put_execution_time_limit(this : ITaskSettings3*, executiontimelimit : UInt8*) : HRESULT
+    @lpVtbl.value.put_execution_time_limit.call(this, executiontimelimit)
+  end
+  def get_enabled(this : ITaskSettings3*, penabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, penabled)
+  end
+  def put_enabled(this : ITaskSettings3*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_delete_expired_task_after(this : ITaskSettings3*, pexpirationdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_delete_expired_task_after.call(this, pexpirationdelay)
+  end
+  def put_delete_expired_task_after(this : ITaskSettings3*, expirationdelay : UInt8*) : HRESULT
+    @lpVtbl.value.put_delete_expired_task_after.call(this, expirationdelay)
+  end
+  def get_priority(this : ITaskSettings3*, ppriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def put_priority(this : ITaskSettings3*, priority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, priority)
+  end
+  def get_compatibility(this : ITaskSettings3*, pcompatlevel : TASK_COMPATIBILITY*) : HRESULT
+    @lpVtbl.value.get_compatibility.call(this, pcompatlevel)
+  end
+  def put_compatibility(this : ITaskSettings3*, compatlevel : TASK_COMPATIBILITY) : HRESULT
+    @lpVtbl.value.put_compatibility.call(this, compatlevel)
+  end
+  def get_hidden(this : ITaskSettings3*, phidden : Int16*) : HRESULT
+    @lpVtbl.value.get_hidden.call(this, phidden)
+  end
+  def put_hidden(this : ITaskSettings3*, hidden : Int16) : HRESULT
+    @lpVtbl.value.put_hidden.call(this, hidden)
+  end
+  def get_idle_settings(this : ITaskSettings3*, ppidlesettings : IIdleSettings*) : HRESULT
+    @lpVtbl.value.get_idle_settings.call(this, ppidlesettings)
+  end
+  def put_idle_settings(this : ITaskSettings3*, pidlesettings : IIdleSettings) : HRESULT
+    @lpVtbl.value.put_idle_settings.call(this, pidlesettings)
+  end
+  def get_run_only_if_idle(this : ITaskSettings3*, prunonlyifidle : Int16*) : HRESULT
+    @lpVtbl.value.get_run_only_if_idle.call(this, prunonlyifidle)
+  end
+  def put_run_only_if_idle(this : ITaskSettings3*, runonlyifidle : Int16) : HRESULT
+    @lpVtbl.value.put_run_only_if_idle.call(this, runonlyifidle)
+  end
+  def get_wake_to_run(this : ITaskSettings3*, pwake : Int16*) : HRESULT
+    @lpVtbl.value.get_wake_to_run.call(this, pwake)
+  end
+  def put_wake_to_run(this : ITaskSettings3*, wake : Int16) : HRESULT
+    @lpVtbl.value.put_wake_to_run.call(this, wake)
+  end
+  def get_network_settings(this : ITaskSettings3*, ppnetworksettings : INetworkSettings*) : HRESULT
+    @lpVtbl.value.get_network_settings.call(this, ppnetworksettings)
+  end
+  def put_network_settings(this : ITaskSettings3*, pnetworksettings : INetworkSettings) : HRESULT
+    @lpVtbl.value.put_network_settings.call(this, pnetworksettings)
+  end
+  def get_disallow_start_on_remote_app_session(this : ITaskSettings3*, pdisallowstart : Int16*) : HRESULT
+    @lpVtbl.value.get_disallow_start_on_remote_app_session.call(this, pdisallowstart)
+  end
+  def put_disallow_start_on_remote_app_session(this : ITaskSettings3*, disallowstart : Int16) : HRESULT
+    @lpVtbl.value.put_disallow_start_on_remote_app_session.call(this, disallowstart)
+  end
+  def get_use_unified_scheduling_engine(this : ITaskSettings3*, puseunifiedengine : Int16*) : HRESULT
+    @lpVtbl.value.get_use_unified_scheduling_engine.call(this, puseunifiedengine)
+  end
+  def put_use_unified_scheduling_engine(this : ITaskSettings3*, useunifiedengine : Int16) : HRESULT
+    @lpVtbl.value.put_use_unified_scheduling_engine.call(this, useunifiedengine)
+  end
+  def get_maintenance_settings(this : ITaskSettings3*, ppmaintenancesettings : IMaintenanceSettings*) : HRESULT
+    @lpVtbl.value.get_maintenance_settings.call(this, ppmaintenancesettings)
+  end
+  def put_maintenance_settings(this : ITaskSettings3*, pmaintenancesettings : IMaintenanceSettings) : HRESULT
+    @lpVtbl.value.put_maintenance_settings.call(this, pmaintenancesettings)
+  end
+  def create_maintenance_settings(this : ITaskSettings3*, ppmaintenancesettings : IMaintenanceSettings*) : HRESULT
+    @lpVtbl.value.create_maintenance_settings.call(this, ppmaintenancesettings)
+  end
+  def get_volatile(this : ITaskSettings3*, pvolatile : Int16*) : HRESULT
+    @lpVtbl.value.get_volatile.call(this, pvolatile)
+  end
+  def put_volatile(this : ITaskSettings3*, volatile : Int16) : HRESULT
+    @lpVtbl.value.put_volatile.call(this, volatile)
+  end
+end
+struct LibWin32::IMaintenanceSettings
+  def query_interface(this : IMaintenanceSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMaintenanceSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMaintenanceSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMaintenanceSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMaintenanceSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMaintenanceSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMaintenanceSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_period(this : IMaintenanceSettings*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_period.call(this, value)
+  end
+  def get_period(this : IMaintenanceSettings*, target : UInt8**) : HRESULT
+    @lpVtbl.value.get_period.call(this, target)
+  end
+  def put_deadline(this : IMaintenanceSettings*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_deadline.call(this, value)
+  end
+  def get_deadline(this : IMaintenanceSettings*, target : UInt8**) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, target)
+  end
+  def put_exclusive(this : IMaintenanceSettings*, value : Int16) : HRESULT
+    @lpVtbl.value.put_exclusive.call(this, value)
+  end
+  def get_exclusive(this : IMaintenanceSettings*, target : Int16*) : HRESULT
+    @lpVtbl.value.get_exclusive.call(this, target)
+  end
+end
+struct LibWin32::IRegisteredTaskCollection
+  def query_interface(this : IRegisteredTaskCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRegisteredTaskCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRegisteredTaskCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRegisteredTaskCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRegisteredTaskCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRegisteredTaskCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRegisteredTaskCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IRegisteredTaskCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_item(this : IRegisteredTaskCollection*, index : VARIANT, ppregisteredtask : IRegisteredTask*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, ppregisteredtask)
+  end
+  def get__new_enum(this : IRegisteredTaskCollection*, ppenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenum)
+  end
+end
+struct LibWin32::ITaskFolder
+  def query_interface(this : ITaskFolder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITaskFolder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITaskFolder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITaskFolder*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITaskFolder*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITaskFolder*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITaskFolder*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ITaskFolder*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_path(this : ITaskFolder*, ppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppath)
+  end
+  def get_folder(this : ITaskFolder*, path : UInt8*, ppfolder : ITaskFolder*) : HRESULT
+    @lpVtbl.value.get_folder.call(this, path, ppfolder)
+  end
+  def get_folders(this : ITaskFolder*, flags : Int32, ppfolders : ITaskFolderCollection*) : HRESULT
+    @lpVtbl.value.get_folders.call(this, flags, ppfolders)
+  end
+  def create_folder(this : ITaskFolder*, subfoldername : UInt8*, sddl : VARIANT, ppfolder : ITaskFolder*) : HRESULT
+    @lpVtbl.value.create_folder.call(this, subfoldername, sddl, ppfolder)
+  end
+  def delete_folder(this : ITaskFolder*, subfoldername : UInt8*, flags : Int32) : HRESULT
+    @lpVtbl.value.delete_folder.call(this, subfoldername, flags)
+  end
+  def get_task(this : ITaskFolder*, path : UInt8*, pptask : IRegisteredTask*) : HRESULT
+    @lpVtbl.value.get_task.call(this, path, pptask)
+  end
+  def get_tasks(this : ITaskFolder*, flags : Int32, pptasks : IRegisteredTaskCollection*) : HRESULT
+    @lpVtbl.value.get_tasks.call(this, flags, pptasks)
+  end
+  def delete_task(this : ITaskFolder*, name : UInt8*, flags : Int32) : HRESULT
+    @lpVtbl.value.delete_task.call(this, name, flags)
+  end
+  def register_task(this : ITaskFolder*, path : UInt8*, xmltext : UInt8*, flags : Int32, userid : VARIANT, password : VARIANT, logontype : TASK_LOGON_TYPE, sddl : VARIANT, pptask : IRegisteredTask*) : HRESULT
+    @lpVtbl.value.register_task.call(this, path, xmltext, flags, userid, password, logontype, sddl, pptask)
+  end
+  def register_task_definition(this : ITaskFolder*, path : UInt8*, pdefinition : ITaskDefinition, flags : Int32, userid : VARIANT, password : VARIANT, logontype : TASK_LOGON_TYPE, sddl : VARIANT, pptask : IRegisteredTask*) : HRESULT
+    @lpVtbl.value.register_task_definition.call(this, path, pdefinition, flags, userid, password, logontype, sddl, pptask)
+  end
+  def get_security_descriptor(this : ITaskFolder*, securityinformation : Int32, psddl : UInt8**) : HRESULT
+    @lpVtbl.value.get_security_descriptor.call(this, securityinformation, psddl)
+  end
+  def set_security_descriptor(this : ITaskFolder*, sddl : UInt8*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_security_descriptor.call(this, sddl, flags)
+  end
+end
+struct LibWin32::IIdleSettings
+  def query_interface(this : IIdleSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIdleSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIdleSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIdleSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIdleSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIdleSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIdleSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_idle_duration(this : IIdleSettings*, pdelay : UInt8**) : HRESULT
+    @lpVtbl.value.get_idle_duration.call(this, pdelay)
+  end
+  def put_idle_duration(this : IIdleSettings*, delay : UInt8*) : HRESULT
+    @lpVtbl.value.put_idle_duration.call(this, delay)
+  end
+  def get_wait_timeout(this : IIdleSettings*, ptimeout : UInt8**) : HRESULT
+    @lpVtbl.value.get_wait_timeout.call(this, ptimeout)
+  end
+  def put_wait_timeout(this : IIdleSettings*, timeout : UInt8*) : HRESULT
+    @lpVtbl.value.put_wait_timeout.call(this, timeout)
+  end
+  def get_stop_on_idle_end(this : IIdleSettings*, pstop : Int16*) : HRESULT
+    @lpVtbl.value.get_stop_on_idle_end.call(this, pstop)
+  end
+  def put_stop_on_idle_end(this : IIdleSettings*, stop : Int16) : HRESULT
+    @lpVtbl.value.put_stop_on_idle_end.call(this, stop)
+  end
+  def get_restart_on_idle(this : IIdleSettings*, prestart : Int16*) : HRESULT
+    @lpVtbl.value.get_restart_on_idle.call(this, prestart)
+  end
+  def put_restart_on_idle(this : IIdleSettings*, restart : Int16) : HRESULT
+    @lpVtbl.value.put_restart_on_idle.call(this, restart)
+  end
+end
+struct LibWin32::INetworkSettings
+  def query_interface(this : INetworkSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetworkSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetworkSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetworkSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetworkSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetworkSettings*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def put_name(this : INetworkSettings*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_id(this : INetworkSettings*, pid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def put_id(this : INetworkSettings*, id : UInt8*) : HRESULT
+    @lpVtbl.value.put_id.call(this, id)
+  end
+end
+struct LibWin32::IRepetitionPattern
+  def query_interface(this : IRepetitionPattern*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRepetitionPattern*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRepetitionPattern*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRepetitionPattern*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRepetitionPattern*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRepetitionPattern*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRepetitionPattern*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_interval(this : IRepetitionPattern*, pinterval : UInt8**) : HRESULT
+    @lpVtbl.value.get_interval.call(this, pinterval)
+  end
+  def put_interval(this : IRepetitionPattern*, interval : UInt8*) : HRESULT
+    @lpVtbl.value.put_interval.call(this, interval)
+  end
+  def get_duration(this : IRepetitionPattern*, pduration : UInt8**) : HRESULT
+    @lpVtbl.value.get_duration.call(this, pduration)
+  end
+  def put_duration(this : IRepetitionPattern*, duration : UInt8*) : HRESULT
+    @lpVtbl.value.put_duration.call(this, duration)
+  end
+  def get_stop_at_duration_end(this : IRepetitionPattern*, pstop : Int16*) : HRESULT
+    @lpVtbl.value.get_stop_at_duration_end.call(this, pstop)
+  end
+  def put_stop_at_duration_end(this : IRepetitionPattern*, stop : Int16) : HRESULT
+    @lpVtbl.value.put_stop_at_duration_end.call(this, stop)
+  end
+end

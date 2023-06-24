@@ -303,3 +303,250 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ISideShowSession
+  def query_interface(this : ISideShowSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_content(this : ISideShowSession*, in_applicationid : Guid*, in_endpointid : Guid*, out_ppicontent : ISideShowContentManager*) : HRESULT
+    @lpVtbl.value.register_content.call(this, in_applicationid, in_endpointid, out_ppicontent)
+  end
+  def register_notifications(this : ISideShowSession*, in_applicationid : Guid*, out_ppinotification : ISideShowNotificationManager*) : HRESULT
+    @lpVtbl.value.register_notifications.call(this, in_applicationid, out_ppinotification)
+  end
+end
+struct LibWin32::ISideShowNotificationManager
+  def query_interface(this : ISideShowNotificationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowNotificationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowNotificationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def show(this : ISideShowNotificationManager*, in_pinotification : ISideShowNotification) : HRESULT
+    @lpVtbl.value.show.call(this, in_pinotification)
+  end
+  def revoke(this : ISideShowNotificationManager*, in_notificationid : UInt32) : HRESULT
+    @lpVtbl.value.revoke.call(this, in_notificationid)
+  end
+  def revoke_all(this : ISideShowNotificationManager*) : HRESULT
+    @lpVtbl.value.revoke_all.call(this)
+  end
+end
+struct LibWin32::ISideShowNotification
+  def query_interface(this : ISideShowNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_notification_id(this : ISideShowNotification*, out_pnotificationid : UInt32*) : HRESULT
+    @lpVtbl.value.get_notification_id.call(this, out_pnotificationid)
+  end
+  def put_notification_id(this : ISideShowNotification*, in_notificationid : UInt32) : HRESULT
+    @lpVtbl.value.put_notification_id.call(this, in_notificationid)
+  end
+  def get_title(this : ISideShowNotification*, out_ppwsztitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title.call(this, out_ppwsztitle)
+  end
+  def put_title(this : ISideShowNotification*, in_pwsztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_title.call(this, in_pwsztitle)
+  end
+  def get_message(this : ISideShowNotification*, out_ppwszmessage : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_message.call(this, out_ppwszmessage)
+  end
+  def put_message(this : ISideShowNotification*, in_pwszmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_message.call(this, in_pwszmessage)
+  end
+  def get_image(this : ISideShowNotification*, out_phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_image.call(this, out_phicon)
+  end
+  def put_image(this : ISideShowNotification*, in_hicon : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_image.call(this, in_hicon)
+  end
+  def get_expiration_time(this : ISideShowNotification*, out_ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_expiration_time.call(this, out_ptime)
+  end
+  def put_expiration_time(this : ISideShowNotification*, in_ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.put_expiration_time.call(this, in_ptime)
+  end
+end
+struct LibWin32::ISideShowContentManager
+  def query_interface(this : ISideShowContentManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowContentManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowContentManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : ISideShowContentManager*, in_picontent : ISideShowContent) : HRESULT
+    @lpVtbl.value.add.call(this, in_picontent)
+  end
+  def remove(this : ISideShowContentManager*, in_contentid : UInt32) : HRESULT
+    @lpVtbl.value.remove.call(this, in_contentid)
+  end
+  def remove_all(this : ISideShowContentManager*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
+  end
+  def set_event_sink(this : ISideShowContentManager*, in_pievents : ISideShowEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.call(this, in_pievents)
+  end
+  def get_device_capabilities(this : ISideShowContentManager*, out_ppcollection : ISideShowCapabilitiesCollection*) : HRESULT
+    @lpVtbl.value.get_device_capabilities.call(this, out_ppcollection)
+  end
+end
+struct LibWin32::ISideShowContent
+  def query_interface(this : ISideShowContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_content(this : ISideShowContent*, in_picapabilities : ISideShowCapabilities, out_pdwsize : UInt32*, out_ppbdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_content.call(this, in_picapabilities, out_pdwsize, out_ppbdata)
+  end
+  def get_content_id(this : ISideShowContent*, out_pcontentid : UInt32*) : HRESULT
+    @lpVtbl.value.get_content_id.call(this, out_pcontentid)
+  end
+  def get_differentiate_content(this : ISideShowContent*, out_pfdifferentiatecontent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_differentiate_content.call(this, out_pfdifferentiatecontent)
+  end
+end
+struct LibWin32::ISideShowEvents
+  def query_interface(this : ISideShowEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def content_missing(this : ISideShowEvents*, in_contentid : UInt32, out_ppicontent : ISideShowContent*) : HRESULT
+    @lpVtbl.value.content_missing.call(this, in_contentid, out_ppicontent)
+  end
+  def application_event(this : ISideShowEvents*, in_picapabilities : ISideShowCapabilities, in_dweventid : UInt32, in_dweventsize : UInt32, in_pbeventdata : UInt8*) : HRESULT
+    @lpVtbl.value.application_event.call(this, in_picapabilities, in_dweventid, in_dweventsize, in_pbeventdata)
+  end
+  def device_added(this : ISideShowEvents*, in_pidevice : ISideShowCapabilities) : HRESULT
+    @lpVtbl.value.device_added.call(this, in_pidevice)
+  end
+  def device_removed(this : ISideShowEvents*, in_pidevice : ISideShowCapabilities) : HRESULT
+    @lpVtbl.value.device_removed.call(this, in_pidevice)
+  end
+end
+struct LibWin32::ISideShowCapabilities
+  def query_interface(this : ISideShowCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capability(this : ISideShowCapabilities*, in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_capability.call(this, in_keycapability, inout_pvalue)
+  end
+end
+struct LibWin32::ISideShowCapabilitiesCollection
+  def query_interface(this : ISideShowCapabilitiesCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowCapabilitiesCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowCapabilitiesCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : ISideShowCapabilitiesCollection*, out_pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, out_pdwcount)
+  end
+  def get_at(this : ISideShowCapabilitiesCollection*, in_dwindex : UInt32, out_ppcapabilities : ISideShowCapabilities*) : HRESULT
+    @lpVtbl.value.get_at.call(this, in_dwindex, out_ppcapabilities)
+  end
+end
+struct LibWin32::ISideShowBulkCapabilities
+  def query_interface(this : ISideShowBulkCapabilities*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowBulkCapabilities*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowBulkCapabilities*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capability(this : ISideShowBulkCapabilities*, in_keycapability : PROPERTYKEY*, inout_pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_capability.call(this, in_keycapability, inout_pvalue)
+  end
+  def get_capabilities(this : ISideShowBulkCapabilities*, in_keycollection : ISideShowKeyCollection, inout_pvalues : ISideShowPropVariantCollection*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, in_keycollection, inout_pvalues)
+  end
+end
+struct LibWin32::ISideShowKeyCollection
+  def query_interface(this : ISideShowKeyCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowKeyCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowKeyCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : ISideShowKeyCollection*, key : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.add.call(this, key)
+  end
+  def clear(this : ISideShowKeyCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def get_at(this : ISideShowKeyCollection*, dwindex : UInt32, pkey : PROPERTYKEY*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pkey)
+  end
+  def get_count(this : ISideShowKeyCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
+  end
+  def remove_at(this : ISideShowKeyCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
+  end
+end
+struct LibWin32::ISideShowPropVariantCollection
+  def query_interface(this : ISideShowPropVariantCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISideShowPropVariantCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISideShowPropVariantCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : ISideShowPropVariantCollection*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add.call(this, pvalue)
+  end
+  def clear(this : ISideShowPropVariantCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def get_at(this : ISideShowPropVariantCollection*, dwindex : UInt32, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_at.call(this, dwindex, pvalue)
+  end
+  def get_count(this : ISideShowPropVariantCollection*, pcelems : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelems)
+  end
+  def remove_at(this : ISideShowPropVariantCollection*, dwindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, dwindex)
+  end
+end

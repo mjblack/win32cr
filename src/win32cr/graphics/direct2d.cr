@@ -5134,10 +5134,10 @@ lib LibWin32
   fun D2D1CreateFactory(factorytype : D2D1_FACTORY_TYPE, riid : Guid*, pfactoryoptions : D2D1_FACTORY_OPTIONS*, ppifactory : Void**) : HRESULT
 
   # Params # angle : Float32 [In],center : D2D_POINT_2F [In],matrix : D2D_MATRIX_3X2_F* [In]
-  fun D2D1MakeRotateMatrix(angle : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*)
+  fun D2D1MakeRotateMatrix(angle : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*) : Void
 
   # Params # anglex : Float32 [In],angley : Float32 [In],center : D2D_POINT_2F [In],matrix : D2D_MATRIX_3X2_F* [In]
-  fun D2D1MakeSkewMatrix(anglex : Float32, angley : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*)
+  fun D2D1MakeSkewMatrix(anglex : Float32, angley : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*) : Void
 
   # Params # matrix : D2D_MATRIX_3X2_F* [In]
   fun D2D1IsMatrixInvertible(matrix : D2D_MATRIX_3X2_F*) : LibC::BOOL
@@ -5155,7 +5155,7 @@ lib LibWin32
   fun D2D1ConvertColorSpace(sourcecolorspace : D2D1_COLOR_SPACE, destinationcolorspace : D2D1_COLOR_SPACE, color : D2D1_COLOR_F*) : D2D1_COLOR_F
 
   # Params # angle : Float32 [In],s : Float32* [In],c : Float32* [In]
-  fun D2D1SinCos(angle : Float32, s : Float32*, c : Float32*)
+  fun D2D1SinCos(angle : Float32, s : Float32*, c : Float32*) : Void
 
   # Params # angle : Float32 [In]
   fun D2D1Tan(angle : Float32) : Float32
@@ -5167,5 +5167,7385 @@ lib LibWin32
   fun D2D1ComputeMaximumScaleFactor(matrix : D2D_MATRIX_3X2_F*) : Float32
 
   # Params # ppoint0 : D2D_POINT_2F* [In],ppoint1 : D2D_POINT_2F* [In],ppoint2 : D2D_POINT_2F* [In],ppoint3 : D2D_POINT_2F* [In],ppoint4 : D2D_POINT_2F* [In],ppoint5 : D2D_POINT_2F* [In],ppoint6 : D2D_POINT_2F* [In],ppoint7 : D2D_POINT_2F* [In],ppoint8 : D2D_POINT_2F* [In],ppoint9 : D2D_POINT_2F* [In],ppoint10 : D2D_POINT_2F* [In],ppoint11 : D2D_POINT_2F* [In],ptensorpoint11 : D2D_POINT_2F* [In],ptensorpoint12 : D2D_POINT_2F* [In],ptensorpoint21 : D2D_POINT_2F* [In],ptensorpoint22 : D2D_POINT_2F* [In]
-  fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(ppoint0 : D2D_POINT_2F*, ppoint1 : D2D_POINT_2F*, ppoint2 : D2D_POINT_2F*, ppoint3 : D2D_POINT_2F*, ppoint4 : D2D_POINT_2F*, ppoint5 : D2D_POINT_2F*, ppoint6 : D2D_POINT_2F*, ppoint7 : D2D_POINT_2F*, ppoint8 : D2D_POINT_2F*, ppoint9 : D2D_POINT_2F*, ppoint10 : D2D_POINT_2F*, ppoint11 : D2D_POINT_2F*, ptensorpoint11 : D2D_POINT_2F*, ptensorpoint12 : D2D_POINT_2F*, ptensorpoint21 : D2D_POINT_2F*, ptensorpoint22 : D2D_POINT_2F*)
+  fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(ppoint0 : D2D_POINT_2F*, ppoint1 : D2D_POINT_2F*, ppoint2 : D2D_POINT_2F*, ppoint3 : D2D_POINT_2F*, ppoint4 : D2D_POINT_2F*, ppoint5 : D2D_POINT_2F*, ppoint6 : D2D_POINT_2F*, ppoint7 : D2D_POINT_2F*, ppoint8 : D2D_POINT_2F*, ppoint9 : D2D_POINT_2F*, ppoint10 : D2D_POINT_2F*, ppoint11 : D2D_POINT_2F*, ptensorpoint11 : D2D_POINT_2F*, ptensorpoint12 : D2D_POINT_2F*, ptensorpoint21 : D2D_POINT_2F*, ptensorpoint22 : D2D_POINT_2F*) : Void
+end
+struct LibWin32::ID2D1Resource
+  def query_interface(this : ID2D1Resource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Resource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Resource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Resource*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+end
+struct LibWin32::ID2D1Image
+  def query_interface(this : ID2D1Image*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Image*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Image*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Image*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+end
+struct LibWin32::ID2D1Bitmap
+  def query_interface(this : ID2D1Bitmap*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Bitmap*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Bitmap*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Bitmap*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_size(this : ID2D1Bitmap*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1Bitmap*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_pixel_format(this : ID2D1Bitmap*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def get_dpi(this : ID2D1Bitmap*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def copy_from_bitmap(this : ID2D1Bitmap*, destpoint : D2D_POINT_2U*, bitmap : ID2D1Bitmap, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_bitmap.call(this, destpoint, bitmap, srcrect)
+  end
+  def copy_from_render_target(this : ID2D1Bitmap*, destpoint : D2D_POINT_2U*, rendertarget : ID2D1RenderTarget, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_render_target.call(this, destpoint, rendertarget, srcrect)
+  end
+  def copy_from_memory(this : ID2D1Bitmap*, dstrect : D2D_RECT_U*, srcdata : Void*, pitch : UInt32) : HRESULT
+    @lpVtbl.value.copy_from_memory.call(this, dstrect, srcdata, pitch)
+  end
+end
+struct LibWin32::ID2D1GradientStopCollection
+  def query_interface(this : ID2D1GradientStopCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GradientStopCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GradientStopCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GradientStopCollection*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_gradient_stop_count(this : ID2D1GradientStopCollection*) : UInt32
+    @lpVtbl.value.get_gradient_stop_count.call(this)
+  end
+  def get_gradient_stops(this : ID2D1GradientStopCollection*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops.call(this, gradientstops, gradientstopscount)
+  end
+  def get_color_interpolation_gamma(this : ID2D1GradientStopCollection*) : D2D1_GAMMA
+    @lpVtbl.value.get_color_interpolation_gamma.call(this)
+  end
+  def get_extend_mode(this : ID2D1GradientStopCollection*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode.call(this)
+  end
+end
+struct LibWin32::ID2D1Brush
+  def query_interface(this : ID2D1Brush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Brush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Brush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Brush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1Brush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1Brush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1Brush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1Brush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+end
+struct LibWin32::ID2D1BitmapBrush
+  def query_interface(this : ID2D1BitmapBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BitmapBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BitmapBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1BitmapBrush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1BitmapBrush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1BitmapBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1BitmapBrush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1BitmapBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_extend_mode_x(this : ID2D1BitmapBrush*, extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.call(this, extendmodex)
+  end
+  def set_extend_mode_y(this : ID2D1BitmapBrush*, extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.call(this, extendmodey)
+  end
+  def set_interpolation_mode(this : ID2D1BitmapBrush*, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_bitmap(this : ID2D1BitmapBrush*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.set_bitmap.call(this, bitmap)
+  end
+  def get_extend_mode_x(this : ID2D1BitmapBrush*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.call(this)
+  end
+  def get_extend_mode_y(this : ID2D1BitmapBrush*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.call(this)
+  end
+  def get_interpolation_mode(this : ID2D1BitmapBrush*) : D2D1_BITMAP_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.call(this)
+  end
+  def get_bitmap(this : ID2D1BitmapBrush*, bitmap : ID2D1Bitmap*) : Void
+    @lpVtbl.value.get_bitmap.call(this, bitmap)
+  end
+end
+struct LibWin32::ID2D1SolidColorBrush
+  def query_interface(this : ID2D1SolidColorBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SolidColorBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SolidColorBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SolidColorBrush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1SolidColorBrush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1SolidColorBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1SolidColorBrush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1SolidColorBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_color(this : ID2D1SolidColorBrush*, color : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.set_color.call(this, color)
+  end
+  def get_color(this : ID2D1SolidColorBrush*) : D2D1_COLOR_F
+    @lpVtbl.value.get_color.call(this)
+  end
+end
+struct LibWin32::ID2D1LinearGradientBrush
+  def query_interface(this : ID2D1LinearGradientBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1LinearGradientBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1LinearGradientBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1LinearGradientBrush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1LinearGradientBrush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1LinearGradientBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1LinearGradientBrush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1LinearGradientBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_start_point(this : ID2D1LinearGradientBrush*, startpoint : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_start_point.call(this, startpoint)
+  end
+  def set_end_point(this : ID2D1LinearGradientBrush*, endpoint : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_end_point.call(this, endpoint)
+  end
+  def get_start_point(this : ID2D1LinearGradientBrush*) : D2D_POINT_2F
+    @lpVtbl.value.get_start_point.call(this)
+  end
+  def get_end_point(this : ID2D1LinearGradientBrush*) : D2D_POINT_2F
+    @lpVtbl.value.get_end_point.call(this)
+  end
+  def get_gradient_stop_collection(this : ID2D1LinearGradientBrush*, gradientstopcollection : ID2D1GradientStopCollection*) : Void
+    @lpVtbl.value.get_gradient_stop_collection.call(this, gradientstopcollection)
+  end
+end
+struct LibWin32::ID2D1RadialGradientBrush
+  def query_interface(this : ID2D1RadialGradientBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1RadialGradientBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1RadialGradientBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1RadialGradientBrush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1RadialGradientBrush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1RadialGradientBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1RadialGradientBrush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1RadialGradientBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_center(this : ID2D1RadialGradientBrush*, center : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_center.call(this, center)
+  end
+  def set_gradient_origin_offset(this : ID2D1RadialGradientBrush*, gradientoriginoffset : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_gradient_origin_offset.call(this, gradientoriginoffset)
+  end
+  def set_radius_x(this : ID2D1RadialGradientBrush*, radiusx : Float32) : Void
+    @lpVtbl.value.set_radius_x.call(this, radiusx)
+  end
+  def set_radius_y(this : ID2D1RadialGradientBrush*, radiusy : Float32) : Void
+    @lpVtbl.value.set_radius_y.call(this, radiusy)
+  end
+  def get_center(this : ID2D1RadialGradientBrush*) : D2D_POINT_2F
+    @lpVtbl.value.get_center.call(this)
+  end
+  def get_gradient_origin_offset(this : ID2D1RadialGradientBrush*) : D2D_POINT_2F
+    @lpVtbl.value.get_gradient_origin_offset.call(this)
+  end
+  def get_radius_x(this : ID2D1RadialGradientBrush*) : Float32
+    @lpVtbl.value.get_radius_x.call(this)
+  end
+  def get_radius_y(this : ID2D1RadialGradientBrush*) : Float32
+    @lpVtbl.value.get_radius_y.call(this)
+  end
+  def get_gradient_stop_collection(this : ID2D1RadialGradientBrush*, gradientstopcollection : ID2D1GradientStopCollection*) : Void
+    @lpVtbl.value.get_gradient_stop_collection.call(this, gradientstopcollection)
+  end
+end
+struct LibWin32::ID2D1StrokeStyle
+  def query_interface(this : ID2D1StrokeStyle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1StrokeStyle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1StrokeStyle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1StrokeStyle*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_start_cap(this : ID2D1StrokeStyle*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_start_cap.call(this)
+  end
+  def get_end_cap(this : ID2D1StrokeStyle*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_end_cap.call(this)
+  end
+  def get_dash_cap(this : ID2D1StrokeStyle*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_dash_cap.call(this)
+  end
+  def get_miter_limit(this : ID2D1StrokeStyle*) : Float32
+    @lpVtbl.value.get_miter_limit.call(this)
+  end
+  def get_line_join(this : ID2D1StrokeStyle*) : D2D1_LINE_JOIN
+    @lpVtbl.value.get_line_join.call(this)
+  end
+  def get_dash_offset(this : ID2D1StrokeStyle*) : Float32
+    @lpVtbl.value.get_dash_offset.call(this)
+  end
+  def get_dash_style(this : ID2D1StrokeStyle*) : D2D1_DASH_STYLE
+    @lpVtbl.value.get_dash_style.call(this)
+  end
+  def get_dashes_count(this : ID2D1StrokeStyle*) : UInt32
+    @lpVtbl.value.get_dashes_count.call(this)
+  end
+  def get_dashes(this : ID2D1StrokeStyle*, dashes : Float32*, dashescount : UInt32) : Void
+    @lpVtbl.value.get_dashes.call(this, dashes, dashescount)
+  end
+end
+struct LibWin32::ID2D1Geometry
+  def query_interface(this : ID2D1Geometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Geometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Geometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Geometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1Geometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1Geometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1Geometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1Geometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1Geometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1Geometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1Geometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1Geometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1Geometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1Geometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1Geometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1Geometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1Geometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+end
+struct LibWin32::ID2D1RectangleGeometry
+  def query_interface(this : ID2D1RectangleGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1RectangleGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1RectangleGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1RectangleGeometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1RectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1RectangleGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1RectangleGeometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1RectangleGeometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1RectangleGeometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1RectangleGeometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1RectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1RectangleGeometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1RectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1RectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1RectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1RectangleGeometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1RectangleGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_rect(this : ID2D1RectangleGeometry*, rect : D2D_RECT_F*) : Void
+    @lpVtbl.value.get_rect.call(this, rect)
+  end
+end
+struct LibWin32::ID2D1RoundedRectangleGeometry
+  def query_interface(this : ID2D1RoundedRectangleGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1RoundedRectangleGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1RoundedRectangleGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1RoundedRectangleGeometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1RoundedRectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1RoundedRectangleGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1RoundedRectangleGeometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1RoundedRectangleGeometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1RoundedRectangleGeometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1RoundedRectangleGeometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1RoundedRectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1RoundedRectangleGeometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1RoundedRectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1RoundedRectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1RoundedRectangleGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1RoundedRectangleGeometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1RoundedRectangleGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_rounded_rect(this : ID2D1RoundedRectangleGeometry*, roundedrect : D2D1_ROUNDED_RECT*) : Void
+    @lpVtbl.value.get_rounded_rect.call(this, roundedrect)
+  end
+end
+struct LibWin32::ID2D1EllipseGeometry
+  def query_interface(this : ID2D1EllipseGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1EllipseGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1EllipseGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1EllipseGeometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1EllipseGeometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1EllipseGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1EllipseGeometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1EllipseGeometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1EllipseGeometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1EllipseGeometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1EllipseGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1EllipseGeometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1EllipseGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1EllipseGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1EllipseGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1EllipseGeometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1EllipseGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_ellipse(this : ID2D1EllipseGeometry*, ellipse : D2D1_ELLIPSE*) : Void
+    @lpVtbl.value.get_ellipse.call(this, ellipse)
+  end
+end
+struct LibWin32::ID2D1GeometryGroup
+  def query_interface(this : ID2D1GeometryGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GeometryGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GeometryGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GeometryGroup*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1GeometryGroup*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1GeometryGroup*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1GeometryGroup*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1GeometryGroup*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1GeometryGroup*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1GeometryGroup*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1GeometryGroup*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1GeometryGroup*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1GeometryGroup*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1GeometryGroup*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1GeometryGroup*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1GeometryGroup*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1GeometryGroup*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_fill_mode(this : ID2D1GeometryGroup*) : D2D1_FILL_MODE
+    @lpVtbl.value.get_fill_mode.call(this)
+  end
+  def get_source_geometry_count(this : ID2D1GeometryGroup*) : UInt32
+    @lpVtbl.value.get_source_geometry_count.call(this)
+  end
+  def get_source_geometries(this : ID2D1GeometryGroup*, geometries : ID2D1Geometry*, geometriescount : UInt32) : Void
+    @lpVtbl.value.get_source_geometries.call(this, geometries, geometriescount)
+  end
+end
+struct LibWin32::ID2D1TransformedGeometry
+  def query_interface(this : ID2D1TransformedGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1TransformedGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1TransformedGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1TransformedGeometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1TransformedGeometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1TransformedGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1TransformedGeometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1TransformedGeometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1TransformedGeometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1TransformedGeometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1TransformedGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1TransformedGeometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1TransformedGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1TransformedGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1TransformedGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1TransformedGeometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1TransformedGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_source_geometry(this : ID2D1TransformedGeometry*, sourcegeometry : ID2D1Geometry*) : Void
+    @lpVtbl.value.get_source_geometry.call(this, sourcegeometry)
+  end
+  def get_transform(this : ID2D1TransformedGeometry*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+end
+struct LibWin32::ID2D1GeometrySink
+  def query_interface(this : ID2D1GeometrySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GeometrySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GeometrySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_fill_mode(this : ID2D1GeometrySink*, fillmode : D2D1_FILL_MODE) : Void
+    @lpVtbl.value.set_fill_mode.call(this, fillmode)
+  end
+  def set_segment_flags(this : ID2D1GeometrySink*, vertexflags : D2D1_PATH_SEGMENT) : Void
+    @lpVtbl.value.set_segment_flags.call(this, vertexflags)
+  end
+  def begin_figure(this : ID2D1GeometrySink*, startpoint : D2D_POINT_2F, figurebegin : D2D1_FIGURE_BEGIN) : Void
+    @lpVtbl.value.begin_figure.call(this, startpoint, figurebegin)
+  end
+  def add_lines(this : ID2D1GeometrySink*, points : D2D_POINT_2F*, pointscount : UInt32) : Void
+    @lpVtbl.value.add_lines.call(this, points, pointscount)
+  end
+  def add_beziers(this : ID2D1GeometrySink*, beziers : D2D1_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_beziers.call(this, beziers, bezierscount)
+  end
+  def end_figure(this : ID2D1GeometrySink*, figureend : D2D1_FIGURE_END) : Void
+    @lpVtbl.value.end_figure.call(this, figureend)
+  end
+  def close(this : ID2D1GeometrySink*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def add_line(this : ID2D1GeometrySink*, point : D2D_POINT_2F) : Void
+    @lpVtbl.value.add_line.call(this, point)
+  end
+  def add_bezier(this : ID2D1GeometrySink*, bezier : D2D1_BEZIER_SEGMENT*) : Void
+    @lpVtbl.value.add_bezier.call(this, bezier)
+  end
+  def add_quadratic_bezier(this : ID2D1GeometrySink*, bezier : D2D1_QUADRATIC_BEZIER_SEGMENT*) : Void
+    @lpVtbl.value.add_quadratic_bezier.call(this, bezier)
+  end
+  def add_quadratic_beziers(this : ID2D1GeometrySink*, beziers : D2D1_QUADRATIC_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_quadratic_beziers.call(this, beziers, bezierscount)
+  end
+  def add_arc(this : ID2D1GeometrySink*, arc : D2D1_ARC_SEGMENT*) : Void
+    @lpVtbl.value.add_arc.call(this, arc)
+  end
+end
+struct LibWin32::ID2D1TessellationSink
+  def query_interface(this : ID2D1TessellationSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1TessellationSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1TessellationSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_triangles(this : ID2D1TessellationSink*, triangles : D2D1_TRIANGLE*, trianglescount : UInt32) : Void
+    @lpVtbl.value.add_triangles.call(this, triangles, trianglescount)
+  end
+  def close(this : ID2D1TessellationSink*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::ID2D1PathGeometry
+  def query_interface(this : ID2D1PathGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1PathGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1PathGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1PathGeometry*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1PathGeometry*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1PathGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1PathGeometry*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1PathGeometry*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1PathGeometry*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1PathGeometry*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1PathGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1PathGeometry*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1PathGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1PathGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1PathGeometry*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1PathGeometry*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1PathGeometry*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def open(this : ID2D1PathGeometry*, geometrysink : ID2D1GeometrySink*) : HRESULT
+    @lpVtbl.value.open.call(this, geometrysink)
+  end
+  def stream(this : ID2D1PathGeometry*, geometrysink : ID2D1GeometrySink) : HRESULT
+    @lpVtbl.value.stream.call(this, geometrysink)
+  end
+  def get_segment_count(this : ID2D1PathGeometry*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.call(this, count)
+  end
+  def get_figure_count(this : ID2D1PathGeometry*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_figure_count.call(this, count)
+  end
+end
+struct LibWin32::ID2D1Mesh
+  def query_interface(this : ID2D1Mesh*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Mesh*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Mesh*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Mesh*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def open(this : ID2D1Mesh*, tessellationsink : ID2D1TessellationSink*) : HRESULT
+    @lpVtbl.value.open.call(this, tessellationsink)
+  end
+end
+struct LibWin32::ID2D1Layer
+  def query_interface(this : ID2D1Layer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Layer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Layer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Layer*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_size(this : ID2D1Layer*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+end
+struct LibWin32::ID2D1DrawingStateBlock
+  def query_interface(this : ID2D1DrawingStateBlock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DrawingStateBlock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DrawingStateBlock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DrawingStateBlock*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_description(this : ID2D1DrawingStateBlock*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.call(this, statedescription)
+  end
+  def set_description(this : ID2D1DrawingStateBlock*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.call(this, statedescription)
+  end
+  def set_text_rendering_params(this : ID2D1DrawingStateBlock*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DrawingStateBlock*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+end
+struct LibWin32::ID2D1RenderTarget
+  def query_interface(this : ID2D1RenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1RenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1RenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1RenderTarget*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1RenderTarget*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1RenderTarget*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1RenderTarget*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1RenderTarget*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1RenderTarget*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1RenderTarget*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1RenderTarget*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1RenderTarget*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1RenderTarget*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1RenderTarget*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1RenderTarget*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1RenderTarget*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1RenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1RenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1RenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1RenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1RenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1RenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1RenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1RenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1RenderTarget*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1RenderTarget*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1RenderTarget*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1RenderTarget*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1RenderTarget*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1RenderTarget*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1RenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1RenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1RenderTarget*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1RenderTarget*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1RenderTarget*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1RenderTarget*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1RenderTarget*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1RenderTarget*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1RenderTarget*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1RenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1RenderTarget*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1RenderTarget*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1RenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1RenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1RenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1RenderTarget*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1RenderTarget*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1RenderTarget*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1RenderTarget*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1RenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1RenderTarget*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1RenderTarget*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1RenderTarget*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1RenderTarget*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1RenderTarget*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1RenderTarget*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1RenderTarget*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+end
+struct LibWin32::ID2D1BitmapRenderTarget
+  def query_interface(this : ID2D1BitmapRenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BitmapRenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BitmapRenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1BitmapRenderTarget*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1BitmapRenderTarget*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1BitmapRenderTarget*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1BitmapRenderTarget*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1BitmapRenderTarget*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1BitmapRenderTarget*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1BitmapRenderTarget*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1BitmapRenderTarget*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1BitmapRenderTarget*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1BitmapRenderTarget*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1BitmapRenderTarget*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1BitmapRenderTarget*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1BitmapRenderTarget*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1BitmapRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1BitmapRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1BitmapRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1BitmapRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1BitmapRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1BitmapRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1BitmapRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1BitmapRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1BitmapRenderTarget*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1BitmapRenderTarget*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1BitmapRenderTarget*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1BitmapRenderTarget*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1BitmapRenderTarget*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1BitmapRenderTarget*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1BitmapRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1BitmapRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1BitmapRenderTarget*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1BitmapRenderTarget*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1BitmapRenderTarget*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1BitmapRenderTarget*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1BitmapRenderTarget*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1BitmapRenderTarget*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1BitmapRenderTarget*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1BitmapRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1BitmapRenderTarget*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1BitmapRenderTarget*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1BitmapRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1BitmapRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1BitmapRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1BitmapRenderTarget*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1BitmapRenderTarget*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1BitmapRenderTarget*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1BitmapRenderTarget*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1BitmapRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1BitmapRenderTarget*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1BitmapRenderTarget*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1BitmapRenderTarget*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1BitmapRenderTarget*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1BitmapRenderTarget*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1BitmapRenderTarget*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1BitmapRenderTarget*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def get_bitmap(this : ID2D1BitmapRenderTarget*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.get_bitmap.call(this, bitmap)
+  end
+end
+struct LibWin32::ID2D1HwndRenderTarget
+  def query_interface(this : ID2D1HwndRenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1HwndRenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1HwndRenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1HwndRenderTarget*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1HwndRenderTarget*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1HwndRenderTarget*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1HwndRenderTarget*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1HwndRenderTarget*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1HwndRenderTarget*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1HwndRenderTarget*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1HwndRenderTarget*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1HwndRenderTarget*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1HwndRenderTarget*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1HwndRenderTarget*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1HwndRenderTarget*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1HwndRenderTarget*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1HwndRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1HwndRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1HwndRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1HwndRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1HwndRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1HwndRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1HwndRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1HwndRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1HwndRenderTarget*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1HwndRenderTarget*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1HwndRenderTarget*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1HwndRenderTarget*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1HwndRenderTarget*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1HwndRenderTarget*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1HwndRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1HwndRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1HwndRenderTarget*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1HwndRenderTarget*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1HwndRenderTarget*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1HwndRenderTarget*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1HwndRenderTarget*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1HwndRenderTarget*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1HwndRenderTarget*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1HwndRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1HwndRenderTarget*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1HwndRenderTarget*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1HwndRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1HwndRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1HwndRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1HwndRenderTarget*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1HwndRenderTarget*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1HwndRenderTarget*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1HwndRenderTarget*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1HwndRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1HwndRenderTarget*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1HwndRenderTarget*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1HwndRenderTarget*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1HwndRenderTarget*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1HwndRenderTarget*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1HwndRenderTarget*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1HwndRenderTarget*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def check_window_state(this : ID2D1HwndRenderTarget*) : D2D1_WINDOW_STATE
+    @lpVtbl.value.check_window_state.call(this)
+  end
+  def resize(this : ID2D1HwndRenderTarget*, pixelsize : D2D_SIZE_U*) : HRESULT
+    @lpVtbl.value.resize.call(this, pixelsize)
+  end
+  def get_hwnd(this : ID2D1HwndRenderTarget*) : HANDLE
+    @lpVtbl.value.get_hwnd.call(this)
+  end
+end
+struct LibWin32::ID2D1GdiInteropRenderTarget
+  def query_interface(this : ID2D1GdiInteropRenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GdiInteropRenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GdiInteropRenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dc(this : ID2D1GdiInteropRenderTarget*, mode : D2D1_DC_INITIALIZE_MODE, hdc : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, mode, hdc)
+  end
+  def release_dc(this : ID2D1GdiInteropRenderTarget*, update : RECT*) : HRESULT
+    @lpVtbl.value.release_dc.call(this, update)
+  end
+end
+struct LibWin32::ID2D1DCRenderTarget
+  def query_interface(this : ID2D1DCRenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DCRenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DCRenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DCRenderTarget*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DCRenderTarget*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DCRenderTarget*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DCRenderTarget*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DCRenderTarget*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DCRenderTarget*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DCRenderTarget*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DCRenderTarget*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DCRenderTarget*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DCRenderTarget*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DCRenderTarget*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DCRenderTarget*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DCRenderTarget*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DCRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DCRenderTarget*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DCRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DCRenderTarget*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DCRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DCRenderTarget*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DCRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DCRenderTarget*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DCRenderTarget*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DCRenderTarget*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DCRenderTarget*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DCRenderTarget*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DCRenderTarget*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DCRenderTarget*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DCRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DCRenderTarget*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DCRenderTarget*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DCRenderTarget*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DCRenderTarget*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DCRenderTarget*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DCRenderTarget*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DCRenderTarget*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DCRenderTarget*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DCRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DCRenderTarget*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DCRenderTarget*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DCRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DCRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DCRenderTarget*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DCRenderTarget*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DCRenderTarget*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DCRenderTarget*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DCRenderTarget*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DCRenderTarget*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DCRenderTarget*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DCRenderTarget*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DCRenderTarget*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DCRenderTarget*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DCRenderTarget*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DCRenderTarget*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DCRenderTarget*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def bind_dc(this : ID2D1DCRenderTarget*, hdc : HDC, psubrect : RECT*) : HRESULT
+    @lpVtbl.value.bind_dc.call(this, hdc, psubrect)
+  end
+end
+struct LibWin32::ID2D1Factory
+  def query_interface(this : ID2D1Factory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+end
+struct LibWin32::ID2D1GdiMetafileSink
+  def query_interface(this : ID2D1GdiMetafileSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GdiMetafileSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GdiMetafileSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def process_record(this : ID2D1GdiMetafileSink*, recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32) : HRESULT
+    @lpVtbl.value.process_record.call(this, recordtype, recorddata, recorddatasize)
+  end
+end
+struct LibWin32::ID2D1GdiMetafile
+  def query_interface(this : ID2D1GdiMetafile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GdiMetafile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GdiMetafile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GdiMetafile*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def stream(this : ID2D1GdiMetafile*, sink : ID2D1GdiMetafileSink) : HRESULT
+    @lpVtbl.value.stream.call(this, sink)
+  end
+  def get_bounds(this : ID2D1GdiMetafile*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, bounds)
+  end
+end
+struct LibWin32::ID2D1CommandSink
+  def query_interface(this : ID2D1CommandSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+end
+struct LibWin32::ID2D1CommandList
+  def query_interface(this : ID2D1CommandList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1CommandList*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def stream(this : ID2D1CommandList*, sink : ID2D1CommandSink) : HRESULT
+    @lpVtbl.value.stream.call(this, sink)
+  end
+  def close(this : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::ID2D1PrintControl
+  def query_interface(this : ID2D1PrintControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1PrintControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1PrintControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_page(this : ID2D1PrintControl*, commandlist : ID2D1CommandList, pagesize : D2D_SIZE_F, pageprintticketstream : IStream, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.add_page.call(this, commandlist, pagesize, pageprintticketstream, tag1, tag2)
+  end
+  def close(this : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::ID2D1ImageBrush
+  def query_interface(this : ID2D1ImageBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ImageBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ImageBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1ImageBrush*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1ImageBrush*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1ImageBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1ImageBrush*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1ImageBrush*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_image(this : ID2D1ImageBrush*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_image.call(this, image)
+  end
+  def set_extend_mode_x(this : ID2D1ImageBrush*, extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.call(this, extendmodex)
+  end
+  def set_extend_mode_y(this : ID2D1ImageBrush*, extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.call(this, extendmodey)
+  end
+  def set_interpolation_mode(this : ID2D1ImageBrush*, interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_source_rectangle(this : ID2D1ImageBrush*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.set_source_rectangle.call(this, sourcerectangle)
+  end
+  def get_image(this : ID2D1ImageBrush*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_image.call(this, image)
+  end
+  def get_extend_mode_x(this : ID2D1ImageBrush*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.call(this)
+  end
+  def get_extend_mode_y(this : ID2D1ImageBrush*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.call(this)
+  end
+  def get_interpolation_mode(this : ID2D1ImageBrush*) : D2D1_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.call(this)
+  end
+  def get_source_rectangle(this : ID2D1ImageBrush*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.get_source_rectangle.call(this, sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1BitmapBrush1
+  def query_interface(this : ID2D1BitmapBrush1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BitmapBrush1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BitmapBrush1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1BitmapBrush1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_opacity(this : ID2D1BitmapBrush1*, opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def set_transform(this : ID2D1BitmapBrush1*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_opacity(this : ID2D1BitmapBrush1*) : Float32
+    @lpVtbl.value.get_opacity.call(this)
+  end
+  def get_transform(this : ID2D1BitmapBrush1*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_extend_mode_x(this : ID2D1BitmapBrush1*, extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.call(this, extendmodex)
+  end
+  def set_extend_mode_y(this : ID2D1BitmapBrush1*, extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.call(this, extendmodey)
+  end
+  def set_interpolation_mode(this : ID2D1BitmapBrush1*, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.call(this, interpolationmode)
+  end
+  def set_bitmap(this : ID2D1BitmapBrush1*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.set_bitmap.call(this, bitmap)
+  end
+  def get_extend_mode_x(this : ID2D1BitmapBrush1*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.call(this)
+  end
+  def get_extend_mode_y(this : ID2D1BitmapBrush1*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.call(this)
+  end
+  def get_interpolation_mode(this : ID2D1BitmapBrush1*) : D2D1_BITMAP_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.call(this)
+  end
+  def get_bitmap(this : ID2D1BitmapBrush1*, bitmap : ID2D1Bitmap*) : Void
+    @lpVtbl.value.get_bitmap.call(this, bitmap)
+  end
+  def set_interpolation_mode1(this : ID2D1BitmapBrush1*, interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode1.call(this, interpolationmode)
+  end
+  def get_interpolation_mode1(this : ID2D1BitmapBrush1*) : D2D1_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode1.call(this)
+  end
+end
+struct LibWin32::ID2D1StrokeStyle1
+  def query_interface(this : ID2D1StrokeStyle1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1StrokeStyle1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1StrokeStyle1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1StrokeStyle1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_start_cap(this : ID2D1StrokeStyle1*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_start_cap.call(this)
+  end
+  def get_end_cap(this : ID2D1StrokeStyle1*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_end_cap.call(this)
+  end
+  def get_dash_cap(this : ID2D1StrokeStyle1*) : D2D1_CAP_STYLE
+    @lpVtbl.value.get_dash_cap.call(this)
+  end
+  def get_miter_limit(this : ID2D1StrokeStyle1*) : Float32
+    @lpVtbl.value.get_miter_limit.call(this)
+  end
+  def get_line_join(this : ID2D1StrokeStyle1*) : D2D1_LINE_JOIN
+    @lpVtbl.value.get_line_join.call(this)
+  end
+  def get_dash_offset(this : ID2D1StrokeStyle1*) : Float32
+    @lpVtbl.value.get_dash_offset.call(this)
+  end
+  def get_dash_style(this : ID2D1StrokeStyle1*) : D2D1_DASH_STYLE
+    @lpVtbl.value.get_dash_style.call(this)
+  end
+  def get_dashes_count(this : ID2D1StrokeStyle1*) : UInt32
+    @lpVtbl.value.get_dashes_count.call(this)
+  end
+  def get_dashes(this : ID2D1StrokeStyle1*, dashes : Float32*, dashescount : UInt32) : Void
+    @lpVtbl.value.get_dashes.call(this, dashes, dashescount)
+  end
+  def get_stroke_transform_type(this : ID2D1StrokeStyle1*) : D2D1_STROKE_TRANSFORM_TYPE
+    @lpVtbl.value.get_stroke_transform_type.call(this)
+  end
+end
+struct LibWin32::ID2D1PathGeometry1
+  def query_interface(this : ID2D1PathGeometry1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1PathGeometry1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1PathGeometry1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1PathGeometry1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_bounds(this : ID2D1PathGeometry1*, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, worldtransform, bounds)
+  end
+  def get_widened_bounds(this : ID2D1PathGeometry1*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(this : ID2D1PathGeometry1*, point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.call(this, point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(this : ID2D1PathGeometry1*, point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.call(this, point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(this : ID2D1PathGeometry1*, inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.call(this, inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(this : ID2D1PathGeometry1*, simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.call(this, simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(this : ID2D1PathGeometry1*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.call(this, worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(this : ID2D1PathGeometry1*, inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.call(this, inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(this : ID2D1PathGeometry1*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.call(this, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(this : ID2D1PathGeometry1*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.call(this, worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(this : ID2D1PathGeometry1*, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.call(this, worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(this : ID2D1PathGeometry1*, length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.call(this, length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(this : ID2D1PathGeometry1*, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.call(this, strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def open(this : ID2D1PathGeometry1*, geometrysink : ID2D1GeometrySink*) : HRESULT
+    @lpVtbl.value.open.call(this, geometrysink)
+  end
+  def stream(this : ID2D1PathGeometry1*, geometrysink : ID2D1GeometrySink) : HRESULT
+    @lpVtbl.value.stream.call(this, geometrysink)
+  end
+  def get_segment_count(this : ID2D1PathGeometry1*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.call(this, count)
+  end
+  def get_figure_count(this : ID2D1PathGeometry1*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_figure_count.call(this, count)
+  end
+  def compute_point_and_segment_at_length(this : ID2D1PathGeometry1*, length : Float32, startsegment : UInt32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, pointdescription : D2D1_POINT_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.compute_point_and_segment_at_length.call(this, length, startsegment, worldtransform, flatteningtolerance, pointdescription)
+  end
+end
+struct LibWin32::ID2D1Properties
+  def query_interface(this : ID2D1Properties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Properties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Properties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_count(this : ID2D1Properties*) : UInt32
+    @lpVtbl.value.get_property_count.call(this)
+  end
+  def get_property_name(this : ID2D1Properties*, index : UInt32, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_property_name.call(this, index, name, namecount)
+  end
+  def get_property_name_length(this : ID2D1Properties*, index : UInt32) : UInt32
+    @lpVtbl.value.get_property_name_length.call(this, index)
+  end
+  def get_type(this : ID2D1Properties*, index : UInt32) : D2D1_PROPERTY_TYPE
+    @lpVtbl.value.get_type.call(this, index)
+  end
+  def get_property_index(this : ID2D1Properties*, name : LibC::LPWSTR) : UInt32
+    @lpVtbl.value.get_property_index.call(this, name)
+  end
+  def set_value_by_name(this : ID2D1Properties*, name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value_by_name.call(this, name, type, data, datasize)
+  end
+  def set_value(this : ID2D1Properties*, index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value.call(this, index, type, data, datasize)
+  end
+  def get_value_by_name(this : ID2D1Properties*, name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value_by_name.call(this, name, type, data, datasize)
+  end
+  def get_value(this : ID2D1Properties*, index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value.call(this, index, type, data, datasize)
+  end
+  def get_value_size(this : ID2D1Properties*, index : UInt32) : UInt32
+    @lpVtbl.value.get_value_size.call(this, index)
+  end
+  def get_sub_properties(this : ID2D1Properties*, index : UInt32, subproperties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_sub_properties.call(this, index, subproperties)
+  end
+end
+struct LibWin32::ID2D1Effect
+  def query_interface(this : ID2D1Effect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Effect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Effect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_count(this : ID2D1Effect*) : UInt32
+    @lpVtbl.value.get_property_count.call(this)
+  end
+  def get_property_name(this : ID2D1Effect*, index : UInt32, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_property_name.call(this, index, name, namecount)
+  end
+  def get_property_name_length(this : ID2D1Effect*, index : UInt32) : UInt32
+    @lpVtbl.value.get_property_name_length.call(this, index)
+  end
+  def get_type(this : ID2D1Effect*, index : UInt32) : D2D1_PROPERTY_TYPE
+    @lpVtbl.value.get_type.call(this, index)
+  end
+  def get_property_index(this : ID2D1Effect*, name : LibC::LPWSTR) : UInt32
+    @lpVtbl.value.get_property_index.call(this, name)
+  end
+  def set_value_by_name(this : ID2D1Effect*, name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value_by_name.call(this, name, type, data, datasize)
+  end
+  def set_value(this : ID2D1Effect*, index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value.call(this, index, type, data, datasize)
+  end
+  def get_value_by_name(this : ID2D1Effect*, name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value_by_name.call(this, name, type, data, datasize)
+  end
+  def get_value(this : ID2D1Effect*, index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value.call(this, index, type, data, datasize)
+  end
+  def get_value_size(this : ID2D1Effect*, index : UInt32) : UInt32
+    @lpVtbl.value.get_value_size.call(this, index)
+  end
+  def get_sub_properties(this : ID2D1Effect*, index : UInt32, subproperties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_sub_properties.call(this, index, subproperties)
+  end
+  def set_input(this : ID2D1Effect*, index : UInt32, input : ID2D1Image, invalidate : LibC::BOOL) : Void
+    @lpVtbl.value.set_input.call(this, index, input, invalidate)
+  end
+  def set_input_count(this : ID2D1Effect*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.set_input_count.call(this, inputcount)
+  end
+  def get_input(this : ID2D1Effect*, index : UInt32, input : ID2D1Image*) : Void
+    @lpVtbl.value.get_input.call(this, index, input)
+  end
+  def get_input_count(this : ID2D1Effect*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def get_output(this : ID2D1Effect*, outputimage : ID2D1Image*) : Void
+    @lpVtbl.value.get_output.call(this, outputimage)
+  end
+end
+struct LibWin32::ID2D1Bitmap1
+  def query_interface(this : ID2D1Bitmap1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Bitmap1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Bitmap1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Bitmap1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_size(this : ID2D1Bitmap1*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1Bitmap1*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_pixel_format(this : ID2D1Bitmap1*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def get_dpi(this : ID2D1Bitmap1*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def copy_from_bitmap(this : ID2D1Bitmap1*, destpoint : D2D_POINT_2U*, bitmap : ID2D1Bitmap, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_bitmap.call(this, destpoint, bitmap, srcrect)
+  end
+  def copy_from_render_target(this : ID2D1Bitmap1*, destpoint : D2D_POINT_2U*, rendertarget : ID2D1RenderTarget, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_render_target.call(this, destpoint, rendertarget, srcrect)
+  end
+  def copy_from_memory(this : ID2D1Bitmap1*, dstrect : D2D_RECT_U*, srcdata : Void*, pitch : UInt32) : HRESULT
+    @lpVtbl.value.copy_from_memory.call(this, dstrect, srcdata, pitch)
+  end
+  def get_color_context(this : ID2D1Bitmap1*, colorcontext : ID2D1ColorContext*) : Void
+    @lpVtbl.value.get_color_context.call(this, colorcontext)
+  end
+  def get_options(this : ID2D1Bitmap1*) : D2D1_BITMAP_OPTIONS
+    @lpVtbl.value.get_options.call(this)
+  end
+  def get_surface(this : ID2D1Bitmap1*, dxgisurface : IDXGISurface*) : HRESULT
+    @lpVtbl.value.get_surface.call(this, dxgisurface)
+  end
+  def map(this : ID2D1Bitmap1*, options : D2D1_MAP_OPTIONS, mappedrect : D2D1_MAPPED_RECT*) : HRESULT
+    @lpVtbl.value.map.call(this, options, mappedrect)
+  end
+  def unmap(this : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.unmap.call(this)
+  end
+end
+struct LibWin32::ID2D1ColorContext
+  def query_interface(this : ID2D1ColorContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ColorContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ColorContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1ColorContext*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_color_space(this : ID2D1ColorContext*) : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_color_space.call(this)
+  end
+  def get_profile_size(this : ID2D1ColorContext*) : UInt32
+    @lpVtbl.value.get_profile_size.call(this)
+  end
+  def get_profile(this : ID2D1ColorContext*, profile : UInt8*, profilesize : UInt32) : HRESULT
+    @lpVtbl.value.get_profile.call(this, profile, profilesize)
+  end
+end
+struct LibWin32::ID2D1GradientStopCollection1
+  def query_interface(this : ID2D1GradientStopCollection1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GradientStopCollection1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GradientStopCollection1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GradientStopCollection1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_gradient_stop_count(this : ID2D1GradientStopCollection1*) : UInt32
+    @lpVtbl.value.get_gradient_stop_count.call(this)
+  end
+  def get_gradient_stops(this : ID2D1GradientStopCollection1*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops.call(this, gradientstops, gradientstopscount)
+  end
+  def get_color_interpolation_gamma(this : ID2D1GradientStopCollection1*) : D2D1_GAMMA
+    @lpVtbl.value.get_color_interpolation_gamma.call(this)
+  end
+  def get_extend_mode(this : ID2D1GradientStopCollection1*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode.call(this)
+  end
+  def get_gradient_stops1(this : ID2D1GradientStopCollection1*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops1.call(this, gradientstops, gradientstopscount)
+  end
+  def get_pre_interpolation_space(this : ID2D1GradientStopCollection1*) : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_pre_interpolation_space.call(this)
+  end
+  def get_post_interpolation_space(this : ID2D1GradientStopCollection1*) : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_post_interpolation_space.call(this)
+  end
+  def get_buffer_precision(this : ID2D1GradientStopCollection1*) : D2D1_BUFFER_PRECISION
+    @lpVtbl.value.get_buffer_precision.call(this)
+  end
+  def get_color_interpolation_mode(this : ID2D1GradientStopCollection1*) : D2D1_COLOR_INTERPOLATION_MODE
+    @lpVtbl.value.get_color_interpolation_mode.call(this)
+  end
+end
+struct LibWin32::ID2D1DrawingStateBlock1
+  def query_interface(this : ID2D1DrawingStateBlock1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DrawingStateBlock1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DrawingStateBlock1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DrawingStateBlock1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_description(this : ID2D1DrawingStateBlock1*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.call(this, statedescription)
+  end
+  def set_description(this : ID2D1DrawingStateBlock1*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.call(this, statedescription)
+  end
+  def set_text_rendering_params(this : ID2D1DrawingStateBlock1*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DrawingStateBlock1*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_description2(this : ID2D1DrawingStateBlock1*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION1*) : Void
+    @lpVtbl.value.get_description2.call(this, statedescription)
+  end
+  def set_description2(this : ID2D1DrawingStateBlock1*, statedescription : D2D1_DRAWING_STATE_DESCRIPTION1*) : Void
+    @lpVtbl.value.set_description2.call(this, statedescription)
+  end
+end
+struct LibWin32::ID2D1DeviceContext
+  def query_interface(this : ID2D1DeviceContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1Device
+  def query_interface(this : ID2D1Device*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+end
+struct LibWin32::ID2D1Factory1
+  def query_interface(this : ID2D1Factory1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory1*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory1*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory1*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory1*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory1*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory1*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory1*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory1*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory1*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory1*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory1*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory1*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory1*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory1*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory1*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory1*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory1*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory1*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory1*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory1*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory1*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory1*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory1*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory1*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+end
+struct LibWin32::ID2D1Multithread
+  def query_interface(this : ID2D1Multithread*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Multithread*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Multithread*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_multithread_protected(this : ID2D1Multithread*) : LibC::BOOL
+    @lpVtbl.value.get_multithread_protected.call(this)
+  end
+  def enter(this : ID2D1Multithread*) : Void
+    @lpVtbl.value.enter.call(this)
+  end
+  def leave(this : ID2D1Multithread*) : Void
+    @lpVtbl.value.leave.call(this)
+  end
+end
+struct LibWin32::ID2D1VertexBuffer
+  def query_interface(this : ID2D1VertexBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1VertexBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1VertexBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def map(this : ID2D1VertexBuffer*, data : UInt8**, buffersize : UInt32) : HRESULT
+    @lpVtbl.value.map.call(this, data, buffersize)
+  end
+  def unmap(this : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.unmap.call(this)
+  end
+end
+struct LibWin32::ID2D1ResourceTexture
+  def query_interface(this : ID2D1ResourceTexture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ResourceTexture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ResourceTexture*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update(this : ID2D1ResourceTexture*, minimumextents : UInt32*, maximimumextents : UInt32*, strides : UInt32*, dimensions : UInt32, data : UInt8*, datacount : UInt32) : HRESULT
+    @lpVtbl.value.update.call(this, minimumextents, maximimumextents, strides, dimensions, data, datacount)
+  end
+end
+struct LibWin32::ID2D1RenderInfo
+  def query_interface(this : ID2D1RenderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1RenderInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1RenderInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input_description(this : ID2D1RenderInfo*, inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.call(this, inputindex, inputdescription)
+  end
+  def set_output_buffer(this : ID2D1RenderInfo*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1RenderInfo*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+  def set_instruction_count_hint(this : ID2D1RenderInfo*, instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.call(this, instructioncount)
+  end
+end
+struct LibWin32::ID2D1DrawInfo
+  def query_interface(this : ID2D1DrawInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DrawInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DrawInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input_description(this : ID2D1DrawInfo*, inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.call(this, inputindex, inputdescription)
+  end
+  def set_output_buffer(this : ID2D1DrawInfo*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1DrawInfo*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+  def set_instruction_count_hint(this : ID2D1DrawInfo*, instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.call(this, instructioncount)
+  end
+  def set_pixel_shader_constant_buffer(this : ID2D1DrawInfo*, buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_buffer.call(this, buffer, buffercount)
+  end
+  def set_resource_texture(this : ID2D1DrawInfo*, textureindex : UInt32, resourcetexture : ID2D1ResourceTexture) : HRESULT
+    @lpVtbl.value.set_resource_texture.call(this, textureindex, resourcetexture)
+  end
+  def set_vertex_shader_constant_buffer(this : ID2D1DrawInfo*, buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_buffer.call(this, buffer, buffercount)
+  end
+  def set_pixel_shader(this : ID2D1DrawInfo*, shaderid : Guid*, pixeloptions : D2D1_PIXEL_OPTIONS) : HRESULT
+    @lpVtbl.value.set_pixel_shader.call(this, shaderid, pixeloptions)
+  end
+  def set_vertex_processing(this : ID2D1DrawInfo*, vertexbuffer : ID2D1VertexBuffer, vertexoptions : D2D1_VERTEX_OPTIONS, blenddescription : D2D1_BLEND_DESCRIPTION*, vertexrange : D2D1_VERTEX_RANGE*, vertexshader : Guid*) : HRESULT
+    @lpVtbl.value.set_vertex_processing.call(this, vertexbuffer, vertexoptions, blenddescription, vertexrange, vertexshader)
+  end
+end
+struct LibWin32::ID2D1ComputeInfo
+  def query_interface(this : ID2D1ComputeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ComputeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ComputeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_input_description(this : ID2D1ComputeInfo*, inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.call(this, inputindex, inputdescription)
+  end
+  def set_output_buffer(this : ID2D1ComputeInfo*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1ComputeInfo*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+  def set_instruction_count_hint(this : ID2D1ComputeInfo*, instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.call(this, instructioncount)
+  end
+  def set_compute_shader_constant_buffer(this : ID2D1ComputeInfo*, buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_compute_shader_constant_buffer.call(this, buffer, buffercount)
+  end
+  def set_compute_shader(this : ID2D1ComputeInfo*, shaderid : Guid*) : HRESULT
+    @lpVtbl.value.set_compute_shader.call(this, shaderid)
+  end
+  def set_resource_texture(this : ID2D1ComputeInfo*, textureindex : UInt32, resourcetexture : ID2D1ResourceTexture) : HRESULT
+    @lpVtbl.value.set_resource_texture.call(this, textureindex, resourcetexture)
+  end
+end
+struct LibWin32::ID2D1TransformNode
+  def query_interface(this : ID2D1TransformNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1TransformNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1TransformNode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1TransformNode*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+end
+struct LibWin32::ID2D1TransformGraph
+  def query_interface(this : ID2D1TransformGraph*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1TransformGraph*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1TransformGraph*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1TransformGraph*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_single_transform_node(this : ID2D1TransformGraph*, node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.set_single_transform_node.call(this, node)
+  end
+  def add_node(this : ID2D1TransformGraph*, node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.add_node.call(this, node)
+  end
+  def remove_node(this : ID2D1TransformGraph*, node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.remove_node.call(this, node)
+  end
+  def set_output_node(this : ID2D1TransformGraph*, node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.set_output_node.call(this, node)
+  end
+  def connect_node(this : ID2D1TransformGraph*, fromnode : ID2D1TransformNode, tonode : ID2D1TransformNode, tonodeinputindex : UInt32) : HRESULT
+    @lpVtbl.value.connect_node.call(this, fromnode, tonode, tonodeinputindex)
+  end
+  def connect_to_effect_input(this : ID2D1TransformGraph*, toeffectinputindex : UInt32, node : ID2D1TransformNode, tonodeinputindex : UInt32) : HRESULT
+    @lpVtbl.value.connect_to_effect_input.call(this, toeffectinputindex, node, tonodeinputindex)
+  end
+  def clear(this : ID2D1TransformGraph*) : Void
+    @lpVtbl.value.clear.call(this)
+  end
+  def set_passthrough_graph(this : ID2D1TransformGraph*, effectinputindex : UInt32) : HRESULT
+    @lpVtbl.value.set_passthrough_graph.call(this, effectinputindex)
+  end
+end
+struct LibWin32::ID2D1Transform
+  def query_interface(this : ID2D1Transform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Transform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Transform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1Transform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def map_output_rect_to_input_rects(this : ID2D1Transform*, outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.call(this, outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(this : ID2D1Transform*, inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.call(this, inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(this : ID2D1Transform*, inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.call(this, inputindex, invalidinputrect, invalidoutputrect)
+  end
+end
+struct LibWin32::ID2D1DrawTransform
+  def query_interface(this : ID2D1DrawTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DrawTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DrawTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1DrawTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def map_output_rect_to_input_rects(this : ID2D1DrawTransform*, outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.call(this, outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(this : ID2D1DrawTransform*, inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.call(this, inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(this : ID2D1DrawTransform*, inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.call(this, inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_draw_info(this : ID2D1DrawTransform*, drawinfo : ID2D1DrawInfo) : HRESULT
+    @lpVtbl.value.set_draw_info.call(this, drawinfo)
+  end
+end
+struct LibWin32::ID2D1ComputeTransform
+  def query_interface(this : ID2D1ComputeTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ComputeTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ComputeTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1ComputeTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def map_output_rect_to_input_rects(this : ID2D1ComputeTransform*, outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.call(this, outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(this : ID2D1ComputeTransform*, inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.call(this, inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(this : ID2D1ComputeTransform*, inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.call(this, inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_compute_info(this : ID2D1ComputeTransform*, computeinfo : ID2D1ComputeInfo) : HRESULT
+    @lpVtbl.value.set_compute_info.call(this, computeinfo)
+  end
+  def calculate_threadgroups(this : ID2D1ComputeTransform*, outputrect : RECT*, dimensionx : UInt32*, dimensiony : UInt32*, dimensionz : UInt32*) : HRESULT
+    @lpVtbl.value.calculate_threadgroups.call(this, outputrect, dimensionx, dimensiony, dimensionz)
+  end
+end
+struct LibWin32::ID2D1AnalysisTransform
+  def query_interface(this : ID2D1AnalysisTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1AnalysisTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1AnalysisTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def process_analysis_results(this : ID2D1AnalysisTransform*, analysisdata : UInt8*, analysisdatacount : UInt32) : HRESULT
+    @lpVtbl.value.process_analysis_results.call(this, analysisdata, analysisdatacount)
+  end
+end
+struct LibWin32::ID2D1SourceTransform
+  def query_interface(this : ID2D1SourceTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SourceTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SourceTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1SourceTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def map_output_rect_to_input_rects(this : ID2D1SourceTransform*, outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.call(this, outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(this : ID2D1SourceTransform*, inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.call(this, inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(this : ID2D1SourceTransform*, inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.call(this, inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_render_info(this : ID2D1SourceTransform*, renderinfo : ID2D1RenderInfo) : HRESULT
+    @lpVtbl.value.set_render_info.call(this, renderinfo)
+  end
+  def draw(this : ID2D1SourceTransform*, target : ID2D1Bitmap1, drawrect : RECT*, targetorigin : D2D_POINT_2U) : HRESULT
+    @lpVtbl.value.draw.call(this, target, drawrect, targetorigin)
+  end
+end
+struct LibWin32::ID2D1ConcreteTransform
+  def query_interface(this : ID2D1ConcreteTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ConcreteTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ConcreteTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1ConcreteTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_output_buffer(this : ID2D1ConcreteTransform*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1ConcreteTransform*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+end
+struct LibWin32::ID2D1BlendTransform
+  def query_interface(this : ID2D1BlendTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BlendTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BlendTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1BlendTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_output_buffer(this : ID2D1BlendTransform*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1BlendTransform*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+  def set_description(this : ID2D1BlendTransform*, description : D2D1_BLEND_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.call(this, description)
+  end
+  def get_description(this : ID2D1BlendTransform*, description : D2D1_BLEND_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.call(this, description)
+  end
+end
+struct LibWin32::ID2D1BorderTransform
+  def query_interface(this : ID2D1BorderTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BorderTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BorderTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1BorderTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_output_buffer(this : ID2D1BorderTransform*, bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.call(this, bufferprecision, channeldepth)
+  end
+  def set_cached(this : ID2D1BorderTransform*, iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.call(this, iscached)
+  end
+  def set_extend_mode_x(this : ID2D1BorderTransform*, extendmode : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.call(this, extendmode)
+  end
+  def set_extend_mode_y(this : ID2D1BorderTransform*, extendmode : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.call(this, extendmode)
+  end
+  def get_extend_mode_x(this : ID2D1BorderTransform*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.call(this)
+  end
+  def get_extend_mode_y(this : ID2D1BorderTransform*) : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.call(this)
+  end
+end
+struct LibWin32::ID2D1OffsetTransform
+  def query_interface(this : ID2D1OffsetTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1OffsetTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1OffsetTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1OffsetTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_offset(this : ID2D1OffsetTransform*, offset : POINT) : Void
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def get_offset(this : ID2D1OffsetTransform*) : POINT
+    @lpVtbl.value.get_offset.call(this)
+  end
+end
+struct LibWin32::ID2D1BoundsAdjustmentTransform
+  def query_interface(this : ID2D1BoundsAdjustmentTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1BoundsAdjustmentTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1BoundsAdjustmentTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_input_count(this : ID2D1BoundsAdjustmentTransform*) : UInt32
+    @lpVtbl.value.get_input_count.call(this)
+  end
+  def set_output_bounds(this : ID2D1BoundsAdjustmentTransform*, outputbounds : RECT*) : Void
+    @lpVtbl.value.set_output_bounds.call(this, outputbounds)
+  end
+  def get_output_bounds(this : ID2D1BoundsAdjustmentTransform*, outputbounds : RECT*) : Void
+    @lpVtbl.value.get_output_bounds.call(this, outputbounds)
+  end
+end
+struct LibWin32::ID2D1EffectImpl
+  def query_interface(this : ID2D1EffectImpl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1EffectImpl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1EffectImpl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : ID2D1EffectImpl*, effectcontext : ID2D1EffectContext, transformgraph : ID2D1TransformGraph) : HRESULT
+    @lpVtbl.value.initialize.call(this, effectcontext, transformgraph)
+  end
+  def prepare_for_render(this : ID2D1EffectImpl*, changetype : D2D1_CHANGE_TYPE) : HRESULT
+    @lpVtbl.value.prepare_for_render.call(this, changetype)
+  end
+  def set_graph(this : ID2D1EffectImpl*, transformgraph : ID2D1TransformGraph) : HRESULT
+    @lpVtbl.value.set_graph.call(this, transformgraph)
+  end
+end
+struct LibWin32::ID2D1EffectContext
+  def query_interface(this : ID2D1EffectContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1EffectContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1EffectContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dpi(this : ID2D1EffectContext*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def create_effect(this : ID2D1EffectContext*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def get_maximum_supported_feature_level(this : ID2D1EffectContext*, featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.call(this, featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(this : ID2D1EffectContext*, effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.call(this, effect, transformnode)
+  end
+  def create_blend_transform(this : ID2D1EffectContext*, numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.call(this, numinputs, blenddescription, transform)
+  end
+  def create_border_transform(this : ID2D1EffectContext*, extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.call(this, extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(this : ID2D1EffectContext*, offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.call(this, offset, transform)
+  end
+  def create_bounds_adjustment_transform(this : ID2D1EffectContext*, outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.call(this, outputrectangle, transform)
+  end
+  def load_pixel_shader(this : ID2D1EffectContext*, shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.call(this, shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(this : ID2D1EffectContext*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(this : ID2D1EffectContext*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(this : ID2D1EffectContext*, shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.call(this, shaderid)
+  end
+  def create_resource_texture(this : ID2D1EffectContext*, resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.call(this, resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(this : ID2D1EffectContext*, resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.call(this, resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(this : ID2D1EffectContext*, vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.call(this, vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(this : ID2D1EffectContext*, resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.call(this, resourceid, buffer)
+  end
+  def create_color_context(this : ID2D1EffectContext*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1EffectContext*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1EffectContext*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(this : ID2D1EffectContext*, feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(this : ID2D1EffectContext*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+end
+struct LibWin32::ID2D1GeometryRealization
+  def query_interface(this : ID2D1GeometryRealization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GeometryRealization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GeometryRealization*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GeometryRealization*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+end
+struct LibWin32::ID2D1DeviceContext1
+  def query_interface(this : ID2D1DeviceContext1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext1*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext1*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext1*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext1*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext1*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext1*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext1*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext1*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext1*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext1*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext1*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext1*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext1*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext1*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext1*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext1*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext1*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext1*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext1*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext1*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext1*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext1*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext1*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext1*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext1*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext1*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext1*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext1*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext1*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext1*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext1*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext1*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext1*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext1*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext1*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext1*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext1*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext1*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext1*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext1*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext1*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext1*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext1*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext1*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext1*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext1*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext1*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext1*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext1*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext1*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext1*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext1*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext1*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext1*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext1*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext1*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext1*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext1*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext1*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext1*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext1*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext1*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext1*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext1*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext1*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext1*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext1*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext1*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext1*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext1*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext1*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext1*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext1*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext1*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext1*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext1*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext1*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext1*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext1*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext1*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext1*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext1*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext1*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext1*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext1*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext1*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext1*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext1*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext1*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext1*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext1*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+end
+struct LibWin32::ID2D1Device1
+  def query_interface(this : ID2D1Device1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device1*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device1*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device1*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device1*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device1*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device1*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device1*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device1*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+end
+struct LibWin32::ID2D1Factory2
+  def query_interface(this : ID2D1Factory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory2*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory2*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory2*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory2*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory2*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory2*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory2*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory2*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory2*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory2*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory2*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory2*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory2*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory2*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory2*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory2*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory2*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory2*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory2*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory2*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory2*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory2*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory2*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory2*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory2*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+end
+struct LibWin32::ID2D1CommandSink1
+  def query_interface(this : ID2D1CommandSink1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink1*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink1*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink1*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink1*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink1*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink1*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink1*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink1*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink1*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink1*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink1*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink1*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink1*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink1*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink1*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink1*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink1*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink1*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink1*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink1*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink1*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink1*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink1*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink1*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink1*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def set_primitive_blend1(this : ID2D1CommandSink1*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.call(this, primitiveblend)
+  end
+end
+struct LibWin32::ID2D1SvgAttribute
+  def query_interface(this : ID2D1SvgAttribute*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgAttribute*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgAttribute*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgAttribute*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_element(this : ID2D1SvgAttribute*, element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.call(this, element)
+  end
+  def clone(this : ID2D1SvgAttribute*, attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.call(this, attribute)
+  end
+end
+struct LibWin32::ID2D1SvgPaint
+  def query_interface(this : ID2D1SvgPaint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgPaint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgPaint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgPaint*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_element(this : ID2D1SvgPaint*, element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.call(this, element)
+  end
+  def clone(this : ID2D1SvgPaint*, attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.call(this, attribute)
+  end
+  def set_paint_type(this : ID2D1SvgPaint*, painttype : D2D1_SVG_PAINT_TYPE) : HRESULT
+    @lpVtbl.value.set_paint_type.call(this, painttype)
+  end
+  def get_paint_type(this : ID2D1SvgPaint*) : D2D1_SVG_PAINT_TYPE
+    @lpVtbl.value.get_paint_type.call(this)
+  end
+  def set_color(this : ID2D1SvgPaint*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.set_color.call(this, color)
+  end
+  def get_color(this : ID2D1SvgPaint*, color : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.get_color.call(this, color)
+  end
+  def set_id(this : ID2D1SvgPaint*, id : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_id.call(this, id)
+  end
+  def get_id(this : ID2D1SvgPaint*, id : Char*, idcount : UInt32) : HRESULT
+    @lpVtbl.value.get_id.call(this, id, idcount)
+  end
+  def get_id_length(this : ID2D1SvgPaint*) : UInt32
+    @lpVtbl.value.get_id_length.call(this)
+  end
+end
+struct LibWin32::ID2D1SvgStrokeDashArray
+  def query_interface(this : ID2D1SvgStrokeDashArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgStrokeDashArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgStrokeDashArray*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgStrokeDashArray*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_element(this : ID2D1SvgStrokeDashArray*, element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.call(this, element)
+  end
+  def clone(this : ID2D1SvgStrokeDashArray*, attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.call(this, attribute)
+  end
+  def remove_dashes_at_end(this : ID2D1SvgStrokeDashArray*, dashescount : UInt32) : HRESULT
+    @lpVtbl.value.remove_dashes_at_end.call(this, dashescount)
+  end
+  def update_dashes(this : ID2D1SvgStrokeDashArray*, dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_dashes.call(this, dashes, dashescount, startindex)
+  end
+  def update_dashes2(this : ID2D1SvgStrokeDashArray*, dashes : Float32*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_dashes2.call(this, dashes, dashescount, startindex)
+  end
+  def get_dashes(this : ID2D1SvgStrokeDashArray*, dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_dashes.call(this, dashes, dashescount, startindex)
+  end
+  def get_dashes2(this : ID2D1SvgStrokeDashArray*, dashes : Float32*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_dashes2.call(this, dashes, dashescount, startindex)
+  end
+  def get_dashes_count(this : ID2D1SvgStrokeDashArray*) : UInt32
+    @lpVtbl.value.get_dashes_count.call(this)
+  end
+end
+struct LibWin32::ID2D1SvgPointCollection
+  def query_interface(this : ID2D1SvgPointCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgPointCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgPointCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgPointCollection*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_element(this : ID2D1SvgPointCollection*, element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.call(this, element)
+  end
+  def clone(this : ID2D1SvgPointCollection*, attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.call(this, attribute)
+  end
+  def remove_points_at_end(this : ID2D1SvgPointCollection*, pointscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_points_at_end.call(this, pointscount)
+  end
+  def update_points(this : ID2D1SvgPointCollection*, points : D2D_POINT_2F*, pointscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_points.call(this, points, pointscount, startindex)
+  end
+  def get_points(this : ID2D1SvgPointCollection*, points : D2D_POINT_2F*, pointscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_points.call(this, points, pointscount, startindex)
+  end
+  def get_points_count(this : ID2D1SvgPointCollection*) : UInt32
+    @lpVtbl.value.get_points_count.call(this)
+  end
+end
+struct LibWin32::ID2D1SvgPathData
+  def query_interface(this : ID2D1SvgPathData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgPathData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgPathData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgPathData*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_element(this : ID2D1SvgPathData*, element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.call(this, element)
+  end
+  def clone(this : ID2D1SvgPathData*, attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.call(this, attribute)
+  end
+  def remove_segment_data_at_end(this : ID2D1SvgPathData*, datacount : UInt32) : HRESULT
+    @lpVtbl.value.remove_segment_data_at_end.call(this, datacount)
+  end
+  def update_segment_data(this : ID2D1SvgPathData*, data : Float32*, datacount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_segment_data.call(this, data, datacount, startindex)
+  end
+  def get_segment_data(this : ID2D1SvgPathData*, data : Float32*, datacount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_segment_data.call(this, data, datacount, startindex)
+  end
+  def get_segment_data_count(this : ID2D1SvgPathData*) : UInt32
+    @lpVtbl.value.get_segment_data_count.call(this)
+  end
+  def remove_commands_at_end(this : ID2D1SvgPathData*, commandscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_commands_at_end.call(this, commandscount)
+  end
+  def update_commands(this : ID2D1SvgPathData*, commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_commands.call(this, commands, commandscount, startindex)
+  end
+  def get_commands(this : ID2D1SvgPathData*, commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_commands.call(this, commands, commandscount, startindex)
+  end
+  def get_commands_count(this : ID2D1SvgPathData*) : UInt32
+    @lpVtbl.value.get_commands_count.call(this)
+  end
+  def create_path_geometry(this : ID2D1SvgPathData*, fillmode : D2D1_FILL_MODE, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, fillmode, pathgeometry)
+  end
+end
+struct LibWin32::ID2D1SvgElement
+  def query_interface(this : ID2D1SvgElement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgElement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgElement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgElement*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_document(this : ID2D1SvgElement*, document : ID2D1SvgDocument*) : Void
+    @lpVtbl.value.get_document.call(this, document)
+  end
+  def get_tag_name(this : ID2D1SvgElement*, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_tag_name.call(this, name, namecount)
+  end
+  def get_tag_name_length(this : ID2D1SvgElement*) : UInt32
+    @lpVtbl.value.get_tag_name_length.call(this)
+  end
+  def is_text_content(this : ID2D1SvgElement*) : LibC::BOOL
+    @lpVtbl.value.is_text_content.call(this)
+  end
+  def get_parent(this : ID2D1SvgElement*, parent : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_parent.call(this, parent)
+  end
+  def has_children(this : ID2D1SvgElement*) : LibC::BOOL
+    @lpVtbl.value.has_children.call(this)
+  end
+  def get_first_child(this : ID2D1SvgElement*, child : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_first_child.call(this, child)
+  end
+  def get_last_child(this : ID2D1SvgElement*, child : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_last_child.call(this, child)
+  end
+  def get_previous_child(this : ID2D1SvgElement*, referencechild : ID2D1SvgElement, previouschild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.get_previous_child.call(this, referencechild, previouschild)
+  end
+  def get_next_child(this : ID2D1SvgElement*, referencechild : ID2D1SvgElement, nextchild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.get_next_child.call(this, referencechild, nextchild)
+  end
+  def insert_child_before(this : ID2D1SvgElement*, newchild : ID2D1SvgElement, referencechild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.insert_child_before.call(this, newchild, referencechild)
+  end
+  def append_child(this : ID2D1SvgElement*, newchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.append_child.call(this, newchild)
+  end
+  def replace_child(this : ID2D1SvgElement*, newchild : ID2D1SvgElement, oldchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.replace_child.call(this, newchild, oldchild)
+  end
+  def remove_child(this : ID2D1SvgElement*, oldchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.remove_child.call(this, oldchild)
+  end
+  def create_child(this : ID2D1SvgElement*, tagname : LibC::LPWSTR, newchild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.create_child.call(this, tagname, newchild)
+  end
+  def is_attribute_specified(this : ID2D1SvgElement*, name : LibC::LPWSTR, inherited : LibC::BOOL*) : LibC::BOOL
+    @lpVtbl.value.is_attribute_specified.call(this, name, inherited)
+  end
+  def get_specified_attribute_count(this : ID2D1SvgElement*) : UInt32
+    @lpVtbl.value.get_specified_attribute_count.call(this)
+  end
+  def get_specified_attribute_name(this : ID2D1SvgElement*, index : UInt32, name : Char*, namecount : UInt32, inherited : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_specified_attribute_name.call(this, index, name, namecount, inherited)
+  end
+  def get_specified_attribute_name_length(this : ID2D1SvgElement*, index : UInt32, namelength : UInt32*, inherited : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_specified_attribute_name_length.call(this, index, namelength, inherited)
+  end
+  def remove_attribute(this : ID2D1SvgElement*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_attribute.call(this, name)
+  end
+  def set_text_value(this : ID2D1SvgElement*, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.set_text_value.call(this, name, namecount)
+  end
+  def get_text_value(this : ID2D1SvgElement*, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_text_value.call(this, name, namecount)
+  end
+  def get_text_value_length(this : ID2D1SvgElement*) : UInt32
+    @lpVtbl.value.get_text_value_length.call(this)
+  end
+  def set_attribute_value(this : ID2D1SvgElement*, name : LibC::LPWSTR, value : ID2D1SvgAttribute) : HRESULT
+    @lpVtbl.value.set_attribute_value.call(this, name, value)
+  end
+  def set_attribute_value2(this : ID2D1SvgElement*, name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_POD_TYPE, value : Void*, valuesizeinbytes : UInt32) : HRESULT
+    @lpVtbl.value.set_attribute_value2.call(this, name, type, value, valuesizeinbytes)
+  end
+  def set_attribute_value3(this : ID2D1SvgElement*, name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_attribute_value3.call(this, name, type, value)
+  end
+  def get_attribute_value(this : ID2D1SvgElement*, name : LibC::LPWSTR, riid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.get_attribute_value.call(this, name, riid, value)
+  end
+  def get_attribute_value2(this : ID2D1SvgElement*, name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_POD_TYPE, value : Void*, valuesizeinbytes : UInt32) : HRESULT
+    @lpVtbl.value.get_attribute_value2.call(this, name, type, value, valuesizeinbytes)
+  end
+  def get_attribute_value3(this : ID2D1SvgElement*, name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, value : Char*, valuecount : UInt32) : HRESULT
+    @lpVtbl.value.get_attribute_value3.call(this, name, type, value, valuecount)
+  end
+  def get_attribute_value_length(this : ID2D1SvgElement*, name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, valuelength : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_value_length.call(this, name, type, valuelength)
+  end
+end
+struct LibWin32::ID2D1SvgDocument
+  def query_interface(this : ID2D1SvgDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgDocument*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_viewport_size(this : ID2D1SvgDocument*, viewportsize : D2D_SIZE_F) : HRESULT
+    @lpVtbl.value.set_viewport_size.call(this, viewportsize)
+  end
+  def get_viewport_size(this : ID2D1SvgDocument*) : D2D_SIZE_F
+    @lpVtbl.value.get_viewport_size.call(this)
+  end
+  def set_root(this : ID2D1SvgDocument*, root : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.set_root.call(this, root)
+  end
+  def get_root(this : ID2D1SvgDocument*, root : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_root.call(this, root)
+  end
+  def find_element_by_id(this : ID2D1SvgDocument*, id : LibC::LPWSTR, svgelement : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.find_element_by_id.call(this, id, svgelement)
+  end
+  def serialize(this : ID2D1SvgDocument*, outputxmlstream : IStream, subtree : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.serialize.call(this, outputxmlstream, subtree)
+  end
+  def deserialize(this : ID2D1SvgDocument*, inputxmlstream : IStream, subtree : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.deserialize.call(this, inputxmlstream, subtree)
+  end
+  def create_paint(this : ID2D1SvgDocument*, painttype : D2D1_SVG_PAINT_TYPE, color : D2D1_COLOR_F*, id : LibC::LPWSTR, paint : ID2D1SvgPaint*) : HRESULT
+    @lpVtbl.value.create_paint.call(this, painttype, color, id, paint)
+  end
+  def create_stroke_dash_array(this : ID2D1SvgDocument*, dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, strokedasharray : ID2D1SvgStrokeDashArray*) : HRESULT
+    @lpVtbl.value.create_stroke_dash_array.call(this, dashes, dashescount, strokedasharray)
+  end
+  def create_point_collection(this : ID2D1SvgDocument*, points : D2D_POINT_2F*, pointscount : UInt32, pointcollection : ID2D1SvgPointCollection*) : HRESULT
+    @lpVtbl.value.create_point_collection.call(this, points, pointscount, pointcollection)
+  end
+  def create_path_data(this : ID2D1SvgDocument*, segmentdata : Float32*, segmentdatacount : UInt32, commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, pathdata : ID2D1SvgPathData*) : HRESULT
+    @lpVtbl.value.create_path_data.call(this, segmentdata, segmentdatacount, commands, commandscount, pathdata)
+  end
+end
+struct LibWin32::ID2D1InkStyle
+  def query_interface(this : ID2D1InkStyle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1InkStyle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1InkStyle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1InkStyle*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_nib_transform(this : ID2D1InkStyle*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_nib_transform.call(this, transform)
+  end
+  def get_nib_transform(this : ID2D1InkStyle*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_nib_transform.call(this, transform)
+  end
+  def set_nib_shape(this : ID2D1InkStyle*, nibshape : D2D1_INK_NIB_SHAPE) : Void
+    @lpVtbl.value.set_nib_shape.call(this, nibshape)
+  end
+  def get_nib_shape(this : ID2D1InkStyle*) : D2D1_INK_NIB_SHAPE
+    @lpVtbl.value.get_nib_shape.call(this)
+  end
+end
+struct LibWin32::ID2D1Ink
+  def query_interface(this : ID2D1Ink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Ink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Ink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Ink*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_start_point(this : ID2D1Ink*, startpoint : D2D1_INK_POINT*) : Void
+    @lpVtbl.value.set_start_point.call(this, startpoint)
+  end
+  def get_start_point(this : ID2D1Ink*) : D2D1_INK_POINT
+    @lpVtbl.value.get_start_point.call(this)
+  end
+  def add_segments(this : ID2D1Ink*, segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.add_segments.call(this, segments, segmentscount)
+  end
+  def remove_segments_at_end(this : ID2D1Ink*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_segments_at_end.call(this, segmentscount)
+  end
+  def set_segments(this : ID2D1Ink*, startsegment : UInt32, segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.set_segments.call(this, startsegment, segments, segmentscount)
+  end
+  def set_segment_at_end(this : ID2D1Ink*, segment : D2D1_INK_BEZIER_SEGMENT*) : HRESULT
+    @lpVtbl.value.set_segment_at_end.call(this, segment)
+  end
+  def get_segment_count(this : ID2D1Ink*) : UInt32
+    @lpVtbl.value.get_segment_count.call(this)
+  end
+  def get_segments(this : ID2D1Ink*, startsegment : UInt32, segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.get_segments.call(this, startsegment, segments, segmentscount)
+  end
+  def stream_as_geometry(this : ID2D1Ink*, inkstyle : ID2D1InkStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.stream_as_geometry.call(this, inkstyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_bounds(this : ID2D1Ink*, inkstyle : ID2D1InkStyle, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, inkstyle, worldtransform, bounds)
+  end
+end
+struct LibWin32::ID2D1GradientMesh
+  def query_interface(this : ID2D1GradientMesh*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GradientMesh*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GradientMesh*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GradientMesh*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_patch_count(this : ID2D1GradientMesh*) : UInt32
+    @lpVtbl.value.get_patch_count.call(this)
+  end
+  def get_patches(this : ID2D1GradientMesh*, startindex : UInt32, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32) : HRESULT
+    @lpVtbl.value.get_patches.call(this, startindex, patches, patchescount)
+  end
+end
+struct LibWin32::ID2D1ImageSource
+  def query_interface(this : ID2D1ImageSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ImageSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ImageSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1ImageSource*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def offer_resources(this : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.offer_resources.call(this)
+  end
+  def try_reclaim_resources(this : ID2D1ImageSource*, resourcesdiscarded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_reclaim_resources.call(this, resourcesdiscarded)
+  end
+end
+struct LibWin32::ID2D1ImageSourceFromWic
+  def query_interface(this : ID2D1ImageSourceFromWic*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ImageSourceFromWic*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ImageSourceFromWic*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1ImageSourceFromWic*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def offer_resources(this : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.offer_resources.call(this)
+  end
+  def try_reclaim_resources(this : ID2D1ImageSourceFromWic*, resourcesdiscarded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_reclaim_resources.call(this, resourcesdiscarded)
+  end
+  def ensure_cached(this : ID2D1ImageSourceFromWic*, rectangletofill : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.ensure_cached.call(this, rectangletofill)
+  end
+  def trim_cache(this : ID2D1ImageSourceFromWic*, rectangletopreserve : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.trim_cache.call(this, rectangletopreserve)
+  end
+  def get_source(this : ID2D1ImageSourceFromWic*, wicbitmapsource : IWICBitmapSource*) : Void
+    @lpVtbl.value.get_source.call(this, wicbitmapsource)
+  end
+end
+struct LibWin32::ID2D1TransformedImageSource
+  def query_interface(this : ID2D1TransformedImageSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1TransformedImageSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1TransformedImageSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1TransformedImageSource*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_source(this : ID2D1TransformedImageSource*, imagesource : ID2D1ImageSource*) : Void
+    @lpVtbl.value.get_source.call(this, imagesource)
+  end
+  def get_properties(this : ID2D1TransformedImageSource*, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*) : Void
+    @lpVtbl.value.get_properties.call(this, properties)
+  end
+end
+struct LibWin32::ID2D1LookupTable3D
+  def query_interface(this : ID2D1LookupTable3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1LookupTable3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1LookupTable3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1LookupTable3D*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+end
+struct LibWin32::ID2D1DeviceContext2
+  def query_interface(this : ID2D1DeviceContext2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext2*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext2*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext2*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext2*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext2*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext2*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext2*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext2*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext2*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext2*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext2*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext2*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext2*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext2*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext2*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext2*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext2*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext2*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext2*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext2*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext2*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext2*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext2*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext2*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext2*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext2*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext2*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext2*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext2*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext2*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext2*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext2*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext2*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext2*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext2*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext2*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext2*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext2*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext2*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext2*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext2*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext2*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext2*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext2*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext2*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext2*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext2*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext2*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext2*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext2*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext2*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext2*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext2*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext2*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext2*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext2*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext2*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext2*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext2*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext2*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext2*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext2*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext2*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext2*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext2*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext2*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext2*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext2*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext2*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext2*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext2*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext2*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext2*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext2*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext2*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext2*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext2*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext2*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext2*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext2*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext2*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext2*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext2*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext2*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext2*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext2*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext2*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext2*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext2*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext2*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext2*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext2*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+  def create_ink(this : ID2D1DeviceContext2*, startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.call(this, startpoint, ink)
+  end
+  def create_ink_style(this : ID2D1DeviceContext2*, inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.call(this, inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(this : ID2D1DeviceContext2*, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.call(this, patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(this : ID2D1DeviceContext2*, wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.call(this, wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(this : ID2D1DeviceContext2*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(this : ID2D1DeviceContext2*, surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.call(this, surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(this : ID2D1DeviceContext2*, gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.call(this, gradientmesh, pbounds)
+  end
+  def draw_ink(this : ID2D1DeviceContext2*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1DeviceContext2*, gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1DeviceContext2*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(this : ID2D1DeviceContext2*, imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.call(this, imagesource, properties, transformedimagesource)
+  end
+end
+struct LibWin32::ID2D1Device2
+  def query_interface(this : ID2D1Device2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device2*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device2*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device2*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device2*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device2*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device2*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device2*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device2*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device2*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+  def create_device_context3(this : ID2D1Device2*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.call(this, options, devicecontext2)
+  end
+  def flush_device_contexts(this : ID2D1Device2*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.call(this, bitmap)
+  end
+  def get_dxgi_device(this : ID2D1Device2*, dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.call(this, dxgidevice)
+  end
+end
+struct LibWin32::ID2D1Factory3
+  def query_interface(this : ID2D1Factory3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory3*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory3*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory3*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory3*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory3*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory3*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory3*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory3*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory3*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory3*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory3*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory3*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory3*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory3*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory3*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory3*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory3*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory3*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory3*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory3*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory3*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory3*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory3*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory3*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory3*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+  def create_device3(this : ID2D1Factory3*, dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.call(this, dxgidevice, d2ddevice2)
+  end
+end
+struct LibWin32::ID2D1CommandSink2
+  def query_interface(this : ID2D1CommandSink2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink2*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink2*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink2*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink2*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink2*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink2*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink2*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink2*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink2*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink2*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink2*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink2*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink2*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink2*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink2*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink2*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink2*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink2*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink2*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink2*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink2*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink2*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink2*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink2*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink2*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def set_primitive_blend1(this : ID2D1CommandSink2*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.call(this, primitiveblend)
+  end
+  def draw_ink(this : ID2D1CommandSink2*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1CommandSink2*, gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1CommandSink2*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1GdiMetafile1
+  def query_interface(this : ID2D1GdiMetafile1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GdiMetafile1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GdiMetafile1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1GdiMetafile1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def stream(this : ID2D1GdiMetafile1*, sink : ID2D1GdiMetafileSink) : HRESULT
+    @lpVtbl.value.stream.call(this, sink)
+  end
+  def get_bounds(this : ID2D1GdiMetafile1*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.call(this, bounds)
+  end
+  def get_dpi(this : ID2D1GdiMetafile1*, dpix : Float32*, dpiy : Float32*) : HRESULT
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_source_bounds(this : ID2D1GdiMetafile1*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_source_bounds.call(this, bounds)
+  end
+end
+struct LibWin32::ID2D1GdiMetafileSink1
+  def query_interface(this : ID2D1GdiMetafileSink1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1GdiMetafileSink1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1GdiMetafileSink1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def process_record(this : ID2D1GdiMetafileSink1*, recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32) : HRESULT
+    @lpVtbl.value.process_record.call(this, recordtype, recorddata, recorddatasize)
+  end
+  def process_record2(this : ID2D1GdiMetafileSink1*, recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.process_record2.call(this, recordtype, recorddata, recorddatasize, flags)
+  end
+end
+struct LibWin32::ID2D1SpriteBatch
+  def query_interface(this : ID2D1SpriteBatch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SpriteBatch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SpriteBatch*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SpriteBatch*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def add_sprites(this : ID2D1SpriteBatch*, spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*, destinationrectanglesstride : UInt32, sourcerectanglesstride : UInt32, colorsstride : UInt32, transformsstride : UInt32) : HRESULT
+    @lpVtbl.value.add_sprites.call(this, spritecount, destinationrectangles, sourcerectangles, colors, transforms, destinationrectanglesstride, sourcerectanglesstride, colorsstride, transformsstride)
+  end
+  def set_sprites(this : ID2D1SpriteBatch*, startindex : UInt32, spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*, destinationrectanglesstride : UInt32, sourcerectanglesstride : UInt32, colorsstride : UInt32, transformsstride : UInt32) : HRESULT
+    @lpVtbl.value.set_sprites.call(this, startindex, spritecount, destinationrectangles, sourcerectangles, colors, transforms, destinationrectanglesstride, sourcerectanglesstride, colorsstride, transformsstride)
+  end
+  def get_sprites(this : ID2D1SpriteBatch*, startindex : UInt32, spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.get_sprites.call(this, startindex, spritecount, destinationrectangles, sourcerectangles, colors, transforms)
+  end
+  def get_sprite_count(this : ID2D1SpriteBatch*) : UInt32
+    @lpVtbl.value.get_sprite_count.call(this)
+  end
+  def clear(this : ID2D1SpriteBatch*) : Void
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::ID2D1DeviceContext3
+  def query_interface(this : ID2D1DeviceContext3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext3*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext3*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext3*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext3*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext3*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext3*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext3*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext3*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext3*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext3*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext3*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext3*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext3*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext3*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext3*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext3*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext3*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext3*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext3*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext3*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext3*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext3*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext3*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext3*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext3*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext3*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext3*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext3*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext3*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext3*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext3*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext3*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext3*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext3*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext3*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext3*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext3*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext3*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext3*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext3*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext3*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext3*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext3*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext3*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext3*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext3*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext3*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext3*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext3*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext3*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext3*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext3*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext3*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext3*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext3*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext3*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext3*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext3*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext3*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext3*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext3*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext3*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext3*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext3*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext3*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext3*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext3*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext3*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext3*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext3*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext3*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext3*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext3*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext3*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext3*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext3*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext3*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext3*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext3*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext3*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext3*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext3*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext3*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext3*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext3*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext3*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext3*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext3*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext3*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext3*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext3*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext3*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+  def create_ink(this : ID2D1DeviceContext3*, startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.call(this, startpoint, ink)
+  end
+  def create_ink_style(this : ID2D1DeviceContext3*, inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.call(this, inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(this : ID2D1DeviceContext3*, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.call(this, patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(this : ID2D1DeviceContext3*, wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.call(this, wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(this : ID2D1DeviceContext3*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(this : ID2D1DeviceContext3*, surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.call(this, surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(this : ID2D1DeviceContext3*, gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.call(this, gradientmesh, pbounds)
+  end
+  def draw_ink(this : ID2D1DeviceContext3*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1DeviceContext3*, gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1DeviceContext3*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(this : ID2D1DeviceContext3*, imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.call(this, imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(this : ID2D1DeviceContext3*, spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.call(this, spritebatch)
+  end
+  def draw_sprite_batch(this : ID2D1DeviceContext3*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+end
+struct LibWin32::ID2D1Device3
+  def query_interface(this : ID2D1Device3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device3*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device3*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device3*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device3*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device3*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device3*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device3*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device3*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device3*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+  def create_device_context3(this : ID2D1Device3*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.call(this, options, devicecontext2)
+  end
+  def flush_device_contexts(this : ID2D1Device3*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.call(this, bitmap)
+  end
+  def get_dxgi_device(this : ID2D1Device3*, dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.call(this, dxgidevice)
+  end
+  def create_device_context4(this : ID2D1Device3*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.call(this, options, devicecontext3)
+  end
+end
+struct LibWin32::ID2D1Factory4
+  def query_interface(this : ID2D1Factory4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory4*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory4*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory4*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory4*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory4*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory4*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory4*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory4*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory4*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory4*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory4*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory4*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory4*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory4*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory4*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory4*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory4*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory4*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory4*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory4*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory4*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory4*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory4*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory4*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory4*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+  def create_device3(this : ID2D1Factory4*, dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.call(this, dxgidevice, d2ddevice2)
+  end
+  def create_device4(this : ID2D1Factory4*, dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.call(this, dxgidevice, d2ddevice3)
+  end
+end
+struct LibWin32::ID2D1CommandSink3
+  def query_interface(this : ID2D1CommandSink3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink3*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink3*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink3*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink3*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink3*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink3*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink3*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink3*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink3*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink3*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink3*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink3*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink3*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink3*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink3*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink3*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink3*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink3*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink3*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink3*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink3*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink3*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink3*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink3*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink3*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def set_primitive_blend1(this : ID2D1CommandSink3*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.call(this, primitiveblend)
+  end
+  def draw_ink(this : ID2D1CommandSink3*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1CommandSink3*, gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1CommandSink3*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(this : ID2D1CommandSink3*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+end
+struct LibWin32::ID2D1SvgGlyphStyle
+  def query_interface(this : ID2D1SvgGlyphStyle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SvgGlyphStyle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SvgGlyphStyle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1SvgGlyphStyle*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def set_fill(this : ID2D1SvgGlyphStyle*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.set_fill.call(this, brush)
+  end
+  def get_fill(this : ID2D1SvgGlyphStyle*, brush : ID2D1Brush*) : Void
+    @lpVtbl.value.get_fill.call(this, brush)
+  end
+  def set_stroke(this : ID2D1SvgGlyphStyle*, brush : ID2D1Brush, strokewidth : Float32, dashes : Float32*, dashescount : UInt32, dashoffset : Float32) : HRESULT
+    @lpVtbl.value.set_stroke.call(this, brush, strokewidth, dashes, dashescount, dashoffset)
+  end
+  def get_stroke_dashes_count(this : ID2D1SvgGlyphStyle*) : UInt32
+    @lpVtbl.value.get_stroke_dashes_count.call(this)
+  end
+  def get_stroke(this : ID2D1SvgGlyphStyle*, brush : ID2D1Brush*, strokewidth : Float32*, dashes : Float32*, dashescount : UInt32, dashoffset : Float32*) : Void
+    @lpVtbl.value.get_stroke.call(this, brush, strokewidth, dashes, dashescount, dashoffset)
+  end
+end
+struct LibWin32::ID2D1DeviceContext4
+  def query_interface(this : ID2D1DeviceContext4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext4*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext4*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext4*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext4*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext4*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext4*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext4*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext4*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext4*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext4*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext4*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext4*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext4*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext4*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext4*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext4*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext4*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext4*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext4*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext4*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext4*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext4*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext4*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext4*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext4*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext4*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext4*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext4*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext4*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext4*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext4*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext4*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext4*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext4*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext4*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext4*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext4*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext4*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext4*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext4*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext4*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext4*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext4*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext4*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext4*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext4*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext4*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext4*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext4*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext4*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext4*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext4*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext4*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext4*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext4*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext4*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext4*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext4*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext4*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext4*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext4*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext4*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext4*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext4*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext4*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext4*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext4*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext4*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext4*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext4*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext4*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext4*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext4*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext4*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext4*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext4*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext4*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext4*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext4*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext4*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext4*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext4*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext4*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext4*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext4*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext4*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext4*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext4*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext4*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+  def create_ink(this : ID2D1DeviceContext4*, startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.call(this, startpoint, ink)
+  end
+  def create_ink_style(this : ID2D1DeviceContext4*, inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.call(this, inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(this : ID2D1DeviceContext4*, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.call(this, patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(this : ID2D1DeviceContext4*, wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.call(this, wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(this : ID2D1DeviceContext4*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(this : ID2D1DeviceContext4*, surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.call(this, surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(this : ID2D1DeviceContext4*, gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.call(this, gradientmesh, pbounds)
+  end
+  def draw_ink(this : ID2D1DeviceContext4*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1DeviceContext4*, gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1DeviceContext4*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(this : ID2D1DeviceContext4*, imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.call(this, imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(this : ID2D1DeviceContext4*, spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.call(this, spritebatch)
+  end
+  def draw_sprite_batch(this : ID2D1DeviceContext4*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(this : ID2D1DeviceContext4*, svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.call(this, svgglyphstyle)
+  end
+  def draw_text2(this : ID2D1DeviceContext4*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(this : ID2D1DeviceContext4*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.call(this, origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(this : ID2D1DeviceContext4*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.call(this, glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(this : ID2D1DeviceContext4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.call(this, baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(this : ID2D1DeviceContext4*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.call(this, glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(this : ID2D1DeviceContext4*, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.call(this, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+end
+struct LibWin32::ID2D1Device4
+  def query_interface(this : ID2D1Device4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device4*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device4*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device4*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device4*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device4*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device4*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device4*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device4*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device4*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+  def create_device_context3(this : ID2D1Device4*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.call(this, options, devicecontext2)
+  end
+  def flush_device_contexts(this : ID2D1Device4*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.call(this, bitmap)
+  end
+  def get_dxgi_device(this : ID2D1Device4*, dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.call(this, dxgidevice)
+  end
+  def create_device_context4(this : ID2D1Device4*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.call(this, options, devicecontext3)
+  end
+  def create_device_context5(this : ID2D1Device4*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.call(this, options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(this : ID2D1Device4*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory(this : ID2D1Device4*) : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.call(this)
+  end
+end
+struct LibWin32::ID2D1Factory5
+  def query_interface(this : ID2D1Factory5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory5*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory5*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory5*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory5*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory5*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory5*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory5*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory5*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory5*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory5*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory5*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory5*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory5*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory5*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory5*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory5*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory5*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory5*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory5*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory5*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory5*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory5*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory5*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory5*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory5*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+  def create_device3(this : ID2D1Factory5*, dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.call(this, dxgidevice, d2ddevice2)
+  end
+  def create_device4(this : ID2D1Factory5*, dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.call(this, dxgidevice, d2ddevice3)
+  end
+  def create_device5(this : ID2D1Factory5*, dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.call(this, dxgidevice, d2ddevice4)
+  end
+end
+struct LibWin32::ID2D1CommandSink4
+  def query_interface(this : ID2D1CommandSink4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink4*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink4*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink4*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink4*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink4*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink4*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink4*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink4*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink4*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink4*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink4*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink4*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink4*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink4*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink4*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink4*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink4*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink4*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink4*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink4*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink4*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink4*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink4*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink4*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def set_primitive_blend1(this : ID2D1CommandSink4*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.call(this, primitiveblend)
+  end
+  def draw_ink(this : ID2D1CommandSink4*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1CommandSink4*, gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1CommandSink4*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(this : ID2D1CommandSink4*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def set_primitive_blend2(this : ID2D1CommandSink4*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend2.call(this, primitiveblend)
+  end
+end
+struct LibWin32::ID2D1ColorContext1
+  def query_interface(this : ID2D1ColorContext1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1ColorContext1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1ColorContext1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1ColorContext1*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def get_color_space(this : ID2D1ColorContext1*) : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_color_space.call(this)
+  end
+  def get_profile_size(this : ID2D1ColorContext1*) : UInt32
+    @lpVtbl.value.get_profile_size.call(this)
+  end
+  def get_profile(this : ID2D1ColorContext1*, profile : UInt8*, profilesize : UInt32) : HRESULT
+    @lpVtbl.value.get_profile.call(this, profile, profilesize)
+  end
+  def get_color_context_type(this : ID2D1ColorContext1*) : D2D1_COLOR_CONTEXT_TYPE
+    @lpVtbl.value.get_color_context_type.call(this)
+  end
+  def get_dxgi_color_space(this : ID2D1ColorContext1*) : DXGI_COLOR_SPACE_TYPE
+    @lpVtbl.value.get_dxgi_color_space.call(this)
+  end
+  def get_simple_color_profile(this : ID2D1ColorContext1*, simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*) : HRESULT
+    @lpVtbl.value.get_simple_color_profile.call(this, simpleprofile)
+  end
+end
+struct LibWin32::ID2D1DeviceContext5
+  def query_interface(this : ID2D1DeviceContext5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext5*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext5*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext5*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext5*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext5*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext5*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext5*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext5*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext5*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext5*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext5*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext5*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext5*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext5*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext5*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext5*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext5*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext5*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext5*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext5*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext5*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext5*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext5*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext5*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext5*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext5*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext5*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext5*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext5*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext5*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext5*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext5*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext5*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext5*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext5*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext5*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext5*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext5*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext5*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext5*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext5*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext5*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext5*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext5*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext5*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext5*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext5*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext5*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext5*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext5*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext5*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext5*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext5*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext5*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext5*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext5*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext5*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext5*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext5*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext5*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext5*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext5*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext5*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext5*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext5*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext5*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext5*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext5*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext5*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext5*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext5*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext5*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext5*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext5*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext5*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext5*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext5*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext5*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext5*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext5*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext5*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext5*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext5*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext5*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext5*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext5*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext5*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext5*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext5*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+  def create_ink(this : ID2D1DeviceContext5*, startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.call(this, startpoint, ink)
+  end
+  def create_ink_style(this : ID2D1DeviceContext5*, inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.call(this, inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(this : ID2D1DeviceContext5*, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.call(this, patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(this : ID2D1DeviceContext5*, wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.call(this, wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(this : ID2D1DeviceContext5*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(this : ID2D1DeviceContext5*, surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.call(this, surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(this : ID2D1DeviceContext5*, gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.call(this, gradientmesh, pbounds)
+  end
+  def draw_ink(this : ID2D1DeviceContext5*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1DeviceContext5*, gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1DeviceContext5*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(this : ID2D1DeviceContext5*, imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.call(this, imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(this : ID2D1DeviceContext5*, spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.call(this, spritebatch)
+  end
+  def draw_sprite_batch(this : ID2D1DeviceContext5*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(this : ID2D1DeviceContext5*, svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.call(this, svgglyphstyle)
+  end
+  def draw_text2(this : ID2D1DeviceContext5*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(this : ID2D1DeviceContext5*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.call(this, origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(this : ID2D1DeviceContext5*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.call(this, glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(this : ID2D1DeviceContext5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.call(this, baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(this : ID2D1DeviceContext5*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.call(this, glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(this : ID2D1DeviceContext5*, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.call(this, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+  def create_svg_document(this : ID2D1DeviceContext5*, inputxmlstream : IStream, viewportsize : D2D_SIZE_F, svgdocument : ID2D1SvgDocument*) : HRESULT
+    @lpVtbl.value.create_svg_document.call(this, inputxmlstream, viewportsize, svgdocument)
+  end
+  def draw_svg_document(this : ID2D1DeviceContext5*, svgdocument : ID2D1SvgDocument) : Void
+    @lpVtbl.value.draw_svg_document.call(this, svgdocument)
+  end
+  def create_color_context_from_dxgi_color_space(this : ID2D1DeviceContext5*, colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.call(this, colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(this : ID2D1DeviceContext5*, simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.call(this, simpleprofile, colorcontext)
+  end
+end
+struct LibWin32::ID2D1Device5
+  def query_interface(this : ID2D1Device5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device5*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device5*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device5*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device5*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device5*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device5*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device5*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+  def create_device_context3(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.call(this, options, devicecontext2)
+  end
+  def flush_device_contexts(this : ID2D1Device5*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.call(this, bitmap)
+  end
+  def get_dxgi_device(this : ID2D1Device5*, dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.call(this, dxgidevice)
+  end
+  def create_device_context4(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.call(this, options, devicecontext3)
+  end
+  def create_device_context5(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.call(this, options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(this : ID2D1Device5*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory(this : ID2D1Device5*) : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.call(this)
+  end
+  def create_device_context6(this : ID2D1Device5*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext5 : ID2D1DeviceContext5*) : HRESULT
+    @lpVtbl.value.create_device_context6.call(this, options, devicecontext5)
+  end
+end
+struct LibWin32::ID2D1Factory6
+  def query_interface(this : ID2D1Factory6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory6*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory6*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory6*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory6*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory6*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory6*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory6*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory6*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory6*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory6*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory6*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory6*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory6*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory6*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory6*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory6*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory6*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory6*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory6*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory6*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory6*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory6*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory6*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+  def create_device3(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.call(this, dxgidevice, d2ddevice2)
+  end
+  def create_device4(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.call(this, dxgidevice, d2ddevice3)
+  end
+  def create_device5(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.call(this, dxgidevice, d2ddevice4)
+  end
+  def create_device6(this : ID2D1Factory6*, dxgidevice : IDXGIDevice, d2ddevice5 : ID2D1Device5*) : HRESULT
+    @lpVtbl.value.create_device6.call(this, dxgidevice, d2ddevice5)
+  end
+end
+struct LibWin32::ID2D1CommandSink5
+  def query_interface(this : ID2D1CommandSink5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1CommandSink5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1CommandSink5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_draw(this : ID2D1CommandSink5*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1CommandSink5*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def set_antialias_mode(this : ID2D1CommandSink5*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def set_tags(this : ID2D1CommandSink5*, tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def set_text_antialias_mode(this : ID2D1CommandSink5*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def set_text_rendering_params(this : ID2D1CommandSink5*, textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_transform(this : ID2D1CommandSink5*, transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def set_primitive_blend(this : ID2D1CommandSink5*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def set_unit_mode(this : ID2D1CommandSink5*, unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def clear(this : ID2D1CommandSink5*, color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.call(this, color)
+  end
+  def draw_glyph_run(this : ID2D1CommandSink5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(this : ID2D1CommandSink5*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(this : ID2D1CommandSink5*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1CommandSink5*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(this : ID2D1CommandSink5*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(this : ID2D1CommandSink5*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1CommandSink5*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def fill_mesh(this : ID2D1CommandSink5*, mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1CommandSink5*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(this : ID2D1CommandSink5*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(this : ID2D1CommandSink5*, rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def push_axis_aligned_clip(this : ID2D1CommandSink5*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def push_layer(this : ID2D1CommandSink5*, layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.call(this, layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip(this : ID2D1CommandSink5*) : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def pop_layer(this : ID2D1CommandSink5*) : HRESULT
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def set_primitive_blend1(this : ID2D1CommandSink5*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.call(this, primitiveblend)
+  end
+  def draw_ink(this : ID2D1CommandSink5*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1CommandSink5*, gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1CommandSink5*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(this : ID2D1CommandSink5*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def set_primitive_blend2(this : ID2D1CommandSink5*, primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend2.call(this, primitiveblend)
+  end
+  def blend_image(this : ID2D1CommandSink5*, image : ID2D1Image, blendmode : D2D1_BLEND_MODE, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.blend_image.call(this, image, blendmode, targetoffset, imagerectangle, interpolationmode)
+  end
+end
+struct LibWin32::ID2D1DeviceContext6
+  def query_interface(this : ID2D1DeviceContext6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1DeviceContext6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1DeviceContext6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1DeviceContext6*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_bitmap(this : ID2D1DeviceContext6*, size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.call(this, size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(this : ID2D1DeviceContext6*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(this : ID2D1DeviceContext6*, riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.call(this, riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(this : ID2D1DeviceContext6*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(this : ID2D1DeviceContext6*, color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(this : ID2D1DeviceContext6*, gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.call(this, gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(this : ID2D1DeviceContext6*, lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : ID2D1DeviceContext6*, radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(this : ID2D1DeviceContext6*, desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.call(this, desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(this : ID2D1DeviceContext6*, size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.call(this, size, layer)
+  end
+  def create_mesh(this : ID2D1DeviceContext6*, mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.call(this, mesh)
+  end
+  def draw_line(this : ID2D1DeviceContext6*, point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.call(this, point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(this : ID2D1DeviceContext6*, rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.call(this, rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(this : ID2D1DeviceContext6*, rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.call(this, rect, brush)
+  end
+  def draw_rounded_rectangle(this : ID2D1DeviceContext6*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.call(this, roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(this : ID2D1DeviceContext6*, roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.call(this, roundedrect, brush)
+  end
+  def draw_ellipse(this : ID2D1DeviceContext6*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.call(this, ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(this : ID2D1DeviceContext6*, ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.call(this, ellipse, brush)
+  end
+  def draw_geometry(this : ID2D1DeviceContext6*, geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.call(this, geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(this : ID2D1DeviceContext6*, geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.call(this, geometry, brush, opacitybrush)
+  end
+  def fill_mesh(this : ID2D1DeviceContext6*, mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.call(this, mesh, brush)
+  end
+  def fill_opacity_mask(this : ID2D1DeviceContext6*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.call(this, opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(this : ID2D1DeviceContext6*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(this : ID2D1DeviceContext6*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(this : ID2D1DeviceContext6*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.call(this, origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(this : ID2D1DeviceContext6*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.call(this, baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(this : ID2D1DeviceContext6*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.call(this, transform)
+  end
+  def get_transform(this : ID2D1DeviceContext6*, transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def set_antialias_mode(this : ID2D1DeviceContext6*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.call(this, antialiasmode)
+  end
+  def get_antialias_mode(this : ID2D1DeviceContext6*) : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : ID2D1DeviceContext6*, textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.call(this, textantialiasmode)
+  end
+  def get_text_antialias_mode(this : ID2D1DeviceContext6*) : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_rendering_params(this : ID2D1DeviceContext6*, textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.call(this, textrenderingparams)
+  end
+  def get_text_rendering_params(this : ID2D1DeviceContext6*, textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.call(this, textrenderingparams)
+  end
+  def set_tags(this : ID2D1DeviceContext6*, tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.call(this, tag1, tag2)
+  end
+  def get_tags(this : ID2D1DeviceContext6*, tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.call(this, tag1, tag2)
+  end
+  def push_layer(this : ID2D1DeviceContext6*, layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.call(this, layerparameters, layer)
+  end
+  def pop_layer(this : ID2D1DeviceContext6*) : Void
+    @lpVtbl.value.pop_layer.call(this)
+  end
+  def flush(this : ID2D1DeviceContext6*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.call(this, tag1, tag2)
+  end
+  def save_drawing_state(this : ID2D1DeviceContext6*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.call(this, drawingstateblock)
+  end
+  def restore_drawing_state(this : ID2D1DeviceContext6*, drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.call(this, drawingstateblock)
+  end
+  def push_axis_aligned_clip(this : ID2D1DeviceContext6*, cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.call(this, cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip(this : ID2D1DeviceContext6*) : Void
+    @lpVtbl.value.pop_axis_aligned_clip.call(this)
+  end
+  def clear(this : ID2D1DeviceContext6*, clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.call(this, clearcolor)
+  end
+  def begin_draw(this : ID2D1DeviceContext6*) : Void
+    @lpVtbl.value.begin_draw.call(this)
+  end
+  def end_draw(this : ID2D1DeviceContext6*, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.call(this, tag1, tag2)
+  end
+  def get_pixel_format(this : ID2D1DeviceContext6*) : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.call(this)
+  end
+  def set_dpi(this : ID2D1DeviceContext6*, dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.call(this, dpix, dpiy)
+  end
+  def get_dpi(this : ID2D1DeviceContext6*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def get_size(this : ID2D1DeviceContext6*) : D2D_SIZE_F
+    @lpVtbl.value.get_size.call(this)
+  end
+  def get_pixel_size(this : ID2D1DeviceContext6*) : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.call(this)
+  end
+  def get_maximum_bitmap_size(this : ID2D1DeviceContext6*) : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.call(this)
+  end
+  def is_supported(this : ID2D1DeviceContext6*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.call(this, rendertargetproperties)
+  end
+  def create_bitmap2(this : ID2D1DeviceContext6*, size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.call(this, size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(this : ID2D1DeviceContext6*, wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.call(this, wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(this : ID2D1DeviceContext6*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1DeviceContext6*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1DeviceContext6*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(this : ID2D1DeviceContext6*, surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.call(this, surface, bitmapproperties, bitmap)
+  end
+  def create_effect(this : ID2D1DeviceContext6*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def create_gradient_stop_collection2(this : ID2D1DeviceContext6*, straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.call(this, straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(this : ID2D1DeviceContext6*, image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(this : ID2D1DeviceContext6*, bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.call(this, bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(this : ID2D1DeviceContext6*, commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.call(this, commandlist)
+  end
+  def is_dxgi_format_supported(this : ID2D1DeviceContext6*, format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.call(this, format)
+  end
+  def is_buffer_precision_supported(this : ID2D1DeviceContext6*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def get_image_local_bounds(this : ID2D1DeviceContext6*, image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.call(this, image, localbounds)
+  end
+  def get_image_world_bounds(this : ID2D1DeviceContext6*, image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.call(this, image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(this : ID2D1DeviceContext6*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.call(this, baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(this : ID2D1DeviceContext6*, device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.call(this, device)
+  end
+  def set_target(this : ID2D1DeviceContext6*, image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.call(this, image)
+  end
+  def get_target(this : ID2D1DeviceContext6*, image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.call(this, image)
+  end
+  def set_rendering_controls(this : ID2D1DeviceContext6*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.call(this, renderingcontrols)
+  end
+  def get_rendering_controls(this : ID2D1DeviceContext6*, renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.call(this, renderingcontrols)
+  end
+  def set_primitive_blend(this : ID2D1DeviceContext6*, primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.call(this, primitiveblend)
+  end
+  def get_primitive_blend(this : ID2D1DeviceContext6*) : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.call(this)
+  end
+  def set_unit_mode(this : ID2D1DeviceContext6*, unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.call(this, unitmode)
+  end
+  def get_unit_mode(this : ID2D1DeviceContext6*) : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.call(this)
+  end
+  def draw_glyph_run2(this : ID2D1DeviceContext6*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(this : ID2D1DeviceContext6*, image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.call(this, image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(this : ID2D1DeviceContext6*, gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.call(this, gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(this : ID2D1DeviceContext6*, bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.call(this, bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(this : ID2D1DeviceContext6*, layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.call(this, layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(this : ID2D1DeviceContext6*, effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.call(this, effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(this : ID2D1DeviceContext6*, effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.call(this, effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(this : ID2D1DeviceContext6*, effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.call(this, effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(this : ID2D1DeviceContext6*, rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.call(this, rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(this : ID2D1DeviceContext6*, opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.call(this, opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(this : ID2D1DeviceContext6*, geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.call(this, geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(this : ID2D1DeviceContext6*, geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.call(this, geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(this : ID2D1DeviceContext6*, geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.call(this, geometryrealization, brush)
+  end
+  def create_ink(this : ID2D1DeviceContext6*, startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.call(this, startpoint, ink)
+  end
+  def create_ink_style(this : ID2D1DeviceContext6*, inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.call(this, inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(this : ID2D1DeviceContext6*, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.call(this, patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(this : ID2D1DeviceContext6*, wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.call(this, wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(this : ID2D1DeviceContext6*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(this : ID2D1DeviceContext6*, surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.call(this, surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(this : ID2D1DeviceContext6*, gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.call(this, gradientmesh, pbounds)
+  end
+  def draw_ink(this : ID2D1DeviceContext6*, ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.call(this, ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(this : ID2D1DeviceContext6*, gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.call(this, gradientmesh)
+  end
+  def draw_gdi_metafile2(this : ID2D1DeviceContext6*, gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.call(this, gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(this : ID2D1DeviceContext6*, imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.call(this, imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(this : ID2D1DeviceContext6*, spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.call(this, spritebatch)
+  end
+  def draw_sprite_batch(this : ID2D1DeviceContext6*, spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.call(this, spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(this : ID2D1DeviceContext6*, svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.call(this, svgglyphstyle)
+  end
+  def draw_text2(this : ID2D1DeviceContext6*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.call(this, string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(this : ID2D1DeviceContext6*, origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.call(this, origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(this : ID2D1DeviceContext6*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.call(this, glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(this : ID2D1DeviceContext6*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.call(this, baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(this : ID2D1DeviceContext6*, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.call(this, glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(this : ID2D1DeviceContext6*, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.call(this, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+  def create_svg_document(this : ID2D1DeviceContext6*, inputxmlstream : IStream, viewportsize : D2D_SIZE_F, svgdocument : ID2D1SvgDocument*) : HRESULT
+    @lpVtbl.value.create_svg_document.call(this, inputxmlstream, viewportsize, svgdocument)
+  end
+  def draw_svg_document(this : ID2D1DeviceContext6*, svgdocument : ID2D1SvgDocument) : Void
+    @lpVtbl.value.draw_svg_document.call(this, svgdocument)
+  end
+  def create_color_context_from_dxgi_color_space(this : ID2D1DeviceContext6*, colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.call(this, colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(this : ID2D1DeviceContext6*, simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.call(this, simpleprofile, colorcontext)
+  end
+  def blend_image(this : ID2D1DeviceContext6*, image : ID2D1Image, blendmode : D2D1_BLEND_MODE, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.blend_image.call(this, image, blendmode, targetoffset, imagerectangle, interpolationmode)
+  end
+end
+struct LibWin32::ID2D1Device6
+  def query_interface(this : ID2D1Device6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Device6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Device6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_factory(this : ID2D1Device6*, factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.call(this, factory)
+  end
+  def create_device_context(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.call(this, options, devicecontext)
+  end
+  def create_print_control(this : ID2D1Device6*, wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.call(this, wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(this : ID2D1Device6*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_texture_memory(this : ID2D1Device6*) : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.call(this)
+  end
+  def clear_resources(this : ID2D1Device6*, millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.call(this, millisecondssinceuse)
+  end
+  def get_rendering_priority(this : ID2D1Device6*) : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.call(this)
+  end
+  def set_rendering_priority(this : ID2D1Device6*, renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.call(this, renderingpriority)
+  end
+  def create_device_context2(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.call(this, options, devicecontext1)
+  end
+  def create_device_context3(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.call(this, options, devicecontext2)
+  end
+  def flush_device_contexts(this : ID2D1Device6*, bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.call(this, bitmap)
+  end
+  def get_dxgi_device(this : ID2D1Device6*, dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.call(this, dxgidevice)
+  end
+  def create_device_context4(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.call(this, options, devicecontext3)
+  end
+  def create_device_context5(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.call(this, options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(this : ID2D1Device6*, maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.call(this, maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory(this : ID2D1Device6*) : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.call(this)
+  end
+  def create_device_context6(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext5 : ID2D1DeviceContext5*) : HRESULT
+    @lpVtbl.value.create_device_context6.call(this, options, devicecontext5)
+  end
+  def create_device_context7(this : ID2D1Device6*, options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext6 : ID2D1DeviceContext6*) : HRESULT
+    @lpVtbl.value.create_device_context7.call(this, options, devicecontext6)
+  end
+end
+struct LibWin32::ID2D1Factory7
+  def query_interface(this : ID2D1Factory7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1Factory7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1Factory7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reload_system_metrics(this : ID2D1Factory7*) : HRESULT
+    @lpVtbl.value.reload_system_metrics.call(this)
+  end
+  def get_desktop_dpi(this : ID2D1Factory7*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.call(this, dpix, dpiy)
+  end
+  def create_rectangle_geometry(this : ID2D1Factory7*, rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.call(this, rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(this : ID2D1Factory7*, roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.call(this, roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(this : ID2D1Factory7*, ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.call(this, ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(this : ID2D1Factory7*, fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.call(this, fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(this : ID2D1Factory7*, sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.call(this, sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(this : ID2D1Factory7*, pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.call(this, pathgeometry)
+  end
+  def create_stroke_style(this : ID2D1Factory7*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(this : ID2D1Factory7*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(this : ID2D1Factory7*, target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.call(this, target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(this : ID2D1Factory7*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.call(this, rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(this : ID2D1Factory7*, dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.call(this, dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(this : ID2D1Factory7*, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.call(this, rendertargetproperties, dcrendertarget)
+  end
+  def create_device(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.call(this, dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(this : ID2D1Factory7*, strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.call(this, strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(this : ID2D1Factory7*, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.call(this, pathgeometry)
+  end
+  def create_drawing_state_block2(this : ID2D1Factory7*, drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.call(this, drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(this : ID2D1Factory7*, metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.call(this, metafilestream, metafile)
+  end
+  def register_effect_from_stream(this : ID2D1Factory7*, classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(this : ID2D1Factory7*, classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.call(this, classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(this : ID2D1Factory7*, classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.call(this, classid)
+  end
+  def get_registered_effects(this : ID2D1Factory7*, effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.call(this, effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(this : ID2D1Factory7*, effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.call(this, effectid, properties)
+  end
+  def create_device2(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.call(this, dxgidevice, d2ddevice1)
+  end
+  def create_device3(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.call(this, dxgidevice, d2ddevice2)
+  end
+  def create_device4(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.call(this, dxgidevice, d2ddevice3)
+  end
+  def create_device5(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.call(this, dxgidevice, d2ddevice4)
+  end
+  def create_device6(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice5 : ID2D1Device5*) : HRESULT
+    @lpVtbl.value.create_device6.call(this, dxgidevice, d2ddevice5)
+  end
+  def create_device7(this : ID2D1Factory7*, dxgidevice : IDXGIDevice, d2ddevice6 : ID2D1Device6*) : HRESULT
+    @lpVtbl.value.create_device7.call(this, dxgidevice, d2ddevice6)
+  end
+end
+struct LibWin32::ID2D1EffectContext1
+  def query_interface(this : ID2D1EffectContext1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1EffectContext1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1EffectContext1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dpi(this : ID2D1EffectContext1*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def create_effect(this : ID2D1EffectContext1*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def get_maximum_supported_feature_level(this : ID2D1EffectContext1*, featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.call(this, featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(this : ID2D1EffectContext1*, effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.call(this, effect, transformnode)
+  end
+  def create_blend_transform(this : ID2D1EffectContext1*, numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.call(this, numinputs, blenddescription, transform)
+  end
+  def create_border_transform(this : ID2D1EffectContext1*, extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.call(this, extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(this : ID2D1EffectContext1*, offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.call(this, offset, transform)
+  end
+  def create_bounds_adjustment_transform(this : ID2D1EffectContext1*, outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.call(this, outputrectangle, transform)
+  end
+  def load_pixel_shader(this : ID2D1EffectContext1*, shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.call(this, shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(this : ID2D1EffectContext1*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(this : ID2D1EffectContext1*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(this : ID2D1EffectContext1*, shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.call(this, shaderid)
+  end
+  def create_resource_texture(this : ID2D1EffectContext1*, resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.call(this, resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(this : ID2D1EffectContext1*, resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.call(this, resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(this : ID2D1EffectContext1*, vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.call(this, vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(this : ID2D1EffectContext1*, resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.call(this, resourceid, buffer)
+  end
+  def create_color_context(this : ID2D1EffectContext1*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1EffectContext1*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1EffectContext1*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(this : ID2D1EffectContext1*, feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(this : ID2D1EffectContext1*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def create_lookup_table3_d(this : ID2D1EffectContext1*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+end
+struct LibWin32::ID2D1EffectContext2
+  def query_interface(this : ID2D1EffectContext2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1EffectContext2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1EffectContext2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dpi(this : ID2D1EffectContext2*, dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.call(this, dpix, dpiy)
+  end
+  def create_effect(this : ID2D1EffectContext2*, effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.call(this, effectid, effect)
+  end
+  def get_maximum_supported_feature_level(this : ID2D1EffectContext2*, featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.call(this, featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(this : ID2D1EffectContext2*, effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.call(this, effect, transformnode)
+  end
+  def create_blend_transform(this : ID2D1EffectContext2*, numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.call(this, numinputs, blenddescription, transform)
+  end
+  def create_border_transform(this : ID2D1EffectContext2*, extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.call(this, extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(this : ID2D1EffectContext2*, offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.call(this, offset, transform)
+  end
+  def create_bounds_adjustment_transform(this : ID2D1EffectContext2*, outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.call(this, outputrectangle, transform)
+  end
+  def load_pixel_shader(this : ID2D1EffectContext2*, shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.call(this, shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(this : ID2D1EffectContext2*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(this : ID2D1EffectContext2*, resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.call(this, resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(this : ID2D1EffectContext2*, shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.call(this, shaderid)
+  end
+  def create_resource_texture(this : ID2D1EffectContext2*, resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.call(this, resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(this : ID2D1EffectContext2*, resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.call(this, resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(this : ID2D1EffectContext2*, vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.call(this, vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(this : ID2D1EffectContext2*, resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.call(this, resourceid, buffer)
+  end
+  def create_color_context(this : ID2D1EffectContext2*, space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.call(this, space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(this : ID2D1EffectContext2*, filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.call(this, filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(this : ID2D1EffectContext2*, wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.call(this, wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(this : ID2D1EffectContext2*, feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(this : ID2D1EffectContext2*, bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.call(this, bufferprecision)
+  end
+  def create_lookup_table3_d(this : ID2D1EffectContext2*, precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.call(this, precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_color_context_from_dxgi_color_space(this : ID2D1EffectContext2*, colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.call(this, colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(this : ID2D1EffectContext2*, simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.call(this, simpleprofile, colorcontext)
+  end
 end

@@ -1218,46 +1218,46 @@ lib LibWin32
   fun WSManCloseOperation(operationhandle : WSMAN_OPERATION*, flags : UInt32) : UInt32
 
   # Params # session : WSMAN_SESSION* [In],flags : UInt32 [In],resourceuri : LibC::LPWSTR [In],startupinfo : WSMAN_SHELL_STARTUP_INFO_V11* [In],options : WSMAN_OPTION_SET* [In],createxml : WSMAN_DATA* [In],async : WSMAN_SHELL_ASYNC* [In],shell : WSMAN_SHELL** [In]
-  fun WSManCreateShell(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, startupinfo : WSMAN_SHELL_STARTUP_INFO_V11*, options : WSMAN_OPTION_SET*, createxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**)
+  fun WSManCreateShell(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, startupinfo : WSMAN_SHELL_STARTUP_INFO_V11*, options : WSMAN_OPTION_SET*, createxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],flags : UInt32 [In],commandline : LibC::LPWSTR [In],args : WSMAN_COMMAND_ARG_SET* [In],options : WSMAN_OPTION_SET* [In],async : WSMAN_SHELL_ASYNC* [In],command : WSMAN_COMMAND** [In]
-  fun WSManRunShellCommand(shell : WSMAN_SHELL*, flags : UInt32, commandline : LibC::LPWSTR, args : WSMAN_COMMAND_ARG_SET*, options : WSMAN_OPTION_SET*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**)
+  fun WSManRunShellCommand(shell : WSMAN_SHELL*, flags : UInt32, commandline : LibC::LPWSTR, args : WSMAN_COMMAND_ARG_SET*, options : WSMAN_OPTION_SET*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],command : WSMAN_COMMAND* [In],flags : UInt32 [In],code : LibC::LPWSTR [In],async : WSMAN_SHELL_ASYNC* [In],signaloperation : WSMAN_OPERATION** [In]
-  fun WSManSignalShell(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, code : LibC::LPWSTR, async : WSMAN_SHELL_ASYNC*, signaloperation : WSMAN_OPERATION**)
+  fun WSManSignalShell(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, code : LibC::LPWSTR, async : WSMAN_SHELL_ASYNC*, signaloperation : WSMAN_OPERATION**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],command : WSMAN_COMMAND* [In],flags : UInt32 [In],desiredstreamset : WSMAN_STREAM_ID_SET* [In],async : WSMAN_SHELL_ASYNC* [In],receiveoperation : WSMAN_OPERATION** [In]
-  fun WSManReceiveShellOutput(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, desiredstreamset : WSMAN_STREAM_ID_SET*, async : WSMAN_SHELL_ASYNC*, receiveoperation : WSMAN_OPERATION**)
+  fun WSManReceiveShellOutput(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, desiredstreamset : WSMAN_STREAM_ID_SET*, async : WSMAN_SHELL_ASYNC*, receiveoperation : WSMAN_OPERATION**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],command : WSMAN_COMMAND* [In],flags : UInt32 [In],streamid : LibC::LPWSTR [In],streamdata : WSMAN_DATA* [In],endofstream : LibC::BOOL [In],async : WSMAN_SHELL_ASYNC* [In],sendoperation : WSMAN_OPERATION** [In]
-  fun WSManSendShellInput(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, streamid : LibC::LPWSTR, streamdata : WSMAN_DATA*, endofstream : LibC::BOOL, async : WSMAN_SHELL_ASYNC*, sendoperation : WSMAN_OPERATION**)
+  fun WSManSendShellInput(shell : WSMAN_SHELL*, command : WSMAN_COMMAND*, flags : UInt32, streamid : LibC::LPWSTR, streamdata : WSMAN_DATA*, endofstream : LibC::BOOL, async : WSMAN_SHELL_ASYNC*, sendoperation : WSMAN_OPERATION**) : Void
 
   # Params # commandhandle : WSMAN_COMMAND* [In],flags : UInt32 [In],async : WSMAN_SHELL_ASYNC* [In]
-  fun WSManCloseCommand(commandhandle : WSMAN_COMMAND*, flags : UInt32, async : WSMAN_SHELL_ASYNC*)
+  fun WSManCloseCommand(commandhandle : WSMAN_COMMAND*, flags : UInt32, async : WSMAN_SHELL_ASYNC*) : Void
 
   # Params # shellhandle : WSMAN_SHELL* [In],flags : UInt32 [In],async : WSMAN_SHELL_ASYNC* [In]
-  fun WSManCloseShell(shellhandle : WSMAN_SHELL*, flags : UInt32, async : WSMAN_SHELL_ASYNC*)
+  fun WSManCloseShell(shellhandle : WSMAN_SHELL*, flags : UInt32, async : WSMAN_SHELL_ASYNC*) : Void
 
   # Params # session : WSMAN_SESSION* [In],flags : UInt32 [In],resourceuri : LibC::LPWSTR [In],shellid : LibC::LPWSTR [In],startupinfo : WSMAN_SHELL_STARTUP_INFO_V11* [In],options : WSMAN_OPTION_SET* [In],createxml : WSMAN_DATA* [In],async : WSMAN_SHELL_ASYNC* [In],shell : WSMAN_SHELL** [In]
-  fun WSManCreateShellEx(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, shellid : LibC::LPWSTR, startupinfo : WSMAN_SHELL_STARTUP_INFO_V11*, options : WSMAN_OPTION_SET*, createxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**)
+  fun WSManCreateShellEx(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, shellid : LibC::LPWSTR, startupinfo : WSMAN_SHELL_STARTUP_INFO_V11*, options : WSMAN_OPTION_SET*, createxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],flags : UInt32 [In],commandid : LibC::LPWSTR [In],commandline : LibC::LPWSTR [In],args : WSMAN_COMMAND_ARG_SET* [In],options : WSMAN_OPTION_SET* [In],async : WSMAN_SHELL_ASYNC* [In],command : WSMAN_COMMAND** [In]
-  fun WSManRunShellCommandEx(shell : WSMAN_SHELL*, flags : UInt32, commandid : LibC::LPWSTR, commandline : LibC::LPWSTR, args : WSMAN_COMMAND_ARG_SET*, options : WSMAN_OPTION_SET*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**)
+  fun WSManRunShellCommandEx(shell : WSMAN_SHELL*, flags : UInt32, commandid : LibC::LPWSTR, commandline : LibC::LPWSTR, args : WSMAN_COMMAND_ARG_SET*, options : WSMAN_OPTION_SET*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],flags : UInt32 [In],disconnectinfo : WSMAN_SHELL_DISCONNECT_INFO* [In],async : WSMAN_SHELL_ASYNC* [In]
-  fun WSManDisconnectShell(shell : WSMAN_SHELL*, flags : UInt32, disconnectinfo : WSMAN_SHELL_DISCONNECT_INFO*, async : WSMAN_SHELL_ASYNC*)
+  fun WSManDisconnectShell(shell : WSMAN_SHELL*, flags : UInt32, disconnectinfo : WSMAN_SHELL_DISCONNECT_INFO*, async : WSMAN_SHELL_ASYNC*) : Void
 
   # Params # shell : WSMAN_SHELL* [In],flags : UInt32 [In],async : WSMAN_SHELL_ASYNC* [In]
-  fun WSManReconnectShell(shell : WSMAN_SHELL*, flags : UInt32, async : WSMAN_SHELL_ASYNC*)
+  fun WSManReconnectShell(shell : WSMAN_SHELL*, flags : UInt32, async : WSMAN_SHELL_ASYNC*) : Void
 
   # Params # commandhandle : WSMAN_COMMAND* [In],flags : UInt32 [In],async : WSMAN_SHELL_ASYNC* [In]
-  fun WSManReconnectShellCommand(commandhandle : WSMAN_COMMAND*, flags : UInt32, async : WSMAN_SHELL_ASYNC*)
+  fun WSManReconnectShellCommand(commandhandle : WSMAN_COMMAND*, flags : UInt32, async : WSMAN_SHELL_ASYNC*) : Void
 
   # Params # session : WSMAN_SESSION* [In],flags : UInt32 [In],resourceuri : LibC::LPWSTR [In],shellid : LibC::LPWSTR [In],options : WSMAN_OPTION_SET* [In],connectxml : WSMAN_DATA* [In],async : WSMAN_SHELL_ASYNC* [In],shell : WSMAN_SHELL** [In]
-  fun WSManConnectShell(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, shellid : LibC::LPWSTR, options : WSMAN_OPTION_SET*, connectxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**)
+  fun WSManConnectShell(session : WSMAN_SESSION*, flags : UInt32, resourceuri : LibC::LPWSTR, shellid : LibC::LPWSTR, options : WSMAN_OPTION_SET*, connectxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, shell : WSMAN_SHELL**) : Void
 
   # Params # shell : WSMAN_SHELL* [In],flags : UInt32 [In],commandid : LibC::LPWSTR [In],options : WSMAN_OPTION_SET* [In],connectxml : WSMAN_DATA* [In],async : WSMAN_SHELL_ASYNC* [In],command : WSMAN_COMMAND** [In]
-  fun WSManConnectShellCommand(shell : WSMAN_SHELL*, flags : UInt32, commandid : LibC::LPWSTR, options : WSMAN_OPTION_SET*, connectxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**)
+  fun WSManConnectShellCommand(shell : WSMAN_SHELL*, flags : UInt32, commandid : LibC::LPWSTR, options : WSMAN_OPTION_SET*, connectxml : WSMAN_DATA*, async : WSMAN_SHELL_ASYNC*, command : WSMAN_COMMAND**) : Void
 
   # Params # requestdetails : WSMAN_PLUGIN_REQUEST* [In],flags : UInt32 [In],context : Void* [In]
   fun WSManPluginReportContext(requestdetails : WSMAN_PLUGIN_REQUEST*, flags : UInt32, context : Void*) : UInt32
@@ -1288,4 +1288,673 @@ lib LibWin32
 
   # Params # senderdetails : WSMAN_SENDER_DETAILS* [In],flags : UInt32 [In],quota : WSMAN_AUTHZ_QUOTA* [In],errorcode : UInt32 [In],extendederrorinformation : LibC::LPWSTR [In]
   fun WSManPluginAuthzQueryQuotaComplete(senderdetails : WSMAN_SENDER_DETAILS*, flags : UInt32, quota : WSMAN_AUTHZ_QUOTA*, errorcode : UInt32, extendederrorinformation : LibC::LPWSTR) : UInt32
+end
+struct LibWin32::IWSMan
+  def query_interface(this : IWSMan*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSMan*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSMan*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSMan*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSMan*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSMan*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSMan*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_session(this : IWSMan*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
+  end
+  def create_connection_options(this : IWSMan*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
+  end
+  def get_command_line(this : IWSMan*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
+  end
+  def get_error(this : IWSMan*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+end
+struct LibWin32::IWSManEx
+  def query_interface(this : IWSManEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_session(this : IWSManEx*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
+  end
+  def create_connection_options(this : IWSManEx*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
+  end
+  def get_command_line(this : IWSManEx*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
+  end
+  def get_error(this : IWSManEx*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+  def create_resource_locator(this : IWSManEx*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
+  end
+  def session_flag_utf8(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
+  end
+  def session_flag_cred_username_password(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
+  end
+  def session_flag_skip_ca_check(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
+  end
+  def session_flag_skip_cn_check(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
+  end
+  def session_flag_use_digest(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
+  end
+  def session_flag_use_negotiate(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
+  end
+  def session_flag_use_basic(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
+  end
+  def session_flag_use_kerberos(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
+  end
+  def session_flag_no_encryption(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
+  end
+  def session_flag_enable_spn_server_port(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
+  end
+  def session_flag_use_no_authentication(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
+  end
+  def enumeration_flag_non_xml_text(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
+  end
+  def enumeration_flag_return_epr(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
+  end
+  def enumeration_flag_return_object_and_epr(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
+  end
+  def get_error_message(this : IWSManEx*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
+  end
+  def enumeration_flag_hierarchy_deep(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
+  end
+  def enumeration_flag_return_object(this : IWSManEx*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
+  end
+end
+struct LibWin32::IWSManEx2
+  def query_interface(this : IWSManEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManEx2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManEx2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManEx2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManEx2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_session(this : IWSManEx2*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
+  end
+  def create_connection_options(this : IWSManEx2*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
+  end
+  def get_command_line(this : IWSManEx2*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
+  end
+  def get_error(this : IWSManEx2*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+  def create_resource_locator(this : IWSManEx2*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
+  end
+  def session_flag_utf8(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
+  end
+  def session_flag_cred_username_password(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
+  end
+  def session_flag_skip_ca_check(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
+  end
+  def session_flag_skip_cn_check(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
+  end
+  def session_flag_use_digest(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
+  end
+  def session_flag_use_negotiate(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
+  end
+  def session_flag_use_basic(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
+  end
+  def session_flag_use_kerberos(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
+  end
+  def session_flag_no_encryption(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
+  end
+  def session_flag_enable_spn_server_port(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
+  end
+  def session_flag_use_no_authentication(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
+  end
+  def enumeration_flag_non_xml_text(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
+  end
+  def enumeration_flag_return_epr(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
+  end
+  def enumeration_flag_return_object_and_epr(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
+  end
+  def get_error_message(this : IWSManEx2*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
+  end
+  def enumeration_flag_hierarchy_deep(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
+  end
+  def enumeration_flag_return_object(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
+  end
+  def session_flag_use_client_certificate(this : IWSManEx2*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_client_certificate.call(this, flags)
+  end
+end
+struct LibWin32::IWSManEx3
+  def query_interface(this : IWSManEx3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManEx3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManEx3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManEx3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManEx3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManEx3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManEx3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_session(this : IWSManEx3*, connection : UInt8*, flags : Int32, connectionoptions : IDispatch, session : IDispatch*) : HRESULT
+    @lpVtbl.value.create_session.call(this, connection, flags, connectionoptions, session)
+  end
+  def create_connection_options(this : IWSManEx3*, connectionoptions : IDispatch*) : HRESULT
+    @lpVtbl.value.create_connection_options.call(this, connectionoptions)
+  end
+  def get_command_line(this : IWSManEx3*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_command_line.call(this, value)
+  end
+  def get_error(this : IWSManEx3*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+  def create_resource_locator(this : IWSManEx3*, strresourcelocator : UInt8*, newresourcelocator : IDispatch*) : HRESULT
+    @lpVtbl.value.create_resource_locator.call(this, strresourcelocator, newresourcelocator)
+  end
+  def session_flag_utf8(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf8.call(this, flags)
+  end
+  def session_flag_cred_username_password(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_cred_username_password.call(this, flags)
+  end
+  def session_flag_skip_ca_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_ca_check.call(this, flags)
+  end
+  def session_flag_skip_cn_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_cn_check.call(this, flags)
+  end
+  def session_flag_use_digest(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_digest.call(this, flags)
+  end
+  def session_flag_use_negotiate(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_negotiate.call(this, flags)
+  end
+  def session_flag_use_basic(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_basic.call(this, flags)
+  end
+  def session_flag_use_kerberos(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_kerberos.call(this, flags)
+  end
+  def session_flag_no_encryption(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_no_encryption.call(this, flags)
+  end
+  def session_flag_enable_spn_server_port(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_enable_spn_server_port.call(this, flags)
+  end
+  def session_flag_use_no_authentication(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_no_authentication.call(this, flags)
+  end
+  def enumeration_flag_non_xml_text(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_non_xml_text.call(this, flags)
+  end
+  def enumeration_flag_return_epr(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_epr.call(this, flags)
+  end
+  def enumeration_flag_return_object_and_epr(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object_and_epr.call(this, flags)
+  end
+  def get_error_message(this : IWSManEx3*, errornumber : UInt32, errormessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_message.call(this, errornumber, errormessage)
+  end
+  def enumeration_flag_hierarchy_deep(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_shallow(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_shallow.call(this, flags)
+  end
+  def enumeration_flag_hierarchy_deep_base_props_only(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_hierarchy_deep_base_props_only.call(this, flags)
+  end
+  def enumeration_flag_return_object(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_return_object.call(this, flags)
+  end
+  def session_flag_use_client_certificate(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_client_certificate.call(this, flags)
+  end
+  def session_flag_utf16(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_utf16.call(this, flags)
+  end
+  def session_flag_use_cred_ssp(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_cred_ssp.call(this, flags)
+  end
+  def enumeration_flag_association_instance(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_association_instance.call(this, flags)
+  end
+  def enumeration_flag_associated_instance(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.enumeration_flag_associated_instance.call(this, flags)
+  end
+  def session_flag_skip_revocation_check(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_skip_revocation_check.call(this, flags)
+  end
+  def session_flag_allow_negotiate_implicit_credentials(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_allow_negotiate_implicit_credentials.call(this, flags)
+  end
+  def session_flag_use_ssl(this : IWSManEx3*, flags : Int32*) : HRESULT
+    @lpVtbl.value.session_flag_use_ssl.call(this, flags)
+  end
+end
+struct LibWin32::IWSManConnectionOptions
+  def query_interface(this : IWSManConnectionOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManConnectionOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManConnectionOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManConnectionOptions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManConnectionOptions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManConnectionOptions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManConnectionOptions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_user_name(this : IWSManConnectionOptions*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
+  end
+  def put_user_name(this : IWSManConnectionOptions*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
+  end
+  def put_password(this : IWSManConnectionOptions*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
+  end
+end
+struct LibWin32::IWSManConnectionOptionsEx
+  def query_interface(this : IWSManConnectionOptionsEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManConnectionOptionsEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManConnectionOptionsEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManConnectionOptionsEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManConnectionOptionsEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManConnectionOptionsEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManConnectionOptionsEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_user_name(this : IWSManConnectionOptionsEx*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
+  end
+  def put_user_name(this : IWSManConnectionOptionsEx*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
+  end
+  def put_password(this : IWSManConnectionOptionsEx*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
+  end
+  def get_certificate_thumbprint(this : IWSManConnectionOptionsEx*, thumbprint : UInt8**) : HRESULT
+    @lpVtbl.value.get_certificate_thumbprint.call(this, thumbprint)
+  end
+  def put_certificate_thumbprint(this : IWSManConnectionOptionsEx*, thumbprint : UInt8*) : HRESULT
+    @lpVtbl.value.put_certificate_thumbprint.call(this, thumbprint)
+  end
+end
+struct LibWin32::IWSManConnectionOptionsEx2
+  def query_interface(this : IWSManConnectionOptionsEx2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManConnectionOptionsEx2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManConnectionOptionsEx2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManConnectionOptionsEx2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManConnectionOptionsEx2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManConnectionOptionsEx2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManConnectionOptionsEx2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_user_name(this : IWSManConnectionOptionsEx2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, name)
+  end
+  def put_user_name(this : IWSManConnectionOptionsEx2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, name)
+  end
+  def put_password(this : IWSManConnectionOptionsEx2*, password : UInt8*) : HRESULT
+    @lpVtbl.value.put_password.call(this, password)
+  end
+  def get_certificate_thumbprint(this : IWSManConnectionOptionsEx2*, thumbprint : UInt8**) : HRESULT
+    @lpVtbl.value.get_certificate_thumbprint.call(this, thumbprint)
+  end
+  def put_certificate_thumbprint(this : IWSManConnectionOptionsEx2*, thumbprint : UInt8*) : HRESULT
+    @lpVtbl.value.put_certificate_thumbprint.call(this, thumbprint)
+  end
+  def set_proxy(this : IWSManConnectionOptionsEx2*, accesstype : Int32, authenticationmechanism : Int32, username : UInt8*, password : UInt8*) : HRESULT
+    @lpVtbl.value.set_proxy.call(this, accesstype, authenticationmechanism, username, password)
+  end
+  def proxy_ie_config(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_ie_config.call(this, value)
+  end
+  def proxy_win_http_config(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_win_http_config.call(this, value)
+  end
+  def proxy_auto_detect(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_auto_detect.call(this, value)
+  end
+  def proxy_no_proxy_server(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_no_proxy_server.call(this, value)
+  end
+  def proxy_authentication_use_negotiate(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_negotiate.call(this, value)
+  end
+  def proxy_authentication_use_basic(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_basic.call(this, value)
+  end
+  def proxy_authentication_use_digest(this : IWSManConnectionOptionsEx2*, value : Int32*) : HRESULT
+    @lpVtbl.value.proxy_authentication_use_digest.call(this, value)
+  end
+end
+struct LibWin32::IWSManSession
+  def query_interface(this : IWSManSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get(this : IWSManSession*, resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
+    @lpVtbl.value.get.call(this, resourceuri, flags, resource)
+  end
+  def put(this : IWSManSession*, resourceuri : VARIANT, resource : UInt8*, flags : Int32, resultresource : UInt8**) : HRESULT
+    @lpVtbl.value.put.call(this, resourceuri, resource, flags, resultresource)
+  end
+  def create(this : IWSManSession*, resourceuri : VARIANT, resource : UInt8*, flags : Int32, newuri : UInt8**) : HRESULT
+    @lpVtbl.value.create.call(this, resourceuri, resource, flags, newuri)
+  end
+  def delete(this : IWSManSession*, resourceuri : VARIANT, flags : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, resourceuri, flags)
+  end
+  def invoke2(this : IWSManSession*, actionuri : UInt8*, resourceuri : VARIANT, parameters : UInt8*, flags : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.invoke2.call(this, actionuri, resourceuri, parameters, flags, result)
+  end
+  def enumerate(this : IWSManSession*, resourceuri : VARIANT, filter : UInt8*, dialect : UInt8*, flags : Int32, resultset : IDispatch*) : HRESULT
+    @lpVtbl.value.enumerate.call(this, resourceuri, filter, dialect, flags, resultset)
+  end
+  def identify(this : IWSManSession*, flags : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.identify.call(this, flags, result)
+  end
+  def get_error(this : IWSManSession*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+  def get_batch_items(this : IWSManSession*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_batch_items.call(this, value)
+  end
+  def put_batch_items(this : IWSManSession*, value : Int32) : HRESULT
+    @lpVtbl.value.put_batch_items.call(this, value)
+  end
+  def get_timeout(this : IWSManSession*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_timeout.call(this, value)
+  end
+  def put_timeout(this : IWSManSession*, value : Int32) : HRESULT
+    @lpVtbl.value.put_timeout.call(this, value)
+  end
+end
+struct LibWin32::IWSManEnumerator
+  def query_interface(this : IWSManEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManEnumerator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManEnumerator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManEnumerator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManEnumerator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def read_item(this : IWSManEnumerator*, resource : UInt8**) : HRESULT
+    @lpVtbl.value.read_item.call(this, resource)
+  end
+  def get_at_end_of_stream(this : IWSManEnumerator*, eos : Int16*) : HRESULT
+    @lpVtbl.value.get_at_end_of_stream.call(this, eos)
+  end
+  def get_error(this : IWSManEnumerator*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+end
+struct LibWin32::IWSManResourceLocator
+  def query_interface(this : IWSManResourceLocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManResourceLocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManResourceLocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManResourceLocator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManResourceLocator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManResourceLocator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManResourceLocator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_resource_uri(this : IWSManResourceLocator*, uri : UInt8*) : HRESULT
+    @lpVtbl.value.put_resource_uri.call(this, uri)
+  end
+  def get_resource_uri(this : IWSManResourceLocator*, uri : UInt8**) : HRESULT
+    @lpVtbl.value.get_resource_uri.call(this, uri)
+  end
+  def add_selector(this : IWSManResourceLocator*, resourceselname : UInt8*, selvalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_selector.call(this, resourceselname, selvalue)
+  end
+  def clear_selectors(this : IWSManResourceLocator*) : HRESULT
+    @lpVtbl.value.clear_selectors.call(this)
+  end
+  def get_fragment_path(this : IWSManResourceLocator*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment_path.call(this, text)
+  end
+  def put_fragment_path(this : IWSManResourceLocator*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_fragment_path.call(this, text)
+  end
+  def get_fragment_dialect(this : IWSManResourceLocator*, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment_dialect.call(this, text)
+  end
+  def put_fragment_dialect(this : IWSManResourceLocator*, text : UInt8*) : HRESULT
+    @lpVtbl.value.put_fragment_dialect.call(this, text)
+  end
+  def add_option(this : IWSManResourceLocator*, optionname : UInt8*, optionvalue : VARIANT, mustcomply : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_option.call(this, optionname, optionvalue, mustcomply)
+  end
+  def put_must_understand_options(this : IWSManResourceLocator*, mustunderstand : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_must_understand_options.call(this, mustunderstand)
+  end
+  def get_must_understand_options(this : IWSManResourceLocator*, mustunderstand : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_must_understand_options.call(this, mustunderstand)
+  end
+  def clear_options(this : IWSManResourceLocator*) : HRESULT
+    @lpVtbl.value.clear_options.call(this)
+  end
+  def get_error(this : IWSManResourceLocator*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_error.call(this, value)
+  end
+end
+struct LibWin32::IWSManResourceLocatorInternal
+  def query_interface(this : IWSManResourceLocatorInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManResourceLocatorInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManResourceLocatorInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IWSManInternal
+  def query_interface(this : IWSManInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSManInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSManInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSManInternal*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSManInternal*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSManInternal*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSManInternal*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def config_sddl(this : IWSManInternal*, session : IDispatch, resourceuri : VARIANT, flags : Int32, resource : UInt8**) : HRESULT
+    @lpVtbl.value.config_sddl.call(this, session, resourceuri, flags, resource)
+  end
 end

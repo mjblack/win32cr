@@ -78,7 +78,7 @@ lib LibWin32
   #fun FreeLibrary(hlibmodule : HINSTANCE) : LibC::BOOL
 
   # Params # hlibmodule : HINSTANCE [In],dwexitcode : UInt32 [In]
-  fun FreeLibraryAndExitThread(hlibmodule : HINSTANCE, dwexitcode : UInt32)
+  fun FreeLibraryAndExitThread(hlibmodule : HINSTANCE, dwexitcode : UInt32) : Void
 
   # Params # hresdata : LibC::IntPtrT [In]
   fun FreeResource(hresdata : LibC::IntPtrT) : LibC::BOOL

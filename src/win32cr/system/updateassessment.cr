@@ -67,3 +67,17 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWaaSAssessor
+  def query_interface(this : IWaaSAssessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWaaSAssessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWaaSAssessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_os_update_assessment(this : IWaaSAssessor*, result : OSUpdateAssessment*) : HRESULT
+    @lpVtbl.value.get_os_update_assessment.call(this, result)
+  end
+end

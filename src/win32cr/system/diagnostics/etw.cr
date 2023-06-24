@@ -816,7 +816,7 @@ lib LibWin32
   end
   union EVENT_TRACE_HEADER_Anonymous2_e__Union
     version : UInt32
-    klass : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    class_ : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_TRACE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -833,7 +833,7 @@ lib LibWin32
   end
   union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
     version : UInt32
-    klass : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    class_ : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -1927,4 +1927,109 @@ lib LibWin32
 
   # Params # cveid : LibC::LPWSTR [In],additionaldetails : LibC::LPWSTR [In]
   fun CveEventWrite(cveid : LibC::LPWSTR, additionaldetails : LibC::LPWSTR) : Int32
+end
+struct LibWin32::ITraceEvent
+  def query_interface(this : ITraceEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITraceEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITraceEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : ITraceEvent*, newevent : ITraceEvent*) : HRESULT
+    @lpVtbl.value.clone.call(this, newevent)
+  end
+  def get_user_context(this : ITraceEvent*, usercontext : Void**) : HRESULT
+    @lpVtbl.value.get_user_context.call(this, usercontext)
+  end
+  def get_event_record(this : ITraceEvent*, eventrecord : EVENT_RECORD**) : HRESULT
+    @lpVtbl.value.get_event_record.call(this, eventrecord)
+  end
+  def set_payload(this : ITraceEvent*, payload : UInt8*, payloadsize : UInt32) : HRESULT
+    @lpVtbl.value.set_payload.call(this, payload, payloadsize)
+  end
+  def set_event_descriptor(this : ITraceEvent*, eventdescriptor : EVENT_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.set_event_descriptor.call(this, eventdescriptor)
+  end
+  def set_process_id(this : ITraceEvent*, processid : UInt32) : HRESULT
+    @lpVtbl.value.set_process_id.call(this, processid)
+  end
+  def set_processor_index(this : ITraceEvent*, processorindex : UInt32) : HRESULT
+    @lpVtbl.value.set_processor_index.call(this, processorindex)
+  end
+  def set_thread_id(this : ITraceEvent*, threadid : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_id.call(this, threadid)
+  end
+  def set_thread_times(this : ITraceEvent*, kerneltime : UInt32, usertime : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_times.call(this, kerneltime, usertime)
+  end
+  def set_activity_id(this : ITraceEvent*, activityid : Guid*) : HRESULT
+    @lpVtbl.value.set_activity_id.call(this, activityid)
+  end
+  def set_time_stamp(this : ITraceEvent*, timestamp : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.set_time_stamp.call(this, timestamp)
+  end
+  def set_provider_id(this : ITraceEvent*, providerid : Guid*) : HRESULT
+    @lpVtbl.value.set_provider_id.call(this, providerid)
+  end
+end
+struct LibWin32::ITraceEventCallback
+  def query_interface(this : ITraceEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITraceEventCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITraceEventCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_begin_process_trace(this : ITraceEventCallback*, headerevent : ITraceEvent, relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_begin_process_trace.call(this, headerevent, relogger)
+  end
+  def on_finalize_process_trace(this : ITraceEventCallback*, relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_finalize_process_trace.call(this, relogger)
+  end
+  def on_event(this : ITraceEventCallback*, event : ITraceEvent, relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_event.call(this, event, relogger)
+  end
+end
+struct LibWin32::ITraceRelogger
+  def query_interface(this : ITraceRelogger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITraceRelogger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITraceRelogger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_logfile_trace_stream(this : ITraceRelogger*, logfilename : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
+    @lpVtbl.value.add_logfile_trace_stream.call(this, logfilename, usercontext, tracehandle)
+  end
+  def add_realtime_trace_stream(this : ITraceRelogger*, loggername : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
+    @lpVtbl.value.add_realtime_trace_stream.call(this, loggername, usercontext, tracehandle)
+  end
+  def register_callback(this : ITraceRelogger*, callback : ITraceEventCallback) : HRESULT
+    @lpVtbl.value.register_callback.call(this, callback)
+  end
+  def inject(this : ITraceRelogger*, event : ITraceEvent) : HRESULT
+    @lpVtbl.value.inject.call(this, event)
+  end
+  def create_event_instance(this : ITraceRelogger*, tracehandle : UInt64, flags : UInt32, event : ITraceEvent*) : HRESULT
+    @lpVtbl.value.create_event_instance.call(this, tracehandle, flags, event)
+  end
+  def process_trace(this : ITraceRelogger*) : HRESULT
+    @lpVtbl.value.process_trace.call(this)
+  end
+  def set_output_filename(this : ITraceRelogger*, logfilename : UInt8*) : HRESULT
+    @lpVtbl.value.set_output_filename.call(this, logfilename)
+  end
+  def set_compression_mode(this : ITraceRelogger*, compressionmode : BOOLEAN) : HRESULT
+    @lpVtbl.value.set_compression_mode.call(this, compressionmode)
+  end
+  def cancel(this : ITraceRelogger*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
 end

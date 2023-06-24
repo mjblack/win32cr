@@ -139,7 +139,7 @@ lib LibWin32
   fun CryptCATAllocSortedMemberInfo(hcatalog : LibC::HANDLE, pwszreferencetag : LibC::LPWSTR) : CRYPTCATMEMBER*
 
   # Params # hcatalog : LibC::HANDLE [In],pcatmember : CRYPTCATMEMBER* [In]
-  fun CryptCATFreeSortedMemberInfo(hcatalog : LibC::HANDLE, pcatmember : CRYPTCATMEMBER*)
+  fun CryptCATFreeSortedMemberInfo(hcatalog : LibC::HANDLE, pcatmember : CRYPTCATMEMBER*) : Void
 
   # Params # hcatalog : LibC::HANDLE [In],pcatmember : CRYPTCATMEMBER* [In],pwszreferencetag : LibC::LPWSTR [In]
   fun CryptCATGetAttrInfo(hcatalog : LibC::HANDLE, pcatmember : CRYPTCATMEMBER*, pwszreferencetag : LibC::LPWSTR) : CRYPTCATATTRIBUTE*

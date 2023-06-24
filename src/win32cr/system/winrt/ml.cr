@@ -79,3 +79,76 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ILearningModelOperatorProviderNative
+  def query_interface(this : ILearningModelOperatorProviderNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILearningModelOperatorProviderNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILearningModelOperatorProviderNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_registry(this : ILearningModelOperatorProviderNative*, ppoperatorregistry : IMLOperatorRegistry*) : HRESULT
+    @lpVtbl.value.get_registry.call(this, ppoperatorregistry)
+  end
+end
+struct LibWin32::ITensorNative
+  def query_interface(this : ITensorNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITensorNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITensorNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer(this : ITensorNative*, value : UInt8**, capacity : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, value, capacity)
+  end
+  def get_d3_d12_resource(this : ITensorNative*, result : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.get_d3_d12_resource.call(this, result)
+  end
+end
+struct LibWin32::ITensorStaticsNative
+  def query_interface(this : ITensorStaticsNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITensorStaticsNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITensorStaticsNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_from_d3_d12_resource(this : ITensorStaticsNative*, value : ID3D12Resource, shape : Int64*, shapecount : Int32, result : IUnknown*) : HRESULT
+    @lpVtbl.value.create_from_d3_d12_resource.call(this, value, shape, shapecount, result)
+  end
+end
+struct LibWin32::ILearningModelDeviceFactoryNative
+  def query_interface(this : ILearningModelDeviceFactoryNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILearningModelDeviceFactoryNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILearningModelDeviceFactoryNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_from_d3_d12_command_queue(this : ILearningModelDeviceFactoryNative*, value : ID3D12CommandQueue, result : IUnknown*) : HRESULT
+    @lpVtbl.value.create_from_d3_d12_command_queue.call(this, value, result)
+  end
+end
+struct LibWin32::ILearningModelSessionOptionsNative
+  def query_interface(this : ILearningModelSessionOptionsNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILearningModelSessionOptionsNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILearningModelSessionOptionsNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_intra_op_num_threads_override(this : ILearningModelSessionOptionsNative*, intraopnumthreads : UInt32) : HRESULT
+    @lpVtbl.value.set_intra_op_num_threads_override.call(this, intraopnumthreads)
+  end
+end

@@ -128,7 +128,7 @@ lib LibWin32
   fun HcsCreateOperation(context : Void*, callback : HCS_OPERATION_COMPLETION) : HCS_OPERATION
 
   # Params # operation : HCS_OPERATION [In]
-  fun HcsCloseOperation(operation : HCS_OPERATION)
+  fun HcsCloseOperation(operation : HCS_OPERATION) : Void
 
   # Params # operation : HCS_OPERATION [In]
   fun HcsGetOperationContext(operation : HCS_OPERATION) : Void*
@@ -182,7 +182,7 @@ lib LibWin32
   fun HcsOpenComputeSystemInNamespace(idnamespace : LibC::LPWSTR, id : LibC::LPWSTR, requestedaccess : UInt32, computesystem : HCS_SYSTEM*) : HRESULT
 
   # Params # computesystem : HCS_SYSTEM [In]
-  fun HcsCloseComputeSystem(computesystem : HCS_SYSTEM)
+  fun HcsCloseComputeSystem(computesystem : HCS_SYSTEM) : Void
 
   # Params # computesystem : HCS_SYSTEM [In],operation : HCS_OPERATION [In],options : LibC::LPWSTR [In]
   fun HcsStartComputeSystem(computesystem : HCS_SYSTEM, operation : HCS_OPERATION, options : LibC::LPWSTR) : HRESULT
@@ -224,7 +224,7 @@ lib LibWin32
   fun HcsOpenProcess(computesystem : HCS_SYSTEM, processid : UInt32, requestedaccess : UInt32, process : HCS_PROCESS*) : HRESULT
 
   # Params # process : HCS_PROCESS [In]
-  fun HcsCloseProcess(process : HCS_PROCESS)
+  fun HcsCloseProcess(process : HCS_PROCESS) : Void
 
   # Params # process : HCS_PROCESS [In],operation : HCS_OPERATION [In],options : LibC::LPWSTR [In]
   fun HcsTerminateProcess(process : HCS_PROCESS, operation : HCS_OPERATION, options : LibC::LPWSTR) : HRESULT

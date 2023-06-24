@@ -3465,7 +3465,7 @@ lib LibWin32
     status : HRESULT
     thread : MINIDUMP_THREAD_CALLBACK
     thread_ex : MINIDUMP_THREAD_EX_CALLBACK
-    module : MINIDUMP_MODULE_CALLBACK
+    module_ : MINIDUMP_MODULE_CALLBACK
     include_thread : MINIDUMP_INCLUDE_THREAD_CALLBACK
     include_module : MINIDUMP_INCLUDE_MODULE_CALLBACK
     io : MINIDUMP_IO_CALLBACK
@@ -3871,7 +3871,7 @@ lib LibWin32
     reserved0 : UInt32
   end
   struct DEBUG_SYMBOL_PARAMETERS
-    module : UInt64
+    module_ : UInt64
     type_id : UInt32
     parent_symbol : UInt32
     sub_elements : UInt32
@@ -4273,7 +4273,7 @@ lib LibWin32
   end
   struct WDBGEXTS_MODULE_IN_RANGE
     start : UInt64
-    rend : UInt64
+    end_ : UInt64
     found_mod_base : UInt64
     found_mod_size : UInt32
   end
@@ -6063,7 +6063,7 @@ lib LibWin32
     reserved : UInt32
   end
   struct IMAGEHLP_MODULE64_EX
-    module : IMAGEHLP_MODULE64
+    module_ : IMAGEHLP_MODULE64
     region_flags : UInt32
   end
   struct IMAGEHLP_MODULEW64
@@ -6094,7 +6094,7 @@ lib LibWin32
     reserved : UInt32
   end
   struct IMAGEHLP_MODULEW64_EX
-    module : IMAGEHLP_MODULEW64
+    module_ : IMAGEHLP_MODULEW64
     region_flags : UInt32
   end
   struct IMAGEHLP_LINE64
@@ -13400,13 +13400,13 @@ lib LibWin32
 
   # Params # contextrecord : CONTEXT* [In]
   # Commented out because function is part of Lib C
-  #fun RtlCaptureContext(contextrecord : CONTEXT*)
+  #fun RtlCaptureContext(contextrecord : CONTEXT*) : Void
 
   # Params # contextrecord : CONTEXT* [In]
-  fun RtlCaptureContext2(contextrecord : CONTEXT*)
+  fun RtlCaptureContext2(contextrecord : CONTEXT*) : Void
 
   # Params # targetframe : Void* [In],targetip : Void* [In],exceptionrecord : EXCEPTION_RECORD* [In],returnvalue : Void* [In]
-  fun RtlUnwind(targetframe : Void*, targetip : Void*, exceptionrecord : EXCEPTION_RECORD*, returnvalue : Void*)
+  fun RtlUnwind(targetframe : Void*, targetip : Void*, exceptionrecord : EXCEPTION_RECORD*, returnvalue : Void*) : Void
 
   # Params # functiontable : IMAGE_RUNTIME_FUNCTION_ENTRY* [In],entrycount : UInt32 [In],baseaddress : UInt64 [In]
   fun RtlAddFunctionTable(functiontable : IMAGE_RUNTIME_FUNCTION_ENTRY*, entrycount : UInt32, baseaddress : UInt64) : BOOLEAN
@@ -13421,25 +13421,25 @@ lib LibWin32
   fun RtlAddGrowableFunctionTable(dynamictable : Void**, functiontable : IMAGE_RUNTIME_FUNCTION_ENTRY*, entrycount : UInt32, maximumentrycount : UInt32, rangebase : LibC::UINT_PTR, rangeend : LibC::UINT_PTR) : UInt32
 
   # Params # dynamictable : Void* [In],newentrycount : UInt32 [In]
-  fun RtlGrowFunctionTable(dynamictable : Void*, newentrycount : UInt32)
+  fun RtlGrowFunctionTable(dynamictable : Void*, newentrycount : UInt32) : Void
 
   # Params # dynamictable : Void* [In]
-  fun RtlDeleteGrowableFunctionTable(dynamictable : Void*)
+  fun RtlDeleteGrowableFunctionTable(dynamictable : Void*) : Void
 
   # Params # controlpc : UInt64 [In],imagebase : UInt64* [In],historytable : UNWIND_HISTORY_TABLE* [In]
   fun RtlLookupFunctionEntry(controlpc : UInt64, imagebase : UInt64*, historytable : UNWIND_HISTORY_TABLE*) : IMAGE_RUNTIME_FUNCTION_ENTRY*
 
   # Params # contextrecord : CONTEXT* [In],exceptionrecord : EXCEPTION_RECORD* [In]
-  fun RtlRestoreContext(contextrecord : CONTEXT*, exceptionrecord : EXCEPTION_RECORD*)
+  fun RtlRestoreContext(contextrecord : CONTEXT*, exceptionrecord : EXCEPTION_RECORD*) : Void
 
   # Params # targetframe : Void* [In],targetip : Void* [In],exceptionrecord : EXCEPTION_RECORD* [In],returnvalue : Void* [In],contextrecord : CONTEXT* [In],historytable : UNWIND_HISTORY_TABLE* [In]
-  fun RtlUnwindEx(targetframe : Void*, targetip : Void*, exceptionrecord : EXCEPTION_RECORD*, returnvalue : Void*, contextrecord : CONTEXT*, historytable : UNWIND_HISTORY_TABLE*)
+  fun RtlUnwindEx(targetframe : Void*, targetip : Void*, exceptionrecord : EXCEPTION_RECORD*, returnvalue : Void*, contextrecord : CONTEXT*, historytable : UNWIND_HISTORY_TABLE*) : Void
 
   # Params # handlertype : RTL_VIRTUAL_UNWIND_HANDLER_TYPE [In],imagebase : UInt64 [In],controlpc : UInt64 [In],functionentry : IMAGE_RUNTIME_FUNCTION_ENTRY* [In],contextrecord : CONTEXT* [In],handlerdata : Void** [In],establisherframe : UInt64* [In],contextpointers : KNONVOLATILE_CONTEXT_POINTERS* [In]
   fun RtlVirtualUnwind(handlertype : RTL_VIRTUAL_UNWIND_HANDLER_TYPE, imagebase : UInt64, controlpc : UInt64, functionentry : IMAGE_RUNTIME_FUNCTION_ENTRY*, contextrecord : CONTEXT*, handlerdata : Void**, establisherframe : UInt64*, contextpointers : KNONVOLATILE_CONTEXT_POINTERS*) : EXCEPTION_ROUTINE
 
   # Params # exceptionrecord : EXCEPTION_RECORD* [In]
-  fun RtlRaiseException(exceptionrecord : EXCEPTION_RECORD*)
+  fun RtlRaiseException(exceptionrecord : EXCEPTION_RECORD*) : Void
 
   # Params # pcvalue : Void* [In],baseofimage : Void** [In]
   fun RtlPcToFileHeader(pcvalue : Void*, baseofimage : Void**) : Void*
@@ -13448,13 +13448,13 @@ lib LibWin32
   fun IsDebuggerPresent : LibC::BOOL
 
   # Params # 
-  fun DebugBreak
+  fun DebugBreak : Void
 
   # Params # lpoutputstring : PSTR [In]
-  fun OutputDebugStringA(lpoutputstring : PSTR)
+  fun OutputDebugStringA(lpoutputstring : PSTR) : Void
 
   # Params # lpoutputstring : LibC::LPWSTR [In]
-  fun OutputDebugStringW(lpoutputstring : LibC::LPWSTR)
+  fun OutputDebugStringW(lpoutputstring : LibC::LPWSTR) : Void
 
   # Params # dwprocessid : UInt32 [In],dwthreadid : UInt32 [In],dwcontinuestatus : UInt32 [In]
   fun ContinueDebugEvent(dwprocessid : UInt32, dwthreadid : UInt32, dwcontinuestatus : UInt32) : LibC::BOOL
@@ -13496,7 +13496,7 @@ lib LibWin32
   fun Beep(dwfreq : UInt32, dwduration : UInt32) : LibC::BOOL
 
   # Params # dwexceptioncode : UInt32 [In],dwexceptionflags : UInt32 [In],nnumberofarguments : UInt32 [In],lparguments : LibC::UINT_PTR* [In]
-  fun RaiseException(dwexceptioncode : UInt32, dwexceptionflags : UInt32, nnumberofarguments : UInt32, lparguments : LibC::UINT_PTR*)
+  fun RaiseException(dwexceptioncode : UInt32, dwexceptionflags : UInt32, nnumberofarguments : UInt32, lparguments : LibC::UINT_PTR*) : Void
 
   # Params # exceptioninfo : EXCEPTION_POINTERS* [In]
   fun UnhandledExceptionFilter(exceptioninfo : EXCEPTION_POINTERS*) : Int32
@@ -13524,13 +13524,13 @@ lib LibWin32
   fun RemoveVectoredContinueHandler(handle : Void*) : UInt32
 
   # Params # pexceptionrecord : EXCEPTION_RECORD* [In],pcontextrecord : CONTEXT* [In],dwflags : UInt32 [In]
-  fun RaiseFailFastException(pexceptionrecord : EXCEPTION_RECORD*, pcontextrecord : CONTEXT*, dwflags : UInt32)
+  fun RaiseFailFastException(pexceptionrecord : EXCEPTION_RECORD*, pcontextrecord : CONTEXT*, dwflags : UInt32) : Void
 
   # Params # uaction : UInt32 [In],lpmessagetext : PSTR [In]
-  fun FatalAppExitA(uaction : UInt32, lpmessagetext : PSTR)
+  fun FatalAppExitA(uaction : UInt32, lpmessagetext : PSTR) : Void
 
   # Params # uaction : UInt32 [In],lpmessagetext : LibC::LPWSTR [In]
-  fun FatalAppExitW(uaction : UInt32, lpmessagetext : LibC::LPWSTR)
+  fun FatalAppExitW(uaction : UInt32, lpmessagetext : LibC::LPWSTR) : Void
 
   # Params # 
   fun GetThreadErrorMode : UInt32
@@ -13539,19 +13539,19 @@ lib LibWin32
   fun SetThreadErrorMode(dwnewmode : THREAD_ERROR_MODE, lpoldmode : THREAD_ERROR_MODE*) : LibC::BOOL
 
   # Params # failedallocationsize : LibC::UINT_PTR [In]
-  fun TerminateProcessOnMemoryExhaustion(failedallocationsize : LibC::UINT_PTR)
+  fun TerminateProcessOnMemoryExhaustion(failedallocationsize : LibC::UINT_PTR) : Void
 
   # Params # flags : OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS [In],callback : PWAITCHAINCALLBACK [In]
   fun OpenThreadWaitChainSession(flags : OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, callback : PWAITCHAINCALLBACK) : Void*
 
   # Params # wcthandle : Void* [In]
-  fun CloseThreadWaitChainSession(wcthandle : Void*)
+  fun CloseThreadWaitChainSession(wcthandle : Void*) : Void
 
   # Params # wcthandle : Void* [In],context : LibC::UINT_PTR [In],flags : WAIT_CHAIN_THREAD_OPTIONS [In],threadid : UInt32 [In],nodecount : UInt32* [In],nodeinfoarray : WAITCHAIN_NODE_INFO* [In],iscycle : Int32* [In]
   fun GetThreadWaitChain(wcthandle : Void*, context : LibC::UINT_PTR, flags : WAIT_CHAIN_THREAD_OPTIONS, threadid : UInt32, nodecount : UInt32*, nodeinfoarray : WAITCHAIN_NODE_INFO*, iscycle : Int32*) : LibC::BOOL
 
   # Params # callstatecallback : PCOGETCALLSTATE [In],activationstatecallback : PCOGETACTIVATIONSTATE [In]
-  fun RegisterWaitChainCOMCallback(callstatecallback : PCOGETCALLSTATE, activationstatecallback : PCOGETACTIVATIONSTATE)
+  fun RegisterWaitChainCOMCallback(callstatecallback : PCOGETCALLSTATE, activationstatecallback : PCOGETACTIVATIONSTATE) : Void
 
   # Params # hprocess : LibC::HANDLE [In],processid : UInt32 [In],hfile : LibC::HANDLE [In],dumptype : MINIDUMP_TYPE [In],exceptionparam : MINIDUMP_EXCEPTION_INFORMATION* [In],userstreamparam : MINIDUMP_USER_STREAM_INFORMATION* [In],callbackparam : MINIDUMP_CALLBACK_INFORMATION* [In]
   fun MiniDumpWriteDump(hprocess : LibC::HANDLE, processid : UInt32, hfile : LibC::HANDLE, dumptype : MINIDUMP_TYPE, exceptionparam : MINIDUMP_EXCEPTION_INFORMATION*, userstreamparam : MINIDUMP_USER_STREAM_INFORMATION*, callbackparam : MINIDUMP_CALLBACK_INFORMATION*) : LibC::BOOL
@@ -14178,25 +14178,25 @@ lib LibWin32
   fun SymGetSymPrev64(hprocess : LibC::HANDLE, symbol : IMAGEHLP_SYMBOL64*) : LibC::BOOL
 
   # Params # lpstartaddress : LPCALL_BACK_USER_INTERRUPT_ROUTINE [In]
-  fun SetCheckUserInterruptShared(lpstartaddress : LPCALL_BACK_USER_INTERRUPT_ROUTINE)
+  fun SetCheckUserInterruptShared(lpstartaddress : LPCALL_BACK_USER_INTERRUPT_ROUTINE) : Void
 
   # Params # 
   fun GetSymLoadError : UInt32
 
   # Params # error : UInt32 [In]
-  fun SetSymLoadError(error : UInt32)
+  fun SetSymLoadError(error : UInt32) : Void
 
   # Params # hprocess : LibC::HANDLE [In],ploadmodule : LibC::LPWSTR [In],psymboldata : DBGHELP_DATA_REPORT_STRUCT* [In]
   fun ReportSymbolLoadSummary(hprocess : LibC::HANDLE, ploadmodule : LibC::LPWSTR, psymboldata : DBGHELP_DATA_REPORT_STRUCT*) : LibC::BOOL
 
   # Params # hprocess : LibC::HANDLE [In]
-  fun RemoveInvalidModuleList(hprocess : LibC::HANDLE)
+  fun RemoveInvalidModuleList(hprocess : LibC::HANDLE) : Void
 
   # Params # 
   fun RangeMapCreate : Void*
 
   # Params # rmaphandle : Void* [In]
-  fun RangeMapFree(rmaphandle : Void*)
+  fun RangeMapFree(rmaphandle : Void*) : Void
 
   # Params # rmaphandle : Void* [In],imagename : LibC::LPWSTR [In],mappedimage : Void* [In],mappingbytes : UInt32 [In],imagebase : UInt64 [In],usertag : UInt64 [In],mappingflags : UInt32 [In]
   fun RangeMapAddPeImageSections(rmaphandle : Void*, imagename : LibC::LPWSTR, mappedimage : Void*, mappingbytes : UInt32, imagebase : UInt64, usertag : UInt64, mappingflags : UInt32) : LibC::BOOL
@@ -14214,7 +14214,7 @@ lib LibWin32
   fun MessageBeep(utype : UInt32) : LibC::BOOL
 
   # Params # exitcode : Int32 [In]
-  fun FatalExit(exitcode : Int32)
+  fun FatalExit(exitcode : Int32) : Void
 
   # Params # hthread : LibC::HANDLE [In],dwselector : UInt32 [In],lpselectorentry : LDT_ENTRY* [In]
   fun GetThreadSelectorEntry(hthread : LibC::HANDLE, dwselector : UInt32, lpselectorentry : LDT_ENTRY*) : LibC::BOOL
@@ -14256,4 +14256,13673 @@ lib LibWin32
 
   # Params # context : CONTEXT* [In],featuremask : UInt64 [In]
   fun SetXStateFeaturesMask(context : CONTEXT*, featuremask : UInt64) : LibC::BOOL
+end
+struct LibWin32::IDebugAdvanced
+  def query_interface(this : IDebugAdvanced*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAdvanced*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAdvanced*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_thread_context(this : IDebugAdvanced*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_thread_context.call(this, context, contextsize)
+  end
+  def set_thread_context(this : IDebugAdvanced*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_context.call(this, context, contextsize)
+  end
+end
+struct LibWin32::IDebugAdvanced2
+  def query_interface(this : IDebugAdvanced2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAdvanced2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAdvanced2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_thread_context(this : IDebugAdvanced2*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_thread_context.call(this, context, contextsize)
+  end
+  def set_thread_context(this : IDebugAdvanced2*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_context.call(this, context, contextsize)
+  end
+  def request(this : IDebugAdvanced2*, request : UInt32, inbuffer : Void*, inbuffersize : UInt32, outbuffer : Void*, outbuffersize : UInt32, outsize : UInt32*) : HRESULT
+    @lpVtbl.value.request.call(this, request, inbuffer, inbuffersize, outbuffer, outbuffersize, outsize)
+  end
+  def get_source_file_information(this : IDebugAdvanced2*, which : UInt32, sourcefile : PSTR, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_information.call(this, which, sourcefile, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def find_source_file_and_token(this : IDebugAdvanced2*, startelement : UInt32, modaddr : UInt64, file : PSTR, flags : UInt32, filetoken : Void*, filetokensize : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_and_token.call(this, startelement, modaddr, file, flags, filetoken, filetokensize, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_symbol_information(this : IDebugAdvanced2*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : UInt8*, stringbuffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_information.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize)
+  end
+  def get_system_object_information(this : IDebugAdvanced2*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_object_information.call(this, which, arg64, arg32, buffer, buffersize, infosize)
+  end
+end
+struct LibWin32::IDebugAdvanced3
+  def query_interface(this : IDebugAdvanced3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAdvanced3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAdvanced3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_thread_context(this : IDebugAdvanced3*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_thread_context.call(this, context, contextsize)
+  end
+  def set_thread_context(this : IDebugAdvanced3*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_context.call(this, context, contextsize)
+  end
+  def request(this : IDebugAdvanced3*, request : UInt32, inbuffer : Void*, inbuffersize : UInt32, outbuffer : Void*, outbuffersize : UInt32, outsize : UInt32*) : HRESULT
+    @lpVtbl.value.request.call(this, request, inbuffer, inbuffersize, outbuffer, outbuffersize, outsize)
+  end
+  def get_source_file_information(this : IDebugAdvanced3*, which : UInt32, sourcefile : PSTR, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_information.call(this, which, sourcefile, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def find_source_file_and_token(this : IDebugAdvanced3*, startelement : UInt32, modaddr : UInt64, file : PSTR, flags : UInt32, filetoken : Void*, filetokensize : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_and_token.call(this, startelement, modaddr, file, flags, filetoken, filetokensize, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_symbol_information(this : IDebugAdvanced3*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : UInt8*, stringbuffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_information.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize)
+  end
+  def get_system_object_information(this : IDebugAdvanced3*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_object_information.call(this, which, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def get_source_file_information_wide(this : IDebugAdvanced3*, which : UInt32, sourcefile : LibC::LPWSTR, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_information_wide.call(this, which, sourcefile, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def find_source_file_and_token_wide(this : IDebugAdvanced3*, startelement : UInt32, modaddr : UInt64, file : LibC::LPWSTR, flags : UInt32, filetoken : Void*, filetokensize : UInt32, foundelement : UInt32*, buffer : Char*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_and_token_wide.call(this, startelement, modaddr, file, flags, filetoken, filetokensize, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_symbol_information_wide(this : IDebugAdvanced3*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : Char*, stringbuffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_information_wide.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize)
+  end
+end
+struct LibWin32::IDebugAdvanced4
+  def query_interface(this : IDebugAdvanced4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAdvanced4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAdvanced4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_thread_context(this : IDebugAdvanced4*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_thread_context.call(this, context, contextsize)
+  end
+  def set_thread_context(this : IDebugAdvanced4*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_context.call(this, context, contextsize)
+  end
+  def request(this : IDebugAdvanced4*, request : UInt32, inbuffer : Void*, inbuffersize : UInt32, outbuffer : Void*, outbuffersize : UInt32, outsize : UInt32*) : HRESULT
+    @lpVtbl.value.request.call(this, request, inbuffer, inbuffersize, outbuffer, outbuffersize, outsize)
+  end
+  def get_source_file_information(this : IDebugAdvanced4*, which : UInt32, sourcefile : PSTR, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_information.call(this, which, sourcefile, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def find_source_file_and_token(this : IDebugAdvanced4*, startelement : UInt32, modaddr : UInt64, file : PSTR, flags : UInt32, filetoken : Void*, filetokensize : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_and_token.call(this, startelement, modaddr, file, flags, filetoken, filetokensize, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_symbol_information(this : IDebugAdvanced4*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : UInt8*, stringbuffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_information.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize)
+  end
+  def get_system_object_information(this : IDebugAdvanced4*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_object_information.call(this, which, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def get_source_file_information_wide(this : IDebugAdvanced4*, which : UInt32, sourcefile : LibC::LPWSTR, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_information_wide.call(this, which, sourcefile, arg64, arg32, buffer, buffersize, infosize)
+  end
+  def find_source_file_and_token_wide(this : IDebugAdvanced4*, startelement : UInt32, modaddr : UInt64, file : LibC::LPWSTR, flags : UInt32, filetoken : Void*, filetokensize : UInt32, foundelement : UInt32*, buffer : Char*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_and_token_wide.call(this, startelement, modaddr, file, flags, filetoken, filetokensize, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_symbol_information_wide(this : IDebugAdvanced4*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : Char*, stringbuffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_information_wide.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize)
+  end
+  def get_symbol_information_wide_ex(this : IDebugAdvanced4*, which : UInt32, arg64 : UInt64, arg32 : UInt32, buffer : Void*, buffersize : UInt32, infosize : UInt32*, stringbuffer : Char*, stringbuffersize : UInt32, stringsize : UInt32*, pinfoex : SYMBOL_INFO_EX*) : HRESULT
+    @lpVtbl.value.get_symbol_information_wide_ex.call(this, which, arg64, arg32, buffer, buffersize, infosize, stringbuffer, stringbuffersize, stringsize, pinfoex)
+  end
+end
+struct LibWin32::IDebugBreakpoint
+  def query_interface(this : IDebugBreakpoint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugBreakpoint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugBreakpoint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IDebugBreakpoint*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_type(this : IDebugBreakpoint*, breaktype : UInt32*, proctype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, breaktype, proctype)
+  end
+  def get_adder(this : IDebugBreakpoint*, adder : IDebugClient*) : HRESULT
+    @lpVtbl.value.get_adder.call(this, adder)
+  end
+  def get_flags(this : IDebugBreakpoint*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, flags)
+  end
+  def add_flags(this : IDebugBreakpoint*, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_flags.call(this, flags)
+  end
+  def remove_flags(this : IDebugBreakpoint*, flags : UInt32) : HRESULT
+    @lpVtbl.value.remove_flags.call(this, flags)
+  end
+  def set_flags(this : IDebugBreakpoint*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_offset(this : IDebugBreakpoint*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def set_offset(this : IDebugBreakpoint*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def get_data_parameters(this : IDebugBreakpoint*, size : UInt32*, accesstype : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_parameters.call(this, size, accesstype)
+  end
+  def set_data_parameters(this : IDebugBreakpoint*, size : UInt32, accesstype : UInt32) : HRESULT
+    @lpVtbl.value.set_data_parameters.call(this, size, accesstype)
+  end
+  def get_pass_count(this : IDebugBreakpoint*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_pass_count.call(this, count)
+  end
+  def set_pass_count(this : IDebugBreakpoint*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_pass_count.call(this, count)
+  end
+  def get_current_pass_count(this : IDebugBreakpoint*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_pass_count.call(this, count)
+  end
+  def get_match_thread_id(this : IDebugBreakpoint*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_match_thread_id.call(this, id)
+  end
+  def set_match_thread_id(this : IDebugBreakpoint*, thread : UInt32) : HRESULT
+    @lpVtbl.value.set_match_thread_id.call(this, thread)
+  end
+  def get_command(this : IDebugBreakpoint*, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_command.call(this, buffer, buffersize, commandsize)
+  end
+  def set_command(this : IDebugBreakpoint*, command : PSTR) : HRESULT
+    @lpVtbl.value.set_command.call(this, command)
+  end
+  def get_offset_expression(this : IDebugBreakpoint*, buffer : UInt8*, buffersize : UInt32, expressionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_expression.call(this, buffer, buffersize, expressionsize)
+  end
+  def set_offset_expression(this : IDebugBreakpoint*, expression : PSTR) : HRESULT
+    @lpVtbl.value.set_offset_expression.call(this, expression)
+  end
+  def get_parameters(this : IDebugBreakpoint*, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, params)
+  end
+end
+struct LibWin32::IDebugBreakpoint2
+  def query_interface(this : IDebugBreakpoint2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugBreakpoint2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugBreakpoint2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IDebugBreakpoint2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_type(this : IDebugBreakpoint2*, breaktype : UInt32*, proctype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, breaktype, proctype)
+  end
+  def get_adder(this : IDebugBreakpoint2*, adder : IDebugClient*) : HRESULT
+    @lpVtbl.value.get_adder.call(this, adder)
+  end
+  def get_flags(this : IDebugBreakpoint2*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, flags)
+  end
+  def add_flags(this : IDebugBreakpoint2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_flags.call(this, flags)
+  end
+  def remove_flags(this : IDebugBreakpoint2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.remove_flags.call(this, flags)
+  end
+  def set_flags(this : IDebugBreakpoint2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_offset(this : IDebugBreakpoint2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def set_offset(this : IDebugBreakpoint2*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def get_data_parameters(this : IDebugBreakpoint2*, size : UInt32*, accesstype : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_parameters.call(this, size, accesstype)
+  end
+  def set_data_parameters(this : IDebugBreakpoint2*, size : UInt32, accesstype : UInt32) : HRESULT
+    @lpVtbl.value.set_data_parameters.call(this, size, accesstype)
+  end
+  def get_pass_count(this : IDebugBreakpoint2*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_pass_count.call(this, count)
+  end
+  def set_pass_count(this : IDebugBreakpoint2*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_pass_count.call(this, count)
+  end
+  def get_current_pass_count(this : IDebugBreakpoint2*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_pass_count.call(this, count)
+  end
+  def get_match_thread_id(this : IDebugBreakpoint2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_match_thread_id.call(this, id)
+  end
+  def set_match_thread_id(this : IDebugBreakpoint2*, thread : UInt32) : HRESULT
+    @lpVtbl.value.set_match_thread_id.call(this, thread)
+  end
+  def get_command(this : IDebugBreakpoint2*, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_command.call(this, buffer, buffersize, commandsize)
+  end
+  def set_command(this : IDebugBreakpoint2*, command : PSTR) : HRESULT
+    @lpVtbl.value.set_command.call(this, command)
+  end
+  def get_offset_expression(this : IDebugBreakpoint2*, buffer : UInt8*, buffersize : UInt32, expressionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_expression.call(this, buffer, buffersize, expressionsize)
+  end
+  def set_offset_expression(this : IDebugBreakpoint2*, expression : PSTR) : HRESULT
+    @lpVtbl.value.set_offset_expression.call(this, expression)
+  end
+  def get_parameters(this : IDebugBreakpoint2*, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, params)
+  end
+  def get_command_wide(this : IDebugBreakpoint2*, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_command_wide.call(this, buffer, buffersize, commandsize)
+  end
+  def set_command_wide(this : IDebugBreakpoint2*, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_command_wide.call(this, command)
+  end
+  def get_offset_expression_wide(this : IDebugBreakpoint2*, buffer : Char*, buffersize : UInt32, expressionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_expression_wide.call(this, buffer, buffersize, expressionsize)
+  end
+  def set_offset_expression_wide(this : IDebugBreakpoint2*, expression : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_offset_expression_wide.call(this, expression)
+  end
+end
+struct LibWin32::IDebugBreakpoint3
+  def query_interface(this : IDebugBreakpoint3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugBreakpoint3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugBreakpoint3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IDebugBreakpoint3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_type(this : IDebugBreakpoint3*, breaktype : UInt32*, proctype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, breaktype, proctype)
+  end
+  def get_adder(this : IDebugBreakpoint3*, adder : IDebugClient*) : HRESULT
+    @lpVtbl.value.get_adder.call(this, adder)
+  end
+  def get_flags(this : IDebugBreakpoint3*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, flags)
+  end
+  def add_flags(this : IDebugBreakpoint3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_flags.call(this, flags)
+  end
+  def remove_flags(this : IDebugBreakpoint3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.remove_flags.call(this, flags)
+  end
+  def set_flags(this : IDebugBreakpoint3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_offset(this : IDebugBreakpoint3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def set_offset(this : IDebugBreakpoint3*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def get_data_parameters(this : IDebugBreakpoint3*, size : UInt32*, accesstype : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_parameters.call(this, size, accesstype)
+  end
+  def set_data_parameters(this : IDebugBreakpoint3*, size : UInt32, accesstype : UInt32) : HRESULT
+    @lpVtbl.value.set_data_parameters.call(this, size, accesstype)
+  end
+  def get_pass_count(this : IDebugBreakpoint3*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_pass_count.call(this, count)
+  end
+  def set_pass_count(this : IDebugBreakpoint3*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_pass_count.call(this, count)
+  end
+  def get_current_pass_count(this : IDebugBreakpoint3*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_pass_count.call(this, count)
+  end
+  def get_match_thread_id(this : IDebugBreakpoint3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_match_thread_id.call(this, id)
+  end
+  def set_match_thread_id(this : IDebugBreakpoint3*, thread : UInt32) : HRESULT
+    @lpVtbl.value.set_match_thread_id.call(this, thread)
+  end
+  def get_command(this : IDebugBreakpoint3*, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_command.call(this, buffer, buffersize, commandsize)
+  end
+  def set_command(this : IDebugBreakpoint3*, command : PSTR) : HRESULT
+    @lpVtbl.value.set_command.call(this, command)
+  end
+  def get_offset_expression(this : IDebugBreakpoint3*, buffer : UInt8*, buffersize : UInt32, expressionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_expression.call(this, buffer, buffersize, expressionsize)
+  end
+  def set_offset_expression(this : IDebugBreakpoint3*, expression : PSTR) : HRESULT
+    @lpVtbl.value.set_offset_expression.call(this, expression)
+  end
+  def get_parameters(this : IDebugBreakpoint3*, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, params)
+  end
+  def get_command_wide(this : IDebugBreakpoint3*, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_command_wide.call(this, buffer, buffersize, commandsize)
+  end
+  def set_command_wide(this : IDebugBreakpoint3*, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_command_wide.call(this, command)
+  end
+  def get_offset_expression_wide(this : IDebugBreakpoint3*, buffer : Char*, buffersize : UInt32, expressionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_expression_wide.call(this, buffer, buffersize, expressionsize)
+  end
+  def set_offset_expression_wide(this : IDebugBreakpoint3*, expression : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_offset_expression_wide.call(this, expression)
+  end
+  def get_guid(this : IDebugBreakpoint3*, guid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guid)
+  end
+end
+struct LibWin32::IDebugClient
+  def query_interface(this : IDebugClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+end
+struct LibWin32::IDebugClient2
+  def query_interface(this : IDebugClient2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient2*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient2*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient2*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient2*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient2*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient2*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient2*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient2*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient2*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient2*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient2*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient2*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient2*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient2*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient2*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient2*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient2*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient2*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient2*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient2*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient2*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient2*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient2*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient2*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient2*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient2*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient2*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient2*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient2*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient2*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient2*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient2*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient2*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient2*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient2*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient2*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient2*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient2*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient2*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient2*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient2*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient2*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient2*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient2*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient2*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient2*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+end
+struct LibWin32::IDebugClient3
+  def query_interface(this : IDebugClient3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient3*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient3*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient3*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient3*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient3*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient3*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient3*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient3*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient3*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient3*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient3*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient3*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient3*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient3*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient3*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient3*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient3*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient3*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient3*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient3*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient3*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient3*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient3*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient3*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient3*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient3*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient3*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient3*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient3*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient3*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient3*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient3*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient3*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient3*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient3*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient3*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient3*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient3*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient3*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient3*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient3*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient3*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient3*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient3*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient3*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient3*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient3*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient3*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient3*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient3*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+end
+struct LibWin32::IDebugClient4
+  def query_interface(this : IDebugClient4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient4*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient4*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient4*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient4*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient4*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient4*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient4*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient4*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient4*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient4*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient4*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient4*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient4*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient4*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient4*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient4*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient4*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient4*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient4*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient4*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient4*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient4*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient4*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient4*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient4*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient4*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient4*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient4*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient4*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient4*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient4*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient4*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient4*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient4*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient4*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient4*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient4*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient4*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient4*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient4*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient4*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient4*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient4*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient4*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient4*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient4*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient4*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient4*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient4*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient4*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def open_dump_file_wide(this : IDebugClient4*, filename : LibC::LPWSTR, filehandle : UInt64) : HRESULT
+    @lpVtbl.value.open_dump_file_wide.call(this, filename, filehandle)
+  end
+  def write_dump_file_wide(this : IDebugClient4*, filename : LibC::LPWSTR, filehandle : UInt64, qualifier : UInt32, formatflags : UInt32, comment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_dump_file_wide.call(this, filename, filehandle, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file_wide(this : IDebugClient4*, filename : LibC::LPWSTR, filehandle : UInt64, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file_wide.call(this, filename, filehandle, type)
+  end
+  def get_number_dump_files(this : IDebugClient4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_dump_files.call(this, number)
+  end
+  def get_dump_file(this : IDebugClient4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def get_dump_file_wide(this : IDebugClient4*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file_wide.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+end
+struct LibWin32::IDebugClient5
+  def query_interface(this : IDebugClient5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient5*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient5*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient5*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient5*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient5*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient5*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient5*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient5*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient5*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient5*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient5*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient5*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient5*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient5*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient5*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient5*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient5*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient5*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient5*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient5*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient5*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient5*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient5*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient5*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient5*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient5*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient5*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient5*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient5*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient5*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient5*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient5*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient5*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient5*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient5*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient5*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient5*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient5*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient5*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient5*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient5*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient5*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient5*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient5*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient5*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient5*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient5*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient5*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient5*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient5*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def open_dump_file_wide(this : IDebugClient5*, filename : LibC::LPWSTR, filehandle : UInt64) : HRESULT
+    @lpVtbl.value.open_dump_file_wide.call(this, filename, filehandle)
+  end
+  def write_dump_file_wide(this : IDebugClient5*, filename : LibC::LPWSTR, filehandle : UInt64, qualifier : UInt32, formatflags : UInt32, comment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_dump_file_wide.call(this, filename, filehandle, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file_wide(this : IDebugClient5*, filename : LibC::LPWSTR, filehandle : UInt64, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file_wide.call(this, filename, filehandle, type)
+  end
+  def get_number_dump_files(this : IDebugClient5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_dump_files.call(this, number)
+  end
+  def get_dump_file(this : IDebugClient5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def get_dump_file_wide(this : IDebugClient5*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file_wide.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def attach_kernel_wide(this : IDebugClient5*, flags : UInt32, connectoptions : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.attach_kernel_wide.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options_wide(this : IDebugClient5*, buffer : Char*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options_wide.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options_wide(this : IDebugClient5*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options_wide.call(this, options)
+  end
+  def start_process_server_wide(this : IDebugClient5*, flags : UInt32, options : LibC::LPWSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server_wide.call(this, flags, options, reserved)
+  end
+  def connect_process_server_wide(this : IDebugClient5*, remoteoptions : LibC::LPWSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server_wide.call(this, remoteoptions, server)
+  end
+  def start_server_wide(this : IDebugClient5*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.start_server_wide.call(this, options)
+  end
+  def output_servers_wide(this : IDebugClient5*, outputcontrol : UInt32, machine : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers_wide.call(this, outputcontrol, machine, flags)
+  end
+  def get_output_callbacks_wide(this : IDebugClient5*, callbacks : IDebugOutputCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_output_callbacks_wide.call(this, callbacks)
+  end
+  def set_output_callbacks_wide(this : IDebugClient5*, callbacks : IDebugOutputCallbacksWide) : HRESULT
+    @lpVtbl.value.set_output_callbacks_wide.call(this, callbacks)
+  end
+  def get_output_line_prefix_wide(this : IDebugClient5*, buffer : Char*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix_wide.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix_wide(this : IDebugClient5*, prefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix_wide.call(this, prefix)
+  end
+  def get_identity_wide(this : IDebugClient5*, buffer : Char*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_wide.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity_wide(this : IDebugClient5*, outputcontrol : UInt32, flags : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_identity_wide.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks_wide(this : IDebugClient5*, callbacks : IDebugEventCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_event_callbacks_wide.call(this, callbacks)
+  end
+  def set_event_callbacks_wide(this : IDebugClient5*, callbacks : IDebugEventCallbacksWide) : HRESULT
+    @lpVtbl.value.set_event_callbacks_wide.call(this, callbacks)
+  end
+  def create_process2(this : IDebugClient5*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR) : HRESULT
+    @lpVtbl.value.create_process2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process2_wide(this : IDebugClient5*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_process2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process_and_attach2(this : IDebugClient5*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def create_process_and_attach2_wide(this : IDebugClient5*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def push_output_line_prefix(this : IDebugClient5*, newprefix : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix.call(this, newprefix, handle)
+  end
+  def push_output_line_prefix_wide(this : IDebugClient5*, newprefix : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix_wide.call(this, newprefix, handle)
+  end
+  def pop_output_line_prefix(this : IDebugClient5*, handle : UInt64) : HRESULT
+    @lpVtbl.value.pop_output_line_prefix.call(this, handle)
+  end
+  def get_number_input_callbacks(this : IDebugClient5*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_input_callbacks.call(this, count)
+  end
+  def get_number_output_callbacks(this : IDebugClient5*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_output_callbacks.call(this, count)
+  end
+  def get_number_event_callbacks(this : IDebugClient5*, eventflags : UInt32, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_callbacks.call(this, eventflags, count)
+  end
+  def get_quit_lock_string(this : IDebugClient5*, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string(this : IDebugClient5*, string : PSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string.call(this, string)
+  end
+  def get_quit_lock_string_wide(this : IDebugClient5*, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string_wide.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string_wide(this : IDebugClient5*, string : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string_wide.call(this, string)
+  end
+end
+struct LibWin32::IDebugClient6
+  def query_interface(this : IDebugClient6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient6*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient6*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient6*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient6*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient6*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient6*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient6*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient6*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient6*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient6*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient6*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient6*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient6*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient6*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient6*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient6*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient6*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient6*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient6*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient6*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient6*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient6*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient6*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient6*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient6*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient6*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient6*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient6*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient6*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient6*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient6*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient6*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient6*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient6*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient6*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient6*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient6*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient6*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient6*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient6*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient6*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient6*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient6*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient6*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient6*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient6*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient6*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient6*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient6*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient6*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient6*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def open_dump_file_wide(this : IDebugClient6*, filename : LibC::LPWSTR, filehandle : UInt64) : HRESULT
+    @lpVtbl.value.open_dump_file_wide.call(this, filename, filehandle)
+  end
+  def write_dump_file_wide(this : IDebugClient6*, filename : LibC::LPWSTR, filehandle : UInt64, qualifier : UInt32, formatflags : UInt32, comment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_dump_file_wide.call(this, filename, filehandle, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file_wide(this : IDebugClient6*, filename : LibC::LPWSTR, filehandle : UInt64, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file_wide.call(this, filename, filehandle, type)
+  end
+  def get_number_dump_files(this : IDebugClient6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_dump_files.call(this, number)
+  end
+  def get_dump_file(this : IDebugClient6*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def get_dump_file_wide(this : IDebugClient6*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file_wide.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def attach_kernel_wide(this : IDebugClient6*, flags : UInt32, connectoptions : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.attach_kernel_wide.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options_wide(this : IDebugClient6*, buffer : Char*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options_wide.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options_wide(this : IDebugClient6*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options_wide.call(this, options)
+  end
+  def start_process_server_wide(this : IDebugClient6*, flags : UInt32, options : LibC::LPWSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server_wide.call(this, flags, options, reserved)
+  end
+  def connect_process_server_wide(this : IDebugClient6*, remoteoptions : LibC::LPWSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server_wide.call(this, remoteoptions, server)
+  end
+  def start_server_wide(this : IDebugClient6*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.start_server_wide.call(this, options)
+  end
+  def output_servers_wide(this : IDebugClient6*, outputcontrol : UInt32, machine : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers_wide.call(this, outputcontrol, machine, flags)
+  end
+  def get_output_callbacks_wide(this : IDebugClient6*, callbacks : IDebugOutputCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_output_callbacks_wide.call(this, callbacks)
+  end
+  def set_output_callbacks_wide(this : IDebugClient6*, callbacks : IDebugOutputCallbacksWide) : HRESULT
+    @lpVtbl.value.set_output_callbacks_wide.call(this, callbacks)
+  end
+  def get_output_line_prefix_wide(this : IDebugClient6*, buffer : Char*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix_wide.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix_wide(this : IDebugClient6*, prefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix_wide.call(this, prefix)
+  end
+  def get_identity_wide(this : IDebugClient6*, buffer : Char*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_wide.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity_wide(this : IDebugClient6*, outputcontrol : UInt32, flags : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_identity_wide.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks_wide(this : IDebugClient6*, callbacks : IDebugEventCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_event_callbacks_wide.call(this, callbacks)
+  end
+  def set_event_callbacks_wide(this : IDebugClient6*, callbacks : IDebugEventCallbacksWide) : HRESULT
+    @lpVtbl.value.set_event_callbacks_wide.call(this, callbacks)
+  end
+  def create_process2(this : IDebugClient6*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR) : HRESULT
+    @lpVtbl.value.create_process2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process2_wide(this : IDebugClient6*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_process2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process_and_attach2(this : IDebugClient6*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def create_process_and_attach2_wide(this : IDebugClient6*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def push_output_line_prefix(this : IDebugClient6*, newprefix : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix.call(this, newprefix, handle)
+  end
+  def push_output_line_prefix_wide(this : IDebugClient6*, newprefix : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix_wide.call(this, newprefix, handle)
+  end
+  def pop_output_line_prefix(this : IDebugClient6*, handle : UInt64) : HRESULT
+    @lpVtbl.value.pop_output_line_prefix.call(this, handle)
+  end
+  def get_number_input_callbacks(this : IDebugClient6*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_input_callbacks.call(this, count)
+  end
+  def get_number_output_callbacks(this : IDebugClient6*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_output_callbacks.call(this, count)
+  end
+  def get_number_event_callbacks(this : IDebugClient6*, eventflags : UInt32, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_callbacks.call(this, eventflags, count)
+  end
+  def get_quit_lock_string(this : IDebugClient6*, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string(this : IDebugClient6*, string : PSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string.call(this, string)
+  end
+  def get_quit_lock_string_wide(this : IDebugClient6*, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string_wide.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string_wide(this : IDebugClient6*, string : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string_wide.call(this, string)
+  end
+  def set_event_context_callbacks(this : IDebugClient6*, callbacks : IDebugEventContextCallbacks) : HRESULT
+    @lpVtbl.value.set_event_context_callbacks.call(this, callbacks)
+  end
+end
+struct LibWin32::IDebugClient7
+  def query_interface(this : IDebugClient7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient7*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient7*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient7*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient7*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient7*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient7*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient7*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient7*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient7*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient7*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient7*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient7*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient7*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient7*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient7*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient7*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient7*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient7*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient7*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient7*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient7*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient7*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient7*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient7*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient7*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient7*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient7*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient7*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient7*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient7*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient7*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient7*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient7*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient7*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient7*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient7*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient7*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient7*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient7*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient7*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient7*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient7*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient7*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient7*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient7*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient7*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient7*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient7*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient7*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient7*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient7*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def open_dump_file_wide(this : IDebugClient7*, filename : LibC::LPWSTR, filehandle : UInt64) : HRESULT
+    @lpVtbl.value.open_dump_file_wide.call(this, filename, filehandle)
+  end
+  def write_dump_file_wide(this : IDebugClient7*, filename : LibC::LPWSTR, filehandle : UInt64, qualifier : UInt32, formatflags : UInt32, comment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_dump_file_wide.call(this, filename, filehandle, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file_wide(this : IDebugClient7*, filename : LibC::LPWSTR, filehandle : UInt64, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file_wide.call(this, filename, filehandle, type)
+  end
+  def get_number_dump_files(this : IDebugClient7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_dump_files.call(this, number)
+  end
+  def get_dump_file(this : IDebugClient7*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def get_dump_file_wide(this : IDebugClient7*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file_wide.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def attach_kernel_wide(this : IDebugClient7*, flags : UInt32, connectoptions : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.attach_kernel_wide.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options_wide(this : IDebugClient7*, buffer : Char*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options_wide.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options_wide(this : IDebugClient7*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options_wide.call(this, options)
+  end
+  def start_process_server_wide(this : IDebugClient7*, flags : UInt32, options : LibC::LPWSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server_wide.call(this, flags, options, reserved)
+  end
+  def connect_process_server_wide(this : IDebugClient7*, remoteoptions : LibC::LPWSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server_wide.call(this, remoteoptions, server)
+  end
+  def start_server_wide(this : IDebugClient7*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.start_server_wide.call(this, options)
+  end
+  def output_servers_wide(this : IDebugClient7*, outputcontrol : UInt32, machine : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers_wide.call(this, outputcontrol, machine, flags)
+  end
+  def get_output_callbacks_wide(this : IDebugClient7*, callbacks : IDebugOutputCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_output_callbacks_wide.call(this, callbacks)
+  end
+  def set_output_callbacks_wide(this : IDebugClient7*, callbacks : IDebugOutputCallbacksWide) : HRESULT
+    @lpVtbl.value.set_output_callbacks_wide.call(this, callbacks)
+  end
+  def get_output_line_prefix_wide(this : IDebugClient7*, buffer : Char*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix_wide.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix_wide(this : IDebugClient7*, prefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix_wide.call(this, prefix)
+  end
+  def get_identity_wide(this : IDebugClient7*, buffer : Char*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_wide.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity_wide(this : IDebugClient7*, outputcontrol : UInt32, flags : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_identity_wide.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks_wide(this : IDebugClient7*, callbacks : IDebugEventCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_event_callbacks_wide.call(this, callbacks)
+  end
+  def set_event_callbacks_wide(this : IDebugClient7*, callbacks : IDebugEventCallbacksWide) : HRESULT
+    @lpVtbl.value.set_event_callbacks_wide.call(this, callbacks)
+  end
+  def create_process2(this : IDebugClient7*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR) : HRESULT
+    @lpVtbl.value.create_process2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process2_wide(this : IDebugClient7*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_process2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process_and_attach2(this : IDebugClient7*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def create_process_and_attach2_wide(this : IDebugClient7*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def push_output_line_prefix(this : IDebugClient7*, newprefix : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix.call(this, newprefix, handle)
+  end
+  def push_output_line_prefix_wide(this : IDebugClient7*, newprefix : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix_wide.call(this, newprefix, handle)
+  end
+  def pop_output_line_prefix(this : IDebugClient7*, handle : UInt64) : HRESULT
+    @lpVtbl.value.pop_output_line_prefix.call(this, handle)
+  end
+  def get_number_input_callbacks(this : IDebugClient7*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_input_callbacks.call(this, count)
+  end
+  def get_number_output_callbacks(this : IDebugClient7*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_output_callbacks.call(this, count)
+  end
+  def get_number_event_callbacks(this : IDebugClient7*, eventflags : UInt32, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_callbacks.call(this, eventflags, count)
+  end
+  def get_quit_lock_string(this : IDebugClient7*, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string(this : IDebugClient7*, string : PSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string.call(this, string)
+  end
+  def get_quit_lock_string_wide(this : IDebugClient7*, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string_wide.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string_wide(this : IDebugClient7*, string : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string_wide.call(this, string)
+  end
+  def set_event_context_callbacks(this : IDebugClient7*, callbacks : IDebugEventContextCallbacks) : HRESULT
+    @lpVtbl.value.set_event_context_callbacks.call(this, callbacks)
+  end
+  def set_client_context(this : IDebugClient7*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_client_context.call(this, context, contextsize)
+  end
+end
+struct LibWin32::IDebugClient8
+  def query_interface(this : IDebugClient8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugClient8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugClient8*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_kernel(this : IDebugClient8*, flags : UInt32, connectoptions : PSTR) : HRESULT
+    @lpVtbl.value.attach_kernel.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options(this : IDebugClient8*, buffer : UInt8*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options(this : IDebugClient8*, options : PSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options.call(this, options)
+  end
+  def start_process_server(this : IDebugClient8*, flags : UInt32, options : PSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server.call(this, flags, options, reserved)
+  end
+  def connect_process_server(this : IDebugClient8*, remoteoptions : PSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server.call(this, remoteoptions, server)
+  end
+  def disconnect_process_server(this : IDebugClient8*, server : UInt64) : HRESULT
+    @lpVtbl.value.disconnect_process_server.call(this, server)
+  end
+  def get_running_process_system_ids(this : IDebugClient8*, server : UInt64, ids : UInt32*, count : UInt32, actualcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_ids.call(this, server, ids, count, actualcount)
+  end
+  def get_running_process_system_id_by_executable_name(this : IDebugClient8*, server : UInt64, exename : PSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description(this : IDebugClient8*, server : UInt64, systemid : UInt32, flags : UInt32, exename : UInt8*, exenamesize : UInt32, actualexenamesize : UInt32*, description : UInt8*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def attach_process(this : IDebugClient8*, server : UInt64, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.attach_process.call(this, server, processid, attachflags)
+  end
+  def create_process_a(this : IDebugClient8*, server : UInt64, commandline : PSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach(this : IDebugClient8*, server : UInt64, commandline : PSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def get_process_options(this : IDebugClient8*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_options.call(this, options)
+  end
+  def add_process_options(this : IDebugClient8*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_process_options.call(this, options)
+  end
+  def remove_process_options(this : IDebugClient8*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_process_options.call(this, options)
+  end
+  def set_process_options(this : IDebugClient8*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_process_options.call(this, options)
+  end
+  def open_dump_file(this : IDebugClient8*, dumpfile : PSTR) : HRESULT
+    @lpVtbl.value.open_dump_file.call(this, dumpfile)
+  end
+  def write_dump_file(this : IDebugClient8*, dumpfile : PSTR, qualifier : UInt32) : HRESULT
+    @lpVtbl.value.write_dump_file.call(this, dumpfile, qualifier)
+  end
+  def connect_session(this : IDebugClient8*, flags : UInt32, historylimit : UInt32) : HRESULT
+    @lpVtbl.value.connect_session.call(this, flags, historylimit)
+  end
+  def start_server(this : IDebugClient8*, options : PSTR) : HRESULT
+    @lpVtbl.value.start_server.call(this, options)
+  end
+  def output_servers(this : IDebugClient8*, outputcontrol : UInt32, machine : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers.call(this, outputcontrol, machine, flags)
+  end
+  def terminate_processes(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.terminate_processes.call(this)
+  end
+  def detach_processes(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.detach_processes.call(this)
+  end
+  def end_session(this : IDebugClient8*, flags : UInt32) : HRESULT
+    @lpVtbl.value.end_session.call(this, flags)
+  end
+  def get_exit_code(this : IDebugClient8*, code : UInt32*) : HRESULT
+    @lpVtbl.value.get_exit_code.call(this, code)
+  end
+  def dispatch_callbacks(this : IDebugClient8*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.dispatch_callbacks.call(this, timeout)
+  end
+  def exit_dispatch(this : IDebugClient8*, client : IDebugClient) : HRESULT
+    @lpVtbl.value.exit_dispatch.call(this, client)
+  end
+  def create_client(this : IDebugClient8*, client : IDebugClient*) : HRESULT
+    @lpVtbl.value.create_client.call(this, client)
+  end
+  def get_input_callbacks(this : IDebugClient8*, callbacks : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.get_input_callbacks.call(this, callbacks)
+  end
+  def set_input_callbacks(this : IDebugClient8*, callbacks : IDebugInputCallbacks) : HRESULT
+    @lpVtbl.value.set_input_callbacks.call(this, callbacks)
+  end
+  def get_output_callbacks(this : IDebugClient8*, callbacks : IDebugOutputCallbacks*) : HRESULT
+    @lpVtbl.value.get_output_callbacks.call(this, callbacks)
+  end
+  def set_output_callbacks(this : IDebugClient8*, callbacks : IDebugOutputCallbacks) : HRESULT
+    @lpVtbl.value.set_output_callbacks.call(this, callbacks)
+  end
+  def get_output_mask(this : IDebugClient8*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_mask.call(this, mask)
+  end
+  def set_output_mask(this : IDebugClient8*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_output_mask.call(this, mask)
+  end
+  def get_other_output_mask(this : IDebugClient8*, client : IDebugClient, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_other_output_mask.call(this, client, mask)
+  end
+  def set_other_output_mask(this : IDebugClient8*, client : IDebugClient, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_other_output_mask.call(this, client, mask)
+  end
+  def get_output_width(this : IDebugClient8*, columns : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_width.call(this, columns)
+  end
+  def set_output_width(this : IDebugClient8*, columns : UInt32) : HRESULT
+    @lpVtbl.value.set_output_width.call(this, columns)
+  end
+  def get_output_line_prefix(this : IDebugClient8*, buffer : UInt8*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix(this : IDebugClient8*, prefix : PSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix.call(this, prefix)
+  end
+  def get_identity(this : IDebugClient8*, buffer : UInt8*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity(this : IDebugClient8*, outputcontrol : UInt32, flags : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_identity.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks(this : IDebugClient8*, callbacks : IDebugEventCallbacks*) : HRESULT
+    @lpVtbl.value.get_event_callbacks.call(this, callbacks)
+  end
+  def set_event_callbacks(this : IDebugClient8*, callbacks : IDebugEventCallbacks) : HRESULT
+    @lpVtbl.value.set_event_callbacks.call(this, callbacks)
+  end
+  def flush_callbacks(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.flush_callbacks.call(this)
+  end
+  def write_dump_file2(this : IDebugClient8*, dumpfile : PSTR, qualifier : UInt32, formatflags : UInt32, comment : PSTR) : HRESULT
+    @lpVtbl.value.write_dump_file2.call(this, dumpfile, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file(this : IDebugClient8*, infofile : PSTR, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file.call(this, infofile, type)
+  end
+  def end_process_server(this : IDebugClient8*, server : UInt64) : HRESULT
+    @lpVtbl.value.end_process_server.call(this, server)
+  end
+  def wait_for_process_server_end(this : IDebugClient8*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_process_server_end.call(this, timeout)
+  end
+  def is_kernel_debugger_enabled(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.is_kernel_debugger_enabled.call(this)
+  end
+  def terminate_current_process(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.terminate_current_process.call(this)
+  end
+  def detach_current_process(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.detach_current_process.call(this)
+  end
+  def abandon_current_process(this : IDebugClient8*) : HRESULT
+    @lpVtbl.value.abandon_current_process.call(this)
+  end
+  def get_running_process_system_id_by_executable_name_wide(this : IDebugClient8*, server : UInt64, exename : LibC::LPWSTR, flags : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_system_id_by_executable_name_wide.call(this, server, exename, flags, id)
+  end
+  def get_running_process_description_wide(this : IDebugClient8*, server : UInt64, systemid : UInt32, flags : UInt32, exename : Char*, exenamesize : UInt32, actualexenamesize : UInt32*, description : Char*, descriptionsize : UInt32, actualdescriptionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_running_process_description_wide.call(this, server, systemid, flags, exename, exenamesize, actualexenamesize, description, descriptionsize, actualdescriptionsize)
+  end
+  def create_process_wide(this : IDebugClient8*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_wide.call(this, server, commandline, createflags)
+  end
+  def create_process_and_attach_wide(this : IDebugClient8*, server : UInt64, commandline : LibC::LPWSTR, createflags : UInt32, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach_wide.call(this, server, commandline, createflags, processid, attachflags)
+  end
+  def open_dump_file_wide(this : IDebugClient8*, filename : LibC::LPWSTR, filehandle : UInt64) : HRESULT
+    @lpVtbl.value.open_dump_file_wide.call(this, filename, filehandle)
+  end
+  def write_dump_file_wide(this : IDebugClient8*, filename : LibC::LPWSTR, filehandle : UInt64, qualifier : UInt32, formatflags : UInt32, comment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_dump_file_wide.call(this, filename, filehandle, qualifier, formatflags, comment)
+  end
+  def add_dump_information_file_wide(this : IDebugClient8*, filename : LibC::LPWSTR, filehandle : UInt64, type : UInt32) : HRESULT
+    @lpVtbl.value.add_dump_information_file_wide.call(this, filename, filehandle, type)
+  end
+  def get_number_dump_files(this : IDebugClient8*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_dump_files.call(this, number)
+  end
+  def get_dump_file(this : IDebugClient8*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def get_dump_file_wide(this : IDebugClient8*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*, handle : UInt64*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_file_wide.call(this, index, buffer, buffersize, namesize, handle, type)
+  end
+  def attach_kernel_wide(this : IDebugClient8*, flags : UInt32, connectoptions : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.attach_kernel_wide.call(this, flags, connectoptions)
+  end
+  def get_kernel_connection_options_wide(this : IDebugClient8*, buffer : Char*, buffersize : UInt32, optionssize : UInt32*) : HRESULT
+    @lpVtbl.value.get_kernel_connection_options_wide.call(this, buffer, buffersize, optionssize)
+  end
+  def set_kernel_connection_options_wide(this : IDebugClient8*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_kernel_connection_options_wide.call(this, options)
+  end
+  def start_process_server_wide(this : IDebugClient8*, flags : UInt32, options : LibC::LPWSTR, reserved : Void*) : HRESULT
+    @lpVtbl.value.start_process_server_wide.call(this, flags, options, reserved)
+  end
+  def connect_process_server_wide(this : IDebugClient8*, remoteoptions : LibC::LPWSTR, server : UInt64*) : HRESULT
+    @lpVtbl.value.connect_process_server_wide.call(this, remoteoptions, server)
+  end
+  def start_server_wide(this : IDebugClient8*, options : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.start_server_wide.call(this, options)
+  end
+  def output_servers_wide(this : IDebugClient8*, outputcontrol : UInt32, machine : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_servers_wide.call(this, outputcontrol, machine, flags)
+  end
+  def get_output_callbacks_wide(this : IDebugClient8*, callbacks : IDebugOutputCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_output_callbacks_wide.call(this, callbacks)
+  end
+  def set_output_callbacks_wide(this : IDebugClient8*, callbacks : IDebugOutputCallbacksWide) : HRESULT
+    @lpVtbl.value.set_output_callbacks_wide.call(this, callbacks)
+  end
+  def get_output_line_prefix_wide(this : IDebugClient8*, buffer : Char*, buffersize : UInt32, prefixsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_line_prefix_wide.call(this, buffer, buffersize, prefixsize)
+  end
+  def set_output_line_prefix_wide(this : IDebugClient8*, prefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_line_prefix_wide.call(this, prefix)
+  end
+  def get_identity_wide(this : IDebugClient8*, buffer : Char*, buffersize : UInt32, identitysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_wide.call(this, buffer, buffersize, identitysize)
+  end
+  def output_identity_wide(this : IDebugClient8*, outputcontrol : UInt32, flags : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_identity_wide.call(this, outputcontrol, flags, format)
+  end
+  def get_event_callbacks_wide(this : IDebugClient8*, callbacks : IDebugEventCallbacksWide*) : HRESULT
+    @lpVtbl.value.get_event_callbacks_wide.call(this, callbacks)
+  end
+  def set_event_callbacks_wide(this : IDebugClient8*, callbacks : IDebugEventCallbacksWide) : HRESULT
+    @lpVtbl.value.set_event_callbacks_wide.call(this, callbacks)
+  end
+  def create_process2(this : IDebugClient8*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR) : HRESULT
+    @lpVtbl.value.create_process2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process2_wide(this : IDebugClient8*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_process2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment)
+  end
+  def create_process_and_attach2(this : IDebugClient8*, server : UInt64, commandline : PSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : PSTR, environment : PSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def create_process_and_attach2_wide(this : IDebugClient8*, server : UInt64, commandline : LibC::LPWSTR, optionsbuffer : Void*, optionsbuffersize : UInt32, initialdirectory : LibC::LPWSTR, environment : LibC::LPWSTR, processid : UInt32, attachflags : UInt32) : HRESULT
+    @lpVtbl.value.create_process_and_attach2_wide.call(this, server, commandline, optionsbuffer, optionsbuffersize, initialdirectory, environment, processid, attachflags)
+  end
+  def push_output_line_prefix(this : IDebugClient8*, newprefix : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix.call(this, newprefix, handle)
+  end
+  def push_output_line_prefix_wide(this : IDebugClient8*, newprefix : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.push_output_line_prefix_wide.call(this, newprefix, handle)
+  end
+  def pop_output_line_prefix(this : IDebugClient8*, handle : UInt64) : HRESULT
+    @lpVtbl.value.pop_output_line_prefix.call(this, handle)
+  end
+  def get_number_input_callbacks(this : IDebugClient8*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_input_callbacks.call(this, count)
+  end
+  def get_number_output_callbacks(this : IDebugClient8*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_output_callbacks.call(this, count)
+  end
+  def get_number_event_callbacks(this : IDebugClient8*, eventflags : UInt32, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_callbacks.call(this, eventflags, count)
+  end
+  def get_quit_lock_string(this : IDebugClient8*, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string(this : IDebugClient8*, string : PSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string.call(this, string)
+  end
+  def get_quit_lock_string_wide(this : IDebugClient8*, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_quit_lock_string_wide.call(this, buffer, buffersize, stringsize)
+  end
+  def set_quit_lock_string_wide(this : IDebugClient8*, string : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_quit_lock_string_wide.call(this, string)
+  end
+  def set_event_context_callbacks(this : IDebugClient8*, callbacks : IDebugEventContextCallbacks) : HRESULT
+    @lpVtbl.value.set_event_context_callbacks.call(this, callbacks)
+  end
+  def set_client_context(this : IDebugClient8*, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_client_context.call(this, context, contextsize)
+  end
+  def open_dump_file_wide2(this : IDebugClient8*, filename : LibC::LPWSTR, filehandle : UInt64, alternatearch : UInt32) : HRESULT
+    @lpVtbl.value.open_dump_file_wide2.call(this, filename, filehandle, alternatearch)
+  end
+end
+struct LibWin32::IDebugPlmClient
+  def query_interface(this : IDebugPlmClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPlmClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPlmClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def launch_plm_package_for_debug_wide(this : IDebugPlmClient*, server : UInt64, timeout : UInt32, packagefullname : LibC::LPWSTR, appname : LibC::LPWSTR, arguments : LibC::LPWSTR, processid : UInt32*, threadid : UInt32*) : HRESULT
+    @lpVtbl.value.launch_plm_package_for_debug_wide.call(this, server, timeout, packagefullname, appname, arguments, processid, threadid)
+  end
+end
+struct LibWin32::IDebugPlmClient2
+  def query_interface(this : IDebugPlmClient2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPlmClient2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPlmClient2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def launch_plm_package_for_debug_wide(this : IDebugPlmClient2*, server : UInt64, timeout : UInt32, packagefullname : LibC::LPWSTR, appname : LibC::LPWSTR, arguments : LibC::LPWSTR, processid : UInt32*, threadid : UInt32*) : HRESULT
+    @lpVtbl.value.launch_plm_package_for_debug_wide.call(this, server, timeout, packagefullname, appname, arguments, processid, threadid)
+  end
+  def launch_plm_bg_task_for_debug_wide(this : IDebugPlmClient2*, server : UInt64, timeout : UInt32, packagefullname : LibC::LPWSTR, backgroundtaskid : LibC::LPWSTR, processid : UInt32*, threadid : UInt32*) : HRESULT
+    @lpVtbl.value.launch_plm_bg_task_for_debug_wide.call(this, server, timeout, packagefullname, backgroundtaskid, processid, threadid)
+  end
+end
+struct LibWin32::IDebugPlmClient3
+  def query_interface(this : IDebugPlmClient3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPlmClient3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPlmClient3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def launch_plm_package_for_debug_wide(this : IDebugPlmClient3*, server : UInt64, timeout : UInt32, packagefullname : LibC::LPWSTR, appname : LibC::LPWSTR, arguments : LibC::LPWSTR, processid : UInt32*, threadid : UInt32*) : HRESULT
+    @lpVtbl.value.launch_plm_package_for_debug_wide.call(this, server, timeout, packagefullname, appname, arguments, processid, threadid)
+  end
+  def launch_plm_bg_task_for_debug_wide(this : IDebugPlmClient3*, server : UInt64, timeout : UInt32, packagefullname : LibC::LPWSTR, backgroundtaskid : LibC::LPWSTR, processid : UInt32*, threadid : UInt32*) : HRESULT
+    @lpVtbl.value.launch_plm_bg_task_for_debug_wide.call(this, server, timeout, packagefullname, backgroundtaskid, processid, threadid)
+  end
+  def query_plm_package_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR, stream : IDebugOutputStream) : HRESULT
+    @lpVtbl.value.query_plm_package_wide.call(this, server, packagefullname, stream)
+  end
+  def query_plm_package_list(this : IDebugPlmClient3*, server : UInt64, stream : IDebugOutputStream) : HRESULT
+    @lpVtbl.value.query_plm_package_list.call(this, server, stream)
+  end
+  def enable_plm_package_debug_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.enable_plm_package_debug_wide.call(this, server, packagefullname)
+  end
+  def disable_plm_package_debug_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.disable_plm_package_debug_wide.call(this, server, packagefullname)
+  end
+  def suspend_plm_package_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.suspend_plm_package_wide.call(this, server, packagefullname)
+  end
+  def resume_plm_package_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resume_plm_package_wide.call(this, server, packagefullname)
+  end
+  def terminate_plm_package_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.terminate_plm_package_wide.call(this, server, packagefullname)
+  end
+  def launch_and_debug_plm_app_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR, appname : LibC::LPWSTR, arguments : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.launch_and_debug_plm_app_wide.call(this, server, packagefullname, appname, arguments)
+  end
+  def activate_and_debug_plm_bg_task_wide(this : IDebugPlmClient3*, server : UInt64, packagefullname : LibC::LPWSTR, backgroundtaskid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.activate_and_debug_plm_bg_task_wide.call(this, server, packagefullname, backgroundtaskid)
+  end
+end
+struct LibWin32::IDebugOutputStream
+  def query_interface(this : IDebugOutputStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugOutputStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugOutputStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def write(this : IDebugOutputStream*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write.call(this, psz)
+  end
+end
+struct LibWin32::IDebugControl
+  def query_interface(this : IDebugControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+end
+struct LibWin32::IDebugControl2
+  def query_interface(this : IDebugControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl2*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl2*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl2*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl2*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl2*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl2*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl2*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl2*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl2*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl2*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl2*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl2*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl2*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl2*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl2*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl2*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl2*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl2*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl2*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl2*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl2*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl2*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl2*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl2*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl2*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl2*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl2*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl2*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl2*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl2*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl2*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl2*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl2*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl2*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl2*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl2*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl2*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl2*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl2*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl2*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl2*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl2*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl2*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl2*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl2*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl2*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl2*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl2*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl2*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl2*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl2*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl2*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl2*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl2*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl2*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl2*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl2*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl2*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl2*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl2*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl2*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl2*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl2*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl2*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl2*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl2*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl2*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl2*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl2*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl2*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl2*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl2*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl2*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl2*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl2*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl2*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl2*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl2*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl2*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl2*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl2*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl2*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl2*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl2*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl2*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl2*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl2*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl2*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl2*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+end
+struct LibWin32::IDebugControl3
+  def query_interface(this : IDebugControl3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl3*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl3*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl3*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl3*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl3*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl3*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl3*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl3*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl3*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl3*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl3*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl3*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl3*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl3*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl3*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl3*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl3*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl3*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl3*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl3*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl3*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl3*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl3*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl3*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl3*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl3*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl3*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl3*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl3*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl3*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl3*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl3*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl3*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl3*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl3*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl3*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl3*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl3*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl3*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl3*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl3*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl3*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl3*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl3*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl3*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl3*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl3*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl3*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl3*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl3*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl3*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl3*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl3*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl3*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl3*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl3*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl3*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl3*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl3*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl3*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl3*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl3*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl3*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl3*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl3*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl3*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl3*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl3*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl3*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl3*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl3*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl3*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl3*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl3*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl3*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl3*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl3*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl3*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl3*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl3*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl3*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl3*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl3*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl3*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl3*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl3*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl3*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl3*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl3*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl3*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+  def get_assembly_options(this : IDebugControl3*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_assembly_options.call(this, options)
+  end
+  def add_assembly_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_assembly_options.call(this, options)
+  end
+  def remove_assembly_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_assembly_options.call(this, options)
+  end
+  def set_assembly_options(this : IDebugControl3*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_assembly_options.call(this, options)
+  end
+  def get_expression_syntax(this : IDebugControl3*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax(this : IDebugControl3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax_by_name(this : IDebugControl3*, abbrevname : PSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name.call(this, abbrevname)
+  end
+  def get_number_expression_syntaxes(this : IDebugControl3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_expression_syntaxes.call(this, number)
+  end
+  def get_expression_syntax_names(this : IDebugControl3*, index : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_number_events(this : IDebugControl3*, events : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_events.call(this, events)
+  end
+  def get_event_index_description(this : IDebugControl3*, index : UInt32, which : UInt32, buffer : PSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_current_event_index(this : IDebugControl3*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_event_index.call(this, index)
+  end
+  def set_next_event_index(this : IDebugControl3*, relation : UInt32, value : UInt32, nextindex : UInt32*) : HRESULT
+    @lpVtbl.value.set_next_event_index.call(this, relation, value, nextindex)
+  end
+end
+struct LibWin32::IDebugControl4
+  def query_interface(this : IDebugControl4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl4*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl4*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl4*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl4*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl4*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl4*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl4*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl4*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl4*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl4*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl4*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl4*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl4*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl4*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl4*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl4*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl4*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl4*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl4*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl4*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl4*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl4*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl4*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl4*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl4*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl4*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl4*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl4*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl4*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl4*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl4*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl4*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl4*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl4*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl4*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl4*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl4*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl4*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl4*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl4*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl4*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl4*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl4*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl4*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl4*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl4*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl4*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl4*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl4*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl4*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl4*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl4*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl4*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl4*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl4*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl4*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl4*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl4*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl4*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl4*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl4*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl4*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl4*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl4*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl4*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl4*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl4*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl4*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl4*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl4*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl4*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl4*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl4*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl4*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl4*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl4*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl4*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl4*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl4*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl4*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl4*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl4*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl4*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl4*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl4*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl4*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+  def get_assembly_options(this : IDebugControl4*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_assembly_options.call(this, options)
+  end
+  def add_assembly_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_assembly_options.call(this, options)
+  end
+  def remove_assembly_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_assembly_options.call(this, options)
+  end
+  def set_assembly_options(this : IDebugControl4*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_assembly_options.call(this, options)
+  end
+  def get_expression_syntax(this : IDebugControl4*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax(this : IDebugControl4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax_by_name(this : IDebugControl4*, abbrevname : PSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name.call(this, abbrevname)
+  end
+  def get_number_expression_syntaxes(this : IDebugControl4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_expression_syntaxes.call(this, number)
+  end
+  def get_expression_syntax_names(this : IDebugControl4*, index : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_number_events(this : IDebugControl4*, events : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_events.call(this, events)
+  end
+  def get_event_index_description(this : IDebugControl4*, index : UInt32, which : UInt32, buffer : PSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_current_event_index(this : IDebugControl4*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_event_index.call(this, index)
+  end
+  def set_next_event_index(this : IDebugControl4*, relation : UInt32, value : UInt32, nextindex : UInt32*) : HRESULT
+    @lpVtbl.value.set_next_event_index.call(this, relation, value, nextindex)
+  end
+  def get_log_file_wide(this : IDebugControl4*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file_wide.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file_wide(this : IDebugControl4*, file : LibC::LPWSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file_wide.call(this, file, append)
+  end
+  def input_wide(this : IDebugControl4*, buffer : Char*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input_wide.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input_wide(this : IDebugControl4*, buffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.return_input_wide.call(this, buffer)
+  end
+  def output_wide(this : IDebugControl4*, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_wide.call(this, mask, format)
+  end
+  def output_va_list_wide(this : IDebugControl4*, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list_wide.call(this, mask, format, args)
+  end
+  def controlled_output_wide(this : IDebugControl4*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.controlled_output_wide.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list_wide(this : IDebugControl4*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list_wide.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt_wide(this : IDebugControl4*, outputcontrol : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_prompt_wide.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list_wide(this : IDebugControl4*, outputcontrol : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list_wide.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text_wide(this : IDebugControl4*, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text_wide.call(this, buffer, buffersize, textsize)
+  end
+  def assemble_wide(this : IDebugControl4*, offset : UInt64, instr : LibC::LPWSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble_wide.call(this, offset, instr, endoffset)
+  end
+  def disassemble_wide(this : IDebugControl4*, offset : UInt64, flags : UInt32, buffer : Char*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble_wide.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_processor_type_names_wide(this : IDebugControl4*, type : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names_wide.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_text_macro_wide(this : IDebugControl4*, slot : UInt32, buffer : Char*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro_wide.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro_wide(this : IDebugControl4*, slot : UInt32, macro_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_macro_wide.call(this, slot, macro_)
+  end
+  def evaluate_wide(this : IDebugControl4*, expression : LibC::LPWSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate_wide.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def execute_wide(this : IDebugControl4*, outputcontrol : UInt32, command : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_wide.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file_wide(this : IDebugControl4*, outputcontrol : UInt32, commandfile : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file_wide.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_breakpoint_by_index2(this : IDebugControl4*, index : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index2.call(this, index, bp)
+  end
+  def get_breakpoint_by_id2(this : IDebugControl4*, id : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id2.call(this, id, bp)
+  end
+  def add_breakpoint2(this : IDebugControl4*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.add_breakpoint2.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint2(this : IDebugControl4*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.remove_breakpoint2.call(this, bp)
+  end
+  def add_extension_wide(this : IDebugControl4*, path : LibC::LPWSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension_wide.call(this, path, flags, handle)
+  end
+  def get_extension_by_path_wide(this : IDebugControl4*, path : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path_wide.call(this, path, handle)
+  end
+  def call_extension_wide(this : IDebugControl4*, handle : UInt64, function : LibC::LPWSTR, arguments : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.call_extension_wide.call(this, handle, function, arguments)
+  end
+  def get_extension_function_wide(this : IDebugControl4*, handle : UInt64, funcname : LibC::LPWSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function_wide.call(this, handle, funcname, function)
+  end
+  def get_event_filter_text_wide(this : IDebugControl4*, index : UInt32, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text_wide.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command_wide(this : IDebugControl4*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command_wide(this : IDebugControl4*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command_wide.call(this, index, command)
+  end
+  def get_specific_filter_argument_wide(this : IDebugControl4*, index : UInt32, buffer : Char*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument_wide.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument_wide(this : IDebugControl4*, index : UInt32, argument : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument_wide.call(this, index, argument)
+  end
+  def get_exception_filter_second_command_wide(this : IDebugControl4*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command_wide(this : IDebugControl4*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command_wide.call(this, index, command)
+  end
+  def get_last_event_information_wide(this : IDebugControl4*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : Char*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information_wide.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_text_replacement_wide(this : IDebugControl4*, srctext : LibC::LPWSTR, index : UInt32, srcbuffer : Char*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : Char*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement_wide.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement_wide(this : IDebugControl4*, srctext : LibC::LPWSTR, dsttext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement_wide.call(this, srctext, dsttext)
+  end
+  def set_expression_syntax_by_name_wide(this : IDebugControl4*, abbrevname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name_wide.call(this, abbrevname)
+  end
+  def get_expression_syntax_names_wide(this : IDebugControl4*, index : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names_wide.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_event_index_description_wide(this : IDebugControl4*, index : UInt32, which : UInt32, buffer : LibC::LPWSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description_wide.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_log_file2(this : IDebugControl4*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2(this : IDebugControl4*, file : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2.call(this, file, flags)
+  end
+  def get_log_file2_wide(this : IDebugControl4*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2_wide.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2_wide(this : IDebugControl4*, file : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2_wide.call(this, file, flags)
+  end
+  def get_system_version_values(this : IDebugControl4*, platformid : UInt32*, win32major : UInt32*, win32minor : UInt32*, kdmajor : UInt32*, kdminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_values.call(this, platformid, win32major, win32minor, kdmajor, kdminor)
+  end
+  def get_system_version_string(this : IDebugControl4*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_system_version_string_wide(this : IDebugControl4*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string_wide.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_context_stack_trace(this : IDebugControl4*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace(this : IDebugControl4*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_stored_event_information(this : IDebugControl4*, type : UInt32*, processid : UInt32*, threadid : UInt32*, context : Void*, contextsize : UInt32, contextused : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*) : HRESULT
+    @lpVtbl.value.get_stored_event_information.call(this, type, processid, threadid, context, contextsize, contextused, extrainformation, extrainformationsize, extrainformationused)
+  end
+  def get_managed_status(this : IDebugControl4*, flags : UInt32*, whichstring : UInt32, string : UInt8*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def get_managed_status_wide(this : IDebugControl4*, flags : UInt32*, whichstring : UInt32, string : Char*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status_wide.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def reset_managed_status(this : IDebugControl4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.reset_managed_status.call(this, flags)
+  end
+end
+struct LibWin32::IDebugControl5
+  def query_interface(this : IDebugControl5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl5*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl5*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl5*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl5*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl5*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl5*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl5*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl5*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl5*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl5*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl5*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl5*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl5*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl5*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl5*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl5*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl5*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl5*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl5*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl5*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl5*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl5*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl5*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl5*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl5*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl5*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl5*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl5*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl5*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl5*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl5*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl5*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl5*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl5*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl5*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl5*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl5*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl5*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl5*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl5*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl5*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl5*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl5*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl5*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl5*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl5*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl5*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl5*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl5*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl5*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl5*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl5*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl5*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl5*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl5*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl5*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl5*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl5*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl5*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl5*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl5*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl5*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl5*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl5*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl5*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl5*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl5*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl5*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl5*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl5*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl5*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl5*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl5*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl5*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl5*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl5*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl5*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl5*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl5*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl5*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl5*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl5*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl5*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl5*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl5*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl5*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl5*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl5*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+  def get_assembly_options(this : IDebugControl5*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_assembly_options.call(this, options)
+  end
+  def add_assembly_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_assembly_options.call(this, options)
+  end
+  def remove_assembly_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_assembly_options.call(this, options)
+  end
+  def set_assembly_options(this : IDebugControl5*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_assembly_options.call(this, options)
+  end
+  def get_expression_syntax(this : IDebugControl5*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax(this : IDebugControl5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax_by_name(this : IDebugControl5*, abbrevname : PSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name.call(this, abbrevname)
+  end
+  def get_number_expression_syntaxes(this : IDebugControl5*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_expression_syntaxes.call(this, number)
+  end
+  def get_expression_syntax_names(this : IDebugControl5*, index : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_number_events(this : IDebugControl5*, events : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_events.call(this, events)
+  end
+  def get_event_index_description(this : IDebugControl5*, index : UInt32, which : UInt32, buffer : PSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_current_event_index(this : IDebugControl5*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_event_index.call(this, index)
+  end
+  def set_next_event_index(this : IDebugControl5*, relation : UInt32, value : UInt32, nextindex : UInt32*) : HRESULT
+    @lpVtbl.value.set_next_event_index.call(this, relation, value, nextindex)
+  end
+  def get_log_file_wide(this : IDebugControl5*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file_wide.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file_wide(this : IDebugControl5*, file : LibC::LPWSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file_wide.call(this, file, append)
+  end
+  def input_wide(this : IDebugControl5*, buffer : Char*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input_wide.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input_wide(this : IDebugControl5*, buffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.return_input_wide.call(this, buffer)
+  end
+  def output_wide(this : IDebugControl5*, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_wide.call(this, mask, format)
+  end
+  def output_va_list_wide(this : IDebugControl5*, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list_wide.call(this, mask, format, args)
+  end
+  def controlled_output_wide(this : IDebugControl5*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.controlled_output_wide.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list_wide(this : IDebugControl5*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list_wide.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt_wide(this : IDebugControl5*, outputcontrol : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_prompt_wide.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list_wide(this : IDebugControl5*, outputcontrol : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list_wide.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text_wide(this : IDebugControl5*, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text_wide.call(this, buffer, buffersize, textsize)
+  end
+  def assemble_wide(this : IDebugControl5*, offset : UInt64, instr : LibC::LPWSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble_wide.call(this, offset, instr, endoffset)
+  end
+  def disassemble_wide(this : IDebugControl5*, offset : UInt64, flags : UInt32, buffer : Char*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble_wide.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_processor_type_names_wide(this : IDebugControl5*, type : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names_wide.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_text_macro_wide(this : IDebugControl5*, slot : UInt32, buffer : Char*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro_wide.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro_wide(this : IDebugControl5*, slot : UInt32, macro_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_macro_wide.call(this, slot, macro_)
+  end
+  def evaluate_wide(this : IDebugControl5*, expression : LibC::LPWSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate_wide.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def execute_wide(this : IDebugControl5*, outputcontrol : UInt32, command : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_wide.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file_wide(this : IDebugControl5*, outputcontrol : UInt32, commandfile : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file_wide.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_breakpoint_by_index2(this : IDebugControl5*, index : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index2.call(this, index, bp)
+  end
+  def get_breakpoint_by_id2(this : IDebugControl5*, id : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id2.call(this, id, bp)
+  end
+  def add_breakpoint2(this : IDebugControl5*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.add_breakpoint2.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint2(this : IDebugControl5*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.remove_breakpoint2.call(this, bp)
+  end
+  def add_extension_wide(this : IDebugControl5*, path : LibC::LPWSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension_wide.call(this, path, flags, handle)
+  end
+  def get_extension_by_path_wide(this : IDebugControl5*, path : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path_wide.call(this, path, handle)
+  end
+  def call_extension_wide(this : IDebugControl5*, handle : UInt64, function : LibC::LPWSTR, arguments : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.call_extension_wide.call(this, handle, function, arguments)
+  end
+  def get_extension_function_wide(this : IDebugControl5*, handle : UInt64, funcname : LibC::LPWSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function_wide.call(this, handle, funcname, function)
+  end
+  def get_event_filter_text_wide(this : IDebugControl5*, index : UInt32, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text_wide.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command_wide(this : IDebugControl5*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command_wide(this : IDebugControl5*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command_wide.call(this, index, command)
+  end
+  def get_specific_filter_argument_wide(this : IDebugControl5*, index : UInt32, buffer : Char*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument_wide.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument_wide(this : IDebugControl5*, index : UInt32, argument : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument_wide.call(this, index, argument)
+  end
+  def get_exception_filter_second_command_wide(this : IDebugControl5*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command_wide(this : IDebugControl5*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command_wide.call(this, index, command)
+  end
+  def get_last_event_information_wide(this : IDebugControl5*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : Char*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information_wide.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_text_replacement_wide(this : IDebugControl5*, srctext : LibC::LPWSTR, index : UInt32, srcbuffer : Char*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : Char*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement_wide.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement_wide(this : IDebugControl5*, srctext : LibC::LPWSTR, dsttext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement_wide.call(this, srctext, dsttext)
+  end
+  def set_expression_syntax_by_name_wide(this : IDebugControl5*, abbrevname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name_wide.call(this, abbrevname)
+  end
+  def get_expression_syntax_names_wide(this : IDebugControl5*, index : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names_wide.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_event_index_description_wide(this : IDebugControl5*, index : UInt32, which : UInt32, buffer : LibC::LPWSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description_wide.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_log_file2(this : IDebugControl5*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2(this : IDebugControl5*, file : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2.call(this, file, flags)
+  end
+  def get_log_file2_wide(this : IDebugControl5*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2_wide.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2_wide(this : IDebugControl5*, file : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2_wide.call(this, file, flags)
+  end
+  def get_system_version_values(this : IDebugControl5*, platformid : UInt32*, win32major : UInt32*, win32minor : UInt32*, kdmajor : UInt32*, kdminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_values.call(this, platformid, win32major, win32minor, kdmajor, kdminor)
+  end
+  def get_system_version_string(this : IDebugControl5*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_system_version_string_wide(this : IDebugControl5*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string_wide.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_context_stack_trace(this : IDebugControl5*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace(this : IDebugControl5*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_stored_event_information(this : IDebugControl5*, type : UInt32*, processid : UInt32*, threadid : UInt32*, context : Void*, contextsize : UInt32, contextused : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*) : HRESULT
+    @lpVtbl.value.get_stored_event_information.call(this, type, processid, threadid, context, contextsize, contextused, extrainformation, extrainformationsize, extrainformationused)
+  end
+  def get_managed_status(this : IDebugControl5*, flags : UInt32*, whichstring : UInt32, string : UInt8*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def get_managed_status_wide(this : IDebugControl5*, flags : UInt32*, whichstring : UInt32, string : Char*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status_wide.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def reset_managed_status(this : IDebugControl5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.reset_managed_status.call(this, flags)
+  end
+  def get_stack_trace_ex(this : IDebugControl5*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace_ex.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def output_stack_trace_ex(this : IDebugControl5*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace_ex.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_context_stack_trace_ex(this : IDebugControl5*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace_ex.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace_ex(this : IDebugControl5*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace_ex.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_breakpoint_by_guid(this : IDebugControl5*, guid : Guid*, bp : IDebugBreakpoint3*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_guid.call(this, guid, bp)
+  end
+end
+struct LibWin32::IDebugControl6
+  def query_interface(this : IDebugControl6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl6*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl6*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl6*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl6*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl6*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl6*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl6*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl6*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl6*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl6*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl6*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl6*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl6*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl6*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl6*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl6*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl6*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl6*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl6*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl6*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl6*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl6*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl6*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl6*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl6*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl6*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl6*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl6*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl6*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl6*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl6*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl6*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl6*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl6*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl6*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl6*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl6*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl6*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl6*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl6*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl6*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl6*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl6*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl6*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl6*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl6*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl6*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl6*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl6*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl6*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl6*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl6*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl6*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl6*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl6*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl6*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl6*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl6*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl6*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl6*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl6*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl6*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl6*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl6*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl6*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl6*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl6*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl6*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl6*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl6*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl6*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl6*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl6*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl6*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl6*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl6*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl6*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl6*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl6*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl6*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl6*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl6*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl6*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl6*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl6*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl6*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl6*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl6*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl6*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl6*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl6*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl6*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl6*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+  def get_assembly_options(this : IDebugControl6*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_assembly_options.call(this, options)
+  end
+  def add_assembly_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_assembly_options.call(this, options)
+  end
+  def remove_assembly_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_assembly_options.call(this, options)
+  end
+  def set_assembly_options(this : IDebugControl6*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_assembly_options.call(this, options)
+  end
+  def get_expression_syntax(this : IDebugControl6*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax(this : IDebugControl6*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax_by_name(this : IDebugControl6*, abbrevname : PSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name.call(this, abbrevname)
+  end
+  def get_number_expression_syntaxes(this : IDebugControl6*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_expression_syntaxes.call(this, number)
+  end
+  def get_expression_syntax_names(this : IDebugControl6*, index : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_number_events(this : IDebugControl6*, events : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_events.call(this, events)
+  end
+  def get_event_index_description(this : IDebugControl6*, index : UInt32, which : UInt32, buffer : PSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_current_event_index(this : IDebugControl6*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_event_index.call(this, index)
+  end
+  def set_next_event_index(this : IDebugControl6*, relation : UInt32, value : UInt32, nextindex : UInt32*) : HRESULT
+    @lpVtbl.value.set_next_event_index.call(this, relation, value, nextindex)
+  end
+  def get_log_file_wide(this : IDebugControl6*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file_wide.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file_wide(this : IDebugControl6*, file : LibC::LPWSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file_wide.call(this, file, append)
+  end
+  def input_wide(this : IDebugControl6*, buffer : Char*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input_wide.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input_wide(this : IDebugControl6*, buffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.return_input_wide.call(this, buffer)
+  end
+  def output_wide(this : IDebugControl6*, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_wide.call(this, mask, format)
+  end
+  def output_va_list_wide(this : IDebugControl6*, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list_wide.call(this, mask, format, args)
+  end
+  def controlled_output_wide(this : IDebugControl6*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.controlled_output_wide.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list_wide(this : IDebugControl6*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list_wide.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt_wide(this : IDebugControl6*, outputcontrol : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_prompt_wide.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list_wide(this : IDebugControl6*, outputcontrol : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list_wide.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text_wide(this : IDebugControl6*, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text_wide.call(this, buffer, buffersize, textsize)
+  end
+  def assemble_wide(this : IDebugControl6*, offset : UInt64, instr : LibC::LPWSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble_wide.call(this, offset, instr, endoffset)
+  end
+  def disassemble_wide(this : IDebugControl6*, offset : UInt64, flags : UInt32, buffer : Char*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble_wide.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_processor_type_names_wide(this : IDebugControl6*, type : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names_wide.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_text_macro_wide(this : IDebugControl6*, slot : UInt32, buffer : Char*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro_wide.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro_wide(this : IDebugControl6*, slot : UInt32, macro_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_macro_wide.call(this, slot, macro_)
+  end
+  def evaluate_wide(this : IDebugControl6*, expression : LibC::LPWSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate_wide.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def execute_wide(this : IDebugControl6*, outputcontrol : UInt32, command : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_wide.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file_wide(this : IDebugControl6*, outputcontrol : UInt32, commandfile : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file_wide.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_breakpoint_by_index2(this : IDebugControl6*, index : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index2.call(this, index, bp)
+  end
+  def get_breakpoint_by_id2(this : IDebugControl6*, id : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id2.call(this, id, bp)
+  end
+  def add_breakpoint2(this : IDebugControl6*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.add_breakpoint2.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint2(this : IDebugControl6*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.remove_breakpoint2.call(this, bp)
+  end
+  def add_extension_wide(this : IDebugControl6*, path : LibC::LPWSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension_wide.call(this, path, flags, handle)
+  end
+  def get_extension_by_path_wide(this : IDebugControl6*, path : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path_wide.call(this, path, handle)
+  end
+  def call_extension_wide(this : IDebugControl6*, handle : UInt64, function : LibC::LPWSTR, arguments : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.call_extension_wide.call(this, handle, function, arguments)
+  end
+  def get_extension_function_wide(this : IDebugControl6*, handle : UInt64, funcname : LibC::LPWSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function_wide.call(this, handle, funcname, function)
+  end
+  def get_event_filter_text_wide(this : IDebugControl6*, index : UInt32, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text_wide.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command_wide(this : IDebugControl6*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command_wide(this : IDebugControl6*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command_wide.call(this, index, command)
+  end
+  def get_specific_filter_argument_wide(this : IDebugControl6*, index : UInt32, buffer : Char*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument_wide.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument_wide(this : IDebugControl6*, index : UInt32, argument : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument_wide.call(this, index, argument)
+  end
+  def get_exception_filter_second_command_wide(this : IDebugControl6*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command_wide(this : IDebugControl6*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command_wide.call(this, index, command)
+  end
+  def get_last_event_information_wide(this : IDebugControl6*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : Char*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information_wide.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_text_replacement_wide(this : IDebugControl6*, srctext : LibC::LPWSTR, index : UInt32, srcbuffer : Char*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : Char*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement_wide.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement_wide(this : IDebugControl6*, srctext : LibC::LPWSTR, dsttext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement_wide.call(this, srctext, dsttext)
+  end
+  def set_expression_syntax_by_name_wide(this : IDebugControl6*, abbrevname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name_wide.call(this, abbrevname)
+  end
+  def get_expression_syntax_names_wide(this : IDebugControl6*, index : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names_wide.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_event_index_description_wide(this : IDebugControl6*, index : UInt32, which : UInt32, buffer : LibC::LPWSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description_wide.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_log_file2(this : IDebugControl6*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2(this : IDebugControl6*, file : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2.call(this, file, flags)
+  end
+  def get_log_file2_wide(this : IDebugControl6*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2_wide.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2_wide(this : IDebugControl6*, file : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2_wide.call(this, file, flags)
+  end
+  def get_system_version_values(this : IDebugControl6*, platformid : UInt32*, win32major : UInt32*, win32minor : UInt32*, kdmajor : UInt32*, kdminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_values.call(this, platformid, win32major, win32minor, kdmajor, kdminor)
+  end
+  def get_system_version_string(this : IDebugControl6*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_system_version_string_wide(this : IDebugControl6*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string_wide.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_context_stack_trace(this : IDebugControl6*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace(this : IDebugControl6*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_stored_event_information(this : IDebugControl6*, type : UInt32*, processid : UInt32*, threadid : UInt32*, context : Void*, contextsize : UInt32, contextused : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*) : HRESULT
+    @lpVtbl.value.get_stored_event_information.call(this, type, processid, threadid, context, contextsize, contextused, extrainformation, extrainformationsize, extrainformationused)
+  end
+  def get_managed_status(this : IDebugControl6*, flags : UInt32*, whichstring : UInt32, string : UInt8*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def get_managed_status_wide(this : IDebugControl6*, flags : UInt32*, whichstring : UInt32, string : Char*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status_wide.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def reset_managed_status(this : IDebugControl6*, flags : UInt32) : HRESULT
+    @lpVtbl.value.reset_managed_status.call(this, flags)
+  end
+  def get_stack_trace_ex(this : IDebugControl6*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace_ex.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def output_stack_trace_ex(this : IDebugControl6*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace_ex.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_context_stack_trace_ex(this : IDebugControl6*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace_ex.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace_ex(this : IDebugControl6*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace_ex.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_breakpoint_by_guid(this : IDebugControl6*, guid : Guid*, bp : IDebugBreakpoint3*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_guid.call(this, guid, bp)
+  end
+  def get_execution_status_ex(this : IDebugControl6*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status_ex.call(this, status)
+  end
+  def get_synchronization_status(this : IDebugControl6*, sendsattempted : UInt32*, secondssincelastresponse : UInt32*) : HRESULT
+    @lpVtbl.value.get_synchronization_status.call(this, sendsattempted, secondssincelastresponse)
+  end
+end
+struct LibWin32::IDebugControl7
+  def query_interface(this : IDebugControl7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugControl7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugControl7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interrupt(this : IDebugControl7*) : HRESULT
+    @lpVtbl.value.get_interrupt.call(this)
+  end
+  def set_interrupt(this : IDebugControl7*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt.call(this, flags)
+  end
+  def get_interrupt_timeout(this : IDebugControl7*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_interrupt_timeout.call(this, seconds)
+  end
+  def set_interrupt_timeout(this : IDebugControl7*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_interrupt_timeout.call(this, seconds)
+  end
+  def get_log_file(this : IDebugControl7*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file(this : IDebugControl7*, file : PSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file.call(this, file, append)
+  end
+  def close_log_file(this : IDebugControl7*) : HRESULT
+    @lpVtbl.value.close_log_file.call(this)
+  end
+  def get_log_mask(this : IDebugControl7*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_mask.call(this, mask)
+  end
+  def set_log_mask(this : IDebugControl7*, mask : UInt32) : HRESULT
+    @lpVtbl.value.set_log_mask.call(this, mask)
+  end
+  def input(this : IDebugControl7*, buffer : UInt8*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input(this : IDebugControl7*, buffer : PSTR) : HRESULT
+    @lpVtbl.value.return_input.call(this, buffer)
+  end
+  def output(this : IDebugControl7*, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, format)
+  end
+  def output_va_list(this : IDebugControl7*, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list.call(this, mask, format, args)
+  end
+  def controlled_output(this : IDebugControl7*, outputcontrol : UInt32, mask : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.controlled_output.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list(this : IDebugControl7*, outputcontrol : UInt32, mask : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt(this : IDebugControl7*, outputcontrol : UInt32, format : PSTR) : HRESULT
+    @lpVtbl.value.output_prompt.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list(this : IDebugControl7*, outputcontrol : UInt32, format : PSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text(this : IDebugControl7*, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text.call(this, buffer, buffersize, textsize)
+  end
+  def output_current_state(this : IDebugControl7*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_current_state.call(this, outputcontrol, flags)
+  end
+  def output_version_information(this : IDebugControl7*, outputcontrol : UInt32) : HRESULT
+    @lpVtbl.value.output_version_information.call(this, outputcontrol)
+  end
+  def get_notify_event_handle(this : IDebugControl7*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_notify_event_handle.call(this, handle)
+  end
+  def set_notify_event_handle(this : IDebugControl7*, handle : UInt64) : HRESULT
+    @lpVtbl.value.set_notify_event_handle.call(this, handle)
+  end
+  def assemble(this : IDebugControl7*, offset : UInt64, instr : PSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble.call(this, offset, instr, endoffset)
+  end
+  def disassemble(this : IDebugControl7*, offset : UInt64, flags : UInt32, buffer : UInt8*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_disassemble_effective_offset(this : IDebugControl7*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_disassemble_effective_offset.call(this, offset)
+  end
+  def output_disassembly(this : IDebugControl7*, outputcontrol : UInt32, offset : UInt64, flags : UInt32, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly.call(this, outputcontrol, offset, flags, endoffset)
+  end
+  def output_disassembly_lines(this : IDebugControl7*, outputcontrol : UInt32, previouslines : UInt32, totallines : UInt32, offset : UInt64, flags : UInt32, offsetline : UInt32*, startoffset : UInt64*, endoffset : UInt64*, lineoffsets : UInt64*) : HRESULT
+    @lpVtbl.value.output_disassembly_lines.call(this, outputcontrol, previouslines, totallines, offset, flags, offsetline, startoffset, endoffset, lineoffsets)
+  end
+  def get_near_instruction(this : IDebugControl7*, offset : UInt64, delta : Int32, nearoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_instruction.call(this, offset, delta, nearoffset)
+  end
+  def get_stack_trace(this : IDebugControl7*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def get_return_offset(this : IDebugControl7*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_offset.call(this, offset)
+  end
+  def output_stack_trace(this : IDebugControl7*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_debuggee_type(this : IDebugControl7*, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type.call(this, class_, qualifier)
+  end
+  def get_actual_processor_type(this : IDebugControl7*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_actual_processor_type.call(this, type)
+  end
+  def get_executing_processor_type(this : IDebugControl7*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_executing_processor_type.call(this, type)
+  end
+  def get_number_possible_executing_processor_types(this : IDebugControl7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_possible_executing_processor_types.call(this, number)
+  end
+  def get_possible_executing_processor_types(this : IDebugControl7*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_possible_executing_processor_types.call(this, start, count, types)
+  end
+  def get_number_processors(this : IDebugControl7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processors.call(this, number)
+  end
+  def get_system_version(this : IDebugControl7*, platformid : UInt32*, major : UInt32*, minor : UInt32*, servicepackstring : UInt8*, servicepackstringsize : UInt32, servicepackstringused : UInt32*, servicepacknumber : UInt32*, buildstring : UInt8*, buildstringsize : UInt32, buildstringused : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version.call(this, platformid, major, minor, servicepackstring, servicepackstringsize, servicepackstringused, servicepacknumber, buildstring, buildstringsize, buildstringused)
+  end
+  def get_page_size(this : IDebugControl7*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_size.call(this, size)
+  end
+  def is_pointer64_bit(this : IDebugControl7*) : HRESULT
+    @lpVtbl.value.is_pointer64_bit.call(this)
+  end
+  def read_bug_check_data(this : IDebugControl7*, code : UInt32*, arg1 : UInt64*, arg2 : UInt64*, arg3 : UInt64*, arg4 : UInt64*) : HRESULT
+    @lpVtbl.value.read_bug_check_data.call(this, code, arg1, arg2, arg3, arg4)
+  end
+  def get_number_supported_processor_types(this : IDebugControl7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_supported_processor_types.call(this, number)
+  end
+  def get_supported_processor_types(this : IDebugControl7*, start : UInt32, count : UInt32, types : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_processor_types.call(this, start, count, types)
+  end
+  def get_processor_type_names(this : IDebugControl7*, type : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_effective_processor_type(this : IDebugControl7*, type : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_processor_type.call(this, type)
+  end
+  def set_effective_processor_type(this : IDebugControl7*, type : UInt32) : HRESULT
+    @lpVtbl.value.set_effective_processor_type.call(this, type)
+  end
+  def get_execution_status(this : IDebugControl7*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status.call(this, status)
+  end
+  def set_execution_status(this : IDebugControl7*, status : UInt32) : HRESULT
+    @lpVtbl.value.set_execution_status.call(this, status)
+  end
+  def get_code_level(this : IDebugControl7*, level : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_level.call(this, level)
+  end
+  def set_code_level(this : IDebugControl7*, level : UInt32) : HRESULT
+    @lpVtbl.value.set_code_level.call(this, level)
+  end
+  def get_engine_options(this : IDebugControl7*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_engine_options.call(this, options)
+  end
+  def add_engine_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_engine_options.call(this, options)
+  end
+  def remove_engine_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_engine_options.call(this, options)
+  end
+  def set_engine_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_engine_options.call(this, options)
+  end
+  def get_system_error_control(this : IDebugControl7*, outputlevel : UInt32*, breaklevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def set_system_error_control(this : IDebugControl7*, outputlevel : UInt32, breaklevel : UInt32) : HRESULT
+    @lpVtbl.value.set_system_error_control.call(this, outputlevel, breaklevel)
+  end
+  def get_text_macro(this : IDebugControl7*, slot : UInt32, buffer : UInt8*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro(this : IDebugControl7*, slot : UInt32, macro_ : PSTR) : HRESULT
+    @lpVtbl.value.set_text_macro.call(this, slot, macro_)
+  end
+  def get_radix(this : IDebugControl7*, radix : UInt32*) : HRESULT
+    @lpVtbl.value.get_radix.call(this, radix)
+  end
+  def set_radix(this : IDebugControl7*, radix : UInt32) : HRESULT
+    @lpVtbl.value.set_radix.call(this, radix)
+  end
+  def evaluate(this : IDebugControl7*, expression : PSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def coerce_value(this : IDebugControl7*, in_ : DEBUG_VALUE*, outtype : UInt32, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_value.call(this, in_, outtype, out_)
+  end
+  def coerce_values(this : IDebugControl7*, count : UInt32, in_ : DEBUG_VALUE*, outtypes : UInt32*, out_ : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.coerce_values.call(this, count, in_, outtypes, out_)
+  end
+  def execute(this : IDebugControl7*, outputcontrol : UInt32, command : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file(this : IDebugControl7*, outputcontrol : UInt32, commandfile : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_number_breakpoints(this : IDebugControl7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_breakpoints.call(this, number)
+  end
+  def get_breakpoint_by_index(this : IDebugControl7*, index : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index.call(this, index, bp)
+  end
+  def get_breakpoint_by_id(this : IDebugControl7*, id : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id.call(this, id, bp)
+  end
+  def get_breakpoint_parameters(this : IDebugControl7*, count : UInt32, ids : UInt32*, start : UInt32, params : DEBUG_BREAKPOINT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_breakpoint_parameters.call(this, count, ids, start, params)
+  end
+  def add_breakpoint(this : IDebugControl7*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.add_breakpoint.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint(this : IDebugControl7*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.remove_breakpoint.call(this, bp)
+  end
+  def add_extension(this : IDebugControl7*, path : PSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension.call(this, path, flags, handle)
+  end
+  def remove_extension(this : IDebugControl7*, handle : UInt64) : HRESULT
+    @lpVtbl.value.remove_extension.call(this, handle)
+  end
+  def get_extension_by_path(this : IDebugControl7*, path : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path.call(this, path, handle)
+  end
+  def call_extension(this : IDebugControl7*, handle : UInt64, function : PSTR, arguments : PSTR) : HRESULT
+    @lpVtbl.value.call_extension.call(this, handle, function, arguments)
+  end
+  def get_extension_function(this : IDebugControl7*, handle : UInt64, funcname : PSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function.call(this, handle, funcname, function)
+  end
+  def get_windbg_extension_apis32(this : IDebugControl7*, api : WINDBG_EXTENSION_APIS32*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis32.call(this, api)
+  end
+  def get_windbg_extension_apis64(this : IDebugControl7*, api : WINDBG_EXTENSION_APIS64*) : HRESULT
+    @lpVtbl.value.get_windbg_extension_apis64.call(this, api)
+  end
+  def get_number_event_filters(this : IDebugControl7*, specificevents : UInt32*, specificexceptions : UInt32*, arbitraryexceptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_event_filters.call(this, specificevents, specificexceptions, arbitraryexceptions)
+  end
+  def get_event_filter_text(this : IDebugControl7*, index : UInt32, buffer : UInt8*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command(this : IDebugControl7*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command(this : IDebugControl7*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command.call(this, index, command)
+  end
+  def get_specific_filter_parameters(this : IDebugControl7*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_specific_filter_parameters.call(this, start, count, params)
+  end
+  def set_specific_filter_parameters(this : IDebugControl7*, start : UInt32, count : UInt32, params : DEBUG_SPECIFIC_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_specific_filter_parameters.call(this, start, count, params)
+  end
+  def get_specific_filter_argument(this : IDebugControl7*, index : UInt32, buffer : UInt8*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument(this : IDebugControl7*, index : UInt32, argument : PSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument.call(this, index, argument)
+  end
+  def get_exception_filter_parameters(this : IDebugControl7*, count : UInt32, codes : UInt32*, start : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_exception_filter_parameters.call(this, count, codes, start, params)
+  end
+  def set_exception_filter_parameters(this : IDebugControl7*, count : UInt32, params : DEBUG_EXCEPTION_FILTER_PARAMETERS*) : HRESULT
+    @lpVtbl.value.set_exception_filter_parameters.call(this, count, params)
+  end
+  def get_exception_filter_second_command(this : IDebugControl7*, index : UInt32, buffer : UInt8*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command(this : IDebugControl7*, index : UInt32, command : PSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command.call(this, index, command)
+  end
+  def wait_for_event(this : IDebugControl7*, flags : UInt32, timeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_event.call(this, flags, timeout)
+  end
+  def get_last_event_information(this : IDebugControl7*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : UInt8*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_current_time_date(this : IDebugControl7*, timedate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_time_date.call(this, timedate)
+  end
+  def get_current_system_up_time(this : IDebugControl7*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_up_time.call(this, uptime)
+  end
+  def get_dump_format_flags(this : IDebugControl7*, formatflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_dump_format_flags.call(this, formatflags)
+  end
+  def get_number_text_replacements(this : IDebugControl7*, numrepl : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_text_replacements.call(this, numrepl)
+  end
+  def get_text_replacement(this : IDebugControl7*, srctext : PSTR, index : UInt32, srcbuffer : UInt8*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : UInt8*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement(this : IDebugControl7*, srctext : PSTR, dsttext : PSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement.call(this, srctext, dsttext)
+  end
+  def remove_text_replacements(this : IDebugControl7*) : HRESULT
+    @lpVtbl.value.remove_text_replacements.call(this)
+  end
+  def output_text_replacements(this : IDebugControl7*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_text_replacements.call(this, outputcontrol, flags)
+  end
+  def get_assembly_options(this : IDebugControl7*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_assembly_options.call(this, options)
+  end
+  def add_assembly_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_assembly_options.call(this, options)
+  end
+  def remove_assembly_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_assembly_options.call(this, options)
+  end
+  def set_assembly_options(this : IDebugControl7*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_assembly_options.call(this, options)
+  end
+  def get_expression_syntax(this : IDebugControl7*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax(this : IDebugControl7*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_expression_syntax.call(this, flags)
+  end
+  def set_expression_syntax_by_name(this : IDebugControl7*, abbrevname : PSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name.call(this, abbrevname)
+  end
+  def get_number_expression_syntaxes(this : IDebugControl7*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_expression_syntaxes.call(this, number)
+  end
+  def get_expression_syntax_names(this : IDebugControl7*, index : UInt32, fullnamebuffer : UInt8*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : UInt8*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_number_events(this : IDebugControl7*, events : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_events.call(this, events)
+  end
+  def get_event_index_description(this : IDebugControl7*, index : UInt32, which : UInt32, buffer : PSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_current_event_index(this : IDebugControl7*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_event_index.call(this, index)
+  end
+  def set_next_event_index(this : IDebugControl7*, relation : UInt32, value : UInt32, nextindex : UInt32*) : HRESULT
+    @lpVtbl.value.set_next_event_index.call(this, relation, value, nextindex)
+  end
+  def get_log_file_wide(this : IDebugControl7*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, append : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_file_wide.call(this, buffer, buffersize, filesize, append)
+  end
+  def open_log_file_wide(this : IDebugControl7*, file : LibC::LPWSTR, append : LibC::BOOL) : HRESULT
+    @lpVtbl.value.open_log_file_wide.call(this, file, append)
+  end
+  def input_wide(this : IDebugControl7*, buffer : Char*, buffersize : UInt32, inputsize : UInt32*) : HRESULT
+    @lpVtbl.value.input_wide.call(this, buffer, buffersize, inputsize)
+  end
+  def return_input_wide(this : IDebugControl7*, buffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.return_input_wide.call(this, buffer)
+  end
+  def output_wide(this : IDebugControl7*, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_wide.call(this, mask, format)
+  end
+  def output_va_list_wide(this : IDebugControl7*, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_va_list_wide.call(this, mask, format, args)
+  end
+  def controlled_output_wide(this : IDebugControl7*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.controlled_output_wide.call(this, outputcontrol, mask, format)
+  end
+  def controlled_output_va_list_wide(this : IDebugControl7*, outputcontrol : UInt32, mask : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.controlled_output_va_list_wide.call(this, outputcontrol, mask, format, args)
+  end
+  def output_prompt_wide(this : IDebugControl7*, outputcontrol : UInt32, format : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_prompt_wide.call(this, outputcontrol, format)
+  end
+  def output_prompt_va_list_wide(this : IDebugControl7*, outputcontrol : UInt32, format : LibC::LPWSTR, args : Int8*) : HRESULT
+    @lpVtbl.value.output_prompt_va_list_wide.call(this, outputcontrol, format, args)
+  end
+  def get_prompt_text_wide(this : IDebugControl7*, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_prompt_text_wide.call(this, buffer, buffersize, textsize)
+  end
+  def assemble_wide(this : IDebugControl7*, offset : UInt64, instr : LibC::LPWSTR, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.assemble_wide.call(this, offset, instr, endoffset)
+  end
+  def disassemble_wide(this : IDebugControl7*, offset : UInt64, flags : UInt32, buffer : Char*, buffersize : UInt32, disassemblysize : UInt32*, endoffset : UInt64*) : HRESULT
+    @lpVtbl.value.disassemble_wide.call(this, offset, flags, buffer, buffersize, disassemblysize, endoffset)
+  end
+  def get_processor_type_names_wide(this : IDebugControl7*, type : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_processor_type_names_wide.call(this, type, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_text_macro_wide(this : IDebugControl7*, slot : UInt32, buffer : Char*, buffersize : UInt32, macrosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_macro_wide.call(this, slot, buffer, buffersize, macrosize)
+  end
+  def set_text_macro_wide(this : IDebugControl7*, slot : UInt32, macro_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_macro_wide.call(this, slot, macro_)
+  end
+  def evaluate_wide(this : IDebugControl7*, expression : LibC::LPWSTR, desiredtype : UInt32, value : DEBUG_VALUE*, remainderindex : UInt32*) : HRESULT
+    @lpVtbl.value.evaluate_wide.call(this, expression, desiredtype, value, remainderindex)
+  end
+  def execute_wide(this : IDebugControl7*, outputcontrol : UInt32, command : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_wide.call(this, outputcontrol, command, flags)
+  end
+  def execute_command_file_wide(this : IDebugControl7*, outputcontrol : UInt32, commandfile : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.execute_command_file_wide.call(this, outputcontrol, commandfile, flags)
+  end
+  def get_breakpoint_by_index2(this : IDebugControl7*, index : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_index2.call(this, index, bp)
+  end
+  def get_breakpoint_by_id2(this : IDebugControl7*, id : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_id2.call(this, id, bp)
+  end
+  def add_breakpoint2(this : IDebugControl7*, type : UInt32, desiredid : UInt32, bp : IDebugBreakpoint2*) : HRESULT
+    @lpVtbl.value.add_breakpoint2.call(this, type, desiredid, bp)
+  end
+  def remove_breakpoint2(this : IDebugControl7*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.remove_breakpoint2.call(this, bp)
+  end
+  def add_extension_wide(this : IDebugControl7*, path : LibC::LPWSTR, flags : UInt32, handle : UInt64*) : HRESULT
+    @lpVtbl.value.add_extension_wide.call(this, path, flags, handle)
+  end
+  def get_extension_by_path_wide(this : IDebugControl7*, path : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_extension_by_path_wide.call(this, path, handle)
+  end
+  def call_extension_wide(this : IDebugControl7*, handle : UInt64, function : LibC::LPWSTR, arguments : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.call_extension_wide.call(this, handle, function, arguments)
+  end
+  def get_extension_function_wide(this : IDebugControl7*, handle : UInt64, funcname : LibC::LPWSTR, function : FARPROC*) : HRESULT
+    @lpVtbl.value.get_extension_function_wide.call(this, handle, funcname, function)
+  end
+  def get_event_filter_text_wide(this : IDebugControl7*, index : UInt32, buffer : Char*, buffersize : UInt32, textsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_text_wide.call(this, index, buffer, buffersize, textsize)
+  end
+  def get_event_filter_command_wide(this : IDebugControl7*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_filter_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_event_filter_command_wide(this : IDebugControl7*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_event_filter_command_wide.call(this, index, command)
+  end
+  def get_specific_filter_argument_wide(this : IDebugControl7*, index : UInt32, buffer : Char*, buffersize : UInt32, argumentsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_specific_filter_argument_wide.call(this, index, buffer, buffersize, argumentsize)
+  end
+  def set_specific_filter_argument_wide(this : IDebugControl7*, index : UInt32, argument : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_specific_filter_argument_wide.call(this, index, argument)
+  end
+  def get_exception_filter_second_command_wide(this : IDebugControl7*, index : UInt32, buffer : Char*, buffersize : UInt32, commandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_exception_filter_second_command_wide.call(this, index, buffer, buffersize, commandsize)
+  end
+  def set_exception_filter_second_command_wide(this : IDebugControl7*, index : UInt32, command : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_exception_filter_second_command_wide.call(this, index, command)
+  end
+  def get_last_event_information_wide(this : IDebugControl7*, type : UInt32*, processid : UInt32*, threadid : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*, description : Char*, descriptionsize : UInt32, descriptionused : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_event_information_wide.call(this, type, processid, threadid, extrainformation, extrainformationsize, extrainformationused, description, descriptionsize, descriptionused)
+  end
+  def get_text_replacement_wide(this : IDebugControl7*, srctext : LibC::LPWSTR, index : UInt32, srcbuffer : Char*, srcbuffersize : UInt32, srcsize : UInt32*, dstbuffer : Char*, dstbuffersize : UInt32, dstsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_replacement_wide.call(this, srctext, index, srcbuffer, srcbuffersize, srcsize, dstbuffer, dstbuffersize, dstsize)
+  end
+  def set_text_replacement_wide(this : IDebugControl7*, srctext : LibC::LPWSTR, dsttext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text_replacement_wide.call(this, srctext, dsttext)
+  end
+  def set_expression_syntax_by_name_wide(this : IDebugControl7*, abbrevname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_expression_syntax_by_name_wide.call(this, abbrevname)
+  end
+  def get_expression_syntax_names_wide(this : IDebugControl7*, index : UInt32, fullnamebuffer : Char*, fullnamebuffersize : UInt32, fullnamesize : UInt32*, abbrevnamebuffer : Char*, abbrevnamebuffersize : UInt32, abbrevnamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_expression_syntax_names_wide.call(this, index, fullnamebuffer, fullnamebuffersize, fullnamesize, abbrevnamebuffer, abbrevnamebuffersize, abbrevnamesize)
+  end
+  def get_event_index_description_wide(this : IDebugControl7*, index : UInt32, which : UInt32, buffer : LibC::LPWSTR, buffersize : UInt32, descsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_index_description_wide.call(this, index, which, buffer, buffersize, descsize)
+  end
+  def get_log_file2(this : IDebugControl7*, buffer : UInt8*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2(this : IDebugControl7*, file : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2.call(this, file, flags)
+  end
+  def get_log_file2_wide(this : IDebugControl7*, buffer : Char*, buffersize : UInt32, filesize : UInt32*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_file2_wide.call(this, buffer, buffersize, filesize, flags)
+  end
+  def open_log_file2_wide(this : IDebugControl7*, file : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.open_log_file2_wide.call(this, file, flags)
+  end
+  def get_system_version_values(this : IDebugControl7*, platformid : UInt32*, win32major : UInt32*, win32minor : UInt32*, kdmajor : UInt32*, kdminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_values.call(this, platformid, win32major, win32minor, kdmajor, kdminor)
+  end
+  def get_system_version_string(this : IDebugControl7*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_system_version_string_wide(this : IDebugControl7*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_version_string_wide.call(this, which, buffer, buffersize, stringsize)
+  end
+  def get_context_stack_trace(this : IDebugControl7*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace(this : IDebugControl7*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_stored_event_information(this : IDebugControl7*, type : UInt32*, processid : UInt32*, threadid : UInt32*, context : Void*, contextsize : UInt32, contextused : UInt32*, extrainformation : Void*, extrainformationsize : UInt32, extrainformationused : UInt32*) : HRESULT
+    @lpVtbl.value.get_stored_event_information.call(this, type, processid, threadid, context, contextsize, contextused, extrainformation, extrainformationsize, extrainformationused)
+  end
+  def get_managed_status(this : IDebugControl7*, flags : UInt32*, whichstring : UInt32, string : UInt8*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def get_managed_status_wide(this : IDebugControl7*, flags : UInt32*, whichstring : UInt32, string : Char*, stringsize : UInt32, stringneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_managed_status_wide.call(this, flags, whichstring, string, stringsize, stringneeded)
+  end
+  def reset_managed_status(this : IDebugControl7*, flags : UInt32) : HRESULT
+    @lpVtbl.value.reset_managed_status.call(this, flags)
+  end
+  def get_stack_trace_ex(this : IDebugControl7*, frameoffset : UInt64, stackoffset : UInt64, instructionoffset : UInt64, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_trace_ex.call(this, frameoffset, stackoffset, instructionoffset, frames, framessize, framesfilled)
+  end
+  def output_stack_trace_ex(this : IDebugControl7*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_stack_trace_ex.call(this, outputcontrol, frames, framessize, flags)
+  end
+  def get_context_stack_trace_ex(this : IDebugControl7*, startcontext : Void*, startcontextsize : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, framesfilled : UInt32*) : HRESULT
+    @lpVtbl.value.get_context_stack_trace_ex.call(this, startcontext, startcontextsize, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, framesfilled)
+  end
+  def output_context_stack_trace_ex(this : IDebugControl7*, outputcontrol : UInt32, frames : DEBUG_STACK_FRAME_EX*, framessize : UInt32, framecontexts : Void*, framecontextssize : UInt32, framecontextsentrysize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_context_stack_trace_ex.call(this, outputcontrol, frames, framessize, framecontexts, framecontextssize, framecontextsentrysize, flags)
+  end
+  def get_breakpoint_by_guid(this : IDebugControl7*, guid : Guid*, bp : IDebugBreakpoint3*) : HRESULT
+    @lpVtbl.value.get_breakpoint_by_guid.call(this, guid, bp)
+  end
+  def get_execution_status_ex(this : IDebugControl7*, status : UInt32*) : HRESULT
+    @lpVtbl.value.get_execution_status_ex.call(this, status)
+  end
+  def get_synchronization_status(this : IDebugControl7*, sendsattempted : UInt32*, secondssincelastresponse : UInt32*) : HRESULT
+    @lpVtbl.value.get_synchronization_status.call(this, sendsattempted, secondssincelastresponse)
+  end
+  def get_debuggee_type2(this : IDebugControl7*, flags : UInt32, class_ : UInt32*, qualifier : UInt32*) : HRESULT
+    @lpVtbl.value.get_debuggee_type2.call(this, flags, class_, qualifier)
+  end
+end
+struct LibWin32::IDebugDataSpaces
+  def query_interface(this : IDebugDataSpaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDataSpaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDataSpaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_virtual(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def search_virtual(this : IDebugDataSpaces*, offset : UInt64, length : UInt64, pattern : Void*, patternsize : UInt32, patterngranularity : UInt32, matchoffset : UInt64*) : HRESULT
+    @lpVtbl.value.search_virtual.call(this, offset, length, pattern, patternsize, patterngranularity, matchoffset)
+  end
+  def read_virtual_uncached(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual_uncached.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual_uncached(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual_uncached.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_pointers_virtual(this : IDebugDataSpaces*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def write_pointers_virtual(this : IDebugDataSpaces*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def read_physical(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_physical.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_physical(this : IDebugDataSpaces*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_physical.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_control(this : IDebugDataSpaces*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_control.call(this, processor, offset, buffer, buffersize, bytesread)
+  end
+  def write_control(this : IDebugDataSpaces*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_control.call(this, processor, offset, buffer, buffersize, byteswritten)
+  end
+  def read_io(this : IDebugDataSpaces*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, bytesread)
+  end
+  def write_io(this : IDebugDataSpaces*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, byteswritten)
+  end
+  def read_msr(this : IDebugDataSpaces*, msr : UInt32, value : UInt64*) : HRESULT
+    @lpVtbl.value.read_msr.call(this, msr, value)
+  end
+  def write_msr(this : IDebugDataSpaces*, msr : UInt32, value : UInt64) : HRESULT
+    @lpVtbl.value.write_msr.call(this, msr, value)
+  end
+  def read_bus_data(this : IDebugDataSpaces*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, bytesread)
+  end
+  def write_bus_data(this : IDebugDataSpaces*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, byteswritten)
+  end
+  def check_low_memory(this : IDebugDataSpaces*) : HRESULT
+    @lpVtbl.value.check_low_memory.call(this)
+  end
+  def read_debugger_data(this : IDebugDataSpaces*, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_debugger_data.call(this, index, buffer, buffersize, datasize)
+  end
+  def read_processor_system_data(this : IDebugDataSpaces*, processor : UInt32, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_processor_system_data.call(this, processor, index, buffer, buffersize, datasize)
+  end
+end
+struct LibWin32::IDebugDataSpaces2
+  def query_interface(this : IDebugDataSpaces2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDataSpaces2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDataSpaces2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_virtual(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def search_virtual(this : IDebugDataSpaces2*, offset : UInt64, length : UInt64, pattern : Void*, patternsize : UInt32, patterngranularity : UInt32, matchoffset : UInt64*) : HRESULT
+    @lpVtbl.value.search_virtual.call(this, offset, length, pattern, patternsize, patterngranularity, matchoffset)
+  end
+  def read_virtual_uncached(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual_uncached.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual_uncached(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual_uncached.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_pointers_virtual(this : IDebugDataSpaces2*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def write_pointers_virtual(this : IDebugDataSpaces2*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def read_physical(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_physical.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_physical(this : IDebugDataSpaces2*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_physical.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_control(this : IDebugDataSpaces2*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_control.call(this, processor, offset, buffer, buffersize, bytesread)
+  end
+  def write_control(this : IDebugDataSpaces2*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_control.call(this, processor, offset, buffer, buffersize, byteswritten)
+  end
+  def read_io(this : IDebugDataSpaces2*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, bytesread)
+  end
+  def write_io(this : IDebugDataSpaces2*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, byteswritten)
+  end
+  def read_msr(this : IDebugDataSpaces2*, msr : UInt32, value : UInt64*) : HRESULT
+    @lpVtbl.value.read_msr.call(this, msr, value)
+  end
+  def write_msr(this : IDebugDataSpaces2*, msr : UInt32, value : UInt64) : HRESULT
+    @lpVtbl.value.write_msr.call(this, msr, value)
+  end
+  def read_bus_data(this : IDebugDataSpaces2*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, bytesread)
+  end
+  def write_bus_data(this : IDebugDataSpaces2*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, byteswritten)
+  end
+  def check_low_memory(this : IDebugDataSpaces2*) : HRESULT
+    @lpVtbl.value.check_low_memory.call(this)
+  end
+  def read_debugger_data(this : IDebugDataSpaces2*, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_debugger_data.call(this, index, buffer, buffersize, datasize)
+  end
+  def read_processor_system_data(this : IDebugDataSpaces2*, processor : UInt32, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_processor_system_data.call(this, processor, index, buffer, buffersize, datasize)
+  end
+  def virtual_to_physical(this : IDebugDataSpaces2*, virtual : UInt64, physical : UInt64*) : HRESULT
+    @lpVtbl.value.virtual_to_physical.call(this, virtual, physical)
+  end
+  def get_virtual_translation_physical_offsets(this : IDebugDataSpaces2*, virtual : UInt64, offsets : UInt64*, offsetssize : UInt32, levels : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_translation_physical_offsets.call(this, virtual, offsets, offsetssize, levels)
+  end
+  def read_handle_data(this : IDebugDataSpaces2*, handle : UInt64, datatype : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_handle_data.call(this, handle, datatype, buffer, buffersize, datasize)
+  end
+  def fill_virtual(this : IDebugDataSpaces2*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_virtual.call(this, start, size, pattern, patternsize, filled)
+  end
+  def fill_physical(this : IDebugDataSpaces2*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_physical.call(this, start, size, pattern, patternsize, filled)
+  end
+  def query_virtual(this : IDebugDataSpaces2*, offset : UInt64, info : MEMORY_BASIC_INFORMATION64*) : HRESULT
+    @lpVtbl.value.query_virtual.call(this, offset, info)
+  end
+end
+struct LibWin32::IDebugDataSpaces3
+  def query_interface(this : IDebugDataSpaces3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDataSpaces3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDataSpaces3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_virtual(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def search_virtual(this : IDebugDataSpaces3*, offset : UInt64, length : UInt64, pattern : Void*, patternsize : UInt32, patterngranularity : UInt32, matchoffset : UInt64*) : HRESULT
+    @lpVtbl.value.search_virtual.call(this, offset, length, pattern, patternsize, patterngranularity, matchoffset)
+  end
+  def read_virtual_uncached(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual_uncached.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual_uncached(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual_uncached.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_pointers_virtual(this : IDebugDataSpaces3*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def write_pointers_virtual(this : IDebugDataSpaces3*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def read_physical(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_physical.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_physical(this : IDebugDataSpaces3*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_physical.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_control(this : IDebugDataSpaces3*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_control.call(this, processor, offset, buffer, buffersize, bytesread)
+  end
+  def write_control(this : IDebugDataSpaces3*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_control.call(this, processor, offset, buffer, buffersize, byteswritten)
+  end
+  def read_io(this : IDebugDataSpaces3*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, bytesread)
+  end
+  def write_io(this : IDebugDataSpaces3*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, byteswritten)
+  end
+  def read_msr(this : IDebugDataSpaces3*, msr : UInt32, value : UInt64*) : HRESULT
+    @lpVtbl.value.read_msr.call(this, msr, value)
+  end
+  def write_msr(this : IDebugDataSpaces3*, msr : UInt32, value : UInt64) : HRESULT
+    @lpVtbl.value.write_msr.call(this, msr, value)
+  end
+  def read_bus_data(this : IDebugDataSpaces3*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, bytesread)
+  end
+  def write_bus_data(this : IDebugDataSpaces3*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, byteswritten)
+  end
+  def check_low_memory(this : IDebugDataSpaces3*) : HRESULT
+    @lpVtbl.value.check_low_memory.call(this)
+  end
+  def read_debugger_data(this : IDebugDataSpaces3*, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_debugger_data.call(this, index, buffer, buffersize, datasize)
+  end
+  def read_processor_system_data(this : IDebugDataSpaces3*, processor : UInt32, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_processor_system_data.call(this, processor, index, buffer, buffersize, datasize)
+  end
+  def virtual_to_physical(this : IDebugDataSpaces3*, virtual : UInt64, physical : UInt64*) : HRESULT
+    @lpVtbl.value.virtual_to_physical.call(this, virtual, physical)
+  end
+  def get_virtual_translation_physical_offsets(this : IDebugDataSpaces3*, virtual : UInt64, offsets : UInt64*, offsetssize : UInt32, levels : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_translation_physical_offsets.call(this, virtual, offsets, offsetssize, levels)
+  end
+  def read_handle_data(this : IDebugDataSpaces3*, handle : UInt64, datatype : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_handle_data.call(this, handle, datatype, buffer, buffersize, datasize)
+  end
+  def fill_virtual(this : IDebugDataSpaces3*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_virtual.call(this, start, size, pattern, patternsize, filled)
+  end
+  def fill_physical(this : IDebugDataSpaces3*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_physical.call(this, start, size, pattern, patternsize, filled)
+  end
+  def query_virtual(this : IDebugDataSpaces3*, offset : UInt64, info : MEMORY_BASIC_INFORMATION64*) : HRESULT
+    @lpVtbl.value.query_virtual.call(this, offset, info)
+  end
+  def read_image_nt_headers(this : IDebugDataSpaces3*, imagebase : UInt64, headers : IMAGE_NT_HEADERS64*) : HRESULT
+    @lpVtbl.value.read_image_nt_headers.call(this, imagebase, headers)
+  end
+  def read_tagged(this : IDebugDataSpaces3*, tag : Guid*, offset : UInt32, buffer : Void*, buffersize : UInt32, totalsize : UInt32*) : HRESULT
+    @lpVtbl.value.read_tagged.call(this, tag, offset, buffer, buffersize, totalsize)
+  end
+  def start_enum_tagged(this : IDebugDataSpaces3*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_enum_tagged.call(this, handle)
+  end
+  def get_next_tagged(this : IDebugDataSpaces3*, handle : UInt64, tag : Guid*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_next_tagged.call(this, handle, tag, size)
+  end
+  def end_enum_tagged(this : IDebugDataSpaces3*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_enum_tagged.call(this, handle)
+  end
+end
+struct LibWin32::IDebugDataSpaces4
+  def query_interface(this : IDebugDataSpaces4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDataSpaces4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDataSpaces4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_virtual(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def search_virtual(this : IDebugDataSpaces4*, offset : UInt64, length : UInt64, pattern : Void*, patternsize : UInt32, patterngranularity : UInt32, matchoffset : UInt64*) : HRESULT
+    @lpVtbl.value.search_virtual.call(this, offset, length, pattern, patternsize, patterngranularity, matchoffset)
+  end
+  def read_virtual_uncached(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_virtual_uncached.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_virtual_uncached(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_virtual_uncached.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_pointers_virtual(this : IDebugDataSpaces4*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def write_pointers_virtual(this : IDebugDataSpaces4*, count : UInt32, offset : UInt64, ptrs : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers_virtual.call(this, count, offset, ptrs)
+  end
+  def read_physical(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_physical.call(this, offset, buffer, buffersize, bytesread)
+  end
+  def write_physical(this : IDebugDataSpaces4*, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_physical.call(this, offset, buffer, buffersize, byteswritten)
+  end
+  def read_control(this : IDebugDataSpaces4*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_control.call(this, processor, offset, buffer, buffersize, bytesread)
+  end
+  def write_control(this : IDebugDataSpaces4*, processor : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_control.call(this, processor, offset, buffer, buffersize, byteswritten)
+  end
+  def read_io(this : IDebugDataSpaces4*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, bytesread)
+  end
+  def write_io(this : IDebugDataSpaces4*, interfacetype : UInt32, busnumber : UInt32, addressspace : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_io.call(this, interfacetype, busnumber, addressspace, offset, buffer, buffersize, byteswritten)
+  end
+  def read_msr(this : IDebugDataSpaces4*, msr : UInt32, value : UInt64*) : HRESULT
+    @lpVtbl.value.read_msr.call(this, msr, value)
+  end
+  def write_msr(this : IDebugDataSpaces4*, msr : UInt32, value : UInt64) : HRESULT
+    @lpVtbl.value.write_msr.call(this, msr, value)
+  end
+  def read_bus_data(this : IDebugDataSpaces4*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, bytesread)
+  end
+  def write_bus_data(this : IDebugDataSpaces4*, busdatatype : UInt32, busnumber : UInt32, slotnumber : UInt32, offset : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_bus_data.call(this, busdatatype, busnumber, slotnumber, offset, buffer, buffersize, byteswritten)
+  end
+  def check_low_memory(this : IDebugDataSpaces4*) : HRESULT
+    @lpVtbl.value.check_low_memory.call(this)
+  end
+  def read_debugger_data(this : IDebugDataSpaces4*, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_debugger_data.call(this, index, buffer, buffersize, datasize)
+  end
+  def read_processor_system_data(this : IDebugDataSpaces4*, processor : UInt32, index : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_processor_system_data.call(this, processor, index, buffer, buffersize, datasize)
+  end
+  def virtual_to_physical(this : IDebugDataSpaces4*, virtual : UInt64, physical : UInt64*) : HRESULT
+    @lpVtbl.value.virtual_to_physical.call(this, virtual, physical)
+  end
+  def get_virtual_translation_physical_offsets(this : IDebugDataSpaces4*, virtual : UInt64, offsets : UInt64*, offsetssize : UInt32, levels : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_translation_physical_offsets.call(this, virtual, offsets, offsetssize, levels)
+  end
+  def read_handle_data(this : IDebugDataSpaces4*, handle : UInt64, datatype : UInt32, buffer : Void*, buffersize : UInt32, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.read_handle_data.call(this, handle, datatype, buffer, buffersize, datasize)
+  end
+  def fill_virtual(this : IDebugDataSpaces4*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_virtual.call(this, start, size, pattern, patternsize, filled)
+  end
+  def fill_physical(this : IDebugDataSpaces4*, start : UInt64, size : UInt32, pattern : Void*, patternsize : UInt32, filled : UInt32*) : HRESULT
+    @lpVtbl.value.fill_physical.call(this, start, size, pattern, patternsize, filled)
+  end
+  def query_virtual(this : IDebugDataSpaces4*, offset : UInt64, info : MEMORY_BASIC_INFORMATION64*) : HRESULT
+    @lpVtbl.value.query_virtual.call(this, offset, info)
+  end
+  def read_image_nt_headers(this : IDebugDataSpaces4*, imagebase : UInt64, headers : IMAGE_NT_HEADERS64*) : HRESULT
+    @lpVtbl.value.read_image_nt_headers.call(this, imagebase, headers)
+  end
+  def read_tagged(this : IDebugDataSpaces4*, tag : Guid*, offset : UInt32, buffer : Void*, buffersize : UInt32, totalsize : UInt32*) : HRESULT
+    @lpVtbl.value.read_tagged.call(this, tag, offset, buffer, buffersize, totalsize)
+  end
+  def start_enum_tagged(this : IDebugDataSpaces4*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_enum_tagged.call(this, handle)
+  end
+  def get_next_tagged(this : IDebugDataSpaces4*, handle : UInt64, tag : Guid*, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_next_tagged.call(this, handle, tag, size)
+  end
+  def end_enum_tagged(this : IDebugDataSpaces4*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_enum_tagged.call(this, handle)
+  end
+  def get_offset_information(this : IDebugDataSpaces4*, space : UInt32, which : UInt32, offset : UInt64, buffer : Void*, buffersize : UInt32, infosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_offset_information.call(this, space, which, offset, buffer, buffersize, infosize)
+  end
+  def get_next_differently_valid_offset_virtual(this : IDebugDataSpaces4*, offset : UInt64, nextoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_differently_valid_offset_virtual.call(this, offset, nextoffset)
+  end
+  def get_valid_region_virtual(this : IDebugDataSpaces4*, base : UInt64, size : UInt32, validbase : UInt64*, validsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_valid_region_virtual.call(this, base, size, validbase, validsize)
+  end
+  def search_virtual2(this : IDebugDataSpaces4*, offset : UInt64, length : UInt64, flags : UInt32, pattern : Void*, patternsize : UInt32, patterngranularity : UInt32, matchoffset : UInt64*) : HRESULT
+    @lpVtbl.value.search_virtual2.call(this, offset, length, flags, pattern, patternsize, patterngranularity, matchoffset)
+  end
+  def read_multi_byte_string_virtual(this : IDebugDataSpaces4*, offset : UInt64, maxbytes : UInt32, buffer : UInt8*, buffersize : UInt32, stringbytes : UInt32*) : HRESULT
+    @lpVtbl.value.read_multi_byte_string_virtual.call(this, offset, maxbytes, buffer, buffersize, stringbytes)
+  end
+  def read_multi_byte_string_virtual_wide(this : IDebugDataSpaces4*, offset : UInt64, maxbytes : UInt32, codepage : UInt32, buffer : Char*, buffersize : UInt32, stringbytes : UInt32*) : HRESULT
+    @lpVtbl.value.read_multi_byte_string_virtual_wide.call(this, offset, maxbytes, codepage, buffer, buffersize, stringbytes)
+  end
+  def read_unicode_string_virtual(this : IDebugDataSpaces4*, offset : UInt64, maxbytes : UInt32, codepage : UInt32, buffer : UInt8*, buffersize : UInt32, stringbytes : UInt32*) : HRESULT
+    @lpVtbl.value.read_unicode_string_virtual.call(this, offset, maxbytes, codepage, buffer, buffersize, stringbytes)
+  end
+  def read_unicode_string_virtual_wide(this : IDebugDataSpaces4*, offset : UInt64, maxbytes : UInt32, buffer : Char*, buffersize : UInt32, stringbytes : UInt32*) : HRESULT
+    @lpVtbl.value.read_unicode_string_virtual_wide.call(this, offset, maxbytes, buffer, buffersize, stringbytes)
+  end
+  def read_physical2(this : IDebugDataSpaces4*, offset : UInt64, flags : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_physical2.call(this, offset, flags, buffer, buffersize, bytesread)
+  end
+  def write_physical2(this : IDebugDataSpaces4*, offset : UInt64, flags : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_physical2.call(this, offset, flags, buffer, buffersize, byteswritten)
+  end
+end
+struct LibWin32::IDebugEventCallbacks
+  def query_interface(this : IDebugEventCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugEventCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugEventCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interest_mask(this : IDebugEventCallbacks*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def breakpoint(this : IDebugEventCallbacks*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.breakpoint.call(this, bp)
+  end
+  def exception(this : IDebugEventCallbacks*, exception : EXCEPTION_RECORD64*, firstchance : UInt32) : HRESULT
+    @lpVtbl.value.exception.call(this, exception, firstchance)
+  end
+  def create_thread(this : IDebugEventCallbacks*, handle : UInt64, dataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_thread.call(this, handle, dataoffset, startoffset)
+  end
+  def exit_thread(this : IDebugEventCallbacks*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_thread.call(this, exitcode)
+  end
+  def create_process_a(this : IDebugEventCallbacks*, imagefilehandle : UInt64, handle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : PSTR, imagename : PSTR, checksum : UInt32, timedatestamp : UInt32, initialthreadhandle : UInt64, threaddataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, imagefilehandle, handle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, initialthreadhandle, threaddataoffset, startoffset)
+  end
+  def exit_process(this : IDebugEventCallbacks*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_process.call(this, exitcode)
+  end
+  def load_module(this : IDebugEventCallbacks*, imagefilehandle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : PSTR, imagename : PSTR, checksum : UInt32, timedatestamp : UInt32) : HRESULT
+    @lpVtbl.value.load_module.call(this, imagefilehandle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp)
+  end
+  def unload_module(this : IDebugEventCallbacks*, imagebasename : PSTR, baseoffset : UInt64) : HRESULT
+    @lpVtbl.value.unload_module.call(this, imagebasename, baseoffset)
+  end
+  def system_error(this : IDebugEventCallbacks*, error : UInt32, level : UInt32) : HRESULT
+    @lpVtbl.value.system_error.call(this, error, level)
+  end
+  def session_status(this : IDebugEventCallbacks*, status : UInt32) : HRESULT
+    @lpVtbl.value.session_status.call(this, status)
+  end
+  def change_debuggee_state(this : IDebugEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_debuggee_state.call(this, flags, argument)
+  end
+  def change_engine_state(this : IDebugEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_engine_state.call(this, flags, argument)
+  end
+  def change_symbol_state(this : IDebugEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_symbol_state.call(this, flags, argument)
+  end
+end
+struct LibWin32::IDebugEventCallbacksWide
+  def query_interface(this : IDebugEventCallbacksWide*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugEventCallbacksWide*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugEventCallbacksWide*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interest_mask(this : IDebugEventCallbacksWide*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def breakpoint(this : IDebugEventCallbacksWide*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.breakpoint.call(this, bp)
+  end
+  def exception(this : IDebugEventCallbacksWide*, exception : EXCEPTION_RECORD64*, firstchance : UInt32) : HRESULT
+    @lpVtbl.value.exception.call(this, exception, firstchance)
+  end
+  def create_thread(this : IDebugEventCallbacksWide*, handle : UInt64, dataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_thread.call(this, handle, dataoffset, startoffset)
+  end
+  def exit_thread(this : IDebugEventCallbacksWide*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_thread.call(this, exitcode)
+  end
+  def create_process_a(this : IDebugEventCallbacksWide*, imagefilehandle : UInt64, handle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32, initialthreadhandle : UInt64, threaddataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, imagefilehandle, handle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, initialthreadhandle, threaddataoffset, startoffset)
+  end
+  def exit_process(this : IDebugEventCallbacksWide*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_process.call(this, exitcode)
+  end
+  def load_module(this : IDebugEventCallbacksWide*, imagefilehandle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32) : HRESULT
+    @lpVtbl.value.load_module.call(this, imagefilehandle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp)
+  end
+  def unload_module(this : IDebugEventCallbacksWide*, imagebasename : LibC::LPWSTR, baseoffset : UInt64) : HRESULT
+    @lpVtbl.value.unload_module.call(this, imagebasename, baseoffset)
+  end
+  def system_error(this : IDebugEventCallbacksWide*, error : UInt32, level : UInt32) : HRESULT
+    @lpVtbl.value.system_error.call(this, error, level)
+  end
+  def session_status(this : IDebugEventCallbacksWide*, status : UInt32) : HRESULT
+    @lpVtbl.value.session_status.call(this, status)
+  end
+  def change_debuggee_state(this : IDebugEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_debuggee_state.call(this, flags, argument)
+  end
+  def change_engine_state(this : IDebugEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_engine_state.call(this, flags, argument)
+  end
+  def change_symbol_state(this : IDebugEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_symbol_state.call(this, flags, argument)
+  end
+end
+struct LibWin32::IDebugEventContextCallbacks
+  def query_interface(this : IDebugEventContextCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugEventContextCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugEventContextCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interest_mask(this : IDebugEventContextCallbacks*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def breakpoint(this : IDebugEventContextCallbacks*, bp : IDebugBreakpoint2, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.breakpoint.call(this, bp, context, contextsize)
+  end
+  def exception(this : IDebugEventContextCallbacks*, exception : EXCEPTION_RECORD64*, firstchance : UInt32, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.exception.call(this, exception, firstchance, context, contextsize)
+  end
+  def create_thread(this : IDebugEventContextCallbacks*, handle : UInt64, dataoffset : UInt64, startoffset : UInt64, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.create_thread.call(this, handle, dataoffset, startoffset, context, contextsize)
+  end
+  def exit_thread(this : IDebugEventContextCallbacks*, exitcode : UInt32, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.exit_thread.call(this, exitcode, context, contextsize)
+  end
+  def create_process_a(this : IDebugEventContextCallbacks*, imagefilehandle : UInt64, handle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32, initialthreadhandle : UInt64, threaddataoffset : UInt64, startoffset : UInt64, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, imagefilehandle, handle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, initialthreadhandle, threaddataoffset, startoffset, context, contextsize)
+  end
+  def exit_process(this : IDebugEventContextCallbacks*, exitcode : UInt32, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.exit_process.call(this, exitcode, context, contextsize)
+  end
+  def load_module(this : IDebugEventContextCallbacks*, imagefilehandle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.load_module.call(this, imagefilehandle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, context, contextsize)
+  end
+  def unload_module(this : IDebugEventContextCallbacks*, imagebasename : LibC::LPWSTR, baseoffset : UInt64, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.unload_module.call(this, imagebasename, baseoffset, context, contextsize)
+  end
+  def system_error(this : IDebugEventContextCallbacks*, error : UInt32, level : UInt32, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.system_error.call(this, error, level, context, contextsize)
+  end
+  def session_status(this : IDebugEventContextCallbacks*, status : UInt32) : HRESULT
+    @lpVtbl.value.session_status.call(this, status)
+  end
+  def change_debuggee_state(this : IDebugEventContextCallbacks*, flags : UInt32, argument : UInt64, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.change_debuggee_state.call(this, flags, argument, context, contextsize)
+  end
+  def change_engine_state(this : IDebugEventContextCallbacks*, flags : UInt32, argument : UInt64, context : Void*, contextsize : UInt32) : HRESULT
+    @lpVtbl.value.change_engine_state.call(this, flags, argument, context, contextsize)
+  end
+  def change_symbol_state(this : IDebugEventContextCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_symbol_state.call(this, flags, argument)
+  end
+end
+struct LibWin32::IDebugInputCallbacks
+  def query_interface(this : IDebugInputCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugInputCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugInputCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_input(this : IDebugInputCallbacks*, buffersize : UInt32) : HRESULT
+    @lpVtbl.value.start_input.call(this, buffersize)
+  end
+  def end_input(this : IDebugInputCallbacks*) : HRESULT
+    @lpVtbl.value.end_input.call(this)
+  end
+end
+struct LibWin32::IDebugOutputCallbacks
+  def query_interface(this : IDebugOutputCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugOutputCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugOutputCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def output(this : IDebugOutputCallbacks*, mask : UInt32, text : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, text)
+  end
+end
+struct LibWin32::IDebugOutputCallbacksWide
+  def query_interface(this : IDebugOutputCallbacksWide*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugOutputCallbacksWide*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugOutputCallbacksWide*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def output(this : IDebugOutputCallbacksWide*, mask : UInt32, text : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, text)
+  end
+end
+struct LibWin32::IDebugOutputCallbacks2
+  def query_interface(this : IDebugOutputCallbacks2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugOutputCallbacks2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugOutputCallbacks2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def output(this : IDebugOutputCallbacks2*, mask : UInt32, text : PSTR) : HRESULT
+    @lpVtbl.value.output.call(this, mask, text)
+  end
+  def get_interest_mask(this : IDebugOutputCallbacks2*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def output2(this : IDebugOutputCallbacks2*, which : UInt32, flags : UInt32, arg : UInt64, text : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output2.call(this, which, flags, arg, text)
+  end
+end
+struct LibWin32::IDebugRegisters
+  def query_interface(this : IDebugRegisters*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugRegisters*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugRegisters*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_registers(this : IDebugRegisters*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_registers.call(this, number)
+  end
+  def get_description(this : IDebugRegisters*, register : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, desc : DEBUG_REGISTER_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_description.call(this, register, namebuffer, namebuffersize, namesize, desc)
+  end
+  def get_index_by_name(this : IDebugRegisters*, name : PSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_by_name.call(this, name, index)
+  end
+  def get_value(this : IDebugRegisters*, register : UInt32, value : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_value.call(this, register, value)
+  end
+  def set_value(this : IDebugRegisters*, register : UInt32, value : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_value.call(this, register, value)
+  end
+  def get_values(this : IDebugRegisters*, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_values.call(this, count, indices, start, values)
+  end
+  def set_values(this : IDebugRegisters*, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_values.call(this, count, indices, start, values)
+  end
+  def output_registers(this : IDebugRegisters*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_registers.call(this, outputcontrol, flags)
+  end
+  def get_instruction_offset(this : IDebugRegisters*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_instruction_offset.call(this, offset)
+  end
+  def get_stack_offset(this : IDebugRegisters*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_stack_offset.call(this, offset)
+  end
+  def get_frame_offset(this : IDebugRegisters*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_frame_offset.call(this, offset)
+  end
+end
+struct LibWin32::IDebugRegisters2
+  def query_interface(this : IDebugRegisters2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugRegisters2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugRegisters2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_registers(this : IDebugRegisters2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_registers.call(this, number)
+  end
+  def get_description(this : IDebugRegisters2*, register : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, desc : DEBUG_REGISTER_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_description.call(this, register, namebuffer, namebuffersize, namesize, desc)
+  end
+  def get_index_by_name(this : IDebugRegisters2*, name : PSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_by_name.call(this, name, index)
+  end
+  def get_value(this : IDebugRegisters2*, register : UInt32, value : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_value.call(this, register, value)
+  end
+  def set_value(this : IDebugRegisters2*, register : UInt32, value : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_value.call(this, register, value)
+  end
+  def get_values(this : IDebugRegisters2*, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_values.call(this, count, indices, start, values)
+  end
+  def set_values(this : IDebugRegisters2*, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_values.call(this, count, indices, start, values)
+  end
+  def output_registers(this : IDebugRegisters2*, outputcontrol : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_registers.call(this, outputcontrol, flags)
+  end
+  def get_instruction_offset(this : IDebugRegisters2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_instruction_offset.call(this, offset)
+  end
+  def get_stack_offset(this : IDebugRegisters2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_stack_offset.call(this, offset)
+  end
+  def get_frame_offset(this : IDebugRegisters2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_frame_offset.call(this, offset)
+  end
+  def get_description_wide(this : IDebugRegisters2*, register : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, desc : DEBUG_REGISTER_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.get_description_wide.call(this, register, namebuffer, namebuffersize, namesize, desc)
+  end
+  def get_index_by_name_wide(this : IDebugRegisters2*, name : LibC::LPWSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_by_name_wide.call(this, name, index)
+  end
+  def get_number_pseudo_registers(this : IDebugRegisters2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_pseudo_registers.call(this, number)
+  end
+  def get_pseudo_description(this : IDebugRegisters2*, register : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, typemodule : UInt64*, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_pseudo_description.call(this, register, namebuffer, namebuffersize, namesize, typemodule, typeid)
+  end
+  def get_pseudo_description_wide(this : IDebugRegisters2*, register : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, typemodule : UInt64*, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_pseudo_description_wide.call(this, register, namebuffer, namebuffersize, namesize, typemodule, typeid)
+  end
+  def get_pseudo_index_by_name(this : IDebugRegisters2*, name : PSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_pseudo_index_by_name.call(this, name, index)
+  end
+  def get_pseudo_index_by_name_wide(this : IDebugRegisters2*, name : LibC::LPWSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_pseudo_index_by_name_wide.call(this, name, index)
+  end
+  def get_pseudo_values(this : IDebugRegisters2*, source : UInt32, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_pseudo_values.call(this, source, count, indices, start, values)
+  end
+  def set_pseudo_values(this : IDebugRegisters2*, source : UInt32, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_pseudo_values.call(this, source, count, indices, start, values)
+  end
+  def get_values2(this : IDebugRegisters2*, source : UInt32, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.get_values2.call(this, source, count, indices, start, values)
+  end
+  def set_values2(this : IDebugRegisters2*, source : UInt32, count : UInt32, indices : UInt32*, start : UInt32, values : DEBUG_VALUE*) : HRESULT
+    @lpVtbl.value.set_values2.call(this, source, count, indices, start, values)
+  end
+  def output_registers2(this : IDebugRegisters2*, outputcontrol : UInt32, source : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_registers2.call(this, outputcontrol, source, flags)
+  end
+  def get_instruction_offset2(this : IDebugRegisters2*, source : UInt32, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_instruction_offset2.call(this, source, offset)
+  end
+  def get_stack_offset2(this : IDebugRegisters2*, source : UInt32, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_stack_offset2.call(this, source, offset)
+  end
+  def get_frame_offset2(this : IDebugRegisters2*, source : UInt32, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_frame_offset2.call(this, source, offset)
+  end
+end
+struct LibWin32::IDebugSymbolGroup
+  def query_interface(this : IDebugSymbolGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbolGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbolGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_symbols(this : IDebugSymbolGroup*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_symbols.call(this, number)
+  end
+  def add_symbol(this : IDebugSymbolGroup*, name : PSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.add_symbol.call(this, name, index)
+  end
+  def remove_symbol_by_name(this : IDebugSymbolGroup*, name : PSTR) : HRESULT
+    @lpVtbl.value.remove_symbol_by_name.call(this, name)
+  end
+  def remove_symbol_by_index(this : IDebugSymbolGroup*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_by_index.call(this, index)
+  end
+  def get_symbol_name(this : IDebugSymbolGroup*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_name.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_parameters(this : IDebugSymbolGroup*, start : UInt32, count : UInt32, params : DEBUG_SYMBOL_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_symbol_parameters.call(this, start, count, params)
+  end
+  def expand_symbol(this : IDebugSymbolGroup*, index : UInt32, expand : LibC::BOOL) : HRESULT
+    @lpVtbl.value.expand_symbol.call(this, index, expand)
+  end
+  def output_symbols(this : IDebugSymbolGroup*, outputcontrol : UInt32, flags : UInt32, start : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.output_symbols.call(this, outputcontrol, flags, start, count)
+  end
+  def write_symbol(this : IDebugSymbolGroup*, index : UInt32, value : PSTR) : HRESULT
+    @lpVtbl.value.write_symbol.call(this, index, value)
+  end
+  def output_as_type(this : IDebugSymbolGroup*, index : UInt32, type : PSTR) : HRESULT
+    @lpVtbl.value.output_as_type.call(this, index, type)
+  end
+end
+struct LibWin32::IDebugSymbolGroup2
+  def query_interface(this : IDebugSymbolGroup2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbolGroup2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbolGroup2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_number_symbols(this : IDebugSymbolGroup2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_symbols.call(this, number)
+  end
+  def add_symbol(this : IDebugSymbolGroup2*, name : PSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.add_symbol.call(this, name, index)
+  end
+  def remove_symbol_by_name(this : IDebugSymbolGroup2*, name : PSTR) : HRESULT
+    @lpVtbl.value.remove_symbol_by_name.call(this, name)
+  end
+  def remove_symbol_by_index(this : IDebugSymbolGroup2*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_by_index.call(this, index)
+  end
+  def get_symbol_name(this : IDebugSymbolGroup2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_name.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_parameters(this : IDebugSymbolGroup2*, start : UInt32, count : UInt32, params : DEBUG_SYMBOL_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_symbol_parameters.call(this, start, count, params)
+  end
+  def expand_symbol(this : IDebugSymbolGroup2*, index : UInt32, expand : LibC::BOOL) : HRESULT
+    @lpVtbl.value.expand_symbol.call(this, index, expand)
+  end
+  def output_symbols(this : IDebugSymbolGroup2*, outputcontrol : UInt32, flags : UInt32, start : UInt32, count : UInt32) : HRESULT
+    @lpVtbl.value.output_symbols.call(this, outputcontrol, flags, start, count)
+  end
+  def write_symbol(this : IDebugSymbolGroup2*, index : UInt32, value : PSTR) : HRESULT
+    @lpVtbl.value.write_symbol.call(this, index, value)
+  end
+  def output_as_type(this : IDebugSymbolGroup2*, index : UInt32, type : PSTR) : HRESULT
+    @lpVtbl.value.output_as_type.call(this, index, type)
+  end
+  def add_symbol_wide(this : IDebugSymbolGroup2*, name : LibC::LPWSTR, index : UInt32*) : HRESULT
+    @lpVtbl.value.add_symbol_wide.call(this, name, index)
+  end
+  def remove_symbol_by_name_wide(this : IDebugSymbolGroup2*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_symbol_by_name_wide.call(this, name)
+  end
+  def get_symbol_name_wide(this : IDebugSymbolGroup2*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_name_wide.call(this, index, buffer, buffersize, namesize)
+  end
+  def write_symbol_wide(this : IDebugSymbolGroup2*, index : UInt32, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_symbol_wide.call(this, index, value)
+  end
+  def output_as_type_wide(this : IDebugSymbolGroup2*, index : UInt32, type : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.output_as_type_wide.call(this, index, type)
+  end
+  def get_symbol_type_name(this : IDebugSymbolGroup2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_type_name.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_type_name_wide(this : IDebugSymbolGroup2*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_type_name_wide.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_size(this : IDebugSymbolGroup2*, index : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_size.call(this, index, size)
+  end
+  def get_symbol_offset(this : IDebugSymbolGroup2*, index : UInt32, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_offset.call(this, index, offset)
+  end
+  def get_symbol_register(this : IDebugSymbolGroup2*, index : UInt32, register : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_register.call(this, index, register)
+  end
+  def get_symbol_value_text(this : IDebugSymbolGroup2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_value_text.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_value_text_wide(this : IDebugSymbolGroup2*, index : UInt32, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_value_text_wide.call(this, index, buffer, buffersize, namesize)
+  end
+  def get_symbol_entry_information(this : IDebugSymbolGroup2*, index : UInt32, entry : DEBUG_SYMBOL_ENTRY*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_information.call(this, index, entry)
+  end
+end
+struct LibWin32::IDebugSymbols
+  def query_interface(this : IDebugSymbols*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbols*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbols*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbol_options(this : IDebugSymbols*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_options.call(this, options)
+  end
+  def add_symbol_options(this : IDebugSymbols*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_symbol_options.call(this, options)
+  end
+  def remove_symbol_options(this : IDebugSymbols*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_options.call(this, options)
+  end
+  def set_symbol_options(this : IDebugSymbols*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_symbol_options.call(this, options)
+  end
+  def get_name_by_offset(this : IDebugSymbols*, offset : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name(this : IDebugSymbols*, symbol : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset(this : IDebugSymbols*, offset : UInt64, delta : Int32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset(this : IDebugSymbols*, offset : UInt64, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line(this : IDebugSymbols*, line : UInt32, file : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line.call(this, line, file, offset)
+  end
+  def get_number_modules(this : IDebugSymbols*, loaded : UInt32*, unloaded : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_modules.call(this, loaded, unloaded)
+  end
+  def get_module_by_index(this : IDebugSymbols*, index : UInt32, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_index.call(this, index, base)
+  end
+  def get_module_by_module_name(this : IDebugSymbols*, name : PSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name.call(this, name, startindex, index, base)
+  end
+  def get_module_by_offset(this : IDebugSymbols*, offset : UInt64, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset.call(this, offset, startindex, index, base)
+  end
+  def get_module_names(this : IDebugSymbols*, index : UInt32, base : UInt64, imagenamebuffer : UInt8*, imagenamebuffersize : UInt32, imagenamesize : UInt32*, modulenamebuffer : UInt8*, modulenamebuffersize : UInt32, modulenamesize : UInt32*, loadedimagenamebuffer : UInt8*, loadedimagenamebuffersize : UInt32, loadedimagenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_names.call(this, index, base, imagenamebuffer, imagenamebuffersize, imagenamesize, modulenamebuffer, modulenamebuffersize, modulenamesize, loadedimagenamebuffer, loadedimagenamebuffersize, loadedimagenamesize)
+  end
+  def get_module_parameters(this : IDebugSymbols*, count : UInt32, bases : UInt64*, start : UInt32, params : DEBUG_MODULE_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_module_parameters.call(this, count, bases, start, params)
+  end
+  def get_symbol_module(this : IDebugSymbols*, symbol : PSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module.call(this, symbol, base)
+  end
+  def get_type_name(this : IDebugSymbols*, module_ : UInt64, typeid : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id(this : IDebugSymbols*, module_ : UInt64, name : PSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id.call(this, module_, name, typeid)
+  end
+  def get_type_size(this : IDebugSymbols*, module_ : UInt64, typeid : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_size.call(this, module_, typeid, size)
+  end
+  def get_field_offset(this : IDebugSymbols*, module_ : UInt64, typeid : UInt32, field : PSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id(this : IDebugSymbols*, symbol : PSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id.call(this, symbol, typeid, module_)
+  end
+  def get_offset_type_id(this : IDebugSymbols*, offset : UInt64, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_type_id.call(this, offset, typeid, module_)
+  end
+  def read_typed_data_virtual(this : IDebugSymbols*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_virtual(this : IDebugSymbols*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_virtual(this : IDebugSymbols*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_virtual.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def read_typed_data_physical(this : IDebugSymbols*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_physical(this : IDebugSymbols*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_physical(this : IDebugSymbols*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_physical.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def get_scope(this : IDebugSymbols*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope(this : IDebugSymbols*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def reset_scope(this : IDebugSymbols*) : HRESULT
+    @lpVtbl.value.reset_scope.call(this)
+  end
+  def get_scope_symbol_group(this : IDebugSymbols*, flags : UInt32, update : IDebugSymbolGroup, symbols : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group.call(this, flags, update, symbols)
+  end
+  def create_symbol_group(this : IDebugSymbols*, group : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.create_symbol_group.call(this, group)
+  end
+  def start_symbol_match(this : IDebugSymbols*, pattern : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match.call(this, pattern, handle)
+  end
+  def get_next_symbol_match(this : IDebugSymbols*, handle : UInt64, buffer : UInt8*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def end_symbol_match(this : IDebugSymbols*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_symbol_match.call(this, handle)
+  end
+  def reload(this : IDebugSymbols*, module_ : PSTR) : HRESULT
+    @lpVtbl.value.reload.call(this, module_)
+  end
+  def get_symbol_path(this : IDebugSymbols*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path(this : IDebugSymbols*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path.call(this, path)
+  end
+  def append_symbol_path(this : IDebugSymbols*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path.call(this, addition)
+  end
+  def get_image_path(this : IDebugSymbols*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path(this : IDebugSymbols*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_image_path.call(this, path)
+  end
+  def append_image_path(this : IDebugSymbols*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_image_path.call(this, addition)
+  end
+  def get_source_path(this : IDebugSymbols*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element(this : IDebugSymbols*, index : UInt32, buffer : UInt8*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path(this : IDebugSymbols*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_source_path.call(this, path)
+  end
+  def append_source_path(this : IDebugSymbols*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_source_path.call(this, addition)
+  end
+  def find_source_file(this : IDebugSymbols*, startelement : UInt32, file : PSTR, flags : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets(this : IDebugSymbols*, file : PSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets.call(this, file, buffer, bufferlines, filelines)
+  end
+end
+struct LibWin32::IDebugSymbols2
+  def query_interface(this : IDebugSymbols2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbols2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbols2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbol_options(this : IDebugSymbols2*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_options.call(this, options)
+  end
+  def add_symbol_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_symbol_options.call(this, options)
+  end
+  def remove_symbol_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_options.call(this, options)
+  end
+  def set_symbol_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_symbol_options.call(this, options)
+  end
+  def get_name_by_offset(this : IDebugSymbols2*, offset : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name(this : IDebugSymbols2*, symbol : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset(this : IDebugSymbols2*, offset : UInt64, delta : Int32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset(this : IDebugSymbols2*, offset : UInt64, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line(this : IDebugSymbols2*, line : UInt32, file : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line.call(this, line, file, offset)
+  end
+  def get_number_modules(this : IDebugSymbols2*, loaded : UInt32*, unloaded : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_modules.call(this, loaded, unloaded)
+  end
+  def get_module_by_index(this : IDebugSymbols2*, index : UInt32, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_index.call(this, index, base)
+  end
+  def get_module_by_module_name(this : IDebugSymbols2*, name : PSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name.call(this, name, startindex, index, base)
+  end
+  def get_module_by_offset(this : IDebugSymbols2*, offset : UInt64, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset.call(this, offset, startindex, index, base)
+  end
+  def get_module_names(this : IDebugSymbols2*, index : UInt32, base : UInt64, imagenamebuffer : UInt8*, imagenamebuffersize : UInt32, imagenamesize : UInt32*, modulenamebuffer : UInt8*, modulenamebuffersize : UInt32, modulenamesize : UInt32*, loadedimagenamebuffer : UInt8*, loadedimagenamebuffersize : UInt32, loadedimagenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_names.call(this, index, base, imagenamebuffer, imagenamebuffersize, imagenamesize, modulenamebuffer, modulenamebuffersize, modulenamesize, loadedimagenamebuffer, loadedimagenamebuffersize, loadedimagenamesize)
+  end
+  def get_module_parameters(this : IDebugSymbols2*, count : UInt32, bases : UInt64*, start : UInt32, params : DEBUG_MODULE_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_module_parameters.call(this, count, bases, start, params)
+  end
+  def get_symbol_module(this : IDebugSymbols2*, symbol : PSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module.call(this, symbol, base)
+  end
+  def get_type_name(this : IDebugSymbols2*, module_ : UInt64, typeid : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id(this : IDebugSymbols2*, module_ : UInt64, name : PSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id.call(this, module_, name, typeid)
+  end
+  def get_type_size(this : IDebugSymbols2*, module_ : UInt64, typeid : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_size.call(this, module_, typeid, size)
+  end
+  def get_field_offset(this : IDebugSymbols2*, module_ : UInt64, typeid : UInt32, field : PSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id(this : IDebugSymbols2*, symbol : PSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id.call(this, symbol, typeid, module_)
+  end
+  def get_offset_type_id(this : IDebugSymbols2*, offset : UInt64, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_type_id.call(this, offset, typeid, module_)
+  end
+  def read_typed_data_virtual(this : IDebugSymbols2*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_virtual(this : IDebugSymbols2*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_virtual(this : IDebugSymbols2*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_virtual.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def read_typed_data_physical(this : IDebugSymbols2*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_physical(this : IDebugSymbols2*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_physical(this : IDebugSymbols2*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_physical.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def get_scope(this : IDebugSymbols2*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope(this : IDebugSymbols2*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def reset_scope(this : IDebugSymbols2*) : HRESULT
+    @lpVtbl.value.reset_scope.call(this)
+  end
+  def get_scope_symbol_group(this : IDebugSymbols2*, flags : UInt32, update : IDebugSymbolGroup, symbols : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group.call(this, flags, update, symbols)
+  end
+  def create_symbol_group(this : IDebugSymbols2*, group : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.create_symbol_group.call(this, group)
+  end
+  def start_symbol_match(this : IDebugSymbols2*, pattern : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match.call(this, pattern, handle)
+  end
+  def get_next_symbol_match(this : IDebugSymbols2*, handle : UInt64, buffer : UInt8*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def end_symbol_match(this : IDebugSymbols2*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_symbol_match.call(this, handle)
+  end
+  def reload(this : IDebugSymbols2*, module_ : PSTR) : HRESULT
+    @lpVtbl.value.reload.call(this, module_)
+  end
+  def get_symbol_path(this : IDebugSymbols2*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path(this : IDebugSymbols2*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path.call(this, path)
+  end
+  def append_symbol_path(this : IDebugSymbols2*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path.call(this, addition)
+  end
+  def get_image_path(this : IDebugSymbols2*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path(this : IDebugSymbols2*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_image_path.call(this, path)
+  end
+  def append_image_path(this : IDebugSymbols2*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_image_path.call(this, addition)
+  end
+  def get_source_path(this : IDebugSymbols2*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element(this : IDebugSymbols2*, index : UInt32, buffer : UInt8*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path(this : IDebugSymbols2*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_source_path.call(this, path)
+  end
+  def append_source_path(this : IDebugSymbols2*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_source_path.call(this, addition)
+  end
+  def find_source_file(this : IDebugSymbols2*, startelement : UInt32, file : PSTR, flags : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets(this : IDebugSymbols2*, file : PSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information(this : IDebugSymbols2*, index : UInt32, base : UInt64, item : PSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string(this : IDebugSymbols2*, which : UInt32, index : UInt32, base : UInt64, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name(this : IDebugSymbols2*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name(this : IDebugSymbols2*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_options(this : IDebugSymbols2*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_options.call(this, options)
+  end
+  def add_type_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_type_options.call(this, options)
+  end
+  def remove_type_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_type_options.call(this, options)
+  end
+  def set_type_options(this : IDebugSymbols2*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_type_options.call(this, options)
+  end
+end
+struct LibWin32::IDebugSymbols3
+  def query_interface(this : IDebugSymbols3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbols3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbols3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbol_options(this : IDebugSymbols3*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_options.call(this, options)
+  end
+  def add_symbol_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_symbol_options.call(this, options)
+  end
+  def remove_symbol_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_options.call(this, options)
+  end
+  def set_symbol_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_symbol_options.call(this, options)
+  end
+  def get_name_by_offset(this : IDebugSymbols3*, offset : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name(this : IDebugSymbols3*, symbol : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset(this : IDebugSymbols3*, offset : UInt64, delta : Int32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset(this : IDebugSymbols3*, offset : UInt64, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line(this : IDebugSymbols3*, line : UInt32, file : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line.call(this, line, file, offset)
+  end
+  def get_number_modules(this : IDebugSymbols3*, loaded : UInt32*, unloaded : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_modules.call(this, loaded, unloaded)
+  end
+  def get_module_by_index(this : IDebugSymbols3*, index : UInt32, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_index.call(this, index, base)
+  end
+  def get_module_by_module_name(this : IDebugSymbols3*, name : PSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name.call(this, name, startindex, index, base)
+  end
+  def get_module_by_offset(this : IDebugSymbols3*, offset : UInt64, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset.call(this, offset, startindex, index, base)
+  end
+  def get_module_names(this : IDebugSymbols3*, index : UInt32, base : UInt64, imagenamebuffer : UInt8*, imagenamebuffersize : UInt32, imagenamesize : UInt32*, modulenamebuffer : UInt8*, modulenamebuffersize : UInt32, modulenamesize : UInt32*, loadedimagenamebuffer : UInt8*, loadedimagenamebuffersize : UInt32, loadedimagenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_names.call(this, index, base, imagenamebuffer, imagenamebuffersize, imagenamesize, modulenamebuffer, modulenamebuffersize, modulenamesize, loadedimagenamebuffer, loadedimagenamebuffersize, loadedimagenamesize)
+  end
+  def get_module_parameters(this : IDebugSymbols3*, count : UInt32, bases : UInt64*, start : UInt32, params : DEBUG_MODULE_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_module_parameters.call(this, count, bases, start, params)
+  end
+  def get_symbol_module(this : IDebugSymbols3*, symbol : PSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module.call(this, symbol, base)
+  end
+  def get_type_name(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id(this : IDebugSymbols3*, module_ : UInt64, name : PSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id.call(this, module_, name, typeid)
+  end
+  def get_type_size(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_size.call(this, module_, typeid, size)
+  end
+  def get_field_offset(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, field : PSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id(this : IDebugSymbols3*, symbol : PSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id.call(this, symbol, typeid, module_)
+  end
+  def get_offset_type_id(this : IDebugSymbols3*, offset : UInt64, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_type_id.call(this, offset, typeid, module_)
+  end
+  def read_typed_data_virtual(this : IDebugSymbols3*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_virtual(this : IDebugSymbols3*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_virtual(this : IDebugSymbols3*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_virtual.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def read_typed_data_physical(this : IDebugSymbols3*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_physical(this : IDebugSymbols3*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_physical(this : IDebugSymbols3*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_physical.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def get_scope(this : IDebugSymbols3*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope(this : IDebugSymbols3*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def reset_scope(this : IDebugSymbols3*) : HRESULT
+    @lpVtbl.value.reset_scope.call(this)
+  end
+  def get_scope_symbol_group(this : IDebugSymbols3*, flags : UInt32, update : IDebugSymbolGroup, symbols : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group.call(this, flags, update, symbols)
+  end
+  def create_symbol_group(this : IDebugSymbols3*, group : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.create_symbol_group.call(this, group)
+  end
+  def start_symbol_match(this : IDebugSymbols3*, pattern : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match.call(this, pattern, handle)
+  end
+  def get_next_symbol_match(this : IDebugSymbols3*, handle : UInt64, buffer : UInt8*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def end_symbol_match(this : IDebugSymbols3*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_symbol_match.call(this, handle)
+  end
+  def reload(this : IDebugSymbols3*, module_ : PSTR) : HRESULT
+    @lpVtbl.value.reload.call(this, module_)
+  end
+  def get_symbol_path(this : IDebugSymbols3*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path(this : IDebugSymbols3*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path.call(this, path)
+  end
+  def append_symbol_path(this : IDebugSymbols3*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path.call(this, addition)
+  end
+  def get_image_path(this : IDebugSymbols3*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path(this : IDebugSymbols3*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_image_path.call(this, path)
+  end
+  def append_image_path(this : IDebugSymbols3*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_image_path.call(this, addition)
+  end
+  def get_source_path(this : IDebugSymbols3*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element(this : IDebugSymbols3*, index : UInt32, buffer : UInt8*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path(this : IDebugSymbols3*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_source_path.call(this, path)
+  end
+  def append_source_path(this : IDebugSymbols3*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_source_path.call(this, addition)
+  end
+  def find_source_file(this : IDebugSymbols3*, startelement : UInt32, file : PSTR, flags : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets(this : IDebugSymbols3*, file : PSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information(this : IDebugSymbols3*, index : UInt32, base : UInt64, item : PSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string(this : IDebugSymbols3*, which : UInt32, index : UInt32, base : UInt64, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_options(this : IDebugSymbols3*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_options.call(this, options)
+  end
+  def add_type_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_type_options.call(this, options)
+  end
+  def remove_type_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_type_options.call(this, options)
+  end
+  def set_type_options(this : IDebugSymbols3*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_type_options.call(this, options)
+  end
+  def get_name_by_offset_wide(this : IDebugSymbols3*, offset : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset_wide.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name_wide(this : IDebugSymbols3*, symbol : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name_wide.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset_wide(this : IDebugSymbols3*, offset : UInt64, delta : Int32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset_wide.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset_wide(this : IDebugSymbols3*, offset : UInt64, line : UInt32*, filebuffer : Char*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset_wide.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line_wide(this : IDebugSymbols3*, line : UInt32, file : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line_wide.call(this, line, file, offset)
+  end
+  def get_module_by_module_name_wide(this : IDebugSymbols3*, name : LibC::LPWSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name_wide.call(this, name, startindex, index, base)
+  end
+  def get_symbol_module_wide(this : IDebugSymbols3*, symbol : LibC::LPWSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module_wide.call(this, symbol, base)
+  end
+  def get_type_name_wide(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name_wide.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id_wide(this : IDebugSymbols3*, module_ : UInt64, name : LibC::LPWSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id_wide.call(this, module_, name, typeid)
+  end
+  def get_field_offset_wide(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, field : LibC::LPWSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset_wide.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id_wide(this : IDebugSymbols3*, symbol : LibC::LPWSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id_wide.call(this, symbol, typeid, module_)
+  end
+  def get_scope_symbol_group2(this : IDebugSymbols3*, flags : UInt32, update : IDebugSymbolGroup2, symbols : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group2.call(this, flags, update, symbols)
+  end
+  def create_symbol_group2(this : IDebugSymbols3*, group : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.create_symbol_group2.call(this, group)
+  end
+  def start_symbol_match_wide(this : IDebugSymbols3*, pattern : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match_wide.call(this, pattern, handle)
+  end
+  def get_next_symbol_match_wide(this : IDebugSymbols3*, handle : UInt64, buffer : Char*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match_wide.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def reload_wide(this : IDebugSymbols3*, module_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reload_wide.call(this, module_)
+  end
+  def get_symbol_path_wide(this : IDebugSymbols3*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path_wide(this : IDebugSymbols3*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path_wide.call(this, path)
+  end
+  def append_symbol_path_wide(this : IDebugSymbols3*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path_wide.call(this, addition)
+  end
+  def get_image_path_wide(this : IDebugSymbols3*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path_wide(this : IDebugSymbols3*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_image_path_wide.call(this, path)
+  end
+  def append_image_path_wide(this : IDebugSymbols3*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_image_path_wide.call(this, addition)
+  end
+  def get_source_path_wide(this : IDebugSymbols3*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element_wide(this : IDebugSymbols3*, index : UInt32, buffer : Char*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element_wide.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path_wide(this : IDebugSymbols3*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_source_path_wide.call(this, path)
+  end
+  def append_source_path_wide(this : IDebugSymbols3*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_source_path_wide.call(this, addition)
+  end
+  def find_source_file_wide(this : IDebugSymbols3*, startelement : UInt32, file : LibC::LPWSTR, flags : UInt32, foundelement : UInt32*, buffer : Char*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_wide.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets_wide(this : IDebugSymbols3*, file : LibC::LPWSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets_wide.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information_wide(this : IDebugSymbols3*, index : UInt32, base : UInt64, item : LibC::LPWSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information_wide.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string_wide(this : IDebugSymbols3*, which : UInt32, index : UInt32, base : UInt64, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string_wide.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name_wide(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name_wide.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name_wide(this : IDebugSymbols3*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name_wide.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def is_managed_module(this : IDebugSymbols3*, index : UInt32, base : UInt64) : HRESULT
+    @lpVtbl.value.is_managed_module.call(this, index, base)
+  end
+  def get_module_by_module_name2(this : IDebugSymbols3*, name : PSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_module_name2_wide(this : IDebugSymbols3*, name : LibC::LPWSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2_wide.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_offset2(this : IDebugSymbols3*, offset : UInt64, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset2.call(this, offset, startindex, flags, index, base)
+  end
+  def add_synthetic_module(this : IDebugSymbols3*, base : UInt64, size : UInt32, imagepath : PSTR, modulename : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module.call(this, base, size, imagepath, modulename, flags)
+  end
+  def add_synthetic_module_wide(this : IDebugSymbols3*, base : UInt64, size : UInt32, imagepath : LibC::LPWSTR, modulename : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module_wide.call(this, base, size, imagepath, modulename, flags)
+  end
+  def remove_synthetic_module(this : IDebugSymbols3*, base : UInt64) : HRESULT
+    @lpVtbl.value.remove_synthetic_module.call(this, base)
+  end
+  def get_current_scope_frame_index(this : IDebugSymbols3*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_scope_frame_index.call(this, index)
+  end
+  def set_scope_frame_by_index(this : IDebugSymbols3*, index : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_frame_by_index.call(this, index)
+  end
+  def set_scope_from_jit_debug_info(this : IDebugSymbols3*, outputcontrol : UInt32, infooffset : UInt64) : HRESULT
+    @lpVtbl.value.set_scope_from_jit_debug_info.call(this, outputcontrol, infooffset)
+  end
+  def set_scope_from_stored_event(this : IDebugSymbols3*) : HRESULT
+    @lpVtbl.value.set_scope_from_stored_event.call(this)
+  end
+  def output_symbol_by_offset(this : IDebugSymbols3*, outputcontrol : UInt32, flags : UInt32, offset : UInt64) : HRESULT
+    @lpVtbl.value.output_symbol_by_offset.call(this, outputcontrol, flags, offset)
+  end
+  def get_function_entry_by_offset(this : IDebugSymbols3*, offset : UInt64, flags : UInt32, buffer : Void*, buffersize : UInt32, bufferneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_function_entry_by_offset.call(this, offset, flags, buffer, buffersize, bufferneeded)
+  end
+  def get_field_type_and_offset(this : IDebugSymbols3*, module_ : UInt64, containertypeid : UInt32, field : PSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def get_field_type_and_offset_wide(this : IDebugSymbols3*, module_ : UInt64, containertypeid : UInt32, field : LibC::LPWSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset_wide.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def add_synthetic_symbol(this : IDebugSymbols3*, offset : UInt64, size : UInt32, name : PSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol.call(this, offset, size, name, flags, id)
+  end
+  def add_synthetic_symbol_wide(this : IDebugSymbols3*, offset : UInt64, size : UInt32, name : LibC::LPWSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol_wide.call(this, offset, size, name, flags, id)
+  end
+  def remove_synthetic_symbol(this : IDebugSymbols3*, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.remove_synthetic_symbol.call(this, id)
+  end
+  def get_symbol_entries_by_offset(this : IDebugSymbols3*, offset : UInt64, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, displacements : UInt64*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_offset.call(this, offset, flags, ids, displacements, idscount, entries)
+  end
+  def get_symbol_entries_by_name(this : IDebugSymbols3*, symbol : PSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entries_by_name_wide(this : IDebugSymbols3*, symbol : LibC::LPWSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name_wide.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entry_by_token(this : IDebugSymbols3*, modulebase : UInt64, token : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_token.call(this, modulebase, token, id)
+  end
+  def get_symbol_entry_information(this : IDebugSymbols3*, id : DEBUG_MODULE_AND_ID*, info : DEBUG_SYMBOL_ENTRY*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_information.call(this, id, info)
+  end
+  def get_symbol_entry_string(this : IDebugSymbols3*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_string_wide(this : IDebugSymbols3*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string_wide.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_offset_regions(this : IDebugSymbols3*, id : DEBUG_MODULE_AND_ID*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_offset_regions.call(this, id, flags, regions, regionscount, regionsavail)
+  end
+  def get_symbol_entry_by_symbol_entry(this : IDebugSymbols3*, fromid : DEBUG_MODULE_AND_ID*, flags : UInt32, toid : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_symbol_entry.call(this, fromid, flags, toid)
+  end
+  def get_source_entries_by_offset(this : IDebugSymbols3*, offset : UInt64, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_offset.call(this, offset, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line(this : IDebugSymbols3*, line : UInt32, file : PSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line_wide(this : IDebugSymbols3*, line : UInt32, file : LibC::LPWSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line_wide.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entry_string(this : IDebugSymbols3*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_string_wide(this : IDebugSymbols3*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string_wide.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_offset_regions(this : IDebugSymbols3*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_offset_regions.call(this, entry, flags, regions, regionscount, regionsavail)
+  end
+  def get_source_entry_by_source_entry(this : IDebugSymbols3*, fromentry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, toentry : DEBUG_SYMBOL_SOURCE_ENTRY*) : HRESULT
+    @lpVtbl.value.get_source_entry_by_source_entry.call(this, fromentry, flags, toentry)
+  end
+end
+struct LibWin32::IDebugSymbols4
+  def query_interface(this : IDebugSymbols4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbols4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbols4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbol_options(this : IDebugSymbols4*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_options.call(this, options)
+  end
+  def add_symbol_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_symbol_options.call(this, options)
+  end
+  def remove_symbol_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_options.call(this, options)
+  end
+  def set_symbol_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_symbol_options.call(this, options)
+  end
+  def get_name_by_offset(this : IDebugSymbols4*, offset : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name(this : IDebugSymbols4*, symbol : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset(this : IDebugSymbols4*, offset : UInt64, delta : Int32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset(this : IDebugSymbols4*, offset : UInt64, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line(this : IDebugSymbols4*, line : UInt32, file : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line.call(this, line, file, offset)
+  end
+  def get_number_modules(this : IDebugSymbols4*, loaded : UInt32*, unloaded : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_modules.call(this, loaded, unloaded)
+  end
+  def get_module_by_index(this : IDebugSymbols4*, index : UInt32, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_index.call(this, index, base)
+  end
+  def get_module_by_module_name(this : IDebugSymbols4*, name : PSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name.call(this, name, startindex, index, base)
+  end
+  def get_module_by_offset(this : IDebugSymbols4*, offset : UInt64, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset.call(this, offset, startindex, index, base)
+  end
+  def get_module_names(this : IDebugSymbols4*, index : UInt32, base : UInt64, imagenamebuffer : UInt8*, imagenamebuffersize : UInt32, imagenamesize : UInt32*, modulenamebuffer : UInt8*, modulenamebuffersize : UInt32, modulenamesize : UInt32*, loadedimagenamebuffer : UInt8*, loadedimagenamebuffersize : UInt32, loadedimagenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_names.call(this, index, base, imagenamebuffer, imagenamebuffersize, imagenamesize, modulenamebuffer, modulenamebuffersize, modulenamesize, loadedimagenamebuffer, loadedimagenamebuffersize, loadedimagenamesize)
+  end
+  def get_module_parameters(this : IDebugSymbols4*, count : UInt32, bases : UInt64*, start : UInt32, params : DEBUG_MODULE_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_module_parameters.call(this, count, bases, start, params)
+  end
+  def get_symbol_module(this : IDebugSymbols4*, symbol : PSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module.call(this, symbol, base)
+  end
+  def get_type_name(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id(this : IDebugSymbols4*, module_ : UInt64, name : PSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id.call(this, module_, name, typeid)
+  end
+  def get_type_size(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_size.call(this, module_, typeid, size)
+  end
+  def get_field_offset(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, field : PSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id(this : IDebugSymbols4*, symbol : PSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id.call(this, symbol, typeid, module_)
+  end
+  def get_offset_type_id(this : IDebugSymbols4*, offset : UInt64, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_type_id.call(this, offset, typeid, module_)
+  end
+  def read_typed_data_virtual(this : IDebugSymbols4*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_virtual(this : IDebugSymbols4*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_virtual(this : IDebugSymbols4*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_virtual.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def read_typed_data_physical(this : IDebugSymbols4*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_physical(this : IDebugSymbols4*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_physical(this : IDebugSymbols4*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_physical.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def get_scope(this : IDebugSymbols4*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope(this : IDebugSymbols4*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def reset_scope(this : IDebugSymbols4*) : HRESULT
+    @lpVtbl.value.reset_scope.call(this)
+  end
+  def get_scope_symbol_group(this : IDebugSymbols4*, flags : UInt32, update : IDebugSymbolGroup, symbols : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group.call(this, flags, update, symbols)
+  end
+  def create_symbol_group(this : IDebugSymbols4*, group : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.create_symbol_group.call(this, group)
+  end
+  def start_symbol_match(this : IDebugSymbols4*, pattern : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match.call(this, pattern, handle)
+  end
+  def get_next_symbol_match(this : IDebugSymbols4*, handle : UInt64, buffer : UInt8*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def end_symbol_match(this : IDebugSymbols4*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_symbol_match.call(this, handle)
+  end
+  def reload(this : IDebugSymbols4*, module_ : PSTR) : HRESULT
+    @lpVtbl.value.reload.call(this, module_)
+  end
+  def get_symbol_path(this : IDebugSymbols4*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path(this : IDebugSymbols4*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path.call(this, path)
+  end
+  def append_symbol_path(this : IDebugSymbols4*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path.call(this, addition)
+  end
+  def get_image_path(this : IDebugSymbols4*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path(this : IDebugSymbols4*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_image_path.call(this, path)
+  end
+  def append_image_path(this : IDebugSymbols4*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_image_path.call(this, addition)
+  end
+  def get_source_path(this : IDebugSymbols4*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element(this : IDebugSymbols4*, index : UInt32, buffer : UInt8*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path(this : IDebugSymbols4*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_source_path.call(this, path)
+  end
+  def append_source_path(this : IDebugSymbols4*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_source_path.call(this, addition)
+  end
+  def find_source_file(this : IDebugSymbols4*, startelement : UInt32, file : PSTR, flags : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets(this : IDebugSymbols4*, file : PSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information(this : IDebugSymbols4*, index : UInt32, base : UInt64, item : PSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string(this : IDebugSymbols4*, which : UInt32, index : UInt32, base : UInt64, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_options(this : IDebugSymbols4*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_options.call(this, options)
+  end
+  def add_type_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_type_options.call(this, options)
+  end
+  def remove_type_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_type_options.call(this, options)
+  end
+  def set_type_options(this : IDebugSymbols4*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_type_options.call(this, options)
+  end
+  def get_name_by_offset_wide(this : IDebugSymbols4*, offset : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset_wide.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name_wide(this : IDebugSymbols4*, symbol : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name_wide.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset_wide(this : IDebugSymbols4*, offset : UInt64, delta : Int32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset_wide.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset_wide(this : IDebugSymbols4*, offset : UInt64, line : UInt32*, filebuffer : Char*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset_wide.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line_wide(this : IDebugSymbols4*, line : UInt32, file : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line_wide.call(this, line, file, offset)
+  end
+  def get_module_by_module_name_wide(this : IDebugSymbols4*, name : LibC::LPWSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name_wide.call(this, name, startindex, index, base)
+  end
+  def get_symbol_module_wide(this : IDebugSymbols4*, symbol : LibC::LPWSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module_wide.call(this, symbol, base)
+  end
+  def get_type_name_wide(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name_wide.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id_wide(this : IDebugSymbols4*, module_ : UInt64, name : LibC::LPWSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id_wide.call(this, module_, name, typeid)
+  end
+  def get_field_offset_wide(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, field : LibC::LPWSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset_wide.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id_wide(this : IDebugSymbols4*, symbol : LibC::LPWSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id_wide.call(this, symbol, typeid, module_)
+  end
+  def get_scope_symbol_group2(this : IDebugSymbols4*, flags : UInt32, update : IDebugSymbolGroup2, symbols : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group2.call(this, flags, update, symbols)
+  end
+  def create_symbol_group2(this : IDebugSymbols4*, group : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.create_symbol_group2.call(this, group)
+  end
+  def start_symbol_match_wide(this : IDebugSymbols4*, pattern : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match_wide.call(this, pattern, handle)
+  end
+  def get_next_symbol_match_wide(this : IDebugSymbols4*, handle : UInt64, buffer : Char*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match_wide.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def reload_wide(this : IDebugSymbols4*, module_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reload_wide.call(this, module_)
+  end
+  def get_symbol_path_wide(this : IDebugSymbols4*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path_wide(this : IDebugSymbols4*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path_wide.call(this, path)
+  end
+  def append_symbol_path_wide(this : IDebugSymbols4*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path_wide.call(this, addition)
+  end
+  def get_image_path_wide(this : IDebugSymbols4*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path_wide(this : IDebugSymbols4*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_image_path_wide.call(this, path)
+  end
+  def append_image_path_wide(this : IDebugSymbols4*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_image_path_wide.call(this, addition)
+  end
+  def get_source_path_wide(this : IDebugSymbols4*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element_wide(this : IDebugSymbols4*, index : UInt32, buffer : Char*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element_wide.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path_wide(this : IDebugSymbols4*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_source_path_wide.call(this, path)
+  end
+  def append_source_path_wide(this : IDebugSymbols4*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_source_path_wide.call(this, addition)
+  end
+  def find_source_file_wide(this : IDebugSymbols4*, startelement : UInt32, file : LibC::LPWSTR, flags : UInt32, foundelement : UInt32*, buffer : Char*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_wide.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets_wide(this : IDebugSymbols4*, file : LibC::LPWSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets_wide.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information_wide(this : IDebugSymbols4*, index : UInt32, base : UInt64, item : LibC::LPWSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information_wide.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string_wide(this : IDebugSymbols4*, which : UInt32, index : UInt32, base : UInt64, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string_wide.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name_wide(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name_wide.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name_wide(this : IDebugSymbols4*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name_wide.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def is_managed_module(this : IDebugSymbols4*, index : UInt32, base : UInt64) : HRESULT
+    @lpVtbl.value.is_managed_module.call(this, index, base)
+  end
+  def get_module_by_module_name2(this : IDebugSymbols4*, name : PSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_module_name2_wide(this : IDebugSymbols4*, name : LibC::LPWSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2_wide.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_offset2(this : IDebugSymbols4*, offset : UInt64, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset2.call(this, offset, startindex, flags, index, base)
+  end
+  def add_synthetic_module(this : IDebugSymbols4*, base : UInt64, size : UInt32, imagepath : PSTR, modulename : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module.call(this, base, size, imagepath, modulename, flags)
+  end
+  def add_synthetic_module_wide(this : IDebugSymbols4*, base : UInt64, size : UInt32, imagepath : LibC::LPWSTR, modulename : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module_wide.call(this, base, size, imagepath, modulename, flags)
+  end
+  def remove_synthetic_module(this : IDebugSymbols4*, base : UInt64) : HRESULT
+    @lpVtbl.value.remove_synthetic_module.call(this, base)
+  end
+  def get_current_scope_frame_index(this : IDebugSymbols4*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_scope_frame_index.call(this, index)
+  end
+  def set_scope_frame_by_index(this : IDebugSymbols4*, index : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_frame_by_index.call(this, index)
+  end
+  def set_scope_from_jit_debug_info(this : IDebugSymbols4*, outputcontrol : UInt32, infooffset : UInt64) : HRESULT
+    @lpVtbl.value.set_scope_from_jit_debug_info.call(this, outputcontrol, infooffset)
+  end
+  def set_scope_from_stored_event(this : IDebugSymbols4*) : HRESULT
+    @lpVtbl.value.set_scope_from_stored_event.call(this)
+  end
+  def output_symbol_by_offset(this : IDebugSymbols4*, outputcontrol : UInt32, flags : UInt32, offset : UInt64) : HRESULT
+    @lpVtbl.value.output_symbol_by_offset.call(this, outputcontrol, flags, offset)
+  end
+  def get_function_entry_by_offset(this : IDebugSymbols4*, offset : UInt64, flags : UInt32, buffer : Void*, buffersize : UInt32, bufferneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_function_entry_by_offset.call(this, offset, flags, buffer, buffersize, bufferneeded)
+  end
+  def get_field_type_and_offset(this : IDebugSymbols4*, module_ : UInt64, containertypeid : UInt32, field : PSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def get_field_type_and_offset_wide(this : IDebugSymbols4*, module_ : UInt64, containertypeid : UInt32, field : LibC::LPWSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset_wide.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def add_synthetic_symbol(this : IDebugSymbols4*, offset : UInt64, size : UInt32, name : PSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol.call(this, offset, size, name, flags, id)
+  end
+  def add_synthetic_symbol_wide(this : IDebugSymbols4*, offset : UInt64, size : UInt32, name : LibC::LPWSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol_wide.call(this, offset, size, name, flags, id)
+  end
+  def remove_synthetic_symbol(this : IDebugSymbols4*, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.remove_synthetic_symbol.call(this, id)
+  end
+  def get_symbol_entries_by_offset(this : IDebugSymbols4*, offset : UInt64, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, displacements : UInt64*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_offset.call(this, offset, flags, ids, displacements, idscount, entries)
+  end
+  def get_symbol_entries_by_name(this : IDebugSymbols4*, symbol : PSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entries_by_name_wide(this : IDebugSymbols4*, symbol : LibC::LPWSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name_wide.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entry_by_token(this : IDebugSymbols4*, modulebase : UInt64, token : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_token.call(this, modulebase, token, id)
+  end
+  def get_symbol_entry_information(this : IDebugSymbols4*, id : DEBUG_MODULE_AND_ID*, info : DEBUG_SYMBOL_ENTRY*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_information.call(this, id, info)
+  end
+  def get_symbol_entry_string(this : IDebugSymbols4*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_string_wide(this : IDebugSymbols4*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string_wide.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_offset_regions(this : IDebugSymbols4*, id : DEBUG_MODULE_AND_ID*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_offset_regions.call(this, id, flags, regions, regionscount, regionsavail)
+  end
+  def get_symbol_entry_by_symbol_entry(this : IDebugSymbols4*, fromid : DEBUG_MODULE_AND_ID*, flags : UInt32, toid : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_symbol_entry.call(this, fromid, flags, toid)
+  end
+  def get_source_entries_by_offset(this : IDebugSymbols4*, offset : UInt64, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_offset.call(this, offset, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line(this : IDebugSymbols4*, line : UInt32, file : PSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line_wide(this : IDebugSymbols4*, line : UInt32, file : LibC::LPWSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line_wide.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entry_string(this : IDebugSymbols4*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_string_wide(this : IDebugSymbols4*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string_wide.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_offset_regions(this : IDebugSymbols4*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_offset_regions.call(this, entry, flags, regions, regionscount, regionsavail)
+  end
+  def get_source_entry_by_source_entry(this : IDebugSymbols4*, fromentry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, toentry : DEBUG_SYMBOL_SOURCE_ENTRY*) : HRESULT
+    @lpVtbl.value.get_source_entry_by_source_entry.call(this, fromentry, flags, toentry)
+  end
+  def get_scope_ex(this : IDebugSymbols4*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME_EX*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope_ex.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope_ex(this : IDebugSymbols4*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME_EX*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_ex.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def get_name_by_inline_context(this : IDebugSymbols4*, offset : UInt64, inlinecontext : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_inline_context.call(this, offset, inlinecontext, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_name_by_inline_context_wide(this : IDebugSymbols4*, offset : UInt64, inlinecontext : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_inline_context_wide.call(this, offset, inlinecontext, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_inline_context(this : IDebugSymbols4*, offset : UInt64, inlinecontext : UInt32, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_inline_context.call(this, offset, inlinecontext, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_line_by_inline_context_wide(this : IDebugSymbols4*, offset : UInt64, inlinecontext : UInt32, line : UInt32*, filebuffer : Char*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_inline_context_wide.call(this, offset, inlinecontext, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def output_symbol_by_inline_context(this : IDebugSymbols4*, outputcontrol : UInt32, flags : UInt32, offset : UInt64, inlinecontext : UInt32) : HRESULT
+    @lpVtbl.value.output_symbol_by_inline_context.call(this, outputcontrol, flags, offset, inlinecontext)
+  end
+end
+struct LibWin32::IDebugSymbols5
+  def query_interface(this : IDebugSymbols5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSymbols5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSymbols5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_symbol_options(this : IDebugSymbols5*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_options.call(this, options)
+  end
+  def add_symbol_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_symbol_options.call(this, options)
+  end
+  def remove_symbol_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_symbol_options.call(this, options)
+  end
+  def set_symbol_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_symbol_options.call(this, options)
+  end
+  def get_name_by_offset(this : IDebugSymbols5*, offset : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name(this : IDebugSymbols5*, symbol : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset(this : IDebugSymbols5*, offset : UInt64, delta : Int32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset(this : IDebugSymbols5*, offset : UInt64, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line(this : IDebugSymbols5*, line : UInt32, file : PSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line.call(this, line, file, offset)
+  end
+  def get_number_modules(this : IDebugSymbols5*, loaded : UInt32*, unloaded : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_modules.call(this, loaded, unloaded)
+  end
+  def get_module_by_index(this : IDebugSymbols5*, index : UInt32, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_index.call(this, index, base)
+  end
+  def get_module_by_module_name(this : IDebugSymbols5*, name : PSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name.call(this, name, startindex, index, base)
+  end
+  def get_module_by_offset(this : IDebugSymbols5*, offset : UInt64, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset.call(this, offset, startindex, index, base)
+  end
+  def get_module_names(this : IDebugSymbols5*, index : UInt32, base : UInt64, imagenamebuffer : UInt8*, imagenamebuffersize : UInt32, imagenamesize : UInt32*, modulenamebuffer : UInt8*, modulenamebuffersize : UInt32, modulenamesize : UInt32*, loadedimagenamebuffer : UInt8*, loadedimagenamebuffersize : UInt32, loadedimagenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_names.call(this, index, base, imagenamebuffer, imagenamebuffersize, imagenamesize, modulenamebuffer, modulenamebuffersize, modulenamesize, loadedimagenamebuffer, loadedimagenamebuffersize, loadedimagenamesize)
+  end
+  def get_module_parameters(this : IDebugSymbols5*, count : UInt32, bases : UInt64*, start : UInt32, params : DEBUG_MODULE_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_module_parameters.call(this, count, bases, start, params)
+  end
+  def get_symbol_module(this : IDebugSymbols5*, symbol : PSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module.call(this, symbol, base)
+  end
+  def get_type_name(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id(this : IDebugSymbols5*, module_ : UInt64, name : PSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id.call(this, module_, name, typeid)
+  end
+  def get_type_size(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, size : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_size.call(this, module_, typeid, size)
+  end
+  def get_field_offset(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, field : PSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id(this : IDebugSymbols5*, symbol : PSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id.call(this, symbol, typeid, module_)
+  end
+  def get_offset_type_id(this : IDebugSymbols5*, offset : UInt64, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_type_id.call(this, offset, typeid, module_)
+  end
+  def read_typed_data_virtual(this : IDebugSymbols5*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_virtual(this : IDebugSymbols5*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_virtual.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_virtual(this : IDebugSymbols5*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_virtual.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def read_typed_data_physical(this : IDebugSymbols5*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, bytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, bytesread)
+  end
+  def write_typed_data_physical(this : IDebugSymbols5*, offset : UInt64, module_ : UInt64, typeid : UInt32, buffer : Void*, buffersize : UInt32, byteswritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_typed_data_physical.call(this, offset, module_, typeid, buffer, buffersize, byteswritten)
+  end
+  def output_typed_data_physical(this : IDebugSymbols5*, outputcontrol : UInt32, offset : UInt64, module_ : UInt64, typeid : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.output_typed_data_physical.call(this, outputcontrol, offset, module_, typeid, flags)
+  end
+  def get_scope(this : IDebugSymbols5*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope(this : IDebugSymbols5*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def reset_scope(this : IDebugSymbols5*) : HRESULT
+    @lpVtbl.value.reset_scope.call(this)
+  end
+  def get_scope_symbol_group(this : IDebugSymbols5*, flags : UInt32, update : IDebugSymbolGroup, symbols : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group.call(this, flags, update, symbols)
+  end
+  def create_symbol_group(this : IDebugSymbols5*, group : IDebugSymbolGroup*) : HRESULT
+    @lpVtbl.value.create_symbol_group.call(this, group)
+  end
+  def start_symbol_match(this : IDebugSymbols5*, pattern : PSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match.call(this, pattern, handle)
+  end
+  def get_next_symbol_match(this : IDebugSymbols5*, handle : UInt64, buffer : UInt8*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def end_symbol_match(this : IDebugSymbols5*, handle : UInt64) : HRESULT
+    @lpVtbl.value.end_symbol_match.call(this, handle)
+  end
+  def reload(this : IDebugSymbols5*, module_ : PSTR) : HRESULT
+    @lpVtbl.value.reload.call(this, module_)
+  end
+  def get_symbol_path(this : IDebugSymbols5*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path(this : IDebugSymbols5*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path.call(this, path)
+  end
+  def append_symbol_path(this : IDebugSymbols5*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path.call(this, addition)
+  end
+  def get_image_path(this : IDebugSymbols5*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path(this : IDebugSymbols5*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_image_path.call(this, path)
+  end
+  def append_image_path(this : IDebugSymbols5*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_image_path.call(this, addition)
+  end
+  def get_source_path(this : IDebugSymbols5*, buffer : UInt8*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element(this : IDebugSymbols5*, index : UInt32, buffer : UInt8*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path(this : IDebugSymbols5*, path : PSTR) : HRESULT
+    @lpVtbl.value.set_source_path.call(this, path)
+  end
+  def append_source_path(this : IDebugSymbols5*, addition : PSTR) : HRESULT
+    @lpVtbl.value.append_source_path.call(this, addition)
+  end
+  def find_source_file(this : IDebugSymbols5*, startelement : UInt32, file : PSTR, flags : UInt32, foundelement : UInt32*, buffer : UInt8*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets(this : IDebugSymbols5*, file : PSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information(this : IDebugSymbols5*, index : UInt32, base : UInt64, item : PSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string(this : IDebugSymbols5*, which : UInt32, index : UInt32, base : UInt64, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_options(this : IDebugSymbols5*, options : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_options.call(this, options)
+  end
+  def add_type_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.add_type_options.call(this, options)
+  end
+  def remove_type_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.remove_type_options.call(this, options)
+  end
+  def set_type_options(this : IDebugSymbols5*, options : UInt32) : HRESULT
+    @lpVtbl.value.set_type_options.call(this, options)
+  end
+  def get_name_by_offset_wide(this : IDebugSymbols5*, offset : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_offset_wide.call(this, offset, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_offset_by_name_wide(this : IDebugSymbols5*, symbol : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_name_wide.call(this, symbol, offset)
+  end
+  def get_near_name_by_offset_wide(this : IDebugSymbols5*, offset : UInt64, delta : Int32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_near_name_by_offset_wide.call(this, offset, delta, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_offset_wide(this : IDebugSymbols5*, offset : UInt64, line : UInt32*, filebuffer : Char*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_offset_wide.call(this, offset, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_offset_by_line_wide(this : IDebugSymbols5*, line : UInt32, file : LibC::LPWSTR, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset_by_line_wide.call(this, line, file, offset)
+  end
+  def get_module_by_module_name_wide(this : IDebugSymbols5*, name : LibC::LPWSTR, startindex : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name_wide.call(this, name, startindex, index, base)
+  end
+  def get_symbol_module_wide(this : IDebugSymbols5*, symbol : LibC::LPWSTR, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_module_wide.call(this, symbol, base)
+  end
+  def get_type_name_wide(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_name_wide.call(this, module_, typeid, namebuffer, namebuffersize, namesize)
+  end
+  def get_type_id_wide(this : IDebugSymbols5*, module_ : UInt64, name : LibC::LPWSTR, typeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_id_wide.call(this, module_, name, typeid)
+  end
+  def get_field_offset_wide(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, field : LibC::LPWSTR, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_offset_wide.call(this, module_, typeid, field, offset)
+  end
+  def get_symbol_type_id_wide(this : IDebugSymbols5*, symbol : LibC::LPWSTR, typeid : UInt32*, module_ : UInt64*) : HRESULT
+    @lpVtbl.value.get_symbol_type_id_wide.call(this, symbol, typeid, module_)
+  end
+  def get_scope_symbol_group2(this : IDebugSymbols5*, flags : UInt32, update : IDebugSymbolGroup2, symbols : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.get_scope_symbol_group2.call(this, flags, update, symbols)
+  end
+  def create_symbol_group2(this : IDebugSymbols5*, group : IDebugSymbolGroup2*) : HRESULT
+    @lpVtbl.value.create_symbol_group2.call(this, group)
+  end
+  def start_symbol_match_wide(this : IDebugSymbols5*, pattern : LibC::LPWSTR, handle : UInt64*) : HRESULT
+    @lpVtbl.value.start_symbol_match_wide.call(this, pattern, handle)
+  end
+  def get_next_symbol_match_wide(this : IDebugSymbols5*, handle : UInt64, buffer : Char*, buffersize : UInt32, matchsize : UInt32*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_next_symbol_match_wide.call(this, handle, buffer, buffersize, matchsize, offset)
+  end
+  def reload_wide(this : IDebugSymbols5*, module_ : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reload_wide.call(this, module_)
+  end
+  def get_symbol_path_wide(this : IDebugSymbols5*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_symbol_path_wide(this : IDebugSymbols5*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_symbol_path_wide.call(this, path)
+  end
+  def append_symbol_path_wide(this : IDebugSymbols5*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_symbol_path_wide.call(this, addition)
+  end
+  def get_image_path_wide(this : IDebugSymbols5*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def set_image_path_wide(this : IDebugSymbols5*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_image_path_wide.call(this, path)
+  end
+  def append_image_path_wide(this : IDebugSymbols5*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_image_path_wide.call(this, addition)
+  end
+  def get_source_path_wide(this : IDebugSymbols5*, buffer : Char*, buffersize : UInt32, pathsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_wide.call(this, buffer, buffersize, pathsize)
+  end
+  def get_source_path_element_wide(this : IDebugSymbols5*, index : UInt32, buffer : Char*, buffersize : UInt32, elementsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_path_element_wide.call(this, index, buffer, buffersize, elementsize)
+  end
+  def set_source_path_wide(this : IDebugSymbols5*, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_source_path_wide.call(this, path)
+  end
+  def append_source_path_wide(this : IDebugSymbols5*, addition : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.append_source_path_wide.call(this, addition)
+  end
+  def find_source_file_wide(this : IDebugSymbols5*, startelement : UInt32, file : LibC::LPWSTR, flags : UInt32, foundelement : UInt32*, buffer : Char*, buffersize : UInt32, foundsize : UInt32*) : HRESULT
+    @lpVtbl.value.find_source_file_wide.call(this, startelement, file, flags, foundelement, buffer, buffersize, foundsize)
+  end
+  def get_source_file_line_offsets_wide(this : IDebugSymbols5*, file : LibC::LPWSTR, buffer : UInt64*, bufferlines : UInt32, filelines : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_file_line_offsets_wide.call(this, file, buffer, bufferlines, filelines)
+  end
+  def get_module_version_information_wide(this : IDebugSymbols5*, index : UInt32, base : UInt64, item : LibC::LPWSTR, buffer : Void*, buffersize : UInt32, verinfosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_version_information_wide.call(this, index, base, item, buffer, buffersize, verinfosize)
+  end
+  def get_module_name_string_wide(this : IDebugSymbols5*, which : UInt32, index : UInt32, base : UInt64, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_module_name_string_wide.call(this, which, index, base, buffer, buffersize, namesize)
+  end
+  def get_constant_name_wide(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, value : UInt64, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_constant_name_wide.call(this, module_, typeid, value, namebuffer, namebuffersize, namesize)
+  end
+  def get_field_name_wide(this : IDebugSymbols5*, module_ : UInt64, typeid : UInt32, fieldindex : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_name_wide.call(this, module_, typeid, fieldindex, namebuffer, namebuffersize, namesize)
+  end
+  def is_managed_module(this : IDebugSymbols5*, index : UInt32, base : UInt64) : HRESULT
+    @lpVtbl.value.is_managed_module.call(this, index, base)
+  end
+  def get_module_by_module_name2(this : IDebugSymbols5*, name : PSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_module_name2_wide(this : IDebugSymbols5*, name : LibC::LPWSTR, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_module_name2_wide.call(this, name, startindex, flags, index, base)
+  end
+  def get_module_by_offset2(this : IDebugSymbols5*, offset : UInt64, startindex : UInt32, flags : UInt32, index : UInt32*, base : UInt64*) : HRESULT
+    @lpVtbl.value.get_module_by_offset2.call(this, offset, startindex, flags, index, base)
+  end
+  def add_synthetic_module(this : IDebugSymbols5*, base : UInt64, size : UInt32, imagepath : PSTR, modulename : PSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module.call(this, base, size, imagepath, modulename, flags)
+  end
+  def add_synthetic_module_wide(this : IDebugSymbols5*, base : UInt64, size : UInt32, imagepath : LibC::LPWSTR, modulename : LibC::LPWSTR, flags : UInt32) : HRESULT
+    @lpVtbl.value.add_synthetic_module_wide.call(this, base, size, imagepath, modulename, flags)
+  end
+  def remove_synthetic_module(this : IDebugSymbols5*, base : UInt64) : HRESULT
+    @lpVtbl.value.remove_synthetic_module.call(this, base)
+  end
+  def get_current_scope_frame_index(this : IDebugSymbols5*, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_scope_frame_index.call(this, index)
+  end
+  def set_scope_frame_by_index(this : IDebugSymbols5*, index : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_frame_by_index.call(this, index)
+  end
+  def set_scope_from_jit_debug_info(this : IDebugSymbols5*, outputcontrol : UInt32, infooffset : UInt64) : HRESULT
+    @lpVtbl.value.set_scope_from_jit_debug_info.call(this, outputcontrol, infooffset)
+  end
+  def set_scope_from_stored_event(this : IDebugSymbols5*) : HRESULT
+    @lpVtbl.value.set_scope_from_stored_event.call(this)
+  end
+  def output_symbol_by_offset(this : IDebugSymbols5*, outputcontrol : UInt32, flags : UInt32, offset : UInt64) : HRESULT
+    @lpVtbl.value.output_symbol_by_offset.call(this, outputcontrol, flags, offset)
+  end
+  def get_function_entry_by_offset(this : IDebugSymbols5*, offset : UInt64, flags : UInt32, buffer : Void*, buffersize : UInt32, bufferneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_function_entry_by_offset.call(this, offset, flags, buffer, buffersize, bufferneeded)
+  end
+  def get_field_type_and_offset(this : IDebugSymbols5*, module_ : UInt64, containertypeid : UInt32, field : PSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def get_field_type_and_offset_wide(this : IDebugSymbols5*, module_ : UInt64, containertypeid : UInt32, field : LibC::LPWSTR, fieldtypeid : UInt32*, offset : UInt32*) : HRESULT
+    @lpVtbl.value.get_field_type_and_offset_wide.call(this, module_, containertypeid, field, fieldtypeid, offset)
+  end
+  def add_synthetic_symbol(this : IDebugSymbols5*, offset : UInt64, size : UInt32, name : PSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol.call(this, offset, size, name, flags, id)
+  end
+  def add_synthetic_symbol_wide(this : IDebugSymbols5*, offset : UInt64, size : UInt32, name : LibC::LPWSTR, flags : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.add_synthetic_symbol_wide.call(this, offset, size, name, flags, id)
+  end
+  def remove_synthetic_symbol(this : IDebugSymbols5*, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.remove_synthetic_symbol.call(this, id)
+  end
+  def get_symbol_entries_by_offset(this : IDebugSymbols5*, offset : UInt64, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, displacements : UInt64*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_offset.call(this, offset, flags, ids, displacements, idscount, entries)
+  end
+  def get_symbol_entries_by_name(this : IDebugSymbols5*, symbol : PSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entries_by_name_wide(this : IDebugSymbols5*, symbol : LibC::LPWSTR, flags : UInt32, ids : DEBUG_MODULE_AND_ID*, idscount : UInt32, entries : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entries_by_name_wide.call(this, symbol, flags, ids, idscount, entries)
+  end
+  def get_symbol_entry_by_token(this : IDebugSymbols5*, modulebase : UInt64, token : UInt32, id : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_token.call(this, modulebase, token, id)
+  end
+  def get_symbol_entry_information(this : IDebugSymbols5*, id : DEBUG_MODULE_AND_ID*, info : DEBUG_SYMBOL_ENTRY*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_information.call(this, id, info)
+  end
+  def get_symbol_entry_string(this : IDebugSymbols5*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_string_wide(this : IDebugSymbols5*, id : DEBUG_MODULE_AND_ID*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_string_wide.call(this, id, which, buffer, buffersize, stringsize)
+  end
+  def get_symbol_entry_offset_regions(this : IDebugSymbols5*, id : DEBUG_MODULE_AND_ID*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_offset_regions.call(this, id, flags, regions, regionscount, regionsavail)
+  end
+  def get_symbol_entry_by_symbol_entry(this : IDebugSymbols5*, fromid : DEBUG_MODULE_AND_ID*, flags : UInt32, toid : DEBUG_MODULE_AND_ID*) : HRESULT
+    @lpVtbl.value.get_symbol_entry_by_symbol_entry.call(this, fromid, flags, toid)
+  end
+  def get_source_entries_by_offset(this : IDebugSymbols5*, offset : UInt64, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_offset.call(this, offset, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line(this : IDebugSymbols5*, line : UInt32, file : PSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entries_by_line_wide(this : IDebugSymbols5*, line : UInt32, file : LibC::LPWSTR, flags : UInt32, entries : DEBUG_SYMBOL_SOURCE_ENTRY*, entriescount : UInt32, entriesavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entries_by_line_wide.call(this, line, file, flags, entries, entriescount, entriesavail)
+  end
+  def get_source_entry_string(this : IDebugSymbols5*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : UInt8*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_string_wide(this : IDebugSymbols5*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, which : UInt32, buffer : Char*, buffersize : UInt32, stringsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_string_wide.call(this, entry, which, buffer, buffersize, stringsize)
+  end
+  def get_source_entry_offset_regions(this : IDebugSymbols5*, entry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, regions : DEBUG_OFFSET_REGION*, regionscount : UInt32, regionsavail : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_entry_offset_regions.call(this, entry, flags, regions, regionscount, regionsavail)
+  end
+  def get_source_entry_by_source_entry(this : IDebugSymbols5*, fromentry : DEBUG_SYMBOL_SOURCE_ENTRY*, flags : UInt32, toentry : DEBUG_SYMBOL_SOURCE_ENTRY*) : HRESULT
+    @lpVtbl.value.get_source_entry_by_source_entry.call(this, fromentry, flags, toentry)
+  end
+  def get_scope_ex(this : IDebugSymbols5*, instructionoffset : UInt64*, scopeframe : DEBUG_STACK_FRAME_EX*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.get_scope_ex.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def set_scope_ex(this : IDebugSymbols5*, instructionoffset : UInt64, scopeframe : DEBUG_STACK_FRAME_EX*, scopecontext : Void*, scopecontextsize : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_ex.call(this, instructionoffset, scopeframe, scopecontext, scopecontextsize)
+  end
+  def get_name_by_inline_context(this : IDebugSymbols5*, offset : UInt64, inlinecontext : UInt32, namebuffer : UInt8*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_inline_context.call(this, offset, inlinecontext, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_name_by_inline_context_wide(this : IDebugSymbols5*, offset : UInt64, inlinecontext : UInt32, namebuffer : Char*, namebuffersize : UInt32, namesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_name_by_inline_context_wide.call(this, offset, inlinecontext, namebuffer, namebuffersize, namesize, displacement)
+  end
+  def get_line_by_inline_context(this : IDebugSymbols5*, offset : UInt64, inlinecontext : UInt32, line : UInt32*, filebuffer : UInt8*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_inline_context.call(this, offset, inlinecontext, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def get_line_by_inline_context_wide(this : IDebugSymbols5*, offset : UInt64, inlinecontext : UInt32, line : UInt32*, filebuffer : Char*, filebuffersize : UInt32, filesize : UInt32*, displacement : UInt64*) : HRESULT
+    @lpVtbl.value.get_line_by_inline_context_wide.call(this, offset, inlinecontext, line, filebuffer, filebuffersize, filesize, displacement)
+  end
+  def output_symbol_by_inline_context(this : IDebugSymbols5*, outputcontrol : UInt32, flags : UInt32, offset : UInt64, inlinecontext : UInt32) : HRESULT
+    @lpVtbl.value.output_symbol_by_inline_context.call(this, outputcontrol, flags, offset, inlinecontext)
+  end
+  def get_current_scope_frame_index_ex(this : IDebugSymbols5*, flags : UInt32, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_scope_frame_index_ex.call(this, flags, index)
+  end
+  def set_scope_frame_by_index_ex(this : IDebugSymbols5*, flags : UInt32, index : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_frame_by_index_ex.call(this, flags, index)
+  end
+end
+struct LibWin32::IDebugSystemObjects
+  def query_interface(this : IDebugSystemObjects*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSystemObjects*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSystemObjects*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_thread(this : IDebugSystemObjects*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_thread.call(this, id)
+  end
+  def get_event_process(this : IDebugSystemObjects*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_process.call(this, id)
+  end
+  def get_current_thread_id(this : IDebugSystemObjects*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_id.call(this, id)
+  end
+  def set_current_thread_id(this : IDebugSystemObjects*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_thread_id.call(this, id)
+  end
+  def get_current_process_id(this : IDebugSystemObjects*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, id)
+  end
+  def set_current_process_id(this : IDebugSystemObjects*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_process_id.call(this, id)
+  end
+  def get_number_threads(this : IDebugSystemObjects*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_threads.call(this, number)
+  end
+  def get_total_number_threads(this : IDebugSystemObjects*, total : UInt32*, largestprocess : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads.call(this, total, largestprocess)
+  end
+  def get_thread_ids_by_index(this : IDebugSystemObjects*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_thread_id_by_processor(this : IDebugSystemObjects*, processor : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_processor.call(this, processor, id)
+  end
+  def get_current_thread_data_offset(this : IDebugSystemObjects*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_data_offset.call(this, offset)
+  end
+  def get_thread_id_by_data_offset(this : IDebugSystemObjects*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_thread_teb(this : IDebugSystemObjects*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_teb.call(this, offset)
+  end
+  def get_thread_id_by_teb(this : IDebugSystemObjects*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_teb.call(this, offset, id)
+  end
+  def get_current_thread_system_id(this : IDebugSystemObjects*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_system_id.call(this, sysid)
+  end
+  def get_thread_id_by_system_id(this : IDebugSystemObjects*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_thread_handle(this : IDebugSystemObjects*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_handle.call(this, handle)
+  end
+  def get_thread_id_by_handle(this : IDebugSystemObjects*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_handle.call(this, handle, id)
+  end
+  def get_number_processes(this : IDebugSystemObjects*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processes.call(this, number)
+  end
+  def get_process_ids_by_index(this : IDebugSystemObjects*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_current_process_data_offset(this : IDebugSystemObjects*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_data_offset.call(this, offset)
+  end
+  def get_process_id_by_data_offset(this : IDebugSystemObjects*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_process_peb(this : IDebugSystemObjects*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_peb.call(this, offset)
+  end
+  def get_process_id_by_peb(this : IDebugSystemObjects*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_peb.call(this, offset, id)
+  end
+  def get_current_process_system_id(this : IDebugSystemObjects*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_system_id.call(this, sysid)
+  end
+  def get_process_id_by_system_id(this : IDebugSystemObjects*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_process_handle(this : IDebugSystemObjects*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_handle.call(this, handle)
+  end
+  def get_process_id_by_handle(this : IDebugSystemObjects*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_handle.call(this, handle, id)
+  end
+  def get_current_process_executable_name(this : IDebugSystemObjects*, buffer : UInt8*, buffersize : UInt32, exesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_executable_name.call(this, buffer, buffersize, exesize)
+  end
+end
+struct LibWin32::IDebugSystemObjects2
+  def query_interface(this : IDebugSystemObjects2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSystemObjects2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSystemObjects2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_thread(this : IDebugSystemObjects2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_thread.call(this, id)
+  end
+  def get_event_process(this : IDebugSystemObjects2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_process.call(this, id)
+  end
+  def get_current_thread_id(this : IDebugSystemObjects2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_id.call(this, id)
+  end
+  def set_current_thread_id(this : IDebugSystemObjects2*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_thread_id.call(this, id)
+  end
+  def get_current_process_id(this : IDebugSystemObjects2*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, id)
+  end
+  def set_current_process_id(this : IDebugSystemObjects2*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_process_id.call(this, id)
+  end
+  def get_number_threads(this : IDebugSystemObjects2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_threads.call(this, number)
+  end
+  def get_total_number_threads(this : IDebugSystemObjects2*, total : UInt32*, largestprocess : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads.call(this, total, largestprocess)
+  end
+  def get_thread_ids_by_index(this : IDebugSystemObjects2*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_thread_id_by_processor(this : IDebugSystemObjects2*, processor : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_processor.call(this, processor, id)
+  end
+  def get_current_thread_data_offset(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_data_offset.call(this, offset)
+  end
+  def get_thread_id_by_data_offset(this : IDebugSystemObjects2*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_thread_teb(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_teb.call(this, offset)
+  end
+  def get_thread_id_by_teb(this : IDebugSystemObjects2*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_teb.call(this, offset, id)
+  end
+  def get_current_thread_system_id(this : IDebugSystemObjects2*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_system_id.call(this, sysid)
+  end
+  def get_thread_id_by_system_id(this : IDebugSystemObjects2*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_thread_handle(this : IDebugSystemObjects2*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_handle.call(this, handle)
+  end
+  def get_thread_id_by_handle(this : IDebugSystemObjects2*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_handle.call(this, handle, id)
+  end
+  def get_number_processes(this : IDebugSystemObjects2*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processes.call(this, number)
+  end
+  def get_process_ids_by_index(this : IDebugSystemObjects2*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_current_process_data_offset(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_data_offset.call(this, offset)
+  end
+  def get_process_id_by_data_offset(this : IDebugSystemObjects2*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_process_peb(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_peb.call(this, offset)
+  end
+  def get_process_id_by_peb(this : IDebugSystemObjects2*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_peb.call(this, offset, id)
+  end
+  def get_current_process_system_id(this : IDebugSystemObjects2*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_system_id.call(this, sysid)
+  end
+  def get_process_id_by_system_id(this : IDebugSystemObjects2*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_process_handle(this : IDebugSystemObjects2*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_handle.call(this, handle)
+  end
+  def get_process_id_by_handle(this : IDebugSystemObjects2*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_handle.call(this, handle, id)
+  end
+  def get_current_process_executable_name(this : IDebugSystemObjects2*, buffer : UInt8*, buffersize : UInt32, exesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_executable_name.call(this, buffer, buffersize, exesize)
+  end
+  def get_current_process_up_time(this : IDebugSystemObjects2*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_up_time.call(this, uptime)
+  end
+  def get_implicit_thread_data_offset(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_thread_data_offset.call(this, offset)
+  end
+  def set_implicit_thread_data_offset(this : IDebugSystemObjects2*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_thread_data_offset.call(this, offset)
+  end
+  def get_implicit_process_data_offset(this : IDebugSystemObjects2*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_process_data_offset.call(this, offset)
+  end
+  def set_implicit_process_data_offset(this : IDebugSystemObjects2*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_process_data_offset.call(this, offset)
+  end
+end
+struct LibWin32::IDebugSystemObjects3
+  def query_interface(this : IDebugSystemObjects3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSystemObjects3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSystemObjects3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_thread(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_thread.call(this, id)
+  end
+  def get_event_process(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_process.call(this, id)
+  end
+  def get_current_thread_id(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_id.call(this, id)
+  end
+  def set_current_thread_id(this : IDebugSystemObjects3*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_thread_id.call(this, id)
+  end
+  def get_current_process_id(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, id)
+  end
+  def set_current_process_id(this : IDebugSystemObjects3*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_process_id.call(this, id)
+  end
+  def get_number_threads(this : IDebugSystemObjects3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_threads.call(this, number)
+  end
+  def get_total_number_threads(this : IDebugSystemObjects3*, total : UInt32*, largestprocess : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads.call(this, total, largestprocess)
+  end
+  def get_thread_ids_by_index(this : IDebugSystemObjects3*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_thread_id_by_processor(this : IDebugSystemObjects3*, processor : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_processor.call(this, processor, id)
+  end
+  def get_current_thread_data_offset(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_data_offset.call(this, offset)
+  end
+  def get_thread_id_by_data_offset(this : IDebugSystemObjects3*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_thread_teb(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_teb.call(this, offset)
+  end
+  def get_thread_id_by_teb(this : IDebugSystemObjects3*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_teb.call(this, offset, id)
+  end
+  def get_current_thread_system_id(this : IDebugSystemObjects3*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_system_id.call(this, sysid)
+  end
+  def get_thread_id_by_system_id(this : IDebugSystemObjects3*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_thread_handle(this : IDebugSystemObjects3*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_handle.call(this, handle)
+  end
+  def get_thread_id_by_handle(this : IDebugSystemObjects3*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_handle.call(this, handle, id)
+  end
+  def get_number_processes(this : IDebugSystemObjects3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processes.call(this, number)
+  end
+  def get_process_ids_by_index(this : IDebugSystemObjects3*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_current_process_data_offset(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_data_offset.call(this, offset)
+  end
+  def get_process_id_by_data_offset(this : IDebugSystemObjects3*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_process_peb(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_peb.call(this, offset)
+  end
+  def get_process_id_by_peb(this : IDebugSystemObjects3*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_peb.call(this, offset, id)
+  end
+  def get_current_process_system_id(this : IDebugSystemObjects3*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_system_id.call(this, sysid)
+  end
+  def get_process_id_by_system_id(this : IDebugSystemObjects3*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_process_handle(this : IDebugSystemObjects3*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_handle.call(this, handle)
+  end
+  def get_process_id_by_handle(this : IDebugSystemObjects3*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_handle.call(this, handle, id)
+  end
+  def get_current_process_executable_name(this : IDebugSystemObjects3*, buffer : UInt8*, buffersize : UInt32, exesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_executable_name.call(this, buffer, buffersize, exesize)
+  end
+  def get_current_process_up_time(this : IDebugSystemObjects3*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_up_time.call(this, uptime)
+  end
+  def get_implicit_thread_data_offset(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_thread_data_offset.call(this, offset)
+  end
+  def set_implicit_thread_data_offset(this : IDebugSystemObjects3*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_thread_data_offset.call(this, offset)
+  end
+  def get_implicit_process_data_offset(this : IDebugSystemObjects3*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_process_data_offset.call(this, offset)
+  end
+  def set_implicit_process_data_offset(this : IDebugSystemObjects3*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_process_data_offset.call(this, offset)
+  end
+  def get_event_system(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_system.call(this, id)
+  end
+  def get_current_system_id(this : IDebugSystemObjects3*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_id.call(this, id)
+  end
+  def set_current_system_id(this : IDebugSystemObjects3*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_system_id.call(this, id)
+  end
+  def get_number_systems(this : IDebugSystemObjects3*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_systems.call(this, number)
+  end
+  def get_system_ids_by_index(this : IDebugSystemObjects3*, start : UInt32, count : UInt32, ids : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_ids_by_index.call(this, start, count, ids)
+  end
+  def get_total_number_threads_and_processes(this : IDebugSystemObjects3*, totalthreads : UInt32*, totalprocesses : UInt32*, largestprocessthreads : UInt32*, largestsystemthreads : UInt32*, largestsystemprocesses : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads_and_processes.call(this, totalthreads, totalprocesses, largestprocessthreads, largestsystemthreads, largestsystemprocesses)
+  end
+  def get_current_system_server(this : IDebugSystemObjects3*, server : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_system_server.call(this, server)
+  end
+  def get_system_by_server(this : IDebugSystemObjects3*, server : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_by_server.call(this, server, id)
+  end
+  def get_current_system_server_name(this : IDebugSystemObjects3*, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_server_name.call(this, buffer, buffersize, namesize)
+  end
+end
+struct LibWin32::IDebugSystemObjects4
+  def query_interface(this : IDebugSystemObjects4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSystemObjects4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSystemObjects4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_thread(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_thread.call(this, id)
+  end
+  def get_event_process(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_process.call(this, id)
+  end
+  def get_current_thread_id(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_id.call(this, id)
+  end
+  def set_current_thread_id(this : IDebugSystemObjects4*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_thread_id.call(this, id)
+  end
+  def get_current_process_id(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.call(this, id)
+  end
+  def set_current_process_id(this : IDebugSystemObjects4*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_process_id.call(this, id)
+  end
+  def get_number_threads(this : IDebugSystemObjects4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_threads.call(this, number)
+  end
+  def get_total_number_threads(this : IDebugSystemObjects4*, total : UInt32*, largestprocess : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads.call(this, total, largestprocess)
+  end
+  def get_thread_ids_by_index(this : IDebugSystemObjects4*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_thread_id_by_processor(this : IDebugSystemObjects4*, processor : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_processor.call(this, processor, id)
+  end
+  def get_current_thread_data_offset(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_data_offset.call(this, offset)
+  end
+  def get_thread_id_by_data_offset(this : IDebugSystemObjects4*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_thread_teb(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_teb.call(this, offset)
+  end
+  def get_thread_id_by_teb(this : IDebugSystemObjects4*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_teb.call(this, offset, id)
+  end
+  def get_current_thread_system_id(this : IDebugSystemObjects4*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_thread_system_id.call(this, sysid)
+  end
+  def get_thread_id_by_system_id(this : IDebugSystemObjects4*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_thread_handle(this : IDebugSystemObjects4*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_thread_handle.call(this, handle)
+  end
+  def get_thread_id_by_handle(this : IDebugSystemObjects4*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_id_by_handle.call(this, handle, id)
+  end
+  def get_number_processes(this : IDebugSystemObjects4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_processes.call(this, number)
+  end
+  def get_process_ids_by_index(this : IDebugSystemObjects4*, start : UInt32, count : UInt32, ids : UInt32*, sysids : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_ids_by_index.call(this, start, count, ids, sysids)
+  end
+  def get_current_process_data_offset(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_data_offset.call(this, offset)
+  end
+  def get_process_id_by_data_offset(this : IDebugSystemObjects4*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_data_offset.call(this, offset, id)
+  end
+  def get_current_process_peb(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_peb.call(this, offset)
+  end
+  def get_process_id_by_peb(this : IDebugSystemObjects4*, offset : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_peb.call(this, offset, id)
+  end
+  def get_current_process_system_id(this : IDebugSystemObjects4*, sysid : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_system_id.call(this, sysid)
+  end
+  def get_process_id_by_system_id(this : IDebugSystemObjects4*, sysid : UInt32, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_system_id.call(this, sysid, id)
+  end
+  def get_current_process_handle(this : IDebugSystemObjects4*, handle : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_process_handle.call(this, handle)
+  end
+  def get_process_id_by_handle(this : IDebugSystemObjects4*, handle : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id_by_handle.call(this, handle, id)
+  end
+  def get_current_process_executable_name(this : IDebugSystemObjects4*, buffer : UInt8*, buffersize : UInt32, exesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_executable_name.call(this, buffer, buffersize, exesize)
+  end
+  def get_current_process_up_time(this : IDebugSystemObjects4*, uptime : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_up_time.call(this, uptime)
+  end
+  def get_implicit_thread_data_offset(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_thread_data_offset.call(this, offset)
+  end
+  def set_implicit_thread_data_offset(this : IDebugSystemObjects4*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_thread_data_offset.call(this, offset)
+  end
+  def get_implicit_process_data_offset(this : IDebugSystemObjects4*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_implicit_process_data_offset.call(this, offset)
+  end
+  def set_implicit_process_data_offset(this : IDebugSystemObjects4*, offset : UInt64) : HRESULT
+    @lpVtbl.value.set_implicit_process_data_offset.call(this, offset)
+  end
+  def get_event_system(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_system.call(this, id)
+  end
+  def get_current_system_id(this : IDebugSystemObjects4*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_id.call(this, id)
+  end
+  def set_current_system_id(this : IDebugSystemObjects4*, id : UInt32) : HRESULT
+    @lpVtbl.value.set_current_system_id.call(this, id)
+  end
+  def get_number_systems(this : IDebugSystemObjects4*, number : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_systems.call(this, number)
+  end
+  def get_system_ids_by_index(this : IDebugSystemObjects4*, start : UInt32, count : UInt32, ids : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_ids_by_index.call(this, start, count, ids)
+  end
+  def get_total_number_threads_and_processes(this : IDebugSystemObjects4*, totalthreads : UInt32*, totalprocesses : UInt32*, largestprocessthreads : UInt32*, largestsystemthreads : UInt32*, largestsystemprocesses : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_number_threads_and_processes.call(this, totalthreads, totalprocesses, largestprocessthreads, largestsystemthreads, largestsystemprocesses)
+  end
+  def get_current_system_server(this : IDebugSystemObjects4*, server : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_system_server.call(this, server)
+  end
+  def get_system_by_server(this : IDebugSystemObjects4*, server : UInt64, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_by_server.call(this, server, id)
+  end
+  def get_current_system_server_name(this : IDebugSystemObjects4*, buffer : UInt8*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_server_name.call(this, buffer, buffersize, namesize)
+  end
+  def get_current_process_executable_name_wide(this : IDebugSystemObjects4*, buffer : Char*, buffersize : UInt32, exesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_process_executable_name_wide.call(this, buffer, buffersize, exesize)
+  end
+  def get_current_system_server_name_wide(this : IDebugSystemObjects4*, buffer : Char*, buffersize : UInt32, namesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_system_server_name_wide.call(this, buffer, buffersize, namesize)
+  end
+end
+struct LibWin32::DebugBaseEventCallbacks
+  def query_interface(this : DebugBaseEventCallbacks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : DebugBaseEventCallbacks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : DebugBaseEventCallbacks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interest_mask(this : DebugBaseEventCallbacks*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def breakpoint(this : DebugBaseEventCallbacks*, bp : IDebugBreakpoint) : HRESULT
+    @lpVtbl.value.breakpoint.call(this, bp)
+  end
+  def exception(this : DebugBaseEventCallbacks*, exception : EXCEPTION_RECORD64*, firstchance : UInt32) : HRESULT
+    @lpVtbl.value.exception.call(this, exception, firstchance)
+  end
+  def create_thread(this : DebugBaseEventCallbacks*, handle : UInt64, dataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_thread.call(this, handle, dataoffset, startoffset)
+  end
+  def exit_thread(this : DebugBaseEventCallbacks*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_thread.call(this, exitcode)
+  end
+  def create_process_a(this : DebugBaseEventCallbacks*, imagefilehandle : UInt64, handle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : PSTR, imagename : PSTR, checksum : UInt32, timedatestamp : UInt32, initialthreadhandle : UInt64, threaddataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, imagefilehandle, handle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, initialthreadhandle, threaddataoffset, startoffset)
+  end
+  def exit_process(this : DebugBaseEventCallbacks*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_process.call(this, exitcode)
+  end
+  def load_module(this : DebugBaseEventCallbacks*, imagefilehandle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : PSTR, imagename : PSTR, checksum : UInt32, timedatestamp : UInt32) : HRESULT
+    @lpVtbl.value.load_module.call(this, imagefilehandle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp)
+  end
+  def unload_module(this : DebugBaseEventCallbacks*, imagebasename : PSTR, baseoffset : UInt64) : HRESULT
+    @lpVtbl.value.unload_module.call(this, imagebasename, baseoffset)
+  end
+  def system_error(this : DebugBaseEventCallbacks*, error : UInt32, level : UInt32) : HRESULT
+    @lpVtbl.value.system_error.call(this, error, level)
+  end
+  def session_status(this : DebugBaseEventCallbacks*, status : UInt32) : HRESULT
+    @lpVtbl.value.session_status.call(this, status)
+  end
+  def change_debuggee_state(this : DebugBaseEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_debuggee_state.call(this, flags, argument)
+  end
+  def change_engine_state(this : DebugBaseEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_engine_state.call(this, flags, argument)
+  end
+  def change_symbol_state(this : DebugBaseEventCallbacks*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_symbol_state.call(this, flags, argument)
+  end
+end
+struct LibWin32::DebugBaseEventCallbacksWide
+  def query_interface(this : DebugBaseEventCallbacksWide*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : DebugBaseEventCallbacksWide*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : DebugBaseEventCallbacksWide*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interest_mask(this : DebugBaseEventCallbacksWide*, mask : UInt32*) : HRESULT
+    @lpVtbl.value.get_interest_mask.call(this, mask)
+  end
+  def breakpoint(this : DebugBaseEventCallbacksWide*, bp : IDebugBreakpoint2) : HRESULT
+    @lpVtbl.value.breakpoint.call(this, bp)
+  end
+  def exception(this : DebugBaseEventCallbacksWide*, exception : EXCEPTION_RECORD64*, firstchance : UInt32) : HRESULT
+    @lpVtbl.value.exception.call(this, exception, firstchance)
+  end
+  def create_thread(this : DebugBaseEventCallbacksWide*, handle : UInt64, dataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_thread.call(this, handle, dataoffset, startoffset)
+  end
+  def exit_thread(this : DebugBaseEventCallbacksWide*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_thread.call(this, exitcode)
+  end
+  def create_process_a(this : DebugBaseEventCallbacksWide*, imagefilehandle : UInt64, handle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32, initialthreadhandle : UInt64, threaddataoffset : UInt64, startoffset : UInt64) : HRESULT
+    @lpVtbl.value.create_process_a.call(this, imagefilehandle, handle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp, initialthreadhandle, threaddataoffset, startoffset)
+  end
+  def exit_process(this : DebugBaseEventCallbacksWide*, exitcode : UInt32) : HRESULT
+    @lpVtbl.value.exit_process.call(this, exitcode)
+  end
+  def load_module(this : DebugBaseEventCallbacksWide*, imagefilehandle : UInt64, baseoffset : UInt64, modulesize : UInt32, modulename : LibC::LPWSTR, imagename : LibC::LPWSTR, checksum : UInt32, timedatestamp : UInt32) : HRESULT
+    @lpVtbl.value.load_module.call(this, imagefilehandle, baseoffset, modulesize, modulename, imagename, checksum, timedatestamp)
+  end
+  def unload_module(this : DebugBaseEventCallbacksWide*, imagebasename : LibC::LPWSTR, baseoffset : UInt64) : HRESULT
+    @lpVtbl.value.unload_module.call(this, imagebasename, baseoffset)
+  end
+  def system_error(this : DebugBaseEventCallbacksWide*, error : UInt32, level : UInt32) : HRESULT
+    @lpVtbl.value.system_error.call(this, error, level)
+  end
+  def session_status(this : DebugBaseEventCallbacksWide*, status : UInt32) : HRESULT
+    @lpVtbl.value.session_status.call(this, status)
+  end
+  def change_debuggee_state(this : DebugBaseEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_debuggee_state.call(this, flags, argument)
+  end
+  def change_engine_state(this : DebugBaseEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_engine_state.call(this, flags, argument)
+  end
+  def change_symbol_state(this : DebugBaseEventCallbacksWide*, flags : UInt32, argument : UInt64) : HRESULT
+    @lpVtbl.value.change_symbol_state.call(this, flags, argument)
+  end
+end
+struct LibWin32::IHostDataModelAccess
+  def query_interface(this : IHostDataModelAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHostDataModelAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHostDataModelAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_data_model(this : IHostDataModelAccess*, manager : IDataModelManager*, host : IDebugHost*) : HRESULT
+    @lpVtbl.value.get_data_model.call(this, manager, host)
+  end
+end
+struct LibWin32::IKeyStore
+  def query_interface(this : IKeyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IKeyStore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IKeyStore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key(this : IKeyStore*, key : LibC::LPWSTR, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key.call(this, key, object, metadata)
+  end
+  def set_key(this : IKeyStore*, key : LibC::LPWSTR, object : IModelObject, metadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_key.call(this, key, object, metadata)
+  end
+  def get_key_value(this : IKeyStore*, key : LibC::LPWSTR, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key_value.call(this, key, object, metadata)
+  end
+  def set_key_value(this : IKeyStore*, key : LibC::LPWSTR, object : IModelObject) : HRESULT
+    @lpVtbl.value.set_key_value.call(this, key, object)
+  end
+  def clear_keys(this : IKeyStore*) : HRESULT
+    @lpVtbl.value.clear_keys.call(this)
+  end
+end
+struct LibWin32::IModelObject
+  def query_interface(this : IModelObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IModelObject*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def get_kind(this : IModelObject*, kind : ModelObjectKind*) : HRESULT
+    @lpVtbl.value.get_kind.call(this, kind)
+  end
+  def get_intrinsic_value(this : IModelObject*, intrinsicdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_intrinsic_value.call(this, intrinsicdata)
+  end
+  def get_intrinsic_value_as(this : IModelObject*, vt : UInt16, intrinsicdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_intrinsic_value_as.call(this, vt, intrinsicdata)
+  end
+  def get_key_value(this : IModelObject*, key : LibC::LPWSTR, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key_value.call(this, key, object, metadata)
+  end
+  def set_key_value(this : IModelObject*, key : LibC::LPWSTR, object : IModelObject) : HRESULT
+    @lpVtbl.value.set_key_value.call(this, key, object)
+  end
+  def enumerate_key_values(this : IModelObject*, enumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_key_values.call(this, enumerator)
+  end
+  def get_raw_value(this : IModelObject*, kind : SymbolKind, name : LibC::LPWSTR, searchflags : UInt32, object : IModelObject*) : HRESULT
+    @lpVtbl.value.get_raw_value.call(this, kind, name, searchflags, object)
+  end
+  def enumerate_raw_values(this : IModelObject*, kind : SymbolKind, searchflags : UInt32, enumerator : IRawEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_raw_values.call(this, kind, searchflags, enumerator)
+  end
+  def dereference(this : IModelObject*, object : IModelObject*) : HRESULT
+    @lpVtbl.value.dereference.call(this, object)
+  end
+  def try_cast_to_runtime_type(this : IModelObject*, runtimetypedobject : IModelObject*) : HRESULT
+    @lpVtbl.value.try_cast_to_runtime_type.call(this, runtimetypedobject)
+  end
+  def get_concept(this : IModelObject*, conceptid : Guid*, conceptinterface : IUnknown*, conceptmetadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_concept.call(this, conceptid, conceptinterface, conceptmetadata)
+  end
+  def get_location(this : IModelObject*, location : Location*) : HRESULT
+    @lpVtbl.value.get_location.call(this, location)
+  end
+  def get_type_info(this : IModelObject*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, type)
+  end
+  def get_target_info(this : IModelObject*, location : Location*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_target_info.call(this, location, type)
+  end
+  def get_number_of_parent_models(this : IModelObject*, nummodels : UInt64*) : HRESULT
+    @lpVtbl.value.get_number_of_parent_models.call(this, nummodels)
+  end
+  def get_parent_model(this : IModelObject*, i : UInt64, model : IModelObject*, contextobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_parent_model.call(this, i, model, contextobject)
+  end
+  def add_parent_model(this : IModelObject*, model : IModelObject, contextobject : IModelObject, override : UInt8) : HRESULT
+    @lpVtbl.value.add_parent_model.call(this, model, contextobject, override)
+  end
+  def remove_parent_model(this : IModelObject*, model : IModelObject) : HRESULT
+    @lpVtbl.value.remove_parent_model.call(this, model)
+  end
+  def get_key(this : IModelObject*, key : LibC::LPWSTR, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key.call(this, key, object, metadata)
+  end
+  def get_key_reference(this : IModelObject*, key : LibC::LPWSTR, objectreference : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key_reference.call(this, key, objectreference, metadata)
+  end
+  def set_key(this : IModelObject*, key : LibC::LPWSTR, object : IModelObject, metadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_key.call(this, key, object, metadata)
+  end
+  def clear_keys(this : IModelObject*) : HRESULT
+    @lpVtbl.value.clear_keys.call(this)
+  end
+  def enumerate_keys(this : IModelObject*, enumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_keys.call(this, enumerator)
+  end
+  def enumerate_key_references(this : IModelObject*, enumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_key_references.call(this, enumerator)
+  end
+  def set_concept(this : IModelObject*, conceptid : Guid*, conceptinterface : IUnknown, conceptmetadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_concept.call(this, conceptid, conceptinterface, conceptmetadata)
+  end
+  def clear_concepts(this : IModelObject*) : HRESULT
+    @lpVtbl.value.clear_concepts.call(this)
+  end
+  def get_raw_reference(this : IModelObject*, kind : SymbolKind, name : LibC::LPWSTR, searchflags : UInt32, object : IModelObject*) : HRESULT
+    @lpVtbl.value.get_raw_reference.call(this, kind, name, searchflags, object)
+  end
+  def enumerate_raw_references(this : IModelObject*, kind : SymbolKind, searchflags : UInt32, enumerator : IRawEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_raw_references.call(this, kind, searchflags, enumerator)
+  end
+  def set_context_for_data_model(this : IModelObject*, datamodelobject : IModelObject, context : IUnknown) : HRESULT
+    @lpVtbl.value.set_context_for_data_model.call(this, datamodelobject, context)
+  end
+  def get_context_for_data_model(this : IModelObject*, datamodelobject : IModelObject, context : IUnknown*) : HRESULT
+    @lpVtbl.value.get_context_for_data_model.call(this, datamodelobject, context)
+  end
+  def compare(this : IModelObject*, other : IModelObject, ppresult : IModelObject*) : HRESULT
+    @lpVtbl.value.compare.call(this, other, ppresult)
+  end
+  def is_equal_to(this : IModelObject*, other : IModelObject, equal : Bool*) : HRESULT
+    @lpVtbl.value.is_equal_to.call(this, other, equal)
+  end
+end
+struct LibWin32::IDataModelManager
+  def query_interface(this : IDataModelManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close(this : IDataModelManager*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def create_no_value(this : IDataModelManager*, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_no_value.call(this, object)
+  end
+  def create_error_object(this : IDataModelManager*, hrerror : HRESULT, pwszmessage : LibC::LPWSTR, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_error_object.call(this, hrerror, pwszmessage, object)
+  end
+  def create_typed_object(this : IDataModelManager*, context : IDebugHostContext, objectlocation : Location, objecttype : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_object.call(this, context, objectlocation, objecttype, object)
+  end
+  def create_typed_object_reference(this : IDataModelManager*, context : IDebugHostContext, objectlocation : Location, objecttype : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_object_reference.call(this, context, objectlocation, objecttype, object)
+  end
+  def create_synthetic_object(this : IDataModelManager*, context : IDebugHostContext, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_synthetic_object.call(this, context, object)
+  end
+  def create_data_model_object(this : IDataModelManager*, datamodel : IDataModelConcept, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_data_model_object.call(this, datamodel, object)
+  end
+  def create_intrinsic_object(this : IDataModelManager*, objectkind : ModelObjectKind, intrinsicdata : VARIANT*, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_intrinsic_object.call(this, objectkind, intrinsicdata, object)
+  end
+  def create_typed_intrinsic_object(this : IDataModelManager*, intrinsicdata : VARIANT*, type : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_intrinsic_object.call(this, intrinsicdata, type, object)
+  end
+  def get_model_for_type_signature(this : IDataModelManager*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject*) : HRESULT
+    @lpVtbl.value.get_model_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def get_model_for_type(this : IDataModelManager*, type : IDebugHostType, datamodel : IModelObject*, typesignature : IDebugHostTypeSignature*, wildcardmatches : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.get_model_for_type.call(this, type, datamodel, typesignature, wildcardmatches)
+  end
+  def register_model_for_type_signature(this : IDataModelManager*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject) : HRESULT
+    @lpVtbl.value.register_model_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def unregister_model_for_type_signature(this : IDataModelManager*, datamodel : IModelObject, typesignature : IDebugHostTypeSignature) : HRESULT
+    @lpVtbl.value.unregister_model_for_type_signature.call(this, datamodel, typesignature)
+  end
+  def register_extension_for_type_signature(this : IDataModelManager*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject) : HRESULT
+    @lpVtbl.value.register_extension_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def unregister_extension_for_type_signature(this : IDataModelManager*, datamodel : IModelObject, typesignature : IDebugHostTypeSignature) : HRESULT
+    @lpVtbl.value.unregister_extension_for_type_signature.call(this, datamodel, typesignature)
+  end
+  def create_metadata_store(this : IDataModelManager*, parentstore : IKeyStore, metadatastore : IKeyStore*) : HRESULT
+    @lpVtbl.value.create_metadata_store.call(this, parentstore, metadatastore)
+  end
+  def get_root_namespace(this : IDataModelManager*, rootnamespace : IModelObject*) : HRESULT
+    @lpVtbl.value.get_root_namespace.call(this, rootnamespace)
+  end
+  def register_named_model(this : IDataModelManager*, modelname : LibC::LPWSTR, modeobject : IModelObject) : HRESULT
+    @lpVtbl.value.register_named_model.call(this, modelname, modeobject)
+  end
+  def unregister_named_model(this : IDataModelManager*, modelname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_named_model.call(this, modelname)
+  end
+  def acquire_named_model(this : IDataModelManager*, modelname : LibC::LPWSTR, modelobject : IModelObject*) : HRESULT
+    @lpVtbl.value.acquire_named_model.call(this, modelname, modelobject)
+  end
+end
+struct LibWin32::IModelKeyReference
+  def query_interface(this : IModelKeyReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelKeyReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelKeyReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key_name(this : IModelKeyReference*, keyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_name.call(this, keyname)
+  end
+  def get_original_object(this : IModelKeyReference*, originalobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_original_object.call(this, originalobject)
+  end
+  def get_context_object(this : IModelKeyReference*, containingobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_context_object.call(this, containingobject)
+  end
+  def get_key(this : IModelKeyReference*, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key.call(this, object, metadata)
+  end
+  def get_key_value(this : IModelKeyReference*, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key_value.call(this, object, metadata)
+  end
+  def set_key(this : IModelKeyReference*, object : IModelObject, metadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_key.call(this, object, metadata)
+  end
+  def set_key_value(this : IModelKeyReference*, object : IModelObject) : HRESULT
+    @lpVtbl.value.set_key_value.call(this, object)
+  end
+end
+struct LibWin32::IModelPropertyAccessor
+  def query_interface(this : IModelPropertyAccessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelPropertyAccessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelPropertyAccessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_value(this : IModelPropertyAccessor*, key : LibC::LPWSTR, contextobject : IModelObject, value : IModelObject*) : HRESULT
+    @lpVtbl.value.get_value.call(this, key, contextobject, value)
+  end
+  def set_value(this : IModelPropertyAccessor*, key : LibC::LPWSTR, contextobject : IModelObject, value : IModelObject) : HRESULT
+    @lpVtbl.value.set_value.call(this, key, contextobject, value)
+  end
+end
+struct LibWin32::IModelMethod
+  def query_interface(this : IModelMethod*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelMethod*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelMethod*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def call(this : IModelMethod*, pcontextobject : IModelObject, argcount : UInt64, pparguments : IModelObject*, ppresult : IModelObject*, ppmetadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.call.call(this, pcontextobject, argcount, pparguments, ppresult, ppmetadata)
+  end
+end
+struct LibWin32::IKeyEnumerator
+  def query_interface(this : IKeyEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IKeyEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IKeyEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IKeyEnumerator*, key : UInt8**, value : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_next.call(this, key, value, metadata)
+  end
+end
+struct LibWin32::IRawEnumerator
+  def query_interface(this : IRawEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRawEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRawEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IRawEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IRawEnumerator*, name : UInt8**, kind : SymbolKind*, value : IModelObject*) : HRESULT
+    @lpVtbl.value.get_next.call(this, name, kind, value)
+  end
+end
+struct LibWin32::IDataModelConcept
+  def query_interface(this : IDataModelConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_object(this : IDataModelConcept*, modelobject : IModelObject, matchingtypesignature : IDebugHostTypeSignature, wildcardmatches : IDebugHostSymbolEnumerator) : HRESULT
+    @lpVtbl.value.initialize_object.call(this, modelobject, matchingtypesignature, wildcardmatches)
+  end
+  def get_name(this : IDataModelConcept*, modelname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, modelname)
+  end
+end
+struct LibWin32::IStringDisplayableConcept
+  def query_interface(this : IStringDisplayableConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStringDisplayableConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStringDisplayableConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def to_display_string(this : IStringDisplayableConcept*, contextobject : IModelObject, metadata : IKeyStore, displaystring : UInt8**) : HRESULT
+    @lpVtbl.value.to_display_string.call(this, contextobject, metadata, displaystring)
+  end
+end
+struct LibWin32::ICodeAddressConcept
+  def query_interface(this : ICodeAddressConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICodeAddressConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICodeAddressConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_containing_symbol(this : ICodeAddressConcept*, pcontextobject : IModelObject, ppsymbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.get_containing_symbol.call(this, pcontextobject, ppsymbol)
+  end
+end
+struct LibWin32::IModelIterator
+  def query_interface(this : IModelIterator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelIterator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelIterator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IModelIterator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IModelIterator*, object : IModelObject*, dimensions : UInt64, indexers : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_next.call(this, object, dimensions, indexers, metadata)
+  end
+end
+struct LibWin32::IIterableConcept
+  def query_interface(this : IIterableConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIterableConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIterableConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_default_index_dimensionality(this : IIterableConcept*, contextobject : IModelObject, dimensionality : UInt64*) : HRESULT
+    @lpVtbl.value.get_default_index_dimensionality.call(this, contextobject, dimensionality)
+  end
+  def get_iterator(this : IIterableConcept*, contextobject : IModelObject, iterator : IModelIterator*) : HRESULT
+    @lpVtbl.value.get_iterator.call(this, contextobject, iterator)
+  end
+end
+struct LibWin32::IIndexableConcept
+  def query_interface(this : IIndexableConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIndexableConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIndexableConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dimensionality(this : IIndexableConcept*, contextobject : IModelObject, dimensionality : UInt64*) : HRESULT
+    @lpVtbl.value.get_dimensionality.call(this, contextobject, dimensionality)
+  end
+  def get_at(this : IIndexableConcept*, contextobject : IModelObject, indexercount : UInt64, indexers : IModelObject*, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_at.call(this, contextobject, indexercount, indexers, object, metadata)
+  end
+  def set_at(this : IIndexableConcept*, contextobject : IModelObject, indexercount : UInt64, indexers : IModelObject*, value : IModelObject) : HRESULT
+    @lpVtbl.value.set_at.call(this, contextobject, indexercount, indexers, value)
+  end
+end
+struct LibWin32::IPreferredRuntimeTypeConcept
+  def query_interface(this : IPreferredRuntimeTypeConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPreferredRuntimeTypeConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPreferredRuntimeTypeConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cast_to_preferred_runtime_type(this : IPreferredRuntimeTypeConcept*, contextobject : IModelObject, object : IModelObject*) : HRESULT
+    @lpVtbl.value.cast_to_preferred_runtime_type.call(this, contextobject, object)
+  end
+end
+struct LibWin32::IDebugHost
+  def query_interface(this : IDebugHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_host_defined_interface(this : IDebugHost*, hostunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_host_defined_interface.call(this, hostunk)
+  end
+  def get_current_context(this : IDebugHost*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_current_context.call(this, context)
+  end
+  def get_default_metadata(this : IDebugHost*, defaultmetadatastore : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_default_metadata.call(this, defaultmetadatastore)
+  end
+end
+struct LibWin32::IDebugHostContext
+  def query_interface(this : IDebugHostContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_equal_to(this : IDebugHostContext*, pcontext : IDebugHostContext, pisequal : Bool*) : HRESULT
+    @lpVtbl.value.is_equal_to.call(this, pcontext, pisequal)
+  end
+end
+struct LibWin32::IDebugHostErrorSink
+  def query_interface(this : IDebugHostErrorSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostErrorSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostErrorSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def report_error(this : IDebugHostErrorSink*, errclass : ErrorClass, hrerror : HRESULT, message : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.report_error.call(this, errclass, hrerror, message)
+  end
+end
+struct LibWin32::IDebugHostSymbol
+  def query_interface(this : IDebugHostSymbol*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostSymbol*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostSymbol*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostSymbol*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostSymbol*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostSymbol*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostSymbol*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostSymbol*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostSymbol*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostSymbol*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+end
+struct LibWin32::IDebugHostSymbolEnumerator
+  def query_interface(this : IDebugHostSymbolEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostSymbolEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostSymbolEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IDebugHostSymbolEnumerator*, symbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.get_next.call(this, symbol)
+  end
+end
+struct LibWin32::IDebugHostModule
+  def query_interface(this : IDebugHostModule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostModule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostModule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostModule*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostModule*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostModule*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostModule*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostModule*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostModule*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostModule*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_image_name(this : IDebugHostModule*, allowpath : UInt8, imagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.call(this, allowpath, imagename)
+  end
+  def get_base_location(this : IDebugHostModule*, modulebaselocation : Location*) : HRESULT
+    @lpVtbl.value.get_base_location.call(this, modulebaselocation)
+  end
+  def get_version(this : IDebugHostModule*, fileversion : UInt64*, productversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, fileversion, productversion)
+  end
+  def find_type_by_name(this : IDebugHostModule*, typename : LibC::LPWSTR, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.find_type_by_name.call(this, typename, type)
+  end
+  def find_symbol_by_rva(this : IDebugHostModule*, rva : UInt64, symbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.find_symbol_by_rva.call(this, rva, symbol)
+  end
+  def find_symbol_by_name(this : IDebugHostModule*, symbolname : LibC::LPWSTR, symbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.find_symbol_by_name.call(this, symbolname, symbol)
+  end
+end
+struct LibWin32::IDebugHostType
+  def query_interface(this : IDebugHostType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostType*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostType*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostType*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostType*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostType*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostType*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostType*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_type_kind(this : IDebugHostType*, kind : TypeKind*) : HRESULT
+    @lpVtbl.value.get_type_kind.call(this, kind)
+  end
+  def get_size(this : IDebugHostType*, size : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_base_type(this : IDebugHostType*, basetype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_base_type.call(this, basetype)
+  end
+  def get_hash_code(this : IDebugHostType*, hashcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_hash_code.call(this, hashcode)
+  end
+  def get_intrinsic_type(this : IDebugHostType*, intrinsickind : IntrinsicKind*, carriertype : UInt16*) : HRESULT
+    @lpVtbl.value.get_intrinsic_type.call(this, intrinsickind, carriertype)
+  end
+  def get_bit_field(this : IDebugHostType*, lsboffield : UInt32*, lengthoffield : UInt32*) : HRESULT
+    @lpVtbl.value.get_bit_field.call(this, lsboffield, lengthoffield)
+  end
+  def get_pointer_kind(this : IDebugHostType*, pointerkind : PointerKind*) : HRESULT
+    @lpVtbl.value.get_pointer_kind.call(this, pointerkind)
+  end
+  def get_member_type(this : IDebugHostType*, membertype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_member_type.call(this, membertype)
+  end
+  def create_pointer_to(this : IDebugHostType*, kind : PointerKind, newtype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.create_pointer_to.call(this, kind, newtype)
+  end
+  def get_array_dimensionality(this : IDebugHostType*, arraydimensionality : UInt64*) : HRESULT
+    @lpVtbl.value.get_array_dimensionality.call(this, arraydimensionality)
+  end
+  def get_array_dimensions(this : IDebugHostType*, dimensions : UInt64, pdimensions : ArrayDimension*) : HRESULT
+    @lpVtbl.value.get_array_dimensions.call(this, dimensions, pdimensions)
+  end
+  def create_array_of(this : IDebugHostType*, dimensions : UInt64, pdimensions : ArrayDimension*, newtype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.create_array_of.call(this, dimensions, pdimensions, newtype)
+  end
+  def get_function_calling_convention(this : IDebugHostType*, conventionkind : CallingConventionKind*) : HRESULT
+    @lpVtbl.value.get_function_calling_convention.call(this, conventionkind)
+  end
+  def get_function_return_type(this : IDebugHostType*, returntype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_function_return_type.call(this, returntype)
+  end
+  def get_function_parameter_type_count(this : IDebugHostType*, count : UInt64*) : HRESULT
+    @lpVtbl.value.get_function_parameter_type_count.call(this, count)
+  end
+  def get_function_parameter_type_at(this : IDebugHostType*, i : UInt64, parametertype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_function_parameter_type_at.call(this, i, parametertype)
+  end
+  def is_generic(this : IDebugHostType*, isgeneric : Bool*) : HRESULT
+    @lpVtbl.value.is_generic.call(this, isgeneric)
+  end
+  def get_generic_argument_count(this : IDebugHostType*, argcount : UInt64*) : HRESULT
+    @lpVtbl.value.get_generic_argument_count.call(this, argcount)
+  end
+  def get_generic_argument_at(this : IDebugHostType*, i : UInt64, argument : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.get_generic_argument_at.call(this, i, argument)
+  end
+end
+struct LibWin32::IDebugHostConstant
+  def query_interface(this : IDebugHostConstant*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostConstant*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostConstant*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostConstant*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostConstant*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostConstant*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostConstant*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostConstant*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostConstant*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostConstant*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_value(this : IDebugHostConstant*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+end
+struct LibWin32::IDebugHostField
+  def query_interface(this : IDebugHostField*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostField*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostField*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostField*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostField*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostField*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostField*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostField*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostField*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostField*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_location_kind(this : IDebugHostField*, locationkind : LocationKind*) : HRESULT
+    @lpVtbl.value.get_location_kind.call(this, locationkind)
+  end
+  def get_offset(this : IDebugHostField*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def get_location(this : IDebugHostField*, location : Location*) : HRESULT
+    @lpVtbl.value.get_location.call(this, location)
+  end
+  def get_value(this : IDebugHostField*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+end
+struct LibWin32::IDebugHostData
+  def query_interface(this : IDebugHostData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostData*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostData*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostData*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostData*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostData*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostData*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostData*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_location_kind(this : IDebugHostData*, locationkind : LocationKind*) : HRESULT
+    @lpVtbl.value.get_location_kind.call(this, locationkind)
+  end
+  def get_location(this : IDebugHostData*, location : Location*) : HRESULT
+    @lpVtbl.value.get_location.call(this, location)
+  end
+  def get_value(this : IDebugHostData*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+end
+struct LibWin32::IDebugHostPublic
+  def query_interface(this : IDebugHostPublic*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostPublic*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostPublic*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostPublic*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostPublic*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostPublic*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostPublic*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostPublic*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostPublic*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostPublic*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_location_kind(this : IDebugHostPublic*, locationkind : LocationKind*) : HRESULT
+    @lpVtbl.value.get_location_kind.call(this, locationkind)
+  end
+  def get_location(this : IDebugHostPublic*, location : Location*) : HRESULT
+    @lpVtbl.value.get_location.call(this, location)
+  end
+end
+struct LibWin32::IDebugHostBaseClass
+  def query_interface(this : IDebugHostBaseClass*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostBaseClass*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostBaseClass*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostBaseClass*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostBaseClass*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostBaseClass*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostBaseClass*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostBaseClass*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostBaseClass*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostBaseClass*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_offset(this : IDebugHostBaseClass*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+end
+struct LibWin32::IDebugHostSymbols
+  def query_interface(this : IDebugHostSymbols*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostSymbols*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostSymbols*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_module_signature(this : IDebugHostSymbols*, pwszmodulename : LibC::LPWSTR, pwszminversion : LibC::LPWSTR, pwszmaxversion : LibC::LPWSTR, ppmodulesignature : IDebugHostModuleSignature*) : HRESULT
+    @lpVtbl.value.create_module_signature.call(this, pwszmodulename, pwszminversion, pwszmaxversion, ppmodulesignature)
+  end
+  def create_type_signature(this : IDebugHostSymbols*, signaturespecification : LibC::LPWSTR, module_ : IDebugHostModule, typesignature : IDebugHostTypeSignature*) : HRESULT
+    @lpVtbl.value.create_type_signature.call(this, signaturespecification, module_, typesignature)
+  end
+  def create_type_signature_for_module_range(this : IDebugHostSymbols*, signaturespecification : LibC::LPWSTR, modulename : LibC::LPWSTR, minversion : LibC::LPWSTR, maxversion : LibC::LPWSTR, typesignature : IDebugHostTypeSignature*) : HRESULT
+    @lpVtbl.value.create_type_signature_for_module_range.call(this, signaturespecification, modulename, minversion, maxversion, typesignature)
+  end
+  def enumerate_modules(this : IDebugHostSymbols*, context : IDebugHostContext, moduleenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_modules.call(this, context, moduleenum)
+  end
+  def find_module_by_name(this : IDebugHostSymbols*, context : IDebugHostContext, modulename : LibC::LPWSTR, module_ : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.find_module_by_name.call(this, context, modulename, module_)
+  end
+  def find_module_by_location(this : IDebugHostSymbols*, context : IDebugHostContext, modulelocation : Location, module_ : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.find_module_by_location.call(this, context, modulelocation, module_)
+  end
+  def get_most_derived_object(this : IDebugHostSymbols*, pcontext : IDebugHostContext, location : Location, objecttype : IDebugHostType, derivedlocation : Location*, derivedtype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_most_derived_object.call(this, pcontext, location, objecttype, derivedlocation, derivedtype)
+  end
+end
+struct LibWin32::IDebugHostMemory
+  def query_interface(this : IDebugHostMemory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostMemory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostMemory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_bytes(this : IDebugHostMemory*, context : IDebugHostContext, location : Location, buffer : Void*, buffersize : UInt64, bytesread : UInt64*) : HRESULT
+    @lpVtbl.value.read_bytes.call(this, context, location, buffer, buffersize, bytesread)
+  end
+  def write_bytes(this : IDebugHostMemory*, context : IDebugHostContext, location : Location, buffer : Void*, buffersize : UInt64, byteswritten : UInt64*) : HRESULT
+    @lpVtbl.value.write_bytes.call(this, context, location, buffer, buffersize, byteswritten)
+  end
+  def read_pointers(this : IDebugHostMemory*, context : IDebugHostContext, location : Location, count : UInt64, pointers : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers.call(this, context, location, count, pointers)
+  end
+  def write_pointers(this : IDebugHostMemory*, context : IDebugHostContext, location : Location, count : UInt64, pointers : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers.call(this, context, location, count, pointers)
+  end
+  def get_display_string_for_location(this : IDebugHostMemory*, context : IDebugHostContext, location : Location, verbose : UInt8, locationname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_string_for_location.call(this, context, location, verbose, locationname)
+  end
+end
+struct LibWin32::IDebugHostEvaluator
+  def query_interface(this : IDebugHostEvaluator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostEvaluator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostEvaluator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def evaluate_expression(this : IDebugHostEvaluator*, context : IDebugHostContext, expression : LibC::LPWSTR, bindingcontext : IModelObject, result : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.evaluate_expression.call(this, context, expression, bindingcontext, result, metadata)
+  end
+  def evaluate_extended_expression(this : IDebugHostEvaluator*, context : IDebugHostContext, expression : LibC::LPWSTR, bindingcontext : IModelObject, result : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.evaluate_extended_expression.call(this, context, expression, bindingcontext, result, metadata)
+  end
+end
+struct LibWin32::IDebugHostModuleSignature
+  def query_interface(this : IDebugHostModuleSignature*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostModuleSignature*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostModuleSignature*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_match(this : IDebugHostModuleSignature*, pmodule : IDebugHostModule, ismatch : Bool*) : HRESULT
+    @lpVtbl.value.is_match.call(this, pmodule, ismatch)
+  end
+end
+struct LibWin32::IDebugHostTypeSignature
+  def query_interface(this : IDebugHostTypeSignature*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostTypeSignature*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostTypeSignature*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_hash_code(this : IDebugHostTypeSignature*, hashcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_hash_code.call(this, hashcode)
+  end
+  def is_match(this : IDebugHostTypeSignature*, type : IDebugHostType, ismatch : Bool*, wildcardmatches : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.is_match.call(this, type, ismatch, wildcardmatches)
+  end
+  def compare_against(this : IDebugHostTypeSignature*, typesignature : IDebugHostTypeSignature, result : SignatureComparison*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, typesignature, result)
+  end
+end
+struct LibWin32::IDebugHostSymbol2
+  def query_interface(this : IDebugHostSymbol2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostSymbol2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostSymbol2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostSymbol2*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostSymbol2*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostSymbol2*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostSymbol2*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostSymbol2*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostSymbol2*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostSymbol2*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_language(this : IDebugHostSymbol2*, pkind : LanguageKind*) : HRESULT
+    @lpVtbl.value.get_language.call(this, pkind)
+  end
+end
+struct LibWin32::IDebugHostType2
+  def query_interface(this : IDebugHostType2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostType2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostType2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostType2*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostType2*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostType2*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostType2*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostType2*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostType2*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostType2*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_type_kind(this : IDebugHostType2*, kind : TypeKind*) : HRESULT
+    @lpVtbl.value.get_type_kind.call(this, kind)
+  end
+  def get_size(this : IDebugHostType2*, size : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_base_type(this : IDebugHostType2*, basetype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_base_type.call(this, basetype)
+  end
+  def get_hash_code(this : IDebugHostType2*, hashcode : UInt32*) : HRESULT
+    @lpVtbl.value.get_hash_code.call(this, hashcode)
+  end
+  def get_intrinsic_type(this : IDebugHostType2*, intrinsickind : IntrinsicKind*, carriertype : UInt16*) : HRESULT
+    @lpVtbl.value.get_intrinsic_type.call(this, intrinsickind, carriertype)
+  end
+  def get_bit_field(this : IDebugHostType2*, lsboffield : UInt32*, lengthoffield : UInt32*) : HRESULT
+    @lpVtbl.value.get_bit_field.call(this, lsboffield, lengthoffield)
+  end
+  def get_pointer_kind(this : IDebugHostType2*, pointerkind : PointerKind*) : HRESULT
+    @lpVtbl.value.get_pointer_kind.call(this, pointerkind)
+  end
+  def get_member_type(this : IDebugHostType2*, membertype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_member_type.call(this, membertype)
+  end
+  def create_pointer_to(this : IDebugHostType2*, kind : PointerKind, newtype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.create_pointer_to.call(this, kind, newtype)
+  end
+  def get_array_dimensionality(this : IDebugHostType2*, arraydimensionality : UInt64*) : HRESULT
+    @lpVtbl.value.get_array_dimensionality.call(this, arraydimensionality)
+  end
+  def get_array_dimensions(this : IDebugHostType2*, dimensions : UInt64, pdimensions : ArrayDimension*) : HRESULT
+    @lpVtbl.value.get_array_dimensions.call(this, dimensions, pdimensions)
+  end
+  def create_array_of(this : IDebugHostType2*, dimensions : UInt64, pdimensions : ArrayDimension*, newtype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.create_array_of.call(this, dimensions, pdimensions, newtype)
+  end
+  def get_function_calling_convention(this : IDebugHostType2*, conventionkind : CallingConventionKind*) : HRESULT
+    @lpVtbl.value.get_function_calling_convention.call(this, conventionkind)
+  end
+  def get_function_return_type(this : IDebugHostType2*, returntype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_function_return_type.call(this, returntype)
+  end
+  def get_function_parameter_type_count(this : IDebugHostType2*, count : UInt64*) : HRESULT
+    @lpVtbl.value.get_function_parameter_type_count.call(this, count)
+  end
+  def get_function_parameter_type_at(this : IDebugHostType2*, i : UInt64, parametertype : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_function_parameter_type_at.call(this, i, parametertype)
+  end
+  def is_generic(this : IDebugHostType2*, isgeneric : Bool*) : HRESULT
+    @lpVtbl.value.is_generic.call(this, isgeneric)
+  end
+  def get_generic_argument_count(this : IDebugHostType2*, argcount : UInt64*) : HRESULT
+    @lpVtbl.value.get_generic_argument_count.call(this, argcount)
+  end
+  def get_generic_argument_at(this : IDebugHostType2*, i : UInt64, argument : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.get_generic_argument_at.call(this, i, argument)
+  end
+  def is_typedef(this : IDebugHostType2*, istypedef : Bool*) : HRESULT
+    @lpVtbl.value.is_typedef.call(this, istypedef)
+  end
+  def get_typedef_base_type(this : IDebugHostType2*, basetype : IDebugHostType2*) : HRESULT
+    @lpVtbl.value.get_typedef_base_type.call(this, basetype)
+  end
+  def get_typedef_final_base_type(this : IDebugHostType2*, finalbasetype : IDebugHostType2*) : HRESULT
+    @lpVtbl.value.get_typedef_final_base_type.call(this, finalbasetype)
+  end
+  def get_function_var_args_kind(this : IDebugHostType2*, varargskind : VarArgsKind*) : HRESULT
+    @lpVtbl.value.get_function_var_args_kind.call(this, varargskind)
+  end
+  def get_function_instance_pointer_type(this : IDebugHostType2*, instancepointertype : IDebugHostType2*) : HRESULT
+    @lpVtbl.value.get_function_instance_pointer_type.call(this, instancepointertype)
+  end
+end
+struct LibWin32::IDebugHostStatus
+  def query_interface(this : IDebugHostStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def poll_user_interrupt(this : IDebugHostStatus*, interruptrequested : Bool*) : HRESULT
+    @lpVtbl.value.poll_user_interrupt.call(this, interruptrequested)
+  end
+end
+struct LibWin32::IDataModelScriptClient
+  def query_interface(this : IDataModelScriptClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def report_error(this : IDataModelScriptClient*, errclass : ErrorClass, hrfail : HRESULT, message : LibC::LPWSTR, line : UInt32, position : UInt32) : HRESULT
+    @lpVtbl.value.report_error.call(this, errclass, hrfail, message, line, position)
+  end
+end
+struct LibWin32::IDataModelScriptTemplate
+  def query_interface(this : IDataModelScriptTemplate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptTemplate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptTemplate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDataModelScriptTemplate*, templatename : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, templatename)
+  end
+  def get_description(this : IDataModelScriptTemplate*, templatedescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, templatedescription)
+  end
+  def get_content(this : IDataModelScriptTemplate*, contentstream : IStream*) : HRESULT
+    @lpVtbl.value.get_content.call(this, contentstream)
+  end
+end
+struct LibWin32::IDataModelScript
+  def query_interface(this : IDataModelScript*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScript*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScript*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDataModelScript*, scriptname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, scriptname)
+  end
+  def rename(this : IDataModelScript*, scriptname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.call(this, scriptname)
+  end
+  def populate(this : IDataModelScript*, contentstream : IStream) : HRESULT
+    @lpVtbl.value.populate.call(this, contentstream)
+  end
+  def execute(this : IDataModelScript*, client : IDataModelScriptClient) : HRESULT
+    @lpVtbl.value.execute.call(this, client)
+  end
+  def unlink(this : IDataModelScript*) : HRESULT
+    @lpVtbl.value.unlink.call(this)
+  end
+  def is_invocable(this : IDataModelScript*, isinvocable : Bool*) : HRESULT
+    @lpVtbl.value.is_invocable.call(this, isinvocable)
+  end
+  def invoke_main(this : IDataModelScript*, client : IDataModelScriptClient) : HRESULT
+    @lpVtbl.value.invoke_main.call(this, client)
+  end
+end
+struct LibWin32::IDataModelScriptTemplateEnumerator
+  def query_interface(this : IDataModelScriptTemplateEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptTemplateEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptTemplateEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDataModelScriptTemplateEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IDataModelScriptTemplateEnumerator*, templatecontent : IDataModelScriptTemplate*) : HRESULT
+    @lpVtbl.value.get_next.call(this, templatecontent)
+  end
+end
+struct LibWin32::IDataModelScriptProvider
+  def query_interface(this : IDataModelScriptProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDataModelScriptProvider*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_extension(this : IDataModelScriptProvider*, extension : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension.call(this, extension)
+  end
+  def create_script(this : IDataModelScriptProvider*, script : IDataModelScript*) : HRESULT
+    @lpVtbl.value.create_script.call(this, script)
+  end
+  def get_default_template_content(this : IDataModelScriptProvider*, templatecontent : IDataModelScriptTemplate*) : HRESULT
+    @lpVtbl.value.get_default_template_content.call(this, templatecontent)
+  end
+  def enumerate_templates(this : IDataModelScriptProvider*, enumerator : IDataModelScriptTemplateEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_templates.call(this, enumerator)
+  end
+end
+struct LibWin32::IDataModelScriptProviderEnumerator
+  def query_interface(this : IDataModelScriptProviderEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptProviderEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptProviderEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDataModelScriptProviderEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IDataModelScriptProviderEnumerator*, provider : IDataModelScriptProvider*) : HRESULT
+    @lpVtbl.value.get_next.call(this, provider)
+  end
+end
+struct LibWin32::IDataModelScriptManager
+  def query_interface(this : IDataModelScriptManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_default_name_binder(this : IDataModelScriptManager*, ppnamebinder : IDataModelNameBinder*) : HRESULT
+    @lpVtbl.value.get_default_name_binder.call(this, ppnamebinder)
+  end
+  def register_script_provider(this : IDataModelScriptManager*, provider : IDataModelScriptProvider) : HRESULT
+    @lpVtbl.value.register_script_provider.call(this, provider)
+  end
+  def unregister_script_provider(this : IDataModelScriptManager*, provider : IDataModelScriptProvider) : HRESULT
+    @lpVtbl.value.unregister_script_provider.call(this, provider)
+  end
+  def find_provider_for_script_type(this : IDataModelScriptManager*, scripttype : LibC::LPWSTR, provider : IDataModelScriptProvider*) : HRESULT
+    @lpVtbl.value.find_provider_for_script_type.call(this, scripttype, provider)
+  end
+  def find_provider_for_script_extension(this : IDataModelScriptManager*, scriptextension : LibC::LPWSTR, provider : IDataModelScriptProvider*) : HRESULT
+    @lpVtbl.value.find_provider_for_script_extension.call(this, scriptextension, provider)
+  end
+  def enumerate_script_providers(this : IDataModelScriptManager*, enumerator : IDataModelScriptProviderEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_script_providers.call(this, enumerator)
+  end
+end
+struct LibWin32::IDynamicKeyProviderConcept
+  def query_interface(this : IDynamicKeyProviderConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDynamicKeyProviderConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDynamicKeyProviderConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key(this : IDynamicKeyProviderConcept*, contextobject : IModelObject, key : LibC::LPWSTR, keyvalue : IModelObject*, metadata : IKeyStore*, haskey : Bool*) : HRESULT
+    @lpVtbl.value.get_key.call(this, contextobject, key, keyvalue, metadata, haskey)
+  end
+  def set_key(this : IDynamicKeyProviderConcept*, contextobject : IModelObject, key : LibC::LPWSTR, keyvalue : IModelObject, metadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_key.call(this, contextobject, key, keyvalue, metadata)
+  end
+  def enumerate_keys(this : IDynamicKeyProviderConcept*, contextobject : IModelObject, ppenumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_keys.call(this, contextobject, ppenumerator)
+  end
+end
+struct LibWin32::IDynamicConceptProviderConcept
+  def query_interface(this : IDynamicConceptProviderConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDynamicConceptProviderConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDynamicConceptProviderConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_concept(this : IDynamicConceptProviderConcept*, contextobject : IModelObject, conceptid : Guid*, conceptinterface : IUnknown*, conceptmetadata : IKeyStore*, hasconcept : Bool*) : HRESULT
+    @lpVtbl.value.get_concept.call(this, contextobject, conceptid, conceptinterface, conceptmetadata, hasconcept)
+  end
+  def set_concept(this : IDynamicConceptProviderConcept*, contextobject : IModelObject, conceptid : Guid*, conceptinterface : IUnknown, conceptmetadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_concept.call(this, contextobject, conceptid, conceptinterface, conceptmetadata)
+  end
+  def notify_parent(this : IDynamicConceptProviderConcept*, parentmodel : IModelObject) : HRESULT
+    @lpVtbl.value.notify_parent.call(this, parentmodel)
+  end
+  def notify_parent_change(this : IDynamicConceptProviderConcept*, parentmodel : IModelObject) : HRESULT
+    @lpVtbl.value.notify_parent_change.call(this, parentmodel)
+  end
+  def notify_destruct(this : IDynamicConceptProviderConcept*) : HRESULT
+    @lpVtbl.value.notify_destruct.call(this)
+  end
+end
+struct LibWin32::IDataModelScriptHostContext
+  def query_interface(this : IDataModelScriptHostContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptHostContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptHostContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_script_change(this : IDataModelScriptHostContext*, script : IDataModelScript, changekind : ScriptChangeKind) : HRESULT
+    @lpVtbl.value.notify_script_change.call(this, script, changekind)
+  end
+  def get_namespace_object(this : IDataModelScriptHostContext*, namespaceobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_namespace_object.call(this, namespaceobject)
+  end
+end
+struct LibWin32::IDebugHostScriptHost
+  def query_interface(this : IDebugHostScriptHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostScriptHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostScriptHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_context(this : IDebugHostScriptHost*, script : IDataModelScript, scriptcontext : IDataModelScriptHostContext*) : HRESULT
+    @lpVtbl.value.create_context.call(this, script, scriptcontext)
+  end
+end
+struct LibWin32::IDataModelNameBinder
+  def query_interface(this : IDataModelNameBinder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelNameBinder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelNameBinder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def bind_value(this : IDataModelNameBinder*, contextobject : IModelObject, name : LibC::LPWSTR, value : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.bind_value.call(this, contextobject, name, value, metadata)
+  end
+  def bind_reference(this : IDataModelNameBinder*, contextobject : IModelObject, name : LibC::LPWSTR, reference : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.bind_reference.call(this, contextobject, name, reference, metadata)
+  end
+  def enumerate_values(this : IDataModelNameBinder*, contextobject : IModelObject, enumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_values.call(this, contextobject, enumerator)
+  end
+  def enumerate_references(this : IDataModelNameBinder*, contextobject : IModelObject, enumerator : IKeyEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_references.call(this, contextobject, enumerator)
+  end
+end
+struct LibWin32::IModelKeyReference2
+  def query_interface(this : IModelKeyReference2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IModelKeyReference2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IModelKeyReference2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key_name(this : IModelKeyReference2*, keyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_key_name.call(this, keyname)
+  end
+  def get_original_object(this : IModelKeyReference2*, originalobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_original_object.call(this, originalobject)
+  end
+  def get_context_object(this : IModelKeyReference2*, containingobject : IModelObject*) : HRESULT
+    @lpVtbl.value.get_context_object.call(this, containingobject)
+  end
+  def get_key(this : IModelKeyReference2*, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key.call(this, object, metadata)
+  end
+  def get_key_value(this : IModelKeyReference2*, object : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_key_value.call(this, object, metadata)
+  end
+  def set_key(this : IModelKeyReference2*, object : IModelObject, metadata : IKeyStore) : HRESULT
+    @lpVtbl.value.set_key.call(this, object, metadata)
+  end
+  def set_key_value(this : IModelKeyReference2*, object : IModelObject) : HRESULT
+    @lpVtbl.value.set_key_value.call(this, object)
+  end
+  def override_context_object(this : IModelKeyReference2*, newcontextobject : IModelObject) : HRESULT
+    @lpVtbl.value.override_context_object.call(this, newcontextobject)
+  end
+end
+struct LibWin32::IDebugHostEvaluator2
+  def query_interface(this : IDebugHostEvaluator2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostEvaluator2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostEvaluator2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def evaluate_expression(this : IDebugHostEvaluator2*, context : IDebugHostContext, expression : LibC::LPWSTR, bindingcontext : IModelObject, result : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.evaluate_expression.call(this, context, expression, bindingcontext, result, metadata)
+  end
+  def evaluate_extended_expression(this : IDebugHostEvaluator2*, context : IDebugHostContext, expression : LibC::LPWSTR, bindingcontext : IModelObject, result : IModelObject*, metadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.evaluate_extended_expression.call(this, context, expression, bindingcontext, result, metadata)
+  end
+  def assign_to(this : IDebugHostEvaluator2*, assignmentreference : IModelObject, assignmentvalue : IModelObject, assignmentresult : IModelObject*, assignmentmetadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.assign_to.call(this, assignmentreference, assignmentvalue, assignmentresult, assignmentmetadata)
+  end
+end
+struct LibWin32::IDataModelManager2
+  def query_interface(this : IDataModelManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close(this : IDataModelManager2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def create_no_value(this : IDataModelManager2*, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_no_value.call(this, object)
+  end
+  def create_error_object(this : IDataModelManager2*, hrerror : HRESULT, pwszmessage : LibC::LPWSTR, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_error_object.call(this, hrerror, pwszmessage, object)
+  end
+  def create_typed_object(this : IDataModelManager2*, context : IDebugHostContext, objectlocation : Location, objecttype : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_object.call(this, context, objectlocation, objecttype, object)
+  end
+  def create_typed_object_reference(this : IDataModelManager2*, context : IDebugHostContext, objectlocation : Location, objecttype : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_object_reference.call(this, context, objectlocation, objecttype, object)
+  end
+  def create_synthetic_object(this : IDataModelManager2*, context : IDebugHostContext, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_synthetic_object.call(this, context, object)
+  end
+  def create_data_model_object(this : IDataModelManager2*, datamodel : IDataModelConcept, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_data_model_object.call(this, datamodel, object)
+  end
+  def create_intrinsic_object(this : IDataModelManager2*, objectkind : ModelObjectKind, intrinsicdata : VARIANT*, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_intrinsic_object.call(this, objectkind, intrinsicdata, object)
+  end
+  def create_typed_intrinsic_object(this : IDataModelManager2*, intrinsicdata : VARIANT*, type : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_intrinsic_object.call(this, intrinsicdata, type, object)
+  end
+  def get_model_for_type_signature(this : IDataModelManager2*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject*) : HRESULT
+    @lpVtbl.value.get_model_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def get_model_for_type(this : IDataModelManager2*, type : IDebugHostType, datamodel : IModelObject*, typesignature : IDebugHostTypeSignature*, wildcardmatches : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.get_model_for_type.call(this, type, datamodel, typesignature, wildcardmatches)
+  end
+  def register_model_for_type_signature(this : IDataModelManager2*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject) : HRESULT
+    @lpVtbl.value.register_model_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def unregister_model_for_type_signature(this : IDataModelManager2*, datamodel : IModelObject, typesignature : IDebugHostTypeSignature) : HRESULT
+    @lpVtbl.value.unregister_model_for_type_signature.call(this, datamodel, typesignature)
+  end
+  def register_extension_for_type_signature(this : IDataModelManager2*, typesignature : IDebugHostTypeSignature, datamodel : IModelObject) : HRESULT
+    @lpVtbl.value.register_extension_for_type_signature.call(this, typesignature, datamodel)
+  end
+  def unregister_extension_for_type_signature(this : IDataModelManager2*, datamodel : IModelObject, typesignature : IDebugHostTypeSignature) : HRESULT
+    @lpVtbl.value.unregister_extension_for_type_signature.call(this, datamodel, typesignature)
+  end
+  def create_metadata_store(this : IDataModelManager2*, parentstore : IKeyStore, metadatastore : IKeyStore*) : HRESULT
+    @lpVtbl.value.create_metadata_store.call(this, parentstore, metadatastore)
+  end
+  def get_root_namespace(this : IDataModelManager2*, rootnamespace : IModelObject*) : HRESULT
+    @lpVtbl.value.get_root_namespace.call(this, rootnamespace)
+  end
+  def register_named_model(this : IDataModelManager2*, modelname : LibC::LPWSTR, modeobject : IModelObject) : HRESULT
+    @lpVtbl.value.register_named_model.call(this, modelname, modeobject)
+  end
+  def unregister_named_model(this : IDataModelManager2*, modelname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_named_model.call(this, modelname)
+  end
+  def acquire_named_model(this : IDataModelManager2*, modelname : LibC::LPWSTR, modelobject : IModelObject*) : HRESULT
+    @lpVtbl.value.acquire_named_model.call(this, modelname, modelobject)
+  end
+  def acquire_sub_namespace(this : IDataModelManager2*, modelname : LibC::LPWSTR, subnamespacemodelname : LibC::LPWSTR, accessname : LibC::LPWSTR, metadata : IKeyStore, namespacemodelobject : IModelObject*) : HRESULT
+    @lpVtbl.value.acquire_sub_namespace.call(this, modelname, subnamespacemodelname, accessname, metadata, namespacemodelobject)
+  end
+  def create_typed_intrinsic_object_ex(this : IDataModelManager2*, context : IDebugHostContext, intrinsicdata : VARIANT*, type : IDebugHostType, object : IModelObject*) : HRESULT
+    @lpVtbl.value.create_typed_intrinsic_object_ex.call(this, context, intrinsicdata, type, object)
+  end
+end
+struct LibWin32::IDebugHostMemory2
+  def query_interface(this : IDebugHostMemory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostMemory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostMemory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_bytes(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, buffer : Void*, buffersize : UInt64, bytesread : UInt64*) : HRESULT
+    @lpVtbl.value.read_bytes.call(this, context, location, buffer, buffersize, bytesread)
+  end
+  def write_bytes(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, buffer : Void*, buffersize : UInt64, byteswritten : UInt64*) : HRESULT
+    @lpVtbl.value.write_bytes.call(this, context, location, buffer, buffersize, byteswritten)
+  end
+  def read_pointers(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, count : UInt64, pointers : UInt64*) : HRESULT
+    @lpVtbl.value.read_pointers.call(this, context, location, count, pointers)
+  end
+  def write_pointers(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, count : UInt64, pointers : UInt64*) : HRESULT
+    @lpVtbl.value.write_pointers.call(this, context, location, count, pointers)
+  end
+  def get_display_string_for_location(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, verbose : UInt8, locationname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_string_for_location.call(this, context, location, verbose, locationname)
+  end
+  def linearize_location(this : IDebugHostMemory2*, context : IDebugHostContext, location : Location, plinearizedlocation : Location*) : HRESULT
+    @lpVtbl.value.linearize_location.call(this, context, location, plinearizedlocation)
+  end
+end
+struct LibWin32::IDebugHostExtensibility
+  def query_interface(this : IDebugHostExtensibility*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostExtensibility*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostExtensibility*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_function_alias(this : IDebugHostExtensibility*, aliasname : LibC::LPWSTR, functionobject : IModelObject) : HRESULT
+    @lpVtbl.value.create_function_alias.call(this, aliasname, functionobject)
+  end
+  def destroy_function_alias(this : IDebugHostExtensibility*, aliasname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.destroy_function_alias.call(this, aliasname)
+  end
+end
+struct LibWin32::IDataModelScriptDebugClient
+  def query_interface(this : IDataModelScriptDebugClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify_debug_event(this : IDataModelScriptDebugClient*, peventinfo : ScriptDebugEventInformation*, pscript : IDataModelScript, peventdataobject : IModelObject, resumeeventkind : ScriptExecutionKind*) : HRESULT
+    @lpVtbl.value.notify_debug_event.call(this, peventinfo, pscript, peventdataobject, resumeeventkind)
+  end
+end
+struct LibWin32::IDataModelScriptDebugVariableSetEnumerator
+  def query_interface(this : IDataModelScriptDebugVariableSetEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugVariableSetEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugVariableSetEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDataModelScriptDebugVariableSetEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IDataModelScriptDebugVariableSetEnumerator*, variablename : UInt8**, variablevalue : IModelObject*, variablemetadata : IKeyStore*) : HRESULT
+    @lpVtbl.value.get_next.call(this, variablename, variablevalue, variablemetadata)
+  end
+end
+struct LibWin32::IDataModelScriptDebugStackFrame
+  def query_interface(this : IDataModelScriptDebugStackFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugStackFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugStackFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDataModelScriptDebugStackFrame*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_position(this : IDataModelScriptDebugStackFrame*, position : ScriptDebugPosition*, positionspanend : ScriptDebugPosition*, linetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_position.call(this, position, positionspanend, linetext)
+  end
+  def is_transition_point(this : IDataModelScriptDebugStackFrame*, istransitionpoint : Bool*) : HRESULT
+    @lpVtbl.value.is_transition_point.call(this, istransitionpoint)
+  end
+  def get_transition(this : IDataModelScriptDebugStackFrame*, transitionscript : IDataModelScript*, istransitioncontiguous : Bool*) : HRESULT
+    @lpVtbl.value.get_transition.call(this, transitionscript, istransitioncontiguous)
+  end
+  def evaluate(this : IDataModelScriptDebugStackFrame*, pwszexpression : LibC::LPWSTR, ppresult : IModelObject*) : HRESULT
+    @lpVtbl.value.evaluate.call(this, pwszexpression, ppresult)
+  end
+  def enumerate_locals(this : IDataModelScriptDebugStackFrame*, variablesenum : IDataModelScriptDebugVariableSetEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_locals.call(this, variablesenum)
+  end
+  def enumerate_arguments(this : IDataModelScriptDebugStackFrame*, variablesenum : IDataModelScriptDebugVariableSetEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_arguments.call(this, variablesenum)
+  end
+end
+struct LibWin32::IDataModelScriptDebugStack
+  def query_interface(this : IDataModelScriptDebugStack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugStack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugStack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_frame_count(this : IDataModelScriptDebugStack*) : UInt64
+    @lpVtbl.value.get_frame_count.call(this)
+  end
+  def get_stack_frame(this : IDataModelScriptDebugStack*, framenumber : UInt64, stackframe : IDataModelScriptDebugStackFrame*) : HRESULT
+    @lpVtbl.value.get_stack_frame.call(this, framenumber, stackframe)
+  end
+end
+struct LibWin32::IDataModelScriptDebugBreakpoint
+  def query_interface(this : IDataModelScriptDebugBreakpoint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugBreakpoint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugBreakpoint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IDataModelScriptDebugBreakpoint*) : UInt64
+    @lpVtbl.value.get_id.call(this)
+  end
+  def is_enabled(this : IDataModelScriptDebugBreakpoint*) : Bool
+    @lpVtbl.value.is_enabled.call(this)
+  end
+  def enable(this : IDataModelScriptDebugBreakpoint*) : Void
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IDataModelScriptDebugBreakpoint*) : Void
+    @lpVtbl.value.disable.call(this)
+  end
+  def remove(this : IDataModelScriptDebugBreakpoint*) : Void
+    @lpVtbl.value.remove.call(this)
+  end
+  def get_position(this : IDataModelScriptDebugBreakpoint*, position : ScriptDebugPosition*, positionspanend : ScriptDebugPosition*, linetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_position.call(this, position, positionspanend, linetext)
+  end
+end
+struct LibWin32::IDataModelScriptDebugBreakpointEnumerator
+  def query_interface(this : IDataModelScriptDebugBreakpointEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebugBreakpointEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebugBreakpointEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset(this : IDataModelScriptDebugBreakpointEnumerator*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def get_next(this : IDataModelScriptDebugBreakpointEnumerator*, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.get_next.call(this, breakpoint)
+  end
+end
+struct LibWin32::IDataModelScriptDebug
+  def query_interface(this : IDataModelScriptDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_debug_state(this : IDataModelScriptDebug*) : ScriptDebugState
+    @lpVtbl.value.get_debug_state.call(this)
+  end
+  def get_current_position(this : IDataModelScriptDebug*, currentposition : ScriptDebugPosition*, positionspanend : ScriptDebugPosition*, linetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, currentposition, positionspanend, linetext)
+  end
+  def get_stack(this : IDataModelScriptDebug*, stack : IDataModelScriptDebugStack*) : HRESULT
+    @lpVtbl.value.get_stack.call(this, stack)
+  end
+  def set_breakpoint(this : IDataModelScriptDebug*, lineposition : UInt32, columnposition : UInt32, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.set_breakpoint.call(this, lineposition, columnposition, breakpoint)
+  end
+  def find_breakpoint_by_id(this : IDataModelScriptDebug*, breakpointid : UInt64, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.find_breakpoint_by_id.call(this, breakpointid, breakpoint)
+  end
+  def enumerate_breakpoints(this : IDataModelScriptDebug*, breakpointenum : IDataModelScriptDebugBreakpointEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_breakpoints.call(this, breakpointenum)
+  end
+  def get_event_filter(this : IDataModelScriptDebug*, eventfilter : ScriptDebugEventFilter, isbreakenabled : Bool*) : HRESULT
+    @lpVtbl.value.get_event_filter.call(this, eventfilter, isbreakenabled)
+  end
+  def set_event_filter(this : IDataModelScriptDebug*, eventfilter : ScriptDebugEventFilter, isbreakenabled : UInt8) : HRESULT
+    @lpVtbl.value.set_event_filter.call(this, eventfilter, isbreakenabled)
+  end
+  def start_debugging(this : IDataModelScriptDebug*, debugclient : IDataModelScriptDebugClient) : HRESULT
+    @lpVtbl.value.start_debugging.call(this, debugclient)
+  end
+  def stop_debugging(this : IDataModelScriptDebug*, debugclient : IDataModelScriptDebugClient) : HRESULT
+    @lpVtbl.value.stop_debugging.call(this, debugclient)
+  end
+end
+struct LibWin32::IDataModelScriptDebug2
+  def query_interface(this : IDataModelScriptDebug2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDataModelScriptDebug2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDataModelScriptDebug2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_debug_state(this : IDataModelScriptDebug2*) : ScriptDebugState
+    @lpVtbl.value.get_debug_state.call(this)
+  end
+  def get_current_position(this : IDataModelScriptDebug2*, currentposition : ScriptDebugPosition*, positionspanend : ScriptDebugPosition*, linetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_position.call(this, currentposition, positionspanend, linetext)
+  end
+  def get_stack(this : IDataModelScriptDebug2*, stack : IDataModelScriptDebugStack*) : HRESULT
+    @lpVtbl.value.get_stack.call(this, stack)
+  end
+  def set_breakpoint(this : IDataModelScriptDebug2*, lineposition : UInt32, columnposition : UInt32, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.set_breakpoint.call(this, lineposition, columnposition, breakpoint)
+  end
+  def find_breakpoint_by_id(this : IDataModelScriptDebug2*, breakpointid : UInt64, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.find_breakpoint_by_id.call(this, breakpointid, breakpoint)
+  end
+  def enumerate_breakpoints(this : IDataModelScriptDebug2*, breakpointenum : IDataModelScriptDebugBreakpointEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_breakpoints.call(this, breakpointenum)
+  end
+  def get_event_filter(this : IDataModelScriptDebug2*, eventfilter : ScriptDebugEventFilter, isbreakenabled : Bool*) : HRESULT
+    @lpVtbl.value.get_event_filter.call(this, eventfilter, isbreakenabled)
+  end
+  def set_event_filter(this : IDataModelScriptDebug2*, eventfilter : ScriptDebugEventFilter, isbreakenabled : UInt8) : HRESULT
+    @lpVtbl.value.set_event_filter.call(this, eventfilter, isbreakenabled)
+  end
+  def start_debugging(this : IDataModelScriptDebug2*, debugclient : IDataModelScriptDebugClient) : HRESULT
+    @lpVtbl.value.start_debugging.call(this, debugclient)
+  end
+  def stop_debugging(this : IDataModelScriptDebug2*, debugclient : IDataModelScriptDebugClient) : HRESULT
+    @lpVtbl.value.stop_debugging.call(this, debugclient)
+  end
+  def set_breakpoint_at_function(this : IDataModelScriptDebug2*, functionname : LibC::LPWSTR, breakpoint : IDataModelScriptDebugBreakpoint*) : HRESULT
+    @lpVtbl.value.set_breakpoint_at_function.call(this, functionname, breakpoint)
+  end
+end
+struct LibWin32::IDebugHostModule2
+  def query_interface(this : IDebugHostModule2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHostModule2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHostModule2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context(this : IDebugHostModule2*, context : IDebugHostContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, context)
+  end
+  def enumerate_children(this : IDebugHostModule2*, kind : SymbolKind, name : LibC::LPWSTR, ppenum : IDebugHostSymbolEnumerator*) : HRESULT
+    @lpVtbl.value.enumerate_children.call(this, kind, name, ppenum)
+  end
+  def get_symbol_kind(this : IDebugHostModule2*, kind : SymbolKind*) : HRESULT
+    @lpVtbl.value.get_symbol_kind.call(this, kind)
+  end
+  def get_name(this : IDebugHostModule2*, symbolname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, symbolname)
+  end
+  def get_type(this : IDebugHostModule2*, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_containing_module(this : IDebugHostModule2*, containingmodule : IDebugHostModule*) : HRESULT
+    @lpVtbl.value.get_containing_module.call(this, containingmodule)
+  end
+  def compare_against(this : IDebugHostModule2*, pcomparisonsymbol : IDebugHostSymbol, comparisonflags : UInt32, pmatches : Bool*) : HRESULT
+    @lpVtbl.value.compare_against.call(this, pcomparisonsymbol, comparisonflags, pmatches)
+  end
+  def get_image_name(this : IDebugHostModule2*, allowpath : UInt8, imagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.call(this, allowpath, imagename)
+  end
+  def get_base_location(this : IDebugHostModule2*, modulebaselocation : Location*) : HRESULT
+    @lpVtbl.value.get_base_location.call(this, modulebaselocation)
+  end
+  def get_version(this : IDebugHostModule2*, fileversion : UInt64*, productversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, fileversion, productversion)
+  end
+  def find_type_by_name(this : IDebugHostModule2*, typename : LibC::LPWSTR, type : IDebugHostType*) : HRESULT
+    @lpVtbl.value.find_type_by_name.call(this, typename, type)
+  end
+  def find_symbol_by_rva(this : IDebugHostModule2*, rva : UInt64, symbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.find_symbol_by_rva.call(this, rva, symbol)
+  end
+  def find_symbol_by_name(this : IDebugHostModule2*, symbolname : LibC::LPWSTR, symbol : IDebugHostSymbol*) : HRESULT
+    @lpVtbl.value.find_symbol_by_name.call(this, symbolname, symbol)
+  end
+  def find_containing_symbol_by_rva(this : IDebugHostModule2*, rva : UInt64, symbol : IDebugHostSymbol*, offset : UInt64*) : HRESULT
+    @lpVtbl.value.find_containing_symbol_by_rva.call(this, rva, symbol, offset)
+  end
+end
+struct LibWin32::IComparableConcept
+  def query_interface(this : IComparableConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IComparableConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IComparableConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def compare_objects(this : IComparableConcept*, contextobject : IModelObject, otherobject : IModelObject, comparisonresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_objects.call(this, contextobject, otherobject, comparisonresult)
+  end
+end
+struct LibWin32::IEquatableConcept
+  def query_interface(this : IEquatableConcept*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEquatableConcept*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEquatableConcept*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def are_objects_equal(this : IEquatableConcept*, contextobject : IModelObject, otherobject : IModelObject, isequal : Bool*) : HRESULT
+    @lpVtbl.value.are_objects_equal.call(this, contextobject, otherobject, isequal)
+  end
+end
+struct LibWin32::IActiveScriptSite
+  def query_interface(this : IActiveScriptSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_lcid(this : IActiveScriptSite*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_lcid.call(this, plcid)
+  end
+  def get_item_info(this : IActiveScriptSite*, pstrname : LibC::LPWSTR, dwreturnmask : UInt32, ppiunkitem : IUnknown*, ppti : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_item_info.call(this, pstrname, dwreturnmask, ppiunkitem, ppti)
+  end
+  def get_doc_version_string(this : IActiveScriptSite*, pbstrversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_doc_version_string.call(this, pbstrversion)
+  end
+  def on_script_terminate(this : IActiveScriptSite*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.on_script_terminate.call(this, pvarresult, pexcepinfo)
+  end
+  def on_state_change(this : IActiveScriptSite*, ssscriptstate : SCRIPTSTATE) : HRESULT
+    @lpVtbl.value.on_state_change.call(this, ssscriptstate)
+  end
+  def on_script_error(this : IActiveScriptSite*, pscripterror : IActiveScriptError) : HRESULT
+    @lpVtbl.value.on_script_error.call(this, pscripterror)
+  end
+  def on_enter_script(this : IActiveScriptSite*) : HRESULT
+    @lpVtbl.value.on_enter_script.call(this)
+  end
+  def on_leave_script(this : IActiveScriptSite*) : HRESULT
+    @lpVtbl.value.on_leave_script.call(this)
+  end
+end
+struct LibWin32::IActiveScriptError
+  def query_interface(this : IActiveScriptError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_exception_info(this : IActiveScriptError*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.get_exception_info.call(this, pexcepinfo)
+  end
+  def get_source_position(this : IActiveScriptError*, pdwsourcecontext : UInt32*, pullinenumber : UInt32*, plcharacterposition : Int32*) : HRESULT
+    @lpVtbl.value.get_source_position.call(this, pdwsourcecontext, pullinenumber, plcharacterposition)
+  end
+  def get_source_line_text(this : IActiveScriptError*, pbstrsourceline : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_line_text.call(this, pbstrsourceline)
+  end
+end
+struct LibWin32::IActiveScriptError64
+  def query_interface(this : IActiveScriptError64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptError64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptError64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_exception_info(this : IActiveScriptError64*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.get_exception_info.call(this, pexcepinfo)
+  end
+  def get_source_position(this : IActiveScriptError64*, pdwsourcecontext : UInt32*, pullinenumber : UInt32*, plcharacterposition : Int32*) : HRESULT
+    @lpVtbl.value.get_source_position.call(this, pdwsourcecontext, pullinenumber, plcharacterposition)
+  end
+  def get_source_line_text(this : IActiveScriptError64*, pbstrsourceline : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_line_text.call(this, pbstrsourceline)
+  end
+  def get_source_position64(this : IActiveScriptError64*, pdwsourcecontext : UInt64*, pullinenumber : UInt32*, plcharacterposition : Int32*) : HRESULT
+    @lpVtbl.value.get_source_position64.call(this, pdwsourcecontext, pullinenumber, plcharacterposition)
+  end
+end
+struct LibWin32::IActiveScriptSiteWindow
+  def query_interface(this : IActiveScriptSiteWindow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteWindow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteWindow*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IActiveScriptSiteWindow*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def enable_modeless(this : IActiveScriptSiteWindow*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_modeless.call(this, fenable)
+  end
+end
+struct LibWin32::IActiveScriptSiteUIControl
+  def query_interface(this : IActiveScriptSiteUIControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteUIControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteUIControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_ui_behavior(this : IActiveScriptSiteUIControl*, uicitem : SCRIPTUICITEM, puichandling : SCRIPTUICHANDLING*) : HRESULT
+    @lpVtbl.value.get_ui_behavior.call(this, uicitem, puichandling)
+  end
+end
+struct LibWin32::IActiveScriptSiteInterruptPoll
+  def query_interface(this : IActiveScriptSiteInterruptPoll*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteInterruptPoll*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteInterruptPoll*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_continue(this : IActiveScriptSiteInterruptPoll*) : HRESULT
+    @lpVtbl.value.query_continue.call(this)
+  end
+end
+struct LibWin32::IActiveScript
+  def query_interface(this : IActiveScript*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScript*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScript*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_script_site(this : IActiveScript*, pass : IActiveScriptSite) : HRESULT
+    @lpVtbl.value.set_script_site.call(this, pass)
+  end
+  def get_script_site(this : IActiveScript*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_script_site.call(this, riid, ppvobject)
+  end
+  def set_script_state(this : IActiveScript*, ss : SCRIPTSTATE) : HRESULT
+    @lpVtbl.value.set_script_state.call(this, ss)
+  end
+  def get_script_state(this : IActiveScript*, pssstate : SCRIPTSTATE*) : HRESULT
+    @lpVtbl.value.get_script_state.call(this, pssstate)
+  end
+  def close(this : IActiveScript*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def add_named_item(this : IActiveScript*, pstrname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.add_named_item.call(this, pstrname, dwflags)
+  end
+  def add_type_lib(this : IActiveScript*, rguidtypelib : Guid*, dwmajor : UInt32, dwminor : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.add_type_lib.call(this, rguidtypelib, dwmajor, dwminor, dwflags)
+  end
+  def get_script_dispatch(this : IActiveScript*, pstritemname : LibC::LPWSTR, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_script_dispatch.call(this, pstritemname, ppdisp)
+  end
+  def get_current_script_thread_id(this : IActiveScript*, pstidthread : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_script_thread_id.call(this, pstidthread)
+  end
+  def get_script_thread_id(this : IActiveScript*, dwwin32threadid : UInt32, pstidthread : UInt32*) : HRESULT
+    @lpVtbl.value.get_script_thread_id.call(this, dwwin32threadid, pstidthread)
+  end
+  def get_script_thread_state(this : IActiveScript*, stidthread : UInt32, pstsstate : SCRIPTTHREADSTATE*) : HRESULT
+    @lpVtbl.value.get_script_thread_state.call(this, stidthread, pstsstate)
+  end
+  def interrupt_script_thread(this : IActiveScript*, stidthread : UInt32, pexcepinfo : EXCEPINFO*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.interrupt_script_thread.call(this, stidthread, pexcepinfo, dwflags)
+  end
+  def clone(this : IActiveScript*, ppscript : IActiveScript*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppscript)
+  end
+end
+struct LibWin32::IActiveScriptParse32
+  def query_interface(this : IActiveScriptParse32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParse32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParse32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_new(this : IActiveScriptParse32*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
+  end
+  def add_scriptlet(this : IActiveScriptParse32*, pstrdefaultname : LibC::LPWSTR, pstrcode : LibC::LPWSTR, pstritemname : LibC::LPWSTR, pstrsubitemname : LibC::LPWSTR, pstreventname : LibC::LPWSTR, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt32, ulstartinglinenumber : UInt32, dwflags : UInt32, pbstrname : UInt8**, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.add_scriptlet.call(this, pstrdefaultname, pstrcode, pstritemname, pstrsubitemname, pstreventname, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, pbstrname, pexcepinfo)
+  end
+  def parse_script_text(this : IActiveScriptParse32*, pstrcode : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt32, ulstartinglinenumber : UInt32, dwflags : UInt32, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.parse_script_text.call(this, pstrcode, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, pvarresult, pexcepinfo)
+  end
+end
+struct LibWin32::IActiveScriptParse64
+  def query_interface(this : IActiveScriptParse64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParse64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParse64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_new(this : IActiveScriptParse64*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
+  end
+  def add_scriptlet(this : IActiveScriptParse64*, pstrdefaultname : LibC::LPWSTR, pstrcode : LibC::LPWSTR, pstritemname : LibC::LPWSTR, pstrsubitemname : LibC::LPWSTR, pstreventname : LibC::LPWSTR, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt64, ulstartinglinenumber : UInt32, dwflags : UInt32, pbstrname : UInt8**, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.add_scriptlet.call(this, pstrdefaultname, pstrcode, pstritemname, pstrsubitemname, pstreventname, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, pbstrname, pexcepinfo)
+  end
+  def parse_script_text(this : IActiveScriptParse64*, pstrcode : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt64, ulstartinglinenumber : UInt32, dwflags : UInt32, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.parse_script_text.call(this, pstrcode, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, pvarresult, pexcepinfo)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedureOld32
+  def query_interface(this : IActiveScriptParseProcedureOld32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedureOld32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedureOld32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedureOld32*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt32, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedureOld64
+  def query_interface(this : IActiveScriptParseProcedureOld64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedureOld64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedureOld64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedureOld64*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt64, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedure32
+  def query_interface(this : IActiveScriptParseProcedure32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedure32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedure32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedure32*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstrprocedurename : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt32, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstrprocedurename, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedure64
+  def query_interface(this : IActiveScriptParseProcedure64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedure64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedure64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedure64*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstrprocedurename : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt64, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstrprocedurename, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedure2_32
+  def query_interface(this : IActiveScriptParseProcedure2_32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedure2_32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedure2_32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedure2_32*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstrprocedurename : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt32, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstrprocedurename, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptParseProcedure2_64
+  def query_interface(this : IActiveScriptParseProcedure2_64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptParseProcedure2_64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptParseProcedure2_64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptParseProcedure2_64*, pstrcode : LibC::LPWSTR, pstrformalparams : LibC::LPWSTR, pstrprocedurename : LibC::LPWSTR, pstritemname : LibC::LPWSTR, punkcontext : IUnknown, pstrdelimiter : LibC::LPWSTR, dwsourcecontextcookie : UInt64, ulstartinglinenumber : UInt32, dwflags : UInt32, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pstrcode, pstrformalparams, pstrprocedurename, pstritemname, punkcontext, pstrdelimiter, dwsourcecontextcookie, ulstartinglinenumber, dwflags, ppdisp)
+  end
+end
+struct LibWin32::IActiveScriptEncode
+  def query_interface(this : IActiveScriptEncode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptEncode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptEncode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encode_section(this : IActiveScriptEncode*, pchin : LibC::LPWSTR, cchin : UInt32, pchout : LibC::LPWSTR, cchout : UInt32, pcchret : UInt32*) : HRESULT
+    @lpVtbl.value.encode_section.call(this, pchin, cchin, pchout, cchout, pcchret)
+  end
+  def decode_script(this : IActiveScriptEncode*, pchin : LibC::LPWSTR, cchin : UInt32, pchout : LibC::LPWSTR, cchout : UInt32, pcchret : UInt32*) : HRESULT
+    @lpVtbl.value.decode_script.call(this, pchin, cchin, pchout, cchout, pcchret)
+  end
+  def get_encode_prog_id(this : IActiveScriptEncode*, pbstrout : UInt8**) : HRESULT
+    @lpVtbl.value.get_encode_prog_id.call(this, pbstrout)
+  end
+end
+struct LibWin32::IActiveScriptHostEncode
+  def query_interface(this : IActiveScriptHostEncode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptHostEncode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptHostEncode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def encode_script_host_file(this : IActiveScriptHostEncode*, bstrinfile : UInt8*, pbstroutfile : UInt8**, cflags : UInt32, bstrdefaultlang : UInt8*) : HRESULT
+    @lpVtbl.value.encode_script_host_file.call(this, bstrinfile, pbstroutfile, cflags, bstrdefaultlang)
+  end
+end
+struct LibWin32::IBindEventHandler
+  def query_interface(this : IBindEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBindEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBindEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def bind_handler(this : IBindEventHandler*, pstrevent : LibC::LPWSTR, pdisp : IDispatch) : HRESULT
+    @lpVtbl.value.bind_handler.call(this, pstrevent, pdisp)
+  end
+end
+struct LibWin32::IActiveScriptStats
+  def query_interface(this : IActiveScriptStats*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptStats*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptStats*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stat(this : IActiveScriptStats*, stid : UInt32, pluhi : UInt32*, plulo : UInt32*) : HRESULT
+    @lpVtbl.value.get_stat.call(this, stid, pluhi, plulo)
+  end
+  def get_stat_ex(this : IActiveScriptStats*, guid : Guid*, pluhi : UInt32*, plulo : UInt32*) : HRESULT
+    @lpVtbl.value.get_stat_ex.call(this, guid, pluhi, plulo)
+  end
+  def reset_stats(this : IActiveScriptStats*) : HRESULT
+    @lpVtbl.value.reset_stats.call(this)
+  end
+end
+struct LibWin32::IActiveScriptProperty
+  def query_interface(this : IActiveScriptProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property(this : IActiveScriptProperty*, dwproperty : UInt32, pvarindex : VARIANT*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, dwproperty, pvarindex, pvarvalue)
+  end
+  def set_property(this : IActiveScriptProperty*, dwproperty : UInt32, pvarindex : VARIANT*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, dwproperty, pvarindex, pvarvalue)
+  end
+end
+struct LibWin32::ITridentEventSink
+  def query_interface(this : ITridentEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITridentEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITridentEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def fire_event(this : ITridentEventSink*, pstrevent : LibC::LPWSTR, pdp : DISPPARAMS*, pvarres : VARIANT*, pei : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.fire_event.call(this, pstrevent, pdp, pvarres, pei)
+  end
+end
+struct LibWin32::IActiveScriptGarbageCollector
+  def query_interface(this : IActiveScriptGarbageCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptGarbageCollector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptGarbageCollector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def collect_garbage(this : IActiveScriptGarbageCollector*, scriptgctype : SCRIPTGCTYPE) : HRESULT
+    @lpVtbl.value.collect_garbage.call(this, scriptgctype)
+  end
+end
+struct LibWin32::IActiveScriptSIPInfo
+  def query_interface(this : IActiveScriptSIPInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSIPInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSIPInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sipoid(this : IActiveScriptSIPInfo*, poid_sip : Guid*) : HRESULT
+    @lpVtbl.value.get_sipoid.call(this, poid_sip)
+  end
+end
+struct LibWin32::IActiveScriptSiteTraceInfo
+  def query_interface(this : IActiveScriptSiteTraceInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteTraceInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteTraceInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def send_script_trace_info(this : IActiveScriptSiteTraceInfo*, stieventtype : SCRIPTTRACEINFO, guidcontextid : Guid, dwscriptcontextcookie : UInt32, lscriptstatementstart : Int32, lscriptstatementend : Int32, dwreserved : UInt64) : HRESULT
+    @lpVtbl.value.send_script_trace_info.call(this, stieventtype, guidcontextid, dwscriptcontextcookie, lscriptstatementstart, lscriptstatementend, dwreserved)
+  end
+end
+struct LibWin32::IActiveScriptTraceInfo
+  def query_interface(this : IActiveScriptTraceInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptTraceInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptTraceInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_script_tracing(this : IActiveScriptTraceInfo*, psitetraceinfo : IActiveScriptSiteTraceInfo, guidcontextid : Guid) : HRESULT
+    @lpVtbl.value.start_script_tracing.call(this, psitetraceinfo, guidcontextid)
+  end
+  def stop_script_tracing(this : IActiveScriptTraceInfo*) : HRESULT
+    @lpVtbl.value.stop_script_tracing.call(this)
+  end
+end
+struct LibWin32::IActiveScriptStringCompare
+  def query_interface(this : IActiveScriptStringCompare*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptStringCompare*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptStringCompare*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def str_comp(this : IActiveScriptStringCompare*, bszstr1 : UInt8*, bszstr2 : UInt8*, iret : Int32*) : HRESULT
+    @lpVtbl.value.str_comp.call(this, bszstr1, bszstr2, iret)
+  end
+end
+struct LibWin32::IDebugProperty
+  def query_interface(this : IDebugProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_info(this : IDebugProperty*, dwfieldspec : UInt32, nradix : UInt32, ppropertyinfo : DebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, dwfieldspec, nradix, ppropertyinfo)
+  end
+  def get_extended_info(this : IDebugProperty*, cinfos : UInt32, rgguidextendedinfo : Guid*, rgvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extended_info.call(this, cinfos, rgguidextendedinfo, rgvar)
+  end
+  def set_value_as_string(this : IDebugProperty*, pszvalue : LibC::LPWSTR, nradix : UInt32) : HRESULT
+    @lpVtbl.value.set_value_as_string.call(this, pszvalue, nradix)
+  end
+  def enum_members(this : IDebugProperty*, dwfieldspec : UInt32, nradix : UInt32, refiid : Guid*, ppepi : IEnumDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.enum_members.call(this, dwfieldspec, nradix, refiid, ppepi)
+  end
+  def get_parent(this : IDebugProperty*, ppdebugprop : IDebugProperty*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppdebugprop)
+  end
+end
+struct LibWin32::IEnumDebugPropertyInfo
+  def query_interface(this : IEnumDebugPropertyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugPropertyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugPropertyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugPropertyInfo*, celt : UInt32, pi : DebugPropertyInfo*, pceltsfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, pi, pceltsfetched)
+  end
+  def skip(this : IEnumDebugPropertyInfo*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugPropertyInfo*, ppepi : IEnumDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppepi)
+  end
+  def get_count(this : IEnumDebugPropertyInfo*, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelt)
+  end
+end
+struct LibWin32::IDebugExtendedProperty
+  def query_interface(this : IDebugExtendedProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugExtendedProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugExtendedProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_info(this : IDebugExtendedProperty*, dwfieldspec : UInt32, nradix : UInt32, ppropertyinfo : DebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, dwfieldspec, nradix, ppropertyinfo)
+  end
+  def get_extended_info(this : IDebugExtendedProperty*, cinfos : UInt32, rgguidextendedinfo : Guid*, rgvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extended_info.call(this, cinfos, rgguidextendedinfo, rgvar)
+  end
+  def set_value_as_string(this : IDebugExtendedProperty*, pszvalue : LibC::LPWSTR, nradix : UInt32) : HRESULT
+    @lpVtbl.value.set_value_as_string.call(this, pszvalue, nradix)
+  end
+  def enum_members(this : IDebugExtendedProperty*, dwfieldspec : UInt32, nradix : UInt32, refiid : Guid*, ppepi : IEnumDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.enum_members.call(this, dwfieldspec, nradix, refiid, ppepi)
+  end
+  def get_parent(this : IDebugExtendedProperty*, ppdebugprop : IDebugProperty*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppdebugprop)
+  end
+  def get_extended_property_info(this : IDebugExtendedProperty*, dwfieldspec : UInt32, nradix : UInt32, pextendedpropertyinfo : ExtendedDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.get_extended_property_info.call(this, dwfieldspec, nradix, pextendedpropertyinfo)
+  end
+  def enum_extended_members(this : IDebugExtendedProperty*, dwfieldspec : UInt32, nradix : UInt32, ppeepi : IEnumDebugExtendedPropertyInfo*) : HRESULT
+    @lpVtbl.value.enum_extended_members.call(this, dwfieldspec, nradix, ppeepi)
+  end
+end
+struct LibWin32::IEnumDebugExtendedPropertyInfo
+  def query_interface(this : IEnumDebugExtendedPropertyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugExtendedPropertyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugExtendedPropertyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugExtendedPropertyInfo*, celt : UInt32, rgextendedpropertyinfo : ExtendedDebugPropertyInfo*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgextendedpropertyinfo, pceltfetched)
+  end
+  def skip(this : IEnumDebugExtendedPropertyInfo*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugExtendedPropertyInfo*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugExtendedPropertyInfo*, pedpe : IEnumDebugExtendedPropertyInfo*) : HRESULT
+    @lpVtbl.value.clone.call(this, pedpe)
+  end
+  def get_count(this : IEnumDebugExtendedPropertyInfo*, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcelt)
+  end
+end
+struct LibWin32::IPerPropertyBrowsing2
+  def query_interface(this : IPerPropertyBrowsing2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPerPropertyBrowsing2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPerPropertyBrowsing2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_string(this : IPerPropertyBrowsing2*, dispid : Int32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_string.call(this, dispid, pbstr)
+  end
+  def map_property_to_page(this : IPerPropertyBrowsing2*, dispid : Int32, pclsidproppage : Guid*) : HRESULT
+    @lpVtbl.value.map_property_to_page.call(this, dispid, pclsidproppage)
+  end
+  def get_predefined_strings(this : IPerPropertyBrowsing2*, dispid : Int32, pcastrings : CALPOLESTR*, pcacookies : CADWORD*) : HRESULT
+    @lpVtbl.value.get_predefined_strings.call(this, dispid, pcastrings, pcacookies)
+  end
+  def set_predefined_value(this : IPerPropertyBrowsing2*, dispid : Int32, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.set_predefined_value.call(this, dispid, dwcookie)
+  end
+end
+struct LibWin32::IDebugPropertyEnumType_All
+  def query_interface(this : IDebugPropertyEnumType_All*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPropertyEnumType_All*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPropertyEnumType_All*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugPropertyEnumType_All*, midl__idebugpropertyenumtype_all0000 : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, midl__idebugpropertyenumtype_all0000)
+  end
+end
+struct LibWin32::IDebugPropertyEnumType_Locals
+  def query_interface(this : IDebugPropertyEnumType_Locals*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPropertyEnumType_Locals*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPropertyEnumType_Locals*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugPropertyEnumType_Locals*, midl__idebugpropertyenumtype_all0000 : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, midl__idebugpropertyenumtype_all0000)
+  end
+end
+struct LibWin32::IDebugPropertyEnumType_Arguments
+  def query_interface(this : IDebugPropertyEnumType_Arguments*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPropertyEnumType_Arguments*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPropertyEnumType_Arguments*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugPropertyEnumType_Arguments*, midl__idebugpropertyenumtype_all0000 : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, midl__idebugpropertyenumtype_all0000)
+  end
+end
+struct LibWin32::IDebugPropertyEnumType_LocalsPlusArgs
+  def query_interface(this : IDebugPropertyEnumType_LocalsPlusArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPropertyEnumType_LocalsPlusArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPropertyEnumType_LocalsPlusArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugPropertyEnumType_LocalsPlusArgs*, midl__idebugpropertyenumtype_all0000 : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, midl__idebugpropertyenumtype_all0000)
+  end
+end
+struct LibWin32::IDebugPropertyEnumType_Registers
+  def query_interface(this : IDebugPropertyEnumType_Registers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugPropertyEnumType_Registers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugPropertyEnumType_Registers*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugPropertyEnumType_Registers*, midl__idebugpropertyenumtype_all0000 : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, midl__idebugpropertyenumtype_all0000)
+  end
+end
+struct LibWin32::IActiveScriptDebug32
+  def query_interface(this : IActiveScriptDebug32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptDebug32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptDebug32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_script_text_attributes(this : IActiveScriptDebug32*, pstrcode : Char*, unumcodechars : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_text_attributes.call(this, pstrcode, unumcodechars, pstrdelimiter, dwflags, pattr)
+  end
+  def get_scriptlet_text_attributes(this : IActiveScriptDebug32*, pstrcode : Char*, unumcodechars : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_scriptlet_text_attributes.call(this, pstrcode, unumcodechars, pstrdelimiter, dwflags, pattr)
+  end
+  def enum_code_contexts_of_position(this : IActiveScriptDebug32*, dwsourcecontext : UInt32, ucharacteroffset : UInt32, unumchars : UInt32, ppescc : IEnumDebugCodeContexts*) : HRESULT
+    @lpVtbl.value.enum_code_contexts_of_position.call(this, dwsourcecontext, ucharacteroffset, unumchars, ppescc)
+  end
+end
+struct LibWin32::IActiveScriptDebug64
+  def query_interface(this : IActiveScriptDebug64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptDebug64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptDebug64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_script_text_attributes(this : IActiveScriptDebug64*, pstrcode : Char*, unumcodechars : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_text_attributes.call(this, pstrcode, unumcodechars, pstrdelimiter, dwflags, pattr)
+  end
+  def get_scriptlet_text_attributes(this : IActiveScriptDebug64*, pstrcode : Char*, unumcodechars : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_scriptlet_text_attributes.call(this, pstrcode, unumcodechars, pstrdelimiter, dwflags, pattr)
+  end
+  def enum_code_contexts_of_position(this : IActiveScriptDebug64*, dwsourcecontext : UInt64, ucharacteroffset : UInt32, unumchars : UInt32, ppescc : IEnumDebugCodeContexts*) : HRESULT
+    @lpVtbl.value.enum_code_contexts_of_position.call(this, dwsourcecontext, ucharacteroffset, unumchars, ppescc)
+  end
+end
+struct LibWin32::IActiveScriptSiteDebug32
+  def query_interface(this : IActiveScriptSiteDebug32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteDebug32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteDebug32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_context_from_position(this : IActiveScriptSiteDebug32*, dwsourcecontext : UInt32, ucharacteroffset : UInt32, unumchars : UInt32, ppsc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_document_context_from_position.call(this, dwsourcecontext, ucharacteroffset, unumchars, ppsc)
+  end
+  def get_application(this : IActiveScriptSiteDebug32*, ppda : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.get_application.call(this, ppda)
+  end
+  def get_root_application_node(this : IActiveScriptSiteDebug32*, ppdanroot : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_root_application_node.call(this, ppdanroot)
+  end
+  def on_script_error_debug(this : IActiveScriptSiteDebug32*, perrordebug : IActiveScriptErrorDebug, pfenterdebugger : LibC::BOOL*, pfcallonscripterrorwhencontinuing : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_script_error_debug.call(this, perrordebug, pfenterdebugger, pfcallonscripterrorwhencontinuing)
+  end
+end
+struct LibWin32::IActiveScriptSiteDebug64
+  def query_interface(this : IActiveScriptSiteDebug64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteDebug64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteDebug64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_context_from_position(this : IActiveScriptSiteDebug64*, dwsourcecontext : UInt64, ucharacteroffset : UInt32, unumchars : UInt32, ppsc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_document_context_from_position.call(this, dwsourcecontext, ucharacteroffset, unumchars, ppsc)
+  end
+  def get_application(this : IActiveScriptSiteDebug64*, ppda : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.get_application.call(this, ppda)
+  end
+  def get_root_application_node(this : IActiveScriptSiteDebug64*, ppdanroot : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_root_application_node.call(this, ppdanroot)
+  end
+  def on_script_error_debug(this : IActiveScriptSiteDebug64*, perrordebug : IActiveScriptErrorDebug, pfenterdebugger : LibC::BOOL*, pfcallonscripterrorwhencontinuing : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_script_error_debug.call(this, perrordebug, pfenterdebugger, pfcallonscripterrorwhencontinuing)
+  end
+end
+struct LibWin32::IActiveScriptSiteDebugEx
+  def query_interface(this : IActiveScriptSiteDebugEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptSiteDebugEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptSiteDebugEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_can_not_jit_script_error_debug(this : IActiveScriptSiteDebugEx*, perrordebug : IActiveScriptErrorDebug, pfcallonscripterrorwhencontinuing : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_can_not_jit_script_error_debug.call(this, perrordebug, pfcallonscripterrorwhencontinuing)
+  end
+end
+struct LibWin32::IActiveScriptErrorDebug
+  def query_interface(this : IActiveScriptErrorDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptErrorDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptErrorDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_exception_info(this : IActiveScriptErrorDebug*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.get_exception_info.call(this, pexcepinfo)
+  end
+  def get_source_position(this : IActiveScriptErrorDebug*, pdwsourcecontext : UInt32*, pullinenumber : UInt32*, plcharacterposition : Int32*) : HRESULT
+    @lpVtbl.value.get_source_position.call(this, pdwsourcecontext, pullinenumber, plcharacterposition)
+  end
+  def get_source_line_text(this : IActiveScriptErrorDebug*, pbstrsourceline : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_line_text.call(this, pbstrsourceline)
+  end
+  def get_document_context(this : IActiveScriptErrorDebug*, ppssc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_document_context.call(this, ppssc)
+  end
+  def get_stack_frame(this : IActiveScriptErrorDebug*, ppdsf : IDebugStackFrame*) : HRESULT
+    @lpVtbl.value.get_stack_frame.call(this, ppdsf)
+  end
+end
+struct LibWin32::IDebugCodeContext
+  def query_interface(this : IDebugCodeContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugCodeContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugCodeContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_context(this : IDebugCodeContext*, ppsc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_document_context.call(this, ppsc)
+  end
+  def set_break_point(this : IDebugCodeContext*, bps : BREAKPOINT_STATE) : HRESULT
+    @lpVtbl.value.set_break_point.call(this, bps)
+  end
+end
+struct LibWin32::IDebugExpression
+  def query_interface(this : IDebugExpression*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugExpression*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugExpression*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : IDebugExpression*, pdecb : IDebugExpressionCallBack) : HRESULT
+    @lpVtbl.value.start.call(this, pdecb)
+  end
+  def abort(this : IDebugExpression*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+  def query_is_complete(this : IDebugExpression*) : HRESULT
+    @lpVtbl.value.query_is_complete.call(this)
+  end
+  def get_result_as_string(this : IDebugExpression*, phrresult : HRESULT*, pbstrresult : UInt8**) : HRESULT
+    @lpVtbl.value.get_result_as_string.call(this, phrresult, pbstrresult)
+  end
+  def get_result_as_debug_property(this : IDebugExpression*, phrresult : HRESULT*, ppdp : IDebugProperty*) : HRESULT
+    @lpVtbl.value.get_result_as_debug_property.call(this, phrresult, ppdp)
+  end
+end
+struct LibWin32::IDebugExpressionContext
+  def query_interface(this : IDebugExpressionContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugExpressionContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugExpressionContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_language_text(this : IDebugExpressionContext*, pstrcode : LibC::LPWSTR, nradix : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, ppe : IDebugExpression*) : HRESULT
+    @lpVtbl.value.parse_language_text.call(this, pstrcode, nradix, pstrdelimiter, dwflags, ppe)
+  end
+  def get_language_info(this : IDebugExpressionContext*, pbstrlanguagename : UInt8**, planguageid : Guid*) : HRESULT
+    @lpVtbl.value.get_language_info.call(this, pbstrlanguagename, planguageid)
+  end
+end
+struct LibWin32::IDebugExpressionCallBack
+  def query_interface(this : IDebugExpressionCallBack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugExpressionCallBack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugExpressionCallBack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_complete(this : IDebugExpressionCallBack*) : HRESULT
+    @lpVtbl.value.on_complete.call(this)
+  end
+end
+struct LibWin32::IDebugStackFrame
+  def query_interface(this : IDebugStackFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugStackFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugStackFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_code_context(this : IDebugStackFrame*, ppcc : IDebugCodeContext*) : HRESULT
+    @lpVtbl.value.get_code_context.call(this, ppcc)
+  end
+  def get_description_string(this : IDebugStackFrame*, flong : LibC::BOOL, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description_string.call(this, flong, pbstrdescription)
+  end
+  def get_language_string(this : IDebugStackFrame*, flong : LibC::BOOL, pbstrlanguage : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_string.call(this, flong, pbstrlanguage)
+  end
+  def get_thread(this : IDebugStackFrame*, ppat : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_thread.call(this, ppat)
+  end
+  def get_debug_property(this : IDebugStackFrame*, ppdebugprop : IDebugProperty*) : HRESULT
+    @lpVtbl.value.get_debug_property.call(this, ppdebugprop)
+  end
+end
+struct LibWin32::IDebugStackFrameSniffer
+  def query_interface(this : IDebugStackFrameSniffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugStackFrameSniffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugStackFrameSniffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_stack_frames(this : IDebugStackFrameSniffer*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+end
+struct LibWin32::IDebugStackFrameSnifferEx32
+  def query_interface(this : IDebugStackFrameSnifferEx32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugStackFrameSnifferEx32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugStackFrameSnifferEx32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_stack_frames(this : IDebugStackFrameSnifferEx32*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+  def enum_stack_frames_ex32(this : IDebugStackFrameSnifferEx32*, dwspmin : UInt32, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames_ex32.call(this, dwspmin, ppedsf)
+  end
+end
+struct LibWin32::IDebugStackFrameSnifferEx64
+  def query_interface(this : IDebugStackFrameSnifferEx64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugStackFrameSnifferEx64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugStackFrameSnifferEx64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_stack_frames(this : IDebugStackFrameSnifferEx64*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+  def enum_stack_frames_ex64(this : IDebugStackFrameSnifferEx64*, dwspmin : UInt64, ppedsf : IEnumDebugStackFrames64*) : HRESULT
+    @lpVtbl.value.enum_stack_frames_ex64.call(this, dwspmin, ppedsf)
+  end
+end
+struct LibWin32::IDebugSyncOperation
+  def query_interface(this : IDebugSyncOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSyncOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSyncOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_target_thread(this : IDebugSyncOperation*, ppattarget : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_target_thread.call(this, ppattarget)
+  end
+  def execute(this : IDebugSyncOperation*, ppunkresult : IUnknown*) : HRESULT
+    @lpVtbl.value.execute.call(this, ppunkresult)
+  end
+  def in_progress_abort(this : IDebugSyncOperation*) : HRESULT
+    @lpVtbl.value.in_progress_abort.call(this)
+  end
+end
+struct LibWin32::IDebugAsyncOperation
+  def query_interface(this : IDebugAsyncOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAsyncOperation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAsyncOperation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sync_debug_operation(this : IDebugAsyncOperation*, ppsdo : IDebugSyncOperation*) : HRESULT
+    @lpVtbl.value.get_sync_debug_operation.call(this, ppsdo)
+  end
+  def start(this : IDebugAsyncOperation*, padocb : IDebugAsyncOperationCallBack) : HRESULT
+    @lpVtbl.value.start.call(this, padocb)
+  end
+  def abort(this : IDebugAsyncOperation*) : HRESULT
+    @lpVtbl.value.abort.call(this)
+  end
+  def query_is_complete(this : IDebugAsyncOperation*) : HRESULT
+    @lpVtbl.value.query_is_complete.call(this)
+  end
+  def get_result(this : IDebugAsyncOperation*, phrresult : HRESULT*, ppunkresult : IUnknown*) : HRESULT
+    @lpVtbl.value.get_result.call(this, phrresult, ppunkresult)
+  end
+end
+struct LibWin32::IDebugAsyncOperationCallBack
+  def query_interface(this : IDebugAsyncOperationCallBack*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugAsyncOperationCallBack*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugAsyncOperationCallBack*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_complete(this : IDebugAsyncOperationCallBack*) : HRESULT
+    @lpVtbl.value.on_complete.call(this)
+  end
+end
+struct LibWin32::IEnumDebugCodeContexts
+  def query_interface(this : IEnumDebugCodeContexts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugCodeContexts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugCodeContexts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugCodeContexts*, celt : UInt32, pscc : IDebugCodeContext*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, pscc, pceltfetched)
+  end
+  def skip(this : IEnumDebugCodeContexts*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugCodeContexts*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugCodeContexts*, ppescc : IEnumDebugCodeContexts*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppescc)
+  end
+end
+struct LibWin32::IEnumDebugStackFrames
+  def query_interface(this : IEnumDebugStackFrames*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugStackFrames*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugStackFrames*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugStackFrames*, celt : UInt32, prgdsfd : DebugStackFrameDescriptor*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, prgdsfd, pceltfetched)
+  end
+  def skip(this : IEnumDebugStackFrames*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugStackFrames*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppedsf)
+  end
+end
+struct LibWin32::IEnumDebugStackFrames64
+  def query_interface(this : IEnumDebugStackFrames64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugStackFrames64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugStackFrames64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugStackFrames64*, celt : UInt32, prgdsfd : DebugStackFrameDescriptor*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, prgdsfd, pceltfetched)
+  end
+  def skip(this : IEnumDebugStackFrames64*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugStackFrames64*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugStackFrames64*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppedsf)
+  end
+  def next64(this : IEnumDebugStackFrames64*, celt : UInt32, prgdsfd : DebugStackFrameDescriptor64*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next64.call(this, celt, prgdsfd, pceltfetched)
+  end
+end
+struct LibWin32::IDebugDocumentInfo
+  def query_interface(this : IDebugDocumentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugDocumentInfo*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugDocumentInfo*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+end
+struct LibWin32::IDebugDocumentProvider
+  def query_interface(this : IDebugDocumentProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugDocumentProvider*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugDocumentProvider*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+  def get_document(this : IDebugDocumentProvider*, ppssd : IDebugDocument*) : HRESULT
+    @lpVtbl.value.get_document.call(this, ppssd)
+  end
+end
+struct LibWin32::IDebugDocument
+  def query_interface(this : IDebugDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugDocument*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugDocument*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+end
+struct LibWin32::IDebugDocumentText
+  def query_interface(this : IDebugDocumentText*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentText*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentText*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugDocumentText*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugDocumentText*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+  def get_document_attributes(this : IDebugDocumentText*, ptextdocattr : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_attributes.call(this, ptextdocattr)
+  end
+  def get_size(this : IDebugDocumentText*, pcnumlines : UInt32*, pcnumchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pcnumlines, pcnumchars)
+  end
+  def get_position_of_line(this : IDebugDocumentText*, clinenumber : UInt32, pccharacterposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_position_of_line.call(this, clinenumber, pccharacterposition)
+  end
+  def get_line_of_position(this : IDebugDocumentText*, ccharacterposition : UInt32, pclinenumber : UInt32*, pccharacteroffsetinline : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_of_position.call(this, ccharacterposition, pclinenumber, pccharacteroffsetinline)
+  end
+  def get_text(this : IDebugDocumentText*, ccharacterposition : UInt32, pchartext : Char*, pstatextattr : UInt16*, pcnumchars : UInt32*, cmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_text.call(this, ccharacterposition, pchartext, pstatextattr, pcnumchars, cmaxchars)
+  end
+  def get_position_of_context(this : IDebugDocumentText*, psc : IDebugDocumentContext, pccharacterposition : UInt32*, cnumchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_position_of_context.call(this, psc, pccharacterposition, cnumchars)
+  end
+  def get_context_of_position(this : IDebugDocumentText*, ccharacterposition : UInt32, cnumchars : UInt32, ppsc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_context_of_position.call(this, ccharacterposition, cnumchars, ppsc)
+  end
+end
+struct LibWin32::IDebugDocumentTextEvents
+  def query_interface(this : IDebugDocumentTextEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentTextEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentTextEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_destroy(this : IDebugDocumentTextEvents*) : HRESULT
+    @lpVtbl.value.on_destroy.call(this)
+  end
+  def on_insert_text(this : IDebugDocumentTextEvents*, ccharacterposition : UInt32, cnumtoinsert : UInt32) : HRESULT
+    @lpVtbl.value.on_insert_text.call(this, ccharacterposition, cnumtoinsert)
+  end
+  def on_remove_text(this : IDebugDocumentTextEvents*, ccharacterposition : UInt32, cnumtoremove : UInt32) : HRESULT
+    @lpVtbl.value.on_remove_text.call(this, ccharacterposition, cnumtoremove)
+  end
+  def on_replace_text(this : IDebugDocumentTextEvents*, ccharacterposition : UInt32, cnumtoreplace : UInt32) : HRESULT
+    @lpVtbl.value.on_replace_text.call(this, ccharacterposition, cnumtoreplace)
+  end
+  def on_update_text_attributes(this : IDebugDocumentTextEvents*, ccharacterposition : UInt32, cnumtoupdate : UInt32) : HRESULT
+    @lpVtbl.value.on_update_text_attributes.call(this, ccharacterposition, cnumtoupdate)
+  end
+  def on_update_document_attributes(this : IDebugDocumentTextEvents*, textdocattr : UInt32) : HRESULT
+    @lpVtbl.value.on_update_document_attributes.call(this, textdocattr)
+  end
+end
+struct LibWin32::IDebugDocumentTextAuthor
+  def query_interface(this : IDebugDocumentTextAuthor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentTextAuthor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentTextAuthor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugDocumentTextAuthor*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugDocumentTextAuthor*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+  def get_document_attributes(this : IDebugDocumentTextAuthor*, ptextdocattr : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_attributes.call(this, ptextdocattr)
+  end
+  def get_size(this : IDebugDocumentTextAuthor*, pcnumlines : UInt32*, pcnumchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pcnumlines, pcnumchars)
+  end
+  def get_position_of_line(this : IDebugDocumentTextAuthor*, clinenumber : UInt32, pccharacterposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_position_of_line.call(this, clinenumber, pccharacterposition)
+  end
+  def get_line_of_position(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, pclinenumber : UInt32*, pccharacteroffsetinline : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_of_position.call(this, ccharacterposition, pclinenumber, pccharacteroffsetinline)
+  end
+  def get_text(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, pchartext : Char*, pstatextattr : UInt16*, pcnumchars : UInt32*, cmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_text.call(this, ccharacterposition, pchartext, pstatextattr, pcnumchars, cmaxchars)
+  end
+  def get_position_of_context(this : IDebugDocumentTextAuthor*, psc : IDebugDocumentContext, pccharacterposition : UInt32*, cnumchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_position_of_context.call(this, psc, pccharacterposition, cnumchars)
+  end
+  def get_context_of_position(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, cnumchars : UInt32, ppsc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_context_of_position.call(this, ccharacterposition, cnumchars, ppsc)
+  end
+  def insert_text(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, cnumtoinsert : UInt32, pchartext : Char*) : HRESULT
+    @lpVtbl.value.insert_text.call(this, ccharacterposition, cnumtoinsert, pchartext)
+  end
+  def remove_text(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, cnumtoremove : UInt32) : HRESULT
+    @lpVtbl.value.remove_text.call(this, ccharacterposition, cnumtoremove)
+  end
+  def replace_text(this : IDebugDocumentTextAuthor*, ccharacterposition : UInt32, cnumtoreplace : UInt32, pchartext : Char*) : HRESULT
+    @lpVtbl.value.replace_text.call(this, ccharacterposition, cnumtoreplace, pchartext)
+  end
+end
+struct LibWin32::IDebugDocumentTextExternalAuthor
+  def query_interface(this : IDebugDocumentTextExternalAuthor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentTextExternalAuthor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentTextExternalAuthor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_path_name(this : IDebugDocumentTextExternalAuthor*, pbstrlongname : UInt8**, pfisoriginalfile : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrlongname, pfisoriginalfile)
+  end
+  def get_file_name(this : IDebugDocumentTextExternalAuthor*, pbstrshortname : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name.call(this, pbstrshortname)
+  end
+  def notify_changed(this : IDebugDocumentTextExternalAuthor*) : HRESULT
+    @lpVtbl.value.notify_changed.call(this)
+  end
+end
+struct LibWin32::IDebugDocumentHelper32
+  def query_interface(this : IDebugDocumentHelper32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentHelper32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentHelper32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : IDebugDocumentHelper32*, pda : IDebugApplication32, pszshortname : LibC::LPWSTR, pszlongname : LibC::LPWSTR, docattr : UInt32) : HRESULT
+    @lpVtbl.value.init.call(this, pda, pszshortname, pszlongname, docattr)
+  end
+  def attach(this : IDebugDocumentHelper32*, pddhparent : IDebugDocumentHelper32) : HRESULT
+    @lpVtbl.value.attach.call(this, pddhparent)
+  end
+  def detach(this : IDebugDocumentHelper32*) : HRESULT
+    @lpVtbl.value.detach.call(this)
+  end
+  def add_unicode_text(this : IDebugDocumentHelper32*, psztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_unicode_text.call(this, psztext)
+  end
+  def add_dbcs_text(this : IDebugDocumentHelper32*, psztext : PSTR) : HRESULT
+    @lpVtbl.value.add_dbcs_text.call(this, psztext)
+  end
+  def set_debug_document_host(this : IDebugDocumentHelper32*, pddh : IDebugDocumentHost) : HRESULT
+    @lpVtbl.value.set_debug_document_host.call(this, pddh)
+  end
+  def add_deferred_text(this : IDebugDocumentHelper32*, cchars : UInt32, dwtextstartcookie : UInt32) : HRESULT
+    @lpVtbl.value.add_deferred_text.call(this, cchars, dwtextstartcookie)
+  end
+  def define_script_block(this : IDebugDocumentHelper32*, ulcharoffset : UInt32, cchars : UInt32, pas : IActiveScript, fscriptlet : LibC::BOOL, pdwsourcecontext : UInt32*) : HRESULT
+    @lpVtbl.value.define_script_block.call(this, ulcharoffset, cchars, pas, fscriptlet, pdwsourcecontext)
+  end
+  def set_default_text_attr(this : IDebugDocumentHelper32*, statextattr : UInt16) : HRESULT
+    @lpVtbl.value.set_default_text_attr.call(this, statextattr)
+  end
+  def set_text_attributes(this : IDebugDocumentHelper32*, ulcharoffset : UInt32, cchars : UInt32, pstatextattr : UInt16*) : HRESULT
+    @lpVtbl.value.set_text_attributes.call(this, ulcharoffset, cchars, pstatextattr)
+  end
+  def set_long_name(this : IDebugDocumentHelper32*, pszlongname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_long_name.call(this, pszlongname)
+  end
+  def set_short_name(this : IDebugDocumentHelper32*, pszshortname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_short_name.call(this, pszshortname)
+  end
+  def set_document_attr(this : IDebugDocumentHelper32*, pszattributes : UInt32) : HRESULT
+    @lpVtbl.value.set_document_attr.call(this, pszattributes)
+  end
+  def get_debug_application_node(this : IDebugDocumentHelper32*, ppdan : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_debug_application_node.call(this, ppdan)
+  end
+  def get_script_block_info(this : IDebugDocumentHelper32*, dwsourcecontext : UInt32, ppasd : IActiveScript*, picharpos : UInt32*, pcchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_script_block_info.call(this, dwsourcecontext, ppasd, picharpos, pcchars)
+  end
+  def create_debug_document_context(this : IDebugDocumentHelper32*, icharpos : UInt32, cchars : UInt32, ppddc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.create_debug_document_context.call(this, icharpos, cchars, ppddc)
+  end
+  def bring_document_to_top(this : IDebugDocumentHelper32*) : HRESULT
+    @lpVtbl.value.bring_document_to_top.call(this)
+  end
+  def bring_document_context_to_top(this : IDebugDocumentHelper32*, pddc : IDebugDocumentContext) : HRESULT
+    @lpVtbl.value.bring_document_context_to_top.call(this, pddc)
+  end
+end
+struct LibWin32::IDebugDocumentHelper64
+  def query_interface(this : IDebugDocumentHelper64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentHelper64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentHelper64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init(this : IDebugDocumentHelper64*, pda : IDebugApplication64, pszshortname : LibC::LPWSTR, pszlongname : LibC::LPWSTR, docattr : UInt32) : HRESULT
+    @lpVtbl.value.init.call(this, pda, pszshortname, pszlongname, docattr)
+  end
+  def attach(this : IDebugDocumentHelper64*, pddhparent : IDebugDocumentHelper64) : HRESULT
+    @lpVtbl.value.attach.call(this, pddhparent)
+  end
+  def detach(this : IDebugDocumentHelper64*) : HRESULT
+    @lpVtbl.value.detach.call(this)
+  end
+  def add_unicode_text(this : IDebugDocumentHelper64*, psztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_unicode_text.call(this, psztext)
+  end
+  def add_dbcs_text(this : IDebugDocumentHelper64*, psztext : PSTR) : HRESULT
+    @lpVtbl.value.add_dbcs_text.call(this, psztext)
+  end
+  def set_debug_document_host(this : IDebugDocumentHelper64*, pddh : IDebugDocumentHost) : HRESULT
+    @lpVtbl.value.set_debug_document_host.call(this, pddh)
+  end
+  def add_deferred_text(this : IDebugDocumentHelper64*, cchars : UInt32, dwtextstartcookie : UInt32) : HRESULT
+    @lpVtbl.value.add_deferred_text.call(this, cchars, dwtextstartcookie)
+  end
+  def define_script_block(this : IDebugDocumentHelper64*, ulcharoffset : UInt32, cchars : UInt32, pas : IActiveScript, fscriptlet : LibC::BOOL, pdwsourcecontext : UInt64*) : HRESULT
+    @lpVtbl.value.define_script_block.call(this, ulcharoffset, cchars, pas, fscriptlet, pdwsourcecontext)
+  end
+  def set_default_text_attr(this : IDebugDocumentHelper64*, statextattr : UInt16) : HRESULT
+    @lpVtbl.value.set_default_text_attr.call(this, statextattr)
+  end
+  def set_text_attributes(this : IDebugDocumentHelper64*, ulcharoffset : UInt32, cchars : UInt32, pstatextattr : UInt16*) : HRESULT
+    @lpVtbl.value.set_text_attributes.call(this, ulcharoffset, cchars, pstatextattr)
+  end
+  def set_long_name(this : IDebugDocumentHelper64*, pszlongname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_long_name.call(this, pszlongname)
+  end
+  def set_short_name(this : IDebugDocumentHelper64*, pszshortname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_short_name.call(this, pszshortname)
+  end
+  def set_document_attr(this : IDebugDocumentHelper64*, pszattributes : UInt32) : HRESULT
+    @lpVtbl.value.set_document_attr.call(this, pszattributes)
+  end
+  def get_debug_application_node(this : IDebugDocumentHelper64*, ppdan : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_debug_application_node.call(this, ppdan)
+  end
+  def get_script_block_info(this : IDebugDocumentHelper64*, dwsourcecontext : UInt64, ppasd : IActiveScript*, picharpos : UInt32*, pcchars : UInt32*) : HRESULT
+    @lpVtbl.value.get_script_block_info.call(this, dwsourcecontext, ppasd, picharpos, pcchars)
+  end
+  def create_debug_document_context(this : IDebugDocumentHelper64*, icharpos : UInt32, cchars : UInt32, ppddc : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.create_debug_document_context.call(this, icharpos, cchars, ppddc)
+  end
+  def bring_document_to_top(this : IDebugDocumentHelper64*) : HRESULT
+    @lpVtbl.value.bring_document_to_top.call(this)
+  end
+  def bring_document_context_to_top(this : IDebugDocumentHelper64*, pddc : IDebugDocumentContext) : HRESULT
+    @lpVtbl.value.bring_document_context_to_top.call(this, pddc)
+  end
+end
+struct LibWin32::IDebugDocumentHost
+  def query_interface(this : IDebugDocumentHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_deferred_text(this : IDebugDocumentHost*, dwtextstartcookie : UInt32, pchartext : Char*, pstatextattr : UInt16*, pcnumchars : UInt32*, cmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_deferred_text.call(this, dwtextstartcookie, pchartext, pstatextattr, pcnumchars, cmaxchars)
+  end
+  def get_script_text_attributes(this : IDebugDocumentHost*, pstrcode : Char*, unumcodechars : UInt32, pstrdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_text_attributes.call(this, pstrcode, unumcodechars, pstrdelimiter, dwflags, pattr)
+  end
+  def on_create_document_context(this : IDebugDocumentHost*, ppunkouter : IUnknown*) : HRESULT
+    @lpVtbl.value.on_create_document_context.call(this, ppunkouter)
+  end
+  def get_path_name(this : IDebugDocumentHost*, pbstrlongname : UInt8**, pfisoriginalfile : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_path_name.call(this, pbstrlongname, pfisoriginalfile)
+  end
+  def get_file_name(this : IDebugDocumentHost*, pbstrshortname : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name.call(this, pbstrshortname)
+  end
+  def notify_changed(this : IDebugDocumentHost*) : HRESULT
+    @lpVtbl.value.notify_changed.call(this)
+  end
+end
+struct LibWin32::IDebugDocumentContext
+  def query_interface(this : IDebugDocumentContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugDocumentContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugDocumentContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document(this : IDebugDocumentContext*, ppsd : IDebugDocument*) : HRESULT
+    @lpVtbl.value.get_document.call(this, ppsd)
+  end
+  def enum_code_contexts(this : IDebugDocumentContext*, ppescc : IEnumDebugCodeContexts*) : HRESULT
+    @lpVtbl.value.enum_code_contexts.call(this, ppescc)
+  end
+end
+struct LibWin32::IDebugSessionProvider
+  def query_interface(this : IDebugSessionProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugSessionProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugSessionProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_debug_session(this : IDebugSessionProvider*, pda : IRemoteDebugApplication) : HRESULT
+    @lpVtbl.value.start_debug_session.call(this, pda)
+  end
+end
+struct LibWin32::IApplicationDebugger
+  def query_interface(this : IApplicationDebugger*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApplicationDebugger*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApplicationDebugger*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_alive(this : IApplicationDebugger*) : HRESULT
+    @lpVtbl.value.query_alive.call(this)
+  end
+  def create_instance_at_debugger(this : IApplicationDebugger*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_instance_at_debugger.call(this, rclsid, punkouter, dwclscontext, riid, ppvobject)
+  end
+  def on_debug_output(this : IApplicationDebugger*, pstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_debug_output.call(this, pstr)
+  end
+  def on_handle_break_point(this : IApplicationDebugger*, prpt : IRemoteDebugApplicationThread, br : BREAKREASON, perror : IActiveScriptErrorDebug) : HRESULT
+    @lpVtbl.value.on_handle_break_point.call(this, prpt, br, perror)
+  end
+  def on_close(this : IApplicationDebugger*) : HRESULT
+    @lpVtbl.value.on_close.call(this)
+  end
+  def on_debugger_event(this : IApplicationDebugger*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.on_debugger_event.call(this, riid, punk)
+  end
+end
+struct LibWin32::IApplicationDebuggerUI
+  def query_interface(this : IApplicationDebuggerUI*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApplicationDebuggerUI*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApplicationDebuggerUI*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def bring_document_to_top(this : IApplicationDebuggerUI*, pddt : IDebugDocumentText) : HRESULT
+    @lpVtbl.value.bring_document_to_top.call(this, pddt)
+  end
+  def bring_document_context_to_top(this : IApplicationDebuggerUI*, pddc : IDebugDocumentContext) : HRESULT
+    @lpVtbl.value.bring_document_context_to_top.call(this, pddc)
+  end
+end
+struct LibWin32::IMachineDebugManager
+  def query_interface(this : IMachineDebugManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMachineDebugManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMachineDebugManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_application(this : IMachineDebugManager*, pda : IRemoteDebugApplication, pdwappcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_application.call(this, pda, pdwappcookie)
+  end
+  def remove_application(this : IMachineDebugManager*, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_application.call(this, dwappcookie)
+  end
+  def enum_applications(this : IMachineDebugManager*, ppeda : IEnumRemoteDebugApplications*) : HRESULT
+    @lpVtbl.value.enum_applications.call(this, ppeda)
+  end
+end
+struct LibWin32::IMachineDebugManagerCookie
+  def query_interface(this : IMachineDebugManagerCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMachineDebugManagerCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMachineDebugManagerCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_application(this : IMachineDebugManagerCookie*, pda : IRemoteDebugApplication, dwdebugappcookie : UInt32, pdwappcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_application.call(this, pda, dwdebugappcookie, pdwappcookie)
+  end
+  def remove_application(this : IMachineDebugManagerCookie*, dwdebugappcookie : UInt32, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_application.call(this, dwdebugappcookie, dwappcookie)
+  end
+  def enum_applications(this : IMachineDebugManagerCookie*, ppeda : IEnumRemoteDebugApplications*) : HRESULT
+    @lpVtbl.value.enum_applications.call(this, ppeda)
+  end
+end
+struct LibWin32::IMachineDebugManagerEvents
+  def query_interface(this : IMachineDebugManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMachineDebugManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMachineDebugManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_add_application(this : IMachineDebugManagerEvents*, pda : IRemoteDebugApplication, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.on_add_application.call(this, pda, dwappcookie)
+  end
+  def on_remove_application(this : IMachineDebugManagerEvents*, pda : IRemoteDebugApplication, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.on_remove_application.call(this, pda, dwappcookie)
+  end
+end
+struct LibWin32::IProcessDebugManager32
+  def query_interface(this : IProcessDebugManager32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProcessDebugManager32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProcessDebugManager32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_application(this : IProcessDebugManager32*, ppda : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.create_application.call(this, ppda)
+  end
+  def get_default_application(this : IProcessDebugManager32*, ppda : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.get_default_application.call(this, ppda)
+  end
+  def add_application(this : IProcessDebugManager32*, pda : IDebugApplication32, pdwappcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_application.call(this, pda, pdwappcookie)
+  end
+  def remove_application(this : IProcessDebugManager32*, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_application.call(this, dwappcookie)
+  end
+  def create_debug_document_helper(this : IProcessDebugManager32*, punkouter : IUnknown, pddh : IDebugDocumentHelper32*) : HRESULT
+    @lpVtbl.value.create_debug_document_helper.call(this, punkouter, pddh)
+  end
+end
+struct LibWin32::IProcessDebugManager64
+  def query_interface(this : IProcessDebugManager64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProcessDebugManager64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProcessDebugManager64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_application(this : IProcessDebugManager64*, ppda : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.create_application.call(this, ppda)
+  end
+  def get_default_application(this : IProcessDebugManager64*, ppda : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.get_default_application.call(this, ppda)
+  end
+  def add_application(this : IProcessDebugManager64*, pda : IDebugApplication64, pdwappcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_application.call(this, pda, pdwappcookie)
+  end
+  def remove_application(this : IProcessDebugManager64*, dwappcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_application.call(this, dwappcookie)
+  end
+  def create_debug_document_helper(this : IProcessDebugManager64*, punkouter : IUnknown, pddh : IDebugDocumentHelper64*) : HRESULT
+    @lpVtbl.value.create_debug_document_helper.call(this, punkouter, pddh)
+  end
+end
+struct LibWin32::IRemoteDebugApplication
+  def query_interface(this : IRemoteDebugApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resume_from_break_point(this : IRemoteDebugApplication*, prptfocus : IRemoteDebugApplicationThread, bra : BREAKRESUME_ACTION, era : ERRORRESUMEACTION) : HRESULT
+    @lpVtbl.value.resume_from_break_point.call(this, prptfocus, bra, era)
+  end
+  def cause_break(this : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.cause_break.call(this)
+  end
+  def connect_debugger(this : IRemoteDebugApplication*, pad : IApplicationDebugger) : HRESULT
+    @lpVtbl.value.connect_debugger.call(this, pad)
+  end
+  def disconnect_debugger(this : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.disconnect_debugger.call(this)
+  end
+  def get_debugger(this : IRemoteDebugApplication*, pad : IApplicationDebugger*) : HRESULT
+    @lpVtbl.value.get_debugger.call(this, pad)
+  end
+  def create_instance_at_application(this : IRemoteDebugApplication*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_instance_at_application.call(this, rclsid, punkouter, dwclscontext, riid, ppvobject)
+  end
+  def query_alive(this : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.query_alive.call(this)
+  end
+  def enum_threads(this : IRemoteDebugApplication*, pperdat : IEnumRemoteDebugApplicationThreads*) : HRESULT
+    @lpVtbl.value.enum_threads.call(this, pperdat)
+  end
+  def get_name(this : IRemoteDebugApplication*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_root_node(this : IRemoteDebugApplication*, ppdanroot : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_root_node.call(this, ppdanroot)
+  end
+  def enum_global_expression_contexts(this : IRemoteDebugApplication*, ppedec : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.enum_global_expression_contexts.call(this, ppedec)
+  end
+end
+struct LibWin32::IDebugApplication32
+  def query_interface(this : IDebugApplication32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplication32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplication32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resume_from_break_point(this : IDebugApplication32*, prptfocus : IRemoteDebugApplicationThread, bra : BREAKRESUME_ACTION, era : ERRORRESUMEACTION) : HRESULT
+    @lpVtbl.value.resume_from_break_point.call(this, prptfocus, bra, era)
+  end
+  def cause_break(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.cause_break.call(this)
+  end
+  def connect_debugger(this : IDebugApplication32*, pad : IApplicationDebugger) : HRESULT
+    @lpVtbl.value.connect_debugger.call(this, pad)
+  end
+  def disconnect_debugger(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.disconnect_debugger.call(this)
+  end
+  def get_debugger(this : IDebugApplication32*, pad : IApplicationDebugger*) : HRESULT
+    @lpVtbl.value.get_debugger.call(this, pad)
+  end
+  def create_instance_at_application(this : IDebugApplication32*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_instance_at_application.call(this, rclsid, punkouter, dwclscontext, riid, ppvobject)
+  end
+  def query_alive(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.query_alive.call(this)
+  end
+  def enum_threads(this : IDebugApplication32*, pperdat : IEnumRemoteDebugApplicationThreads*) : HRESULT
+    @lpVtbl.value.enum_threads.call(this, pperdat)
+  end
+  def get_name(this : IDebugApplication32*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_root_node(this : IDebugApplication32*, ppdanroot : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_root_node.call(this, ppdanroot)
+  end
+  def enum_global_expression_contexts(this : IDebugApplication32*, ppedec : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.enum_global_expression_contexts.call(this, ppedec)
+  end
+  def set_name(this : IDebugApplication32*, pstrname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pstrname)
+  end
+  def step_out_complete(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.step_out_complete.call(this)
+  end
+  def debug_output(this : IDebugApplication32*, pstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.debug_output.call(this, pstr)
+  end
+  def start_debug_session(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.start_debug_session.call(this)
+  end
+  def handle_break_point(this : IDebugApplication32*, br : BREAKREASON, pbra : BREAKRESUME_ACTION*) : HRESULT
+    @lpVtbl.value.handle_break_point.call(this, br, pbra)
+  end
+  def close(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_break_flags(this : IDebugApplication32*, pabf : UInt32*, pprdatsteppingthread : IRemoteDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_break_flags.call(this, pabf, pprdatsteppingthread)
+  end
+  def get_current_thread(this : IDebugApplication32*, pat : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_current_thread.call(this, pat)
+  end
+  def create_async_debug_operation(this : IDebugApplication32*, psdo : IDebugSyncOperation, ppado : IDebugAsyncOperation*) : HRESULT
+    @lpVtbl.value.create_async_debug_operation.call(this, psdo, ppado)
+  end
+  def add_stack_frame_sniffer(this : IDebugApplication32*, pdsfs : IDebugStackFrameSniffer, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_stack_frame_sniffer.call(this, pdsfs, pdwcookie)
+  end
+  def remove_stack_frame_sniffer(this : IDebugApplication32*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_stack_frame_sniffer.call(this, dwcookie)
+  end
+  def query_current_thread_is_debugger_thread(this : IDebugApplication32*) : HRESULT
+    @lpVtbl.value.query_current_thread_is_debugger_thread.call(this)
+  end
+  def synchronous_call_in_debugger_thread(this : IDebugApplication32*, pptc : IDebugThreadCall32, dwparam1 : UInt32, dwparam2 : UInt32, dwparam3 : UInt32) : HRESULT
+    @lpVtbl.value.synchronous_call_in_debugger_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def create_application_node(this : IDebugApplication32*, ppdannew : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.create_application_node.call(this, ppdannew)
+  end
+  def fire_debugger_event(this : IDebugApplication32*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.fire_debugger_event.call(this, riid, punk)
+  end
+  def handle_runtime_error(this : IDebugApplication32*, perrordebug : IActiveScriptErrorDebug, pscriptsite : IActiveScriptSite, pbra : BREAKRESUME_ACTION*, perra : ERRORRESUMEACTION*, pfcallonscripterror : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.handle_runtime_error.call(this, perrordebug, pscriptsite, pbra, perra, pfcallonscripterror)
+  end
+  def f_can_jit_debug(this : IDebugApplication32*) : LibC::BOOL
+    @lpVtbl.value.f_can_jit_debug.call(this)
+  end
+  def f_is_auto_jit_debug_enabled(this : IDebugApplication32*) : LibC::BOOL
+    @lpVtbl.value.f_is_auto_jit_debug_enabled.call(this)
+  end
+  def add_global_expression_context_provider(this : IDebugApplication32*, pdsfs : IProvideExpressionContexts, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_global_expression_context_provider.call(this, pdsfs, pdwcookie)
+  end
+  def remove_global_expression_context_provider(this : IDebugApplication32*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_global_expression_context_provider.call(this, dwcookie)
+  end
+end
+struct LibWin32::IDebugApplication64
+  def query_interface(this : IDebugApplication64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplication64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplication64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resume_from_break_point(this : IDebugApplication64*, prptfocus : IRemoteDebugApplicationThread, bra : BREAKRESUME_ACTION, era : ERRORRESUMEACTION) : HRESULT
+    @lpVtbl.value.resume_from_break_point.call(this, prptfocus, bra, era)
+  end
+  def cause_break(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.cause_break.call(this)
+  end
+  def connect_debugger(this : IDebugApplication64*, pad : IApplicationDebugger) : HRESULT
+    @lpVtbl.value.connect_debugger.call(this, pad)
+  end
+  def disconnect_debugger(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.disconnect_debugger.call(this)
+  end
+  def get_debugger(this : IDebugApplication64*, pad : IApplicationDebugger*) : HRESULT
+    @lpVtbl.value.get_debugger.call(this, pad)
+  end
+  def create_instance_at_application(this : IDebugApplication64*, rclsid : Guid*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : IUnknown*) : HRESULT
+    @lpVtbl.value.create_instance_at_application.call(this, rclsid, punkouter, dwclscontext, riid, ppvobject)
+  end
+  def query_alive(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.query_alive.call(this)
+  end
+  def enum_threads(this : IDebugApplication64*, pperdat : IEnumRemoteDebugApplicationThreads*) : HRESULT
+    @lpVtbl.value.enum_threads.call(this, pperdat)
+  end
+  def get_name(this : IDebugApplication64*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_root_node(this : IDebugApplication64*, ppdanroot : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_root_node.call(this, ppdanroot)
+  end
+  def enum_global_expression_contexts(this : IDebugApplication64*, ppedec : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.enum_global_expression_contexts.call(this, ppedec)
+  end
+  def set_name(this : IDebugApplication64*, pstrname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pstrname)
+  end
+  def step_out_complete(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.step_out_complete.call(this)
+  end
+  def debug_output(this : IDebugApplication64*, pstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.debug_output.call(this, pstr)
+  end
+  def start_debug_session(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.start_debug_session.call(this)
+  end
+  def handle_break_point(this : IDebugApplication64*, br : BREAKREASON, pbra : BREAKRESUME_ACTION*) : HRESULT
+    @lpVtbl.value.handle_break_point.call(this, br, pbra)
+  end
+  def close(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_break_flags(this : IDebugApplication64*, pabf : UInt32*, pprdatsteppingthread : IRemoteDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_break_flags.call(this, pabf, pprdatsteppingthread)
+  end
+  def get_current_thread(this : IDebugApplication64*, pat : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_current_thread.call(this, pat)
+  end
+  def create_async_debug_operation(this : IDebugApplication64*, psdo : IDebugSyncOperation, ppado : IDebugAsyncOperation*) : HRESULT
+    @lpVtbl.value.create_async_debug_operation.call(this, psdo, ppado)
+  end
+  def add_stack_frame_sniffer(this : IDebugApplication64*, pdsfs : IDebugStackFrameSniffer, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_stack_frame_sniffer.call(this, pdsfs, pdwcookie)
+  end
+  def remove_stack_frame_sniffer(this : IDebugApplication64*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.remove_stack_frame_sniffer.call(this, dwcookie)
+  end
+  def query_current_thread_is_debugger_thread(this : IDebugApplication64*) : HRESULT
+    @lpVtbl.value.query_current_thread_is_debugger_thread.call(this)
+  end
+  def synchronous_call_in_debugger_thread(this : IDebugApplication64*, pptc : IDebugThreadCall64, dwparam1 : UInt64, dwparam2 : UInt64, dwparam3 : UInt64) : HRESULT
+    @lpVtbl.value.synchronous_call_in_debugger_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def create_application_node(this : IDebugApplication64*, ppdannew : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.create_application_node.call(this, ppdannew)
+  end
+  def fire_debugger_event(this : IDebugApplication64*, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.fire_debugger_event.call(this, riid, punk)
+  end
+  def handle_runtime_error(this : IDebugApplication64*, perrordebug : IActiveScriptErrorDebug, pscriptsite : IActiveScriptSite, pbra : BREAKRESUME_ACTION*, perra : ERRORRESUMEACTION*, pfcallonscripterror : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.handle_runtime_error.call(this, perrordebug, pscriptsite, pbra, perra, pfcallonscripterror)
+  end
+  def f_can_jit_debug(this : IDebugApplication64*) : LibC::BOOL
+    @lpVtbl.value.f_can_jit_debug.call(this)
+  end
+  def f_is_auto_jit_debug_enabled(this : IDebugApplication64*) : LibC::BOOL
+    @lpVtbl.value.f_is_auto_jit_debug_enabled.call(this)
+  end
+  def add_global_expression_context_provider(this : IDebugApplication64*, pdsfs : IProvideExpressionContexts, pdwcookie : UInt64*) : HRESULT
+    @lpVtbl.value.add_global_expression_context_provider.call(this, pdsfs, pdwcookie)
+  end
+  def remove_global_expression_context_provider(this : IDebugApplication64*, dwcookie : UInt64) : HRESULT
+    @lpVtbl.value.remove_global_expression_context_provider.call(this, dwcookie)
+  end
+end
+struct LibWin32::IRemoteDebugApplicationEvents
+  def query_interface(this : IRemoteDebugApplicationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugApplicationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugApplicationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_connect_debugger(this : IRemoteDebugApplicationEvents*, pad : IApplicationDebugger) : HRESULT
+    @lpVtbl.value.on_connect_debugger.call(this, pad)
+  end
+  def on_disconnect_debugger(this : IRemoteDebugApplicationEvents*) : HRESULT
+    @lpVtbl.value.on_disconnect_debugger.call(this)
+  end
+  def on_set_name(this : IRemoteDebugApplicationEvents*, pstrname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_set_name.call(this, pstrname)
+  end
+  def on_debug_output(this : IRemoteDebugApplicationEvents*, pstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_debug_output.call(this, pstr)
+  end
+  def on_close(this : IRemoteDebugApplicationEvents*) : HRESULT
+    @lpVtbl.value.on_close.call(this)
+  end
+  def on_enter_break_point(this : IRemoteDebugApplicationEvents*, prdat : IRemoteDebugApplicationThread) : HRESULT
+    @lpVtbl.value.on_enter_break_point.call(this, prdat)
+  end
+  def on_leave_break_point(this : IRemoteDebugApplicationEvents*, prdat : IRemoteDebugApplicationThread) : HRESULT
+    @lpVtbl.value.on_leave_break_point.call(this, prdat)
+  end
+  def on_create_thread(this : IRemoteDebugApplicationEvents*, prdat : IRemoteDebugApplicationThread) : HRESULT
+    @lpVtbl.value.on_create_thread.call(this, prdat)
+  end
+  def on_destroy_thread(this : IRemoteDebugApplicationEvents*, prdat : IRemoteDebugApplicationThread) : HRESULT
+    @lpVtbl.value.on_destroy_thread.call(this, prdat)
+  end
+  def on_break_flag_change(this : IRemoteDebugApplicationEvents*, abf : UInt32, prdatsteppingthread : IRemoteDebugApplicationThread) : HRESULT
+    @lpVtbl.value.on_break_flag_change.call(this, abf, prdatsteppingthread)
+  end
+end
+struct LibWin32::IDebugApplicationNode
+  def query_interface(this : IDebugApplicationNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationNode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IDebugApplicationNode*, dnt : DOCUMENTNAMETYPE, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, dnt, pbstrname)
+  end
+  def get_document_class_id(this : IDebugApplicationNode*, pclsiddocument : Guid*) : HRESULT
+    @lpVtbl.value.get_document_class_id.call(this, pclsiddocument)
+  end
+  def get_document(this : IDebugApplicationNode*, ppssd : IDebugDocument*) : HRESULT
+    @lpVtbl.value.get_document.call(this, ppssd)
+  end
+  def enum_children(this : IDebugApplicationNode*, pperddp : IEnumDebugApplicationNodes*) : HRESULT
+    @lpVtbl.value.enum_children.call(this, pperddp)
+  end
+  def get_parent(this : IDebugApplicationNode*, pprddp : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, pprddp)
+  end
+  def set_document_provider(this : IDebugApplicationNode*, pddp : IDebugDocumentProvider) : HRESULT
+    @lpVtbl.value.set_document_provider.call(this, pddp)
+  end
+  def close(this : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def attach(this : IDebugApplicationNode*, pdanparent : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.attach.call(this, pdanparent)
+  end
+  def detach(this : IDebugApplicationNode*) : HRESULT
+    @lpVtbl.value.detach.call(this)
+  end
+end
+struct LibWin32::IDebugApplicationNodeEvents
+  def query_interface(this : IDebugApplicationNodeEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationNodeEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationNodeEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_add_child(this : IDebugApplicationNodeEvents*, prddpchild : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.on_add_child.call(this, prddpchild)
+  end
+  def on_remove_child(this : IDebugApplicationNodeEvents*, prddpchild : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.on_remove_child.call(this, prddpchild)
+  end
+  def on_detach(this : IDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.on_detach.call(this)
+  end
+  def on_attach(this : IDebugApplicationNodeEvents*, prddpparent : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.on_attach.call(this, prddpparent)
+  end
+end
+struct LibWin32::AsyncIDebugApplicationNodeEvents
+  def query_interface(this : AsyncIDebugApplicationNodeEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIDebugApplicationNodeEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIDebugApplicationNodeEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_on_add_child(this : AsyncIDebugApplicationNodeEvents*, prddpchild : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.begin_on_add_child.call(this, prddpchild)
+  end
+  def finish_on_add_child(this : AsyncIDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.finish_on_add_child.call(this)
+  end
+  def begin_on_remove_child(this : AsyncIDebugApplicationNodeEvents*, prddpchild : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.begin_on_remove_child.call(this, prddpchild)
+  end
+  def finish_on_remove_child(this : AsyncIDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.finish_on_remove_child.call(this)
+  end
+  def begin_on_detach(this : AsyncIDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.begin_on_detach.call(this)
+  end
+  def finish_on_detach(this : AsyncIDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.finish_on_detach.call(this)
+  end
+  def begin_on_attach(this : AsyncIDebugApplicationNodeEvents*, prddpparent : IDebugApplicationNode) : HRESULT
+    @lpVtbl.value.begin_on_attach.call(this, prddpparent)
+  end
+  def finish_on_attach(this : AsyncIDebugApplicationNodeEvents*) : HRESULT
+    @lpVtbl.value.finish_on_attach.call(this)
+  end
+end
+struct LibWin32::IDebugThreadCall32
+  def query_interface(this : IDebugThreadCall32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugThreadCall32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugThreadCall32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def thread_call_handler(this : IDebugThreadCall32*, dwparam1 : UInt32, dwparam2 : UInt32, dwparam3 : UInt32) : HRESULT
+    @lpVtbl.value.thread_call_handler.call(this, dwparam1, dwparam2, dwparam3)
+  end
+end
+struct LibWin32::IDebugThreadCall64
+  def query_interface(this : IDebugThreadCall64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugThreadCall64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugThreadCall64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def thread_call_handler(this : IDebugThreadCall64*, dwparam1 : UInt64, dwparam2 : UInt64, dwparam3 : UInt64) : HRESULT
+    @lpVtbl.value.thread_call_handler.call(this, dwparam1, dwparam2, dwparam3)
+  end
+end
+struct LibWin32::IRemoteDebugApplicationThread
+  def query_interface(this : IRemoteDebugApplicationThread*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugApplicationThread*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugApplicationThread*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_thread_id(this : IRemoteDebugApplicationThread*, dwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_thread_id.call(this, dwthreadid)
+  end
+  def get_application(this : IRemoteDebugApplicationThread*, pprda : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.get_application.call(this, pprda)
+  end
+  def enum_stack_frames(this : IRemoteDebugApplicationThread*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+  def get_description(this : IRemoteDebugApplicationThread*, pbstrdescription : UInt8**, pbstrstate : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription, pbstrstate)
+  end
+  def set_next_statement(this : IRemoteDebugApplicationThread*, pstackframe : IDebugStackFrame, pcodecontext : IDebugCodeContext) : HRESULT
+    @lpVtbl.value.set_next_statement.call(this, pstackframe, pcodecontext)
+  end
+  def get_state(this : IRemoteDebugApplicationThread*, pstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def suspend(this : IRemoteDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.suspend.call(this, pdwcount)
+  end
+  def resume(this : IRemoteDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.resume.call(this, pdwcount)
+  end
+  def get_suspend_count(this : IRemoteDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_suspend_count.call(this, pdwcount)
+  end
+end
+struct LibWin32::IDebugApplicationThread
+  def query_interface(this : IDebugApplicationThread*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationThread*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationThread*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_thread_id(this : IDebugApplicationThread*, dwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_thread_id.call(this, dwthreadid)
+  end
+  def get_application(this : IDebugApplicationThread*, pprda : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.get_application.call(this, pprda)
+  end
+  def enum_stack_frames(this : IDebugApplicationThread*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+  def get_description(this : IDebugApplicationThread*, pbstrdescription : UInt8**, pbstrstate : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription, pbstrstate)
+  end
+  def set_next_statement(this : IDebugApplicationThread*, pstackframe : IDebugStackFrame, pcodecontext : IDebugCodeContext) : HRESULT
+    @lpVtbl.value.set_next_statement.call(this, pstackframe, pcodecontext)
+  end
+  def get_state(this : IDebugApplicationThread*, pstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def suspend(this : IDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.suspend.call(this, pdwcount)
+  end
+  def resume(this : IDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.resume.call(this, pdwcount)
+  end
+  def get_suspend_count(this : IDebugApplicationThread*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_suspend_count.call(this, pdwcount)
+  end
+  def synchronous_call_into_thread32(this : IDebugApplicationThread*, pstcb : IDebugThreadCall32, dwparam1 : UInt32, dwparam2 : UInt32, dwparam3 : UInt32) : HRESULT
+    @lpVtbl.value.synchronous_call_into_thread32.call(this, pstcb, dwparam1, dwparam2, dwparam3)
+  end
+  def query_is_current_thread(this : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.query_is_current_thread.call(this)
+  end
+  def query_is_debugger_thread(this : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.query_is_debugger_thread.call(this)
+  end
+  def set_description(this : IDebugApplicationThread*, pstrdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pstrdescription)
+  end
+  def set_state_string(this : IDebugApplicationThread*, pstrstate : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_state_string.call(this, pstrstate)
+  end
+end
+struct LibWin32::IDebugApplicationThread64
+  def query_interface(this : IDebugApplicationThread64*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationThread64*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationThread64*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_thread_id(this : IDebugApplicationThread64*, dwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_thread_id.call(this, dwthreadid)
+  end
+  def get_application(this : IDebugApplicationThread64*, pprda : IRemoteDebugApplication*) : HRESULT
+    @lpVtbl.value.get_application.call(this, pprda)
+  end
+  def enum_stack_frames(this : IDebugApplicationThread64*, ppedsf : IEnumDebugStackFrames*) : HRESULT
+    @lpVtbl.value.enum_stack_frames.call(this, ppedsf)
+  end
+  def get_description(this : IDebugApplicationThread64*, pbstrdescription : UInt8**, pbstrstate : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription, pbstrstate)
+  end
+  def set_next_statement(this : IDebugApplicationThread64*, pstackframe : IDebugStackFrame, pcodecontext : IDebugCodeContext) : HRESULT
+    @lpVtbl.value.set_next_statement.call(this, pstackframe, pcodecontext)
+  end
+  def get_state(this : IDebugApplicationThread64*, pstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def suspend(this : IDebugApplicationThread64*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.suspend.call(this, pdwcount)
+  end
+  def resume(this : IDebugApplicationThread64*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.resume.call(this, pdwcount)
+  end
+  def get_suspend_count(this : IDebugApplicationThread64*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_suspend_count.call(this, pdwcount)
+  end
+  def synchronous_call_into_thread32(this : IDebugApplicationThread64*, pstcb : IDebugThreadCall32, dwparam1 : UInt32, dwparam2 : UInt32, dwparam3 : UInt32) : HRESULT
+    @lpVtbl.value.synchronous_call_into_thread32.call(this, pstcb, dwparam1, dwparam2, dwparam3)
+  end
+  def query_is_current_thread(this : IDebugApplicationThread64*) : HRESULT
+    @lpVtbl.value.query_is_current_thread.call(this)
+  end
+  def query_is_debugger_thread(this : IDebugApplicationThread64*) : HRESULT
+    @lpVtbl.value.query_is_debugger_thread.call(this)
+  end
+  def set_description(this : IDebugApplicationThread64*, pstrdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pstrdescription)
+  end
+  def set_state_string(this : IDebugApplicationThread64*, pstrstate : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_state_string.call(this, pstrstate)
+  end
+  def synchronous_call_into_thread64(this : IDebugApplicationThread64*, pstcb : IDebugThreadCall64, dwparam1 : UInt64, dwparam2 : UInt64, dwparam3 : UInt64) : HRESULT
+    @lpVtbl.value.synchronous_call_into_thread64.call(this, pstcb, dwparam1, dwparam2, dwparam3)
+  end
+end
+struct LibWin32::IDebugCookie
+  def query_interface(this : IDebugCookie*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugCookie*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugCookie*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_debug_cookie(this : IDebugCookie*, dwdebugappcookie : UInt32) : HRESULT
+    @lpVtbl.value.set_debug_cookie.call(this, dwdebugappcookie)
+  end
+end
+struct LibWin32::IEnumDebugApplicationNodes
+  def query_interface(this : IEnumDebugApplicationNodes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugApplicationNodes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugApplicationNodes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugApplicationNodes*, celt : UInt32, pprddp : IDebugApplicationNode*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, pprddp, pceltfetched)
+  end
+  def skip(this : IEnumDebugApplicationNodes*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugApplicationNodes*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugApplicationNodes*, pperddp : IEnumDebugApplicationNodes*) : HRESULT
+    @lpVtbl.value.clone.call(this, pperddp)
+  end
+end
+struct LibWin32::IEnumRemoteDebugApplications
+  def query_interface(this : IEnumRemoteDebugApplications*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRemoteDebugApplications*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRemoteDebugApplications*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumRemoteDebugApplications*, celt : UInt32, ppda : IRemoteDebugApplication*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppda, pceltfetched)
+  end
+  def skip(this : IEnumRemoteDebugApplications*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumRemoteDebugApplications*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumRemoteDebugApplications*, ppessd : IEnumRemoteDebugApplications*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppessd)
+  end
+end
+struct LibWin32::IEnumRemoteDebugApplicationThreads
+  def query_interface(this : IEnumRemoteDebugApplicationThreads*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRemoteDebugApplicationThreads*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRemoteDebugApplicationThreads*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumRemoteDebugApplicationThreads*, celt : UInt32, pprdat : IRemoteDebugApplicationThread*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, pprdat, pceltfetched)
+  end
+  def skip(this : IEnumRemoteDebugApplicationThreads*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumRemoteDebugApplicationThreads*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumRemoteDebugApplicationThreads*, pperdat : IEnumRemoteDebugApplicationThreads*) : HRESULT
+    @lpVtbl.value.clone.call(this, pperdat)
+  end
+end
+struct LibWin32::IDebugFormatter
+  def query_interface(this : IDebugFormatter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugFormatter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugFormatter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_string_for_variant(this : IDebugFormatter*, pvar : VARIANT*, nradix : UInt32, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_for_variant.call(this, pvar, nradix, pbstrvalue)
+  end
+  def get_variant_for_string(this : IDebugFormatter*, pwstrvalue : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_variant_for_string.call(this, pwstrvalue, pvar)
+  end
+  def get_string_for_var_type(this : IDebugFormatter*, vt : UInt16, ptdescarraytype : TYPEDESC*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_for_var_type.call(this, vt, ptdescarraytype, pbstr)
+  end
+end
+struct LibWin32::ISimpleConnectionPoint
+  def query_interface(this : ISimpleConnectionPoint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISimpleConnectionPoint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISimpleConnectionPoint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_count(this : ISimpleConnectionPoint*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_count.call(this, pulcount)
+  end
+  def describe_events(this : ISimpleConnectionPoint*, ievent : UInt32, cevents : UInt32, prgid : Int32*, prgbstr : UInt8**, pceventsfetched : UInt32*) : HRESULT
+    @lpVtbl.value.describe_events.call(this, ievent, cevents, prgid, prgbstr, pceventsfetched)
+  end
+  def advise(this : ISimpleConnectionPoint*, pdisp : IDispatch, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, pdisp, pdwcookie)
+  end
+  def unadvise(this : ISimpleConnectionPoint*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwcookie)
+  end
+end
+struct LibWin32::IDebugHelper
+  def query_interface(this : IDebugHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_property_browser(this : IDebugHelper*, pvar : VARIANT*, bstrname : LibC::LPWSTR, pdat : IDebugApplicationThread, ppdob : IDebugProperty*) : HRESULT
+    @lpVtbl.value.create_property_browser.call(this, pvar, bstrname, pdat, ppdob)
+  end
+  def create_property_browser_ex(this : IDebugHelper*, pvar : VARIANT*, bstrname : LibC::LPWSTR, pdat : IDebugApplicationThread, pdf : IDebugFormatter, ppdob : IDebugProperty*) : HRESULT
+    @lpVtbl.value.create_property_browser_ex.call(this, pvar, bstrname, pdat, pdf, ppdob)
+  end
+  def create_simple_connection_point(this : IDebugHelper*, pdisp : IDispatch, ppscp : ISimpleConnectionPoint*) : HRESULT
+    @lpVtbl.value.create_simple_connection_point.call(this, pdisp, ppscp)
+  end
+end
+struct LibWin32::IEnumDebugExpressionContexts
+  def query_interface(this : IEnumDebugExpressionContexts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDebugExpressionContexts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDebugExpressionContexts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDebugExpressionContexts*, celt : UInt32, ppdec : IDebugExpressionContext*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppdec, pceltfetched)
+  end
+  def skip(this : IEnumDebugExpressionContexts*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDebugExpressionContexts*, ppedec : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppedec)
+  end
+end
+struct LibWin32::IProvideExpressionContexts
+  def query_interface(this : IProvideExpressionContexts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideExpressionContexts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideExpressionContexts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_expression_contexts(this : IProvideExpressionContexts*, ppedec : IEnumDebugExpressionContexts*) : HRESULT
+    @lpVtbl.value.enum_expression_contexts.call(this, ppedec)
+  end
+end
+struct LibWin32::IActiveScriptProfilerControl
+  def query_interface(this : IActiveScriptProfilerControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_profiling(this : IActiveScriptProfilerControl*, clsidprofilerobject : Guid*, dweventmask : UInt32, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.start_profiling.call(this, clsidprofilerobject, dweventmask, dwcontext)
+  end
+  def set_profiler_event_mask(this : IActiveScriptProfilerControl*, dweventmask : UInt32) : HRESULT
+    @lpVtbl.value.set_profiler_event_mask.call(this, dweventmask)
+  end
+  def stop_profiling(this : IActiveScriptProfilerControl*, hrshutdownreason : HRESULT) : HRESULT
+    @lpVtbl.value.stop_profiling.call(this, hrshutdownreason)
+  end
+end
+struct LibWin32::IActiveScriptProfilerControl2
+  def query_interface(this : IActiveScriptProfilerControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerControl2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerControl2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_profiling(this : IActiveScriptProfilerControl2*, clsidprofilerobject : Guid*, dweventmask : UInt32, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.start_profiling.call(this, clsidprofilerobject, dweventmask, dwcontext)
+  end
+  def set_profiler_event_mask(this : IActiveScriptProfilerControl2*, dweventmask : UInt32) : HRESULT
+    @lpVtbl.value.set_profiler_event_mask.call(this, dweventmask)
+  end
+  def stop_profiling(this : IActiveScriptProfilerControl2*, hrshutdownreason : HRESULT) : HRESULT
+    @lpVtbl.value.stop_profiling.call(this, hrshutdownreason)
+  end
+  def complete_profiler_start(this : IActiveScriptProfilerControl2*) : HRESULT
+    @lpVtbl.value.complete_profiler_start.call(this)
+  end
+  def prepare_profiler_stop(this : IActiveScriptProfilerControl2*) : HRESULT
+    @lpVtbl.value.prepare_profiler_stop.call(this)
+  end
+end
+struct LibWin32::IActiveScriptProfilerHeapEnum
+  def query_interface(this : IActiveScriptProfilerHeapEnum*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerHeapEnum*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerHeapEnum*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IActiveScriptProfilerHeapEnum*, celt : UInt32, heapobjects : PROFILER_HEAP_OBJECT**, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, heapobjects, pceltfetched)
+  end
+  def get_optional_info(this : IActiveScriptProfilerHeapEnum*, heapobject : PROFILER_HEAP_OBJECT*, celt : UInt32, optionalinfo : PROFILER_HEAP_OBJECT_OPTIONAL_INFO*) : HRESULT
+    @lpVtbl.value.get_optional_info.call(this, heapobject, celt, optionalinfo)
+  end
+  def free_object_and_optional_info(this : IActiveScriptProfilerHeapEnum*, celt : UInt32, heapobjects : PROFILER_HEAP_OBJECT**) : HRESULT
+    @lpVtbl.value.free_object_and_optional_info.call(this, celt, heapobjects)
+  end
+  def get_name_id_map(this : IActiveScriptProfilerHeapEnum*, pnamelist : LibC::LPWSTR***, pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_name_id_map.call(this, pnamelist, pcelt)
+  end
+end
+struct LibWin32::IActiveScriptProfilerControl3
+  def query_interface(this : IActiveScriptProfilerControl3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerControl3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerControl3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_profiling(this : IActiveScriptProfilerControl3*, clsidprofilerobject : Guid*, dweventmask : UInt32, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.start_profiling.call(this, clsidprofilerobject, dweventmask, dwcontext)
+  end
+  def set_profiler_event_mask(this : IActiveScriptProfilerControl3*, dweventmask : UInt32) : HRESULT
+    @lpVtbl.value.set_profiler_event_mask.call(this, dweventmask)
+  end
+  def stop_profiling(this : IActiveScriptProfilerControl3*, hrshutdownreason : HRESULT) : HRESULT
+    @lpVtbl.value.stop_profiling.call(this, hrshutdownreason)
+  end
+  def complete_profiler_start(this : IActiveScriptProfilerControl3*) : HRESULT
+    @lpVtbl.value.complete_profiler_start.call(this)
+  end
+  def prepare_profiler_stop(this : IActiveScriptProfilerControl3*) : HRESULT
+    @lpVtbl.value.prepare_profiler_stop.call(this)
+  end
+  def enum_heap(this : IActiveScriptProfilerControl3*, ppenum : IActiveScriptProfilerHeapEnum*) : HRESULT
+    @lpVtbl.value.enum_heap.call(this, ppenum)
+  end
+end
+struct LibWin32::IActiveScriptProfilerControl4
+  def query_interface(this : IActiveScriptProfilerControl4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerControl4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerControl4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_profiling(this : IActiveScriptProfilerControl4*, clsidprofilerobject : Guid*, dweventmask : UInt32, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.start_profiling.call(this, clsidprofilerobject, dweventmask, dwcontext)
+  end
+  def set_profiler_event_mask(this : IActiveScriptProfilerControl4*, dweventmask : UInt32) : HRESULT
+    @lpVtbl.value.set_profiler_event_mask.call(this, dweventmask)
+  end
+  def stop_profiling(this : IActiveScriptProfilerControl4*, hrshutdownreason : HRESULT) : HRESULT
+    @lpVtbl.value.stop_profiling.call(this, hrshutdownreason)
+  end
+  def complete_profiler_start(this : IActiveScriptProfilerControl4*) : HRESULT
+    @lpVtbl.value.complete_profiler_start.call(this)
+  end
+  def prepare_profiler_stop(this : IActiveScriptProfilerControl4*) : HRESULT
+    @lpVtbl.value.prepare_profiler_stop.call(this)
+  end
+  def enum_heap(this : IActiveScriptProfilerControl4*, ppenum : IActiveScriptProfilerHeapEnum*) : HRESULT
+    @lpVtbl.value.enum_heap.call(this, ppenum)
+  end
+  def summarize_heap(this : IActiveScriptProfilerControl4*, heapsummary : PROFILER_HEAP_SUMMARY*) : HRESULT
+    @lpVtbl.value.summarize_heap.call(this, heapsummary)
+  end
+end
+struct LibWin32::IActiveScriptProfilerControl5
+  def query_interface(this : IActiveScriptProfilerControl5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerControl5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerControl5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_profiling(this : IActiveScriptProfilerControl5*, clsidprofilerobject : Guid*, dweventmask : UInt32, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.start_profiling.call(this, clsidprofilerobject, dweventmask, dwcontext)
+  end
+  def set_profiler_event_mask(this : IActiveScriptProfilerControl5*, dweventmask : UInt32) : HRESULT
+    @lpVtbl.value.set_profiler_event_mask.call(this, dweventmask)
+  end
+  def stop_profiling(this : IActiveScriptProfilerControl5*, hrshutdownreason : HRESULT) : HRESULT
+    @lpVtbl.value.stop_profiling.call(this, hrshutdownreason)
+  end
+  def complete_profiler_start(this : IActiveScriptProfilerControl5*) : HRESULT
+    @lpVtbl.value.complete_profiler_start.call(this)
+  end
+  def prepare_profiler_stop(this : IActiveScriptProfilerControl5*) : HRESULT
+    @lpVtbl.value.prepare_profiler_stop.call(this)
+  end
+  def enum_heap(this : IActiveScriptProfilerControl5*, ppenum : IActiveScriptProfilerHeapEnum*) : HRESULT
+    @lpVtbl.value.enum_heap.call(this, ppenum)
+  end
+  def summarize_heap(this : IActiveScriptProfilerControl5*, heapsummary : PROFILER_HEAP_SUMMARY*) : HRESULT
+    @lpVtbl.value.summarize_heap.call(this, heapsummary)
+  end
+  def enum_heap2(this : IActiveScriptProfilerControl5*, enumflags : PROFILER_HEAP_ENUM_FLAGS, ppenum : IActiveScriptProfilerHeapEnum*) : HRESULT
+    @lpVtbl.value.enum_heap2.call(this, enumflags, ppenum)
+  end
+end
+struct LibWin32::IActiveScriptProfilerCallback
+  def query_interface(this : IActiveScriptProfilerCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IActiveScriptProfilerCallback*, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, dwcontext)
+  end
+  def shutdown(this : IActiveScriptProfilerCallback*, hrreason : HRESULT) : HRESULT
+    @lpVtbl.value.shutdown.call(this, hrreason)
+  end
+  def script_compiled(this : IActiveScriptProfilerCallback*, scriptid : Int32, type : PROFILER_SCRIPT_TYPE, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.script_compiled.call(this, scriptid, type, pidebugdocumentcontext)
+  end
+  def function_compiled(this : IActiveScriptProfilerCallback*, functionid : Int32, scriptid : Int32, pwszfunctionname : LibC::LPWSTR, pwszfunctionnamehint : LibC::LPWSTR, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.function_compiled.call(this, functionid, scriptid, pwszfunctionname, pwszfunctionnamehint, pidebugdocumentcontext)
+  end
+  def on_function_enter(this : IActiveScriptProfilerCallback*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_enter.call(this, scriptid, functionid)
+  end
+  def on_function_exit(this : IActiveScriptProfilerCallback*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_exit.call(this, scriptid, functionid)
+  end
+end
+struct LibWin32::IActiveScriptProfilerCallback2
+  def query_interface(this : IActiveScriptProfilerCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IActiveScriptProfilerCallback2*, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, dwcontext)
+  end
+  def shutdown(this : IActiveScriptProfilerCallback2*, hrreason : HRESULT) : HRESULT
+    @lpVtbl.value.shutdown.call(this, hrreason)
+  end
+  def script_compiled(this : IActiveScriptProfilerCallback2*, scriptid : Int32, type : PROFILER_SCRIPT_TYPE, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.script_compiled.call(this, scriptid, type, pidebugdocumentcontext)
+  end
+  def function_compiled(this : IActiveScriptProfilerCallback2*, functionid : Int32, scriptid : Int32, pwszfunctionname : LibC::LPWSTR, pwszfunctionnamehint : LibC::LPWSTR, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.function_compiled.call(this, functionid, scriptid, pwszfunctionname, pwszfunctionnamehint, pidebugdocumentcontext)
+  end
+  def on_function_enter(this : IActiveScriptProfilerCallback2*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_enter.call(this, scriptid, functionid)
+  end
+  def on_function_exit(this : IActiveScriptProfilerCallback2*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_exit.call(this, scriptid, functionid)
+  end
+  def on_function_enter_by_name(this : IActiveScriptProfilerCallback2*, pwszfunctionname : LibC::LPWSTR, type : PROFILER_SCRIPT_TYPE) : HRESULT
+    @lpVtbl.value.on_function_enter_by_name.call(this, pwszfunctionname, type)
+  end
+  def on_function_exit_by_name(this : IActiveScriptProfilerCallback2*, pwszfunctionname : LibC::LPWSTR, type : PROFILER_SCRIPT_TYPE) : HRESULT
+    @lpVtbl.value.on_function_exit_by_name.call(this, pwszfunctionname, type)
+  end
+end
+struct LibWin32::IActiveScriptProfilerCallback3
+  def query_interface(this : IActiveScriptProfilerCallback3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptProfilerCallback3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptProfilerCallback3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IActiveScriptProfilerCallback3*, dwcontext : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, dwcontext)
+  end
+  def shutdown(this : IActiveScriptProfilerCallback3*, hrreason : HRESULT) : HRESULT
+    @lpVtbl.value.shutdown.call(this, hrreason)
+  end
+  def script_compiled(this : IActiveScriptProfilerCallback3*, scriptid : Int32, type : PROFILER_SCRIPT_TYPE, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.script_compiled.call(this, scriptid, type, pidebugdocumentcontext)
+  end
+  def function_compiled(this : IActiveScriptProfilerCallback3*, functionid : Int32, scriptid : Int32, pwszfunctionname : LibC::LPWSTR, pwszfunctionnamehint : LibC::LPWSTR, pidebugdocumentcontext : IUnknown) : HRESULT
+    @lpVtbl.value.function_compiled.call(this, functionid, scriptid, pwszfunctionname, pwszfunctionnamehint, pidebugdocumentcontext)
+  end
+  def on_function_enter(this : IActiveScriptProfilerCallback3*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_enter.call(this, scriptid, functionid)
+  end
+  def on_function_exit(this : IActiveScriptProfilerCallback3*, scriptid : Int32, functionid : Int32) : HRESULT
+    @lpVtbl.value.on_function_exit.call(this, scriptid, functionid)
+  end
+  def on_function_enter_by_name(this : IActiveScriptProfilerCallback3*, pwszfunctionname : LibC::LPWSTR, type : PROFILER_SCRIPT_TYPE) : HRESULT
+    @lpVtbl.value.on_function_enter_by_name.call(this, pwszfunctionname, type)
+  end
+  def on_function_exit_by_name(this : IActiveScriptProfilerCallback3*, pwszfunctionname : LibC::LPWSTR, type : PROFILER_SCRIPT_TYPE) : HRESULT
+    @lpVtbl.value.on_function_exit_by_name.call(this, pwszfunctionname, type)
+  end
+  def set_web_worker_id(this : IActiveScriptProfilerCallback3*, webworkerid : UInt32) : HRESULT
+    @lpVtbl.value.set_web_worker_id.call(this, webworkerid)
+  end
+end
+struct LibWin32::IScriptNode
+  def query_interface(this : IScriptNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScriptNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScriptNode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def alive(this : IScriptNode*) : HRESULT
+    @lpVtbl.value.alive.call(this)
+  end
+  def delete(this : IScriptNode*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_parent(this : IScriptNode*, ppsnparent : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppsnparent)
+  end
+  def get_index_in_parent(this : IScriptNode*, pisn : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_in_parent.call(this, pisn)
+  end
+  def get_cookie(this : IScriptNode*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pdwcookie)
+  end
+  def get_number_of_children(this : IScriptNode*, pcsn : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_children.call(this, pcsn)
+  end
+  def get_child(this : IScriptNode*, isn : UInt32, ppsn : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_child.call(this, isn, ppsn)
+  end
+  def get_language(this : IScriptNode*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_language.call(this, pbstr)
+  end
+  def create_child_entry(this : IScriptNode*, isn : UInt32, dwcookie : UInt32, pszdelimiter : LibC::LPWSTR, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_entry.call(this, isn, dwcookie, pszdelimiter, ppse)
+  end
+  def create_child_handler(this : IScriptNode*, pszdefaultname : LibC::LPWSTR, prgpsznames : LibC::LPWSTR*, cpsznames : UInt32, pszevent : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, ptisignature : ITypeInfo, imethodsignature : UInt32, isn : UInt32, dwcookie : UInt32, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_handler.call(this, pszdefaultname, prgpsznames, cpsznames, pszevent, pszdelimiter, ptisignature, imethodsignature, isn, dwcookie, ppse)
+  end
+end
+struct LibWin32::IScriptEntry
+  def query_interface(this : IScriptEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScriptEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScriptEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def alive(this : IScriptEntry*) : HRESULT
+    @lpVtbl.value.alive.call(this)
+  end
+  def delete(this : IScriptEntry*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_parent(this : IScriptEntry*, ppsnparent : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppsnparent)
+  end
+  def get_index_in_parent(this : IScriptEntry*, pisn : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_in_parent.call(this, pisn)
+  end
+  def get_cookie(this : IScriptEntry*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pdwcookie)
+  end
+  def get_number_of_children(this : IScriptEntry*, pcsn : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_children.call(this, pcsn)
+  end
+  def get_child(this : IScriptEntry*, isn : UInt32, ppsn : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_child.call(this, isn, ppsn)
+  end
+  def get_language(this : IScriptEntry*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_language.call(this, pbstr)
+  end
+  def create_child_entry(this : IScriptEntry*, isn : UInt32, dwcookie : UInt32, pszdelimiter : LibC::LPWSTR, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_entry.call(this, isn, dwcookie, pszdelimiter, ppse)
+  end
+  def create_child_handler(this : IScriptEntry*, pszdefaultname : LibC::LPWSTR, prgpsznames : LibC::LPWSTR*, cpsznames : UInt32, pszevent : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, ptisignature : ITypeInfo, imethodsignature : UInt32, isn : UInt32, dwcookie : UInt32, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_handler.call(this, pszdefaultname, prgpsznames, cpsznames, pszevent, pszdelimiter, ptisignature, imethodsignature, isn, dwcookie, ppse)
+  end
+  def get_text(this : IScriptEntry*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : IScriptEntry*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text.call(this, psz)
+  end
+  def get_body(this : IScriptEntry*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.call(this, pbstr)
+  end
+  def set_body(this : IScriptEntry*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_body.call(this, psz)
+  end
+  def get_name(this : IScriptEntry*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstr)
+  end
+  def set_name(this : IScriptEntry*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, psz)
+  end
+  def get_item_name(this : IScriptEntry*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.call(this, pbstr)
+  end
+  def set_item_name(this : IScriptEntry*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_item_name.call(this, psz)
+  end
+  def get_signature(this : IScriptEntry*, ppti : ITypeInfo*, pimethod : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, ppti, pimethod)
+  end
+  def set_signature(this : IScriptEntry*, pti : ITypeInfo, imethod : UInt32) : HRESULT
+    @lpVtbl.value.set_signature.call(this, pti, imethod)
+  end
+  def get_range(this : IScriptEntry*, pichmin : UInt32*, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_range.call(this, pichmin, pcch)
+  end
+end
+struct LibWin32::IScriptScriptlet
+  def query_interface(this : IScriptScriptlet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScriptScriptlet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScriptScriptlet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def alive(this : IScriptScriptlet*) : HRESULT
+    @lpVtbl.value.alive.call(this)
+  end
+  def delete(this : IScriptScriptlet*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_parent(this : IScriptScriptlet*, ppsnparent : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, ppsnparent)
+  end
+  def get_index_in_parent(this : IScriptScriptlet*, pisn : UInt32*) : HRESULT
+    @lpVtbl.value.get_index_in_parent.call(this, pisn)
+  end
+  def get_cookie(this : IScriptScriptlet*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pdwcookie)
+  end
+  def get_number_of_children(this : IScriptScriptlet*, pcsn : UInt32*) : HRESULT
+    @lpVtbl.value.get_number_of_children.call(this, pcsn)
+  end
+  def get_child(this : IScriptScriptlet*, isn : UInt32, ppsn : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_child.call(this, isn, ppsn)
+  end
+  def get_language(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_language.call(this, pbstr)
+  end
+  def create_child_entry(this : IScriptScriptlet*, isn : UInt32, dwcookie : UInt32, pszdelimiter : LibC::LPWSTR, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_entry.call(this, isn, dwcookie, pszdelimiter, ppse)
+  end
+  def create_child_handler(this : IScriptScriptlet*, pszdefaultname : LibC::LPWSTR, prgpsznames : LibC::LPWSTR*, cpsznames : UInt32, pszevent : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, ptisignature : ITypeInfo, imethodsignature : UInt32, isn : UInt32, dwcookie : UInt32, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.create_child_handler.call(this, pszdefaultname, prgpsznames, cpsznames, pszevent, pszdelimiter, ptisignature, imethodsignature, isn, dwcookie, ppse)
+  end
+  def get_text(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_text.call(this, psz)
+  end
+  def get_body(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.call(this, pbstr)
+  end
+  def set_body(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_body.call(this, psz)
+  end
+  def get_name(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstr)
+  end
+  def set_name(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, psz)
+  end
+  def get_item_name(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.call(this, pbstr)
+  end
+  def set_item_name(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_item_name.call(this, psz)
+  end
+  def get_signature(this : IScriptScriptlet*, ppti : ITypeInfo*, pimethod : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, ppti, pimethod)
+  end
+  def set_signature(this : IScriptScriptlet*, pti : ITypeInfo, imethod : UInt32) : HRESULT
+    @lpVtbl.value.set_signature.call(this, pti, imethod)
+  end
+  def get_range(this : IScriptScriptlet*, pichmin : UInt32*, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_range.call(this, pichmin, pcch)
+  end
+  def get_sub_item_name(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_sub_item_name.call(this, pbstr)
+  end
+  def set_sub_item_name(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_sub_item_name.call(this, psz)
+  end
+  def get_event_name(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_event_name.call(this, pbstr)
+  end
+  def set_event_name(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_event_name.call(this, psz)
+  end
+  def get_simple_event_name(this : IScriptScriptlet*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_simple_event_name.call(this, pbstr)
+  end
+  def set_simple_event_name(this : IScriptScriptlet*, psz : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_simple_event_name.call(this, psz)
+  end
+end
+struct LibWin32::IActiveScriptAuthor
+  def query_interface(this : IActiveScriptAuthor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptAuthor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptAuthor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_named_item(this : IActiveScriptAuthor*, pszname : LibC::LPWSTR, dwflags : UInt32, pdisp : IDispatch) : HRESULT
+    @lpVtbl.value.add_named_item.call(this, pszname, dwflags, pdisp)
+  end
+  def add_scriptlet(this : IActiveScriptAuthor*, pszdefaultname : LibC::LPWSTR, pszcode : LibC::LPWSTR, pszitemname : LibC::LPWSTR, pszsubitemname : LibC::LPWSTR, pszeventname : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, dwcookie : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.add_scriptlet.call(this, pszdefaultname, pszcode, pszitemname, pszsubitemname, pszeventname, pszdelimiter, dwcookie, dwflags)
+  end
+  def parse_script_text(this : IActiveScriptAuthor*, pszcode : LibC::LPWSTR, pszitemname : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, dwcookie : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.parse_script_text.call(this, pszcode, pszitemname, pszdelimiter, dwcookie, dwflags)
+  end
+  def get_script_text_attributes(this : IActiveScriptAuthor*, pszcode : Char*, cch : UInt32, pszdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_text_attributes.call(this, pszcode, cch, pszdelimiter, dwflags, pattr)
+  end
+  def get_scriptlet_text_attributes(this : IActiveScriptAuthor*, pszcode : Char*, cch : UInt32, pszdelimiter : LibC::LPWSTR, dwflags : UInt32, pattr : UInt16*) : HRESULT
+    @lpVtbl.value.get_scriptlet_text_attributes.call(this, pszcode, cch, pszdelimiter, dwflags, pattr)
+  end
+  def get_root(this : IActiveScriptAuthor*, ppsp : IScriptNode*) : HRESULT
+    @lpVtbl.value.get_root.call(this, ppsp)
+  end
+  def get_language_flags(this : IActiveScriptAuthor*, pgrfasa : UInt32*) : HRESULT
+    @lpVtbl.value.get_language_flags.call(this, pgrfasa)
+  end
+  def get_event_handler(this : IActiveScriptAuthor*, pdisp : IDispatch, pszitem : LibC::LPWSTR, pszsubitem : LibC::LPWSTR, pszevent : LibC::LPWSTR, ppse : IScriptEntry*) : HRESULT
+    @lpVtbl.value.get_event_handler.call(this, pdisp, pszitem, pszsubitem, pszevent, ppse)
+  end
+  def remove_named_item(this : IActiveScriptAuthor*, pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_named_item.call(this, pszname)
+  end
+  def add_type_lib(this : IActiveScriptAuthor*, rguidtypelib : Guid*, dwmajor : UInt32, dwminor : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.add_type_lib.call(this, rguidtypelib, dwmajor, dwminor, dwflags)
+  end
+  def remove_type_lib(this : IActiveScriptAuthor*, rguidtypelib : Guid*, dwmajor : UInt32, dwminor : UInt32) : HRESULT
+    @lpVtbl.value.remove_type_lib.call(this, rguidtypelib, dwmajor, dwminor)
+  end
+  def get_chars(this : IActiveScriptAuthor*, frequestedlist : UInt32, pbstrchars : UInt8**) : HRESULT
+    @lpVtbl.value.get_chars.call(this, frequestedlist, pbstrchars)
+  end
+  def get_info_from_context(this : IActiveScriptAuthor*, pszcode : LibC::LPWSTR, cchcode : UInt32, ichcurrentposition : UInt32, dwlisttypesrequested : UInt32, pdwlisttypesprovided : UInt32*, pichlistanchorposition : UInt32*, pichfuncanchorposition : UInt32*, pmemid : Int32*, picurrentparameter : Int32*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_info_from_context.call(this, pszcode, cchcode, ichcurrentposition, dwlisttypesrequested, pdwlisttypesprovided, pichlistanchorposition, pichfuncanchorposition, pmemid, picurrentparameter, ppunk)
+  end
+  def is_commit_char(this : IActiveScriptAuthor*, ch : Char, pfcommit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_commit_char.call(this, ch, pfcommit)
+  end
+end
+struct LibWin32::IActiveScriptAuthorProcedure
+  def query_interface(this : IActiveScriptAuthorProcedure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptAuthorProcedure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptAuthorProcedure*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_procedure_text(this : IActiveScriptAuthorProcedure*, pszcode : LibC::LPWSTR, pszformalparams : LibC::LPWSTR, pszprocedurename : LibC::LPWSTR, pszitemname : LibC::LPWSTR, pszdelimiter : LibC::LPWSTR, dwcookie : UInt32, dwflags : UInt32, pdispfor : IDispatch) : HRESULT
+    @lpVtbl.value.parse_procedure_text.call(this, pszcode, pszformalparams, pszprocedurename, pszitemname, pszdelimiter, dwcookie, dwflags, pdispfor)
+  end
+end
+struct LibWin32::IDebugApplicationNode100
+  def query_interface(this : IDebugApplicationNode100*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationNode100*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationNode100*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_filter_for_event_sink(this : IDebugApplicationNode100*, dwcookie : UInt32, filter : APPLICATION_NODE_EVENT_FILTER) : HRESULT
+    @lpVtbl.value.set_filter_for_event_sink.call(this, dwcookie, filter)
+  end
+  def get_excluded_documents(this : IDebugApplicationNode100*, filter : APPLICATION_NODE_EVENT_FILTER, pdocuments : TEXT_DOCUMENT_ARRAY*) : HRESULT
+    @lpVtbl.value.get_excluded_documents.call(this, filter, pdocuments)
+  end
+  def query_is_child_node(this : IDebugApplicationNode100*, psearchkey : IDebugDocument) : HRESULT
+    @lpVtbl.value.query_is_child_node.call(this, psearchkey)
+  end
+end
+struct LibWin32::IWebAppDiagnosticsSetup
+  def query_interface(this : IWebAppDiagnosticsSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebAppDiagnosticsSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebAppDiagnosticsSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def diagnostics_supported(this : IWebAppDiagnosticsSetup*, pretval : Int16*) : HRESULT
+    @lpVtbl.value.diagnostics_supported.call(this, pretval)
+  end
+  def create_object_with_site_at_web_app(this : IWebAppDiagnosticsSetup*, rclsid : Guid*, dwclscontext : UInt32, riid : Guid*, hpasstoobject : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.create_object_with_site_at_web_app.call(this, rclsid, dwclscontext, riid, hpasstoobject)
+  end
+end
+struct LibWin32::IRemoteDebugApplication110
+  def query_interface(this : IRemoteDebugApplication110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugApplication110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugApplication110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_debugger_options(this : IRemoteDebugApplication110*, mask : SCRIPT_DEBUGGER_OPTIONS, value : SCRIPT_DEBUGGER_OPTIONS) : HRESULT
+    @lpVtbl.value.set_debugger_options.call(this, mask, value)
+  end
+  def get_current_debugger_options(this : IRemoteDebugApplication110*, pcurrentoptions : SCRIPT_DEBUGGER_OPTIONS*) : HRESULT
+    @lpVtbl.value.get_current_debugger_options.call(this, pcurrentoptions)
+  end
+  def get_main_thread(this : IRemoteDebugApplication110*, ppthread : IRemoteDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_main_thread.call(this, ppthread)
+  end
+end
+struct LibWin32::IDebugApplication11032
+  def query_interface(this : IDebugApplication11032*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplication11032*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplication11032*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_debugger_options(this : IDebugApplication11032*, mask : SCRIPT_DEBUGGER_OPTIONS, value : SCRIPT_DEBUGGER_OPTIONS) : HRESULT
+    @lpVtbl.value.set_debugger_options.call(this, mask, value)
+  end
+  def get_current_debugger_options(this : IDebugApplication11032*, pcurrentoptions : SCRIPT_DEBUGGER_OPTIONS*) : HRESULT
+    @lpVtbl.value.get_current_debugger_options.call(this, pcurrentoptions)
+  end
+  def get_main_thread(this : IDebugApplication11032*, ppthread : IRemoteDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_main_thread.call(this, ppthread)
+  end
+  def synchronous_call_in_main_thread(this : IDebugApplication11032*, pptc : IDebugThreadCall32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.synchronous_call_in_main_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def asynchronous_call_in_main_thread(this : IDebugApplication11032*, pptc : IDebugThreadCall32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.asynchronous_call_in_main_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def callable_wait_for_handles(this : IDebugApplication11032*, handlecount : UInt32, phandles : LibC::HANDLE*, pindex : UInt32*) : HRESULT
+    @lpVtbl.value.callable_wait_for_handles.call(this, handlecount, phandles, pindex)
+  end
+end
+struct LibWin32::IDebugApplication11064
+  def query_interface(this : IDebugApplication11064*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplication11064*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplication11064*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_debugger_options(this : IDebugApplication11064*, mask : SCRIPT_DEBUGGER_OPTIONS, value : SCRIPT_DEBUGGER_OPTIONS) : HRESULT
+    @lpVtbl.value.set_debugger_options.call(this, mask, value)
+  end
+  def get_current_debugger_options(this : IDebugApplication11064*, pcurrentoptions : SCRIPT_DEBUGGER_OPTIONS*) : HRESULT
+    @lpVtbl.value.get_current_debugger_options.call(this, pcurrentoptions)
+  end
+  def get_main_thread(this : IDebugApplication11064*, ppthread : IRemoteDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_main_thread.call(this, ppthread)
+  end
+  def synchronous_call_in_main_thread(this : IDebugApplication11064*, pptc : IDebugThreadCall64, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.synchronous_call_in_main_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def asynchronous_call_in_main_thread(this : IDebugApplication11064*, pptc : IDebugThreadCall64, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.asynchronous_call_in_main_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+  def callable_wait_for_handles(this : IDebugApplication11064*, handlecount : UInt32, phandles : LibC::HANDLE*, pindex : UInt32*) : HRESULT
+    @lpVtbl.value.callable_wait_for_handles.call(this, handlecount, phandles, pindex)
+  end
+end
+struct LibWin32::IWebAppDiagnosticsObjectInitialization
+  def query_interface(this : IWebAppDiagnosticsObjectInitialization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebAppDiagnosticsObjectInitialization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebAppDiagnosticsObjectInitialization*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IWebAppDiagnosticsObjectInitialization*, hpassedhandle : HANDLE_PTR, pdebugapplication : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.call(this, hpassedhandle, pdebugapplication)
+  end
+end
+struct LibWin32::IActiveScriptWinRTErrorDebug
+  def query_interface(this : IActiveScriptWinRTErrorDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptWinRTErrorDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptWinRTErrorDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_exception_info(this : IActiveScriptWinRTErrorDebug*, pexcepinfo : EXCEPINFO*) : HRESULT
+    @lpVtbl.value.get_exception_info.call(this, pexcepinfo)
+  end
+  def get_source_position(this : IActiveScriptWinRTErrorDebug*, pdwsourcecontext : UInt32*, pullinenumber : UInt32*, plcharacterposition : Int32*) : HRESULT
+    @lpVtbl.value.get_source_position.call(this, pdwsourcecontext, pullinenumber, plcharacterposition)
+  end
+  def get_source_line_text(this : IActiveScriptWinRTErrorDebug*, pbstrsourceline : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_line_text.call(this, pbstrsourceline)
+  end
+  def get_restricted_error_string(this : IActiveScriptWinRTErrorDebug*, errorstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_restricted_error_string.call(this, errorstring)
+  end
+  def get_restricted_error_reference(this : IActiveScriptWinRTErrorDebug*, referencestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_restricted_error_reference.call(this, referencestring)
+  end
+  def get_capability_sid(this : IActiveScriptWinRTErrorDebug*, capabilitysid : UInt8**) : HRESULT
+    @lpVtbl.value.get_capability_sid.call(this, capabilitysid)
+  end
+end
+struct LibWin32::IActiveScriptErrorDebug110
+  def query_interface(this : IActiveScriptErrorDebug110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveScriptErrorDebug110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveScriptErrorDebug110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_exception_thrown_kind(this : IActiveScriptErrorDebug110*, pexceptionkind : SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND*) : HRESULT
+    @lpVtbl.value.get_exception_thrown_kind.call(this, pexceptionkind)
+  end
+end
+struct LibWin32::IDebugApplicationThreadEvents110
+  def query_interface(this : IDebugApplicationThreadEvents110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationThreadEvents110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationThreadEvents110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_suspend_for_break_point(this : IDebugApplicationThreadEvents110*) : HRESULT
+    @lpVtbl.value.on_suspend_for_break_point.call(this)
+  end
+  def on_resume_from_break_point(this : IDebugApplicationThreadEvents110*) : HRESULT
+    @lpVtbl.value.on_resume_from_break_point.call(this)
+  end
+  def on_thread_request_complete(this : IDebugApplicationThreadEvents110*) : HRESULT
+    @lpVtbl.value.on_thread_request_complete.call(this)
+  end
+  def on_begin_thread_request(this : IDebugApplicationThreadEvents110*) : HRESULT
+    @lpVtbl.value.on_begin_thread_request.call(this)
+  end
+end
+struct LibWin32::IDebugApplicationThread11032
+  def query_interface(this : IDebugApplicationThread11032*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationThread11032*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationThread11032*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_active_thread_request_count(this : IDebugApplicationThread11032*, puithreadrequests : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_thread_request_count.call(this, puithreadrequests)
+  end
+  def is_suspended_for_break_point(this : IDebugApplicationThread11032*, pfissuspended : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_suspended_for_break_point.call(this, pfissuspended)
+  end
+  def is_thread_callable(this : IDebugApplicationThread11032*, pfiscallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_callable.call(this, pfiscallable)
+  end
+  def asynchronous_call_into_thread(this : IDebugApplicationThread11032*, pptc : IDebugThreadCall32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.asynchronous_call_into_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+end
+struct LibWin32::IDebugApplicationThread11064
+  def query_interface(this : IDebugApplicationThread11064*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugApplicationThread11064*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugApplicationThread11064*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_active_thread_request_count(this : IDebugApplicationThread11064*, puithreadrequests : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_thread_request_count.call(this, puithreadrequests)
+  end
+  def is_suspended_for_break_point(this : IDebugApplicationThread11064*, pfissuspended : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_suspended_for_break_point.call(this, pfissuspended)
+  end
+  def is_thread_callable(this : IDebugApplicationThread11064*, pfiscallable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_callable.call(this, pfiscallable)
+  end
+  def asynchronous_call_into_thread(this : IDebugApplicationThread11064*, pptc : IDebugThreadCall64, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR, dwparam3 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.asynchronous_call_into_thread.call(this, pptc, dwparam1, dwparam2, dwparam3)
+  end
+end
+struct LibWin32::IRemoteDebugCriticalErrorEvent110
+  def query_interface(this : IRemoteDebugCriticalErrorEvent110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugCriticalErrorEvent110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugCriticalErrorEvent110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error_info(this : IRemoteDebugCriticalErrorEvent110*, pbstrsource : UInt8**, pmessageid : Int32*, pbstrmessage : UInt8**, pplocation : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_error_info.call(this, pbstrsource, pmessageid, pbstrmessage, pplocation)
+  end
+end
+struct LibWin32::IScriptInvocationContext
+  def query_interface(this : IScriptInvocationContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IScriptInvocationContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IScriptInvocationContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_context_type(this : IScriptInvocationContext*, pinvocationcontexttype : SCRIPT_INVOCATION_CONTEXT_TYPE*) : HRESULT
+    @lpVtbl.value.get_context_type.call(this, pinvocationcontexttype)
+  end
+  def get_context_description(this : IScriptInvocationContext*, pdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_context_description.call(this, pdescription)
+  end
+  def get_context_object(this : IScriptInvocationContext*, ppcontextobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_context_object.call(this, ppcontextobject)
+  end
+end
+struct LibWin32::IDebugStackFrame110
+  def query_interface(this : IDebugStackFrame110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDebugStackFrame110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDebugStackFrame110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_code_context(this : IDebugStackFrame110*, ppcc : IDebugCodeContext*) : HRESULT
+    @lpVtbl.value.get_code_context.call(this, ppcc)
+  end
+  def get_description_string(this : IDebugStackFrame110*, flong : LibC::BOOL, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description_string.call(this, flong, pbstrdescription)
+  end
+  def get_language_string(this : IDebugStackFrame110*, flong : LibC::BOOL, pbstrlanguage : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_string.call(this, flong, pbstrlanguage)
+  end
+  def get_thread(this : IDebugStackFrame110*, ppat : IDebugApplicationThread*) : HRESULT
+    @lpVtbl.value.get_thread.call(this, ppat)
+  end
+  def get_debug_property(this : IDebugStackFrame110*, ppdebugprop : IDebugProperty*) : HRESULT
+    @lpVtbl.value.get_debug_property.call(this, ppdebugprop)
+  end
+  def get_stack_frame_type(this : IDebugStackFrame110*, pstackframekind : DEBUG_STACKFRAME_TYPE*) : HRESULT
+    @lpVtbl.value.get_stack_frame_type.call(this, pstackframekind)
+  end
+  def get_script_invocation_context(this : IDebugStackFrame110*, ppinvocationcontext : IScriptInvocationContext*) : HRESULT
+    @lpVtbl.value.get_script_invocation_context.call(this, ppinvocationcontext)
+  end
+end
+struct LibWin32::IRemoteDebugInfoEvent110
+  def query_interface(this : IRemoteDebugInfoEvent110*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteDebugInfoEvent110*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteDebugInfoEvent110*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_event_info(this : IRemoteDebugInfoEvent110*, pmessagetype : DEBUG_EVENT_INFO_TYPE*, pbstrmessage : UInt8**, pbstrurl : UInt8**, pplocation : IDebugDocumentContext*) : HRESULT
+    @lpVtbl.value.get_event_info.call(this, pmessagetype, pbstrmessage, pbstrurl, pplocation)
+  end
+end
+struct LibWin32::IJsDebug
+  def query_interface(this : IJsDebug*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebug*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebug*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open_virtual_process(this : IJsDebug*, processid : UInt32, runtimejsbaseaddress : UInt64, pdatatarget : IJsDebugDataTarget, ppprocess : IJsDebugProcess*) : HRESULT
+    @lpVtbl.value.open_virtual_process.call(this, processid, runtimejsbaseaddress, pdatatarget, ppprocess)
+  end
+end
+struct LibWin32::IJsDebugProcess
+  def query_interface(this : IJsDebugProcess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugProcess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugProcess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stack_walker(this : IJsDebugProcess*, threadid : UInt32, ppstackwalker : IJsDebugStackWalker*) : HRESULT
+    @lpVtbl.value.create_stack_walker.call(this, threadid, ppstackwalker)
+  end
+  def create_break_point(this : IJsDebugProcess*, documentid : UInt64, characteroffset : UInt32, charactercount : UInt32, isenabled : LibC::BOOL, ppdebugbreakpoint : IJsDebugBreakPoint*) : HRESULT
+    @lpVtbl.value.create_break_point.call(this, documentid, characteroffset, charactercount, isenabled, ppdebugbreakpoint)
+  end
+  def perform_async_break(this : IJsDebugProcess*, threadid : UInt32) : HRESULT
+    @lpVtbl.value.perform_async_break.call(this, threadid)
+  end
+  def get_external_step_address(this : IJsDebugProcess*, pcodeaddress : UInt64*) : HRESULT
+    @lpVtbl.value.get_external_step_address.call(this, pcodeaddress)
+  end
+end
+struct LibWin32::IJsDebugStackWalker
+  def query_interface(this : IJsDebugStackWalker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugStackWalker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugStackWalker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next(this : IJsDebugStackWalker*, ppframe : IJsDebugFrame*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppframe)
+  end
+end
+struct LibWin32::IJsDebugFrame
+  def query_interface(this : IJsDebugFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stack_range(this : IJsDebugFrame*, pstart : UInt64*, pend : UInt64*) : HRESULT
+    @lpVtbl.value.get_stack_range.call(this, pstart, pend)
+  end
+  def get_name(this : IJsDebugFrame*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_document_position_with_id(this : IJsDebugFrame*, pdocumentid : UInt64*, pcharacteroffset : UInt32*, pstatementcharcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_position_with_id.call(this, pdocumentid, pcharacteroffset, pstatementcharcount)
+  end
+  def get_document_position_with_name(this : IJsDebugFrame*, pdocumentname : UInt8**, pline : UInt32*, pcolumn : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_position_with_name.call(this, pdocumentname, pline, pcolumn)
+  end
+  def get_debug_property(this : IJsDebugFrame*, ppdebugproperty : IJsDebugProperty*) : HRESULT
+    @lpVtbl.value.get_debug_property.call(this, ppdebugproperty)
+  end
+  def get_return_address(this : IJsDebugFrame*, preturnaddress : UInt64*) : HRESULT
+    @lpVtbl.value.get_return_address.call(this, preturnaddress)
+  end
+  def evaluate(this : IJsDebugFrame*, pexpressiontext : LibC::LPWSTR, ppdebugproperty : IJsDebugProperty*, perror : UInt8**) : HRESULT
+    @lpVtbl.value.evaluate.call(this, pexpressiontext, ppdebugproperty, perror)
+  end
+end
+struct LibWin32::IJsDebugProperty
+  def query_interface(this : IJsDebugProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_info(this : IJsDebugProperty*, nradix : UInt32, ppropertyinfo : JsDebugPropertyInfo*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, nradix, ppropertyinfo)
+  end
+  def get_members(this : IJsDebugProperty*, members : JS_PROPERTY_MEMBERS, ppenum : IJsEnumDebugProperty*) : HRESULT
+    @lpVtbl.value.get_members.call(this, members, ppenum)
+  end
+end
+struct LibWin32::IJsEnumDebugProperty
+  def query_interface(this : IJsEnumDebugProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsEnumDebugProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsEnumDebugProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IJsEnumDebugProperty*, count : UInt32, ppdebugproperty : IJsDebugProperty*, pactualcount : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, count, ppdebugproperty, pactualcount)
+  end
+  def get_count(this : IJsEnumDebugProperty*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+end
+struct LibWin32::IJsDebugBreakPoint
+  def query_interface(this : IJsDebugBreakPoint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugBreakPoint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugBreakPoint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_enabled(this : IJsDebugBreakPoint*, pisenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled.call(this, pisenabled)
+  end
+  def enable(this : IJsDebugBreakPoint*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IJsDebugBreakPoint*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+  def delete(this : IJsDebugBreakPoint*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_document_position(this : IJsDebugBreakPoint*, pdocumentid : UInt64*, pcharacteroffset : UInt32*, pstatementcharcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_position.call(this, pdocumentid, pcharacteroffset, pstatementcharcount)
+  end
+end
+struct LibWin32::IEnumJsStackFrames
+  def query_interface(this : IEnumJsStackFrames*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumJsStackFrames*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumJsStackFrames*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumJsStackFrames*, cframecount : UInt32, pframes : MIDL___MIDL_itf_jscript9diag_0000_0007_0001*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cframecount, pframes, pcfetched)
+  end
+  def reset(this : IEnumJsStackFrames*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IJsDebugDataTarget
+  def query_interface(this : IJsDebugDataTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IJsDebugDataTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IJsDebugDataTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_memory(this : IJsDebugDataTarget*, address : UInt64, flags : JsDebugReadMemoryFlags, pbuffer : UInt8*, size : UInt32, pbytesread : UInt32*) : HRESULT
+    @lpVtbl.value.read_memory.call(this, address, flags, pbuffer, size, pbytesread)
+  end
+  def write_memory(this : IJsDebugDataTarget*, address : UInt64, pmemory : UInt8*, size : UInt32) : HRESULT
+    @lpVtbl.value.write_memory.call(this, address, pmemory, size)
+  end
+  def allocate_virtual_memory(this : IJsDebugDataTarget*, address : UInt64, size : UInt32, allocationtype : UInt32, pageprotection : UInt32, pallocatedaddress : UInt64*) : HRESULT
+    @lpVtbl.value.allocate_virtual_memory.call(this, address, size, allocationtype, pageprotection, pallocatedaddress)
+  end
+  def free_virtual_memory(this : IJsDebugDataTarget*, address : UInt64, size : UInt32, freetype : UInt32) : HRESULT
+    @lpVtbl.value.free_virtual_memory.call(this, address, size, freetype)
+  end
+  def get_tls_value(this : IJsDebugDataTarget*, threadid : UInt32, tlsindex : UInt32, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_tls_value.call(this, threadid, tlsindex, pvalue)
+  end
+  def read_bstr(this : IJsDebugDataTarget*, address : UInt64, pstring : UInt8**) : HRESULT
+    @lpVtbl.value.read_bstr.call(this, address, pstring)
+  end
+  def read_null_terminated_string(this : IJsDebugDataTarget*, address : UInt64, charactersize : UInt16, maxcharacters : UInt32, pstring : UInt8**) : HRESULT
+    @lpVtbl.value.read_null_terminated_string.call(this, address, charactersize, maxcharacters, pstring)
+  end
+  def create_stack_frame_enumerator(this : IJsDebugDataTarget*, threadid : UInt32, ppenumerator : IEnumJsStackFrames*) : HRESULT
+    @lpVtbl.value.create_stack_frame_enumerator.call(this, threadid, ppenumerator)
+  end
+  def get_thread_context(this : IJsDebugDataTarget*, threadid : UInt32, contextflags : UInt32, contextsize : UInt32, pcontext : Void*) : HRESULT
+    @lpVtbl.value.get_thread_context.call(this, threadid, contextflags, contextsize, pcontext)
+  end
+end
+struct LibWin32::IObjectSafety
+  def query_interface(this : IObjectSafety*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectSafety*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectSafety*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_interface_safety_options(this : IObjectSafety*, riid : Guid*, pdwsupportedoptions : UInt32*, pdwenabledoptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_interface_safety_options.call(this, riid, pdwsupportedoptions, pdwenabledoptions)
+  end
+  def set_interface_safety_options(this : IObjectSafety*, riid : Guid*, dwoptionsetmask : UInt32, dwenabledoptions : UInt32) : HRESULT
+    @lpVtbl.value.set_interface_safety_options.call(this, riid, dwoptionsetmask, dwenabledoptions)
+  end
 end

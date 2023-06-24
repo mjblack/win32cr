@@ -944,3 +944,335 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ISdoMachine
+  def query_interface(this : ISdoMachine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdoMachine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdoMachine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdoMachine*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdoMachine*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdoMachine*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdoMachine*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def attach(this : ISdoMachine*, bstrcomputername : UInt8*) : HRESULT
+    @lpVtbl.value.attach.call(this, bstrcomputername)
+  end
+  def get_dictionary_sdo(this : ISdoMachine*, ppdictionarysdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_dictionary_sdo.call(this, ppdictionarysdo)
+  end
+  def get_service_sdo(this : ISdoMachine*, edatastore : IASDATASTORE, bstrservicename : UInt8*, ppservicesdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service_sdo.call(this, edatastore, bstrservicename, ppservicesdo)
+  end
+  def get_user_sdo(this : ISdoMachine*, edatastore : IASDATASTORE, bstrusername : UInt8*, ppusersdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_user_sdo.call(this, edatastore, bstrusername, ppusersdo)
+  end
+  def get_os_type(this : ISdoMachine*, eostype : IASOSTYPE*) : HRESULT
+    @lpVtbl.value.get_os_type.call(this, eostype)
+  end
+  def get_domain_type(this : ISdoMachine*, edomaintype : IASDOMAINTYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.call(this, edomaintype)
+  end
+  def is_directory_available(this : ISdoMachine*, booldirectoryavailable : Int16*) : HRESULT
+    @lpVtbl.value.is_directory_available.call(this, booldirectoryavailable)
+  end
+  def get_attached_computer(this : ISdoMachine*, bstrcomputername : UInt8**) : HRESULT
+    @lpVtbl.value.get_attached_computer.call(this, bstrcomputername)
+  end
+  def get_sdo_schema(this : ISdoMachine*, ppsdoschema : IUnknown*) : HRESULT
+    @lpVtbl.value.get_sdo_schema.call(this, ppsdoschema)
+  end
+end
+struct LibWin32::ISdoMachine2
+  def query_interface(this : ISdoMachine2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdoMachine2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdoMachine2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdoMachine2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdoMachine2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdoMachine2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdoMachine2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def attach(this : ISdoMachine2*, bstrcomputername : UInt8*) : HRESULT
+    @lpVtbl.value.attach.call(this, bstrcomputername)
+  end
+  def get_dictionary_sdo(this : ISdoMachine2*, ppdictionarysdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_dictionary_sdo.call(this, ppdictionarysdo)
+  end
+  def get_service_sdo(this : ISdoMachine2*, edatastore : IASDATASTORE, bstrservicename : UInt8*, ppservicesdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service_sdo.call(this, edatastore, bstrservicename, ppservicesdo)
+  end
+  def get_user_sdo(this : ISdoMachine2*, edatastore : IASDATASTORE, bstrusername : UInt8*, ppusersdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_user_sdo.call(this, edatastore, bstrusername, ppusersdo)
+  end
+  def get_os_type(this : ISdoMachine2*, eostype : IASOSTYPE*) : HRESULT
+    @lpVtbl.value.get_os_type.call(this, eostype)
+  end
+  def get_domain_type(this : ISdoMachine2*, edomaintype : IASDOMAINTYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.call(this, edomaintype)
+  end
+  def is_directory_available(this : ISdoMachine2*, booldirectoryavailable : Int16*) : HRESULT
+    @lpVtbl.value.is_directory_available.call(this, booldirectoryavailable)
+  end
+  def get_attached_computer(this : ISdoMachine2*, bstrcomputername : UInt8**) : HRESULT
+    @lpVtbl.value.get_attached_computer.call(this, bstrcomputername)
+  end
+  def get_sdo_schema(this : ISdoMachine2*, ppsdoschema : IUnknown*) : HRESULT
+    @lpVtbl.value.get_sdo_schema.call(this, ppsdoschema)
+  end
+  def get_templates_sdo(this : ISdoMachine2*, bstrservicename : UInt8*, pptemplatessdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_templates_sdo.call(this, bstrservicename, pptemplatessdo)
+  end
+  def enable_templates(this : ISdoMachine2*) : HRESULT
+    @lpVtbl.value.enable_templates.call(this)
+  end
+  def sync_config_against_templates(this : ISdoMachine2*, bstrservicename : UInt8*, ppconfigroot : IUnknown*, pptemplatesroot : IUnknown*, bforcedsync : Int16) : HRESULT
+    @lpVtbl.value.sync_config_against_templates.call(this, bstrservicename, ppconfigroot, pptemplatesroot, bforcedsync)
+  end
+  def import_remote_templates(this : ISdoMachine2*, plocaltemplatesroot : IUnknown, bstrremotemachinename : UInt8*) : HRESULT
+    @lpVtbl.value.import_remote_templates.call(this, plocaltemplatesroot, bstrremotemachinename)
+  end
+  def reload(this : ISdoMachine2*) : HRESULT
+    @lpVtbl.value.reload.call(this)
+  end
+end
+struct LibWin32::ISdoServiceControl
+  def query_interface(this : ISdoServiceControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdoServiceControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdoServiceControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdoServiceControl*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdoServiceControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdoServiceControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdoServiceControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def start_service(this : ISdoServiceControl*) : HRESULT
+    @lpVtbl.value.start_service.call(this)
+  end
+  def stop_service(this : ISdoServiceControl*) : HRESULT
+    @lpVtbl.value.stop_service.call(this)
+  end
+  def get_service_status(this : ISdoServiceControl*, status : Int32*) : HRESULT
+    @lpVtbl.value.get_service_status.call(this, status)
+  end
+  def reset_service(this : ISdoServiceControl*) : HRESULT
+    @lpVtbl.value.reset_service.call(this)
+  end
+end
+struct LibWin32::ISdo
+  def query_interface(this : ISdo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property_info(this : ISdo*, id : Int32, pppropertyinfo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, id, pppropertyinfo)
+  end
+  def get_property(this : ISdo*, id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, id, pvalue)
+  end
+  def put_property(this : ISdo*, id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_property.call(this, id, pvalue)
+  end
+  def reset_property(this : ISdo*, id : Int32) : HRESULT
+    @lpVtbl.value.reset_property.call(this, id)
+  end
+  def apply(this : ISdo*) : HRESULT
+    @lpVtbl.value.apply.call(this)
+  end
+  def restore(this : ISdo*) : HRESULT
+    @lpVtbl.value.restore.call(this)
+  end
+  def get__new_enum(this : ISdo*, ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumvariant)
+  end
+end
+struct LibWin32::ISdoCollection
+  def query_interface(this : ISdoCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdoCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdoCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdoCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdoCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdoCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdoCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISdoCollection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def add(this : ISdoCollection*, bstrname : UInt8*, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrname, ppitem)
+  end
+  def remove(this : ISdoCollection*, pitem : IDispatch) : HRESULT
+    @lpVtbl.value.remove.call(this, pitem)
+  end
+  def remove_all(this : ISdoCollection*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
+  end
+  def reload(this : ISdoCollection*) : HRESULT
+    @lpVtbl.value.reload.call(this)
+  end
+  def is_name_unique(this : ISdoCollection*, bstrname : UInt8*, pbool : Int16*) : HRESULT
+    @lpVtbl.value.is_name_unique.call(this, bstrname, pbool)
+  end
+  def item(this : ISdoCollection*, name : VARIANT*, pitem : IDispatch*) : HRESULT
+    @lpVtbl.value.item.call(this, name, pitem)
+  end
+  def get__new_enum(this : ISdoCollection*, ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumvariant)
+  end
+end
+struct LibWin32::ITemplateSdo
+  def query_interface(this : ITemplateSdo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITemplateSdo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITemplateSdo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITemplateSdo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITemplateSdo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITemplateSdo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITemplateSdo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property_info(this : ITemplateSdo*, id : Int32, pppropertyinfo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, id, pppropertyinfo)
+  end
+  def get_property(this : ITemplateSdo*, id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, id, pvalue)
+  end
+  def put_property(this : ITemplateSdo*, id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_property.call(this, id, pvalue)
+  end
+  def reset_property(this : ITemplateSdo*, id : Int32) : HRESULT
+    @lpVtbl.value.reset_property.call(this, id)
+  end
+  def apply(this : ITemplateSdo*) : HRESULT
+    @lpVtbl.value.apply.call(this)
+  end
+  def restore(this : ITemplateSdo*) : HRESULT
+    @lpVtbl.value.restore.call(this)
+  end
+  def get__new_enum(this : ITemplateSdo*, ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppenumvariant)
+  end
+  def add_to_collection(this : ITemplateSdo*, bstrname : UInt8*, pcollection : IDispatch, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add_to_collection.call(this, bstrname, pcollection, ppitem)
+  end
+  def add_to_sdo(this : ITemplateSdo*, bstrname : UInt8*, psdotarget : IDispatch, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add_to_sdo.call(this, bstrname, psdotarget, ppitem)
+  end
+  def add_to_sdo_as_property(this : ITemplateSdo*, psdotarget : IDispatch, id : Int32) : HRESULT
+    @lpVtbl.value.add_to_sdo_as_property.call(this, psdotarget, id)
+  end
+end
+struct LibWin32::ISdoDictionaryOld
+  def query_interface(this : ISdoDictionaryOld*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISdoDictionaryOld*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISdoDictionaryOld*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISdoDictionaryOld*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISdoDictionaryOld*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISdoDictionaryOld*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISdoDictionaryOld*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enum_attributes(this : ISdoDictionaryOld*, id : VARIANT*, pvalues : VARIANT*) : HRESULT
+    @lpVtbl.value.enum_attributes.call(this, id, pvalues)
+  end
+  def get_attribute_info(this : ISdoDictionaryOld*, id : ATTRIBUTEID, pinfoids : VARIANT*, pinfovalues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_info.call(this, id, pinfoids, pinfovalues)
+  end
+  def enum_attribute_values(this : ISdoDictionaryOld*, id : ATTRIBUTEID, pvalueids : VARIANT*, pvaluesdesc : VARIANT*) : HRESULT
+    @lpVtbl.value.enum_attribute_values.call(this, id, pvalueids, pvaluesdesc)
+  end
+  def create_attribute(this : ISdoDictionaryOld*, id : ATTRIBUTEID, ppattributeobject : IDispatch*) : HRESULT
+    @lpVtbl.value.create_attribute.call(this, id, ppattributeobject)
+  end
+  def get_attribute_id(this : ISdoDictionaryOld*, bstrattributename : UInt8*, pid : ATTRIBUTEID*) : HRESULT
+    @lpVtbl.value.get_attribute_id.call(this, bstrattributename, pid)
+  end
+end

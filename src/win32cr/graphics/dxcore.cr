@@ -149,3 +149,99 @@ lib LibWin32
   # Params # riid : Guid* [In],ppvfactory : Void** [In]
   fun DXCoreCreateAdapterFactory(riid : Guid*, ppvfactory : Void**) : HRESULT
 end
+struct LibWin32::IDXCoreAdapter
+  def query_interface(this : IDXCoreAdapter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDXCoreAdapter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDXCoreAdapter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_valid(this : IDXCoreAdapter*) : Bool
+    @lpVtbl.value.is_valid.call(this)
+  end
+  def is_attribute_supported(this : IDXCoreAdapter*, attributeguid : Guid*) : Bool
+    @lpVtbl.value.is_attribute_supported.call(this, attributeguid)
+  end
+  def is_property_supported(this : IDXCoreAdapter*, property : DXCoreAdapterProperty) : Bool
+    @lpVtbl.value.is_property_supported.call(this, property)
+  end
+  def get_property(this : IDXCoreAdapter*, property : DXCoreAdapterProperty, buffersize : LibC::UINT_PTR, propertydata : Void*) : HRESULT
+    @lpVtbl.value.get_property.call(this, property, buffersize, propertydata)
+  end
+  def get_property_size(this : IDXCoreAdapter*, property : DXCoreAdapterProperty, buffersize : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_property_size.call(this, property, buffersize)
+  end
+  def is_query_state_supported(this : IDXCoreAdapter*, property : DXCoreAdapterState) : Bool
+    @lpVtbl.value.is_query_state_supported.call(this, property)
+  end
+  def query_state(this : IDXCoreAdapter*, state : DXCoreAdapterState, inputstatedetailssize : LibC::UINT_PTR, inputstatedetails : Void*, outputbuffersize : LibC::UINT_PTR, outputbuffer : Void*) : HRESULT
+    @lpVtbl.value.query_state.call(this, state, inputstatedetailssize, inputstatedetails, outputbuffersize, outputbuffer)
+  end
+  def is_set_state_supported(this : IDXCoreAdapter*, property : DXCoreAdapterState) : Bool
+    @lpVtbl.value.is_set_state_supported.call(this, property)
+  end
+  def set_state(this : IDXCoreAdapter*, state : DXCoreAdapterState, inputstatedetailssize : LibC::UINT_PTR, inputstatedetails : Void*, inputdatasize : LibC::UINT_PTR, inputdata : Void*) : HRESULT
+    @lpVtbl.value.set_state.call(this, state, inputstatedetailssize, inputstatedetails, inputdatasize, inputdata)
+  end
+  def get_factory(this : IDXCoreAdapter*, riid : Guid*, ppvfactory : Void**) : HRESULT
+    @lpVtbl.value.get_factory.call(this, riid, ppvfactory)
+  end
+end
+struct LibWin32::IDXCoreAdapterList
+  def query_interface(this : IDXCoreAdapterList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDXCoreAdapterList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDXCoreAdapterList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_adapter(this : IDXCoreAdapterList*, index : UInt32, riid : Guid*, ppvadapter : Void**) : HRESULT
+    @lpVtbl.value.get_adapter.call(this, index, riid, ppvadapter)
+  end
+  def get_adapter_count(this : IDXCoreAdapterList*) : UInt32
+    @lpVtbl.value.get_adapter_count.call(this)
+  end
+  def is_stale(this : IDXCoreAdapterList*) : Bool
+    @lpVtbl.value.is_stale.call(this)
+  end
+  def get_factory(this : IDXCoreAdapterList*, riid : Guid*, ppvfactory : Void**) : HRESULT
+    @lpVtbl.value.get_factory.call(this, riid, ppvfactory)
+  end
+  def sort(this : IDXCoreAdapterList*, numpreferences : UInt32, preferences : DXCoreAdapterPreference*) : HRESULT
+    @lpVtbl.value.sort.call(this, numpreferences, preferences)
+  end
+  def is_adapter_preference_supported(this : IDXCoreAdapterList*, preference : DXCoreAdapterPreference) : Bool
+    @lpVtbl.value.is_adapter_preference_supported.call(this, preference)
+  end
+end
+struct LibWin32::IDXCoreAdapterFactory
+  def query_interface(this : IDXCoreAdapterFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDXCoreAdapterFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDXCoreAdapterFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_adapter_list(this : IDXCoreAdapterFactory*, numattributes : UInt32, filterattributes : Guid*, riid : Guid*, ppvadapterlist : Void**) : HRESULT
+    @lpVtbl.value.create_adapter_list.call(this, numattributes, filterattributes, riid, ppvadapterlist)
+  end
+  def get_adapter_by_luid(this : IDXCoreAdapterFactory*, adapterluid : LUID*, riid : Guid*, ppvadapter : Void**) : HRESULT
+    @lpVtbl.value.get_adapter_by_luid.call(this, adapterluid, riid, ppvadapter)
+  end
+  def is_notification_type_supported(this : IDXCoreAdapterFactory*, notificationtype : DXCoreNotificationType) : Bool
+    @lpVtbl.value.is_notification_type_supported.call(this, notificationtype)
+  end
+  def register_event_notification(this : IDXCoreAdapterFactory*, dxcoreobject : IUnknown, notificationtype : DXCoreNotificationType, callbackfunction : PFN_DXCORE_NOTIFICATION_CALLBACK, callbackcontext : Void*, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_event_notification.call(this, dxcoreobject, notificationtype, callbackfunction, callbackcontext, eventcookie)
+  end
+  def unregister_event_notification(this : IDXCoreAdapterFactory*, eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_event_notification.call(this, eventcookie)
+  end
+end

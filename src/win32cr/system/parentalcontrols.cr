@@ -635,3 +635,172 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWPCProviderState
+  def query_interface(this : IWPCProviderState*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCProviderState*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCProviderState*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable(this : IWPCProviderState*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IWPCProviderState*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+end
+struct LibWin32::IWPCProviderConfig
+  def query_interface(this : IWPCProviderConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCProviderConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCProviderConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_user_summary(this : IWPCProviderConfig*, bstrsid : UInt8*, pbstrusersummary : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_summary.call(this, bstrsid, pbstrusersummary)
+  end
+  def configure(this : IWPCProviderConfig*, hwnd : LibC::HANDLE, bstrsid : UInt8*) : HRESULT
+    @lpVtbl.value.configure.call(this, hwnd, bstrsid)
+  end
+  def request_override(this : IWPCProviderConfig*, hwnd : LibC::HANDLE, bstrpath : UInt8*, dwflags : WPCFLAG_RESTRICTION) : HRESULT
+    @lpVtbl.value.request_override.call(this, hwnd, bstrpath, dwflags)
+  end
+end
+struct LibWin32::IWPCSettings
+  def query_interface(this : IWPCSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_logging_required(this : IWPCSettings*, pfrequired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_logging_required.call(this, pfrequired)
+  end
+  def get_last_settings_change_time(this : IWPCSettings*, ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_last_settings_change_time.call(this, ptime)
+  end
+  def get_restrictions(this : IWPCSettings*, pdwrestrictions : WPCFLAG_RESTRICTION*) : HRESULT
+    @lpVtbl.value.get_restrictions.call(this, pdwrestrictions)
+  end
+end
+struct LibWin32::IWPCGamesSettings
+  def query_interface(this : IWPCGamesSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCGamesSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCGamesSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_logging_required(this : IWPCGamesSettings*, pfrequired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_logging_required.call(this, pfrequired)
+  end
+  def get_last_settings_change_time(this : IWPCGamesSettings*, ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_last_settings_change_time.call(this, ptime)
+  end
+  def get_restrictions(this : IWPCGamesSettings*, pdwrestrictions : WPCFLAG_RESTRICTION*) : HRESULT
+    @lpVtbl.value.get_restrictions.call(this, pdwrestrictions)
+  end
+  def is_blocked(this : IWPCGamesSettings*, guidappid : Guid, pdwreasons : UInt32*) : HRESULT
+    @lpVtbl.value.is_blocked.call(this, guidappid, pdwreasons)
+  end
+end
+struct LibWin32::IWPCWebSettings
+  def query_interface(this : IWPCWebSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCWebSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCWebSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_logging_required(this : IWPCWebSettings*, pfrequired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_logging_required.call(this, pfrequired)
+  end
+  def get_last_settings_change_time(this : IWPCWebSettings*, ptime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_last_settings_change_time.call(this, ptime)
+  end
+  def get_restrictions(this : IWPCWebSettings*, pdwrestrictions : WPCFLAG_RESTRICTION*) : HRESULT
+    @lpVtbl.value.get_restrictions.call(this, pdwrestrictions)
+  end
+  def get_settings(this : IWPCWebSettings*, pdwsettings : WPCFLAG_WEB_SETTING*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, pdwsettings)
+  end
+  def request_url_override(this : IWPCWebSettings*, hwnd : LibC::HANDLE, pcszurl : LibC::LPWSTR, curls : UInt32, ppcszsuburls : LibC::LPWSTR*, pfchanged : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.request_url_override.call(this, hwnd, pcszurl, curls, ppcszsuburls, pfchanged)
+  end
+end
+struct LibWin32::IWindowsParentalControlsCore
+  def query_interface(this : IWindowsParentalControlsCore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsParentalControlsCore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsParentalControlsCore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_visibility(this : IWindowsParentalControlsCore*, pevisibility : WPCFLAG_VISIBILITY*) : HRESULT
+    @lpVtbl.value.get_visibility.call(this, pevisibility)
+  end
+  def get_user_settings(this : IWindowsParentalControlsCore*, pcszsid : LibC::LPWSTR, ppsettings : IWPCSettings*) : HRESULT
+    @lpVtbl.value.get_user_settings.call(this, pcszsid, ppsettings)
+  end
+  def get_web_settings(this : IWindowsParentalControlsCore*, pcszsid : LibC::LPWSTR, ppsettings : IWPCWebSettings*) : HRESULT
+    @lpVtbl.value.get_web_settings.call(this, pcszsid, ppsettings)
+  end
+  def get_web_filter_info(this : IWindowsParentalControlsCore*, pguidid : Guid*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_web_filter_info.call(this, pguidid, ppszname)
+  end
+end
+struct LibWin32::IWindowsParentalControls
+  def query_interface(this : IWindowsParentalControls*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsParentalControls*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsParentalControls*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_visibility(this : IWindowsParentalControls*, pevisibility : WPCFLAG_VISIBILITY*) : HRESULT
+    @lpVtbl.value.get_visibility.call(this, pevisibility)
+  end
+  def get_user_settings(this : IWindowsParentalControls*, pcszsid : LibC::LPWSTR, ppsettings : IWPCSettings*) : HRESULT
+    @lpVtbl.value.get_user_settings.call(this, pcszsid, ppsettings)
+  end
+  def get_web_settings(this : IWindowsParentalControls*, pcszsid : LibC::LPWSTR, ppsettings : IWPCWebSettings*) : HRESULT
+    @lpVtbl.value.get_web_settings.call(this, pcszsid, ppsettings)
+  end
+  def get_web_filter_info(this : IWindowsParentalControls*, pguidid : Guid*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_web_filter_info.call(this, pguidid, ppszname)
+  end
+  def get_games_settings(this : IWindowsParentalControls*, pcszsid : LibC::LPWSTR, ppsettings : IWPCGamesSettings*) : HRESULT
+    @lpVtbl.value.get_games_settings.call(this, pcszsid, ppsettings)
+  end
+end
+struct LibWin32::IWPCProviderSupport
+  def query_interface(this : IWPCProviderSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWPCProviderSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWPCProviderSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current(this : IWPCProviderSupport*, pguidprovider : Guid*) : HRESULT
+    @lpVtbl.value.get_current.call(this, pguidprovider)
+  end
+end

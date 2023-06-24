@@ -227,3 +227,301 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IAudioEndpointFormatControl
+  def query_interface(this : IAudioEndpointFormatControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointFormatControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointFormatControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reset_to_default(this : IAudioEndpointFormatControl*, resetflags : UInt32) : HRESULT
+    @lpVtbl.value.reset_to_default.call(this, resetflags)
+  end
+end
+struct LibWin32::IAudioEndpointOffloadStreamVolume
+  def query_interface(this : IAudioEndpointOffloadStreamVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointOffloadStreamVolume*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointOffloadStreamVolume*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_volume_channel_count(this : IAudioEndpointOffloadStreamVolume*, pu32channelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_volume_channel_count.call(this, pu32channelcount)
+  end
+  def set_channel_volumes(this : IAudioEndpointOffloadStreamVolume*, u32channelcount : UInt32, pf32volumes : Float32*, u32curvetype : AUDIO_CURVE_TYPE, pcurveduration : Int64*) : HRESULT
+    @lpVtbl.value.set_channel_volumes.call(this, u32channelcount, pf32volumes, u32curvetype, pcurveduration)
+  end
+  def get_channel_volumes(this : IAudioEndpointOffloadStreamVolume*, u32channelcount : UInt32, pf32volumes : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volumes.call(this, u32channelcount, pf32volumes)
+  end
+end
+struct LibWin32::IAudioEndpointOffloadStreamMute
+  def query_interface(this : IAudioEndpointOffloadStreamMute*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointOffloadStreamMute*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointOffloadStreamMute*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_mute(this : IAudioEndpointOffloadStreamMute*, bmuted : UInt8) : HRESULT
+    @lpVtbl.value.set_mute.call(this, bmuted)
+  end
+  def get_mute(this : IAudioEndpointOffloadStreamMute*, pbmuted : UInt8*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pbmuted)
+  end
+end
+struct LibWin32::IAudioEndpointOffloadStreamMeter
+  def query_interface(this : IAudioEndpointOffloadStreamMeter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointOffloadStreamMeter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointOffloadStreamMeter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_meter_channel_count(this : IAudioEndpointOffloadStreamMeter*, pu32channelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_meter_channel_count.call(this, pu32channelcount)
+  end
+  def get_metering_data(this : IAudioEndpointOffloadStreamMeter*, u32channelcount : UInt32, pf32peakvalues : Float32*) : HRESULT
+    @lpVtbl.value.get_metering_data.call(this, u32channelcount, pf32peakvalues)
+  end
+end
+struct LibWin32::IAudioEndpointLastBufferControl
+  def query_interface(this : IAudioEndpointLastBufferControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointLastBufferControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointLastBufferControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_last_buffer_control_supported(this : IAudioEndpointLastBufferControl*) : LibC::BOOL
+    @lpVtbl.value.is_last_buffer_control_supported.call(this)
+  end
+  def release_output_data_pointer_for_last_buffer(this : IAudioEndpointLastBufferControl*, pconnectionproperty : APO_CONNECTION_PROPERTY*) : Void
+    @lpVtbl.value.release_output_data_pointer_for_last_buffer.call(this, pconnectionproperty)
+  end
+end
+struct LibWin32::IAudioLfxControl
+  def query_interface(this : IAudioLfxControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioLfxControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioLfxControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_local_effects_state(this : IAudioLfxControl*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_local_effects_state.call(this, benabled)
+  end
+  def get_local_effects_state(this : IAudioLfxControl*, pbenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_local_effects_state.call(this, pbenabled)
+  end
+end
+struct LibWin32::IHardwareAudioEngineBase
+  def query_interface(this : IHardwareAudioEngineBase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHardwareAudioEngineBase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHardwareAudioEngineBase*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_available_offload_connector_count(this : IHardwareAudioEngineBase*, pwstrdeviceid : LibC::LPWSTR, uconnectorid : UInt32, pavailableconnectorinstancecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_offload_connector_count.call(this, pwstrdeviceid, uconnectorid, pavailableconnectorinstancecount)
+  end
+  def get_engine_format(this : IHardwareAudioEngineBase*, pdevice : IMMDevice, brequestdeviceformat : LibC::BOOL, ppwfxformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.get_engine_format.call(this, pdevice, brequestdeviceformat, ppwfxformat)
+  end
+  def set_engine_device_format(this : IHardwareAudioEngineBase*, pdevice : IMMDevice, pwfxformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_engine_device_format.call(this, pdevice, pwfxformat)
+  end
+  def set_gfx_state(this : IHardwareAudioEngineBase*, pdevice : IMMDevice, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_gfx_state.call(this, pdevice, benable)
+  end
+  def get_gfx_state(this : IHardwareAudioEngineBase*, pdevice : IMMDevice, pbenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_gfx_state.call(this, pdevice, pbenable)
+  end
+end
+struct LibWin32::IAudioEndpointVolumeCallback
+  def query_interface(this : IAudioEndpointVolumeCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointVolumeCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointVolumeCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_notify(this : IAudioEndpointVolumeCallback*, pnotify : AUDIO_VOLUME_NOTIFICATION_DATA*) : HRESULT
+    @lpVtbl.value.on_notify.call(this, pnotify)
+  end
+end
+struct LibWin32::IAudioEndpointVolume
+  def query_interface(this : IAudioEndpointVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointVolume*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointVolume*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_control_change_notify(this : IAudioEndpointVolume*, pnotify : IAudioEndpointVolumeCallback) : HRESULT
+    @lpVtbl.value.register_control_change_notify.call(this, pnotify)
+  end
+  def unregister_control_change_notify(this : IAudioEndpointVolume*, pnotify : IAudioEndpointVolumeCallback) : HRESULT
+    @lpVtbl.value.unregister_control_change_notify.call(this, pnotify)
+  end
+  def get_channel_count(this : IAudioEndpointVolume*, pnchannelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_count.call(this, pnchannelcount)
+  end
+  def set_master_volume_level(this : IAudioEndpointVolume*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_master_volume_level.call(this, fleveldb, pguideventcontext)
+  end
+  def set_master_volume_level_scalar(this : IAudioEndpointVolume*, flevel : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_master_volume_level_scalar.call(this, flevel, pguideventcontext)
+  end
+  def get_master_volume_level(this : IAudioEndpointVolume*, pfleveldb : Float32*) : HRESULT
+    @lpVtbl.value.get_master_volume_level.call(this, pfleveldb)
+  end
+  def get_master_volume_level_scalar(this : IAudioEndpointVolume*, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_master_volume_level_scalar.call(this, pflevel)
+  end
+  def set_channel_volume_level(this : IAudioEndpointVolume*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_channel_volume_level.call(this, nchannel, fleveldb, pguideventcontext)
+  end
+  def set_channel_volume_level_scalar(this : IAudioEndpointVolume*, nchannel : UInt32, flevel : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_channel_volume_level_scalar.call(this, nchannel, flevel, pguideventcontext)
+  end
+  def get_channel_volume_level(this : IAudioEndpointVolume*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volume_level.call(this, nchannel, pfleveldb)
+  end
+  def get_channel_volume_level_scalar(this : IAudioEndpointVolume*, nchannel : UInt32, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volume_level_scalar.call(this, nchannel, pflevel)
+  end
+  def set_mute(this : IAudioEndpointVolume*, bmute : LibC::BOOL, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_mute.call(this, bmute, pguideventcontext)
+  end
+  def get_mute(this : IAudioEndpointVolume*, pbmute : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pbmute)
+  end
+  def get_volume_step_info(this : IAudioEndpointVolume*, pnstep : UInt32*, pnstepcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_volume_step_info.call(this, pnstep, pnstepcount)
+  end
+  def volume_step_up(this : IAudioEndpointVolume*, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.volume_step_up.call(this, pguideventcontext)
+  end
+  def volume_step_down(this : IAudioEndpointVolume*, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.volume_step_down.call(this, pguideventcontext)
+  end
+  def query_hardware_support(this : IAudioEndpointVolume*, pdwhardwaresupportmask : UInt32*) : HRESULT
+    @lpVtbl.value.query_hardware_support.call(this, pdwhardwaresupportmask)
+  end
+  def get_volume_range(this : IAudioEndpointVolume*, pflvolumemindb : Float32*, pflvolumemaxdb : Float32*, pflvolumeincrementdb : Float32*) : HRESULT
+    @lpVtbl.value.get_volume_range.call(this, pflvolumemindb, pflvolumemaxdb, pflvolumeincrementdb)
+  end
+end
+struct LibWin32::IAudioEndpointVolumeEx
+  def query_interface(this : IAudioEndpointVolumeEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioEndpointVolumeEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioEndpointVolumeEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_control_change_notify(this : IAudioEndpointVolumeEx*, pnotify : IAudioEndpointVolumeCallback) : HRESULT
+    @lpVtbl.value.register_control_change_notify.call(this, pnotify)
+  end
+  def unregister_control_change_notify(this : IAudioEndpointVolumeEx*, pnotify : IAudioEndpointVolumeCallback) : HRESULT
+    @lpVtbl.value.unregister_control_change_notify.call(this, pnotify)
+  end
+  def get_channel_count(this : IAudioEndpointVolumeEx*, pnchannelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_count.call(this, pnchannelcount)
+  end
+  def set_master_volume_level(this : IAudioEndpointVolumeEx*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_master_volume_level.call(this, fleveldb, pguideventcontext)
+  end
+  def set_master_volume_level_scalar(this : IAudioEndpointVolumeEx*, flevel : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_master_volume_level_scalar.call(this, flevel, pguideventcontext)
+  end
+  def get_master_volume_level(this : IAudioEndpointVolumeEx*, pfleveldb : Float32*) : HRESULT
+    @lpVtbl.value.get_master_volume_level.call(this, pfleveldb)
+  end
+  def get_master_volume_level_scalar(this : IAudioEndpointVolumeEx*, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_master_volume_level_scalar.call(this, pflevel)
+  end
+  def set_channel_volume_level(this : IAudioEndpointVolumeEx*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_channel_volume_level.call(this, nchannel, fleveldb, pguideventcontext)
+  end
+  def set_channel_volume_level_scalar(this : IAudioEndpointVolumeEx*, nchannel : UInt32, flevel : Float32, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_channel_volume_level_scalar.call(this, nchannel, flevel, pguideventcontext)
+  end
+  def get_channel_volume_level(this : IAudioEndpointVolumeEx*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volume_level.call(this, nchannel, pfleveldb)
+  end
+  def get_channel_volume_level_scalar(this : IAudioEndpointVolumeEx*, nchannel : UInt32, pflevel : Float32*) : HRESULT
+    @lpVtbl.value.get_channel_volume_level_scalar.call(this, nchannel, pflevel)
+  end
+  def set_mute(this : IAudioEndpointVolumeEx*, bmute : LibC::BOOL, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.set_mute.call(this, bmute, pguideventcontext)
+  end
+  def get_mute(this : IAudioEndpointVolumeEx*, pbmute : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_mute.call(this, pbmute)
+  end
+  def get_volume_step_info(this : IAudioEndpointVolumeEx*, pnstep : UInt32*, pnstepcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_volume_step_info.call(this, pnstep, pnstepcount)
+  end
+  def volume_step_up(this : IAudioEndpointVolumeEx*, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.volume_step_up.call(this, pguideventcontext)
+  end
+  def volume_step_down(this : IAudioEndpointVolumeEx*, pguideventcontext : Guid*) : HRESULT
+    @lpVtbl.value.volume_step_down.call(this, pguideventcontext)
+  end
+  def query_hardware_support(this : IAudioEndpointVolumeEx*, pdwhardwaresupportmask : UInt32*) : HRESULT
+    @lpVtbl.value.query_hardware_support.call(this, pdwhardwaresupportmask)
+  end
+  def get_volume_range(this : IAudioEndpointVolumeEx*, pflvolumemindb : Float32*, pflvolumemaxdb : Float32*, pflvolumeincrementdb : Float32*) : HRESULT
+    @lpVtbl.value.get_volume_range.call(this, pflvolumemindb, pflvolumemaxdb, pflvolumeincrementdb)
+  end
+  def get_volume_range_channel(this : IAudioEndpointVolumeEx*, ichannel : UInt32, pflvolumemindb : Float32*, pflvolumemaxdb : Float32*, pflvolumeincrementdb : Float32*) : HRESULT
+    @lpVtbl.value.get_volume_range_channel.call(this, ichannel, pflvolumemindb, pflvolumemaxdb, pflvolumeincrementdb)
+  end
+end
+struct LibWin32::IAudioMeterInformation
+  def query_interface(this : IAudioMeterInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAudioMeterInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAudioMeterInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_peak_value(this : IAudioMeterInformation*, pfpeak : Float32*) : HRESULT
+    @lpVtbl.value.get_peak_value.call(this, pfpeak)
+  end
+  def get_metering_channel_count(this : IAudioMeterInformation*, pnchannelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_metering_channel_count.call(this, pnchannelcount)
+  end
+  def get_channels_peak_values(this : IAudioMeterInformation*, u32channelcount : UInt32, afpeakvalues : Float32*) : HRESULT
+    @lpVtbl.value.get_channels_peak_values.call(this, u32channelcount, afpeakvalues)
+  end
+  def query_hardware_support(this : IAudioMeterInformation*, pdwhardwaresupportmask : UInt32*) : HRESULT
+    @lpVtbl.value.query_hardware_support.call(this, pdwhardwaresupportmask)
+  end
+end

@@ -1519,10 +1519,10 @@ lib LibWin32
 
 
   # Params # version : UInt32* [In]
-  fun Dhcpv6CApiInitialize(version : UInt32*)
+  fun Dhcpv6CApiInitialize(version : UInt32*) : Void
 
   # Params # 
-  fun Dhcpv6CApiCleanup
+  fun Dhcpv6CApiCleanup : Void
 
   # Params # forcenewinform : LibC::BOOL [In],reserved : Void* [In],adaptername : LibC::LPWSTR [In],classid : DHCPV6CAPI_CLASSID* [In],recdparams : DHCPV6CAPI_PARAMS_ARRAY [In],buffer : UInt8* [In],psize : UInt32* [In]
   fun Dhcpv6RequestParams(forcenewinform : LibC::BOOL, reserved : Void*, adaptername : LibC::LPWSTR, classid : DHCPV6CAPI_CLASSID*, recdparams : DHCPV6CAPI_PARAMS_ARRAY, buffer : UInt8*, psize : UInt32*) : UInt32
@@ -1540,7 +1540,7 @@ lib LibWin32
   fun DhcpCApiInitialize(version : UInt32*) : UInt32
 
   # Params # 
-  fun DhcpCApiCleanup
+  fun DhcpCApiCleanup : Void
 
   # Params # flags : UInt32 [In],reserved : Void* [In],adaptername : LibC::LPWSTR [In],classid : DHCPCAPI_CLASSID* [In],sendparams : DHCPCAPI_PARAMS_ARRAY [In],recdparams : DHCPCAPI_PARAMS_ARRAY [In],buffer : UInt8* [In],psize : UInt32* [In],requestidstr : LibC::LPWSTR [In]
   fun DhcpRequestParams(flags : UInt32, reserved : Void*, adaptername : LibC::LPWSTR, classid : DHCPCAPI_CLASSID*, sendparams : DHCPCAPI_PARAMS_ARRAY, recdparams : DHCPCAPI_PARAMS_ARRAY, buffer : UInt8*, psize : UInt32*, requestidstr : LibC::LPWSTR) : UInt32
@@ -1675,7 +1675,7 @@ lib LibWin32
   fun DhcpScanDatabase(serveripaddress : LibC::LPWSTR, subnetaddress : UInt32, fixflag : UInt32, scanlist : DHCP_SCAN_LIST**) : UInt32
 
   # Params # bufferpointer : Void* [In]
-  fun DhcpRpcFreeMemory(bufferpointer : Void*)
+  fun DhcpRpcFreeMemory(bufferpointer : Void*) : Void
 
   # Params # serveripaddress : LibC::LPWSTR [In],majorversion : UInt32* [In],minorversion : UInt32* [In]
   fun DhcpGetVersion(serveripaddress : LibC::LPWSTR, majorversion : UInt32*, minorversion : UInt32*) : UInt32
@@ -1843,7 +1843,7 @@ lib LibWin32
   fun DhcpDsInit : UInt32
 
   # Params # 
-  fun DhcpDsCleanup
+  fun DhcpDsCleanup : Void
 
   # Params # flags : UInt32 [In],reserved : Void* [In]
   fun DhcpSetThreadOptions(flags : UInt32, reserved : Void*) : UInt32
@@ -1891,7 +1891,7 @@ lib LibWin32
   fun DhcpGetServerSpecificStrings(serveripaddress : LibC::LPWSTR, serverspecificstrings : DHCP_SERVER_SPECIFIC_STRINGS**) : UInt32
 
   # Params # configinfo : DHCP_SERVER_CONFIG_INFO_VQ* [In]
-  fun DhcpServerAuditlogParamsFree(configinfo : DHCP_SERVER_CONFIG_INFO_VQ*)
+  fun DhcpServerAuditlogParamsFree(configinfo : DHCP_SERVER_CONFIG_INFO_VQ*) : Void
 
   # Params # serveripaddress : LibC::LPWSTR [In],subnetaddress : DHCP_IPV6_ADDRESS [In],subnetinfo : DHCP_SUBNET_INFO_V6* [In]
   fun DhcpCreateSubnetV6(serveripaddress : LibC::LPWSTR, subnetaddress : DHCP_IPV6_ADDRESS, subnetinfo : DHCP_SUBNET_INFO_V6*) : UInt32
@@ -2044,22 +2044,22 @@ lib LibWin32
   fun DhcpHlprModifyV4PolicyExpr(policy : DHCP_POLICY*, operator : DHCP_POL_LOGIC_OPER) : UInt32
 
   # Params # policy : DHCP_POLICY* [In]
-  fun DhcpHlprFreeV4Policy(policy : DHCP_POLICY*)
+  fun DhcpHlprFreeV4Policy(policy : DHCP_POLICY*) : Void
 
   # Params # policyarray : DHCP_POLICY_ARRAY* [In]
-  fun DhcpHlprFreeV4PolicyArray(policyarray : DHCP_POLICY_ARRAY*)
+  fun DhcpHlprFreeV4PolicyArray(policyarray : DHCP_POLICY_ARRAY*) : Void
 
   # Params # policyex : DHCP_POLICY_EX* [In]
-  fun DhcpHlprFreeV4PolicyEx(policyex : DHCP_POLICY_EX*)
+  fun DhcpHlprFreeV4PolicyEx(policyex : DHCP_POLICY_EX*) : Void
 
   # Params # policyexarray : DHCP_POLICY_EX_ARRAY* [In]
-  fun DhcpHlprFreeV4PolicyExArray(policyexarray : DHCP_POLICY_EX_ARRAY*)
+  fun DhcpHlprFreeV4PolicyExArray(policyexarray : DHCP_POLICY_EX_ARRAY*) : Void
 
   # Params # property : DHCP_PROPERTY* [In]
-  fun DhcpHlprFreeV4DhcpProperty(property : DHCP_PROPERTY*)
+  fun DhcpHlprFreeV4DhcpProperty(property : DHCP_PROPERTY*) : Void
 
   # Params # propertyarray : DHCP_PROPERTY_ARRAY* [In]
-  fun DhcpHlprFreeV4DhcpPropertyArray(propertyarray : DHCP_PROPERTY_ARRAY*)
+  fun DhcpHlprFreeV4DhcpPropertyArray(propertyarray : DHCP_PROPERTY_ARRAY*) : Void
 
   # Params # propertyarray : DHCP_PROPERTY_ARRAY* [In],id : DHCP_PROPERTY_ID [In],type : DHCP_PROPERTY_TYPE [In]
   fun DhcpHlprFindV4DhcpProperty(propertyarray : DHCP_PROPERTY_ARRAY*, id : DHCP_PROPERTY_ID, type : DHCP_PROPERTY_TYPE) : DHCP_PROPERTY*

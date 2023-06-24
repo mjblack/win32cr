@@ -280,3 +280,269 @@ lib LibWin32
   # Params # endpointname : LibC::LPWSTR [In],pid : UInt32 [In],wszdllxamldiagnostics : LibC::LPWSTR [In],wsztapdllname : LibC::LPWSTR [In],tapclsid : Guid [In],wszinitializationdata : LibC::LPWSTR [In]
   fun InitializeXamlDiagnosticsEx(endpointname : LibC::LPWSTR, pid : UInt32, wszdllxamldiagnostics : LibC::LPWSTR, wsztapdllname : LibC::LPWSTR, tapclsid : Guid, wszinitializationdata : LibC::LPWSTR) : HRESULT
 end
+struct LibWin32::IVisualTreeServiceCallback
+  def query_interface(this : IVisualTreeServiceCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualTreeServiceCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualTreeServiceCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_visual_tree_change(this : IVisualTreeServiceCallback*, relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
+    @lpVtbl.value.on_visual_tree_change.call(this, relation, element, mutationtype)
+  end
+end
+struct LibWin32::IVisualTreeServiceCallback2
+  def query_interface(this : IVisualTreeServiceCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualTreeServiceCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualTreeServiceCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_visual_tree_change(this : IVisualTreeServiceCallback2*, relation : ParentChildRelation, element : VisualElement, mutationtype : VisualMutationType) : HRESULT
+    @lpVtbl.value.on_visual_tree_change.call(this, relation, element, mutationtype)
+  end
+  def on_element_state_changed(this : IVisualTreeServiceCallback2*, element : UInt64, elementstate : VisualElementState, context : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_element_state_changed.call(this, element, elementstate, context)
+  end
+end
+struct LibWin32::IVisualTreeService
+  def query_interface(this : IVisualTreeService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualTreeService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualTreeService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_visual_tree_change(this : IVisualTreeService*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
+  end
+  def unadvise_visual_tree_change(this : IVisualTreeService*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
+  end
+  def get_enums(this : IVisualTreeService*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
+  end
+  def create_instance(this : IVisualTreeService*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
+  end
+  def get_property_values_chain(this : IVisualTreeService*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  end
+  def set_property(this : IVisualTreeService*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
+  end
+  def clear_property(this : IVisualTreeService*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
+  end
+  def get_collection_count(this : IVisualTreeService*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
+  end
+  def get_collection_elements(this : IVisualTreeService*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
+  end
+  def add_child(this : IVisualTreeService*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
+  end
+  def remove_child(this : IVisualTreeService*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
+  end
+  def clear_children(this : IVisualTreeService*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
+  end
+end
+struct LibWin32::IXamlDiagnostics
+  def query_interface(this : IXamlDiagnostics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXamlDiagnostics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXamlDiagnostics*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dispatcher(this : IXamlDiagnostics*, ppdispatcher : IInspectable*) : HRESULT
+    @lpVtbl.value.get_dispatcher.call(this, ppdispatcher)
+  end
+  def get_ui_layer(this : IXamlDiagnostics*, pplayer : IInspectable*) : HRESULT
+    @lpVtbl.value.get_ui_layer.call(this, pplayer)
+  end
+  def get_application(this : IXamlDiagnostics*, ppapplication : IInspectable*) : HRESULT
+    @lpVtbl.value.get_application.call(this, ppapplication)
+  end
+  def get_i_inspectable_from_handle(this : IXamlDiagnostics*, instancehandle : UInt64, ppinstance : IInspectable*) : HRESULT
+    @lpVtbl.value.get_i_inspectable_from_handle.call(this, instancehandle, ppinstance)
+  end
+  def get_handle_from_i_inspectable(this : IXamlDiagnostics*, pinstance : IInspectable, phandle : UInt64*) : HRESULT
+    @lpVtbl.value.get_handle_from_i_inspectable.call(this, pinstance, phandle)
+  end
+  def hit_test(this : IXamlDiagnostics*, rect : RECT, pcount : UInt32*, ppinstancehandles : UInt64**) : HRESULT
+    @lpVtbl.value.hit_test.call(this, rect, pcount, ppinstancehandles)
+  end
+  def register_instance(this : IXamlDiagnostics*, pinstance : IInspectable, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.register_instance.call(this, pinstance, pinstancehandle)
+  end
+  def get_initialization_data(this : IXamlDiagnostics*, pinitializationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_initialization_data.call(this, pinitializationdata)
+  end
+end
+struct LibWin32::IBitmapData
+  def query_interface(this : IBitmapData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBitmapData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBitmapData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def copy_bytes_to(this : IBitmapData*, sourceoffsetinbytes : UInt32, maxbytestocopy : UInt32, pvbytes : UInt8*, numberofbytescopied : UInt32*) : HRESULT
+    @lpVtbl.value.copy_bytes_to.call(this, sourceoffsetinbytes, maxbytestocopy, pvbytes, numberofbytescopied)
+  end
+  def get_stride(this : IBitmapData*, pstride : UInt32*) : HRESULT
+    @lpVtbl.value.get_stride.call(this, pstride)
+  end
+  def get_bitmap_description(this : IBitmapData*, pbitmapdescription : BitmapDescription*) : HRESULT
+    @lpVtbl.value.get_bitmap_description.call(this, pbitmapdescription)
+  end
+  def get_source_bitmap_description(this : IBitmapData*, pbitmapdescription : BitmapDescription*) : HRESULT
+    @lpVtbl.value.get_source_bitmap_description.call(this, pbitmapdescription)
+  end
+end
+struct LibWin32::IVisualTreeService2
+  def query_interface(this : IVisualTreeService2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualTreeService2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualTreeService2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_visual_tree_change(this : IVisualTreeService2*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
+  end
+  def unadvise_visual_tree_change(this : IVisualTreeService2*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
+  end
+  def get_enums(this : IVisualTreeService2*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
+  end
+  def create_instance(this : IVisualTreeService2*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
+  end
+  def get_property_values_chain(this : IVisualTreeService2*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  end
+  def set_property(this : IVisualTreeService2*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
+  end
+  def clear_property(this : IVisualTreeService2*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
+  end
+  def get_collection_count(this : IVisualTreeService2*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
+  end
+  def get_collection_elements(this : IVisualTreeService2*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
+  end
+  def add_child(this : IVisualTreeService2*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
+  end
+  def remove_child(this : IVisualTreeService2*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
+  end
+  def clear_children(this : IVisualTreeService2*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
+  end
+  def get_property_index(this : IVisualTreeService2*, object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_index.call(this, object, propertyname, ppropertyindex)
+  end
+  def get_property(this : IVisualTreeService2*, object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_property.call(this, object, propertyindex, pvalue)
+  end
+  def replace_resource(this : IVisualTreeService2*, resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
+    @lpVtbl.value.replace_resource.call(this, resourcedictionary, key, newvalue)
+  end
+  def render_target_bitmap(this : IVisualTreeService2*, handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
+    @lpVtbl.value.render_target_bitmap.call(this, handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
+  end
+end
+struct LibWin32::IVisualTreeService3
+  def query_interface(this : IVisualTreeService3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVisualTreeService3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVisualTreeService3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_visual_tree_change(this : IVisualTreeService3*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.advise_visual_tree_change.call(this, pcallback)
+  end
+  def unadvise_visual_tree_change(this : IVisualTreeService3*, pcallback : IVisualTreeServiceCallback) : HRESULT
+    @lpVtbl.value.unadvise_visual_tree_change.call(this, pcallback)
+  end
+  def get_enums(this : IVisualTreeService3*, pcount : UInt32*, ppenums : EnumType**) : HRESULT
+    @lpVtbl.value.get_enums.call(this, pcount, ppenums)
+  end
+  def create_instance(this : IVisualTreeService3*, typename : UInt8*, value : UInt8*, pinstancehandle : UInt64*) : HRESULT
+    @lpVtbl.value.create_instance.call(this, typename, value, pinstancehandle)
+  end
+  def get_property_values_chain(this : IVisualTreeService3*, instancehandle : UInt64, psourcecount : UInt32*, pppropertysources : PropertyChainSource**, ppropertycount : UInt32*, pppropertyvalues : PropertyChainValue**) : HRESULT
+    @lpVtbl.value.get_property_values_chain.call(this, instancehandle, psourcecount, pppropertysources, ppropertycount, pppropertyvalues)
+  end
+  def set_property(this : IVisualTreeService3*, instancehandle : UInt64, value : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, instancehandle, value, propertyindex)
+  end
+  def clear_property(this : IVisualTreeService3*, instancehandle : UInt64, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.clear_property.call(this, instancehandle, propertyindex)
+  end
+  def get_collection_count(this : IVisualTreeService3*, instancehandle : UInt64, pcollectionsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_collection_count.call(this, instancehandle, pcollectionsize)
+  end
+  def get_collection_elements(this : IVisualTreeService3*, instancehandle : UInt64, startindex : UInt32, pelementcount : UInt32*, ppelementvalues : CollectionElementValue**) : HRESULT
+    @lpVtbl.value.get_collection_elements.call(this, instancehandle, startindex, pelementcount, ppelementvalues)
+  end
+  def add_child(this : IVisualTreeService3*, parent : UInt64, child : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.add_child.call(this, parent, child, index)
+  end
+  def remove_child(this : IVisualTreeService3*, parent : UInt64, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_child.call(this, parent, index)
+  end
+  def clear_children(this : IVisualTreeService3*, parent : UInt64) : HRESULT
+    @lpVtbl.value.clear_children.call(this, parent)
+  end
+  def get_property_index(this : IVisualTreeService3*, object : UInt64, propertyname : LibC::LPWSTR, ppropertyindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_index.call(this, object, propertyname, ppropertyindex)
+  end
+  def get_property(this : IVisualTreeService3*, object : UInt64, propertyindex : UInt32, pvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_property.call(this, object, propertyindex, pvalue)
+  end
+  def replace_resource(this : IVisualTreeService3*, resourcedictionary : UInt64, key : UInt64, newvalue : UInt64) : HRESULT
+    @lpVtbl.value.replace_resource.call(this, resourcedictionary, key, newvalue)
+  end
+  def render_target_bitmap(this : IVisualTreeService3*, handle : UInt64, options : RenderTargetBitmapOptions, maxpixelwidth : UInt32, maxpixelheight : UInt32, ppbitmapdata : IBitmapData*) : HRESULT
+    @lpVtbl.value.render_target_bitmap.call(this, handle, options, maxpixelwidth, maxpixelheight, ppbitmapdata)
+  end
+  def resolve_resource(this : IVisualTreeService3*, resourcecontext : UInt64, resourcename : LibC::LPWSTR, resourcetype : ResourceType, propertyindex : UInt32) : HRESULT
+    @lpVtbl.value.resolve_resource.call(this, resourcecontext, resourcename, resourcetype, propertyindex)
+  end
+  def get_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcename : LibC::LPWSTR, resourceisimplicitstyle : LibC::BOOL, resourcehandle : UInt64*) : HRESULT
+    @lpVtbl.value.get_dictionary_item.call(this, dictionaryhandle, resourcename, resourceisimplicitstyle, resourcehandle)
+  end
+  def add_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcekey : UInt64, resourcehandle : UInt64) : HRESULT
+    @lpVtbl.value.add_dictionary_item.call(this, dictionaryhandle, resourcekey, resourcehandle)
+  end
+  def remove_dictionary_item(this : IVisualTreeService3*, dictionaryhandle : UInt64, resourcekey : UInt64) : HRESULT
+    @lpVtbl.value.remove_dictionary_item.call(this, dictionaryhandle, resourcekey)
+  end
+end

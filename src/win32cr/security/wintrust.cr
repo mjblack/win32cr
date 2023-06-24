@@ -568,7 +568,7 @@ lib LibWin32
   fun WinVerifyTrustEx(hwnd : LibC::HANDLE, pgactionid : Guid*, pwintrustdata : WINTRUST_DATA*) : Int32
 
   # Params # pdwpolicyflags : WINTRUST_POLICY_FLAGS* [In]
-  fun WintrustGetRegPolicyFlags(pdwpolicyflags : WINTRUST_POLICY_FLAGS*)
+  fun WintrustGetRegPolicyFlags(pdwpolicyflags : WINTRUST_POLICY_FLAGS*) : Void
 
   # Params # dwpolicyflags : WINTRUST_POLICY_FLAGS [In]
   fun WintrustSetRegPolicyFlags(dwpolicyflags : WINTRUST_POLICY_FLAGS) : LibC::BOOL
@@ -613,5 +613,5 @@ lib LibWin32
   fun OpenPersonalTrustDBDialog(hwndparent : LibC::HANDLE) : LibC::BOOL
 
   # Params # fincludepepagehashes : LibC::BOOL [In]
-  fun WintrustSetDefaultIncludePEPageHashes(fincludepepagehashes : LibC::BOOL)
+  fun WintrustSetDefaultIncludePEPageHashes(fincludepepagehashes : LibC::BOOL) : Void
 end

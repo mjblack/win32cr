@@ -783,3 +783,388 @@ lib LibWin32
   # Params # pprop : SERIALIZEDPROPERTYVALUE* [In],cbmax : UInt32 [In],ppropvar : PROPVARIANT* [In]
   fun StgDeserializePropVariant(pprop : SERIALIZEDPROPERTYVALUE*, cbmax : UInt32, ppropvar : PROPVARIANT*) : HRESULT
 end
+struct LibWin32::IEnumSTATSTG
+  def query_interface(this : IEnumSTATSTG*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSTATSTG*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSTATSTG*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSTATSTG*, celt : UInt32, rgelt : STATSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumSTATSTG*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumSTATSTG*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSTATSTG*, ppenum : IEnumSTATSTG*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IStorage
+  def query_interface(this : IStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream(this : IStorage*, pwcsname : LibC::LPWSTR, grfmode : UInt32, reserved1 : UInt32, reserved2 : UInt32, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, pwcsname, grfmode, reserved1, reserved2, ppstm)
+  end
+  def open_stream(this : IStorage*, pwcsname : LibC::LPWSTR, reserved1 : Void*, grfmode : UInt32, reserved2 : UInt32, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pwcsname, reserved1, grfmode, reserved2, ppstm)
+  end
+  def create_storage(this : IStorage*, pwcsname : LibC::LPWSTR, grfmode : UInt32, reserved1 : UInt32, reserved2 : UInt32, ppstg : IStorage*) : HRESULT
+    @lpVtbl.value.create_storage.call(this, pwcsname, grfmode, reserved1, reserved2, ppstg)
+  end
+  def open_storage(this : IStorage*, pwcsname : LibC::LPWSTR, pstgpriority : IStorage, grfmode : UInt32, snbexclude : UInt16**, reserved : UInt32, ppstg : IStorage*) : HRESULT
+    @lpVtbl.value.open_storage.call(this, pwcsname, pstgpriority, grfmode, snbexclude, reserved, ppstg)
+  end
+  def copy_to(this : IStorage*, ciidexclude : UInt32, rgiidexclude : Guid*, snbexclude : UInt16**, pstgdest : IStorage) : HRESULT
+    @lpVtbl.value.copy_to.call(this, ciidexclude, rgiidexclude, snbexclude, pstgdest)
+  end
+  def move_element_to(this : IStorage*, pwcsname : LibC::LPWSTR, pstgdest : IStorage, pwcsnewname : LibC::LPWSTR, grfflags : UInt32) : HRESULT
+    @lpVtbl.value.move_element_to.call(this, pwcsname, pstgdest, pwcsnewname, grfflags)
+  end
+  def commit(this : IStorage*, grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, grfcommitflags)
+  end
+  def revert(this : IStorage*) : HRESULT
+    @lpVtbl.value.revert.call(this)
+  end
+  def enum_elements(this : IStorage*, reserved1 : UInt32, reserved2 : Void*, reserved3 : UInt32, ppenum : IEnumSTATSTG*) : HRESULT
+    @lpVtbl.value.enum_elements.call(this, reserved1, reserved2, reserved3, ppenum)
+  end
+  def destroy_element(this : IStorage*, pwcsname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.destroy_element.call(this, pwcsname)
+  end
+  def rename_element(this : IStorage*, pwcsoldname : LibC::LPWSTR, pwcsnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_element.call(this, pwcsoldname, pwcsnewname)
+  end
+  def set_element_times(this : IStorage*, pwcsname : LibC::LPWSTR, pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_element_times.call(this, pwcsname, pctime, patime, pmtime)
+  end
+  def set_class(this : IStorage*, clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.call(this, clsid)
+  end
+  def set_state_bits(this : IStorage*, grfstatebits : UInt32, grfmask : UInt32) : HRESULT
+    @lpVtbl.value.set_state_bits.call(this, grfstatebits, grfmask)
+  end
+  def stat(this : IStorage*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
+  end
+end
+struct LibWin32::IPersistStorage
+  def query_interface(this : IPersistStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPersistStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPersistStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_id(this : IPersistStorage*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
+  end
+  def is_dirty(this : IPersistStorage*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
+  end
+  def init_new(this : IPersistStorage*, pstg : IStorage) : HRESULT
+    @lpVtbl.value.init_new.call(this, pstg)
+  end
+  def load(this : IPersistStorage*, pstg : IStorage) : HRESULT
+    @lpVtbl.value.load.call(this, pstg)
+  end
+  def save(this : IPersistStorage*, pstgsave : IStorage, fsameasload : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, pstgsave, fsameasload)
+  end
+  def save_completed(this : IPersistStorage*, pstgnew : IStorage) : HRESULT
+    @lpVtbl.value.save_completed.call(this, pstgnew)
+  end
+  def hands_off_storage(this : IPersistStorage*) : HRESULT
+    @lpVtbl.value.hands_off_storage.call(this)
+  end
+end
+struct LibWin32::ILockBytes
+  def query_interface(this : ILockBytes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILockBytes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILockBytes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_at(this : ILockBytes*, uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read_at.call(this, uloffset, pv, cb, pcbread)
+  end
+  def write_at(this : ILockBytes*, uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_at.call(this, uloffset, pv, cb, pcbwritten)
+  end
+  def flush(this : ILockBytes*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def set_size(this : ILockBytes*, cb : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_size.call(this, cb)
+  end
+  def lock_region(this : ILockBytes*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
+  end
+  def unlock_region(this : ILockBytes*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
+  end
+  def stat(this : ILockBytes*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
+  end
+end
+struct LibWin32::IRootStorage
+  def query_interface(this : IRootStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRootStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRootStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def switch_to_file(this : IRootStorage*, pszfile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.switch_to_file.call(this, pszfile)
+  end
+end
+struct LibWin32::IFillLockBytes
+  def query_interface(this : IFillLockBytes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFillLockBytes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFillLockBytes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def fill_append(this : IFillLockBytes*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.fill_append.call(this, pv, cb, pcbwritten)
+  end
+  def fill_at(this : IFillLockBytes*, uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.fill_at.call(this, uloffset, pv, cb, pcbwritten)
+  end
+  def set_fill_size(this : IFillLockBytes*, ulsize : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_fill_size.call(this, ulsize)
+  end
+  def terminate(this : IFillLockBytes*, bcanceled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.terminate.call(this, bcanceled)
+  end
+end
+struct LibWin32::ILayoutStorage
+  def query_interface(this : ILayoutStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILayoutStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILayoutStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def layout_script(this : ILayoutStorage*, pstoragelayout : StorageLayout*, nentries : UInt32, glfinterleavedflag : UInt32) : HRESULT
+    @lpVtbl.value.layout_script.call(this, pstoragelayout, nentries, glfinterleavedflag)
+  end
+  def begin_monitor(this : ILayoutStorage*) : HRESULT
+    @lpVtbl.value.begin_monitor.call(this)
+  end
+  def end_monitor(this : ILayoutStorage*) : HRESULT
+    @lpVtbl.value.end_monitor.call(this)
+  end
+  def re_layout_docfile(this : ILayoutStorage*, pwcsnewdfname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.re_layout_docfile.call(this, pwcsnewdfname)
+  end
+  def re_layout_docfile_on_i_lock_bytes(this : ILayoutStorage*, pilockbytes : ILockBytes) : HRESULT
+    @lpVtbl.value.re_layout_docfile_on_i_lock_bytes.call(this, pilockbytes)
+  end
+end
+struct LibWin32::IDirectWriterLock
+  def query_interface(this : IDirectWriterLock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectWriterLock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectWriterLock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def wait_for_write_access(this : IDirectWriterLock*, dwtimeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_write_access.call(this, dwtimeout)
+  end
+  def release_write_access(this : IDirectWriterLock*) : HRESULT
+    @lpVtbl.value.release_write_access.call(this)
+  end
+  def have_write_access(this : IDirectWriterLock*) : HRESULT
+    @lpVtbl.value.have_write_access.call(this)
+  end
+end
+struct LibWin32::IPropertyStorage
+  def query_interface(this : IPropertyStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_multiple(this : IPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.read_multiple.call(this, cpspec, rgpspec, rgpropvar)
+  end
+  def write_multiple(this : IPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*, propidnamefirst : UInt32) : HRESULT
+    @lpVtbl.value.write_multiple.call(this, cpspec, rgpspec, rgpropvar, propidnamefirst)
+  end
+  def delete_multiple(this : IPropertyStorage*, cpspec : UInt32, rgpspec : PROPSPEC*) : HRESULT
+    @lpVtbl.value.delete_multiple.call(this, cpspec, rgpspec)
+  end
+  def read_property_names(this : IPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.read_property_names.call(this, cpropid, rgpropid, rglpwstrname)
+  end
+  def write_property_names(this : IPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.write_property_names.call(this, cpropid, rgpropid, rglpwstrname)
+  end
+  def delete_property_names(this : IPropertyStorage*, cpropid : UInt32, rgpropid : UInt32*) : HRESULT
+    @lpVtbl.value.delete_property_names.call(this, cpropid, rgpropid)
+  end
+  def commit(this : IPropertyStorage*, grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, grfcommitflags)
+  end
+  def revert(this : IPropertyStorage*) : HRESULT
+    @lpVtbl.value.revert.call(this)
+  end
+  def enum(this : IPropertyStorage*, ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.enum.call(this, ppenum)
+  end
+  def set_times(this : IPropertyStorage*, pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_times.call(this, pctime, patime, pmtime)
+  end
+  def set_class(this : IPropertyStorage*, clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.call(this, clsid)
+  end
+  def stat(this : IPropertyStorage*, pstatpsstg : STATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.stat.call(this, pstatpsstg)
+  end
+end
+struct LibWin32::IPropertySetStorage
+  def query_interface(this : IPropertySetStorage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertySetStorage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertySetStorage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IPropertySetStorage*, rfmtid : Guid*, pclsid : Guid*, grfflags : UInt32, grfmode : UInt32, ppprstg : IPropertyStorage*) : HRESULT
+    @lpVtbl.value.create.call(this, rfmtid, pclsid, grfflags, grfmode, ppprstg)
+  end
+  def open(this : IPropertySetStorage*, rfmtid : Guid*, grfmode : UInt32, ppprstg : IPropertyStorage*) : HRESULT
+    @lpVtbl.value.open.call(this, rfmtid, grfmode, ppprstg)
+  end
+  def delete(this : IPropertySetStorage*, rfmtid : Guid*) : HRESULT
+    @lpVtbl.value.delete.call(this, rfmtid)
+  end
+  def enum(this : IPropertySetStorage*, ppenum : IEnumSTATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.enum.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumSTATPROPSTG
+  def query_interface(this : IEnumSTATPROPSTG*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSTATPROPSTG*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSTATPROPSTG*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSTATPROPSTG*, celt : UInt32, rgelt : STATPROPSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumSTATPROPSTG*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSTATPROPSTG*, ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumSTATPROPSETSTG
+  def query_interface(this : IEnumSTATPROPSETSTG*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumSTATPROPSETSTG*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumSTATPROPSETSTG*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumSTATPROPSETSTG*, celt : UInt32, rgelt : STATPROPSETSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumSTATPROPSETSTG*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumSTATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumSTATPROPSETSTG*, ppenum : IEnumSTATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IPropertyBag
+  def query_interface(this : IPropertyBag*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyBag*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyBag*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read(this : IPropertyBag*, pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.call(this, pszpropname, pvar, perrorlog)
+  end
+  def write(this : IPropertyBag*, pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.call(this, pszpropname, pvar)
+  end
+end
+struct LibWin32::IPropertyBag2
+  def query_interface(this : IPropertyBag2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyBag2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyBag2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read(this : IPropertyBag2*, cproperties : UInt32, ppropbag : PROPBAG2*, perrlog : IErrorLog, pvarvalue : VARIANT*, phrerror : HRESULT*) : HRESULT
+    @lpVtbl.value.read.call(this, cproperties, ppropbag, perrlog, pvarvalue, phrerror)
+  end
+  def write(this : IPropertyBag2*, cproperties : UInt32, ppropbag : PROPBAG2*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.write.call(this, cproperties, ppropbag, pvarvalue)
+  end
+  def count_properties(this : IPropertyBag2*, pcproperties : UInt32*) : HRESULT
+    @lpVtbl.value.count_properties.call(this, pcproperties)
+  end
+  def get_property_info(this : IPropertyBag2*, iproperty : UInt32, cproperties : UInt32, ppropbag : PROPBAG2*, pcproperties : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, iproperty, cproperties, ppropbag, pcproperties)
+  end
+  def load_object(this : IPropertyBag2*, pstrname : LibC::LPWSTR, dwhint : UInt32, punkobject : IUnknown, perrlog : IErrorLog) : HRESULT
+    @lpVtbl.value.load_object.call(this, pstrname, dwhint, punkobject, perrlog)
+  end
+end

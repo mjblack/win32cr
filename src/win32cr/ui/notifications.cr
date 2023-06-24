@@ -29,3 +29,17 @@ lib LibWin32
   end
 
 end
+struct LibWin32::INotificationActivationCallback
+  def query_interface(this : INotificationActivationCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INotificationActivationCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INotificationActivationCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate(this : INotificationActivationCallback*, appusermodelid : LibC::LPWSTR, invokedargs : LibC::LPWSTR, data : NOTIFICATION_USER_INPUT_DATA*, count : UInt32) : HRESULT
+    @lpVtbl.value.activate.call(this, appusermodelid, invokedargs, data, count)
+  end
+end

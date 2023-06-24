@@ -211,13 +211,13 @@ lib LibWin32
     selector1 : UInt16
     selector2 : UInt16
     segment : UInt16
-    module : CHAR[10]*
+    module_ : CHAR[10]*
     file_name : CHAR[256]*
     type : UInt16
     length : UInt32
   end
   struct IMAGE_NOTE
-    module : CHAR[10]*
+    module_ : CHAR[10]*
     file_name : CHAR[256]*
     h_module : UInt16
     h_task : UInt16

@@ -1244,13 +1244,13 @@ lib LibWin32
   fun WinBioGetEnrolledFactors(accountowner : WINBIO_IDENTITY*, enrolledfactors : UInt32*) : HRESULT
 
   # Params # value : UInt8* [In],source : WINBIO_SETTING_SOURCE* [In]
-  fun WinBioGetEnabledSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*)
+  fun WinBioGetEnabledSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*) : Void
 
   # Params # value : UInt8* [In],source : WINBIO_SETTING_SOURCE* [In]
-  fun WinBioGetLogonSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*)
+  fun WinBioGetLogonSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*) : Void
 
   # Params # value : UInt8* [In],source : WINBIO_SETTING_SOURCE* [In]
-  fun WinBioGetDomainLogonSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*)
+  fun WinBioGetDomainLogonSetting(value : UInt8*, source : WINBIO_SETTING_SOURCE*) : Void
 
   # Params # 
   fun WinBioAcquireFocus : HRESULT

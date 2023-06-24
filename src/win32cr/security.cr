@@ -1046,7 +1046,7 @@ lib LibWin32
   fun MakeSelfRelativeSD(pabsolutesecuritydescriptor : SECURITY_DESCRIPTOR*, pselfrelativesecuritydescriptor : SECURITY_DESCRIPTOR*, lpdwbufferlength : UInt32*) : LibC::BOOL
 
   # Params # accessmask : UInt32* [In],genericmapping : GENERIC_MAPPING* [In]
-  fun MapGenericMask(accessmask : UInt32*, genericmapping : GENERIC_MAPPING*)
+  fun MapGenericMask(accessmask : UInt32*, genericmapping : GENERIC_MAPPING*) : Void
 
   # Params # subsystemname : LibC::LPWSTR [In],handleid : Void* [In],generateonclose : LibC::BOOL [In]
   fun ObjectCloseAuditAlarmW(subsystemname : LibC::LPWSTR, handleid : Void*, generateonclose : LibC::BOOL) : LibC::BOOL
@@ -1067,7 +1067,7 @@ lib LibWin32
   fun PrivilegedServiceAuditAlarmW(subsystemname : LibC::LPWSTR, servicename : LibC::LPWSTR, clienttoken : LibC::HANDLE, privileges : PRIVILEGE_SET*, accessgranted : LibC::BOOL) : LibC::BOOL
 
   # Params # securityinformation : UInt32 [In],desiredaccess : UInt32* [In]
-  fun QuerySecurityAccessMask(securityinformation : UInt32, desiredaccess : UInt32*)
+  fun QuerySecurityAccessMask(securityinformation : UInt32, desiredaccess : UInt32*) : Void
 
   # Params # 
   fun RevertToSelf : LibC::BOOL
@@ -1088,7 +1088,7 @@ lib LibWin32
   fun SetPrivateObjectSecurityEx(securityinformation : UInt32, modificationdescriptor : SECURITY_DESCRIPTOR*, objectssecuritydescriptor : SECURITY_DESCRIPTOR**, autoinheritflags : SECURITY_AUTO_INHERIT_FLAGS, genericmapping : GENERIC_MAPPING*, token : LibC::HANDLE) : LibC::BOOL
 
   # Params # securityinformation : UInt32 [In],desiredaccess : UInt32* [In]
-  fun SetSecurityAccessMask(securityinformation : UInt32, desiredaccess : UInt32*)
+  fun SetSecurityAccessMask(securityinformation : UInt32, desiredaccess : UInt32*) : Void
 
   # Params # psecuritydescriptor : SECURITY_DESCRIPTOR* [In],controlbitsofinterest : UInt16 [In],controlbitstoset : UInt16 [In]
   fun SetSecurityDescriptorControl(psecuritydescriptor : SECURITY_DESCRIPTOR*, controlbitsofinterest : UInt16, controlbitstoset : UInt16) : LibC::BOOL

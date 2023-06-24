@@ -135,3 +135,100 @@ lib LibWin32
   # Params # printername : LibC::LPWSTR [In],jobname : LibC::LPWSTR [In],outputfilename : LibC::LPWSTR [In],progressevent : LibC::HANDLE [In],completionevent : LibC::HANDLE [In],xpsprintjob : IXpsPrintJob* [In],printcontentreceiver : IXpsOMPackageTarget* [In]
   fun StartXpsPrintJob1(printername : LibC::LPWSTR, jobname : LibC::LPWSTR, outputfilename : LibC::LPWSTR, progressevent : LibC::HANDLE, completionevent : LibC::HANDLE, xpsprintjob : IXpsPrintJob*, printcontentreceiver : IXpsOMPackageTarget*) : HRESULT
 end
+struct LibWin32::IXpsPrintJobStream
+  def query_interface(this : IXpsPrintJobStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsPrintJobStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsPrintJobStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read(this : IXpsPrintJobStream*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pv, cb, pcbread)
+  end
+  def write(this : IXpsPrintJobStream*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
+  end
+  def close(this : IXpsPrintJobStream*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IXpsPrintJob
+  def query_interface(this : IXpsPrintJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsPrintJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsPrintJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cancel(this : IXpsPrintJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def get_job_status(this : IXpsPrintJob*, jobstatus : XPS_JOB_STATUS*) : HRESULT
+    @lpVtbl.value.get_job_status.call(this, jobstatus)
+  end
+end
+struct LibWin32::IPrintDocumentPackageTarget
+  def query_interface(this : IPrintDocumentPackageTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintDocumentPackageTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintDocumentPackageTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_package_target_types(this : IPrintDocumentPackageTarget*, targetcount : UInt32*, targettypes : Guid**) : HRESULT
+    @lpVtbl.value.get_package_target_types.call(this, targetcount, targettypes)
+  end
+  def get_package_target(this : IPrintDocumentPackageTarget*, guidtargettype : Guid*, riid : Guid*, ppvtarget : Void**) : HRESULT
+    @lpVtbl.value.get_package_target.call(this, guidtargettype, riid, ppvtarget)
+  end
+  def cancel(this : IPrintDocumentPackageTarget*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IPrintDocumentPackageStatusEvent
+  def query_interface(this : IPrintDocumentPackageStatusEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintDocumentPackageStatusEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintDocumentPackageStatusEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPrintDocumentPackageStatusEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPrintDocumentPackageStatusEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPrintDocumentPackageStatusEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPrintDocumentPackageStatusEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def package_status_updated(this : IPrintDocumentPackageStatusEvent*, packagestatus : PrintDocumentPackageStatus*) : HRESULT
+    @lpVtbl.value.package_status_updated.call(this, packagestatus)
+  end
+end
+struct LibWin32::IPrintDocumentPackageTargetFactory
+  def query_interface(this : IPrintDocumentPackageTargetFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintDocumentPackageTargetFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintDocumentPackageTargetFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_document_package_target_for_print_job(this : IPrintDocumentPackageTargetFactory*, printername : LibC::LPWSTR, jobname : LibC::LPWSTR, joboutputstream : IStream, jobprintticketstream : IStream, docpackagetarget : IPrintDocumentPackageTarget*) : HRESULT
+    @lpVtbl.value.create_document_package_target_for_print_job.call(this, printername, jobname, joboutputstream, jobprintticketstream, docpackagetarget)
+  end
+end

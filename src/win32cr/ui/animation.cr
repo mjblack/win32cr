@@ -679,3 +679,959 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IUIAnimationManager
+  def query_interface(this : IUIAnimationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_animation_variable(this : IUIAnimationManager*, initialvalue : Float64, variable : IUIAnimationVariable*) : HRESULT
+    @lpVtbl.value.create_animation_variable.call(this, initialvalue, variable)
+  end
+  def schedule_transition(this : IUIAnimationManager*, variable : IUIAnimationVariable, transition : IUIAnimationTransition, timenow : Float64) : HRESULT
+    @lpVtbl.value.schedule_transition.call(this, variable, transition, timenow)
+  end
+  def create_storyboard(this : IUIAnimationManager*, storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.create_storyboard.call(this, storyboard)
+  end
+  def finish_all_storyboards(this : IUIAnimationManager*, completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish_all_storyboards.call(this, completiondeadline)
+  end
+  def abandon_all_storyboards(this : IUIAnimationManager*) : HRESULT
+    @lpVtbl.value.abandon_all_storyboards.call(this)
+  end
+  def update(this : IUIAnimationManager*, timenow : Float64, updateresult : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.update.call(this, timenow, updateresult)
+  end
+  def get_variable_from_tag(this : IUIAnimationManager*, object : IUnknown, id : UInt32, variable : IUIAnimationVariable*) : HRESULT
+    @lpVtbl.value.get_variable_from_tag.call(this, object, id, variable)
+  end
+  def get_storyboard_from_tag(this : IUIAnimationManager*, object : IUnknown, id : UInt32, storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.get_storyboard_from_tag.call(this, object, id, storyboard)
+  end
+  def get_status(this : IUIAnimationManager*, status : UI_ANIMATION_MANAGER_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def set_animation_mode(this : IUIAnimationManager*, mode : UI_ANIMATION_MODE) : HRESULT
+    @lpVtbl.value.set_animation_mode.call(this, mode)
+  end
+  def pause(this : IUIAnimationManager*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IUIAnimationManager*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def set_manager_event_handler(this : IUIAnimationManager*, handler : IUIAnimationManagerEventHandler) : HRESULT
+    @lpVtbl.value.set_manager_event_handler.call(this, handler)
+  end
+  def set_cancel_priority_comparison(this : IUIAnimationManager*, comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_cancel_priority_comparison.call(this, comparison)
+  end
+  def set_trim_priority_comparison(this : IUIAnimationManager*, comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_trim_priority_comparison.call(this, comparison)
+  end
+  def set_compress_priority_comparison(this : IUIAnimationManager*, comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_compress_priority_comparison.call(this, comparison)
+  end
+  def set_conclude_priority_comparison(this : IUIAnimationManager*, comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_conclude_priority_comparison.call(this, comparison)
+  end
+  def set_default_longest_acceptable_delay(this : IUIAnimationManager*, delay : Float64) : HRESULT
+    @lpVtbl.value.set_default_longest_acceptable_delay.call(this, delay)
+  end
+  def shutdown(this : IUIAnimationManager*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IUIAnimationVariable
+  def query_interface(this : IUIAnimationVariable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_value(this : IUIAnimationVariable*, value : Float64*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+  def get_final_value(this : IUIAnimationVariable*, finalvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.call(this, finalvalue)
+  end
+  def get_previous_value(this : IUIAnimationVariable*, previousvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_previous_value.call(this, previousvalue)
+  end
+  def get_integer_value(this : IUIAnimationVariable*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_integer_value.call(this, value)
+  end
+  def get_final_integer_value(this : IUIAnimationVariable*, finalvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_final_integer_value.call(this, finalvalue)
+  end
+  def get_previous_integer_value(this : IUIAnimationVariable*, previousvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_previous_integer_value.call(this, previousvalue)
+  end
+  def get_current_storyboard(this : IUIAnimationVariable*, storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.get_current_storyboard.call(this, storyboard)
+  end
+  def set_lower_bound(this : IUIAnimationVariable*, bound : Float64) : HRESULT
+    @lpVtbl.value.set_lower_bound.call(this, bound)
+  end
+  def set_upper_bound(this : IUIAnimationVariable*, bound : Float64) : HRESULT
+    @lpVtbl.value.set_upper_bound.call(this, bound)
+  end
+  def set_rounding_mode(this : IUIAnimationVariable*, mode : UI_ANIMATION_ROUNDING_MODE) : HRESULT
+    @lpVtbl.value.set_rounding_mode.call(this, mode)
+  end
+  def set_tag(this : IUIAnimationVariable*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_tag(this : IUIAnimationVariable*, object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, object, id)
+  end
+  def set_variable_change_handler(this : IUIAnimationVariable*, handler : IUIAnimationVariableChangeHandler) : HRESULT
+    @lpVtbl.value.set_variable_change_handler.call(this, handler)
+  end
+  def set_variable_integer_change_handler(this : IUIAnimationVariable*, handler : IUIAnimationVariableIntegerChangeHandler) : HRESULT
+    @lpVtbl.value.set_variable_integer_change_handler.call(this, handler)
+  end
+end
+struct LibWin32::IUIAnimationStoryboard
+  def query_interface(this : IUIAnimationStoryboard*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationStoryboard*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationStoryboard*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_transition(this : IUIAnimationStoryboard*, variable : IUIAnimationVariable, transition : IUIAnimationTransition) : HRESULT
+    @lpVtbl.value.add_transition.call(this, variable, transition)
+  end
+  def add_keyframe_at_offset(this : IUIAnimationStoryboard*, existingkeyframe : UI_ANIMATION_KEYFRAME, offset : Float64, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_at_offset.call(this, existingkeyframe, offset, keyframe)
+  end
+  def add_keyframe_after_transition(this : IUIAnimationStoryboard*, transition : IUIAnimationTransition, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_after_transition.call(this, transition, keyframe)
+  end
+  def add_transition_at_keyframe(this : IUIAnimationStoryboard*, variable : IUIAnimationVariable, transition : IUIAnimationTransition, startkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_at_keyframe.call(this, variable, transition, startkeyframe)
+  end
+  def add_transition_between_keyframes(this : IUIAnimationStoryboard*, variable : IUIAnimationVariable, transition : IUIAnimationTransition, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_between_keyframes.call(this, variable, transition, startkeyframe, endkeyframe)
+  end
+  def repeat_between_keyframes(this : IUIAnimationStoryboard*, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME, repetitioncount : Int32) : HRESULT
+    @lpVtbl.value.repeat_between_keyframes.call(this, startkeyframe, endkeyframe, repetitioncount)
+  end
+  def hold_variable(this : IUIAnimationStoryboard*, variable : IUIAnimationVariable) : HRESULT
+    @lpVtbl.value.hold_variable.call(this, variable)
+  end
+  def set_longest_acceptable_delay(this : IUIAnimationStoryboard*, delay : Float64) : HRESULT
+    @lpVtbl.value.set_longest_acceptable_delay.call(this, delay)
+  end
+  def schedule(this : IUIAnimationStoryboard*, timenow : Float64, schedulingresult : UI_ANIMATION_SCHEDULING_RESULT*) : HRESULT
+    @lpVtbl.value.schedule.call(this, timenow, schedulingresult)
+  end
+  def conclude(this : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.conclude.call(this)
+  end
+  def finish(this : IUIAnimationStoryboard*, completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish.call(this, completiondeadline)
+  end
+  def abandon(this : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
+  end
+  def set_tag(this : IUIAnimationStoryboard*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_tag(this : IUIAnimationStoryboard*, object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, object, id)
+  end
+  def get_status(this : IUIAnimationStoryboard*, status : UI_ANIMATION_STORYBOARD_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_elapsed_time(this : IUIAnimationStoryboard*, elapsedtime : Float64*) : HRESULT
+    @lpVtbl.value.get_elapsed_time.call(this, elapsedtime)
+  end
+  def set_storyboard_event_handler(this : IUIAnimationStoryboard*, handler : IUIAnimationStoryboardEventHandler) : HRESULT
+    @lpVtbl.value.set_storyboard_event_handler.call(this, handler)
+  end
+end
+struct LibWin32::IUIAnimationTransition
+  def query_interface(this : IUIAnimationTransition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_initial_value(this : IUIAnimationTransition*, value : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value.call(this, value)
+  end
+  def set_initial_velocity(this : IUIAnimationTransition*, velocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_velocity.call(this, velocity)
+  end
+  def is_duration_known(this : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.is_duration_known.call(this)
+  end
+  def get_duration(this : IUIAnimationTransition*, duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, duration)
+  end
+end
+struct LibWin32::IUIAnimationManagerEventHandler
+  def query_interface(this : IUIAnimationManagerEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationManagerEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationManagerEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_manager_status_changed(this : IUIAnimationManagerEventHandler*, newstatus : UI_ANIMATION_MANAGER_STATUS, previousstatus : UI_ANIMATION_MANAGER_STATUS) : HRESULT
+    @lpVtbl.value.on_manager_status_changed.call(this, newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationVariableChangeHandler
+  def query_interface(this : IUIAnimationVariableChangeHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariableChangeHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariableChangeHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_value_changed(this : IUIAnimationVariableChangeHandler*, storyboard : IUIAnimationStoryboard, variable : IUIAnimationVariable, newvalue : Float64, previousvalue : Float64) : HRESULT
+    @lpVtbl.value.on_value_changed.call(this, storyboard, variable, newvalue, previousvalue)
+  end
+end
+struct LibWin32::IUIAnimationVariableIntegerChangeHandler
+  def query_interface(this : IUIAnimationVariableIntegerChangeHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariableIntegerChangeHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariableIntegerChangeHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_integer_value_changed(this : IUIAnimationVariableIntegerChangeHandler*, storyboard : IUIAnimationStoryboard, variable : IUIAnimationVariable, newvalue : Int32, previousvalue : Int32) : HRESULT
+    @lpVtbl.value.on_integer_value_changed.call(this, storyboard, variable, newvalue, previousvalue)
+  end
+end
+struct LibWin32::IUIAnimationStoryboardEventHandler
+  def query_interface(this : IUIAnimationStoryboardEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationStoryboardEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationStoryboardEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_storyboard_status_changed(this : IUIAnimationStoryboardEventHandler*, storyboard : IUIAnimationStoryboard, newstatus : UI_ANIMATION_STORYBOARD_STATUS, previousstatus : UI_ANIMATION_STORYBOARD_STATUS) : HRESULT
+    @lpVtbl.value.on_storyboard_status_changed.call(this, storyboard, newstatus, previousstatus)
+  end
+  def on_storyboard_updated(this : IUIAnimationStoryboardEventHandler*, storyboard : IUIAnimationStoryboard) : HRESULT
+    @lpVtbl.value.on_storyboard_updated.call(this, storyboard)
+  end
+end
+struct LibWin32::IUIAnimationPriorityComparison
+  def query_interface(this : IUIAnimationPriorityComparison*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationPriorityComparison*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationPriorityComparison*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def has_priority(this : IUIAnimationPriorityComparison*, scheduledstoryboard : IUIAnimationStoryboard, newstoryboard : IUIAnimationStoryboard, priorityeffect : UI_ANIMATION_PRIORITY_EFFECT) : HRESULT
+    @lpVtbl.value.has_priority.call(this, scheduledstoryboard, newstoryboard, priorityeffect)
+  end
+end
+struct LibWin32::IUIAnimationTransitionLibrary
+  def query_interface(this : IUIAnimationTransitionLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransitionLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransitionLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instantaneous_transition(this : IUIAnimationTransitionLibrary*, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_instantaneous_transition.call(this, finalvalue, transition)
+  end
+  def create_constant_transition(this : IUIAnimationTransitionLibrary*, duration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_constant_transition.call(this, duration, transition)
+  end
+  def create_discrete_transition(this : IUIAnimationTransitionLibrary*, delay : Float64, finalvalue : Float64, hold : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_discrete_transition.call(this, delay, finalvalue, hold, transition)
+  end
+  def create_linear_transition(this : IUIAnimationTransitionLibrary*, duration : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_linear_transition.call(this, duration, finalvalue, transition)
+  end
+  def create_linear_transition_from_speed(this : IUIAnimationTransitionLibrary*, speed : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_linear_transition_from_speed.call(this, speed, finalvalue, transition)
+  end
+  def create_sinusoidal_transition_from_velocity(this : IUIAnimationTransitionLibrary*, duration : Float64, period : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_velocity.call(this, duration, period, transition)
+  end
+  def create_sinusoidal_transition_from_range(this : IUIAnimationTransitionLibrary*, duration : Float64, minimumvalue : Float64, maximumvalue : Float64, period : Float64, slope : UI_ANIMATION_SLOPE, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_range.call(this, duration, minimumvalue, maximumvalue, period, slope, transition)
+  end
+  def create_accelerate_decelerate_transition(this : IUIAnimationTransitionLibrary*, duration : Float64, finalvalue : Float64, accelerationratio : Float64, decelerationratio : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_accelerate_decelerate_transition.call(this, duration, finalvalue, accelerationratio, decelerationratio, transition)
+  end
+  def create_reversal_transition(this : IUIAnimationTransitionLibrary*, duration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_reversal_transition.call(this, duration, transition)
+  end
+  def create_cubic_transition(this : IUIAnimationTransitionLibrary*, duration : Float64, finalvalue : Float64, finalvelocity : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_cubic_transition.call(this, duration, finalvalue, finalvelocity, transition)
+  end
+  def create_smooth_stop_transition(this : IUIAnimationTransitionLibrary*, maximumduration : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_smooth_stop_transition.call(this, maximumduration, finalvalue, transition)
+  end
+  def create_parabolic_transition_from_acceleration(this : IUIAnimationTransitionLibrary*, finalvalue : Float64, finalvelocity : Float64, acceleration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_parabolic_transition_from_acceleration.call(this, finalvalue, finalvelocity, acceleration, transition)
+  end
+end
+struct LibWin32::IUIAnimationInterpolator
+  def query_interface(this : IUIAnimationInterpolator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationInterpolator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationInterpolator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_initial_value_and_velocity(this : IUIAnimationInterpolator*, initialvalue : Float64, initialvelocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value_and_velocity.call(this, initialvalue, initialvelocity)
+  end
+  def set_duration(this : IUIAnimationInterpolator*, duration : Float64) : HRESULT
+    @lpVtbl.value.set_duration.call(this, duration)
+  end
+  def get_duration(this : IUIAnimationInterpolator*, duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, duration)
+  end
+  def get_final_value(this : IUIAnimationInterpolator*, value : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.call(this, value)
+  end
+  def interpolate_value(this : IUIAnimationInterpolator*, offset : Float64, value : Float64*) : HRESULT
+    @lpVtbl.value.interpolate_value.call(this, offset, value)
+  end
+  def interpolate_velocity(this : IUIAnimationInterpolator*, offset : Float64, velocity : Float64*) : HRESULT
+    @lpVtbl.value.interpolate_velocity.call(this, offset, velocity)
+  end
+  def get_dependencies(this : IUIAnimationInterpolator*, initialvaluedependencies : UI_ANIMATION_DEPENDENCIES*, initialvelocitydependencies : UI_ANIMATION_DEPENDENCIES*, durationdependencies : UI_ANIMATION_DEPENDENCIES*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, initialvaluedependencies, initialvelocitydependencies, durationdependencies)
+  end
+end
+struct LibWin32::IUIAnimationTransitionFactory
+  def query_interface(this : IUIAnimationTransitionFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransitionFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransitionFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_transition(this : IUIAnimationTransitionFactory*, interpolator : IUIAnimationInterpolator, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_transition.call(this, interpolator, transition)
+  end
+end
+struct LibWin32::IUIAnimationTimer
+  def query_interface(this : IUIAnimationTimer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTimer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTimer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_timer_update_handler(this : IUIAnimationTimer*, updatehandler : IUIAnimationTimerUpdateHandler, idlebehavior : UI_ANIMATION_IDLE_BEHAVIOR) : HRESULT
+    @lpVtbl.value.set_timer_update_handler.call(this, updatehandler, idlebehavior)
+  end
+  def set_timer_event_handler(this : IUIAnimationTimer*, handler : IUIAnimationTimerEventHandler) : HRESULT
+    @lpVtbl.value.set_timer_event_handler.call(this, handler)
+  end
+  def enable(this : IUIAnimationTimer*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def disable(this : IUIAnimationTimer*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+  def is_enabled(this : IUIAnimationTimer*) : HRESULT
+    @lpVtbl.value.is_enabled.call(this)
+  end
+  def get_time(this : IUIAnimationTimer*, seconds : Float64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, seconds)
+  end
+  def set_frame_rate_threshold(this : IUIAnimationTimer*, framespersecond : UInt32) : HRESULT
+    @lpVtbl.value.set_frame_rate_threshold.call(this, framespersecond)
+  end
+end
+struct LibWin32::IUIAnimationTimerUpdateHandler
+  def query_interface(this : IUIAnimationTimerUpdateHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTimerUpdateHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTimerUpdateHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_update(this : IUIAnimationTimerUpdateHandler*, timenow : Float64, result : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.on_update.call(this, timenow, result)
+  end
+  def set_timer_client_event_handler(this : IUIAnimationTimerUpdateHandler*, handler : IUIAnimationTimerClientEventHandler) : HRESULT
+    @lpVtbl.value.set_timer_client_event_handler.call(this, handler)
+  end
+  def clear_timer_client_event_handler(this : IUIAnimationTimerUpdateHandler*) : HRESULT
+    @lpVtbl.value.clear_timer_client_event_handler.call(this)
+  end
+end
+struct LibWin32::IUIAnimationTimerClientEventHandler
+  def query_interface(this : IUIAnimationTimerClientEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTimerClientEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTimerClientEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_timer_client_status_changed(this : IUIAnimationTimerClientEventHandler*, newstatus : UI_ANIMATION_TIMER_CLIENT_STATUS, previousstatus : UI_ANIMATION_TIMER_CLIENT_STATUS) : HRESULT
+    @lpVtbl.value.on_timer_client_status_changed.call(this, newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationTimerEventHandler
+  def query_interface(this : IUIAnimationTimerEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTimerEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTimerEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_pre_update(this : IUIAnimationTimerEventHandler*) : HRESULT
+    @lpVtbl.value.on_pre_update.call(this)
+  end
+  def on_post_update(this : IUIAnimationTimerEventHandler*) : HRESULT
+    @lpVtbl.value.on_post_update.call(this)
+  end
+  def on_rendering_too_slow(this : IUIAnimationTimerEventHandler*, framespersecond : UInt32) : HRESULT
+    @lpVtbl.value.on_rendering_too_slow.call(this, framespersecond)
+  end
+end
+struct LibWin32::IUIAnimationManager2
+  def query_interface(this : IUIAnimationManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_animation_vector_variable(this : IUIAnimationManager2*, initialvalue : Float64*, cdimension : UInt32, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.create_animation_vector_variable.call(this, initialvalue, cdimension, variable)
+  end
+  def create_animation_variable(this : IUIAnimationManager2*, initialvalue : Float64, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.create_animation_variable.call(this, initialvalue, variable)
+  end
+  def schedule_transition(this : IUIAnimationManager2*, variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, timenow : Float64) : HRESULT
+    @lpVtbl.value.schedule_transition.call(this, variable, transition, timenow)
+  end
+  def create_storyboard(this : IUIAnimationManager2*, storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.create_storyboard.call(this, storyboard)
+  end
+  def finish_all_storyboards(this : IUIAnimationManager2*, completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish_all_storyboards.call(this, completiondeadline)
+  end
+  def abandon_all_storyboards(this : IUIAnimationManager2*) : HRESULT
+    @lpVtbl.value.abandon_all_storyboards.call(this)
+  end
+  def update(this : IUIAnimationManager2*, timenow : Float64, updateresult : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.update.call(this, timenow, updateresult)
+  end
+  def get_variable_from_tag(this : IUIAnimationManager2*, object : IUnknown, id : UInt32, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.get_variable_from_tag.call(this, object, id, variable)
+  end
+  def get_storyboard_from_tag(this : IUIAnimationManager2*, object : IUnknown, id : UInt32, storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.get_storyboard_from_tag.call(this, object, id, storyboard)
+  end
+  def estimate_next_event_time(this : IUIAnimationManager2*, seconds : Float64*) : HRESULT
+    @lpVtbl.value.estimate_next_event_time.call(this, seconds)
+  end
+  def get_status(this : IUIAnimationManager2*, status : UI_ANIMATION_MANAGER_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def set_animation_mode(this : IUIAnimationManager2*, mode : UI_ANIMATION_MODE) : HRESULT
+    @lpVtbl.value.set_animation_mode.call(this, mode)
+  end
+  def pause(this : IUIAnimationManager2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IUIAnimationManager2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def set_manager_event_handler(this : IUIAnimationManager2*, handler : IUIAnimationManagerEventHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manager_event_handler.call(this, handler, fregisterfornextanimationevent)
+  end
+  def set_cancel_priority_comparison(this : IUIAnimationManager2*, comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_cancel_priority_comparison.call(this, comparison)
+  end
+  def set_trim_priority_comparison(this : IUIAnimationManager2*, comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_trim_priority_comparison.call(this, comparison)
+  end
+  def set_compress_priority_comparison(this : IUIAnimationManager2*, comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_compress_priority_comparison.call(this, comparison)
+  end
+  def set_conclude_priority_comparison(this : IUIAnimationManager2*, comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_conclude_priority_comparison.call(this, comparison)
+  end
+  def set_default_longest_acceptable_delay(this : IUIAnimationManager2*, delay : Float64) : HRESULT
+    @lpVtbl.value.set_default_longest_acceptable_delay.call(this, delay)
+  end
+  def shutdown(this : IUIAnimationManager2*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IUIAnimationVariable2
+  def query_interface(this : IUIAnimationVariable2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariable2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariable2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dimension(this : IUIAnimationVariable2*, dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.call(this, dimension)
+  end
+  def get_value(this : IUIAnimationVariable2*, value : Float64*) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+  def get_vector_value(this : IUIAnimationVariable2*, value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_vector_value.call(this, value, cdimension)
+  end
+  def get_curve(this : IUIAnimationVariable2*, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.get_curve.call(this, animation)
+  end
+  def get_vector_curve(this : IUIAnimationVariable2*, animation : IDCompositionAnimation*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_vector_curve.call(this, animation, cdimension)
+  end
+  def get_final_value(this : IUIAnimationVariable2*, finalvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.call(this, finalvalue)
+  end
+  def get_final_vector_value(this : IUIAnimationVariable2*, finalvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_vector_value.call(this, finalvalue, cdimension)
+  end
+  def get_previous_value(this : IUIAnimationVariable2*, previousvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_previous_value.call(this, previousvalue)
+  end
+  def get_previous_vector_value(this : IUIAnimationVariable2*, previousvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_previous_vector_value.call(this, previousvalue, cdimension)
+  end
+  def get_integer_value(this : IUIAnimationVariable2*, value : Int32*) : HRESULT
+    @lpVtbl.value.get_integer_value.call(this, value)
+  end
+  def get_integer_vector_value(this : IUIAnimationVariable2*, value : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_integer_vector_value.call(this, value, cdimension)
+  end
+  def get_final_integer_value(this : IUIAnimationVariable2*, finalvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_final_integer_value.call(this, finalvalue)
+  end
+  def get_final_integer_vector_value(this : IUIAnimationVariable2*, finalvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_integer_vector_value.call(this, finalvalue, cdimension)
+  end
+  def get_previous_integer_value(this : IUIAnimationVariable2*, previousvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_previous_integer_value.call(this, previousvalue)
+  end
+  def get_previous_integer_vector_value(this : IUIAnimationVariable2*, previousvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_previous_integer_vector_value.call(this, previousvalue, cdimension)
+  end
+  def get_current_storyboard(this : IUIAnimationVariable2*, storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.get_current_storyboard.call(this, storyboard)
+  end
+  def set_lower_bound(this : IUIAnimationVariable2*, bound : Float64) : HRESULT
+    @lpVtbl.value.set_lower_bound.call(this, bound)
+  end
+  def set_lower_bound_vector(this : IUIAnimationVariable2*, bound : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_lower_bound_vector.call(this, bound, cdimension)
+  end
+  def set_upper_bound(this : IUIAnimationVariable2*, bound : Float64) : HRESULT
+    @lpVtbl.value.set_upper_bound.call(this, bound)
+  end
+  def set_upper_bound_vector(this : IUIAnimationVariable2*, bound : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_upper_bound_vector.call(this, bound, cdimension)
+  end
+  def set_rounding_mode(this : IUIAnimationVariable2*, mode : UI_ANIMATION_ROUNDING_MODE) : HRESULT
+    @lpVtbl.value.set_rounding_mode.call(this, mode)
+  end
+  def set_tag(this : IUIAnimationVariable2*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_tag(this : IUIAnimationVariable2*, object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, object, id)
+  end
+  def set_variable_change_handler(this : IUIAnimationVariable2*, handler : IUIAnimationVariableChangeHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_variable_change_handler.call(this, handler, fregisterfornextanimationevent)
+  end
+  def set_variable_integer_change_handler(this : IUIAnimationVariable2*, handler : IUIAnimationVariableIntegerChangeHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_variable_integer_change_handler.call(this, handler, fregisterfornextanimationevent)
+  end
+  def set_variable_curve_change_handler(this : IUIAnimationVariable2*, handler : IUIAnimationVariableCurveChangeHandler2) : HRESULT
+    @lpVtbl.value.set_variable_curve_change_handler.call(this, handler)
+  end
+end
+struct LibWin32::IUIAnimationTransition2
+  def query_interface(this : IUIAnimationTransition2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransition2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransition2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dimension(this : IUIAnimationTransition2*, dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.call(this, dimension)
+  end
+  def set_initial_value(this : IUIAnimationTransition2*, value : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value.call(this, value)
+  end
+  def set_initial_vector_value(this : IUIAnimationTransition2*, value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_vector_value.call(this, value, cdimension)
+  end
+  def set_initial_velocity(this : IUIAnimationTransition2*, velocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_velocity.call(this, velocity)
+  end
+  def set_initial_vector_velocity(this : IUIAnimationTransition2*, velocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_vector_velocity.call(this, velocity, cdimension)
+  end
+  def is_duration_known(this : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.is_duration_known.call(this)
+  end
+  def get_duration(this : IUIAnimationTransition2*, duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, duration)
+  end
+end
+struct LibWin32::IUIAnimationManagerEventHandler2
+  def query_interface(this : IUIAnimationManagerEventHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationManagerEventHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationManagerEventHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_manager_status_changed(this : IUIAnimationManagerEventHandler2*, newstatus : UI_ANIMATION_MANAGER_STATUS, previousstatus : UI_ANIMATION_MANAGER_STATUS) : HRESULT
+    @lpVtbl.value.on_manager_status_changed.call(this, newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationVariableChangeHandler2
+  def query_interface(this : IUIAnimationVariableChangeHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariableChangeHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariableChangeHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_value_changed(this : IUIAnimationVariableChangeHandler2*, storyboard : IUIAnimationStoryboard2, variable : IUIAnimationVariable2, newvalue : Float64*, previousvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.on_value_changed.call(this, storyboard, variable, newvalue, previousvalue, cdimension)
+  end
+end
+struct LibWin32::IUIAnimationVariableIntegerChangeHandler2
+  def query_interface(this : IUIAnimationVariableIntegerChangeHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariableIntegerChangeHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariableIntegerChangeHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_integer_value_changed(this : IUIAnimationVariableIntegerChangeHandler2*, storyboard : IUIAnimationStoryboard2, variable : IUIAnimationVariable2, newvalue : Int32*, previousvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.on_integer_value_changed.call(this, storyboard, variable, newvalue, previousvalue, cdimension)
+  end
+end
+struct LibWin32::IUIAnimationVariableCurveChangeHandler2
+  def query_interface(this : IUIAnimationVariableCurveChangeHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationVariableCurveChangeHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationVariableCurveChangeHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_curve_changed(this : IUIAnimationVariableCurveChangeHandler2*, variable : IUIAnimationVariable2) : HRESULT
+    @lpVtbl.value.on_curve_changed.call(this, variable)
+  end
+end
+struct LibWin32::IUIAnimationStoryboardEventHandler2
+  def query_interface(this : IUIAnimationStoryboardEventHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationStoryboardEventHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationStoryboardEventHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_storyboard_status_changed(this : IUIAnimationStoryboardEventHandler2*, storyboard : IUIAnimationStoryboard2, newstatus : UI_ANIMATION_STORYBOARD_STATUS, previousstatus : UI_ANIMATION_STORYBOARD_STATUS) : HRESULT
+    @lpVtbl.value.on_storyboard_status_changed.call(this, storyboard, newstatus, previousstatus)
+  end
+  def on_storyboard_updated(this : IUIAnimationStoryboardEventHandler2*, storyboard : IUIAnimationStoryboard2) : HRESULT
+    @lpVtbl.value.on_storyboard_updated.call(this, storyboard)
+  end
+end
+struct LibWin32::IUIAnimationLoopIterationChangeHandler2
+  def query_interface(this : IUIAnimationLoopIterationChangeHandler2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationLoopIterationChangeHandler2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationLoopIterationChangeHandler2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_loop_iteration_changed(this : IUIAnimationLoopIterationChangeHandler2*, storyboard : IUIAnimationStoryboard2, id : LibC::UINT_PTR, newiterationcount : UInt32, olditerationcount : UInt32) : HRESULT
+    @lpVtbl.value.on_loop_iteration_changed.call(this, storyboard, id, newiterationcount, olditerationcount)
+  end
+end
+struct LibWin32::IUIAnimationPriorityComparison2
+  def query_interface(this : IUIAnimationPriorityComparison2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationPriorityComparison2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationPriorityComparison2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def has_priority(this : IUIAnimationPriorityComparison2*, scheduledstoryboard : IUIAnimationStoryboard2, newstoryboard : IUIAnimationStoryboard2, priorityeffect : UI_ANIMATION_PRIORITY_EFFECT) : HRESULT
+    @lpVtbl.value.has_priority.call(this, scheduledstoryboard, newstoryboard, priorityeffect)
+  end
+end
+struct LibWin32::IUIAnimationTransitionLibrary2
+  def query_interface(this : IUIAnimationTransitionLibrary2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransitionLibrary2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransitionLibrary2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instantaneous_transition(this : IUIAnimationTransitionLibrary2*, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_instantaneous_transition.call(this, finalvalue, transition)
+  end
+  def create_instantaneous_vector_transition(this : IUIAnimationTransitionLibrary2*, finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_instantaneous_vector_transition.call(this, finalvalue, cdimension, transition)
+  end
+  def create_constant_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_constant_transition.call(this, duration, transition)
+  end
+  def create_discrete_transition(this : IUIAnimationTransitionLibrary2*, delay : Float64, finalvalue : Float64, hold : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_discrete_transition.call(this, delay, finalvalue, hold, transition)
+  end
+  def create_discrete_vector_transition(this : IUIAnimationTransitionLibrary2*, delay : Float64, finalvalue : Float64*, cdimension : UInt32, hold : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_discrete_vector_transition.call(this, delay, finalvalue, cdimension, hold, transition)
+  end
+  def create_linear_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_transition.call(this, duration, finalvalue, transition)
+  end
+  def create_linear_vector_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_vector_transition.call(this, duration, finalvalue, cdimension, transition)
+  end
+  def create_linear_transition_from_speed(this : IUIAnimationTransitionLibrary2*, speed : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_transition_from_speed.call(this, speed, finalvalue, transition)
+  end
+  def create_linear_vector_transition_from_speed(this : IUIAnimationTransitionLibrary2*, speed : Float64, finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_vector_transition_from_speed.call(this, speed, finalvalue, cdimension, transition)
+  end
+  def create_sinusoidal_transition_from_velocity(this : IUIAnimationTransitionLibrary2*, duration : Float64, period : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_velocity.call(this, duration, period, transition)
+  end
+  def create_sinusoidal_transition_from_range(this : IUIAnimationTransitionLibrary2*, duration : Float64, minimumvalue : Float64, maximumvalue : Float64, period : Float64, slope : UI_ANIMATION_SLOPE, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_range.call(this, duration, minimumvalue, maximumvalue, period, slope, transition)
+  end
+  def create_accelerate_decelerate_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64, accelerationratio : Float64, decelerationratio : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_accelerate_decelerate_transition.call(this, duration, finalvalue, accelerationratio, decelerationratio, transition)
+  end
+  def create_reversal_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_reversal_transition.call(this, duration, transition)
+  end
+  def create_cubic_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64, finalvelocity : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_transition.call(this, duration, finalvalue, finalvelocity, transition)
+  end
+  def create_cubic_vector_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64*, finalvelocity : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_vector_transition.call(this, duration, finalvalue, finalvelocity, cdimension, transition)
+  end
+  def create_smooth_stop_transition(this : IUIAnimationTransitionLibrary2*, maximumduration : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_smooth_stop_transition.call(this, maximumduration, finalvalue, transition)
+  end
+  def create_parabolic_transition_from_acceleration(this : IUIAnimationTransitionLibrary2*, finalvalue : Float64, finalvelocity : Float64, acceleration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_parabolic_transition_from_acceleration.call(this, finalvalue, finalvelocity, acceleration, transition)
+  end
+  def create_cubic_bezier_linear_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64, x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64, pptransition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_bezier_linear_transition.call(this, duration, finalvalue, x1, y1, x2, y2, pptransition)
+  end
+  def create_cubic_bezier_linear_vector_transition(this : IUIAnimationTransitionLibrary2*, duration : Float64, finalvalue : Float64*, cdimension : UInt32, x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64, pptransition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_bezier_linear_vector_transition.call(this, duration, finalvalue, cdimension, x1, y1, x2, y2, pptransition)
+  end
+end
+struct LibWin32::IUIAnimationPrimitiveInterpolation
+  def query_interface(this : IUIAnimationPrimitiveInterpolation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationPrimitiveInterpolation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationPrimitiveInterpolation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_cubic(this : IUIAnimationPrimitiveInterpolation*, dimension : UInt32, beginoffset : Float64, constantcoefficient : Float32, linearcoefficient : Float32, quadraticcoefficient : Float32, cubiccoefficient : Float32) : HRESULT
+    @lpVtbl.value.add_cubic.call(this, dimension, beginoffset, constantcoefficient, linearcoefficient, quadraticcoefficient, cubiccoefficient)
+  end
+  def add_sinusoidal(this : IUIAnimationPrimitiveInterpolation*, dimension : UInt32, beginoffset : Float64, bias : Float32, amplitude : Float32, frequency : Float32, phase : Float32) : HRESULT
+    @lpVtbl.value.add_sinusoidal.call(this, dimension, beginoffset, bias, amplitude, frequency, phase)
+  end
+end
+struct LibWin32::IUIAnimationInterpolator2
+  def query_interface(this : IUIAnimationInterpolator2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationInterpolator2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationInterpolator2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dimension(this : IUIAnimationInterpolator2*, dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.call(this, dimension)
+  end
+  def set_initial_value_and_velocity(this : IUIAnimationInterpolator2*, initialvalue : Float64*, initialvelocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_value_and_velocity.call(this, initialvalue, initialvelocity, cdimension)
+  end
+  def set_duration(this : IUIAnimationInterpolator2*, duration : Float64) : HRESULT
+    @lpVtbl.value.set_duration.call(this, duration)
+  end
+  def get_duration(this : IUIAnimationInterpolator2*, duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, duration)
+  end
+  def get_final_value(this : IUIAnimationInterpolator2*, value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_value.call(this, value, cdimension)
+  end
+  def interpolate_value(this : IUIAnimationInterpolator2*, offset : Float64, value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.interpolate_value.call(this, offset, value, cdimension)
+  end
+  def interpolate_velocity(this : IUIAnimationInterpolator2*, offset : Float64, velocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.interpolate_velocity.call(this, offset, velocity, cdimension)
+  end
+  def get_primitive_interpolation(this : IUIAnimationInterpolator2*, interpolation : IUIAnimationPrimitiveInterpolation, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_primitive_interpolation.call(this, interpolation, cdimension)
+  end
+  def get_dependencies(this : IUIAnimationInterpolator2*, initialvaluedependencies : UI_ANIMATION_DEPENDENCIES*, initialvelocitydependencies : UI_ANIMATION_DEPENDENCIES*, durationdependencies : UI_ANIMATION_DEPENDENCIES*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, initialvaluedependencies, initialvelocitydependencies, durationdependencies)
+  end
+end
+struct LibWin32::IUIAnimationTransitionFactory2
+  def query_interface(this : IUIAnimationTransitionFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationTransitionFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationTransitionFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_transition(this : IUIAnimationTransitionFactory2*, interpolator : IUIAnimationInterpolator2, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_transition.call(this, interpolator, transition)
+  end
+end
+struct LibWin32::IUIAnimationStoryboard2
+  def query_interface(this : IUIAnimationStoryboard2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIAnimationStoryboard2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIAnimationStoryboard2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_transition(this : IUIAnimationStoryboard2*, variable : IUIAnimationVariable2, transition : IUIAnimationTransition2) : HRESULT
+    @lpVtbl.value.add_transition.call(this, variable, transition)
+  end
+  def add_keyframe_at_offset(this : IUIAnimationStoryboard2*, existingkeyframe : UI_ANIMATION_KEYFRAME, offset : Float64, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_at_offset.call(this, existingkeyframe, offset, keyframe)
+  end
+  def add_keyframe_after_transition(this : IUIAnimationStoryboard2*, transition : IUIAnimationTransition2, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_after_transition.call(this, transition, keyframe)
+  end
+  def add_transition_at_keyframe(this : IUIAnimationStoryboard2*, variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, startkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_at_keyframe.call(this, variable, transition, startkeyframe)
+  end
+  def add_transition_between_keyframes(this : IUIAnimationStoryboard2*, variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_between_keyframes.call(this, variable, transition, startkeyframe, endkeyframe)
+  end
+  def repeat_between_keyframes(this : IUIAnimationStoryboard2*, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME, crepetition : Float64, repeatmode : UI_ANIMATION_REPEAT_MODE, piterationchangehandler : IUIAnimationLoopIterationChangeHandler2, id : LibC::UINT_PTR, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.repeat_between_keyframes.call(this, startkeyframe, endkeyframe, crepetition, repeatmode, piterationchangehandler, id, fregisterfornextanimationevent)
+  end
+  def hold_variable(this : IUIAnimationStoryboard2*, variable : IUIAnimationVariable2) : HRESULT
+    @lpVtbl.value.hold_variable.call(this, variable)
+  end
+  def set_longest_acceptable_delay(this : IUIAnimationStoryboard2*, delay : Float64) : HRESULT
+    @lpVtbl.value.set_longest_acceptable_delay.call(this, delay)
+  end
+  def set_skip_duration(this : IUIAnimationStoryboard2*, secondsduration : Float64) : HRESULT
+    @lpVtbl.value.set_skip_duration.call(this, secondsduration)
+  end
+  def schedule(this : IUIAnimationStoryboard2*, timenow : Float64, schedulingresult : UI_ANIMATION_SCHEDULING_RESULT*) : HRESULT
+    @lpVtbl.value.schedule.call(this, timenow, schedulingresult)
+  end
+  def conclude(this : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.conclude.call(this)
+  end
+  def finish(this : IUIAnimationStoryboard2*, completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish.call(this, completiondeadline)
+  end
+  def abandon(this : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.abandon.call(this)
+  end
+  def set_tag(this : IUIAnimationStoryboard2*, object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.call(this, object, id)
+  end
+  def get_tag(this : IUIAnimationStoryboard2*, object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.call(this, object, id)
+  end
+  def get_status(this : IUIAnimationStoryboard2*, status : UI_ANIMATION_STORYBOARD_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_elapsed_time(this : IUIAnimationStoryboard2*, elapsedtime : Float64*) : HRESULT
+    @lpVtbl.value.get_elapsed_time.call(this, elapsedtime)
+  end
+  def set_storyboard_event_handler(this : IUIAnimationStoryboard2*, handler : IUIAnimationStoryboardEventHandler2, fregisterstatuschangefornextanimationevent : LibC::BOOL, fregisterupdatefornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_storyboard_event_handler.call(this, handler, fregisterstatuschangefornextanimationevent, fregisterupdatefornextanimationevent)
+  end
+end

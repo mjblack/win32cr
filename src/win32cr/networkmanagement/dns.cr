@@ -1219,7 +1219,7 @@ lib LibWin32
   fun DnsRecordSetDetach(precordlist : DNS_RECORDA*) : DNS_RECORDA*
 
   # Params # pdata : Void* [In],freetype : DNS_FREE_TYPE [In]
-  fun DnsFree(pdata : Void*, freetype : DNS_FREE_TYPE)
+  fun DnsFree(pdata : Void*, freetype : DNS_FREE_TYPE) : Void
 
   # Params # pszname : PSTR [In],wtype : UInt16 [In],options : UInt32 [In],pextra : Void* [In],ppqueryresults : DNS_RECORDA** [In],preserved : Void** [In]
   fun DnsQuery_A(pszname : PSTR, wtype : UInt16, options : UInt32, pextra : Void*, ppqueryresults : DNS_RECORDA**, preserved : Void**) : Int32
@@ -1237,7 +1237,7 @@ lib LibWin32
   fun DnsCancelQuery(pcancelhandle : DNS_QUERY_CANCEL*) : Int32
 
   # Params # pcservers : UInt32* [In],ppservers : DNS_CUSTOM_SERVER** [In]
-  fun DnsFreeCustomServers(pcservers : UInt32*, ppservers : DNS_CUSTOM_SERVER**)
+  fun DnsFreeCustomServers(pcservers : UInt32*, ppservers : DNS_CUSTOM_SERVER**) : Void
 
   # Params # pcservers : UInt32* [In],ppdefaultservers : DNS_CUSTOM_SERVER** [In],psettings : DNS_APPLICATION_SETTINGS* [In]
   fun DnsGetApplicationSettings(pcservers : UInt32*, ppdefaultservers : DNS_CUSTOM_SERVER**, psettings : DNS_APPLICATION_SETTINGS*) : UInt32
@@ -1252,7 +1252,7 @@ lib LibWin32
   fun DnsAcquireContextHandle_A(credentialflags : UInt32, credentials : Void*, pcontext : DnsContextHandle*) : Int32
 
   # Params # hcontext : LibC::HANDLE [In]
-  fun DnsReleaseContextHandle(hcontext : LibC::HANDLE)
+  fun DnsReleaseContextHandle(hcontext : LibC::HANDLE) : Void
 
   # Params # paddrecords : DNS_RECORDA* [In],pdeleterecords : DNS_RECORDA* [In],options : UInt32 [In],hcredentials : LibC::HANDLE [In],pextralist : Void* [In],preserved : Void* [In]
   fun DnsModifyRecordsInSet_W(paddrecords : DNS_RECORDA*, pdeleterecords : DNS_RECORDA*, options : UInt32, hcredentials : LibC::HANDLE, pextralist : Void*, preserved : Void*) : Int32
@@ -1303,19 +1303,19 @@ lib LibWin32
   fun DnsGetProxyInformation(hostname : LibC::LPWSTR, proxyinformation : DNS_PROXY_INFORMATION*, defaultproxyinformation : DNS_PROXY_INFORMATION*, completionroutine : DNS_PROXY_COMPLETION_ROUTINE, completioncontext : Void*) : UInt32
 
   # Params # proxyname : LibC::LPWSTR [In]
-  fun DnsFreeProxyName(proxyname : LibC::LPWSTR)
+  fun DnsFreeProxyName(proxyname : LibC::LPWSTR) : Void
 
   # Params # pwszhosturl : LibC::LPWSTR [In],pselectioncontext : UInt8* [In],dwselectioncontextlength : UInt32 [In],dwexplicitinterfaceindex : UInt32 [In],pproxyinfoex : DNS_CONNECTION_PROXY_INFO_EX* [In]
   fun DnsConnectionGetProxyInfoForHostUrl(pwszhosturl : LibC::LPWSTR, pselectioncontext : UInt8*, dwselectioncontextlength : UInt32, dwexplicitinterfaceindex : UInt32, pproxyinfoex : DNS_CONNECTION_PROXY_INFO_EX*) : UInt32
 
   # Params # pproxyinfoex : DNS_CONNECTION_PROXY_INFO_EX* [In]
-  fun DnsConnectionFreeProxyInfoEx(pproxyinfoex : DNS_CONNECTION_PROXY_INFO_EX*)
+  fun DnsConnectionFreeProxyInfoEx(pproxyinfoex : DNS_CONNECTION_PROXY_INFO_EX*) : Void
 
   # Params # pwszconnectionname : LibC::LPWSTR [In],type : DNS_CONNECTION_PROXY_TYPE [In],pproxyinfo : DNS_CONNECTION_PROXY_INFO* [In]
   fun DnsConnectionGetProxyInfo(pwszconnectionname : LibC::LPWSTR, type : DNS_CONNECTION_PROXY_TYPE, pproxyinfo : DNS_CONNECTION_PROXY_INFO*) : UInt32
 
   # Params # pproxyinfo : DNS_CONNECTION_PROXY_INFO* [In]
-  fun DnsConnectionFreeProxyInfo(pproxyinfo : DNS_CONNECTION_PROXY_INFO*)
+  fun DnsConnectionFreeProxyInfo(pproxyinfo : DNS_CONNECTION_PROXY_INFO*) : Void
 
   # Params # pwszconnectionname : LibC::LPWSTR [In],type : DNS_CONNECTION_PROXY_TYPE [In],pproxyinfo : DNS_CONNECTION_PROXY_INFO* [In]
   fun DnsConnectionSetProxyInfo(pwszconnectionname : LibC::LPWSTR, type : DNS_CONNECTION_PROXY_TYPE, pproxyinfo : DNS_CONNECTION_PROXY_INFO*) : UInt32
@@ -1327,13 +1327,13 @@ lib LibWin32
   fun DnsConnectionGetProxyList(pwszconnectionname : LibC::LPWSTR, pproxylist : DNS_CONNECTION_PROXY_LIST*) : UInt32
 
   # Params # pproxylist : DNS_CONNECTION_PROXY_LIST* [In]
-  fun DnsConnectionFreeProxyList(pproxylist : DNS_CONNECTION_PROXY_LIST*)
+  fun DnsConnectionFreeProxyList(pproxylist : DNS_CONNECTION_PROXY_LIST*) : Void
 
   # Params # pnamelist : DNS_CONNECTION_NAME_LIST* [In]
   fun DnsConnectionGetNameList(pnamelist : DNS_CONNECTION_NAME_LIST*) : UInt32
 
   # Params # pnamelist : DNS_CONNECTION_NAME_LIST* [In]
-  fun DnsConnectionFreeNameList(pnamelist : DNS_CONNECTION_NAME_LIST*)
+  fun DnsConnectionFreeNameList(pnamelist : DNS_CONNECTION_NAME_LIST*) : Void
 
   # Params # pconnectionifindexentries : DNS_CONNECTION_IFINDEX_LIST* [In]
   fun DnsConnectionUpdateIfIndexTable(pconnectionifindexentries : DNS_CONNECTION_IFINDEX_LIST*) : UInt32
@@ -1351,7 +1351,7 @@ lib LibWin32
   fun DnsServiceCopyInstance(porig : DNS_SERVICE_INSTANCE*) : DNS_SERVICE_INSTANCE*
 
   # Params # pinstance : DNS_SERVICE_INSTANCE* [In]
-  fun DnsServiceFreeInstance(pinstance : DNS_SERVICE_INSTANCE*)
+  fun DnsServiceFreeInstance(pinstance : DNS_SERVICE_INSTANCE*) : Void
 
   # Params # prequest : DNS_SERVICE_BROWSE_REQUEST* [In],pcancel : DNS_SERVICE_CANCEL* [In]
   fun DnsServiceBrowse(prequest : DNS_SERVICE_BROWSE_REQUEST*, pcancel : DNS_SERVICE_CANCEL*) : Int32

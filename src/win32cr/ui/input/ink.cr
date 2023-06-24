@@ -105,3 +105,105 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IInkCommitRequestHandler
+  def query_interface(this : IInkCommitRequestHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCommitRequestHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCommitRequestHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_commit_requested(this : IInkCommitRequestHandler*) : HRESULT
+    @lpVtbl.value.on_commit_requested.call(this)
+  end
+end
+struct LibWin32::IInkPresenterDesktop
+  def query_interface(this : IInkPresenterDesktop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkPresenterDesktop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkPresenterDesktop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_root_visual(this : IInkPresenterDesktop*, rootvisual : IUnknown, device : IUnknown) : HRESULT
+    @lpVtbl.value.set_root_visual.call(this, rootvisual, device)
+  end
+  def set_commit_request_handler(this : IInkPresenterDesktop*, handler : IInkCommitRequestHandler) : HRESULT
+    @lpVtbl.value.set_commit_request_handler.call(this, handler)
+  end
+  def get_size(this : IInkPresenterDesktop*, width : Float32*, height : Float32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, width, height)
+  end
+  def set_size(this : IInkPresenterDesktop*, width : Float32, height : Float32) : HRESULT
+    @lpVtbl.value.set_size.call(this, width, height)
+  end
+  def on_high_contrast_changed(this : IInkPresenterDesktop*) : HRESULT
+    @lpVtbl.value.on_high_contrast_changed.call(this)
+  end
+end
+struct LibWin32::IInkHostWorkItem
+  def query_interface(this : IInkHostWorkItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkHostWorkItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkHostWorkItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IInkHostWorkItem*) : HRESULT
+    @lpVtbl.value.invoke.call(this)
+  end
+end
+struct LibWin32::IInkDesktopHost
+  def query_interface(this : IInkDesktopHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDesktopHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDesktopHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def queue_work_item(this : IInkDesktopHost*, workitem : IInkHostWorkItem) : HRESULT
+    @lpVtbl.value.queue_work_item.call(this, workitem)
+  end
+  def create_ink_presenter(this : IInkDesktopHost*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_ink_presenter.call(this, riid, ppv)
+  end
+  def create_and_initialize_ink_presenter(this : IInkDesktopHost*, rootvisual : IUnknown, width : Float32, height : Float32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_and_initialize_ink_presenter.call(this, rootvisual, width, height, riid, ppv)
+  end
+end
+struct LibWin32::IInkD2DRenderer
+  def query_interface(this : IInkD2DRenderer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkD2DRenderer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkD2DRenderer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IInkD2DRenderer*, pd2d1devicecontext : IUnknown, pinkstrokeiterable : IUnknown, fhighcontrast : LibC::BOOL) : HRESULT
+    @lpVtbl.value.draw.call(this, pd2d1devicecontext, pinkstrokeiterable, fhighcontrast)
+  end
+end
+struct LibWin32::IInkD2DRenderer2
+  def query_interface(this : IInkD2DRenderer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkD2DRenderer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkD2DRenderer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IInkD2DRenderer2*, pd2d1devicecontext : IUnknown, pinkstrokeiterable : IUnknown, highcontrastadjustment : INK_HIGH_CONTRAST_ADJUSTMENT) : HRESULT
+    @lpVtbl.value.draw.call(this, pd2d1devicecontext, pinkstrokeiterable, highcontrastadjustment)
+  end
+end

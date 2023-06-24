@@ -3772,3 +3772,5728 @@ lib LibWin32
   # Params # factorytype : DWRITE_FACTORY_TYPE [In],iid : Guid* [In],factory : IUnknown* [In]
   fun DWriteCreateFactory(factorytype : DWRITE_FACTORY_TYPE, iid : Guid*, factory : IUnknown*) : HRESULT
 end
+struct LibWin32::IDWriteFontFileLoader
+  def query_interface(this : IDWriteFontFileLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFileLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFileLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream_from_key(this : IDWriteFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+end
+struct LibWin32::IDWriteLocalFontFileLoader
+  def query_interface(this : IDWriteLocalFontFileLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteLocalFontFileLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteLocalFontFileLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream_from_key(this : IDWriteLocalFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def get_file_path_length_from_key(this : IDWriteLocalFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, filepathlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_path_length_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, filepathlength)
+  end
+  def get_file_path_from_key(this : IDWriteLocalFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, filepath : Char*, filepathsize : UInt32) : HRESULT
+    @lpVtbl.value.get_file_path_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, filepath, filepathsize)
+  end
+  def get_last_write_time_from_key(this : IDWriteLocalFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_write_time_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, lastwritetime)
+  end
+end
+struct LibWin32::IDWriteFontFileStream
+  def query_interface(this : IDWriteFontFileStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFileStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFileStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_file_fragment(this : IDWriteFontFileStream*, fragmentstart : Void**, fileoffset : UInt64, fragmentsize : UInt64, fragmentcontext : Void**) : HRESULT
+    @lpVtbl.value.read_file_fragment.call(this, fragmentstart, fileoffset, fragmentsize, fragmentcontext)
+  end
+  def release_file_fragment(this : IDWriteFontFileStream*, fragmentcontext : Void*) : Void
+    @lpVtbl.value.release_file_fragment.call(this, fragmentcontext)
+  end
+  def get_file_size(this : IDWriteFontFileStream*, filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, filesize)
+  end
+  def get_last_write_time(this : IDWriteFontFileStream*, lastwritetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.call(this, lastwritetime)
+  end
+end
+struct LibWin32::IDWriteFontFile
+  def query_interface(this : IDWriteFontFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_reference_key(this : IDWriteFontFile*, fontfilereferencekey : Void**, fontfilereferencekeysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_reference_key.call(this, fontfilereferencekey, fontfilereferencekeysize)
+  end
+  def get_loader(this : IDWriteFontFile*, fontfileloader : IDWriteFontFileLoader*) : HRESULT
+    @lpVtbl.value.get_loader.call(this, fontfileloader)
+  end
+  def analyze(this : IDWriteFontFile*, issupportedfonttype : LibC::BOOL*, fontfiletype : DWRITE_FONT_FILE_TYPE*, fontfacetype : DWRITE_FONT_FACE_TYPE*, numberoffaces : UInt32*) : HRESULT
+    @lpVtbl.value.analyze.call(this, issupportedfonttype, fontfiletype, fontfacetype, numberoffaces)
+  end
+end
+struct LibWin32::IDWriteRenderingParams
+  def query_interface(this : IDWriteRenderingParams*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRenderingParams*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRenderingParams*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_gamma(this : IDWriteRenderingParams*) : Float32
+    @lpVtbl.value.get_gamma.call(this)
+  end
+  def get_enhanced_contrast(this : IDWriteRenderingParams*) : Float32
+    @lpVtbl.value.get_enhanced_contrast.call(this)
+  end
+  def get_clear_type_level(this : IDWriteRenderingParams*) : Float32
+    @lpVtbl.value.get_clear_type_level.call(this)
+  end
+  def get_pixel_geometry(this : IDWriteRenderingParams*) : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.call(this)
+  end
+  def get_rendering_mode(this : IDWriteRenderingParams*) : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.call(this)
+  end
+end
+struct LibWin32::IDWriteFontFace
+  def query_interface(this : IDWriteFontFace*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+end
+struct LibWin32::IDWriteFontCollectionLoader
+  def query_interface(this : IDWriteFontCollectionLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontCollectionLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontCollectionLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_enumerator_from_key(this : IDWriteFontCollectionLoader*, factory : IDWriteFactory, collectionkey : Void*, collectionkeysize : UInt32, fontfileenumerator : IDWriteFontFileEnumerator*) : HRESULT
+    @lpVtbl.value.create_enumerator_from_key.call(this, factory, collectionkey, collectionkeysize, fontfileenumerator)
+  end
+end
+struct LibWin32::IDWriteFontFileEnumerator
+  def query_interface(this : IDWriteFontFileEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFileEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFileEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IDWriteFontFileEnumerator*, hascurrentfile : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hascurrentfile)
+  end
+  def get_current_font_file(this : IDWriteFontFileEnumerator*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_current_font_file.call(this, fontfile)
+  end
+end
+struct LibWin32::IDWriteLocalizedStrings
+  def query_interface(this : IDWriteLocalizedStrings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteLocalizedStrings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteLocalizedStrings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IDWriteLocalizedStrings*) : UInt32
+    @lpVtbl.value.get_count.call(this)
+  end
+  def find_locale_name(this : IDWriteLocalizedStrings*, localename : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_locale_name.call(this, localename, index, exists)
+  end
+  def get_locale_name_length(this : IDWriteLocalizedStrings*, index : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_name_length.call(this, index, length)
+  end
+  def get_locale_name(this : IDWriteLocalizedStrings*, index : UInt32, localename : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, index, localename, size)
+  end
+  def get_string_length(this : IDWriteLocalizedStrings*, index : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, index, length)
+  end
+  def get_string(this : IDWriteLocalizedStrings*, index : UInt32, stringbuffer : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_string.call(this, index, stringbuffer, size)
+  end
+end
+struct LibWin32::IDWriteFontCollection
+  def query_interface(this : IDWriteFontCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family_count(this : IDWriteFontCollection*) : UInt32
+    @lpVtbl.value.get_font_family_count.call(this)
+  end
+  def get_font_family(this : IDWriteFontCollection*, index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, index, fontfamily)
+  end
+  def find_family_name(this : IDWriteFontCollection*, familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.call(this, familyname, index, exists)
+  end
+  def get_font_from_font_face(this : IDWriteFontCollection*, fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.call(this, fontface, font)
+  end
+end
+struct LibWin32::IDWriteFontList
+  def query_interface(this : IDWriteFontList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontList*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontList*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontList*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+end
+struct LibWin32::IDWriteFontFamily
+  def query_interface(this : IDWriteFontFamily*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFamily*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFamily*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontFamily*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontFamily*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontFamily*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+  def get_family_names(this : IDWriteFontFamily*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_first_matching_font(this : IDWriteFontFamily*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.call(this, weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(this : IDWriteFontFamily*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, weight, stretch, style, matchingfonts)
+  end
+end
+struct LibWin32::IDWriteFont
+  def query_interface(this : IDWriteFont*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFont*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFont*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family(this : IDWriteFont*, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, fontfamily)
+  end
+  def get_weight(this : IDWriteFont*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFont*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFont*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def is_symbol_font(this : IDWriteFont*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_face_names(this : IDWriteFont*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFont*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations(this : IDWriteFont*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_metrics(this : IDWriteFont*, fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontmetrics)
+  end
+  def has_character(this : IDWriteFont*, unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.call(this, unicodevalue, exists)
+  end
+  def create_font_face(this : IDWriteFont*, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+end
+struct LibWin32::IDWriteTextFormat
+  def query_interface(this : IDWriteTextFormat*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextFormat*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextFormat*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextFormat*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextFormat*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextFormat*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextFormat*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextFormat*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextFormat*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextFormat*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextFormat*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextFormat*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextFormat*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextFormat*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextFormat*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextFormat*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextFormat*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextFormat*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextFormat*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextFormat*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextFormat*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextFormat*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextFormat*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextFormat*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextFormat*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextFormat*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextFormat*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextFormat*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+end
+struct LibWin32::IDWriteTypography
+  def query_interface(this : IDWriteTypography*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTypography*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTypography*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_font_feature(this : IDWriteTypography*, fontfeature : DWRITE_FONT_FEATURE) : HRESULT
+    @lpVtbl.value.add_font_feature.call(this, fontfeature)
+  end
+  def get_font_feature_count(this : IDWriteTypography*) : UInt32
+    @lpVtbl.value.get_font_feature_count.call(this)
+  end
+  def get_font_feature(this : IDWriteTypography*, fontfeatureindex : UInt32, fontfeature : DWRITE_FONT_FEATURE*) : HRESULT
+    @lpVtbl.value.get_font_feature.call(this, fontfeatureindex, fontfeature)
+  end
+end
+struct LibWin32::IDWriteNumberSubstitution
+  def query_interface(this : IDWriteNumberSubstitution*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteNumberSubstitution*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteNumberSubstitution*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSource
+  def query_interface(this : IDWriteTextAnalysisSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalysisSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalysisSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text_at_position(this : IDWriteTextAnalysisSource*, textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_at_position.call(this, textposition, textstring, textlength)
+  end
+  def get_text_before_position(this : IDWriteTextAnalysisSource*, textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_before_position.call(this, textposition, textstring, textlength)
+  end
+  def get_paragraph_reading_direction(this : IDWriteTextAnalysisSource*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_paragraph_reading_direction.call(this)
+  end
+  def get_locale_name(this : IDWriteTextAnalysisSource*, textposition : UInt32, textlength : UInt32*, localename : UInt16**) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, textposition, textlength, localename)
+  end
+  def get_number_substitution(this : IDWriteTextAnalysisSource*, textposition : UInt32, textlength : UInt32*, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.get_number_substitution.call(this, textposition, textlength, numbersubstitution)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSink
+  def query_interface(this : IDWriteTextAnalysisSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalysisSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalysisSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_script_analysis(this : IDWriteTextAnalysisSink*, textposition : UInt32, textlength : UInt32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*) : HRESULT
+    @lpVtbl.value.set_script_analysis.call(this, textposition, textlength, scriptanalysis)
+  end
+  def set_line_breakpoints(this : IDWriteTextAnalysisSink*, textposition : UInt32, textlength : UInt32, linebreakpoints : DWRITE_LINE_BREAKPOINT*) : HRESULT
+    @lpVtbl.value.set_line_breakpoints.call(this, textposition, textlength, linebreakpoints)
+  end
+  def set_bidi_level(this : IDWriteTextAnalysisSink*, textposition : UInt32, textlength : UInt32, explicitlevel : UInt8, resolvedlevel : UInt8) : HRESULT
+    @lpVtbl.value.set_bidi_level.call(this, textposition, textlength, explicitlevel, resolvedlevel)
+  end
+  def set_number_substitution(this : IDWriteTextAnalysisSink*, textposition : UInt32, textlength : UInt32, numbersubstitution : IDWriteNumberSubstitution) : HRESULT
+    @lpVtbl.value.set_number_substitution.call(this, textposition, textlength, numbersubstitution)
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer
+  def query_interface(this : IDWriteTextAnalyzer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalyzer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalyzer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def analyze_script(this : IDWriteTextAnalyzer*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(this : IDWriteTextAnalyzer*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(this : IDWriteTextAnalyzer*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(this : IDWriteTextAnalyzer*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(this : IDWriteTextAnalyzer*, textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.call(this, textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(this : IDWriteTextAnalyzer*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+end
+struct LibWin32::IDWriteInlineObject
+  def query_interface(this : IDWriteInlineObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteInlineObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteInlineObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IDWriteInlineObject*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy, issideways, isrighttoleft, clientdrawingeffect)
+  end
+  def get_metrics(this : IDWriteInlineObject*, metrics : DWRITE_INLINE_OBJECT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, metrics)
+  end
+  def get_overhang_metrics(this : IDWriteInlineObject*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_break_conditions(this : IDWriteInlineObject*, breakconditionbefore : DWRITE_BREAK_CONDITION*, breakconditionafter : DWRITE_BREAK_CONDITION*) : HRESULT
+    @lpVtbl.value.get_break_conditions.call(this, breakconditionbefore, breakconditionafter)
+  end
+end
+struct LibWin32::IDWritePixelSnapping
+  def query_interface(this : IDWritePixelSnapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWritePixelSnapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWritePixelSnapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_pixel_snapping_disabled(this : IDWritePixelSnapping*, clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.call(this, clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(this : IDWritePixelSnapping*, clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.call(this, clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(this : IDWritePixelSnapping*, clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.call(this, clientdrawingcontext, pixelsperdip)
+  end
+end
+struct LibWin32::IDWriteTextRenderer
+  def query_interface(this : IDWriteTextRenderer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextRenderer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextRenderer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_pixel_snapping_disabled(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.call(this, clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.call(this, clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.call(this, clientdrawingcontext, pixelsperdip)
+  end
+  def draw_glyph_run(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object(this : IDWriteTextRenderer*, clientdrawingcontext : Void*, originx : Float32, originy : Float32, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object.call(this, clientdrawingcontext, originx, originy, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+end
+struct LibWin32::IDWriteTextLayout
+  def query_interface(this : IDWriteTextLayout*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextLayout*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextLayout*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextLayout*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextLayout*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextLayout*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextLayout*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextLayout*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextLayout*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextLayout*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextLayout*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextLayout*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextLayout*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextLayout*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextLayout*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextLayout*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextLayout*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextLayout*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextLayout*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextLayout*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextLayout*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextLayout*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextLayout*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextLayout*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextLayout*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextLayout*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextLayout*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextLayout*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_max_width(this : IDWriteTextLayout*, maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.call(this, maxwidth)
+  end
+  def set_max_height(this : IDWriteTextLayout*, maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.call(this, maxheight)
+  end
+  def set_font_collection(this : IDWriteTextLayout*, fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.call(this, fontcollection, textrange)
+  end
+  def set_font_family_name(this : IDWriteTextLayout*, fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.call(this, fontfamilyname, textrange)
+  end
+  def set_font_weight(this : IDWriteTextLayout*, fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.call(this, fontweight, textrange)
+  end
+  def set_font_style(this : IDWriteTextLayout*, fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.call(this, fontstyle, textrange)
+  end
+  def set_font_stretch(this : IDWriteTextLayout*, fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.call(this, fontstretch, textrange)
+  end
+  def set_font_size(this : IDWriteTextLayout*, fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.call(this, fontsize, textrange)
+  end
+  def set_underline(this : IDWriteTextLayout*, hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.call(this, hasunderline, textrange)
+  end
+  def set_strikethrough(this : IDWriteTextLayout*, hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.call(this, hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(this : IDWriteTextLayout*, drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.call(this, drawingeffect, textrange)
+  end
+  def set_inline_object(this : IDWriteTextLayout*, inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, inlineobject, textrange)
+  end
+  def set_typography(this : IDWriteTextLayout*, typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.call(this, typography, textrange)
+  end
+  def set_locale_name(this : IDWriteTextLayout*, localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.call(this, localename, textrange)
+  end
+  def get_max_width(this : IDWriteTextLayout*) : Float32
+    @lpVtbl.value.get_max_width.call(this)
+  end
+  def get_max_height(this : IDWriteTextLayout*) : Float32
+    @lpVtbl.value.get_max_height.call(this)
+  end
+  def get_font_collection2(this : IDWriteTextLayout*, currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.call(this, currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(this : IDWriteTextLayout*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(this : IDWriteTextLayout*, currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.call(this, currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(this : IDWriteTextLayout*, currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.call(this, currentposition, fontweight, textrange)
+  end
+  def get_font_style2(this : IDWriteTextLayout*, currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.call(this, currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(this : IDWriteTextLayout*, currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.call(this, currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(this : IDWriteTextLayout*, currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.call(this, currentposition, fontsize, textrange)
+  end
+  def get_underline(this : IDWriteTextLayout*, currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(this : IDWriteTextLayout*, currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(this : IDWriteTextLayout*, currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.call(this, currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(this : IDWriteTextLayout*, currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, currentposition, inlineobject, textrange)
+  end
+  def get_typography(this : IDWriteTextLayout*, currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.call(this, currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(this : IDWriteTextLayout*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_locale_name2(this : IDWriteTextLayout*, currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.call(this, currentposition, localename, namesize, textrange)
+  end
+  def draw(this : IDWriteTextLayout*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(this : IDWriteTextLayout*, linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(this : IDWriteTextLayout*, textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, textmetrics)
+  end
+  def get_overhang_metrics(this : IDWriteTextLayout*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_cluster_metrics(this : IDWriteTextLayout*, clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.call(this, clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(this : IDWriteTextLayout*, minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.call(this, minwidth)
+  end
+  def hit_test_point(this : IDWriteTextLayout*, pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.call(this, pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(this : IDWriteTextLayout*, textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.call(this, textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(this : IDWriteTextLayout*, textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.call(this, textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+end
+struct LibWin32::IDWriteBitmapRenderTarget
+  def query_interface(this : IDWriteBitmapRenderTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteBitmapRenderTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteBitmapRenderTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw_glyph_run(this : IDWriteBitmapRenderTarget*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, renderingparams : IDWriteRenderingParams, textcolor : UInt32, blackboxrect : RECT*) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineoriginx, baselineoriginy, measuringmode, glyphrun, renderingparams, textcolor, blackboxrect)
+  end
+  def get_memory_dc(this : IDWriteBitmapRenderTarget*) : HDC
+    @lpVtbl.value.get_memory_dc.call(this)
+  end
+  def get_pixels_per_dip(this : IDWriteBitmapRenderTarget*) : Float32
+    @lpVtbl.value.get_pixels_per_dip.call(this)
+  end
+  def set_pixels_per_dip(this : IDWriteBitmapRenderTarget*, pixelsperdip : Float32) : HRESULT
+    @lpVtbl.value.set_pixels_per_dip.call(this, pixelsperdip)
+  end
+  def get_current_transform(this : IDWriteBitmapRenderTarget*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.call(this, transform)
+  end
+  def set_current_transform(this : IDWriteBitmapRenderTarget*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.set_current_transform.call(this, transform)
+  end
+  def get_size(this : IDWriteBitmapRenderTarget*, size : SIZE*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def resize(this : IDWriteBitmapRenderTarget*, width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+end
+struct LibWin32::IDWriteGdiInterop
+  def query_interface(this : IDWriteGdiInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteGdiInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteGdiInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_font_from_logfont(this : IDWriteGdiInterop*, logfont : LOGFONTW*, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont.call(this, logfont, font)
+  end
+  def convert_font_to_logfont(this : IDWriteGdiInterop*, font : IDWriteFont, logfont : LOGFONTW*, issystemfont : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.convert_font_to_logfont.call(this, font, logfont, issystemfont)
+  end
+  def convert_font_face_to_logfont(this : IDWriteGdiInterop*, font : IDWriteFontFace, logfont : LOGFONTW*) : HRESULT
+    @lpVtbl.value.convert_font_face_to_logfont.call(this, font, logfont)
+  end
+  def create_font_face_from_hdc(this : IDWriteGdiInterop*, hdc : HDC, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face_from_hdc.call(this, hdc, fontface)
+  end
+  def create_bitmap_render_target(this : IDWriteGdiInterop*, hdc : HDC, width : UInt32, height : UInt32, rendertarget : IDWriteBitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_bitmap_render_target.call(this, hdc, width, height, rendertarget)
+  end
+end
+struct LibWin32::IDWriteGlyphRunAnalysis
+  def query_interface(this : IDWriteGlyphRunAnalysis*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteGlyphRunAnalysis*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteGlyphRunAnalysis*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_alpha_texture_bounds(this : IDWriteGlyphRunAnalysis*, texturetype : DWRITE_TEXTURE_TYPE, texturebounds : RECT*) : HRESULT
+    @lpVtbl.value.get_alpha_texture_bounds.call(this, texturetype, texturebounds)
+  end
+  def create_alpha_texture(this : IDWriteGlyphRunAnalysis*, texturetype : DWRITE_TEXTURE_TYPE, texturebounds : RECT*, alphavalues : UInt8*, buffersize : UInt32) : HRESULT
+    @lpVtbl.value.create_alpha_texture.call(this, texturetype, texturebounds, alphavalues, buffersize)
+  end
+  def get_alpha_blend_params(this : IDWriteGlyphRunAnalysis*, renderingparams : IDWriteRenderingParams, blendgamma : Float32*, blendenhancedcontrast : Float32*, blendcleartypelevel : Float32*) : HRESULT
+    @lpVtbl.value.get_alpha_blend_params.call(this, renderingparams, blendgamma, blendenhancedcontrast, blendcleartypelevel)
+  end
+end
+struct LibWin32::IDWriteFactory
+  def query_interface(this : IDWriteFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+end
+struct LibWin32::IDWriteFactory1
+  def query_interface(this : IDWriteFactory1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory1*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory1*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory1*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory1*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory1*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory1*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory1*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory1*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory1*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory1*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory1*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory1*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory1*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory1*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory1*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory1*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory1*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory1*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory1*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory1*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory1*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory1*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory1*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+end
+struct LibWin32::IDWriteFontFace1
+  def query_interface(this : IDWriteFontFace1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace1*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace1*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace1*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace1*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace1*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace1*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace1*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace1*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace1*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace1*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace1*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace1*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace1*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace1*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace1*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace1*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace1*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace1*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace1*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace1*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace1*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace1*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace1*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace1*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace1*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace1*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace1*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+end
+struct LibWin32::IDWriteFont1
+  def query_interface(this : IDWriteFont1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFont1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFont1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family(this : IDWriteFont1*, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, fontfamily)
+  end
+  def get_weight(this : IDWriteFont1*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFont1*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFont1*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def is_symbol_font(this : IDWriteFont1*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_face_names(this : IDWriteFont1*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFont1*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations(this : IDWriteFont1*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_metrics(this : IDWriteFont1*, fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontmetrics)
+  end
+  def has_character(this : IDWriteFont1*, unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.call(this, unicodevalue, exists)
+  end
+  def create_font_face(this : IDWriteFont1*, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+  def get_metrics2(this : IDWriteFont1*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_panose(this : IDWriteFont1*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_unicode_ranges(this : IDWriteFont1*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFont1*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+end
+struct LibWin32::IDWriteRenderingParams1
+  def query_interface(this : IDWriteRenderingParams1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRenderingParams1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRenderingParams1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_gamma(this : IDWriteRenderingParams1*) : Float32
+    @lpVtbl.value.get_gamma.call(this)
+  end
+  def get_enhanced_contrast(this : IDWriteRenderingParams1*) : Float32
+    @lpVtbl.value.get_enhanced_contrast.call(this)
+  end
+  def get_clear_type_level(this : IDWriteRenderingParams1*) : Float32
+    @lpVtbl.value.get_clear_type_level.call(this)
+  end
+  def get_pixel_geometry(this : IDWriteRenderingParams1*) : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.call(this)
+  end
+  def get_rendering_mode(this : IDWriteRenderingParams1*) : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.call(this)
+  end
+  def get_grayscale_enhanced_contrast(this : IDWriteRenderingParams1*) : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.call(this)
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer1
+  def query_interface(this : IDWriteTextAnalyzer1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalyzer1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalyzer1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def analyze_script(this : IDWriteTextAnalyzer1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(this : IDWriteTextAnalyzer1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(this : IDWriteTextAnalyzer1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(this : IDWriteTextAnalyzer1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(this : IDWriteTextAnalyzer1*, textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.call(this, textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(this : IDWriteTextAnalyzer1*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer1*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def apply_character_spacing(this : IDWriteTextAnalyzer1*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textlength : UInt32, glyphcount : UInt32, clustermap : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.apply_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textlength, glyphcount, clustermap, glyphadvances, glyphoffsets, glyphproperties, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_baseline(this : IDWriteTextAnalyzer1*, fontface : IDWriteFontFace, baseline : DWRITE_BASELINE, isvertical : LibC::BOOL, issimulationallowed : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, baselinecoordinate : Int32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_baseline.call(this, fontface, baseline, isvertical, issimulationallowed, scriptanalysis, localename, baselinecoordinate, exists)
+  end
+  def analyze_vertical_glyph_orientation(this : IDWriteTextAnalyzer1*, analysissource : IDWriteTextAnalysisSource1, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink1) : HRESULT
+    @lpVtbl.value.analyze_vertical_glyph_orientation.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyph_orientation_transform(this : IDWriteTextAnalyzer1*, glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform.call(this, glyphorientationangle, issideways, transform)
+  end
+  def get_script_properties(this : IDWriteTextAnalyzer1*, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, scriptproperties : DWRITE_SCRIPT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_script_properties.call(this, scriptanalysis, scriptproperties)
+  end
+  def get_text_complexity(this : IDWriteTextAnalyzer1*, textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, istextsimple : LibC::BOOL*, textlengthread : UInt32*, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_text_complexity.call(this, textstring, textlength, fontface, istextsimple, textlengthread, glyphindices)
+  end
+  def get_justification_opportunities(this : IDWriteTextAnalyzer1*, fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, textstring : Char*, clustermap : UInt16*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*) : HRESULT
+    @lpVtbl.value.get_justification_opportunities.call(this, fontface, fontemsize, scriptanalysis, textlength, glyphcount, textstring, clustermap, glyphproperties, justificationopportunities)
+  end
+  def justify_glyph_advances(this : IDWriteTextAnalyzer1*, linewidth : Float32, glyphcount : UInt32, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.justify_glyph_advances.call(this, linewidth, glyphcount, justificationopportunities, glyphadvances, glyphoffsets, justifiedglyphadvances, justifiedglyphoffsets)
+  end
+  def get_justified_glyphs(this : IDWriteTextAnalyzer1*, fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, glyphindices : UInt16*, glyphadvances : Float32*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*, modifiedclustermap : UInt16*, modifiedglyphindices : UInt16*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_justified_glyphs.call(this, fontface, fontemsize, scriptanalysis, textlength, glyphcount, maxglyphcount, clustermap, glyphindices, glyphadvances, justifiedglyphadvances, justifiedglyphoffsets, glyphproperties, actualglyphcount, modifiedclustermap, modifiedglyphindices, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSource1
+  def query_interface(this : IDWriteTextAnalysisSource1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalysisSource1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalysisSource1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_text_at_position(this : IDWriteTextAnalysisSource1*, textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_at_position.call(this, textposition, textstring, textlength)
+  end
+  def get_text_before_position(this : IDWriteTextAnalysisSource1*, textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_before_position.call(this, textposition, textstring, textlength)
+  end
+  def get_paragraph_reading_direction(this : IDWriteTextAnalysisSource1*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_paragraph_reading_direction.call(this)
+  end
+  def get_locale_name(this : IDWriteTextAnalysisSource1*, textposition : UInt32, textlength : UInt32*, localename : UInt16**) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, textposition, textlength, localename)
+  end
+  def get_number_substitution(this : IDWriteTextAnalysisSource1*, textposition : UInt32, textlength : UInt32*, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.get_number_substitution.call(this, textposition, textlength, numbersubstitution)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextAnalysisSource1*, textposition : UInt32, textlength : UInt32*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION*, bidilevel : UInt8*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this, textposition, textlength, glyphorientation, bidilevel)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSink1
+  def query_interface(this : IDWriteTextAnalysisSink1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalysisSink1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalysisSink1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_script_analysis(this : IDWriteTextAnalysisSink1*, textposition : UInt32, textlength : UInt32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*) : HRESULT
+    @lpVtbl.value.set_script_analysis.call(this, textposition, textlength, scriptanalysis)
+  end
+  def set_line_breakpoints(this : IDWriteTextAnalysisSink1*, textposition : UInt32, textlength : UInt32, linebreakpoints : DWRITE_LINE_BREAKPOINT*) : HRESULT
+    @lpVtbl.value.set_line_breakpoints.call(this, textposition, textlength, linebreakpoints)
+  end
+  def set_bidi_level(this : IDWriteTextAnalysisSink1*, textposition : UInt32, textlength : UInt32, explicitlevel : UInt8, resolvedlevel : UInt8) : HRESULT
+    @lpVtbl.value.set_bidi_level.call(this, textposition, textlength, explicitlevel, resolvedlevel)
+  end
+  def set_number_substitution(this : IDWriteTextAnalysisSink1*, textposition : UInt32, textlength : UInt32, numbersubstitution : IDWriteNumberSubstitution) : HRESULT
+    @lpVtbl.value.set_number_substitution.call(this, textposition, textlength, numbersubstitution)
+  end
+  def set_glyph_orientation(this : IDWriteTextAnalysisSink1*, textposition : UInt32, textlength : UInt32, glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, adjustedbidilevel : UInt8, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_glyph_orientation.call(this, textposition, textlength, glyphorientationangle, adjustedbidilevel, issideways, isrighttoleft)
+  end
+end
+struct LibWin32::IDWriteTextLayout1
+  def query_interface(this : IDWriteTextLayout1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextLayout1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextLayout1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextLayout1*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextLayout1*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextLayout1*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextLayout1*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextLayout1*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextLayout1*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextLayout1*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextLayout1*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextLayout1*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextLayout1*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextLayout1*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextLayout1*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextLayout1*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextLayout1*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextLayout1*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextLayout1*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextLayout1*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextLayout1*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextLayout1*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextLayout1*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextLayout1*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextLayout1*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextLayout1*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextLayout1*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextLayout1*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_max_width(this : IDWriteTextLayout1*, maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.call(this, maxwidth)
+  end
+  def set_max_height(this : IDWriteTextLayout1*, maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.call(this, maxheight)
+  end
+  def set_font_collection(this : IDWriteTextLayout1*, fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.call(this, fontcollection, textrange)
+  end
+  def set_font_family_name(this : IDWriteTextLayout1*, fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.call(this, fontfamilyname, textrange)
+  end
+  def set_font_weight(this : IDWriteTextLayout1*, fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.call(this, fontweight, textrange)
+  end
+  def set_font_style(this : IDWriteTextLayout1*, fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.call(this, fontstyle, textrange)
+  end
+  def set_font_stretch(this : IDWriteTextLayout1*, fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.call(this, fontstretch, textrange)
+  end
+  def set_font_size(this : IDWriteTextLayout1*, fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.call(this, fontsize, textrange)
+  end
+  def set_underline(this : IDWriteTextLayout1*, hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.call(this, hasunderline, textrange)
+  end
+  def set_strikethrough(this : IDWriteTextLayout1*, hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.call(this, hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(this : IDWriteTextLayout1*, drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.call(this, drawingeffect, textrange)
+  end
+  def set_inline_object(this : IDWriteTextLayout1*, inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, inlineobject, textrange)
+  end
+  def set_typography(this : IDWriteTextLayout1*, typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.call(this, typography, textrange)
+  end
+  def set_locale_name(this : IDWriteTextLayout1*, localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.call(this, localename, textrange)
+  end
+  def get_max_width(this : IDWriteTextLayout1*) : Float32
+    @lpVtbl.value.get_max_width.call(this)
+  end
+  def get_max_height(this : IDWriteTextLayout1*) : Float32
+    @lpVtbl.value.get_max_height.call(this)
+  end
+  def get_font_collection2(this : IDWriteTextLayout1*, currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.call(this, currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(this : IDWriteTextLayout1*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(this : IDWriteTextLayout1*, currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.call(this, currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(this : IDWriteTextLayout1*, currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.call(this, currentposition, fontweight, textrange)
+  end
+  def get_font_style2(this : IDWriteTextLayout1*, currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.call(this, currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(this : IDWriteTextLayout1*, currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.call(this, currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(this : IDWriteTextLayout1*, currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.call(this, currentposition, fontsize, textrange)
+  end
+  def get_underline(this : IDWriteTextLayout1*, currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(this : IDWriteTextLayout1*, currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(this : IDWriteTextLayout1*, currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.call(this, currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(this : IDWriteTextLayout1*, currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, currentposition, inlineobject, textrange)
+  end
+  def get_typography(this : IDWriteTextLayout1*, currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.call(this, currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(this : IDWriteTextLayout1*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_locale_name2(this : IDWriteTextLayout1*, currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.call(this, currentposition, localename, namesize, textrange)
+  end
+  def draw(this : IDWriteTextLayout1*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(this : IDWriteTextLayout1*, linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(this : IDWriteTextLayout1*, textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, textmetrics)
+  end
+  def get_overhang_metrics(this : IDWriteTextLayout1*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_cluster_metrics(this : IDWriteTextLayout1*, clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.call(this, clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(this : IDWriteTextLayout1*, minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.call(this, minwidth)
+  end
+  def hit_test_point(this : IDWriteTextLayout1*, pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.call(this, pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(this : IDWriteTextLayout1*, textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.call(this, textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(this : IDWriteTextLayout1*, textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.call(this, textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(this : IDWriteTextLayout1*, ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.call(this, ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(this : IDWriteTextLayout1*, currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.call(this, currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(this : IDWriteTextLayout1*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(this : IDWriteTextLayout1*, currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.call(this, currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+end
+struct LibWin32::IDWriteBitmapRenderTarget1
+  def query_interface(this : IDWriteBitmapRenderTarget1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteBitmapRenderTarget1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteBitmapRenderTarget1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw_glyph_run(this : IDWriteBitmapRenderTarget1*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, renderingparams : IDWriteRenderingParams, textcolor : UInt32, blackboxrect : RECT*) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, baselineoriginx, baselineoriginy, measuringmode, glyphrun, renderingparams, textcolor, blackboxrect)
+  end
+  def get_memory_dc(this : IDWriteBitmapRenderTarget1*) : HDC
+    @lpVtbl.value.get_memory_dc.call(this)
+  end
+  def get_pixels_per_dip(this : IDWriteBitmapRenderTarget1*) : Float32
+    @lpVtbl.value.get_pixels_per_dip.call(this)
+  end
+  def set_pixels_per_dip(this : IDWriteBitmapRenderTarget1*, pixelsperdip : Float32) : HRESULT
+    @lpVtbl.value.set_pixels_per_dip.call(this, pixelsperdip)
+  end
+  def get_current_transform(this : IDWriteBitmapRenderTarget1*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.call(this, transform)
+  end
+  def set_current_transform(this : IDWriteBitmapRenderTarget1*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.set_current_transform.call(this, transform)
+  end
+  def get_size(this : IDWriteBitmapRenderTarget1*, size : SIZE*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def resize(this : IDWriteBitmapRenderTarget1*, width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.call(this, width, height)
+  end
+  def get_text_antialias_mode(this : IDWriteBitmapRenderTarget1*) : DWRITE_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.call(this)
+  end
+  def set_text_antialias_mode(this : IDWriteBitmapRenderTarget1*, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.call(this, antialiasmode)
+  end
+end
+struct LibWin32::IDWriteTextRenderer1
+  def query_interface(this : IDWriteTextRenderer1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextRenderer1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextRenderer1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_pixel_snapping_disabled(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.call(this, clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.call(this, clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.call(this, clientdrawingcontext, pixelsperdip)
+  end
+  def draw_glyph_run(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, originx : Float32, originy : Float32, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object.call(this, clientdrawingcontext, originx, originy, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+  def draw_glyph_run2(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run2.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline2(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline2.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough2(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough2.call(this, clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object2(this : IDWriteTextRenderer1*, clientdrawingcontext : Void*, originx : Float32, originy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object2.call(this, clientdrawingcontext, originx, originy, orientationangle, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+end
+struct LibWin32::IDWriteTextFormat1
+  def query_interface(this : IDWriteTextFormat1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextFormat1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextFormat1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextFormat1*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextFormat1*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextFormat1*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextFormat1*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextFormat1*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextFormat1*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextFormat1*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextFormat1*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextFormat1*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextFormat1*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextFormat1*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextFormat1*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextFormat1*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextFormat1*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextFormat1*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextFormat1*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextFormat1*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextFormat1*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextFormat1*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextFormat1*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextFormat1*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextFormat1*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextFormat1*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextFormat1*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextFormat1*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextFormat1*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextFormat1*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextFormat1*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextFormat1*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextFormat1*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextFormat1*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextFormat1*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextFormat1*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+end
+struct LibWin32::IDWriteTextLayout2
+  def query_interface(this : IDWriteTextLayout2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextLayout2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextLayout2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextLayout2*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextLayout2*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextLayout2*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextLayout2*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextLayout2*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextLayout2*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextLayout2*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextLayout2*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextLayout2*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextLayout2*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextLayout2*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextLayout2*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextLayout2*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextLayout2*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextLayout2*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextLayout2*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextLayout2*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextLayout2*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextLayout2*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextLayout2*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextLayout2*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextLayout2*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextLayout2*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextLayout2*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextLayout2*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_max_width(this : IDWriteTextLayout2*, maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.call(this, maxwidth)
+  end
+  def set_max_height(this : IDWriteTextLayout2*, maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.call(this, maxheight)
+  end
+  def set_font_collection(this : IDWriteTextLayout2*, fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.call(this, fontcollection, textrange)
+  end
+  def set_font_family_name(this : IDWriteTextLayout2*, fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.call(this, fontfamilyname, textrange)
+  end
+  def set_font_weight(this : IDWriteTextLayout2*, fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.call(this, fontweight, textrange)
+  end
+  def set_font_style(this : IDWriteTextLayout2*, fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.call(this, fontstyle, textrange)
+  end
+  def set_font_stretch(this : IDWriteTextLayout2*, fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.call(this, fontstretch, textrange)
+  end
+  def set_font_size(this : IDWriteTextLayout2*, fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.call(this, fontsize, textrange)
+  end
+  def set_underline(this : IDWriteTextLayout2*, hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.call(this, hasunderline, textrange)
+  end
+  def set_strikethrough(this : IDWriteTextLayout2*, hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.call(this, hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(this : IDWriteTextLayout2*, drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.call(this, drawingeffect, textrange)
+  end
+  def set_inline_object(this : IDWriteTextLayout2*, inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, inlineobject, textrange)
+  end
+  def set_typography(this : IDWriteTextLayout2*, typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.call(this, typography, textrange)
+  end
+  def set_locale_name(this : IDWriteTextLayout2*, localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.call(this, localename, textrange)
+  end
+  def get_max_width(this : IDWriteTextLayout2*) : Float32
+    @lpVtbl.value.get_max_width.call(this)
+  end
+  def get_max_height(this : IDWriteTextLayout2*) : Float32
+    @lpVtbl.value.get_max_height.call(this)
+  end
+  def get_font_collection2(this : IDWriteTextLayout2*, currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.call(this, currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(this : IDWriteTextLayout2*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(this : IDWriteTextLayout2*, currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.call(this, currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(this : IDWriteTextLayout2*, currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.call(this, currentposition, fontweight, textrange)
+  end
+  def get_font_style2(this : IDWriteTextLayout2*, currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.call(this, currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(this : IDWriteTextLayout2*, currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.call(this, currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(this : IDWriteTextLayout2*, currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.call(this, currentposition, fontsize, textrange)
+  end
+  def get_underline(this : IDWriteTextLayout2*, currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(this : IDWriteTextLayout2*, currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(this : IDWriteTextLayout2*, currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.call(this, currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(this : IDWriteTextLayout2*, currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, currentposition, inlineobject, textrange)
+  end
+  def get_typography(this : IDWriteTextLayout2*, currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.call(this, currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(this : IDWriteTextLayout2*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_locale_name2(this : IDWriteTextLayout2*, currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.call(this, currentposition, localename, namesize, textrange)
+  end
+  def draw(this : IDWriteTextLayout2*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(this : IDWriteTextLayout2*, linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(this : IDWriteTextLayout2*, textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, textmetrics)
+  end
+  def get_overhang_metrics(this : IDWriteTextLayout2*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_cluster_metrics(this : IDWriteTextLayout2*, clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.call(this, clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(this : IDWriteTextLayout2*, minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.call(this, minwidth)
+  end
+  def hit_test_point(this : IDWriteTextLayout2*, pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.call(this, pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(this : IDWriteTextLayout2*, textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.call(this, textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(this : IDWriteTextLayout2*, textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.call(this, textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(this : IDWriteTextLayout2*, ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.call(this, ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(this : IDWriteTextLayout2*, currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.call(this, currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(this : IDWriteTextLayout2*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(this : IDWriteTextLayout2*, currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.call(this, currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(this : IDWriteTextLayout2*, textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.call(this, textmetrics)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextLayout2*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextLayout2*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextLayout2*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextLayout2*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextLayout2*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextLayout2*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextLayout2*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextLayout2*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer2
+  def query_interface(this : IDWriteTextAnalyzer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextAnalyzer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextAnalyzer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def analyze_script(this : IDWriteTextAnalyzer2*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(this : IDWriteTextAnalyzer2*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(this : IDWriteTextAnalyzer2*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(this : IDWriteTextAnalyzer2*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(this : IDWriteTextAnalyzer2*, textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.call(this, textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(this : IDWriteTextAnalyzer2*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(this : IDWriteTextAnalyzer2*, textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.call(this, textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def apply_character_spacing(this : IDWriteTextAnalyzer2*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textlength : UInt32, glyphcount : UInt32, clustermap : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.apply_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textlength, glyphcount, clustermap, glyphadvances, glyphoffsets, glyphproperties, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_baseline(this : IDWriteTextAnalyzer2*, fontface : IDWriteFontFace, baseline : DWRITE_BASELINE, isvertical : LibC::BOOL, issimulationallowed : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, baselinecoordinate : Int32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_baseline.call(this, fontface, baseline, isvertical, issimulationallowed, scriptanalysis, localename, baselinecoordinate, exists)
+  end
+  def analyze_vertical_glyph_orientation(this : IDWriteTextAnalyzer2*, analysissource : IDWriteTextAnalysisSource1, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink1) : HRESULT
+    @lpVtbl.value.analyze_vertical_glyph_orientation.call(this, analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyph_orientation_transform(this : IDWriteTextAnalyzer2*, glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform.call(this, glyphorientationangle, issideways, transform)
+  end
+  def get_script_properties(this : IDWriteTextAnalyzer2*, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, scriptproperties : DWRITE_SCRIPT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_script_properties.call(this, scriptanalysis, scriptproperties)
+  end
+  def get_text_complexity(this : IDWriteTextAnalyzer2*, textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, istextsimple : LibC::BOOL*, textlengthread : UInt32*, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_text_complexity.call(this, textstring, textlength, fontface, istextsimple, textlengthread, glyphindices)
+  end
+  def get_justification_opportunities(this : IDWriteTextAnalyzer2*, fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, textstring : Char*, clustermap : UInt16*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*) : HRESULT
+    @lpVtbl.value.get_justification_opportunities.call(this, fontface, fontemsize, scriptanalysis, textlength, glyphcount, textstring, clustermap, glyphproperties, justificationopportunities)
+  end
+  def justify_glyph_advances(this : IDWriteTextAnalyzer2*, linewidth : Float32, glyphcount : UInt32, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.justify_glyph_advances.call(this, linewidth, glyphcount, justificationopportunities, glyphadvances, glyphoffsets, justifiedglyphadvances, justifiedglyphoffsets)
+  end
+  def get_justified_glyphs(this : IDWriteTextAnalyzer2*, fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, glyphindices : UInt16*, glyphadvances : Float32*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*, modifiedclustermap : UInt16*, modifiedglyphindices : UInt16*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_justified_glyphs.call(this, fontface, fontemsize, scriptanalysis, textlength, glyphcount, maxglyphcount, clustermap, glyphindices, glyphadvances, justifiedglyphadvances, justifiedglyphoffsets, glyphproperties, actualglyphcount, modifiedclustermap, modifiedglyphindices, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_glyph_orientation_transform2(this : IDWriteTextAnalyzer2*, glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, originx : Float32, originy : Float32, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform2.call(this, glyphorientationangle, issideways, originx, originy, transform)
+  end
+  def get_typographic_features(this : IDWriteTextAnalyzer2*, fontface : IDWriteFontFace, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, maxtagcount : UInt32, actualtagcount : UInt32*, tags : DWRITE_FONT_FEATURE_TAG*) : HRESULT
+    @lpVtbl.value.get_typographic_features.call(this, fontface, scriptanalysis, localename, maxtagcount, actualtagcount, tags)
+  end
+  def check_typographic_feature(this : IDWriteTextAnalyzer2*, fontface : IDWriteFontFace, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, featuretag : DWRITE_FONT_FEATURE_TAG, glyphcount : UInt32, glyphindices : UInt16*, featureapplies : UInt8*) : HRESULT
+    @lpVtbl.value.check_typographic_feature.call(this, fontface, scriptanalysis, localename, featuretag, glyphcount, glyphindices, featureapplies)
+  end
+end
+struct LibWin32::IDWriteFontFallback
+  def query_interface(this : IDWriteFontFallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def map_characters(this : IDWriteFontFallback*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, baseweight : DWRITE_FONT_WEIGHT, basestyle : DWRITE_FONT_STYLE, basestretch : DWRITE_FONT_STRETCH, mappedlength : UInt32*, mappedfont : IDWriteFont*, scale : Float32*) : HRESULT
+    @lpVtbl.value.map_characters.call(this, analysissource, textposition, textlength, basefontcollection, basefamilyname, baseweight, basestyle, basestretch, mappedlength, mappedfont, scale)
+  end
+end
+struct LibWin32::IDWriteFontFallbackBuilder
+  def query_interface(this : IDWriteFontFallbackBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFallbackBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFallbackBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_mapping(this : IDWriteFontFallbackBuilder*, ranges : DWRITE_UNICODE_RANGE*, rangescount : UInt32, targetfamilynames : UInt16**, targetfamilynamescount : UInt32, fontcollection : IDWriteFontCollection, localename : LibC::LPWSTR, basefamilyname : LibC::LPWSTR, scale : Float32) : HRESULT
+    @lpVtbl.value.add_mapping.call(this, ranges, rangescount, targetfamilynames, targetfamilynamescount, fontcollection, localename, basefamilyname, scale)
+  end
+  def add_mappings(this : IDWriteFontFallbackBuilder*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.add_mappings.call(this, fontfallback)
+  end
+  def create_font_fallback(this : IDWriteFontFallbackBuilder*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.create_font_fallback.call(this, fontfallback)
+  end
+end
+struct LibWin32::IDWriteFont2
+  def query_interface(this : IDWriteFont2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFont2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFont2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family(this : IDWriteFont2*, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, fontfamily)
+  end
+  def get_weight(this : IDWriteFont2*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFont2*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFont2*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def is_symbol_font(this : IDWriteFont2*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_face_names(this : IDWriteFont2*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFont2*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations(this : IDWriteFont2*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_metrics(this : IDWriteFont2*, fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontmetrics)
+  end
+  def has_character(this : IDWriteFont2*, unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.call(this, unicodevalue, exists)
+  end
+  def create_font_face(this : IDWriteFont2*, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+  def get_metrics2(this : IDWriteFont2*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_panose(this : IDWriteFont2*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_unicode_ranges(this : IDWriteFont2*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFont2*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def is_color_font(this : IDWriteFont2*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+end
+struct LibWin32::IDWriteFontFace2
+  def query_interface(this : IDWriteFontFace2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace2*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace2*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace2*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace2*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace2*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace2*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace2*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace2*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace2*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace2*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace2*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace2*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace2*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace2*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace2*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace2*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace2*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace2*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace2*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace2*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace2*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace2*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace2*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace2*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace2*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace2*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace2*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+  def is_color_font(this : IDWriteFontFace2*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def get_color_palette_count(this : IDWriteFontFace2*) : UInt32
+    @lpVtbl.value.get_color_palette_count.call(this)
+  end
+  def get_palette_entry_count(this : IDWriteFontFace2*) : UInt32
+    @lpVtbl.value.get_palette_entry_count.call(this)
+  end
+  def get_palette_entries(this : IDWriteFontFace2*, colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(this : IDWriteFontFace2*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+end
+struct LibWin32::IDWriteColorGlyphRunEnumerator
+  def query_interface(this : IDWriteColorGlyphRunEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteColorGlyphRunEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteColorGlyphRunEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IDWriteColorGlyphRunEnumerator*, hasrun : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasrun)
+  end
+  def get_current_run(this : IDWriteColorGlyphRunEnumerator*, colorglyphrun : DWRITE_COLOR_GLYPH_RUN**) : HRESULT
+    @lpVtbl.value.get_current_run.call(this, colorglyphrun)
+  end
+end
+struct LibWin32::IDWriteRenderingParams2
+  def query_interface(this : IDWriteRenderingParams2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRenderingParams2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRenderingParams2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_gamma(this : IDWriteRenderingParams2*) : Float32
+    @lpVtbl.value.get_gamma.call(this)
+  end
+  def get_enhanced_contrast(this : IDWriteRenderingParams2*) : Float32
+    @lpVtbl.value.get_enhanced_contrast.call(this)
+  end
+  def get_clear_type_level(this : IDWriteRenderingParams2*) : Float32
+    @lpVtbl.value.get_clear_type_level.call(this)
+  end
+  def get_pixel_geometry(this : IDWriteRenderingParams2*) : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.call(this)
+  end
+  def get_rendering_mode(this : IDWriteRenderingParams2*) : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.call(this)
+  end
+  def get_grayscale_enhanced_contrast(this : IDWriteRenderingParams2*) : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.call(this)
+  end
+  def get_grid_fit_mode(this : IDWriteRenderingParams2*) : DWRITE_GRID_FIT_MODE
+    @lpVtbl.value.get_grid_fit_mode.call(this)
+  end
+end
+struct LibWin32::IDWriteFactory2
+  def query_interface(this : IDWriteFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory2*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory2*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory2*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory2*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory2*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory2*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory2*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory2*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory2*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory2*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory2*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory2*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory2*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory2*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory2*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory2*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory2*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory2*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory2*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory2*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory2*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory2*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory2*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory2*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory2*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory2*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory2*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory2*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+end
+struct LibWin32::IDWriteRenderingParams3
+  def query_interface(this : IDWriteRenderingParams3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRenderingParams3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRenderingParams3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_gamma(this : IDWriteRenderingParams3*) : Float32
+    @lpVtbl.value.get_gamma.call(this)
+  end
+  def get_enhanced_contrast(this : IDWriteRenderingParams3*) : Float32
+    @lpVtbl.value.get_enhanced_contrast.call(this)
+  end
+  def get_clear_type_level(this : IDWriteRenderingParams3*) : Float32
+    @lpVtbl.value.get_clear_type_level.call(this)
+  end
+  def get_pixel_geometry(this : IDWriteRenderingParams3*) : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.call(this)
+  end
+  def get_rendering_mode(this : IDWriteRenderingParams3*) : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.call(this)
+  end
+  def get_grayscale_enhanced_contrast(this : IDWriteRenderingParams3*) : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.call(this)
+  end
+  def get_grid_fit_mode(this : IDWriteRenderingParams3*) : DWRITE_GRID_FIT_MODE
+    @lpVtbl.value.get_grid_fit_mode.call(this)
+  end
+  def get_rendering_mode1(this : IDWriteRenderingParams3*) : DWRITE_RENDERING_MODE1
+    @lpVtbl.value.get_rendering_mode1.call(this)
+  end
+end
+struct LibWin32::IDWriteFactory3
+  def query_interface(this : IDWriteFactory3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory3*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory3*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory3*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory3*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory3*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory3*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory3*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory3*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory3*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory3*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory3*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory3*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory3*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory3*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory3*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory3*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory3*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory3*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory3*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory3*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory3*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory3*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory3*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory3*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory3*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory3*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory3*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory3*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(this : IDWriteFactory3*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(this : IDWriteFactory3*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(this : IDWriteFactory3*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(this : IDWriteFactory3*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.call(this, filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(this : IDWriteFactory3*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.call(this, fontset)
+  end
+  def create_font_set_builder(this : IDWriteFactory3*, fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.call(this, fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(this : IDWriteFactory3*, fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.call(this, fontset, fontcollection)
+  end
+  def get_system_font_collection2(this : IDWriteFactory3*, includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.call(this, includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(this : IDWriteFactory3*, fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.call(this, fontdownloadqueue)
+  end
+end
+struct LibWin32::IDWriteFontSet
+  def query_interface(this : IDWriteFontSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_count(this : IDWriteFontSet*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font_face_reference(this : IDWriteFontSet*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def find_font_face_reference(this : IDWriteFontSet*, fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.call(this, fontfacereference, listindex, exists)
+  end
+  def find_font_face(this : IDWriteFontSet*, fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.call(this, fontface, listindex, exists)
+  end
+  def get_property_values(this : IDWriteFontSet*, propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.call(this, propertyid, values)
+  end
+  def get_property_values2(this : IDWriteFontSet*, propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.call(this, propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(this : IDWriteFontSet*, listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.call(this, listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(this : IDWriteFontSet*, property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.call(this, property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(this : IDWriteFontSet*, familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(this : IDWriteFontSet*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.call(this, properties, propertycount, filteredset)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder
+  def query_interface(this : IDWriteFontSetBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSetBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSetBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_font_face_reference(this : IDWriteFontSetBuilder*, fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.call(this, fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(this : IDWriteFontSetBuilder*, fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.call(this, fontfacereference)
+  end
+  def add_font_set(this : IDWriteFontSetBuilder*, fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.call(this, fontset)
+  end
+  def create_font_set(this : IDWriteFontSetBuilder*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.call(this, fontset)
+  end
+end
+struct LibWin32::IDWriteFontCollection1
+  def query_interface(this : IDWriteFontCollection1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontCollection1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontCollection1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family_count(this : IDWriteFontCollection1*) : UInt32
+    @lpVtbl.value.get_font_family_count.call(this)
+  end
+  def get_font_family(this : IDWriteFontCollection1*, index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, index, fontfamily)
+  end
+  def find_family_name(this : IDWriteFontCollection1*, familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.call(this, familyname, index, exists)
+  end
+  def get_font_from_font_face(this : IDWriteFontCollection1*, fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.call(this, fontface, font)
+  end
+  def get_font_set(this : IDWriteFontCollection1*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.call(this, fontset)
+  end
+  def get_font_family2(this : IDWriteFontCollection1*, index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.call(this, index, fontfamily)
+  end
+end
+struct LibWin32::IDWriteFontFamily1
+  def query_interface(this : IDWriteFontFamily1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFamily1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFamily1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontFamily1*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontFamily1*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontFamily1*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+  def get_family_names(this : IDWriteFontFamily1*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_first_matching_font(this : IDWriteFontFamily1*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.call(this, weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(this : IDWriteFontFamily1*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, weight, stretch, style, matchingfonts)
+  end
+  def get_font_locality(this : IDWriteFontFamily1*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_font2(this : IDWriteFontFamily1*, listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, listindex, font)
+  end
+  def get_font_face_reference(this : IDWriteFontFamily1*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontList1
+  def query_interface(this : IDWriteFontList1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontList1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontList1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontList1*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontList1*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontList1*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+  def get_font_locality(this : IDWriteFontList1*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_font2(this : IDWriteFontList1*, listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, listindex, font)
+  end
+  def get_font_face_reference(this : IDWriteFontList1*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontFaceReference
+  def query_interface(this : IDWriteFontFaceReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFaceReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFaceReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_font_face(this : IDWriteFontFaceReference*, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+  def create_font_face_with_simulations(this : IDWriteFontFaceReference*, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face_with_simulations.call(this, fontfacesimulationflags, fontface)
+  end
+  def equals(this : IDWriteFontFaceReference*, fontfacereference : IDWriteFontFaceReference) : LibC::BOOL
+    @lpVtbl.value.equals.call(this, fontfacereference)
+  end
+  def get_font_face_index(this : IDWriteFontFaceReference*) : UInt32
+    @lpVtbl.value.get_font_face_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFaceReference*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_font_file(this : IDWriteFontFaceReference*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.call(this, fontfile)
+  end
+  def get_local_file_size(this : IDWriteFontFaceReference*) : UInt64
+    @lpVtbl.value.get_local_file_size.call(this)
+  end
+  def get_file_size(this : IDWriteFontFaceReference*) : UInt64
+    @lpVtbl.value.get_file_size.call(this)
+  end
+  def get_file_time(this : IDWriteFontFaceReference*, lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_time.call(this, lastwritetime)
+  end
+  def get_locality(this : IDWriteFontFaceReference*) : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.call(this)
+  end
+  def enqueue_font_download_request(this : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.enqueue_font_download_request.call(this)
+  end
+  def enqueue_character_download_request(this : IDWriteFontFaceReference*, characters : Char*, charactercount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_character_download_request.call(this, characters, charactercount)
+  end
+  def enqueue_glyph_download_request(this : IDWriteFontFaceReference*, glyphindices : UInt16*, glyphcount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_glyph_download_request.call(this, glyphindices, glyphcount)
+  end
+  def enqueue_file_fragment_download_request(this : IDWriteFontFaceReference*, fileoffset : UInt64, fragmentsize : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_file_fragment_download_request.call(this, fileoffset, fragmentsize)
+  end
+end
+struct LibWin32::IDWriteFont3
+  def query_interface(this : IDWriteFont3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFont3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFont3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family(this : IDWriteFont3*, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, fontfamily)
+  end
+  def get_weight(this : IDWriteFont3*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFont3*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFont3*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def is_symbol_font(this : IDWriteFont3*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_face_names(this : IDWriteFont3*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFont3*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations(this : IDWriteFont3*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_metrics(this : IDWriteFont3*, fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontmetrics)
+  end
+  def has_character(this : IDWriteFont3*, unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.call(this, unicodevalue, exists)
+  end
+  def create_font_face(this : IDWriteFont3*, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+  def get_metrics2(this : IDWriteFont3*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_panose(this : IDWriteFont3*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_unicode_ranges(this : IDWriteFont3*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFont3*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def is_color_font(this : IDWriteFont3*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def create_font_face2(this : IDWriteFont3*, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face2.call(this, fontface)
+  end
+  def equals(this : IDWriteFont3*, font : IDWriteFont) : LibC::BOOL
+    @lpVtbl.value.equals.call(this, font)
+  end
+  def get_font_face_reference(this : IDWriteFont3*, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, fontfacereference)
+  end
+  def has_character2(this : IDWriteFont3*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character2.call(this, unicodevalue)
+  end
+  def get_locality(this : IDWriteFont3*) : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.call(this)
+  end
+end
+struct LibWin32::IDWriteFontFace3
+  def query_interface(this : IDWriteFontFace3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace3*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace3*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace3*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace3*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace3*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace3*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace3*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace3*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace3*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace3*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace3*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace3*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace3*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace3*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace3*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace3*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace3*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace3*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace3*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace3*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace3*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace3*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace3*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace3*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace3*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace3*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace3*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+  def is_color_font(this : IDWriteFontFace3*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def get_color_palette_count(this : IDWriteFontFace3*) : UInt32
+    @lpVtbl.value.get_color_palette_count.call(this)
+  end
+  def get_palette_entry_count(this : IDWriteFontFace3*) : UInt32
+    @lpVtbl.value.get_palette_entry_count.call(this)
+  end
+  def get_palette_entries(this : IDWriteFontFace3*, colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(this : IDWriteFontFace3*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(this : IDWriteFontFace3*, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, fontfacereference)
+  end
+  def get_panose(this : IDWriteFontFace3*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_weight(this : IDWriteFontFace3*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFontFace3*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFontFace3*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def get_family_names(this : IDWriteFontFace3*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_face_names(this : IDWriteFontFace3*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFontFace3*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def has_character(this : IDWriteFontFace3*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.call(this, unicodevalue)
+  end
+  def get_recommended_rendering_mode4(this : IDWriteFontFace3*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(this : IDWriteFontFace3*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.call(this, unicodevalue)
+  end
+  def is_glyph_local(this : IDWriteFontFace3*, glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.call(this, glyphid)
+  end
+  def are_characters_local(this : IDWriteFontFace3*, characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.call(this, characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(this : IDWriteFontFace3*, glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.call(this, glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+end
+struct LibWin32::IDWriteStringList
+  def query_interface(this : IDWriteStringList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteStringList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteStringList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IDWriteStringList*) : UInt32
+    @lpVtbl.value.get_count.call(this)
+  end
+  def get_locale_name_length(this : IDWriteStringList*, listindex : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_name_length.call(this, listindex, length)
+  end
+  def get_locale_name(this : IDWriteStringList*, listindex : UInt32, localename : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, listindex, localename, size)
+  end
+  def get_string_length(this : IDWriteStringList*, listindex : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.call(this, listindex, length)
+  end
+  def get_string(this : IDWriteStringList*, listindex : UInt32, stringbuffer : Char*, stringbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.get_string.call(this, listindex, stringbuffer, stringbuffersize)
+  end
+end
+struct LibWin32::IDWriteFontDownloadListener
+  def query_interface(this : IDWriteFontDownloadListener*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontDownloadListener*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontDownloadListener*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def download_completed(this : IDWriteFontDownloadListener*, downloadqueue : IDWriteFontDownloadQueue, context : IUnknown, downloadresult : HRESULT) : Void
+    @lpVtbl.value.download_completed.call(this, downloadqueue, context, downloadresult)
+  end
+end
+struct LibWin32::IDWriteFontDownloadQueue
+  def query_interface(this : IDWriteFontDownloadQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontDownloadQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontDownloadQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_listener(this : IDWriteFontDownloadQueue*, listener : IDWriteFontDownloadListener, token : UInt32*) : HRESULT
+    @lpVtbl.value.add_listener.call(this, listener, token)
+  end
+  def remove_listener(this : IDWriteFontDownloadQueue*, token : UInt32) : HRESULT
+    @lpVtbl.value.remove_listener.call(this, token)
+  end
+  def is_empty(this : IDWriteFontDownloadQueue*) : LibC::BOOL
+    @lpVtbl.value.is_empty.call(this)
+  end
+  def begin_download(this : IDWriteFontDownloadQueue*, context : IUnknown) : HRESULT
+    @lpVtbl.value.begin_download.call(this, context)
+  end
+  def cancel_download(this : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.cancel_download.call(this)
+  end
+  def get_generation_count(this : IDWriteFontDownloadQueue*) : UInt64
+    @lpVtbl.value.get_generation_count.call(this)
+  end
+end
+struct LibWin32::IDWriteGdiInterop1
+  def query_interface(this : IDWriteGdiInterop1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteGdiInterop1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteGdiInterop1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_font_from_logfont(this : IDWriteGdiInterop1*, logfont : LOGFONTW*, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont.call(this, logfont, font)
+  end
+  def convert_font_to_logfont(this : IDWriteGdiInterop1*, font : IDWriteFont, logfont : LOGFONTW*, issystemfont : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.convert_font_to_logfont.call(this, font, logfont, issystemfont)
+  end
+  def convert_font_face_to_logfont(this : IDWriteGdiInterop1*, font : IDWriteFontFace, logfont : LOGFONTW*) : HRESULT
+    @lpVtbl.value.convert_font_face_to_logfont.call(this, font, logfont)
+  end
+  def create_font_face_from_hdc(this : IDWriteGdiInterop1*, hdc : HDC, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face_from_hdc.call(this, hdc, fontface)
+  end
+  def create_bitmap_render_target(this : IDWriteGdiInterop1*, hdc : HDC, width : UInt32, height : UInt32, rendertarget : IDWriteBitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_bitmap_render_target.call(this, hdc, width, height, rendertarget)
+  end
+  def create_font_from_logfont2(this : IDWriteGdiInterop1*, logfont : LOGFONTW*, fontcollection : IDWriteFontCollection, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont2.call(this, logfont, fontcollection, font)
+  end
+  def get_font_signature(this : IDWriteGdiInterop1*, fontface : IDWriteFontFace, fontsignature : FONTSIGNATURE*) : HRESULT
+    @lpVtbl.value.get_font_signature.call(this, fontface, fontsignature)
+  end
+  def get_font_signature2(this : IDWriteGdiInterop1*, font : IDWriteFont, fontsignature : FONTSIGNATURE*) : HRESULT
+    @lpVtbl.value.get_font_signature2.call(this, font, fontsignature)
+  end
+  def get_matching_fonts_by_logfont(this : IDWriteGdiInterop1*, logfont : LOGFONTA*, fontset : IDWriteFontSet, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts_by_logfont.call(this, logfont, fontset, filteredset)
+  end
+end
+struct LibWin32::IDWriteTextFormat2
+  def query_interface(this : IDWriteTextFormat2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextFormat2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextFormat2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextFormat2*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextFormat2*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextFormat2*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextFormat2*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextFormat2*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextFormat2*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextFormat2*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextFormat2*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextFormat2*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextFormat2*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextFormat2*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextFormat2*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextFormat2*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextFormat2*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextFormat2*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextFormat2*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextFormat2*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextFormat2*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextFormat2*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextFormat2*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextFormat2*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextFormat2*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextFormat2*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextFormat2*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextFormat2*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextFormat2*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextFormat2*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextFormat2*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextFormat2*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextFormat2*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextFormat2*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextFormat2*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextFormat2*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+  def set_line_spacing2(this : IDWriteTextFormat2*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_spacing2(this : IDWriteTextFormat2*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.call(this, linespacingoptions)
+  end
+end
+struct LibWin32::IDWriteTextLayout3
+  def query_interface(this : IDWriteTextLayout3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextLayout3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextLayout3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextLayout3*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextLayout3*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextLayout3*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextLayout3*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextLayout3*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextLayout3*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextLayout3*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextLayout3*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextLayout3*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextLayout3*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextLayout3*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextLayout3*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextLayout3*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextLayout3*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextLayout3*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextLayout3*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextLayout3*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextLayout3*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextLayout3*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextLayout3*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextLayout3*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextLayout3*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextLayout3*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextLayout3*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextLayout3*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_max_width(this : IDWriteTextLayout3*, maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.call(this, maxwidth)
+  end
+  def set_max_height(this : IDWriteTextLayout3*, maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.call(this, maxheight)
+  end
+  def set_font_collection(this : IDWriteTextLayout3*, fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.call(this, fontcollection, textrange)
+  end
+  def set_font_family_name(this : IDWriteTextLayout3*, fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.call(this, fontfamilyname, textrange)
+  end
+  def set_font_weight(this : IDWriteTextLayout3*, fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.call(this, fontweight, textrange)
+  end
+  def set_font_style(this : IDWriteTextLayout3*, fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.call(this, fontstyle, textrange)
+  end
+  def set_font_stretch(this : IDWriteTextLayout3*, fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.call(this, fontstretch, textrange)
+  end
+  def set_font_size(this : IDWriteTextLayout3*, fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.call(this, fontsize, textrange)
+  end
+  def set_underline(this : IDWriteTextLayout3*, hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.call(this, hasunderline, textrange)
+  end
+  def set_strikethrough(this : IDWriteTextLayout3*, hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.call(this, hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(this : IDWriteTextLayout3*, drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.call(this, drawingeffect, textrange)
+  end
+  def set_inline_object(this : IDWriteTextLayout3*, inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, inlineobject, textrange)
+  end
+  def set_typography(this : IDWriteTextLayout3*, typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.call(this, typography, textrange)
+  end
+  def set_locale_name(this : IDWriteTextLayout3*, localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.call(this, localename, textrange)
+  end
+  def get_max_width(this : IDWriteTextLayout3*) : Float32
+    @lpVtbl.value.get_max_width.call(this)
+  end
+  def get_max_height(this : IDWriteTextLayout3*) : Float32
+    @lpVtbl.value.get_max_height.call(this)
+  end
+  def get_font_collection2(this : IDWriteTextLayout3*, currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.call(this, currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(this : IDWriteTextLayout3*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(this : IDWriteTextLayout3*, currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.call(this, currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(this : IDWriteTextLayout3*, currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.call(this, currentposition, fontweight, textrange)
+  end
+  def get_font_style2(this : IDWriteTextLayout3*, currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.call(this, currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(this : IDWriteTextLayout3*, currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.call(this, currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(this : IDWriteTextLayout3*, currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.call(this, currentposition, fontsize, textrange)
+  end
+  def get_underline(this : IDWriteTextLayout3*, currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(this : IDWriteTextLayout3*, currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(this : IDWriteTextLayout3*, currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.call(this, currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(this : IDWriteTextLayout3*, currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, currentposition, inlineobject, textrange)
+  end
+  def get_typography(this : IDWriteTextLayout3*, currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.call(this, currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(this : IDWriteTextLayout3*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_locale_name2(this : IDWriteTextLayout3*, currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.call(this, currentposition, localename, namesize, textrange)
+  end
+  def draw(this : IDWriteTextLayout3*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(this : IDWriteTextLayout3*, linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(this : IDWriteTextLayout3*, textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, textmetrics)
+  end
+  def get_overhang_metrics(this : IDWriteTextLayout3*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_cluster_metrics(this : IDWriteTextLayout3*, clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.call(this, clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(this : IDWriteTextLayout3*, minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.call(this, minwidth)
+  end
+  def hit_test_point(this : IDWriteTextLayout3*, pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.call(this, pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(this : IDWriteTextLayout3*, textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.call(this, textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(this : IDWriteTextLayout3*, textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.call(this, textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(this : IDWriteTextLayout3*, ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.call(this, ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(this : IDWriteTextLayout3*, currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.call(this, currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(this : IDWriteTextLayout3*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(this : IDWriteTextLayout3*, currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.call(this, currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(this : IDWriteTextLayout3*, textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.call(this, textmetrics)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextLayout3*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextLayout3*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextLayout3*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextLayout3*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextLayout3*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextLayout3*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextLayout3*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextLayout3*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+  def invalidate_layout(this : IDWriteTextLayout3*) : HRESULT
+    @lpVtbl.value.invalidate_layout.call(this)
+  end
+  def set_line_spacing2(this : IDWriteTextLayout3*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_spacing2(this : IDWriteTextLayout3*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_metrics2(this : IDWriteTextLayout3*, linemetrics : DWRITE_LINE_METRICS1*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics2.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+end
+struct LibWin32::IDWriteColorGlyphRunEnumerator1
+  def query_interface(this : IDWriteColorGlyphRunEnumerator1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteColorGlyphRunEnumerator1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteColorGlyphRunEnumerator1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IDWriteColorGlyphRunEnumerator1*, hasrun : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasrun)
+  end
+  def get_current_run(this : IDWriteColorGlyphRunEnumerator1*, colorglyphrun : DWRITE_COLOR_GLYPH_RUN**) : HRESULT
+    @lpVtbl.value.get_current_run.call(this, colorglyphrun)
+  end
+  def get_current_run2(this : IDWriteColorGlyphRunEnumerator1*, colorglyphrun : DWRITE_COLOR_GLYPH_RUN1**) : HRESULT
+    @lpVtbl.value.get_current_run2.call(this, colorglyphrun)
+  end
+end
+struct LibWin32::IDWriteFontFace4
+  def query_interface(this : IDWriteFontFace4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace4*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace4*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace4*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace4*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace4*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace4*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace4*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace4*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace4*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace4*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace4*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace4*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace4*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace4*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace4*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace4*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace4*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace4*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace4*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace4*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace4*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace4*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace4*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace4*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace4*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace4*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace4*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+  def is_color_font(this : IDWriteFontFace4*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def get_color_palette_count(this : IDWriteFontFace4*) : UInt32
+    @lpVtbl.value.get_color_palette_count.call(this)
+  end
+  def get_palette_entry_count(this : IDWriteFontFace4*) : UInt32
+    @lpVtbl.value.get_palette_entry_count.call(this)
+  end
+  def get_palette_entries(this : IDWriteFontFace4*, colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(this : IDWriteFontFace4*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(this : IDWriteFontFace4*, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, fontfacereference)
+  end
+  def get_panose(this : IDWriteFontFace4*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_weight(this : IDWriteFontFace4*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFontFace4*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFontFace4*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def get_family_names(this : IDWriteFontFace4*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_face_names(this : IDWriteFontFace4*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFontFace4*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def has_character(this : IDWriteFontFace4*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.call(this, unicodevalue)
+  end
+  def get_recommended_rendering_mode4(this : IDWriteFontFace4*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(this : IDWriteFontFace4*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.call(this, unicodevalue)
+  end
+  def is_glyph_local(this : IDWriteFontFace4*, glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.call(this, glyphid)
+  end
+  def are_characters_local(this : IDWriteFontFace4*, characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.call(this, characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(this : IDWriteFontFace4*, glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.call(this, glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(this : IDWriteFontFace4*, glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.call(this, glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2(this : IDWriteFontFace4*) : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.call(this)
+  end
+  def get_glyph_image_data(this : IDWriteFontFace4*, glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.call(this, glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(this : IDWriteFontFace4*, glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.call(this, glyphdatacontext)
+  end
+end
+struct LibWin32::IDWriteFactory4
+  def query_interface(this : IDWriteFactory4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory4*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory4*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory4*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory4*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory4*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory4*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory4*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory4*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory4*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory4*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory4*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory4*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory4*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory4*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory4*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory4*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory4*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory4*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory4*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory4*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory4*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory4*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory4*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory4*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory4*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory4*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory4*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory4*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(this : IDWriteFactory4*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(this : IDWriteFactory4*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(this : IDWriteFactory4*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(this : IDWriteFactory4*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.call(this, filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(this : IDWriteFactory4*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.call(this, fontset)
+  end
+  def create_font_set_builder(this : IDWriteFactory4*, fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.call(this, fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(this : IDWriteFactory4*, fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.call(this, fontset, fontcollection)
+  end
+  def get_system_font_collection2(this : IDWriteFactory4*, includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.call(this, includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(this : IDWriteFactory4*, fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.call(this, fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(this : IDWriteFactory4*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(this : IDWriteFactory4*, glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.call(this, glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(this : IDWriteFactory4*, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.call(this, glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder1
+  def query_interface(this : IDWriteFontSetBuilder1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSetBuilder1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSetBuilder1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_font_face_reference(this : IDWriteFontSetBuilder1*, fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.call(this, fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(this : IDWriteFontSetBuilder1*, fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.call(this, fontfacereference)
+  end
+  def add_font_set(this : IDWriteFontSetBuilder1*, fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.call(this, fontset)
+  end
+  def create_font_set(this : IDWriteFontSetBuilder1*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.call(this, fontset)
+  end
+  def add_font_file(this : IDWriteFontSetBuilder1*, fontfile : IDWriteFontFile) : HRESULT
+    @lpVtbl.value.add_font_file.call(this, fontfile)
+  end
+end
+struct LibWin32::IDWriteAsyncResult
+  def query_interface(this : IDWriteAsyncResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteAsyncResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteAsyncResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_wait_handle(this : IDWriteAsyncResult*) : LibC::HANDLE
+    @lpVtbl.value.get_wait_handle.call(this)
+  end
+  def get_result(this : IDWriteAsyncResult*) : HRESULT
+    @lpVtbl.value.get_result.call(this)
+  end
+end
+struct LibWin32::IDWriteRemoteFontFileStream
+  def query_interface(this : IDWriteRemoteFontFileStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRemoteFontFileStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRemoteFontFileStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_file_fragment(this : IDWriteRemoteFontFileStream*, fragmentstart : Void**, fileoffset : UInt64, fragmentsize : UInt64, fragmentcontext : Void**) : HRESULT
+    @lpVtbl.value.read_file_fragment.call(this, fragmentstart, fileoffset, fragmentsize, fragmentcontext)
+  end
+  def release_file_fragment(this : IDWriteRemoteFontFileStream*, fragmentcontext : Void*) : Void
+    @lpVtbl.value.release_file_fragment.call(this, fragmentcontext)
+  end
+  def get_file_size(this : IDWriteRemoteFontFileStream*, filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, filesize)
+  end
+  def get_last_write_time(this : IDWriteRemoteFontFileStream*, lastwritetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.call(this, lastwritetime)
+  end
+  def get_local_file_size(this : IDWriteRemoteFontFileStream*, localfilesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_local_file_size.call(this, localfilesize)
+  end
+  def get_file_fragment_locality(this : IDWriteRemoteFontFileStream*, fileoffset : UInt64, fragmentsize : UInt64, islocal : LibC::BOOL*, partialsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_fragment_locality.call(this, fileoffset, fragmentsize, islocal, partialsize)
+  end
+  def get_locality(this : IDWriteRemoteFontFileStream*) : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.call(this)
+  end
+  def begin_download(this : IDWriteRemoteFontFileStream*, downloadoperationid : Guid*, filefragments : DWRITE_FILE_FRAGMENT*, fragmentcount : UInt32, asyncresult : IDWriteAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_download.call(this, downloadoperationid, filefragments, fragmentcount, asyncresult)
+  end
+end
+struct LibWin32::IDWriteRemoteFontFileLoader
+  def query_interface(this : IDWriteRemoteFontFileLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteRemoteFontFileLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteRemoteFontFileLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream_from_key(this : IDWriteRemoteFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def create_remote_stream_from_key(this : IDWriteRemoteFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteRemoteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_remote_stream_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def get_locality_from_key(this : IDWriteRemoteFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, locality : DWRITE_LOCALITY*) : HRESULT
+    @lpVtbl.value.get_locality_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, locality)
+  end
+  def create_font_file_reference_from_url(this : IDWriteRemoteFontFileLoader*, factory : IDWriteFactory, baseurl : LibC::LPWSTR, fontfileurl : LibC::LPWSTR, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference_from_url.call(this, factory, baseurl, fontfileurl, fontfile)
+  end
+end
+struct LibWin32::IDWriteInMemoryFontFileLoader
+  def query_interface(this : IDWriteInMemoryFontFileLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteInMemoryFontFileLoader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteInMemoryFontFileLoader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stream_from_key(this : IDWriteInMemoryFontFileLoader*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def create_in_memory_font_file_reference(this : IDWriteInMemoryFontFileLoader*, factory : IDWriteFactory, fontdata : Void*, fontdatasize : UInt32, ownerobject : IUnknown, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_reference.call(this, factory, fontdata, fontdatasize, ownerobject, fontfile)
+  end
+  def get_file_count(this : IDWriteInMemoryFontFileLoader*) : UInt32
+    @lpVtbl.value.get_file_count.call(this)
+  end
+end
+struct LibWin32::IDWriteFactory5
+  def query_interface(this : IDWriteFactory5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory5*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory5*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory5*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory5*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory5*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory5*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory5*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory5*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory5*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory5*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory5*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory5*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory5*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory5*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory5*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory5*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory5*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory5*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory5*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory5*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory5*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory5*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory5*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory5*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory5*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory5*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory5*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory5*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(this : IDWriteFactory5*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(this : IDWriteFactory5*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(this : IDWriteFactory5*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(this : IDWriteFactory5*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.call(this, filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(this : IDWriteFactory5*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.call(this, fontset)
+  end
+  def create_font_set_builder(this : IDWriteFactory5*, fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.call(this, fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(this : IDWriteFactory5*, fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.call(this, fontset, fontcollection)
+  end
+  def get_system_font_collection2(this : IDWriteFactory5*, includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.call(this, includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(this : IDWriteFactory5*, fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.call(this, fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(this : IDWriteFactory5*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(this : IDWriteFactory5*, glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.call(this, glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(this : IDWriteFactory5*, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.call(this, glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(this : IDWriteFactory5*, fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.call(this, fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(this : IDWriteFactory5*, newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.call(this, newloader)
+  end
+  def create_http_font_file_loader(this : IDWriteFactory5*, referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.call(this, referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(this : IDWriteFactory5*, filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.call(this, filedata, filedatasize)
+  end
+  def unpack_font_file(this : IDWriteFactory5*, containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.call(this, containertype, filedata, filedatasize, unpackedfontstream)
+  end
+end
+struct LibWin32::IDWriteFactory6
+  def query_interface(this : IDWriteFactory6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory6*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory6*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory6*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory6*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory6*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory6*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory6*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory6*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory6*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory6*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory6*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory6*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory6*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory6*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory6*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory6*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory6*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory6*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory6*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory6*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory6*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory6*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory6*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory6*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory6*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory6*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory6*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory6*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(this : IDWriteFactory6*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(this : IDWriteFactory6*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(this : IDWriteFactory6*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(this : IDWriteFactory6*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.call(this, filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(this : IDWriteFactory6*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.call(this, fontset)
+  end
+  def create_font_set_builder(this : IDWriteFactory6*, fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.call(this, fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(this : IDWriteFactory6*, fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.call(this, fontset, fontcollection)
+  end
+  def get_system_font_collection2(this : IDWriteFactory6*, includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.call(this, includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(this : IDWriteFactory6*, fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.call(this, fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(this : IDWriteFactory6*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(this : IDWriteFactory6*, glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.call(this, glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(this : IDWriteFactory6*, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.call(this, glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(this : IDWriteFactory6*, fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.call(this, fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(this : IDWriteFactory6*, newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.call(this, newloader)
+  end
+  def create_http_font_file_loader(this : IDWriteFactory6*, referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.call(this, referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(this : IDWriteFactory6*, filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.call(this, filedata, filedatasize)
+  end
+  def unpack_font_file(this : IDWriteFactory6*, containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.call(this, containertype, filedata, filedatasize, unpackedfontstream)
+  end
+  def create_font_face_reference3(this : IDWriteFactory6*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference3.call(this, fontfile, faceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+  def create_font_resource(this : IDWriteFactory6*, fontfile : IDWriteFontFile, faceindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, fontfile, faceindex, fontresource)
+  end
+  def get_system_font_set2(this : IDWriteFactory6*, includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_system_font_set2.call(this, includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection3(this : IDWriteFactory6*, includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.get_system_font_collection3.call(this, includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+  def create_font_collection_from_font_set2(this : IDWriteFactory6*, fontset : IDWriteFontSet, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set2.call(this, fontset, fontfamilymodel, fontcollection)
+  end
+  def create_font_set_builder3(this : IDWriteFactory6*, fontsetbuilder : IDWriteFontSetBuilder2*) : HRESULT
+    @lpVtbl.value.create_font_set_builder3.call(this, fontsetbuilder)
+  end
+  def create_text_format2(this : IDWriteFactory6*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat3*) : HRESULT
+    @lpVtbl.value.create_text_format2.call(this, fontfamilyname, fontcollection, fontaxisvalues, fontaxisvaluecount, fontsize, localename, textformat)
+  end
+end
+struct LibWin32::IDWriteFontFace5
+  def query_interface(this : IDWriteFontFace5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace5*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace5*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace5*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace5*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace5*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace5*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace5*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace5*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace5*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace5*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace5*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace5*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace5*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace5*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace5*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace5*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace5*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace5*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace5*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace5*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace5*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace5*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+  def is_color_font(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def get_color_palette_count(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.get_color_palette_count.call(this)
+  end
+  def get_palette_entry_count(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.get_palette_entry_count.call(this)
+  end
+  def get_palette_entries(this : IDWriteFontFace5*, colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(this : IDWriteFontFace5*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(this : IDWriteFontFace5*, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, fontfacereference)
+  end
+  def get_panose(this : IDWriteFontFace5*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_weight(this : IDWriteFontFace5*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFontFace5*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFontFace5*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def get_family_names(this : IDWriteFontFace5*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_face_names(this : IDWriteFontFace5*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFontFace5*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def has_character(this : IDWriteFontFace5*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.call(this, unicodevalue)
+  end
+  def get_recommended_rendering_mode4(this : IDWriteFontFace5*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(this : IDWriteFontFace5*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.call(this, unicodevalue)
+  end
+  def is_glyph_local(this : IDWriteFontFace5*, glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.call(this, glyphid)
+  end
+  def are_characters_local(this : IDWriteFontFace5*, characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.call(this, characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(this : IDWriteFontFace5*, glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.call(this, glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(this : IDWriteFontFace5*, glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.call(this, glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2(this : IDWriteFontFace5*) : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.call(this)
+  end
+  def get_glyph_image_data(this : IDWriteFontFace5*, glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.call(this, glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(this : IDWriteFontFace5*, glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.call(this, glyphdatacontext)
+  end
+  def get_font_axis_value_count(this : IDWriteFontFace5*) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.call(this)
+  end
+  def get_font_axis_values(this : IDWriteFontFace5*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+  def has_variations(this : IDWriteFontFace5*) : LibC::BOOL
+    @lpVtbl.value.has_variations.call(this)
+  end
+  def get_font_resource(this : IDWriteFontFace5*, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.call(this, fontresource)
+  end
+  def equals(this : IDWriteFontFace5*, fontface : IDWriteFontFace) : LibC::BOOL
+    @lpVtbl.value.equals.call(this, fontface)
+  end
+end
+struct LibWin32::IDWriteFontResource
+  def query_interface(this : IDWriteFontResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_file(this : IDWriteFontResource*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.call(this, fontfile)
+  end
+  def get_font_face_index(this : IDWriteFontResource*) : UInt32
+    @lpVtbl.value.get_font_face_index.call(this)
+  end
+  def get_font_axis_count(this : IDWriteFontResource*) : UInt32
+    @lpVtbl.value.get_font_axis_count.call(this)
+  end
+  def get_default_font_axis_values(this : IDWriteFontResource*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_default_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_font_axis_ranges(this : IDWriteFontResource*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.call(this, fontaxisranges, fontaxisrangecount)
+  end
+  def get_font_axis_attributes(this : IDWriteFontResource*, axisindex : UInt32) : DWRITE_FONT_AXIS_ATTRIBUTES
+    @lpVtbl.value.get_font_axis_attributes.call(this, axisindex)
+  end
+  def get_axis_names(this : IDWriteFontResource*, axisindex : UInt32, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_axis_names.call(this, axisindex, names)
+  end
+  def get_axis_value_name_count(this : IDWriteFontResource*, axisindex : UInt32) : UInt32
+    @lpVtbl.value.get_axis_value_name_count.call(this, axisindex)
+  end
+  def get_axis_value_names(this : IDWriteFontResource*, axisindex : UInt32, axisvalueindex : UInt32, fontaxisrange : DWRITE_FONT_AXIS_RANGE*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_axis_value_names.call(this, axisindex, axisvalueindex, fontaxisrange, names)
+  end
+  def has_variations(this : IDWriteFontResource*) : LibC::BOOL
+    @lpVtbl.value.has_variations.call(this)
+  end
+  def create_font_face(this : IDWriteFontResource*, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontface)
+  end
+  def create_font_face_reference(this : IDWriteFontResource*, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontFaceReference1
+  def query_interface(this : IDWriteFontFaceReference1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFaceReference1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFaceReference1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_font_face(this : IDWriteFontFaceReference1*, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontface)
+  end
+  def create_font_face_with_simulations(this : IDWriteFontFaceReference1*, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face_with_simulations.call(this, fontfacesimulationflags, fontface)
+  end
+  def equals(this : IDWriteFontFaceReference1*, fontfacereference : IDWriteFontFaceReference) : LibC::BOOL
+    @lpVtbl.value.equals.call(this, fontfacereference)
+  end
+  def get_font_face_index(this : IDWriteFontFaceReference1*) : UInt32
+    @lpVtbl.value.get_font_face_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFaceReference1*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def get_font_file(this : IDWriteFontFaceReference1*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.call(this, fontfile)
+  end
+  def get_local_file_size(this : IDWriteFontFaceReference1*) : UInt64
+    @lpVtbl.value.get_local_file_size.call(this)
+  end
+  def get_file_size(this : IDWriteFontFaceReference1*) : UInt64
+    @lpVtbl.value.get_file_size.call(this)
+  end
+  def get_file_time(this : IDWriteFontFaceReference1*, lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_time.call(this, lastwritetime)
+  end
+  def get_locality(this : IDWriteFontFaceReference1*) : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.call(this)
+  end
+  def enqueue_font_download_request(this : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.enqueue_font_download_request.call(this)
+  end
+  def enqueue_character_download_request(this : IDWriteFontFaceReference1*, characters : Char*, charactercount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_character_download_request.call(this, characters, charactercount)
+  end
+  def enqueue_glyph_download_request(this : IDWriteFontFaceReference1*, glyphindices : UInt16*, glyphcount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_glyph_download_request.call(this, glyphindices, glyphcount)
+  end
+  def enqueue_file_fragment_download_request(this : IDWriteFontFaceReference1*, fileoffset : UInt64, fragmentsize : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_file_fragment_download_request.call(this, fileoffset, fragmentsize)
+  end
+  def create_font_face2(this : IDWriteFontFaceReference1*, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face2.call(this, fontface)
+  end
+  def get_font_axis_value_count(this : IDWriteFontFaceReference1*) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.call(this)
+  end
+  def get_font_axis_values(this : IDWriteFontFaceReference1*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder2
+  def query_interface(this : IDWriteFontSetBuilder2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSetBuilder2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSetBuilder2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_font_face_reference(this : IDWriteFontSetBuilder2*, fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.call(this, fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(this : IDWriteFontSetBuilder2*, fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.call(this, fontfacereference)
+  end
+  def add_font_set(this : IDWriteFontSetBuilder2*, fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.call(this, fontset)
+  end
+  def create_font_set(this : IDWriteFontSetBuilder2*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.call(this, fontset)
+  end
+  def add_font_file(this : IDWriteFontSetBuilder2*, fontfile : IDWriteFontFile) : HRESULT
+    @lpVtbl.value.add_font_file.call(this, fontfile)
+  end
+  def add_font(this : IDWriteFontSetBuilder2*, fontfile : IDWriteFontFile, fontfaceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font.call(this, fontfile, fontfaceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontaxisranges, fontaxisrangecount, properties, propertycount)
+  end
+  def add_font_file2(this : IDWriteFontSetBuilder2*, filepath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_font_file2.call(this, filepath)
+  end
+end
+struct LibWin32::IDWriteFontSet1
+  def query_interface(this : IDWriteFontSet1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSet1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSet1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_count(this : IDWriteFontSet1*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font_face_reference(this : IDWriteFontSet1*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def find_font_face_reference(this : IDWriteFontSet1*, fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.call(this, fontfacereference, listindex, exists)
+  end
+  def find_font_face(this : IDWriteFontSet1*, fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.call(this, fontface, listindex, exists)
+  end
+  def get_property_values(this : IDWriteFontSet1*, propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.call(this, propertyid, values)
+  end
+  def get_property_values2(this : IDWriteFontSet1*, propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.call(this, propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(this : IDWriteFontSet1*, listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.call(this, listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(this : IDWriteFontSet1*, property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.call(this, property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(this : IDWriteFontSet1*, familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(this : IDWriteFontSet1*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.call(this, properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(this : IDWriteFontSet1*, fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.call(this, fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(this : IDWriteFontSet1*, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.call(this, filteredfontset)
+  end
+  def get_filtered_fonts(this : IDWriteFontSet1*, indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.call(this, indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(this : IDWriteFontSet1*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(this : IDWriteFontSet1*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.call(this, properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(this : IDWriteFontSet1*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(this : IDWriteFontSet1*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.call(this, properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(this : IDWriteFontSet1*, listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.call(this, listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(this : IDWriteFontSet1*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.call(this, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(this : IDWriteFontSet1*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.call(this, listindex, fontfacereference)
+  end
+  def create_font_resource(this : IDWriteFontSet1*, listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, listindex, fontresource)
+  end
+  def create_font_face(this : IDWriteFontSet1*, listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, listindex, fontface)
+  end
+  def get_font_locality(this : IDWriteFontSet1*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+end
+struct LibWin32::IDWriteFontList2
+  def query_interface(this : IDWriteFontList2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontList2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontList2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontList2*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontList2*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontList2*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+  def get_font_locality(this : IDWriteFontList2*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_font2(this : IDWriteFontList2*, listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, listindex, font)
+  end
+  def get_font_face_reference(this : IDWriteFontList2*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def get_font_set(this : IDWriteFontList2*, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set.call(this, fontset)
+  end
+end
+struct LibWin32::IDWriteFontFamily2
+  def query_interface(this : IDWriteFontFamily2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFamily2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFamily2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_collection(this : IDWriteFontFamily2*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_count(this : IDWriteFontFamily2*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font(this : IDWriteFontFamily2*, index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, index, font)
+  end
+  def get_family_names(this : IDWriteFontFamily2*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_first_matching_font(this : IDWriteFontFamily2*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.call(this, weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(this : IDWriteFontFamily2*, weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, weight, stretch, style, matchingfonts)
+  end
+  def get_font_locality(this : IDWriteFontFamily2*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_font2(this : IDWriteFontFamily2*, listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, listindex, font)
+  end
+  def get_font_face_reference(this : IDWriteFontFamily2*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def get_matching_fonts2(this : IDWriteFontFamily2*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.call(this, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_font_set(this : IDWriteFontFamily2*, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set.call(this, fontset)
+  end
+end
+struct LibWin32::IDWriteFontCollection2
+  def query_interface(this : IDWriteFontCollection2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontCollection2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontCollection2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family_count(this : IDWriteFontCollection2*) : UInt32
+    @lpVtbl.value.get_font_family_count.call(this)
+  end
+  def get_font_family(this : IDWriteFontCollection2*, index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, index, fontfamily)
+  end
+  def find_family_name(this : IDWriteFontCollection2*, familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.call(this, familyname, index, exists)
+  end
+  def get_font_from_font_face(this : IDWriteFontCollection2*, fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.call(this, fontface, font)
+  end
+  def get_font_set(this : IDWriteFontCollection2*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.call(this, fontset)
+  end
+  def get_font_family2(this : IDWriteFontCollection2*, index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.call(this, index, fontfamily)
+  end
+  def get_font_family3(this : IDWriteFontCollection2*, index : UInt32, fontfamily : IDWriteFontFamily2*) : HRESULT
+    @lpVtbl.value.get_font_family3.call(this, index, fontfamily)
+  end
+  def get_matching_fonts(this : IDWriteFontCollection2*, familyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontlist : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontaxisvalues, fontaxisvaluecount, fontlist)
+  end
+  def get_font_family_model(this : IDWriteFontCollection2*) : DWRITE_FONT_FAMILY_MODEL
+    @lpVtbl.value.get_font_family_model.call(this)
+  end
+  def get_font_set2(this : IDWriteFontCollection2*, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set2.call(this, fontset)
+  end
+end
+struct LibWin32::IDWriteTextLayout4
+  def query_interface(this : IDWriteTextLayout4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextLayout4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextLayout4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextLayout4*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextLayout4*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextLayout4*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextLayout4*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextLayout4*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextLayout4*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextLayout4*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextLayout4*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextLayout4*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextLayout4*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextLayout4*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextLayout4*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextLayout4*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextLayout4*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextLayout4*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextLayout4*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextLayout4*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextLayout4*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextLayout4*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextLayout4*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextLayout4*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextLayout4*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextLayout4*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextLayout4*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextLayout4*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_max_width(this : IDWriteTextLayout4*, maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.call(this, maxwidth)
+  end
+  def set_max_height(this : IDWriteTextLayout4*, maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.call(this, maxheight)
+  end
+  def set_font_collection(this : IDWriteTextLayout4*, fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.call(this, fontcollection, textrange)
+  end
+  def set_font_family_name(this : IDWriteTextLayout4*, fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.call(this, fontfamilyname, textrange)
+  end
+  def set_font_weight(this : IDWriteTextLayout4*, fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.call(this, fontweight, textrange)
+  end
+  def set_font_style(this : IDWriteTextLayout4*, fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.call(this, fontstyle, textrange)
+  end
+  def set_font_stretch(this : IDWriteTextLayout4*, fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.call(this, fontstretch, textrange)
+  end
+  def set_font_size(this : IDWriteTextLayout4*, fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.call(this, fontsize, textrange)
+  end
+  def set_underline(this : IDWriteTextLayout4*, hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.call(this, hasunderline, textrange)
+  end
+  def set_strikethrough(this : IDWriteTextLayout4*, hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.call(this, hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(this : IDWriteTextLayout4*, drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.call(this, drawingeffect, textrange)
+  end
+  def set_inline_object(this : IDWriteTextLayout4*, inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, inlineobject, textrange)
+  end
+  def set_typography(this : IDWriteTextLayout4*, typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.call(this, typography, textrange)
+  end
+  def set_locale_name(this : IDWriteTextLayout4*, localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.call(this, localename, textrange)
+  end
+  def get_max_width(this : IDWriteTextLayout4*) : Float32
+    @lpVtbl.value.get_max_width.call(this)
+  end
+  def get_max_height(this : IDWriteTextLayout4*) : Float32
+    @lpVtbl.value.get_max_height.call(this)
+  end
+  def get_font_collection2(this : IDWriteTextLayout4*, currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.call(this, currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(this : IDWriteTextLayout4*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(this : IDWriteTextLayout4*, currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.call(this, currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(this : IDWriteTextLayout4*, currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.call(this, currentposition, fontweight, textrange)
+  end
+  def get_font_style2(this : IDWriteTextLayout4*, currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.call(this, currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(this : IDWriteTextLayout4*, currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.call(this, currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(this : IDWriteTextLayout4*, currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.call(this, currentposition, fontsize, textrange)
+  end
+  def get_underline(this : IDWriteTextLayout4*, currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(this : IDWriteTextLayout4*, currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(this : IDWriteTextLayout4*, currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.call(this, currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(this : IDWriteTextLayout4*, currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, currentposition, inlineobject, textrange)
+  end
+  def get_typography(this : IDWriteTextLayout4*, currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.call(this, currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(this : IDWriteTextLayout4*, currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.call(this, currentposition, namelength, textrange)
+  end
+  def get_locale_name2(this : IDWriteTextLayout4*, currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.call(this, currentposition, localename, namesize, textrange)
+  end
+  def draw(this : IDWriteTextLayout4*, clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.call(this, clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(this : IDWriteTextLayout4*, linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(this : IDWriteTextLayout4*, textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.call(this, textmetrics)
+  end
+  def get_overhang_metrics(this : IDWriteTextLayout4*, overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.call(this, overhangs)
+  end
+  def get_cluster_metrics(this : IDWriteTextLayout4*, clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.call(this, clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(this : IDWriteTextLayout4*, minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.call(this, minwidth)
+  end
+  def hit_test_point(this : IDWriteTextLayout4*, pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.call(this, pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(this : IDWriteTextLayout4*, textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.call(this, textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(this : IDWriteTextLayout4*, textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.call(this, textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(this : IDWriteTextLayout4*, ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.call(this, ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(this : IDWriteTextLayout4*, currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.call(this, currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(this : IDWriteTextLayout4*, leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.call(this, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(this : IDWriteTextLayout4*, currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.call(this, currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(this : IDWriteTextLayout4*, textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.call(this, textmetrics)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextLayout4*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextLayout4*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextLayout4*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextLayout4*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextLayout4*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextLayout4*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextLayout4*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextLayout4*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+  def invalidate_layout(this : IDWriteTextLayout4*) : HRESULT
+    @lpVtbl.value.invalidate_layout.call(this)
+  end
+  def set_line_spacing2(this : IDWriteTextLayout4*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_spacing2(this : IDWriteTextLayout4*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_metrics2(this : IDWriteTextLayout4*, linemetrics : DWRITE_LINE_METRICS1*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics2.call(this, linemetrics, maxlinecount, actuallinecount)
+  end
+  def set_font_axis_values(this : IDWriteTextLayout4*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount, textrange)
+  end
+  def get_font_axis_value_count(this : IDWriteTextLayout4*, currentposition : UInt32) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.call(this, currentposition)
+  end
+  def get_font_axis_values(this : IDWriteTextLayout4*, currentposition : UInt32, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_axis_values.call(this, currentposition, fontaxisvalues, fontaxisvaluecount, textrange)
+  end
+  def get_automatic_font_axes(this : IDWriteTextLayout4*) : DWRITE_AUTOMATIC_FONT_AXES
+    @lpVtbl.value.get_automatic_font_axes.call(this)
+  end
+  def set_automatic_font_axes(this : IDWriteTextLayout4*, automaticfontaxes : DWRITE_AUTOMATIC_FONT_AXES) : HRESULT
+    @lpVtbl.value.set_automatic_font_axes.call(this, automaticfontaxes)
+  end
+end
+struct LibWin32::IDWriteTextFormat3
+  def query_interface(this : IDWriteTextFormat3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteTextFormat3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteTextFormat3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_text_alignment(this : IDWriteTextFormat3*, textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.call(this, textalignment)
+  end
+  def set_paragraph_alignment(this : IDWriteTextFormat3*, paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.call(this, paragraphalignment)
+  end
+  def set_word_wrapping(this : IDWriteTextFormat3*, wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.call(this, wordwrapping)
+  end
+  def set_reading_direction(this : IDWriteTextFormat3*, readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.call(this, readingdirection)
+  end
+  def set_flow_direction(this : IDWriteTextFormat3*, flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.call(this, flowdirection)
+  end
+  def set_incremental_tab_stop(this : IDWriteTextFormat3*, incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.call(this, incrementaltabstop)
+  end
+  def set_trimming(this : IDWriteTextFormat3*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(this : IDWriteTextFormat3*, linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment(this : IDWriteTextFormat3*) : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.call(this)
+  end
+  def get_paragraph_alignment(this : IDWriteTextFormat3*) : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.call(this)
+  end
+  def get_word_wrapping(this : IDWriteTextFormat3*) : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.call(this)
+  end
+  def get_reading_direction(this : IDWriteTextFormat3*) : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.call(this)
+  end
+  def get_flow_direction(this : IDWriteTextFormat3*) : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.call(this)
+  end
+  def get_incremental_tab_stop(this : IDWriteTextFormat3*) : Float32
+    @lpVtbl.value.get_incremental_tab_stop.call(this)
+  end
+  def get_trimming(this : IDWriteTextFormat3*, trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.call(this, trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(this : IDWriteTextFormat3*, linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(this : IDWriteTextFormat3*, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.call(this, fontcollection)
+  end
+  def get_font_family_name_length(this : IDWriteTextFormat3*) : UInt32
+    @lpVtbl.value.get_font_family_name_length.call(this)
+  end
+  def get_font_family_name(this : IDWriteTextFormat3*, fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.call(this, fontfamilyname, namesize)
+  end
+  def get_font_weight(this : IDWriteTextFormat3*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.call(this)
+  end
+  def get_font_style(this : IDWriteTextFormat3*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.call(this)
+  end
+  def get_font_stretch(this : IDWriteTextFormat3*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.call(this)
+  end
+  def get_font_size(this : IDWriteTextFormat3*) : Float32
+    @lpVtbl.value.get_font_size.call(this)
+  end
+  def get_locale_name_length(this : IDWriteTextFormat3*) : UInt32
+    @lpVtbl.value.get_locale_name_length.call(this)
+  end
+  def get_locale_name(this : IDWriteTextFormat3*, localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.call(this, localename, namesize)
+  end
+  def set_vertical_glyph_orientation(this : IDWriteTextFormat3*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.call(this, glyphorientation)
+  end
+  def get_vertical_glyph_orientation(this : IDWriteTextFormat3*) : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.call(this)
+  end
+  def set_last_line_wrapping(this : IDWriteTextFormat3*, islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.call(this, islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping(this : IDWriteTextFormat3*) : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.call(this)
+  end
+  def set_optical_alignment(this : IDWriteTextFormat3*, opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.call(this, opticalalignment)
+  end
+  def get_optical_alignment(this : IDWriteTextFormat3*) : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.call(this)
+  end
+  def set_font_fallback(this : IDWriteTextFormat3*, fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.call(this, fontfallback)
+  end
+  def get_font_fallback(this : IDWriteTextFormat3*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.call(this, fontfallback)
+  end
+  def set_line_spacing2(this : IDWriteTextFormat3*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.call(this, linespacingoptions)
+  end
+  def get_line_spacing2(this : IDWriteTextFormat3*, linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.call(this, linespacingoptions)
+  end
+  def set_font_axis_values(this : IDWriteTextFormat3*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.set_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_font_axis_value_count(this : IDWriteTextFormat3*) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.call(this)
+  end
+  def get_font_axis_values(this : IDWriteTextFormat3*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_automatic_font_axes(this : IDWriteTextFormat3*) : DWRITE_AUTOMATIC_FONT_AXES
+    @lpVtbl.value.get_automatic_font_axes.call(this)
+  end
+  def set_automatic_font_axes(this : IDWriteTextFormat3*, automaticfontaxes : DWRITE_AUTOMATIC_FONT_AXES) : HRESULT
+    @lpVtbl.value.set_automatic_font_axes.call(this, automaticfontaxes)
+  end
+end
+struct LibWin32::IDWriteFontFallback1
+  def query_interface(this : IDWriteFontFallback1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFallback1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFallback1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def map_characters(this : IDWriteFontFallback1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, baseweight : DWRITE_FONT_WEIGHT, basestyle : DWRITE_FONT_STYLE, basestretch : DWRITE_FONT_STRETCH, mappedlength : UInt32*, mappedfont : IDWriteFont*, scale : Float32*) : HRESULT
+    @lpVtbl.value.map_characters.call(this, analysissource, textposition, textlength, basefontcollection, basefamilyname, baseweight, basestyle, basestretch, mappedlength, mappedfont, scale)
+  end
+  def map_characters2(this : IDWriteFontFallback1*, analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, mappedlength : UInt32*, scale : Float32*, mappedfontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.map_characters2.call(this, analysissource, textposition, textlength, basefontcollection, basefamilyname, fontaxisvalues, fontaxisvaluecount, mappedlength, scale, mappedfontface)
+  end
+end
+struct LibWin32::IDWriteFontSet2
+  def query_interface(this : IDWriteFontSet2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSet2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSet2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_count(this : IDWriteFontSet2*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font_face_reference(this : IDWriteFontSet2*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def find_font_face_reference(this : IDWriteFontSet2*, fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.call(this, fontfacereference, listindex, exists)
+  end
+  def find_font_face(this : IDWriteFontSet2*, fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.call(this, fontface, listindex, exists)
+  end
+  def get_property_values(this : IDWriteFontSet2*, propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.call(this, propertyid, values)
+  end
+  def get_property_values2(this : IDWriteFontSet2*, propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.call(this, propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(this : IDWriteFontSet2*, listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.call(this, listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(this : IDWriteFontSet2*, property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.call(this, property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(this : IDWriteFontSet2*, familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(this : IDWriteFontSet2*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.call(this, properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(this : IDWriteFontSet2*, fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.call(this, fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(this : IDWriteFontSet2*, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.call(this, filteredfontset)
+  end
+  def get_filtered_fonts(this : IDWriteFontSet2*, indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.call(this, indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(this : IDWriteFontSet2*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(this : IDWriteFontSet2*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.call(this, properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(this : IDWriteFontSet2*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(this : IDWriteFontSet2*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.call(this, properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(this : IDWriteFontSet2*, listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.call(this, listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(this : IDWriteFontSet2*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.call(this, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(this : IDWriteFontSet2*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.call(this, listindex, fontfacereference)
+  end
+  def create_font_resource(this : IDWriteFontSet2*, listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, listindex, fontresource)
+  end
+  def create_font_face(this : IDWriteFontSet2*, listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, listindex, fontface)
+  end
+  def get_font_locality(this : IDWriteFontSet2*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_expiration_event(this : IDWriteFontSet2*) : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.call(this)
+  end
+end
+struct LibWin32::IDWriteFontCollection3
+  def query_interface(this : IDWriteFontCollection3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontCollection3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontCollection3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_family_count(this : IDWriteFontCollection3*) : UInt32
+    @lpVtbl.value.get_font_family_count.call(this)
+  end
+  def get_font_family(this : IDWriteFontCollection3*, index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.call(this, index, fontfamily)
+  end
+  def find_family_name(this : IDWriteFontCollection3*, familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.call(this, familyname, index, exists)
+  end
+  def get_font_from_font_face(this : IDWriteFontCollection3*, fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.call(this, fontface, font)
+  end
+  def get_font_set(this : IDWriteFontCollection3*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.call(this, fontset)
+  end
+  def get_font_family2(this : IDWriteFontCollection3*, index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.call(this, index, fontfamily)
+  end
+  def get_font_family3(this : IDWriteFontCollection3*, index : UInt32, fontfamily : IDWriteFontFamily2*) : HRESULT
+    @lpVtbl.value.get_font_family3.call(this, index, fontfamily)
+  end
+  def get_matching_fonts(this : IDWriteFontCollection3*, familyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontlist : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontaxisvalues, fontaxisvaluecount, fontlist)
+  end
+  def get_font_family_model(this : IDWriteFontCollection3*) : DWRITE_FONT_FAMILY_MODEL
+    @lpVtbl.value.get_font_family_model.call(this)
+  end
+  def get_font_set2(this : IDWriteFontCollection3*, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set2.call(this, fontset)
+  end
+  def get_expiration_event(this : IDWriteFontCollection3*) : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.call(this)
+  end
+end
+struct LibWin32::IDWriteFactory7
+  def query_interface(this : IDWriteFactory7*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFactory7*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFactory7*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_system_font_collection(this : IDWriteFactory7*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(this : IDWriteFactory7*, collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.call(this, collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(this : IDWriteFactory7*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def unregister_font_collection_loader(this : IDWriteFactory7*, fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.call(this, fontcollectionloader)
+  end
+  def create_font_file_reference(this : IDWriteFactory7*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.call(this, filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(this : IDWriteFactory7*, fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.call(this, fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(this : IDWriteFactory7*, fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(this : IDWriteFactory7*, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.call(this, renderingparams)
+  end
+  def create_monitor_rendering_params(this : IDWriteFactory7*, monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.call(this, monitor, renderingparams)
+  end
+  def create_custom_rendering_params(this : IDWriteFactory7*, gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.call(this, gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(this : IDWriteFactory7*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.call(this, fontfileloader)
+  end
+  def unregister_font_file_loader(this : IDWriteFactory7*, fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.call(this, fontfileloader)
+  end
+  def create_text_format(this : IDWriteFactory7*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.call(this, fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(this : IDWriteFactory7*, typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.call(this, typography)
+  end
+  def get_gdi_interop(this : IDWriteFactory7*, gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.call(this, gdiinterop)
+  end
+  def create_text_layout(this : IDWriteFactory7*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.call(this, string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(this : IDWriteFactory7*, string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.call(this, string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(this : IDWriteFactory7*, textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.call(this, textformat, trimmingsign)
+  end
+  def create_text_analyzer(this : IDWriteFactory7*, textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.call(this, textanalyzer)
+  end
+  def create_number_substitution(this : IDWriteFactory7*, substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.call(this, substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(this : IDWriteFactory7*, glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.call(this, glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(this : IDWriteFactory7*, fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.call(this, fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(this : IDWriteFactory7*, gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.call(this, gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(this : IDWriteFactory7*, fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.call(this, fontfallback)
+  end
+  def create_font_fallback_builder(this : IDWriteFactory7*, fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.call(this, fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(this : IDWriteFactory7*, baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.call(this, baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(this : IDWriteFactory7*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(this : IDWriteFactory7*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(this : IDWriteFactory7*, glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.call(this, glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(this : IDWriteFactory7*, gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.call(this, gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(this : IDWriteFactory7*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.call(this, fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(this : IDWriteFactory7*, filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.call(this, filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(this : IDWriteFactory7*, fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.call(this, fontset)
+  end
+  def create_font_set_builder(this : IDWriteFactory7*, fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.call(this, fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(this : IDWriteFactory7*, fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.call(this, fontset, fontcollection)
+  end
+  def get_system_font_collection2(this : IDWriteFactory7*, includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.call(this, includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(this : IDWriteFactory7*, fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.call(this, fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(this : IDWriteFactory7*, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.call(this, baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(this : IDWriteFactory7*, glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.call(this, glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(this : IDWriteFactory7*, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.call(this, glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(this : IDWriteFactory7*, fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.call(this, fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(this : IDWriteFactory7*, newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.call(this, newloader)
+  end
+  def create_http_font_file_loader(this : IDWriteFactory7*, referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.call(this, referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(this : IDWriteFactory7*, filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.call(this, filedata, filedatasize)
+  end
+  def unpack_font_file(this : IDWriteFactory7*, containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.call(this, containertype, filedata, filedatasize, unpackedfontstream)
+  end
+  def create_font_face_reference3(this : IDWriteFactory7*, fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference3.call(this, fontfile, faceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+  def create_font_resource(this : IDWriteFactory7*, fontfile : IDWriteFontFile, faceindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, fontfile, faceindex, fontresource)
+  end
+  def get_system_font_set2(this : IDWriteFactory7*, includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_system_font_set2.call(this, includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection3(this : IDWriteFactory7*, includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.get_system_font_collection3.call(this, includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+  def create_font_collection_from_font_set2(this : IDWriteFactory7*, fontset : IDWriteFontSet, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set2.call(this, fontset, fontfamilymodel, fontcollection)
+  end
+  def create_font_set_builder3(this : IDWriteFactory7*, fontsetbuilder : IDWriteFontSetBuilder2*) : HRESULT
+    @lpVtbl.value.create_font_set_builder3.call(this, fontsetbuilder)
+  end
+  def create_text_format2(this : IDWriteFactory7*, fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat3*) : HRESULT
+    @lpVtbl.value.create_text_format2.call(this, fontfamilyname, fontcollection, fontaxisvalues, fontaxisvaluecount, fontsize, localename, textformat)
+  end
+  def get_system_font_set3(this : IDWriteFactory7*, includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet2*) : HRESULT
+    @lpVtbl.value.get_system_font_set3.call(this, includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection4(this : IDWriteFactory7*, includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection3*) : HRESULT
+    @lpVtbl.value.get_system_font_collection4.call(this, includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+end
+struct LibWin32::IDWriteFontSet3
+  def query_interface(this : IDWriteFontSet3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontSet3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontSet3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_count(this : IDWriteFontSet3*) : UInt32
+    @lpVtbl.value.get_font_count.call(this)
+  end
+  def get_font_face_reference(this : IDWriteFontSet3*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, listindex, fontfacereference)
+  end
+  def find_font_face_reference(this : IDWriteFontSet3*, fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.call(this, fontfacereference, listindex, exists)
+  end
+  def find_font_face(this : IDWriteFontSet3*, fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.call(this, fontface, listindex, exists)
+  end
+  def get_property_values(this : IDWriteFontSet3*, propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.call(this, propertyid, values)
+  end
+  def get_property_values2(this : IDWriteFontSet3*, propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.call(this, propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(this : IDWriteFontSet3*, listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.call(this, listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(this : IDWriteFontSet3*, property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.call(this, property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(this : IDWriteFontSet3*, familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.call(this, familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(this : IDWriteFontSet3*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.call(this, properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(this : IDWriteFontSet3*, fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.call(this, fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(this : IDWriteFontSet3*, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.call(this, filteredfontset)
+  end
+  def get_filtered_fonts(this : IDWriteFontSet3*, indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.call(this, indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(this : IDWriteFontSet3*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(this : IDWriteFontSet3*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.call(this, properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(this : IDWriteFontSet3*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.call(this, fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(this : IDWriteFontSet3*, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.call(this, properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(this : IDWriteFontSet3*, listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.call(this, listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(this : IDWriteFontSet3*, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.call(this, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(this : IDWriteFontSet3*, listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.call(this, listindex, fontfacereference)
+  end
+  def create_font_resource(this : IDWriteFontSet3*, listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, listindex, fontresource)
+  end
+  def create_font_face(this : IDWriteFontSet3*, listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.call(this, listindex, fontface)
+  end
+  def get_font_locality(this : IDWriteFontSet3*, listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.call(this, listindex)
+  end
+  def get_expiration_event(this : IDWriteFontSet3*) : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.call(this)
+  end
+  def get_font_source_type(this : IDWriteFontSet3*, fontindex : UInt32) : DWRITE_FONT_SOURCE_TYPE
+    @lpVtbl.value.get_font_source_type.call(this, fontindex)
+  end
+  def get_font_source_name_length(this : IDWriteFontSet3*, listindex : UInt32) : UInt32
+    @lpVtbl.value.get_font_source_name_length.call(this, listindex)
+  end
+  def get_font_source_name(this : IDWriteFontSet3*, listindex : UInt32, stringbuffer : Char*, stringbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_source_name.call(this, listindex, stringbuffer, stringbuffersize)
+  end
+end
+struct LibWin32::IDWriteFontFace6
+  def query_interface(this : IDWriteFontFace6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IDWriteFontFace6*) : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_files(this : IDWriteFontFace6*, numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.call(this, numberoffiles, fontfiles)
+  end
+  def get_index(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.get_index.call(this)
+  end
+  def get_simulations(this : IDWriteFontFace6*) : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.call(this)
+  end
+  def is_symbol_font(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.call(this)
+  end
+  def get_metrics(this : IDWriteFontFace6*, fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.call(this, fontfacemetrics)
+  end
+  def get_glyph_count(this : IDWriteFontFace6*) : UInt16
+    @lpVtbl.value.get_glyph_count.call(this)
+  end
+  def get_design_glyph_metrics(this : IDWriteFontFace6*, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.call(this, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(this : IDWriteFontFace6*, codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(this : IDWriteFontFace6*, opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.call(this, opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(this : IDWriteFontFace6*, tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.call(this, tablecontext)
+  end
+  def get_glyph_run_outline(this : IDWriteFontFace6*, emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.call(this, emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(this : IDWriteFontFace6*, emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.call(this, emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(this : IDWriteFontFace6*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.call(this, emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(this : IDWriteFontFace6*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.call(this, emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(this : IDWriteFontFace6*, fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.call(this, fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(this : IDWriteFontFace6*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.call(this, emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(this : IDWriteFontFace6*, caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.call(this, caretmetrics)
+  end
+  def get_unicode_ranges(this : IDWriteFontFace6*, maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.call(this)
+  end
+  def get_design_glyph_advances(this : IDWriteFontFace6*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.call(this, glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(this : IDWriteFontFace6*, emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.call(this, emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(this : IDWriteFontFace6*, glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.call(this, glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.call(this)
+  end
+  def get_recommended_rendering_mode2(this : IDWriteFontFace6*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(this : IDWriteFontFace6*, glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.call(this, glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.call(this)
+  end
+  def is_color_font(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.is_color_font.call(this)
+  end
+  def get_color_palette_count(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.get_color_palette_count.call(this)
+  end
+  def get_palette_entry_count(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.get_palette_entry_count.call(this)
+  end
+  def get_palette_entries(this : IDWriteFontFace6*, colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(this : IDWriteFontFace6*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(this : IDWriteFontFace6*, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.call(this, fontfacereference)
+  end
+  def get_panose(this : IDWriteFontFace6*, panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.call(this, panose)
+  end
+  def get_weight(this : IDWriteFontFace6*) : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.call(this)
+  end
+  def get_stretch(this : IDWriteFontFace6*) : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.call(this)
+  end
+  def get_style(this : IDWriteFontFace6*) : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.call(this)
+  end
+  def get_family_names(this : IDWriteFontFace6*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.call(this, names)
+  end
+  def get_face_names(this : IDWriteFontFace6*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.call(this, names)
+  end
+  def get_informational_strings(this : IDWriteFontFace6*, informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.call(this, informationalstringid, informationalstrings, exists)
+  end
+  def has_character(this : IDWriteFontFace6*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.call(this, unicodevalue)
+  end
+  def get_recommended_rendering_mode4(this : IDWriteFontFace6*, fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.call(this, fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(this : IDWriteFontFace6*, unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.call(this, unicodevalue)
+  end
+  def is_glyph_local(this : IDWriteFontFace6*, glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.call(this, glyphid)
+  end
+  def are_characters_local(this : IDWriteFontFace6*, characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.call(this, characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(this : IDWriteFontFace6*, glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.call(this, glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(this : IDWriteFontFace6*, glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.call(this, glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2(this : IDWriteFontFace6*) : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.call(this)
+  end
+  def get_glyph_image_data(this : IDWriteFontFace6*, glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.call(this, glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(this : IDWriteFontFace6*, glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.call(this, glyphdatacontext)
+  end
+  def get_font_axis_value_count(this : IDWriteFontFace6*) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.call(this)
+  end
+  def get_font_axis_values(this : IDWriteFontFace6*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.call(this, fontaxisvalues, fontaxisvaluecount)
+  end
+  def has_variations(this : IDWriteFontFace6*) : LibC::BOOL
+    @lpVtbl.value.has_variations.call(this)
+  end
+  def get_font_resource(this : IDWriteFontFace6*, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.call(this, fontresource)
+  end
+  def equals(this : IDWriteFontFace6*, fontface : IDWriteFontFace) : LibC::BOOL
+    @lpVtbl.value.equals.call(this, fontface)
+  end
+  def get_family_names2(this : IDWriteFontFace6*, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names2.call(this, fontfamilymodel, names)
+  end
+  def get_face_names2(this : IDWriteFontFace6*, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names2.call(this, fontfamilymodel, names)
+  end
+end

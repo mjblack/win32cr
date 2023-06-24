@@ -3399,10 +3399,10 @@ lib LibWin32
   fun GetTempFileNameA(lppathname : PSTR, lpprefixstring : PSTR, uunique : UInt32, lptempfilename : UInt8*) : UInt32
 
   # Params # 
-  fun SetFileApisToOEM
+  fun SetFileApisToOEM : Void
 
   # Params # 
-  fun SetFileApisToANSI
+  fun SetFileApisToANSI : Void
 
   # Params # bufferlength : UInt32 [In],buffer : Char* [In]
   fun GetTempPath2W(bufferlength : UInt32, buffer : Char*) : UInt32
@@ -3687,7 +3687,7 @@ lib LibWin32
   fun SetUserFileEncryptionKeyEx(pencryptioncertificate : ENCRYPTION_CERTIFICATE*, dwcapabilities : UInt32, dwflags : UInt32, pvreserved : Void*) : UInt32
 
   # Params # pusers : ENCRYPTION_CERTIFICATE_HASH_LIST* [In]
-  fun FreeEncryptionCertificateHashList(pusers : ENCRYPTION_CERTIFICATE_HASH_LIST*)
+  fun FreeEncryptionCertificateHashList(pusers : ENCRYPTION_CERTIFICATE_HASH_LIST*) : Void
 
   # Params # dirpath : LibC::LPWSTR [In],disable : LibC::BOOL [In]
   fun EncryptionDisable(dirpath : LibC::LPWSTR, disable : LibC::BOOL) : LibC::BOOL
@@ -3702,13 +3702,13 @@ lib LibWin32
   fun SetEncryptedFileMetadata(lpfilename : LibC::LPWSTR, pboldmetadata : UInt8*, pbnewmetadata : UInt8*, pownerhash : ENCRYPTION_CERTIFICATE_HASH*, dwoperation : UInt32, pcertificatesadded : ENCRYPTION_CERTIFICATE_HASH_LIST*) : UInt32
 
   # Params # pbmetadata : UInt8* [In]
-  fun FreeEncryptedFileMetadata(pbmetadata : UInt8*)
+  fun FreeEncryptedFileMetadata(pbmetadata : UInt8*) : Void
 
   # Params # 
   fun LZStart : Int32
 
   # Params # 
-  fun LZDone
+  fun LZDone : Void
 
   # Params # hfsource : Int32 [In],hfdest : Int32 [In]
   fun CopyLZFile(hfsource : Int32, hfdest : Int32) : Int32
@@ -3738,7 +3738,7 @@ lib LibWin32
   fun LZRead(hfile : Int32, lpbuffer : PSTR, cbread : Int32) : Int32
 
   # Params # hfile : Int32 [In]
-  fun LZClose(hfile : Int32)
+  fun LZClose(hfile : Int32) : Void
 
   # Params # volume : LibC::LPWSTR [In],algorithm : UInt32* [In]
   fun WofShouldCompressBinaries(volume : LibC::LPWSTR, algorithm : UInt32*) : LibC::BOOL
@@ -3795,10 +3795,10 @@ lib LibWin32
   fun TxfLogRecordGetGenericType(recordbuffer : Void*, recordbufferlengthinbytes : UInt32, generictype : UInt32*, virtualclock : LARGE_INTEGER*) : LibC::BOOL
 
   # Params # miniversion : UInt16 [In]
-  fun TxfSetThreadMiniVersionForCreate(miniversion : UInt16)
+  fun TxfSetThreadMiniVersionForCreate(miniversion : UInt16) : Void
 
   # Params # miniversion : UInt16* [In]
-  fun TxfGetThreadMiniVersionForCreate(miniversion : UInt16*)
+  fun TxfGetThreadMiniVersionForCreate(miniversion : UInt16*) : Void
 
   # Params # lptransactionattributes : SECURITY_ATTRIBUTES* [In],uow : Guid* [In],createoptions : UInt32 [In],isolationlevel : UInt32 [In],isolationflags : UInt32 [In],timeout : UInt32 [In],description : LibC::LPWSTR [In]
   fun CreateTransaction(lptransactionattributes : SECURITY_ATTRIBUTES*, uow : Guid*, createoptions : UInt32, isolationlevel : UInt32, isolationflags : UInt32, timeout : UInt32, description : LibC::LPWSTR) : LibC::HANDLE
@@ -4106,7 +4106,7 @@ lib LibWin32
   fun WriteEncryptedFileRaw(pfimportcallback : PFE_IMPORT_FUNC, pvcallbackcontext : Void*, pvcontext : Void*) : UInt32
 
   # Params # pvcontext : Void* [In]
-  fun CloseEncryptedFileRaw(pvcontext : Void*)
+  fun CloseEncryptedFileRaw(pvcontext : Void*) : Void
 
   # Params # lpfilename : PSTR [In],lpreopenbuff : OFSTRUCT* [In],ustyle : LZOPENFILE_STYLE [In]
   fun OpenFile(lpfilename : PSTR, lpreopenbuff : OFSTRUCT*, ustyle : LZOPENFILE_STYLE) : Int32
@@ -4350,4 +4350,200 @@ lib LibWin32
 
   # Params # filehandle : LibC::HANDLE* [In],desiredaccess : UInt32 [In],objectattributes : OBJECT_ATTRIBUTES* [In],iostatusblock : IO_STATUS_BLOCK* [In],allocationsize : LARGE_INTEGER* [In],fileattributes : UInt32 [In],shareaccess : FILE_SHARE_MODE [In],createdisposition : NT_CREATE_FILE_DISPOSITION [In],createoptions : UInt32 [In],eabuffer : Void* [In],ealength : UInt32 [In]
   fun NtCreateFile(filehandle : LibC::HANDLE*, desiredaccess : UInt32, objectattributes : OBJECT_ATTRIBUTES*, iostatusblock : IO_STATUS_BLOCK*, allocationsize : LARGE_INTEGER*, fileattributes : UInt32, shareaccess : FILE_SHARE_MODE, createdisposition : NT_CREATE_FILE_DISPOSITION, createoptions : UInt32, eabuffer : Void*, ealength : UInt32) : NTSTATUS
+end
+struct LibWin32::IDiskQuotaUser
+  def query_interface(this : IDiskQuotaUser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDiskQuotaUser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDiskQuotaUser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IDiskQuotaUser*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IDiskQuotaUser*, pszaccountcontainer : LibC::LPWSTR, cchaccountcontainer : UInt32, pszlogonname : LibC::LPWSTR, cchlogonname : UInt32, pszdisplayname : LibC::LPWSTR, cchdisplayname : UInt32) : HRESULT
+    @lpVtbl.value.get_name.call(this, pszaccountcontainer, cchaccountcontainer, pszlogonname, cchlogonname, pszdisplayname, cchdisplayname)
+  end
+  def get_sid_length(this : IDiskQuotaUser*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_sid_length.call(this, pdwlength)
+  end
+  def get_sid(this : IDiskQuotaUser*, pbsidbuffer : UInt8*, cbsidbuffer : UInt32) : HRESULT
+    @lpVtbl.value.get_sid.call(this, pbsidbuffer, cbsidbuffer)
+  end
+  def get_quota_threshold(this : IDiskQuotaUser*, pllthreshold : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_threshold.call(this, pllthreshold)
+  end
+  def get_quota_threshold_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_threshold_text.call(this, psztext, cchtext)
+  end
+  def get_quota_limit(this : IDiskQuotaUser*, plllimit : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, plllimit)
+  end
+  def get_quota_limit_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_limit_text.call(this, psztext, cchtext)
+  end
+  def get_quota_used(this : IDiskQuotaUser*, pllused : Int64*) : HRESULT
+    @lpVtbl.value.get_quota_used.call(this, pllused)
+  end
+  def get_quota_used_text(this : IDiskQuotaUser*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_used_text.call(this, psztext, cchtext)
+  end
+  def get_quota_information(this : IDiskQuotaUser*, pbquotainfo : Void*, cbquotainfo : UInt32) : HRESULT
+    @lpVtbl.value.get_quota_information.call(this, pbquotainfo, cbquotainfo)
+  end
+  def set_quota_threshold(this : IDiskQuotaUser*, llthreshold : Int64, fwritethrough : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_quota_threshold.call(this, llthreshold, fwritethrough)
+  end
+  def set_quota_limit(this : IDiskQuotaUser*, lllimit : Int64, fwritethrough : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_quota_limit.call(this, lllimit, fwritethrough)
+  end
+  def invalidate(this : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.invalidate.call(this)
+  end
+  def get_account_status(this : IDiskQuotaUser*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_account_status.call(this, pdwstatus)
+  end
+end
+struct LibWin32::IEnumDiskQuotaUsers
+  def query_interface(this : IEnumDiskQuotaUsers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumDiskQuotaUsers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumDiskQuotaUsers*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumDiskQuotaUsers*, cusers : UInt32, rgusers : IDiskQuotaUser*, pcusersfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cusers, rgusers, pcusersfetched)
+  end
+  def skip(this : IEnumDiskQuotaUsers*, cusers : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cusers)
+  end
+  def reset(this : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumDiskQuotaUsers*, ppenum : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IDiskQuotaUserBatch
+  def query_interface(this : IDiskQuotaUserBatch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDiskQuotaUserBatch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDiskQuotaUserBatch*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : IDiskQuotaUserBatch*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.add.call(this, puser)
+  end
+  def remove(this : IDiskQuotaUserBatch*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.remove.call(this, puser)
+  end
+  def remove_all(this : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.remove_all.call(this)
+  end
+  def flush_to_disk(this : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.flush_to_disk.call(this)
+  end
+end
+struct LibWin32::IDiskQuotaControl
+  def query_interface(this : IDiskQuotaControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDiskQuotaControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDiskQuotaControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_connection_points(this : IDiskQuotaControl*, ppenum : IEnumConnectionPoints*) : HRESULT
+    @lpVtbl.value.enum_connection_points.call(this, ppenum)
+  end
+  def find_connection_point(this : IDiskQuotaControl*, riid : Guid*, ppcp : IConnectionPoint*) : HRESULT
+    @lpVtbl.value.find_connection_point.call(this, riid, ppcp)
+  end
+  def initialize(this : IDiskQuotaControl*, pszpath : LibC::LPWSTR, breadwrite : LibC::BOOL) : HRESULT
+    @lpVtbl.value.initialize.call(this, pszpath, breadwrite)
+  end
+  def set_quota_state(this : IDiskQuotaControl*, dwstate : UInt32) : HRESULT
+    @lpVtbl.value.set_quota_state.call(this, dwstate)
+  end
+  def get_quota_state(this : IDiskQuotaControl*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_quota_state.call(this, pdwstate)
+  end
+  def set_quota_log_flags(this : IDiskQuotaControl*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_quota_log_flags.call(this, dwflags)
+  end
+  def get_quota_log_flags(this : IDiskQuotaControl*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_quota_log_flags.call(this, pdwflags)
+  end
+  def set_default_quota_threshold(this : IDiskQuotaControl*, llthreshold : Int64) : HRESULT
+    @lpVtbl.value.set_default_quota_threshold.call(this, llthreshold)
+  end
+  def get_default_quota_threshold(this : IDiskQuotaControl*, pllthreshold : Int64*) : HRESULT
+    @lpVtbl.value.get_default_quota_threshold.call(this, pllthreshold)
+  end
+  def get_default_quota_threshold_text(this : IDiskQuotaControl*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_default_quota_threshold_text.call(this, psztext, cchtext)
+  end
+  def set_default_quota_limit(this : IDiskQuotaControl*, lllimit : Int64) : HRESULT
+    @lpVtbl.value.set_default_quota_limit.call(this, lllimit)
+  end
+  def get_default_quota_limit(this : IDiskQuotaControl*, plllimit : Int64*) : HRESULT
+    @lpVtbl.value.get_default_quota_limit.call(this, plllimit)
+  end
+  def get_default_quota_limit_text(this : IDiskQuotaControl*, psztext : LibC::LPWSTR, cchtext : UInt32) : HRESULT
+    @lpVtbl.value.get_default_quota_limit_text.call(this, psztext, cchtext)
+  end
+  def add_user_sid(this : IDiskQuotaControl*, pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.add_user_sid.call(this, pusersid, fnameresolution, ppuser)
+  end
+  def add_user_name(this : IDiskQuotaControl*, pszlogonname : LibC::LPWSTR, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.add_user_name.call(this, pszlogonname, fnameresolution, ppuser)
+  end
+  def delete_user(this : IDiskQuotaControl*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.delete_user.call(this, puser)
+  end
+  def find_user_sid(this : IDiskQuotaControl*, pusersid : PSID, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.find_user_sid.call(this, pusersid, fnameresolution, ppuser)
+  end
+  def find_user_name(this : IDiskQuotaControl*, pszlogonname : LibC::LPWSTR, ppuser : IDiskQuotaUser*) : HRESULT
+    @lpVtbl.value.find_user_name.call(this, pszlogonname, ppuser)
+  end
+  def create_enum_users(this : IDiskQuotaControl*, rgpusersids : PSID*, cpsids : UInt32, fnameresolution : DISKQUOTA_USERNAME_RESOLVE, ppenum : IEnumDiskQuotaUsers*) : HRESULT
+    @lpVtbl.value.create_enum_users.call(this, rgpusersids, cpsids, fnameresolution, ppenum)
+  end
+  def create_user_batch(this : IDiskQuotaControl*, ppbatch : IDiskQuotaUserBatch*) : HRESULT
+    @lpVtbl.value.create_user_batch.call(this, ppbatch)
+  end
+  def invalidate_sid_name_cache(this : IDiskQuotaControl*) : HRESULT
+    @lpVtbl.value.invalidate_sid_name_cache.call(this)
+  end
+  def give_user_name_resolution_priority(this : IDiskQuotaControl*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.give_user_name_resolution_priority.call(this, puser)
+  end
+  def shutdown_name_resolution(this : IDiskQuotaControl*) : HRESULT
+    @lpVtbl.value.shutdown_name_resolution.call(this)
+  end
+end
+struct LibWin32::IDiskQuotaEvents
+  def query_interface(this : IDiskQuotaEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDiskQuotaEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDiskQuotaEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_user_name_changed(this : IDiskQuotaEvents*, puser : IDiskQuotaUser) : HRESULT
+    @lpVtbl.value.on_user_name_changed.call(this, puser)
+  end
 end

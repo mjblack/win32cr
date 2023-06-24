@@ -1386,3 +1386,1431 @@ lib LibWin32
   # Params # i_pwszhost : LibC::LPWSTR [In],i_pwsztmname : LibC::LPWSTR [In],i_riid : Guid* [In],i_grfoptions : UInt32 [In],i_pvconfigparams : Void* [In],o_ppvobject : Void** [In]
   fun DtcGetTransactionManagerExW(i_pwszhost : LibC::LPWSTR, i_pwsztmname : LibC::LPWSTR, i_riid : Guid*, i_grfoptions : UInt32, i_pvconfigparams : Void*, o_ppvobject : Void**) : HRESULT
 end
+struct LibWin32::ITransaction
+  def query_interface(this : ITransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : ITransaction*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
+  end
+  def abort(this : ITransaction*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
+  end
+  def get_transaction_info(this : ITransaction*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
+  end
+end
+struct LibWin32::ITransactionCloner
+  def query_interface(this : ITransactionCloner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionCloner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionCloner*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : ITransactionCloner*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
+  end
+  def abort(this : ITransactionCloner*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
+  end
+  def get_transaction_info(this : ITransactionCloner*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
+  end
+  def clone_with_commit_disabled(this : ITransactionCloner*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.clone_with_commit_disabled.call(this, ppitransaction)
+  end
+end
+struct LibWin32::ITransaction2
+  def query_interface(this : ITransaction2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransaction2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransaction2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def commit(this : ITransaction2*, fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, fretaining, grftc, grfrm)
+  end
+  def abort(this : ITransaction2*, pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.call(this, pboidreason, fretaining, fasync)
+  end
+  def get_transaction_info(this : ITransaction2*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.call(this, pinfo)
+  end
+  def clone_with_commit_disabled(this : ITransaction2*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.clone_with_commit_disabled.call(this, ppitransaction)
+  end
+  def get_transaction_info2(this : ITransaction2*, pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info2.call(this, pinfo)
+  end
+end
+struct LibWin32::ITransactionDispenser
+  def query_interface(this : ITransactionDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_options_object(this : ITransactionDispenser*, ppoptions : ITransactionOptions*) : HRESULT
+    @lpVtbl.value.get_options_object.call(this, ppoptions)
+  end
+  def begin_transaction(this : ITransactionDispenser*, punkouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.begin_transaction.call(this, punkouter, isolevel, isoflags, poptions, pptransaction)
+  end
+end
+struct LibWin32::ITransactionOptions
+  def query_interface(this : ITransactionOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_options(this : ITransactionOptions*, poptions : XACTOPT*) : HRESULT
+    @lpVtbl.value.set_options.call(this, poptions)
+  end
+  def get_options(this : ITransactionOptions*, poptions : XACTOPT*) : HRESULT
+    @lpVtbl.value.get_options.call(this, poptions)
+  end
+end
+struct LibWin32::ITransactionOutcomeEvents
+  def query_interface(this : ITransactionOutcomeEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionOutcomeEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionOutcomeEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def committed(this : ITransactionOutcomeEvents*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.committed.call(this, fretaining, pnewuow, hr)
+  end
+  def aborted(this : ITransactionOutcomeEvents*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.aborted.call(this, pboidreason, fretaining, pnewuow, hr)
+  end
+  def heuristic_decision(this : ITransactionOutcomeEvents*, dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.heuristic_decision.call(this, dwdecision, pboidreason, hr)
+  end
+  def indoubt(this : ITransactionOutcomeEvents*) : HRESULT
+    @lpVtbl.value.indoubt.call(this)
+  end
+end
+struct LibWin32::ITmNodeName
+  def query_interface(this : ITmNodeName*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITmNodeName*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITmNodeName*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_node_name_size(this : ITmNodeName*, pcbnodenamesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_node_name_size.call(this, pcbnodenamesize)
+  end
+  def get_node_name(this : ITmNodeName*, cbnodenamebuffersize : UInt32, pnodenamebuffer : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.get_node_name.call(this, cbnodenamebuffersize, pnodenamebuffer)
+  end
+end
+struct LibWin32::IKernelTransaction
+  def query_interface(this : IKernelTransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IKernelTransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IKernelTransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_handle(this : IKernelTransaction*, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+end
+struct LibWin32::ITransactionResourceAsync
+  def query_interface(this : ITransactionResourceAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionResourceAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionResourceAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def prepare_request(this : ITransactionResourceAsync*, fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.prepare_request.call(this, fretaining, grfrm, fwantmoniker, fsinglephase)
+  end
+  def commit_request(this : ITransactionResourceAsync*, grfrm : UInt32, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.commit_request.call(this, grfrm, pnewuow)
+  end
+  def abort_request(this : ITransactionResourceAsync*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.abort_request.call(this, pboidreason, fretaining, pnewuow)
+  end
+  def tm_down(this : ITransactionResourceAsync*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
+  end
+end
+struct LibWin32::ITransactionLastResourceAsync
+  def query_interface(this : ITransactionLastResourceAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionLastResourceAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionLastResourceAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def delegate_commit(this : ITransactionLastResourceAsync*, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.delegate_commit.call(this, grfrm)
+  end
+  def forget_request(this : ITransactionLastResourceAsync*, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.forget_request.call(this, pnewuow)
+  end
+end
+struct LibWin32::ITransactionResource
+  def query_interface(this : ITransactionResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def prepare_request(this : ITransactionResource*, fretaining : LibC::BOOL, grfrm : UInt32, fwantmoniker : LibC::BOOL, fsinglephase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.prepare_request.call(this, fretaining, grfrm, fwantmoniker, fsinglephase)
+  end
+  def commit_request(this : ITransactionResource*, grfrm : UInt32, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.commit_request.call(this, grfrm, pnewuow)
+  end
+  def abort_request(this : ITransactionResource*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*) : HRESULT
+    @lpVtbl.value.abort_request.call(this, pboidreason, fretaining, pnewuow)
+  end
+  def tm_down(this : ITransactionResource*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
+  end
+end
+struct LibWin32::ITransactionEnlistmentAsync
+  def query_interface(this : ITransactionEnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionEnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionEnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def prepare_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT, pmk : IMoniker, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.prepare_request_done.call(this, hr, pmk, pboidreason)
+  end
+  def commit_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.commit_request_done.call(this, hr)
+  end
+  def abort_request_done(this : ITransactionEnlistmentAsync*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.abort_request_done.call(this, hr)
+  end
+end
+struct LibWin32::ITransactionLastEnlistmentAsync
+  def query_interface(this : ITransactionLastEnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionLastEnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionLastEnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transaction_outcome(this : ITransactionLastEnlistmentAsync*, xactstat : XACTSTAT, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.transaction_outcome.call(this, xactstat, pboidreason)
+  end
+end
+struct LibWin32::ITransactionExportFactory
+  def query_interface(this : ITransactionExportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionExportFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionExportFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_class_id(this : ITransactionExportFactory*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_remote_class_id.call(this, pclsid)
+  end
+  def create(this : ITransactionExportFactory*, cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, ppexport : ITransactionExport*) : HRESULT
+    @lpVtbl.value.create.call(this, cbwhereabouts, rgbwhereabouts, ppexport)
+  end
+end
+struct LibWin32::ITransactionImportWhereabouts
+  def query_interface(this : ITransactionImportWhereabouts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionImportWhereabouts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionImportWhereabouts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_whereabouts_size(this : ITransactionImportWhereabouts*, pcbwhereabouts : UInt32*) : HRESULT
+    @lpVtbl.value.get_whereabouts_size.call(this, pcbwhereabouts)
+  end
+  def get_whereabouts(this : ITransactionImportWhereabouts*, cbwhereabouts : UInt32, rgbwhereabouts : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.get_whereabouts.call(this, cbwhereabouts, rgbwhereabouts, pcbused)
+  end
+end
+struct LibWin32::ITransactionExport
+  def query_interface(this : ITransactionExport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionExport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionExport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def export(this : ITransactionExport*, punktransaction : IUnknown, pcbtransactioncookie : UInt32*) : HRESULT
+    @lpVtbl.value.export.call(this, punktransaction, pcbtransactioncookie)
+  end
+  def get_transaction_cookie(this : ITransactionExport*, punktransaction : IUnknown, cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_cookie.call(this, punktransaction, cbtransactioncookie, rgbtransactioncookie, pcbused)
+  end
+end
+struct LibWin32::ITransactionImport
+  def query_interface(this : ITransactionImport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionImport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionImport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def import(this : ITransactionImport*, cbtransactioncookie : UInt32, rgbtransactioncookie : UInt8*, piid : Guid*, ppvtransaction : Void**) : HRESULT
+    @lpVtbl.value.import.call(this, cbtransactioncookie, rgbtransactioncookie, piid, ppvtransaction)
+  end
+end
+struct LibWin32::ITipTransaction
+  def query_interface(this : ITipTransaction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITipTransaction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITipTransaction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def push(this : ITipTransaction*, i_pszremotetmurl : UInt8*, o_ppszremotetxurl : PSTR*) : HRESULT
+    @lpVtbl.value.push.call(this, i_pszremotetmurl, o_ppszremotetxurl)
+  end
+  def get_transaction_url(this : ITipTransaction*, o_ppszlocaltxurl : PSTR*) : HRESULT
+    @lpVtbl.value.get_transaction_url.call(this, o_ppszlocaltxurl)
+  end
+end
+struct LibWin32::ITipHelper
+  def query_interface(this : ITipHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITipHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITipHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def pull(this : ITipHelper*, i_psztxurl : UInt8*, o_ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.pull.call(this, i_psztxurl, o_ppitransaction)
+  end
+  def pull_async(this : ITipHelper*, i_psztxurl : UInt8*, i_ptippullsink : ITipPullSink, o_ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.pull_async.call(this, i_psztxurl, i_ptippullsink, o_ppitransaction)
+  end
+  def get_local_tm_url(this : ITipHelper*, o_ppszlocaltmurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_tm_url.call(this, o_ppszlocaltmurl)
+  end
+end
+struct LibWin32::ITipPullSink
+  def query_interface(this : ITipPullSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITipPullSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITipPullSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def pull_complete(this : ITipPullSink*, i_hrpull : HRESULT) : HRESULT
+    @lpVtbl.value.pull_complete.call(this, i_hrpull)
+  end
+end
+struct LibWin32::IDtcNetworkAccessConfig
+  def query_interface(this : IDtcNetworkAccessConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcNetworkAccessConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcNetworkAccessConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_any_network_access(this : IDtcNetworkAccessConfig*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
+  end
+  def set_any_network_access(this : IDtcNetworkAccessConfig*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
+  end
+  def get_network_administration_access(this : IDtcNetworkAccessConfig*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
+  end
+  def set_network_administration_access(this : IDtcNetworkAccessConfig*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
+  end
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
+  end
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
+  end
+  def get_network_client_access(this : IDtcNetworkAccessConfig*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
+  end
+  def set_network_client_access(this : IDtcNetworkAccessConfig*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
+  end
+  def get_network_tip_access(this : IDtcNetworkAccessConfig*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
+  end
+  def set_network_tip_access(this : IDtcNetworkAccessConfig*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
+  end
+  def get_xa_access(this : IDtcNetworkAccessConfig*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
+  end
+  def set_xa_access(this : IDtcNetworkAccessConfig*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
+  end
+  def restart_dtc_service(this : IDtcNetworkAccessConfig*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
+  end
+end
+struct LibWin32::IDtcNetworkAccessConfig2
+  def query_interface(this : IDtcNetworkAccessConfig2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcNetworkAccessConfig2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcNetworkAccessConfig2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_any_network_access(this : IDtcNetworkAccessConfig2*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
+  end
+  def set_any_network_access(this : IDtcNetworkAccessConfig2*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
+  end
+  def get_network_administration_access(this : IDtcNetworkAccessConfig2*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
+  end
+  def set_network_administration_access(this : IDtcNetworkAccessConfig2*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
+  end
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig2*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
+  end
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig2*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
+  end
+  def get_network_client_access(this : IDtcNetworkAccessConfig2*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
+  end
+  def set_network_client_access(this : IDtcNetworkAccessConfig2*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
+  end
+  def get_network_tip_access(this : IDtcNetworkAccessConfig2*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
+  end
+  def set_network_tip_access(this : IDtcNetworkAccessConfig2*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
+  end
+  def get_xa_access(this : IDtcNetworkAccessConfig2*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
+  end
+  def set_xa_access(this : IDtcNetworkAccessConfig2*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
+  end
+  def restart_dtc_service(this : IDtcNetworkAccessConfig2*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
+  end
+  def get_network_inbound_access(this : IDtcNetworkAccessConfig2*, pbinbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_inbound_access.call(this, pbinbound)
+  end
+  def get_network_outbound_access(this : IDtcNetworkAccessConfig2*, pboutbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_outbound_access.call(this, pboutbound)
+  end
+  def set_network_inbound_access(this : IDtcNetworkAccessConfig2*, binbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_inbound_access.call(this, binbound)
+  end
+  def set_network_outbound_access(this : IDtcNetworkAccessConfig2*, boutbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_outbound_access.call(this, boutbound)
+  end
+  def get_authentication_level(this : IDtcNetworkAccessConfig2*, pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
+    @lpVtbl.value.get_authentication_level.call(this, pauthlevel)
+  end
+  def set_authentication_level(this : IDtcNetworkAccessConfig2*, authlevel : AUTHENTICATION_LEVEL) : HRESULT
+    @lpVtbl.value.set_authentication_level.call(this, authlevel)
+  end
+end
+struct LibWin32::IDtcNetworkAccessConfig3
+  def query_interface(this : IDtcNetworkAccessConfig3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcNetworkAccessConfig3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcNetworkAccessConfig3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_any_network_access(this : IDtcNetworkAccessConfig3*, pbanynetworkaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_any_network_access.call(this, pbanynetworkaccess)
+  end
+  def set_any_network_access(this : IDtcNetworkAccessConfig3*, banynetworkaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_any_network_access.call(this, banynetworkaccess)
+  end
+  def get_network_administration_access(this : IDtcNetworkAccessConfig3*, pbnetworkadministrationaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_administration_access.call(this, pbnetworkadministrationaccess)
+  end
+  def set_network_administration_access(this : IDtcNetworkAccessConfig3*, bnetworkadministrationaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_administration_access.call(this, bnetworkadministrationaccess)
+  end
+  def get_network_transaction_access(this : IDtcNetworkAccessConfig3*, pbnetworktransactionaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_transaction_access.call(this, pbnetworktransactionaccess)
+  end
+  def set_network_transaction_access(this : IDtcNetworkAccessConfig3*, bnetworktransactionaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_transaction_access.call(this, bnetworktransactionaccess)
+  end
+  def get_network_client_access(this : IDtcNetworkAccessConfig3*, pbnetworkclientaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_client_access.call(this, pbnetworkclientaccess)
+  end
+  def set_network_client_access(this : IDtcNetworkAccessConfig3*, bnetworkclientaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_client_access.call(this, bnetworkclientaccess)
+  end
+  def get_network_tip_access(this : IDtcNetworkAccessConfig3*, pbnetworktipaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_tip_access.call(this, pbnetworktipaccess)
+  end
+  def set_network_tip_access(this : IDtcNetworkAccessConfig3*, bnetworktipaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_tip_access.call(this, bnetworktipaccess)
+  end
+  def get_xa_access(this : IDtcNetworkAccessConfig3*, pbxaaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_xa_access.call(this, pbxaaccess)
+  end
+  def set_xa_access(this : IDtcNetworkAccessConfig3*, bxaaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_xa_access.call(this, bxaaccess)
+  end
+  def restart_dtc_service(this : IDtcNetworkAccessConfig3*) : HRESULT
+    @lpVtbl.value.restart_dtc_service.call(this)
+  end
+  def get_network_inbound_access(this : IDtcNetworkAccessConfig3*, pbinbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_inbound_access.call(this, pbinbound)
+  end
+  def get_network_outbound_access(this : IDtcNetworkAccessConfig3*, pboutbound : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_network_outbound_access.call(this, pboutbound)
+  end
+  def set_network_inbound_access(this : IDtcNetworkAccessConfig3*, binbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_inbound_access.call(this, binbound)
+  end
+  def set_network_outbound_access(this : IDtcNetworkAccessConfig3*, boutbound : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_network_outbound_access.call(this, boutbound)
+  end
+  def get_authentication_level(this : IDtcNetworkAccessConfig3*, pauthlevel : AUTHENTICATION_LEVEL*) : HRESULT
+    @lpVtbl.value.get_authentication_level.call(this, pauthlevel)
+  end
+  def set_authentication_level(this : IDtcNetworkAccessConfig3*, authlevel : AUTHENTICATION_LEVEL) : HRESULT
+    @lpVtbl.value.set_authentication_level.call(this, authlevel)
+  end
+  def get_lu_access(this : IDtcNetworkAccessConfig3*, pbluaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_lu_access.call(this, pbluaccess)
+  end
+  def set_lu_access(this : IDtcNetworkAccessConfig3*, bluaccess : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_lu_access.call(this, bluaccess)
+  end
+end
+struct LibWin32::IDtcToXaMapper
+  def query_interface(this : IDtcToXaMapper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcToXaMapper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcToXaMapper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request_new_resource_manager(this : IDtcToXaMapper*, pszdsn : PSTR, pszclientdllname : PSTR, pdwrmcookie : UInt32*) : HRESULT
+    @lpVtbl.value.request_new_resource_manager.call(this, pszdsn, pszclientdllname, pdwrmcookie)
+  end
+  def translate_trid_to_xid(this : IDtcToXaMapper*, pdwitransaction : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.translate_trid_to_xid.call(this, pdwitransaction, dwrmcookie, pxid)
+  end
+  def enlist_resource_manager(this : IDtcToXaMapper*, dwrmcookie : UInt32, pdwitransaction : UInt32*) : HRESULT
+    @lpVtbl.value.enlist_resource_manager.call(this, dwrmcookie, pdwitransaction)
+  end
+  def release_resource_manager(this : IDtcToXaMapper*, dwrmcookie : UInt32) : HRESULT
+    @lpVtbl.value.release_resource_manager.call(this, dwrmcookie)
+  end
+end
+struct LibWin32::IDtcToXaHelperFactory
+  def query_interface(this : IDtcToXaHelperFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcToXaHelperFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcToXaHelperFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IDtcToXaHelperFactory*, pszdsn : PSTR, pszclientdllname : PSTR, pguidrm : Guid*, ppxahelper : IDtcToXaHelper*) : HRESULT
+    @lpVtbl.value.create.call(this, pszdsn, pszclientdllname, pguidrm, ppxahelper)
+  end
+end
+struct LibWin32::IDtcToXaHelper
+  def query_interface(this : IDtcToXaHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcToXaHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcToXaHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def close(this : IDtcToXaHelper*, i_fdorecovery : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close.call(this, i_fdorecovery)
+  end
+  def translate_trid_to_xid(this : IDtcToXaHelper*, pitransaction : ITransaction, pguidbqual : Guid*, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.translate_trid_to_xid.call(this, pitransaction, pguidbqual, pxid)
+  end
+end
+struct LibWin32::IDtcToXaHelperSinglePipe
+  def query_interface(this : IDtcToXaHelperSinglePipe*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcToXaHelperSinglePipe*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcToXaHelperSinglePipe*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def xarm_create(this : IDtcToXaHelperSinglePipe*, pszdsn : PSTR, pszclientdll : PSTR, pdwrmcookie : UInt32*) : HRESULT
+    @lpVtbl.value.xarm_create.call(this, pszdsn, pszclientdll, pdwrmcookie)
+  end
+  def convert_trid_to_xid(this : IDtcToXaHelperSinglePipe*, pdwitrans : UInt32*, dwrmcookie : UInt32, pxid : Xid_t*) : HRESULT
+    @lpVtbl.value.convert_trid_to_xid.call(this, pdwitrans, dwrmcookie, pxid)
+  end
+  def enlist_with_rm(this : IDtcToXaHelperSinglePipe*, dwrmcookie : UInt32, i_pitransaction : ITransaction, i_pitransres : ITransactionResourceAsync, o_ppitransenslitment : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist_with_rm.call(this, dwrmcookie, i_pitransaction, i_pitransres, o_ppitransenslitment)
+  end
+  def release_rm_cookie(this : IDtcToXaHelperSinglePipe*, i_dwrmcookie : UInt32, i_fnormal : LibC::BOOL) : Void
+    @lpVtbl.value.release_rm_cookie.call(this, i_dwrmcookie, i_fnormal)
+  end
+end
+struct LibWin32::IXATransLookup
+  def query_interface(this : IXATransLookup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXATransLookup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXATransLookup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lookup(this : IXATransLookup*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.lookup.call(this, pptransaction)
+  end
+end
+struct LibWin32::IXATransLookup2
+  def query_interface(this : IXATransLookup2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXATransLookup2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXATransLookup2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lookup(this : IXATransLookup2*, pxid : Xid_t*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.lookup.call(this, pxid, pptransaction)
+  end
+end
+struct LibWin32::IResourceManagerSink
+  def query_interface(this : IResourceManagerSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManagerSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManagerSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def tm_down(this : IResourceManagerSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
+  end
+end
+struct LibWin32::IResourceManager
+  def query_interface(this : IResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enlist(this : IResourceManager*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
+  end
+  def reenlist(this : IResourceManager*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  end
+  def reenlistment_complete(this : IResourceManager*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
+  end
+  def get_distributed_transaction_manager(this : IResourceManager*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
+  end
+end
+struct LibWin32::ILastResourceManager
+  def query_interface(this : ILastResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILastResourceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILastResourceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def transaction_committed(this : ILastResourceManager*, pprepinfo : UInt8*, cbprepinfo : UInt32) : HRESULT
+    @lpVtbl.value.transaction_committed.call(this, pprepinfo, cbprepinfo)
+  end
+  def recovery_done(this : ILastResourceManager*) : HRESULT
+    @lpVtbl.value.recovery_done.call(this)
+  end
+end
+struct LibWin32::IResourceManager2
+  def query_interface(this : IResourceManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enlist(this : IResourceManager2*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
+  end
+  def reenlist(this : IResourceManager2*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  end
+  def reenlistment_complete(this : IResourceManager2*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
+  end
+  def get_distributed_transaction_manager(this : IResourceManager2*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
+  end
+  def enlist2(this : IResourceManager2*, ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist2.call(this, ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
+  end
+  def reenlist2(this : IResourceManager2*, pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist2.call(this, pxid, dwtimeout, pxactstat)
+  end
+end
+struct LibWin32::IResourceManagerRejoinable
+  def query_interface(this : IResourceManagerRejoinable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManagerRejoinable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManagerRejoinable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enlist(this : IResourceManagerRejoinable*, ptransaction : ITransaction, pres : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist.call(this, ptransaction, pres, puow, pisolevel, ppenlist)
+  end
+  def reenlist(this : IResourceManagerRejoinable*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  end
+  def reenlistment_complete(this : IResourceManagerRejoinable*) : HRESULT
+    @lpVtbl.value.reenlistment_complete.call(this)
+  end
+  def get_distributed_transaction_manager(this : IResourceManagerRejoinable*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_distributed_transaction_manager.call(this, iid, ppvobject)
+  end
+  def enlist2(this : IResourceManagerRejoinable*, ptransaction : ITransaction, presasync : ITransactionResourceAsync, puow : BOID*, pisolevel : Int32*, pxid : Xid_t*, ppenlist : ITransactionEnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enlist2.call(this, ptransaction, presasync, puow, pisolevel, pxid, ppenlist)
+  end
+  def reenlist2(this : IResourceManagerRejoinable*, pxid : Xid_t*, dwtimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.reenlist2.call(this, pxid, dwtimeout, pxactstat)
+  end
+  def rejoin(this : IResourceManagerRejoinable*, pprepinfo : UInt8*, cbprepinfo : UInt32, ltimeout : UInt32, pxactstat : XACTSTAT*) : HRESULT
+    @lpVtbl.value.rejoin.call(this, pprepinfo, cbprepinfo, ltimeout, pxactstat)
+  end
+end
+struct LibWin32::IXAConfig
+  def query_interface(this : IXAConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IXAConfig*, clsidhelperdll : Guid) : HRESULT
+    @lpVtbl.value.initialize.call(this, clsidhelperdll)
+  end
+  def terminate(this : IXAConfig*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+end
+struct LibWin32::IRMHelper
+  def query_interface(this : IRMHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRMHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRMHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def rm_count(this : IRMHelper*, dwctotalnumberofrms : UInt32) : HRESULT
+    @lpVtbl.value.rm_count.call(this, dwctotalnumberofrms)
+  end
+  def rm_info(this : IRMHelper*, pxa_switch : Xa_switch_t*, fcdeclcallingconv : LibC::BOOL, pszopenstring : PSTR, pszclosestring : PSTR, guidrmrecovery : Guid) : HRESULT
+    @lpVtbl.value.rm_info.call(this, pxa_switch, fcdeclcallingconv, pszopenstring, pszclosestring, guidrmrecovery)
+  end
+end
+struct LibWin32::IXAObtainRMInfo
+  def query_interface(this : IXAObtainRMInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXAObtainRMInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXAObtainRMInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def obtain_rm_info(this : IXAObtainRMInfo*, pirmhelper : IRMHelper) : HRESULT
+    @lpVtbl.value.obtain_rm_info.call(this, pirmhelper)
+  end
+end
+struct LibWin32::IResourceManagerFactory
+  def query_interface(this : IResourceManagerFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManagerFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManagerFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IResourceManagerFactory*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
+    @lpVtbl.value.create.call(this, pguidrm, pszrmname, piresmgrsink, ppresmgr)
+  end
+end
+struct LibWin32::IResourceManagerFactory2
+  def query_interface(this : IResourceManagerFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IResourceManagerFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IResourceManagerFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IResourceManagerFactory2*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, ppresmgr : IResourceManager*) : HRESULT
+    @lpVtbl.value.create.call(this, pguidrm, pszrmname, piresmgrsink, ppresmgr)
+  end
+  def create_ex(this : IResourceManagerFactory2*, pguidrm : Guid*, pszrmname : PSTR, piresmgrsink : IResourceManagerSink, riidrequested : Guid*, ppvresmgr : Void**) : HRESULT
+    @lpVtbl.value.create_ex.call(this, pguidrm, pszrmname, piresmgrsink, riidrequested, ppvresmgr)
+  end
+end
+struct LibWin32::IPrepareInfo
+  def query_interface(this : IPrepareInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrepareInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrepareInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prepare_info_size(this : IPrepareInfo*, pcbprepinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_prepare_info_size.call(this, pcbprepinfo)
+  end
+  def get_prepare_info(this : IPrepareInfo*, pprepinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_prepare_info.call(this, pprepinfo)
+  end
+end
+struct LibWin32::IPrepareInfo2
+  def query_interface(this : IPrepareInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrepareInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrepareInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prepare_info_size(this : IPrepareInfo2*, pcbprepinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_prepare_info_size.call(this, pcbprepinfo)
+  end
+  def get_prepare_info(this : IPrepareInfo2*, cbprepareinfo : UInt32, pprepinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_prepare_info.call(this, cbprepareinfo, pprepinfo)
+  end
+end
+struct LibWin32::IGetDispenser
+  def query_interface(this : IGetDispenser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetDispenser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetDispenser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dispenser(this : IGetDispenser*, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_dispenser.call(this, iid, ppvobject)
+  end
+end
+struct LibWin32::ITransactionVoterBallotAsync2
+  def query_interface(this : ITransactionVoterBallotAsync2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionVoterBallotAsync2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionVoterBallotAsync2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def vote_request_done(this : ITransactionVoterBallotAsync2*, hr : HRESULT, pboidreason : BOID*) : HRESULT
+    @lpVtbl.value.vote_request_done.call(this, hr, pboidreason)
+  end
+end
+struct LibWin32::ITransactionVoterNotifyAsync2
+  def query_interface(this : ITransactionVoterNotifyAsync2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionVoterNotifyAsync2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionVoterNotifyAsync2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def committed(this : ITransactionVoterNotifyAsync2*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.committed.call(this, fretaining, pnewuow, hr)
+  end
+  def aborted(this : ITransactionVoterNotifyAsync2*, pboidreason : BOID*, fretaining : LibC::BOOL, pnewuow : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.aborted.call(this, pboidreason, fretaining, pnewuow, hr)
+  end
+  def heuristic_decision(this : ITransactionVoterNotifyAsync2*, dwdecision : UInt32, pboidreason : BOID*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.heuristic_decision.call(this, dwdecision, pboidreason, hr)
+  end
+  def indoubt(this : ITransactionVoterNotifyAsync2*) : HRESULT
+    @lpVtbl.value.indoubt.call(this)
+  end
+  def vote_request(this : ITransactionVoterNotifyAsync2*) : HRESULT
+    @lpVtbl.value.vote_request.call(this)
+  end
+end
+struct LibWin32::ITransactionVoterFactory2
+  def query_interface(this : ITransactionVoterFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionVoterFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionVoterFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : ITransactionVoterFactory2*, ptransaction : ITransaction, pvoternotify : ITransactionVoterNotifyAsync2, ppvoterballot : ITransactionVoterBallotAsync2*) : HRESULT
+    @lpVtbl.value.create.call(this, ptransaction, pvoternotify, ppvoterballot)
+  end
+end
+struct LibWin32::ITransactionPhase0EnlistmentAsync
+  def query_interface(this : ITransactionPhase0EnlistmentAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionPhase0EnlistmentAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionPhase0EnlistmentAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def wait_for_enlistment(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.wait_for_enlistment.call(this)
+  end
+  def phase0_done(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.phase0_done.call(this)
+  end
+  def unenlist(this : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.unenlist.call(this)
+  end
+  def get_transaction(this : ITransactionPhase0EnlistmentAsync*, ppitransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.get_transaction.call(this, ppitransaction)
+  end
+end
+struct LibWin32::ITransactionPhase0NotifyAsync
+  def query_interface(this : ITransactionPhase0NotifyAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionPhase0NotifyAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionPhase0NotifyAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def phase0_request(this : ITransactionPhase0NotifyAsync*, fabortinghint : LibC::BOOL) : HRESULT
+    @lpVtbl.value.phase0_request.call(this, fabortinghint)
+  end
+  def enlist_completed(this : ITransactionPhase0NotifyAsync*, status : HRESULT) : HRESULT
+    @lpVtbl.value.enlist_completed.call(this, status)
+  end
+end
+struct LibWin32::ITransactionPhase0Factory
+  def query_interface(this : ITransactionPhase0Factory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionPhase0Factory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionPhase0Factory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : ITransactionPhase0Factory*, pphase0notify : ITransactionPhase0NotifyAsync, ppphase0enlistment : ITransactionPhase0EnlistmentAsync*) : HRESULT
+    @lpVtbl.value.create.call(this, pphase0notify, ppphase0enlistment)
+  end
+end
+struct LibWin32::ITransactionTransmitter
+  def query_interface(this : ITransactionTransmitter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionTransmitter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionTransmitter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set(this : ITransactionTransmitter*, ptransaction : ITransaction) : HRESULT
+    @lpVtbl.value.set.call(this, ptransaction)
+  end
+  def get_propagation_token_size(this : ITransactionTransmitter*, pcbtoken : UInt32*) : HRESULT
+    @lpVtbl.value.get_propagation_token_size.call(this, pcbtoken)
+  end
+  def marshal_propagation_token(this : ITransactionTransmitter*, cbtoken : UInt32, rgbtoken : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.marshal_propagation_token.call(this, cbtoken, rgbtoken, pcbused)
+  end
+  def unmarshal_return_token(this : ITransactionTransmitter*, cbreturntoken : UInt32, rgbreturntoken : UInt8*) : HRESULT
+    @lpVtbl.value.unmarshal_return_token.call(this, cbreturntoken, rgbreturntoken)
+  end
+  def reset(this : ITransactionTransmitter*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::ITransactionTransmitterFactory
+  def query_interface(this : ITransactionTransmitterFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionTransmitterFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionTransmitterFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : ITransactionTransmitterFactory*, pptransmitter : ITransactionTransmitter*) : HRESULT
+    @lpVtbl.value.create.call(this, pptransmitter)
+  end
+end
+struct LibWin32::ITransactionReceiver
+  def query_interface(this : ITransactionReceiver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionReceiver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionReceiver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def unmarshal_propagation_token(this : ITransactionReceiver*, cbtoken : UInt32, rgbtoken : UInt8*, pptransaction : ITransaction*) : HRESULT
+    @lpVtbl.value.unmarshal_propagation_token.call(this, cbtoken, rgbtoken, pptransaction)
+  end
+  def get_return_token_size(this : ITransactionReceiver*, pcbreturntoken : UInt32*) : HRESULT
+    @lpVtbl.value.get_return_token_size.call(this, pcbreturntoken)
+  end
+  def marshal_return_token(this : ITransactionReceiver*, cbreturntoken : UInt32, rgbreturntoken : UInt8*, pcbused : UInt32*) : HRESULT
+    @lpVtbl.value.marshal_return_token.call(this, cbreturntoken, rgbreturntoken, pcbused)
+  end
+  def reset(this : ITransactionReceiver*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::ITransactionReceiverFactory
+  def query_interface(this : ITransactionReceiverFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransactionReceiverFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransactionReceiverFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : ITransactionReceiverFactory*, ppreceiver : ITransactionReceiver*) : HRESULT
+    @lpVtbl.value.create.call(this, ppreceiver)
+  end
+end
+struct LibWin32::IDtcLuConfigure
+  def query_interface(this : IDtcLuConfigure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuConfigure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuConfigure*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : IDtcLuConfigure*, puclupair : UInt8*, cblupair : UInt32) : HRESULT
+    @lpVtbl.value.add.call(this, puclupair, cblupair)
+  end
+  def delete(this : IDtcLuConfigure*, puclupair : UInt8*, cblupair : UInt32) : HRESULT
+    @lpVtbl.value.delete.call(this, puclupair, cblupair)
+  end
+end
+struct LibWin32::IDtcLuRecovery
+  def query_interface(this : IDtcLuRecovery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecovery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecovery*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::IDtcLuRecoveryFactory
+  def query_interface(this : IDtcLuRecoveryFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IDtcLuRecoveryFactory*, puclupair : UInt8*, cblupair : UInt32, pprecovery : IDtcLuRecovery*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, pprecovery)
+  end
+end
+struct LibWin32::IDtcLuRecoveryInitiatedByDtcTransWork
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtcTransWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_log_name_sizes(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pcbourlogname : UInt32*, pcbremotelogname : UInt32*) : HRESULT
+    @lpVtbl.value.get_log_name_sizes.call(this, pcbourlogname, pcbremotelogname)
+  end
+  def get_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pxln : DtcLu_Xln*, pourlogname : UInt8*, premotelogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_xln.call(this, pxln, pourlogname, premotelogname, pdwprotocol)
+  end
+  def handle_confirmation_from_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, confirmation : DtcLu_Xln_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_from_our_xln.call(this, confirmation)
+  end
+  def handle_their_xln_response(this : IDtcLuRecoveryInitiatedByDtcTransWork*, xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, dwprotocol : UInt32, pconfirmation : DtcLu_Xln_Confirmation*) : HRESULT
+    @lpVtbl.value.handle_their_xln_response.call(this, xln, premotelogname, cbremotelogname, dwprotocol, pconfirmation)
+  end
+  def handle_error_from_our_xln(this : IDtcLuRecoveryInitiatedByDtcTransWork*, error : DtcLu_Xln_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_xln.call(this, error)
+  end
+  def check_for_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, fcomparestates : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_for_compare_states.call(this, fcomparestates)
+  end
+  def get_our_trans_id_size(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pcbourtransid : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_trans_id_size.call(this, pcbourtransid)
+  end
+  def get_our_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, pourtransid : UInt8*, pcomparestate : DtcLu_CompareState*) : HRESULT
+    @lpVtbl.value.get_our_compare_states.call(this, pourtransid, pcomparestate)
+  end
+  def handle_their_compare_states_response(this : IDtcLuRecoveryInitiatedByDtcTransWork*, comparestate : DtcLu_CompareState, pconfirmation : DtcLu_CompareStates_Confirmation*) : HRESULT
+    @lpVtbl.value.handle_their_compare_states_response.call(this, comparestate, pconfirmation)
+  end
+  def handle_error_from_our_compare_states(this : IDtcLuRecoveryInitiatedByDtcTransWork*, error : DtcLu_CompareStates_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_compare_states.call(this, error)
+  end
+  def conversation_lost(this : IDtcLuRecoveryInitiatedByDtcTransWork*) : HRESULT
+    @lpVtbl.value.conversation_lost.call(this)
+  end
+  def get_recovery_seq_num(this : IDtcLuRecoveryInitiatedByDtcTransWork*, plrecoveryseqnum : Int32*) : HRESULT
+    @lpVtbl.value.get_recovery_seq_num.call(this, plrecoveryseqnum)
+  end
+  def obsolete_recovery_seq_num(this : IDtcLuRecoveryInitiatedByDtcTransWork*, lnewrecoveryseqnum : Int32) : HRESULT
+    @lpVtbl.value.obsolete_recovery_seq_num.call(this, lnewrecoveryseqnum)
+  end
+end
+struct LibWin32::IDtcLuRecoveryInitiatedByDtcStatusWork
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtcStatusWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtcStatusWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryInitiatedByDtcStatusWork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_check_lu_status(this : IDtcLuRecoveryInitiatedByDtcStatusWork*, lrecoveryseqnum : Int32) : HRESULT
+    @lpVtbl.value.handle_check_lu_status.call(this, lrecoveryseqnum)
+  end
+end
+struct LibWin32::IDtcLuRecoveryInitiatedByDtc
+  def query_interface(this : IDtcLuRecoveryInitiatedByDtc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryInitiatedByDtc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryInitiatedByDtc*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_work(this : IDtcLuRecoveryInitiatedByDtc*, pwork : DtcLu_LocalRecovery_Work*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_work.call(this, pwork, ppv)
+  end
+end
+struct LibWin32::IDtcLuRecoveryInitiatedByLuWork
+  def query_interface(this : IDtcLuRecoveryInitiatedByLuWork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryInitiatedByLuWork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryInitiatedByLuWork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def handle_their_xln(this : IDtcLuRecoveryInitiatedByLuWork*, lrecoveryseqnum : Int32, xln : DtcLu_Xln, premotelogname : UInt8*, cbremotelogname : UInt32, pourlogname : UInt8*, cbourlogname : UInt32, dwprotocol : UInt32, presponse : DtcLu_Xln_Response*) : HRESULT
+    @lpVtbl.value.handle_their_xln.call(this, lrecoveryseqnum, xln, premotelogname, cbremotelogname, pourlogname, cbourlogname, dwprotocol, presponse)
+  end
+  def get_our_log_name_size(this : IDtcLuRecoveryInitiatedByLuWork*, pcbourlogname : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_log_name_size.call(this, pcbourlogname)
+  end
+  def get_our_xln(this : IDtcLuRecoveryInitiatedByLuWork*, pxln : DtcLu_Xln*, pourlogname : UInt8*, pdwprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_our_xln.call(this, pxln, pourlogname, pdwprotocol)
+  end
+  def handle_confirmation_of_our_xln(this : IDtcLuRecoveryInitiatedByLuWork*, confirmation : DtcLu_Xln_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_of_our_xln.call(this, confirmation)
+  end
+  def handle_their_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, premotetransid : UInt8*, cbremotetransid : UInt32, comparestate : DtcLu_CompareState, presponse : DtcLu_CompareStates_Response*, pcomparestate : DtcLu_CompareState*) : HRESULT
+    @lpVtbl.value.handle_their_compare_states.call(this, premotetransid, cbremotetransid, comparestate, presponse, pcomparestate)
+  end
+  def handle_confirmation_of_our_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, confirmation : DtcLu_CompareStates_Confirmation) : HRESULT
+    @lpVtbl.value.handle_confirmation_of_our_compare_states.call(this, confirmation)
+  end
+  def handle_error_from_our_compare_states(this : IDtcLuRecoveryInitiatedByLuWork*, error : DtcLu_CompareStates_Error) : HRESULT
+    @lpVtbl.value.handle_error_from_our_compare_states.call(this, error)
+  end
+  def conversation_lost(this : IDtcLuRecoveryInitiatedByLuWork*) : HRESULT
+    @lpVtbl.value.conversation_lost.call(this)
+  end
+end
+struct LibWin32::IDtcLuRecoveryInitiatedByLu
+  def query_interface(this : IDtcLuRecoveryInitiatedByLu*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRecoveryInitiatedByLu*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRecoveryInitiatedByLu*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_to_handle_work_from_lu(this : IDtcLuRecoveryInitiatedByLu*, ppwork : IDtcLuRecoveryInitiatedByLuWork*) : HRESULT
+    @lpVtbl.value.get_object_to_handle_work_from_lu.call(this, ppwork)
+  end
+end
+struct LibWin32::IDtcLuRmEnlistment
+  def query_interface(this : IDtcLuRmEnlistment*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRmEnlistment*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRmEnlistment*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def unplug(this : IDtcLuRmEnlistment*, fconversationlost : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unplug.call(this, fconversationlost)
+  end
+  def backed_out(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
+  end
+  def back_out(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
+  end
+  def committed(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.committed.call(this)
+  end
+  def forget(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.forget.call(this)
+  end
+  def request_commit(this : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
+  end
+end
+struct LibWin32::IDtcLuRmEnlistmentSink
+  def query_interface(this : IDtcLuRmEnlistmentSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRmEnlistmentSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRmEnlistmentSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def ack_unplug(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.ack_unplug.call(this)
+  end
+  def tm_down(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
+  end
+  def session_lost(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.session_lost.call(this)
+  end
+  def backed_out(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
+  end
+  def back_out(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
+  end
+  def committed(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.committed.call(this)
+  end
+  def forget(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.forget.call(this)
+  end
+  def prepare(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def request_commit(this : IDtcLuRmEnlistmentSink*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
+  end
+end
+struct LibWin32::IDtcLuRmEnlistmentFactory
+  def query_interface(this : IDtcLuRmEnlistmentFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuRmEnlistmentFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuRmEnlistmentFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IDtcLuRmEnlistmentFactory*, puclupair : UInt8*, cblupair : UInt32, pitransaction : ITransaction, ptransid : UInt8*, cbtransid : UInt32, prmenlistmentsink : IDtcLuRmEnlistmentSink, pprmenlistment : IDtcLuRmEnlistment*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, pitransaction, ptransid, cbtransid, prmenlistmentsink, pprmenlistment)
+  end
+end
+struct LibWin32::IDtcLuSubordinateDtc
+  def query_interface(this : IDtcLuSubordinateDtc*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuSubordinateDtc*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuSubordinateDtc*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def unplug(this : IDtcLuSubordinateDtc*, fconversationlost : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unplug.call(this, fconversationlost)
+  end
+  def backed_out(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
+  end
+  def back_out(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
+  end
+  def committed(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.committed.call(this)
+  end
+  def forget(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.forget.call(this)
+  end
+  def prepare(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.prepare.call(this)
+  end
+  def request_commit(this : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
+  end
+end
+struct LibWin32::IDtcLuSubordinateDtcSink
+  def query_interface(this : IDtcLuSubordinateDtcSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuSubordinateDtcSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuSubordinateDtcSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def ack_unplug(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.ack_unplug.call(this)
+  end
+  def tm_down(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.tm_down.call(this)
+  end
+  def session_lost(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.session_lost.call(this)
+  end
+  def backed_out(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.backed_out.call(this)
+  end
+  def back_out(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.back_out.call(this)
+  end
+  def committed(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.committed.call(this)
+  end
+  def forget(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.forget.call(this)
+  end
+  def request_commit(this : IDtcLuSubordinateDtcSink*) : HRESULT
+    @lpVtbl.value.request_commit.call(this)
+  end
+end
+struct LibWin32::IDtcLuSubordinateDtcFactory
+  def query_interface(this : IDtcLuSubordinateDtcFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDtcLuSubordinateDtcFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDtcLuSubordinateDtcFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IDtcLuSubordinateDtcFactory*, puclupair : UInt8*, cblupair : UInt32, punktransactionouter : IUnknown, isolevel : Int32, isoflags : UInt32, poptions : ITransactionOptions, pptransaction : ITransaction*, ptransid : UInt8*, cbtransid : UInt32, psubordinatedtcsink : IDtcLuSubordinateDtcSink, ppsubordinatedtc : IDtcLuSubordinateDtc*) : HRESULT
+    @lpVtbl.value.create.call(this, puclupair, cblupair, punktransactionouter, isolevel, isoflags, poptions, pptransaction, ptransid, cbtransid, psubordinatedtcsink, ppsubordinatedtc)
+  end
+end

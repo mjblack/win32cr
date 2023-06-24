@@ -209,3 +209,150 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IDedupReadFileCallback
+  def query_interface(this : IDedupReadFileCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupReadFileCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupReadFileCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def read_backup_file(this : IDedupReadFileCallback*, filefullpath : UInt8*, fileoffset : Int64, sizetoread : UInt32, filebuffer : UInt8*, returnedsize : UInt32*, flags : UInt32) : HRESULT
+    @lpVtbl.value.read_backup_file.call(this, filefullpath, fileoffset, sizetoread, filebuffer, returnedsize, flags)
+  end
+  def order_containers_restore(this : IDedupReadFileCallback*, numberofcontainers : UInt32, containerpaths : UInt8**, readplanentries : UInt32*, readplan : DEDUP_CONTAINER_EXTENT**) : HRESULT
+    @lpVtbl.value.order_containers_restore.call(this, numberofcontainers, containerpaths, readplanentries, readplan)
+  end
+  def preview_container_read(this : IDedupReadFileCallback*, filefullpath : UInt8*, numberofreads : UInt32, readoffsets : DDP_FILE_EXTENT*) : HRESULT
+    @lpVtbl.value.preview_container_read.call(this, filefullpath, numberofreads, readoffsets)
+  end
+end
+struct LibWin32::IDedupBackupSupport
+  def query_interface(this : IDedupBackupSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupBackupSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupBackupSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def restore_files(this : IDedupBackupSupport*, numberoffiles : UInt32, filefullpaths : UInt8**, store : IDedupReadFileCallback, flags : UInt32, fileresults : HRESULT*) : HRESULT
+    @lpVtbl.value.restore_files.call(this, numberoffiles, filefullpaths, store, flags, fileresults)
+  end
+end
+struct LibWin32::IDedupChunkLibrary
+  def query_interface(this : IDedupChunkLibrary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupChunkLibrary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupChunkLibrary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_for_push_buffers(this : IDedupChunkLibrary*) : HRESULT
+    @lpVtbl.value.initialize_for_push_buffers.call(this)
+  end
+  def uninitialize(this : IDedupChunkLibrary*) : HRESULT
+    @lpVtbl.value.uninitialize.call(this)
+  end
+  def set_parameter(this : IDedupChunkLibrary*, dwparamtype : UInt32, vparamvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_parameter.call(this, dwparamtype, vparamvalue)
+  end
+  def start_chunking(this : IDedupChunkLibrary*, iiditeratorinterfaceid : Guid, ppchunksenum : IUnknown*) : HRESULT
+    @lpVtbl.value.start_chunking.call(this, iiditeratorinterfaceid, ppchunksenum)
+  end
+end
+struct LibWin32::IDedupIterateChunksHash32
+  def query_interface(this : IDedupIterateChunksHash32*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupIterateChunksHash32*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupIterateChunksHash32*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def push_buffer(this : IDedupIterateChunksHash32*, pbuffer : UInt8*, ulbufferlength : UInt32) : HRESULT
+    @lpVtbl.value.push_buffer.call(this, pbuffer, ulbufferlength)
+  end
+  def next(this : IDedupIterateChunksHash32*, ulmaxchunks : UInt32, parrchunks : DEDUP_CHUNK_INFO_HASH32*, pulfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulmaxchunks, parrchunks, pulfetched)
+  end
+  def drain(this : IDedupIterateChunksHash32*) : HRESULT
+    @lpVtbl.value.drain.call(this)
+  end
+  def reset(this : IDedupIterateChunksHash32*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::IDedupDataPort
+  def query_interface(this : IDedupDataPort*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupDataPort*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupDataPort*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IDedupDataPort*, pstatus : DedupDataPortVolumeStatus*, pdataheadroommb : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus, pdataheadroommb)
+  end
+  def lookup_chunks(this : IDedupDataPort*, count : UInt32, phashes : DedupHash*, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.lookup_chunks.call(this, count, phashes, prequestid)
+  end
+  def insert_chunks(this : IDedupDataPort*, chunkcount : UInt32, pchunkmetadata : DedupChunk*, databytecount : UInt32, pchunkdata : UInt8*, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.insert_chunks.call(this, chunkcount, pchunkmetadata, databytecount, pchunkdata, prequestid)
+  end
+  def insert_chunks_with_stream(this : IDedupDataPort*, chunkcount : UInt32, pchunkmetadata : DedupChunk*, databytecount : UInt32, pchunkdatastream : IStream, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.insert_chunks_with_stream.call(this, chunkcount, pchunkmetadata, databytecount, pchunkdatastream, prequestid)
+  end
+  def commit_streams(this : IDedupDataPort*, streamcount : UInt32, pstreams : DedupStream*, entrycount : UInt32, pentries : DedupStreamEntry*, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.commit_streams.call(this, streamcount, pstreams, entrycount, pentries, prequestid)
+  end
+  def commit_streams_with_stream(this : IDedupDataPort*, streamcount : UInt32, pstreams : DedupStream*, entrycount : UInt32, pentriesstream : IStream, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.commit_streams_with_stream.call(this, streamcount, pstreams, entrycount, pentriesstream, prequestid)
+  end
+  def get_streams(this : IDedupDataPort*, streamcount : UInt32, pstreampaths : UInt8**, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.get_streams.call(this, streamcount, pstreampaths, prequestid)
+  end
+  def get_streams_results(this : IDedupDataPort*, requestid : Guid, maxwaitms : UInt32, streamentryindex : UInt32, pstreamcount : UInt32*, ppstreams : DedupStream**, pentrycount : UInt32*, ppentries : DedupStreamEntry**, pstatus : DedupDataPortRequestStatus*, ppitemresults : HRESULT**) : HRESULT
+    @lpVtbl.value.get_streams_results.call(this, requestid, maxwaitms, streamentryindex, pstreamcount, ppstreams, pentrycount, ppentries, pstatus, ppitemresults)
+  end
+  def get_chunks(this : IDedupDataPort*, count : UInt32, phashes : DedupHash*, prequestid : Guid*) : HRESULT
+    @lpVtbl.value.get_chunks.call(this, count, phashes, prequestid)
+  end
+  def get_chunks_results(this : IDedupDataPort*, requestid : Guid, maxwaitms : UInt32, chunkindex : UInt32, pchunkcount : UInt32*, ppchunkmetadata : DedupChunk**, pdatabytecount : UInt32*, ppchunkdata : UInt8**, pstatus : DedupDataPortRequestStatus*, ppitemresults : HRESULT**) : HRESULT
+    @lpVtbl.value.get_chunks_results.call(this, requestid, maxwaitms, chunkindex, pchunkcount, ppchunkmetadata, pdatabytecount, ppchunkdata, pstatus, ppitemresults)
+  end
+  def get_request_status(this : IDedupDataPort*, requestid : Guid, pstatus : DedupDataPortRequestStatus*) : HRESULT
+    @lpVtbl.value.get_request_status.call(this, requestid, pstatus)
+  end
+  def get_request_results(this : IDedupDataPort*, requestid : Guid, maxwaitms : UInt32, pbatchresult : HRESULT*, pbatchcount : UInt32*, pstatus : DedupDataPortRequestStatus*, ppitemresults : HRESULT**) : HRESULT
+    @lpVtbl.value.get_request_results.call(this, requestid, maxwaitms, pbatchresult, pbatchcount, pstatus, ppitemresults)
+  end
+end
+struct LibWin32::IDedupDataPortManager
+  def query_interface(this : IDedupDataPortManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDedupDataPortManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDedupDataPortManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_configuration(this : IDedupDataPortManager*, pminchunksize : UInt32*, pmaxchunksize : UInt32*, pchunkingalgorithm : DedupChunkingAlgorithm*, phashingalgorithm : DedupHashingAlgorithm*, pcompressionalgorithm : DedupCompressionAlgorithm*) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pminchunksize, pmaxchunksize, pchunkingalgorithm, phashingalgorithm, pcompressionalgorithm)
+  end
+  def get_volume_status(this : IDedupDataPortManager*, options : UInt32, path : UInt8*, pstatus : DedupDataPortVolumeStatus*) : HRESULT
+    @lpVtbl.value.get_volume_status.call(this, options, path, pstatus)
+  end
+  def get_volume_data_port(this : IDedupDataPortManager*, options : UInt32, path : UInt8*, ppdataport : IDedupDataPort*) : HRESULT
+    @lpVtbl.value.get_volume_data_port.call(this, options, path, ppdataport)
+  end
+end

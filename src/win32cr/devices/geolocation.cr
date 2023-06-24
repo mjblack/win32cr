@@ -942,3 +942,469 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ILocationReport
+  def query_interface(this : ILocationReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocationReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocationReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sensor_id(this : ILocationReport*, psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.call(this, psensorid)
+  end
+  def get_timestamp(this : ILocationReport*, pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
+  end
+  def get_value(this : ILocationReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pkey, pvalue)
+  end
+end
+struct LibWin32::ILatLongReport
+  def query_interface(this : ILatLongReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILatLongReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILatLongReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sensor_id(this : ILatLongReport*, psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.call(this, psensorid)
+  end
+  def get_timestamp(this : ILatLongReport*, pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
+  end
+  def get_value(this : ILatLongReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pkey, pvalue)
+  end
+  def get_latitude(this : ILatLongReport*, platitude : Float64*) : HRESULT
+    @lpVtbl.value.get_latitude.call(this, platitude)
+  end
+  def get_longitude(this : ILatLongReport*, plongitude : Float64*) : HRESULT
+    @lpVtbl.value.get_longitude.call(this, plongitude)
+  end
+  def get_error_radius(this : ILatLongReport*, perrorradius : Float64*) : HRESULT
+    @lpVtbl.value.get_error_radius.call(this, perrorradius)
+  end
+  def get_altitude(this : ILatLongReport*, paltitude : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude.call(this, paltitude)
+  end
+  def get_altitude_error(this : ILatLongReport*, paltitudeerror : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude_error.call(this, paltitudeerror)
+  end
+end
+struct LibWin32::ICivicAddressReport
+  def query_interface(this : ICivicAddressReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICivicAddressReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICivicAddressReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sensor_id(this : ICivicAddressReport*, psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.call(this, psensorid)
+  end
+  def get_timestamp(this : ICivicAddressReport*, pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
+  end
+  def get_value(this : ICivicAddressReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pkey, pvalue)
+  end
+  def get_address_line1(this : ICivicAddressReport*, pbstraddress1 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line1.call(this, pbstraddress1)
+  end
+  def get_address_line2(this : ICivicAddressReport*, pbstraddress2 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line2.call(this, pbstraddress2)
+  end
+  def get_city(this : ICivicAddressReport*, pbstrcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.call(this, pbstrcity)
+  end
+  def get_state_province(this : ICivicAddressReport*, pbstrstateprovince : UInt8**) : HRESULT
+    @lpVtbl.value.get_state_province.call(this, pbstrstateprovince)
+  end
+  def get_postal_code(this : ICivicAddressReport*, pbstrpostalcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_code.call(this, pbstrpostalcode)
+  end
+  def get_country_region(this : ICivicAddressReport*, pbstrcountryregion : UInt8**) : HRESULT
+    @lpVtbl.value.get_country_region.call(this, pbstrcountryregion)
+  end
+  def get_detail_level(this : ICivicAddressReport*, pdetaillevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_detail_level.call(this, pdetaillevel)
+  end
+end
+struct LibWin32::ILocation
+  def query_interface(this : ILocation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_for_report(this : ILocation*, pevents : ILocationEvents, reporttype : Guid*, dwrequestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.register_for_report.call(this, pevents, reporttype, dwrequestedreportinterval)
+  end
+  def unregister_for_report(this : ILocation*, reporttype : Guid*) : HRESULT
+    @lpVtbl.value.unregister_for_report.call(this, reporttype)
+  end
+  def get_report(this : ILocation*, reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
+    @lpVtbl.value.get_report.call(this, reporttype, pplocationreport)
+  end
+  def get_report_status(this : ILocation*, reporttype : Guid*, pstatus : LOCATION_REPORT_STATUS*) : HRESULT
+    @lpVtbl.value.get_report_status.call(this, reporttype, pstatus)
+  end
+  def get_report_interval(this : ILocation*, reporttype : Guid*, pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.call(this, reporttype, pmilliseconds)
+  end
+  def set_report_interval(this : ILocation*, reporttype : Guid*, millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.set_report_interval.call(this, reporttype, millisecondsrequested)
+  end
+  def get_desired_accuracy(this : ILocation*, reporttype : Guid*, pdesiredaccuracy : LOCATION_DESIRED_ACCURACY*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.call(this, reporttype, pdesiredaccuracy)
+  end
+  def set_desired_accuracy(this : ILocation*, reporttype : Guid*, desiredaccuracy : LOCATION_DESIRED_ACCURACY) : HRESULT
+    @lpVtbl.value.set_desired_accuracy.call(this, reporttype, desiredaccuracy)
+  end
+  def request_permissions(this : ILocation*, hparent : LibC::HANDLE, preporttypes : Guid*, count : UInt32, fmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.request_permissions.call(this, hparent, preporttypes, count, fmodal)
+  end
+end
+struct LibWin32::ILocationPower
+  def query_interface(this : ILocationPower*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocationPower*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocationPower*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect(this : ILocationPower*) : HRESULT
+    @lpVtbl.value.connect.call(this)
+  end
+  def disconnect(this : ILocationPower*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+end
+struct LibWin32::IDefaultLocation
+  def query_interface(this : IDefaultLocation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDefaultLocation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDefaultLocation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_report(this : IDefaultLocation*, reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
+    @lpVtbl.value.set_report.call(this, reporttype, plocationreport)
+  end
+  def get_report(this : IDefaultLocation*, reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
+    @lpVtbl.value.get_report.call(this, reporttype, pplocationreport)
+  end
+end
+struct LibWin32::ILocationEvents
+  def query_interface(this : ILocationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_location_changed(this : ILocationEvents*, reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
+    @lpVtbl.value.on_location_changed.call(this, reporttype, plocationreport)
+  end
+  def on_status_changed(this : ILocationEvents*, reporttype : Guid*, newstatus : LOCATION_REPORT_STATUS) : HRESULT
+    @lpVtbl.value.on_status_changed.call(this, reporttype, newstatus)
+  end
+end
+struct LibWin32::IDispLatLongReport
+  def query_interface(this : IDispLatLongReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDispLatLongReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDispLatLongReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDispLatLongReport*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDispLatLongReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDispLatLongReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDispLatLongReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_latitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_latitude.call(this, pval)
+  end
+  def get_longitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_longitude.call(this, pval)
+  end
+  def get_error_radius(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_error_radius.call(this, pval)
+  end
+  def get_altitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude.call(this, pval)
+  end
+  def get_altitude_error(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude_error.call(this, pval)
+  end
+  def get_timestamp(this : IDispLatLongReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, pval)
+  end
+end
+struct LibWin32::IDispCivicAddressReport
+  def query_interface(this : IDispCivicAddressReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDispCivicAddressReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDispCivicAddressReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDispCivicAddressReport*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDispCivicAddressReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDispCivicAddressReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDispCivicAddressReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address_line1(this : IDispCivicAddressReport*, paddress1 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line1.call(this, paddress1)
+  end
+  def get_address_line2(this : IDispCivicAddressReport*, paddress2 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line2.call(this, paddress2)
+  end
+  def get_city(this : IDispCivicAddressReport*, pcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.call(this, pcity)
+  end
+  def get_state_province(this : IDispCivicAddressReport*, pstateprovince : UInt8**) : HRESULT
+    @lpVtbl.value.get_state_province.call(this, pstateprovince)
+  end
+  def get_postal_code(this : IDispCivicAddressReport*, ppostalcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_code.call(this, ppostalcode)
+  end
+  def get_country_region(this : IDispCivicAddressReport*, pcountryregion : UInt8**) : HRESULT
+    @lpVtbl.value.get_country_region.call(this, pcountryregion)
+  end
+  def get_detail_level(this : IDispCivicAddressReport*, pdetaillevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_detail_level.call(this, pdetaillevel)
+  end
+  def get_timestamp(this : IDispCivicAddressReport*, pval : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, pval)
+  end
+end
+struct LibWin32::ILocationReportFactory
+  def query_interface(this : ILocationReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocationReportFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocationReportFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ILocationReportFactory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ILocationReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ILocationReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ILocationReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(this : ILocationReportFactory*, requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
+  end
+  def stop_listening_for_reports(this : ILocationReportFactory*) : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.call(this)
+  end
+  def get_status(this : ILocationReportFactory*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pval)
+  end
+  def get_report_interval(this : ILocationReportFactory*, pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
+  end
+  def put_report_interval(this : ILocationReportFactory*, millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
+  end
+  def get_desired_accuracy(this : ILocationReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
+  end
+  def put_desired_accuracy(this : ILocationReportFactory*, desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
+  end
+  def request_permissions(this : ILocationReportFactory*, hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.call(this, hwnd)
+  end
+end
+struct LibWin32::ILatLongReportFactory
+  def query_interface(this : ILatLongReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILatLongReportFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILatLongReportFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ILatLongReportFactory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ILatLongReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ILatLongReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ILatLongReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(this : ILatLongReportFactory*, requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
+  end
+  def stop_listening_for_reports(this : ILatLongReportFactory*) : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.call(this)
+  end
+  def get_status(this : ILatLongReportFactory*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pval)
+  end
+  def get_report_interval(this : ILatLongReportFactory*, pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
+  end
+  def put_report_interval(this : ILatLongReportFactory*, millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
+  end
+  def get_desired_accuracy(this : ILatLongReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
+  end
+  def put_desired_accuracy(this : ILatLongReportFactory*, desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
+  end
+  def request_permissions(this : ILatLongReportFactory*, hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.call(this, hwnd)
+  end
+  def get_lat_long_report(this : ILatLongReportFactory*, pval : IDispLatLongReport*) : HRESULT
+    @lpVtbl.value.get_lat_long_report.call(this, pval)
+  end
+end
+struct LibWin32::ICivicAddressReportFactory
+  def query_interface(this : ICivicAddressReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICivicAddressReportFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICivicAddressReportFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICivicAddressReportFactory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICivicAddressReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICivicAddressReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICivicAddressReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(this : ICivicAddressReportFactory*, requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
+  end
+  def stop_listening_for_reports(this : ICivicAddressReportFactory*) : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.call(this)
+  end
+  def get_status(this : ICivicAddressReportFactory*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pval)
+  end
+  def get_report_interval(this : ICivicAddressReportFactory*, pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
+  end
+  def put_report_interval(this : ICivicAddressReportFactory*, millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
+  end
+  def get_desired_accuracy(this : ICivicAddressReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
+  end
+  def put_desired_accuracy(this : ICivicAddressReportFactory*, desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
+  end
+  def request_permissions(this : ICivicAddressReportFactory*, hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.call(this, hwnd)
+  end
+  def get_civic_address_report(this : ICivicAddressReportFactory*, pval : IDispCivicAddressReport*) : HRESULT
+    @lpVtbl.value.get_civic_address_report.call(this, pval)
+  end
+end
+struct LibWin32::IILatLongReportFactoryEvents
+  def query_interface(this : IILatLongReportFactoryEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IILatLongReportFactoryEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IILatLongReportFactoryEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IILatLongReportFactoryEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IILatLongReportFactoryEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IILatLongReportFactoryEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IILatLongReportFactoryEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IICivicAddressReportFactoryEvents
+  def query_interface(this : IICivicAddressReportFactoryEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IICivicAddressReportFactoryEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IICivicAddressReportFactoryEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IICivicAddressReportFactoryEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IICivicAddressReportFactoryEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IICivicAddressReportFactoryEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IICivicAddressReportFactoryEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end

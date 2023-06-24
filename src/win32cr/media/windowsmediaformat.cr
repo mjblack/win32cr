@@ -3272,3 +3272,4267 @@ lib LibWin32
   # Params # ppsink : IWMWriterPushSink* [In]
   fun WMCreateWriterPushSink(ppsink : IWMWriterPushSink*) : HRESULT
 end
+struct LibWin32::IAMWMBufferPass
+  def query_interface(this : IAMWMBufferPass*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAMWMBufferPass*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAMWMBufferPass*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_notify(this : IAMWMBufferPass*, pcallback : IAMWMBufferPassCallback) : HRESULT
+    @lpVtbl.value.set_notify.call(this, pcallback)
+  end
+end
+struct LibWin32::IAMWMBufferPassCallback
+  def query_interface(this : IAMWMBufferPassCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAMWMBufferPassCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAMWMBufferPassCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def notify(this : IAMWMBufferPassCallback*, pnssbuffer3 : INSSBuffer3, ppin : IPin, prtstart : Int64*, prtend : Int64*) : HRESULT
+    @lpVtbl.value.notify.call(this, pnssbuffer3, ppin, prtstart, prtend)
+  end
+end
+struct LibWin32::INSSBuffer
+  def query_interface(this : INSSBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INSSBuffer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INSSBuffer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : INSSBuffer*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pdwlength)
+  end
+  def set_length(this : INSSBuffer*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_length.call(this, dwlength)
+  end
+  def get_max_length(this : INSSBuffer*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pdwlength)
+  end
+  def get_buffer(this : INSSBuffer*, ppdwbuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, ppdwbuffer)
+  end
+  def get_buffer_and_length(this : INSSBuffer*, ppdwbuffer : UInt8**, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_and_length.call(this, ppdwbuffer, pdwlength)
+  end
+end
+struct LibWin32::INSSBuffer2
+  def query_interface(this : INSSBuffer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INSSBuffer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INSSBuffer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : INSSBuffer2*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pdwlength)
+  end
+  def set_length(this : INSSBuffer2*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_length.call(this, dwlength)
+  end
+  def get_max_length(this : INSSBuffer2*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pdwlength)
+  end
+  def get_buffer(this : INSSBuffer2*, ppdwbuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, ppdwbuffer)
+  end
+  def get_buffer_and_length(this : INSSBuffer2*, ppdwbuffer : UInt8**, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_and_length.call(this, ppdwbuffer, pdwlength)
+  end
+  def get_sample_properties(this : INSSBuffer2*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.get_sample_properties.call(this, cbproperties, pbproperties)
+  end
+  def set_sample_properties(this : INSSBuffer2*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.set_sample_properties.call(this, cbproperties, pbproperties)
+  end
+end
+struct LibWin32::INSSBuffer3
+  def query_interface(this : INSSBuffer3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INSSBuffer3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INSSBuffer3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : INSSBuffer3*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pdwlength)
+  end
+  def set_length(this : INSSBuffer3*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_length.call(this, dwlength)
+  end
+  def get_max_length(this : INSSBuffer3*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pdwlength)
+  end
+  def get_buffer(this : INSSBuffer3*, ppdwbuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, ppdwbuffer)
+  end
+  def get_buffer_and_length(this : INSSBuffer3*, ppdwbuffer : UInt8**, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_and_length.call(this, ppdwbuffer, pdwlength)
+  end
+  def get_sample_properties(this : INSSBuffer3*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.get_sample_properties.call(this, cbproperties, pbproperties)
+  end
+  def set_sample_properties(this : INSSBuffer3*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.set_sample_properties.call(this, cbproperties, pbproperties)
+  end
+  def set_property(this : INSSBuffer3*, guidbufferproperty : Guid, pvbufferproperty : Void*, dwbufferpropertysize : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, guidbufferproperty, pvbufferproperty, dwbufferpropertysize)
+  end
+  def get_property(this : INSSBuffer3*, guidbufferproperty : Guid, pvbufferproperty : Void*, pdwbufferpropertysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, guidbufferproperty, pvbufferproperty, pdwbufferpropertysize)
+  end
+end
+struct LibWin32::INSSBuffer4
+  def query_interface(this : INSSBuffer4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INSSBuffer4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INSSBuffer4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_length(this : INSSBuffer4*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pdwlength)
+  end
+  def set_length(this : INSSBuffer4*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_length.call(this, dwlength)
+  end
+  def get_max_length(this : INSSBuffer4*, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pdwlength)
+  end
+  def get_buffer(this : INSSBuffer4*, ppdwbuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, ppdwbuffer)
+  end
+  def get_buffer_and_length(this : INSSBuffer4*, ppdwbuffer : UInt8**, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_and_length.call(this, ppdwbuffer, pdwlength)
+  end
+  def get_sample_properties(this : INSSBuffer4*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.get_sample_properties.call(this, cbproperties, pbproperties)
+  end
+  def set_sample_properties(this : INSSBuffer4*, cbproperties : UInt32, pbproperties : UInt8*) : HRESULT
+    @lpVtbl.value.set_sample_properties.call(this, cbproperties, pbproperties)
+  end
+  def set_property(this : INSSBuffer4*, guidbufferproperty : Guid, pvbufferproperty : Void*, dwbufferpropertysize : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, guidbufferproperty, pvbufferproperty, dwbufferpropertysize)
+  end
+  def get_property(this : INSSBuffer4*, guidbufferproperty : Guid, pvbufferproperty : Void*, pdwbufferpropertysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, guidbufferproperty, pvbufferproperty, pdwbufferpropertysize)
+  end
+  def get_property_count(this : INSSBuffer4*, pcbufferproperties : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_count.call(this, pcbufferproperties)
+  end
+  def get_property_by_index(this : INSSBuffer4*, dwbufferpropertyindex : UInt32, pguidbufferproperty : Guid*, pvbufferproperty : Void*, pdwbufferpropertysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_by_index.call(this, dwbufferpropertyindex, pguidbufferproperty, pvbufferproperty, pdwbufferpropertysize)
+  end
+end
+struct LibWin32::IWMSBufferAllocator
+  def query_interface(this : IWMSBufferAllocator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSBufferAllocator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSBufferAllocator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def allocate_buffer(this : IWMSBufferAllocator*, dwmaxbuffersize : UInt32, ppbuffer : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_buffer.call(this, dwmaxbuffersize, ppbuffer)
+  end
+  def allocate_page_size_buffer(this : IWMSBufferAllocator*, dwmaxbuffersize : UInt32, ppbuffer : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_page_size_buffer.call(this, dwmaxbuffersize, ppbuffer)
+  end
+end
+struct LibWin32::IWMMediaProps
+  def query_interface(this : IWMMediaProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMMediaProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMMediaProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IWMMediaProps*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def get_media_type(this : IWMMediaProps*, ptype : WM_MEDIA_TYPE*, pcbtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, ptype, pcbtype)
+  end
+  def set_media_type(this : IWMMediaProps*, ptype : WM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, ptype)
+  end
+end
+struct LibWin32::IWMVideoMediaProps
+  def query_interface(this : IWMVideoMediaProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMVideoMediaProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMVideoMediaProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IWMVideoMediaProps*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def get_media_type(this : IWMVideoMediaProps*, ptype : WM_MEDIA_TYPE*, pcbtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, ptype, pcbtype)
+  end
+  def set_media_type(this : IWMVideoMediaProps*, ptype : WM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, ptype)
+  end
+  def get_max_key_frame_spacing(this : IWMVideoMediaProps*, plltime : Int64*) : HRESULT
+    @lpVtbl.value.get_max_key_frame_spacing.call(this, plltime)
+  end
+  def set_max_key_frame_spacing(this : IWMVideoMediaProps*, lltime : Int64) : HRESULT
+    @lpVtbl.value.set_max_key_frame_spacing.call(this, lltime)
+  end
+  def get_quality(this : IWMVideoMediaProps*, pdwquality : UInt32*) : HRESULT
+    @lpVtbl.value.get_quality.call(this, pdwquality)
+  end
+  def set_quality(this : IWMVideoMediaProps*, dwquality : UInt32) : HRESULT
+    @lpVtbl.value.set_quality.call(this, dwquality)
+  end
+end
+struct LibWin32::IWMWriter
+  def query_interface(this : IWMWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_profile_by_id(this : IWMWriter*, guidprofile : Guid*) : HRESULT
+    @lpVtbl.value.set_profile_by_id.call(this, guidprofile)
+  end
+  def set_profile(this : IWMWriter*, pprofile : IWMProfile) : HRESULT
+    @lpVtbl.value.set_profile.call(this, pprofile)
+  end
+  def set_output_filename(this : IWMWriter*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_filename.call(this, pwszfilename)
+  end
+  def get_input_count(this : IWMWriter*, pcinputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_count.call(this, pcinputs)
+  end
+  def get_input_props(this : IWMWriter*, dwinputnum : UInt32, ppinput : IWMInputMediaProps*) : HRESULT
+    @lpVtbl.value.get_input_props.call(this, dwinputnum, ppinput)
+  end
+  def set_input_props(this : IWMWriter*, dwinputnum : UInt32, pinput : IWMInputMediaProps) : HRESULT
+    @lpVtbl.value.set_input_props.call(this, dwinputnum, pinput)
+  end
+  def get_input_format_count(this : IWMWriter*, dwinputnumber : UInt32, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_format_count.call(this, dwinputnumber, pcformats)
+  end
+  def get_input_format(this : IWMWriter*, dwinputnumber : UInt32, dwformatnumber : UInt32, pprops : IWMInputMediaProps*) : HRESULT
+    @lpVtbl.value.get_input_format.call(this, dwinputnumber, dwformatnumber, pprops)
+  end
+  def begin_writing(this : IWMWriter*) : HRESULT
+    @lpVtbl.value.begin_writing.call(this)
+  end
+  def end_writing(this : IWMWriter*) : HRESULT
+    @lpVtbl.value.end_writing.call(this)
+  end
+  def allocate_sample(this : IWMWriter*, dwsamplesize : UInt32, ppsample : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_sample.call(this, dwsamplesize, ppsample)
+  end
+  def write_sample(this : IWMWriter*, dwinputnum : UInt32, cnssampletime : UInt64, dwflags : UInt32, psample : INSSBuffer) : HRESULT
+    @lpVtbl.value.write_sample.call(this, dwinputnum, cnssampletime, dwflags, psample)
+  end
+  def flush(this : IWMWriter*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end
+struct LibWin32::IWMDRMWriter
+  def query_interface(this : IWMDRMWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def generate_key_seed(this : IWMDRMWriter*, pwszkeyseed : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_seed.call(this, pwszkeyseed, pcwchlength)
+  end
+  def generate_key_id(this : IWMDRMWriter*, pwszkeyid : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_id.call(this, pwszkeyid, pcwchlength)
+  end
+  def generate_signing_key_pair(this : IWMDRMWriter*, pwszprivkey : Char*, pcwchprivkeylength : UInt32*, pwszpubkey : Char*, pcwchpubkeylength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_signing_key_pair.call(this, pwszprivkey, pcwchprivkeylength, pwszpubkey, pcwchpubkeylength)
+  end
+  def set_drm_attribute(this : IWMDRMWriter*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+end
+struct LibWin32::IWMDRMWriter2
+  def query_interface(this : IWMDRMWriter2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMWriter2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMWriter2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def generate_key_seed(this : IWMDRMWriter2*, pwszkeyseed : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_seed.call(this, pwszkeyseed, pcwchlength)
+  end
+  def generate_key_id(this : IWMDRMWriter2*, pwszkeyid : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_id.call(this, pwszkeyid, pcwchlength)
+  end
+  def generate_signing_key_pair(this : IWMDRMWriter2*, pwszprivkey : Char*, pcwchprivkeylength : UInt32*, pwszpubkey : Char*, pcwchpubkeylength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_signing_key_pair.call(this, pwszprivkey, pcwchprivkeylength, pwszpubkey, pcwchpubkeylength)
+  end
+  def set_drm_attribute(this : IWMDRMWriter2*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+  def set_wmdrm_net_encryption(this : IWMDRMWriter2*, fsamplesencrypted : LibC::BOOL, pbkeyid : UInt8*, cbkeyid : UInt32) : HRESULT
+    @lpVtbl.value.set_wmdrm_net_encryption.call(this, fsamplesencrypted, pbkeyid, cbkeyid)
+  end
+end
+struct LibWin32::IWMDRMWriter3
+  def query_interface(this : IWMDRMWriter3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMWriter3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMWriter3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def generate_key_seed(this : IWMDRMWriter3*, pwszkeyseed : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_seed.call(this, pwszkeyseed, pcwchlength)
+  end
+  def generate_key_id(this : IWMDRMWriter3*, pwszkeyid : Char*, pcwchlength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_key_id.call(this, pwszkeyid, pcwchlength)
+  end
+  def generate_signing_key_pair(this : IWMDRMWriter3*, pwszprivkey : Char*, pcwchprivkeylength : UInt32*, pwszpubkey : Char*, pcwchpubkeylength : UInt32*) : HRESULT
+    @lpVtbl.value.generate_signing_key_pair.call(this, pwszprivkey, pcwchprivkeylength, pwszpubkey, pcwchpubkeylength)
+  end
+  def set_drm_attribute(this : IWMDRMWriter3*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+  def set_wmdrm_net_encryption(this : IWMDRMWriter3*, fsamplesencrypted : LibC::BOOL, pbkeyid : UInt8*, cbkeyid : UInt32) : HRESULT
+    @lpVtbl.value.set_wmdrm_net_encryption.call(this, fsamplesencrypted, pbkeyid, cbkeyid)
+  end
+  def set_protect_stream_samples(this : IWMDRMWriter3*, pimportinitstruct : WMDRM_IMPORT_INIT_STRUCT*) : HRESULT
+    @lpVtbl.value.set_protect_stream_samples.call(this, pimportinitstruct)
+  end
+end
+struct LibWin32::IWMInputMediaProps
+  def query_interface(this : IWMInputMediaProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMInputMediaProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMInputMediaProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IWMInputMediaProps*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def get_media_type(this : IWMInputMediaProps*, ptype : WM_MEDIA_TYPE*, pcbtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, ptype, pcbtype)
+  end
+  def set_media_type(this : IWMInputMediaProps*, ptype : WM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, ptype)
+  end
+  def get_connection_name(this : IWMInputMediaProps*, pwszname : Char*, pcchname : UInt16*) : HRESULT
+    @lpVtbl.value.get_connection_name.call(this, pwszname, pcchname)
+  end
+  def get_group_name(this : IWMInputMediaProps*, pwszname : Char*, pcchname : UInt16*) : HRESULT
+    @lpVtbl.value.get_group_name.call(this, pwszname, pcchname)
+  end
+end
+struct LibWin32::IWMPropertyVault
+  def query_interface(this : IWMPropertyVault*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMPropertyVault*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMPropertyVault*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_count(this : IWMPropertyVault*, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_count.call(this, pdwcount)
+  end
+  def get_property_by_name(this : IWMPropertyVault*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_by_name.call(this, pszname, ptype, pvalue, pdwsize)
+  end
+  def set_property(this : IWMPropertyVault*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE, pvalue : UInt8*, dwsize : UInt32) : HRESULT
+    @lpVtbl.value.set_property.call(this, pszname, ptype, pvalue, dwsize)
+  end
+  def get_property_by_index(this : IWMPropertyVault*, dwindex : UInt32, pszname : Char*, pdwnamelen : UInt32*, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_by_index.call(this, dwindex, pszname, pdwnamelen, ptype, pvalue, pdwsize)
+  end
+  def copy_properties_from(this : IWMPropertyVault*, piwmpropertyvault : IWMPropertyVault) : HRESULT
+    @lpVtbl.value.copy_properties_from.call(this, piwmpropertyvault)
+  end
+  def clear(this : IWMPropertyVault*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IWMIStreamProps
+  def query_interface(this : IWMIStreamProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMIStreamProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMIStreamProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property(this : IWMIStreamProps*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, pszname, ptype, pvalue, pdwsize)
+  end
+end
+struct LibWin32::IWMReader
+  def query_interface(this : IWMReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IWMReader*, pwszurl : LibC::LPWSTR, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open.call(this, pwszurl, pcallback, pvcontext)
+  end
+  def close(this : IWMReader*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_output_count(this : IWMReader*, pcoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_count.call(this, pcoutputs)
+  end
+  def get_output_props(this : IWMReader*, dwoutputnum : UInt32, ppoutput : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_props.call(this, dwoutputnum, ppoutput)
+  end
+  def set_output_props(this : IWMReader*, dwoutputnum : UInt32, poutput : IWMOutputMediaProps) : HRESULT
+    @lpVtbl.value.set_output_props.call(this, dwoutputnum, poutput)
+  end
+  def get_output_format_count(this : IWMReader*, dwoutputnumber : UInt32, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_format_count.call(this, dwoutputnumber, pcformats)
+  end
+  def get_output_format(this : IWMReader*, dwoutputnumber : UInt32, dwformatnumber : UInt32, ppprops : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_format.call(this, dwoutputnumber, dwformatnumber, ppprops)
+  end
+  def start(this : IWMReader*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start.call(this, cnsstart, cnsduration, frate, pvcontext)
+  end
+  def stop(this : IWMReader*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def pause(this : IWMReader*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IWMReader*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+end
+struct LibWin32::IWMSyncReader
+  def query_interface(this : IWMSyncReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSyncReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSyncReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IWMSyncReader*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def close(this : IWMSyncReader*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def set_range(this : IWMSyncReader*, cnsstarttime : UInt64, cnsduration : Int64) : HRESULT
+    @lpVtbl.value.set_range.call(this, cnsstarttime, cnsduration)
+  end
+  def set_range_by_frame(this : IWMSyncReader*, wstreamnum : UInt16, qwframenumber : UInt64, cframestoread : Int64) : HRESULT
+    @lpVtbl.value.set_range_by_frame.call(this, wstreamnum, qwframenumber, cframestoread)
+  end
+  def get_next_sample(this : IWMSyncReader*, wstreamnum : UInt16, ppsample : INSSBuffer*, pcnssampletime : UInt64*, pcnsduration : UInt64*, pdwflags : UInt32*, pdwoutputnum : UInt32*, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_next_sample.call(this, wstreamnum, ppsample, pcnssampletime, pcnsduration, pdwflags, pdwoutputnum, pwstreamnum)
+  end
+  def set_streams_selected(this : IWMSyncReader*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMSyncReader*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_read_stream_samples(this : IWMSyncReader*, wstreamnum : UInt16, fcompressed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_read_stream_samples.call(this, wstreamnum, fcompressed)
+  end
+  def get_read_stream_samples(this : IWMSyncReader*, wstreamnum : UInt16, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_read_stream_samples.call(this, wstreamnum, pfcompressed)
+  end
+  def get_output_setting(this : IWMSyncReader*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMSyncReader*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def get_output_count(this : IWMSyncReader*, pcoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_count.call(this, pcoutputs)
+  end
+  def get_output_props(this : IWMSyncReader*, dwoutputnum : UInt32, ppoutput : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_props.call(this, dwoutputnum, ppoutput)
+  end
+  def set_output_props(this : IWMSyncReader*, dwoutputnum : UInt32, poutput : IWMOutputMediaProps) : HRESULT
+    @lpVtbl.value.set_output_props.call(this, dwoutputnum, poutput)
+  end
+  def get_output_format_count(this : IWMSyncReader*, dwoutputnum : UInt32, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_format_count.call(this, dwoutputnum, pcformats)
+  end
+  def get_output_format(this : IWMSyncReader*, dwoutputnum : UInt32, dwformatnum : UInt32, ppprops : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_format.call(this, dwoutputnum, dwformatnum, ppprops)
+  end
+  def get_output_number_for_stream(this : IWMSyncReader*, wstreamnum : UInt16, pdwoutputnum : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_number_for_stream.call(this, wstreamnum, pdwoutputnum)
+  end
+  def get_stream_number_for_output(this : IWMSyncReader*, dwoutputnum : UInt32, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_number_for_output.call(this, dwoutputnum, pwstreamnum)
+  end
+  def get_max_output_sample_size(this : IWMSyncReader*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMSyncReader*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def open_stream(this : IWMSyncReader*, pstream : IStream) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream)
+  end
+end
+struct LibWin32::IWMSyncReader2
+  def query_interface(this : IWMSyncReader2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSyncReader2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSyncReader2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IWMSyncReader2*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def close(this : IWMSyncReader2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def set_range(this : IWMSyncReader2*, cnsstarttime : UInt64, cnsduration : Int64) : HRESULT
+    @lpVtbl.value.set_range.call(this, cnsstarttime, cnsduration)
+  end
+  def set_range_by_frame(this : IWMSyncReader2*, wstreamnum : UInt16, qwframenumber : UInt64, cframestoread : Int64) : HRESULT
+    @lpVtbl.value.set_range_by_frame.call(this, wstreamnum, qwframenumber, cframestoread)
+  end
+  def get_next_sample(this : IWMSyncReader2*, wstreamnum : UInt16, ppsample : INSSBuffer*, pcnssampletime : UInt64*, pcnsduration : UInt64*, pdwflags : UInt32*, pdwoutputnum : UInt32*, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_next_sample.call(this, wstreamnum, ppsample, pcnssampletime, pcnsduration, pdwflags, pdwoutputnum, pwstreamnum)
+  end
+  def set_streams_selected(this : IWMSyncReader2*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMSyncReader2*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_read_stream_samples(this : IWMSyncReader2*, wstreamnum : UInt16, fcompressed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_read_stream_samples.call(this, wstreamnum, fcompressed)
+  end
+  def get_read_stream_samples(this : IWMSyncReader2*, wstreamnum : UInt16, pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_read_stream_samples.call(this, wstreamnum, pfcompressed)
+  end
+  def get_output_setting(this : IWMSyncReader2*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMSyncReader2*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def get_output_count(this : IWMSyncReader2*, pcoutputs : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_count.call(this, pcoutputs)
+  end
+  def get_output_props(this : IWMSyncReader2*, dwoutputnum : UInt32, ppoutput : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_props.call(this, dwoutputnum, ppoutput)
+  end
+  def set_output_props(this : IWMSyncReader2*, dwoutputnum : UInt32, poutput : IWMOutputMediaProps) : HRESULT
+    @lpVtbl.value.set_output_props.call(this, dwoutputnum, poutput)
+  end
+  def get_output_format_count(this : IWMSyncReader2*, dwoutputnum : UInt32, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_format_count.call(this, dwoutputnum, pcformats)
+  end
+  def get_output_format(this : IWMSyncReader2*, dwoutputnum : UInt32, dwformatnum : UInt32, ppprops : IWMOutputMediaProps*) : HRESULT
+    @lpVtbl.value.get_output_format.call(this, dwoutputnum, dwformatnum, ppprops)
+  end
+  def get_output_number_for_stream(this : IWMSyncReader2*, wstreamnum : UInt16, pdwoutputnum : UInt32*) : HRESULT
+    @lpVtbl.value.get_output_number_for_stream.call(this, wstreamnum, pdwoutputnum)
+  end
+  def get_stream_number_for_output(this : IWMSyncReader2*, dwoutputnum : UInt32, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_number_for_output.call(this, dwoutputnum, pwstreamnum)
+  end
+  def get_max_output_sample_size(this : IWMSyncReader2*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMSyncReader2*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def open_stream(this : IWMSyncReader2*, pstream : IStream) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream)
+  end
+  def set_range_by_timecode(this : IWMSyncReader2*, wstreamnum : UInt16, pstart : WMT_TIMECODE_EXTENSION_DATA*, pend : WMT_TIMECODE_EXTENSION_DATA*) : HRESULT
+    @lpVtbl.value.set_range_by_timecode.call(this, wstreamnum, pstart, pend)
+  end
+  def set_range_by_frame_ex(this : IWMSyncReader2*, wstreamnum : UInt16, qwframenumber : UInt64, cframestoread : Int64, pcnsstarttime : UInt64*) : HRESULT
+    @lpVtbl.value.set_range_by_frame_ex.call(this, wstreamnum, qwframenumber, cframestoread, pcnsstarttime)
+  end
+  def set_allocate_for_output(this : IWMSyncReader2*, dwoutputnum : UInt32, pallocator : IWMReaderAllocatorEx) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, pallocator)
+  end
+  def get_allocate_for_output(this : IWMSyncReader2*, dwoutputnum : UInt32, ppallocator : IWMReaderAllocatorEx*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, ppallocator)
+  end
+  def set_allocate_for_stream(this : IWMSyncReader2*, wstreamnum : UInt16, pallocator : IWMReaderAllocatorEx) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, pallocator)
+  end
+  def get_allocate_for_stream(this : IWMSyncReader2*, dwsreamnum : UInt16, ppallocator : IWMReaderAllocatorEx*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, ppallocator)
+  end
+end
+struct LibWin32::IWMOutputMediaProps
+  def query_interface(this : IWMOutputMediaProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMOutputMediaProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMOutputMediaProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type(this : IWMOutputMediaProps*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def get_media_type(this : IWMOutputMediaProps*, ptype : WM_MEDIA_TYPE*, pcbtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, ptype, pcbtype)
+  end
+  def set_media_type(this : IWMOutputMediaProps*, ptype : WM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.set_media_type.call(this, ptype)
+  end
+  def get_stream_group_name(this : IWMOutputMediaProps*, pwszname : Char*, pcchname : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_group_name.call(this, pwszname, pcchname)
+  end
+  def get_connection_name(this : IWMOutputMediaProps*, pwszname : Char*, pcchname : UInt16*) : HRESULT
+    @lpVtbl.value.get_connection_name.call(this, pwszname, pcchname)
+  end
+end
+struct LibWin32::IWMStatusCallback
+  def query_interface(this : IWMStatusCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStatusCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStatusCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status(this : IWMStatusCallback*, status : WMT_STATUS, hr : HRESULT, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_status.call(this, status, hr, dwtype, pvalue, pvcontext)
+  end
+end
+struct LibWin32::IWMReaderCallback
+  def query_interface(this : IWMReaderCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status(this : IWMReaderCallback*, status : WMT_STATUS, hr : HRESULT, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_status.call(this, status, hr, dwtype, pvalue, pvcontext)
+  end
+  def on_sample(this : IWMReaderCallback*, dwoutputnum : UInt32, cnssampletime : UInt64, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_sample.call(this, dwoutputnum, cnssampletime, cnssampleduration, dwflags, psample, pvcontext)
+  end
+end
+struct LibWin32::IWMCredentialCallback
+  def query_interface(this : IWMCredentialCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCredentialCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCredentialCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_credentials(this : IWMCredentialCallback*, pwszrealm : LibC::LPWSTR, pwszsite : LibC::LPWSTR, pwszuser : Char*, cchuser : UInt32, pwszpassword : Char*, cchpassword : UInt32, hrstatus : HRESULT, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.acquire_credentials.call(this, pwszrealm, pwszsite, pwszuser, cchuser, pwszpassword, cchpassword, hrstatus, pdwflags)
+  end
+end
+struct LibWin32::IWMMetadataEditor
+  def query_interface(this : IWMMetadataEditor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMMetadataEditor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMMetadataEditor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IWMMetadataEditor*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def close(this : IWMMetadataEditor*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def flush(this : IWMMetadataEditor*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end
+struct LibWin32::IWMMetadataEditor2
+  def query_interface(this : IWMMetadataEditor2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMMetadataEditor2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMMetadataEditor2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IWMMetadataEditor2*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def close(this : IWMMetadataEditor2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def flush(this : IWMMetadataEditor2*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+  def open_ex(this : IWMMetadataEditor2*, pwszfilename : LibC::LPWSTR, dwdesiredaccess : UInt32, dwsharemode : UInt32) : HRESULT
+    @lpVtbl.value.open_ex.call(this, pwszfilename, dwdesiredaccess, dwsharemode)
+  end
+end
+struct LibWin32::IWMDRMEditor
+  def query_interface(this : IWMDRMEditor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMEditor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMEditor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_drm_property(this : IWMDRMEditor*, pwstrname : LibC::LPWSTR, pdwtype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_drm_property.call(this, pwstrname, pdwtype, pvalue, pcblength)
+  end
+end
+struct LibWin32::IWMHeaderInfo
+  def query_interface(this : IWMHeaderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMHeaderInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMHeaderInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attribute_count(this : IWMHeaderInfo*, wstreamnum : UInt16, pcattributes : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, wstreamnum, pcattributes)
+  end
+  def get_attribute_by_index(this : IWMHeaderInfo*, windex : UInt16, pwstreamnum : UInt16*, pwszname : Char*, pcchnamelen : UInt16*, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_index.call(this, windex, pwstreamnum, pwszname, pcchnamelen, ptype, pvalue, pcblength)
+  end
+  def get_attribute_by_name(this : IWMHeaderInfo*, pwstreamnum : UInt16*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_name.call(this, pwstreamnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_attribute(this : IWMHeaderInfo*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+  def get_marker_count(this : IWMHeaderInfo*, pcmarkers : UInt16*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pcmarkers)
+  end
+  def get_marker(this : IWMHeaderInfo*, windex : UInt16, pwszmarkername : Char*, pcchmarkernamelen : UInt16*, pcnsmarkertime : UInt64*) : HRESULT
+    @lpVtbl.value.get_marker.call(this, windex, pwszmarkername, pcchmarkernamelen, pcnsmarkertime)
+  end
+  def add_marker(this : IWMHeaderInfo*, pwszmarkername : LibC::LPWSTR, cnsmarkertime : UInt64) : HRESULT
+    @lpVtbl.value.add_marker.call(this, pwszmarkername, cnsmarkertime)
+  end
+  def remove_marker(this : IWMHeaderInfo*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_marker.call(this, windex)
+  end
+  def get_script_count(this : IWMHeaderInfo*, pcscripts : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_count.call(this, pcscripts)
+  end
+  def get_script(this : IWMHeaderInfo*, windex : UInt16, pwsztype : Char*, pcchtypelen : UInt16*, pwszcommand : Char*, pcchcommandlen : UInt16*, pcnsscripttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_script.call(this, windex, pwsztype, pcchtypelen, pwszcommand, pcchcommandlen, pcnsscripttime)
+  end
+  def add_script(this : IWMHeaderInfo*, pwsztype : LibC::LPWSTR, pwszcommand : LibC::LPWSTR, cnsscripttime : UInt64) : HRESULT
+    @lpVtbl.value.add_script.call(this, pwsztype, pwszcommand, cnsscripttime)
+  end
+  def remove_script(this : IWMHeaderInfo*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_script.call(this, windex)
+  end
+end
+struct LibWin32::IWMHeaderInfo2
+  def query_interface(this : IWMHeaderInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMHeaderInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMHeaderInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attribute_count(this : IWMHeaderInfo2*, wstreamnum : UInt16, pcattributes : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, wstreamnum, pcattributes)
+  end
+  def get_attribute_by_index(this : IWMHeaderInfo2*, windex : UInt16, pwstreamnum : UInt16*, pwszname : Char*, pcchnamelen : UInt16*, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_index.call(this, windex, pwstreamnum, pwszname, pcchnamelen, ptype, pvalue, pcblength)
+  end
+  def get_attribute_by_name(this : IWMHeaderInfo2*, pwstreamnum : UInt16*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_name.call(this, pwstreamnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_attribute(this : IWMHeaderInfo2*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+  def get_marker_count(this : IWMHeaderInfo2*, pcmarkers : UInt16*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pcmarkers)
+  end
+  def get_marker(this : IWMHeaderInfo2*, windex : UInt16, pwszmarkername : Char*, pcchmarkernamelen : UInt16*, pcnsmarkertime : UInt64*) : HRESULT
+    @lpVtbl.value.get_marker.call(this, windex, pwszmarkername, pcchmarkernamelen, pcnsmarkertime)
+  end
+  def add_marker(this : IWMHeaderInfo2*, pwszmarkername : LibC::LPWSTR, cnsmarkertime : UInt64) : HRESULT
+    @lpVtbl.value.add_marker.call(this, pwszmarkername, cnsmarkertime)
+  end
+  def remove_marker(this : IWMHeaderInfo2*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_marker.call(this, windex)
+  end
+  def get_script_count(this : IWMHeaderInfo2*, pcscripts : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_count.call(this, pcscripts)
+  end
+  def get_script(this : IWMHeaderInfo2*, windex : UInt16, pwsztype : Char*, pcchtypelen : UInt16*, pwszcommand : Char*, pcchcommandlen : UInt16*, pcnsscripttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_script.call(this, windex, pwsztype, pcchtypelen, pwszcommand, pcchcommandlen, pcnsscripttime)
+  end
+  def add_script(this : IWMHeaderInfo2*, pwsztype : LibC::LPWSTR, pwszcommand : LibC::LPWSTR, cnsscripttime : UInt64) : HRESULT
+    @lpVtbl.value.add_script.call(this, pwsztype, pwszcommand, cnsscripttime)
+  end
+  def remove_script(this : IWMHeaderInfo2*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_script.call(this, windex)
+  end
+  def get_codec_info_count(this : IWMHeaderInfo2*, pccodecinfos : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_info_count.call(this, pccodecinfos)
+  end
+  def get_codec_info(this : IWMHeaderInfo2*, windex : UInt32, pcchname : UInt16*, pwszname : Char*, pcchdescription : UInt16*, pwszdescription : Char*, pcodectype : WMT_CODEC_INFO_TYPE*, pcbcodecinfo : UInt16*, pbcodecinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_codec_info.call(this, windex, pcchname, pwszname, pcchdescription, pwszdescription, pcodectype, pcbcodecinfo, pbcodecinfo)
+  end
+end
+struct LibWin32::IWMHeaderInfo3
+  def query_interface(this : IWMHeaderInfo3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMHeaderInfo3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMHeaderInfo3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attribute_count(this : IWMHeaderInfo3*, wstreamnum : UInt16, pcattributes : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, wstreamnum, pcattributes)
+  end
+  def get_attribute_by_index(this : IWMHeaderInfo3*, windex : UInt16, pwstreamnum : UInt16*, pwszname : Char*, pcchnamelen : UInt16*, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_index.call(this, windex, pwstreamnum, pwszname, pcchnamelen, ptype, pvalue, pcblength)
+  end
+  def get_attribute_by_name(this : IWMHeaderInfo3*, pwstreamnum : UInt16*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_by_name.call(this, pwstreamnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_attribute(this : IWMHeaderInfo3*, wstreamnum : UInt16, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_attribute.call(this, wstreamnum, pszname, type, pvalue, cblength)
+  end
+  def get_marker_count(this : IWMHeaderInfo3*, pcmarkers : UInt16*) : HRESULT
+    @lpVtbl.value.get_marker_count.call(this, pcmarkers)
+  end
+  def get_marker(this : IWMHeaderInfo3*, windex : UInt16, pwszmarkername : Char*, pcchmarkernamelen : UInt16*, pcnsmarkertime : UInt64*) : HRESULT
+    @lpVtbl.value.get_marker.call(this, windex, pwszmarkername, pcchmarkernamelen, pcnsmarkertime)
+  end
+  def add_marker(this : IWMHeaderInfo3*, pwszmarkername : LibC::LPWSTR, cnsmarkertime : UInt64) : HRESULT
+    @lpVtbl.value.add_marker.call(this, pwszmarkername, cnsmarkertime)
+  end
+  def remove_marker(this : IWMHeaderInfo3*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_marker.call(this, windex)
+  end
+  def get_script_count(this : IWMHeaderInfo3*, pcscripts : UInt16*) : HRESULT
+    @lpVtbl.value.get_script_count.call(this, pcscripts)
+  end
+  def get_script(this : IWMHeaderInfo3*, windex : UInt16, pwsztype : Char*, pcchtypelen : UInt16*, pwszcommand : Char*, pcchcommandlen : UInt16*, pcnsscripttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_script.call(this, windex, pwsztype, pcchtypelen, pwszcommand, pcchcommandlen, pcnsscripttime)
+  end
+  def add_script(this : IWMHeaderInfo3*, pwsztype : LibC::LPWSTR, pwszcommand : LibC::LPWSTR, cnsscripttime : UInt64) : HRESULT
+    @lpVtbl.value.add_script.call(this, pwsztype, pwszcommand, cnsscripttime)
+  end
+  def remove_script(this : IWMHeaderInfo3*, windex : UInt16) : HRESULT
+    @lpVtbl.value.remove_script.call(this, windex)
+  end
+  def get_codec_info_count(this : IWMHeaderInfo3*, pccodecinfos : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_info_count.call(this, pccodecinfos)
+  end
+  def get_codec_info(this : IWMHeaderInfo3*, windex : UInt32, pcchname : UInt16*, pwszname : Char*, pcchdescription : UInt16*, pwszdescription : Char*, pcodectype : WMT_CODEC_INFO_TYPE*, pcbcodecinfo : UInt16*, pbcodecinfo : UInt8*) : HRESULT
+    @lpVtbl.value.get_codec_info.call(this, windex, pcchname, pwszname, pcchdescription, pwszdescription, pcodectype, pcbcodecinfo, pbcodecinfo)
+  end
+  def get_attribute_count_ex(this : IWMHeaderInfo3*, wstreamnum : UInt16, pcattributes : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_count_ex.call(this, wstreamnum, pcattributes)
+  end
+  def get_attribute_indices(this : IWMHeaderInfo3*, wstreamnum : UInt16, pwszname : LibC::LPWSTR, pwlangindex : UInt16*, pwindices : UInt16*, pwcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_attribute_indices.call(this, wstreamnum, pwszname, pwlangindex, pwindices, pwcount)
+  end
+  def get_attribute_by_index_ex(this : IWMHeaderInfo3*, wstreamnum : UInt16, windex : UInt16, pwszname : Char*, pwnamelen : UInt16*, ptype : WMT_ATTR_DATATYPE*, pwlangindex : UInt16*, pvalue : UInt8*, pdwdatalength : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_by_index_ex.call(this, wstreamnum, windex, pwszname, pwnamelen, ptype, pwlangindex, pvalue, pdwdatalength)
+  end
+  def modify_attribute(this : IWMHeaderInfo3*, wstreamnum : UInt16, windex : UInt16, type : WMT_ATTR_DATATYPE, wlangindex : UInt16, pvalue : UInt8*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.modify_attribute.call(this, wstreamnum, windex, type, wlangindex, pvalue, dwlength)
+  end
+  def add_attribute(this : IWMHeaderInfo3*, wstreamnum : UInt16, pszname : LibC::LPWSTR, pwindex : UInt16*, type : WMT_ATTR_DATATYPE, wlangindex : UInt16, pvalue : UInt8*, dwlength : UInt32) : HRESULT
+    @lpVtbl.value.add_attribute.call(this, wstreamnum, pszname, pwindex, type, wlangindex, pvalue, dwlength)
+  end
+  def delete_attribute(this : IWMHeaderInfo3*, wstreamnum : UInt16, windex : UInt16) : HRESULT
+    @lpVtbl.value.delete_attribute.call(this, wstreamnum, windex)
+  end
+  def add_codec_info(this : IWMHeaderInfo3*, pwszname : LibC::LPWSTR, pwszdescription : LibC::LPWSTR, codectype : WMT_CODEC_INFO_TYPE, cbcodecinfo : UInt16, pbcodecinfo : UInt8*) : HRESULT
+    @lpVtbl.value.add_codec_info.call(this, pwszname, pwszdescription, codectype, cbcodecinfo, pbcodecinfo)
+  end
+end
+struct LibWin32::IWMProfileManager
+  def query_interface(this : IWMProfileManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfileManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfileManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_empty_profile(this : IWMProfileManager*, dwversion : WMT_VERSION, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.create_empty_profile.call(this, dwversion, ppprofile)
+  end
+  def load_profile_by_id(this : IWMProfileManager*, guidprofile : Guid*, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_profile_by_id.call(this, guidprofile, ppprofile)
+  end
+  def load_profile_by_data(this : IWMProfileManager*, pwszprofile : LibC::LPWSTR, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_profile_by_data.call(this, pwszprofile, ppprofile)
+  end
+  def save_profile(this : IWMProfileManager*, piwmprofile : IWMProfile, pwszprofile : LibC::LPWSTR, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.save_profile.call(this, piwmprofile, pwszprofile, pdwlength)
+  end
+  def get_system_profile_count(this : IWMProfileManager*, pcprofiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_profile_count.call(this, pcprofiles)
+  end
+  def load_system_profile(this : IWMProfileManager*, dwprofileindex : UInt32, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_system_profile.call(this, dwprofileindex, ppprofile)
+  end
+end
+struct LibWin32::IWMProfileManager2
+  def query_interface(this : IWMProfileManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfileManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfileManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_empty_profile(this : IWMProfileManager2*, dwversion : WMT_VERSION, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.create_empty_profile.call(this, dwversion, ppprofile)
+  end
+  def load_profile_by_id(this : IWMProfileManager2*, guidprofile : Guid*, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_profile_by_id.call(this, guidprofile, ppprofile)
+  end
+  def load_profile_by_data(this : IWMProfileManager2*, pwszprofile : LibC::LPWSTR, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_profile_by_data.call(this, pwszprofile, ppprofile)
+  end
+  def save_profile(this : IWMProfileManager2*, piwmprofile : IWMProfile, pwszprofile : LibC::LPWSTR, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.save_profile.call(this, piwmprofile, pwszprofile, pdwlength)
+  end
+  def get_system_profile_count(this : IWMProfileManager2*, pcprofiles : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_profile_count.call(this, pcprofiles)
+  end
+  def load_system_profile(this : IWMProfileManager2*, dwprofileindex : UInt32, ppprofile : IWMProfile*) : HRESULT
+    @lpVtbl.value.load_system_profile.call(this, dwprofileindex, ppprofile)
+  end
+  def get_system_profile_version(this : IWMProfileManager2*, pdwversion : WMT_VERSION*) : HRESULT
+    @lpVtbl.value.get_system_profile_version.call(this, pdwversion)
+  end
+  def set_system_profile_version(this : IWMProfileManager2*, dwversion : WMT_VERSION) : HRESULT
+    @lpVtbl.value.set_system_profile_version.call(this, dwversion)
+  end
+end
+struct LibWin32::IWMProfileManagerLanguage
+  def query_interface(this : IWMProfileManagerLanguage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfileManagerLanguage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfileManagerLanguage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_user_language_id(this : IWMProfileManagerLanguage*, wlangid : UInt16*) : HRESULT
+    @lpVtbl.value.get_user_language_id.call(this, wlangid)
+  end
+  def set_user_language_id(this : IWMProfileManagerLanguage*, wlangid : UInt16) : HRESULT
+    @lpVtbl.value.set_user_language_id.call(this, wlangid)
+  end
+end
+struct LibWin32::IWMProfile
+  def query_interface(this : IWMProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version(this : IWMProfile*, pdwversion : WMT_VERSION*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_name(this : IWMProfile*, pwszname : Char*, pcchname : UInt32*) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, pcchname)
+  end
+  def set_name(this : IWMProfile*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pwszname)
+  end
+  def get_description(this : IWMProfile*, pwszdescription : Char*, pcchdescription : UInt32*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pwszdescription, pcchdescription)
+  end
+  def set_description(this : IWMProfile*, pwszdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pwszdescription)
+  end
+  def get_stream_count(this : IWMProfile*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcstreams)
+  end
+  def get_stream(this : IWMProfile*, dwstreamindex : UInt32, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, dwstreamindex, ppconfig)
+  end
+  def get_stream_by_number(this : IWMProfile*, wstreamnum : UInt16, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream_by_number.call(this, wstreamnum, ppconfig)
+  end
+  def remove_stream(this : IWMProfile*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, pconfig)
+  end
+  def remove_stream_by_number(this : IWMProfile*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream_by_number.call(this, wstreamnum)
+  end
+  def add_stream(this : IWMProfile*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.add_stream.call(this, pconfig)
+  end
+  def reconfig_stream(this : IWMProfile*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.reconfig_stream.call(this, pconfig)
+  end
+  def create_new_stream(this : IWMProfile*, guidstreamtype : Guid*, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.create_new_stream.call(this, guidstreamtype, ppconfig)
+  end
+  def get_mutual_exclusion_count(this : IWMProfile*, pcme : UInt32*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion_count.call(this, pcme)
+  end
+  def get_mutual_exclusion(this : IWMProfile*, dwmeindex : UInt32, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion.call(this, dwmeindex, ppme)
+  end
+  def remove_mutual_exclusion(this : IWMProfile*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.remove_mutual_exclusion.call(this, pme)
+  end
+  def add_mutual_exclusion(this : IWMProfile*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.add_mutual_exclusion.call(this, pme)
+  end
+  def create_new_mutual_exclusion(this : IWMProfile*, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.create_new_mutual_exclusion.call(this, ppme)
+  end
+end
+struct LibWin32::IWMProfile2
+  def query_interface(this : IWMProfile2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfile2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfile2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version(this : IWMProfile2*, pdwversion : WMT_VERSION*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_name(this : IWMProfile2*, pwszname : Char*, pcchname : UInt32*) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, pcchname)
+  end
+  def set_name(this : IWMProfile2*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pwszname)
+  end
+  def get_description(this : IWMProfile2*, pwszdescription : Char*, pcchdescription : UInt32*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pwszdescription, pcchdescription)
+  end
+  def set_description(this : IWMProfile2*, pwszdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pwszdescription)
+  end
+  def get_stream_count(this : IWMProfile2*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcstreams)
+  end
+  def get_stream(this : IWMProfile2*, dwstreamindex : UInt32, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, dwstreamindex, ppconfig)
+  end
+  def get_stream_by_number(this : IWMProfile2*, wstreamnum : UInt16, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream_by_number.call(this, wstreamnum, ppconfig)
+  end
+  def remove_stream(this : IWMProfile2*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, pconfig)
+  end
+  def remove_stream_by_number(this : IWMProfile2*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream_by_number.call(this, wstreamnum)
+  end
+  def add_stream(this : IWMProfile2*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.add_stream.call(this, pconfig)
+  end
+  def reconfig_stream(this : IWMProfile2*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.reconfig_stream.call(this, pconfig)
+  end
+  def create_new_stream(this : IWMProfile2*, guidstreamtype : Guid*, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.create_new_stream.call(this, guidstreamtype, ppconfig)
+  end
+  def get_mutual_exclusion_count(this : IWMProfile2*, pcme : UInt32*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion_count.call(this, pcme)
+  end
+  def get_mutual_exclusion(this : IWMProfile2*, dwmeindex : UInt32, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion.call(this, dwmeindex, ppme)
+  end
+  def remove_mutual_exclusion(this : IWMProfile2*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.remove_mutual_exclusion.call(this, pme)
+  end
+  def add_mutual_exclusion(this : IWMProfile2*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.add_mutual_exclusion.call(this, pme)
+  end
+  def create_new_mutual_exclusion(this : IWMProfile2*, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.create_new_mutual_exclusion.call(this, ppme)
+  end
+  def get_profile_id(this : IWMProfile2*, pguidid : Guid*) : HRESULT
+    @lpVtbl.value.get_profile_id.call(this, pguidid)
+  end
+end
+struct LibWin32::IWMProfile3
+  def query_interface(this : IWMProfile3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProfile3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProfile3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version(this : IWMProfile3*, pdwversion : WMT_VERSION*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pdwversion)
+  end
+  def get_name(this : IWMProfile3*, pwszname : Char*, pcchname : UInt32*) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, pcchname)
+  end
+  def set_name(this : IWMProfile3*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pwszname)
+  end
+  def get_description(this : IWMProfile3*, pwszdescription : Char*, pcchdescription : UInt32*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pwszdescription, pcchdescription)
+  end
+  def set_description(this : IWMProfile3*, pwszdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, pwszdescription)
+  end
+  def get_stream_count(this : IWMProfile3*, pcstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcstreams)
+  end
+  def get_stream(this : IWMProfile3*, dwstreamindex : UInt32, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, dwstreamindex, ppconfig)
+  end
+  def get_stream_by_number(this : IWMProfile3*, wstreamnum : UInt16, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_stream_by_number.call(this, wstreamnum, ppconfig)
+  end
+  def remove_stream(this : IWMProfile3*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, pconfig)
+  end
+  def remove_stream_by_number(this : IWMProfile3*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream_by_number.call(this, wstreamnum)
+  end
+  def add_stream(this : IWMProfile3*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.add_stream.call(this, pconfig)
+  end
+  def reconfig_stream(this : IWMProfile3*, pconfig : IWMStreamConfig) : HRESULT
+    @lpVtbl.value.reconfig_stream.call(this, pconfig)
+  end
+  def create_new_stream(this : IWMProfile3*, guidstreamtype : Guid*, ppconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.create_new_stream.call(this, guidstreamtype, ppconfig)
+  end
+  def get_mutual_exclusion_count(this : IWMProfile3*, pcme : UInt32*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion_count.call(this, pcme)
+  end
+  def get_mutual_exclusion(this : IWMProfile3*, dwmeindex : UInt32, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.get_mutual_exclusion.call(this, dwmeindex, ppme)
+  end
+  def remove_mutual_exclusion(this : IWMProfile3*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.remove_mutual_exclusion.call(this, pme)
+  end
+  def add_mutual_exclusion(this : IWMProfile3*, pme : IWMMutualExclusion) : HRESULT
+    @lpVtbl.value.add_mutual_exclusion.call(this, pme)
+  end
+  def create_new_mutual_exclusion(this : IWMProfile3*, ppme : IWMMutualExclusion*) : HRESULT
+    @lpVtbl.value.create_new_mutual_exclusion.call(this, ppme)
+  end
+  def get_profile_id(this : IWMProfile3*, pguidid : Guid*) : HRESULT
+    @lpVtbl.value.get_profile_id.call(this, pguidid)
+  end
+  def get_storage_format(this : IWMProfile3*, pnstorageformat : WMT_STORAGE_FORMAT*) : HRESULT
+    @lpVtbl.value.get_storage_format.call(this, pnstorageformat)
+  end
+  def set_storage_format(this : IWMProfile3*, nstorageformat : WMT_STORAGE_FORMAT) : HRESULT
+    @lpVtbl.value.set_storage_format.call(this, nstorageformat)
+  end
+  def get_bandwidth_sharing_count(this : IWMProfile3*, pcbs : UInt32*) : HRESULT
+    @lpVtbl.value.get_bandwidth_sharing_count.call(this, pcbs)
+  end
+  def get_bandwidth_sharing(this : IWMProfile3*, dwbsindex : UInt32, ppbs : IWMBandwidthSharing*) : HRESULT
+    @lpVtbl.value.get_bandwidth_sharing.call(this, dwbsindex, ppbs)
+  end
+  def remove_bandwidth_sharing(this : IWMProfile3*, pbs : IWMBandwidthSharing) : HRESULT
+    @lpVtbl.value.remove_bandwidth_sharing.call(this, pbs)
+  end
+  def add_bandwidth_sharing(this : IWMProfile3*, pbs : IWMBandwidthSharing) : HRESULT
+    @lpVtbl.value.add_bandwidth_sharing.call(this, pbs)
+  end
+  def create_new_bandwidth_sharing(this : IWMProfile3*, ppbs : IWMBandwidthSharing*) : HRESULT
+    @lpVtbl.value.create_new_bandwidth_sharing.call(this, ppbs)
+  end
+  def get_stream_prioritization(this : IWMProfile3*, ppsp : IWMStreamPrioritization*) : HRESULT
+    @lpVtbl.value.get_stream_prioritization.call(this, ppsp)
+  end
+  def set_stream_prioritization(this : IWMProfile3*, psp : IWMStreamPrioritization) : HRESULT
+    @lpVtbl.value.set_stream_prioritization.call(this, psp)
+  end
+  def remove_stream_prioritization(this : IWMProfile3*) : HRESULT
+    @lpVtbl.value.remove_stream_prioritization.call(this)
+  end
+  def create_new_stream_prioritization(this : IWMProfile3*, ppsp : IWMStreamPrioritization*) : HRESULT
+    @lpVtbl.value.create_new_stream_prioritization.call(this, ppsp)
+  end
+  def get_expected_packet_count(this : IWMProfile3*, msduration : UInt64, pcpackets : UInt64*) : HRESULT
+    @lpVtbl.value.get_expected_packet_count.call(this, msduration, pcpackets)
+  end
+end
+struct LibWin32::IWMStreamConfig
+  def query_interface(this : IWMStreamConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStreamConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStreamConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_type(this : IWMStreamConfig*, pguidstreamtype : Guid*) : HRESULT
+    @lpVtbl.value.get_stream_type.call(this, pguidstreamtype)
+  end
+  def get_stream_number(this : IWMStreamConfig*, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_number.call(this, pwstreamnum)
+  end
+  def set_stream_number(this : IWMStreamConfig*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.set_stream_number.call(this, wstreamnum)
+  end
+  def get_stream_name(this : IWMStreamConfig*, pwszstreamname : Char*, pcchstreamname : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_name.call(this, pwszstreamname, pcchstreamname)
+  end
+  def set_stream_name(this : IWMStreamConfig*, pwszstreamname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_stream_name.call(this, pwszstreamname)
+  end
+  def get_connection_name(this : IWMStreamConfig*, pwszinputname : Char*, pcchinputname : UInt16*) : HRESULT
+    @lpVtbl.value.get_connection_name.call(this, pwszinputname, pcchinputname)
+  end
+  def set_connection_name(this : IWMStreamConfig*, pwszinputname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_connection_name.call(this, pwszinputname)
+  end
+  def get_bitrate(this : IWMStreamConfig*, pdwbitrate : UInt32*) : HRESULT
+    @lpVtbl.value.get_bitrate.call(this, pdwbitrate)
+  end
+  def set_bitrate(this : IWMStreamConfig*, pdwbitrate : UInt32) : HRESULT
+    @lpVtbl.value.set_bitrate.call(this, pdwbitrate)
+  end
+  def get_buffer_window(this : IWMStreamConfig*, pmsbufferwindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_window.call(this, pmsbufferwindow)
+  end
+  def set_buffer_window(this : IWMStreamConfig*, msbufferwindow : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_window.call(this, msbufferwindow)
+  end
+end
+struct LibWin32::IWMStreamConfig2
+  def query_interface(this : IWMStreamConfig2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStreamConfig2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStreamConfig2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_type(this : IWMStreamConfig2*, pguidstreamtype : Guid*) : HRESULT
+    @lpVtbl.value.get_stream_type.call(this, pguidstreamtype)
+  end
+  def get_stream_number(this : IWMStreamConfig2*, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_number.call(this, pwstreamnum)
+  end
+  def set_stream_number(this : IWMStreamConfig2*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.set_stream_number.call(this, wstreamnum)
+  end
+  def get_stream_name(this : IWMStreamConfig2*, pwszstreamname : Char*, pcchstreamname : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_name.call(this, pwszstreamname, pcchstreamname)
+  end
+  def set_stream_name(this : IWMStreamConfig2*, pwszstreamname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_stream_name.call(this, pwszstreamname)
+  end
+  def get_connection_name(this : IWMStreamConfig2*, pwszinputname : Char*, pcchinputname : UInt16*) : HRESULT
+    @lpVtbl.value.get_connection_name.call(this, pwszinputname, pcchinputname)
+  end
+  def set_connection_name(this : IWMStreamConfig2*, pwszinputname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_connection_name.call(this, pwszinputname)
+  end
+  def get_bitrate(this : IWMStreamConfig2*, pdwbitrate : UInt32*) : HRESULT
+    @lpVtbl.value.get_bitrate.call(this, pdwbitrate)
+  end
+  def set_bitrate(this : IWMStreamConfig2*, pdwbitrate : UInt32) : HRESULT
+    @lpVtbl.value.set_bitrate.call(this, pdwbitrate)
+  end
+  def get_buffer_window(this : IWMStreamConfig2*, pmsbufferwindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_window.call(this, pmsbufferwindow)
+  end
+  def set_buffer_window(this : IWMStreamConfig2*, msbufferwindow : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_window.call(this, msbufferwindow)
+  end
+  def get_transport_type(this : IWMStreamConfig2*, pntransporttype : WMT_TRANSPORT_TYPE*) : HRESULT
+    @lpVtbl.value.get_transport_type.call(this, pntransporttype)
+  end
+  def set_transport_type(this : IWMStreamConfig2*, ntransporttype : WMT_TRANSPORT_TYPE) : HRESULT
+    @lpVtbl.value.set_transport_type.call(this, ntransporttype)
+  end
+  def add_data_unit_extension(this : IWMStreamConfig2*, guidextensionsystemid : Guid, cbextensiondatasize : UInt16, pbextensionsysteminfo : UInt8*, cbextensionsysteminfo : UInt32) : HRESULT
+    @lpVtbl.value.add_data_unit_extension.call(this, guidextensionsystemid, cbextensiondatasize, pbextensionsysteminfo, cbextensionsysteminfo)
+  end
+  def get_data_unit_extension_count(this : IWMStreamConfig2*, pcdataunitextensions : UInt16*) : HRESULT
+    @lpVtbl.value.get_data_unit_extension_count.call(this, pcdataunitextensions)
+  end
+  def get_data_unit_extension(this : IWMStreamConfig2*, wdataunitextensionnumber : UInt16, pguidextensionsystemid : Guid*, pcbextensiondatasize : UInt16*, pbextensionsysteminfo : UInt8*, pcbextensionsysteminfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_unit_extension.call(this, wdataunitextensionnumber, pguidextensionsystemid, pcbextensiondatasize, pbextensionsysteminfo, pcbextensionsysteminfo)
+  end
+  def remove_all_data_unit_extensions(this : IWMStreamConfig2*) : HRESULT
+    @lpVtbl.value.remove_all_data_unit_extensions.call(this)
+  end
+end
+struct LibWin32::IWMStreamConfig3
+  def query_interface(this : IWMStreamConfig3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStreamConfig3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStreamConfig3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stream_type(this : IWMStreamConfig3*, pguidstreamtype : Guid*) : HRESULT
+    @lpVtbl.value.get_stream_type.call(this, pguidstreamtype)
+  end
+  def get_stream_number(this : IWMStreamConfig3*, pwstreamnum : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_number.call(this, pwstreamnum)
+  end
+  def set_stream_number(this : IWMStreamConfig3*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.set_stream_number.call(this, wstreamnum)
+  end
+  def get_stream_name(this : IWMStreamConfig3*, pwszstreamname : Char*, pcchstreamname : UInt16*) : HRESULT
+    @lpVtbl.value.get_stream_name.call(this, pwszstreamname, pcchstreamname)
+  end
+  def set_stream_name(this : IWMStreamConfig3*, pwszstreamname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_stream_name.call(this, pwszstreamname)
+  end
+  def get_connection_name(this : IWMStreamConfig3*, pwszinputname : Char*, pcchinputname : UInt16*) : HRESULT
+    @lpVtbl.value.get_connection_name.call(this, pwszinputname, pcchinputname)
+  end
+  def set_connection_name(this : IWMStreamConfig3*, pwszinputname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_connection_name.call(this, pwszinputname)
+  end
+  def get_bitrate(this : IWMStreamConfig3*, pdwbitrate : UInt32*) : HRESULT
+    @lpVtbl.value.get_bitrate.call(this, pdwbitrate)
+  end
+  def set_bitrate(this : IWMStreamConfig3*, pdwbitrate : UInt32) : HRESULT
+    @lpVtbl.value.set_bitrate.call(this, pdwbitrate)
+  end
+  def get_buffer_window(this : IWMStreamConfig3*, pmsbufferwindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_window.call(this, pmsbufferwindow)
+  end
+  def set_buffer_window(this : IWMStreamConfig3*, msbufferwindow : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_window.call(this, msbufferwindow)
+  end
+  def get_transport_type(this : IWMStreamConfig3*, pntransporttype : WMT_TRANSPORT_TYPE*) : HRESULT
+    @lpVtbl.value.get_transport_type.call(this, pntransporttype)
+  end
+  def set_transport_type(this : IWMStreamConfig3*, ntransporttype : WMT_TRANSPORT_TYPE) : HRESULT
+    @lpVtbl.value.set_transport_type.call(this, ntransporttype)
+  end
+  def add_data_unit_extension(this : IWMStreamConfig3*, guidextensionsystemid : Guid, cbextensiondatasize : UInt16, pbextensionsysteminfo : UInt8*, cbextensionsysteminfo : UInt32) : HRESULT
+    @lpVtbl.value.add_data_unit_extension.call(this, guidextensionsystemid, cbextensiondatasize, pbextensionsysteminfo, cbextensionsysteminfo)
+  end
+  def get_data_unit_extension_count(this : IWMStreamConfig3*, pcdataunitextensions : UInt16*) : HRESULT
+    @lpVtbl.value.get_data_unit_extension_count.call(this, pcdataunitextensions)
+  end
+  def get_data_unit_extension(this : IWMStreamConfig3*, wdataunitextensionnumber : UInt16, pguidextensionsystemid : Guid*, pcbextensiondatasize : UInt16*, pbextensionsysteminfo : UInt8*, pcbextensionsysteminfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_unit_extension.call(this, wdataunitextensionnumber, pguidextensionsystemid, pcbextensiondatasize, pbextensionsysteminfo, pcbextensionsysteminfo)
+  end
+  def remove_all_data_unit_extensions(this : IWMStreamConfig3*) : HRESULT
+    @lpVtbl.value.remove_all_data_unit_extensions.call(this)
+  end
+  def get_language(this : IWMStreamConfig3*, pwszlanguagestring : Char*, pcchlanguagestringlength : UInt16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, pwszlanguagestring, pcchlanguagestringlength)
+  end
+  def set_language(this : IWMStreamConfig3*, pwszlanguagestring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, pwszlanguagestring)
+  end
+end
+struct LibWin32::IWMPacketSize
+  def query_interface(this : IWMPacketSize*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMPacketSize*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMPacketSize*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_max_packet_size(this : IWMPacketSize*, pdwmaxpacketsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_packet_size.call(this, pdwmaxpacketsize)
+  end
+  def set_max_packet_size(this : IWMPacketSize*, dwmaxpacketsize : UInt32) : HRESULT
+    @lpVtbl.value.set_max_packet_size.call(this, dwmaxpacketsize)
+  end
+end
+struct LibWin32::IWMPacketSize2
+  def query_interface(this : IWMPacketSize2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMPacketSize2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMPacketSize2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_max_packet_size(this : IWMPacketSize2*, pdwmaxpacketsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_packet_size.call(this, pdwmaxpacketsize)
+  end
+  def set_max_packet_size(this : IWMPacketSize2*, dwmaxpacketsize : UInt32) : HRESULT
+    @lpVtbl.value.set_max_packet_size.call(this, dwmaxpacketsize)
+  end
+  def get_min_packet_size(this : IWMPacketSize2*, pdwminpacketsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_min_packet_size.call(this, pdwminpacketsize)
+  end
+  def set_min_packet_size(this : IWMPacketSize2*, dwminpacketsize : UInt32) : HRESULT
+    @lpVtbl.value.set_min_packet_size.call(this, dwminpacketsize)
+  end
+end
+struct LibWin32::IWMStreamList
+  def query_interface(this : IWMStreamList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStreamList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStreamList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_streams(this : IWMStreamList*, pwstreamnumarray : UInt16*, pcstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_streams.call(this, pwstreamnumarray, pcstreams)
+  end
+  def add_stream(this : IWMStreamList*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.add_stream.call(this, wstreamnum)
+  end
+  def remove_stream(this : IWMStreamList*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, wstreamnum)
+  end
+end
+struct LibWin32::IWMMutualExclusion
+  def query_interface(this : IWMMutualExclusion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMMutualExclusion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMMutualExclusion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_streams(this : IWMMutualExclusion*, pwstreamnumarray : UInt16*, pcstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_streams.call(this, pwstreamnumarray, pcstreams)
+  end
+  def add_stream(this : IWMMutualExclusion*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.add_stream.call(this, wstreamnum)
+  end
+  def remove_stream(this : IWMMutualExclusion*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, wstreamnum)
+  end
+  def get_type(this : IWMMutualExclusion*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def set_type(this : IWMMutualExclusion*, guidtype : Guid*) : HRESULT
+    @lpVtbl.value.set_type.call(this, guidtype)
+  end
+end
+struct LibWin32::IWMMutualExclusion2
+  def query_interface(this : IWMMutualExclusion2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMMutualExclusion2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMMutualExclusion2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_streams(this : IWMMutualExclusion2*, pwstreamnumarray : UInt16*, pcstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_streams.call(this, pwstreamnumarray, pcstreams)
+  end
+  def add_stream(this : IWMMutualExclusion2*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.add_stream.call(this, wstreamnum)
+  end
+  def remove_stream(this : IWMMutualExclusion2*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, wstreamnum)
+  end
+  def get_type(this : IWMMutualExclusion2*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def set_type(this : IWMMutualExclusion2*, guidtype : Guid*) : HRESULT
+    @lpVtbl.value.set_type.call(this, guidtype)
+  end
+  def get_name(this : IWMMutualExclusion2*, pwszname : Char*, pcchname : UInt16*) : HRESULT
+    @lpVtbl.value.get_name.call(this, pwszname, pcchname)
+  end
+  def set_name(this : IWMMutualExclusion2*, pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, pwszname)
+  end
+  def get_record_count(this : IWMMutualExclusion2*, pwrecordcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_record_count.call(this, pwrecordcount)
+  end
+  def add_record(this : IWMMutualExclusion2*) : HRESULT
+    @lpVtbl.value.add_record.call(this)
+  end
+  def remove_record(this : IWMMutualExclusion2*, wrecordnumber : UInt16) : HRESULT
+    @lpVtbl.value.remove_record.call(this, wrecordnumber)
+  end
+  def get_record_name(this : IWMMutualExclusion2*, wrecordnumber : UInt16, pwszrecordname : Char*, pcchrecordname : UInt16*) : HRESULT
+    @lpVtbl.value.get_record_name.call(this, wrecordnumber, pwszrecordname, pcchrecordname)
+  end
+  def set_record_name(this : IWMMutualExclusion2*, wrecordnumber : UInt16, pwszrecordname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_record_name.call(this, wrecordnumber, pwszrecordname)
+  end
+  def get_streams_for_record(this : IWMMutualExclusion2*, wrecordnumber : UInt16, pwstreamnumarray : UInt16*, pcstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_streams_for_record.call(this, wrecordnumber, pwstreamnumarray, pcstreams)
+  end
+  def add_stream_for_record(this : IWMMutualExclusion2*, wrecordnumber : UInt16, wstreamnumber : UInt16) : HRESULT
+    @lpVtbl.value.add_stream_for_record.call(this, wrecordnumber, wstreamnumber)
+  end
+  def remove_stream_for_record(this : IWMMutualExclusion2*, wrecordnumber : UInt16, wstreamnumber : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream_for_record.call(this, wrecordnumber, wstreamnumber)
+  end
+end
+struct LibWin32::IWMBandwidthSharing
+  def query_interface(this : IWMBandwidthSharing*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMBandwidthSharing*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMBandwidthSharing*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_streams(this : IWMBandwidthSharing*, pwstreamnumarray : UInt16*, pcstreams : UInt16*) : HRESULT
+    @lpVtbl.value.get_streams.call(this, pwstreamnumarray, pcstreams)
+  end
+  def add_stream(this : IWMBandwidthSharing*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.add_stream.call(this, wstreamnum)
+  end
+  def remove_stream(this : IWMBandwidthSharing*, wstreamnum : UInt16) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, wstreamnum)
+  end
+  def get_type(this : IWMBandwidthSharing*, pguidtype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pguidtype)
+  end
+  def set_type(this : IWMBandwidthSharing*, guidtype : Guid*) : HRESULT
+    @lpVtbl.value.set_type.call(this, guidtype)
+  end
+  def get_bandwidth(this : IWMBandwidthSharing*, pdwbitrate : UInt32*, pmsbufferwindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_bandwidth.call(this, pdwbitrate, pmsbufferwindow)
+  end
+  def set_bandwidth(this : IWMBandwidthSharing*, dwbitrate : UInt32, msbufferwindow : UInt32) : HRESULT
+    @lpVtbl.value.set_bandwidth.call(this, dwbitrate, msbufferwindow)
+  end
+end
+struct LibWin32::IWMStreamPrioritization
+  def query_interface(this : IWMStreamPrioritization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMStreamPrioritization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMStreamPrioritization*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_priority_records(this : IWMStreamPrioritization*, precordarray : WM_STREAM_PRIORITY_RECORD*, pcrecords : UInt16*) : HRESULT
+    @lpVtbl.value.get_priority_records.call(this, precordarray, pcrecords)
+  end
+  def set_priority_records(this : IWMStreamPrioritization*, precordarray : WM_STREAM_PRIORITY_RECORD*, crecords : UInt16) : HRESULT
+    @lpVtbl.value.set_priority_records.call(this, precordarray, crecords)
+  end
+end
+struct LibWin32::IWMWriterAdvanced
+  def query_interface(this : IWMWriterAdvanced*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterAdvanced*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterAdvanced*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sink_count(this : IWMWriterAdvanced*, pcsinks : UInt32*) : HRESULT
+    @lpVtbl.value.get_sink_count.call(this, pcsinks)
+  end
+  def get_sink(this : IWMWriterAdvanced*, dwsinknum : UInt32, ppsink : IWMWriterSink*) : HRESULT
+    @lpVtbl.value.get_sink.call(this, dwsinknum, ppsink)
+  end
+  def add_sink(this : IWMWriterAdvanced*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.add_sink.call(this, psink)
+  end
+  def remove_sink(this : IWMWriterAdvanced*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.remove_sink.call(this, psink)
+  end
+  def write_stream_sample(this : IWMWriterAdvanced*, wstreamnum : UInt16, cnssampletime : UInt64, mssamplesendtime : UInt32, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer) : HRESULT
+    @lpVtbl.value.write_stream_sample.call(this, wstreamnum, cnssampletime, mssamplesendtime, cnssampleduration, dwflags, psample)
+  end
+  def set_live_source(this : IWMWriterAdvanced*, fislivesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_live_source.call(this, fislivesource)
+  end
+  def is_real_time(this : IWMWriterAdvanced*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def get_writer_time(this : IWMWriterAdvanced*, pcnscurrenttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_writer_time.call(this, pcnscurrenttime)
+  end
+  def get_statistics(this : IWMWriterAdvanced*, wstreamnum : UInt16, pstats : WM_WRITER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, wstreamnum, pstats)
+  end
+  def set_sync_tolerance(this : IWMWriterAdvanced*, mswindow : UInt32) : HRESULT
+    @lpVtbl.value.set_sync_tolerance.call(this, mswindow)
+  end
+  def get_sync_tolerance(this : IWMWriterAdvanced*, pmswindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_sync_tolerance.call(this, pmswindow)
+  end
+end
+struct LibWin32::IWMWriterAdvanced2
+  def query_interface(this : IWMWriterAdvanced2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterAdvanced2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterAdvanced2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sink_count(this : IWMWriterAdvanced2*, pcsinks : UInt32*) : HRESULT
+    @lpVtbl.value.get_sink_count.call(this, pcsinks)
+  end
+  def get_sink(this : IWMWriterAdvanced2*, dwsinknum : UInt32, ppsink : IWMWriterSink*) : HRESULT
+    @lpVtbl.value.get_sink.call(this, dwsinknum, ppsink)
+  end
+  def add_sink(this : IWMWriterAdvanced2*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.add_sink.call(this, psink)
+  end
+  def remove_sink(this : IWMWriterAdvanced2*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.remove_sink.call(this, psink)
+  end
+  def write_stream_sample(this : IWMWriterAdvanced2*, wstreamnum : UInt16, cnssampletime : UInt64, mssamplesendtime : UInt32, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer) : HRESULT
+    @lpVtbl.value.write_stream_sample.call(this, wstreamnum, cnssampletime, mssamplesendtime, cnssampleduration, dwflags, psample)
+  end
+  def set_live_source(this : IWMWriterAdvanced2*, fislivesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_live_source.call(this, fislivesource)
+  end
+  def is_real_time(this : IWMWriterAdvanced2*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def get_writer_time(this : IWMWriterAdvanced2*, pcnscurrenttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_writer_time.call(this, pcnscurrenttime)
+  end
+  def get_statistics(this : IWMWriterAdvanced2*, wstreamnum : UInt16, pstats : WM_WRITER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, wstreamnum, pstats)
+  end
+  def set_sync_tolerance(this : IWMWriterAdvanced2*, mswindow : UInt32) : HRESULT
+    @lpVtbl.value.set_sync_tolerance.call(this, mswindow)
+  end
+  def get_sync_tolerance(this : IWMWriterAdvanced2*, pmswindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_sync_tolerance.call(this, pmswindow)
+  end
+  def get_input_setting(this : IWMWriterAdvanced2*, dwinputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_input_setting.call(this, dwinputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_input_setting(this : IWMWriterAdvanced2*, dwinputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_input_setting.call(this, dwinputnum, pszname, type, pvalue, cblength)
+  end
+end
+struct LibWin32::IWMWriterAdvanced3
+  def query_interface(this : IWMWriterAdvanced3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterAdvanced3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterAdvanced3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sink_count(this : IWMWriterAdvanced3*, pcsinks : UInt32*) : HRESULT
+    @lpVtbl.value.get_sink_count.call(this, pcsinks)
+  end
+  def get_sink(this : IWMWriterAdvanced3*, dwsinknum : UInt32, ppsink : IWMWriterSink*) : HRESULT
+    @lpVtbl.value.get_sink.call(this, dwsinknum, ppsink)
+  end
+  def add_sink(this : IWMWriterAdvanced3*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.add_sink.call(this, psink)
+  end
+  def remove_sink(this : IWMWriterAdvanced3*, psink : IWMWriterSink) : HRESULT
+    @lpVtbl.value.remove_sink.call(this, psink)
+  end
+  def write_stream_sample(this : IWMWriterAdvanced3*, wstreamnum : UInt16, cnssampletime : UInt64, mssamplesendtime : UInt32, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer) : HRESULT
+    @lpVtbl.value.write_stream_sample.call(this, wstreamnum, cnssampletime, mssamplesendtime, cnssampleduration, dwflags, psample)
+  end
+  def set_live_source(this : IWMWriterAdvanced3*, fislivesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_live_source.call(this, fislivesource)
+  end
+  def is_real_time(this : IWMWriterAdvanced3*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def get_writer_time(this : IWMWriterAdvanced3*, pcnscurrenttime : UInt64*) : HRESULT
+    @lpVtbl.value.get_writer_time.call(this, pcnscurrenttime)
+  end
+  def get_statistics(this : IWMWriterAdvanced3*, wstreamnum : UInt16, pstats : WM_WRITER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, wstreamnum, pstats)
+  end
+  def set_sync_tolerance(this : IWMWriterAdvanced3*, mswindow : UInt32) : HRESULT
+    @lpVtbl.value.set_sync_tolerance.call(this, mswindow)
+  end
+  def get_sync_tolerance(this : IWMWriterAdvanced3*, pmswindow : UInt32*) : HRESULT
+    @lpVtbl.value.get_sync_tolerance.call(this, pmswindow)
+  end
+  def get_input_setting(this : IWMWriterAdvanced3*, dwinputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_input_setting.call(this, dwinputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_input_setting(this : IWMWriterAdvanced3*, dwinputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_input_setting.call(this, dwinputnum, pszname, type, pvalue, cblength)
+  end
+  def get_statistics_ex(this : IWMWriterAdvanced3*, wstreamnum : UInt16, pstats : WM_WRITER_STATISTICS_EX*) : HRESULT
+    @lpVtbl.value.get_statistics_ex.call(this, wstreamnum, pstats)
+  end
+  def set_non_blocking(this : IWMWriterAdvanced3*) : HRESULT
+    @lpVtbl.value.set_non_blocking.call(this)
+  end
+end
+struct LibWin32::IWMWriterPreprocess
+  def query_interface(this : IWMWriterPreprocess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterPreprocess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterPreprocess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_max_preprocessing_passes(this : IWMWriterPreprocess*, dwinputnum : UInt32, dwflags : UInt32, pdwmaxnumpasses : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_preprocessing_passes.call(this, dwinputnum, dwflags, pdwmaxnumpasses)
+  end
+  def set_num_preprocessing_passes(this : IWMWriterPreprocess*, dwinputnum : UInt32, dwflags : UInt32, dwnumpasses : UInt32) : HRESULT
+    @lpVtbl.value.set_num_preprocessing_passes.call(this, dwinputnum, dwflags, dwnumpasses)
+  end
+  def begin_preprocessing_pass(this : IWMWriterPreprocess*, dwinputnum : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.begin_preprocessing_pass.call(this, dwinputnum, dwflags)
+  end
+  def preprocess_sample(this : IWMWriterPreprocess*, dwinputnum : UInt32, cnssampletime : UInt64, dwflags : UInt32, psample : INSSBuffer) : HRESULT
+    @lpVtbl.value.preprocess_sample.call(this, dwinputnum, cnssampletime, dwflags, psample)
+  end
+  def end_preprocessing_pass(this : IWMWriterPreprocess*, dwinputnum : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.end_preprocessing_pass.call(this, dwinputnum, dwflags)
+  end
+end
+struct LibWin32::IWMWriterPostViewCallback
+  def query_interface(this : IWMWriterPostViewCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterPostViewCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterPostViewCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status(this : IWMWriterPostViewCallback*, status : WMT_STATUS, hr : HRESULT, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_status.call(this, status, hr, dwtype, pvalue, pvcontext)
+  end
+  def on_post_view_sample(this : IWMWriterPostViewCallback*, wstreamnumber : UInt16, cnssampletime : UInt64, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_post_view_sample.call(this, wstreamnumber, cnssampletime, cnssampleduration, dwflags, psample, pvcontext)
+  end
+  def allocate_for_post_view(this : IWMWriterPostViewCallback*, wstreamnum : UInt16, cbbuffer : UInt32, ppbuffer : INSSBuffer*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.allocate_for_post_view.call(this, wstreamnum, cbbuffer, ppbuffer, pvcontext)
+  end
+end
+struct LibWin32::IWMWriterPostView
+  def query_interface(this : IWMWriterPostView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterPostView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterPostView*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_post_view_callback(this : IWMWriterPostView*, pcallback : IWMWriterPostViewCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.set_post_view_callback.call(this, pcallback, pvcontext)
+  end
+  def set_receive_post_view_samples(this : IWMWriterPostView*, wstreamnum : UInt16, freceivepostviewsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_post_view_samples.call(this, wstreamnum, freceivepostviewsamples)
+  end
+  def get_receive_post_view_samples(this : IWMWriterPostView*, wstreamnum : UInt16, pfreceivepostviewsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_post_view_samples.call(this, wstreamnum, pfreceivepostviewsamples)
+  end
+  def get_post_view_props(this : IWMWriterPostView*, wstreamnumber : UInt16, ppoutput : IWMMediaProps*) : HRESULT
+    @lpVtbl.value.get_post_view_props.call(this, wstreamnumber, ppoutput)
+  end
+  def set_post_view_props(this : IWMWriterPostView*, wstreamnumber : UInt16, poutput : IWMMediaProps) : HRESULT
+    @lpVtbl.value.set_post_view_props.call(this, wstreamnumber, poutput)
+  end
+  def get_post_view_format_count(this : IWMWriterPostView*, wstreamnumber : UInt16, pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_post_view_format_count.call(this, wstreamnumber, pcformats)
+  end
+  def get_post_view_format(this : IWMWriterPostView*, wstreamnumber : UInt16, dwformatnumber : UInt32, ppprops : IWMMediaProps*) : HRESULT
+    @lpVtbl.value.get_post_view_format.call(this, wstreamnumber, dwformatnumber, ppprops)
+  end
+  def set_allocate_for_post_view(this : IWMWriterPostView*, wstreamnumber : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_post_view.call(this, wstreamnumber, fallocate)
+  end
+  def get_allocate_for_post_view(this : IWMWriterPostView*, wstreamnumber : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_post_view.call(this, wstreamnumber, pfallocate)
+  end
+end
+struct LibWin32::IWMWriterSink
+  def query_interface(this : IWMWriterSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterSink*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterSink*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterSink*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterSink*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterSink*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+end
+struct LibWin32::IWMRegisterCallback
+  def query_interface(this : IWMRegisterCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMRegisterCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMRegisterCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise(this : IWMRegisterCallback*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.advise.call(this, pcallback, pvcontext)
+  end
+  def unadvise(this : IWMRegisterCallback*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.unadvise.call(this, pcallback, pvcontext)
+  end
+end
+struct LibWin32::IWMWriterFileSink
+  def query_interface(this : IWMWriterFileSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterFileSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterFileSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterFileSink*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterFileSink*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterFileSink*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterFileSink*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterFileSink*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+  def open(this : IWMWriterFileSink*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+end
+struct LibWin32::IWMWriterFileSink2
+  def query_interface(this : IWMWriterFileSink2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterFileSink2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterFileSink2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterFileSink2*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterFileSink2*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterFileSink2*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterFileSink2*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterFileSink2*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+  def open(this : IWMWriterFileSink2*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def start(this : IWMWriterFileSink2*, cnsstarttime : UInt64) : HRESULT
+    @lpVtbl.value.start.call(this, cnsstarttime)
+  end
+  def stop(this : IWMWriterFileSink2*, cnsstoptime : UInt64) : HRESULT
+    @lpVtbl.value.stop.call(this, cnsstoptime)
+  end
+  def is_stopped(this : IWMWriterFileSink2*, pfstopped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_stopped.call(this, pfstopped)
+  end
+  def get_file_duration(this : IWMWriterFileSink2*, pcnsduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_duration.call(this, pcnsduration)
+  end
+  def get_file_size(this : IWMWriterFileSink2*, pcbfile : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, pcbfile)
+  end
+  def close(this : IWMWriterFileSink2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def is_closed(this : IWMWriterFileSink2*, pfclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.call(this, pfclosed)
+  end
+end
+struct LibWin32::IWMWriterFileSink3
+  def query_interface(this : IWMWriterFileSink3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterFileSink3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterFileSink3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterFileSink3*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterFileSink3*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterFileSink3*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterFileSink3*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterFileSink3*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+  def open(this : IWMWriterFileSink3*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.open.call(this, pwszfilename)
+  end
+  def start(this : IWMWriterFileSink3*, cnsstarttime : UInt64) : HRESULT
+    @lpVtbl.value.start.call(this, cnsstarttime)
+  end
+  def stop(this : IWMWriterFileSink3*, cnsstoptime : UInt64) : HRESULT
+    @lpVtbl.value.stop.call(this, cnsstoptime)
+  end
+  def is_stopped(this : IWMWriterFileSink3*, pfstopped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_stopped.call(this, pfstopped)
+  end
+  def get_file_duration(this : IWMWriterFileSink3*, pcnsduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_duration.call(this, pcnsduration)
+  end
+  def get_file_size(this : IWMWriterFileSink3*, pcbfile : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, pcbfile)
+  end
+  def close(this : IWMWriterFileSink3*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def is_closed(this : IWMWriterFileSink3*, pfclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.call(this, pfclosed)
+  end
+  def set_auto_indexing(this : IWMWriterFileSink3*, fdoautoindexing : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_auto_indexing.call(this, fdoautoindexing)
+  end
+  def get_auto_indexing(this : IWMWriterFileSink3*, pfautoindexing : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_indexing.call(this, pfautoindexing)
+  end
+  def set_control_stream(this : IWMWriterFileSink3*, wstreamnumber : UInt16, fshouldcontrolstartandstop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_control_stream.call(this, wstreamnumber, fshouldcontrolstartandstop)
+  end
+  def get_mode(this : IWMWriterFileSink3*, pdwfilesinkmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_mode.call(this, pdwfilesinkmode)
+  end
+  def on_data_unit_ex(this : IWMWriterFileSink3*, pfilesinkdataunit : WMT_FILESINK_DATA_UNIT*) : HRESULT
+    @lpVtbl.value.on_data_unit_ex.call(this, pfilesinkdataunit)
+  end
+  def set_unbuffered_io(this : IWMWriterFileSink3*, funbufferedio : LibC::BOOL, frestrictmemusage : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_unbuffered_io.call(this, funbufferedio, frestrictmemusage)
+  end
+  def get_unbuffered_io(this : IWMWriterFileSink3*, pfunbufferedio : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_unbuffered_io.call(this, pfunbufferedio)
+  end
+  def complete_operations(this : IWMWriterFileSink3*) : HRESULT
+    @lpVtbl.value.complete_operations.call(this)
+  end
+end
+struct LibWin32::IWMWriterNetworkSink
+  def query_interface(this : IWMWriterNetworkSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterNetworkSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterNetworkSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterNetworkSink*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterNetworkSink*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterNetworkSink*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterNetworkSink*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterNetworkSink*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+  def set_maximum_clients(this : IWMWriterNetworkSink*, dwmaxclients : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_clients.call(this, dwmaxclients)
+  end
+  def get_maximum_clients(this : IWMWriterNetworkSink*, pdwmaxclients : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_clients.call(this, pdwmaxclients)
+  end
+  def set_network_protocol(this : IWMWriterNetworkSink*, protocol : WMT_NET_PROTOCOL) : HRESULT
+    @lpVtbl.value.set_network_protocol.call(this, protocol)
+  end
+  def get_network_protocol(this : IWMWriterNetworkSink*, pprotocol : WMT_NET_PROTOCOL*) : HRESULT
+    @lpVtbl.value.get_network_protocol.call(this, pprotocol)
+  end
+  def get_host_url(this : IWMWriterNetworkSink*, pwszurl : LibC::LPWSTR, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_host_url.call(this, pwszurl, pcchurl)
+  end
+  def open(this : IWMWriterNetworkSink*, pdwportnum : UInt32*) : HRESULT
+    @lpVtbl.value.open.call(this, pdwportnum)
+  end
+  def disconnect(this : IWMWriterNetworkSink*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def close(this : IWMWriterNetworkSink*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IWMClientConnections
+  def query_interface(this : IWMClientConnections*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMClientConnections*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMClientConnections*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client_count(this : IWMClientConnections*, pcclients : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_count.call(this, pcclients)
+  end
+  def get_client_properties(this : IWMClientConnections*, dwclientnum : UInt32, pclientproperties : WM_CLIENT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_client_properties.call(this, dwclientnum, pclientproperties)
+  end
+end
+struct LibWin32::IWMClientConnections2
+  def query_interface(this : IWMClientConnections2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMClientConnections2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMClientConnections2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client_count(this : IWMClientConnections2*, pcclients : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_count.call(this, pcclients)
+  end
+  def get_client_properties(this : IWMClientConnections2*, dwclientnum : UInt32, pclientproperties : WM_CLIENT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_client_properties.call(this, dwclientnum, pclientproperties)
+  end
+  def get_client_info(this : IWMClientConnections2*, dwclientnum : UInt32, pwsznetworkaddress : Char*, pcchnetworkaddress : UInt32*, pwszport : Char*, pcchport : UInt32*, pwszdnsname : Char*, pcchdnsname : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_info.call(this, dwclientnum, pwsznetworkaddress, pcchnetworkaddress, pwszport, pcchport, pwszdnsname, pcchdnsname)
+  end
+end
+struct LibWin32::IWMReaderAdvanced
+  def query_interface(this : IWMReaderAdvanced*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+end
+struct LibWin32::IWMReaderAdvanced2
+  def query_interface(this : IWMReaderAdvanced2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced2*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced2*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced2*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced2*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced2*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced2*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced2*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced2*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced2*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced2*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced2*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced2*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced2*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced2*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced2*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced2*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced2*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced2*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced2*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced2*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+  def set_play_mode(this : IWMReaderAdvanced2*, mode : WMT_PLAY_MODE) : HRESULT
+    @lpVtbl.value.set_play_mode.call(this, mode)
+  end
+  def get_play_mode(this : IWMReaderAdvanced2*, pmode : WMT_PLAY_MODE*) : HRESULT
+    @lpVtbl.value.get_play_mode.call(this, pmode)
+  end
+  def get_buffer_progress(this : IWMReaderAdvanced2*, pdwpercent : UInt32*, pcnsbuffering : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer_progress.call(this, pdwpercent, pcnsbuffering)
+  end
+  def get_download_progress(this : IWMReaderAdvanced2*, pdwpercent : UInt32*, pqwbytesdownloaded : UInt64*, pcnsdownload : UInt64*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pdwpercent, pqwbytesdownloaded, pcnsdownload)
+  end
+  def get_save_as_progress(this : IWMReaderAdvanced2*, pdwpercent : UInt32*) : HRESULT
+    @lpVtbl.value.get_save_as_progress.call(this, pdwpercent)
+  end
+  def save_file_as(this : IWMReaderAdvanced2*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_file_as.call(this, pwszfilename)
+  end
+  def get_protocol_name(this : IWMReaderAdvanced2*, pwszprotocol : Char*, pcchprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, pwszprotocol, pcchprotocol)
+  end
+  def start_at_marker(this : IWMReaderAdvanced2*, wmarkerindex : UInt16, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_marker.call(this, wmarkerindex, cnsduration, frate, pvcontext)
+  end
+  def get_output_setting(this : IWMReaderAdvanced2*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMReaderAdvanced2*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def preroll(this : IWMReaderAdvanced2*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32) : HRESULT
+    @lpVtbl.value.preroll.call(this, cnsstart, cnsduration, frate)
+  end
+  def set_log_client_id(this : IWMReaderAdvanced2*, flogclientid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_log_client_id.call(this, flogclientid)
+  end
+  def get_log_client_id(this : IWMReaderAdvanced2*, pflogclientid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_client_id.call(this, pflogclientid)
+  end
+  def stop_buffering(this : IWMReaderAdvanced2*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+  def open_stream(this : IWMReaderAdvanced2*, pstream : IStream, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream, pcallback, pvcontext)
+  end
+end
+struct LibWin32::IWMReaderAdvanced3
+  def query_interface(this : IWMReaderAdvanced3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced3*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced3*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced3*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced3*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced3*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced3*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced3*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced3*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced3*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced3*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced3*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced3*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced3*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced3*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced3*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced3*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced3*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced3*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced3*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced3*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+  def set_play_mode(this : IWMReaderAdvanced3*, mode : WMT_PLAY_MODE) : HRESULT
+    @lpVtbl.value.set_play_mode.call(this, mode)
+  end
+  def get_play_mode(this : IWMReaderAdvanced3*, pmode : WMT_PLAY_MODE*) : HRESULT
+    @lpVtbl.value.get_play_mode.call(this, pmode)
+  end
+  def get_buffer_progress(this : IWMReaderAdvanced3*, pdwpercent : UInt32*, pcnsbuffering : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer_progress.call(this, pdwpercent, pcnsbuffering)
+  end
+  def get_download_progress(this : IWMReaderAdvanced3*, pdwpercent : UInt32*, pqwbytesdownloaded : UInt64*, pcnsdownload : UInt64*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pdwpercent, pqwbytesdownloaded, pcnsdownload)
+  end
+  def get_save_as_progress(this : IWMReaderAdvanced3*, pdwpercent : UInt32*) : HRESULT
+    @lpVtbl.value.get_save_as_progress.call(this, pdwpercent)
+  end
+  def save_file_as(this : IWMReaderAdvanced3*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_file_as.call(this, pwszfilename)
+  end
+  def get_protocol_name(this : IWMReaderAdvanced3*, pwszprotocol : Char*, pcchprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, pwszprotocol, pcchprotocol)
+  end
+  def start_at_marker(this : IWMReaderAdvanced3*, wmarkerindex : UInt16, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_marker.call(this, wmarkerindex, cnsduration, frate, pvcontext)
+  end
+  def get_output_setting(this : IWMReaderAdvanced3*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMReaderAdvanced3*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def preroll(this : IWMReaderAdvanced3*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32) : HRESULT
+    @lpVtbl.value.preroll.call(this, cnsstart, cnsduration, frate)
+  end
+  def set_log_client_id(this : IWMReaderAdvanced3*, flogclientid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_log_client_id.call(this, flogclientid)
+  end
+  def get_log_client_id(this : IWMReaderAdvanced3*, pflogclientid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_client_id.call(this, pflogclientid)
+  end
+  def stop_buffering(this : IWMReaderAdvanced3*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+  def open_stream(this : IWMReaderAdvanced3*, pstream : IStream, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream, pcallback, pvcontext)
+  end
+  def stop_net_streaming(this : IWMReaderAdvanced3*) : HRESULT
+    @lpVtbl.value.stop_net_streaming.call(this)
+  end
+  def start_at_position(this : IWMReaderAdvanced3*, wstreamnum : UInt16, pvoffsetstart : Void*, pvduration : Void*, dwoffsetformat : WMT_OFFSET_FORMAT, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_position.call(this, wstreamnum, pvoffsetstart, pvduration, dwoffsetformat, frate, pvcontext)
+  end
+end
+struct LibWin32::IWMReaderAdvanced4
+  def query_interface(this : IWMReaderAdvanced4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced4*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced4*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced4*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced4*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced4*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced4*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced4*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced4*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced4*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced4*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced4*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced4*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced4*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced4*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced4*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced4*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced4*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced4*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+  def set_play_mode(this : IWMReaderAdvanced4*, mode : WMT_PLAY_MODE) : HRESULT
+    @lpVtbl.value.set_play_mode.call(this, mode)
+  end
+  def get_play_mode(this : IWMReaderAdvanced4*, pmode : WMT_PLAY_MODE*) : HRESULT
+    @lpVtbl.value.get_play_mode.call(this, pmode)
+  end
+  def get_buffer_progress(this : IWMReaderAdvanced4*, pdwpercent : UInt32*, pcnsbuffering : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer_progress.call(this, pdwpercent, pcnsbuffering)
+  end
+  def get_download_progress(this : IWMReaderAdvanced4*, pdwpercent : UInt32*, pqwbytesdownloaded : UInt64*, pcnsdownload : UInt64*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pdwpercent, pqwbytesdownloaded, pcnsdownload)
+  end
+  def get_save_as_progress(this : IWMReaderAdvanced4*, pdwpercent : UInt32*) : HRESULT
+    @lpVtbl.value.get_save_as_progress.call(this, pdwpercent)
+  end
+  def save_file_as(this : IWMReaderAdvanced4*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_file_as.call(this, pwszfilename)
+  end
+  def get_protocol_name(this : IWMReaderAdvanced4*, pwszprotocol : Char*, pcchprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, pwszprotocol, pcchprotocol)
+  end
+  def start_at_marker(this : IWMReaderAdvanced4*, wmarkerindex : UInt16, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_marker.call(this, wmarkerindex, cnsduration, frate, pvcontext)
+  end
+  def get_output_setting(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def preroll(this : IWMReaderAdvanced4*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32) : HRESULT
+    @lpVtbl.value.preroll.call(this, cnsstart, cnsduration, frate)
+  end
+  def set_log_client_id(this : IWMReaderAdvanced4*, flogclientid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_log_client_id.call(this, flogclientid)
+  end
+  def get_log_client_id(this : IWMReaderAdvanced4*, pflogclientid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_client_id.call(this, pflogclientid)
+  end
+  def stop_buffering(this : IWMReaderAdvanced4*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+  def open_stream(this : IWMReaderAdvanced4*, pstream : IStream, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream, pcallback, pvcontext)
+  end
+  def stop_net_streaming(this : IWMReaderAdvanced4*) : HRESULT
+    @lpVtbl.value.stop_net_streaming.call(this)
+  end
+  def start_at_position(this : IWMReaderAdvanced4*, wstreamnum : UInt16, pvoffsetstart : Void*, pvduration : Void*, dwoffsetformat : WMT_OFFSET_FORMAT, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_position.call(this, wstreamnum, pvoffsetstart, pvduration, dwoffsetformat, frate, pvcontext)
+  end
+  def get_language_count(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, pwlanguagecount : UInt16*) : HRESULT
+    @lpVtbl.value.get_language_count.call(this, dwoutputnum, pwlanguagecount)
+  end
+  def get_language(this : IWMReaderAdvanced4*, dwoutputnum : UInt32, wlanguage : UInt16, pwszlanguagestring : Char*, pcchlanguagestringlength : UInt16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, dwoutputnum, wlanguage, pwszlanguagestring, pcchlanguagestringlength)
+  end
+  def get_max_speed_factor(this : IWMReaderAdvanced4*, pdblfactor : Float64*) : HRESULT
+    @lpVtbl.value.get_max_speed_factor.call(this, pdblfactor)
+  end
+  def is_using_fast_cache(this : IWMReaderAdvanced4*, pfusingfastcache : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_using_fast_cache.call(this, pfusingfastcache)
+  end
+  def add_log_param(this : IWMReaderAdvanced4*, wsznamespace : LibC::LPWSTR, wszname : LibC::LPWSTR, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_log_param.call(this, wsznamespace, wszname, wszvalue)
+  end
+  def send_log_params(this : IWMReaderAdvanced4*) : HRESULT
+    @lpVtbl.value.send_log_params.call(this)
+  end
+  def can_save_file_as(this : IWMReaderAdvanced4*, pfcansave : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_save_file_as.call(this, pfcansave)
+  end
+  def cancel_save_file_as(this : IWMReaderAdvanced4*) : HRESULT
+    @lpVtbl.value.cancel_save_file_as.call(this)
+  end
+  def get_url(this : IWMReaderAdvanced4*, pwszurl : Char*, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_url.call(this, pwszurl, pcchurl)
+  end
+end
+struct LibWin32::IWMReaderAdvanced5
+  def query_interface(this : IWMReaderAdvanced5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced5*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced5*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced5*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced5*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced5*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced5*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced5*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced5*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced5*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced5*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced5*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced5*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced5*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced5*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced5*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced5*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced5*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced5*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+  def set_play_mode(this : IWMReaderAdvanced5*, mode : WMT_PLAY_MODE) : HRESULT
+    @lpVtbl.value.set_play_mode.call(this, mode)
+  end
+  def get_play_mode(this : IWMReaderAdvanced5*, pmode : WMT_PLAY_MODE*) : HRESULT
+    @lpVtbl.value.get_play_mode.call(this, pmode)
+  end
+  def get_buffer_progress(this : IWMReaderAdvanced5*, pdwpercent : UInt32*, pcnsbuffering : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer_progress.call(this, pdwpercent, pcnsbuffering)
+  end
+  def get_download_progress(this : IWMReaderAdvanced5*, pdwpercent : UInt32*, pqwbytesdownloaded : UInt64*, pcnsdownload : UInt64*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pdwpercent, pqwbytesdownloaded, pcnsdownload)
+  end
+  def get_save_as_progress(this : IWMReaderAdvanced5*, pdwpercent : UInt32*) : HRESULT
+    @lpVtbl.value.get_save_as_progress.call(this, pdwpercent)
+  end
+  def save_file_as(this : IWMReaderAdvanced5*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_file_as.call(this, pwszfilename)
+  end
+  def get_protocol_name(this : IWMReaderAdvanced5*, pwszprotocol : Char*, pcchprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, pwszprotocol, pcchprotocol)
+  end
+  def start_at_marker(this : IWMReaderAdvanced5*, wmarkerindex : UInt16, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_marker.call(this, wmarkerindex, cnsduration, frate, pvcontext)
+  end
+  def get_output_setting(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def preroll(this : IWMReaderAdvanced5*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32) : HRESULT
+    @lpVtbl.value.preroll.call(this, cnsstart, cnsduration, frate)
+  end
+  def set_log_client_id(this : IWMReaderAdvanced5*, flogclientid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_log_client_id.call(this, flogclientid)
+  end
+  def get_log_client_id(this : IWMReaderAdvanced5*, pflogclientid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_client_id.call(this, pflogclientid)
+  end
+  def stop_buffering(this : IWMReaderAdvanced5*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+  def open_stream(this : IWMReaderAdvanced5*, pstream : IStream, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream, pcallback, pvcontext)
+  end
+  def stop_net_streaming(this : IWMReaderAdvanced5*) : HRESULT
+    @lpVtbl.value.stop_net_streaming.call(this)
+  end
+  def start_at_position(this : IWMReaderAdvanced5*, wstreamnum : UInt16, pvoffsetstart : Void*, pvduration : Void*, dwoffsetformat : WMT_OFFSET_FORMAT, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_position.call(this, wstreamnum, pvoffsetstart, pvduration, dwoffsetformat, frate, pvcontext)
+  end
+  def get_language_count(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, pwlanguagecount : UInt16*) : HRESULT
+    @lpVtbl.value.get_language_count.call(this, dwoutputnum, pwlanguagecount)
+  end
+  def get_language(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, wlanguage : UInt16, pwszlanguagestring : Char*, pcchlanguagestringlength : UInt16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, dwoutputnum, wlanguage, pwszlanguagestring, pcchlanguagestringlength)
+  end
+  def get_max_speed_factor(this : IWMReaderAdvanced5*, pdblfactor : Float64*) : HRESULT
+    @lpVtbl.value.get_max_speed_factor.call(this, pdblfactor)
+  end
+  def is_using_fast_cache(this : IWMReaderAdvanced5*, pfusingfastcache : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_using_fast_cache.call(this, pfusingfastcache)
+  end
+  def add_log_param(this : IWMReaderAdvanced5*, wsznamespace : LibC::LPWSTR, wszname : LibC::LPWSTR, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_log_param.call(this, wsznamespace, wszname, wszvalue)
+  end
+  def send_log_params(this : IWMReaderAdvanced5*) : HRESULT
+    @lpVtbl.value.send_log_params.call(this)
+  end
+  def can_save_file_as(this : IWMReaderAdvanced5*, pfcansave : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_save_file_as.call(this, pfcansave)
+  end
+  def cancel_save_file_as(this : IWMReaderAdvanced5*) : HRESULT
+    @lpVtbl.value.cancel_save_file_as.call(this)
+  end
+  def get_url(this : IWMReaderAdvanced5*, pwszurl : Char*, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_url.call(this, pwszurl, pcchurl)
+  end
+  def set_player_hook(this : IWMReaderAdvanced5*, dwoutputnum : UInt32, phook : IWMPlayerHook) : HRESULT
+    @lpVtbl.value.set_player_hook.call(this, dwoutputnum, phook)
+  end
+end
+struct LibWin32::IWMReaderAdvanced6
+  def query_interface(this : IWMReaderAdvanced6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAdvanced6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAdvanced6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_user_provided_clock(this : IWMReaderAdvanced6*, fuserclock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_user_provided_clock.call(this, fuserclock)
+  end
+  def get_user_provided_clock(this : IWMReaderAdvanced6*, pfuserclock : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_user_provided_clock.call(this, pfuserclock)
+  end
+  def deliver_time(this : IWMReaderAdvanced6*, cnstime : UInt64) : HRESULT
+    @lpVtbl.value.deliver_time.call(this, cnstime)
+  end
+  def set_manual_stream_selection(this : IWMReaderAdvanced6*, fselection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manual_stream_selection.call(this, fselection)
+  end
+  def get_manual_stream_selection(this : IWMReaderAdvanced6*, pfselection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_manual_stream_selection.call(this, pfselection)
+  end
+  def set_streams_selected(this : IWMReaderAdvanced6*, cstreamcount : UInt16, pwstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.set_streams_selected.call(this, cstreamcount, pwstreamnumbers, pselections)
+  end
+  def get_stream_selected(this : IWMReaderAdvanced6*, wstreamnum : UInt16, pselection : WMT_STREAM_SELECTION*) : HRESULT
+    @lpVtbl.value.get_stream_selected.call(this, wstreamnum, pselection)
+  end
+  def set_receive_selection_callbacks(this : IWMReaderAdvanced6*, fgetcallbacks : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_selection_callbacks.call(this, fgetcallbacks)
+  end
+  def get_receive_selection_callbacks(this : IWMReaderAdvanced6*, pfgetcallbacks : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_selection_callbacks.call(this, pfgetcallbacks)
+  end
+  def set_receive_stream_samples(this : IWMReaderAdvanced6*, wstreamnum : UInt16, freceivestreamsamples : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_receive_stream_samples.call(this, wstreamnum, freceivestreamsamples)
+  end
+  def get_receive_stream_samples(this : IWMReaderAdvanced6*, wstreamnum : UInt16, pfreceivestreamsamples : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_receive_stream_samples.call(this, wstreamnum, pfreceivestreamsamples)
+  end
+  def set_allocate_for_output(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_output.call(this, dwoutputnum, fallocate)
+  end
+  def get_allocate_for_output(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_output.call(this, dwoutputnum, pfallocate)
+  end
+  def set_allocate_for_stream(this : IWMReaderAdvanced6*, wstreamnum : UInt16, fallocate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_for_stream.call(this, wstreamnum, fallocate)
+  end
+  def get_allocate_for_stream(this : IWMReaderAdvanced6*, dwsreamnum : UInt16, pfallocate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_for_stream.call(this, dwsreamnum, pfallocate)
+  end
+  def get_statistics(this : IWMReaderAdvanced6*, pstatistics : WM_READER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_statistics.call(this, pstatistics)
+  end
+  def set_client_info(this : IWMReaderAdvanced6*, pclientinfo : WM_READER_CLIENTINFO*) : HRESULT
+    @lpVtbl.value.set_client_info.call(this, pclientinfo)
+  end
+  def get_max_output_sample_size(this : IWMReaderAdvanced6*, dwoutput : UInt32, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_output_sample_size.call(this, dwoutput, pcbmax)
+  end
+  def get_max_stream_sample_size(this : IWMReaderAdvanced6*, wstream : UInt16, pcbmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_stream_sample_size.call(this, wstream, pcbmax)
+  end
+  def notify_late_delivery(this : IWMReaderAdvanced6*, cnslateness : UInt64) : HRESULT
+    @lpVtbl.value.notify_late_delivery.call(this, cnslateness)
+  end
+  def set_play_mode(this : IWMReaderAdvanced6*, mode : WMT_PLAY_MODE) : HRESULT
+    @lpVtbl.value.set_play_mode.call(this, mode)
+  end
+  def get_play_mode(this : IWMReaderAdvanced6*, pmode : WMT_PLAY_MODE*) : HRESULT
+    @lpVtbl.value.get_play_mode.call(this, pmode)
+  end
+  def get_buffer_progress(this : IWMReaderAdvanced6*, pdwpercent : UInt32*, pcnsbuffering : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffer_progress.call(this, pdwpercent, pcnsbuffering)
+  end
+  def get_download_progress(this : IWMReaderAdvanced6*, pdwpercent : UInt32*, pqwbytesdownloaded : UInt64*, pcnsdownload : UInt64*) : HRESULT
+    @lpVtbl.value.get_download_progress.call(this, pdwpercent, pqwbytesdownloaded, pcnsdownload)
+  end
+  def get_save_as_progress(this : IWMReaderAdvanced6*, pdwpercent : UInt32*) : HRESULT
+    @lpVtbl.value.get_save_as_progress.call(this, pdwpercent)
+  end
+  def save_file_as(this : IWMReaderAdvanced6*, pwszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_file_as.call(this, pwszfilename)
+  end
+  def get_protocol_name(this : IWMReaderAdvanced6*, pwszprotocol : Char*, pcchprotocol : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, pwszprotocol, pcchprotocol)
+  end
+  def start_at_marker(this : IWMReaderAdvanced6*, wmarkerindex : UInt16, cnsduration : UInt64, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_marker.call(this, wmarkerindex, cnsduration, frate, pvcontext)
+  end
+  def get_output_setting(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_output_setting.call(this, dwoutputnum, pszname, ptype, pvalue, pcblength)
+  end
+  def set_output_setting(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_output_setting.call(this, dwoutputnum, pszname, type, pvalue, cblength)
+  end
+  def preroll(this : IWMReaderAdvanced6*, cnsstart : UInt64, cnsduration : UInt64, frate : Float32) : HRESULT
+    @lpVtbl.value.preroll.call(this, cnsstart, cnsduration, frate)
+  end
+  def set_log_client_id(this : IWMReaderAdvanced6*, flogclientid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_log_client_id.call(this, flogclientid)
+  end
+  def get_log_client_id(this : IWMReaderAdvanced6*, pflogclientid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_log_client_id.call(this, pflogclientid)
+  end
+  def stop_buffering(this : IWMReaderAdvanced6*) : HRESULT
+    @lpVtbl.value.stop_buffering.call(this)
+  end
+  def open_stream(this : IWMReaderAdvanced6*, pstream : IStream, pcallback : IWMReaderCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.open_stream.call(this, pstream, pcallback, pvcontext)
+  end
+  def stop_net_streaming(this : IWMReaderAdvanced6*) : HRESULT
+    @lpVtbl.value.stop_net_streaming.call(this)
+  end
+  def start_at_position(this : IWMReaderAdvanced6*, wstreamnum : UInt16, pvoffsetstart : Void*, pvduration : Void*, dwoffsetformat : WMT_OFFSET_FORMAT, frate : Float32, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_at_position.call(this, wstreamnum, pvoffsetstart, pvduration, dwoffsetformat, frate, pvcontext)
+  end
+  def get_language_count(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, pwlanguagecount : UInt16*) : HRESULT
+    @lpVtbl.value.get_language_count.call(this, dwoutputnum, pwlanguagecount)
+  end
+  def get_language(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, wlanguage : UInt16, pwszlanguagestring : Char*, pcchlanguagestringlength : UInt16*) : HRESULT
+    @lpVtbl.value.get_language.call(this, dwoutputnum, wlanguage, pwszlanguagestring, pcchlanguagestringlength)
+  end
+  def get_max_speed_factor(this : IWMReaderAdvanced6*, pdblfactor : Float64*) : HRESULT
+    @lpVtbl.value.get_max_speed_factor.call(this, pdblfactor)
+  end
+  def is_using_fast_cache(this : IWMReaderAdvanced6*, pfusingfastcache : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_using_fast_cache.call(this, pfusingfastcache)
+  end
+  def add_log_param(this : IWMReaderAdvanced6*, wsznamespace : LibC::LPWSTR, wszname : LibC::LPWSTR, wszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_log_param.call(this, wsznamespace, wszname, wszvalue)
+  end
+  def send_log_params(this : IWMReaderAdvanced6*) : HRESULT
+    @lpVtbl.value.send_log_params.call(this)
+  end
+  def can_save_file_as(this : IWMReaderAdvanced6*, pfcansave : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_save_file_as.call(this, pfcansave)
+  end
+  def cancel_save_file_as(this : IWMReaderAdvanced6*) : HRESULT
+    @lpVtbl.value.cancel_save_file_as.call(this)
+  end
+  def get_url(this : IWMReaderAdvanced6*, pwszurl : Char*, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_url.call(this, pwszurl, pcchurl)
+  end
+  def set_player_hook(this : IWMReaderAdvanced6*, dwoutputnum : UInt32, phook : IWMPlayerHook) : HRESULT
+    @lpVtbl.value.set_player_hook.call(this, dwoutputnum, phook)
+  end
+  def set_protect_stream_samples(this : IWMReaderAdvanced6*, pbcertificate : UInt8*, cbcertificate : UInt32, dwcertificatetype : UInt32, dwflags : UInt32, pbinitializationvector : UInt8*, pcbinitializationvector : UInt32*) : HRESULT
+    @lpVtbl.value.set_protect_stream_samples.call(this, pbcertificate, cbcertificate, dwcertificatetype, dwflags, pbinitializationvector, pcbinitializationvector)
+  end
+end
+struct LibWin32::IWMPlayerHook
+  def query_interface(this : IWMPlayerHook*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMPlayerHook*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMPlayerHook*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def pre_decode(this : IWMPlayerHook*) : HRESULT
+    @lpVtbl.value.pre_decode.call(this)
+  end
+end
+struct LibWin32::IWMReaderAllocatorEx
+  def query_interface(this : IWMReaderAllocatorEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAllocatorEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAllocatorEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def allocate_for_stream_ex(this : IWMReaderAllocatorEx*, wstreamnum : UInt16, cbbuffer : UInt32, ppbuffer : INSSBuffer*, dwflags : UInt32, cnssampletime : UInt64, cnssampleduration : UInt64, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.allocate_for_stream_ex.call(this, wstreamnum, cbbuffer, ppbuffer, dwflags, cnssampletime, cnssampleduration, pvcontext)
+  end
+  def allocate_for_output_ex(this : IWMReaderAllocatorEx*, dwoutputnum : UInt32, cbbuffer : UInt32, ppbuffer : INSSBuffer*, dwflags : UInt32, cnssampletime : UInt64, cnssampleduration : UInt64, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.allocate_for_output_ex.call(this, dwoutputnum, cbbuffer, ppbuffer, dwflags, cnssampletime, cnssampleduration, pvcontext)
+  end
+end
+struct LibWin32::IWMReaderTypeNegotiation
+  def query_interface(this : IWMReaderTypeNegotiation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderTypeNegotiation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderTypeNegotiation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def try_output_props(this : IWMReaderTypeNegotiation*, dwoutputnum : UInt32, poutput : IWMOutputMediaProps) : HRESULT
+    @lpVtbl.value.try_output_props.call(this, dwoutputnum, poutput)
+  end
+end
+struct LibWin32::IWMReaderCallbackAdvanced
+  def query_interface(this : IWMReaderCallbackAdvanced*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderCallbackAdvanced*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderCallbackAdvanced*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_stream_sample(this : IWMReaderCallbackAdvanced*, wstreamnum : UInt16, cnssampletime : UInt64, cnssampleduration : UInt64, dwflags : UInt32, psample : INSSBuffer, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_stream_sample.call(this, wstreamnum, cnssampletime, cnssampleduration, dwflags, psample, pvcontext)
+  end
+  def on_time(this : IWMReaderCallbackAdvanced*, cnscurrenttime : UInt64, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_time.call(this, cnscurrenttime, pvcontext)
+  end
+  def on_stream_selection(this : IWMReaderCallbackAdvanced*, wstreamcount : UInt16, pstreamnumbers : UInt16*, pselections : WMT_STREAM_SELECTION*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_stream_selection.call(this, wstreamcount, pstreamnumbers, pselections, pvcontext)
+  end
+  def on_output_props_changed(this : IWMReaderCallbackAdvanced*, dwoutputnum : UInt32, pmediatype : WM_MEDIA_TYPE*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.on_output_props_changed.call(this, dwoutputnum, pmediatype, pvcontext)
+  end
+  def allocate_for_stream(this : IWMReaderCallbackAdvanced*, wstreamnum : UInt16, cbbuffer : UInt32, ppbuffer : INSSBuffer*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.allocate_for_stream.call(this, wstreamnum, cbbuffer, ppbuffer, pvcontext)
+  end
+  def allocate_for_output(this : IWMReaderCallbackAdvanced*, dwoutputnum : UInt32, cbbuffer : UInt32, ppbuffer : INSSBuffer*, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.allocate_for_output.call(this, dwoutputnum, cbbuffer, ppbuffer, pvcontext)
+  end
+end
+struct LibWin32::IWMDRMReader
+  def query_interface(this : IWMDRMReader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMReader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMReader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_license(this : IWMDRMReader*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.acquire_license.call(this, dwflags)
+  end
+  def cancel_license_acquisition(this : IWMDRMReader*) : HRESULT
+    @lpVtbl.value.cancel_license_acquisition.call(this)
+  end
+  def individualize(this : IWMDRMReader*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.individualize.call(this, dwflags)
+  end
+  def cancel_individualization(this : IWMDRMReader*) : HRESULT
+    @lpVtbl.value.cancel_individualization.call(this)
+  end
+  def monitor_license_acquisition(this : IWMDRMReader*) : HRESULT
+    @lpVtbl.value.monitor_license_acquisition.call(this)
+  end
+  def cancel_monitor_license_acquisition(this : IWMDRMReader*) : HRESULT
+    @lpVtbl.value.cancel_monitor_license_acquisition.call(this)
+  end
+  def set_drm_property(this : IWMDRMReader*, pwstrname : LibC::LPWSTR, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_property.call(this, pwstrname, dwtype, pvalue, cblength)
+  end
+  def get_drm_property(this : IWMDRMReader*, pwstrname : LibC::LPWSTR, pdwtype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_drm_property.call(this, pwstrname, pdwtype, pvalue, pcblength)
+  end
+end
+struct LibWin32::IWMDRMReader2
+  def query_interface(this : IWMDRMReader2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMReader2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMReader2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_license(this : IWMDRMReader2*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.acquire_license.call(this, dwflags)
+  end
+  def cancel_license_acquisition(this : IWMDRMReader2*) : HRESULT
+    @lpVtbl.value.cancel_license_acquisition.call(this)
+  end
+  def individualize(this : IWMDRMReader2*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.individualize.call(this, dwflags)
+  end
+  def cancel_individualization(this : IWMDRMReader2*) : HRESULT
+    @lpVtbl.value.cancel_individualization.call(this)
+  end
+  def monitor_license_acquisition(this : IWMDRMReader2*) : HRESULT
+    @lpVtbl.value.monitor_license_acquisition.call(this)
+  end
+  def cancel_monitor_license_acquisition(this : IWMDRMReader2*) : HRESULT
+    @lpVtbl.value.cancel_monitor_license_acquisition.call(this)
+  end
+  def set_drm_property(this : IWMDRMReader2*, pwstrname : LibC::LPWSTR, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_property.call(this, pwstrname, dwtype, pvalue, cblength)
+  end
+  def get_drm_property(this : IWMDRMReader2*, pwstrname : LibC::LPWSTR, pdwtype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_drm_property.call(this, pwstrname, pdwtype, pvalue, pcblength)
+  end
+  def set_evaluate_output_level_licenses(this : IWMDRMReader2*, fevaluate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_evaluate_output_level_licenses.call(this, fevaluate)
+  end
+  def get_play_output_levels(this : IWMDRMReader2*, pplayopl : DRM_PLAY_OPL*, pcblength : UInt32*, pdwminappcompliancelevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_output_levels.call(this, pplayopl, pcblength, pdwminappcompliancelevel)
+  end
+  def get_copy_output_levels(this : IWMDRMReader2*, pcopyopl : DRM_COPY_OPL*, pcblength : UInt32*, pdwminappcompliancelevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_copy_output_levels.call(this, pcopyopl, pcblength, pdwminappcompliancelevel)
+  end
+  def try_next_license(this : IWMDRMReader2*) : HRESULT
+    @lpVtbl.value.try_next_license.call(this)
+  end
+end
+struct LibWin32::IWMDRMReader3
+  def query_interface(this : IWMDRMReader3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMReader3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMReader3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_license(this : IWMDRMReader3*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.acquire_license.call(this, dwflags)
+  end
+  def cancel_license_acquisition(this : IWMDRMReader3*) : HRESULT
+    @lpVtbl.value.cancel_license_acquisition.call(this)
+  end
+  def individualize(this : IWMDRMReader3*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.individualize.call(this, dwflags)
+  end
+  def cancel_individualization(this : IWMDRMReader3*) : HRESULT
+    @lpVtbl.value.cancel_individualization.call(this)
+  end
+  def monitor_license_acquisition(this : IWMDRMReader3*) : HRESULT
+    @lpVtbl.value.monitor_license_acquisition.call(this)
+  end
+  def cancel_monitor_license_acquisition(this : IWMDRMReader3*) : HRESULT
+    @lpVtbl.value.cancel_monitor_license_acquisition.call(this)
+  end
+  def set_drm_property(this : IWMDRMReader3*, pwstrname : LibC::LPWSTR, dwtype : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_drm_property.call(this, pwstrname, dwtype, pvalue, cblength)
+  end
+  def get_drm_property(this : IWMDRMReader3*, pwstrname : LibC::LPWSTR, pdwtype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_drm_property.call(this, pwstrname, pdwtype, pvalue, pcblength)
+  end
+  def set_evaluate_output_level_licenses(this : IWMDRMReader3*, fevaluate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_evaluate_output_level_licenses.call(this, fevaluate)
+  end
+  def get_play_output_levels(this : IWMDRMReader3*, pplayopl : DRM_PLAY_OPL*, pcblength : UInt32*, pdwminappcompliancelevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_output_levels.call(this, pplayopl, pcblength, pdwminappcompliancelevel)
+  end
+  def get_copy_output_levels(this : IWMDRMReader3*, pcopyopl : DRM_COPY_OPL*, pcblength : UInt32*, pdwminappcompliancelevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_copy_output_levels.call(this, pcopyopl, pcblength, pdwminappcompliancelevel)
+  end
+  def try_next_license(this : IWMDRMReader3*) : HRESULT
+    @lpVtbl.value.try_next_license.call(this)
+  end
+  def get_inclusion_list(this : IWMDRMReader3*, ppguids : Guid**, pcguids : UInt32*) : HRESULT
+    @lpVtbl.value.get_inclusion_list.call(this, ppguids, pcguids)
+  end
+end
+struct LibWin32::IWMReaderPlaylistBurn
+  def query_interface(this : IWMReaderPlaylistBurn*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderPlaylistBurn*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderPlaylistBurn*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_playlist_burn(this : IWMReaderPlaylistBurn*, cfiles : UInt32, ppwszfilenames : LibC::LPWSTR*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.init_playlist_burn.call(this, cfiles, ppwszfilenames, pcallback, pvcontext)
+  end
+  def get_init_results(this : IWMReaderPlaylistBurn*, cfiles : UInt32, phrstati : HRESULT*) : HRESULT
+    @lpVtbl.value.get_init_results.call(this, cfiles, phrstati)
+  end
+  def cancel(this : IWMReaderPlaylistBurn*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def end_playlist_burn(this : IWMReaderPlaylistBurn*, hrburnresult : HRESULT) : HRESULT
+    @lpVtbl.value.end_playlist_burn.call(this, hrburnresult)
+  end
+end
+struct LibWin32::IWMReaderNetworkConfig
+  def query_interface(this : IWMReaderNetworkConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderNetworkConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderNetworkConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffering_time(this : IWMReaderNetworkConfig*, pcnsbufferingtime : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffering_time.call(this, pcnsbufferingtime)
+  end
+  def set_buffering_time(this : IWMReaderNetworkConfig*, cnsbufferingtime : UInt64) : HRESULT
+    @lpVtbl.value.set_buffering_time.call(this, cnsbufferingtime)
+  end
+  def get_udp_port_ranges(this : IWMReaderNetworkConfig*, prangearray : WM_PORT_NUMBER_RANGE*, pcranges : UInt32*) : HRESULT
+    @lpVtbl.value.get_udp_port_ranges.call(this, prangearray, pcranges)
+  end
+  def set_udp_port_ranges(this : IWMReaderNetworkConfig*, prangearray : WM_PORT_NUMBER_RANGE*, cranges : UInt32) : HRESULT
+    @lpVtbl.value.set_udp_port_ranges.call(this, prangearray, cranges)
+  end
+  def get_proxy_settings(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pproxysetting : WMT_PROXY_SETTINGS*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pwszprotocol, pproxysetting)
+  end
+  def set_proxy_settings(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, proxysetting : WMT_PROXY_SETTINGS) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, pwszprotocol, proxysetting)
+  end
+  def get_proxy_host_name(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pwszhostname : Char*, pcchhostname : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_host_name.call(this, pwszprotocol, pwszhostname, pcchhostname)
+  end
+  def set_proxy_host_name(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pwszhostname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_host_name.call(this, pwszprotocol, pwszhostname)
+  end
+  def get_proxy_port(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pdwport : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_port.call(this, pwszprotocol, pdwport)
+  end
+  def set_proxy_port(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, dwport : UInt32) : HRESULT
+    @lpVtbl.value.set_proxy_port.call(this, pwszprotocol, dwport)
+  end
+  def get_proxy_exception_list(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pwszexceptionlist : Char*, pcchexceptionlist : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_exception_list.call(this, pwszprotocol, pwszexceptionlist, pcchexceptionlist)
+  end
+  def set_proxy_exception_list(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pwszexceptionlist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_exception_list.call(this, pwszprotocol, pwszexceptionlist)
+  end
+  def get_proxy_bypass_for_local(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, pfbypassforlocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_proxy_bypass_for_local.call(this, pwszprotocol, pfbypassforlocal)
+  end
+  def set_proxy_bypass_for_local(this : IWMReaderNetworkConfig*, pwszprotocol : LibC::LPWSTR, fbypassforlocal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_proxy_bypass_for_local.call(this, pwszprotocol, fbypassforlocal)
+  end
+  def get_force_rerun_auto_proxy_detection(this : IWMReaderNetworkConfig*, pfforcererundetection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_force_rerun_auto_proxy_detection.call(this, pfforcererundetection)
+  end
+  def set_force_rerun_auto_proxy_detection(this : IWMReaderNetworkConfig*, fforcererundetection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_force_rerun_auto_proxy_detection.call(this, fforcererundetection)
+  end
+  def get_enable_multicast(this : IWMReaderNetworkConfig*, pfenablemulticast : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_multicast.call(this, pfenablemulticast)
+  end
+  def set_enable_multicast(this : IWMReaderNetworkConfig*, fenablemulticast : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_multicast.call(this, fenablemulticast)
+  end
+  def get_enable_http(this : IWMReaderNetworkConfig*, pfenablehttp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_http.call(this, pfenablehttp)
+  end
+  def set_enable_http(this : IWMReaderNetworkConfig*, fenablehttp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_http.call(this, fenablehttp)
+  end
+  def get_enable_udp(this : IWMReaderNetworkConfig*, pfenableudp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_udp.call(this, pfenableudp)
+  end
+  def set_enable_udp(this : IWMReaderNetworkConfig*, fenableudp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_udp.call(this, fenableudp)
+  end
+  def get_enable_tcp(this : IWMReaderNetworkConfig*, pfenabletcp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_tcp.call(this, pfenabletcp)
+  end
+  def set_enable_tcp(this : IWMReaderNetworkConfig*, fenabletcp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_tcp.call(this, fenabletcp)
+  end
+  def reset_protocol_rollover(this : IWMReaderNetworkConfig*) : HRESULT
+    @lpVtbl.value.reset_protocol_rollover.call(this)
+  end
+  def get_connection_bandwidth(this : IWMReaderNetworkConfig*, pdwconnectionbandwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_bandwidth.call(this, pdwconnectionbandwidth)
+  end
+  def set_connection_bandwidth(this : IWMReaderNetworkConfig*, dwconnectionbandwidth : UInt32) : HRESULT
+    @lpVtbl.value.set_connection_bandwidth.call(this, dwconnectionbandwidth)
+  end
+  def get_num_protocols_supported(this : IWMReaderNetworkConfig*, pcprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_protocols_supported.call(this, pcprotocols)
+  end
+  def get_supported_protocol_name(this : IWMReaderNetworkConfig*, dwprotocolnum : UInt32, pwszprotocolname : Char*, pcchprotocolname : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_protocol_name.call(this, dwprotocolnum, pwszprotocolname, pcchprotocolname)
+  end
+  def add_logging_url(this : IWMReaderNetworkConfig*, pwszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_logging_url.call(this, pwszurl)
+  end
+  def get_logging_url(this : IWMReaderNetworkConfig*, dwindex : UInt32, pwszurl : Char*, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_logging_url.call(this, dwindex, pwszurl, pcchurl)
+  end
+  def get_logging_url_count(this : IWMReaderNetworkConfig*, pdwurlcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_logging_url_count.call(this, pdwurlcount)
+  end
+  def reset_logging_url_list(this : IWMReaderNetworkConfig*) : HRESULT
+    @lpVtbl.value.reset_logging_url_list.call(this)
+  end
+end
+struct LibWin32::IWMReaderNetworkConfig2
+  def query_interface(this : IWMReaderNetworkConfig2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderNetworkConfig2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderNetworkConfig2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffering_time(this : IWMReaderNetworkConfig2*, pcnsbufferingtime : UInt64*) : HRESULT
+    @lpVtbl.value.get_buffering_time.call(this, pcnsbufferingtime)
+  end
+  def set_buffering_time(this : IWMReaderNetworkConfig2*, cnsbufferingtime : UInt64) : HRESULT
+    @lpVtbl.value.set_buffering_time.call(this, cnsbufferingtime)
+  end
+  def get_udp_port_ranges(this : IWMReaderNetworkConfig2*, prangearray : WM_PORT_NUMBER_RANGE*, pcranges : UInt32*) : HRESULT
+    @lpVtbl.value.get_udp_port_ranges.call(this, prangearray, pcranges)
+  end
+  def set_udp_port_ranges(this : IWMReaderNetworkConfig2*, prangearray : WM_PORT_NUMBER_RANGE*, cranges : UInt32) : HRESULT
+    @lpVtbl.value.set_udp_port_ranges.call(this, prangearray, cranges)
+  end
+  def get_proxy_settings(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pproxysetting : WMT_PROXY_SETTINGS*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pwszprotocol, pproxysetting)
+  end
+  def set_proxy_settings(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, proxysetting : WMT_PROXY_SETTINGS) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, pwszprotocol, proxysetting)
+  end
+  def get_proxy_host_name(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pwszhostname : Char*, pcchhostname : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_host_name.call(this, pwszprotocol, pwszhostname, pcchhostname)
+  end
+  def set_proxy_host_name(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pwszhostname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_host_name.call(this, pwszprotocol, pwszhostname)
+  end
+  def get_proxy_port(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pdwport : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_port.call(this, pwszprotocol, pdwport)
+  end
+  def set_proxy_port(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, dwport : UInt32) : HRESULT
+    @lpVtbl.value.set_proxy_port.call(this, pwszprotocol, dwport)
+  end
+  def get_proxy_exception_list(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pwszexceptionlist : Char*, pcchexceptionlist : UInt32*) : HRESULT
+    @lpVtbl.value.get_proxy_exception_list.call(this, pwszprotocol, pwszexceptionlist, pcchexceptionlist)
+  end
+  def set_proxy_exception_list(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pwszexceptionlist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_exception_list.call(this, pwszprotocol, pwszexceptionlist)
+  end
+  def get_proxy_bypass_for_local(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, pfbypassforlocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_proxy_bypass_for_local.call(this, pwszprotocol, pfbypassforlocal)
+  end
+  def set_proxy_bypass_for_local(this : IWMReaderNetworkConfig2*, pwszprotocol : LibC::LPWSTR, fbypassforlocal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_proxy_bypass_for_local.call(this, pwszprotocol, fbypassforlocal)
+  end
+  def get_force_rerun_auto_proxy_detection(this : IWMReaderNetworkConfig2*, pfforcererundetection : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_force_rerun_auto_proxy_detection.call(this, pfforcererundetection)
+  end
+  def set_force_rerun_auto_proxy_detection(this : IWMReaderNetworkConfig2*, fforcererundetection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_force_rerun_auto_proxy_detection.call(this, fforcererundetection)
+  end
+  def get_enable_multicast(this : IWMReaderNetworkConfig2*, pfenablemulticast : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_multicast.call(this, pfenablemulticast)
+  end
+  def set_enable_multicast(this : IWMReaderNetworkConfig2*, fenablemulticast : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_multicast.call(this, fenablemulticast)
+  end
+  def get_enable_http(this : IWMReaderNetworkConfig2*, pfenablehttp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_http.call(this, pfenablehttp)
+  end
+  def set_enable_http(this : IWMReaderNetworkConfig2*, fenablehttp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_http.call(this, fenablehttp)
+  end
+  def get_enable_udp(this : IWMReaderNetworkConfig2*, pfenableudp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_udp.call(this, pfenableudp)
+  end
+  def set_enable_udp(this : IWMReaderNetworkConfig2*, fenableudp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_udp.call(this, fenableudp)
+  end
+  def get_enable_tcp(this : IWMReaderNetworkConfig2*, pfenabletcp : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_tcp.call(this, pfenabletcp)
+  end
+  def set_enable_tcp(this : IWMReaderNetworkConfig2*, fenabletcp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_tcp.call(this, fenabletcp)
+  end
+  def reset_protocol_rollover(this : IWMReaderNetworkConfig2*) : HRESULT
+    @lpVtbl.value.reset_protocol_rollover.call(this)
+  end
+  def get_connection_bandwidth(this : IWMReaderNetworkConfig2*, pdwconnectionbandwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_bandwidth.call(this, pdwconnectionbandwidth)
+  end
+  def set_connection_bandwidth(this : IWMReaderNetworkConfig2*, dwconnectionbandwidth : UInt32) : HRESULT
+    @lpVtbl.value.set_connection_bandwidth.call(this, dwconnectionbandwidth)
+  end
+  def get_num_protocols_supported(this : IWMReaderNetworkConfig2*, pcprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_protocols_supported.call(this, pcprotocols)
+  end
+  def get_supported_protocol_name(this : IWMReaderNetworkConfig2*, dwprotocolnum : UInt32, pwszprotocolname : Char*, pcchprotocolname : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_protocol_name.call(this, dwprotocolnum, pwszprotocolname, pcchprotocolname)
+  end
+  def add_logging_url(this : IWMReaderNetworkConfig2*, pwszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_logging_url.call(this, pwszurl)
+  end
+  def get_logging_url(this : IWMReaderNetworkConfig2*, dwindex : UInt32, pwszurl : Char*, pcchurl : UInt32*) : HRESULT
+    @lpVtbl.value.get_logging_url.call(this, dwindex, pwszurl, pcchurl)
+  end
+  def get_logging_url_count(this : IWMReaderNetworkConfig2*, pdwurlcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_logging_url_count.call(this, pdwurlcount)
+  end
+  def reset_logging_url_list(this : IWMReaderNetworkConfig2*) : HRESULT
+    @lpVtbl.value.reset_logging_url_list.call(this)
+  end
+  def get_enable_content_caching(this : IWMReaderNetworkConfig2*, pfenablecontentcaching : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_content_caching.call(this, pfenablecontentcaching)
+  end
+  def set_enable_content_caching(this : IWMReaderNetworkConfig2*, fenablecontentcaching : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_content_caching.call(this, fenablecontentcaching)
+  end
+  def get_enable_fast_cache(this : IWMReaderNetworkConfig2*, pfenablefastcache : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_fast_cache.call(this, pfenablefastcache)
+  end
+  def set_enable_fast_cache(this : IWMReaderNetworkConfig2*, fenablefastcache : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_fast_cache.call(this, fenablefastcache)
+  end
+  def get_accelerated_streaming_duration(this : IWMReaderNetworkConfig2*, pcnsaccelduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_accelerated_streaming_duration.call(this, pcnsaccelduration)
+  end
+  def set_accelerated_streaming_duration(this : IWMReaderNetworkConfig2*, cnsaccelduration : UInt64) : HRESULT
+    @lpVtbl.value.set_accelerated_streaming_duration.call(this, cnsaccelduration)
+  end
+  def get_auto_reconnect_limit(this : IWMReaderNetworkConfig2*, pdwautoreconnectlimit : UInt32*) : HRESULT
+    @lpVtbl.value.get_auto_reconnect_limit.call(this, pdwautoreconnectlimit)
+  end
+  def set_auto_reconnect_limit(this : IWMReaderNetworkConfig2*, dwautoreconnectlimit : UInt32) : HRESULT
+    @lpVtbl.value.set_auto_reconnect_limit.call(this, dwautoreconnectlimit)
+  end
+  def get_enable_resends(this : IWMReaderNetworkConfig2*, pfenableresends : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_resends.call(this, pfenableresends)
+  end
+  def set_enable_resends(this : IWMReaderNetworkConfig2*, fenableresends : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_resends.call(this, fenableresends)
+  end
+  def get_enable_thinning(this : IWMReaderNetworkConfig2*, pfenablethinning : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enable_thinning.call(this, pfenablethinning)
+  end
+  def set_enable_thinning(this : IWMReaderNetworkConfig2*, fenablethinning : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_enable_thinning.call(this, fenablethinning)
+  end
+  def get_max_net_packet_size(this : IWMReaderNetworkConfig2*, pdwmaxnetpacketsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_net_packet_size.call(this, pdwmaxnetpacketsize)
+  end
+end
+struct LibWin32::IWMReaderStreamClock
+  def query_interface(this : IWMReaderStreamClock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderStreamClock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderStreamClock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_time(this : IWMReaderStreamClock*, pcnsnow : UInt64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, pcnsnow)
+  end
+  def set_timer(this : IWMReaderStreamClock*, cnswhen : UInt64, pvparam : Void*, pdwtimerid : UInt32*) : HRESULT
+    @lpVtbl.value.set_timer.call(this, cnswhen, pvparam, pdwtimerid)
+  end
+  def kill_timer(this : IWMReaderStreamClock*, dwtimerid : UInt32) : HRESULT
+    @lpVtbl.value.kill_timer.call(this, dwtimerid)
+  end
+end
+struct LibWin32::IWMIndexer
+  def query_interface(this : IWMIndexer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMIndexer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMIndexer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_indexing(this : IWMIndexer*, pwszurl : LibC::LPWSTR, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_indexing.call(this, pwszurl, pcallback, pvcontext)
+  end
+  def cancel(this : IWMIndexer*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IWMIndexer2
+  def query_interface(this : IWMIndexer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMIndexer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMIndexer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_indexing(this : IWMIndexer2*, pwszurl : LibC::LPWSTR, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_indexing.call(this, pwszurl, pcallback, pvcontext)
+  end
+  def cancel(this : IWMIndexer2*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def configure(this : IWMIndexer2*, wstreamnum : UInt16, nindexertype : WMT_INDEXER_TYPE, pvinterval : Void*, pvindextype : Void*) : HRESULT
+    @lpVtbl.value.configure.call(this, wstreamnum, nindexertype, pvinterval, pvindextype)
+  end
+end
+struct LibWin32::IWMLicenseBackup
+  def query_interface(this : IWMLicenseBackup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMLicenseBackup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMLicenseBackup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def backup_licenses(this : IWMLicenseBackup*, dwflags : UInt32, pcallback : IWMStatusCallback) : HRESULT
+    @lpVtbl.value.backup_licenses.call(this, dwflags, pcallback)
+  end
+  def cancel_license_backup(this : IWMLicenseBackup*) : HRESULT
+    @lpVtbl.value.cancel_license_backup.call(this)
+  end
+end
+struct LibWin32::IWMLicenseRestore
+  def query_interface(this : IWMLicenseRestore*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMLicenseRestore*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMLicenseRestore*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def restore_licenses(this : IWMLicenseRestore*, dwflags : UInt32, pcallback : IWMStatusCallback) : HRESULT
+    @lpVtbl.value.restore_licenses.call(this, dwflags, pcallback)
+  end
+  def cancel_license_restore(this : IWMLicenseRestore*) : HRESULT
+    @lpVtbl.value.cancel_license_restore.call(this)
+  end
+end
+struct LibWin32::IWMBackupRestoreProps
+  def query_interface(this : IWMBackupRestoreProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMBackupRestoreProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMBackupRestoreProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prop_count(this : IWMBackupRestoreProps*, pcprops : UInt16*) : HRESULT
+    @lpVtbl.value.get_prop_count.call(this, pcprops)
+  end
+  def get_prop_by_index(this : IWMBackupRestoreProps*, windex : UInt16, pwszname : Char*, pcchnamelen : UInt16*, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_prop_by_index.call(this, windex, pwszname, pcchnamelen, ptype, pvalue, pcblength)
+  end
+  def get_prop_by_name(this : IWMBackupRestoreProps*, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pcblength : UInt16*) : HRESULT
+    @lpVtbl.value.get_prop_by_name.call(this, pszname, ptype, pvalue, pcblength)
+  end
+  def set_prop(this : IWMBackupRestoreProps*, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, cblength : UInt16) : HRESULT
+    @lpVtbl.value.set_prop.call(this, pszname, type, pvalue, cblength)
+  end
+  def remove_prop(this : IWMBackupRestoreProps*, pcwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_prop.call(this, pcwszname)
+  end
+  def remove_all_props(this : IWMBackupRestoreProps*) : HRESULT
+    @lpVtbl.value.remove_all_props.call(this)
+  end
+end
+struct LibWin32::IWMCodecInfo
+  def query_interface(this : IWMCodecInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_codec_info_count(this : IWMCodecInfo*, guidtype : Guid*, pccodecs : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_info_count.call(this, guidtype, pccodecs)
+  end
+  def get_codec_format_count(this : IWMCodecInfo*, guidtype : Guid*, dwcodecindex : UInt32, pcformat : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_count.call(this, guidtype, dwcodecindex, pcformat)
+  end
+  def get_codec_format(this : IWMCodecInfo*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, ppistreamconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_codec_format.call(this, guidtype, dwcodecindex, dwformatindex, ppistreamconfig)
+  end
+end
+struct LibWin32::IWMCodecInfo2
+  def query_interface(this : IWMCodecInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_codec_info_count(this : IWMCodecInfo2*, guidtype : Guid*, pccodecs : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_info_count.call(this, guidtype, pccodecs)
+  end
+  def get_codec_format_count(this : IWMCodecInfo2*, guidtype : Guid*, dwcodecindex : UInt32, pcformat : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_count.call(this, guidtype, dwcodecindex, pcformat)
+  end
+  def get_codec_format(this : IWMCodecInfo2*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, ppistreamconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_codec_format.call(this, guidtype, dwcodecindex, dwformatindex, ppistreamconfig)
+  end
+  def get_codec_name(this : IWMCodecInfo2*, guidtype : Guid*, dwcodecindex : UInt32, wszname : Char*, pcchname : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_name.call(this, guidtype, dwcodecindex, wszname, pcchname)
+  end
+  def get_codec_format_desc(this : IWMCodecInfo2*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, ppistreamconfig : IWMStreamConfig*, wszdesc : Char*, pcchdesc : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_desc.call(this, guidtype, dwcodecindex, dwformatindex, ppistreamconfig, wszdesc, pcchdesc)
+  end
+end
+struct LibWin32::IWMCodecInfo3
+  def query_interface(this : IWMCodecInfo3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecInfo3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecInfo3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_codec_info_count(this : IWMCodecInfo3*, guidtype : Guid*, pccodecs : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_info_count.call(this, guidtype, pccodecs)
+  end
+  def get_codec_format_count(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, pcformat : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_count.call(this, guidtype, dwcodecindex, pcformat)
+  end
+  def get_codec_format(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, ppistreamconfig : IWMStreamConfig*) : HRESULT
+    @lpVtbl.value.get_codec_format.call(this, guidtype, dwcodecindex, dwformatindex, ppistreamconfig)
+  end
+  def get_codec_name(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, wszname : Char*, pcchname : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_name.call(this, guidtype, dwcodecindex, wszname, pcchname)
+  end
+  def get_codec_format_desc(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, ppistreamconfig : IWMStreamConfig*, wszdesc : Char*, pcchdesc : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_desc.call(this, guidtype, dwcodecindex, dwformatindex, ppistreamconfig, wszdesc, pcchdesc)
+  end
+  def get_codec_format_prop(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, dwformatindex : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_format_prop.call(this, guidtype, dwcodecindex, dwformatindex, pszname, ptype, pvalue, pdwsize)
+  end
+  def get_codec_prop(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_prop.call(this, guidtype, dwcodecindex, pszname, ptype, pvalue, pdwsize)
+  end
+  def set_codec_enumeration_setting(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, pszname : LibC::LPWSTR, type : WMT_ATTR_DATATYPE, pvalue : UInt8*, dwsize : UInt32) : HRESULT
+    @lpVtbl.value.set_codec_enumeration_setting.call(this, guidtype, dwcodecindex, pszname, type, pvalue, dwsize)
+  end
+  def get_codec_enumeration_setting(this : IWMCodecInfo3*, guidtype : Guid*, dwcodecindex : UInt32, pszname : LibC::LPWSTR, ptype : WMT_ATTR_DATATYPE*, pvalue : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_codec_enumeration_setting.call(this, guidtype, dwcodecindex, pszname, ptype, pvalue, pdwsize)
+  end
+end
+struct LibWin32::IWMLanguageList
+  def query_interface(this : IWMLanguageList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMLanguageList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMLanguageList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_count(this : IWMLanguageList*, pwcount : UInt16*) : HRESULT
+    @lpVtbl.value.get_language_count.call(this, pwcount)
+  end
+  def get_language_details(this : IWMLanguageList*, windex : UInt16, pwszlanguagestring : Char*, pcchlanguagestringlength : UInt16*) : HRESULT
+    @lpVtbl.value.get_language_details.call(this, windex, pwszlanguagestring, pcchlanguagestringlength)
+  end
+  def add_language_by_rfc1766_string(this : IWMLanguageList*, pwszlanguagestring : LibC::LPWSTR, pwindex : UInt16*) : HRESULT
+    @lpVtbl.value.add_language_by_rfc1766_string.call(this, pwszlanguagestring, pwindex)
+  end
+end
+struct LibWin32::IWMWriterPushSink
+  def query_interface(this : IWMWriterPushSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWriterPushSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWriterPushSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_header(this : IWMWriterPushSink*, pheader : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_header.call(this, pheader)
+  end
+  def is_real_time(this : IWMWriterPushSink*, pfrealtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real_time.call(this, pfrealtime)
+  end
+  def allocate_data_unit(this : IWMWriterPushSink*, cbdataunit : UInt32, ppdataunit : INSSBuffer*) : HRESULT
+    @lpVtbl.value.allocate_data_unit.call(this, cbdataunit, ppdataunit)
+  end
+  def on_data_unit(this : IWMWriterPushSink*, pdataunit : INSSBuffer) : HRESULT
+    @lpVtbl.value.on_data_unit.call(this, pdataunit)
+  end
+  def on_end_writing(this : IWMWriterPushSink*) : HRESULT
+    @lpVtbl.value.on_end_writing.call(this)
+  end
+  def connect(this : IWMWriterPushSink*, pwszurl : LibC::LPWSTR, pwsztemplateurl : LibC::LPWSTR, fautodestroy : LibC::BOOL) : HRESULT
+    @lpVtbl.value.connect.call(this, pwszurl, pwsztemplateurl, fautodestroy)
+  end
+  def disconnect(this : IWMWriterPushSink*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def end_session(this : IWMWriterPushSink*) : HRESULT
+    @lpVtbl.value.end_session.call(this)
+  end
+end
+struct LibWin32::IWMDeviceRegistration
+  def query_interface(this : IWMDeviceRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDeviceRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDeviceRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_device(this : IWMDeviceRegistration*, dwregistertype : UInt32, pbcertificate : UInt8*, cbcertificate : UInt32, serialnumber : DRM_VAL16, ppdevice : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.register_device.call(this, dwregistertype, pbcertificate, cbcertificate, serialnumber, ppdevice)
+  end
+  def unregister_device(this : IWMDeviceRegistration*, dwregistertype : UInt32, pbcertificate : UInt8*, cbcertificate : UInt32, serialnumber : DRM_VAL16) : HRESULT
+    @lpVtbl.value.unregister_device.call(this, dwregistertype, pbcertificate, cbcertificate, serialnumber)
+  end
+  def get_registration_stats(this : IWMDeviceRegistration*, dwregistertype : UInt32, pcregistereddevices : UInt32*) : HRESULT
+    @lpVtbl.value.get_registration_stats.call(this, dwregistertype, pcregistereddevices)
+  end
+  def get_first_registered_device(this : IWMDeviceRegistration*, dwregistertype : UInt32, ppdevice : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.get_first_registered_device.call(this, dwregistertype, ppdevice)
+  end
+  def get_next_registered_device(this : IWMDeviceRegistration*, ppdevice : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.get_next_registered_device.call(this, ppdevice)
+  end
+  def get_registered_device_by_id(this : IWMDeviceRegistration*, dwregistertype : UInt32, pbcertificate : UInt8*, cbcertificate : UInt32, serialnumber : DRM_VAL16, ppdevice : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.get_registered_device_by_id.call(this, dwregistertype, pbcertificate, cbcertificate, serialnumber, ppdevice)
+  end
+end
+struct LibWin32::IWMRegisteredDevice
+  def query_interface(this : IWMRegisteredDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMRegisteredDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMRegisteredDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device_serial_number(this : IWMRegisteredDevice*, pserialnumber : DRM_VAL16*) : HRESULT
+    @lpVtbl.value.get_device_serial_number.call(this, pserialnumber)
+  end
+  def get_device_certificate(this : IWMRegisteredDevice*, ppcertificate : INSSBuffer*) : HRESULT
+    @lpVtbl.value.get_device_certificate.call(this, ppcertificate)
+  end
+  def get_device_type(this : IWMRegisteredDevice*, pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_type.call(this, pdwtype)
+  end
+  def get_attribute_count(this : IWMRegisteredDevice*, pcattributes : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.call(this, pcattributes)
+  end
+  def get_attribute_by_index(this : IWMRegisteredDevice*, dwindex : UInt32, pbstrname : UInt8**, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_by_index.call(this, dwindex, pbstrname, pbstrvalue)
+  end
+  def get_attribute_by_name(this : IWMRegisteredDevice*, bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute_by_name.call(this, bstrname, pbstrvalue)
+  end
+  def set_attribute_by_name(this : IWMRegisteredDevice*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_attribute_by_name.call(this, bstrname, bstrvalue)
+  end
+  def approve(this : IWMRegisteredDevice*, fapprove : LibC::BOOL) : HRESULT
+    @lpVtbl.value.approve.call(this, fapprove)
+  end
+  def is_valid(this : IWMRegisteredDevice*, pfvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_valid.call(this, pfvalid)
+  end
+  def is_approved(this : IWMRegisteredDevice*, pfapproved : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_approved.call(this, pfapproved)
+  end
+  def is_wmdrm_compliant(this : IWMRegisteredDevice*, pfcompliant : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_wmdrm_compliant.call(this, pfcompliant)
+  end
+  def is_opened(this : IWMRegisteredDevice*, pfopened : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_opened.call(this, pfopened)
+  end
+  def open(this : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.open.call(this)
+  end
+  def close(this : IWMRegisteredDevice*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IWMProximityDetection
+  def query_interface(this : IWMProximityDetection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMProximityDetection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMProximityDetection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_detection(this : IWMProximityDetection*, pbregistrationmsg : UInt8*, cbregistrationmsg : UInt32, pblocaladdress : UInt8*, cblocaladdress : UInt32, dwextraportsallowed : UInt32, ppregistrationresponsemsg : INSSBuffer*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.start_detection.call(this, pbregistrationmsg, cbregistrationmsg, pblocaladdress, cblocaladdress, dwextraportsallowed, ppregistrationresponsemsg, pcallback, pvcontext)
+  end
+end
+struct LibWin32::IWMDRMMessageParser
+  def query_interface(this : IWMDRMMessageParser*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMMessageParser*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMMessageParser*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_registration_req_msg(this : IWMDRMMessageParser*, pbregistrationreqmsg : UInt8*, cbregistrationreqmsg : UInt32, ppdevicecert : INSSBuffer*, pdeviceserialnumber : DRM_VAL16*) : HRESULT
+    @lpVtbl.value.parse_registration_req_msg.call(this, pbregistrationreqmsg, cbregistrationreqmsg, ppdevicecert, pdeviceserialnumber)
+  end
+  def parse_license_request_msg(this : IWMDRMMessageParser*, pblicenserequestmsg : UInt8*, cblicenserequestmsg : UInt32, ppdevicecert : INSSBuffer*, pdeviceserialnumber : DRM_VAL16*, pbstraction : UInt8**) : HRESULT
+    @lpVtbl.value.parse_license_request_msg.call(this, pblicenserequestmsg, cblicenserequestmsg, ppdevicecert, pdeviceserialnumber, pbstraction)
+  end
+end
+struct LibWin32::IWMDRMTranscryptor
+  def query_interface(this : IWMDRMTranscryptor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMTranscryptor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMTranscryptor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IWMDRMTranscryptor*, bstrfilename : UInt8*, pblicenserequestmsg : UInt8*, cblicenserequestmsg : UInt32, pplicenseresponsemsg : INSSBuffer*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.initialize.call(this, bstrfilename, pblicenserequestmsg, cblicenserequestmsg, pplicenseresponsemsg, pcallback, pvcontext)
+  end
+  def seek(this : IWMDRMTranscryptor*, hnstime : UInt64) : HRESULT
+    @lpVtbl.value.seek.call(this, hnstime)
+  end
+  def read(this : IWMDRMTranscryptor*, pbdata : UInt8*, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pbdata, pcbdata)
+  end
+  def close(this : IWMDRMTranscryptor*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end
+struct LibWin32::IWMDRMTranscryptor2
+  def query_interface(this : IWMDRMTranscryptor2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMTranscryptor2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMTranscryptor2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IWMDRMTranscryptor2*, bstrfilename : UInt8*, pblicenserequestmsg : UInt8*, cblicenserequestmsg : UInt32, pplicenseresponsemsg : INSSBuffer*, pcallback : IWMStatusCallback, pvcontext : Void*) : HRESULT
+    @lpVtbl.value.initialize.call(this, bstrfilename, pblicenserequestmsg, cblicenserequestmsg, pplicenseresponsemsg, pcallback, pvcontext)
+  end
+  def seek(this : IWMDRMTranscryptor2*, hnstime : UInt64) : HRESULT
+    @lpVtbl.value.seek.call(this, hnstime)
+  end
+  def read(this : IWMDRMTranscryptor2*, pbdata : UInt8*, pcbdata : UInt32*) : HRESULT
+    @lpVtbl.value.read.call(this, pbdata, pcbdata)
+  end
+  def close(this : IWMDRMTranscryptor2*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def seek_ex(this : IWMDRMTranscryptor2*, cnsstarttime : UInt64, cnsduration : UInt64, flrate : Float32, fincludefileheader : LibC::BOOL) : HRESULT
+    @lpVtbl.value.seek_ex.call(this, cnsstarttime, cnsduration, flrate, fincludefileheader)
+  end
+  def zero_adjust_timestamps(this : IWMDRMTranscryptor2*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.zero_adjust_timestamps.call(this, fenable)
+  end
+  def get_seek_start_time(this : IWMDRMTranscryptor2*, pcnstime : UInt64*) : HRESULT
+    @lpVtbl.value.get_seek_start_time.call(this, pcnstime)
+  end
+  def get_duration(this : IWMDRMTranscryptor2*, pcnsduration : UInt64*) : HRESULT
+    @lpVtbl.value.get_duration.call(this, pcnsduration)
+  end
+end
+struct LibWin32::IWMDRMTranscryptionManager
+  def query_interface(this : IWMDRMTranscryptionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMDRMTranscryptionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMDRMTranscryptionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_transcryptor(this : IWMDRMTranscryptionManager*, pptranscryptor : IWMDRMTranscryptor*) : HRESULT
+    @lpVtbl.value.create_transcryptor.call(this, pptranscryptor)
+  end
+end
+struct LibWin32::IWMWatermarkInfo
+  def query_interface(this : IWMWatermarkInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMWatermarkInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMWatermarkInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_watermark_entry_count(this : IWMWatermarkInfo*, wmettype : WMT_WATERMARK_ENTRY_TYPE, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_watermark_entry_count.call(this, wmettype, pdwcount)
+  end
+  def get_watermark_entry(this : IWMWatermarkInfo*, wmettype : WMT_WATERMARK_ENTRY_TYPE, dwentrynum : UInt32, pentry : WMT_WATERMARK_ENTRY*) : HRESULT
+    @lpVtbl.value.get_watermark_entry.call(this, wmettype, dwentrynum, pentry)
+  end
+end
+struct LibWin32::IWMReaderAccelerator
+  def query_interface(this : IWMReaderAccelerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderAccelerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderAccelerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_codec_interface(this : IWMReaderAccelerator*, dwoutputnum : UInt32, riid : Guid*, ppvcodecinterface : Void**) : HRESULT
+    @lpVtbl.value.get_codec_interface.call(this, dwoutputnum, riid, ppvcodecinterface)
+  end
+  def notify(this : IWMReaderAccelerator*, dwoutputnum : UInt32, psubtype : WM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.notify.call(this, dwoutputnum, psubtype)
+  end
+end
+struct LibWin32::IWMReaderTimecode
+  def query_interface(this : IWMReaderTimecode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMReaderTimecode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMReaderTimecode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_timecode_range_count(this : IWMReaderTimecode*, wstreamnum : UInt16, pwrangecount : UInt16*) : HRESULT
+    @lpVtbl.value.get_timecode_range_count.call(this, wstreamnum, pwrangecount)
+  end
+  def get_timecode_range_bounds(this : IWMReaderTimecode*, wstreamnum : UInt16, wrangenum : UInt16, pstarttimecode : UInt32*, pendtimecode : UInt32*) : HRESULT
+    @lpVtbl.value.get_timecode_range_bounds.call(this, wstreamnum, wrangenum, pstarttimecode, pendtimecode)
+  end
+end
+struct LibWin32::IWMAddressAccess
+  def query_interface(this : IWMAddressAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMAddressAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMAddressAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_access_entry_count(this : IWMAddressAccess*, aetype : WM_AETYPE, pcentries : UInt32*) : HRESULT
+    @lpVtbl.value.get_access_entry_count.call(this, aetype, pcentries)
+  end
+  def get_access_entry(this : IWMAddressAccess*, aetype : WM_AETYPE, dwentrynum : UInt32, paddraccessentry : WM_ADDRESS_ACCESSENTRY*) : HRESULT
+    @lpVtbl.value.get_access_entry.call(this, aetype, dwentrynum, paddraccessentry)
+  end
+  def add_access_entry(this : IWMAddressAccess*, aetype : WM_AETYPE, paddraccessentry : WM_ADDRESS_ACCESSENTRY*) : HRESULT
+    @lpVtbl.value.add_access_entry.call(this, aetype, paddraccessentry)
+  end
+  def remove_access_entry(this : IWMAddressAccess*, aetype : WM_AETYPE, dwentrynum : UInt32) : HRESULT
+    @lpVtbl.value.remove_access_entry.call(this, aetype, dwentrynum)
+  end
+end
+struct LibWin32::IWMAddressAccess2
+  def query_interface(this : IWMAddressAccess2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMAddressAccess2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMAddressAccess2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_access_entry_count(this : IWMAddressAccess2*, aetype : WM_AETYPE, pcentries : UInt32*) : HRESULT
+    @lpVtbl.value.get_access_entry_count.call(this, aetype, pcentries)
+  end
+  def get_access_entry(this : IWMAddressAccess2*, aetype : WM_AETYPE, dwentrynum : UInt32, paddraccessentry : WM_ADDRESS_ACCESSENTRY*) : HRESULT
+    @lpVtbl.value.get_access_entry.call(this, aetype, dwentrynum, paddraccessentry)
+  end
+  def add_access_entry(this : IWMAddressAccess2*, aetype : WM_AETYPE, paddraccessentry : WM_ADDRESS_ACCESSENTRY*) : HRESULT
+    @lpVtbl.value.add_access_entry.call(this, aetype, paddraccessentry)
+  end
+  def remove_access_entry(this : IWMAddressAccess2*, aetype : WM_AETYPE, dwentrynum : UInt32) : HRESULT
+    @lpVtbl.value.remove_access_entry.call(this, aetype, dwentrynum)
+  end
+  def get_access_entry_ex(this : IWMAddressAccess2*, aetype : WM_AETYPE, dwentrynum : UInt32, pbstraddress : UInt8**, pbstrmask : UInt8**) : HRESULT
+    @lpVtbl.value.get_access_entry_ex.call(this, aetype, dwentrynum, pbstraddress, pbstrmask)
+  end
+  def add_access_entry_ex(this : IWMAddressAccess2*, aetype : WM_AETYPE, bstraddress : UInt8*, bstrmask : UInt8*) : HRESULT
+    @lpVtbl.value.add_access_entry_ex.call(this, aetype, bstraddress, bstrmask)
+  end
+end
+struct LibWin32::IWMImageInfo
+  def query_interface(this : IWMImageInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMImageInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMImageInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_image_count(this : IWMImageInfo*, pcimages : UInt32*) : HRESULT
+    @lpVtbl.value.get_image_count.call(this, pcimages)
+  end
+  def get_image(this : IWMImageInfo*, windex : UInt32, pcchmimetype : UInt16*, pwszmimetype : Char*, pcchdescription : UInt16*, pwszdescription : Char*, pimagetype : UInt16*, pcbimagedata : UInt32*, pbimagedata : UInt8*) : HRESULT
+    @lpVtbl.value.get_image.call(this, windex, pcchmimetype, pwszmimetype, pcchdescription, pwszdescription, pimagetype, pcbimagedata, pbimagedata)
+  end
+end
+struct LibWin32::IWMLicenseRevocationAgent
+  def query_interface(this : IWMLicenseRevocationAgent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMLicenseRevocationAgent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMLicenseRevocationAgent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_lrb_challenge(this : IWMLicenseRevocationAgent*, pmachineid : UInt8*, dwmachineidlength : UInt32, pchallenge : UInt8*, dwchallengelength : UInt32, pchallengeoutput : UInt8*, pdwchallengeoutputlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_lrb_challenge.call(this, pmachineid, dwmachineidlength, pchallenge, dwchallengelength, pchallengeoutput, pdwchallengeoutputlength)
+  end
+  def process_lrb(this : IWMLicenseRevocationAgent*, psignedlrb : UInt8*, dwsignedlrblength : UInt32, psignedack : UInt8*, pdwsignedacklength : UInt32*) : HRESULT
+    @lpVtbl.value.process_lrb.call(this, psignedlrb, dwsignedlrblength, psignedack, pdwsignedacklength)
+  end
+end
+struct LibWin32::IWMAuthorizer
+  def query_interface(this : IWMAuthorizer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMAuthorizer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMAuthorizer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cert_count(this : IWMAuthorizer*, pccerts : UInt32*) : HRESULT
+    @lpVtbl.value.get_cert_count.call(this, pccerts)
+  end
+  def get_cert(this : IWMAuthorizer*, dwindex : UInt32, ppbcertdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_cert.call(this, dwindex, ppbcertdata)
+  end
+  def get_shared_data(this : IWMAuthorizer*, dwcertindex : UInt32, pbshareddata : UInt8*, pbcert : UInt8*, ppbshareddata : UInt8**) : HRESULT
+    @lpVtbl.value.get_shared_data.call(this, dwcertindex, pbshareddata, pbcert, ppbshareddata)
+  end
+end
+struct LibWin32::IWMSecureChannel
+  def query_interface(this : IWMSecureChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSecureChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSecureChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cert_count(this : IWMSecureChannel*, pccerts : UInt32*) : HRESULT
+    @lpVtbl.value.get_cert_count.call(this, pccerts)
+  end
+  def get_cert(this : IWMSecureChannel*, dwindex : UInt32, ppbcertdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_cert.call(this, dwindex, ppbcertdata)
+  end
+  def get_shared_data(this : IWMSecureChannel*, dwcertindex : UInt32, pbshareddata : UInt8*, pbcert : UInt8*, ppbshareddata : UInt8**) : HRESULT
+    @lpVtbl.value.get_shared_data.call(this, dwcertindex, pbshareddata, pbcert, ppbshareddata)
+  end
+  def wmsc_add_certificate(this : IWMSecureChannel*, pcert : IWMAuthorizer) : HRESULT
+    @lpVtbl.value.wmsc_add_certificate.call(this, pcert)
+  end
+  def wmsc_add_signature(this : IWMSecureChannel*, pbcertsig : UInt8*, cbcertsig : UInt32) : HRESULT
+    @lpVtbl.value.wmsc_add_signature.call(this, pbcertsig, cbcertsig)
+  end
+  def wmsc_connect(this : IWMSecureChannel*, potherside : IWMSecureChannel) : HRESULT
+    @lpVtbl.value.wmsc_connect.call(this, potherside)
+  end
+  def wmsc_is_connected(this : IWMSecureChannel*, pfisconnected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.wmsc_is_connected.call(this, pfisconnected)
+  end
+  def wmsc_disconnect(this : IWMSecureChannel*) : HRESULT
+    @lpVtbl.value.wmsc_disconnect.call(this)
+  end
+  def wmsc_get_valid_certificate(this : IWMSecureChannel*, ppbcertificate : UInt8**, pdwsignature : UInt32*) : HRESULT
+    @lpVtbl.value.wmsc_get_valid_certificate.call(this, ppbcertificate, pdwsignature)
+  end
+  def wmsc_encrypt(this : IWMSecureChannel*, pbdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.wmsc_encrypt.call(this, pbdata, cbdata)
+  end
+  def wmsc_decrypt(this : IWMSecureChannel*, pbdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.wmsc_decrypt.call(this, pbdata, cbdata)
+  end
+  def wmsc_lock(this : IWMSecureChannel*) : HRESULT
+    @lpVtbl.value.wmsc_lock.call(this)
+  end
+  def wmsc_unlock(this : IWMSecureChannel*) : HRESULT
+    @lpVtbl.value.wmsc_unlock.call(this)
+  end
+  def wmsc_set_shared_data(this : IWMSecureChannel*, dwcertindex : UInt32, pbshareddata : UInt8*) : HRESULT
+    @lpVtbl.value.wmsc_set_shared_data.call(this, dwcertindex, pbshareddata)
+  end
+end
+struct LibWin32::IWMGetSecureChannel
+  def query_interface(this : IWMGetSecureChannel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMGetSecureChannel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMGetSecureChannel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_peer_secure_channel_interface(this : IWMGetSecureChannel*, pppeer : IWMSecureChannel*) : HRESULT
+    @lpVtbl.value.get_peer_secure_channel_interface.call(this, pppeer)
+  end
+end
+struct LibWin32::INSNetSourceCreator
+  def query_interface(this : INSNetSourceCreator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INSNetSourceCreator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INSNetSourceCreator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : INSNetSourceCreator*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
+  end
+  def create_net_source(this : INSNetSourceCreator*, pszstreamname : LibC::LPWSTR, pmonitor : IUnknown, pdata : UInt8*, pusercontext : IUnknown, pcallback : IUnknown, qwcontext : UInt64) : HRESULT
+    @lpVtbl.value.create_net_source.call(this, pszstreamname, pmonitor, pdata, pusercontext, pcallback, qwcontext)
+  end
+  def get_net_source_properties(this : INSNetSourceCreator*, pszstreamname : LibC::LPWSTR, pppropertiesnode : IUnknown*) : HRESULT
+    @lpVtbl.value.get_net_source_properties.call(this, pszstreamname, pppropertiesnode)
+  end
+  def get_net_source_shared_namespace(this : INSNetSourceCreator*, ppsharednamespace : IUnknown*) : HRESULT
+    @lpVtbl.value.get_net_source_shared_namespace.call(this, ppsharednamespace)
+  end
+  def get_net_source_admin_interface(this : INSNetSourceCreator*, pszstreamname : LibC::LPWSTR, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_net_source_admin_interface.call(this, pszstreamname, pval)
+  end
+  def get_num_protocols_supported(this : INSNetSourceCreator*, pcprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_protocols_supported.call(this, pcprotocols)
+  end
+  def get_protocol_name(this : INSNetSourceCreator*, dwprotocolnum : UInt32, pwszprotocolname : LibC::LPWSTR, pcchprotocolname : UInt16*) : HRESULT
+    @lpVtbl.value.get_protocol_name.call(this, dwprotocolnum, pwszprotocolname, pcchprotocolname)
+  end
+  def shutdown(this : INSNetSourceCreator*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+end
+struct LibWin32::IWMPlayerTimestampHook
+  def query_interface(this : IWMPlayerTimestampHook*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMPlayerTimestampHook*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMPlayerTimestampHook*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def map_timestamp(this : IWMPlayerTimestampHook*, rtin : Int64, prtout : Int64*) : HRESULT
+    @lpVtbl.value.map_timestamp.call(this, rtin, prtout)
+  end
+end
+struct LibWin32::IWMCodecAMVideoAccelerator
+  def query_interface(this : IWMCodecAMVideoAccelerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecAMVideoAccelerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecAMVideoAccelerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_accelerator_interface(this : IWMCodecAMVideoAccelerator*, piamva : IAMVideoAccelerator) : HRESULT
+    @lpVtbl.value.set_accelerator_interface.call(this, piamva)
+  end
+  def negotiate_connection(this : IWMCodecAMVideoAccelerator*, pmediatype : AM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.negotiate_connection.call(this, pmediatype)
+  end
+  def set_player_notify(this : IWMCodecAMVideoAccelerator*, phook : IWMPlayerTimestampHook) : HRESULT
+    @lpVtbl.value.set_player_notify.call(this, phook)
+  end
+end
+struct LibWin32::IWMCodecVideoAccelerator
+  def query_interface(this : IWMCodecVideoAccelerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMCodecVideoAccelerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMCodecVideoAccelerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def negotiate_connection(this : IWMCodecVideoAccelerator*, piamva : IAMVideoAccelerator, pmediatype : AM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.negotiate_connection.call(this, piamva, pmediatype)
+  end
+  def set_player_notify(this : IWMCodecVideoAccelerator*, phook : IWMPlayerTimestampHook) : HRESULT
+    @lpVtbl.value.set_player_notify.call(this, phook)
+  end
+end
+struct LibWin32::IWMSInternalAdminNetSource
+  def query_interface(this : IWMSInternalAdminNetSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSInternalAdminNetSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSInternalAdminNetSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IWMSInternalAdminNetSource*, psharednamespace : IUnknown, pnamespacenode : IUnknown, pnetsourcecreator : INSNetSourceCreator, fembeddedinserver : LibC::BOOL) : HRESULT
+    @lpVtbl.value.initialize.call(this, psharednamespace, pnamespacenode, pnetsourcecreator, fembeddedinserver)
+  end
+  def get_net_source_creator(this : IWMSInternalAdminNetSource*, ppnetsourcecreator : INSNetSourceCreator*) : HRESULT
+    @lpVtbl.value.get_net_source_creator.call(this, ppnetsourcecreator)
+  end
+  def set_credentials(this : IWMSInternalAdminNetSource*, bstrrealm : UInt8*, bstrname : UInt8*, bstrpassword : UInt8*, fpersist : LibC::BOOL, fconfirmedgood : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, bstrrealm, bstrname, bstrpassword, fpersist, fconfirmedgood)
+  end
+  def get_credentials(this : IWMSInternalAdminNetSource*, bstrrealm : UInt8*, pbstrname : UInt8**, pbstrpassword : UInt8**, pfconfirmedgood : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_credentials.call(this, bstrrealm, pbstrname, pbstrpassword, pfconfirmedgood)
+  end
+  def delete_credentials(this : IWMSInternalAdminNetSource*, bstrrealm : UInt8*) : HRESULT
+    @lpVtbl.value.delete_credentials.call(this, bstrrealm)
+  end
+  def get_credential_flags(this : IWMSInternalAdminNetSource*, lpdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_credential_flags.call(this, lpdwflags)
+  end
+  def set_credential_flags(this : IWMSInternalAdminNetSource*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_credential_flags.call(this, dwflags)
+  end
+  def find_proxy_for_url(this : IWMSInternalAdminNetSource*, bstrprotocol : UInt8*, bstrhost : UInt8*, pfproxyenabled : LibC::BOOL*, pbstrproxyserver : UInt8**, pdwproxyport : UInt32*, pdwproxycontext : UInt32*) : HRESULT
+    @lpVtbl.value.find_proxy_for_url.call(this, bstrprotocol, bstrhost, pfproxyenabled, pbstrproxyserver, pdwproxyport, pdwproxycontext)
+  end
+  def register_proxy_failure(this : IWMSInternalAdminNetSource*, hrparam : HRESULT, dwproxycontext : UInt32) : HRESULT
+    @lpVtbl.value.register_proxy_failure.call(this, hrparam, dwproxycontext)
+  end
+  def shutdown_proxy_context(this : IWMSInternalAdminNetSource*, dwproxycontext : UInt32) : HRESULT
+    @lpVtbl.value.shutdown_proxy_context.call(this, dwproxycontext)
+  end
+  def is_using_ie(this : IWMSInternalAdminNetSource*, dwproxycontext : UInt32, pfisusingie : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_using_ie.call(this, dwproxycontext, pfisusingie)
+  end
+end
+struct LibWin32::IWMSInternalAdminNetSource2
+  def query_interface(this : IWMSInternalAdminNetSource2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSInternalAdminNetSource2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSInternalAdminNetSource2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_credentials_ex(this : IWMSInternalAdminNetSource2*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, bstrname : UInt8*, bstrpassword : UInt8*, fpersist : LibC::BOOL, fconfirmedgood : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_credentials_ex.call(this, bstrrealm, bstrurl, fproxy, bstrname, bstrpassword, fpersist, fconfirmedgood)
+  end
+  def get_credentials_ex(this : IWMSInternalAdminNetSource2*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, pdwurlpolicy : NETSOURCE_URLCREDPOLICY_SETTINGS*, pbstrname : UInt8**, pbstrpassword : UInt8**, pfconfirmedgood : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_credentials_ex.call(this, bstrrealm, bstrurl, fproxy, pdwurlpolicy, pbstrname, pbstrpassword, pfconfirmedgood)
+  end
+  def delete_credentials_ex(this : IWMSInternalAdminNetSource2*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL) : HRESULT
+    @lpVtbl.value.delete_credentials_ex.call(this, bstrrealm, bstrurl, fproxy)
+  end
+  def find_proxy_for_url_ex(this : IWMSInternalAdminNetSource2*, bstrprotocol : UInt8*, bstrhost : UInt8*, bstrurl : UInt8*, pfproxyenabled : LibC::BOOL*, pbstrproxyserver : UInt8**, pdwproxyport : UInt32*, pdwproxycontext : UInt32*) : HRESULT
+    @lpVtbl.value.find_proxy_for_url_ex.call(this, bstrprotocol, bstrhost, bstrurl, pfproxyenabled, pbstrproxyserver, pdwproxyport, pdwproxycontext)
+  end
+end
+struct LibWin32::IWMSInternalAdminNetSource3
+  def query_interface(this : IWMSInternalAdminNetSource3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWMSInternalAdminNetSource3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWMSInternalAdminNetSource3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_credentials_ex(this : IWMSInternalAdminNetSource3*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, bstrname : UInt8*, bstrpassword : UInt8*, fpersist : LibC::BOOL, fconfirmedgood : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_credentials_ex.call(this, bstrrealm, bstrurl, fproxy, bstrname, bstrpassword, fpersist, fconfirmedgood)
+  end
+  def get_credentials_ex(this : IWMSInternalAdminNetSource3*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, pdwurlpolicy : NETSOURCE_URLCREDPOLICY_SETTINGS*, pbstrname : UInt8**, pbstrpassword : UInt8**, pfconfirmedgood : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_credentials_ex.call(this, bstrrealm, bstrurl, fproxy, pdwurlpolicy, pbstrname, pbstrpassword, pfconfirmedgood)
+  end
+  def delete_credentials_ex(this : IWMSInternalAdminNetSource3*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL) : HRESULT
+    @lpVtbl.value.delete_credentials_ex.call(this, bstrrealm, bstrurl, fproxy)
+  end
+  def find_proxy_for_url_ex(this : IWMSInternalAdminNetSource3*, bstrprotocol : UInt8*, bstrhost : UInt8*, bstrurl : UInt8*, pfproxyenabled : LibC::BOOL*, pbstrproxyserver : UInt8**, pdwproxyport : UInt32*, pdwproxycontext : UInt32*) : HRESULT
+    @lpVtbl.value.find_proxy_for_url_ex.call(this, bstrprotocol, bstrhost, bstrurl, pfproxyenabled, pbstrproxyserver, pdwproxyport, pdwproxycontext)
+  end
+  def get_net_source_creator2(this : IWMSInternalAdminNetSource3*, ppnetsourcecreator : IUnknown*) : HRESULT
+    @lpVtbl.value.get_net_source_creator2.call(this, ppnetsourcecreator)
+  end
+  def find_proxy_for_url_ex2(this : IWMSInternalAdminNetSource3*, bstrprotocol : UInt8*, bstrhost : UInt8*, bstrurl : UInt8*, pfproxyenabled : LibC::BOOL*, pbstrproxyserver : UInt8**, pdwproxyport : UInt32*, pqwproxycontext : UInt64*) : HRESULT
+    @lpVtbl.value.find_proxy_for_url_ex2.call(this, bstrprotocol, bstrhost, bstrurl, pfproxyenabled, pbstrproxyserver, pdwproxyport, pqwproxycontext)
+  end
+  def register_proxy_failure2(this : IWMSInternalAdminNetSource3*, hrparam : HRESULT, qwproxycontext : UInt64) : HRESULT
+    @lpVtbl.value.register_proxy_failure2.call(this, hrparam, qwproxycontext)
+  end
+  def shutdown_proxy_context2(this : IWMSInternalAdminNetSource3*, qwproxycontext : UInt64) : HRESULT
+    @lpVtbl.value.shutdown_proxy_context2.call(this, qwproxycontext)
+  end
+  def is_using_ie2(this : IWMSInternalAdminNetSource3*, qwproxycontext : UInt64, pfisusingie : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_using_ie2.call(this, qwproxycontext, pfisusingie)
+  end
+  def set_credentials_ex2(this : IWMSInternalAdminNetSource3*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, bstrname : UInt8*, bstrpassword : UInt8*, fpersist : LibC::BOOL, fconfirmedgood : LibC::BOOL, fcleartextauthentication : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_credentials_ex2.call(this, bstrrealm, bstrurl, fproxy, bstrname, bstrpassword, fpersist, fconfirmedgood, fcleartextauthentication)
+  end
+  def get_credentials_ex2(this : IWMSInternalAdminNetSource3*, bstrrealm : UInt8*, bstrurl : UInt8*, fproxy : LibC::BOOL, fcleartextauthentication : LibC::BOOL, pdwurlpolicy : NETSOURCE_URLCREDPOLICY_SETTINGS*, pbstrname : UInt8**, pbstrpassword : UInt8**, pfconfirmedgood : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_credentials_ex2.call(this, bstrrealm, bstrurl, fproxy, fcleartextauthentication, pdwurlpolicy, pbstrname, pbstrpassword, pfconfirmedgood)
+  end
+end

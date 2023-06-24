@@ -2642,7 +2642,7 @@ lib LibWin32
   fun FONTOBJ_cGetAllGlyphHandles(pfo : FONTOBJ*, phg : UInt32*) : UInt32
 
   # Params # pfo : FONTOBJ* [In],cjsize : UInt32 [In],pfi : FONTINFO* [In]
-  fun FONTOBJ_vGetInfo(pfo : FONTOBJ*, cjsize : UInt32, pfi : FONTINFO*)
+  fun FONTOBJ_vGetInfo(pfo : FONTOBJ*, cjsize : UInt32, pfi : FONTINFO*) : Void
 
   # Params # pfo : FONTOBJ* [In],imode : UInt32 [In],cglyph : UInt32 [In],phg : UInt32* [In],ppvglyph : Void** [In]
   fun FONTOBJ_cGetGlyphs(pfo : FONTOBJ*, imode : UInt32, cglyph : UInt32, phg : UInt32*, ppvglyph : Void**) : UInt32
@@ -2663,22 +2663,22 @@ lib LibWin32
   fun FONTOBJ_pQueryGlyphAttrs(pfo : FONTOBJ*, imode : UInt32) : FD_GLYPHATTR*
 
   # Params # ppo : PATHOBJ* [In]
-  fun PATHOBJ_vEnumStart(ppo : PATHOBJ*)
+  fun PATHOBJ_vEnumStart(ppo : PATHOBJ*) : Void
 
   # Params # ppo : PATHOBJ* [In],ppd : PATHDATA* [In]
   fun PATHOBJ_bEnum(ppo : PATHOBJ*, ppd : PATHDATA*) : LibC::BOOL
 
   # Params # ppo : PATHOBJ* [In],pco : CLIPOBJ* [In],pso : SURFOBJ* [In],pla : LINEATTRS* [In]
-  fun PATHOBJ_vEnumStartClipLines(ppo : PATHOBJ*, pco : CLIPOBJ*, pso : SURFOBJ*, pla : LINEATTRS*)
+  fun PATHOBJ_vEnumStartClipLines(ppo : PATHOBJ*, pco : CLIPOBJ*, pso : SURFOBJ*, pla : LINEATTRS*) : Void
 
   # Params # ppo : PATHOBJ* [In],cb : UInt32 [In],pcl : CLIPLINE* [In]
   fun PATHOBJ_bEnumClipLines(ppo : PATHOBJ*, cb : UInt32, pcl : CLIPLINE*) : LibC::BOOL
 
   # Params # ppo : PATHOBJ* [In],prectfx : RECTFX* [In]
-  fun PATHOBJ_vGetBounds(ppo : PATHOBJ*, prectfx : RECTFX*)
+  fun PATHOBJ_vGetBounds(ppo : PATHOBJ*, prectfx : RECTFX*) : Void
 
   # Params # pstro : STROBJ* [In]
-  fun STROBJ_vEnumStart(pstro : STROBJ*)
+  fun STROBJ_vEnumStart(pstro : STROBJ*) : Void
 
   # Params # pstro : STROBJ* [In],pc : UInt32* [In],ppgpos : GLYPHPOS** [In]
   fun STROBJ_bEnum(pstro : STROBJ*, pc : UInt32*, ppgpos : GLYPHPOS**) : LibC::BOOL
@@ -2726,7 +2726,7 @@ lib LibWin32
   fun EngLockSurface(hsurf : HSURF) : SURFOBJ*
 
   # Params # pso : SURFOBJ* [In]
-  fun EngUnlockSurface(pso : SURFOBJ*)
+  fun EngUnlockSurface(pso : SURFOBJ*) : Void
 
   # Params # pso : SURFOBJ* [In],prcl : RECTL* [In],icolor : UInt32 [In]
   fun EngEraseSurface(pso : SURFOBJ*, prcl : RECTL*, icolor : UInt32) : LibC::BOOL
@@ -2741,7 +2741,7 @@ lib LibWin32
   fun EngCheckAbort(pso : SURFOBJ*) : LibC::BOOL
 
   # Params # ppo : PATHOBJ* [In]
-  fun EngDeletePath(ppo : PATHOBJ*)
+  fun EngDeletePath(ppo : PATHOBJ*) : Void
 
   # Params # imode : UInt32 [In],ccolors : UInt32 [In],pulcolors : UInt32* [In],flred : UInt32 [In],flgreen : UInt32 [In],flblue : UInt32 [In]
   fun EngCreatePalette(imode : UInt32, ccolors : UInt32, pulcolors : UInt32*, flred : UInt32, flgreen : UInt32, flblue : UInt32) : HPALETTE
@@ -2753,7 +2753,7 @@ lib LibWin32
   fun EngCreateClip : CLIPOBJ*
 
   # Params # pco : CLIPOBJ* [In]
-  fun EngDeleteClip(pco : CLIPOBJ*)
+  fun EngDeleteClip(pco : CLIPOBJ*) : Void
 
   # Params # psotrg : SURFOBJ* [In],psosrc : SURFOBJ* [In],psomask : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],prcltrg : RECTL* [In],pptlsrc : POINTL* [In],pptlmask : POINTL* [In],pbo : BRUSHOBJ* [In],pptlbrush : POINTL* [In],rop4 : UInt32 [In]
   fun EngBitBlt(psotrg : SURFOBJ*, psosrc : SURFOBJ*, psomask : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, prcltrg : RECTL*, pptlsrc : POINTL*, pptlmask : POINTL*, pbo : BRUSHOBJ*, pptlbrush : POINTL*, rop4 : UInt32) : LibC::BOOL
@@ -2816,28 +2816,28 @@ lib LibWin32
   fun EngFindResource(h : LibC::HANDLE, iname : Int32, itype : Int32, pulsize : UInt32*) : Void*
 
   # Params # h : LibC::HANDLE [In]
-  fun EngFreeModule(h : LibC::HANDLE)
+  fun EngFreeModule(h : LibC::HANDLE) : Void
 
   # Params # 
   fun EngCreateSemaphore : HSEMAPHORE
 
   # Params # hsem : HSEMAPHORE [In]
-  fun EngAcquireSemaphore(hsem : HSEMAPHORE)
+  fun EngAcquireSemaphore(hsem : HSEMAPHORE) : Void
 
   # Params # hsem : HSEMAPHORE [In]
-  fun EngReleaseSemaphore(hsem : HSEMAPHORE)
+  fun EngReleaseSemaphore(hsem : HSEMAPHORE) : Void
 
   # Params # hsem : HSEMAPHORE [In]
-  fun EngDeleteSemaphore(hsem : HSEMAPHORE)
+  fun EngDeleteSemaphore(hsem : HSEMAPHORE) : Void
 
   # Params # unicodestring : LibC::LPWSTR [In],maxbytesinunicodestring : UInt32 [In],bytesinunicodestring : UInt32* [In],multibytestring : PSTR [In],bytesinmultibytestring : UInt32 [In]
-  fun EngMultiByteToUnicodeN(unicodestring : LibC::LPWSTR, maxbytesinunicodestring : UInt32, bytesinunicodestring : UInt32*, multibytestring : PSTR, bytesinmultibytestring : UInt32)
+  fun EngMultiByteToUnicodeN(unicodestring : LibC::LPWSTR, maxbytesinunicodestring : UInt32, bytesinunicodestring : UInt32*, multibytestring : PSTR, bytesinmultibytestring : UInt32) : Void
 
   # Params # multibytestring : PSTR [In],maxbytesinmultibytestring : UInt32 [In],bytesinmultibytestring : UInt32* [In],unicodestring : LibC::LPWSTR [In],bytesinunicodestring : UInt32 [In]
-  fun EngUnicodeToMultiByteN(multibytestring : PSTR, maxbytesinmultibytestring : UInt32, bytesinmultibytestring : UInt32*, unicodestring : LibC::LPWSTR, bytesinunicodestring : UInt32)
+  fun EngUnicodeToMultiByteN(multibytestring : PSTR, maxbytesinmultibytestring : UInt32, bytesinmultibytestring : UInt32*, unicodestring : LibC::LPWSTR, bytesinunicodestring : UInt32) : Void
 
   # Params # param0 : ENG_TIME_FIELDS* [In]
-  fun EngQueryLocalTime(param0 : ENG_TIME_FIELDS*)
+  fun EngQueryLocalTime(param0 : ENG_TIME_FIELDS*) : Void
 
   # Params # ncodepage : Int32 [In],nfirstchar : Int32 [In],cchars : Int32 [In]
   fun EngComputeGlyphSet(ncodepage : Int32, nfirstchar : Int32, cchars : Int32) : FD_GLYPHSET*
@@ -2849,7 +2849,7 @@ lib LibWin32
   fun EngWideCharToMultiByte(codepage : UInt32, widecharstring : LibC::LPWSTR, bytesinwidecharstring : Int32, multibytestring : PSTR, bytesinmultibytestring : Int32) : Int32
 
   # Params # oemcodepage : UInt16* [In],ansicodepage : UInt16* [In]
-  fun EngGetCurrentCodePage(oemcodepage : UInt16*, ansicodepage : UInt16*)
+  fun EngGetCurrentCodePage(oemcodepage : UInt16*, ansicodepage : UInt16*) : Void
 
   # Params # hdev : HDEV [In],pemfinfo : EMFINFO* [In]
   fun EngQueryEMFInfo(hdev : HDEV, pemfinfo : EMFINFO*) : LibC::BOOL
@@ -2877,4 +2877,56 @@ lib LibWin32
 
   # Params # orientation : ORIENTATION_PREFERENCE [In]
   fun SetDisplayAutoRotationPreferences(orientation : ORIENTATION_PREFERENCE) : LibC::BOOL
+end
+struct LibWin32::ICloneViewHelper
+  def query_interface(this : ICloneViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICloneViewHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICloneViewHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connected_i_ds(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
+  end
+  def get_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
+  end
+  def set_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
+  end
+  def commit(this : ICloneViewHelper*, ffinalcall : LibC::BOOL) : HRESULT
+    @lpVtbl.value.commit.call(this, ffinalcall)
+  end
+end
+struct LibWin32::IViewHelper
+  def query_interface(this : IViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IViewHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IViewHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connected_i_ds(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
+  end
+  def get_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
+  end
+  def set_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
+    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
+  end
+  def commit(this : IViewHelper*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def set_configuration(this : IViewHelper*, pistream : IStream, pulstatus : UInt32*) : HRESULT
+    @lpVtbl.value.set_configuration.call(this, pistream, pulstatus)
+  end
+  def get_proceed_on_new_configuration(this : IViewHelper*) : HRESULT
+    @lpVtbl.value.get_proceed_on_new_configuration.call(this)
+  end
 end

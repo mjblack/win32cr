@@ -776,3 +776,45 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ID3DBlob
+  def query_interface(this : ID3DBlob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3DBlob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3DBlob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer_pointer(this : ID3DBlob*) : Void*
+    @lpVtbl.value.get_buffer_pointer.call(this)
+  end
+  def get_buffer_size(this : ID3DBlob*) : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.call(this)
+  end
+end
+struct LibWin32::ID3DDestructionNotifier
+  def query_interface(this : ID3DDestructionNotifier*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3DDestructionNotifier*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3DDestructionNotifier*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_destruction_callback(this : ID3DDestructionNotifier*, callbackfn : PFN_DESTRUCTION_CALLBACK, pdata : Void*, pcallbackid : UInt32*) : HRESULT
+    @lpVtbl.value.register_destruction_callback.call(this, callbackfn, pdata, pcallbackid)
+  end
+  def unregister_destruction_callback(this : ID3DDestructionNotifier*, callbackid : UInt32) : HRESULT
+    @lpVtbl.value.unregister_destruction_callback.call(this, callbackid)
+  end
+end
+struct LibWin32::ID3DInclude
+  def open(this : ID3DInclude*, includetype : D3D_INCLUDE_TYPE, pfilename : PSTR, pparentdata : Void*, ppdata : Void**, pbytes : UInt32*) : HRESULT
+    @lpVtbl.value.open.call(this, includetype, pfilename, pparentdata, ppdata, pbytes)
+  end
+  def close(this : ID3DInclude*, pdata : Void*) : HRESULT
+    @lpVtbl.value.close.call(this, pdata)
+  end
+end

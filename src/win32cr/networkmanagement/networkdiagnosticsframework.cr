@@ -342,3 +342,130 @@ lib LibWin32
   # Params # handle : Void* [In],tracefilelocation : LibC::LPWSTR* [In]
   fun NdfGetTraceFile(handle : Void*, tracefilelocation : LibC::LPWSTR*) : HRESULT
 end
+struct LibWin32::INetDiagHelper
+  def query_interface(this : INetDiagHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetDiagHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetDiagHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : INetDiagHelper*, celt : UInt32, rgattributes : HELPER_ATTRIBUTE*) : HRESULT
+    @lpVtbl.value.initialize.call(this, celt, rgattributes)
+  end
+  def get_diagnostics_info(this : INetDiagHelper*, ppinfo : DiagnosticsInfo**) : HRESULT
+    @lpVtbl.value.get_diagnostics_info.call(this, ppinfo)
+  end
+  def get_key_attributes(this : INetDiagHelper*, pcelt : UInt32*, pprgattributes : HELPER_ATTRIBUTE**) : HRESULT
+    @lpVtbl.value.get_key_attributes.call(this, pcelt, pprgattributes)
+  end
+  def low_health(this : INetDiagHelper*, pwszinstancedescription : LibC::LPWSTR, ppwszdescription : LibC::LPWSTR*, pdeferredtime : Int32*, pstatus : DIAGNOSIS_STATUS*) : HRESULT
+    @lpVtbl.value.low_health.call(this, pwszinstancedescription, ppwszdescription, pdeferredtime, pstatus)
+  end
+  def high_utilization(this : INetDiagHelper*, pwszinstancedescription : LibC::LPWSTR, ppwszdescription : LibC::LPWSTR*, pdeferredtime : Int32*, pstatus : DIAGNOSIS_STATUS*) : HRESULT
+    @lpVtbl.value.high_utilization.call(this, pwszinstancedescription, ppwszdescription, pdeferredtime, pstatus)
+  end
+  def get_lower_hypotheses(this : INetDiagHelper*, pcelt : UInt32*, pprghypotheses : HYPOTHESIS**) : HRESULT
+    @lpVtbl.value.get_lower_hypotheses.call(this, pcelt, pprghypotheses)
+  end
+  def get_down_stream_hypotheses(this : INetDiagHelper*, pcelt : UInt32*, pprghypotheses : HYPOTHESIS**) : HRESULT
+    @lpVtbl.value.get_down_stream_hypotheses.call(this, pcelt, pprghypotheses)
+  end
+  def get_higher_hypotheses(this : INetDiagHelper*, pcelt : UInt32*, pprghypotheses : HYPOTHESIS**) : HRESULT
+    @lpVtbl.value.get_higher_hypotheses.call(this, pcelt, pprghypotheses)
+  end
+  def get_up_stream_hypotheses(this : INetDiagHelper*, pcelt : UInt32*, pprghypotheses : HYPOTHESIS**) : HRESULT
+    @lpVtbl.value.get_up_stream_hypotheses.call(this, pcelt, pprghypotheses)
+  end
+  def repair(this : INetDiagHelper*, pinfo : RepairInfo*, pdeferredtime : Int32*, pstatus : REPAIR_STATUS*) : HRESULT
+    @lpVtbl.value.repair.call(this, pinfo, pdeferredtime, pstatus)
+  end
+  def validate(this : INetDiagHelper*, problem : PROBLEM_TYPE, pdeferredtime : Int32*, pstatus : REPAIR_STATUS*) : HRESULT
+    @lpVtbl.value.validate.call(this, problem, pdeferredtime, pstatus)
+  end
+  def get_repair_info(this : INetDiagHelper*, problem : PROBLEM_TYPE, pcelt : UInt32*, ppinfo : RepairInfo**) : HRESULT
+    @lpVtbl.value.get_repair_info.call(this, problem, pcelt, ppinfo)
+  end
+  def get_life_time(this : INetDiagHelper*, plifetime : LIFE_TIME*) : HRESULT
+    @lpVtbl.value.get_life_time.call(this, plifetime)
+  end
+  def set_life_time(this : INetDiagHelper*, lifetime : LIFE_TIME) : HRESULT
+    @lpVtbl.value.set_life_time.call(this, lifetime)
+  end
+  def get_cache_time(this : INetDiagHelper*, pcachetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_cache_time.call(this, pcachetime)
+  end
+  def get_attributes(this : INetDiagHelper*, pcelt : UInt32*, pprgattributes : HELPER_ATTRIBUTE**) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pcelt, pprgattributes)
+  end
+  def cancel(this : INetDiagHelper*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def cleanup(this : INetDiagHelper*) : HRESULT
+    @lpVtbl.value.cleanup.call(this)
+  end
+end
+struct LibWin32::INetDiagHelperUtilFactory
+  def query_interface(this : INetDiagHelperUtilFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetDiagHelperUtilFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetDiagHelperUtilFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_utility_instance(this : INetDiagHelperUtilFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_utility_instance.call(this, riid, ppvobject)
+  end
+end
+struct LibWin32::INetDiagHelperEx
+  def query_interface(this : INetDiagHelperEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetDiagHelperEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetDiagHelperEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reconfirm_low_health(this : INetDiagHelperEx*, celt : UInt32, presults : HypothesisResult*, ppwszupdateddescription : LibC::LPWSTR*, pupdatedstatus : DIAGNOSIS_STATUS*) : HRESULT
+    @lpVtbl.value.reconfirm_low_health.call(this, celt, presults, ppwszupdateddescription, pupdatedstatus)
+  end
+  def set_utilities(this : INetDiagHelperEx*, putilities : INetDiagHelperUtilFactory) : HRESULT
+    @lpVtbl.value.set_utilities.call(this, putilities)
+  end
+  def reproduce_failure(this : INetDiagHelperEx*) : HRESULT
+    @lpVtbl.value.reproduce_failure.call(this)
+  end
+end
+struct LibWin32::INetDiagHelperInfo
+  def query_interface(this : INetDiagHelperInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetDiagHelperInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetDiagHelperInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attribute_info(this : INetDiagHelperInfo*, pcelt : UInt32*, pprgattributeinfos : HelperAttributeInfo**) : HRESULT
+    @lpVtbl.value.get_attribute_info.call(this, pcelt, pprgattributeinfos)
+  end
+end
+struct LibWin32::INetDiagExtensibleHelper
+  def query_interface(this : INetDiagExtensibleHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetDiagExtensibleHelper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetDiagExtensibleHelper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resolve_attributes(this : INetDiagExtensibleHelper*, celt : UInt32, rgkeyattributes : HELPER_ATTRIBUTE*, pcelt : UInt32*, prgmatchvalues : HELPER_ATTRIBUTE**) : HRESULT
+    @lpVtbl.value.resolve_attributes.call(this, celt, rgkeyattributes, pcelt, prgmatchvalues)
+  end
+end

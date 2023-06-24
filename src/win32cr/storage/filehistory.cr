@@ -216,3 +216,116 @@ lib LibWin32
   # Params # pipe : FH_SERVICE_PIPE_HANDLE [In]
   fun FhServiceUnblockBackup(pipe : FH_SERVICE_PIPE_HANDLE) : HRESULT
 end
+struct LibWin32::IFhTarget
+  def query_interface(this : IFhTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFhTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFhTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_string_property(this : IFhTarget*, propertytype : FH_TARGET_PROPERTY_TYPE, propertyvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_property.call(this, propertytype, propertyvalue)
+  end
+  def get_numerical_property(this : IFhTarget*, propertytype : FH_TARGET_PROPERTY_TYPE, propertyvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_numerical_property.call(this, propertytype, propertyvalue)
+  end
+end
+struct LibWin32::IFhScopeIterator
+  def query_interface(this : IFhScopeIterator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFhScopeIterator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFhScopeIterator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_to_next_item(this : IFhScopeIterator*) : HRESULT
+    @lpVtbl.value.move_to_next_item.call(this)
+  end
+  def get_item(this : IFhScopeIterator*, item : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, item)
+  end
+end
+struct LibWin32::IFhConfigMgr
+  def query_interface(this : IFhConfigMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFhConfigMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFhConfigMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_configuration(this : IFhConfigMgr*) : HRESULT
+    @lpVtbl.value.load_configuration.call(this)
+  end
+  def create_default_configuration(this : IFhConfigMgr*, overwriteifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_default_configuration.call(this, overwriteifexists)
+  end
+  def save_configuration(this : IFhConfigMgr*) : HRESULT
+    @lpVtbl.value.save_configuration.call(this)
+  end
+  def add_remove_exclude_rule(this : IFhConfigMgr*, add : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, item : UInt8*) : HRESULT
+    @lpVtbl.value.add_remove_exclude_rule.call(this, add, category, item)
+  end
+  def get_include_exclude_rules(this : IFhConfigMgr*, include : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, iterator : IFhScopeIterator*) : HRESULT
+    @lpVtbl.value.get_include_exclude_rules.call(this, include, category, iterator)
+  end
+  def get_local_policy(this : IFhConfigMgr*, localpolicytype : FH_LOCAL_POLICY_TYPE, policyvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_local_policy.call(this, localpolicytype, policyvalue)
+  end
+  def set_local_policy(this : IFhConfigMgr*, localpolicytype : FH_LOCAL_POLICY_TYPE, policyvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_local_policy.call(this, localpolicytype, policyvalue)
+  end
+  def get_backup_status(this : IFhConfigMgr*, backupstatus : FH_BACKUP_STATUS*) : HRESULT
+    @lpVtbl.value.get_backup_status.call(this, backupstatus)
+  end
+  def set_backup_status(this : IFhConfigMgr*, backupstatus : FH_BACKUP_STATUS) : HRESULT
+    @lpVtbl.value.set_backup_status.call(this, backupstatus)
+  end
+  def get_default_target(this : IFhConfigMgr*, defaulttarget : IFhTarget*) : HRESULT
+    @lpVtbl.value.get_default_target.call(this, defaulttarget)
+  end
+  def validate_target(this : IFhConfigMgr*, targeturl : UInt8*, validationresult : FH_DEVICE_VALIDATION_RESULT*) : HRESULT
+    @lpVtbl.value.validate_target.call(this, targeturl, validationresult)
+  end
+  def provision_and_set_new_target(this : IFhConfigMgr*, targeturl : UInt8*, targetname : UInt8*) : HRESULT
+    @lpVtbl.value.provision_and_set_new_target.call(this, targeturl, targetname)
+  end
+  def change_default_target_recommendation(this : IFhConfigMgr*, recommend : LibC::BOOL) : HRESULT
+    @lpVtbl.value.change_default_target_recommendation.call(this, recommend)
+  end
+  def query_protection_status(this : IFhConfigMgr*, protectionstate : UInt32*, protecteduntiltime : UInt8**) : HRESULT
+    @lpVtbl.value.query_protection_status.call(this, protectionstate, protecteduntiltime)
+  end
+end
+struct LibWin32::IFhReassociation
+  def query_interface(this : IFhReassociation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFhReassociation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFhReassociation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def validate_target(this : IFhReassociation*, targeturl : UInt8*, validationresult : FH_DEVICE_VALIDATION_RESULT*) : HRESULT
+    @lpVtbl.value.validate_target.call(this, targeturl, validationresult)
+  end
+  def scan_target_for_configurations(this : IFhReassociation*, targeturl : UInt8*) : HRESULT
+    @lpVtbl.value.scan_target_for_configurations.call(this, targeturl)
+  end
+  def get_configuration_details(this : IFhReassociation*, index : UInt32, username : UInt8**, pcname : UInt8**, backuptime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_configuration_details.call(this, index, username, pcname, backuptime)
+  end
+  def select_configuration(this : IFhReassociation*, index : UInt32) : HRESULT
+    @lpVtbl.value.select_configuration.call(this, index)
+  end
+  def perform_reassociation(this : IFhReassociation*, overwriteifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.perform_reassociation.call(this, overwriteifexists)
+  end
+end

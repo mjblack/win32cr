@@ -171,3 +171,163 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ICatalog
+  def query_interface(this : ICatalog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICatalog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICatalog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICatalog*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICatalog*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICatalog*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICatalog*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_collection(this : ICatalog*, bstrcollname : UInt8*, ppcatalogcollection : IDispatch*) : HRESULT
+    @lpVtbl.value.get_collection.call(this, bstrcollname, ppcatalogcollection)
+  end
+  def connect(this : ICatalog*, bstrconnectstring : UInt8*, ppcatalogcollection : IDispatch*) : HRESULT
+    @lpVtbl.value.connect.call(this, bstrconnectstring, ppcatalogcollection)
+  end
+  def get_major_version(this : ICatalog*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, retval)
+  end
+  def get_minor_version(this : ICatalog*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, retval)
+  end
+end
+struct LibWin32::IComponentUtil
+  def query_interface(this : IComponentUtil*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IComponentUtil*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IComponentUtil*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IComponentUtil*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IComponentUtil*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IComponentUtil*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IComponentUtil*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def install_component(this : IComponentUtil*, bstrdllfile : UInt8*, bstrtypelibfile : UInt8*, bstrproxystubdllfile : UInt8*) : HRESULT
+    @lpVtbl.value.install_component.call(this, bstrdllfile, bstrtypelibfile, bstrproxystubdllfile)
+  end
+  def import_component(this : IComponentUtil*, bstrclsid : UInt8*) : HRESULT
+    @lpVtbl.value.import_component.call(this, bstrclsid)
+  end
+  def import_component_by_name(this : IComponentUtil*, bstrprogid : UInt8*) : HRESULT
+    @lpVtbl.value.import_component_by_name.call(this, bstrprogid)
+  end
+  def get_clsi_ds(this : IComponentUtil*, bstrdllfile : UInt8*, bstrtypelibfile : UInt8*, aclsids : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_clsi_ds.call(this, bstrdllfile, bstrtypelibfile, aclsids)
+  end
+end
+struct LibWin32::IPackageUtil
+  def query_interface(this : IPackageUtil*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPackageUtil*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPackageUtil*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPackageUtil*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPackageUtil*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPackageUtil*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPackageUtil*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def install_package(this : IPackageUtil*, bstrpackagefile : UInt8*, bstrinstallpath : UInt8*, loptions : Int32) : HRESULT
+    @lpVtbl.value.install_package.call(this, bstrpackagefile, bstrinstallpath, loptions)
+  end
+  def export_package(this : IPackageUtil*, bstrpackageid : UInt8*, bstrpackagefile : UInt8*, loptions : Int32) : HRESULT
+    @lpVtbl.value.export_package.call(this, bstrpackageid, bstrpackagefile, loptions)
+  end
+  def shutdown_package(this : IPackageUtil*, bstrpackageid : UInt8*) : HRESULT
+    @lpVtbl.value.shutdown_package.call(this, bstrpackageid)
+  end
+end
+struct LibWin32::IRemoteComponentUtil
+  def query_interface(this : IRemoteComponentUtil*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRemoteComponentUtil*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRemoteComponentUtil*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRemoteComponentUtil*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRemoteComponentUtil*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRemoteComponentUtil*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRemoteComponentUtil*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def install_remote_component(this : IRemoteComponentUtil*, bstrserver : UInt8*, bstrpackageid : UInt8*, bstrclsid : UInt8*) : HRESULT
+    @lpVtbl.value.install_remote_component.call(this, bstrserver, bstrpackageid, bstrclsid)
+  end
+  def install_remote_component_by_name(this : IRemoteComponentUtil*, bstrserver : UInt8*, bstrpackagename : UInt8*, bstrprogid : UInt8*) : HRESULT
+    @lpVtbl.value.install_remote_component_by_name.call(this, bstrserver, bstrpackagename, bstrprogid)
+  end
+end
+struct LibWin32::IRoleAssociationUtil
+  def query_interface(this : IRoleAssociationUtil*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRoleAssociationUtil*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRoleAssociationUtil*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRoleAssociationUtil*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRoleAssociationUtil*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRoleAssociationUtil*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRoleAssociationUtil*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def associate_role(this : IRoleAssociationUtil*, bstrroleid : UInt8*) : HRESULT
+    @lpVtbl.value.associate_role.call(this, bstrroleid)
+  end
+  def associate_role_by_name(this : IRoleAssociationUtil*, bstrrolename : UInt8*) : HRESULT
+    @lpVtbl.value.associate_role_by_name.call(this, bstrrolename)
+  end
+end

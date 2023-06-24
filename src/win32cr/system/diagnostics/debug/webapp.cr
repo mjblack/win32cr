@@ -119,3 +119,137 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWebApplicationScriptEvents
+  def query_interface(this : IWebApplicationScriptEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationScriptEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationScriptEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def before_script_execute(this : IWebApplicationScriptEvents*, htmlwindow : IHTMLWindow2) : HRESULT
+    @lpVtbl.value.before_script_execute.call(this, htmlwindow)
+  end
+  def script_error(this : IWebApplicationScriptEvents*, htmlwindow : IHTMLWindow2, scripterror : IActiveScriptError, url : LibC::LPWSTR, errorhandled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.script_error.call(this, htmlwindow, scripterror, url, errorhandled)
+  end
+end
+struct LibWin32::IWebApplicationNavigationEvents
+  def query_interface(this : IWebApplicationNavigationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationNavigationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationNavigationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def before_navigate(this : IWebApplicationNavigationEvents*, htmlwindow : IHTMLWindow2, url : LibC::LPWSTR, navigationflags : UInt32, targetframename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.before_navigate.call(this, htmlwindow, url, navigationflags, targetframename)
+  end
+  def navigate_complete(this : IWebApplicationNavigationEvents*, htmlwindow : IHTMLWindow2, url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.navigate_complete.call(this, htmlwindow, url)
+  end
+  def navigate_error(this : IWebApplicationNavigationEvents*, htmlwindow : IHTMLWindow2, url : LibC::LPWSTR, targetframename : LibC::LPWSTR, statuscode : UInt32) : HRESULT
+    @lpVtbl.value.navigate_error.call(this, htmlwindow, url, targetframename, statuscode)
+  end
+  def document_complete(this : IWebApplicationNavigationEvents*, htmlwindow : IHTMLWindow2, url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.document_complete.call(this, htmlwindow, url)
+  end
+  def download_begin(this : IWebApplicationNavigationEvents*) : HRESULT
+    @lpVtbl.value.download_begin.call(this)
+  end
+  def download_complete(this : IWebApplicationNavigationEvents*) : HRESULT
+    @lpVtbl.value.download_complete.call(this)
+  end
+end
+struct LibWin32::IWebApplicationUIEvents
+  def query_interface(this : IWebApplicationUIEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationUIEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationUIEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def security_problem(this : IWebApplicationUIEvents*, securityproblem : UInt32, result : HRESULT*) : HRESULT
+    @lpVtbl.value.security_problem.call(this, securityproblem, result)
+  end
+end
+struct LibWin32::IWebApplicationUpdateEvents
+  def query_interface(this : IWebApplicationUpdateEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationUpdateEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationUpdateEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_paint(this : IWebApplicationUpdateEvents*) : HRESULT
+    @lpVtbl.value.on_paint.call(this)
+  end
+  def on_css_changed(this : IWebApplicationUpdateEvents*) : HRESULT
+    @lpVtbl.value.on_css_changed.call(this)
+  end
+end
+struct LibWin32::IWebApplicationHost
+  def query_interface(this : IWebApplicationHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_hwnd(this : IWebApplicationHost*, hwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, hwnd)
+  end
+  def get_document(this : IWebApplicationHost*, htmldocument : IHTMLDocument2*) : HRESULT
+    @lpVtbl.value.get_document.call(this, htmldocument)
+  end
+  def refresh(this : IWebApplicationHost*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def advise(this : IWebApplicationHost*, interfaceid : Guid*, callback : IUnknown, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, interfaceid, callback, cookie)
+  end
+  def unadvise(this : IWebApplicationHost*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, cookie)
+  end
+end
+struct LibWin32::IWebApplicationActivation
+  def query_interface(this : IWebApplicationActivation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationActivation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationActivation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cancel_pending_activation(this : IWebApplicationActivation*) : HRESULT
+    @lpVtbl.value.cancel_pending_activation.call(this)
+  end
+end
+struct LibWin32::IWebApplicationAuthoringMode
+  def query_interface(this : IWebApplicationAuthoringMode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebApplicationAuthoringMode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebApplicationAuthoringMode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_service(this : IWebApplicationAuthoringMode*, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_service.call(this, guidservice, riid, ppvobject)
+  end
+  def get_authoring_client_binary(this : IWebApplicationAuthoringMode*, designmodedllpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_authoring_client_binary.call(this, designmodedllpath)
+  end
+end

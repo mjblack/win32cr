@@ -85,3 +85,122 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IHolographicCameraInterop
+  def query_interface(this : IHolographicCameraInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHolographicCameraInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHolographicCameraInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IHolographicCameraInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IHolographicCameraInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IHolographicCameraInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_direct3_d12_back_buffer_resource(this : IHolographicCameraInterop*, pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_back_buffer_resource.call(this, pdevice, ptexture2ddesc, ppcreatedtexture2dresource)
+  end
+  def create_direct3_d12_hardware_protected_back_buffer_resource(this : IHolographicCameraInterop*, pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_hardware_protected_back_buffer_resource.call(this, pdevice, ptexture2ddesc, pprotectedresourcesession, ppcreatedtexture2dresource)
+  end
+  def acquire_direct3_d12_buffer_resource(this : IHolographicCameraInterop*, presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource.call(this, presourcetoacquire, pcommandqueue)
+  end
+  def acquire_direct3_d12_buffer_resource_with_timeout(this : IHolographicCameraInterop*, presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue, duration : UInt64) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource_with_timeout.call(this, presourcetoacquire, pcommandqueue, duration)
+  end
+  def unacquire_direct3_d12_buffer_resource(this : IHolographicCameraInterop*, presourcetounacquire : ID3D12Resource) : HRESULT
+    @lpVtbl.value.unacquire_direct3_d12_buffer_resource.call(this, presourcetounacquire)
+  end
+end
+struct LibWin32::IHolographicCameraRenderingParametersInterop
+  def query_interface(this : IHolographicCameraRenderingParametersInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHolographicCameraRenderingParametersInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHolographicCameraRenderingParametersInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IHolographicCameraRenderingParametersInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IHolographicCameraRenderingParametersInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IHolographicCameraRenderingParametersInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def commit_direct3_d12_resource(this : IHolographicCameraRenderingParametersInterop*, pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource.call(this, pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue)
+  end
+  def commit_direct3_d12_resource_with_depth_data(this : IHolographicCameraRenderingParametersInterop*, pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64, pdepthresourcetocommit : ID3D12Resource, pdepthresourcefence : ID3D12Fence, depthresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource_with_depth_data.call(this, pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue, pdepthresourcetocommit, pdepthresourcefence, depthresourcefencesignalvalue)
+  end
+end
+struct LibWin32::IHolographicQuadLayerInterop
+  def query_interface(this : IHolographicQuadLayerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHolographicQuadLayerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHolographicQuadLayerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IHolographicQuadLayerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IHolographicQuadLayerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IHolographicQuadLayerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_direct3_d12_content_buffer_resource(this : IHolographicQuadLayerInterop*, pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pptexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_content_buffer_resource.call(this, pdevice, ptexture2ddesc, pptexture2dresource)
+  end
+  def create_direct3_d12_hardware_protected_content_buffer_resource(this : IHolographicQuadLayerInterop*, pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_hardware_protected_content_buffer_resource.call(this, pdevice, ptexture2ddesc, pprotectedresourcesession, ppcreatedtexture2dresource)
+  end
+  def acquire_direct3_d12_buffer_resource(this : IHolographicQuadLayerInterop*, presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource.call(this, presourcetoacquire, pcommandqueue)
+  end
+  def acquire_direct3_d12_buffer_resource_with_timeout(this : IHolographicQuadLayerInterop*, presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue, duration : UInt64) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource_with_timeout.call(this, presourcetoacquire, pcommandqueue, duration)
+  end
+  def unacquire_direct3_d12_buffer_resource(this : IHolographicQuadLayerInterop*, presourcetounacquire : ID3D12Resource) : HRESULT
+    @lpVtbl.value.unacquire_direct3_d12_buffer_resource.call(this, presourcetounacquire)
+  end
+end
+struct LibWin32::IHolographicQuadLayerUpdateParametersInterop
+  def query_interface(this : IHolographicQuadLayerUpdateParametersInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHolographicQuadLayerUpdateParametersInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHolographicQuadLayerUpdateParametersInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IHolographicQuadLayerUpdateParametersInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IHolographicQuadLayerUpdateParametersInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IHolographicQuadLayerUpdateParametersInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def commit_direct3_d12_resource(this : IHolographicQuadLayerUpdateParametersInterop*, pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource.call(this, pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue)
+  end
+end

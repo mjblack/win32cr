@@ -2099,3 +2099,3199 @@ lib LibWin32
   # Params # hwnd : LibC::HANDLE [In],hdcblt : HDC [In],nflags : PRINT_WINDOW_FLAGS [In]
   fun PrintWindow(hwnd : LibC::HANDLE, hdcblt : HDC, nflags : PRINT_WINDOW_FLAGS) : LibC::BOOL
 end
+struct LibWin32::IXpsOMShareable
+  def query_interface(this : IXpsOMShareable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMShareable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMShareable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMShareable*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMShareable*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+end
+struct LibWin32::IXpsOMVisual
+  def query_interface(this : IXpsOMVisual*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMVisual*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMVisual*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMVisual*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMVisual*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_transform(this : IXpsOMVisual*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, matrixtransform)
+  end
+  def get_transform_local(this : IXpsOMVisual*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, matrixtransform)
+  end
+  def set_transform_local(this : IXpsOMVisual*, matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, matrixtransform)
+  end
+  def get_transform_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_clip_geometry(this : IXpsOMVisual*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.call(this, clipgeometry)
+  end
+  def get_clip_geometry_local(this : IXpsOMVisual*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.call(this, clipgeometry)
+  end
+  def set_clip_geometry_local(this : IXpsOMVisual*, clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.call(this, clipgeometry)
+  end
+  def get_clip_geometry_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.call(this, key)
+  end
+  def set_clip_geometry_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.call(this, key)
+  end
+  def get_opacity(this : IXpsOMVisual*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMVisual*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_opacity_mask_brush(this : IXpsOMVisual*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(this : IXpsOMVisual*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(this : IXpsOMVisual*, opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.call(this, key)
+  end
+  def set_opacity_mask_brush_lookup(this : IXpsOMVisual*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.call(this, key)
+  end
+  def get_name(this : IXpsOMVisual*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMVisual*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMVisual*, ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def set_is_hyperlink_target(this : IXpsOMVisual*, ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(this : IXpsOMVisual*, hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(this : IXpsOMVisual*, hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def get_language(this : IXpsOMVisual*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMVisual*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+end
+struct LibWin32::IXpsOMPart
+  def query_interface(this : IXpsOMPart*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPart*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPart*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMPart*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMPart*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+end
+struct LibWin32::IXpsOMGlyphsEditor
+  def query_interface(this : IXpsOMGlyphsEditor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGlyphsEditor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGlyphsEditor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def apply_edits(this : IXpsOMGlyphsEditor*) : HRESULT
+    @lpVtbl.value.apply_edits.call(this)
+  end
+  def get_unicode_string(this : IXpsOMGlyphsEditor*, unicodestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unicode_string.call(this, unicodestring)
+  end
+  def set_unicode_string(this : IXpsOMGlyphsEditor*, unicodestring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_unicode_string.call(this, unicodestring)
+  end
+  def get_glyph_index_count(this : IXpsOMGlyphsEditor*, indexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_index_count.call(this, indexcount)
+  end
+  def get_glyph_indices(this : IXpsOMGlyphsEditor*, indexcount : UInt32*, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, indexcount, glyphindices)
+  end
+  def set_glyph_indices(this : IXpsOMGlyphsEditor*, indexcount : UInt32, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.set_glyph_indices.call(this, indexcount, glyphindices)
+  end
+  def get_glyph_mapping_count(this : IXpsOMGlyphsEditor*, glyphmappingcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_mapping_count.call(this, glyphmappingcount)
+  end
+  def get_glyph_mappings(this : IXpsOMGlyphsEditor*, glyphmappingcount : UInt32*, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.get_glyph_mappings.call(this, glyphmappingcount, glyphmappings)
+  end
+  def set_glyph_mappings(this : IXpsOMGlyphsEditor*, glyphmappingcount : UInt32, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.set_glyph_mappings.call(this, glyphmappingcount, glyphmappings)
+  end
+  def get_prohibited_caret_stop_count(this : IXpsOMGlyphsEditor*, prohibitedcaretstopcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stop_count.call(this, prohibitedcaretstopcount)
+  end
+  def get_prohibited_caret_stops(this : IXpsOMGlyphsEditor*, count : UInt32*, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stops.call(this, count, prohibitedcaretstops)
+  end
+  def set_prohibited_caret_stops(this : IXpsOMGlyphsEditor*, count : UInt32, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.set_prohibited_caret_stops.call(this, count, prohibitedcaretstops)
+  end
+  def get_bidi_level(this : IXpsOMGlyphsEditor*, bidilevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_bidi_level.call(this, bidilevel)
+  end
+  def set_bidi_level(this : IXpsOMGlyphsEditor*, bidilevel : UInt32) : HRESULT
+    @lpVtbl.value.set_bidi_level.call(this, bidilevel)
+  end
+  def get_is_sideways(this : IXpsOMGlyphsEditor*, issideways : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_sideways.call(this, issideways)
+  end
+  def set_is_sideways(this : IXpsOMGlyphsEditor*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_sideways.call(this, issideways)
+  end
+  def get_device_font_name(this : IXpsOMGlyphsEditor*, devicefontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_font_name.call(this, devicefontname)
+  end
+  def set_device_font_name(this : IXpsOMGlyphsEditor*, devicefontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_device_font_name.call(this, devicefontname)
+  end
+end
+struct LibWin32::IXpsOMGlyphs
+  def query_interface(this : IXpsOMGlyphs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGlyphs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGlyphs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMGlyphs*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMGlyphs*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_transform(this : IXpsOMGlyphs*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, matrixtransform)
+  end
+  def get_transform_local(this : IXpsOMGlyphs*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, matrixtransform)
+  end
+  def set_transform_local(this : IXpsOMGlyphs*, matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, matrixtransform)
+  end
+  def get_transform_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_clip_geometry(this : IXpsOMGlyphs*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.call(this, clipgeometry)
+  end
+  def get_clip_geometry_local(this : IXpsOMGlyphs*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.call(this, clipgeometry)
+  end
+  def set_clip_geometry_local(this : IXpsOMGlyphs*, clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.call(this, clipgeometry)
+  end
+  def get_clip_geometry_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.call(this, key)
+  end
+  def set_clip_geometry_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.call(this, key)
+  end
+  def get_opacity(this : IXpsOMGlyphs*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMGlyphs*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_opacity_mask_brush(this : IXpsOMGlyphs*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(this : IXpsOMGlyphs*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(this : IXpsOMGlyphs*, opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.call(this, key)
+  end
+  def set_opacity_mask_brush_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.call(this, key)
+  end
+  def get_name(this : IXpsOMGlyphs*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMGlyphs*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMGlyphs*, ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def set_is_hyperlink_target(this : IXpsOMGlyphs*, ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(this : IXpsOMGlyphs*, hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(this : IXpsOMGlyphs*, hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def get_language(this : IXpsOMGlyphs*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMGlyphs*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_unicode_string(this : IXpsOMGlyphs*, unicodestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unicode_string.call(this, unicodestring)
+  end
+  def get_glyph_index_count(this : IXpsOMGlyphs*, indexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_index_count.call(this, indexcount)
+  end
+  def get_glyph_indices(this : IXpsOMGlyphs*, indexcount : UInt32*, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.call(this, indexcount, glyphindices)
+  end
+  def get_glyph_mapping_count(this : IXpsOMGlyphs*, glyphmappingcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_mapping_count.call(this, glyphmappingcount)
+  end
+  def get_glyph_mappings(this : IXpsOMGlyphs*, glyphmappingcount : UInt32*, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.get_glyph_mappings.call(this, glyphmappingcount, glyphmappings)
+  end
+  def get_prohibited_caret_stop_count(this : IXpsOMGlyphs*, prohibitedcaretstopcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stop_count.call(this, prohibitedcaretstopcount)
+  end
+  def get_prohibited_caret_stops(this : IXpsOMGlyphs*, prohibitedcaretstopcount : UInt32*, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stops.call(this, prohibitedcaretstopcount, prohibitedcaretstops)
+  end
+  def get_bidi_level(this : IXpsOMGlyphs*, bidilevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_bidi_level.call(this, bidilevel)
+  end
+  def get_is_sideways(this : IXpsOMGlyphs*, issideways : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_sideways.call(this, issideways)
+  end
+  def get_device_font_name(this : IXpsOMGlyphs*, devicefontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_font_name.call(this, devicefontname)
+  end
+  def get_style_simulations(this : IXpsOMGlyphs*, stylesimulations : XPS_STYLE_SIMULATION*) : HRESULT
+    @lpVtbl.value.get_style_simulations.call(this, stylesimulations)
+  end
+  def set_style_simulations(this : IXpsOMGlyphs*, stylesimulations : XPS_STYLE_SIMULATION) : HRESULT
+    @lpVtbl.value.set_style_simulations.call(this, stylesimulations)
+  end
+  def get_origin(this : IXpsOMGlyphs*, origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_origin.call(this, origin)
+  end
+  def set_origin(this : IXpsOMGlyphs*, origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_origin.call(this, origin)
+  end
+  def get_font_rendering_em_size(this : IXpsOMGlyphs*, fontrenderingemsize : Float32*) : HRESULT
+    @lpVtbl.value.get_font_rendering_em_size.call(this, fontrenderingemsize)
+  end
+  def set_font_rendering_em_size(this : IXpsOMGlyphs*, fontrenderingemsize : Float32) : HRESULT
+    @lpVtbl.value.set_font_rendering_em_size.call(this, fontrenderingemsize)
+  end
+  def get_font_resource(this : IXpsOMGlyphs*, fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.call(this, fontresource)
+  end
+  def set_font_resource(this : IXpsOMGlyphs*, fontresource : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.set_font_resource.call(this, fontresource)
+  end
+  def get_font_face_index(this : IXpsOMGlyphs*, fontfaceindex : Int16*) : HRESULT
+    @lpVtbl.value.get_font_face_index.call(this, fontfaceindex)
+  end
+  def set_font_face_index(this : IXpsOMGlyphs*, fontfaceindex : Int16) : HRESULT
+    @lpVtbl.value.set_font_face_index.call(this, fontfaceindex)
+  end
+  def get_fill_brush(this : IXpsOMGlyphs*, fillbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush.call(this, fillbrush)
+  end
+  def get_fill_brush_local(this : IXpsOMGlyphs*, fillbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush_local.call(this, fillbrush)
+  end
+  def set_fill_brush_local(this : IXpsOMGlyphs*, fillbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_fill_brush_local.call(this, fillbrush)
+  end
+  def get_fill_brush_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_fill_brush_lookup.call(this, key)
+  end
+  def set_fill_brush_lookup(this : IXpsOMGlyphs*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_fill_brush_lookup.call(this, key)
+  end
+  def get_glyphs_editor(this : IXpsOMGlyphs*, editor : IXpsOMGlyphsEditor*) : HRESULT
+    @lpVtbl.value.get_glyphs_editor.call(this, editor)
+  end
+  def clone(this : IXpsOMGlyphs*, glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.clone.call(this, glyphs)
+  end
+end
+struct LibWin32::IXpsOMDashCollection
+  def query_interface(this : IXpsOMDashCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDashCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDashCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMDashCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMDashCollection*, index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, dash)
+  end
+  def insert_at(this : IXpsOMDashCollection*, index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, dash)
+  end
+  def remove_at(this : IXpsOMDashCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMDashCollection*, index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, dash)
+  end
+  def append(this : IXpsOMDashCollection*, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.append.call(this, dash)
+  end
+end
+struct LibWin32::IXpsOMMatrixTransform
+  def query_interface(this : IXpsOMMatrixTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMMatrixTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMMatrixTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMMatrixTransform*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMMatrixTransform*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_matrix(this : IXpsOMMatrixTransform*, matrix : XPS_MATRIX*) : HRESULT
+    @lpVtbl.value.get_matrix.call(this, matrix)
+  end
+  def set_matrix(this : IXpsOMMatrixTransform*, matrix : XPS_MATRIX*) : HRESULT
+    @lpVtbl.value.set_matrix.call(this, matrix)
+  end
+  def clone(this : IXpsOMMatrixTransform*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.clone.call(this, matrixtransform)
+  end
+end
+struct LibWin32::IXpsOMGeometry
+  def query_interface(this : IXpsOMGeometry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGeometry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGeometry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMGeometry*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMGeometry*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_figures(this : IXpsOMGeometry*, figures : IXpsOMGeometryFigureCollection*) : HRESULT
+    @lpVtbl.value.get_figures.call(this, figures)
+  end
+  def get_fill_rule(this : IXpsOMGeometry*, fillrule : XPS_FILL_RULE*) : HRESULT
+    @lpVtbl.value.get_fill_rule.call(this, fillrule)
+  end
+  def set_fill_rule(this : IXpsOMGeometry*, fillrule : XPS_FILL_RULE) : HRESULT
+    @lpVtbl.value.set_fill_rule.call(this, fillrule)
+  end
+  def get_transform(this : IXpsOMGeometry*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMGeometry*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMGeometry*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMGeometry*, lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, lookup)
+  end
+  def set_transform_lookup(this : IXpsOMGeometry*, lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, lookup)
+  end
+  def clone(this : IXpsOMGeometry*, geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.clone.call(this, geometry)
+  end
+end
+struct LibWin32::IXpsOMGeometryFigure
+  def query_interface(this : IXpsOMGeometryFigure*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGeometryFigure*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGeometryFigure*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMGeometryFigure*, owner : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_segment_data(this : IXpsOMGeometryFigure*, datacount : UInt32*, segmentdata : Float32*) : HRESULT
+    @lpVtbl.value.get_segment_data.call(this, datacount, segmentdata)
+  end
+  def get_segment_types(this : IXpsOMGeometryFigure*, segmentcount : UInt32*, segmenttypes : XPS_SEGMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_segment_types.call(this, segmentcount, segmenttypes)
+  end
+  def get_segment_strokes(this : IXpsOMGeometryFigure*, segmentcount : UInt32*, segmentstrokes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_segment_strokes.call(this, segmentcount, segmentstrokes)
+  end
+  def set_segments(this : IXpsOMGeometryFigure*, segmentcount : UInt32, segmentdatacount : UInt32, segmenttypes : XPS_SEGMENT_TYPE*, segmentdata : Float32*, segmentstrokes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_segments.call(this, segmentcount, segmentdatacount, segmenttypes, segmentdata, segmentstrokes)
+  end
+  def get_start_point(this : IXpsOMGeometryFigure*, startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_start_point.call(this, startpoint)
+  end
+  def set_start_point(this : IXpsOMGeometryFigure*, startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_start_point.call(this, startpoint)
+  end
+  def get_is_closed(this : IXpsOMGeometryFigure*, isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_closed.call(this, isclosed)
+  end
+  def set_is_closed(this : IXpsOMGeometryFigure*, isclosed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_closed.call(this, isclosed)
+  end
+  def get_is_filled(this : IXpsOMGeometryFigure*, isfilled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_filled.call(this, isfilled)
+  end
+  def set_is_filled(this : IXpsOMGeometryFigure*, isfilled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_filled.call(this, isfilled)
+  end
+  def get_segment_count(this : IXpsOMGeometryFigure*, segmentcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.call(this, segmentcount)
+  end
+  def get_segment_data_count(this : IXpsOMGeometryFigure*, segmentdatacount : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_data_count.call(this, segmentdatacount)
+  end
+  def get_segment_stroke_pattern(this : IXpsOMGeometryFigure*, segmentstrokepattern : XPS_SEGMENT_STROKE_PATTERN*) : HRESULT
+    @lpVtbl.value.get_segment_stroke_pattern.call(this, segmentstrokepattern)
+  end
+  def clone(this : IXpsOMGeometryFigure*, geometryfigure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.clone.call(this, geometryfigure)
+  end
+end
+struct LibWin32::IXpsOMGeometryFigureCollection
+  def query_interface(this : IXpsOMGeometryFigureCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGeometryFigureCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGeometryFigureCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMGeometryFigureCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMGeometryFigureCollection*, index : UInt32, geometryfigure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, geometryfigure)
+  end
+  def insert_at(this : IXpsOMGeometryFigureCollection*, index : UInt32, geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, geometryfigure)
+  end
+  def remove_at(this : IXpsOMGeometryFigureCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMGeometryFigureCollection*, index : UInt32, geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, geometryfigure)
+  end
+  def append(this : IXpsOMGeometryFigureCollection*, geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.append.call(this, geometryfigure)
+  end
+end
+struct LibWin32::IXpsOMPath
+  def query_interface(this : IXpsOMPath*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPath*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPath*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMPath*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMPath*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_transform(this : IXpsOMPath*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, matrixtransform)
+  end
+  def get_transform_local(this : IXpsOMPath*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, matrixtransform)
+  end
+  def set_transform_local(this : IXpsOMPath*, matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, matrixtransform)
+  end
+  def get_transform_lookup(this : IXpsOMPath*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMPath*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_clip_geometry(this : IXpsOMPath*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.call(this, clipgeometry)
+  end
+  def get_clip_geometry_local(this : IXpsOMPath*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.call(this, clipgeometry)
+  end
+  def set_clip_geometry_local(this : IXpsOMPath*, clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.call(this, clipgeometry)
+  end
+  def get_clip_geometry_lookup(this : IXpsOMPath*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.call(this, key)
+  end
+  def set_clip_geometry_lookup(this : IXpsOMPath*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.call(this, key)
+  end
+  def get_opacity(this : IXpsOMPath*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMPath*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_opacity_mask_brush(this : IXpsOMPath*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(this : IXpsOMPath*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(this : IXpsOMPath*, opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(this : IXpsOMPath*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.call(this, key)
+  end
+  def set_opacity_mask_brush_lookup(this : IXpsOMPath*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.call(this, key)
+  end
+  def get_name(this : IXpsOMPath*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMPath*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMPath*, ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def set_is_hyperlink_target(this : IXpsOMPath*, ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(this : IXpsOMPath*, hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(this : IXpsOMPath*, hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def get_language(this : IXpsOMPath*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMPath*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_geometry(this : IXpsOMPath*, geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_geometry.call(this, geometry)
+  end
+  def get_geometry_local(this : IXpsOMPath*, geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_geometry_local.call(this, geometry)
+  end
+  def set_geometry_local(this : IXpsOMPath*, geometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_geometry_local.call(this, geometry)
+  end
+  def get_geometry_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_geometry_lookup.call(this, lookup)
+  end
+  def set_geometry_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_geometry_lookup.call(this, lookup)
+  end
+  def get_accessibility_short_description(this : IXpsOMPath*, shortdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_short_description.call(this, shortdescription)
+  end
+  def set_accessibility_short_description(this : IXpsOMPath*, shortdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_short_description.call(this, shortdescription)
+  end
+  def get_accessibility_long_description(this : IXpsOMPath*, longdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_long_description.call(this, longdescription)
+  end
+  def set_accessibility_long_description(this : IXpsOMPath*, longdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_long_description.call(this, longdescription)
+  end
+  def get_snaps_to_pixels(this : IXpsOMPath*, snapstopixels : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_snaps_to_pixels.call(this, snapstopixels)
+  end
+  def set_snaps_to_pixels(this : IXpsOMPath*, snapstopixels : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_snaps_to_pixels.call(this, snapstopixels)
+  end
+  def get_stroke_brush(this : IXpsOMPath*, brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_stroke_brush.call(this, brush)
+  end
+  def get_stroke_brush_local(this : IXpsOMPath*, brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_stroke_brush_local.call(this, brush)
+  end
+  def set_stroke_brush_local(this : IXpsOMPath*, brush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_stroke_brush_local.call(this, brush)
+  end
+  def get_stroke_brush_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_stroke_brush_lookup.call(this, lookup)
+  end
+  def set_stroke_brush_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_stroke_brush_lookup.call(this, lookup)
+  end
+  def get_stroke_dashes(this : IXpsOMPath*, strokedashes : IXpsOMDashCollection*) : HRESULT
+    @lpVtbl.value.get_stroke_dashes.call(this, strokedashes)
+  end
+  def get_stroke_dash_cap(this : IXpsOMPath*, strokedashcap : XPS_DASH_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_dash_cap.call(this, strokedashcap)
+  end
+  def set_stroke_dash_cap(this : IXpsOMPath*, strokedashcap : XPS_DASH_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_dash_cap.call(this, strokedashcap)
+  end
+  def get_stroke_dash_offset(this : IXpsOMPath*, strokedashoffset : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_dash_offset.call(this, strokedashoffset)
+  end
+  def set_stroke_dash_offset(this : IXpsOMPath*, strokedashoffset : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_dash_offset.call(this, strokedashoffset)
+  end
+  def get_stroke_start_line_cap(this : IXpsOMPath*, strokestartlinecap : XPS_LINE_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_start_line_cap.call(this, strokestartlinecap)
+  end
+  def set_stroke_start_line_cap(this : IXpsOMPath*, strokestartlinecap : XPS_LINE_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_start_line_cap.call(this, strokestartlinecap)
+  end
+  def get_stroke_end_line_cap(this : IXpsOMPath*, strokeendlinecap : XPS_LINE_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_end_line_cap.call(this, strokeendlinecap)
+  end
+  def set_stroke_end_line_cap(this : IXpsOMPath*, strokeendlinecap : XPS_LINE_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_end_line_cap.call(this, strokeendlinecap)
+  end
+  def get_stroke_line_join(this : IXpsOMPath*, strokelinejoin : XPS_LINE_JOIN*) : HRESULT
+    @lpVtbl.value.get_stroke_line_join.call(this, strokelinejoin)
+  end
+  def set_stroke_line_join(this : IXpsOMPath*, strokelinejoin : XPS_LINE_JOIN) : HRESULT
+    @lpVtbl.value.set_stroke_line_join.call(this, strokelinejoin)
+  end
+  def get_stroke_miter_limit(this : IXpsOMPath*, strokemiterlimit : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_miter_limit.call(this, strokemiterlimit)
+  end
+  def set_stroke_miter_limit(this : IXpsOMPath*, strokemiterlimit : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_miter_limit.call(this, strokemiterlimit)
+  end
+  def get_stroke_thickness(this : IXpsOMPath*, strokethickness : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_thickness.call(this, strokethickness)
+  end
+  def set_stroke_thickness(this : IXpsOMPath*, strokethickness : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_thickness.call(this, strokethickness)
+  end
+  def get_fill_brush(this : IXpsOMPath*, brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush.call(this, brush)
+  end
+  def get_fill_brush_local(this : IXpsOMPath*, brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush_local.call(this, brush)
+  end
+  def set_fill_brush_local(this : IXpsOMPath*, brush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_fill_brush_local.call(this, brush)
+  end
+  def get_fill_brush_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_fill_brush_lookup.call(this, lookup)
+  end
+  def set_fill_brush_lookup(this : IXpsOMPath*, lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_fill_brush_lookup.call(this, lookup)
+  end
+  def clone(this : IXpsOMPath*, path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.clone.call(this, path)
+  end
+end
+struct LibWin32::IXpsOMBrush
+  def query_interface(this : IXpsOMBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+end
+struct LibWin32::IXpsOMGradientStopCollection
+  def query_interface(this : IXpsOMGradientStopCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGradientStopCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGradientStopCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMGradientStopCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMGradientStopCollection*, index : UInt32, stop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, stop)
+  end
+  def insert_at(this : IXpsOMGradientStopCollection*, index : UInt32, stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, stop)
+  end
+  def remove_at(this : IXpsOMGradientStopCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMGradientStopCollection*, index : UInt32, stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, stop)
+  end
+  def append(this : IXpsOMGradientStopCollection*, stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.append.call(this, stop)
+  end
+end
+struct LibWin32::IXpsOMSolidColorBrush
+  def query_interface(this : IXpsOMSolidColorBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMSolidColorBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMSolidColorBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMSolidColorBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMSolidColorBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMSolidColorBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMSolidColorBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_color(this : IXpsOMSolidColorBrush*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color.call(this, color, colorprofile)
+  end
+  def set_color(this : IXpsOMSolidColorBrush*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color.call(this, color, colorprofile)
+  end
+  def clone(this : IXpsOMSolidColorBrush*, solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.clone.call(this, solidcolorbrush)
+  end
+end
+struct LibWin32::IXpsOMTileBrush
+  def query_interface(this : IXpsOMTileBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMTileBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMTileBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMTileBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMTileBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMTileBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMTileBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_transform(this : IXpsOMTileBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMTileBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMTileBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMTileBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMTileBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_viewbox(this : IXpsOMTileBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.call(this, viewbox)
+  end
+  def set_viewbox(this : IXpsOMTileBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.call(this, viewbox)
+  end
+  def get_viewport(this : IXpsOMTileBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, viewport)
+  end
+  def set_viewport(this : IXpsOMTileBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.call(this, viewport)
+  end
+  def get_tile_mode(this : IXpsOMTileBrush*, tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.call(this, tilemode)
+  end
+  def set_tile_mode(this : IXpsOMTileBrush*, tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.call(this, tilemode)
+  end
+end
+struct LibWin32::IXpsOMVisualBrush
+  def query_interface(this : IXpsOMVisualBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMVisualBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMVisualBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMVisualBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMVisualBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMVisualBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMVisualBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_transform(this : IXpsOMVisualBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMVisualBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMVisualBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMVisualBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMVisualBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_viewbox(this : IXpsOMVisualBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.call(this, viewbox)
+  end
+  def set_viewbox(this : IXpsOMVisualBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.call(this, viewbox)
+  end
+  def get_viewport(this : IXpsOMVisualBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, viewport)
+  end
+  def set_viewport(this : IXpsOMVisualBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.call(this, viewport)
+  end
+  def get_tile_mode(this : IXpsOMVisualBrush*, tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.call(this, tilemode)
+  end
+  def set_tile_mode(this : IXpsOMVisualBrush*, tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.call(this, tilemode)
+  end
+  def get_visual(this : IXpsOMVisualBrush*, visual : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_visual.call(this, visual)
+  end
+  def get_visual_local(this : IXpsOMVisualBrush*, visual : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_visual_local.call(this, visual)
+  end
+  def set_visual_local(this : IXpsOMVisualBrush*, visual : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.set_visual_local.call(this, visual)
+  end
+  def get_visual_lookup(this : IXpsOMVisualBrush*, lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_visual_lookup.call(this, lookup)
+  end
+  def set_visual_lookup(this : IXpsOMVisualBrush*, lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_visual_lookup.call(this, lookup)
+  end
+  def clone(this : IXpsOMVisualBrush*, visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.clone.call(this, visualbrush)
+  end
+end
+struct LibWin32::IXpsOMImageBrush
+  def query_interface(this : IXpsOMImageBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMImageBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMImageBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMImageBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMImageBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMImageBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMImageBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_transform(this : IXpsOMImageBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMImageBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMImageBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMImageBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMImageBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_viewbox(this : IXpsOMImageBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.call(this, viewbox)
+  end
+  def set_viewbox(this : IXpsOMImageBrush*, viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.call(this, viewbox)
+  end
+  def get_viewport(this : IXpsOMImageBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, viewport)
+  end
+  def set_viewport(this : IXpsOMImageBrush*, viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.call(this, viewport)
+  end
+  def get_tile_mode(this : IXpsOMImageBrush*, tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.call(this, tilemode)
+  end
+  def set_tile_mode(this : IXpsOMImageBrush*, tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.call(this, tilemode)
+  end
+  def get_image_resource(this : IXpsOMImageBrush*, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_image_resource.call(this, imageresource)
+  end
+  def set_image_resource(this : IXpsOMImageBrush*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_image_resource.call(this, imageresource)
+  end
+  def get_color_profile_resource(this : IXpsOMImageBrush*, colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color_profile_resource.call(this, colorprofileresource)
+  end
+  def set_color_profile_resource(this : IXpsOMImageBrush*, colorprofileresource : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color_profile_resource.call(this, colorprofileresource)
+  end
+  def clone(this : IXpsOMImageBrush*, imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.clone.call(this, imagebrush)
+  end
+end
+struct LibWin32::IXpsOMGradientStop
+  def query_interface(this : IXpsOMGradientStop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGradientStop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGradientStop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMGradientStop*, owner : IXpsOMGradientBrush*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_offset(this : IXpsOMGradientStop*, offset : Float32*) : HRESULT
+    @lpVtbl.value.get_offset.call(this, offset)
+  end
+  def set_offset(this : IXpsOMGradientStop*, offset : Float32) : HRESULT
+    @lpVtbl.value.set_offset.call(this, offset)
+  end
+  def get_color(this : IXpsOMGradientStop*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color.call(this, color, colorprofile)
+  end
+  def set_color(this : IXpsOMGradientStop*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color.call(this, color, colorprofile)
+  end
+  def clone(this : IXpsOMGradientStop*, gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.clone.call(this, gradientstop)
+  end
+end
+struct LibWin32::IXpsOMGradientBrush
+  def query_interface(this : IXpsOMGradientBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMGradientBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMGradientBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMGradientBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMGradientBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMGradientBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMGradientBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_gradient_stops(this : IXpsOMGradientBrush*, gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.call(this, gradientstops)
+  end
+  def get_transform(this : IXpsOMGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMGradientBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMGradientBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMGradientBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_spread_method(this : IXpsOMGradientBrush*, spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.call(this, spreadmethod)
+  end
+  def set_spread_method(this : IXpsOMGradientBrush*, spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.call(this, spreadmethod)
+  end
+  def get_color_interpolation_mode(this : IXpsOMGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(this : IXpsOMGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+end
+struct LibWin32::IXpsOMLinearGradientBrush
+  def query_interface(this : IXpsOMLinearGradientBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMLinearGradientBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMLinearGradientBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMLinearGradientBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMLinearGradientBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMLinearGradientBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMLinearGradientBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_gradient_stops(this : IXpsOMLinearGradientBrush*, gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.call(this, gradientstops)
+  end
+  def get_transform(this : IXpsOMLinearGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMLinearGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMLinearGradientBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMLinearGradientBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMLinearGradientBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_spread_method(this : IXpsOMLinearGradientBrush*, spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.call(this, spreadmethod)
+  end
+  def set_spread_method(this : IXpsOMLinearGradientBrush*, spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.call(this, spreadmethod)
+  end
+  def get_color_interpolation_mode(this : IXpsOMLinearGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(this : IXpsOMLinearGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+  def get_start_point(this : IXpsOMLinearGradientBrush*, startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_start_point.call(this, startpoint)
+  end
+  def set_start_point(this : IXpsOMLinearGradientBrush*, startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_start_point.call(this, startpoint)
+  end
+  def get_end_point(this : IXpsOMLinearGradientBrush*, endpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_end_point.call(this, endpoint)
+  end
+  def set_end_point(this : IXpsOMLinearGradientBrush*, endpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_end_point.call(this, endpoint)
+  end
+  def clone(this : IXpsOMLinearGradientBrush*, lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.clone.call(this, lineargradientbrush)
+  end
+end
+struct LibWin32::IXpsOMRadialGradientBrush
+  def query_interface(this : IXpsOMRadialGradientBrush*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMRadialGradientBrush*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMRadialGradientBrush*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMRadialGradientBrush*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMRadialGradientBrush*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_opacity(this : IXpsOMRadialGradientBrush*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMRadialGradientBrush*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_gradient_stops(this : IXpsOMRadialGradientBrush*, gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.call(this, gradientstops)
+  end
+  def get_transform(this : IXpsOMRadialGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, transform)
+  end
+  def get_transform_local(this : IXpsOMRadialGradientBrush*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, transform)
+  end
+  def set_transform_local(this : IXpsOMRadialGradientBrush*, transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, transform)
+  end
+  def get_transform_lookup(this : IXpsOMRadialGradientBrush*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMRadialGradientBrush*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_spread_method(this : IXpsOMRadialGradientBrush*, spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.call(this, spreadmethod)
+  end
+  def set_spread_method(this : IXpsOMRadialGradientBrush*, spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.call(this, spreadmethod)
+  end
+  def get_color_interpolation_mode(this : IXpsOMRadialGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(this : IXpsOMRadialGradientBrush*, colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.call(this, colorinterpolationmode)
+  end
+  def get_center(this : IXpsOMRadialGradientBrush*, center : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_center.call(this, center)
+  end
+  def set_center(this : IXpsOMRadialGradientBrush*, center : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_center.call(this, center)
+  end
+  def get_radii_sizes(this : IXpsOMRadialGradientBrush*, radiisizes : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_radii_sizes.call(this, radiisizes)
+  end
+  def set_radii_sizes(this : IXpsOMRadialGradientBrush*, radiisizes : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_radii_sizes.call(this, radiisizes)
+  end
+  def get_gradient_origin(this : IXpsOMRadialGradientBrush*, origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_gradient_origin.call(this, origin)
+  end
+  def set_gradient_origin(this : IXpsOMRadialGradientBrush*, origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_gradient_origin.call(this, origin)
+  end
+  def clone(this : IXpsOMRadialGradientBrush*, radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.clone.call(this, radialgradientbrush)
+  end
+end
+struct LibWin32::IXpsOMResource
+  def query_interface(this : IXpsOMResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+end
+struct LibWin32::IXpsOMPartResources
+  def query_interface(this : IXpsOMPartResources*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPartResources*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPartResources*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_font_resources(this : IXpsOMPartResources*, fontresources : IXpsOMFontResourceCollection*) : HRESULT
+    @lpVtbl.value.get_font_resources.call(this, fontresources)
+  end
+  def get_image_resources(this : IXpsOMPartResources*, imageresources : IXpsOMImageResourceCollection*) : HRESULT
+    @lpVtbl.value.get_image_resources.call(this, imageresources)
+  end
+  def get_color_profile_resources(this : IXpsOMPartResources*, colorprofileresources : IXpsOMColorProfileResourceCollection*) : HRESULT
+    @lpVtbl.value.get_color_profile_resources.call(this, colorprofileresources)
+  end
+  def get_remote_dictionary_resources(this : IXpsOMPartResources*, dictionaryresources : IXpsOMRemoteDictionaryResourceCollection*) : HRESULT
+    @lpVtbl.value.get_remote_dictionary_resources.call(this, dictionaryresources)
+  end
+end
+struct LibWin32::IXpsOMDictionary
+  def query_interface(this : IXpsOMDictionary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDictionary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDictionary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMDictionary*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_count(this : IXpsOMDictionary*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMDictionary*, index : UInt32, key : LibC::LPWSTR*, entry : IXpsOMShareable*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, key, entry)
+  end
+  def get_by_key(this : IXpsOMDictionary*, key : LibC::LPWSTR, beforeentry : IXpsOMShareable, entry : IXpsOMShareable*) : HRESULT
+    @lpVtbl.value.get_by_key.call(this, key, beforeentry, entry)
+  end
+  def get_index(this : IXpsOMDictionary*, entry : IXpsOMShareable, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, entry, index)
+  end
+  def append(this : IXpsOMDictionary*, key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.append.call(this, key, entry)
+  end
+  def insert_at(this : IXpsOMDictionary*, index : UInt32, key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, key, entry)
+  end
+  def remove_at(this : IXpsOMDictionary*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMDictionary*, index : UInt32, key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, key, entry)
+  end
+  def clone(this : IXpsOMDictionary*, dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.clone.call(this, dictionary)
+  end
+end
+struct LibWin32::IXpsOMFontResource
+  def query_interface(this : IXpsOMFontResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMFontResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMFontResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMFontResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMFontResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_stream(this : IXpsOMFontResource*, readerstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, readerstream)
+  end
+  def set_content(this : IXpsOMFontResource*, sourcestream : IStream, embeddingoption : XPS_FONT_EMBEDDING, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, embeddingoption, partname)
+  end
+  def get_embedding_option(this : IXpsOMFontResource*, embeddingoption : XPS_FONT_EMBEDDING*) : HRESULT
+    @lpVtbl.value.get_embedding_option.call(this, embeddingoption)
+  end
+end
+struct LibWin32::IXpsOMFontResourceCollection
+  def query_interface(this : IXpsOMFontResourceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMFontResourceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMFontResourceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMFontResourceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMFontResourceCollection*, index : UInt32, value : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, value)
+  end
+  def set_at(this : IXpsOMFontResourceCollection*, index : UInt32, value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, value)
+  end
+  def insert_at(this : IXpsOMFontResourceCollection*, index : UInt32, value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, value)
+  end
+  def append(this : IXpsOMFontResourceCollection*, value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.append.call(this, value)
+  end
+  def remove_at(this : IXpsOMFontResourceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def get_by_part_name(this : IXpsOMFontResourceCollection*, partname : IOpcPartUri, part : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.call(this, partname, part)
+  end
+end
+struct LibWin32::IXpsOMImageResource
+  def query_interface(this : IXpsOMImageResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMImageResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMImageResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMImageResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMImageResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_stream(this : IXpsOMImageResource*, readerstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, readerstream)
+  end
+  def set_content(this : IXpsOMImageResource*, sourcestream : IStream, imagetype : XPS_IMAGE_TYPE, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, imagetype, partname)
+  end
+  def get_image_type(this : IXpsOMImageResource*, imagetype : XPS_IMAGE_TYPE*) : HRESULT
+    @lpVtbl.value.get_image_type.call(this, imagetype)
+  end
+end
+struct LibWin32::IXpsOMImageResourceCollection
+  def query_interface(this : IXpsOMImageResourceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMImageResourceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMImageResourceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMImageResourceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMImageResourceCollection*, index : UInt32, object : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, object)
+  end
+  def insert_at(this : IXpsOMImageResourceCollection*, index : UInt32, object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, object)
+  end
+  def remove_at(this : IXpsOMImageResourceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMImageResourceCollection*, index : UInt32, object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, object)
+  end
+  def append(this : IXpsOMImageResourceCollection*, object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.append.call(this, object)
+  end
+  def get_by_part_name(this : IXpsOMImageResourceCollection*, partname : IOpcPartUri, part : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.call(this, partname, part)
+  end
+end
+struct LibWin32::IXpsOMColorProfileResource
+  def query_interface(this : IXpsOMColorProfileResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMColorProfileResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMColorProfileResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMColorProfileResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMColorProfileResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_stream(this : IXpsOMColorProfileResource*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+  def set_content(this : IXpsOMColorProfileResource*, sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMColorProfileResourceCollection
+  def query_interface(this : IXpsOMColorProfileResourceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMColorProfileResourceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMColorProfileResourceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMColorProfileResourceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMColorProfileResourceCollection*, index : UInt32, object : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, object)
+  end
+  def insert_at(this : IXpsOMColorProfileResourceCollection*, index : UInt32, object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, object)
+  end
+  def remove_at(this : IXpsOMColorProfileResourceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMColorProfileResourceCollection*, index : UInt32, object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, object)
+  end
+  def append(this : IXpsOMColorProfileResourceCollection*, object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.append.call(this, object)
+  end
+  def get_by_part_name(this : IXpsOMColorProfileResourceCollection*, partname : IOpcPartUri, part : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.call(this, partname, part)
+  end
+end
+struct LibWin32::IXpsOMPrintTicketResource
+  def query_interface(this : IXpsOMPrintTicketResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPrintTicketResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPrintTicketResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMPrintTicketResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMPrintTicketResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_stream(this : IXpsOMPrintTicketResource*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+  def set_content(this : IXpsOMPrintTicketResource*, sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResource
+  def query_interface(this : IXpsOMRemoteDictionaryResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMRemoteDictionaryResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMRemoteDictionaryResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMRemoteDictionaryResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMRemoteDictionaryResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_dictionary(this : IXpsOMRemoteDictionaryResource*, dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.call(this, dictionary)
+  end
+  def set_dictionary(this : IXpsOMRemoteDictionaryResource*, dictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary.call(this, dictionary)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResourceCollection
+  def query_interface(this : IXpsOMRemoteDictionaryResourceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMRemoteDictionaryResourceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMRemoteDictionaryResourceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMRemoteDictionaryResourceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMRemoteDictionaryResourceCollection*, index : UInt32, object : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, object)
+  end
+  def insert_at(this : IXpsOMRemoteDictionaryResourceCollection*, index : UInt32, object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, object)
+  end
+  def remove_at(this : IXpsOMRemoteDictionaryResourceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMRemoteDictionaryResourceCollection*, index : UInt32, object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, object)
+  end
+  def append(this : IXpsOMRemoteDictionaryResourceCollection*, object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.append.call(this, object)
+  end
+  def get_by_part_name(this : IXpsOMRemoteDictionaryResourceCollection*, partname : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.call(this, partname, remotedictionaryresource)
+  end
+end
+struct LibWin32::IXpsOMSignatureBlockResourceCollection
+  def query_interface(this : IXpsOMSignatureBlockResourceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMSignatureBlockResourceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMSignatureBlockResourceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMSignatureBlockResourceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMSignatureBlockResourceCollection*, index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, signatureblockresource)
+  end
+  def insert_at(this : IXpsOMSignatureBlockResourceCollection*, index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, signatureblockresource)
+  end
+  def remove_at(this : IXpsOMSignatureBlockResourceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMSignatureBlockResourceCollection*, index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, signatureblockresource)
+  end
+  def append(this : IXpsOMSignatureBlockResourceCollection*, signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.append.call(this, signatureblockresource)
+  end
+  def get_by_part_name(this : IXpsOMSignatureBlockResourceCollection*, partname : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.call(this, partname, signatureblockresource)
+  end
+end
+struct LibWin32::IXpsOMDocumentStructureResource
+  def query_interface(this : IXpsOMDocumentStructureResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDocumentStructureResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDocumentStructureResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMDocumentStructureResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMDocumentStructureResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMDocumentStructureResource*, owner : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_stream(this : IXpsOMDocumentStructureResource*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+  def set_content(this : IXpsOMDocumentStructureResource*, sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMStoryFragmentsResource
+  def query_interface(this : IXpsOMStoryFragmentsResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMStoryFragmentsResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMStoryFragmentsResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMStoryFragmentsResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMStoryFragmentsResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMStoryFragmentsResource*, owner : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_stream(this : IXpsOMStoryFragmentsResource*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+  def set_content(this : IXpsOMStoryFragmentsResource*, sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMSignatureBlockResource
+  def query_interface(this : IXpsOMSignatureBlockResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMSignatureBlockResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMSignatureBlockResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMSignatureBlockResource*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMSignatureBlockResource*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMSignatureBlockResource*, owner : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_stream(this : IXpsOMSignatureBlockResource*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, stream)
+  end
+  def set_content(this : IXpsOMSignatureBlockResource*, sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.call(this, sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMVisualCollection
+  def query_interface(this : IXpsOMVisualCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMVisualCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMVisualCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMVisualCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMVisualCollection*, index : UInt32, object : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, object)
+  end
+  def insert_at(this : IXpsOMVisualCollection*, index : UInt32, object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, object)
+  end
+  def remove_at(this : IXpsOMVisualCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMVisualCollection*, index : UInt32, object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, object)
+  end
+  def append(this : IXpsOMVisualCollection*, object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.append.call(this, object)
+  end
+end
+struct LibWin32::IXpsOMCanvas
+  def query_interface(this : IXpsOMCanvas*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMCanvas*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMCanvas*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMCanvas*, owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, owner)
+  end
+  def get_type(this : IXpsOMCanvas*, type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_transform(this : IXpsOMCanvas*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, matrixtransform)
+  end
+  def get_transform_local(this : IXpsOMCanvas*, matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.call(this, matrixtransform)
+  end
+  def set_transform_local(this : IXpsOMCanvas*, matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.call(this, matrixtransform)
+  end
+  def get_transform_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.call(this, key)
+  end
+  def set_transform_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.call(this, key)
+  end
+  def get_clip_geometry(this : IXpsOMCanvas*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.call(this, clipgeometry)
+  end
+  def get_clip_geometry_local(this : IXpsOMCanvas*, clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.call(this, clipgeometry)
+  end
+  def set_clip_geometry_local(this : IXpsOMCanvas*, clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.call(this, clipgeometry)
+  end
+  def get_clip_geometry_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.call(this, key)
+  end
+  def set_clip_geometry_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.call(this, key)
+  end
+  def get_opacity(this : IXpsOMCanvas*, opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.call(this, opacity)
+  end
+  def set_opacity(this : IXpsOMCanvas*, opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.call(this, opacity)
+  end
+  def get_opacity_mask_brush(this : IXpsOMCanvas*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(this : IXpsOMCanvas*, opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(this : IXpsOMCanvas*, opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.call(this, opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.call(this, key)
+  end
+  def set_opacity_mask_brush_lookup(this : IXpsOMCanvas*, key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.call(this, key)
+  end
+  def get_name(this : IXpsOMCanvas*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMCanvas*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMCanvas*, ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def set_is_hyperlink_target(this : IXpsOMCanvas*, ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(this : IXpsOMCanvas*, hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(this : IXpsOMCanvas*, hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.call(this, hyperlinkuri)
+  end
+  def get_language(this : IXpsOMCanvas*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMCanvas*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_visuals(this : IXpsOMCanvas*, visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.call(this, visuals)
+  end
+  def get_use_aliased_edge_mode(this : IXpsOMCanvas*, usealiasededgemode : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_use_aliased_edge_mode.call(this, usealiasededgemode)
+  end
+  def set_use_aliased_edge_mode(this : IXpsOMCanvas*, usealiasededgemode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_use_aliased_edge_mode.call(this, usealiasededgemode)
+  end
+  def get_accessibility_short_description(this : IXpsOMCanvas*, shortdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_short_description.call(this, shortdescription)
+  end
+  def set_accessibility_short_description(this : IXpsOMCanvas*, shortdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_short_description.call(this, shortdescription)
+  end
+  def get_accessibility_long_description(this : IXpsOMCanvas*, longdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_long_description.call(this, longdescription)
+  end
+  def set_accessibility_long_description(this : IXpsOMCanvas*, longdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_long_description.call(this, longdescription)
+  end
+  def get_dictionary(this : IXpsOMCanvas*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.call(this, resourcedictionary)
+  end
+  def get_dictionary_local(this : IXpsOMCanvas*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.call(this, resourcedictionary)
+  end
+  def set_dictionary_local(this : IXpsOMCanvas*, resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.call(this, resourcedictionary)
+  end
+  def get_dictionary_resource(this : IXpsOMCanvas*, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def set_dictionary_resource(this : IXpsOMCanvas*, remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def clone(this : IXpsOMCanvas*, canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.clone.call(this, canvas)
+  end
+end
+struct LibWin32::IXpsOMPage
+  def query_interface(this : IXpsOMPage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMPage*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMPage*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMPage*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pagereference)
+  end
+  def get_visuals(this : IXpsOMPage*, visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.call(this, visuals)
+  end
+  def get_page_dimensions(this : IXpsOMPage*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_page_dimensions.call(this, pagedimensions)
+  end
+  def set_page_dimensions(this : IXpsOMPage*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_page_dimensions.call(this, pagedimensions)
+  end
+  def get_content_box(this : IXpsOMPage*, contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_content_box.call(this, contentbox)
+  end
+  def set_content_box(this : IXpsOMPage*, contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_content_box.call(this, contentbox)
+  end
+  def get_bleed_box(this : IXpsOMPage*, bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_bleed_box.call(this, bleedbox)
+  end
+  def set_bleed_box(this : IXpsOMPage*, bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_bleed_box.call(this, bleedbox)
+  end
+  def get_language(this : IXpsOMPage*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMPage*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_name(this : IXpsOMPage*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMPage*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMPage*, ishyperlinktarget : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlinktarget)
+  end
+  def set_is_hyperlink_target(this : IXpsOMPage*, ishyperlinktarget : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlinktarget)
+  end
+  def get_dictionary(this : IXpsOMPage*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.call(this, resourcedictionary)
+  end
+  def get_dictionary_local(this : IXpsOMPage*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.call(this, resourcedictionary)
+  end
+  def set_dictionary_local(this : IXpsOMPage*, resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.call(this, resourcedictionary)
+  end
+  def get_dictionary_resource(this : IXpsOMPage*, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def set_dictionary_resource(this : IXpsOMPage*, remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def write(this : IXpsOMPage*, stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write.call(this, stream, optimizemarkupsize)
+  end
+  def generate_unused_lookup_key(this : IXpsOMPage*, type : XPS_OBJECT_TYPE, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.generate_unused_lookup_key.call(this, type, key)
+  end
+  def clone(this : IXpsOMPage*, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.clone.call(this, page)
+  end
+end
+struct LibWin32::IXpsOMPageReference
+  def query_interface(this : IXpsOMPageReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPageReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPageReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_owner(this : IXpsOMPageReference*, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, document)
+  end
+  def get_page(this : IXpsOMPageReference*, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.get_page.call(this, page)
+  end
+  def set_page(this : IXpsOMPageReference*, page : IXpsOMPage) : HRESULT
+    @lpVtbl.value.set_page.call(this, page)
+  end
+  def discard_page(this : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.discard_page.call(this)
+  end
+  def is_page_loaded(this : IXpsOMPageReference*, ispageloaded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_page_loaded.call(this, ispageloaded)
+  end
+  def get_advisory_page_dimensions(this : IXpsOMPageReference*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_advisory_page_dimensions.call(this, pagedimensions)
+  end
+  def set_advisory_page_dimensions(this : IXpsOMPageReference*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_advisory_page_dimensions.call(this, pagedimensions)
+  end
+  def get_story_fragments_resource(this : IXpsOMPageReference*, storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.get_story_fragments_resource.call(this, storyfragmentsresource)
+  end
+  def set_story_fragments_resource(this : IXpsOMPageReference*, storyfragmentsresource : IXpsOMStoryFragmentsResource) : HRESULT
+    @lpVtbl.value.set_story_fragments_resource.call(this, storyfragmentsresource)
+  end
+  def get_print_ticket_resource(this : IXpsOMPageReference*, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.call(this, printticketresource)
+  end
+  def set_print_ticket_resource(this : IXpsOMPageReference*, printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.call(this, printticketresource)
+  end
+  def get_thumbnail_resource(this : IXpsOMPageReference*, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.call(this, imageresource)
+  end
+  def set_thumbnail_resource(this : IXpsOMPageReference*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.call(this, imageresource)
+  end
+  def collect_link_targets(this : IXpsOMPageReference*, linktargets : IXpsOMNameCollection*) : HRESULT
+    @lpVtbl.value.collect_link_targets.call(this, linktargets)
+  end
+  def collect_part_resources(this : IXpsOMPageReference*, partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.collect_part_resources.call(this, partresources)
+  end
+  def has_restricted_fonts(this : IXpsOMPageReference*, restrictedfonts : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_restricted_fonts.call(this, restrictedfonts)
+  end
+  def clone(this : IXpsOMPageReference*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.clone.call(this, pagereference)
+  end
+end
+struct LibWin32::IXpsOMPageReferenceCollection
+  def query_interface(this : IXpsOMPageReferenceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPageReferenceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPageReferenceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMPageReferenceCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMPageReferenceCollection*, index : UInt32, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, pagereference)
+  end
+  def insert_at(this : IXpsOMPageReferenceCollection*, index : UInt32, pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, pagereference)
+  end
+  def remove_at(this : IXpsOMPageReferenceCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMPageReferenceCollection*, index : UInt32, pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, pagereference)
+  end
+  def append(this : IXpsOMPageReferenceCollection*, pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.append.call(this, pagereference)
+  end
+end
+struct LibWin32::IXpsOMDocument
+  def query_interface(this : IXpsOMDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMDocument*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMDocument*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMDocument*, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, documentsequence)
+  end
+  def get_page_references(this : IXpsOMDocument*, pagereferences : IXpsOMPageReferenceCollection*) : HRESULT
+    @lpVtbl.value.get_page_references.call(this, pagereferences)
+  end
+  def get_print_ticket_resource(this : IXpsOMDocument*, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.call(this, printticketresource)
+  end
+  def set_print_ticket_resource(this : IXpsOMDocument*, printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.call(this, printticketresource)
+  end
+  def get_document_structure_resource(this : IXpsOMDocument*, documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.get_document_structure_resource.call(this, documentstructureresource)
+  end
+  def set_document_structure_resource(this : IXpsOMDocument*, documentstructureresource : IXpsOMDocumentStructureResource) : HRESULT
+    @lpVtbl.value.set_document_structure_resource.call(this, documentstructureresource)
+  end
+  def get_signature_block_resources(this : IXpsOMDocument*, signatureblockresources : IXpsOMSignatureBlockResourceCollection*) : HRESULT
+    @lpVtbl.value.get_signature_block_resources.call(this, signatureblockresources)
+  end
+  def clone(this : IXpsOMDocument*, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.clone.call(this, document)
+  end
+end
+struct LibWin32::IXpsOMDocumentCollection
+  def query_interface(this : IXpsOMDocumentCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDocumentCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDocumentCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMDocumentCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMDocumentCollection*, index : UInt32, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, document)
+  end
+  def insert_at(this : IXpsOMDocumentCollection*, index : UInt32, document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, document)
+  end
+  def remove_at(this : IXpsOMDocumentCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMDocumentCollection*, index : UInt32, document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, document)
+  end
+  def append(this : IXpsOMDocumentCollection*, document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.append.call(this, document)
+  end
+end
+struct LibWin32::IXpsOMDocumentSequence
+  def query_interface(this : IXpsOMDocumentSequence*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMDocumentSequence*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMDocumentSequence*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMDocumentSequence*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMDocumentSequence*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMDocumentSequence*, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, package)
+  end
+  def get_documents(this : IXpsOMDocumentSequence*, documents : IXpsOMDocumentCollection*) : HRESULT
+    @lpVtbl.value.get_documents.call(this, documents)
+  end
+  def get_print_ticket_resource(this : IXpsOMDocumentSequence*, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.call(this, printticketresource)
+  end
+  def set_print_ticket_resource(this : IXpsOMDocumentSequence*, printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.call(this, printticketresource)
+  end
+end
+struct LibWin32::IXpsOMCoreProperties
+  def query_interface(this : IXpsOMCoreProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMCoreProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMCoreProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMCoreProperties*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMCoreProperties*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMCoreProperties*, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, package)
+  end
+  def get_category(this : IXpsOMCoreProperties*, category : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_category.call(this, category)
+  end
+  def set_category(this : IXpsOMCoreProperties*, category : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_category.call(this, category)
+  end
+  def get_content_status(this : IXpsOMCoreProperties*, contentstatus : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_status.call(this, contentstatus)
+  end
+  def set_content_status(this : IXpsOMCoreProperties*, contentstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_content_status.call(this, contentstatus)
+  end
+  def get_content_type(this : IXpsOMCoreProperties*, contenttype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, contenttype)
+  end
+  def set_content_type(this : IXpsOMCoreProperties*, contenttype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_content_type.call(this, contenttype)
+  end
+  def get_created(this : IXpsOMCoreProperties*, created : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_created.call(this, created)
+  end
+  def set_created(this : IXpsOMCoreProperties*, created : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_created.call(this, created)
+  end
+  def get_creator(this : IXpsOMCoreProperties*, creator : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_creator.call(this, creator)
+  end
+  def set_creator(this : IXpsOMCoreProperties*, creator : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_creator.call(this, creator)
+  end
+  def get_description(this : IXpsOMCoreProperties*, description : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def set_description(this : IXpsOMCoreProperties*, description : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, description)
+  end
+  def get_identifier(this : IXpsOMCoreProperties*, identifier : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_identifier.call(this, identifier)
+  end
+  def set_identifier(this : IXpsOMCoreProperties*, identifier : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_identifier.call(this, identifier)
+  end
+  def get_keywords(this : IXpsOMCoreProperties*, keywords : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_keywords.call(this, keywords)
+  end
+  def set_keywords(this : IXpsOMCoreProperties*, keywords : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_keywords.call(this, keywords)
+  end
+  def get_language(this : IXpsOMCoreProperties*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMCoreProperties*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_last_modified_by(this : IXpsOMCoreProperties*, lastmodifiedby : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_last_modified_by.call(this, lastmodifiedby)
+  end
+  def set_last_modified_by(this : IXpsOMCoreProperties*, lastmodifiedby : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_last_modified_by.call(this, lastmodifiedby)
+  end
+  def get_last_printed(this : IXpsOMCoreProperties*, lastprinted : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_last_printed.call(this, lastprinted)
+  end
+  def set_last_printed(this : IXpsOMCoreProperties*, lastprinted : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_last_printed.call(this, lastprinted)
+  end
+  def get_modified(this : IXpsOMCoreProperties*, modified : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, modified)
+  end
+  def set_modified(this : IXpsOMCoreProperties*, modified : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_modified.call(this, modified)
+  end
+  def get_revision(this : IXpsOMCoreProperties*, revision : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_revision.call(this, revision)
+  end
+  def set_revision(this : IXpsOMCoreProperties*, revision : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_revision.call(this, revision)
+  end
+  def get_subject(this : IXpsOMCoreProperties*, subject : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_subject.call(this, subject)
+  end
+  def set_subject(this : IXpsOMCoreProperties*, subject : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_subject.call(this, subject)
+  end
+  def get_title(this : IXpsOMCoreProperties*, title : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title.call(this, title)
+  end
+  def set_title(this : IXpsOMCoreProperties*, title : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.call(this, title)
+  end
+  def get_version(this : IXpsOMCoreProperties*, version : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+  def set_version(this : IXpsOMCoreProperties*, version : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_version.call(this, version)
+  end
+  def clone(this : IXpsOMCoreProperties*, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.clone.call(this, coreproperties)
+  end
+end
+struct LibWin32::IXpsOMPackage
+  def query_interface(this : IXpsOMPackage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPackage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPackage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_sequence(this : IXpsOMPackage*, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_document_sequence.call(this, documentsequence)
+  end
+  def set_document_sequence(this : IXpsOMPackage*, documentsequence : IXpsOMDocumentSequence) : HRESULT
+    @lpVtbl.value.set_document_sequence.call(this, documentsequence)
+  end
+  def get_core_properties(this : IXpsOMPackage*, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.get_core_properties.call(this, coreproperties)
+  end
+  def set_core_properties(this : IXpsOMPackage*, coreproperties : IXpsOMCoreProperties) : HRESULT
+    @lpVtbl.value.set_core_properties.call(this, coreproperties)
+  end
+  def get_discard_control_part_name(this : IXpsOMPackage*, discardcontrolparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_discard_control_part_name.call(this, discardcontrolparturi)
+  end
+  def set_discard_control_part_name(this : IXpsOMPackage*, discardcontrolparturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_discard_control_part_name.call(this, discardcontrolparturi)
+  end
+  def get_thumbnail_resource(this : IXpsOMPackage*, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.call(this, imageresource)
+  end
+  def set_thumbnail_resource(this : IXpsOMPackage*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.call(this, imageresource)
+  end
+  def write_to_file(this : IXpsOMPackage*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_file.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize)
+  end
+  def write_to_stream(this : IXpsOMPackage*, stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_stream.call(this, stream, optimizemarkupsize)
+  end
+end
+struct LibWin32::IXpsOMObjectFactory
+  def query_interface(this : IXpsOMObjectFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMObjectFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMObjectFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_package(this : IXpsOMObjectFactory*, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package.call(this, package)
+  end
+  def create_package_from_file(this : IXpsOMObjectFactory*, filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_file.call(this, filename, reuseobjects, package)
+  end
+  def create_package_from_stream(this : IXpsOMObjectFactory*, stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_stream.call(this, stream, reuseobjects, package)
+  end
+  def create_story_fragments_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, parturi : IOpcPartUri, storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.create_story_fragments_resource.call(this, acquiredstream, parturi, storyfragmentsresource)
+  end
+  def create_document_structure_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, parturi : IOpcPartUri, documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.create_document_structure_resource.call(this, acquiredstream, parturi, documentstructureresource)
+  end
+  def create_signature_block_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, parturi : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.create_signature_block_resource.call(this, acquiredstream, parturi, signatureblockresource)
+  end
+  def create_remote_dictionary_resource(this : IXpsOMObjectFactory*, dictionary : IXpsOMDictionary, parturi : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource.call(this, dictionary, parturi, remotedictionaryresource)
+  end
+  def create_remote_dictionary_resource_from_stream(this : IXpsOMObjectFactory*, dictionarymarkupstream : IStream, dictionaryparturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream.call(this, dictionarymarkupstream, dictionaryparturi, resources, dictionaryresource)
+  end
+  def create_part_resources(this : IXpsOMObjectFactory*, partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.create_part_resources.call(this, partresources)
+  end
+  def create_document_sequence(this : IXpsOMObjectFactory*, parturi : IOpcPartUri, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.create_document_sequence.call(this, parturi, documentsequence)
+  end
+  def create_document(this : IXpsOMObjectFactory*, parturi : IOpcPartUri, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.create_document.call(this, parturi, document)
+  end
+  def create_page_reference(this : IXpsOMObjectFactory*, advisorypagedimensions : XPS_SIZE*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.create_page_reference.call(this, advisorypagedimensions, pagereference)
+  end
+  def create_page(this : IXpsOMObjectFactory*, pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page.call(this, pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream(this : IXpsOMObjectFactory*, pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page_from_stream.call(this, pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_canvas(this : IXpsOMObjectFactory*, canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.create_canvas.call(this, canvas)
+  end
+  def create_glyphs(this : IXpsOMObjectFactory*, fontresource : IXpsOMFontResource, glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.create_glyphs.call(this, fontresource, glyphs)
+  end
+  def create_path(this : IXpsOMObjectFactory*, path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.create_path.call(this, path)
+  end
+  def create_geometry(this : IXpsOMObjectFactory*, geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.create_geometry.call(this, geometry)
+  end
+  def create_geometry_figure(this : IXpsOMObjectFactory*, startpoint : XPS_POINT*, figure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.create_geometry_figure.call(this, startpoint, figure)
+  end
+  def create_matrix_transform(this : IXpsOMObjectFactory*, matrix : XPS_MATRIX*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrix, transform)
+  end
+  def create_solid_color_brush(this : IXpsOMObjectFactory*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, colorprofile, solidcolorbrush)
+  end
+  def create_color_profile_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, parturi : IOpcPartUri, colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.create_color_profile_resource.call(this, acquiredstream, parturi, colorprofileresource)
+  end
+  def create_image_brush(this : IXpsOMObjectFactory*, image : IXpsOMImageResource, viewbox : XPS_RECT*, viewport : XPS_RECT*, imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, viewbox, viewport, imagebrush)
+  end
+  def create_visual_brush(this : IXpsOMObjectFactory*, viewbox : XPS_RECT*, viewport : XPS_RECT*, visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.create_visual_brush.call(this, viewbox, viewport, visualbrush)
+  end
+  def create_image_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, contenttype : XPS_IMAGE_TYPE, parturi : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.create_image_resource.call(this, acquiredstream, contenttype, parturi, imageresource)
+  end
+  def create_print_ticket_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, parturi : IOpcPartUri, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.create_print_ticket_resource.call(this, acquiredstream, parturi, printticketresource)
+  end
+  def create_font_resource(this : IXpsOMObjectFactory*, acquiredstream : IStream, fontembedding : XPS_FONT_EMBEDDING, parturi : IOpcPartUri, isobfsourcestream : LibC::BOOL, fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, acquiredstream, fontembedding, parturi, isobfsourcestream, fontresource)
+  end
+  def create_gradient_stop(this : IXpsOMObjectFactory*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, offset : Float32, gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.create_gradient_stop.call(this, color, colorprofile, offset, gradientstop)
+  end
+  def create_linear_gradient_brush(this : IXpsOMObjectFactory*, gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, startpoint : XPS_POINT*, endpoint : XPS_POINT*, lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, gradstop1, gradstop2, startpoint, endpoint, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : IXpsOMObjectFactory*, gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, centerpoint : XPS_POINT*, gradientorigin : XPS_POINT*, radiisizes : XPS_SIZE*, radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, gradstop1, gradstop2, centerpoint, gradientorigin, radiisizes, radialgradientbrush)
+  end
+  def create_core_properties(this : IXpsOMObjectFactory*, parturi : IOpcPartUri, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.create_core_properties.call(this, parturi, coreproperties)
+  end
+  def create_dictionary(this : IXpsOMObjectFactory*, dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.create_dictionary.call(this, dictionary)
+  end
+  def create_part_uri_collection(this : IXpsOMObjectFactory*, parturicollection : IXpsOMPartUriCollection*) : HRESULT
+    @lpVtbl.value.create_part_uri_collection.call(this, parturicollection)
+  end
+  def create_package_writer_on_file(this : IXpsOMObjectFactory*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_package_writer_on_stream(this : IXpsOMObjectFactory*, outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream.call(this, outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_part_uri(this : IXpsOMObjectFactory*, uri : LibC::LPWSTR, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.create_part_uri.call(this, uri, parturi)
+  end
+  def create_read_only_stream_on_file(this : IXpsOMObjectFactory*, filename : LibC::LPWSTR, stream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_on_file.call(this, filename, stream)
+  end
+end
+struct LibWin32::IXpsOMNameCollection
+  def query_interface(this : IXpsOMNameCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMNameCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMNameCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMNameCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMNameCollection*, index : UInt32, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, name)
+  end
+end
+struct LibWin32::IXpsOMPartUriCollection
+  def query_interface(this : IXpsOMPartUriCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPartUriCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPartUriCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsOMPartUriCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsOMPartUriCollection*, index : UInt32, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, parturi)
+  end
+  def insert_at(this : IXpsOMPartUriCollection*, index : UInt32, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.insert_at.call(this, index, parturi)
+  end
+  def remove_at(this : IXpsOMPartUriCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+  def set_at(this : IXpsOMPartUriCollection*, index : UInt32, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_at.call(this, index, parturi)
+  end
+  def append(this : IXpsOMPartUriCollection*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.append.call(this, parturi)
+  end
+end
+struct LibWin32::IXpsOMPackageWriter
+  def query_interface(this : IXpsOMPackageWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPackageWriter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPackageWriter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_new_document(this : IXpsOMPackageWriter*, documentpartname : IOpcPartUri, documentprintticket : IXpsOMPrintTicketResource, documentstructure : IXpsOMDocumentStructureResource, signatureblockresources : IXpsOMSignatureBlockResourceCollection, restrictedfonts : IXpsOMPartUriCollection) : HRESULT
+    @lpVtbl.value.start_new_document.call(this, documentpartname, documentprintticket, documentstructure, signatureblockresources, restrictedfonts)
+  end
+  def add_page(this : IXpsOMPackageWriter*, page : IXpsOMPage, advisorypagedimensions : XPS_SIZE*, discardableresourceparts : IXpsOMPartUriCollection, storyfragments : IXpsOMStoryFragmentsResource, pageprintticket : IXpsOMPrintTicketResource, pagethumbnail : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.add_page.call(this, page, advisorypagedimensions, discardableresourceparts, storyfragments, pageprintticket, pagethumbnail)
+  end
+  def add_resource(this : IXpsOMPackageWriter*, resource : IXpsOMResource) : HRESULT
+    @lpVtbl.value.add_resource.call(this, resource)
+  end
+  def close(this : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def is_closed(this : IXpsOMPackageWriter*, isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.call(this, isclosed)
+  end
+end
+struct LibWin32::IXpsOMPackageTarget
+  def query_interface(this : IXpsOMPackageTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPackageTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPackageTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_xps_om_package_writer(this : IXpsOMPackageTarget*, documentsequencepartname : IOpcPartUri, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_xps_om_package_writer.call(this, documentsequencepartname, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+end
+struct LibWin32::IXpsOMThumbnailGenerator
+  def query_interface(this : IXpsOMThumbnailGenerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMThumbnailGenerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMThumbnailGenerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def generate_thumbnail(this : IXpsOMThumbnailGenerator*, page : IXpsOMPage, thumbnailtype : XPS_IMAGE_TYPE, thumbnailsize : XPS_THUMBNAIL_SIZE, imageresourcepartname : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.generate_thumbnail.call(this, page, thumbnailtype, thumbnailsize, imageresourcepartname, imageresource)
+  end
+end
+struct LibWin32::IXpsOMObjectFactory1
+  def query_interface(this : IXpsOMObjectFactory1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMObjectFactory1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMObjectFactory1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_package(this : IXpsOMObjectFactory1*, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package.call(this, package)
+  end
+  def create_package_from_file(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_file.call(this, filename, reuseobjects, package)
+  end
+  def create_package_from_stream(this : IXpsOMObjectFactory1*, stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_stream.call(this, stream, reuseobjects, package)
+  end
+  def create_story_fragments_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, parturi : IOpcPartUri, storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.create_story_fragments_resource.call(this, acquiredstream, parturi, storyfragmentsresource)
+  end
+  def create_document_structure_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, parturi : IOpcPartUri, documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.create_document_structure_resource.call(this, acquiredstream, parturi, documentstructureresource)
+  end
+  def create_signature_block_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, parturi : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.create_signature_block_resource.call(this, acquiredstream, parturi, signatureblockresource)
+  end
+  def create_remote_dictionary_resource(this : IXpsOMObjectFactory1*, dictionary : IXpsOMDictionary, parturi : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource.call(this, dictionary, parturi, remotedictionaryresource)
+  end
+  def create_remote_dictionary_resource_from_stream(this : IXpsOMObjectFactory1*, dictionarymarkupstream : IStream, dictionaryparturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream.call(this, dictionarymarkupstream, dictionaryparturi, resources, dictionaryresource)
+  end
+  def create_part_resources(this : IXpsOMObjectFactory1*, partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.create_part_resources.call(this, partresources)
+  end
+  def create_document_sequence(this : IXpsOMObjectFactory1*, parturi : IOpcPartUri, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.create_document_sequence.call(this, parturi, documentsequence)
+  end
+  def create_document(this : IXpsOMObjectFactory1*, parturi : IOpcPartUri, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.create_document.call(this, parturi, document)
+  end
+  def create_page_reference(this : IXpsOMObjectFactory1*, advisorypagedimensions : XPS_SIZE*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.create_page_reference.call(this, advisorypagedimensions, pagereference)
+  end
+  def create_page(this : IXpsOMObjectFactory1*, pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page.call(this, pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream(this : IXpsOMObjectFactory1*, pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page_from_stream.call(this, pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_canvas(this : IXpsOMObjectFactory1*, canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.create_canvas.call(this, canvas)
+  end
+  def create_glyphs(this : IXpsOMObjectFactory1*, fontresource : IXpsOMFontResource, glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.create_glyphs.call(this, fontresource, glyphs)
+  end
+  def create_path(this : IXpsOMObjectFactory1*, path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.create_path.call(this, path)
+  end
+  def create_geometry(this : IXpsOMObjectFactory1*, geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.create_geometry.call(this, geometry)
+  end
+  def create_geometry_figure(this : IXpsOMObjectFactory1*, startpoint : XPS_POINT*, figure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.create_geometry_figure.call(this, startpoint, figure)
+  end
+  def create_matrix_transform(this : IXpsOMObjectFactory1*, matrix : XPS_MATRIX*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.call(this, matrix, transform)
+  end
+  def create_solid_color_brush(this : IXpsOMObjectFactory1*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.call(this, color, colorprofile, solidcolorbrush)
+  end
+  def create_color_profile_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, parturi : IOpcPartUri, colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.create_color_profile_resource.call(this, acquiredstream, parturi, colorprofileresource)
+  end
+  def create_image_brush(this : IXpsOMObjectFactory1*, image : IXpsOMImageResource, viewbox : XPS_RECT*, viewport : XPS_RECT*, imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.call(this, image, viewbox, viewport, imagebrush)
+  end
+  def create_visual_brush(this : IXpsOMObjectFactory1*, viewbox : XPS_RECT*, viewport : XPS_RECT*, visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.create_visual_brush.call(this, viewbox, viewport, visualbrush)
+  end
+  def create_image_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, contenttype : XPS_IMAGE_TYPE, parturi : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.create_image_resource.call(this, acquiredstream, contenttype, parturi, imageresource)
+  end
+  def create_print_ticket_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, parturi : IOpcPartUri, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.create_print_ticket_resource.call(this, acquiredstream, parturi, printticketresource)
+  end
+  def create_font_resource(this : IXpsOMObjectFactory1*, acquiredstream : IStream, fontembedding : XPS_FONT_EMBEDDING, parturi : IOpcPartUri, isobfsourcestream : LibC::BOOL, fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.call(this, acquiredstream, fontembedding, parturi, isobfsourcestream, fontresource)
+  end
+  def create_gradient_stop(this : IXpsOMObjectFactory1*, color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, offset : Float32, gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.create_gradient_stop.call(this, color, colorprofile, offset, gradientstop)
+  end
+  def create_linear_gradient_brush(this : IXpsOMObjectFactory1*, gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, startpoint : XPS_POINT*, endpoint : XPS_POINT*, lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.call(this, gradstop1, gradstop2, startpoint, endpoint, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(this : IXpsOMObjectFactory1*, gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, centerpoint : XPS_POINT*, gradientorigin : XPS_POINT*, radiisizes : XPS_SIZE*, radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.call(this, gradstop1, gradstop2, centerpoint, gradientorigin, radiisizes, radialgradientbrush)
+  end
+  def create_core_properties(this : IXpsOMObjectFactory1*, parturi : IOpcPartUri, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.create_core_properties.call(this, parturi, coreproperties)
+  end
+  def create_dictionary(this : IXpsOMObjectFactory1*, dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.create_dictionary.call(this, dictionary)
+  end
+  def create_part_uri_collection(this : IXpsOMObjectFactory1*, parturicollection : IXpsOMPartUriCollection*) : HRESULT
+    @lpVtbl.value.create_part_uri_collection.call(this, parturicollection)
+  end
+  def create_package_writer_on_file(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_package_writer_on_stream(this : IXpsOMObjectFactory1*, outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream.call(this, outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_part_uri(this : IXpsOMObjectFactory1*, uri : LibC::LPWSTR, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.create_part_uri.call(this, uri, parturi)
+  end
+  def create_read_only_stream_on_file(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, stream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_on_file.call(this, filename, stream)
+  end
+  def get_document_type_from_file(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type_from_file.call(this, filename, documenttype)
+  end
+  def get_document_type_from_stream(this : IXpsOMObjectFactory1*, xpsdocumentstream : IStream, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type_from_stream.call(this, xpsdocumentstream, documenttype)
+  end
+  def convert_hd_photo_to_jpeg_xr(this : IXpsOMObjectFactory1*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.convert_hd_photo_to_jpeg_xr.call(this, imageresource)
+  end
+  def convert_jpeg_xr_to_hd_photo(this : IXpsOMObjectFactory1*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.convert_jpeg_xr_to_hd_photo.call(this, imageresource)
+  end
+  def create_package_writer_on_file1(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, documenttype : XPS_DOCUMENT_TYPE, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file1.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, documenttype, packagewriter)
+  end
+  def create_package_writer_on_stream1(this : IXpsOMObjectFactory1*, outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, documenttype : XPS_DOCUMENT_TYPE, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream1.call(this, outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, documenttype, packagewriter)
+  end
+  def create_package1(this : IXpsOMObjectFactory1*, package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package1.call(this, package)
+  end
+  def create_package_from_stream1(this : IXpsOMObjectFactory1*, stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package_from_stream1.call(this, stream, reuseobjects, package)
+  end
+  def create_package_from_file1(this : IXpsOMObjectFactory1*, filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package_from_file1.call(this, filename, reuseobjects, package)
+  end
+  def create_page1(this : IXpsOMObjectFactory1*, pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage1*) : HRESULT
+    @lpVtbl.value.create_page1.call(this, pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream1(this : IXpsOMObjectFactory1*, pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage1*) : HRESULT
+    @lpVtbl.value.create_page_from_stream1.call(this, pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_remote_dictionary_resource_from_stream1(this : IXpsOMObjectFactory1*, dictionarymarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream1.call(this, dictionarymarkupstream, parturi, resources, dictionaryresource)
+  end
+end
+struct LibWin32::IXpsOMPackage1
+  def query_interface(this : IXpsOMPackage1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPackage1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPackage1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_document_sequence(this : IXpsOMPackage1*, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_document_sequence.call(this, documentsequence)
+  end
+  def set_document_sequence(this : IXpsOMPackage1*, documentsequence : IXpsOMDocumentSequence) : HRESULT
+    @lpVtbl.value.set_document_sequence.call(this, documentsequence)
+  end
+  def get_core_properties(this : IXpsOMPackage1*, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.get_core_properties.call(this, coreproperties)
+  end
+  def set_core_properties(this : IXpsOMPackage1*, coreproperties : IXpsOMCoreProperties) : HRESULT
+    @lpVtbl.value.set_core_properties.call(this, coreproperties)
+  end
+  def get_discard_control_part_name(this : IXpsOMPackage1*, discardcontrolparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_discard_control_part_name.call(this, discardcontrolparturi)
+  end
+  def set_discard_control_part_name(this : IXpsOMPackage1*, discardcontrolparturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_discard_control_part_name.call(this, discardcontrolparturi)
+  end
+  def get_thumbnail_resource(this : IXpsOMPackage1*, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.call(this, imageresource)
+  end
+  def set_thumbnail_resource(this : IXpsOMPackage1*, imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.call(this, imageresource)
+  end
+  def write_to_file(this : IXpsOMPackage1*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_file.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize)
+  end
+  def write_to_stream(this : IXpsOMPackage1*, stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_stream.call(this, stream, optimizemarkupsize)
+  end
+  def get_document_type(this : IXpsOMPackage1*, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.call(this, documenttype)
+  end
+  def write_to_file1(this : IXpsOMPackage1*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write_to_file1.call(this, filename, securityattributes, flagsandattributes, optimizemarkupsize, documenttype)
+  end
+  def write_to_stream1(this : IXpsOMPackage1*, outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write_to_stream1.call(this, outputstream, optimizemarkupsize, documenttype)
+  end
+end
+struct LibWin32::IXpsOMPage1
+  def query_interface(this : IXpsOMPage1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPage1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPage1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMPage1*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMPage1*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_owner(this : IXpsOMPage1*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pagereference)
+  end
+  def get_visuals(this : IXpsOMPage1*, visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.call(this, visuals)
+  end
+  def get_page_dimensions(this : IXpsOMPage1*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_page_dimensions.call(this, pagedimensions)
+  end
+  def set_page_dimensions(this : IXpsOMPage1*, pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_page_dimensions.call(this, pagedimensions)
+  end
+  def get_content_box(this : IXpsOMPage1*, contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_content_box.call(this, contentbox)
+  end
+  def set_content_box(this : IXpsOMPage1*, contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_content_box.call(this, contentbox)
+  end
+  def get_bleed_box(this : IXpsOMPage1*, bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_bleed_box.call(this, bleedbox)
+  end
+  def set_bleed_box(this : IXpsOMPage1*, bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_bleed_box.call(this, bleedbox)
+  end
+  def get_language(this : IXpsOMPage1*, language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.call(this, language)
+  end
+  def set_language(this : IXpsOMPage1*, language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.call(this, language)
+  end
+  def get_name(this : IXpsOMPage1*, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def set_name(this : IXpsOMPage1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_is_hyperlink_target(this : IXpsOMPage1*, ishyperlinktarget : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.call(this, ishyperlinktarget)
+  end
+  def set_is_hyperlink_target(this : IXpsOMPage1*, ishyperlinktarget : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.call(this, ishyperlinktarget)
+  end
+  def get_dictionary(this : IXpsOMPage1*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.call(this, resourcedictionary)
+  end
+  def get_dictionary_local(this : IXpsOMPage1*, resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.call(this, resourcedictionary)
+  end
+  def set_dictionary_local(this : IXpsOMPage1*, resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.call(this, resourcedictionary)
+  end
+  def get_dictionary_resource(this : IXpsOMPage1*, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def set_dictionary_resource(this : IXpsOMPage1*, remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.call(this, remotedictionaryresource)
+  end
+  def write(this : IXpsOMPage1*, stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write.call(this, stream, optimizemarkupsize)
+  end
+  def generate_unused_lookup_key(this : IXpsOMPage1*, type : XPS_OBJECT_TYPE, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.generate_unused_lookup_key.call(this, type, key)
+  end
+  def clone(this : IXpsOMPage1*, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.clone.call(this, page)
+  end
+  def get_document_type(this : IXpsOMPage1*, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.call(this, documenttype)
+  end
+  def write1(this : IXpsOMPage1*, stream : ISequentialStream, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write1.call(this, stream, optimizemarkupsize, documenttype)
+  end
+end
+struct LibWin32::IXpsDocumentPackageTarget
+  def query_interface(this : IXpsDocumentPackageTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsDocumentPackageTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsDocumentPackageTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_xps_om_package_writer(this : IXpsDocumentPackageTarget*, documentsequencepartname : IOpcPartUri, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.get_xps_om_package_writer.call(this, documentsequencepartname, discardcontrolpartname, packagewriter)
+  end
+  def get_xps_om_factory(this : IXpsDocumentPackageTarget*, xpsfactory : IXpsOMObjectFactory*) : HRESULT
+    @lpVtbl.value.get_xps_om_factory.call(this, xpsfactory)
+  end
+  def get_xps_type(this : IXpsDocumentPackageTarget*, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_xps_type.call(this, documenttype)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResource1
+  def query_interface(this : IXpsOMRemoteDictionaryResource1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMRemoteDictionaryResource1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMRemoteDictionaryResource1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IXpsOMRemoteDictionaryResource1*, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, parturi)
+  end
+  def set_part_name(this : IXpsOMRemoteDictionaryResource1*, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.call(this, parturi)
+  end
+  def get_dictionary(this : IXpsOMRemoteDictionaryResource1*, dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.call(this, dictionary)
+  end
+  def set_dictionary(this : IXpsOMRemoteDictionaryResource1*, dictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary.call(this, dictionary)
+  end
+  def get_document_type(this : IXpsOMRemoteDictionaryResource1*, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.call(this, documenttype)
+  end
+  def write1(this : IXpsOMRemoteDictionaryResource1*, stream : ISequentialStream, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write1.call(this, stream, documenttype)
+  end
+end
+struct LibWin32::IXpsOMPackageWriter3D
+  def query_interface(this : IXpsOMPackageWriter3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsOMPackageWriter3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsOMPackageWriter3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_new_document(this : IXpsOMPackageWriter3D*, documentpartname : IOpcPartUri, documentprintticket : IXpsOMPrintTicketResource, documentstructure : IXpsOMDocumentStructureResource, signatureblockresources : IXpsOMSignatureBlockResourceCollection, restrictedfonts : IXpsOMPartUriCollection) : HRESULT
+    @lpVtbl.value.start_new_document.call(this, documentpartname, documentprintticket, documentstructure, signatureblockresources, restrictedfonts)
+  end
+  def add_page(this : IXpsOMPackageWriter3D*, page : IXpsOMPage, advisorypagedimensions : XPS_SIZE*, discardableresourceparts : IXpsOMPartUriCollection, storyfragments : IXpsOMStoryFragmentsResource, pageprintticket : IXpsOMPrintTicketResource, pagethumbnail : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.add_page.call(this, page, advisorypagedimensions, discardableresourceparts, storyfragments, pageprintticket, pagethumbnail)
+  end
+  def add_resource(this : IXpsOMPackageWriter3D*, resource : IXpsOMResource) : HRESULT
+    @lpVtbl.value.add_resource.call(this, resource)
+  end
+  def close(this : IXpsOMPackageWriter3D*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def is_closed(this : IXpsOMPackageWriter3D*, isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.call(this, isclosed)
+  end
+  def add_model_texture(this : IXpsOMPackageWriter3D*, texturepartname : IOpcPartUri, texturedata : IStream) : HRESULT
+    @lpVtbl.value.add_model_texture.call(this, texturepartname, texturedata)
+  end
+  def set_model_print_ticket(this : IXpsOMPackageWriter3D*, printticketpartname : IOpcPartUri, printticketdata : IStream) : HRESULT
+    @lpVtbl.value.set_model_print_ticket.call(this, printticketpartname, printticketdata)
+  end
+end
+struct LibWin32::IXpsDocumentPackageTarget3D
+  def query_interface(this : IXpsDocumentPackageTarget3D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsDocumentPackageTarget3D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsDocumentPackageTarget3D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_xps_om_package_writer3_d(this : IXpsDocumentPackageTarget3D*, documentsequencepartname : IOpcPartUri, discardcontrolpartname : IOpcPartUri, modelpartname : IOpcPartUri, modeldata : IStream, packagewriter : IXpsOMPackageWriter3D*) : HRESULT
+    @lpVtbl.value.get_xps_om_package_writer3_d.call(this, documentsequencepartname, discardcontrolpartname, modelpartname, modeldata, packagewriter)
+  end
+  def get_xps_om_factory(this : IXpsDocumentPackageTarget3D*, xpsfactory : IXpsOMObjectFactory*) : HRESULT
+    @lpVtbl.value.get_xps_om_factory.call(this, xpsfactory)
+  end
+end
+struct LibWin32::IXpsSigningOptions
+  def query_interface(this : IXpsSigningOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSigningOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSigningOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_signature_id(this : IXpsSigningOptions*, signatureid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.call(this, signatureid)
+  end
+  def set_signature_id(this : IXpsSigningOptions*, signatureid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_id.call(this, signatureid)
+  end
+  def get_signature_method(this : IXpsSigningOptions*, signaturemethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_method.call(this, signaturemethod)
+  end
+  def set_signature_method(this : IXpsSigningOptions*, signaturemethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_method.call(this, signaturemethod)
+  end
+  def get_digest_method(this : IXpsSigningOptions*, digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_digest_method.call(this, digestmethod)
+  end
+  def set_digest_method(this : IXpsSigningOptions*, digestmethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_digest_method.call(this, digestmethod)
+  end
+  def get_signature_part_name(this : IXpsSigningOptions*, signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.call(this, signaturepartname)
+  end
+  def set_signature_part_name(this : IXpsSigningOptions*, signaturepartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_part_name.call(this, signaturepartname)
+  end
+  def get_policy(this : IXpsSigningOptions*, policy : XPS_SIGN_POLICY*) : HRESULT
+    @lpVtbl.value.get_policy.call(this, policy)
+  end
+  def set_policy(this : IXpsSigningOptions*, policy : XPS_SIGN_POLICY) : HRESULT
+    @lpVtbl.value.set_policy.call(this, policy)
+  end
+  def get_signing_time_format(this : IXpsSigningOptions*, timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_signing_time_format.call(this, timeformat)
+  end
+  def set_signing_time_format(this : IXpsSigningOptions*, timeformat : OPC_SIGNATURE_TIME_FORMAT) : HRESULT
+    @lpVtbl.value.set_signing_time_format.call(this, timeformat)
+  end
+  def get_custom_objects(this : IXpsSigningOptions*, customobjectset : IOpcSignatureCustomObjectSet*) : HRESULT
+    @lpVtbl.value.get_custom_objects.call(this, customobjectset)
+  end
+  def get_custom_references(this : IXpsSigningOptions*, customreferenceset : IOpcSignatureReferenceSet*) : HRESULT
+    @lpVtbl.value.get_custom_references.call(this, customreferenceset)
+  end
+  def get_certificate_set(this : IXpsSigningOptions*, certificateset : IOpcCertificateSet*) : HRESULT
+    @lpVtbl.value.get_certificate_set.call(this, certificateset)
+  end
+  def get_flags(this : IXpsSigningOptions*, flags : XPS_SIGN_FLAGS*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, flags)
+  end
+  def set_flags(this : IXpsSigningOptions*, flags : XPS_SIGN_FLAGS) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+end
+struct LibWin32::IXpsSignatureCollection
+  def query_interface(this : IXpsSignatureCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsSignatureCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsSignatureCollection*, index : UInt32, signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, signature)
+  end
+  def remove_at(this : IXpsSignatureCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+end
+struct LibWin32::IXpsSignature
+  def query_interface(this : IXpsSignature*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignature*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignature*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_signature_id(this : IXpsSignature*, sigid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.call(this, sigid)
+  end
+  def get_signature_value(this : IXpsSignature*, signaturehashvalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_value.call(this, signaturehashvalue, count)
+  end
+  def get_certificate_enumerator(this : IXpsSignature*, certificateenumerator : IOpcCertificateEnumerator*) : HRESULT
+    @lpVtbl.value.get_certificate_enumerator.call(this, certificateenumerator)
+  end
+  def get_signing_time(this : IXpsSignature*, sigdatetimestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signing_time.call(this, sigdatetimestring)
+  end
+  def get_signing_time_format(this : IXpsSignature*, timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_signing_time_format.call(this, timeformat)
+  end
+  def get_signature_part_name(this : IXpsSignature*, signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.call(this, signaturepartname)
+  end
+  def verify(this : IXpsSignature*, x509certificate : CERT_CONTEXT*, sigstatus : XPS_SIGNATURE_STATUS*) : HRESULT
+    @lpVtbl.value.verify.call(this, x509certificate, sigstatus)
+  end
+  def get_policy(this : IXpsSignature*, policy : XPS_SIGN_POLICY*) : HRESULT
+    @lpVtbl.value.get_policy.call(this, policy)
+  end
+  def get_custom_object_enumerator(this : IXpsSignature*, customobjectenumerator : IOpcSignatureCustomObjectEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_object_enumerator.call(this, customobjectenumerator)
+  end
+  def get_custom_reference_enumerator(this : IXpsSignature*, customreferenceenumerator : IOpcSignatureReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_reference_enumerator.call(this, customreferenceenumerator)
+  end
+  def get_signature_xml(this : IXpsSignature*, signaturexml : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_xml.call(this, signaturexml, count)
+  end
+  def set_signature_xml(this : IXpsSignature*, signaturexml : UInt8*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_signature_xml.call(this, signaturexml, count)
+  end
+end
+struct LibWin32::IXpsSignatureBlockCollection
+  def query_interface(this : IXpsSignatureBlockCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureBlockCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureBlockCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsSignatureBlockCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsSignatureBlockCollection*, index : UInt32, signatureblock : IXpsSignatureBlock*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, signatureblock)
+  end
+  def remove_at(this : IXpsSignatureBlockCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+end
+struct LibWin32::IXpsSignatureBlock
+  def query_interface(this : IXpsSignatureBlock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureBlock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureBlock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_requests(this : IXpsSignatureBlock*, requests : IXpsSignatureRequestCollection*) : HRESULT
+    @lpVtbl.value.get_requests.call(this, requests)
+  end
+  def get_part_name(this : IXpsSignatureBlock*, partname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, partname)
+  end
+  def get_document_index(this : IXpsSignatureBlock*, fixeddocumentindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_index.call(this, fixeddocumentindex)
+  end
+  def get_document_name(this : IXpsSignatureBlock*, fixeddocumentname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, fixeddocumentname)
+  end
+  def create_request(this : IXpsSignatureBlock*, requestid : LibC::LPWSTR, signaturerequest : IXpsSignatureRequest*) : HRESULT
+    @lpVtbl.value.create_request.call(this, requestid, signaturerequest)
+  end
+end
+struct LibWin32::IXpsSignatureRequestCollection
+  def query_interface(this : IXpsSignatureRequestCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureRequestCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureRequestCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IXpsSignatureRequestCollection*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_at(this : IXpsSignatureRequestCollection*, index : UInt32, signaturerequest : IXpsSignatureRequest*) : HRESULT
+    @lpVtbl.value.get_at.call(this, index, signaturerequest)
+  end
+  def remove_at(this : IXpsSignatureRequestCollection*, index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+end
+struct LibWin32::IXpsSignatureRequest
+  def query_interface(this : IXpsSignatureRequest*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureRequest*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureRequest*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_intent(this : IXpsSignatureRequest*, intent : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_intent.call(this, intent)
+  end
+  def set_intent(this : IXpsSignatureRequest*, intent : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_intent.call(this, intent)
+  end
+  def get_requested_signer(this : IXpsSignatureRequest*, signername : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_requested_signer.call(this, signername)
+  end
+  def set_requested_signer(this : IXpsSignatureRequest*, signername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_requested_signer.call(this, signername)
+  end
+  def get_request_sign_by_date(this : IXpsSignatureRequest*, datestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_request_sign_by_date.call(this, datestring)
+  end
+  def set_request_sign_by_date(this : IXpsSignatureRequest*, datestring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_request_sign_by_date.call(this, datestring)
+  end
+  def get_signing_locale(this : IXpsSignatureRequest*, place : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signing_locale.call(this, place)
+  end
+  def set_signing_locale(this : IXpsSignatureRequest*, place : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signing_locale.call(this, place)
+  end
+  def get_spot_location(this : IXpsSignatureRequest*, pageindex : Int32*, pagepartname : IOpcPartUri*, x : Float32*, y : Float32*) : HRESULT
+    @lpVtbl.value.get_spot_location.call(this, pageindex, pagepartname, x, y)
+  end
+  def set_spot_location(this : IXpsSignatureRequest*, pageindex : Int32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.set_spot_location.call(this, pageindex, x, y)
+  end
+  def get_request_id(this : IXpsSignatureRequest*, requestid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_request_id.call(this, requestid)
+  end
+  def get_signature(this : IXpsSignatureRequest*, signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, signature)
+  end
+end
+struct LibWin32::IXpsSignatureManager
+  def query_interface(this : IXpsSignatureManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXpsSignatureManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXpsSignatureManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def load_package_file(this : IXpsSignatureManager*, filename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.load_package_file.call(this, filename)
+  end
+  def load_package_stream(this : IXpsSignatureManager*, stream : IStream) : HRESULT
+    @lpVtbl.value.load_package_stream.call(this, stream)
+  end
+  def sign(this : IXpsSignatureManager*, signoptions : IXpsSigningOptions, x509certificate : CERT_CONTEXT*, signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.sign.call(this, signoptions, x509certificate, signature)
+  end
+  def get_signature_origin_part_name(this : IXpsSignatureManager*, signatureoriginpartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_origin_part_name.call(this, signatureoriginpartname)
+  end
+  def set_signature_origin_part_name(this : IXpsSignatureManager*, signatureoriginpartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_origin_part_name.call(this, signatureoriginpartname)
+  end
+  def get_signatures(this : IXpsSignatureManager*, signatures : IXpsSignatureCollection*) : HRESULT
+    @lpVtbl.value.get_signatures.call(this, signatures)
+  end
+  def add_signature_block(this : IXpsSignatureManager*, partname : IOpcPartUri, fixeddocumentindex : UInt32, signatureblock : IXpsSignatureBlock*) : HRESULT
+    @lpVtbl.value.add_signature_block.call(this, partname, fixeddocumentindex, signatureblock)
+  end
+  def get_signature_blocks(this : IXpsSignatureManager*, signatureblocks : IXpsSignatureBlockCollection*) : HRESULT
+    @lpVtbl.value.get_signature_blocks.call(this, signatureblocks)
+  end
+  def create_signing_options(this : IXpsSignatureManager*, signingoptions : IXpsSigningOptions*) : HRESULT
+    @lpVtbl.value.create_signing_options.call(this, signingoptions)
+  end
+  def save_package_to_file(this : IXpsSignatureManager*, filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32) : HRESULT
+    @lpVtbl.value.save_package_to_file.call(this, filename, securityattributes, flagsandattributes)
+  end
+  def save_package_to_stream(this : IXpsSignatureManager*, stream : IStream) : HRESULT
+    @lpVtbl.value.save_package_to_stream.call(this, stream)
+  end
+end

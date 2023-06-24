@@ -9947,10 +9947,10 @@ lib LibWin32
   fun SysAddRefString(bstrstring : UInt8*) : HRESULT
 
   # Params # bstrstring : UInt8* [In]
-  fun SysReleaseString(bstrstring : UInt8*)
+  fun SysReleaseString(bstrstring : UInt8*) : Void
 
   # Params # bstrstring : UInt8* [In]
-  fun SysFreeString(bstrstring : UInt8*)
+  fun SysFreeString(bstrstring : UInt8*) : Void
 
   # Params # pbstr : UInt8* [In]
   fun SysStringLen(pbstr : UInt8*) : UInt32
@@ -9984,10 +9984,10 @@ lib LibWin32
 
   # Params # dwerrcode : WIN32_ERROR [In]
   # Commented out because function is part of Lib C
-  #fun SetLastError(dwerrcode : WIN32_ERROR)
+  #fun SetLastError(dwerrcode : WIN32_ERROR) : Void
 
   # Params # dwerrcode : WIN32_ERROR [In],dwtype : UInt32 [In]
-  fun SetLastErrorEx(dwerrcode : WIN32_ERROR, dwtype : UInt32)
+  fun SetLastErrorEx(dwerrcode : WIN32_ERROR, dwtype : UInt32) : Void
 
   # Params # status : NTSTATUS [In]
   fun RtlNtStatusToDosError(status : NTSTATUS) : UInt32

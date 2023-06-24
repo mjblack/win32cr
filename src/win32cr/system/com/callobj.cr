@@ -198,3 +198,185 @@ lib LibWin32
   # Params # iidintercepted : Guid* [In],punkouter : IUnknown [In],typeinfo : ITypeInfo [In],iid : Guid* [In],ppv : Void** [In]
   fun CoGetInterceptorFromTypeInfo(iidintercepted : Guid*, punkouter : IUnknown, typeinfo : ITypeInfo, iid : Guid*, ppv : Void**) : HRESULT
 end
+struct LibWin32::ICallFrame
+  def query_interface(this : ICallFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_info(this : ICallFrame*, pinfo : CALLFRAMEINFO*) : HRESULT
+    @lpVtbl.value.get_info.call(this, pinfo)
+  end
+  def get_iid_and_method(this : ICallFrame*, piid : Guid*, pimethod : UInt32*) : HRESULT
+    @lpVtbl.value.get_iid_and_method.call(this, piid, pimethod)
+  end
+  def get_names(this : ICallFrame*, pwszinterface : LibC::LPWSTR*, pwszmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_names.call(this, pwszinterface, pwszmethod)
+  end
+  def get_stack_location(this : ICallFrame*) : Void*
+    @lpVtbl.value.get_stack_location.call(this)
+  end
+  def set_stack_location(this : ICallFrame*, pvstack : Void*) : Void
+    @lpVtbl.value.set_stack_location.call(this, pvstack)
+  end
+  def set_return_value(this : ICallFrame*, hr : HRESULT) : Void
+    @lpVtbl.value.set_return_value.call(this, hr)
+  end
+  def get_return_value(this : ICallFrame*) : HRESULT
+    @lpVtbl.value.get_return_value.call(this)
+  end
+  def get_param_info(this : ICallFrame*, iparam : UInt32, pinfo : CALLFRAMEPARAMINFO*) : HRESULT
+    @lpVtbl.value.get_param_info.call(this, iparam, pinfo)
+  end
+  def set_param(this : ICallFrame*, iparam : UInt32, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.set_param.call(this, iparam, pvar)
+  end
+  def get_param(this : ICallFrame*, iparam : UInt32, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_param.call(this, iparam, pvar)
+  end
+  def copy(this : ICallFrame*, copycontrol : CALLFRAME_COPY, pwalker : ICallFrameWalker, ppframe : ICallFrame*) : HRESULT
+    @lpVtbl.value.copy.call(this, copycontrol, pwalker, ppframe)
+  end
+  def free(this : ICallFrame*, pframeargsdest : ICallFrame, pwalkerdestfree : ICallFrameWalker, pwalkercopy : ICallFrameWalker, freeflags : UInt32, pwalkerfree : ICallFrameWalker, nullflags : UInt32) : HRESULT
+    @lpVtbl.value.free.call(this, pframeargsdest, pwalkerdestfree, pwalkercopy, freeflags, pwalkerfree, nullflags)
+  end
+  def free_param(this : ICallFrame*, iparam : UInt32, freeflags : UInt32, pwalkerfree : ICallFrameWalker, nullflags : UInt32) : HRESULT
+    @lpVtbl.value.free_param.call(this, iparam, freeflags, pwalkerfree, nullflags)
+  end
+  def walk_frame(this : ICallFrame*, walkwhat : UInt32, pwalker : ICallFrameWalker) : HRESULT
+    @lpVtbl.value.walk_frame.call(this, walkwhat, pwalker)
+  end
+  def get_marshal_size_max(this : ICallFrame*, pmshlcontext : CALLFRAME_MARSHALCONTEXT*, mshlflags : MSHLFLAGS, pcbbufferneeded : UInt32*) : HRESULT
+    @lpVtbl.value.get_marshal_size_max.call(this, pmshlcontext, mshlflags, pcbbufferneeded)
+  end
+  def marshal(this : ICallFrame*, pmshlcontext : CALLFRAME_MARSHALCONTEXT*, mshlflags : MSHLFLAGS, pbuffer : Void*, cbbuffer : UInt32, pcbbufferused : UInt32*, pdatarep : UInt32*, prpcflags : UInt32*) : HRESULT
+    @lpVtbl.value.marshal.call(this, pmshlcontext, mshlflags, pbuffer, cbbuffer, pcbbufferused, pdatarep, prpcflags)
+  end
+  def unmarshal(this : ICallFrame*, pbuffer : Void*, cbbuffer : UInt32, datarep : UInt32, pcontext : CALLFRAME_MARSHALCONTEXT*, pcbunmarshalled : UInt32*) : HRESULT
+    @lpVtbl.value.unmarshal.call(this, pbuffer, cbbuffer, datarep, pcontext, pcbunmarshalled)
+  end
+  def release_marshal_data(this : ICallFrame*, pbuffer : Void*, cbbuffer : UInt32, ibfirstrelease : UInt32, datarep : UInt32, pcontext : CALLFRAME_MARSHALCONTEXT*) : HRESULT
+    @lpVtbl.value.release_marshal_data.call(this, pbuffer, cbbuffer, ibfirstrelease, datarep, pcontext)
+  end
+  def invoke(this : ICallFrame*, pvreceiver : Void*) : HRESULT
+    @lpVtbl.value.invoke.call(this, pvreceiver)
+  end
+end
+struct LibWin32::ICallIndirect
+  def query_interface(this : ICallIndirect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallIndirect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallIndirect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def call_indirect(this : ICallIndirect*, phrreturn : HRESULT*, imethod : UInt32, pvargs : Void*, cbargs : UInt32*) : HRESULT
+    @lpVtbl.value.call_indirect.call(this, phrreturn, imethod, pvargs, cbargs)
+  end
+  def get_method_info(this : ICallIndirect*, imethod : UInt32, pinfo : CALLFRAMEINFO*, pwszmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_method_info.call(this, imethod, pinfo, pwszmethod)
+  end
+  def get_stack_size(this : ICallIndirect*, imethod : UInt32, cbargs : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_size.call(this, imethod, cbargs)
+  end
+  def get_iid(this : ICallIndirect*, piid : Guid*, pfderivesfromidispatch : LibC::BOOL*, pcmethod : UInt32*, pwszinterface : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_iid.call(this, piid, pfderivesfromidispatch, pcmethod, pwszinterface)
+  end
+end
+struct LibWin32::ICallInterceptor
+  def query_interface(this : ICallInterceptor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallInterceptor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallInterceptor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def call_indirect(this : ICallInterceptor*, phrreturn : HRESULT*, imethod : UInt32, pvargs : Void*, cbargs : UInt32*) : HRESULT
+    @lpVtbl.value.call_indirect.call(this, phrreturn, imethod, pvargs, cbargs)
+  end
+  def get_method_info(this : ICallInterceptor*, imethod : UInt32, pinfo : CALLFRAMEINFO*, pwszmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_method_info.call(this, imethod, pinfo, pwszmethod)
+  end
+  def get_stack_size(this : ICallInterceptor*, imethod : UInt32, cbargs : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_size.call(this, imethod, cbargs)
+  end
+  def get_iid(this : ICallInterceptor*, piid : Guid*, pfderivesfromidispatch : LibC::BOOL*, pcmethod : UInt32*, pwszinterface : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_iid.call(this, piid, pfderivesfromidispatch, pcmethod, pwszinterface)
+  end
+  def register_sink(this : ICallInterceptor*, psink : ICallFrameEvents) : HRESULT
+    @lpVtbl.value.register_sink.call(this, psink)
+  end
+  def get_registered_sink(this : ICallInterceptor*, ppsink : ICallFrameEvents*) : HRESULT
+    @lpVtbl.value.get_registered_sink.call(this, ppsink)
+  end
+end
+struct LibWin32::ICallFrameEvents
+  def query_interface(this : ICallFrameEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallFrameEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallFrameEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_call(this : ICallFrameEvents*, pframe : ICallFrame) : HRESULT
+    @lpVtbl.value.on_call.call(this, pframe)
+  end
+end
+struct LibWin32::ICallUnmarshal
+  def query_interface(this : ICallUnmarshal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallUnmarshal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallUnmarshal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def unmarshal(this : ICallUnmarshal*, imethod : UInt32, pbuffer : Void*, cbbuffer : UInt32, fforcebuffercopy : LibC::BOOL, datarep : UInt32, pcontext : CALLFRAME_MARSHALCONTEXT*, pcbunmarshalled : UInt32*, ppframe : ICallFrame*) : HRESULT
+    @lpVtbl.value.unmarshal.call(this, imethod, pbuffer, cbbuffer, fforcebuffercopy, datarep, pcontext, pcbunmarshalled, ppframe)
+  end
+  def release_marshal_data(this : ICallUnmarshal*, imethod : UInt32, pbuffer : Void*, cbbuffer : UInt32, ibfirstrelease : UInt32, datarep : UInt32, pcontext : CALLFRAME_MARSHALCONTEXT*) : HRESULT
+    @lpVtbl.value.release_marshal_data.call(this, imethod, pbuffer, cbbuffer, ibfirstrelease, datarep, pcontext)
+  end
+end
+struct LibWin32::ICallFrameWalker
+  def query_interface(this : ICallFrameWalker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICallFrameWalker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICallFrameWalker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_walk_interface(this : ICallFrameWalker*, iid : Guid*, ppvinterface : Void**, fin : LibC::BOOL, fout : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_walk_interface.call(this, iid, ppvinterface, fin, fout)
+  end
+end
+struct LibWin32::IInterfaceRelated
+  def query_interface(this : IInterfaceRelated*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInterfaceRelated*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInterfaceRelated*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_iid(this : IInterfaceRelated*, iid : Guid*) : HRESULT
+    @lpVtbl.value.set_iid.call(this, iid)
+  end
+  def get_iid(this : IInterfaceRelated*, piid : Guid*) : HRESULT
+    @lpVtbl.value.get_iid.call(this, piid)
+  end
+end

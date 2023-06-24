@@ -5915,8 +5915,8 @@ lib LibWin32
     query_interface : Proc(IAVIStreaming*, Guid*, Void**, HRESULT)
     add_ref : Proc(IAVIStreaming*, UInt32)
     release : Proc(IAVIStreaming*, UInt32)
-    rbegin : Proc(IAVIStreaming*, Int32, Int32, Int32, HRESULT)
-    rend : Proc(IAVIStreaming*, HRESULT)
+    begin_ : Proc(IAVIStreaming*, Int32, Int32, Int32, HRESULT)
+    end_ : Proc(IAVIStreaming*, HRESULT)
   end
 
   IAVIStreaming_GUID = "00020022-0000-0000-c000-000000000046"
@@ -5985,8 +5985,8 @@ lib LibWin32
     add_ref : Proc(IGetFrame*, UInt32)
     release : Proc(IGetFrame*, UInt32)
     get_frame : Proc(IGetFrame*, Int32, Void**)
-    rbegin : Proc(IGetFrame*, Int32, Int32, Int32, HRESULT)
-    rend : Proc(IGetFrame*, HRESULT)
+    begin_ : Proc(IGetFrame*, Int32, Int32, Int32, HRESULT)
+    end_ : Proc(IGetFrame*, HRESULT)
     set_format : Proc(IGetFrame*, BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, HRESULT)
   end
 
@@ -6229,13 +6229,13 @@ lib LibWin32
   fun ICSeqCompressFrameStart(pc : COMPVARS*, lpbiin : BITMAPINFO*) : LibC::BOOL
 
   # Params # pc : COMPVARS* [In]
-  fun ICSeqCompressFrameEnd(pc : COMPVARS*)
+  fun ICSeqCompressFrameEnd(pc : COMPVARS*) : Void
 
   # Params # pc : COMPVARS* [In],uiflags : UInt32 [In],lpbits : Void* [In],pfkey : LibC::BOOL* [In],plsize : Int32* [In]
   fun ICSeqCompressFrame(pc : COMPVARS*, uiflags : UInt32, lpbits : Void*, pfkey : LibC::BOOL*, plsize : Int32*) : Void*
 
   # Params # pc : COMPVARS* [In]
-  fun ICCompressorFree(pc : COMPVARS*)
+  fun ICCompressorFree(pc : COMPVARS*) : Void
 
   # Params # 
   fun DrawDibOpen : LibC::IntPtrT
@@ -6280,10 +6280,10 @@ lib LibWin32
   fun DrawDibProfileDisplay(lpbi : BITMAPINFOHEADER*) : LRESULT
 
   # Params # 
-  fun AVIFileInit
+  fun AVIFileInit : Void
 
   # Params # 
-  fun AVIFileExit
+  fun AVIFileExit : Void
 
   # Params # pfile : IAVIFile [In]
   fun AVIFileAddRef(pfile : IAVIFile) : UInt32
@@ -6496,14 +6496,188 @@ lib LibWin32
   fun mmTaskCreate(lpfn : LPTASKCALLBACK, lph : LibC::HANDLE*, dwinst : LibC::UINT_PTR) : UInt32
 
   # Params # h : UInt32 [In]
-  fun mmTaskBlock(h : UInt32)
+  fun mmTaskBlock(h : UInt32) : Void
 
   # Params # h : UInt32 [In]
   fun mmTaskSignal(h : UInt32) : LibC::BOOL
 
   # Params # 
-  fun mmTaskYield
+  fun mmTaskYield : Void
 
   # Params # 
   fun mmGetCurrentTask : UInt32
+end
+struct LibWin32::IAVIStream
+  def query_interface(this : IAVIStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAVIStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAVIStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IAVIStream*, lparam1 : LPARAM, lparam2 : LPARAM) : HRESULT
+    @lpVtbl.value.create.call(this, lparam1, lparam2)
+  end
+  def info(this : IAVIStream*, psi : AVISTREAMINFOW*, lsize : Int32) : HRESULT
+    @lpVtbl.value.info.call(this, psi, lsize)
+  end
+  def find_sample(this : IAVIStream*, lpos : Int32, lflags : Int32) : Int32
+    @lpVtbl.value.find_sample.call(this, lpos, lflags)
+  end
+  def read_format(this : IAVIStream*, lpos : Int32, lpformat : Void*, lpcbformat : Int32*) : HRESULT
+    @lpVtbl.value.read_format.call(this, lpos, lpformat, lpcbformat)
+  end
+  def set_format(this : IAVIStream*, lpos : Int32, lpformat : Void*, cbformat : Int32) : HRESULT
+    @lpVtbl.value.set_format.call(this, lpos, lpformat, cbformat)
+  end
+  def read(this : IAVIStream*, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, plbytes : Int32*, plsamples : Int32*) : HRESULT
+    @lpVtbl.value.read.call(this, lstart, lsamples, lpbuffer, cbbuffer, plbytes, plsamples)
+  end
+  def write(this : IAVIStream*, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, dwflags : UInt32, plsampwritten : Int32*, plbyteswritten : Int32*) : HRESULT
+    @lpVtbl.value.write.call(this, lstart, lsamples, lpbuffer, cbbuffer, dwflags, plsampwritten, plbyteswritten)
+  end
+  def delete(this : IAVIStream*, lstart : Int32, lsamples : Int32) : HRESULT
+    @lpVtbl.value.delete.call(this, lstart, lsamples)
+  end
+  def read_data(this : IAVIStream*, fcc : UInt32, lp : Void*, lpcb : Int32*) : HRESULT
+    @lpVtbl.value.read_data.call(this, fcc, lp, lpcb)
+  end
+  def write_data(this : IAVIStream*, fcc : UInt32, lp : Void*, cb : Int32) : HRESULT
+    @lpVtbl.value.write_data.call(this, fcc, lp, cb)
+  end
+  def set_info(this : IAVIStream*, lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
+    @lpVtbl.value.set_info.call(this, lpinfo, cbinfo)
+  end
+end
+struct LibWin32::IAVIStreaming
+  def query_interface(this : IAVIStreaming*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAVIStreaming*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAVIStreaming*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IAVIStreaming*, lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
+    @lpVtbl.value.begin_.call(this, lstart, lend, lrate)
+  end
+  def end_(this : IAVIStreaming*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+end
+struct LibWin32::IAVIEditStream
+  def query_interface(this : IAVIEditStream*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAVIEditStream*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAVIEditStream*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cut(this : IAVIEditStream*, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.cut.call(this, plstart, pllength, ppresult)
+  end
+  def copy(this : IAVIEditStream*, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.copy.call(this, plstart, pllength, ppresult)
+  end
+  def paste(this : IAVIEditStream*, plpos : Int32*, pllength : Int32*, pstream : IAVIStream, lstart : Int32, lend : Int32) : HRESULT
+    @lpVtbl.value.paste.call(this, plpos, pllength, pstream, lstart, lend)
+  end
+  def clone(this : IAVIEditStream*, ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppresult)
+  end
+  def set_info(this : IAVIEditStream*, lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
+    @lpVtbl.value.set_info.call(this, lpinfo, cbinfo)
+  end
+end
+struct LibWin32::IAVIPersistFile
+  def query_interface(this : IAVIPersistFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAVIPersistFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAVIPersistFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_id(this : IAVIPersistFile*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
+  end
+  def is_dirty(this : IAVIPersistFile*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
+  end
+  def load(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.load.call(this, pszfilename, dwmode)
+  end
+  def save(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR, fremember : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, pszfilename, fremember)
+  end
+  def save_completed(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_completed.call(this, pszfilename)
+  end
+  def get_cur_file(this : IAVIPersistFile*, ppszfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_cur_file.call(this, ppszfilename)
+  end
+  def reserved1(this : IAVIPersistFile*) : HRESULT
+    @lpVtbl.value.reserved1.call(this)
+  end
+end
+struct LibWin32::IAVIFile
+  def query_interface(this : IAVIFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAVIFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAVIFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def info(this : IAVIFile*, pfi : AVIFILEINFOW*, lsize : Int32) : HRESULT
+    @lpVtbl.value.info.call(this, pfi, lsize)
+  end
+  def get_stream(this : IAVIFile*, ppstream : IAVIStream*, fcctype : UInt32, lparam : Int32) : HRESULT
+    @lpVtbl.value.get_stream.call(this, ppstream, fcctype, lparam)
+  end
+  def create_stream(this : IAVIFile*, ppstream : IAVIStream*, psi : AVISTREAMINFOW*) : HRESULT
+    @lpVtbl.value.create_stream.call(this, ppstream, psi)
+  end
+  def write_data(this : IAVIFile*, ckid : UInt32, lpdata : Void*, cbdata : Int32) : HRESULT
+    @lpVtbl.value.write_data.call(this, ckid, lpdata, cbdata)
+  end
+  def read_data(this : IAVIFile*, ckid : UInt32, lpdata : Void*, lpcbdata : Int32*) : HRESULT
+    @lpVtbl.value.read_data.call(this, ckid, lpdata, lpcbdata)
+  end
+  def end_record(this : IAVIFile*) : HRESULT
+    @lpVtbl.value.end_record.call(this)
+  end
+  def delete_stream(this : IAVIFile*, fcctype : UInt32, lparam : Int32) : HRESULT
+    @lpVtbl.value.delete_stream.call(this, fcctype, lparam)
+  end
+end
+struct LibWin32::IGetFrame
+  def query_interface(this : IGetFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_frame(this : IGetFrame*, lpos : Int32) : Void*
+    @lpVtbl.value.get_frame.call(this, lpos)
+  end
+  def begin_(this : IGetFrame*, lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
+    @lpVtbl.value.begin_.call(this, lstart, lend, lrate)
+  end
+  def end_(this : IGetFrame*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+  def set_format(this : IGetFrame*, lpbi : BITMAPINFOHEADER*, lpbits : Void*, x : Int32, y : Int32, dx : Int32, dy : Int32) : HRESULT
+    @lpVtbl.value.set_format.call(this, lpbi, lpbits, x, y, dx, dy)
+  end
 end

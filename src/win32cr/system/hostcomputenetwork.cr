@@ -183,5 +183,5 @@ lib LibWin32
   fun HcnEnumerateGuestNetworkPortReservations(returncount : UInt32*, portentries : HCN_PORT_RANGE_ENTRY**) : HRESULT
 
   # Params # portentries : HCN_PORT_RANGE_ENTRY* [In]
-  fun HcnFreeGuestNetworkPortReservations(portentries : HCN_PORT_RANGE_ENTRY*)
+  fun HcnFreeGuestNetworkPortReservations(portentries : HCN_PORT_RANGE_ENTRY*) : Void
 end

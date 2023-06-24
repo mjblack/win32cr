@@ -3978,7 +3978,7 @@ lib LibWin32
   fun HidD_GetAttributes(hiddeviceobject : LibC::HANDLE, attributes : HIDD_ATTRIBUTES*) : BOOLEAN
 
   # Params # hidguid : Guid* [In]
-  fun HidD_GetHidGuid(hidguid : Guid*)
+  fun HidD_GetHidGuid(hidguid : Guid*) : Void
 
   # Params # hiddeviceobject : LibC::HANDLE [In],preparseddata : LibC::IntPtrT* [In]
   fun HidD_GetPreparsedData(hiddeviceobject : LibC::HANDLE, preparseddata : LibC::IntPtrT*) : BOOLEAN
@@ -4030,4 +4030,1103 @@ lib LibWin32
 
   # Params # hiddeviceobject : LibC::HANDLE [In],buffer : Void* [In],bufferlength : UInt32 [In]
   fun HidD_GetMsGenreDescriptor(hiddeviceobject : LibC::HANDLE, buffer : Void*, bufferlength : UInt32) : BOOLEAN
+end
+struct LibWin32::IDirectInputEffect
+  def query_interface(this : IDirectInputEffect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputEffect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputEffect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IDirectInputEffect*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def get_effect_guid(this : IDirectInputEffect*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_guid.call(this, param0)
+  end
+  def get_parameters(this : IDirectInputEffect*, param0 : DIEFFECT*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, param0, param1)
+  end
+  def set_parameters(this : IDirectInputEffect*, param0 : DIEFFECT*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_parameters.call(this, param0, param1)
+  end
+  def start(this : IDirectInputEffect*, param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.start.call(this, param0, param1)
+  end
+  def stop(this : IDirectInputEffect*) : HRESULT
+    @lpVtbl.value.stop.call(this)
+  end
+  def get_effect_status(this : IDirectInputEffect*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_status.call(this, param0)
+  end
+  def download(this : IDirectInputEffect*) : HRESULT
+    @lpVtbl.value.download.call(this)
+  end
+  def unload(this : IDirectInputEffect*) : HRESULT
+    @lpVtbl.value.unload.call(this)
+  end
+  def escape(this : IDirectInputEffect*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+end
+struct LibWin32::IDirectInputDeviceW
+  def query_interface(this : IDirectInputDeviceW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDeviceW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDeviceW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDeviceW*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDeviceW*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDeviceW*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDeviceW*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDeviceW*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDeviceW*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDeviceW*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDeviceW*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDeviceW*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDeviceW*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDeviceW*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDeviceW*, param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDeviceW*, param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDeviceW*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDeviceW*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputDeviceA
+  def query_interface(this : IDirectInputDeviceA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDeviceA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDeviceA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDeviceA*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDeviceA*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDeviceA*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDeviceA*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDeviceA*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDeviceA*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDeviceA*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDeviceA*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDeviceA*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDeviceA*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDeviceA*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDeviceA*, param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDeviceA*, param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDeviceA*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDeviceA*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputDevice2W
+  def query_interface(this : IDirectInputDevice2W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice2W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice2W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice2W*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice2W*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice2W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice2W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice2W*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice2W*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice2W*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice2W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice2W*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice2W*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice2W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice2W*, param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice2W*, param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice2W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice2W*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice2W*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice2W*, param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice2W*, param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice2W*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice2W*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice2W*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice2W*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice2W*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice2W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice2A
+  def query_interface(this : IDirectInputDevice2A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice2A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice2A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice2A*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice2A*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice2A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice2A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice2A*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice2A*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice2A*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice2A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice2A*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice2A*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice2A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice2A*, param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice2A*, param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice2A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice2A*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice2A*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice2A*, param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice2A*, param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice2A*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice2A*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice2A*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice2A*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice2A*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice2A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice7W
+  def query_interface(this : IDirectInputDevice7W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice7W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice7W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice7W*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice7W*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice7W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice7W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice7W*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice7W*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice7W*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice7W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice7W*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice7W*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice7W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice7W*, param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice7W*, param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice7W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice7W*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice7W*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice7W*, param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice7W*, param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice7W*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice7W*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice7W*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice7W*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice7W*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice7W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(this : IDirectInputDevice7W*, param0 : LibC::LPWSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.call(this, param0, param1, param2, param3)
+  end
+  def write_effect_to_file(this : IDirectInputDevice7W*, param0 : LibC::LPWSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice7A
+  def query_interface(this : IDirectInputDevice7A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice7A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice7A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice7A*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice7A*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice7A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice7A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice7A*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice7A*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice7A*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice7A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice7A*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice7A*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice7A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice7A*, param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice7A*, param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice7A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice7A*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice7A*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice7A*, param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice7A*, param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice7A*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice7A*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice7A*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice7A*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice7A*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice7A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(this : IDirectInputDevice7A*, param0 : PSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.call(this, param0, param1, param2, param3)
+  end
+  def write_effect_to_file(this : IDirectInputDevice7A*, param0 : PSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice8W
+  def query_interface(this : IDirectInputDevice8W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice8W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice8W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice8W*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice8W*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice8W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice8W*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice8W*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice8W*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice8W*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice8W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice8W*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice8W*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice8W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice8W*, param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice8W*, param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice8W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice8W*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice8W*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice8W*, param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice8W*, param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice8W*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice8W*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice8W*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice8W*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice8W*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice8W*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(this : IDirectInputDevice8W*, param0 : LibC::LPWSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.call(this, param0, param1, param2, param3)
+  end
+  def write_effect_to_file(this : IDirectInputDevice8W*, param0 : LibC::LPWSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.call(this, param0, param1, param2, param3)
+  end
+  def build_action_map(this : IDirectInputDevice8W*, param0 : DIACTIONFORMATW*, param1 : LibC::LPWSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.build_action_map.call(this, param0, param1, param2)
+  end
+  def set_action_map(this : IDirectInputDevice8W*, param0 : DIACTIONFORMATW*, param1 : LibC::LPWSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_action_map.call(this, param0, param1, param2)
+  end
+  def get_image_info(this : IDirectInputDevice8W*, param0 : DIDEVICEIMAGEINFOHEADERW*) : HRESULT
+    @lpVtbl.value.get_image_info.call(this, param0)
+  end
+end
+struct LibWin32::IDirectInputDevice8A
+  def query_interface(this : IDirectInputDevice8A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputDevice8A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputDevice8A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_capabilities(this : IDirectInputDevice8A*, param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, param0)
+  end
+  def enum_objects(this : IDirectInputDevice8A*, param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, param0, param1, param2)
+  end
+  def get_property(this : IDirectInputDevice8A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.call(this, param0, param1)
+  end
+  def set_property(this : IDirectInputDevice8A*, param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.call(this, param0, param1)
+  end
+  def acquire(this : IDirectInputDevice8A*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputDevice8A*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def get_device_state(this : IDirectInputDevice8A*, param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.call(this, param0, param1)
+  end
+  def get_device_data(this : IDirectInputDevice8A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.call(this, param0, param1, param2, param3)
+  end
+  def set_data_format(this : IDirectInputDevice8A*, param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.call(this, param0)
+  end
+  def set_event_notification(this : IDirectInputDevice8A*, param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.call(this, param0)
+  end
+  def set_cooperative_level(this : IDirectInputDevice8A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def get_object_info(this : IDirectInputDevice8A*, param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, param0, param1, param2)
+  end
+  def get_device_info(this : IDirectInputDevice8A*, param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputDevice8A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputDevice8A*, param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1, param2)
+  end
+  def create_effect(this : IDirectInputDevice8A*, param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects(this : IDirectInputDevice8A*, param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.call(this, param0, param1, param2)
+  end
+  def get_effect_info(this : IDirectInputDevice8A*, param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputDevice8A*, param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0)
+  end
+  def send_force_feedback_command(this : IDirectInputDevice8A*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0)
+  end
+  def enum_created_effect_objects(this : IDirectInputDevice8A*, param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.call(this, param0, param1, param2)
+  end
+  def escape(this : IDirectInputDevice8A*, param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0)
+  end
+  def poll(this : IDirectInputDevice8A*) : HRESULT
+    @lpVtbl.value.poll.call(this)
+  end
+  def send_device_data(this : IDirectInputDevice8A*, param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.call(this, param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(this : IDirectInputDevice8A*, param0 : PSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.call(this, param0, param1, param2, param3)
+  end
+  def write_effect_to_file(this : IDirectInputDevice8A*, param0 : PSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.call(this, param0, param1, param2, param3)
+  end
+  def build_action_map(this : IDirectInputDevice8A*, param0 : DIACTIONFORMATA*, param1 : PSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.build_action_map.call(this, param0, param1, param2)
+  end
+  def set_action_map(this : IDirectInputDevice8A*, param0 : DIACTIONFORMATA*, param1 : PSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_action_map.call(this, param0, param1, param2)
+  end
+  def get_image_info(this : IDirectInputDevice8A*, param0 : DIDEVICEIMAGEINFOHEADERA*) : HRESULT
+    @lpVtbl.value.get_image_info.call(this, param0)
+  end
+end
+struct LibWin32::IDirectInputW
+  def query_interface(this : IDirectInputW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInputW*, param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInputW*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInputW*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputW*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputW*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+end
+struct LibWin32::IDirectInputA
+  def query_interface(this : IDirectInputA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInputA*, param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInputA*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInputA*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInputA*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInputA*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+end
+struct LibWin32::IDirectInput2W
+  def query_interface(this : IDirectInput2W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput2W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput2W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput2W*, param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput2W*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput2W*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput2W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput2W*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput2W*, param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInput2A
+  def query_interface(this : IDirectInput2A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput2A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput2A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput2A*, param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput2A*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput2A*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput2A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput2A*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput2A*, param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInput7W
+  def query_interface(this : IDirectInput7W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput7W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput7W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput7W*, param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput7W*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput7W*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput7W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput7W*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput7W*, param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+  def create_device_ex(this : IDirectInput7W*, param0 : Guid*, param1 : Guid*, param2 : Void**, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device_ex.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput7A
+  def query_interface(this : IDirectInput7A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput7A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput7A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput7A*, param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput7A*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput7A*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput7A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput7A*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput7A*, param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+  def create_device_ex(this : IDirectInput7A*, param0 : Guid*, param1 : Guid*, param2 : Void**, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device_ex.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput8W
+  def query_interface(this : IDirectInput8W*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput8W*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput8W*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput8W*, param0 : Guid*, param1 : IDirectInputDevice8W*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput8W*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput8W*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput8W*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput8W*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput8W*, param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+  def enum_devices_by_semantics(this : IDirectInput8W*, param0 : LibC::LPWSTR, param1 : DIACTIONFORMATW*, param2 : LPDIENUMDEVICESBYSEMANTICSCBW, param3 : Void*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices_by_semantics.call(this, param0, param1, param2, param3, param4)
+  end
+  def configure_devices(this : IDirectInput8W*, param0 : LPDICONFIGUREDEVICESCALLBACK, param1 : DICONFIGUREDEVICESPARAMSW*, param2 : UInt32, param3 : Void*) : HRESULT
+    @lpVtbl.value.configure_devices.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput8A
+  def query_interface(this : IDirectInput8A*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInput8A*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInput8A*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_device(this : IDirectInput8A*, param0 : Guid*, param1 : IDirectInputDevice8A*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, param0, param1, param2)
+  end
+  def enum_devices(this : IDirectInput8A*, param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.call(this, param0, param1, param2, param3)
+  end
+  def get_device_status(this : IDirectInput8A*, param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, param0)
+  end
+  def run_control_panel(this : IDirectInput8A*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.call(this, param0, param1)
+  end
+  def initialize(this : IDirectInput8A*, param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, param0, param1)
+  end
+  def find_device(this : IDirectInput8A*, param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.call(this, param0, param1, param2)
+  end
+  def enum_devices_by_semantics(this : IDirectInput8A*, param0 : PSTR, param1 : DIACTIONFORMATA*, param2 : LPDIENUMDEVICESBYSEMANTICSCBA, param3 : Void*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices_by_semantics.call(this, param0, param1, param2, param3, param4)
+  end
+  def configure_devices(this : IDirectInput8A*, param0 : LPDICONFIGUREDEVICESCALLBACK, param1 : DICONFIGUREDEVICESPARAMSA*, param2 : UInt32, param3 : Void*) : HRESULT
+    @lpVtbl.value.configure_devices.call(this, param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputEffectDriver
+  def query_interface(this : IDirectInputEffectDriver*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputEffectDriver*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputEffectDriver*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def device_id(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : Void*) : HRESULT
+    @lpVtbl.value.device_id.call(this, param0, param1, param2, param3, param4)
+  end
+  def get_versions(this : IDirectInputEffectDriver*, param0 : DIDRIVERVERSIONS*) : HRESULT
+    @lpVtbl.value.get_versions.call(this, param0)
+  end
+  def escape(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32, param2 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.call(this, param0, param1, param2)
+  end
+  def set_gain(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_gain.call(this, param0, param1)
+  end
+  def send_force_feedback_command(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.call(this, param0, param1)
+  end
+  def get_force_feedback_state(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : DIDEVICESTATE*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.call(this, param0, param1)
+  end
+  def download_effect(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32, param2 : UInt32*, param3 : DIEFFECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.download_effect.call(this, param0, param1, param2, param3, param4)
+  end
+  def destroy_effect(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.destroy_effect.call(this, param0, param1)
+  end
+  def start_effect(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32) : HRESULT
+    @lpVtbl.value.start_effect.call(this, param0, param1, param2, param3)
+  end
+  def stop_effect(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.stop_effect.call(this, param0, param1)
+  end
+  def get_effect_status(this : IDirectInputEffectDriver*, param0 : UInt32, param1 : UInt32, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_status.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputJoyConfig
+  def query_interface(this : IDirectInputJoyConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputJoyConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputJoyConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire(this : IDirectInputJoyConfig*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputJoyConfig*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def set_cooperative_level(this : IDirectInputJoyConfig*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def send_notify(this : IDirectInputJoyConfig*) : HRESULT
+    @lpVtbl.value.send_notify.call(this)
+  end
+  def enum_types(this : IDirectInputJoyConfig*, param0 : LPDIJOYTYPECALLBACK, param1 : Void*) : HRESULT
+    @lpVtbl.value.enum_types.call(this, param0, param1)
+  end
+  def get_type_info(this : IDirectInputJoyConfig*, param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, param0, param1, param2)
+  end
+  def set_type_info(this : IDirectInputJoyConfig*, param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_type_info.call(this, param0, param1, param2)
+  end
+  def delete_type(this : IDirectInputJoyConfig*, param0 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_type.call(this, param0)
+  end
+  def get_config(this : IDirectInputJoyConfig*, param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_config.call(this, param0, param1, param2)
+  end
+  def set_config(this : IDirectInputJoyConfig*, param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_config.call(this, param0, param1, param2)
+  end
+  def delete_config(this : IDirectInputJoyConfig*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.delete_config.call(this, param0)
+  end
+  def get_user_values(this : IDirectInputJoyConfig*, param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_user_values.call(this, param0, param1)
+  end
+  def set_user_values(this : IDirectInputJoyConfig*, param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_user_values.call(this, param0, param1)
+  end
+  def add_new_hardware(this : IDirectInputJoyConfig*, param0 : LibC::HANDLE, param1 : Guid*) : HRESULT
+    @lpVtbl.value.add_new_hardware.call(this, param0, param1)
+  end
+  def open_type_key(this : IDirectInputJoyConfig*, param0 : LibC::LPWSTR, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_type_key.call(this, param0, param1, param2)
+  end
+  def open_config_key(this : IDirectInputJoyConfig*, param0 : UInt32, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_config_key.call(this, param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputJoyConfig8
+  def query_interface(this : IDirectInputJoyConfig8*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirectInputJoyConfig8*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirectInputJoyConfig8*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire(this : IDirectInputJoyConfig8*) : HRESULT
+    @lpVtbl.value.acquire.call(this)
+  end
+  def unacquire(this : IDirectInputJoyConfig8*) : HRESULT
+    @lpVtbl.value.unacquire.call(this)
+  end
+  def set_cooperative_level(this : IDirectInputJoyConfig8*, param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.call(this, param0, param1)
+  end
+  def send_notify(this : IDirectInputJoyConfig8*) : HRESULT
+    @lpVtbl.value.send_notify.call(this)
+  end
+  def enum_types(this : IDirectInputJoyConfig8*, param0 : LPDIJOYTYPECALLBACK, param1 : Void*) : HRESULT
+    @lpVtbl.value.enum_types.call(this, param0, param1)
+  end
+  def get_type_info(this : IDirectInputJoyConfig8*, param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, param0, param1, param2)
+  end
+  def set_type_info(this : IDirectInputJoyConfig8*, param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32, param3 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_type_info.call(this, param0, param1, param2, param3)
+  end
+  def delete_type(this : IDirectInputJoyConfig8*, param0 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_type.call(this, param0)
+  end
+  def get_config(this : IDirectInputJoyConfig8*, param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_config.call(this, param0, param1, param2)
+  end
+  def set_config(this : IDirectInputJoyConfig8*, param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_config.call(this, param0, param1, param2)
+  end
+  def delete_config(this : IDirectInputJoyConfig8*, param0 : UInt32) : HRESULT
+    @lpVtbl.value.delete_config.call(this, param0)
+  end
+  def get_user_values(this : IDirectInputJoyConfig8*, param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_user_values.call(this, param0, param1)
+  end
+  def set_user_values(this : IDirectInputJoyConfig8*, param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_user_values.call(this, param0, param1)
+  end
+  def add_new_hardware(this : IDirectInputJoyConfig8*, param0 : LibC::HANDLE, param1 : Guid*) : HRESULT
+    @lpVtbl.value.add_new_hardware.call(this, param0, param1)
+  end
+  def open_type_key(this : IDirectInputJoyConfig8*, param0 : LibC::LPWSTR, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_type_key.call(this, param0, param1, param2)
+  end
+  def open_app_status_key(this : IDirectInputJoyConfig8*, param0 : HKEY*) : HRESULT
+    @lpVtbl.value.open_app_status_key.call(this, param0)
+  end
 end

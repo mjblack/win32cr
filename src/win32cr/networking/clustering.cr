@@ -4808,7 +4808,7 @@ lib LibWin32
   fun ResUtilDupParameterBlock(poutparams : UInt8*, pinparams : UInt8*, ppropertytable : RESUTIL_PROPERTY_ITEM*) : UInt32
 
   # Params # poutparams : UInt8* [In],pinparams : UInt8* [In],ppropertytable : RESUTIL_PROPERTY_ITEM* [In]
-  fun ResUtilFreeParameterBlock(poutparams : UInt8*, pinparams : UInt8*, ppropertytable : RESUTIL_PROPERTY_ITEM*)
+  fun ResUtilFreeParameterBlock(poutparams : UInt8*, pinparams : UInt8*, ppropertytable : RESUTIL_PROPERTY_ITEM*) : Void
 
   # Params # hkeyclusterkey : HKEY [In],ppropertytable : RESUTIL_PROPERTY_ITEM* [In],poutpropertylist : Void* [In],pcboutpropertylistsize : UInt32 [In],pcbbytesreturned : UInt32* [In],pcbrequired : UInt32* [In]
   fun ResUtilAddUnknownProperties(hkeyclusterkey : HKEY, ppropertytable : RESUTIL_PROPERTY_ITEM*, poutpropertylist : Void*, pcboutpropertylistsize : UInt32, pcbbytesreturned : UInt32*, pcbrequired : UInt32*) : UInt32
@@ -4925,7 +4925,7 @@ lib LibWin32
   fun ClusWorkerCheckTerminate(lpworker : CLUS_WORKER*) : LibC::BOOL
 
   # Params # lpworker : CLUS_WORKER* [In]
-  fun ClusWorkerTerminate(lpworker : CLUS_WORKER*)
+  fun ClusWorkerTerminate(lpworker : CLUS_WORKER*) : Void
 
   # Params # clusworker : CLUS_WORKER* [In],timeoutinmilliseconds : UInt32 [In],waitonly : LibC::BOOL [In]
   fun ClusWorkerTerminateEx(clusworker : CLUS_WORKER*, timeoutinmilliseconds : UInt32, waitonly : LibC::BOOL) : UInt32
@@ -5091,4 +5091,2125 @@ lib LibWin32
 
   # Params # processhandle : LibC::HANDLE [In],mask : UInt32 [In],flags : UInt32 [In]
   fun SetAppInstanceCsvFlags(processhandle : LibC::HANDLE, mask : UInt32, flags : UInt32) : UInt32
+end
+struct LibWin32::IGetClusterUIInfo
+  def query_interface(this : IGetClusterUIInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterUIInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterUIInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cluster_name(this : IGetClusterUIInfo*, lpszname : UInt8*, pcchname : Int32*) : HRESULT
+    @lpVtbl.value.get_cluster_name.call(this, lpszname, pcchname)
+  end
+  def get_locale(this : IGetClusterUIInfo*) : UInt32
+    @lpVtbl.value.get_locale.call(this)
+  end
+  def get_font(this : IGetClusterUIInfo*) : HFONT
+    @lpVtbl.value.get_font.call(this)
+  end
+  def get_icon(this : IGetClusterUIInfo*) : HANDLE
+    @lpVtbl.value.get_icon.call(this)
+  end
+end
+struct LibWin32::IGetClusterDataInfo
+  def query_interface(this : IGetClusterDataInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterDataInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterDataInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cluster_name(this : IGetClusterDataInfo*, lpszname : UInt8*, pcchname : Int32*) : HRESULT
+    @lpVtbl.value.get_cluster_name.call(this, lpszname, pcchname)
+  end
+  def get_cluster_handle(this : IGetClusterDataInfo*) : HCLUSTER*
+    @lpVtbl.value.get_cluster_handle.call(this)
+  end
+  def get_object_count(this : IGetClusterDataInfo*) : Int32
+    @lpVtbl.value.get_object_count.call(this)
+  end
+end
+struct LibWin32::IGetClusterObjectInfo
+  def query_interface(this : IGetClusterObjectInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterObjectInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterObjectInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_name(this : IGetClusterObjectInfo*, lobjindex : Int32, lpszname : UInt8*, pcchname : Int32*) : HRESULT
+    @lpVtbl.value.get_object_name.call(this, lobjindex, lpszname, pcchname)
+  end
+  def get_object_type(this : IGetClusterObjectInfo*, lobjindex : Int32) : CLUADMEX_OBJECT_TYPE
+    @lpVtbl.value.get_object_type.call(this, lobjindex)
+  end
+end
+struct LibWin32::IGetClusterNodeInfo
+  def query_interface(this : IGetClusterNodeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterNodeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterNodeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_node_handle(this : IGetClusterNodeInfo*, lobjindex : Int32) : HNODE*
+    @lpVtbl.value.get_node_handle.call(this, lobjindex)
+  end
+end
+struct LibWin32::IGetClusterGroupInfo
+  def query_interface(this : IGetClusterGroupInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterGroupInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterGroupInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_group_handle(this : IGetClusterGroupInfo*, lobjindex : Int32) : HGROUP*
+    @lpVtbl.value.get_group_handle.call(this, lobjindex)
+  end
+end
+struct LibWin32::IGetClusterResourceInfo
+  def query_interface(this : IGetClusterResourceInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterResourceInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterResourceInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_resource_handle(this : IGetClusterResourceInfo*, lobjindex : Int32) : HRESOURCE*
+    @lpVtbl.value.get_resource_handle.call(this, lobjindex)
+  end
+  def get_resource_type_name(this : IGetClusterResourceInfo*, lobjindex : Int32, lpszrestypename : UInt8*, pcchrestypename : Int32*) : HRESULT
+    @lpVtbl.value.get_resource_type_name.call(this, lobjindex, lpszrestypename, pcchrestypename)
+  end
+  def get_resource_network_name(this : IGetClusterResourceInfo*, lobjindex : Int32, lpsznetname : UInt8*, pcchnetname : UInt32*) : LibC::BOOL
+    @lpVtbl.value.get_resource_network_name.call(this, lobjindex, lpsznetname, pcchnetname)
+  end
+end
+struct LibWin32::IGetClusterNetworkInfo
+  def query_interface(this : IGetClusterNetworkInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterNetworkInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterNetworkInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_network_handle(this : IGetClusterNetworkInfo*, lobjindex : Int32) : HNETWORK*
+    @lpVtbl.value.get_network_handle.call(this, lobjindex)
+  end
+end
+struct LibWin32::IGetClusterNetInterfaceInfo
+  def query_interface(this : IGetClusterNetInterfaceInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetClusterNetInterfaceInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetClusterNetInterfaceInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_net_interface_handle(this : IGetClusterNetInterfaceInfo*, lobjindex : Int32) : HNETINTERFACE*
+    @lpVtbl.value.get_net_interface_handle.call(this, lobjindex)
+  end
+end
+struct LibWin32::IWCPropertySheetCallback
+  def query_interface(this : IWCPropertySheetCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCPropertySheetCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCPropertySheetCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_property_sheet_page(this : IWCPropertySheetCallback*, hpage : Int32*) : HRESULT
+    @lpVtbl.value.add_property_sheet_page.call(this, hpage)
+  end
+end
+struct LibWin32::IWEExtendPropertySheet
+  def query_interface(this : IWEExtendPropertySheet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWEExtendPropertySheet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWEExtendPropertySheet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_property_sheet_pages(this : IWEExtendPropertySheet*, pidata : IUnknown, picallback : IWCPropertySheetCallback) : HRESULT
+    @lpVtbl.value.create_property_sheet_pages.call(this, pidata, picallback)
+  end
+end
+struct LibWin32::IWCWizardCallback
+  def query_interface(this : IWCWizardCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCWizardCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCWizardCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_wizard_page(this : IWCWizardCallback*, hpage : Int32*) : HRESULT
+    @lpVtbl.value.add_wizard_page.call(this, hpage)
+  end
+  def enable_next(this : IWCWizardCallback*, hpage : Int32*, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_next.call(this, hpage, benable)
+  end
+end
+struct LibWin32::IWEExtendWizard
+  def query_interface(this : IWEExtendWizard*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWEExtendWizard*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWEExtendWizard*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_wizard_pages(this : IWEExtendWizard*, pidata : IUnknown, picallback : IWCWizardCallback) : HRESULT
+    @lpVtbl.value.create_wizard_pages.call(this, pidata, picallback)
+  end
+end
+struct LibWin32::IWCContextMenuCallback
+  def query_interface(this : IWCContextMenuCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCContextMenuCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCContextMenuCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_extension_menu_item(this : IWCContextMenuCallback*, lpszname : UInt8*, lpszstatusbartext : UInt8*, ncommandid : UInt32, nsubmenucommandid : UInt32, uflags : UInt32) : HRESULT
+    @lpVtbl.value.add_extension_menu_item.call(this, lpszname, lpszstatusbartext, ncommandid, nsubmenucommandid, uflags)
+  end
+end
+struct LibWin32::IWEExtendContextMenu
+  def query_interface(this : IWEExtendContextMenu*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWEExtendContextMenu*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWEExtendContextMenu*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_context_menu_items(this : IWEExtendContextMenu*, pidata : IUnknown, picallback : IWCContextMenuCallback) : HRESULT
+    @lpVtbl.value.add_context_menu_items.call(this, pidata, picallback)
+  end
+end
+struct LibWin32::IWEInvokeCommand
+  def query_interface(this : IWEInvokeCommand*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWEInvokeCommand*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWEInvokeCommand*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke_command(this : IWEInvokeCommand*, ncommandid : UInt32, pidata : IUnknown) : HRESULT
+    @lpVtbl.value.invoke_command.call(this, ncommandid, pidata)
+  end
+end
+struct LibWin32::IWCWizard97Callback
+  def query_interface(this : IWCWizard97Callback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWCWizard97Callback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWCWizard97Callback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_wizard97_page(this : IWCWizard97Callback*, hpage : Int32*) : HRESULT
+    @lpVtbl.value.add_wizard97_page.call(this, hpage)
+  end
+  def enable_next(this : IWCWizard97Callback*, hpage : Int32*, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_next.call(this, hpage, benable)
+  end
+end
+struct LibWin32::IWEExtendWizard97
+  def query_interface(this : IWEExtendWizard97*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWEExtendWizard97*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWEExtendWizard97*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_wizard97_pages(this : IWEExtendWizard97*, pidata : IUnknown, picallback : IWCWizard97Callback) : HRESULT
+    @lpVtbl.value.create_wizard97_pages.call(this, pidata, picallback)
+  end
+end
+struct LibWin32::ISClusApplication
+  def query_interface(this : ISClusApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain_names(this : ISClusApplication*, ppdomains : ISDomainNames*) : HRESULT
+    @lpVtbl.value.get_domain_names.call(this, ppdomains)
+  end
+  def get_cluster_names(this : ISClusApplication*, bstrdomainname : UInt8*, ppclusters : ISClusterNames*) : HRESULT
+    @lpVtbl.value.get_cluster_names.call(this, bstrdomainname, ppclusters)
+  end
+  def open_cluster(this : ISClusApplication*, bstrclustername : UInt8*, pcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.open_cluster.call(this, bstrclustername, pcluster)
+  end
+end
+struct LibWin32::ISDomainNames
+  def query_interface(this : ISDomainNames*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISDomainNames*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISDomainNames*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISDomainNames*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISDomainNames*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISDomainNames*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISDomainNames*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISDomainNames*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISDomainNames*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISDomainNames*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISDomainNames*, varindex : VARIANT, pbstrdomainname : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pbstrdomainname)
+  end
+end
+struct LibWin32::ISClusterNames
+  def query_interface(this : ISClusterNames*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusterNames*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusterNames*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusterNames*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusterNames*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusterNames*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusterNames*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusterNames*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusterNames*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusterNames*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusterNames*, varindex : VARIANT, pbstrclustername : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pbstrclustername)
+  end
+  def get_domain_name(this : ISClusterNames*, pbstrdomainname : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_name.call(this, pbstrdomainname)
+  end
+end
+struct LibWin32::ISClusRefObject
+  def query_interface(this : ISClusRefObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusRefObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusRefObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusRefObject*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusRefObject*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusRefObject*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusRefObject*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_handle(this : ISClusRefObject*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+end
+struct LibWin32::ISClusVersion
+  def query_interface(this : ISClusVersion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusVersion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusVersion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusVersion*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusVersion*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusVersion*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusVersion*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ISClusVersion*, pbstrclustername : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrclustername)
+  end
+  def get_major_version(this : ISClusVersion*, pnmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, pnmajorversion)
+  end
+  def get_minor_version(this : ISClusVersion*, pnminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, pnminorversion)
+  end
+  def get_build_number(this : ISClusVersion*, pnbuildnumber : Int16*) : HRESULT
+    @lpVtbl.value.get_build_number.call(this, pnbuildnumber)
+  end
+  def get_vendor_id(this : ISClusVersion*, pbstrvendorid : UInt8**) : HRESULT
+    @lpVtbl.value.get_vendor_id.call(this, pbstrvendorid)
+  end
+  def get_csd_version(this : ISClusVersion*, pbstrcsdversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_csd_version.call(this, pbstrcsdversion)
+  end
+  def get_cluster_highest_version(this : ISClusVersion*, pnclusterhighestversion : Int32*) : HRESULT
+    @lpVtbl.value.get_cluster_highest_version.call(this, pnclusterhighestversion)
+  end
+  def get_cluster_lowest_version(this : ISClusVersion*, pnclusterlowestversion : Int32*) : HRESULT
+    @lpVtbl.value.get_cluster_lowest_version.call(this, pnclusterlowestversion)
+  end
+  def get_flags(this : ISClusVersion*, pnflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pnflags)
+  end
+  def get_mixed_version(this : ISClusVersion*, pvarmixedversion : VARIANT*) : HRESULT
+    @lpVtbl.value.get_mixed_version.call(this, pvarmixedversion)
+  end
+end
+struct LibWin32::ISCluster
+  def query_interface(this : ISCluster*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISCluster*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISCluster*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISCluster*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISCluster*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISCluster*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISCluster*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISCluster*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISCluster*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISCluster*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISCluster*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_handle(this : ISCluster*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def open(this : ISCluster*, bstrclustername : UInt8*) : HRESULT
+    @lpVtbl.value.open.call(this, bstrclustername)
+  end
+  def get_name(this : ISCluster*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : ISCluster*, bstrclustername : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrclustername)
+  end
+  def get_version(this : ISCluster*, ppclusversion : ISClusVersion*) : HRESULT
+    @lpVtbl.value.get_version.call(this, ppclusversion)
+  end
+  def put_quorum_resource(this : ISCluster*, pclusterresource : ISClusResource) : HRESULT
+    @lpVtbl.value.put_quorum_resource.call(this, pclusterresource)
+  end
+  def get_quorum_resource(this : ISCluster*, pclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_quorum_resource.call(this, pclusterresource)
+  end
+  def get_quorum_log_size(this : ISCluster*, pnlogsize : Int32*) : HRESULT
+    @lpVtbl.value.get_quorum_log_size.call(this, pnlogsize)
+  end
+  def put_quorum_log_size(this : ISCluster*, nlogsize : Int32) : HRESULT
+    @lpVtbl.value.put_quorum_log_size.call(this, nlogsize)
+  end
+  def get_quorum_path(this : ISCluster*, pppath : UInt8**) : HRESULT
+    @lpVtbl.value.get_quorum_path.call(this, pppath)
+  end
+  def put_quorum_path(this : ISCluster*, ppath : UInt8*) : HRESULT
+    @lpVtbl.value.put_quorum_path.call(this, ppath)
+  end
+  def get_nodes(this : ISCluster*, ppnodes : ISClusNodes*) : HRESULT
+    @lpVtbl.value.get_nodes.call(this, ppnodes)
+  end
+  def get_resource_groups(this : ISCluster*, ppclusterresourcegroups : ISClusResGroups*) : HRESULT
+    @lpVtbl.value.get_resource_groups.call(this, ppclusterresourcegroups)
+  end
+  def get_resources(this : ISCluster*, ppclusterresources : ISClusResources*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, ppclusterresources)
+  end
+  def get_resource_types(this : ISCluster*, ppresourcetypes : ISClusResTypes*) : HRESULT
+    @lpVtbl.value.get_resource_types.call(this, ppresourcetypes)
+  end
+  def get_networks(this : ISCluster*, ppnetworks : ISClusNetworks*) : HRESULT
+    @lpVtbl.value.get_networks.call(this, ppnetworks)
+  end
+  def get_net_interfaces(this : ISCluster*, ppnetinterfaces : ISClusNetInterfaces*) : HRESULT
+    @lpVtbl.value.get_net_interfaces.call(this, ppnetinterfaces)
+  end
+end
+struct LibWin32::ISClusNode
+  def query_interface(this : ISClusNode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNode*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNode*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNode*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNode*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusNode*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusNode*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusNode*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusNode*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_name(this : ISClusNode*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_handle(this : ISClusNode*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_node_id(this : ISClusNode*, pbstrnodeid : UInt8**) : HRESULT
+    @lpVtbl.value.get_node_id.call(this, pbstrnodeid)
+  end
+  def get_state(this : ISClusNode*, dwstate : CLUSTER_NODE_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwstate)
+  end
+  def pause(this : ISClusNode*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : ISClusNode*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def evict(this : ISClusNode*) : HRESULT
+    @lpVtbl.value.evict.call(this)
+  end
+  def get_resource_groups(this : ISClusNode*, ppresourcegroups : ISClusResGroups*) : HRESULT
+    @lpVtbl.value.get_resource_groups.call(this, ppresourcegroups)
+  end
+  def get_cluster(this : ISClusNode*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+  def get_net_interfaces(this : ISClusNode*, ppclusnetinterfaces : ISClusNodeNetInterfaces*) : HRESULT
+    @lpVtbl.value.get_net_interfaces.call(this, ppclusnetinterfaces)
+  end
+end
+struct LibWin32::ISClusNodes
+  def query_interface(this : ISClusNodes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNodes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNodes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNodes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNodes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNodes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNodes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusNodes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusNodes*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusNodes*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusNodes*, varindex : VARIANT, ppnode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppnode)
+  end
+end
+struct LibWin32::ISClusNetwork
+  def query_interface(this : ISClusNetwork*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNetwork*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNetwork*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNetwork*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNetwork*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNetwork*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNetwork*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusNetwork*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusNetwork*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusNetwork*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusNetwork*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_handle(this : ISClusNetwork*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_name(this : ISClusNetwork*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : ISClusNetwork*, bstrnetworkname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrnetworkname)
+  end
+  def get_network_id(this : ISClusNetwork*, pbstrnetworkid : UInt8**) : HRESULT
+    @lpVtbl.value.get_network_id.call(this, pbstrnetworkid)
+  end
+  def get_state(this : ISClusNetwork*, dwstate : CLUSTER_NETWORK_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwstate)
+  end
+  def get_net_interfaces(this : ISClusNetwork*, ppclusnetinterfaces : ISClusNetworkNetInterfaces*) : HRESULT
+    @lpVtbl.value.get_net_interfaces.call(this, ppclusnetinterfaces)
+  end
+  def get_cluster(this : ISClusNetwork*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+end
+struct LibWin32::ISClusNetworks
+  def query_interface(this : ISClusNetworks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNetworks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNetworks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNetworks*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNetworks*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNetworks*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNetworks*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusNetworks*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusNetworks*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusNetworks*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusNetworks*, varindex : VARIANT, ppclusnetwork : ISClusNetwork*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusnetwork)
+  end
+end
+struct LibWin32::ISClusNetInterface
+  def query_interface(this : ISClusNetInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNetInterface*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNetInterface*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNetInterface*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNetInterface*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNetInterface*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNetInterface*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusNetInterface*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusNetInterface*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusNetInterface*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusNetInterface*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_name(this : ISClusNetInterface*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_handle(this : ISClusNetInterface*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_state(this : ISClusNetInterface*, dwstate : CLUSTER_NETINTERFACE_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwstate)
+  end
+  def get_cluster(this : ISClusNetInterface*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+end
+struct LibWin32::ISClusNetInterfaces
+  def query_interface(this : ISClusNetInterfaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNetInterfaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNetInterfaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNetInterfaces*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNetInterfaces*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNetInterfaces*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNetInterfaces*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusNetInterfaces*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusNetInterfaces*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusNetInterfaces*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusNetInterfaces*, varindex : VARIANT, ppclusnetinterface : ISClusNetInterface*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusnetinterface)
+  end
+end
+struct LibWin32::ISClusNodeNetInterfaces
+  def query_interface(this : ISClusNodeNetInterfaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNodeNetInterfaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNodeNetInterfaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNodeNetInterfaces*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNodeNetInterfaces*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNodeNetInterfaces*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNodeNetInterfaces*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusNodeNetInterfaces*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusNodeNetInterfaces*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusNodeNetInterfaces*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusNodeNetInterfaces*, varindex : VARIANT, ppclusnetinterface : ISClusNetInterface*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusnetinterface)
+  end
+end
+struct LibWin32::ISClusNetworkNetInterfaces
+  def query_interface(this : ISClusNetworkNetInterfaces*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusNetworkNetInterfaces*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusNetworkNetInterfaces*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusNetworkNetInterfaces*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusNetworkNetInterfaces*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusNetworkNetInterfaces*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusNetworkNetInterfaces*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusNetworkNetInterfaces*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusNetworkNetInterfaces*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusNetworkNetInterfaces*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusNetworkNetInterfaces*, varindex : VARIANT, ppclusnetinterface : ISClusNetInterface*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusnetinterface)
+  end
+end
+struct LibWin32::ISClusResGroup
+  def query_interface(this : ISClusResGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusResGroup*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusResGroup*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusResGroup*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusResGroup*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_handle(this : ISClusResGroup*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_name(this : ISClusResGroup*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : ISClusResGroup*, bstrgroupname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrgroupname)
+  end
+  def get_state(this : ISClusResGroup*, dwstate : CLUSTER_GROUP_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwstate)
+  end
+  def get_owner_node(this : ISClusResGroup*, ppownernode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_owner_node.call(this, ppownernode)
+  end
+  def get_resources(this : ISClusResGroup*, ppclustergroupresources : ISClusResGroupResources*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, ppclustergroupresources)
+  end
+  def get_preferred_owner_nodes(this : ISClusResGroup*, ppownernodes : ISClusResGroupPreferredOwnerNodes*) : HRESULT
+    @lpVtbl.value.get_preferred_owner_nodes.call(this, ppownernodes)
+  end
+  def delete(this : ISClusResGroup*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def online(this : ISClusResGroup*, vartimeout : VARIANT, varnode : VARIANT, pvarpending : VARIANT*) : HRESULT
+    @lpVtbl.value.online.call(this, vartimeout, varnode, pvarpending)
+  end
+  def move(this : ISClusResGroup*, vartimeout : VARIANT, varnode : VARIANT, pvarpending : VARIANT*) : HRESULT
+    @lpVtbl.value.move.call(this, vartimeout, varnode, pvarpending)
+  end
+  def offline(this : ISClusResGroup*, vartimeout : VARIANT, pvarpending : VARIANT*) : HRESULT
+    @lpVtbl.value.offline.call(this, vartimeout, pvarpending)
+  end
+  def get_cluster(this : ISClusResGroup*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+end
+struct LibWin32::ISClusResGroups
+  def query_interface(this : ISClusResGroups*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResGroups*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResGroups*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResGroups*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResGroups*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResGroups*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResGroups*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResGroups*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResGroups*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResGroups*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResGroups*, varindex : VARIANT, ppclusresgroup : ISClusResGroup*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresgroup)
+  end
+  def create_item(this : ISClusResGroups*, bstrresourcegroupname : UInt8*, ppresourcegroup : ISClusResGroup*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcegroupname, ppresourcegroup)
+  end
+  def delete_item(this : ISClusResGroups*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResource
+  def query_interface(this : ISClusResource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResource*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResource*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResource*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResource*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusResource*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusResource*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusResource*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusResource*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_handle(this : ISClusResource*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_name(this : ISClusResource*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : ISClusResource*, bstrresourcename : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrresourcename)
+  end
+  def get_state(this : ISClusResource*, dwstate : CLUSTER_RESOURCE_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, dwstate)
+  end
+  def get_core_flag(this : ISClusResource*, dwcoreflag : CLUS_FLAGS*) : HRESULT
+    @lpVtbl.value.get_core_flag.call(this, dwcoreflag)
+  end
+  def become_quorum_resource(this : ISClusResource*, bstrdevicepath : UInt8*, lmaxlogsize : Int32) : HRESULT
+    @lpVtbl.value.become_quorum_resource.call(this, bstrdevicepath, lmaxlogsize)
+  end
+  def delete(this : ISClusResource*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def fail(this : ISClusResource*) : HRESULT
+    @lpVtbl.value.fail.call(this)
+  end
+  def online(this : ISClusResource*, ntimeout : Int32, pvarpending : VARIANT*) : HRESULT
+    @lpVtbl.value.online.call(this, ntimeout, pvarpending)
+  end
+  def offline(this : ISClusResource*, ntimeout : Int32, pvarpending : VARIANT*) : HRESULT
+    @lpVtbl.value.offline.call(this, ntimeout, pvarpending)
+  end
+  def change_resource_group(this : ISClusResource*, presourcegroup : ISClusResGroup) : HRESULT
+    @lpVtbl.value.change_resource_group.call(this, presourcegroup)
+  end
+  def add_resource_node(this : ISClusResource*, pnode : ISClusNode) : HRESULT
+    @lpVtbl.value.add_resource_node.call(this, pnode)
+  end
+  def remove_resource_node(this : ISClusResource*, pnode : ISClusNode) : HRESULT
+    @lpVtbl.value.remove_resource_node.call(this, pnode)
+  end
+  def can_resource_be_dependent(this : ISClusResource*, presource : ISClusResource, pvardependent : VARIANT*) : HRESULT
+    @lpVtbl.value.can_resource_be_dependent.call(this, presource, pvardependent)
+  end
+  def get_possible_owner_nodes(this : ISClusResource*, ppownernodes : ISClusResPossibleOwnerNodes*) : HRESULT
+    @lpVtbl.value.get_possible_owner_nodes.call(this, ppownernodes)
+  end
+  def get_dependencies(this : ISClusResource*, ppresdependencies : ISClusResDependencies*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, ppresdependencies)
+  end
+  def get_dependents(this : ISClusResource*, ppresdependents : ISClusResDependents*) : HRESULT
+    @lpVtbl.value.get_dependents.call(this, ppresdependents)
+  end
+  def get_group(this : ISClusResource*, ppresgroup : ISClusResGroup*) : HRESULT
+    @lpVtbl.value.get_group.call(this, ppresgroup)
+  end
+  def get_owner_node(this : ISClusResource*, ppownernode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_owner_node.call(this, ppownernode)
+  end
+  def get_cluster(this : ISClusResource*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+  def get_class_info(this : ISClusResource*, prcclassinfo : CLUSTER_RESOURCE_CLASS*) : HRESULT
+    @lpVtbl.value.get_class_info.call(this, prcclassinfo)
+  end
+  def get_disk(this : ISClusResource*, ppdisk : ISClusDisk*) : HRESULT
+    @lpVtbl.value.get_disk.call(this, ppdisk)
+  end
+  def get_registry_keys(this : ISClusResource*, ppregistrykeys : ISClusRegistryKeys*) : HRESULT
+    @lpVtbl.value.get_registry_keys.call(this, ppregistrykeys)
+  end
+  def get_crypto_keys(this : ISClusResource*, ppcryptokeys : ISClusCryptoKeys*) : HRESULT
+    @lpVtbl.value.get_crypto_keys.call(this, ppcryptokeys)
+  end
+  def get_type_name(this : ISClusResource*, pbstrtypename : UInt8**) : HRESULT
+    @lpVtbl.value.get_type_name.call(this, pbstrtypename)
+  end
+  def get_type(this : ISClusResource*, ppresourcetype : ISClusResType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ppresourcetype)
+  end
+  def get_maintenance_mode(this : ISClusResource*, pbmaintenancemode : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_maintenance_mode.call(this, pbmaintenancemode)
+  end
+  def put_maintenance_mode(this : ISClusResource*, bmaintenancemode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_maintenance_mode.call(this, bmaintenancemode)
+  end
+end
+struct LibWin32::ISClusResDependencies
+  def query_interface(this : ISClusResDependencies*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResDependencies*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResDependencies*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResDependencies*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResDependencies*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResDependencies*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResDependencies*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResDependencies*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResDependencies*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResDependencies*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResDependencies*, varindex : VARIANT, ppclusresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresource)
+  end
+  def create_item(this : ISClusResDependencies*, bstrresourcename : UInt8*, bstrresourcetype : UInt8*, dwflags : CLUSTER_RESOURCE_CREATE_FLAGS, ppclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcename, bstrresourcetype, dwflags, ppclusterresource)
+  end
+  def delete_item(this : ISClusResDependencies*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+  def add_item(this : ISClusResDependencies*, presource : ISClusResource) : HRESULT
+    @lpVtbl.value.add_item.call(this, presource)
+  end
+  def remove_item(this : ISClusResDependencies*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResGroupResources
+  def query_interface(this : ISClusResGroupResources*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResGroupResources*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResGroupResources*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResGroupResources*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResGroupResources*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResGroupResources*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResGroupResources*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResGroupResources*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResGroupResources*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResGroupResources*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResGroupResources*, varindex : VARIANT, ppclusresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresource)
+  end
+  def create_item(this : ISClusResGroupResources*, bstrresourcename : UInt8*, bstrresourcetype : UInt8*, dwflags : CLUSTER_RESOURCE_CREATE_FLAGS, ppclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcename, bstrresourcetype, dwflags, ppclusterresource)
+  end
+  def delete_item(this : ISClusResGroupResources*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResTypeResources
+  def query_interface(this : ISClusResTypeResources*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResTypeResources*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResTypeResources*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResTypeResources*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResTypeResources*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResTypeResources*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResTypeResources*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResTypeResources*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResTypeResources*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResTypeResources*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResTypeResources*, varindex : VARIANT, ppclusresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresource)
+  end
+  def create_item(this : ISClusResTypeResources*, bstrresourcename : UInt8*, bstrgroupname : UInt8*, dwflags : CLUSTER_RESOURCE_CREATE_FLAGS, ppclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcename, bstrgroupname, dwflags, ppclusterresource)
+  end
+  def delete_item(this : ISClusResTypeResources*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResources
+  def query_interface(this : ISClusResources*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResources*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResources*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResources*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResources*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResources*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResources*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResources*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResources*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResources*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResources*, varindex : VARIANT, ppclusresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresource)
+  end
+  def create_item(this : ISClusResources*, bstrresourcename : UInt8*, bstrresourcetype : UInt8*, bstrgroupname : UInt8*, dwflags : CLUSTER_RESOURCE_CREATE_FLAGS, ppclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcename, bstrresourcetype, bstrgroupname, dwflags, ppclusterresource)
+  end
+  def delete_item(this : ISClusResources*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResGroupPreferredOwnerNodes
+  def query_interface(this : ISClusResGroupPreferredOwnerNodes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResGroupPreferredOwnerNodes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResGroupPreferredOwnerNodes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResGroupPreferredOwnerNodes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResGroupPreferredOwnerNodes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResGroupPreferredOwnerNodes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResGroupPreferredOwnerNodes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResGroupPreferredOwnerNodes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResGroupPreferredOwnerNodes*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResGroupPreferredOwnerNodes*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResGroupPreferredOwnerNodes*, varindex : VARIANT, ppnode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppnode)
+  end
+  def insert_item(this : ISClusResGroupPreferredOwnerNodes*, pnode : ISClusNode, nposition : Int32) : HRESULT
+    @lpVtbl.value.insert_item.call(this, pnode, nposition)
+  end
+  def remove_item(this : ISClusResGroupPreferredOwnerNodes*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+  def get_modified(this : ISClusResGroupPreferredOwnerNodes*, pvarmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, pvarmodified)
+  end
+  def save_changes(this : ISClusResGroupPreferredOwnerNodes*) : HRESULT
+    @lpVtbl.value.save_changes.call(this)
+  end
+  def add_item(this : ISClusResGroupPreferredOwnerNodes*, pnode : ISClusNode) : HRESULT
+    @lpVtbl.value.add_item.call(this, pnode)
+  end
+end
+struct LibWin32::ISClusResPossibleOwnerNodes
+  def query_interface(this : ISClusResPossibleOwnerNodes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResPossibleOwnerNodes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResPossibleOwnerNodes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResPossibleOwnerNodes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResPossibleOwnerNodes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResPossibleOwnerNodes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResPossibleOwnerNodes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResPossibleOwnerNodes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResPossibleOwnerNodes*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResPossibleOwnerNodes*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResPossibleOwnerNodes*, varindex : VARIANT, ppnode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppnode)
+  end
+  def add_item(this : ISClusResPossibleOwnerNodes*, pnode : ISClusNode) : HRESULT
+    @lpVtbl.value.add_item.call(this, pnode)
+  end
+  def remove_item(this : ISClusResPossibleOwnerNodes*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+  def get_modified(this : ISClusResPossibleOwnerNodes*, pvarmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, pvarmodified)
+  end
+end
+struct LibWin32::ISClusResTypePossibleOwnerNodes
+  def query_interface(this : ISClusResTypePossibleOwnerNodes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResTypePossibleOwnerNodes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResTypePossibleOwnerNodes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResTypePossibleOwnerNodes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResTypePossibleOwnerNodes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResTypePossibleOwnerNodes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResTypePossibleOwnerNodes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResTypePossibleOwnerNodes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResTypePossibleOwnerNodes*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResTypePossibleOwnerNodes*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResTypePossibleOwnerNodes*, varindex : VARIANT, ppnode : ISClusNode*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppnode)
+  end
+end
+struct LibWin32::ISClusResType
+  def query_interface(this : ISClusResType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResType*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResType*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResType*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResType*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_common_properties(this : ISClusResType*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_properties.call(this, ppproperties)
+  end
+  def get_private_properties(this : ISClusResType*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_properties.call(this, ppproperties)
+  end
+  def get_common_ro_properties(this : ISClusResType*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_common_ro_properties.call(this, ppproperties)
+  end
+  def get_private_ro_properties(this : ISClusResType*, ppproperties : ISClusProperties*) : HRESULT
+    @lpVtbl.value.get_private_ro_properties.call(this, ppproperties)
+  end
+  def get_name(this : ISClusResType*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def delete(this : ISClusResType*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_cluster(this : ISClusResType*, ppcluster : ISCluster*) : HRESULT
+    @lpVtbl.value.get_cluster.call(this, ppcluster)
+  end
+  def get_resources(this : ISClusResType*, ppclusterrestyperesources : ISClusResTypeResources*) : HRESULT
+    @lpVtbl.value.get_resources.call(this, ppclusterrestyperesources)
+  end
+  def get_possible_owner_nodes(this : ISClusResType*, ppownernodes : ISClusResTypePossibleOwnerNodes*) : HRESULT
+    @lpVtbl.value.get_possible_owner_nodes.call(this, ppownernodes)
+  end
+  def get_available_disks(this : ISClusResType*, ppavailabledisks : ISClusDisks*) : HRESULT
+    @lpVtbl.value.get_available_disks.call(this, ppavailabledisks)
+  end
+end
+struct LibWin32::ISClusResTypes
+  def query_interface(this : ISClusResTypes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResTypes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResTypes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResTypes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResTypes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResTypes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResTypes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResTypes*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResTypes*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResTypes*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResTypes*, varindex : VARIANT, ppclusrestype : ISClusResType*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusrestype)
+  end
+  def create_item(this : ISClusResTypes*, bstrresourcetypename : UInt8*, bstrdisplayname : UInt8*, bstrresourcetypedll : UInt8*, dwlooksalivepollinterval : Int32, dwisalivepollinterval : Int32, ppresourcetype : ISClusResType*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcetypename, bstrdisplayname, bstrresourcetypedll, dwlooksalivepollinterval, dwisalivepollinterval, ppresourcetype)
+  end
+  def delete_item(this : ISClusResTypes*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusProperty
+  def query_interface(this : ISClusProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ISClusProperty*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_length(this : ISClusProperty*, plength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, plength)
+  end
+  def get_value_count(this : ISClusProperty*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_value_count.call(this, pcount)
+  end
+  def get_values(this : ISClusProperty*, ppclusterpropertyvalues : ISClusPropertyValues*) : HRESULT
+    @lpVtbl.value.get_values.call(this, ppclusterpropertyvalues)
+  end
+  def get_value(this : ISClusProperty*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvarvalue)
+  end
+  def put_value(this : ISClusProperty*, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_value.call(this, varvalue)
+  end
+  def get_type(this : ISClusProperty*, ptype : CLUSTER_PROPERTY_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def put_type(this : ISClusProperty*, type : CLUSTER_PROPERTY_TYPE) : HRESULT
+    @lpVtbl.value.put_type.call(this, type)
+  end
+  def get_format(this : ISClusProperty*, pformat : CLUSTER_PROPERTY_FORMAT*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pformat)
+  end
+  def put_format(this : ISClusProperty*, format : CLUSTER_PROPERTY_FORMAT) : HRESULT
+    @lpVtbl.value.put_format.call(this, format)
+  end
+  def get_read_only(this : ISClusProperty*, pvarreadonly : VARIANT*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, pvarreadonly)
+  end
+  def get_private(this : ISClusProperty*, pvarprivate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private.call(this, pvarprivate)
+  end
+  def get_common(this : ISClusProperty*, pvarcommon : VARIANT*) : HRESULT
+    @lpVtbl.value.get_common.call(this, pvarcommon)
+  end
+  def get_modified(this : ISClusProperty*, pvarmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, pvarmodified)
+  end
+  def use_default_value(this : ISClusProperty*) : HRESULT
+    @lpVtbl.value.use_default_value.call(this)
+  end
+end
+struct LibWin32::ISClusPropertyValue
+  def query_interface(this : ISClusPropertyValue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPropertyValue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPropertyValue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPropertyValue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPropertyValue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPropertyValue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPropertyValue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_value(this : ISClusPropertyValue*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvarvalue)
+  end
+  def put_value(this : ISClusPropertyValue*, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_value.call(this, varvalue)
+  end
+  def get_type(this : ISClusPropertyValue*, ptype : CLUSTER_PROPERTY_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def put_type(this : ISClusPropertyValue*, type : CLUSTER_PROPERTY_TYPE) : HRESULT
+    @lpVtbl.value.put_type.call(this, type)
+  end
+  def get_format(this : ISClusPropertyValue*, pformat : CLUSTER_PROPERTY_FORMAT*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pformat)
+  end
+  def put_format(this : ISClusPropertyValue*, format : CLUSTER_PROPERTY_FORMAT) : HRESULT
+    @lpVtbl.value.put_format.call(this, format)
+  end
+  def get_length(this : ISClusPropertyValue*, plength : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, plength)
+  end
+  def get_data_count(this : ISClusPropertyValue*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_data_count.call(this, pcount)
+  end
+  def get_data(this : ISClusPropertyValue*, ppclusterpropertyvaluedata : ISClusPropertyValueData*) : HRESULT
+    @lpVtbl.value.get_data.call(this, ppclusterpropertyvaluedata)
+  end
+end
+struct LibWin32::ISClusPropertyValues
+  def query_interface(this : ISClusPropertyValues*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPropertyValues*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPropertyValues*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPropertyValues*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPropertyValues*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPropertyValues*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPropertyValues*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusPropertyValues*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusPropertyValues*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : ISClusPropertyValues*, varindex : VARIANT, pppropertyvalue : ISClusPropertyValue*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pppropertyvalue)
+  end
+  def create_item(this : ISClusPropertyValues*, bstrname : UInt8*, varvalue : VARIANT, pppropertyvalue : ISClusPropertyValue*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrname, varvalue, pppropertyvalue)
+  end
+  def remove_item(this : ISClusPropertyValues*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusProperties
+  def query_interface(this : ISClusProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusProperties*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusProperties*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusProperties*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusProperties*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusProperties*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusProperties*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusProperties*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusProperties*, varindex : VARIANT, ppclusproperty : ISClusProperty*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusproperty)
+  end
+  def create_item(this : ISClusProperties*, bstrname : UInt8*, varvalue : VARIANT, pproperty : ISClusProperty*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrname, varvalue, pproperty)
+  end
+  def use_default_value(this : ISClusProperties*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.use_default_value.call(this, varindex)
+  end
+  def save_changes(this : ISClusProperties*, pvarstatuscode : VARIANT*) : HRESULT
+    @lpVtbl.value.save_changes.call(this, pvarstatuscode)
+  end
+  def get_read_only(this : ISClusProperties*, pvarreadonly : VARIANT*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, pvarreadonly)
+  end
+  def get_private(this : ISClusProperties*, pvarprivate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private.call(this, pvarprivate)
+  end
+  def get_common(this : ISClusProperties*, pvarcommon : VARIANT*) : HRESULT
+    @lpVtbl.value.get_common.call(this, pvarcommon)
+  end
+  def get_modified(this : ISClusProperties*, pvarmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_modified.call(this, pvarmodified)
+  end
+end
+struct LibWin32::ISClusPropertyValueData
+  def query_interface(this : ISClusPropertyValueData*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPropertyValueData*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPropertyValueData*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPropertyValueData*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPropertyValueData*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPropertyValueData*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPropertyValueData*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusPropertyValueData*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusPropertyValueData*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : ISClusPropertyValueData*, varindex : VARIANT, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pvarvalue)
+  end
+  def create_item(this : ISClusPropertyValueData*, varvalue : VARIANT, pvardata : VARIANT*) : HRESULT
+    @lpVtbl.value.create_item.call(this, varvalue, pvardata)
+  end
+  def remove_item(this : ISClusPropertyValueData*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusPartition
+  def query_interface(this : ISClusPartition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPartition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPartition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPartition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPartition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPartition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPartition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_flags(this : ISClusPartition*, plflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, plflags)
+  end
+  def get_device_name(this : ISClusPartition*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_volume_label(this : ISClusPartition*, pbstrvolumelabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_label.call(this, pbstrvolumelabel)
+  end
+  def get_serial_number(this : ISClusPartition*, plserialnumber : Int32*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, plserialnumber)
+  end
+  def get_maximum_component_length(this : ISClusPartition*, plmaximumcomponentlength : Int32*) : HRESULT
+    @lpVtbl.value.get_maximum_component_length.call(this, plmaximumcomponentlength)
+  end
+  def get_file_system_flags(this : ISClusPartition*, plfilesystemflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_system_flags.call(this, plfilesystemflags)
+  end
+  def get_file_system(this : ISClusPartition*, pbstrfilesystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_system.call(this, pbstrfilesystem)
+  end
+end
+struct LibWin32::ISClusPartitionEx
+  def query_interface(this : ISClusPartitionEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPartitionEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPartitionEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPartitionEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPartitionEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPartitionEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPartitionEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_flags(this : ISClusPartitionEx*, plflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, plflags)
+  end
+  def get_device_name(this : ISClusPartitionEx*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_volume_label(this : ISClusPartitionEx*, pbstrvolumelabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_label.call(this, pbstrvolumelabel)
+  end
+  def get_serial_number(this : ISClusPartitionEx*, plserialnumber : Int32*) : HRESULT
+    @lpVtbl.value.get_serial_number.call(this, plserialnumber)
+  end
+  def get_maximum_component_length(this : ISClusPartitionEx*, plmaximumcomponentlength : Int32*) : HRESULT
+    @lpVtbl.value.get_maximum_component_length.call(this, plmaximumcomponentlength)
+  end
+  def get_file_system_flags(this : ISClusPartitionEx*, plfilesystemflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_system_flags.call(this, plfilesystemflags)
+  end
+  def get_file_system(this : ISClusPartitionEx*, pbstrfilesystem : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_system.call(this, pbstrfilesystem)
+  end
+  def get_total_size(this : ISClusPartitionEx*, pltotalsize : Int32*) : HRESULT
+    @lpVtbl.value.get_total_size.call(this, pltotalsize)
+  end
+  def get_free_space(this : ISClusPartitionEx*, plfreespace : Int32*) : HRESULT
+    @lpVtbl.value.get_free_space.call(this, plfreespace)
+  end
+  def get_device_number(this : ISClusPartitionEx*, pldevicenumber : Int32*) : HRESULT
+    @lpVtbl.value.get_device_number.call(this, pldevicenumber)
+  end
+  def get_partition_number(this : ISClusPartitionEx*, plpartitionnumber : Int32*) : HRESULT
+    @lpVtbl.value.get_partition_number.call(this, plpartitionnumber)
+  end
+  def get_volume_guid(this : ISClusPartitionEx*, pbstrvolumeguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_guid.call(this, pbstrvolumeguid)
+  end
+end
+struct LibWin32::ISClusPartitions
+  def query_interface(this : ISClusPartitions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusPartitions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusPartitions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusPartitions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusPartitions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusPartitions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusPartitions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusPartitions*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusPartitions*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : ISClusPartitions*, varindex : VARIANT, pppartition : ISClusPartition*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pppartition)
+  end
+end
+struct LibWin32::ISClusDisk
+  def query_interface(this : ISClusDisk*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusDisk*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusDisk*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusDisk*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusDisk*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusDisk*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusDisk*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_signature(this : ISClusDisk*, plsignature : Int32*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, plsignature)
+  end
+  def get_scsi_address(this : ISClusDisk*, ppscsiaddress : ISClusScsiAddress*) : HRESULT
+    @lpVtbl.value.get_scsi_address.call(this, ppscsiaddress)
+  end
+  def get_disk_number(this : ISClusDisk*, pldisknumber : Int32*) : HRESULT
+    @lpVtbl.value.get_disk_number.call(this, pldisknumber)
+  end
+  def get_partitions(this : ISClusDisk*, pppartitions : ISClusPartitions*) : HRESULT
+    @lpVtbl.value.get_partitions.call(this, pppartitions)
+  end
+end
+struct LibWin32::ISClusDisks
+  def query_interface(this : ISClusDisks*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusDisks*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusDisks*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusDisks*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusDisks*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusDisks*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusDisks*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusDisks*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusDisks*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_item(this : ISClusDisks*, varindex : VARIANT, ppdisk : ISClusDisk*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppdisk)
+  end
+end
+struct LibWin32::ISClusScsiAddress
+  def query_interface(this : ISClusScsiAddress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusScsiAddress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusScsiAddress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusScsiAddress*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusScsiAddress*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusScsiAddress*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusScsiAddress*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_port_number(this : ISClusScsiAddress*, pvarportnumber : VARIANT*) : HRESULT
+    @lpVtbl.value.get_port_number.call(this, pvarportnumber)
+  end
+  def get_path_id(this : ISClusScsiAddress*, pvarpathid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_path_id.call(this, pvarpathid)
+  end
+  def get_target_id(this : ISClusScsiAddress*, pvartargetid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_target_id.call(this, pvartargetid)
+  end
+  def get_lun(this : ISClusScsiAddress*, pvarlun : VARIANT*) : HRESULT
+    @lpVtbl.value.get_lun.call(this, pvarlun)
+  end
+end
+struct LibWin32::ISClusRegistryKeys
+  def query_interface(this : ISClusRegistryKeys*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusRegistryKeys*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusRegistryKeys*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusRegistryKeys*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusRegistryKeys*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusRegistryKeys*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusRegistryKeys*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusRegistryKeys*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusRegistryKeys*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusRegistryKeys*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusRegistryKeys*, varindex : VARIANT, pbstrregistrykey : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pbstrregistrykey)
+  end
+  def add_item(this : ISClusRegistryKeys*, bstrregistrykey : UInt8*) : HRESULT
+    @lpVtbl.value.add_item.call(this, bstrregistrykey)
+  end
+  def remove_item(this : ISClusRegistryKeys*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusCryptoKeys
+  def query_interface(this : ISClusCryptoKeys*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusCryptoKeys*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusCryptoKeys*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusCryptoKeys*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusCryptoKeys*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusCryptoKeys*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusCryptoKeys*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusCryptoKeys*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusCryptoKeys*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusCryptoKeys*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusCryptoKeys*, varindex : VARIANT, pbstrcyrptokey : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, pbstrcyrptokey)
+  end
+  def add_item(this : ISClusCryptoKeys*, bstrcryptokey : UInt8*) : HRESULT
+    @lpVtbl.value.add_item.call(this, bstrcryptokey)
+  end
+  def remove_item(this : ISClusCryptoKeys*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
+end
+struct LibWin32::ISClusResDependents
+  def query_interface(this : ISClusResDependents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISClusResDependents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISClusResDependents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISClusResDependents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISClusResDependents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISClusResDependents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISClusResDependents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : ISClusResDependents*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get__new_enum(this : ISClusResDependents*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def refresh(this : ISClusResDependents*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_item(this : ISClusResDependents*, varindex : VARIANT, ppclusresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.get_item.call(this, varindex, ppclusresource)
+  end
+  def create_item(this : ISClusResDependents*, bstrresourcename : UInt8*, bstrresourcetype : UInt8*, dwflags : CLUSTER_RESOURCE_CREATE_FLAGS, ppclusterresource : ISClusResource*) : HRESULT
+    @lpVtbl.value.create_item.call(this, bstrresourcename, bstrresourcetype, dwflags, ppclusterresource)
+  end
+  def delete_item(this : ISClusResDependents*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.delete_item.call(this, varindex)
+  end
+  def add_item(this : ISClusResDependents*, presource : ISClusResource) : HRESULT
+    @lpVtbl.value.add_item.call(this, presource)
+  end
+  def remove_item(this : ISClusResDependents*, varindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove_item.call(this, varindex)
+  end
 end

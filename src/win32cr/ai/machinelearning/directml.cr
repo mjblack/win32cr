@@ -1671,3 +1671,387 @@ lib LibWin32
   # Params # d3d12device : ID3D12Device [In],flags : DML_CREATE_DEVICE_FLAGS [In],minimumfeaturelevel : DML_FEATURE_LEVEL [In],riid : Guid* [In],ppv : Void** [In]
   fun DMLCreateDevice1(d3d12device : ID3D12Device, flags : DML_CREATE_DEVICE_FLAGS, minimumfeaturelevel : DML_FEATURE_LEVEL, riid : Guid*, ppv : Void**) : HRESULT
 end
+struct LibWin32::IDMLObject
+  def query_interface(this : IDMLObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLObject*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLObject*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLObject*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLObject*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+end
+struct LibWin32::IDMLDevice
+  def query_interface(this : IDMLDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLDevice*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLDevice*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLDevice*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLDevice*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def check_feature_support(this : IDMLDevice*, feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
+  end
+  def create_operator(this : IDMLDevice*, desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator.call(this, desc, riid, ppv)
+  end
+  def compile_operator(this : IDMLDevice*, op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_operator.call(this, op, flags, riid, ppv)
+  end
+  def create_operator_initializer(this : IDMLDevice*, operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator_initializer.call(this, operatorcount, operators, riid, ppv)
+  end
+  def create_command_recorder(this : IDMLDevice*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_command_recorder.call(this, riid, ppv)
+  end
+  def create_binding_table(this : IDMLDevice*, desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_binding_table.call(this, desc, riid, ppv)
+  end
+  def evict(this : IDMLDevice*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.evict.call(this, count, ppobjects)
+  end
+  def make_resident(this : IDMLDevice*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.make_resident.call(this, count, ppobjects)
+  end
+  def get_device_removed_reason(this : IDMLDevice*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
+  end
+  def get_parent_device(this : IDMLDevice*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_parent_device.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IDMLDeviceChild
+  def query_interface(this : IDMLDeviceChild*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLDeviceChild*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLDeviceChild*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLDeviceChild*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLDeviceChild*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLDeviceChild*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLDeviceChild*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLDeviceChild*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IDMLPageable
+  def query_interface(this : IDMLPageable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLPageable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLPageable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLPageable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLPageable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLPageable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLPageable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLPageable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IDMLOperator
+  def query_interface(this : IDMLOperator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLOperator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLOperator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLOperator*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLOperator*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLOperator*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLOperator*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IDMLDispatchable
+  def query_interface(this : IDMLDispatchable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLDispatchable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLDispatchable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLDispatchable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLDispatchable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLDispatchable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLDispatchable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLDispatchable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+  def get_binding_properties(this : IDMLDispatchable*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
+  end
+end
+struct LibWin32::IDMLCompiledOperator
+  def query_interface(this : IDMLCompiledOperator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLCompiledOperator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLCompiledOperator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLCompiledOperator*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLCompiledOperator*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLCompiledOperator*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLCompiledOperator*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+  def get_binding_properties(this : IDMLCompiledOperator*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
+  end
+end
+struct LibWin32::IDMLOperatorInitializer
+  def query_interface(this : IDMLOperatorInitializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLOperatorInitializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLOperatorInitializer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLOperatorInitializer*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLOperatorInitializer*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLOperatorInitializer*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLOperatorInitializer*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLOperatorInitializer*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+  def get_binding_properties(this : IDMLOperatorInitializer*) : DML_BINDING_PROPERTIES
+    @lpVtbl.value.get_binding_properties.call(this)
+  end
+  def reset(this : IDMLOperatorInitializer*, operatorcount : UInt32, operators : IDMLCompiledOperator*) : HRESULT
+    @lpVtbl.value.reset.call(this, operatorcount, operators)
+  end
+end
+struct LibWin32::IDMLBindingTable
+  def query_interface(this : IDMLBindingTable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLBindingTable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLBindingTable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLBindingTable*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLBindingTable*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLBindingTable*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLBindingTable*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLBindingTable*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+  def bind_inputs(this : IDMLBindingTable*, bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_inputs.call(this, bindingcount, bindings)
+  end
+  def bind_outputs(this : IDMLBindingTable*, bindingcount : UInt32, bindings : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_outputs.call(this, bindingcount, bindings)
+  end
+  def bind_temporary_resource(this : IDMLBindingTable*, binding : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_temporary_resource.call(this, binding)
+  end
+  def bind_persistent_resource(this : IDMLBindingTable*, binding : DML_BINDING_DESC*) : Void
+    @lpVtbl.value.bind_persistent_resource.call(this, binding)
+  end
+  def reset(this : IDMLBindingTable*, desc : DML_BINDING_TABLE_DESC*) : HRESULT
+    @lpVtbl.value.reset.call(this, desc)
+  end
+end
+struct LibWin32::IDMLCommandRecorder
+  def query_interface(this : IDMLCommandRecorder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLCommandRecorder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLCommandRecorder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLCommandRecorder*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLCommandRecorder*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLCommandRecorder*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLCommandRecorder*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def get_device(this : IDMLCommandRecorder*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_device.call(this, riid, ppv)
+  end
+  def record_dispatch(this : IDMLCommandRecorder*, commandlist : ID3D12CommandList, dispatchable : IDMLDispatchable, bindings : IDMLBindingTable) : Void
+    @lpVtbl.value.record_dispatch.call(this, commandlist, dispatchable, bindings)
+  end
+end
+struct LibWin32::IDMLDebugDevice
+  def query_interface(this : IDMLDebugDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLDebugDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLDebugDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_mute_debug_output(this : IDMLDebugDevice*, mute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.call(this, mute)
+  end
+end
+struct LibWin32::IDMLDevice1
+  def query_interface(this : IDMLDevice1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDMLDevice1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDMLDevice1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_private_data(this : IDMLDevice1*, guid : Guid*, datasize : UInt32*, data : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data(this : IDMLDevice1*, guid : Guid*, datasize : UInt32, data : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, guid, datasize, data)
+  end
+  def set_private_data_interface(this : IDMLDevice1*, guid : Guid*, data : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.call(this, guid, data)
+  end
+  def set_name(this : IDMLDevice1*, name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, name)
+  end
+  def check_feature_support(this : IDMLDevice1*, feature : DML_FEATURE, featurequerydatasize : UInt32, featurequerydata : Void*, featuresupportdatasize : UInt32, featuresupportdata : Void*) : HRESULT
+    @lpVtbl.value.check_feature_support.call(this, feature, featurequerydatasize, featurequerydata, featuresupportdatasize, featuresupportdata)
+  end
+  def create_operator(this : IDMLDevice1*, desc : DML_OPERATOR_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator.call(this, desc, riid, ppv)
+  end
+  def compile_operator(this : IDMLDevice1*, op : IDMLOperator, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_operator.call(this, op, flags, riid, ppv)
+  end
+  def create_operator_initializer(this : IDMLDevice1*, operatorcount : UInt32, operators : IDMLCompiledOperator*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_operator_initializer.call(this, operatorcount, operators, riid, ppv)
+  end
+  def create_command_recorder(this : IDMLDevice1*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_command_recorder.call(this, riid, ppv)
+  end
+  def create_binding_table(this : IDMLDevice1*, desc : DML_BINDING_TABLE_DESC*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_binding_table.call(this, desc, riid, ppv)
+  end
+  def evict(this : IDMLDevice1*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.evict.call(this, count, ppobjects)
+  end
+  def make_resident(this : IDMLDevice1*, count : UInt32, ppobjects : IDMLPageable*) : HRESULT
+    @lpVtbl.value.make_resident.call(this, count, ppobjects)
+  end
+  def get_device_removed_reason(this : IDMLDevice1*) : HRESULT
+    @lpVtbl.value.get_device_removed_reason.call(this)
+  end
+  def get_parent_device(this : IDMLDevice1*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_parent_device.call(this, riid, ppv)
+  end
+  def compile_graph(this : IDMLDevice1*, desc : DML_GRAPH_DESC*, flags : DML_EXECUTION_FLAGS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.compile_graph.call(this, desc, flags, riid, ppv)
+  end
+end

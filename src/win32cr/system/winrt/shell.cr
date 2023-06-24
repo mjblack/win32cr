@@ -32,3 +32,17 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IDDEInitializer
+  def query_interface(this : IDDEInitializer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDDEInitializer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDDEInitializer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IDDEInitializer*, fileextensionorprotocol : LibC::LPWSTR, method : CreateProcessMethod, currentdirectory : LibC::LPWSTR, exectarget : IShellItem, site : IUnknown, application : LibC::LPWSTR, targetfile : LibC::LPWSTR, arguments : LibC::LPWSTR, verb : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, fileextensionorprotocol, method, currentdirectory, exectarget, site, application, targetfile, arguments, verb)
+  end
+end

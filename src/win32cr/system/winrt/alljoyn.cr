@@ -77,3 +77,101 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IWindowsDevicesAllJoynBusAttachmentInterop
+  def query_interface(this : IWindowsDevicesAllJoynBusAttachmentInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDevicesAllJoynBusAttachmentInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDevicesAllJoynBusAttachmentInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IWindowsDevicesAllJoynBusAttachmentInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IWindowsDevicesAllJoynBusAttachmentInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IWindowsDevicesAllJoynBusAttachmentInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_win32_handle(this : IWindowsDevicesAllJoynBusAttachmentInterop*, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_win32_handle.call(this, value)
+  end
+end
+struct LibWin32::IWindowsDevicesAllJoynBusAttachmentFactoryInterop
+  def query_interface(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_from_win32_handle(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, win32handle : UInt64, enableaboutdata : UInt8, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_from_win32_handle.call(this, win32handle, enableaboutdata, riid, ppv)
+  end
+end
+struct LibWin32::IWindowsDevicesAllJoynBusObjectInterop
+  def query_interface(this : IWindowsDevicesAllJoynBusObjectInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDevicesAllJoynBusObjectInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDevicesAllJoynBusObjectInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IWindowsDevicesAllJoynBusObjectInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IWindowsDevicesAllJoynBusObjectInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IWindowsDevicesAllJoynBusObjectInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def add_property_get_handler(this : IWindowsDevicesAllJoynBusObjectInterop*, context : Void*, interfacename : HSTRING, callback : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.add_property_get_handler.call(this, context, interfacename, callback)
+  end
+  def add_property_set_handler(this : IWindowsDevicesAllJoynBusObjectInterop*, context : Void*, interfacename : HSTRING, callback : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.add_property_set_handler.call(this, context, interfacename, callback)
+  end
+  def get_win32_handle(this : IWindowsDevicesAllJoynBusObjectInterop*, value : UInt64*) : HRESULT
+    @lpVtbl.value.get_win32_handle.call(this, value)
+  end
+end
+struct LibWin32::IWindowsDevicesAllJoynBusObjectFactoryInterop
+  def query_interface(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_from_win32_handle(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, win32handle : UInt64, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_from_win32_handle.call(this, win32handle, riid, ppv)
+  end
+end

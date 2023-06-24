@@ -201,3 +201,232 @@ lib LibWin32
   # Params # ppszuri : LibC::LPWSTR* [In]
   fun WscGetAntiMalwareUri(ppszuri : LibC::LPWSTR*) : HRESULT
 end
+struct LibWin32::IWscProduct
+  def query_interface(this : IWscProduct*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWscProduct*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWscProduct*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWscProduct*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWscProduct*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWscProduct*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWscProduct*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_product_name(this : IWscProduct*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_name.call(this, pval)
+  end
+  def get_product_state(this : IWscProduct*, pval : WSC_SECURITY_PRODUCT_STATE*) : HRESULT
+    @lpVtbl.value.get_product_state.call(this, pval)
+  end
+  def get_signature_status(this : IWscProduct*, pval : WSC_SECURITY_SIGNATURE_STATUS*) : HRESULT
+    @lpVtbl.value.get_signature_status.call(this, pval)
+  end
+  def get_remediation_path(this : IWscProduct*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remediation_path.call(this, pval)
+  end
+  def get_product_state_timestamp(this : IWscProduct*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_state_timestamp.call(this, pval)
+  end
+  def get_product_guid(this : IWscProduct*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_guid.call(this, pval)
+  end
+  def get_product_is_default(this : IWscProduct*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_product_is_default.call(this, pval)
+  end
+end
+struct LibWin32::IWscProduct2
+  def query_interface(this : IWscProduct2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWscProduct2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWscProduct2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWscProduct2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWscProduct2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWscProduct2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWscProduct2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_product_name(this : IWscProduct2*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_name.call(this, pval)
+  end
+  def get_product_state(this : IWscProduct2*, pval : WSC_SECURITY_PRODUCT_STATE*) : HRESULT
+    @lpVtbl.value.get_product_state.call(this, pval)
+  end
+  def get_signature_status(this : IWscProduct2*, pval : WSC_SECURITY_SIGNATURE_STATUS*) : HRESULT
+    @lpVtbl.value.get_signature_status.call(this, pval)
+  end
+  def get_remediation_path(this : IWscProduct2*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remediation_path.call(this, pval)
+  end
+  def get_product_state_timestamp(this : IWscProduct2*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_state_timestamp.call(this, pval)
+  end
+  def get_product_guid(this : IWscProduct2*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_guid.call(this, pval)
+  end
+  def get_product_is_default(this : IWscProduct2*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_product_is_default.call(this, pval)
+  end
+  def get_antivirus_scan_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_scan_substatus.call(this, pestatus)
+  end
+  def get_antivirus_settings_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_settings_substatus.call(this, pestatus)
+  end
+  def get_antivirus_protection_update_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_protection_update_substatus.call(this, pestatus)
+  end
+  def get_firewall_domain_profile_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_domain_profile_substatus.call(this, pestatus)
+  end
+  def get_firewall_private_profile_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_private_profile_substatus.call(this, pestatus)
+  end
+  def get_firewall_public_profile_substatus(this : IWscProduct2*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_public_profile_substatus.call(this, pestatus)
+  end
+end
+struct LibWin32::IWscProduct3
+  def query_interface(this : IWscProduct3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWscProduct3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWscProduct3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWscProduct3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWscProduct3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWscProduct3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWscProduct3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_product_name(this : IWscProduct3*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_name.call(this, pval)
+  end
+  def get_product_state(this : IWscProduct3*, pval : WSC_SECURITY_PRODUCT_STATE*) : HRESULT
+    @lpVtbl.value.get_product_state.call(this, pval)
+  end
+  def get_signature_status(this : IWscProduct3*, pval : WSC_SECURITY_SIGNATURE_STATUS*) : HRESULT
+    @lpVtbl.value.get_signature_status.call(this, pval)
+  end
+  def get_remediation_path(this : IWscProduct3*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remediation_path.call(this, pval)
+  end
+  def get_product_state_timestamp(this : IWscProduct3*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_state_timestamp.call(this, pval)
+  end
+  def get_product_guid(this : IWscProduct3*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product_guid.call(this, pval)
+  end
+  def get_product_is_default(this : IWscProduct3*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_product_is_default.call(this, pval)
+  end
+  def get_antivirus_scan_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_scan_substatus.call(this, pestatus)
+  end
+  def get_antivirus_settings_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_settings_substatus.call(this, pestatus)
+  end
+  def get_antivirus_protection_update_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_antivirus_protection_update_substatus.call(this, pestatus)
+  end
+  def get_firewall_domain_profile_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_domain_profile_substatus.call(this, pestatus)
+  end
+  def get_firewall_private_profile_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_private_profile_substatus.call(this, pestatus)
+  end
+  def get_firewall_public_profile_substatus(this : IWscProduct3*, pestatus : WSC_SECURITY_PRODUCT_SUBSTATUS*) : HRESULT
+    @lpVtbl.value.get_firewall_public_profile_substatus.call(this, pestatus)
+  end
+  def get_antivirus_days_until_expired(this : IWscProduct3*, pdwdays : UInt32*) : HRESULT
+    @lpVtbl.value.get_antivirus_days_until_expired.call(this, pdwdays)
+  end
+end
+struct LibWin32::IWSCProductList
+  def query_interface(this : IWSCProductList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSCProductList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSCProductList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSCProductList*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSCProductList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSCProductList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSCProductList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def initialize(this : IWSCProductList*, provider : WSC_SECURITY_PROVIDER) : HRESULT
+    @lpVtbl.value.initialize.call(this, provider)
+  end
+  def get_count(this : IWSCProductList*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+  def get_item(this : IWSCProductList*, index : UInt32, pval : IWscProduct*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pval)
+  end
+end
+struct LibWin32::IWSCDefaultProduct
+  def query_interface(this : IWSCDefaultProduct*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWSCDefaultProduct*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWSCDefaultProduct*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWSCDefaultProduct*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWSCDefaultProduct*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWSCDefaultProduct*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWSCDefaultProduct*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def set_default_product(this : IWSCDefaultProduct*, etype : SECURITY_PRODUCT_TYPE, pguid : UInt8*) : HRESULT
+    @lpVtbl.value.set_default_product.call(this, etype, pguid)
+  end
+end

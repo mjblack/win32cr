@@ -568,9 +568,9 @@ lib LibWin32
     query_interface : Proc(IOfflineFilesProgress*, Guid*, Void**, HRESULT)
     add_ref : Proc(IOfflineFilesProgress*, UInt32)
     release : Proc(IOfflineFilesProgress*, UInt32)
-    rbegin : Proc(IOfflineFilesProgress*, LibC::BOOL*, HRESULT)
+    begin_ : Proc(IOfflineFilesProgress*, LibC::BOOL*, HRESULT)
     query_abort : Proc(IOfflineFilesProgress*, LibC::BOOL*, HRESULT)
-    rend : Proc(IOfflineFilesProgress*, HRESULT, HRESULT)
+    end_ : Proc(IOfflineFilesProgress*, HRESULT, HRESULT)
   end
 
   IOfflineFilesProgress_GUID = "fad63237-c55b-4911-9850-bcf96d4c979e"
@@ -583,9 +583,9 @@ lib LibWin32
     query_interface : Proc(IOfflineFilesSimpleProgress*, Guid*, Void**, HRESULT)
     add_ref : Proc(IOfflineFilesSimpleProgress*, UInt32)
     release : Proc(IOfflineFilesSimpleProgress*, UInt32)
-    rbegin : Proc(IOfflineFilesSimpleProgress*, LibC::BOOL*, HRESULT)
+    begin_ : Proc(IOfflineFilesSimpleProgress*, LibC::BOOL*, HRESULT)
     query_abort : Proc(IOfflineFilesSimpleProgress*, LibC::BOOL*, HRESULT)
-    rend : Proc(IOfflineFilesSimpleProgress*, HRESULT, HRESULT)
+    end_ : Proc(IOfflineFilesSimpleProgress*, HRESULT, HRESULT)
     item_begin : Proc(IOfflineFilesSimpleProgress*, LibC::LPWSTR, OFFLINEFILES_OP_RESPONSE*, HRESULT)
     item_result : Proc(IOfflineFilesSimpleProgress*, LibC::LPWSTR, HRESULT, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
@@ -600,9 +600,9 @@ lib LibWin32
     query_interface : Proc(IOfflineFilesSyncProgress*, Guid*, Void**, HRESULT)
     add_ref : Proc(IOfflineFilesSyncProgress*, UInt32)
     release : Proc(IOfflineFilesSyncProgress*, UInt32)
-    rbegin : Proc(IOfflineFilesSyncProgress*, LibC::BOOL*, HRESULT)
+    begin_ : Proc(IOfflineFilesSyncProgress*, LibC::BOOL*, HRESULT)
     query_abort : Proc(IOfflineFilesSyncProgress*, LibC::BOOL*, HRESULT)
-    rend : Proc(IOfflineFilesSyncProgress*, HRESULT, HRESULT)
+    end_ : Proc(IOfflineFilesSyncProgress*, HRESULT, HRESULT)
     sync_item_begin : Proc(IOfflineFilesSyncProgress*, LibC::LPWSTR, OFFLINEFILES_OP_RESPONSE*, HRESULT)
     sync_item_result : Proc(IOfflineFilesSyncProgress*, LibC::LPWSTR, HRESULT, IOfflineFilesSyncErrorInfo, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
@@ -1031,4 +1031,1238 @@ lib LibWin32
 
   # Params # pbactive : LibC::BOOL* [In],pbenabled : LibC::BOOL* [In],pbavailable : LibC::BOOL* [In]
   fun OfflineFilesQueryStatusEx(pbactive : LibC::BOOL*, pbenabled : LibC::BOOL*, pbavailable : LibC::BOOL*) : UInt32
+end
+struct LibWin32::IOfflineFilesEvents
+  def query_interface(this : IOfflineFilesEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache_moved(this : IOfflineFilesEvents*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.cache_moved.call(this, pszoldpath, psznewpath)
+  end
+  def cache_is_full(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.cache_is_full.call(this)
+  end
+  def cache_is_corrupted(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.cache_is_corrupted.call(this)
+  end
+  def enabled(this : IOfflineFilesEvents*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enabled.call(this, benabled)
+  end
+  def encryption_changed(this : IOfflineFilesEvents*, bwasencrypted : LibC::BOOL, bwaspartial : LibC::BOOL, bisencrypted : LibC::BOOL, bispartial : LibC::BOOL) : HRESULT
+    @lpVtbl.value.encryption_changed.call(this, bwasencrypted, bwaspartial, bisencrypted, bispartial)
+  end
+  def sync_begin(this : IOfflineFilesEvents*, rsyncid : Guid*) : HRESULT
+    @lpVtbl.value.sync_begin.call(this, rsyncid)
+  end
+  def sync_file_result(this : IOfflineFilesEvents*, rsyncid : Guid*, pszfile : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_file_result.call(this, rsyncid, pszfile, hrresult)
+  end
+  def sync_conflict_rec_added(this : IOfflineFilesEvents*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_added.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_updated(this : IOfflineFilesEvents*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_updated.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_removed(this : IOfflineFilesEvents*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_removed.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_end(this : IOfflineFilesEvents*, rsyncid : Guid*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_end.call(this, rsyncid, hrresult)
+  end
+  def net_transport_arrived(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.net_transport_arrived.call(this)
+  end
+  def no_net_transports(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.no_net_transports.call(this)
+  end
+  def item_disconnected(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_disconnected.call(this, pszpath, itemtype)
+  end
+  def item_reconnected(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_reconnected.call(this, pszpath, itemtype)
+  end
+  def item_available_offline(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_not_available_offline(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_pinned(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_pinned.call(this, pszpath, itemtype)
+  end
+  def item_not_pinned(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_pinned.call(this, pszpath, itemtype)
+  end
+  def item_modified(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.item_modified.call(this, pszpath, itemtype, bmodifieddata, bmodifiedattributes)
+  end
+  def item_added_to_cache(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_added_to_cache.call(this, pszpath, itemtype)
+  end
+  def item_deleted_from_cache(this : IOfflineFilesEvents*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_deleted_from_cache.call(this, pszpath, itemtype)
+  end
+  def item_renamed(this : IOfflineFilesEvents*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_renamed.call(this, pszoldpath, psznewpath, itemtype)
+  end
+  def data_lost(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.data_lost.call(this)
+  end
+  def ping(this : IOfflineFilesEvents*) : HRESULT
+    @lpVtbl.value.ping.call(this)
+  end
+end
+struct LibWin32::IOfflineFilesEvents2
+  def query_interface(this : IOfflineFilesEvents2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesEvents2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesEvents2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache_moved(this : IOfflineFilesEvents2*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.cache_moved.call(this, pszoldpath, psznewpath)
+  end
+  def cache_is_full(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.cache_is_full.call(this)
+  end
+  def cache_is_corrupted(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.cache_is_corrupted.call(this)
+  end
+  def enabled(this : IOfflineFilesEvents2*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enabled.call(this, benabled)
+  end
+  def encryption_changed(this : IOfflineFilesEvents2*, bwasencrypted : LibC::BOOL, bwaspartial : LibC::BOOL, bisencrypted : LibC::BOOL, bispartial : LibC::BOOL) : HRESULT
+    @lpVtbl.value.encryption_changed.call(this, bwasencrypted, bwaspartial, bisencrypted, bispartial)
+  end
+  def sync_begin(this : IOfflineFilesEvents2*, rsyncid : Guid*) : HRESULT
+    @lpVtbl.value.sync_begin.call(this, rsyncid)
+  end
+  def sync_file_result(this : IOfflineFilesEvents2*, rsyncid : Guid*, pszfile : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_file_result.call(this, rsyncid, pszfile, hrresult)
+  end
+  def sync_conflict_rec_added(this : IOfflineFilesEvents2*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_added.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_updated(this : IOfflineFilesEvents2*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_updated.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_removed(this : IOfflineFilesEvents2*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_removed.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_end(this : IOfflineFilesEvents2*, rsyncid : Guid*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_end.call(this, rsyncid, hrresult)
+  end
+  def net_transport_arrived(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.net_transport_arrived.call(this)
+  end
+  def no_net_transports(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.no_net_transports.call(this)
+  end
+  def item_disconnected(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_disconnected.call(this, pszpath, itemtype)
+  end
+  def item_reconnected(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_reconnected.call(this, pszpath, itemtype)
+  end
+  def item_available_offline(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_not_available_offline(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_pinned(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_pinned.call(this, pszpath, itemtype)
+  end
+  def item_not_pinned(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_pinned.call(this, pszpath, itemtype)
+  end
+  def item_modified(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.item_modified.call(this, pszpath, itemtype, bmodifieddata, bmodifiedattributes)
+  end
+  def item_added_to_cache(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_added_to_cache.call(this, pszpath, itemtype)
+  end
+  def item_deleted_from_cache(this : IOfflineFilesEvents2*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_deleted_from_cache.call(this, pszpath, itemtype)
+  end
+  def item_renamed(this : IOfflineFilesEvents2*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_renamed.call(this, pszoldpath, psznewpath, itemtype)
+  end
+  def data_lost(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.data_lost.call(this)
+  end
+  def ping(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.ping.call(this)
+  end
+  def item_reconnect_begin(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.item_reconnect_begin.call(this)
+  end
+  def item_reconnect_end(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.item_reconnect_end.call(this)
+  end
+  def cache_evict_begin(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.cache_evict_begin.call(this)
+  end
+  def cache_evict_end(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.cache_evict_end.call(this)
+  end
+  def background_sync_begin(this : IOfflineFilesEvents2*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_begin.call(this, dwsynccontrolflags)
+  end
+  def background_sync_end(this : IOfflineFilesEvents2*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_end.call(this, dwsynccontrolflags)
+  end
+  def policy_change_detected(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.policy_change_detected.call(this)
+  end
+  def preference_change_detected(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.preference_change_detected.call(this)
+  end
+  def settings_changes_applied(this : IOfflineFilesEvents2*) : HRESULT
+    @lpVtbl.value.settings_changes_applied.call(this)
+  end
+end
+struct LibWin32::IOfflineFilesEvents3
+  def query_interface(this : IOfflineFilesEvents3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesEvents3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesEvents3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache_moved(this : IOfflineFilesEvents3*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.cache_moved.call(this, pszoldpath, psznewpath)
+  end
+  def cache_is_full(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.cache_is_full.call(this)
+  end
+  def cache_is_corrupted(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.cache_is_corrupted.call(this)
+  end
+  def enabled(this : IOfflineFilesEvents3*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enabled.call(this, benabled)
+  end
+  def encryption_changed(this : IOfflineFilesEvents3*, bwasencrypted : LibC::BOOL, bwaspartial : LibC::BOOL, bisencrypted : LibC::BOOL, bispartial : LibC::BOOL) : HRESULT
+    @lpVtbl.value.encryption_changed.call(this, bwasencrypted, bwaspartial, bisencrypted, bispartial)
+  end
+  def sync_begin(this : IOfflineFilesEvents3*, rsyncid : Guid*) : HRESULT
+    @lpVtbl.value.sync_begin.call(this, rsyncid)
+  end
+  def sync_file_result(this : IOfflineFilesEvents3*, rsyncid : Guid*, pszfile : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_file_result.call(this, rsyncid, pszfile, hrresult)
+  end
+  def sync_conflict_rec_added(this : IOfflineFilesEvents3*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_added.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_updated(this : IOfflineFilesEvents3*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_updated.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_removed(this : IOfflineFilesEvents3*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_removed.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_end(this : IOfflineFilesEvents3*, rsyncid : Guid*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_end.call(this, rsyncid, hrresult)
+  end
+  def net_transport_arrived(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.net_transport_arrived.call(this)
+  end
+  def no_net_transports(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.no_net_transports.call(this)
+  end
+  def item_disconnected(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_disconnected.call(this, pszpath, itemtype)
+  end
+  def item_reconnected(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_reconnected.call(this, pszpath, itemtype)
+  end
+  def item_available_offline(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_not_available_offline(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_pinned(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_pinned.call(this, pszpath, itemtype)
+  end
+  def item_not_pinned(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_pinned.call(this, pszpath, itemtype)
+  end
+  def item_modified(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.item_modified.call(this, pszpath, itemtype, bmodifieddata, bmodifiedattributes)
+  end
+  def item_added_to_cache(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_added_to_cache.call(this, pszpath, itemtype)
+  end
+  def item_deleted_from_cache(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_deleted_from_cache.call(this, pszpath, itemtype)
+  end
+  def item_renamed(this : IOfflineFilesEvents3*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_renamed.call(this, pszoldpath, psznewpath, itemtype)
+  end
+  def data_lost(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.data_lost.call(this)
+  end
+  def ping(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.ping.call(this)
+  end
+  def item_reconnect_begin(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.item_reconnect_begin.call(this)
+  end
+  def item_reconnect_end(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.item_reconnect_end.call(this)
+  end
+  def cache_evict_begin(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.cache_evict_begin.call(this)
+  end
+  def cache_evict_end(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.cache_evict_end.call(this)
+  end
+  def background_sync_begin(this : IOfflineFilesEvents3*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_begin.call(this, dwsynccontrolflags)
+  end
+  def background_sync_end(this : IOfflineFilesEvents3*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_end.call(this, dwsynccontrolflags)
+  end
+  def policy_change_detected(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.policy_change_detected.call(this)
+  end
+  def preference_change_detected(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.preference_change_detected.call(this)
+  end
+  def settings_changes_applied(this : IOfflineFilesEvents3*) : HRESULT
+    @lpVtbl.value.settings_changes_applied.call(this)
+  end
+  def transparent_cache_item_notify(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, eventtype : OFFLINEFILES_EVENTS, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL, pzsoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.transparent_cache_item_notify.call(this, pszpath, eventtype, itemtype, bmodifieddata, bmodifiedattributes, pzsoldpath)
+  end
+  def prefetch_file_begin(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.prefetch_file_begin.call(this, pszpath)
+  end
+  def prefetch_file_end(this : IOfflineFilesEvents3*, pszpath : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.prefetch_file_end.call(this, pszpath, hrresult)
+  end
+end
+struct LibWin32::IOfflineFilesEvents4
+  def query_interface(this : IOfflineFilesEvents4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesEvents4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesEvents4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache_moved(this : IOfflineFilesEvents4*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.cache_moved.call(this, pszoldpath, psznewpath)
+  end
+  def cache_is_full(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.cache_is_full.call(this)
+  end
+  def cache_is_corrupted(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.cache_is_corrupted.call(this)
+  end
+  def enabled(this : IOfflineFilesEvents4*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enabled.call(this, benabled)
+  end
+  def encryption_changed(this : IOfflineFilesEvents4*, bwasencrypted : LibC::BOOL, bwaspartial : LibC::BOOL, bisencrypted : LibC::BOOL, bispartial : LibC::BOOL) : HRESULT
+    @lpVtbl.value.encryption_changed.call(this, bwasencrypted, bwaspartial, bisencrypted, bispartial)
+  end
+  def sync_begin(this : IOfflineFilesEvents4*, rsyncid : Guid*) : HRESULT
+    @lpVtbl.value.sync_begin.call(this, rsyncid)
+  end
+  def sync_file_result(this : IOfflineFilesEvents4*, rsyncid : Guid*, pszfile : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_file_result.call(this, rsyncid, pszfile, hrresult)
+  end
+  def sync_conflict_rec_added(this : IOfflineFilesEvents4*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_added.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_updated(this : IOfflineFilesEvents4*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_updated.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_conflict_rec_removed(this : IOfflineFilesEvents4*, pszconflictpath : LibC::LPWSTR, pftconflictdatetime : FILETIME*, conflictsyncstate : OFFLINEFILES_SYNC_STATE) : HRESULT
+    @lpVtbl.value.sync_conflict_rec_removed.call(this, pszconflictpath, pftconflictdatetime, conflictsyncstate)
+  end
+  def sync_end(this : IOfflineFilesEvents4*, rsyncid : Guid*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.sync_end.call(this, rsyncid, hrresult)
+  end
+  def net_transport_arrived(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.net_transport_arrived.call(this)
+  end
+  def no_net_transports(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.no_net_transports.call(this)
+  end
+  def item_disconnected(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_disconnected.call(this, pszpath, itemtype)
+  end
+  def item_reconnected(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_reconnected.call(this, pszpath, itemtype)
+  end
+  def item_available_offline(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_not_available_offline(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_available_offline.call(this, pszpath, itemtype)
+  end
+  def item_pinned(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_pinned.call(this, pszpath, itemtype)
+  end
+  def item_not_pinned(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_not_pinned.call(this, pszpath, itemtype)
+  end
+  def item_modified(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.item_modified.call(this, pszpath, itemtype, bmodifieddata, bmodifiedattributes)
+  end
+  def item_added_to_cache(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_added_to_cache.call(this, pszpath, itemtype)
+  end
+  def item_deleted_from_cache(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_deleted_from_cache.call(this, pszpath, itemtype)
+  end
+  def item_renamed(this : IOfflineFilesEvents4*, pszoldpath : LibC::LPWSTR, psznewpath : LibC::LPWSTR, itemtype : OFFLINEFILES_ITEM_TYPE) : HRESULT
+    @lpVtbl.value.item_renamed.call(this, pszoldpath, psznewpath, itemtype)
+  end
+  def data_lost(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.data_lost.call(this)
+  end
+  def ping(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.ping.call(this)
+  end
+  def item_reconnect_begin(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.item_reconnect_begin.call(this)
+  end
+  def item_reconnect_end(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.item_reconnect_end.call(this)
+  end
+  def cache_evict_begin(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.cache_evict_begin.call(this)
+  end
+  def cache_evict_end(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.cache_evict_end.call(this)
+  end
+  def background_sync_begin(this : IOfflineFilesEvents4*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_begin.call(this, dwsynccontrolflags)
+  end
+  def background_sync_end(this : IOfflineFilesEvents4*, dwsynccontrolflags : UInt32) : HRESULT
+    @lpVtbl.value.background_sync_end.call(this, dwsynccontrolflags)
+  end
+  def policy_change_detected(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.policy_change_detected.call(this)
+  end
+  def preference_change_detected(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.preference_change_detected.call(this)
+  end
+  def settings_changes_applied(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.settings_changes_applied.call(this)
+  end
+  def transparent_cache_item_notify(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, eventtype : OFFLINEFILES_EVENTS, itemtype : OFFLINEFILES_ITEM_TYPE, bmodifieddata : LibC::BOOL, bmodifiedattributes : LibC::BOOL, pzsoldpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.transparent_cache_item_notify.call(this, pszpath, eventtype, itemtype, bmodifieddata, bmodifiedattributes, pzsoldpath)
+  end
+  def prefetch_file_begin(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.prefetch_file_begin.call(this, pszpath)
+  end
+  def prefetch_file_end(this : IOfflineFilesEvents4*, pszpath : LibC::LPWSTR, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.prefetch_file_end.call(this, pszpath, hrresult)
+  end
+  def prefetch_close_handle_begin(this : IOfflineFilesEvents4*) : HRESULT
+    @lpVtbl.value.prefetch_close_handle_begin.call(this)
+  end
+  def prefetch_close_handle_end(this : IOfflineFilesEvents4*, dwclosedhandlecount : UInt32, dwopenhandlecount : UInt32, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.prefetch_close_handle_end.call(this, dwclosedhandlecount, dwopenhandlecount, hrresult)
+  end
+end
+struct LibWin32::IOfflineFilesEventsFilter
+  def query_interface(this : IOfflineFilesEventsFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesEventsFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesEventsFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_path_filter(this : IOfflineFilesEventsFilter*, ppszfilter : LibC::LPWSTR*, pmatch : OFFLINEFILES_PATHFILTER_MATCH*) : HRESULT
+    @lpVtbl.value.get_path_filter.call(this, ppszfilter, pmatch)
+  end
+  def get_included_events(this : IOfflineFilesEventsFilter*, celements : UInt32, prgevents : OFFLINEFILES_EVENTS*, pcevents : UInt32*) : HRESULT
+    @lpVtbl.value.get_included_events.call(this, celements, prgevents, pcevents)
+  end
+  def get_excluded_events(this : IOfflineFilesEventsFilter*, celements : UInt32, prgevents : OFFLINEFILES_EVENTS*, pcevents : UInt32*) : HRESULT
+    @lpVtbl.value.get_excluded_events.call(this, celements, prgevents, pcevents)
+  end
+end
+struct LibWin32::IOfflineFilesErrorInfo
+  def query_interface(this : IOfflineFilesErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_raw_data(this : IOfflineFilesErrorInfo*, ppblob : BYTE_BLOB**) : HRESULT
+    @lpVtbl.value.get_raw_data.call(this, ppblob)
+  end
+  def get_description(this : IOfflineFilesErrorInfo*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, ppszdescription)
+  end
+end
+struct LibWin32::IOfflineFilesSyncErrorItemInfo
+  def query_interface(this : IOfflineFilesSyncErrorItemInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSyncErrorItemInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSyncErrorItemInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_file_attributes(this : IOfflineFilesSyncErrorItemInfo*, pdwattributes : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_attributes.call(this, pdwattributes)
+  end
+  def get_file_times(this : IOfflineFilesSyncErrorItemInfo*, pftlastwrite : FILETIME*, pftchange : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_times.call(this, pftlastwrite, pftchange)
+  end
+  def get_file_size(this : IOfflineFilesSyncErrorItemInfo*, psize : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, psize)
+  end
+end
+struct LibWin32::IOfflineFilesSyncErrorInfo
+  def query_interface(this : IOfflineFilesSyncErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSyncErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSyncErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_raw_data(this : IOfflineFilesSyncErrorInfo*, ppblob : BYTE_BLOB**) : HRESULT
+    @lpVtbl.value.get_raw_data.call(this, ppblob)
+  end
+  def get_description(this : IOfflineFilesSyncErrorInfo*, ppszdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, ppszdescription)
+  end
+  def get_sync_operation(this : IOfflineFilesSyncErrorInfo*, psyncop : OFFLINEFILES_SYNC_OPERATION*) : HRESULT
+    @lpVtbl.value.get_sync_operation.call(this, psyncop)
+  end
+  def get_item_change_flags(this : IOfflineFilesSyncErrorInfo*, pdwitemchangeflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_change_flags.call(this, pdwitemchangeflags)
+  end
+  def info_enumerated(this : IOfflineFilesSyncErrorInfo*, pblocalenumerated : LibC::BOOL*, pbremoteenumerated : LibC::BOOL*, pboriginalenumerated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.info_enumerated.call(this, pblocalenumerated, pbremoteenumerated, pboriginalenumerated)
+  end
+  def info_available(this : IOfflineFilesSyncErrorInfo*, pblocalinfo : LibC::BOOL*, pbremoteinfo : LibC::BOOL*, pboriginalinfo : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.info_available.call(this, pblocalinfo, pbremoteinfo, pboriginalinfo)
+  end
+  def get_local_info(this : IOfflineFilesSyncErrorInfo*, ppinfo : IOfflineFilesSyncErrorItemInfo*) : HRESULT
+    @lpVtbl.value.get_local_info.call(this, ppinfo)
+  end
+  def get_remote_info(this : IOfflineFilesSyncErrorInfo*, ppinfo : IOfflineFilesSyncErrorItemInfo*) : HRESULT
+    @lpVtbl.value.get_remote_info.call(this, ppinfo)
+  end
+  def get_original_info(this : IOfflineFilesSyncErrorInfo*, ppinfo : IOfflineFilesSyncErrorItemInfo*) : HRESULT
+    @lpVtbl.value.get_original_info.call(this, ppinfo)
+  end
+end
+struct LibWin32::IOfflineFilesProgress
+  def query_interface(this : IOfflineFilesProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IOfflineFilesProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.begin_.call(this, pbabort)
+  end
+  def query_abort(this : IOfflineFilesProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_abort.call(this, pbabort)
+  end
+  def end_(this : IOfflineFilesProgress*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.end_.call(this, hrresult)
+  end
+end
+struct LibWin32::IOfflineFilesSimpleProgress
+  def query_interface(this : IOfflineFilesSimpleProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSimpleProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSimpleProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IOfflineFilesSimpleProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.begin_.call(this, pbabort)
+  end
+  def query_abort(this : IOfflineFilesSimpleProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_abort.call(this, pbabort)
+  end
+  def end_(this : IOfflineFilesSimpleProgress*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.end_.call(this, hrresult)
+  end
+  def item_begin(this : IOfflineFilesSimpleProgress*, pszfile : LibC::LPWSTR, presponse : OFFLINEFILES_OP_RESPONSE*) : HRESULT
+    @lpVtbl.value.item_begin.call(this, pszfile, presponse)
+  end
+  def item_result(this : IOfflineFilesSimpleProgress*, pszfile : LibC::LPWSTR, hrresult : HRESULT, presponse : OFFLINEFILES_OP_RESPONSE*) : HRESULT
+    @lpVtbl.value.item_result.call(this, pszfile, hrresult, presponse)
+  end
+end
+struct LibWin32::IOfflineFilesSyncProgress
+  def query_interface(this : IOfflineFilesSyncProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSyncProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSyncProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_(this : IOfflineFilesSyncProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.begin_.call(this, pbabort)
+  end
+  def query_abort(this : IOfflineFilesSyncProgress*, pbabort : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_abort.call(this, pbabort)
+  end
+  def end_(this : IOfflineFilesSyncProgress*, hrresult : HRESULT) : HRESULT
+    @lpVtbl.value.end_.call(this, hrresult)
+  end
+  def sync_item_begin(this : IOfflineFilesSyncProgress*, pszfile : LibC::LPWSTR, presponse : OFFLINEFILES_OP_RESPONSE*) : HRESULT
+    @lpVtbl.value.sync_item_begin.call(this, pszfile, presponse)
+  end
+  def sync_item_result(this : IOfflineFilesSyncProgress*, pszfile : LibC::LPWSTR, hrresult : HRESULT, perrorinfo : IOfflineFilesSyncErrorInfo, presponse : OFFLINEFILES_OP_RESPONSE*) : HRESULT
+    @lpVtbl.value.sync_item_result.call(this, pszfile, hrresult, perrorinfo, presponse)
+  end
+end
+struct LibWin32::IOfflineFilesSyncConflictHandler
+  def query_interface(this : IOfflineFilesSyncConflictHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSyncConflictHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSyncConflictHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resolve_conflict(this : IOfflineFilesSyncConflictHandler*, pszpath : LibC::LPWSTR, fstateknown : UInt32, state : OFFLINEFILES_SYNC_STATE, fchangedetails : UInt32, pconflictresolution : OFFLINEFILES_SYNC_CONFLICT_RESOLVE*, ppsznewname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.resolve_conflict.call(this, pszpath, fstateknown, state, fchangedetails, pconflictresolution, ppsznewname)
+  end
+end
+struct LibWin32::IOfflineFilesItemFilter
+  def query_interface(this : IOfflineFilesItemFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesItemFilter*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesItemFilter*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_filter_flags(this : IOfflineFilesItemFilter*, pullflags : UInt64*, pullmask : UInt64*) : HRESULT
+    @lpVtbl.value.get_filter_flags.call(this, pullflags, pullmask)
+  end
+  def get_time_filter(this : IOfflineFilesItemFilter*, pfttime : FILETIME*, pbevaltimeofday : LibC::BOOL*, ptimetype : OFFLINEFILES_ITEM_TIME*, pcompare : OFFLINEFILES_COMPARE*) : HRESULT
+    @lpVtbl.value.get_time_filter.call(this, pfttime, pbevaltimeofday, ptimetype, pcompare)
+  end
+  def get_pattern_filter(this : IOfflineFilesItemFilter*, pszpattern : Char*, cchpattern : UInt32) : HRESULT
+    @lpVtbl.value.get_pattern_filter.call(this, pszpattern, cchpattern)
+  end
+end
+struct LibWin32::IOfflineFilesItem
+  def query_interface(this : IOfflineFilesItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IOfflineFilesItem*, pitemtype : OFFLINEFILES_ITEM_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def get_path(this : IOfflineFilesItem*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
+  end
+  def get_parent_item(this : IOfflineFilesItem*, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppitem)
+  end
+  def refresh(this : IOfflineFilesItem*, dwqueryflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.call(this, dwqueryflags)
+  end
+  def is_marked_for_deletion(this : IOfflineFilesItem*, pbmarkedfordeletion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_marked_for_deletion.call(this, pbmarkedfordeletion)
+  end
+end
+struct LibWin32::IOfflineFilesServerItem
+  def query_interface(this : IOfflineFilesServerItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesServerItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesServerItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IOfflineFilesServerItem*, pitemtype : OFFLINEFILES_ITEM_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def get_path(this : IOfflineFilesServerItem*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
+  end
+  def get_parent_item(this : IOfflineFilesServerItem*, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppitem)
+  end
+  def refresh(this : IOfflineFilesServerItem*, dwqueryflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.call(this, dwqueryflags)
+  end
+  def is_marked_for_deletion(this : IOfflineFilesServerItem*, pbmarkedfordeletion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_marked_for_deletion.call(this, pbmarkedfordeletion)
+  end
+end
+struct LibWin32::IOfflineFilesShareItem
+  def query_interface(this : IOfflineFilesShareItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesShareItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesShareItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IOfflineFilesShareItem*, pitemtype : OFFLINEFILES_ITEM_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def get_path(this : IOfflineFilesShareItem*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
+  end
+  def get_parent_item(this : IOfflineFilesShareItem*, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppitem)
+  end
+  def refresh(this : IOfflineFilesShareItem*, dwqueryflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.call(this, dwqueryflags)
+  end
+  def is_marked_for_deletion(this : IOfflineFilesShareItem*, pbmarkedfordeletion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_marked_for_deletion.call(this, pbmarkedfordeletion)
+  end
+end
+struct LibWin32::IOfflineFilesDirectoryItem
+  def query_interface(this : IOfflineFilesDirectoryItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesDirectoryItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesDirectoryItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IOfflineFilesDirectoryItem*, pitemtype : OFFLINEFILES_ITEM_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def get_path(this : IOfflineFilesDirectoryItem*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
+  end
+  def get_parent_item(this : IOfflineFilesDirectoryItem*, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppitem)
+  end
+  def refresh(this : IOfflineFilesDirectoryItem*, dwqueryflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.call(this, dwqueryflags)
+  end
+  def is_marked_for_deletion(this : IOfflineFilesDirectoryItem*, pbmarkedfordeletion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_marked_for_deletion.call(this, pbmarkedfordeletion)
+  end
+end
+struct LibWin32::IOfflineFilesFileItem
+  def query_interface(this : IOfflineFilesFileItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesFileItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesFileItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_type(this : IOfflineFilesFileItem*, pitemtype : OFFLINEFILES_ITEM_TYPE*) : HRESULT
+    @lpVtbl.value.get_item_type.call(this, pitemtype)
+  end
+  def get_path(this : IOfflineFilesFileItem*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_path.call(this, ppszpath)
+  end
+  def get_parent_item(this : IOfflineFilesFileItem*, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.call(this, ppitem)
+  end
+  def refresh(this : IOfflineFilesFileItem*, dwqueryflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.call(this, dwqueryflags)
+  end
+  def is_marked_for_deletion(this : IOfflineFilesFileItem*, pbmarkedfordeletion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_marked_for_deletion.call(this, pbmarkedfordeletion)
+  end
+  def is_sparse(this : IOfflineFilesFileItem*, pbissparse : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_sparse.call(this, pbissparse)
+  end
+  def is_encrypted(this : IOfflineFilesFileItem*, pbisencrypted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_encrypted.call(this, pbisencrypted)
+  end
+end
+struct LibWin32::IEnumOfflineFilesItems
+  def query_interface(this : IEnumOfflineFilesItems*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumOfflineFilesItems*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumOfflineFilesItems*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumOfflineFilesItems*, celt : UInt32, rgelt : IOfflineFilesItem*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumOfflineFilesItems*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumOfflineFilesItems*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumOfflineFilesItems*, ppenum : IEnumOfflineFilesItems*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IOfflineFilesItemContainer
+  def query_interface(this : IOfflineFilesItemContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesItemContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesItemContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_items(this : IOfflineFilesItemContainer*, dwqueryflags : UInt32, ppenum : IEnumOfflineFilesItems*) : HRESULT
+    @lpVtbl.value.enum_items.call(this, dwqueryflags, ppenum)
+  end
+  def enum_items_ex(this : IOfflineFilesItemContainer*, pincludefilefilter : IOfflineFilesItemFilter, pincludedirfilter : IOfflineFilesItemFilter, pexcludefilefilter : IOfflineFilesItemFilter, pexcludedirfilter : IOfflineFilesItemFilter, dwenumflags : UInt32, dwqueryflags : UInt32, ppenum : IEnumOfflineFilesItems*) : HRESULT
+    @lpVtbl.value.enum_items_ex.call(this, pincludefilefilter, pincludedirfilter, pexcludefilefilter, pexcludedirfilter, dwenumflags, dwqueryflags, ppenum)
+  end
+end
+struct LibWin32::IOfflineFilesChangeInfo
+  def query_interface(this : IOfflineFilesChangeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesChangeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesChangeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_dirty(this : IOfflineFilesChangeInfo*, pbdirty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this, pbdirty)
+  end
+  def is_deleted_offline(this : IOfflineFilesChangeInfo*, pbdeletedoffline : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_deleted_offline.call(this, pbdeletedoffline)
+  end
+  def is_created_offline(this : IOfflineFilesChangeInfo*, pbcreatedoffline : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_created_offline.call(this, pbcreatedoffline)
+  end
+  def is_locally_modified_data(this : IOfflineFilesChangeInfo*, pblocallymodifieddata : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_locally_modified_data.call(this, pblocallymodifieddata)
+  end
+  def is_locally_modified_attributes(this : IOfflineFilesChangeInfo*, pblocallymodifiedattributes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_locally_modified_attributes.call(this, pblocallymodifiedattributes)
+  end
+  def is_locally_modified_time(this : IOfflineFilesChangeInfo*, pblocallymodifiedtime : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_locally_modified_time.call(this, pblocallymodifiedtime)
+  end
+end
+struct LibWin32::IOfflineFilesDirtyInfo
+  def query_interface(this : IOfflineFilesDirtyInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesDirtyInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesDirtyInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def local_dirty_byte_count(this : IOfflineFilesDirtyInfo*, pdirtybytecount : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.local_dirty_byte_count.call(this, pdirtybytecount)
+  end
+  def remote_dirty_byte_count(this : IOfflineFilesDirtyInfo*, pdirtybytecount : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.remote_dirty_byte_count.call(this, pdirtybytecount)
+  end
+end
+struct LibWin32::IOfflineFilesFileSysInfo
+  def query_interface(this : IOfflineFilesFileSysInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesFileSysInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesFileSysInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attributes(this : IOfflineFilesFileSysInfo*, copy : OFFLINEFILES_ITEM_COPY, pdwattributes : UInt32*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, copy, pdwattributes)
+  end
+  def get_times(this : IOfflineFilesFileSysInfo*, copy : OFFLINEFILES_ITEM_COPY, pftcreationtime : FILETIME*, pftlastwritetime : FILETIME*, pftchangetime : FILETIME*, pftlastaccesstime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_times.call(this, copy, pftcreationtime, pftlastwritetime, pftchangetime, pftlastaccesstime)
+  end
+  def get_file_size(this : IOfflineFilesFileSysInfo*, copy : OFFLINEFILES_ITEM_COPY, psize : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, copy, psize)
+  end
+end
+struct LibWin32::IOfflineFilesPinInfo
+  def query_interface(this : IOfflineFilesPinInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesPinInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesPinInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_pinned(this : IOfflineFilesPinInfo*, pbpinned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned.call(this, pbpinned)
+  end
+  def is_pinned_for_user(this : IOfflineFilesPinInfo*, pbpinnedforuser : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_user.call(this, pbpinnedforuser, pbinherit)
+  end
+  def is_pinned_for_user_by_policy(this : IOfflineFilesPinInfo*, pbpinnedforuser : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_user_by_policy.call(this, pbpinnedforuser, pbinherit)
+  end
+  def is_pinned_for_computer(this : IOfflineFilesPinInfo*, pbpinnedforcomputer : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_computer.call(this, pbpinnedforcomputer, pbinherit)
+  end
+  def is_pinned_for_folder_redirection(this : IOfflineFilesPinInfo*, pbpinnedforfolderredirection : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_folder_redirection.call(this, pbpinnedforfolderredirection, pbinherit)
+  end
+end
+struct LibWin32::IOfflineFilesPinInfo2
+  def query_interface(this : IOfflineFilesPinInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesPinInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesPinInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_pinned(this : IOfflineFilesPinInfo2*, pbpinned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned.call(this, pbpinned)
+  end
+  def is_pinned_for_user(this : IOfflineFilesPinInfo2*, pbpinnedforuser : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_user.call(this, pbpinnedforuser, pbinherit)
+  end
+  def is_pinned_for_user_by_policy(this : IOfflineFilesPinInfo2*, pbpinnedforuser : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_user_by_policy.call(this, pbpinnedforuser, pbinherit)
+  end
+  def is_pinned_for_computer(this : IOfflineFilesPinInfo2*, pbpinnedforcomputer : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_computer.call(this, pbpinnedforcomputer, pbinherit)
+  end
+  def is_pinned_for_folder_redirection(this : IOfflineFilesPinInfo2*, pbpinnedforfolderredirection : LibC::BOOL*, pbinherit : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pinned_for_folder_redirection.call(this, pbpinnedforfolderredirection, pbinherit)
+  end
+  def is_partly_pinned(this : IOfflineFilesPinInfo2*, pbpartlypinned : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_partly_pinned.call(this, pbpartlypinned)
+  end
+end
+struct LibWin32::IOfflineFilesTransparentCacheInfo
+  def query_interface(this : IOfflineFilesTransparentCacheInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesTransparentCacheInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesTransparentCacheInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_transparently_cached(this : IOfflineFilesTransparentCacheInfo*, pbtransparentlycached : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_transparently_cached.call(this, pbtransparentlycached)
+  end
+end
+struct LibWin32::IOfflineFilesGhostInfo
+  def query_interface(this : IOfflineFilesGhostInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesGhostInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesGhostInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_ghosted(this : IOfflineFilesGhostInfo*, pbghosted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_ghosted.call(this, pbghosted)
+  end
+end
+struct LibWin32::IOfflineFilesConnectionInfo
+  def query_interface(this : IOfflineFilesConnectionInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesConnectionInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesConnectionInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_connect_state(this : IOfflineFilesConnectionInfo*, pconnectstate : OFFLINEFILES_CONNECT_STATE*, pofflinereason : OFFLINEFILES_OFFLINE_REASON*) : HRESULT
+    @lpVtbl.value.get_connect_state.call(this, pconnectstate, pofflinereason)
+  end
+  def set_connect_state(this : IOfflineFilesConnectionInfo*, hwndparent : LibC::HANDLE, dwflags : UInt32, connectstate : OFFLINEFILES_CONNECT_STATE) : HRESULT
+    @lpVtbl.value.set_connect_state.call(this, hwndparent, dwflags, connectstate)
+  end
+  def transition_online(this : IOfflineFilesConnectionInfo*, hwndparent : LibC::HANDLE, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.transition_online.call(this, hwndparent, dwflags)
+  end
+  def transition_offline(this : IOfflineFilesConnectionInfo*, hwndparent : LibC::HANDLE, dwflags : UInt32, bforceopenfilesclosed : LibC::BOOL, pbopenfilespreventedtransition : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.transition_offline.call(this, hwndparent, dwflags, bforceopenfilesclosed, pbopenfilespreventedtransition)
+  end
+end
+struct LibWin32::IOfflineFilesShareInfo
+  def query_interface(this : IOfflineFilesShareInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesShareInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesShareInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_share_item(this : IOfflineFilesShareInfo*, ppshareitem : IOfflineFilesShareItem*) : HRESULT
+    @lpVtbl.value.get_share_item.call(this, ppshareitem)
+  end
+  def get_share_caching_mode(this : IOfflineFilesShareInfo*, pcachingmode : OFFLINEFILES_CACHING_MODE*) : HRESULT
+    @lpVtbl.value.get_share_caching_mode.call(this, pcachingmode)
+  end
+  def is_share_dfs_junction(this : IOfflineFilesShareInfo*, pbisdfsjunction : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_share_dfs_junction.call(this, pbisdfsjunction)
+  end
+end
+struct LibWin32::IOfflineFilesSuspend
+  def query_interface(this : IOfflineFilesSuspend*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSuspend*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSuspend*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def suspend_root(this : IOfflineFilesSuspend*, bsuspend : LibC::BOOL) : HRESULT
+    @lpVtbl.value.suspend_root.call(this, bsuspend)
+  end
+end
+struct LibWin32::IOfflineFilesSuspendInfo
+  def query_interface(this : IOfflineFilesSuspendInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSuspendInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSuspendInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_suspended(this : IOfflineFilesSuspendInfo*, pbsuspended : LibC::BOOL*, pbsuspendedroot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_suspended.call(this, pbsuspended, pbsuspendedroot)
+  end
+end
+struct LibWin32::IOfflineFilesSetting
+  def query_interface(this : IOfflineFilesSetting*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesSetting*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesSetting*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IOfflineFilesSetting*, ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.call(this, ppszname)
+  end
+  def get_value_type(this : IOfflineFilesSetting*, ptype : OFFLINEFILES_SETTING_VALUE_TYPE*) : HRESULT
+    @lpVtbl.value.get_value_type.call(this, ptype)
+  end
+  def get_preference(this : IOfflineFilesSetting*, pvarvalue : VARIANT*, dwscope : UInt32) : HRESULT
+    @lpVtbl.value.get_preference.call(this, pvarvalue, dwscope)
+  end
+  def get_preference_scope(this : IOfflineFilesSetting*, pdwscope : UInt32*) : HRESULT
+    @lpVtbl.value.get_preference_scope.call(this, pdwscope)
+  end
+  def set_preference(this : IOfflineFilesSetting*, pvarvalue : VARIANT*, dwscope : UInt32) : HRESULT
+    @lpVtbl.value.set_preference.call(this, pvarvalue, dwscope)
+  end
+  def delete_preference(this : IOfflineFilesSetting*, dwscope : UInt32) : HRESULT
+    @lpVtbl.value.delete_preference.call(this, dwscope)
+  end
+  def get_policy(this : IOfflineFilesSetting*, pvarvalue : VARIANT*, dwscope : UInt32) : HRESULT
+    @lpVtbl.value.get_policy.call(this, pvarvalue, dwscope)
+  end
+  def get_policy_scope(this : IOfflineFilesSetting*, pdwscope : UInt32*) : HRESULT
+    @lpVtbl.value.get_policy_scope.call(this, pdwscope)
+  end
+  def get_value(this : IOfflineFilesSetting*, pvarvalue : VARIANT*, pbsetbypolicy : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pvarvalue, pbsetbypolicy)
+  end
+end
+struct LibWin32::IEnumOfflineFilesSettings
+  def query_interface(this : IEnumOfflineFilesSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumOfflineFilesSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumOfflineFilesSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumOfflineFilesSettings*, celt : UInt32, rgelt : IOfflineFilesSetting*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumOfflineFilesSettings*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumOfflineFilesSettings*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumOfflineFilesSettings*, ppenum : IEnumOfflineFilesSettings*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IOfflineFilesCache
+  def query_interface(this : IOfflineFilesCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesCache*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def synchronize(this : IOfflineFilesCache*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, basync : LibC::BOOL, dwsynccontrol : UInt32, pisyncconflicthandler : IOfflineFilesSyncConflictHandler, piprogress : IOfflineFilesSyncProgress, psyncid : Guid*) : HRESULT
+    @lpVtbl.value.synchronize.call(this, hwndparent, rgpszpaths, cpaths, basync, dwsynccontrol, pisyncconflicthandler, piprogress, psyncid)
+  end
+  def delete_items(this : IOfflineFilesCache*, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, dwflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSimpleProgress) : HRESULT
+    @lpVtbl.value.delete_items.call(this, rgpszpaths, cpaths, dwflags, basync, piprogress)
+  end
+  def delete_items_for_user(this : IOfflineFilesCache*, pszuser : LibC::LPWSTR, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, dwflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSimpleProgress) : HRESULT
+    @lpVtbl.value.delete_items_for_user.call(this, pszuser, rgpszpaths, cpaths, dwflags, basync, piprogress)
+  end
+  def pin(this : IOfflineFilesCache*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, bdeep : LibC::BOOL, basync : LibC::BOOL, dwpincontrolflags : UInt32, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.pin.call(this, hwndparent, rgpszpaths, cpaths, bdeep, basync, dwpincontrolflags, piprogress)
+  end
+  def unpin(this : IOfflineFilesCache*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, bdeep : LibC::BOOL, basync : LibC::BOOL, dwpincontrolflags : UInt32, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.unpin.call(this, hwndparent, rgpszpaths, cpaths, bdeep, basync, dwpincontrolflags, piprogress)
+  end
+  def get_encryption_status(this : IOfflineFilesCache*, pbencrypted : LibC::BOOL*, pbpartial : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_encryption_status.call(this, pbencrypted, pbpartial)
+  end
+  def encrypt(this : IOfflineFilesCache*, hwndparent : LibC::HANDLE, bencrypt : LibC::BOOL, dwencryptioncontrolflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.encrypt.call(this, hwndparent, bencrypt, dwencryptioncontrolflags, basync, piprogress)
+  end
+  def find_item(this : IOfflineFilesCache*, pszpath : LibC::LPWSTR, dwqueryflags : UInt32, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.find_item.call(this, pszpath, dwqueryflags, ppitem)
+  end
+  def find_item_ex(this : IOfflineFilesCache*, pszpath : LibC::LPWSTR, pincludefilefilter : IOfflineFilesItemFilter, pincludedirfilter : IOfflineFilesItemFilter, pexcludefilefilter : IOfflineFilesItemFilter, pexcludedirfilter : IOfflineFilesItemFilter, dwqueryflags : UInt32, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.find_item_ex.call(this, pszpath, pincludefilefilter, pincludedirfilter, pexcludefilefilter, pexcludedirfilter, dwqueryflags, ppitem)
+  end
+  def rename_item(this : IOfflineFilesCache*, pszpathoriginal : LibC::LPWSTR, pszpathnew : LibC::LPWSTR, breplaceifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.rename_item.call(this, pszpathoriginal, pszpathnew, breplaceifexists)
+  end
+  def get_location(this : IOfflineFilesCache*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_location.call(this, ppszpath)
+  end
+  def get_disk_space_information(this : IOfflineFilesCache*, pcbvolumetotal : UInt64*, pcblimit : UInt64*, pcbused : UInt64*, pcbunpinnedlimit : UInt64*, pcbunpinnedused : UInt64*) : HRESULT
+    @lpVtbl.value.get_disk_space_information.call(this, pcbvolumetotal, pcblimit, pcbused, pcbunpinnedlimit, pcbunpinnedused)
+  end
+  def set_disk_space_limits(this : IOfflineFilesCache*, cblimit : UInt64, cbunpinnedlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_disk_space_limits.call(this, cblimit, cbunpinnedlimit)
+  end
+  def process_admin_pin_policy(this : IOfflineFilesCache*, ppinprogress : IOfflineFilesSyncProgress, punpinprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.process_admin_pin_policy.call(this, ppinprogress, punpinprogress)
+  end
+  def get_setting_object(this : IOfflineFilesCache*, pszsettingname : LibC::LPWSTR, ppsetting : IOfflineFilesSetting*) : HRESULT
+    @lpVtbl.value.get_setting_object.call(this, pszsettingname, ppsetting)
+  end
+  def enum_setting_objects(this : IOfflineFilesCache*, ppenum : IEnumOfflineFilesSettings*) : HRESULT
+    @lpVtbl.value.enum_setting_objects.call(this, ppenum)
+  end
+  def is_path_cacheable(this : IOfflineFilesCache*, pszpath : LibC::LPWSTR, pbcacheable : LibC::BOOL*, psharecachingmode : OFFLINEFILES_CACHING_MODE*) : HRESULT
+    @lpVtbl.value.is_path_cacheable.call(this, pszpath, pbcacheable, psharecachingmode)
+  end
+end
+struct LibWin32::IOfflineFilesCache2
+  def query_interface(this : IOfflineFilesCache2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOfflineFilesCache2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOfflineFilesCache2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def synchronize(this : IOfflineFilesCache2*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, basync : LibC::BOOL, dwsynccontrol : UInt32, pisyncconflicthandler : IOfflineFilesSyncConflictHandler, piprogress : IOfflineFilesSyncProgress, psyncid : Guid*) : HRESULT
+    @lpVtbl.value.synchronize.call(this, hwndparent, rgpszpaths, cpaths, basync, dwsynccontrol, pisyncconflicthandler, piprogress, psyncid)
+  end
+  def delete_items(this : IOfflineFilesCache2*, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, dwflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSimpleProgress) : HRESULT
+    @lpVtbl.value.delete_items.call(this, rgpszpaths, cpaths, dwflags, basync, piprogress)
+  end
+  def delete_items_for_user(this : IOfflineFilesCache2*, pszuser : LibC::LPWSTR, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, dwflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSimpleProgress) : HRESULT
+    @lpVtbl.value.delete_items_for_user.call(this, pszuser, rgpszpaths, cpaths, dwflags, basync, piprogress)
+  end
+  def pin(this : IOfflineFilesCache2*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, bdeep : LibC::BOOL, basync : LibC::BOOL, dwpincontrolflags : UInt32, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.pin.call(this, hwndparent, rgpszpaths, cpaths, bdeep, basync, dwpincontrolflags, piprogress)
+  end
+  def unpin(this : IOfflineFilesCache2*, hwndparent : LibC::HANDLE, rgpszpaths : LibC::LPWSTR*, cpaths : UInt32, bdeep : LibC::BOOL, basync : LibC::BOOL, dwpincontrolflags : UInt32, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.unpin.call(this, hwndparent, rgpszpaths, cpaths, bdeep, basync, dwpincontrolflags, piprogress)
+  end
+  def get_encryption_status(this : IOfflineFilesCache2*, pbencrypted : LibC::BOOL*, pbpartial : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_encryption_status.call(this, pbencrypted, pbpartial)
+  end
+  def encrypt(this : IOfflineFilesCache2*, hwndparent : LibC::HANDLE, bencrypt : LibC::BOOL, dwencryptioncontrolflags : UInt32, basync : LibC::BOOL, piprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.encrypt.call(this, hwndparent, bencrypt, dwencryptioncontrolflags, basync, piprogress)
+  end
+  def find_item(this : IOfflineFilesCache2*, pszpath : LibC::LPWSTR, dwqueryflags : UInt32, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.find_item.call(this, pszpath, dwqueryflags, ppitem)
+  end
+  def find_item_ex(this : IOfflineFilesCache2*, pszpath : LibC::LPWSTR, pincludefilefilter : IOfflineFilesItemFilter, pincludedirfilter : IOfflineFilesItemFilter, pexcludefilefilter : IOfflineFilesItemFilter, pexcludedirfilter : IOfflineFilesItemFilter, dwqueryflags : UInt32, ppitem : IOfflineFilesItem*) : HRESULT
+    @lpVtbl.value.find_item_ex.call(this, pszpath, pincludefilefilter, pincludedirfilter, pexcludefilefilter, pexcludedirfilter, dwqueryflags, ppitem)
+  end
+  def rename_item(this : IOfflineFilesCache2*, pszpathoriginal : LibC::LPWSTR, pszpathnew : LibC::LPWSTR, breplaceifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.rename_item.call(this, pszpathoriginal, pszpathnew, breplaceifexists)
+  end
+  def get_location(this : IOfflineFilesCache2*, ppszpath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_location.call(this, ppszpath)
+  end
+  def get_disk_space_information(this : IOfflineFilesCache2*, pcbvolumetotal : UInt64*, pcblimit : UInt64*, pcbused : UInt64*, pcbunpinnedlimit : UInt64*, pcbunpinnedused : UInt64*) : HRESULT
+    @lpVtbl.value.get_disk_space_information.call(this, pcbvolumetotal, pcblimit, pcbused, pcbunpinnedlimit, pcbunpinnedused)
+  end
+  def set_disk_space_limits(this : IOfflineFilesCache2*, cblimit : UInt64, cbunpinnedlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_disk_space_limits.call(this, cblimit, cbunpinnedlimit)
+  end
+  def process_admin_pin_policy(this : IOfflineFilesCache2*, ppinprogress : IOfflineFilesSyncProgress, punpinprogress : IOfflineFilesSyncProgress) : HRESULT
+    @lpVtbl.value.process_admin_pin_policy.call(this, ppinprogress, punpinprogress)
+  end
+  def get_setting_object(this : IOfflineFilesCache2*, pszsettingname : LibC::LPWSTR, ppsetting : IOfflineFilesSetting*) : HRESULT
+    @lpVtbl.value.get_setting_object.call(this, pszsettingname, ppsetting)
+  end
+  def enum_setting_objects(this : IOfflineFilesCache2*, ppenum : IEnumOfflineFilesSettings*) : HRESULT
+    @lpVtbl.value.enum_setting_objects.call(this, ppenum)
+  end
+  def is_path_cacheable(this : IOfflineFilesCache2*, pszpath : LibC::LPWSTR, pbcacheable : LibC::BOOL*, psharecachingmode : OFFLINEFILES_CACHING_MODE*) : HRESULT
+    @lpVtbl.value.is_path_cacheable.call(this, pszpath, pbcacheable, psharecachingmode)
+  end
+  def rename_item_ex(this : IOfflineFilesCache2*, pszpathoriginal : LibC::LPWSTR, pszpathnew : LibC::LPWSTR, breplaceifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.rename_item_ex.call(this, pszpathoriginal, pszpathnew, breplaceifexists)
+  end
 end

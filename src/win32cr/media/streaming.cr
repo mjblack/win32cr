@@ -127,3 +127,88 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IMFDeviceTransform
+  def query_interface(this : IMFDeviceTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDeviceTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDeviceTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_transform(this : IMFDeviceTransform*, pattributes : IMFAttributes) : HRESULT
+    @lpVtbl.value.initialize_transform.call(this, pattributes)
+  end
+  def get_input_available_type(this : IMFDeviceTransform*, dwinputstreamid : UInt32, dwtypeindex : UInt32, pmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_available_type.call(this, dwinputstreamid, dwtypeindex, pmediatype)
+  end
+  def get_input_current_type(this : IMFDeviceTransform*, dwinputstreamid : UInt32, pmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_current_type.call(this, dwinputstreamid, pmediatype)
+  end
+  def get_input_stream_attributes(this : IMFDeviceTransform*, dwinputstreamid : UInt32, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_input_stream_attributes.call(this, dwinputstreamid, ppattributes)
+  end
+  def get_output_available_type(this : IMFDeviceTransform*, dwoutputstreamid : UInt32, dwtypeindex : UInt32, pmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_available_type.call(this, dwoutputstreamid, dwtypeindex, pmediatype)
+  end
+  def get_output_current_type(this : IMFDeviceTransform*, dwoutputstreamid : UInt32, pmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_output_current_type.call(this, dwoutputstreamid, pmediatype)
+  end
+  def get_output_stream_attributes(this : IMFDeviceTransform*, dwoutputstreamid : UInt32, ppattributes : IMFAttributes*) : HRESULT
+    @lpVtbl.value.get_output_stream_attributes.call(this, dwoutputstreamid, ppattributes)
+  end
+  def get_stream_count(this : IMFDeviceTransform*, pcinputstreams : UInt32*, pcoutputstreams : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_count.call(this, pcinputstreams, pcoutputstreams)
+  end
+  def get_stream_i_ds(this : IMFDeviceTransform*, dwinputidarraysize : UInt32, pdwinputstreamids : UInt32*, dwoutputidarraysize : UInt32, pdwoutputstreamids : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_i_ds.call(this, dwinputidarraysize, pdwinputstreamids, dwoutputidarraysize, pdwoutputstreamids)
+  end
+  def process_event(this : IMFDeviceTransform*, dwinputstreamid : UInt32, pevent : IMFMediaEvent) : HRESULT
+    @lpVtbl.value.process_event.call(this, dwinputstreamid, pevent)
+  end
+  def process_input(this : IMFDeviceTransform*, dwinputstreamid : UInt32, psample : IMFSample, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.process_input.call(this, dwinputstreamid, psample, dwflags)
+  end
+  def process_message(this : IMFDeviceTransform*, emessage : MFT_MESSAGE_TYPE, ulparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.process_message.call(this, emessage, ulparam)
+  end
+  def process_output(this : IMFDeviceTransform*, dwflags : UInt32, coutputbuffercount : UInt32, poutputsample : MFT_OUTPUT_DATA_BUFFER*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.process_output.call(this, dwflags, coutputbuffercount, poutputsample, pdwstatus)
+  end
+  def set_input_stream_state(this : IMFDeviceTransform*, dwstreamid : UInt32, pmediatype : IMFMediaType, value : DeviceStreamState, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_input_stream_state.call(this, dwstreamid, pmediatype, value, dwflags)
+  end
+  def get_input_stream_state(this : IMFDeviceTransform*, dwstreamid : UInt32, value : DeviceStreamState*) : HRESULT
+    @lpVtbl.value.get_input_stream_state.call(this, dwstreamid, value)
+  end
+  def set_output_stream_state(this : IMFDeviceTransform*, dwstreamid : UInt32, pmediatype : IMFMediaType, value : DeviceStreamState, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_output_stream_state.call(this, dwstreamid, pmediatype, value, dwflags)
+  end
+  def get_output_stream_state(this : IMFDeviceTransform*, dwstreamid : UInt32, value : DeviceStreamState*) : HRESULT
+    @lpVtbl.value.get_output_stream_state.call(this, dwstreamid, value)
+  end
+  def get_input_stream_preferred_state(this : IMFDeviceTransform*, dwstreamid : UInt32, value : DeviceStreamState*, ppmediatype : IMFMediaType*) : HRESULT
+    @lpVtbl.value.get_input_stream_preferred_state.call(this, dwstreamid, value, ppmediatype)
+  end
+  def flush_input_stream(this : IMFDeviceTransform*, dwstreamindex : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.flush_input_stream.call(this, dwstreamindex, dwflags)
+  end
+  def flush_output_stream(this : IMFDeviceTransform*, dwstreamindex : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.flush_output_stream.call(this, dwstreamindex, dwflags)
+  end
+end
+struct LibWin32::IMFDeviceTransformCallback
+  def query_interface(this : IMFDeviceTransformCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMFDeviceTransformCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMFDeviceTransformCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_buffer_sent(this : IMFDeviceTransformCallback*, pcallbackattributes : IMFAttributes, pinid : UInt32) : HRESULT
+    @lpVtbl.value.on_buffer_sent.call(this, pcallbackattributes, pinid)
+  end
+end

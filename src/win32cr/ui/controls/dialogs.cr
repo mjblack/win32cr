@@ -716,3 +716,43 @@ lib LibWin32
   # Params # param0 : PAGESETUPDLGW* [In]
   fun PageSetupDlgW(param0 : PAGESETUPDLGW*) : LibC::BOOL
 end
+struct LibWin32::IPrintDialogCallback
+  def query_interface(this : IPrintDialogCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintDialogCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintDialogCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def init_done(this : IPrintDialogCallback*) : HRESULT
+    @lpVtbl.value.init_done.call(this)
+  end
+  def selection_change(this : IPrintDialogCallback*) : HRESULT
+    @lpVtbl.value.selection_change.call(this)
+  end
+  def handle_message(this : IPrintDialogCallback*, hdlg : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, presult : LRESULT*) : HRESULT
+    @lpVtbl.value.handle_message.call(this, hdlg, umsg, wparam, lparam, presult)
+  end
+end
+struct LibWin32::IPrintDialogServices
+  def query_interface(this : IPrintDialogServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrintDialogServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrintDialogServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_dev_mode(this : IPrintDialogServices*, pdevmode : DEVMODEA*, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_dev_mode.call(this, pdevmode, pcbsize)
+  end
+  def get_current_printer_name(this : IPrintDialogServices*, pprintername : Char*, pcchsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_printer_name.call(this, pprintername, pcchsize)
+  end
+  def get_current_port_name(this : IPrintDialogServices*, pportname : Char*, pcchsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_port_name.call(this, pportname, pcchsize)
+  end
+end

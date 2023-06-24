@@ -5108,7 +5108,7 @@ lib LibWin32
   fun BCryptCloseAlgorithmProvider(halgorithm : BCRYPT_ALG_HANDLE, dwflags : UInt32) : NTSTATUS
 
   # Params # pvbuffer : Void* [In]
-  fun BCryptFreeBuffer(pvbuffer : Void*)
+  fun BCryptFreeBuffer(pvbuffer : Void*) : Void
 
   # Params # halgorithm : BCRYPT_ALG_HANDLE [In],phkey : BCRYPT_KEY_HANDLE* [In],pbkeyobject : UInt8* [In],cbkeyobject : UInt32 [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In],dwflags : UInt32 [In]
   fun BCryptGenerateSymmetricKey(halgorithm : BCRYPT_ALG_HANDLE, phkey : BCRYPT_KEY_HANDLE*, pbkeyobject : UInt8*, cbkeyobject : UInt32, pbsecret : UInt8*, cbsecret : UInt32, dwflags : UInt32) : NTSTATUS
@@ -5599,7 +5599,7 @@ lib LibWin32
   fun CertAddStoreToCollection(hcollectionstore : Void*, hsiblingstore : Void*, dwupdateflags : UInt32, dwpriority : UInt32) : LibC::BOOL
 
   # Params # hcollectionstore : Void* [In],hsiblingstore : Void* [In]
-  fun CertRemoveStoreFromCollection(hcollectionstore : Void*, hsiblingstore : Void*)
+  fun CertRemoveStoreFromCollection(hcollectionstore : Void*, hsiblingstore : Void*) : Void
 
   # Params # hcertstore : Void* [In],dwflags : CERT_CONTROL_STORE_FLAGS [In],dwctrltype : UInt32 [In],pvctrlpara : Void* [In]
   fun CertControlStore(hcertstore : Void*, dwflags : CERT_CONTROL_STORE_FLAGS, dwctrltype : UInt32, pvctrlpara : Void*) : LibC::BOOL
@@ -5877,7 +5877,7 @@ lib LibWin32
   fun CryptMemRealloc(pv : Void*, cbsize : UInt32) : Void*
 
   # Params # pv : Void* [In]
-  fun CryptMemFree(pv : Void*)
+  fun CryptMemFree(pv : Void*) : Void
 
   # Params # dwflags : UInt32 [In],phasync : HCRYPTASYNC* [In]
   fun CryptCreateAsyncHandle(dwflags : UInt32, phasync : HCRYPTASYNC*) : LibC::BOOL
@@ -5925,7 +5925,7 @@ lib LibWin32
   fun CertCreateCertificateChainEngine(pconfig : CERT_CHAIN_ENGINE_CONFIG*, phchainengine : HCERTCHAINENGINE*) : LibC::BOOL
 
   # Params # hchainengine : HCERTCHAINENGINE [In]
-  fun CertFreeCertificateChainEngine(hchainengine : HCERTCHAINENGINE)
+  fun CertFreeCertificateChainEngine(hchainengine : HCERTCHAINENGINE) : Void
 
   # Params # hchainengine : HCERTCHAINENGINE [In]
   fun CertResyncCertificateChainEngine(hchainengine : HCERTCHAINENGINE) : LibC::BOOL
@@ -5934,7 +5934,7 @@ lib LibWin32
   fun CertGetCertificateChain(hchainengine : HCERTCHAINENGINE, pcertcontext : CERT_CONTEXT*, ptime : FILETIME*, hadditionalstore : Void*, pchainpara : CERT_CHAIN_PARA*, dwflags : UInt32, pvreserved : Void*, ppchaincontext : CERT_CHAIN_CONTEXT**) : LibC::BOOL
 
   # Params # pchaincontext : CERT_CHAIN_CONTEXT* [In]
-  fun CertFreeCertificateChain(pchaincontext : CERT_CHAIN_CONTEXT*)
+  fun CertFreeCertificateChain(pchaincontext : CERT_CHAIN_CONTEXT*) : Void
 
   # Params # pchaincontext : CERT_CHAIN_CONTEXT* [In]
   fun CertDuplicateCertificateChain(pchaincontext : CERT_CHAIN_CONTEXT*) : CERT_CHAIN_CONTEXT*
@@ -5976,19 +5976,19 @@ lib LibWin32
   fun CertOpenServerOcspResponse(pchaincontext : CERT_CHAIN_CONTEXT*, dwflags : UInt32, popenpara : CERT_SERVER_OCSP_RESPONSE_OPEN_PARA*) : Void*
 
   # Params # hserverocspresponse : Void* [In]
-  fun CertAddRefServerOcspResponse(hserverocspresponse : Void*)
+  fun CertAddRefServerOcspResponse(hserverocspresponse : Void*) : Void
 
   # Params # hserverocspresponse : Void* [In],dwflags : UInt32 [In]
-  fun CertCloseServerOcspResponse(hserverocspresponse : Void*, dwflags : UInt32)
+  fun CertCloseServerOcspResponse(hserverocspresponse : Void*, dwflags : UInt32) : Void
 
   # Params # hserverocspresponse : Void* [In],dwflags : UInt32 [In],pvreserved : Void* [In]
   fun CertGetServerOcspResponseContext(hserverocspresponse : Void*, dwflags : UInt32, pvreserved : Void*) : CERT_SERVER_OCSP_RESPONSE_CONTEXT*
 
   # Params # pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT* [In]
-  fun CertAddRefServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*)
+  fun CertAddRefServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
 
   # Params # pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT* [In]
-  fun CertFreeServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*)
+  fun CertFreeServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
 
   # Params # pcertcontext : CERT_CONTEXT* [In],lpszlogoorbiometrictype : PSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],dwflags : UInt32 [In],pvreserved : Void* [In],ppbdata : UInt8** [In],pcbdata : UInt32* [In],ppwszmimetype : LibC::LPWSTR* [In]
   fun CertRetrieveLogoOrBiometricInfo(pcertcontext : CERT_CONTEXT*, lpszlogoorbiometrictype : PSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, dwflags : UInt32, pvreserved : Void*, ppbdata : UInt8**, pcbdata : UInt32*, ppwszmimetype : LibC::LPWSTR*) : LibC::BOOL
@@ -5997,7 +5997,7 @@ lib LibWin32
   fun CertSelectCertificateChains(pselectioncontext : Guid*, dwflags : UInt32, pchainparameters : CERT_SELECT_CHAIN_PARA*, ccriteria : UInt32, rgpcriteria : CERT_SELECT_CRITERIA*, hstore : Void*, pcselection : UInt32*, pprgpselection : CERT_CHAIN_CONTEXT***) : LibC::BOOL
 
   # Params # prgpselection : CERT_CHAIN_CONTEXT** [In]
-  fun CertFreeCertificateChainList(prgpselection : CERT_CHAIN_CONTEXT**)
+  fun CertFreeCertificateChainList(prgpselection : CERT_CHAIN_CONTEXT**) : Void
 
   # Params # wszurl : LibC::LPWSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],pszhashid : PSTR [In],ppara : CRYPT_TIMESTAMP_PARA* [In],pbdata : UInt8* [In],cbdata : UInt32 [In],pptscontext : CRYPT_TIMESTAMP_CONTEXT** [In],pptssigner : CERT_CONTEXT** [In],phstore : Void** [In]
   fun CryptRetrieveTimeStamp(wszurl : LibC::LPWSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, pszhashid : PSTR, ppara : CRYPT_TIMESTAMP_PARA*, pbdata : UInt8*, cbdata : UInt32, pptscontext : CRYPT_TIMESTAMP_CONTEXT**, pptssigner : CERT_CONTEXT**, phstore : Void**) : LibC::BOOL
@@ -6166,4 +6166,325 @@ lib LibWin32
 
   # Params # dwparamtype : UInt32 [In],pparam : Void* [In],pcbtoken : UInt32* [In],pptoken : UInt8** [In]
   fun GetBrowserToken(dwparamtype : UInt32, pparam : Void*, pcbtoken : UInt32*, pptoken : UInt8**) : HRESULT
+end
+struct LibWin32::ICertSrvSetupKeyInformation
+  def query_interface(this : ICertSrvSetupKeyInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICertSrvSetupKeyInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICertSrvSetupKeyInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICertSrvSetupKeyInformation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICertSrvSetupKeyInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICertSrvSetupKeyInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICertSrvSetupKeyInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_provider_name(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_name.call(this, pval)
+  end
+  def put_provider_name(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_provider_name.call(this, bstrval)
+  end
+  def get_length(this : ICertSrvSetupKeyInformation*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_length.call(this, pval)
+  end
+  def put_length(this : ICertSrvSetupKeyInformation*, lval : Int32) : HRESULT
+    @lpVtbl.value.put_length.call(this, lval)
+  end
+  def get_existing(this : ICertSrvSetupKeyInformation*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_existing.call(this, pval)
+  end
+  def put_existing(this : ICertSrvSetupKeyInformation*, bval : Int16) : HRESULT
+    @lpVtbl.value.put_existing.call(this, bval)
+  end
+  def get_container_name(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_container_name.call(this, pval)
+  end
+  def put_container_name(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_container_name.call(this, bstrval)
+  end
+  def get_hash_algorithm(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_hash_algorithm.call(this, pval)
+  end
+  def put_hash_algorithm(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_hash_algorithm.call(this, bstrval)
+  end
+  def get_existing_ca_certificate(this : ICertSrvSetupKeyInformation*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_existing_ca_certificate.call(this, pval)
+  end
+  def put_existing_ca_certificate(this : ICertSrvSetupKeyInformation*, varval : VARIANT) : HRESULT
+    @lpVtbl.value.put_existing_ca_certificate.call(this, varval)
+  end
+end
+struct LibWin32::ICertSrvSetupKeyInformationCollection
+  def query_interface(this : ICertSrvSetupKeyInformationCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICertSrvSetupKeyInformationCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICertSrvSetupKeyInformationCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICertSrvSetupKeyInformationCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICertSrvSetupKeyInformationCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICertSrvSetupKeyInformationCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICertSrvSetupKeyInformationCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : ICertSrvSetupKeyInformationCollection*, ppval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppval)
+  end
+  def get_item(this : ICertSrvSetupKeyInformationCollection*, index : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pval)
+  end
+  def get_count(this : ICertSrvSetupKeyInformationCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+  def add(this : ICertSrvSetupKeyInformationCollection*, pikeyinformation : ICertSrvSetupKeyInformation) : HRESULT
+    @lpVtbl.value.add.call(this, pikeyinformation)
+  end
+end
+struct LibWin32::ICertSrvSetup
+  def query_interface(this : ICertSrvSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICertSrvSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICertSrvSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICertSrvSetup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICertSrvSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICertSrvSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICertSrvSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_ca_error_id(this : ICertSrvSetup*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_ca_error_id.call(this, pval)
+  end
+  def get_ca_error_string(this : ICertSrvSetup*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_ca_error_string.call(this, pval)
+  end
+  def initialize_defaults(this : ICertSrvSetup*, bserver : Int16, bclient : Int16) : HRESULT
+    @lpVtbl.value.initialize_defaults.call(this, bserver, bclient)
+  end
+  def get_ca_setup_property(this : ICertSrvSetup*, propertyid : CASetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ca_setup_property.call(this, propertyid, ppropertyvalue)
+  end
+  def set_ca_setup_property(this : ICertSrvSetup*, propertyid : CASetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_ca_setup_property.call(this, propertyid, ppropertyvalue)
+  end
+  def is_property_editable(this : ICertSrvSetup*, propertyid : CASetupProperty, pbeditable : Int16*) : HRESULT
+    @lpVtbl.value.is_property_editable.call(this, propertyid, pbeditable)
+  end
+  def get_supported_ca_types(this : ICertSrvSetup*, pcatypes : VARIANT*) : HRESULT
+    @lpVtbl.value.get_supported_ca_types.call(this, pcatypes)
+  end
+  def get_provider_name_list(this : ICertSrvSetup*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_provider_name_list.call(this, pval)
+  end
+  def get_key_length_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_key_length_list.call(this, bstrprovidername, pval)
+  end
+  def get_hash_algorithm_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_hash_algorithm_list.call(this, bstrprovidername, pval)
+  end
+  def get_private_key_container_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private_key_container_list.call(this, bstrprovidername, pval)
+  end
+  def get_existing_ca_certificates(this : ICertSrvSetup*, ppval : ICertSrvSetupKeyInformationCollection*) : HRESULT
+    @lpVtbl.value.get_existing_ca_certificates.call(this, ppval)
+  end
+  def ca_import_pfx(this : ICertSrvSetup*, bstrfilename : UInt8*, bstrpasswd : UInt8*, boverwriteexistingkey : Int16, ppval : ICertSrvSetupKeyInformation*) : HRESULT
+    @lpVtbl.value.ca_import_pfx.call(this, bstrfilename, bstrpasswd, boverwriteexistingkey, ppval)
+  end
+  def set_ca_distinguished_name(this : ICertSrvSetup*, bstrcadn : UInt8*, bignoreunicode : Int16, boverwriteexistingkey : Int16, boverwriteexistingcainds : Int16) : HRESULT
+    @lpVtbl.value.set_ca_distinguished_name.call(this, bstrcadn, bignoreunicode, boverwriteexistingkey, boverwriteexistingcainds)
+  end
+  def set_database_information(this : ICertSrvSetup*, bstrdbdirectory : UInt8*, bstrlogdirectory : UInt8*, bstrsharedfolder : UInt8*, bforceoverwrite : Int16) : HRESULT
+    @lpVtbl.value.set_database_information.call(this, bstrdbdirectory, bstrlogdirectory, bstrsharedfolder, bforceoverwrite)
+  end
+  def set_parent_ca_information(this : ICertSrvSetup*, bstrcaconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.set_parent_ca_information.call(this, bstrcaconfiguration)
+  end
+  def set_web_ca_information(this : ICertSrvSetup*, bstrcaconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.set_web_ca_information.call(this, bstrcaconfiguration)
+  end
+  def install(this : ICertSrvSetup*) : HRESULT
+    @lpVtbl.value.install.call(this)
+  end
+  def pre_un_install(this : ICertSrvSetup*, bclientonly : Int16) : HRESULT
+    @lpVtbl.value.pre_un_install.call(this, bclientonly)
+  end
+  def post_un_install(this : ICertSrvSetup*) : HRESULT
+    @lpVtbl.value.post_un_install.call(this)
+  end
+end
+struct LibWin32::IMSCEPSetup
+  def query_interface(this : IMSCEPSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMSCEPSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMSCEPSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMSCEPSetup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMSCEPSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMSCEPSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMSCEPSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_mscep_error_id(this : IMSCEPSetup*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_mscep_error_id.call(this, pval)
+  end
+  def get_mscep_error_string(this : IMSCEPSetup*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_mscep_error_string.call(this, pval)
+  end
+  def initialize_defaults(this : IMSCEPSetup*) : HRESULT
+    @lpVtbl.value.initialize_defaults.call(this)
+  end
+  def get_mscep_setup_property(this : IMSCEPSetup*, propertyid : MSCEPSetupProperty, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_mscep_setup_property.call(this, propertyid, pval)
+  end
+  def set_mscep_setup_property(this : IMSCEPSetup*, propertyid : MSCEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_mscep_setup_property.call(this, propertyid, ppropertyvalue)
+  end
+  def set_account_information(this : IMSCEPSetup*, bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_account_information.call(this, bstrusername, bstrpassword)
+  end
+  def is_mscep_store_empty(this : IMSCEPSetup*, pbempty : Int16*) : HRESULT
+    @lpVtbl.value.is_mscep_store_empty.call(this, pbempty)
+  end
+  def get_provider_name_list(this : IMSCEPSetup*, bexchange : Int16, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_provider_name_list.call(this, bexchange, pval)
+  end
+  def get_key_length_list(this : IMSCEPSetup*, bexchange : Int16, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_key_length_list.call(this, bexchange, bstrprovidername, pval)
+  end
+  def install(this : IMSCEPSetup*) : HRESULT
+    @lpVtbl.value.install.call(this)
+  end
+  def pre_un_install(this : IMSCEPSetup*) : HRESULT
+    @lpVtbl.value.pre_un_install.call(this)
+  end
+  def post_un_install(this : IMSCEPSetup*) : HRESULT
+    @lpVtbl.value.post_un_install.call(this)
+  end
+end
+struct LibWin32::ICertificateEnrollmentServerSetup
+  def query_interface(this : ICertificateEnrollmentServerSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICertificateEnrollmentServerSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICertificateEnrollmentServerSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICertificateEnrollmentServerSetup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICertificateEnrollmentServerSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICertificateEnrollmentServerSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICertificateEnrollmentServerSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_error_string(this : ICertificateEnrollmentServerSetup*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_string.call(this, pval)
+  end
+  def initialize_install_defaults(this : ICertificateEnrollmentServerSetup*) : HRESULT
+    @lpVtbl.value.initialize_install_defaults.call(this)
+  end
+  def get_property(this : ICertificateEnrollmentServerSetup*, propertyid : CESSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, ppropertyvalue)
+  end
+  def set_property(this : ICertificateEnrollmentServerSetup*, propertyid : CESSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, ppropertyvalue)
+  end
+  def set_application_pool_credentials(this : ICertificateEnrollmentServerSetup*, bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_application_pool_credentials.call(this, bstrusername, bstrpassword)
+  end
+  def install(this : ICertificateEnrollmentServerSetup*) : HRESULT
+    @lpVtbl.value.install.call(this)
+  end
+  def un_install(this : ICertificateEnrollmentServerSetup*, pcaconfig : VARIANT*, pauthentication : VARIANT*) : HRESULT
+    @lpVtbl.value.un_install.call(this, pcaconfig, pauthentication)
+  end
+end
+struct LibWin32::ICertificateEnrollmentPolicyServerSetup
+  def query_interface(this : ICertificateEnrollmentPolicyServerSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICertificateEnrollmentPolicyServerSetup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICertificateEnrollmentPolicyServerSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICertificateEnrollmentPolicyServerSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICertificateEnrollmentPolicyServerSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_error_string(this : ICertificateEnrollmentPolicyServerSetup*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_string.call(this, pval)
+  end
+  def initialize_install_defaults(this : ICertificateEnrollmentPolicyServerSetup*) : HRESULT
+    @lpVtbl.value.initialize_install_defaults.call(this)
+  end
+  def get_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyid : CEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, ppropertyvalue)
+  end
+  def set_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyid : CEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, ppropertyvalue)
+  end
+  def install(this : ICertificateEnrollmentPolicyServerSetup*) : HRESULT
+    @lpVtbl.value.install.call(this)
+  end
+  def un_install(this : ICertificateEnrollmentPolicyServerSetup*, pauthkeybasedrenewal : VARIANT*) : HRESULT
+    @lpVtbl.value.un_install.call(this, pauthkeybasedrenewal)
+  end
 end

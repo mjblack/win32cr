@@ -904,433 +904,433 @@ lib LibWin32
   fun wglSwapLayerBuffers(param0 : HDC, param1 : UInt32) : LibC::BOOL
 
   # Params # op : UInt32 [In],value : Float32 [In]
-  fun glAccum(op : UInt32, value : Float32)
+  fun glAccum(op : UInt32, value : Float32) : Void
 
   # Params # func : UInt32 [In],ref : Float32 [In]
-  fun glAlphaFunc(func : UInt32, ref : Float32)
+  fun glAlphaFunc(func : UInt32, ref : Float32) : Void
 
   # Params # n : Int32 [In],textures : UInt32* [In],residences : UInt8* [In]
   fun glAreTexturesResident(n : Int32, textures : UInt32*, residences : UInt8*) : UInt8
 
   # Params # i : Int32 [In]
-  fun glArrayElement(i : Int32)
+  fun glArrayElement(i : Int32) : Void
 
   # Params # mode : UInt32 [In]
-  fun glBegin(mode : UInt32)
+  fun glBegin(mode : UInt32) : Void
 
   # Params # target : UInt32 [In],texture : UInt32 [In]
-  fun glBindTexture(target : UInt32, texture : UInt32)
+  fun glBindTexture(target : UInt32, texture : UInt32) : Void
 
   # Params # width : Int32 [In],height : Int32 [In],xorig : Float32 [In],yorig : Float32 [In],xmove : Float32 [In],ymove : Float32 [In],bitmap : UInt8* [In]
-  fun glBitmap(width : Int32, height : Int32, xorig : Float32, yorig : Float32, xmove : Float32, ymove : Float32, bitmap : UInt8*)
+  fun glBitmap(width : Int32, height : Int32, xorig : Float32, yorig : Float32, xmove : Float32, ymove : Float32, bitmap : UInt8*) : Void
 
   # Params # sfactor : UInt32 [In],dfactor : UInt32 [In]
-  fun glBlendFunc(sfactor : UInt32, dfactor : UInt32)
+  fun glBlendFunc(sfactor : UInt32, dfactor : UInt32) : Void
 
   # Params # list : UInt32 [In]
-  fun glCallList(list : UInt32)
+  fun glCallList(list : UInt32) : Void
 
   # Params # n : Int32 [In],type : UInt32 [In],lists : Void* [In]
-  fun glCallLists(n : Int32, type : UInt32, lists : Void*)
+  fun glCallLists(n : Int32, type : UInt32, lists : Void*) : Void
 
   # Params # mask : UInt32 [In]
-  fun glClear(mask : UInt32)
+  fun glClear(mask : UInt32) : Void
 
   # Params # red : Float32 [In],green : Float32 [In],blue : Float32 [In],alpha : Float32 [In]
-  fun glClearAccum(red : Float32, green : Float32, blue : Float32, alpha : Float32)
+  fun glClearAccum(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
 
   # Params # red : Float32 [In],green : Float32 [In],blue : Float32 [In],alpha : Float32 [In]
-  fun glClearColor(red : Float32, green : Float32, blue : Float32, alpha : Float32)
+  fun glClearColor(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
 
   # Params # depth : Float64 [In]
-  fun glClearDepth(depth : Float64)
+  fun glClearDepth(depth : Float64) : Void
 
   # Params # c : Float32 [In]
-  fun glClearIndex(c : Float32)
+  fun glClearIndex(c : Float32) : Void
 
   # Params # s : Int32 [In]
-  fun glClearStencil(s : Int32)
+  fun glClearStencil(s : Int32) : Void
 
   # Params # plane : UInt32 [In],equation : Float64* [In]
-  fun glClipPlane(plane : UInt32, equation : Float64*)
+  fun glClipPlane(plane : UInt32, equation : Float64*) : Void
 
   # Params # red : Int8 [In],green : Int8 [In],blue : Int8 [In]
-  fun glColor3b(red : Int8, green : Int8, blue : Int8)
+  fun glColor3b(red : Int8, green : Int8, blue : Int8) : Void
 
   # Params # v : Int8* [In]
-  fun glColor3bv(v : Int8*)
+  fun glColor3bv(v : Int8*) : Void
 
   # Params # red : Float64 [In],green : Float64 [In],blue : Float64 [In]
-  fun glColor3d(red : Float64, green : Float64, blue : Float64)
+  fun glColor3d(red : Float64, green : Float64, blue : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glColor3dv(v : Float64*)
+  fun glColor3dv(v : Float64*) : Void
 
   # Params # red : Float32 [In],green : Float32 [In],blue : Float32 [In]
-  fun glColor3f(red : Float32, green : Float32, blue : Float32)
+  fun glColor3f(red : Float32, green : Float32, blue : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glColor3fv(v : Float32*)
+  fun glColor3fv(v : Float32*) : Void
 
   # Params # red : Int32 [In],green : Int32 [In],blue : Int32 [In]
-  fun glColor3i(red : Int32, green : Int32, blue : Int32)
+  fun glColor3i(red : Int32, green : Int32, blue : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glColor3iv(v : Int32*)
+  fun glColor3iv(v : Int32*) : Void
 
   # Params # red : Int16 [In],green : Int16 [In],blue : Int16 [In]
-  fun glColor3s(red : Int16, green : Int16, blue : Int16)
+  fun glColor3s(red : Int16, green : Int16, blue : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glColor3sv(v : Int16*)
+  fun glColor3sv(v : Int16*) : Void
 
   # Params # red : UInt8 [In],green : UInt8 [In],blue : UInt8 [In]
-  fun glColor3ub(red : UInt8, green : UInt8, blue : UInt8)
+  fun glColor3ub(red : UInt8, green : UInt8, blue : UInt8) : Void
 
   # Params # v : UInt8* [In]
-  fun glColor3ubv(v : UInt8*)
+  fun glColor3ubv(v : UInt8*) : Void
 
   # Params # red : UInt32 [In],green : UInt32 [In],blue : UInt32 [In]
-  fun glColor3ui(red : UInt32, green : UInt32, blue : UInt32)
+  fun glColor3ui(red : UInt32, green : UInt32, blue : UInt32) : Void
 
   # Params # v : UInt32* [In]
-  fun glColor3uiv(v : UInt32*)
+  fun glColor3uiv(v : UInt32*) : Void
 
   # Params # red : UInt16 [In],green : UInt16 [In],blue : UInt16 [In]
-  fun glColor3us(red : UInt16, green : UInt16, blue : UInt16)
+  fun glColor3us(red : UInt16, green : UInt16, blue : UInt16) : Void
 
   # Params # v : UInt16* [In]
-  fun glColor3usv(v : UInt16*)
+  fun glColor3usv(v : UInt16*) : Void
 
   # Params # red : Int8 [In],green : Int8 [In],blue : Int8 [In],alpha : Int8 [In]
-  fun glColor4b(red : Int8, green : Int8, blue : Int8, alpha : Int8)
+  fun glColor4b(red : Int8, green : Int8, blue : Int8, alpha : Int8) : Void
 
   # Params # v : Int8* [In]
-  fun glColor4bv(v : Int8*)
+  fun glColor4bv(v : Int8*) : Void
 
   # Params # red : Float64 [In],green : Float64 [In],blue : Float64 [In],alpha : Float64 [In]
-  fun glColor4d(red : Float64, green : Float64, blue : Float64, alpha : Float64)
+  fun glColor4d(red : Float64, green : Float64, blue : Float64, alpha : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glColor4dv(v : Float64*)
+  fun glColor4dv(v : Float64*) : Void
 
   # Params # red : Float32 [In],green : Float32 [In],blue : Float32 [In],alpha : Float32 [In]
-  fun glColor4f(red : Float32, green : Float32, blue : Float32, alpha : Float32)
+  fun glColor4f(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glColor4fv(v : Float32*)
+  fun glColor4fv(v : Float32*) : Void
 
   # Params # red : Int32 [In],green : Int32 [In],blue : Int32 [In],alpha : Int32 [In]
-  fun glColor4i(red : Int32, green : Int32, blue : Int32, alpha : Int32)
+  fun glColor4i(red : Int32, green : Int32, blue : Int32, alpha : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glColor4iv(v : Int32*)
+  fun glColor4iv(v : Int32*) : Void
 
   # Params # red : Int16 [In],green : Int16 [In],blue : Int16 [In],alpha : Int16 [In]
-  fun glColor4s(red : Int16, green : Int16, blue : Int16, alpha : Int16)
+  fun glColor4s(red : Int16, green : Int16, blue : Int16, alpha : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glColor4sv(v : Int16*)
+  fun glColor4sv(v : Int16*) : Void
 
   # Params # red : UInt8 [In],green : UInt8 [In],blue : UInt8 [In],alpha : UInt8 [In]
-  fun glColor4ub(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8)
+  fun glColor4ub(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8) : Void
 
   # Params # v : UInt8* [In]
-  fun glColor4ubv(v : UInt8*)
+  fun glColor4ubv(v : UInt8*) : Void
 
   # Params # red : UInt32 [In],green : UInt32 [In],blue : UInt32 [In],alpha : UInt32 [In]
-  fun glColor4ui(red : UInt32, green : UInt32, blue : UInt32, alpha : UInt32)
+  fun glColor4ui(red : UInt32, green : UInt32, blue : UInt32, alpha : UInt32) : Void
 
   # Params # v : UInt32* [In]
-  fun glColor4uiv(v : UInt32*)
+  fun glColor4uiv(v : UInt32*) : Void
 
   # Params # red : UInt16 [In],green : UInt16 [In],blue : UInt16 [In],alpha : UInt16 [In]
-  fun glColor4us(red : UInt16, green : UInt16, blue : UInt16, alpha : UInt16)
+  fun glColor4us(red : UInt16, green : UInt16, blue : UInt16, alpha : UInt16) : Void
 
   # Params # v : UInt16* [In]
-  fun glColor4usv(v : UInt16*)
+  fun glColor4usv(v : UInt16*) : Void
 
   # Params # red : UInt8 [In],green : UInt8 [In],blue : UInt8 [In],alpha : UInt8 [In]
-  fun glColorMask(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8)
+  fun glColorMask(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8) : Void
 
   # Params # face : UInt32 [In],mode : UInt32 [In]
-  fun glColorMaterial(face : UInt32, mode : UInt32)
+  fun glColorMaterial(face : UInt32, mode : UInt32) : Void
 
   # Params # size : Int32 [In],type : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glColorPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*)
+  fun glColorPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In],type : UInt32 [In]
-  fun glCopyPixels(x : Int32, y : Int32, width : Int32, height : Int32, type : UInt32)
+  fun glCopyPixels(x : Int32, y : Int32, width : Int32, height : Int32, type : UInt32) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],internalformat : UInt32 [In],x : Int32 [In],y : Int32 [In],width : Int32 [In],border : Int32 [In]
-  fun glCopyTexImage1D(target : UInt32, level : Int32, internalformat : UInt32, x : Int32, y : Int32, width : Int32, border : Int32)
+  fun glCopyTexImage1D(target : UInt32, level : Int32, internalformat : UInt32, x : Int32, y : Int32, width : Int32, border : Int32) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],internalformat : UInt32 [In],x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In],border : Int32 [In]
-  fun glCopyTexImage2D(target : UInt32, level : Int32, internalformat : UInt32, x : Int32, y : Int32, width : Int32, height : Int32, border : Int32)
+  fun glCopyTexImage2D(target : UInt32, level : Int32, internalformat : UInt32, x : Int32, y : Int32, width : Int32, height : Int32, border : Int32) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],xoffset : Int32 [In],x : Int32 [In],y : Int32 [In],width : Int32 [In]
-  fun glCopyTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, x : Int32, y : Int32, width : Int32)
+  fun glCopyTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, x : Int32, y : Int32, width : Int32) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],xoffset : Int32 [In],yoffset : Int32 [In],x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In]
-  fun glCopyTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, x : Int32, y : Int32, width : Int32, height : Int32)
+  fun glCopyTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, x : Int32, y : Int32, width : Int32, height : Int32) : Void
 
   # Params # mode : UInt32 [In]
-  fun glCullFace(mode : UInt32)
+  fun glCullFace(mode : UInt32) : Void
 
   # Params # list : UInt32 [In],range : Int32 [In]
-  fun glDeleteLists(list : UInt32, range : Int32)
+  fun glDeleteLists(list : UInt32, range : Int32) : Void
 
   # Params # n : Int32 [In],textures : UInt32* [In]
-  fun glDeleteTextures(n : Int32, textures : UInt32*)
+  fun glDeleteTextures(n : Int32, textures : UInt32*) : Void
 
   # Params # func : UInt32 [In]
-  fun glDepthFunc(func : UInt32)
+  fun glDepthFunc(func : UInt32) : Void
 
   # Params # flag : UInt8 [In]
-  fun glDepthMask(flag : UInt8)
+  fun glDepthMask(flag : UInt8) : Void
 
   # Params # znear : Float64 [In],zfar : Float64 [In]
-  fun glDepthRange(znear : Float64, zfar : Float64)
+  fun glDepthRange(znear : Float64, zfar : Float64) : Void
 
   # Params # cap : UInt32 [In]
-  fun glDisable(cap : UInt32)
+  fun glDisable(cap : UInt32) : Void
 
   # Params # array : UInt32 [In]
-  fun glDisableClientState(array : UInt32)
+  fun glDisableClientState(array : UInt32) : Void
 
   # Params # mode : UInt32 [In],first : Int32 [In],count : Int32 [In]
-  fun glDrawArrays(mode : UInt32, first : Int32, count : Int32)
+  fun glDrawArrays(mode : UInt32, first : Int32, count : Int32) : Void
 
   # Params # mode : UInt32 [In]
-  fun glDrawBuffer(mode : UInt32)
+  fun glDrawBuffer(mode : UInt32) : Void
 
   # Params # mode : UInt32 [In],count : Int32 [In],type : UInt32 [In],indices : Void* [In]
-  fun glDrawElements(mode : UInt32, count : Int32, type : UInt32, indices : Void*)
+  fun glDrawElements(mode : UInt32, count : Int32, type : UInt32, indices : Void*) : Void
 
   # Params # width : Int32 [In],height : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glDrawPixels(width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glDrawPixels(width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # flag : UInt8 [In]
-  fun glEdgeFlag(flag : UInt8)
+  fun glEdgeFlag(flag : UInt8) : Void
 
   # Params # stride : Int32 [In],pointer : Void* [In]
-  fun glEdgeFlagPointer(stride : Int32, pointer : Void*)
+  fun glEdgeFlagPointer(stride : Int32, pointer : Void*) : Void
 
   # Params # flag : UInt8* [In]
-  fun glEdgeFlagv(flag : UInt8*)
+  fun glEdgeFlagv(flag : UInt8*) : Void
 
   # Params # cap : UInt32 [In]
-  fun glEnable(cap : UInt32)
+  fun glEnable(cap : UInt32) : Void
 
   # Params # array : UInt32 [In]
-  fun glEnableClientState(array : UInt32)
+  fun glEnableClientState(array : UInt32) : Void
 
   # Params # 
-  fun glEnd
+  fun glEnd : Void
 
   # Params # 
-  fun glEndList
+  fun glEndList : Void
 
   # Params # u : Float64 [In]
-  fun glEvalCoord1d(u : Float64)
+  fun glEvalCoord1d(u : Float64) : Void
 
   # Params # u : Float64* [In]
-  fun glEvalCoord1dv(u : Float64*)
+  fun glEvalCoord1dv(u : Float64*) : Void
 
   # Params # u : Float32 [In]
-  fun glEvalCoord1f(u : Float32)
+  fun glEvalCoord1f(u : Float32) : Void
 
   # Params # u : Float32* [In]
-  fun glEvalCoord1fv(u : Float32*)
+  fun glEvalCoord1fv(u : Float32*) : Void
 
   # Params # u : Float64 [In],v : Float64 [In]
-  fun glEvalCoord2d(u : Float64, v : Float64)
+  fun glEvalCoord2d(u : Float64, v : Float64) : Void
 
   # Params # u : Float64* [In]
-  fun glEvalCoord2dv(u : Float64*)
+  fun glEvalCoord2dv(u : Float64*) : Void
 
   # Params # u : Float32 [In],v : Float32 [In]
-  fun glEvalCoord2f(u : Float32, v : Float32)
+  fun glEvalCoord2f(u : Float32, v : Float32) : Void
 
   # Params # u : Float32* [In]
-  fun glEvalCoord2fv(u : Float32*)
+  fun glEvalCoord2fv(u : Float32*) : Void
 
   # Params # mode : UInt32 [In],i1 : Int32 [In],i2 : Int32 [In]
-  fun glEvalMesh1(mode : UInt32, i1 : Int32, i2 : Int32)
+  fun glEvalMesh1(mode : UInt32, i1 : Int32, i2 : Int32) : Void
 
   # Params # mode : UInt32 [In],i1 : Int32 [In],i2 : Int32 [In],j1 : Int32 [In],j2 : Int32 [In]
-  fun glEvalMesh2(mode : UInt32, i1 : Int32, i2 : Int32, j1 : Int32, j2 : Int32)
+  fun glEvalMesh2(mode : UInt32, i1 : Int32, i2 : Int32, j1 : Int32, j2 : Int32) : Void
 
   # Params # i : Int32 [In]
-  fun glEvalPoint1(i : Int32)
+  fun glEvalPoint1(i : Int32) : Void
 
   # Params # i : Int32 [In],j : Int32 [In]
-  fun glEvalPoint2(i : Int32, j : Int32)
+  fun glEvalPoint2(i : Int32, j : Int32) : Void
 
   # Params # size : Int32 [In],type : UInt32 [In],buffer : Float32* [In]
-  fun glFeedbackBuffer(size : Int32, type : UInt32, buffer : Float32*)
+  fun glFeedbackBuffer(size : Int32, type : UInt32, buffer : Float32*) : Void
 
   # Params # 
-  fun glFinish
+  fun glFinish : Void
 
   # Params # 
-  fun glFlush
+  fun glFlush : Void
 
   # Params # pname : UInt32 [In],param1 : Float32 [In]
-  fun glFogf(pname : UInt32, param1 : Float32)
+  fun glFogf(pname : UInt32, param1 : Float32) : Void
 
   # Params # pname : UInt32 [In],params : Float32* [In]
-  fun glFogfv(pname : UInt32, params : Float32*)
+  fun glFogfv(pname : UInt32, params : Float32*) : Void
 
   # Params # pname : UInt32 [In],param1 : Int32 [In]
-  fun glFogi(pname : UInt32, param1 : Int32)
+  fun glFogi(pname : UInt32, param1 : Int32) : Void
 
   # Params # pname : UInt32 [In],params : Int32* [In]
-  fun glFogiv(pname : UInt32, params : Int32*)
+  fun glFogiv(pname : UInt32, params : Int32*) : Void
 
   # Params # mode : UInt32 [In]
-  fun glFrontFace(mode : UInt32)
+  fun glFrontFace(mode : UInt32) : Void
 
   # Params # left : Float64 [In],right : Float64 [In],bottom : Float64 [In],top : Float64 [In],znear : Float64 [In],zfar : Float64 [In]
-  fun glFrustum(left : Float64, right : Float64, bottom : Float64, top : Float64, znear : Float64, zfar : Float64)
+  fun glFrustum(left : Float64, right : Float64, bottom : Float64, top : Float64, znear : Float64, zfar : Float64) : Void
 
   # Params # range : Int32 [In]
   fun glGenLists(range : Int32) : UInt32
 
   # Params # n : Int32 [In],textures : UInt32* [In]
-  fun glGenTextures(n : Int32, textures : UInt32*)
+  fun glGenTextures(n : Int32, textures : UInt32*) : Void
 
   # Params # pname : UInt32 [In],params : UInt8* [In]
-  fun glGetBooleanv(pname : UInt32, params : UInt8*)
+  fun glGetBooleanv(pname : UInt32, params : UInt8*) : Void
 
   # Params # plane : UInt32 [In],equation : Float64* [In]
-  fun glGetClipPlane(plane : UInt32, equation : Float64*)
+  fun glGetClipPlane(plane : UInt32, equation : Float64*) : Void
 
   # Params # pname : UInt32 [In],params : Float64* [In]
-  fun glGetDoublev(pname : UInt32, params : Float64*)
+  fun glGetDoublev(pname : UInt32, params : Float64*) : Void
 
   # Params # 
   fun glGetError : UInt32
 
   # Params # pname : UInt32 [In],params : Float32* [In]
-  fun glGetFloatv(pname : UInt32, params : Float32*)
+  fun glGetFloatv(pname : UInt32, params : Float32*) : Void
 
   # Params # pname : UInt32 [In],params : Int32* [In]
-  fun glGetIntegerv(pname : UInt32, params : Int32*)
+  fun glGetIntegerv(pname : UInt32, params : Int32*) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetLightfv(light : UInt32, pname : UInt32, params : Float32*)
+  fun glGetLightfv(light : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetLightiv(light : UInt32, pname : UInt32, params : Int32*)
+  fun glGetLightiv(light : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],query : UInt32 [In],v : Float64* [In]
-  fun glGetMapdv(target : UInt32, query : UInt32, v : Float64*)
+  fun glGetMapdv(target : UInt32, query : UInt32, v : Float64*) : Void
 
   # Params # target : UInt32 [In],query : UInt32 [In],v : Float32* [In]
-  fun glGetMapfv(target : UInt32, query : UInt32, v : Float32*)
+  fun glGetMapfv(target : UInt32, query : UInt32, v : Float32*) : Void
 
   # Params # target : UInt32 [In],query : UInt32 [In],v : Int32* [In]
-  fun glGetMapiv(target : UInt32, query : UInt32, v : Int32*)
+  fun glGetMapiv(target : UInt32, query : UInt32, v : Int32*) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetMaterialfv(face : UInt32, pname : UInt32, params : Float32*)
+  fun glGetMaterialfv(face : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetMaterialiv(face : UInt32, pname : UInt32, params : Int32*)
+  fun glGetMaterialiv(face : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # map : UInt32 [In],values : Float32* [In]
-  fun glGetPixelMapfv(map : UInt32, values : Float32*)
+  fun glGetPixelMapfv(map : UInt32, values : Float32*) : Void
 
   # Params # map : UInt32 [In],values : UInt32* [In]
-  fun glGetPixelMapuiv(map : UInt32, values : UInt32*)
+  fun glGetPixelMapuiv(map : UInt32, values : UInt32*) : Void
 
   # Params # map : UInt32 [In],values : UInt16* [In]
-  fun glGetPixelMapusv(map : UInt32, values : UInt16*)
+  fun glGetPixelMapusv(map : UInt32, values : UInt16*) : Void
 
   # Params # pname : UInt32 [In],params : Void** [In]
-  fun glGetPointerv(pname : UInt32, params : Void**)
+  fun glGetPointerv(pname : UInt32, params : Void**) : Void
 
   # Params # mask : UInt8* [In]
-  fun glGetPolygonStipple(mask : UInt8*)
+  fun glGetPolygonStipple(mask : UInt8*) : Void
 
   # Params # name : UInt32 [In]
   fun glGetString(name : UInt32) : UInt8*
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetTexEnvfv(target : UInt32, pname : UInt32, params : Float32*)
+  fun glGetTexEnvfv(target : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetTexEnviv(target : UInt32, pname : UInt32, params : Int32*)
+  fun glGetTexEnviv(target : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Float64* [In]
-  fun glGetTexGendv(coord : UInt32, pname : UInt32, params : Float64*)
+  fun glGetTexGendv(coord : UInt32, pname : UInt32, params : Float64*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetTexGenfv(coord : UInt32, pname : UInt32, params : Float32*)
+  fun glGetTexGenfv(coord : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetTexGeniv(coord : UInt32, pname : UInt32, params : Int32*)
+  fun glGetTexGeniv(coord : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glGetTexImage(target : UInt32, level : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glGetTexImage(target : UInt32, level : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetTexLevelParameterfv(target : UInt32, level : Int32, pname : UInt32, params : Float32*)
+  fun glGetTexLevelParameterfv(target : UInt32, level : Int32, pname : UInt32, params : Float32*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetTexLevelParameteriv(target : UInt32, level : Int32, pname : UInt32, params : Int32*)
+  fun glGetTexLevelParameteriv(target : UInt32, level : Int32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glGetTexParameterfv(target : UInt32, pname : UInt32, params : Float32*)
+  fun glGetTexParameterfv(target : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glGetTexParameteriv(target : UInt32, pname : UInt32, params : Int32*)
+  fun glGetTexParameteriv(target : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],mode : UInt32 [In]
-  fun glHint(target : UInt32, mode : UInt32)
+  fun glHint(target : UInt32, mode : UInt32) : Void
 
   # Params # mask : UInt32 [In]
-  fun glIndexMask(mask : UInt32)
+  fun glIndexMask(mask : UInt32) : Void
 
   # Params # type : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glIndexPointer(type : UInt32, stride : Int32, pointer : Void*)
+  fun glIndexPointer(type : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # c : Float64 [In]
-  fun glIndexd(c : Float64)
+  fun glIndexd(c : Float64) : Void
 
   # Params # c : Float64* [In]
-  fun glIndexdv(c : Float64*)
+  fun glIndexdv(c : Float64*) : Void
 
   # Params # c : Float32 [In]
-  fun glIndexf(c : Float32)
+  fun glIndexf(c : Float32) : Void
 
   # Params # c : Float32* [In]
-  fun glIndexfv(c : Float32*)
+  fun glIndexfv(c : Float32*) : Void
 
   # Params # c : Int32 [In]
-  fun glIndexi(c : Int32)
+  fun glIndexi(c : Int32) : Void
 
   # Params # c : Int32* [In]
-  fun glIndexiv(c : Int32*)
+  fun glIndexiv(c : Int32*) : Void
 
   # Params # c : Int16 [In]
-  fun glIndexs(c : Int16)
+  fun glIndexs(c : Int16) : Void
 
   # Params # c : Int16* [In]
-  fun glIndexsv(c : Int16*)
+  fun glIndexsv(c : Int16*) : Void
 
   # Params # c : UInt8 [In]
-  fun glIndexub(c : UInt8)
+  fun glIndexub(c : UInt8) : Void
 
   # Params # c : UInt8* [In]
-  fun glIndexubv(c : UInt8*)
+  fun glIndexubv(c : UInt8*) : Void
 
   # Params # 
-  fun glInitNames
+  fun glInitNames : Void
 
   # Params # format : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glInterleavedArrays(format : UInt32, stride : Int32, pointer : Void*)
+  fun glInterleavedArrays(format : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # cap : UInt32 [In]
   fun glIsEnabled(cap : UInt32) : UInt8
@@ -1342,574 +1342,574 @@ lib LibWin32
   fun glIsTexture(texture : UInt32) : UInt8
 
   # Params # pname : UInt32 [In],param1 : Float32 [In]
-  fun glLightModelf(pname : UInt32, param1 : Float32)
+  fun glLightModelf(pname : UInt32, param1 : Float32) : Void
 
   # Params # pname : UInt32 [In],params : Float32* [In]
-  fun glLightModelfv(pname : UInt32, params : Float32*)
+  fun glLightModelfv(pname : UInt32, params : Float32*) : Void
 
   # Params # pname : UInt32 [In],param1 : Int32 [In]
-  fun glLightModeli(pname : UInt32, param1 : Int32)
+  fun glLightModeli(pname : UInt32, param1 : Int32) : Void
 
   # Params # pname : UInt32 [In],params : Int32* [In]
-  fun glLightModeliv(pname : UInt32, params : Int32*)
+  fun glLightModeliv(pname : UInt32, params : Int32*) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],param2 : Float32 [In]
-  fun glLightf(light : UInt32, pname : UInt32, param2 : Float32)
+  fun glLightf(light : UInt32, pname : UInt32, param2 : Float32) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glLightfv(light : UInt32, pname : UInt32, params : Float32*)
+  fun glLightfv(light : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],param2 : Int32 [In]
-  fun glLighti(light : UInt32, pname : UInt32, param2 : Int32)
+  fun glLighti(light : UInt32, pname : UInt32, param2 : Int32) : Void
 
   # Params # light : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glLightiv(light : UInt32, pname : UInt32, params : Int32*)
+  fun glLightiv(light : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # factor : Int32 [In],pattern : UInt16 [In]
-  fun glLineStipple(factor : Int32, pattern : UInt16)
+  fun glLineStipple(factor : Int32, pattern : UInt16) : Void
 
   # Params # width : Float32 [In]
-  fun glLineWidth(width : Float32)
+  fun glLineWidth(width : Float32) : Void
 
   # Params # base : UInt32 [In]
-  fun glListBase(base : UInt32)
+  fun glListBase(base : UInt32) : Void
 
   # Params # 
-  fun glLoadIdentity
+  fun glLoadIdentity : Void
 
   # Params # m : Float64* [In]
-  fun glLoadMatrixd(m : Float64*)
+  fun glLoadMatrixd(m : Float64*) : Void
 
   # Params # m : Float32* [In]
-  fun glLoadMatrixf(m : Float32*)
+  fun glLoadMatrixf(m : Float32*) : Void
 
   # Params # name : UInt32 [In]
-  fun glLoadName(name : UInt32)
+  fun glLoadName(name : UInt32) : Void
 
   # Params # opcode : UInt32 [In]
-  fun glLogicOp(opcode : UInt32)
+  fun glLogicOp(opcode : UInt32) : Void
 
   # Params # target : UInt32 [In],u1 : Float64 [In],u2 : Float64 [In],stride : Int32 [In],order : Int32 [In],points : Float64* [In]
-  fun glMap1d(target : UInt32, u1 : Float64, u2 : Float64, stride : Int32, order : Int32, points : Float64*)
+  fun glMap1d(target : UInt32, u1 : Float64, u2 : Float64, stride : Int32, order : Int32, points : Float64*) : Void
 
   # Params # target : UInt32 [In],u1 : Float32 [In],u2 : Float32 [In],stride : Int32 [In],order : Int32 [In],points : Float32* [In]
-  fun glMap1f(target : UInt32, u1 : Float32, u2 : Float32, stride : Int32, order : Int32, points : Float32*)
+  fun glMap1f(target : UInt32, u1 : Float32, u2 : Float32, stride : Int32, order : Int32, points : Float32*) : Void
 
   # Params # target : UInt32 [In],u1 : Float64 [In],u2 : Float64 [In],ustride : Int32 [In],uorder : Int32 [In],v1 : Float64 [In],v2 : Float64 [In],vstride : Int32 [In],vorder : Int32 [In],points : Float64* [In]
-  fun glMap2d(target : UInt32, u1 : Float64, u2 : Float64, ustride : Int32, uorder : Int32, v1 : Float64, v2 : Float64, vstride : Int32, vorder : Int32, points : Float64*)
+  fun glMap2d(target : UInt32, u1 : Float64, u2 : Float64, ustride : Int32, uorder : Int32, v1 : Float64, v2 : Float64, vstride : Int32, vorder : Int32, points : Float64*) : Void
 
   # Params # target : UInt32 [In],u1 : Float32 [In],u2 : Float32 [In],ustride : Int32 [In],uorder : Int32 [In],v1 : Float32 [In],v2 : Float32 [In],vstride : Int32 [In],vorder : Int32 [In],points : Float32* [In]
-  fun glMap2f(target : UInt32, u1 : Float32, u2 : Float32, ustride : Int32, uorder : Int32, v1 : Float32, v2 : Float32, vstride : Int32, vorder : Int32, points : Float32*)
+  fun glMap2f(target : UInt32, u1 : Float32, u2 : Float32, ustride : Int32, uorder : Int32, v1 : Float32, v2 : Float32, vstride : Int32, vorder : Int32, points : Float32*) : Void
 
   # Params # un : Int32 [In],u1 : Float64 [In],u2 : Float64 [In]
-  fun glMapGrid1d(un : Int32, u1 : Float64, u2 : Float64)
+  fun glMapGrid1d(un : Int32, u1 : Float64, u2 : Float64) : Void
 
   # Params # un : Int32 [In],u1 : Float32 [In],u2 : Float32 [In]
-  fun glMapGrid1f(un : Int32, u1 : Float32, u2 : Float32)
+  fun glMapGrid1f(un : Int32, u1 : Float32, u2 : Float32) : Void
 
   # Params # un : Int32 [In],u1 : Float64 [In],u2 : Float64 [In],vn : Int32 [In],v1 : Float64 [In],v2 : Float64 [In]
-  fun glMapGrid2d(un : Int32, u1 : Float64, u2 : Float64, vn : Int32, v1 : Float64, v2 : Float64)
+  fun glMapGrid2d(un : Int32, u1 : Float64, u2 : Float64, vn : Int32, v1 : Float64, v2 : Float64) : Void
 
   # Params # un : Int32 [In],u1 : Float32 [In],u2 : Float32 [In],vn : Int32 [In],v1 : Float32 [In],v2 : Float32 [In]
-  fun glMapGrid2f(un : Int32, u1 : Float32, u2 : Float32, vn : Int32, v1 : Float32, v2 : Float32)
+  fun glMapGrid2f(un : Int32, u1 : Float32, u2 : Float32, vn : Int32, v1 : Float32, v2 : Float32) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],param2 : Float32 [In]
-  fun glMaterialf(face : UInt32, pname : UInt32, param2 : Float32)
+  fun glMaterialf(face : UInt32, pname : UInt32, param2 : Float32) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glMaterialfv(face : UInt32, pname : UInt32, params : Float32*)
+  fun glMaterialfv(face : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],param2 : Int32 [In]
-  fun glMateriali(face : UInt32, pname : UInt32, param2 : Int32)
+  fun glMateriali(face : UInt32, pname : UInt32, param2 : Int32) : Void
 
   # Params # face : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glMaterialiv(face : UInt32, pname : UInt32, params : Int32*)
+  fun glMaterialiv(face : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # mode : UInt32 [In]
-  fun glMatrixMode(mode : UInt32)
+  fun glMatrixMode(mode : UInt32) : Void
 
   # Params # m : Float64* [In]
-  fun glMultMatrixd(m : Float64*)
+  fun glMultMatrixd(m : Float64*) : Void
 
   # Params # m : Float32* [In]
-  fun glMultMatrixf(m : Float32*)
+  fun glMultMatrixf(m : Float32*) : Void
 
   # Params # list : UInt32 [In],mode : UInt32 [In]
-  fun glNewList(list : UInt32, mode : UInt32)
+  fun glNewList(list : UInt32, mode : UInt32) : Void
 
   # Params # nx : Int8 [In],ny : Int8 [In],nz : Int8 [In]
-  fun glNormal3b(nx : Int8, ny : Int8, nz : Int8)
+  fun glNormal3b(nx : Int8, ny : Int8, nz : Int8) : Void
 
   # Params # v : Int8* [In]
-  fun glNormal3bv(v : Int8*)
+  fun glNormal3bv(v : Int8*) : Void
 
   # Params # nx : Float64 [In],ny : Float64 [In],nz : Float64 [In]
-  fun glNormal3d(nx : Float64, ny : Float64, nz : Float64)
+  fun glNormal3d(nx : Float64, ny : Float64, nz : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glNormal3dv(v : Float64*)
+  fun glNormal3dv(v : Float64*) : Void
 
   # Params # nx : Float32 [In],ny : Float32 [In],nz : Float32 [In]
-  fun glNormal3f(nx : Float32, ny : Float32, nz : Float32)
+  fun glNormal3f(nx : Float32, ny : Float32, nz : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glNormal3fv(v : Float32*)
+  fun glNormal3fv(v : Float32*) : Void
 
   # Params # nx : Int32 [In],ny : Int32 [In],nz : Int32 [In]
-  fun glNormal3i(nx : Int32, ny : Int32, nz : Int32)
+  fun glNormal3i(nx : Int32, ny : Int32, nz : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glNormal3iv(v : Int32*)
+  fun glNormal3iv(v : Int32*) : Void
 
   # Params # nx : Int16 [In],ny : Int16 [In],nz : Int16 [In]
-  fun glNormal3s(nx : Int16, ny : Int16, nz : Int16)
+  fun glNormal3s(nx : Int16, ny : Int16, nz : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glNormal3sv(v : Int16*)
+  fun glNormal3sv(v : Int16*) : Void
 
   # Params # type : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glNormalPointer(type : UInt32, stride : Int32, pointer : Void*)
+  fun glNormalPointer(type : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # left : Float64 [In],right : Float64 [In],bottom : Float64 [In],top : Float64 [In],znear : Float64 [In],zfar : Float64 [In]
-  fun glOrtho(left : Float64, right : Float64, bottom : Float64, top : Float64, znear : Float64, zfar : Float64)
+  fun glOrtho(left : Float64, right : Float64, bottom : Float64, top : Float64, znear : Float64, zfar : Float64) : Void
 
   # Params # token : Float32 [In]
-  fun glPassThrough(token : Float32)
+  fun glPassThrough(token : Float32) : Void
 
   # Params # map : UInt32 [In],mapsize : Int32 [In],values : Float32* [In]
-  fun glPixelMapfv(map : UInt32, mapsize : Int32, values : Float32*)
+  fun glPixelMapfv(map : UInt32, mapsize : Int32, values : Float32*) : Void
 
   # Params # map : UInt32 [In],mapsize : Int32 [In],values : UInt32* [In]
-  fun glPixelMapuiv(map : UInt32, mapsize : Int32, values : UInt32*)
+  fun glPixelMapuiv(map : UInt32, mapsize : Int32, values : UInt32*) : Void
 
   # Params # map : UInt32 [In],mapsize : Int32 [In],values : UInt16* [In]
-  fun glPixelMapusv(map : UInt32, mapsize : Int32, values : UInt16*)
+  fun glPixelMapusv(map : UInt32, mapsize : Int32, values : UInt16*) : Void
 
   # Params # pname : UInt32 [In],param1 : Float32 [In]
-  fun glPixelStoref(pname : UInt32, param1 : Float32)
+  fun glPixelStoref(pname : UInt32, param1 : Float32) : Void
 
   # Params # pname : UInt32 [In],param1 : Int32 [In]
-  fun glPixelStorei(pname : UInt32, param1 : Int32)
+  fun glPixelStorei(pname : UInt32, param1 : Int32) : Void
 
   # Params # pname : UInt32 [In],param1 : Float32 [In]
-  fun glPixelTransferf(pname : UInt32, param1 : Float32)
+  fun glPixelTransferf(pname : UInt32, param1 : Float32) : Void
 
   # Params # pname : UInt32 [In],param1 : Int32 [In]
-  fun glPixelTransferi(pname : UInt32, param1 : Int32)
+  fun glPixelTransferi(pname : UInt32, param1 : Int32) : Void
 
   # Params # xfactor : Float32 [In],yfactor : Float32 [In]
-  fun glPixelZoom(xfactor : Float32, yfactor : Float32)
+  fun glPixelZoom(xfactor : Float32, yfactor : Float32) : Void
 
   # Params # size : Float32 [In]
-  fun glPointSize(size : Float32)
+  fun glPointSize(size : Float32) : Void
 
   # Params # face : UInt32 [In],mode : UInt32 [In]
-  fun glPolygonMode(face : UInt32, mode : UInt32)
+  fun glPolygonMode(face : UInt32, mode : UInt32) : Void
 
   # Params # factor : Float32 [In],units : Float32 [In]
-  fun glPolygonOffset(factor : Float32, units : Float32)
+  fun glPolygonOffset(factor : Float32, units : Float32) : Void
 
   # Params # mask : UInt8* [In]
-  fun glPolygonStipple(mask : UInt8*)
+  fun glPolygonStipple(mask : UInt8*) : Void
 
   # Params # 
-  fun glPopAttrib
+  fun glPopAttrib : Void
 
   # Params # 
-  fun glPopClientAttrib
+  fun glPopClientAttrib : Void
 
   # Params # 
-  fun glPopMatrix
+  fun glPopMatrix : Void
 
   # Params # 
-  fun glPopName
+  fun glPopName : Void
 
   # Params # n : Int32 [In],textures : UInt32* [In],priorities : Float32* [In]
-  fun glPrioritizeTextures(n : Int32, textures : UInt32*, priorities : Float32*)
+  fun glPrioritizeTextures(n : Int32, textures : UInt32*, priorities : Float32*) : Void
 
   # Params # mask : UInt32 [In]
-  fun glPushAttrib(mask : UInt32)
+  fun glPushAttrib(mask : UInt32) : Void
 
   # Params # mask : UInt32 [In]
-  fun glPushClientAttrib(mask : UInt32)
+  fun glPushClientAttrib(mask : UInt32) : Void
 
   # Params # 
-  fun glPushMatrix
+  fun glPushMatrix : Void
 
   # Params # name : UInt32 [In]
-  fun glPushName(name : UInt32)
+  fun glPushName(name : UInt32) : Void
 
   # Params # x : Float64 [In],y : Float64 [In]
-  fun glRasterPos2d(x : Float64, y : Float64)
+  fun glRasterPos2d(x : Float64, y : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glRasterPos2dv(v : Float64*)
+  fun glRasterPos2dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In]
-  fun glRasterPos2f(x : Float32, y : Float32)
+  fun glRasterPos2f(x : Float32, y : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glRasterPos2fv(v : Float32*)
+  fun glRasterPos2fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In]
-  fun glRasterPos2i(x : Int32, y : Int32)
+  fun glRasterPos2i(x : Int32, y : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glRasterPos2iv(v : Int32*)
+  fun glRasterPos2iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In]
-  fun glRasterPos2s(x : Int16, y : Int16)
+  fun glRasterPos2s(x : Int16, y : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glRasterPos2sv(v : Int16*)
+  fun glRasterPos2sv(v : Int16*) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun glRasterPos3d(x : Float64, y : Float64, z : Float64)
+  fun glRasterPos3d(x : Float64, y : Float64, z : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glRasterPos3dv(v : Float64*)
+  fun glRasterPos3dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In]
-  fun glRasterPos3f(x : Float32, y : Float32, z : Float32)
+  fun glRasterPos3f(x : Float32, y : Float32, z : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glRasterPos3fv(v : Float32*)
+  fun glRasterPos3fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],z : Int32 [In]
-  fun glRasterPos3i(x : Int32, y : Int32, z : Int32)
+  fun glRasterPos3i(x : Int32, y : Int32, z : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glRasterPos3iv(v : Int32*)
+  fun glRasterPos3iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In],z : Int16 [In]
-  fun glRasterPos3s(x : Int16, y : Int16, z : Int16)
+  fun glRasterPos3s(x : Int16, y : Int16, z : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glRasterPos3sv(v : Int16*)
+  fun glRasterPos3sv(v : Int16*) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In],w : Float64 [In]
-  fun glRasterPos4d(x : Float64, y : Float64, z : Float64, w : Float64)
+  fun glRasterPos4d(x : Float64, y : Float64, z : Float64, w : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glRasterPos4dv(v : Float64*)
+  fun glRasterPos4dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In],w : Float32 [In]
-  fun glRasterPos4f(x : Float32, y : Float32, z : Float32, w : Float32)
+  fun glRasterPos4f(x : Float32, y : Float32, z : Float32, w : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glRasterPos4fv(v : Float32*)
+  fun glRasterPos4fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],z : Int32 [In],w : Int32 [In]
-  fun glRasterPos4i(x : Int32, y : Int32, z : Int32, w : Int32)
+  fun glRasterPos4i(x : Int32, y : Int32, z : Int32, w : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glRasterPos4iv(v : Int32*)
+  fun glRasterPos4iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In],z : Int16 [In],w : Int16 [In]
-  fun glRasterPos4s(x : Int16, y : Int16, z : Int16, w : Int16)
+  fun glRasterPos4s(x : Int16, y : Int16, z : Int16, w : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glRasterPos4sv(v : Int16*)
+  fun glRasterPos4sv(v : Int16*) : Void
 
   # Params # mode : UInt32 [In]
-  fun glReadBuffer(mode : UInt32)
+  fun glReadBuffer(mode : UInt32) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glReadPixels(x : Int32, y : Int32, width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glReadPixels(x : Int32, y : Int32, width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # x1 : Float64 [In],y1 : Float64 [In],x2 : Float64 [In],y2 : Float64 [In]
-  fun glRectd(x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64)
+  fun glRectd(x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64) : Void
 
   # Params # v1 : Float64* [In],v2 : Float64* [In]
-  fun glRectdv(v1 : Float64*, v2 : Float64*)
+  fun glRectdv(v1 : Float64*, v2 : Float64*) : Void
 
   # Params # x1 : Float32 [In],y1 : Float32 [In],x2 : Float32 [In],y2 : Float32 [In]
-  fun glRectf(x1 : Float32, y1 : Float32, x2 : Float32, y2 : Float32)
+  fun glRectf(x1 : Float32, y1 : Float32, x2 : Float32, y2 : Float32) : Void
 
   # Params # v1 : Float32* [In],v2 : Float32* [In]
-  fun glRectfv(v1 : Float32*, v2 : Float32*)
+  fun glRectfv(v1 : Float32*, v2 : Float32*) : Void
 
   # Params # x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In]
-  fun glRecti(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32)
+  fun glRecti(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Void
 
   # Params # v1 : Int32* [In],v2 : Int32* [In]
-  fun glRectiv(v1 : Int32*, v2 : Int32*)
+  fun glRectiv(v1 : Int32*, v2 : Int32*) : Void
 
   # Params # x1 : Int16 [In],y1 : Int16 [In],x2 : Int16 [In],y2 : Int16 [In]
-  fun glRects(x1 : Int16, y1 : Int16, x2 : Int16, y2 : Int16)
+  fun glRects(x1 : Int16, y1 : Int16, x2 : Int16, y2 : Int16) : Void
 
   # Params # v1 : Int16* [In],v2 : Int16* [In]
-  fun glRectsv(v1 : Int16*, v2 : Int16*)
+  fun glRectsv(v1 : Int16*, v2 : Int16*) : Void
 
   # Params # mode : UInt32 [In]
   fun glRenderMode(mode : UInt32) : Int32
 
   # Params # angle : Float64 [In],x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun glRotated(angle : Float64, x : Float64, y : Float64, z : Float64)
+  fun glRotated(angle : Float64, x : Float64, y : Float64, z : Float64) : Void
 
   # Params # angle : Float32 [In],x : Float32 [In],y : Float32 [In],z : Float32 [In]
-  fun glRotatef(angle : Float32, x : Float32, y : Float32, z : Float32)
+  fun glRotatef(angle : Float32, x : Float32, y : Float32, z : Float32) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun glScaled(x : Float64, y : Float64, z : Float64)
+  fun glScaled(x : Float64, y : Float64, z : Float64) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In]
-  fun glScalef(x : Float32, y : Float32, z : Float32)
+  fun glScalef(x : Float32, y : Float32, z : Float32) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In]
-  fun glScissor(x : Int32, y : Int32, width : Int32, height : Int32)
+  fun glScissor(x : Int32, y : Int32, width : Int32, height : Int32) : Void
 
   # Params # size : Int32 [In],buffer : UInt32* [In]
-  fun glSelectBuffer(size : Int32, buffer : UInt32*)
+  fun glSelectBuffer(size : Int32, buffer : UInt32*) : Void
 
   # Params # mode : UInt32 [In]
-  fun glShadeModel(mode : UInt32)
+  fun glShadeModel(mode : UInt32) : Void
 
   # Params # func : UInt32 [In],ref : Int32 [In],mask : UInt32 [In]
-  fun glStencilFunc(func : UInt32, ref : Int32, mask : UInt32)
+  fun glStencilFunc(func : UInt32, ref : Int32, mask : UInt32) : Void
 
   # Params # mask : UInt32 [In]
-  fun glStencilMask(mask : UInt32)
+  fun glStencilMask(mask : UInt32) : Void
 
   # Params # fail : UInt32 [In],zfail : UInt32 [In],zpass : UInt32 [In]
-  fun glStencilOp(fail : UInt32, zfail : UInt32, zpass : UInt32)
+  fun glStencilOp(fail : UInt32, zfail : UInt32, zpass : UInt32) : Void
 
   # Params # s : Float64 [In]
-  fun glTexCoord1d(s : Float64)
+  fun glTexCoord1d(s : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glTexCoord1dv(v : Float64*)
+  fun glTexCoord1dv(v : Float64*) : Void
 
   # Params # s : Float32 [In]
-  fun glTexCoord1f(s : Float32)
+  fun glTexCoord1f(s : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glTexCoord1fv(v : Float32*)
+  fun glTexCoord1fv(v : Float32*) : Void
 
   # Params # s : Int32 [In]
-  fun glTexCoord1i(s : Int32)
+  fun glTexCoord1i(s : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glTexCoord1iv(v : Int32*)
+  fun glTexCoord1iv(v : Int32*) : Void
 
   # Params # s : Int16 [In]
-  fun glTexCoord1s(s : Int16)
+  fun glTexCoord1s(s : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glTexCoord1sv(v : Int16*)
+  fun glTexCoord1sv(v : Int16*) : Void
 
   # Params # s : Float64 [In],t : Float64 [In]
-  fun glTexCoord2d(s : Float64, t : Float64)
+  fun glTexCoord2d(s : Float64, t : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glTexCoord2dv(v : Float64*)
+  fun glTexCoord2dv(v : Float64*) : Void
 
   # Params # s : Float32 [In],t : Float32 [In]
-  fun glTexCoord2f(s : Float32, t : Float32)
+  fun glTexCoord2f(s : Float32, t : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glTexCoord2fv(v : Float32*)
+  fun glTexCoord2fv(v : Float32*) : Void
 
   # Params # s : Int32 [In],t : Int32 [In]
-  fun glTexCoord2i(s : Int32, t : Int32)
+  fun glTexCoord2i(s : Int32, t : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glTexCoord2iv(v : Int32*)
+  fun glTexCoord2iv(v : Int32*) : Void
 
   # Params # s : Int16 [In],t : Int16 [In]
-  fun glTexCoord2s(s : Int16, t : Int16)
+  fun glTexCoord2s(s : Int16, t : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glTexCoord2sv(v : Int16*)
+  fun glTexCoord2sv(v : Int16*) : Void
 
   # Params # s : Float64 [In],t : Float64 [In],r : Float64 [In]
-  fun glTexCoord3d(s : Float64, t : Float64, r : Float64)
+  fun glTexCoord3d(s : Float64, t : Float64, r : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glTexCoord3dv(v : Float64*)
+  fun glTexCoord3dv(v : Float64*) : Void
 
   # Params # s : Float32 [In],t : Float32 [In],r : Float32 [In]
-  fun glTexCoord3f(s : Float32, t : Float32, r : Float32)
+  fun glTexCoord3f(s : Float32, t : Float32, r : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glTexCoord3fv(v : Float32*)
+  fun glTexCoord3fv(v : Float32*) : Void
 
   # Params # s : Int32 [In],t : Int32 [In],r : Int32 [In]
-  fun glTexCoord3i(s : Int32, t : Int32, r : Int32)
+  fun glTexCoord3i(s : Int32, t : Int32, r : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glTexCoord3iv(v : Int32*)
+  fun glTexCoord3iv(v : Int32*) : Void
 
   # Params # s : Int16 [In],t : Int16 [In],r : Int16 [In]
-  fun glTexCoord3s(s : Int16, t : Int16, r : Int16)
+  fun glTexCoord3s(s : Int16, t : Int16, r : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glTexCoord3sv(v : Int16*)
+  fun glTexCoord3sv(v : Int16*) : Void
 
   # Params # s : Float64 [In],t : Float64 [In],r : Float64 [In],q : Float64 [In]
-  fun glTexCoord4d(s : Float64, t : Float64, r : Float64, q : Float64)
+  fun glTexCoord4d(s : Float64, t : Float64, r : Float64, q : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glTexCoord4dv(v : Float64*)
+  fun glTexCoord4dv(v : Float64*) : Void
 
   # Params # s : Float32 [In],t : Float32 [In],r : Float32 [In],q : Float32 [In]
-  fun glTexCoord4f(s : Float32, t : Float32, r : Float32, q : Float32)
+  fun glTexCoord4f(s : Float32, t : Float32, r : Float32, q : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glTexCoord4fv(v : Float32*)
+  fun glTexCoord4fv(v : Float32*) : Void
 
   # Params # s : Int32 [In],t : Int32 [In],r : Int32 [In],q : Int32 [In]
-  fun glTexCoord4i(s : Int32, t : Int32, r : Int32, q : Int32)
+  fun glTexCoord4i(s : Int32, t : Int32, r : Int32, q : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glTexCoord4iv(v : Int32*)
+  fun glTexCoord4iv(v : Int32*) : Void
 
   # Params # s : Int16 [In],t : Int16 [In],r : Int16 [In],q : Int16 [In]
-  fun glTexCoord4s(s : Int16, t : Int16, r : Int16, q : Int16)
+  fun glTexCoord4s(s : Int16, t : Int16, r : Int16, q : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glTexCoord4sv(v : Int16*)
+  fun glTexCoord4sv(v : Int16*) : Void
 
   # Params # size : Int32 [In],type : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glTexCoordPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*)
+  fun glTexCoordPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],param2 : Float32 [In]
-  fun glTexEnvf(target : UInt32, pname : UInt32, param2 : Float32)
+  fun glTexEnvf(target : UInt32, pname : UInt32, param2 : Float32) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glTexEnvfv(target : UInt32, pname : UInt32, params : Float32*)
+  fun glTexEnvfv(target : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],param2 : Int32 [In]
-  fun glTexEnvi(target : UInt32, pname : UInt32, param2 : Int32)
+  fun glTexEnvi(target : UInt32, pname : UInt32, param2 : Int32) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glTexEnviv(target : UInt32, pname : UInt32, params : Int32*)
+  fun glTexEnviv(target : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],param2 : Float64 [In]
-  fun glTexGend(coord : UInt32, pname : UInt32, param2 : Float64)
+  fun glTexGend(coord : UInt32, pname : UInt32, param2 : Float64) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Float64* [In]
-  fun glTexGendv(coord : UInt32, pname : UInt32, params : Float64*)
+  fun glTexGendv(coord : UInt32, pname : UInt32, params : Float64*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],param2 : Float32 [In]
-  fun glTexGenf(coord : UInt32, pname : UInt32, param2 : Float32)
+  fun glTexGenf(coord : UInt32, pname : UInt32, param2 : Float32) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glTexGenfv(coord : UInt32, pname : UInt32, params : Float32*)
+  fun glTexGenfv(coord : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],param2 : Int32 [In]
-  fun glTexGeni(coord : UInt32, pname : UInt32, param2 : Int32)
+  fun glTexGeni(coord : UInt32, pname : UInt32, param2 : Int32) : Void
 
   # Params # coord : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glTexGeniv(coord : UInt32, pname : UInt32, params : Int32*)
+  fun glTexGeniv(coord : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],internalformat : Int32 [In],width : Int32 [In],border : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glTexImage1D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, border : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glTexImage1D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, border : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],internalformat : Int32 [In],width : Int32 [In],height : Int32 [In],border : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glTexImage2D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, height : Int32, border : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glTexImage2D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, height : Int32, border : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],param2 : Float32 [In]
-  fun glTexParameterf(target : UInt32, pname : UInt32, param2 : Float32)
+  fun glTexParameterf(target : UInt32, pname : UInt32, param2 : Float32) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Float32* [In]
-  fun glTexParameterfv(target : UInt32, pname : UInt32, params : Float32*)
+  fun glTexParameterfv(target : UInt32, pname : UInt32, params : Float32*) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],param2 : Int32 [In]
-  fun glTexParameteri(target : UInt32, pname : UInt32, param2 : Int32)
+  fun glTexParameteri(target : UInt32, pname : UInt32, param2 : Int32) : Void
 
   # Params # target : UInt32 [In],pname : UInt32 [In],params : Int32* [In]
-  fun glTexParameteriv(target : UInt32, pname : UInt32, params : Int32*)
+  fun glTexParameteriv(target : UInt32, pname : UInt32, params : Int32*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],xoffset : Int32 [In],width : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, width : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, width : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # target : UInt32 [In],level : Int32 [In],xoffset : Int32 [In],yoffset : Int32 [In],width : Int32 [In],height : Int32 [In],format : UInt32 [In],type : UInt32 [In],pixels : Void* [In]
-  fun glTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*)
+  fun glTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, width : Int32, height : Int32, format : UInt32, type : UInt32, pixels : Void*) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun glTranslated(x : Float64, y : Float64, z : Float64)
+  fun glTranslated(x : Float64, y : Float64, z : Float64) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In]
-  fun glTranslatef(x : Float32, y : Float32, z : Float32)
+  fun glTranslatef(x : Float32, y : Float32, z : Float32) : Void
 
   # Params # x : Float64 [In],y : Float64 [In]
-  fun glVertex2d(x : Float64, y : Float64)
+  fun glVertex2d(x : Float64, y : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glVertex2dv(v : Float64*)
+  fun glVertex2dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In]
-  fun glVertex2f(x : Float32, y : Float32)
+  fun glVertex2f(x : Float32, y : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glVertex2fv(v : Float32*)
+  fun glVertex2fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In]
-  fun glVertex2i(x : Int32, y : Int32)
+  fun glVertex2i(x : Int32, y : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glVertex2iv(v : Int32*)
+  fun glVertex2iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In]
-  fun glVertex2s(x : Int16, y : Int16)
+  fun glVertex2s(x : Int16, y : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glVertex2sv(v : Int16*)
+  fun glVertex2sv(v : Int16*) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun glVertex3d(x : Float64, y : Float64, z : Float64)
+  fun glVertex3d(x : Float64, y : Float64, z : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glVertex3dv(v : Float64*)
+  fun glVertex3dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In]
-  fun glVertex3f(x : Float32, y : Float32, z : Float32)
+  fun glVertex3f(x : Float32, y : Float32, z : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glVertex3fv(v : Float32*)
+  fun glVertex3fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],z : Int32 [In]
-  fun glVertex3i(x : Int32, y : Int32, z : Int32)
+  fun glVertex3i(x : Int32, y : Int32, z : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glVertex3iv(v : Int32*)
+  fun glVertex3iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In],z : Int16 [In]
-  fun glVertex3s(x : Int16, y : Int16, z : Int16)
+  fun glVertex3s(x : Int16, y : Int16, z : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glVertex3sv(v : Int16*)
+  fun glVertex3sv(v : Int16*) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],z : Float64 [In],w : Float64 [In]
-  fun glVertex4d(x : Float64, y : Float64, z : Float64, w : Float64)
+  fun glVertex4d(x : Float64, y : Float64, z : Float64, w : Float64) : Void
 
   # Params # v : Float64* [In]
-  fun glVertex4dv(v : Float64*)
+  fun glVertex4dv(v : Float64*) : Void
 
   # Params # x : Float32 [In],y : Float32 [In],z : Float32 [In],w : Float32 [In]
-  fun glVertex4f(x : Float32, y : Float32, z : Float32, w : Float32)
+  fun glVertex4f(x : Float32, y : Float32, z : Float32, w : Float32) : Void
 
   # Params # v : Float32* [In]
-  fun glVertex4fv(v : Float32*)
+  fun glVertex4fv(v : Float32*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],z : Int32 [In],w : Int32 [In]
-  fun glVertex4i(x : Int32, y : Int32, z : Int32, w : Int32)
+  fun glVertex4i(x : Int32, y : Int32, z : Int32, w : Int32) : Void
 
   # Params # v : Int32* [In]
-  fun glVertex4iv(v : Int32*)
+  fun glVertex4iv(v : Int32*) : Void
 
   # Params # x : Int16 [In],y : Int16 [In],z : Int16 [In],w : Int16 [In]
-  fun glVertex4s(x : Int16, y : Int16, z : Int16, w : Int16)
+  fun glVertex4s(x : Int16, y : Int16, z : Int16, w : Int16) : Void
 
   # Params # v : Int16* [In]
-  fun glVertex4sv(v : Int16*)
+  fun glVertex4sv(v : Int16*) : Void
 
   # Params # size : Int32 [In],type : UInt32 [In],stride : Int32 [In],pointer : Void* [In]
-  fun glVertexPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*)
+  fun glVertexPointer(size : Int32, type : UInt32, stride : Int32, pointer : Void*) : Void
 
   # Params # x : Int32 [In],y : Int32 [In],width : Int32 [In],height : Int32 [In]
-  fun glViewport(x : Int32, y : Int32, width : Int32, height : Int32)
+  fun glViewport(x : Int32, y : Int32, width : Int32, height : Int32) : Void
 
   # Params # errcode : UInt32 [In]
   fun gluErrorString(errcode : UInt32) : UInt8*
@@ -1921,16 +1921,16 @@ lib LibWin32
   fun gluGetString(name : UInt32) : UInt8*
 
   # Params # left : Float64 [In],right : Float64 [In],bottom : Float64 [In],top : Float64 [In]
-  fun gluOrtho2D(left : Float64, right : Float64, bottom : Float64, top : Float64)
+  fun gluOrtho2D(left : Float64, right : Float64, bottom : Float64, top : Float64) : Void
 
   # Params # fovy : Float64 [In],aspect : Float64 [In],znear : Float64 [In],zfar : Float64 [In]
-  fun gluPerspective(fovy : Float64, aspect : Float64, znear : Float64, zfar : Float64)
+  fun gluPerspective(fovy : Float64, aspect : Float64, znear : Float64, zfar : Float64) : Void
 
   # Params # x : Float64 [In],y : Float64 [In],width : Float64 [In],height : Float64 [In],viewport : Int32* [In]
-  fun gluPickMatrix(x : Float64, y : Float64, width : Float64, height : Float64, viewport : Int32*)
+  fun gluPickMatrix(x : Float64, y : Float64, width : Float64, height : Float64, viewport : Int32*) : Void
 
   # Params # eyex : Float64 [In],eyey : Float64 [In],eyez : Float64 [In],centerx : Float64 [In],centery : Float64 [In],centerz : Float64 [In],upx : Float64 [In],upy : Float64 [In],upz : Float64 [In]
-  fun gluLookAt(eyex : Float64, eyey : Float64, eyez : Float64, centerx : Float64, centery : Float64, centerz : Float64, upx : Float64, upy : Float64, upz : Float64)
+  fun gluLookAt(eyex : Float64, eyey : Float64, eyez : Float64, centerx : Float64, centery : Float64, centerz : Float64, upx : Float64, upy : Float64, upz : Float64) : Void
 
   # Params # objx : Float64 [In],objy : Float64 [In],objz : Float64 [In],modelmatrix : Float64* [In],projmatrix : Float64* [In],viewport : Int32* [In],winx : Float64* [In],winy : Float64* [In],winz : Float64* [In]
   fun gluProject(objx : Float64, objy : Float64, objz : Float64, modelmatrix : Float64*, projmatrix : Float64*, viewport : Int32*, winx : Float64*, winy : Float64*, winz : Float64*) : Int32
@@ -1951,119 +1951,119 @@ lib LibWin32
   fun gluNewQuadric : GLUquadric*
 
   # Params # state : GLUquadric* [In]
-  fun gluDeleteQuadric(state : GLUquadric*)
+  fun gluDeleteQuadric(state : GLUquadric*) : Void
 
   # Params # quadobject : GLUquadric* [In],normals : UInt32 [In]
-  fun gluQuadricNormals(quadobject : GLUquadric*, normals : UInt32)
+  fun gluQuadricNormals(quadobject : GLUquadric*, normals : UInt32) : Void
 
   # Params # quadobject : GLUquadric* [In],texturecoords : UInt8 [In]
-  fun gluQuadricTexture(quadobject : GLUquadric*, texturecoords : UInt8)
+  fun gluQuadricTexture(quadobject : GLUquadric*, texturecoords : UInt8) : Void
 
   # Params # quadobject : GLUquadric* [In],orientation : UInt32 [In]
-  fun gluQuadricOrientation(quadobject : GLUquadric*, orientation : UInt32)
+  fun gluQuadricOrientation(quadobject : GLUquadric*, orientation : UInt32) : Void
 
   # Params # quadobject : GLUquadric* [In],drawstyle : UInt32 [In]
-  fun gluQuadricDrawStyle(quadobject : GLUquadric*, drawstyle : UInt32)
+  fun gluQuadricDrawStyle(quadobject : GLUquadric*, drawstyle : UInt32) : Void
 
   # Params # qobj : GLUquadric* [In],baseradius : Float64 [In],topradius : Float64 [In],height : Float64 [In],slices : Int32 [In],stacks : Int32 [In]
-  fun gluCylinder(qobj : GLUquadric*, baseradius : Float64, topradius : Float64, height : Float64, slices : Int32, stacks : Int32)
+  fun gluCylinder(qobj : GLUquadric*, baseradius : Float64, topradius : Float64, height : Float64, slices : Int32, stacks : Int32) : Void
 
   # Params # qobj : GLUquadric* [In],innerradius : Float64 [In],outerradius : Float64 [In],slices : Int32 [In],loops : Int32 [In]
-  fun gluDisk(qobj : GLUquadric*, innerradius : Float64, outerradius : Float64, slices : Int32, loops : Int32)
+  fun gluDisk(qobj : GLUquadric*, innerradius : Float64, outerradius : Float64, slices : Int32, loops : Int32) : Void
 
   # Params # qobj : GLUquadric* [In],innerradius : Float64 [In],outerradius : Float64 [In],slices : Int32 [In],loops : Int32 [In],startangle : Float64 [In],sweepangle : Float64 [In]
-  fun gluPartialDisk(qobj : GLUquadric*, innerradius : Float64, outerradius : Float64, slices : Int32, loops : Int32, startangle : Float64, sweepangle : Float64)
+  fun gluPartialDisk(qobj : GLUquadric*, innerradius : Float64, outerradius : Float64, slices : Int32, loops : Int32, startangle : Float64, sweepangle : Float64) : Void
 
   # Params # qobj : GLUquadric* [In],radius : Float64 [In],slices : Int32 [In],stacks : Int32 [In]
-  fun gluSphere(qobj : GLUquadric*, radius : Float64, slices : Int32, stacks : Int32)
+  fun gluSphere(qobj : GLUquadric*, radius : Float64, slices : Int32, stacks : Int32) : Void
 
   # Params # qobj : GLUquadric* [In],which : UInt32 [In],fn : LibC::IntPtrT [In]
-  fun gluQuadricCallback(qobj : GLUquadric*, which : UInt32, fn : LibC::IntPtrT)
+  fun gluQuadricCallback(qobj : GLUquadric*, which : UInt32, fn : LibC::IntPtrT) : Void
 
   # Params # 
   fun gluNewTess : GLUtesselator*
 
   # Params # tess : GLUtesselator* [In]
-  fun gluDeleteTess(tess : GLUtesselator*)
+  fun gluDeleteTess(tess : GLUtesselator*) : Void
 
   # Params # tess : GLUtesselator* [In],polygon_data : Void* [In]
-  fun gluTessBeginPolygon(tess : GLUtesselator*, polygon_data : Void*)
+  fun gluTessBeginPolygon(tess : GLUtesselator*, polygon_data : Void*) : Void
 
   # Params # tess : GLUtesselator* [In]
-  fun gluTessBeginContour(tess : GLUtesselator*)
+  fun gluTessBeginContour(tess : GLUtesselator*) : Void
 
   # Params # tess : GLUtesselator* [In],coords : Float64* [In],data : Void* [In]
-  fun gluTessVertex(tess : GLUtesselator*, coords : Float64*, data : Void*)
+  fun gluTessVertex(tess : GLUtesselator*, coords : Float64*, data : Void*) : Void
 
   # Params # tess : GLUtesselator* [In]
-  fun gluTessEndContour(tess : GLUtesselator*)
+  fun gluTessEndContour(tess : GLUtesselator*) : Void
 
   # Params # tess : GLUtesselator* [In]
-  fun gluTessEndPolygon(tess : GLUtesselator*)
+  fun gluTessEndPolygon(tess : GLUtesselator*) : Void
 
   # Params # tess : GLUtesselator* [In],which : UInt32 [In],value : Float64 [In]
-  fun gluTessProperty(tess : GLUtesselator*, which : UInt32, value : Float64)
+  fun gluTessProperty(tess : GLUtesselator*, which : UInt32, value : Float64) : Void
 
   # Params # tess : GLUtesselator* [In],x : Float64 [In],y : Float64 [In],z : Float64 [In]
-  fun gluTessNormal(tess : GLUtesselator*, x : Float64, y : Float64, z : Float64)
+  fun gluTessNormal(tess : GLUtesselator*, x : Float64, y : Float64, z : Float64) : Void
 
   # Params # tess : GLUtesselator* [In],which : UInt32 [In],fn : LibC::IntPtrT [In]
-  fun gluTessCallback(tess : GLUtesselator*, which : UInt32, fn : LibC::IntPtrT)
+  fun gluTessCallback(tess : GLUtesselator*, which : UInt32, fn : LibC::IntPtrT) : Void
 
   # Params # tess : GLUtesselator* [In],which : UInt32 [In],value : Float64* [In]
-  fun gluGetTessProperty(tess : GLUtesselator*, which : UInt32, value : Float64*)
+  fun gluGetTessProperty(tess : GLUtesselator*, which : UInt32, value : Float64*) : Void
 
   # Params # 
   fun gluNewNurbsRenderer : GLUnurbs*
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluDeleteNurbsRenderer(nobj : GLUnurbs*)
+  fun gluDeleteNurbsRenderer(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluBeginSurface(nobj : GLUnurbs*)
+  fun gluBeginSurface(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluBeginCurve(nobj : GLUnurbs*)
+  fun gluBeginCurve(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluEndCurve(nobj : GLUnurbs*)
+  fun gluEndCurve(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluEndSurface(nobj : GLUnurbs*)
+  fun gluEndSurface(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluBeginTrim(nobj : GLUnurbs*)
+  fun gluBeginTrim(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In]
-  fun gluEndTrim(nobj : GLUnurbs*)
+  fun gluEndTrim(nobj : GLUnurbs*) : Void
 
   # Params # nobj : GLUnurbs* [In],count : Int32 [In],array : Float32* [In],stride : Int32 [In],type : UInt32 [In]
-  fun gluPwlCurve(nobj : GLUnurbs*, count : Int32, array : Float32*, stride : Int32, type : UInt32)
+  fun gluPwlCurve(nobj : GLUnurbs*, count : Int32, array : Float32*, stride : Int32, type : UInt32) : Void
 
   # Params # nobj : GLUnurbs* [In],nknots : Int32 [In],knot : Float32* [In],stride : Int32 [In],ctlarray : Float32* [In],order : Int32 [In],type : UInt32 [In]
-  fun gluNurbsCurve(nobj : GLUnurbs*, nknots : Int32, knot : Float32*, stride : Int32, ctlarray : Float32*, order : Int32, type : UInt32)
+  fun gluNurbsCurve(nobj : GLUnurbs*, nknots : Int32, knot : Float32*, stride : Int32, ctlarray : Float32*, order : Int32, type : UInt32) : Void
 
   # Params # nobj : GLUnurbs* [In],sknot_count : Int32 [In],sknot : Float32* [In],tknot_count : Int32 [In],tknot : Float32* [In],s_stride : Int32 [In],t_stride : Int32 [In],ctlarray : Float32* [In],sorder : Int32 [In],torder : Int32 [In],type : UInt32 [In]
-  fun gluNurbsSurface(nobj : GLUnurbs*, sknot_count : Int32, sknot : Float32*, tknot_count : Int32, tknot : Float32*, s_stride : Int32, t_stride : Int32, ctlarray : Float32*, sorder : Int32, torder : Int32, type : UInt32)
+  fun gluNurbsSurface(nobj : GLUnurbs*, sknot_count : Int32, sknot : Float32*, tknot_count : Int32, tknot : Float32*, s_stride : Int32, t_stride : Int32, ctlarray : Float32*, sorder : Int32, torder : Int32, type : UInt32) : Void
 
   # Params # nobj : GLUnurbs* [In],modelmatrix : Float32* [In],projmatrix : Float32* [In],viewport : Int32* [In]
-  fun gluLoadSamplingMatrices(nobj : GLUnurbs*, modelmatrix : Float32*, projmatrix : Float32*, viewport : Int32*)
+  fun gluLoadSamplingMatrices(nobj : GLUnurbs*, modelmatrix : Float32*, projmatrix : Float32*, viewport : Int32*) : Void
 
   # Params # nobj : GLUnurbs* [In],property : UInt32 [In],value : Float32 [In]
-  fun gluNurbsProperty(nobj : GLUnurbs*, property : UInt32, value : Float32)
+  fun gluNurbsProperty(nobj : GLUnurbs*, property : UInt32, value : Float32) : Void
 
   # Params # nobj : GLUnurbs* [In],property : UInt32 [In],value : Float32* [In]
-  fun gluGetNurbsProperty(nobj : GLUnurbs*, property : UInt32, value : Float32*)
+  fun gluGetNurbsProperty(nobj : GLUnurbs*, property : UInt32, value : Float32*) : Void
 
   # Params # nobj : GLUnurbs* [In],which : UInt32 [In],fn : LibC::IntPtrT [In]
-  fun gluNurbsCallback(nobj : GLUnurbs*, which : UInt32, fn : LibC::IntPtrT)
+  fun gluNurbsCallback(nobj : GLUnurbs*, which : UInt32, fn : LibC::IntPtrT) : Void
 
   # Params # tess : GLUtesselator* [In]
-  fun gluBeginPolygon(tess : GLUtesselator*)
+  fun gluBeginPolygon(tess : GLUtesselator*) : Void
 
   # Params # tess : GLUtesselator* [In],type : UInt32 [In]
-  fun gluNextContour(tess : GLUtesselator*, type : UInt32)
+  fun gluNextContour(tess : GLUtesselator*, type : UInt32) : Void
 
   # Params # tess : GLUtesselator* [In]
-  fun gluEndPolygon(tess : GLUtesselator*)
+  fun gluEndPolygon(tess : GLUtesselator*) : Void
 end

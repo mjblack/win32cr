@@ -1371,7 +1371,7 @@ lib LibWin32
     add_ref : Proc(IActiveIMMMessagePumpOwner*, UInt32)
     release : Proc(IActiveIMMMessagePumpOwner*, UInt32)
     start : Proc(IActiveIMMMessagePumpOwner*, HRESULT)
-    rend : Proc(IActiveIMMMessagePumpOwner*, HRESULT)
+    end_ : Proc(IActiveIMMMessagePumpOwner*, HRESULT)
     on_translate_message : Proc(IActiveIMMMessagePumpOwner*, MSG*, HRESULT)
     pause : Proc(IActiveIMMMessagePumpOwner*, UInt32*, HRESULT)
     resume : Proc(IActiveIMMMessagePumpOwner*, UInt32, HRESULT)
@@ -1869,4 +1869,938 @@ lib LibWin32
 
   # Params # param0 : HIMCC [In]
   fun ImmGetIMCCSize(param0 : HIMCC) : UInt32
+end
+struct LibWin32::IFEClassFactory
+  def query_interface(this : IFEClassFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFEClassFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFEClassFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IFEClassFactory*, punkouter : IUnknown, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance.call(this, punkouter, riid, ppvobject)
+  end
+  def lock_server(this : IFEClassFactory*, flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_server.call(this, flock)
+  end
+end
+struct LibWin32::IFECommon
+  def query_interface(this : IFECommon*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFECommon*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFECommon*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_default_ime(this : IFECommon*, szname : UInt8*, cszname : Int32) : HRESULT
+    @lpVtbl.value.is_default_ime.call(this, szname, cszname)
+  end
+  def set_default_ime(this : IFECommon*) : HRESULT
+    @lpVtbl.value.set_default_ime.call(this)
+  end
+  def invoke_word_reg_dialog(this : IFECommon*, pimedlg : IMEDLG*) : HRESULT
+    @lpVtbl.value.invoke_word_reg_dialog.call(this, pimedlg)
+  end
+  def invoke_dict_tool_dialog(this : IFECommon*, pimedlg : IMEDLG*) : HRESULT
+    @lpVtbl.value.invoke_dict_tool_dialog.call(this, pimedlg)
+  end
+end
+struct LibWin32::IFELanguage
+  def query_interface(this : IFELanguage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFELanguage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFELanguage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IFELanguage*) : HRESULT
+    @lpVtbl.value.open.call(this)
+  end
+  def close(this : IFELanguage*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_j_morph_result(this : IFELanguage*, dwrequest : UInt32, dwcmode : UInt32, cwchinput : Int32, pwchinput : LibC::LPWSTR, pfcinfo : UInt32*, ppresult : MORRSLT**) : HRESULT
+    @lpVtbl.value.get_j_morph_result.call(this, dwrequest, dwcmode, cwchinput, pwchinput, pfcinfo, ppresult)
+  end
+  def get_conversion_mode_caps(this : IFELanguage*, pdwcaps : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_mode_caps.call(this, pdwcaps)
+  end
+  def get_phonetic(this : IFELanguage*, string : UInt8*, start : Int32, length : Int32, phonetic : UInt8**) : HRESULT
+    @lpVtbl.value.get_phonetic.call(this, string, start, length, phonetic)
+  end
+  def get_conversion(this : IFELanguage*, string : UInt8*, start : Int32, length : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.get_conversion.call(this, string, start, length, result)
+  end
+end
+struct LibWin32::IFEDictionary
+  def query_interface(this : IFEDictionary*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFEDictionary*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFEDictionary*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IFEDictionary*, pchdictpath : UInt8*, pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.open.call(this, pchdictpath, pshf)
+  end
+  def close(this : IFEDictionary*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_header(this : IFEDictionary*, pchdictpath : UInt8*, pshf : IMESHF*, pjfmt : IMEFMT*, pultype : UInt32*) : HRESULT
+    @lpVtbl.value.get_header.call(this, pchdictpath, pshf, pjfmt, pultype)
+  end
+  def display_property(this : IFEDictionary*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_property.call(this, hwnd)
+  end
+  def get_pos_table(this : IFEDictionary*, prgpostbl : POSTBL**, pcpostbl : Int32*) : HRESULT
+    @lpVtbl.value.get_pos_table.call(this, prgpostbl, pcpostbl)
+  end
+  def get_words(this : IFEDictionary*, pwchfirst : LibC::LPWSTR, pwchlast : LibC::LPWSTR, pwchdisplay : LibC::LPWSTR, ulpos : UInt32, ulselect : UInt32, ulwordsrc : UInt32, pchbuffer : UInt8*, cbbuffer : UInt32, pcwrd : UInt32*) : HRESULT
+    @lpVtbl.value.get_words.call(this, pwchfirst, pwchlast, pwchdisplay, ulpos, ulselect, ulwordsrc, pchbuffer, cbbuffer, pcwrd)
+  end
+  def next_words(this : IFEDictionary*, pchbuffer : UInt8*, cbbuffer : UInt32, pcwrd : UInt32*) : HRESULT
+    @lpVtbl.value.next_words.call(this, pchbuffer, cbbuffer, pcwrd)
+  end
+  def create(this : IFEDictionary*, pchdictpath : PSTR, pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.create.call(this, pchdictpath, pshf)
+  end
+  def set_header(this : IFEDictionary*, pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.set_header.call(this, pshf)
+  end
+  def exist_word(this : IFEDictionary*, pwrd : IMEWRD*) : HRESULT
+    @lpVtbl.value.exist_word.call(this, pwrd)
+  end
+  def exist_dependency(this : IFEDictionary*, pdp : IMEDP*) : HRESULT
+    @lpVtbl.value.exist_dependency.call(this, pdp)
+  end
+  def register_word(this : IFEDictionary*, reg : IMEREG, pwrd : IMEWRD*) : HRESULT
+    @lpVtbl.value.register_word.call(this, reg, pwrd)
+  end
+  def register_dependency(this : IFEDictionary*, reg : IMEREG, pdp : IMEDP*) : HRESULT
+    @lpVtbl.value.register_dependency.call(this, reg, pdp)
+  end
+  def get_dependencies(this : IFEDictionary*, pwchkakarireading : LibC::LPWSTR, pwchkakaridisplay : LibC::LPWSTR, ulkakaripos : UInt32, pwchukereading : LibC::LPWSTR, pwchukedisplay : LibC::LPWSTR, ulukepos : UInt32, jrel : IMEREL, ulwordsrc : UInt32, pchbuffer : UInt8*, cbbuffer : UInt32, pcdp : UInt32*) : HRESULT
+    @lpVtbl.value.get_dependencies.call(this, pwchkakarireading, pwchkakaridisplay, ulkakaripos, pwchukereading, pwchukedisplay, ulukepos, jrel, ulwordsrc, pchbuffer, cbbuffer, pcdp)
+  end
+  def next_dependencies(this : IFEDictionary*, pchbuffer : UInt8*, cbbuffer : UInt32, pcdp : UInt32*) : HRESULT
+    @lpVtbl.value.next_dependencies.call(this, pchbuffer, cbbuffer, pcdp)
+  end
+  def convert_from_old_msime(this : IFEDictionary*, pchdic : PSTR, pfnlog : PFNLOG, reg : IMEREG) : HRESULT
+    @lpVtbl.value.convert_from_old_msime.call(this, pchdic, pfnlog, reg)
+  end
+  def convert_from_user_to_sys(this : IFEDictionary*) : HRESULT
+    @lpVtbl.value.convert_from_user_to_sys.call(this)
+  end
+end
+struct LibWin32::IImeSpecifyApplets
+  def query_interface(this : IImeSpecifyApplets*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IImeSpecifyApplets*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IImeSpecifyApplets*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_applet_iid_list(this : IImeSpecifyApplets*, refiid : Guid*, lpiidlist : APPLETIDLIST*) : HRESULT
+    @lpVtbl.value.get_applet_iid_list.call(this, refiid, lpiidlist)
+  end
+end
+struct LibWin32::IImePadApplet
+  def query_interface(this : IImePadApplet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IImePadApplet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IImePadApplet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IImePadApplet*, lpiimepad : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.call(this, lpiimepad)
+  end
+  def terminate(this : IImePadApplet*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+  def get_applet_config(this : IImePadApplet*, lpappletcfg : IMEAPPLETCFG*) : HRESULT
+    @lpVtbl.value.get_applet_config.call(this, lpappletcfg)
+  end
+  def create_ui(this : IImePadApplet*, hwndparent : LibC::HANDLE, lpimeappletui : IMEAPPLETUI*) : HRESULT
+    @lpVtbl.value.create_ui.call(this, hwndparent, lpimeappletui)
+  end
+  def notify(this : IImePadApplet*, lpimepad : IUnknown, notify : Int32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.notify.call(this, lpimepad, notify, wparam, lparam)
+  end
+end
+struct LibWin32::IImePad
+  def query_interface(this : IImePad*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IImePad*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IImePad*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request(this : IImePad*, piimepadapplet : IImePadApplet, reqid : IME_PAD_REQUEST_FLAGS, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.request.call(this, piimepadapplet, reqid, wparam, lparam)
+  end
+end
+struct LibWin32::IImePlugInDictDictionaryList
+  def query_interface(this : IImePlugInDictDictionaryList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IImePlugInDictDictionaryList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IImePlugInDictDictionaryList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_dictionaries_in_use(this : IImePlugInDictDictionaryList*, prgdictionaryguid : SAFEARRAY**, prgdatecreated : SAFEARRAY**, prgfencrypted : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_dictionaries_in_use.call(this, prgdictionaryguid, prgdatecreated, prgfencrypted)
+  end
+  def delete_dictionary(this : IImePlugInDictDictionaryList*, bstrdictionaryguid : UInt8*) : HRESULT
+    @lpVtbl.value.delete_dictionary.call(this, bstrdictionaryguid)
+  end
+end
+struct LibWin32::IEnumRegisterWordA
+  def query_interface(this : IEnumRegisterWordA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRegisterWordA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRegisterWordA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumRegisterWordA*, ppenum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumRegisterWordA*, ulcount : UInt32, rgregisterword : REGISTERWORDA*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgregisterword, pcfetched)
+  end
+  def reset(this : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumRegisterWordA*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::IEnumRegisterWordW
+  def query_interface(this : IEnumRegisterWordW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumRegisterWordW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumRegisterWordW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumRegisterWordW*, ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumRegisterWordW*, ulcount : UInt32, rgregisterword : REGISTERWORDW*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rgregisterword, pcfetched)
+  end
+  def reset(this : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumRegisterWordW*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::IEnumInputContext
+  def query_interface(this : IEnumInputContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumInputContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumInputContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def clone(this : IEnumInputContext*, ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def next(this : IEnumInputContext*, ulcount : UInt32, rginputcontext : HIMC*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, ulcount, rginputcontext, pcfetched)
+  end
+  def reset(this : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IEnumInputContext*, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, ulcount)
+  end
+end
+struct LibWin32::IActiveIMMRegistrar
+  def query_interface(this : IActiveIMMRegistrar*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIMMRegistrar*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIMMRegistrar*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_ime(this : IActiveIMMRegistrar*, rclsid : Guid*, lgid : UInt16, psziconfile : LibC::LPWSTR, pszdesc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_ime.call(this, rclsid, lgid, psziconfile, pszdesc)
+  end
+  def unregister_ime(this : IActiveIMMRegistrar*, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_ime.call(this, rclsid)
+  end
+end
+struct LibWin32::IActiveIMMMessagePumpOwner
+  def query_interface(this : IActiveIMMMessagePumpOwner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIMMMessagePumpOwner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIMMMessagePumpOwner*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start(this : IActiveIMMMessagePumpOwner*) : HRESULT
+    @lpVtbl.value.start.call(this)
+  end
+  def end_(this : IActiveIMMMessagePumpOwner*) : HRESULT
+    @lpVtbl.value.end_.call(this)
+  end
+  def on_translate_message(this : IActiveIMMMessagePumpOwner*, pmsg : MSG*) : HRESULT
+    @lpVtbl.value.on_translate_message.call(this, pmsg)
+  end
+  def pause(this : IActiveIMMMessagePumpOwner*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.pause.call(this, pdwcookie)
+  end
+  def resume(this : IActiveIMMMessagePumpOwner*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.resume.call(this, dwcookie)
+  end
+end
+struct LibWin32::IActiveIMMApp
+  def query_interface(this : IActiveIMMApp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIMMApp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIMMApp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def associate_context(this : IActiveIMMApp*, hwnd : LibC::HANDLE, hime : HIMC, phprev : HIMC*) : HRESULT
+    @lpVtbl.value.associate_context.call(this, hwnd, hime, phprev)
+  end
+  def configure_imea(this : IActiveIMMApp*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDA*) : HRESULT
+    @lpVtbl.value.configure_imea.call(this, hkl, hwnd, dwmode, pdata)
+  end
+  def configure_imew(this : IActiveIMMApp*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure_imew.call(this, hkl, hwnd, dwmode, pdata)
+  end
+  def create_context(this : IActiveIMMApp*, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.create_context.call(this, phimc)
+  end
+  def destroy_context(this : IActiveIMMApp*, hime : HIMC) : HRESULT
+    @lpVtbl.value.destroy_context.call(this, hime)
+  end
+  def enum_register_word_a(this : IActiveIMMApp*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR, pdata : Void*, penum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.enum_register_word_a.call(this, hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def enum_register_word_w(this : IActiveIMMApp*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, penum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word_w.call(this, hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def escape_a(this : IActiveIMMApp*, hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_a.call(this, hkl, himc, uescape, pdata, plresult)
+  end
+  def escape_w(this : IActiveIMMApp*, hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_w.call(this, hkl, himc, uescape, pdata, plresult)
+  end
+  def get_candidate_list_a(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_a.call(this, himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_w(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_w.call(this, himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_count_a(this : IActiveIMMApp*, himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_a.call(this, himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_list_count_w(this : IActiveIMMApp*, himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_w.call(this, himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_window(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.get_candidate_window.call(this, himc, dwindex, pcandidate)
+  end
+  def get_composition_font_a(this : IActiveIMMApp*, himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.get_composition_font_a.call(this, himc, plf)
+  end
+  def get_composition_font_w(this : IActiveIMMApp*, himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.get_composition_font_w.call(this, himc, plf)
+  end
+  def get_composition_string_a(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_a.call(this, himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_string_w(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_w.call(this, himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_window(this : IActiveIMMApp*, himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.get_composition_window.call(this, himc, pcompform)
+  end
+  def get_context(this : IActiveIMMApp*, hwnd : LibC::HANDLE, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.get_context.call(this, hwnd, phimc)
+  end
+  def get_conversion_list_a(this : IActiveIMMApp*, hkl : HKL, himc : HIMC, psrc : PSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_a.call(this, hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_list_w(this : IActiveIMMApp*, hkl : HKL, himc : HIMC, psrc : LibC::LPWSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_w.call(this, hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_status(this : IActiveIMMApp*, himc : HIMC, pfdwconversion : UInt32*, pfdwsentence : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_status.call(this, himc, pfdwconversion, pfdwsentence)
+  end
+  def get_default_ime_wnd(this : IActiveIMMApp*, hwnd : LibC::HANDLE, phdefwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_default_ime_wnd.call(this, hwnd, phdefwnd)
+  end
+  def get_description_a(this : IActiveIMMApp*, hkl : HKL, ubuflen : UInt32, szdescription : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_a.call(this, hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_description_w(this : IActiveIMMApp*, hkl : HKL, ubuflen : UInt32, szdescription : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_w.call(this, hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_guide_line_a(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : PSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_a.call(this, himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_guide_line_w(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : LibC::LPWSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_w.call(this, himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_ime_file_name_a(this : IActiveIMMApp*, hkl : HKL, ubuflen : UInt32, szfilename : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_a.call(this, hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_ime_file_name_w(this : IActiveIMMApp*, hkl : HKL, ubuflen : UInt32, szfilename : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_w.call(this, hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_open_status(this : IActiveIMMApp*, himc : HIMC) : HRESULT
+    @lpVtbl.value.get_open_status.call(this, himc)
+  end
+  def get_property(this : IActiveIMMApp*, hkl : HKL, fdwindex : UInt32, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, hkl, fdwindex, pdwproperty)
+  end
+  def get_register_word_style_a(this : IActiveIMMApp*, hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFA*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_a.call(this, hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_register_word_style_w(this : IActiveIMMApp*, hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFW*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_w.call(this, hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_status_window_pos(this : IActiveIMMApp*, himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.get_status_window_pos.call(this, himc, pptpos)
+  end
+  def get_virtual_key(this : IActiveIMMApp*, hwnd : LibC::HANDLE, puvirtualkey : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_key.call(this, hwnd, puvirtualkey)
+  end
+  def install_imea(this : IActiveIMMApp*, szimefilename : PSTR, szlayouttext : PSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imea.call(this, szimefilename, szlayouttext, phkl)
+  end
+  def install_imew(this : IActiveIMMApp*, szimefilename : LibC::LPWSTR, szlayouttext : LibC::LPWSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imew.call(this, szimefilename, szlayouttext, phkl)
+  end
+  def is_ime(this : IActiveIMMApp*, hkl : HKL) : HRESULT
+    @lpVtbl.value.is_ime.call(this, hkl)
+  end
+  def is_ui_message_a(this : IActiveIMMApp*, hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_a.call(this, hwndime, msg, wparam, lparam)
+  end
+  def is_ui_message_w(this : IActiveIMMApp*, hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_w.call(this, hwndime, msg, wparam, lparam)
+  end
+  def notify_ime(this : IActiveIMMApp*, himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify_ime.call(this, himc, dwaction, dwindex, dwvalue)
+  end
+  def register_word_a(this : IActiveIMMApp*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR) : HRESULT
+    @lpVtbl.value.register_word_a.call(this, hkl, szreading, dwstyle, szregister)
+  end
+  def register_word_w(this : IActiveIMMApp*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word_w.call(this, hkl, szreading, dwstyle, szregister)
+  end
+  def release_context(this : IActiveIMMApp*, hwnd : LibC::HANDLE, himc : HIMC) : HRESULT
+    @lpVtbl.value.release_context.call(this, hwnd, himc)
+  end
+  def set_candidate_window(this : IActiveIMMApp*, himc : HIMC, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.set_candidate_window.call(this, himc, pcandidate)
+  end
+  def set_composition_font_a(this : IActiveIMMApp*, himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.set_composition_font_a.call(this, himc, plf)
+  end
+  def set_composition_font_w(this : IActiveIMMApp*, himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.set_composition_font_w.call(this, himc, plf)
+  end
+  def set_composition_string_a(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_a.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_string_w(this : IActiveIMMApp*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_w.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_window(this : IActiveIMMApp*, himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.set_composition_window.call(this, himc, pcompform)
+  end
+  def set_conversion_status(this : IActiveIMMApp*, himc : HIMC, fdwconversion : UInt32, fdwsentence : UInt32) : HRESULT
+    @lpVtbl.value.set_conversion_status.call(this, himc, fdwconversion, fdwsentence)
+  end
+  def set_open_status(this : IActiveIMMApp*, himc : HIMC, fopen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_open_status.call(this, himc, fopen)
+  end
+  def set_status_window_pos(this : IActiveIMMApp*, himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.set_status_window_pos.call(this, himc, pptpos)
+  end
+  def simulate_hot_key(this : IActiveIMMApp*, hwnd : LibC::HANDLE, dwhotkeyid : UInt32) : HRESULT
+    @lpVtbl.value.simulate_hot_key.call(this, hwnd, dwhotkeyid)
+  end
+  def unregister_word_a(this : IActiveIMMApp*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szunregister : PSTR) : HRESULT
+    @lpVtbl.value.unregister_word_a.call(this, hkl, szreading, dwstyle, szunregister)
+  end
+  def unregister_word_w(this : IActiveIMMApp*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szunregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word_w.call(this, hkl, szreading, dwstyle, szunregister)
+  end
+  def activate(this : IActiveIMMApp*, frestorelayout : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.call(this, frestorelayout)
+  end
+  def deactivate(this : IActiveIMMApp*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def on_def_window_proc(this : IActiveIMMApp*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.on_def_window_proc.call(this, hwnd, msg, wparam, lparam, plresult)
+  end
+  def filter_client_windows(this : IActiveIMMApp*, aaclasslist : UInt16*, usize : UInt32) : HRESULT
+    @lpVtbl.value.filter_client_windows.call(this, aaclasslist, usize)
+  end
+  def get_code_page_a(this : IActiveIMMApp*, hkl : HKL, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.call(this, hkl, ucodepage)
+  end
+  def get_lang_id(this : IActiveIMMApp*, hkl : HKL, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.call(this, hkl, plid)
+  end
+  def associate_context_ex(this : IActiveIMMApp*, hwnd : LibC::HANDLE, himc : HIMC, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.associate_context_ex.call(this, hwnd, himc, dwflags)
+  end
+  def disable_ime(this : IActiveIMMApp*, idthread : UInt32) : HRESULT
+    @lpVtbl.value.disable_ime.call(this, idthread)
+  end
+  def get_ime_menu_items_a(this : IActiveIMMApp*, himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOA*, pimemenu : IMEMENUITEMINFOA*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_a.call(this, himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def get_ime_menu_items_w(this : IActiveIMMApp*, himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOW*, pimemenu : IMEMENUITEMINFOW*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_w.call(this, himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def enum_input_context(this : IActiveIMMApp*, idthread : UInt32, ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.enum_input_context.call(this, idthread, ppenum)
+  end
+end
+struct LibWin32::IActiveIMMIME
+  def query_interface(this : IActiveIMMIME*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIMMIME*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIMMIME*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def associate_context(this : IActiveIMMIME*, hwnd : LibC::HANDLE, hime : HIMC, phprev : HIMC*) : HRESULT
+    @lpVtbl.value.associate_context.call(this, hwnd, hime, phprev)
+  end
+  def configure_imea(this : IActiveIMMIME*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDA*) : HRESULT
+    @lpVtbl.value.configure_imea.call(this, hkl, hwnd, dwmode, pdata)
+  end
+  def configure_imew(this : IActiveIMMIME*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure_imew.call(this, hkl, hwnd, dwmode, pdata)
+  end
+  def create_context(this : IActiveIMMIME*, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.create_context.call(this, phimc)
+  end
+  def destroy_context(this : IActiveIMMIME*, hime : HIMC) : HRESULT
+    @lpVtbl.value.destroy_context.call(this, hime)
+  end
+  def enum_register_word_a(this : IActiveIMMIME*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR, pdata : Void*, penum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.enum_register_word_a.call(this, hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def enum_register_word_w(this : IActiveIMMIME*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, penum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word_w.call(this, hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def escape_a(this : IActiveIMMIME*, hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_a.call(this, hkl, himc, uescape, pdata, plresult)
+  end
+  def escape_w(this : IActiveIMMIME*, hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_w.call(this, hkl, himc, uescape, pdata, plresult)
+  end
+  def get_candidate_list_a(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_a.call(this, himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_w(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_w.call(this, himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_count_a(this : IActiveIMMIME*, himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_a.call(this, himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_list_count_w(this : IActiveIMMIME*, himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_w.call(this, himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_window(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.get_candidate_window.call(this, himc, dwindex, pcandidate)
+  end
+  def get_composition_font_a(this : IActiveIMMIME*, himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.get_composition_font_a.call(this, himc, plf)
+  end
+  def get_composition_font_w(this : IActiveIMMIME*, himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.get_composition_font_w.call(this, himc, plf)
+  end
+  def get_composition_string_a(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_a.call(this, himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_string_w(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_w.call(this, himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_window(this : IActiveIMMIME*, himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.get_composition_window.call(this, himc, pcompform)
+  end
+  def get_context(this : IActiveIMMIME*, hwnd : LibC::HANDLE, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.get_context.call(this, hwnd, phimc)
+  end
+  def get_conversion_list_a(this : IActiveIMMIME*, hkl : HKL, himc : HIMC, psrc : PSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_a.call(this, hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_list_w(this : IActiveIMMIME*, hkl : HKL, himc : HIMC, psrc : LibC::LPWSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_w.call(this, hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_status(this : IActiveIMMIME*, himc : HIMC, pfdwconversion : UInt32*, pfdwsentence : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_status.call(this, himc, pfdwconversion, pfdwsentence)
+  end
+  def get_default_ime_wnd(this : IActiveIMMIME*, hwnd : LibC::HANDLE, phdefwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_default_ime_wnd.call(this, hwnd, phdefwnd)
+  end
+  def get_description_a(this : IActiveIMMIME*, hkl : HKL, ubuflen : UInt32, szdescription : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_a.call(this, hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_description_w(this : IActiveIMMIME*, hkl : HKL, ubuflen : UInt32, szdescription : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_w.call(this, hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_guide_line_a(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : PSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_a.call(this, himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_guide_line_w(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : LibC::LPWSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_w.call(this, himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_ime_file_name_a(this : IActiveIMMIME*, hkl : HKL, ubuflen : UInt32, szfilename : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_a.call(this, hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_ime_file_name_w(this : IActiveIMMIME*, hkl : HKL, ubuflen : UInt32, szfilename : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_w.call(this, hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_open_status(this : IActiveIMMIME*, himc : HIMC) : HRESULT
+    @lpVtbl.value.get_open_status.call(this, himc)
+  end
+  def get_property(this : IActiveIMMIME*, hkl : HKL, fdwindex : UInt32, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, hkl, fdwindex, pdwproperty)
+  end
+  def get_register_word_style_a(this : IActiveIMMIME*, hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFA*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_a.call(this, hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_register_word_style_w(this : IActiveIMMIME*, hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFW*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_w.call(this, hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_status_window_pos(this : IActiveIMMIME*, himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.get_status_window_pos.call(this, himc, pptpos)
+  end
+  def get_virtual_key(this : IActiveIMMIME*, hwnd : LibC::HANDLE, puvirtualkey : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_key.call(this, hwnd, puvirtualkey)
+  end
+  def install_imea(this : IActiveIMMIME*, szimefilename : PSTR, szlayouttext : PSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imea.call(this, szimefilename, szlayouttext, phkl)
+  end
+  def install_imew(this : IActiveIMMIME*, szimefilename : LibC::LPWSTR, szlayouttext : LibC::LPWSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imew.call(this, szimefilename, szlayouttext, phkl)
+  end
+  def is_ime(this : IActiveIMMIME*, hkl : HKL) : HRESULT
+    @lpVtbl.value.is_ime.call(this, hkl)
+  end
+  def is_ui_message_a(this : IActiveIMMIME*, hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_a.call(this, hwndime, msg, wparam, lparam)
+  end
+  def is_ui_message_w(this : IActiveIMMIME*, hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_w.call(this, hwndime, msg, wparam, lparam)
+  end
+  def notify_ime(this : IActiveIMMIME*, himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify_ime.call(this, himc, dwaction, dwindex, dwvalue)
+  end
+  def register_word_a(this : IActiveIMMIME*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR) : HRESULT
+    @lpVtbl.value.register_word_a.call(this, hkl, szreading, dwstyle, szregister)
+  end
+  def register_word_w(this : IActiveIMMIME*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word_w.call(this, hkl, szreading, dwstyle, szregister)
+  end
+  def release_context(this : IActiveIMMIME*, hwnd : LibC::HANDLE, himc : HIMC) : HRESULT
+    @lpVtbl.value.release_context.call(this, hwnd, himc)
+  end
+  def set_candidate_window(this : IActiveIMMIME*, himc : HIMC, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.set_candidate_window.call(this, himc, pcandidate)
+  end
+  def set_composition_font_a(this : IActiveIMMIME*, himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.set_composition_font_a.call(this, himc, plf)
+  end
+  def set_composition_font_w(this : IActiveIMMIME*, himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.set_composition_font_w.call(this, himc, plf)
+  end
+  def set_composition_string_a(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_a.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_string_w(this : IActiveIMMIME*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_w.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_window(this : IActiveIMMIME*, himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.set_composition_window.call(this, himc, pcompform)
+  end
+  def set_conversion_status(this : IActiveIMMIME*, himc : HIMC, fdwconversion : UInt32, fdwsentence : UInt32) : HRESULT
+    @lpVtbl.value.set_conversion_status.call(this, himc, fdwconversion, fdwsentence)
+  end
+  def set_open_status(this : IActiveIMMIME*, himc : HIMC, fopen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_open_status.call(this, himc, fopen)
+  end
+  def set_status_window_pos(this : IActiveIMMIME*, himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.set_status_window_pos.call(this, himc, pptpos)
+  end
+  def simulate_hot_key(this : IActiveIMMIME*, hwnd : LibC::HANDLE, dwhotkeyid : UInt32) : HRESULT
+    @lpVtbl.value.simulate_hot_key.call(this, hwnd, dwhotkeyid)
+  end
+  def unregister_word_a(this : IActiveIMMIME*, hkl : HKL, szreading : PSTR, dwstyle : UInt32, szunregister : PSTR) : HRESULT
+    @lpVtbl.value.unregister_word_a.call(this, hkl, szreading, dwstyle, szunregister)
+  end
+  def unregister_word_w(this : IActiveIMMIME*, hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szunregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word_w.call(this, hkl, szreading, dwstyle, szunregister)
+  end
+  def generate_message(this : IActiveIMMIME*, himc : HIMC) : HRESULT
+    @lpVtbl.value.generate_message.call(this, himc)
+  end
+  def lock_imc(this : IActiveIMMIME*, himc : HIMC, ppimc : INPUTCONTEXT**) : HRESULT
+    @lpVtbl.value.lock_imc.call(this, himc, ppimc)
+  end
+  def unlock_imc(this : IActiveIMMIME*, himc : HIMC) : HRESULT
+    @lpVtbl.value.unlock_imc.call(this, himc)
+  end
+  def get_imc_lock_count(this : IActiveIMMIME*, himc : HIMC, pdwlockcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_imc_lock_count.call(this, himc, pdwlockcount)
+  end
+  def create_imcc(this : IActiveIMMIME*, dwsize : UInt32, phimcc : HIMCC*) : HRESULT
+    @lpVtbl.value.create_imcc.call(this, dwsize, phimcc)
+  end
+  def destroy_imcc(this : IActiveIMMIME*, himcc : HIMCC) : HRESULT
+    @lpVtbl.value.destroy_imcc.call(this, himcc)
+  end
+  def lock_imcc(this : IActiveIMMIME*, himcc : HIMCC, ppv : Void**) : HRESULT
+    @lpVtbl.value.lock_imcc.call(this, himcc, ppv)
+  end
+  def unlock_imcc(this : IActiveIMMIME*, himcc : HIMCC) : HRESULT
+    @lpVtbl.value.unlock_imcc.call(this, himcc)
+  end
+  def re_size_imcc(this : IActiveIMMIME*, himcc : HIMCC, dwsize : UInt32, phimcc : HIMCC*) : HRESULT
+    @lpVtbl.value.re_size_imcc.call(this, himcc, dwsize, phimcc)
+  end
+  def get_imcc_size(this : IActiveIMMIME*, himcc : HIMCC, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_imcc_size.call(this, himcc, pdwsize)
+  end
+  def get_imcc_lock_count(this : IActiveIMMIME*, himcc : HIMCC, pdwlockcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_imcc_lock_count.call(this, himcc, pdwlockcount)
+  end
+  def get_hot_key(this : IActiveIMMIME*, dwhotkeyid : UInt32, pumodifiers : UInt32*, puvkey : UInt32*, phkl : HKL*) : HRESULT
+    @lpVtbl.value.get_hot_key.call(this, dwhotkeyid, pumodifiers, puvkey, phkl)
+  end
+  def set_hot_key(this : IActiveIMMIME*, dwhotkeyid : UInt32, umodifiers : UInt32, uvkey : UInt32, hkl : HKL) : HRESULT
+    @lpVtbl.value.set_hot_key.call(this, dwhotkeyid, umodifiers, uvkey, hkl)
+  end
+  def create_soft_keyboard(this : IActiveIMMIME*, utype : UInt32, howner : LibC::HANDLE, x : Int32, y : Int32, phsoftkbdwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.create_soft_keyboard.call(this, utype, howner, x, y, phsoftkbdwnd)
+  end
+  def destroy_soft_keyboard(this : IActiveIMMIME*, hsoftkbdwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.destroy_soft_keyboard.call(this, hsoftkbdwnd)
+  end
+  def show_soft_keyboard(this : IActiveIMMIME*, hsoftkbdwnd : LibC::HANDLE, ncmdshow : Int32) : HRESULT
+    @lpVtbl.value.show_soft_keyboard.call(this, hsoftkbdwnd, ncmdshow)
+  end
+  def get_code_page_a(this : IActiveIMMIME*, hkl : HKL, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.call(this, hkl, ucodepage)
+  end
+  def get_lang_id(this : IActiveIMMIME*, hkl : HKL, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.call(this, hkl, plid)
+  end
+  def keybd_event(this : IActiveIMMIME*, lgidime : UInt16, bvk : UInt8, bscan : UInt8, dwflags : UInt32, dwextrainfo : UInt32) : HRESULT
+    @lpVtbl.value.keybd_event.call(this, lgidime, bvk, bscan, dwflags, dwextrainfo)
+  end
+  def lock_modal(this : IActiveIMMIME*) : HRESULT
+    @lpVtbl.value.lock_modal.call(this)
+  end
+  def unlock_modal(this : IActiveIMMIME*) : HRESULT
+    @lpVtbl.value.unlock_modal.call(this)
+  end
+  def associate_context_ex(this : IActiveIMMIME*, hwnd : LibC::HANDLE, himc : HIMC, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.associate_context_ex.call(this, hwnd, himc, dwflags)
+  end
+  def disable_ime(this : IActiveIMMIME*, idthread : UInt32) : HRESULT
+    @lpVtbl.value.disable_ime.call(this, idthread)
+  end
+  def get_ime_menu_items_a(this : IActiveIMMIME*, himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOA*, pimemenu : IMEMENUITEMINFOA*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_a.call(this, himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def get_ime_menu_items_w(this : IActiveIMMIME*, himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOW*, pimemenu : IMEMENUITEMINFOW*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_w.call(this, himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def enum_input_context(this : IActiveIMMIME*, idthread : UInt32, ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.enum_input_context.call(this, idthread, ppenum)
+  end
+  def request_message_a(this : IActiveIMMIME*, himc : HIMC, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.request_message_a.call(this, himc, wparam, lparam, plresult)
+  end
+  def request_message_w(this : IActiveIMMIME*, himc : HIMC, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.request_message_w.call(this, himc, wparam, lparam, plresult)
+  end
+  def send_imca(this : IActiveIMMIME*, hwnd : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.send_imca.call(this, hwnd, umsg, wparam, lparam, plresult)
+  end
+  def send_imcw(this : IActiveIMMIME*, hwnd : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.send_imcw.call(this, hwnd, umsg, wparam, lparam, plresult)
+  end
+  def is_sleeping(this : IActiveIMMIME*) : HRESULT
+    @lpVtbl.value.is_sleeping.call(this)
+  end
+end
+struct LibWin32::IActiveIME
+  def query_interface(this : IActiveIME*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIME*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIME*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def inquire(this : IActiveIME*, dwsysteminfoflags : UInt32, pimeinfo : IMEINFO*, szwndclass : LibC::LPWSTR, pdwprivate : UInt32*) : HRESULT
+    @lpVtbl.value.inquire.call(this, dwsysteminfoflags, pimeinfo, szwndclass, pdwprivate)
+  end
+  def conversion_list(this : IActiveIME*, himc : HIMC, szsource : LibC::LPWSTR, uflag : UInt32, ubuflen : UInt32, pdest : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.conversion_list.call(this, himc, szsource, uflag, ubuflen, pdest, pucopied)
+  end
+  def configure(this : IActiveIME*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pregisterword : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure.call(this, hkl, hwnd, dwmode, pregisterword)
+  end
+  def destroy(this : IActiveIME*, ureserved : UInt32) : HRESULT
+    @lpVtbl.value.destroy.call(this, ureserved)
+  end
+  def escape(this : IActiveIME*, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape.call(this, himc, uescape, pdata, plresult)
+  end
+  def set_active_context(this : IActiveIME*, himc : HIMC, fflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_active_context.call(this, himc, fflag)
+  end
+  def process_key(this : IActiveIME*, himc : HIMC, uvirkey : UInt32, lparam : UInt32, pbkeystate : UInt8*) : HRESULT
+    @lpVtbl.value.process_key.call(this, himc, uvirkey, lparam, pbkeystate)
+  end
+  def notify(this : IActiveIME*, himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify.call(this, himc, dwaction, dwindex, dwvalue)
+  end
+  def select(this : IActiveIME*, himc : HIMC, fselect : LibC::BOOL) : HRESULT
+    @lpVtbl.value.select.call(this, himc, fselect)
+  end
+  def set_composition_string(this : IActiveIME*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def to_ascii_ex(this : IActiveIME*, uvirkey : UInt32, uscancode : UInt32, pbkeystate : UInt8*, fustate : UInt32, himc : HIMC, pdwtransbuf : UInt32*, pusize : UInt32*) : HRESULT
+    @lpVtbl.value.to_ascii_ex.call(this, uvirkey, uscancode, pbkeystate, fustate, himc, pdwtransbuf, pusize)
+  end
+  def register_word(this : IActiveIME*, szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word.call(this, szreading, dwstyle, szstring)
+  end
+  def unregister_word(this : IActiveIME*, szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word.call(this, szreading, dwstyle, szstring)
+  end
+  def get_register_word_style(this : IActiveIME*, nitem : UInt32, pstylebuf : STYLEBUFW*, pubufsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style.call(this, nitem, pstylebuf, pubufsize)
+  end
+  def enum_register_word(this : IActiveIME*, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word.call(this, szreading, dwstyle, szregister, pdata, ppenum)
+  end
+  def get_code_page_a(this : IActiveIME*, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.call(this, ucodepage)
+  end
+  def get_lang_id(this : IActiveIME*, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.call(this, plid)
+  end
+end
+struct LibWin32::IActiveIME2
+  def query_interface(this : IActiveIME2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActiveIME2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActiveIME2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def inquire(this : IActiveIME2*, dwsysteminfoflags : UInt32, pimeinfo : IMEINFO*, szwndclass : LibC::LPWSTR, pdwprivate : UInt32*) : HRESULT
+    @lpVtbl.value.inquire.call(this, dwsysteminfoflags, pimeinfo, szwndclass, pdwprivate)
+  end
+  def conversion_list(this : IActiveIME2*, himc : HIMC, szsource : LibC::LPWSTR, uflag : UInt32, ubuflen : UInt32, pdest : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.conversion_list.call(this, himc, szsource, uflag, ubuflen, pdest, pucopied)
+  end
+  def configure(this : IActiveIME2*, hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pregisterword : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure.call(this, hkl, hwnd, dwmode, pregisterword)
+  end
+  def destroy(this : IActiveIME2*, ureserved : UInt32) : HRESULT
+    @lpVtbl.value.destroy.call(this, ureserved)
+  end
+  def escape(this : IActiveIME2*, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape.call(this, himc, uescape, pdata, plresult)
+  end
+  def set_active_context(this : IActiveIME2*, himc : HIMC, fflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_active_context.call(this, himc, fflag)
+  end
+  def process_key(this : IActiveIME2*, himc : HIMC, uvirkey : UInt32, lparam : UInt32, pbkeystate : UInt8*) : HRESULT
+    @lpVtbl.value.process_key.call(this, himc, uvirkey, lparam, pbkeystate)
+  end
+  def notify(this : IActiveIME2*, himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify.call(this, himc, dwaction, dwindex, dwvalue)
+  end
+  def select(this : IActiveIME2*, himc : HIMC, fselect : LibC::BOOL) : HRESULT
+    @lpVtbl.value.select.call(this, himc, fselect)
+  end
+  def set_composition_string(this : IActiveIME2*, himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string.call(this, himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def to_ascii_ex(this : IActiveIME2*, uvirkey : UInt32, uscancode : UInt32, pbkeystate : UInt8*, fustate : UInt32, himc : HIMC, pdwtransbuf : UInt32*, pusize : UInt32*) : HRESULT
+    @lpVtbl.value.to_ascii_ex.call(this, uvirkey, uscancode, pbkeystate, fustate, himc, pdwtransbuf, pusize)
+  end
+  def register_word(this : IActiveIME2*, szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word.call(this, szreading, dwstyle, szstring)
+  end
+  def unregister_word(this : IActiveIME2*, szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word.call(this, szreading, dwstyle, szstring)
+  end
+  def get_register_word_style(this : IActiveIME2*, nitem : UInt32, pstylebuf : STYLEBUFW*, pubufsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style.call(this, nitem, pstylebuf, pubufsize)
+  end
+  def enum_register_word(this : IActiveIME2*, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word.call(this, szreading, dwstyle, szregister, pdata, ppenum)
+  end
+  def get_code_page_a(this : IActiveIME2*, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.call(this, ucodepage)
+  end
+  def get_lang_id(this : IActiveIME2*, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.call(this, plid)
+  end
+  def sleep(this : IActiveIME2*) : HRESULT
+    @lpVtbl.value.sleep.call(this)
+  end
+  def unsleep(this : IActiveIME2*, fdead : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unsleep.call(this, fdead)
+  end
 end

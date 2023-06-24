@@ -1383,3 +1383,2032 @@ lib LibWin32
   # Params # wszservername : LibC::LPWSTR [In],netisoerror : NETISO_ERROR_TYPE* [In]
   fun NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszservername : LibC::LPWSTR, netisoerror : NETISO_ERROR_TYPE*) : UInt32
 end
+struct LibWin32::IUPnPNAT
+  def query_interface(this : IUPnPNAT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUPnPNAT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUPnPNAT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUPnPNAT*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUPnPNAT*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUPnPNAT*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUPnPNAT*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_static_port_mapping_collection(this : IUPnPNAT*, ppspms : IStaticPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_static_port_mapping_collection.call(this, ppspms)
+  end
+  def get_dynamic_port_mapping_collection(this : IUPnPNAT*, ppdpms : IDynamicPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_dynamic_port_mapping_collection.call(this, ppdpms)
+  end
+  def get_nat_event_manager(this : IUPnPNAT*, ppnem : INATEventManager*) : HRESULT
+    @lpVtbl.value.get_nat_event_manager.call(this, ppnem)
+  end
+end
+struct LibWin32::INATEventManager
+  def query_interface(this : INATEventManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INATEventManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INATEventManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INATEventManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INATEventManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INATEventManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INATEventManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_external_ip_address_callback(this : INATEventManager*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.put_external_ip_address_callback.call(this, punk)
+  end
+  def put_number_of_entries_callback(this : INATEventManager*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.put_number_of_entries_callback.call(this, punk)
+  end
+end
+struct LibWin32::INATExternalIPAddressCallback
+  def query_interface(this : INATExternalIPAddressCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INATExternalIPAddressCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INATExternalIPAddressCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def new_external_ip_address(this : INATExternalIPAddressCallback*, bstrnewexternalipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.new_external_ip_address.call(this, bstrnewexternalipaddress)
+  end
+end
+struct LibWin32::INATNumberOfEntriesCallback
+  def query_interface(this : INATNumberOfEntriesCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INATNumberOfEntriesCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INATNumberOfEntriesCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def new_number_of_entries(this : INATNumberOfEntriesCallback*, lnewnumberofentries : Int32) : HRESULT
+    @lpVtbl.value.new_number_of_entries.call(this, lnewnumberofentries)
+  end
+end
+struct LibWin32::IDynamicPortMappingCollection
+  def query_interface(this : IDynamicPortMappingCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDynamicPortMappingCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDynamicPortMappingCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDynamicPortMappingCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDynamicPortMappingCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDynamicPortMappingCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDynamicPortMappingCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IDynamicPortMappingCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_item(this : IDynamicPortMappingCollection*, bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*, ppdpm : IDynamicPortMapping*) : HRESULT
+    @lpVtbl.value.get_item.call(this, bstrremotehost, lexternalport, bstrprotocol, ppdpm)
+  end
+  def get_count(this : IDynamicPortMappingCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+  def remove(this : IDynamicPortMappingCollection*, bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, bstrremotehost, lexternalport, bstrprotocol)
+  end
+  def add(this : IDynamicPortMappingCollection*, bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*, linternalport : Int32, bstrinternalclient : UInt8*, benabled : Int16, bstrdescription : UInt8*, lleaseduration : Int32, ppdpm : IDynamicPortMapping*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrremotehost, lexternalport, bstrprotocol, linternalport, bstrinternalclient, benabled, bstrdescription, lleaseduration, ppdpm)
+  end
+end
+struct LibWin32::IDynamicPortMapping
+  def query_interface(this : IDynamicPortMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDynamicPortMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDynamicPortMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDynamicPortMapping*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDynamicPortMapping*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDynamicPortMapping*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDynamicPortMapping*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_external_ip_address(this : IDynamicPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_external_ip_address.call(this, pval)
+  end
+  def get_remote_host(this : IDynamicPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_host.call(this, pval)
+  end
+  def get_external_port(this : IDynamicPortMapping*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.call(this, pval)
+  end
+  def get_protocol(this : IDynamicPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, pval)
+  end
+  def get_internal_port(this : IDynamicPortMapping*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.call(this, pval)
+  end
+  def get_internal_client(this : IDynamicPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_internal_client.call(this, pval)
+  end
+  def get_enabled(this : IDynamicPortMapping*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pval)
+  end
+  def get_description(this : IDynamicPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def get_lease_duration(this : IDynamicPortMapping*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_lease_duration.call(this, pval)
+  end
+  def renew_lease(this : IDynamicPortMapping*, lleasedurationdesired : Int32, pleasedurationreturned : Int32*) : HRESULT
+    @lpVtbl.value.renew_lease.call(this, lleasedurationdesired, pleasedurationreturned)
+  end
+  def edit_internal_client(this : IDynamicPortMapping*, bstrinternalclient : UInt8*) : HRESULT
+    @lpVtbl.value.edit_internal_client.call(this, bstrinternalclient)
+  end
+  def enable(this : IDynamicPortMapping*, vb : Int16) : HRESULT
+    @lpVtbl.value.enable.call(this, vb)
+  end
+  def edit_description(this : IDynamicPortMapping*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.edit_description.call(this, bstrdescription)
+  end
+  def edit_internal_port(this : IDynamicPortMapping*, linternalport : Int32) : HRESULT
+    @lpVtbl.value.edit_internal_port.call(this, linternalport)
+  end
+end
+struct LibWin32::IStaticPortMappingCollection
+  def query_interface(this : IStaticPortMappingCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStaticPortMappingCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStaticPortMappingCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IStaticPortMappingCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IStaticPortMappingCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IStaticPortMappingCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IStaticPortMappingCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IStaticPortMappingCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_item(this : IStaticPortMappingCollection*, lexternalport : Int32, bstrprotocol : UInt8*, ppspm : IStaticPortMapping*) : HRESULT
+    @lpVtbl.value.get_item.call(this, lexternalport, bstrprotocol, ppspm)
+  end
+  def get_count(this : IStaticPortMappingCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+  def remove(this : IStaticPortMappingCollection*, lexternalport : Int32, bstrprotocol : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, lexternalport, bstrprotocol)
+  end
+  def add(this : IStaticPortMappingCollection*, lexternalport : Int32, bstrprotocol : UInt8*, linternalport : Int32, bstrinternalclient : UInt8*, benabled : Int16, bstrdescription : UInt8*, ppspm : IStaticPortMapping*) : HRESULT
+    @lpVtbl.value.add.call(this, lexternalport, bstrprotocol, linternalport, bstrinternalclient, benabled, bstrdescription, ppspm)
+  end
+end
+struct LibWin32::IStaticPortMapping
+  def query_interface(this : IStaticPortMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStaticPortMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStaticPortMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IStaticPortMapping*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IStaticPortMapping*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IStaticPortMapping*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IStaticPortMapping*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_external_ip_address(this : IStaticPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_external_ip_address.call(this, pval)
+  end
+  def get_external_port(this : IStaticPortMapping*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.call(this, pval)
+  end
+  def get_internal_port(this : IStaticPortMapping*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.call(this, pval)
+  end
+  def get_protocol(this : IStaticPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, pval)
+  end
+  def get_internal_client(this : IStaticPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_internal_client.call(this, pval)
+  end
+  def get_enabled(this : IStaticPortMapping*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pval)
+  end
+  def get_description(this : IStaticPortMapping*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def edit_internal_client(this : IStaticPortMapping*, bstrinternalclient : UInt8*) : HRESULT
+    @lpVtbl.value.edit_internal_client.call(this, bstrinternalclient)
+  end
+  def enable(this : IStaticPortMapping*, vb : Int16) : HRESULT
+    @lpVtbl.value.enable.call(this, vb)
+  end
+  def edit_description(this : IStaticPortMapping*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.edit_description.call(this, bstrdescription)
+  end
+  def edit_internal_port(this : IStaticPortMapping*, linternalport : Int32) : HRESULT
+    @lpVtbl.value.edit_internal_port.call(this, linternalport)
+  end
+end
+struct LibWin32::IEnumNetConnection
+  def query_interface(this : IEnumNetConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumNetConnection*, celt : UInt32, rgelt : INetConnection*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumNetConnection*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetConnection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetConnection*, ppenum : IEnumNetConnection*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::INetConnection
+  def query_interface(this : INetConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect(this : INetConnection*) : HRESULT
+    @lpVtbl.value.connect.call(this)
+  end
+  def disconnect(this : INetConnection*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def delete(this : INetConnection*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def duplicate(this : INetConnection*, pszwduplicatename : LibC::LPWSTR, ppcon : INetConnection*) : HRESULT
+    @lpVtbl.value.duplicate.call(this, pszwduplicatename, ppcon)
+  end
+  def get_properties(this : INetConnection*, ppprops : NETCON_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppprops)
+  end
+  def get_ui_object_class_id(this : INetConnection*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_ui_object_class_id.call(this, pclsid)
+  end
+  def rename(this : INetConnection*, pszwnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.call(this, pszwnewname)
+  end
+end
+struct LibWin32::INetConnectionManager
+  def query_interface(this : INetConnectionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetConnectionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetConnectionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_connections(this : INetConnectionManager*, flags : NETCONMGR_ENUM_FLAGS, ppenum : IEnumNetConnection*) : HRESULT
+    @lpVtbl.value.enum_connections.call(this, flags, ppenum)
+  end
+end
+struct LibWin32::INetConnectionConnectUi
+  def query_interface(this : INetConnectionConnectUi*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetConnectionConnectUi*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetConnectionConnectUi*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_connection(this : INetConnectionConnectUi*, pcon : INetConnection) : HRESULT
+    @lpVtbl.value.set_connection.call(this, pcon)
+  end
+  def connect(this : INetConnectionConnectUi*, hwndparent : LibC::HANDLE, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.connect.call(this, hwndparent, dwflags)
+  end
+  def disconnect(this : INetConnectionConnectUi*, hwndparent : LibC::HANDLE, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.disconnect.call(this, hwndparent, dwflags)
+  end
+end
+struct LibWin32::IEnumNetSharingPortMapping
+  def query_interface(this : IEnumNetSharingPortMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetSharingPortMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetSharingPortMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumNetSharingPortMapping*, celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgvar, pceltfetched)
+  end
+  def skip(this : IEnumNetSharingPortMapping*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetSharingPortMapping*, ppenum : IEnumNetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::INetSharingPortMappingProps
+  def query_interface(this : INetSharingPortMappingProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingPortMappingProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingPortMappingProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingPortMappingProps*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingPortMappingProps*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingPortMappingProps*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingPortMappingProps*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetSharingPortMappingProps*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_ip_protocol(this : INetSharingPortMappingProps*, pucipprot : UInt8*) : HRESULT
+    @lpVtbl.value.get_ip_protocol.call(this, pucipprot)
+  end
+  def get_external_port(this : INetSharingPortMappingProps*, pusport : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.call(this, pusport)
+  end
+  def get_internal_port(this : INetSharingPortMappingProps*, pusport : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.call(this, pusport)
+  end
+  def get_options(this : INetSharingPortMappingProps*, pdwoptions : Int32*) : HRESULT
+    @lpVtbl.value.get_options.call(this, pdwoptions)
+  end
+  def get_target_name(this : INetSharingPortMappingProps*, pbstrtargetname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_name.call(this, pbstrtargetname)
+  end
+  def get_target_ip_address(this : INetSharingPortMappingProps*, pbstrtargetipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_ip_address.call(this, pbstrtargetipaddress)
+  end
+  def get_enabled(this : INetSharingPortMappingProps*, pbool : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbool)
+  end
+end
+struct LibWin32::INetSharingPortMapping
+  def query_interface(this : INetSharingPortMapping*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingPortMapping*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingPortMapping*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingPortMapping*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingPortMapping*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingPortMapping*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingPortMapping*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def disable(this : INetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.disable.call(this)
+  end
+  def enable(this : INetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.enable.call(this)
+  end
+  def get_properties(this : INetSharingPortMapping*, ppnspmp : INetSharingPortMappingProps*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ppnspmp)
+  end
+  def delete(this : INetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IEnumNetSharingEveryConnection
+  def query_interface(this : IEnumNetSharingEveryConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetSharingEveryConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetSharingEveryConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumNetSharingEveryConnection*, celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgvar, pceltfetched)
+  end
+  def skip(this : IEnumNetSharingEveryConnection*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetSharingEveryConnection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetSharingEveryConnection*, ppenum : IEnumNetSharingEveryConnection*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumNetSharingPublicConnection
+  def query_interface(this : IEnumNetSharingPublicConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetSharingPublicConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetSharingPublicConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumNetSharingPublicConnection*, celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgvar, pceltfetched)
+  end
+  def skip(this : IEnumNetSharingPublicConnection*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetSharingPublicConnection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetSharingPublicConnection*, ppenum : IEnumNetSharingPublicConnection*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IEnumNetSharingPrivateConnection
+  def query_interface(this : IEnumNetSharingPrivateConnection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumNetSharingPrivateConnection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumNetSharingPrivateConnection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumNetSharingPrivateConnection*, celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgvar, pceltfetched)
+  end
+  def skip(this : IEnumNetSharingPrivateConnection*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumNetSharingPrivateConnection*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumNetSharingPrivateConnection*, ppenum : IEnumNetSharingPrivateConnection*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::INetSharingPortMappingCollection
+  def query_interface(this : INetSharingPortMappingCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingPortMappingCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingPortMappingCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingPortMappingCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingPortMappingCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingPortMappingCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingPortMappingCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : INetSharingPortMappingCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_count(this : INetSharingPortMappingCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+end
+struct LibWin32::INetConnectionProps
+  def query_interface(this : INetConnectionProps*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetConnectionProps*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetConnectionProps*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetConnectionProps*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetConnectionProps*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetConnectionProps*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetConnectionProps*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_guid(this : INetConnectionProps*, pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pbstrguid)
+  end
+  def get_name(this : INetConnectionProps*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_device_name(this : INetConnectionProps*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_status(this : INetConnectionProps*, pstatus : NETCON_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_media_type(this : INetConnectionProps*, pmediatype : NETCON_MEDIATYPE*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, pmediatype)
+  end
+  def get_characteristics(this : INetConnectionProps*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.call(this, pdwflags)
+  end
+end
+struct LibWin32::INetSharingConfiguration
+  def query_interface(this : INetSharingConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingConfiguration*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingConfiguration*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingConfiguration*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingConfiguration*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_sharing_enabled(this : INetSharingConfiguration*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_sharing_enabled.call(this, pbenabled)
+  end
+  def get_sharing_connection_type(this : INetSharingConfiguration*, ptype : SHARINGCONNECTIONTYPE*) : HRESULT
+    @lpVtbl.value.get_sharing_connection_type.call(this, ptype)
+  end
+  def disable_sharing(this : INetSharingConfiguration*) : HRESULT
+    @lpVtbl.value.disable_sharing.call(this)
+  end
+  def enable_sharing(this : INetSharingConfiguration*, type : SHARINGCONNECTIONTYPE) : HRESULT
+    @lpVtbl.value.enable_sharing.call(this, type)
+  end
+  def get_internet_firewall_enabled(this : INetSharingConfiguration*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_internet_firewall_enabled.call(this, pbenabled)
+  end
+  def disable_internet_firewall(this : INetSharingConfiguration*) : HRESULT
+    @lpVtbl.value.disable_internet_firewall.call(this)
+  end
+  def enable_internet_firewall(this : INetSharingConfiguration*) : HRESULT
+    @lpVtbl.value.enable_internet_firewall.call(this)
+  end
+  def get_enum_port_mappings(this : INetSharingConfiguration*, flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_enum_port_mappings.call(this, flags, ppcoll)
+  end
+  def add_port_mapping(this : INetSharingConfiguration*, bstrname : UInt8*, ucipprotocol : UInt8, usexternalport : UInt16, usinternalport : UInt16, dwoptions : UInt32, bstrtargetnameoripaddress : UInt8*, etargettype : ICS_TARGETTYPE, ppmapping : INetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.add_port_mapping.call(this, bstrname, ucipprotocol, usexternalport, usinternalport, dwoptions, bstrtargetnameoripaddress, etargettype, ppmapping)
+  end
+  def remove_port_mapping(this : INetSharingConfiguration*, pmapping : INetSharingPortMapping) : HRESULT
+    @lpVtbl.value.remove_port_mapping.call(this, pmapping)
+  end
+end
+struct LibWin32::INetSharingEveryConnectionCollection
+  def query_interface(this : INetSharingEveryConnectionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingEveryConnectionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingEveryConnectionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingEveryConnectionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingEveryConnectionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingEveryConnectionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingEveryConnectionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : INetSharingEveryConnectionCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_count(this : INetSharingEveryConnectionCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+end
+struct LibWin32::INetSharingPublicConnectionCollection
+  def query_interface(this : INetSharingPublicConnectionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingPublicConnectionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingPublicConnectionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingPublicConnectionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingPublicConnectionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingPublicConnectionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingPublicConnectionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : INetSharingPublicConnectionCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_count(this : INetSharingPublicConnectionCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+end
+struct LibWin32::INetSharingPrivateConnectionCollection
+  def query_interface(this : INetSharingPrivateConnectionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingPrivateConnectionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingPrivateConnectionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingPrivateConnectionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingPrivateConnectionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingPrivateConnectionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingPrivateConnectionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : INetSharingPrivateConnectionCollection*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, pval)
+  end
+  def get_count(this : INetSharingPrivateConnectionCollection*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pval)
+  end
+end
+struct LibWin32::INetSharingManager
+  def query_interface(this : INetSharingManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetSharingManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetSharingManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetSharingManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetSharingManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetSharingManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetSharingManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_sharing_installed(this : INetSharingManager*, pbinstalled : Int16*) : HRESULT
+    @lpVtbl.value.get_sharing_installed.call(this, pbinstalled)
+  end
+  def get_enum_public_connections(this : INetSharingManager*, flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPublicConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_public_connections.call(this, flags, ppcoll)
+  end
+  def get_enum_private_connections(this : INetSharingManager*, flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPrivateConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_private_connections.call(this, flags, ppcoll)
+  end
+  def get_i_net_sharing_configuration_for_i_net_connection(this : INetSharingManager*, pnetconnection : INetConnection, ppnetsharingconfiguration : INetSharingConfiguration*) : HRESULT
+    @lpVtbl.value.get_i_net_sharing_configuration_for_i_net_connection.call(this, pnetconnection, ppnetsharingconfiguration)
+  end
+  def get_enum_every_connection(this : INetSharingManager*, ppcoll : INetSharingEveryConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_every_connection.call(this, ppcoll)
+  end
+  def get_net_connection_props(this : INetSharingManager*, pnetconnection : INetConnection, ppprops : INetConnectionProps*) : HRESULT
+    @lpVtbl.value.get_net_connection_props.call(this, pnetconnection, ppprops)
+  end
+end
+struct LibWin32::INetFwRemoteAdminSettings
+  def query_interface(this : INetFwRemoteAdminSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwRemoteAdminSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwRemoteAdminSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwRemoteAdminSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwRemoteAdminSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwRemoteAdminSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwRemoteAdminSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_ip_version(this : INetFwRemoteAdminSettings*, ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.call(this, ipversion)
+  end
+  def put_ip_version(this : INetFwRemoteAdminSettings*, ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.call(this, ipversion)
+  end
+  def get_scope(this : INetFwRemoteAdminSettings*, scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
+  end
+  def put_scope(this : INetFwRemoteAdminSettings*, scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.call(this, scope)
+  end
+  def get_remote_addresses(this : INetFwRemoteAdminSettings*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwRemoteAdminSettings*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_enabled(this : INetFwRemoteAdminSettings*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwRemoteAdminSettings*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+end
+struct LibWin32::INetFwIcmpSettings
+  def query_interface(this : INetFwIcmpSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwIcmpSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwIcmpSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwIcmpSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwIcmpSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwIcmpSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwIcmpSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_allow_outbound_destination_unreachable(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_destination_unreachable.call(this, allow)
+  end
+  def put_allow_outbound_destination_unreachable(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_destination_unreachable.call(this, allow)
+  end
+  def get_allow_redirect(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_redirect.call(this, allow)
+  end
+  def put_allow_redirect(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_redirect.call(this, allow)
+  end
+  def get_allow_inbound_echo_request(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_echo_request.call(this, allow)
+  end
+  def put_allow_inbound_echo_request(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_echo_request.call(this, allow)
+  end
+  def get_allow_outbound_time_exceeded(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_time_exceeded.call(this, allow)
+  end
+  def put_allow_outbound_time_exceeded(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_time_exceeded.call(this, allow)
+  end
+  def get_allow_outbound_parameter_problem(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_parameter_problem.call(this, allow)
+  end
+  def put_allow_outbound_parameter_problem(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_parameter_problem.call(this, allow)
+  end
+  def get_allow_outbound_source_quench(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_source_quench.call(this, allow)
+  end
+  def put_allow_outbound_source_quench(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_source_quench.call(this, allow)
+  end
+  def get_allow_inbound_router_request(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_router_request.call(this, allow)
+  end
+  def put_allow_inbound_router_request(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_router_request.call(this, allow)
+  end
+  def get_allow_inbound_timestamp_request(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_timestamp_request.call(this, allow)
+  end
+  def put_allow_inbound_timestamp_request(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_timestamp_request.call(this, allow)
+  end
+  def get_allow_inbound_mask_request(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_mask_request.call(this, allow)
+  end
+  def put_allow_inbound_mask_request(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_mask_request.call(this, allow)
+  end
+  def get_allow_outbound_packet_too_big(this : INetFwIcmpSettings*, allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_packet_too_big.call(this, allow)
+  end
+  def put_allow_outbound_packet_too_big(this : INetFwIcmpSettings*, allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_packet_too_big.call(this, allow)
+  end
+end
+struct LibWin32::INetFwOpenPort
+  def query_interface(this : INetFwOpenPort*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwOpenPort*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwOpenPort*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwOpenPort*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwOpenPort*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwOpenPort*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwOpenPort*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwOpenPort*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : INetFwOpenPort*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_ip_version(this : INetFwOpenPort*, ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.call(this, ipversion)
+  end
+  def put_ip_version(this : INetFwOpenPort*, ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.call(this, ipversion)
+  end
+  def get_protocol(this : INetFwOpenPort*, ipprotocol : NET_FW_IP_PROTOCOL*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, ipprotocol)
+  end
+  def put_protocol(this : INetFwOpenPort*, ipprotocol : NET_FW_IP_PROTOCOL) : HRESULT
+    @lpVtbl.value.put_protocol.call(this, ipprotocol)
+  end
+  def get_port(this : INetFwOpenPort*, portnumber : Int32*) : HRESULT
+    @lpVtbl.value.get_port.call(this, portnumber)
+  end
+  def put_port(this : INetFwOpenPort*, portnumber : Int32) : HRESULT
+    @lpVtbl.value.put_port.call(this, portnumber)
+  end
+  def get_scope(this : INetFwOpenPort*, scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
+  end
+  def put_scope(this : INetFwOpenPort*, scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.call(this, scope)
+  end
+  def get_remote_addresses(this : INetFwOpenPort*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwOpenPort*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_enabled(this : INetFwOpenPort*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwOpenPort*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_built_in(this : INetFwOpenPort*, builtin : Int16*) : HRESULT
+    @lpVtbl.value.get_built_in.call(this, builtin)
+  end
+end
+struct LibWin32::INetFwOpenPorts
+  def query_interface(this : INetFwOpenPorts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwOpenPorts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwOpenPorts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwOpenPorts*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwOpenPorts*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwOpenPorts*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwOpenPorts*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : INetFwOpenPorts*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def add(this : INetFwOpenPorts*, port : INetFwOpenPort) : HRESULT
+    @lpVtbl.value.add.call(this, port)
+  end
+  def remove(this : INetFwOpenPorts*, portnumber : Int32, ipprotocol : NET_FW_IP_PROTOCOL) : HRESULT
+    @lpVtbl.value.remove.call(this, portnumber, ipprotocol)
+  end
+  def item(this : INetFwOpenPorts*, portnumber : Int32, ipprotocol : NET_FW_IP_PROTOCOL, openport : INetFwOpenPort*) : HRESULT
+    @lpVtbl.value.item.call(this, portnumber, ipprotocol, openport)
+  end
+  def get__new_enum(this : INetFwOpenPorts*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::INetFwService
+  def query_interface(this : INetFwService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwService*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwService*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwService*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwService*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwService*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_type(this : INetFwService*, type : NET_FW_SERVICE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_customized(this : INetFwService*, customized : Int16*) : HRESULT
+    @lpVtbl.value.get_customized.call(this, customized)
+  end
+  def get_ip_version(this : INetFwService*, ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.call(this, ipversion)
+  end
+  def put_ip_version(this : INetFwService*, ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.call(this, ipversion)
+  end
+  def get_scope(this : INetFwService*, scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
+  end
+  def put_scope(this : INetFwService*, scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.call(this, scope)
+  end
+  def get_remote_addresses(this : INetFwService*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwService*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_enabled(this : INetFwService*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwService*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_globally_open_ports(this : INetFwService*, openports : INetFwOpenPorts*) : HRESULT
+    @lpVtbl.value.get_globally_open_ports.call(this, openports)
+  end
+end
+struct LibWin32::INetFwServices
+  def query_interface(this : INetFwServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwServices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwServices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwServices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwServices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : INetFwServices*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def item(this : INetFwServices*, svctype : NET_FW_SERVICE_TYPE, service : INetFwService*) : HRESULT
+    @lpVtbl.value.item.call(this, svctype, service)
+  end
+  def get__new_enum(this : INetFwServices*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::INetFwAuthorizedApplication
+  def query_interface(this : INetFwAuthorizedApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwAuthorizedApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwAuthorizedApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwAuthorizedApplication*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwAuthorizedApplication*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwAuthorizedApplication*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwAuthorizedApplication*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwAuthorizedApplication*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : INetFwAuthorizedApplication*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_process_image_file_name(this : INetFwAuthorizedApplication*, imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_process_image_file_name.call(this, imagefilename)
+  end
+  def put_process_image_file_name(this : INetFwAuthorizedApplication*, imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_process_image_file_name.call(this, imagefilename)
+  end
+  def get_ip_version(this : INetFwAuthorizedApplication*, ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.call(this, ipversion)
+  end
+  def put_ip_version(this : INetFwAuthorizedApplication*, ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.call(this, ipversion)
+  end
+  def get_scope(this : INetFwAuthorizedApplication*, scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, scope)
+  end
+  def put_scope(this : INetFwAuthorizedApplication*, scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.call(this, scope)
+  end
+  def get_remote_addresses(this : INetFwAuthorizedApplication*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwAuthorizedApplication*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_enabled(this : INetFwAuthorizedApplication*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwAuthorizedApplication*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+end
+struct LibWin32::INetFwAuthorizedApplications
+  def query_interface(this : INetFwAuthorizedApplications*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwAuthorizedApplications*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwAuthorizedApplications*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwAuthorizedApplications*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwAuthorizedApplications*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwAuthorizedApplications*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwAuthorizedApplications*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : INetFwAuthorizedApplications*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def add(this : INetFwAuthorizedApplications*, app : INetFwAuthorizedApplication) : HRESULT
+    @lpVtbl.value.add.call(this, app)
+  end
+  def remove(this : INetFwAuthorizedApplications*, imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, imagefilename)
+  end
+  def item(this : INetFwAuthorizedApplications*, imagefilename : UInt8*, app : INetFwAuthorizedApplication*) : HRESULT
+    @lpVtbl.value.item.call(this, imagefilename, app)
+  end
+  def get__new_enum(this : INetFwAuthorizedApplications*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::INetFwRule
+  def query_interface(this : INetFwRule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwRule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwRule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwRule*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwRule*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : INetFwRule*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_description(this : INetFwRule*, desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, desc)
+  end
+  def put_description(this : INetFwRule*, desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, desc)
+  end
+  def get_application_name(this : INetFwRule*, imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.call(this, imagefilename)
+  end
+  def put_application_name(this : INetFwRule*, imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.call(this, imagefilename)
+  end
+  def get_service_name(this : INetFwRule*, servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.call(this, servicename)
+  end
+  def put_service_name(this : INetFwRule*, servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.call(this, servicename)
+  end
+  def get_protocol(this : INetFwRule*, protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, protocol)
+  end
+  def put_protocol(this : INetFwRule*, protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.call(this, protocol)
+  end
+  def get_local_ports(this : INetFwRule*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.call(this, portnumbers)
+  end
+  def put_local_ports(this : INetFwRule*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.call(this, portnumbers)
+  end
+  def get_remote_ports(this : INetFwRule*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.call(this, portnumbers)
+  end
+  def put_remote_ports(this : INetFwRule*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.call(this, portnumbers)
+  end
+  def get_local_addresses(this : INetFwRule*, localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.call(this, localaddrs)
+  end
+  def put_local_addresses(this : INetFwRule*, localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.call(this, localaddrs)
+  end
+  def get_remote_addresses(this : INetFwRule*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwRule*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_icmp_types_and_codes(this : INetFwRule*, icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(this : INetFwRule*, icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def get_direction(this : INetFwRule*, dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.call(this, dir)
+  end
+  def put_direction(this : INetFwRule*, dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.call(this, dir)
+  end
+  def get_interfaces(this : INetFwRule*, interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.call(this, interfaces)
+  end
+  def put_interfaces(this : INetFwRule*, interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.call(this, interfaces)
+  end
+  def get_interface_types(this : INetFwRule*, interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.call(this, interfacetypes)
+  end
+  def put_interface_types(this : INetFwRule*, interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.call(this, interfacetypes)
+  end
+  def get_enabled(this : INetFwRule*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwRule*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_grouping(this : INetFwRule*, context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.call(this, context)
+  end
+  def put_grouping(this : INetFwRule*, context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.call(this, context)
+  end
+  def get_profiles(this : INetFwRule*, profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.call(this, profiletypesbitmask)
+  end
+  def put_profiles(this : INetFwRule*, profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.call(this, profiletypesbitmask)
+  end
+  def get_edge_traversal(this : INetFwRule*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.call(this, enabled)
+  end
+  def put_edge_traversal(this : INetFwRule*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.call(this, enabled)
+  end
+  def get_action(this : INetFwRule*, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.call(this, action)
+  end
+  def put_action(this : INetFwRule*, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.call(this, action)
+  end
+end
+struct LibWin32::INetFwRule2
+  def query_interface(this : INetFwRule2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwRule2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwRule2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwRule2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwRule2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwRule2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwRule2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwRule2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : INetFwRule2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_description(this : INetFwRule2*, desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, desc)
+  end
+  def put_description(this : INetFwRule2*, desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, desc)
+  end
+  def get_application_name(this : INetFwRule2*, imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.call(this, imagefilename)
+  end
+  def put_application_name(this : INetFwRule2*, imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.call(this, imagefilename)
+  end
+  def get_service_name(this : INetFwRule2*, servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.call(this, servicename)
+  end
+  def put_service_name(this : INetFwRule2*, servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.call(this, servicename)
+  end
+  def get_protocol(this : INetFwRule2*, protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, protocol)
+  end
+  def put_protocol(this : INetFwRule2*, protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.call(this, protocol)
+  end
+  def get_local_ports(this : INetFwRule2*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.call(this, portnumbers)
+  end
+  def put_local_ports(this : INetFwRule2*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.call(this, portnumbers)
+  end
+  def get_remote_ports(this : INetFwRule2*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.call(this, portnumbers)
+  end
+  def put_remote_ports(this : INetFwRule2*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.call(this, portnumbers)
+  end
+  def get_local_addresses(this : INetFwRule2*, localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.call(this, localaddrs)
+  end
+  def put_local_addresses(this : INetFwRule2*, localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.call(this, localaddrs)
+  end
+  def get_remote_addresses(this : INetFwRule2*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwRule2*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_icmp_types_and_codes(this : INetFwRule2*, icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(this : INetFwRule2*, icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def get_direction(this : INetFwRule2*, dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.call(this, dir)
+  end
+  def put_direction(this : INetFwRule2*, dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.call(this, dir)
+  end
+  def get_interfaces(this : INetFwRule2*, interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.call(this, interfaces)
+  end
+  def put_interfaces(this : INetFwRule2*, interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.call(this, interfaces)
+  end
+  def get_interface_types(this : INetFwRule2*, interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.call(this, interfacetypes)
+  end
+  def put_interface_types(this : INetFwRule2*, interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.call(this, interfacetypes)
+  end
+  def get_enabled(this : INetFwRule2*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwRule2*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_grouping(this : INetFwRule2*, context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.call(this, context)
+  end
+  def put_grouping(this : INetFwRule2*, context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.call(this, context)
+  end
+  def get_profiles(this : INetFwRule2*, profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.call(this, profiletypesbitmask)
+  end
+  def put_profiles(this : INetFwRule2*, profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.call(this, profiletypesbitmask)
+  end
+  def get_edge_traversal(this : INetFwRule2*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.call(this, enabled)
+  end
+  def put_edge_traversal(this : INetFwRule2*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.call(this, enabled)
+  end
+  def get_action(this : INetFwRule2*, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.call(this, action)
+  end
+  def put_action(this : INetFwRule2*, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.call(this, action)
+  end
+  def get_edge_traversal_options(this : INetFwRule2*, loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_edge_traversal_options.call(this, loptions)
+  end
+  def put_edge_traversal_options(this : INetFwRule2*, loptions : Int32) : HRESULT
+    @lpVtbl.value.put_edge_traversal_options.call(this, loptions)
+  end
+end
+struct LibWin32::INetFwRule3
+  def query_interface(this : INetFwRule3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwRule3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwRule3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwRule3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwRule3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwRule3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwRule3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : INetFwRule3*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : INetFwRule3*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_description(this : INetFwRule3*, desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, desc)
+  end
+  def put_description(this : INetFwRule3*, desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, desc)
+  end
+  def get_application_name(this : INetFwRule3*, imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.call(this, imagefilename)
+  end
+  def put_application_name(this : INetFwRule3*, imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.call(this, imagefilename)
+  end
+  def get_service_name(this : INetFwRule3*, servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.call(this, servicename)
+  end
+  def put_service_name(this : INetFwRule3*, servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.call(this, servicename)
+  end
+  def get_protocol(this : INetFwRule3*, protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, protocol)
+  end
+  def put_protocol(this : INetFwRule3*, protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.call(this, protocol)
+  end
+  def get_local_ports(this : INetFwRule3*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.call(this, portnumbers)
+  end
+  def put_local_ports(this : INetFwRule3*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.call(this, portnumbers)
+  end
+  def get_remote_ports(this : INetFwRule3*, portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.call(this, portnumbers)
+  end
+  def put_remote_ports(this : INetFwRule3*, portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.call(this, portnumbers)
+  end
+  def get_local_addresses(this : INetFwRule3*, localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.call(this, localaddrs)
+  end
+  def put_local_addresses(this : INetFwRule3*, localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.call(this, localaddrs)
+  end
+  def get_remote_addresses(this : INetFwRule3*, remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.call(this, remoteaddrs)
+  end
+  def put_remote_addresses(this : INetFwRule3*, remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.call(this, remoteaddrs)
+  end
+  def get_icmp_types_and_codes(this : INetFwRule3*, icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(this : INetFwRule3*, icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.call(this, icmptypesandcodes)
+  end
+  def get_direction(this : INetFwRule3*, dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.call(this, dir)
+  end
+  def put_direction(this : INetFwRule3*, dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.call(this, dir)
+  end
+  def get_interfaces(this : INetFwRule3*, interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.call(this, interfaces)
+  end
+  def put_interfaces(this : INetFwRule3*, interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.call(this, interfaces)
+  end
+  def get_interface_types(this : INetFwRule3*, interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.call(this, interfacetypes)
+  end
+  def put_interface_types(this : INetFwRule3*, interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.call(this, interfacetypes)
+  end
+  def get_enabled(this : INetFwRule3*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : INetFwRule3*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_grouping(this : INetFwRule3*, context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.call(this, context)
+  end
+  def put_grouping(this : INetFwRule3*, context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.call(this, context)
+  end
+  def get_profiles(this : INetFwRule3*, profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.call(this, profiletypesbitmask)
+  end
+  def put_profiles(this : INetFwRule3*, profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.call(this, profiletypesbitmask)
+  end
+  def get_edge_traversal(this : INetFwRule3*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.call(this, enabled)
+  end
+  def put_edge_traversal(this : INetFwRule3*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.call(this, enabled)
+  end
+  def get_action(this : INetFwRule3*, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.call(this, action)
+  end
+  def put_action(this : INetFwRule3*, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.call(this, action)
+  end
+  def get_edge_traversal_options(this : INetFwRule3*, loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_edge_traversal_options.call(this, loptions)
+  end
+  def put_edge_traversal_options(this : INetFwRule3*, loptions : Int32) : HRESULT
+    @lpVtbl.value.put_edge_traversal_options.call(this, loptions)
+  end
+  def get_local_app_package_id(this : INetFwRule3*, wszpackageid : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_app_package_id.call(this, wszpackageid)
+  end
+  def put_local_app_package_id(this : INetFwRule3*, wszpackageid : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_app_package_id.call(this, wszpackageid)
+  end
+  def get_local_user_owner(this : INetFwRule3*, wszuserowner : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_owner.call(this, wszuserowner)
+  end
+  def put_local_user_owner(this : INetFwRule3*, wszuserowner : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_owner.call(this, wszuserowner)
+  end
+  def get_local_user_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_authorized_list.call(this, wszuserauthlist)
+  end
+  def put_local_user_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_authorized_list.call(this, wszuserauthlist)
+  end
+  def get_remote_user_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_user_authorized_list.call(this, wszuserauthlist)
+  end
+  def put_remote_user_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_user_authorized_list.call(this, wszuserauthlist)
+  end
+  def get_remote_machine_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_machine_authorized_list.call(this, wszuserauthlist)
+  end
+  def put_remote_machine_authorized_list(this : INetFwRule3*, wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_machine_authorized_list.call(this, wszuserauthlist)
+  end
+  def get_secure_flags(this : INetFwRule3*, loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_secure_flags.call(this, loptions)
+  end
+  def put_secure_flags(this : INetFwRule3*, loptions : Int32) : HRESULT
+    @lpVtbl.value.put_secure_flags.call(this, loptions)
+  end
+end
+struct LibWin32::INetFwRules
+  def query_interface(this : INetFwRules*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwRules*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwRules*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwRules*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwRules*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwRules*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwRules*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : INetFwRules*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def add(this : INetFwRules*, rule : INetFwRule) : HRESULT
+    @lpVtbl.value.add.call(this, rule)
+  end
+  def remove(this : INetFwRules*, name : UInt8*) : HRESULT
+    @lpVtbl.value.remove.call(this, name)
+  end
+  def item(this : INetFwRules*, name : UInt8*, rule : INetFwRule*) : HRESULT
+    @lpVtbl.value.item.call(this, name, rule)
+  end
+  def get__new_enum(this : INetFwRules*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end
+struct LibWin32::INetFwServiceRestriction
+  def query_interface(this : INetFwServiceRestriction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwServiceRestriction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwServiceRestriction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwServiceRestriction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwServiceRestriction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwServiceRestriction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwServiceRestriction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def restrict_service(this : INetFwServiceRestriction*, servicename : UInt8*, appname : UInt8*, restrictservice : Int16, servicesidrestricted : Int16) : HRESULT
+    @lpVtbl.value.restrict_service.call(this, servicename, appname, restrictservice, servicesidrestricted)
+  end
+  def service_restricted(this : INetFwServiceRestriction*, servicename : UInt8*, appname : UInt8*, servicerestricted : Int16*) : HRESULT
+    @lpVtbl.value.service_restricted.call(this, servicename, appname, servicerestricted)
+  end
+  def get_rules(this : INetFwServiceRestriction*, rules : INetFwRules*) : HRESULT
+    @lpVtbl.value.get_rules.call(this, rules)
+  end
+end
+struct LibWin32::INetFwProfile
+  def query_interface(this : INetFwProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwProfile*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwProfile*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwProfile*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwProfile*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : INetFwProfile*, type : NET_FW_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_firewall_enabled(this : INetFwProfile*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_firewall_enabled.call(this, enabled)
+  end
+  def put_firewall_enabled(this : INetFwProfile*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_firewall_enabled.call(this, enabled)
+  end
+  def get_exceptions_not_allowed(this : INetFwProfile*, notallowed : Int16*) : HRESULT
+    @lpVtbl.value.get_exceptions_not_allowed.call(this, notallowed)
+  end
+  def put_exceptions_not_allowed(this : INetFwProfile*, notallowed : Int16) : HRESULT
+    @lpVtbl.value.put_exceptions_not_allowed.call(this, notallowed)
+  end
+  def get_notifications_disabled(this : INetFwProfile*, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_notifications_disabled.call(this, disabled)
+  end
+  def put_notifications_disabled(this : INetFwProfile*, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_notifications_disabled.call(this, disabled)
+  end
+  def get_unicast_responses_to_multicast_broadcast_disabled(this : INetFwProfile*, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_unicast_responses_to_multicast_broadcast_disabled.call(this, disabled)
+  end
+  def put_unicast_responses_to_multicast_broadcast_disabled(this : INetFwProfile*, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_unicast_responses_to_multicast_broadcast_disabled.call(this, disabled)
+  end
+  def get_remote_admin_settings(this : INetFwProfile*, remoteadminsettings : INetFwRemoteAdminSettings*) : HRESULT
+    @lpVtbl.value.get_remote_admin_settings.call(this, remoteadminsettings)
+  end
+  def get_icmp_settings(this : INetFwProfile*, icmpsettings : INetFwIcmpSettings*) : HRESULT
+    @lpVtbl.value.get_icmp_settings.call(this, icmpsettings)
+  end
+  def get_globally_open_ports(this : INetFwProfile*, openports : INetFwOpenPorts*) : HRESULT
+    @lpVtbl.value.get_globally_open_ports.call(this, openports)
+  end
+  def get_services(this : INetFwProfile*, services : INetFwServices*) : HRESULT
+    @lpVtbl.value.get_services.call(this, services)
+  end
+  def get_authorized_applications(this : INetFwProfile*, apps : INetFwAuthorizedApplications*) : HRESULT
+    @lpVtbl.value.get_authorized_applications.call(this, apps)
+  end
+end
+struct LibWin32::INetFwPolicy
+  def query_interface(this : INetFwPolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwPolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwPolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwPolicy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwPolicy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwPolicy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwPolicy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_profile(this : INetFwPolicy*, profile : INetFwProfile*) : HRESULT
+    @lpVtbl.value.get_current_profile.call(this, profile)
+  end
+  def get_profile_by_type(this : INetFwPolicy*, profiletype : NET_FW_PROFILE_TYPE, profile : INetFwProfile*) : HRESULT
+    @lpVtbl.value.get_profile_by_type.call(this, profiletype, profile)
+  end
+end
+struct LibWin32::INetFwPolicy2
+  def query_interface(this : INetFwPolicy2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwPolicy2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwPolicy2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwPolicy2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwPolicy2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwPolicy2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwPolicy2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_profile_types(this : INetFwPolicy2*, profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_current_profile_types.call(this, profiletypesbitmask)
+  end
+  def get_firewall_enabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_firewall_enabled.call(this, profiletype, enabled)
+  end
+  def put_firewall_enabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_firewall_enabled.call(this, profiletype, enabled)
+  end
+  def get_excluded_interfaces(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_excluded_interfaces.call(this, profiletype, interfaces)
+  end
+  def put_excluded_interfaces(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_excluded_interfaces.call(this, profiletype, interfaces)
+  end
+  def get_block_all_inbound_traffic(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, block : Int16*) : HRESULT
+    @lpVtbl.value.get_block_all_inbound_traffic.call(this, profiletype, block)
+  end
+  def put_block_all_inbound_traffic(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, block : Int16) : HRESULT
+    @lpVtbl.value.put_block_all_inbound_traffic.call(this, profiletype, block)
+  end
+  def get_notifications_disabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_notifications_disabled.call(this, profiletype, disabled)
+  end
+  def put_notifications_disabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_notifications_disabled.call(this, profiletype, disabled)
+  end
+  def get_unicast_responses_to_multicast_broadcast_disabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_unicast_responses_to_multicast_broadcast_disabled.call(this, profiletype, disabled)
+  end
+  def put_unicast_responses_to_multicast_broadcast_disabled(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_unicast_responses_to_multicast_broadcast_disabled.call(this, profiletype, disabled)
+  end
+  def get_rules(this : INetFwPolicy2*, rules : INetFwRules*) : HRESULT
+    @lpVtbl.value.get_rules.call(this, rules)
+  end
+  def get_service_restriction(this : INetFwPolicy2*, servicerestriction : INetFwServiceRestriction*) : HRESULT
+    @lpVtbl.value.get_service_restriction.call(this, servicerestriction)
+  end
+  def enable_rule_group(this : INetFwPolicy2*, profiletypesbitmask : Int32, group : UInt8*, enable : Int16) : HRESULT
+    @lpVtbl.value.enable_rule_group.call(this, profiletypesbitmask, group, enable)
+  end
+  def is_rule_group_enabled(this : INetFwPolicy2*, profiletypesbitmask : Int32, group : UInt8*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.is_rule_group_enabled.call(this, profiletypesbitmask, group, enabled)
+  end
+  def restore_local_firewall_defaults(this : INetFwPolicy2*) : HRESULT
+    @lpVtbl.value.restore_local_firewall_defaults.call(this)
+  end
+  def get_default_inbound_action(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_default_inbound_action.call(this, profiletype, action)
+  end
+  def put_default_inbound_action(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_default_inbound_action.call(this, profiletype, action)
+  end
+  def get_default_outbound_action(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_default_outbound_action.call(this, profiletype, action)
+  end
+  def put_default_outbound_action(this : INetFwPolicy2*, profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_default_outbound_action.call(this, profiletype, action)
+  end
+  def get_is_rule_group_currently_enabled(this : INetFwPolicy2*, group : UInt8*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_is_rule_group_currently_enabled.call(this, group, enabled)
+  end
+  def get_local_policy_modify_state(this : INetFwPolicy2*, modifystate : NET_FW_MODIFY_STATE*) : HRESULT
+    @lpVtbl.value.get_local_policy_modify_state.call(this, modifystate)
+  end
+end
+struct LibWin32::INetFwMgr
+  def query_interface(this : INetFwMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwMgr*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwMgr*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwMgr*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwMgr*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_local_policy(this : INetFwMgr*, localpolicy : INetFwPolicy*) : HRESULT
+    @lpVtbl.value.get_local_policy.call(this, localpolicy)
+  end
+  def get_current_profile_type(this : INetFwMgr*, profiletype : NET_FW_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_current_profile_type.call(this, profiletype)
+  end
+  def restore_defaults(this : INetFwMgr*) : HRESULT
+    @lpVtbl.value.restore_defaults.call(this)
+  end
+  def is_port_allowed(this : INetFwMgr*, imagefilename : UInt8*, ipversion : NET_FW_IP_VERSION, portnumber : Int32, localaddress : UInt8*, ipprotocol : NET_FW_IP_PROTOCOL, allowed : VARIANT*, restricted : VARIANT*) : HRESULT
+    @lpVtbl.value.is_port_allowed.call(this, imagefilename, ipversion, portnumber, localaddress, ipprotocol, allowed, restricted)
+  end
+  def is_icmp_type_allowed(this : INetFwMgr*, ipversion : NET_FW_IP_VERSION, localaddress : UInt8*, type : UInt8, allowed : VARIANT*, restricted : VARIANT*) : HRESULT
+    @lpVtbl.value.is_icmp_type_allowed.call(this, ipversion, localaddress, type, allowed, restricted)
+  end
+end
+struct LibWin32::INetFwProduct
+  def query_interface(this : INetFwProduct*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwProduct*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwProduct*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwProduct*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwProduct*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwProduct*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwProduct*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_rule_categories(this : INetFwProduct*, rulecategories : VARIANT*) : HRESULT
+    @lpVtbl.value.get_rule_categories.call(this, rulecategories)
+  end
+  def put_rule_categories(this : INetFwProduct*, rulecategories : VARIANT) : HRESULT
+    @lpVtbl.value.put_rule_categories.call(this, rulecategories)
+  end
+  def get_display_name(this : INetFwProduct*, displayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, displayname)
+  end
+  def put_display_name(this : INetFwProduct*, displayname : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.call(this, displayname)
+  end
+  def get_path_to_signed_product_exe(this : INetFwProduct*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_to_signed_product_exe.call(this, path)
+  end
+end
+struct LibWin32::INetFwProducts
+  def query_interface(this : INetFwProducts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetFwProducts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetFwProducts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : INetFwProducts*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : INetFwProducts*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : INetFwProducts*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : INetFwProducts*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : INetFwProducts*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def register(this : INetFwProducts*, product : INetFwProduct, registration : IUnknown*) : HRESULT
+    @lpVtbl.value.register.call(this, product, registration)
+  end
+  def item(this : INetFwProducts*, index : Int32, product : INetFwProduct*) : HRESULT
+    @lpVtbl.value.item.call(this, index, product)
+  end
+  def get__new_enum(this : INetFwProducts*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+end

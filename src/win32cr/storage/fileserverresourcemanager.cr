@@ -2305,3 +2305,3860 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IFsrmObject
+  def query_interface(this : IFsrmObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmObject*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmObject*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmObject*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmObject*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmObject*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmObject*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmObject*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmObject*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmObject*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+end
+struct LibWin32::IFsrmCollection
+  def query_interface(this : IFsrmCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFsrmCollection*, unknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, unknown)
+  end
+  def get_item(this : IFsrmCollection*, index : Int32, item : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, item)
+  end
+  def get_count(this : IFsrmCollection*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_state(this : IFsrmCollection*, state : FsrmCollectionState*) : HRESULT
+    @lpVtbl.value.get_state.call(this, state)
+  end
+  def cancel(this : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def wait_for_completion(this : IFsrmCollection*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, waitseconds, completed)
+  end
+  def get_by_id(this : IFsrmCollection*, id : Guid, entry : VARIANT*) : HRESULT
+    @lpVtbl.value.get_by_id.call(this, id, entry)
+  end
+end
+struct LibWin32::IFsrmMutableCollection
+  def query_interface(this : IFsrmMutableCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmMutableCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmMutableCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmMutableCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmMutableCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmMutableCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmMutableCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFsrmMutableCollection*, unknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, unknown)
+  end
+  def get_item(this : IFsrmMutableCollection*, index : Int32, item : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, item)
+  end
+  def get_count(this : IFsrmMutableCollection*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_state(this : IFsrmMutableCollection*, state : FsrmCollectionState*) : HRESULT
+    @lpVtbl.value.get_state.call(this, state)
+  end
+  def cancel(this : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def wait_for_completion(this : IFsrmMutableCollection*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, waitseconds, completed)
+  end
+  def get_by_id(this : IFsrmMutableCollection*, id : Guid, entry : VARIANT*) : HRESULT
+    @lpVtbl.value.get_by_id.call(this, id, entry)
+  end
+  def add(this : IFsrmMutableCollection*, item : VARIANT) : HRESULT
+    @lpVtbl.value.add.call(this, item)
+  end
+  def remove(this : IFsrmMutableCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, index)
+  end
+  def remove_by_id(this : IFsrmMutableCollection*, id : Guid) : HRESULT
+    @lpVtbl.value.remove_by_id.call(this, id)
+  end
+  def clone(this : IFsrmMutableCollection*, collection : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.clone.call(this, collection)
+  end
+end
+struct LibWin32::IFsrmCommittableCollection
+  def query_interface(this : IFsrmCommittableCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmCommittableCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmCommittableCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmCommittableCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmCommittableCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmCommittableCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmCommittableCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFsrmCommittableCollection*, unknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, unknown)
+  end
+  def get_item(this : IFsrmCommittableCollection*, index : Int32, item : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, item)
+  end
+  def get_count(this : IFsrmCommittableCollection*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get_state(this : IFsrmCommittableCollection*, state : FsrmCollectionState*) : HRESULT
+    @lpVtbl.value.get_state.call(this, state)
+  end
+  def cancel(this : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def wait_for_completion(this : IFsrmCommittableCollection*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, waitseconds, completed)
+  end
+  def get_by_id(this : IFsrmCommittableCollection*, id : Guid, entry : VARIANT*) : HRESULT
+    @lpVtbl.value.get_by_id.call(this, id, entry)
+  end
+  def add(this : IFsrmCommittableCollection*, item : VARIANT) : HRESULT
+    @lpVtbl.value.add.call(this, item)
+  end
+  def remove(this : IFsrmCommittableCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, index)
+  end
+  def remove_by_id(this : IFsrmCommittableCollection*, id : Guid) : HRESULT
+    @lpVtbl.value.remove_by_id.call(this, id)
+  end
+  def clone(this : IFsrmCommittableCollection*, collection : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.clone.call(this, collection)
+  end
+  def commit(this : IFsrmCommittableCollection*, options : FsrmCommitOptions, results : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.commit.call(this, options, results)
+  end
+end
+struct LibWin32::IFsrmAction
+  def query_interface(this : IFsrmAction*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmAction*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmAction*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmAction*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmAction*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmAction*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmAction*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmAction*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmAction*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFsrmActionEmail
+  def query_interface(this : IFsrmActionEmail*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmActionEmail*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmActionEmail*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmActionEmail*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmActionEmail*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmActionEmail*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmActionEmail*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmActionEmail*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmActionEmail*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmActionEmail*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmActionEmail*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmActionEmail*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_mail_from(this : IFsrmActionEmail*, mailfrom : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_from.call(this, mailfrom)
+  end
+  def put_mail_from(this : IFsrmActionEmail*, mailfrom : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_from.call(this, mailfrom)
+  end
+  def get_mail_reply_to(this : IFsrmActionEmail*, mailreplyto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_reply_to.call(this, mailreplyto)
+  end
+  def put_mail_reply_to(this : IFsrmActionEmail*, mailreplyto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_reply_to.call(this, mailreplyto)
+  end
+  def get_mail_to(this : IFsrmActionEmail*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_to.call(this, mailto)
+  end
+  def put_mail_to(this : IFsrmActionEmail*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_to.call(this, mailto)
+  end
+  def get_mail_cc(this : IFsrmActionEmail*, mailcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_cc.call(this, mailcc)
+  end
+  def put_mail_cc(this : IFsrmActionEmail*, mailcc : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_cc.call(this, mailcc)
+  end
+  def get_mail_bcc(this : IFsrmActionEmail*, mailbcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_bcc.call(this, mailbcc)
+  end
+  def put_mail_bcc(this : IFsrmActionEmail*, mailbcc : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_bcc.call(this, mailbcc)
+  end
+  def get_mail_subject(this : IFsrmActionEmail*, mailsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_subject.call(this, mailsubject)
+  end
+  def put_mail_subject(this : IFsrmActionEmail*, mailsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_subject.call(this, mailsubject)
+  end
+  def get_message_text(this : IFsrmActionEmail*, messagetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_message_text.call(this, messagetext)
+  end
+  def put_message_text(this : IFsrmActionEmail*, messagetext : UInt8*) : HRESULT
+    @lpVtbl.value.put_message_text.call(this, messagetext)
+  end
+end
+struct LibWin32::IFsrmActionEmail2
+  def query_interface(this : IFsrmActionEmail2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmActionEmail2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmActionEmail2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmActionEmail2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmActionEmail2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmActionEmail2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmActionEmail2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmActionEmail2*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmActionEmail2*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmActionEmail2*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmActionEmail2*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmActionEmail2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_mail_from(this : IFsrmActionEmail2*, mailfrom : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_from.call(this, mailfrom)
+  end
+  def put_mail_from(this : IFsrmActionEmail2*, mailfrom : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_from.call(this, mailfrom)
+  end
+  def get_mail_reply_to(this : IFsrmActionEmail2*, mailreplyto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_reply_to.call(this, mailreplyto)
+  end
+  def put_mail_reply_to(this : IFsrmActionEmail2*, mailreplyto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_reply_to.call(this, mailreplyto)
+  end
+  def get_mail_to(this : IFsrmActionEmail2*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_to.call(this, mailto)
+  end
+  def put_mail_to(this : IFsrmActionEmail2*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_to.call(this, mailto)
+  end
+  def get_mail_cc(this : IFsrmActionEmail2*, mailcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_cc.call(this, mailcc)
+  end
+  def put_mail_cc(this : IFsrmActionEmail2*, mailcc : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_cc.call(this, mailcc)
+  end
+  def get_mail_bcc(this : IFsrmActionEmail2*, mailbcc : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_bcc.call(this, mailbcc)
+  end
+  def put_mail_bcc(this : IFsrmActionEmail2*, mailbcc : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_bcc.call(this, mailbcc)
+  end
+  def get_mail_subject(this : IFsrmActionEmail2*, mailsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_subject.call(this, mailsubject)
+  end
+  def put_mail_subject(this : IFsrmActionEmail2*, mailsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_subject.call(this, mailsubject)
+  end
+  def get_message_text(this : IFsrmActionEmail2*, messagetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_message_text.call(this, messagetext)
+  end
+  def put_message_text(this : IFsrmActionEmail2*, messagetext : UInt8*) : HRESULT
+    @lpVtbl.value.put_message_text.call(this, messagetext)
+  end
+  def get_attachment_file_list_size(this : IFsrmActionEmail2*, attachmentfilelistsize : Int32*) : HRESULT
+    @lpVtbl.value.get_attachment_file_list_size.call(this, attachmentfilelistsize)
+  end
+  def put_attachment_file_list_size(this : IFsrmActionEmail2*, attachmentfilelistsize : Int32) : HRESULT
+    @lpVtbl.value.put_attachment_file_list_size.call(this, attachmentfilelistsize)
+  end
+end
+struct LibWin32::IFsrmActionReport
+  def query_interface(this : IFsrmActionReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmActionReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmActionReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmActionReport*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmActionReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmActionReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmActionReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmActionReport*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmActionReport*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmActionReport*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmActionReport*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmActionReport*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_report_types(this : IFsrmActionReport*, reporttypes : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_report_types.call(this, reporttypes)
+  end
+  def put_report_types(this : IFsrmActionReport*, reporttypes : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_report_types.call(this, reporttypes)
+  end
+  def get_mail_to(this : IFsrmActionReport*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_to.call(this, mailto)
+  end
+  def put_mail_to(this : IFsrmActionReport*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_to.call(this, mailto)
+  end
+end
+struct LibWin32::IFsrmActionEventLog
+  def query_interface(this : IFsrmActionEventLog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmActionEventLog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmActionEventLog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmActionEventLog*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmActionEventLog*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmActionEventLog*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmActionEventLog*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmActionEventLog*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmActionEventLog*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmActionEventLog*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmActionEventLog*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmActionEventLog*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_event_type(this : IFsrmActionEventLog*, eventtype : FsrmEventType*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, eventtype)
+  end
+  def put_event_type(this : IFsrmActionEventLog*, eventtype : FsrmEventType) : HRESULT
+    @lpVtbl.value.put_event_type.call(this, eventtype)
+  end
+  def get_message_text(this : IFsrmActionEventLog*, messagetext : UInt8**) : HRESULT
+    @lpVtbl.value.get_message_text.call(this, messagetext)
+  end
+  def put_message_text(this : IFsrmActionEventLog*, messagetext : UInt8*) : HRESULT
+    @lpVtbl.value.put_message_text.call(this, messagetext)
+  end
+end
+struct LibWin32::IFsrmActionCommand
+  def query_interface(this : IFsrmActionCommand*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmActionCommand*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmActionCommand*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmActionCommand*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmActionCommand*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmActionCommand*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmActionCommand*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmActionCommand*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_action_type(this : IFsrmActionCommand*, actiontype : FsrmActionType*) : HRESULT
+    @lpVtbl.value.get_action_type.call(this, actiontype)
+  end
+  def get_run_limit_interval(this : IFsrmActionCommand*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_run_limit_interval.call(this, minutes)
+  end
+  def put_run_limit_interval(this : IFsrmActionCommand*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_run_limit_interval.call(this, minutes)
+  end
+  def delete(this : IFsrmActionCommand*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_executable_path(this : IFsrmActionCommand*, executablepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_executable_path.call(this, executablepath)
+  end
+  def put_executable_path(this : IFsrmActionCommand*, executablepath : UInt8*) : HRESULT
+    @lpVtbl.value.put_executable_path.call(this, executablepath)
+  end
+  def get_arguments(this : IFsrmActionCommand*, arguments : UInt8**) : HRESULT
+    @lpVtbl.value.get_arguments.call(this, arguments)
+  end
+  def put_arguments(this : IFsrmActionCommand*, arguments : UInt8*) : HRESULT
+    @lpVtbl.value.put_arguments.call(this, arguments)
+  end
+  def get_account(this : IFsrmActionCommand*, account : FsrmAccountType*) : HRESULT
+    @lpVtbl.value.get_account.call(this, account)
+  end
+  def put_account(this : IFsrmActionCommand*, account : FsrmAccountType) : HRESULT
+    @lpVtbl.value.put_account.call(this, account)
+  end
+  def get_working_directory(this : IFsrmActionCommand*, workingdirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_working_directory.call(this, workingdirectory)
+  end
+  def put_working_directory(this : IFsrmActionCommand*, workingdirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_working_directory.call(this, workingdirectory)
+  end
+  def get_monitor_command(this : IFsrmActionCommand*, monitorcommand : Int16*) : HRESULT
+    @lpVtbl.value.get_monitor_command.call(this, monitorcommand)
+  end
+  def put_monitor_command(this : IFsrmActionCommand*, monitorcommand : Int16) : HRESULT
+    @lpVtbl.value.put_monitor_command.call(this, monitorcommand)
+  end
+  def get_kill_time_out(this : IFsrmActionCommand*, minutes : Int32*) : HRESULT
+    @lpVtbl.value.get_kill_time_out.call(this, minutes)
+  end
+  def put_kill_time_out(this : IFsrmActionCommand*, minutes : Int32) : HRESULT
+    @lpVtbl.value.put_kill_time_out.call(this, minutes)
+  end
+  def get_log_result(this : IFsrmActionCommand*, logresults : Int16*) : HRESULT
+    @lpVtbl.value.get_log_result.call(this, logresults)
+  end
+  def put_log_result(this : IFsrmActionCommand*, logresults : Int16) : HRESULT
+    @lpVtbl.value.put_log_result.call(this, logresults)
+  end
+end
+struct LibWin32::IFsrmSetting
+  def query_interface(this : IFsrmSetting*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmSetting*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmSetting*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmSetting*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmSetting*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmSetting*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmSetting*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_smtp_server(this : IFsrmSetting*, smtpserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_server.call(this, smtpserver)
+  end
+  def put_smtp_server(this : IFsrmSetting*, smtpserver : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_server.call(this, smtpserver)
+  end
+  def get_mail_from(this : IFsrmSetting*, mailfrom : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_from.call(this, mailfrom)
+  end
+  def put_mail_from(this : IFsrmSetting*, mailfrom : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_from.call(this, mailfrom)
+  end
+  def get_admin_email(this : IFsrmSetting*, adminemail : UInt8**) : HRESULT
+    @lpVtbl.value.get_admin_email.call(this, adminemail)
+  end
+  def put_admin_email(this : IFsrmSetting*, adminemail : UInt8*) : HRESULT
+    @lpVtbl.value.put_admin_email.call(this, adminemail)
+  end
+  def get_disable_command_line(this : IFsrmSetting*, disablecommandline : Int16*) : HRESULT
+    @lpVtbl.value.get_disable_command_line.call(this, disablecommandline)
+  end
+  def put_disable_command_line(this : IFsrmSetting*, disablecommandline : Int16) : HRESULT
+    @lpVtbl.value.put_disable_command_line.call(this, disablecommandline)
+  end
+  def get_enable_screening_audit(this : IFsrmSetting*, enablescreeningaudit : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_screening_audit.call(this, enablescreeningaudit)
+  end
+  def put_enable_screening_audit(this : IFsrmSetting*, enablescreeningaudit : Int16) : HRESULT
+    @lpVtbl.value.put_enable_screening_audit.call(this, enablescreeningaudit)
+  end
+  def email_test(this : IFsrmSetting*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.email_test.call(this, mailto)
+  end
+  def set_action_run_limit_interval(this : IFsrmSetting*, actiontype : FsrmActionType, delaytimeminutes : Int32) : HRESULT
+    @lpVtbl.value.set_action_run_limit_interval.call(this, actiontype, delaytimeminutes)
+  end
+  def get_action_run_limit_interval(this : IFsrmSetting*, actiontype : FsrmActionType, delaytimeminutes : Int32*) : HRESULT
+    @lpVtbl.value.get_action_run_limit_interval.call(this, actiontype, delaytimeminutes)
+  end
+end
+struct LibWin32::IFsrmPathMapper
+  def query_interface(this : IFsrmPathMapper*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPathMapper*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPathMapper*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPathMapper*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPathMapper*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPathMapper*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPathMapper*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_share_paths_for_local_path(this : IFsrmPathMapper*, localpath : UInt8*, sharepaths : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_share_paths_for_local_path.call(this, localpath, sharepaths)
+  end
+end
+struct LibWin32::IFsrmExportImport
+  def query_interface(this : IFsrmExportImport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmExportImport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmExportImport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmExportImport*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmExportImport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmExportImport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmExportImport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def export_file_groups(this : IFsrmExportImport*, filepath : UInt8*, filegroupnamessafearray : VARIANT*, remotehost : UInt8*) : HRESULT
+    @lpVtbl.value.export_file_groups.call(this, filepath, filegroupnamessafearray, remotehost)
+  end
+  def import_file_groups(this : IFsrmExportImport*, filepath : UInt8*, filegroupnamessafearray : VARIANT*, remotehost : UInt8*, filegroups : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_file_groups.call(this, filepath, filegroupnamessafearray, remotehost, filegroups)
+  end
+  def export_file_screen_templates(this : IFsrmExportImport*, filepath : UInt8*, templatenamessafearray : VARIANT*, remotehost : UInt8*) : HRESULT
+    @lpVtbl.value.export_file_screen_templates.call(this, filepath, templatenamessafearray, remotehost)
+  end
+  def import_file_screen_templates(this : IFsrmExportImport*, filepath : UInt8*, templatenamessafearray : VARIANT*, remotehost : UInt8*, templates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_file_screen_templates.call(this, filepath, templatenamessafearray, remotehost, templates)
+  end
+  def export_quota_templates(this : IFsrmExportImport*, filepath : UInt8*, templatenamessafearray : VARIANT*, remotehost : UInt8*) : HRESULT
+    @lpVtbl.value.export_quota_templates.call(this, filepath, templatenamessafearray, remotehost)
+  end
+  def import_quota_templates(this : IFsrmExportImport*, filepath : UInt8*, templatenamessafearray : VARIANT*, remotehost : UInt8*, templates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_quota_templates.call(this, filepath, templatenamessafearray, remotehost, templates)
+  end
+end
+struct LibWin32::IFsrmDerivedObjectsResult
+  def query_interface(this : IFsrmDerivedObjectsResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmDerivedObjectsResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmDerivedObjectsResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmDerivedObjectsResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmDerivedObjectsResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmDerivedObjectsResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmDerivedObjectsResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_derived_objects(this : IFsrmDerivedObjectsResult*, derivedobjects : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.get_derived_objects.call(this, derivedobjects)
+  end
+  def get_results(this : IFsrmDerivedObjectsResult*, results : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.get_results.call(this, results)
+  end
+end
+struct LibWin32::IFsrmAccessDeniedRemediationClient
+  def query_interface(this : IFsrmAccessDeniedRemediationClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmAccessDeniedRemediationClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmAccessDeniedRemediationClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmAccessDeniedRemediationClient*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmAccessDeniedRemediationClient*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmAccessDeniedRemediationClient*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmAccessDeniedRemediationClient*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def show(this : IFsrmAccessDeniedRemediationClient*, parentwnd : LibC::UINT_PTR, accesspath : UInt8*, errortype : AdrClientErrorType, flags : Int32, windowtitle : UInt8*, windowmessage : UInt8*, result : Int32*) : HRESULT
+    @lpVtbl.value.show.call(this, parentwnd, accesspath, errortype, flags, windowtitle, windowmessage, result)
+  end
+end
+struct LibWin32::IFsrmQuotaBase
+  def query_interface(this : IFsrmQuotaBase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaBase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaBase*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaBase*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaBase*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaBase*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaBase*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmQuotaBase*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmQuotaBase*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmQuotaBase*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmQuotaBase*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmQuotaBase*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmQuotaBase*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmQuotaBase*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmQuotaBase*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmQuotaBase*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmQuotaBase*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmQuotaBase*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmQuotaBase*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmQuotaBase*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmQuotaBase*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmQuotaBase*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+end
+struct LibWin32::IFsrmQuotaObject
+  def query_interface(this : IFsrmQuotaObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaObject*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaObject*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaObject*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaObject*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmQuotaObject*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmQuotaObject*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmQuotaObject*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmQuotaObject*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmQuotaObject*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmQuotaObject*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmQuotaObject*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmQuotaObject*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmQuotaObject*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmQuotaObject*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmQuotaObject*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmQuotaObject*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmQuotaObject*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmQuotaObject*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmQuotaObject*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+  def get_path(this : IFsrmQuotaObject*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
+  end
+  def get_user_sid(this : IFsrmQuotaObject*, usersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sid.call(this, usersid)
+  end
+  def get_user_account(this : IFsrmQuotaObject*, useraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, useraccount)
+  end
+  def get_source_template_name(this : IFsrmQuotaObject*, quotatemplatename : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_template_name.call(this, quotatemplatename)
+  end
+  def get_matches_source_template(this : IFsrmQuotaObject*, matches : Int16*) : HRESULT
+    @lpVtbl.value.get_matches_source_template.call(this, matches)
+  end
+  def apply_template(this : IFsrmQuotaObject*, quotatemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.apply_template.call(this, quotatemplatename)
+  end
+end
+struct LibWin32::IFsrmQuota
+  def query_interface(this : IFsrmQuota*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuota*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuota*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuota*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuota*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuota*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuota*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmQuota*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmQuota*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmQuota*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmQuota*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmQuota*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmQuota*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmQuota*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmQuota*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmQuota*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmQuota*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmQuota*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmQuota*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmQuota*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+  def get_path(this : IFsrmQuota*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
+  end
+  def get_user_sid(this : IFsrmQuota*, usersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sid.call(this, usersid)
+  end
+  def get_user_account(this : IFsrmQuota*, useraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, useraccount)
+  end
+  def get_source_template_name(this : IFsrmQuota*, quotatemplatename : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_template_name.call(this, quotatemplatename)
+  end
+  def get_matches_source_template(this : IFsrmQuota*, matches : Int16*) : HRESULT
+    @lpVtbl.value.get_matches_source_template.call(this, matches)
+  end
+  def apply_template(this : IFsrmQuota*, quotatemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.apply_template.call(this, quotatemplatename)
+  end
+  def get_quota_used(this : IFsrmQuota*, used : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_used.call(this, used)
+  end
+  def get_quota_peak_usage(this : IFsrmQuota*, peakusage : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_peak_usage.call(this, peakusage)
+  end
+  def get_quota_peak_usage_time(this : IFsrmQuota*, peakusagedatetime : Float64*) : HRESULT
+    @lpVtbl.value.get_quota_peak_usage_time.call(this, peakusagedatetime)
+  end
+  def reset_peak_usage(this : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.reset_peak_usage.call(this)
+  end
+  def refresh_usage_properties(this : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.refresh_usage_properties.call(this)
+  end
+end
+struct LibWin32::IFsrmAutoApplyQuota
+  def query_interface(this : IFsrmAutoApplyQuota*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmAutoApplyQuota*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmAutoApplyQuota*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmAutoApplyQuota*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmAutoApplyQuota*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmAutoApplyQuota*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmAutoApplyQuota*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmAutoApplyQuota*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmAutoApplyQuota*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmAutoApplyQuota*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmAutoApplyQuota*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmAutoApplyQuota*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmAutoApplyQuota*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmAutoApplyQuota*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmAutoApplyQuota*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmAutoApplyQuota*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmAutoApplyQuota*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmAutoApplyQuota*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmAutoApplyQuota*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmAutoApplyQuota*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+  def get_path(this : IFsrmAutoApplyQuota*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
+  end
+  def get_user_sid(this : IFsrmAutoApplyQuota*, usersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sid.call(this, usersid)
+  end
+  def get_user_account(this : IFsrmAutoApplyQuota*, useraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, useraccount)
+  end
+  def get_source_template_name(this : IFsrmAutoApplyQuota*, quotatemplatename : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_template_name.call(this, quotatemplatename)
+  end
+  def get_matches_source_template(this : IFsrmAutoApplyQuota*, matches : Int16*) : HRESULT
+    @lpVtbl.value.get_matches_source_template.call(this, matches)
+  end
+  def apply_template(this : IFsrmAutoApplyQuota*, quotatemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.apply_template.call(this, quotatemplatename)
+  end
+  def get_exclude_folders(this : IFsrmAutoApplyQuota*, folders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_exclude_folders.call(this, folders)
+  end
+  def put_exclude_folders(this : IFsrmAutoApplyQuota*, folders : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_exclude_folders.call(this, folders)
+  end
+  def commit_and_update_derived(this : IFsrmAutoApplyQuota*, commitoptions : FsrmCommitOptions, applyoptions : FsrmTemplateApplyOptions, derivedobjectsresult : IFsrmDerivedObjectsResult*) : HRESULT
+    @lpVtbl.value.commit_and_update_derived.call(this, commitoptions, applyoptions, derivedobjectsresult)
+  end
+end
+struct LibWin32::IFsrmQuotaManager
+  def query_interface(this : IFsrmQuotaManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_action_variables(this : IFsrmQuotaManager*, variables : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variables.call(this, variables)
+  end
+  def get_action_variable_descriptions(this : IFsrmQuotaManager*, descriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variable_descriptions.call(this, descriptions)
+  end
+  def create_quota(this : IFsrmQuotaManager*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.create_quota.call(this, path, quota)
+  end
+  def create_auto_apply_quota(this : IFsrmQuotaManager*, quotatemplatename : UInt8*, path : UInt8*, quota : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.create_auto_apply_quota.call(this, quotatemplatename, path, quota)
+  end
+  def get_quota(this : IFsrmQuotaManager*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, path, quota)
+  end
+  def get_auto_apply_quota(this : IFsrmQuotaManager*, path : UInt8*, quota : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.get_auto_apply_quota.call(this, path, quota)
+  end
+  def get_restrictive_quota(this : IFsrmQuotaManager*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.get_restrictive_quota.call(this, path, quota)
+  end
+  def enum_quotas(this : IFsrmQuotaManager*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_quotas.call(this, path, options, quotas)
+  end
+  def enum_auto_apply_quotas(this : IFsrmQuotaManager*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_auto_apply_quotas.call(this, path, options, quotas)
+  end
+  def enum_effective_quotas(this : IFsrmQuotaManager*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_effective_quotas.call(this, path, options, quotas)
+  end
+  def scan(this : IFsrmQuotaManager*, strpath : UInt8*) : HRESULT
+    @lpVtbl.value.scan.call(this, strpath)
+  end
+  def create_quota_collection(this : IFsrmQuotaManager*, collection : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.create_quota_collection.call(this, collection)
+  end
+end
+struct LibWin32::IFsrmQuotaManagerEx
+  def query_interface(this : IFsrmQuotaManagerEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaManagerEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaManagerEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaManagerEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaManagerEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaManagerEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaManagerEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_action_variables(this : IFsrmQuotaManagerEx*, variables : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variables.call(this, variables)
+  end
+  def get_action_variable_descriptions(this : IFsrmQuotaManagerEx*, descriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variable_descriptions.call(this, descriptions)
+  end
+  def create_quota(this : IFsrmQuotaManagerEx*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.create_quota.call(this, path, quota)
+  end
+  def create_auto_apply_quota(this : IFsrmQuotaManagerEx*, quotatemplatename : UInt8*, path : UInt8*, quota : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.create_auto_apply_quota.call(this, quotatemplatename, path, quota)
+  end
+  def get_quota(this : IFsrmQuotaManagerEx*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.get_quota.call(this, path, quota)
+  end
+  def get_auto_apply_quota(this : IFsrmQuotaManagerEx*, path : UInt8*, quota : IFsrmAutoApplyQuota*) : HRESULT
+    @lpVtbl.value.get_auto_apply_quota.call(this, path, quota)
+  end
+  def get_restrictive_quota(this : IFsrmQuotaManagerEx*, path : UInt8*, quota : IFsrmQuota*) : HRESULT
+    @lpVtbl.value.get_restrictive_quota.call(this, path, quota)
+  end
+  def enum_quotas(this : IFsrmQuotaManagerEx*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_quotas.call(this, path, options, quotas)
+  end
+  def enum_auto_apply_quotas(this : IFsrmQuotaManagerEx*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_auto_apply_quotas.call(this, path, options, quotas)
+  end
+  def enum_effective_quotas(this : IFsrmQuotaManagerEx*, path : UInt8*, options : FsrmEnumOptions, quotas : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_effective_quotas.call(this, path, options, quotas)
+  end
+  def scan(this : IFsrmQuotaManagerEx*, strpath : UInt8*) : HRESULT
+    @lpVtbl.value.scan.call(this, strpath)
+  end
+  def create_quota_collection(this : IFsrmQuotaManagerEx*, collection : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.create_quota_collection.call(this, collection)
+  end
+  def is_affected_by_quota(this : IFsrmQuotaManagerEx*, path : UInt8*, options : FsrmEnumOptions, affected : Int16*) : HRESULT
+    @lpVtbl.value.is_affected_by_quota.call(this, path, options, affected)
+  end
+end
+struct LibWin32::IFsrmQuotaTemplate
+  def query_interface(this : IFsrmQuotaTemplate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaTemplate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaTemplate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaTemplate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaTemplate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaTemplate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaTemplate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmQuotaTemplate*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmQuotaTemplate*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmQuotaTemplate*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmQuotaTemplate*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmQuotaTemplate*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmQuotaTemplate*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmQuotaTemplate*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmQuotaTemplate*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmQuotaTemplate*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmQuotaTemplate*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmQuotaTemplate*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmQuotaTemplate*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmQuotaTemplate*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmQuotaTemplate*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmQuotaTemplate*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+  def get_name(this : IFsrmQuotaTemplate*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmQuotaTemplate*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def copy_template(this : IFsrmQuotaTemplate*, quotatemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.copy_template.call(this, quotatemplatename)
+  end
+  def commit_and_update_derived(this : IFsrmQuotaTemplate*, commitoptions : FsrmCommitOptions, applyoptions : FsrmTemplateApplyOptions, derivedobjectsresult : IFsrmDerivedObjectsResult*) : HRESULT
+    @lpVtbl.value.commit_and_update_derived.call(this, commitoptions, applyoptions, derivedobjectsresult)
+  end
+end
+struct LibWin32::IFsrmQuotaTemplateImported
+  def query_interface(this : IFsrmQuotaTemplateImported*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaTemplateImported*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaTemplateImported*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaTemplateImported*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaTemplateImported*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaTemplateImported*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaTemplateImported*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmQuotaTemplateImported*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmQuotaTemplateImported*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmQuotaTemplateImported*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmQuotaTemplateImported*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmQuotaTemplateImported*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_quota_limit(this : IFsrmQuotaTemplateImported*, quotalimit : VARIANT*) : HRESULT
+    @lpVtbl.value.get_quota_limit.call(this, quotalimit)
+  end
+  def put_quota_limit(this : IFsrmQuotaTemplateImported*, quotalimit : VARIANT) : HRESULT
+    @lpVtbl.value.put_quota_limit.call(this, quotalimit)
+  end
+  def get_quota_flags(this : IFsrmQuotaTemplateImported*, quotaflags : Int32*) : HRESULT
+    @lpVtbl.value.get_quota_flags.call(this, quotaflags)
+  end
+  def put_quota_flags(this : IFsrmQuotaTemplateImported*, quotaflags : Int32) : HRESULT
+    @lpVtbl.value.put_quota_flags.call(this, quotaflags)
+  end
+  def get_thresholds(this : IFsrmQuotaTemplateImported*, thresholds : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_thresholds.call(this, thresholds)
+  end
+  def add_threshold(this : IFsrmQuotaTemplateImported*, threshold : Int32) : HRESULT
+    @lpVtbl.value.add_threshold.call(this, threshold)
+  end
+  def delete_threshold(this : IFsrmQuotaTemplateImported*, threshold : Int32) : HRESULT
+    @lpVtbl.value.delete_threshold.call(this, threshold)
+  end
+  def modify_threshold(this : IFsrmQuotaTemplateImported*, threshold : Int32, newthreshold : Int32) : HRESULT
+    @lpVtbl.value.modify_threshold.call(this, threshold, newthreshold)
+  end
+  def create_threshold_action(this : IFsrmQuotaTemplateImported*, threshold : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_threshold_action.call(this, threshold, actiontype, action)
+  end
+  def enum_threshold_actions(this : IFsrmQuotaTemplateImported*, threshold : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_threshold_actions.call(this, threshold, actions)
+  end
+  def get_name(this : IFsrmQuotaTemplateImported*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmQuotaTemplateImported*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def copy_template(this : IFsrmQuotaTemplateImported*, quotatemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.copy_template.call(this, quotatemplatename)
+  end
+  def commit_and_update_derived(this : IFsrmQuotaTemplateImported*, commitoptions : FsrmCommitOptions, applyoptions : FsrmTemplateApplyOptions, derivedobjectsresult : IFsrmDerivedObjectsResult*) : HRESULT
+    @lpVtbl.value.commit_and_update_derived.call(this, commitoptions, applyoptions, derivedobjectsresult)
+  end
+  def get_overwrite_on_commit(this : IFsrmQuotaTemplateImported*, overwrite : Int16*) : HRESULT
+    @lpVtbl.value.get_overwrite_on_commit.call(this, overwrite)
+  end
+  def put_overwrite_on_commit(this : IFsrmQuotaTemplateImported*, overwrite : Int16) : HRESULT
+    @lpVtbl.value.put_overwrite_on_commit.call(this, overwrite)
+  end
+end
+struct LibWin32::IFsrmQuotaTemplateManager
+  def query_interface(this : IFsrmQuotaTemplateManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmQuotaTemplateManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmQuotaTemplateManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmQuotaTemplateManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmQuotaTemplateManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmQuotaTemplateManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmQuotaTemplateManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_template(this : IFsrmQuotaTemplateManager*, quotatemplate : IFsrmQuotaTemplate*) : HRESULT
+    @lpVtbl.value.create_template.call(this, quotatemplate)
+  end
+  def get_template(this : IFsrmQuotaTemplateManager*, name : UInt8*, quotatemplate : IFsrmQuotaTemplate*) : HRESULT
+    @lpVtbl.value.get_template.call(this, name, quotatemplate)
+  end
+  def enum_templates(this : IFsrmQuotaTemplateManager*, options : FsrmEnumOptions, quotatemplates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_templates.call(this, options, quotatemplates)
+  end
+  def export_templates(this : IFsrmQuotaTemplateManager*, quotatemplatenamesarray : VARIANT*, serializedquotatemplates : UInt8**) : HRESULT
+    @lpVtbl.value.export_templates.call(this, quotatemplatenamesarray, serializedquotatemplates)
+  end
+  def import_templates(this : IFsrmQuotaTemplateManager*, serializedquotatemplates : UInt8*, quotatemplatenamesarray : VARIANT*, quotatemplates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_templates.call(this, serializedquotatemplates, quotatemplatenamesarray, quotatemplates)
+  end
+end
+struct LibWin32::IFsrmFileGroup
+  def query_interface(this : IFsrmFileGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileGroup*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileGroup*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileGroup*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileGroup*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileGroup*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmFileGroup*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmFileGroup*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_members(this : IFsrmFileGroup*, members : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_members.call(this, members)
+  end
+  def put_members(this : IFsrmFileGroup*, members : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_members.call(this, members)
+  end
+  def get_non_members(this : IFsrmFileGroup*, nonmembers : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_non_members.call(this, nonmembers)
+  end
+  def put_non_members(this : IFsrmFileGroup*, nonmembers : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_non_members.call(this, nonmembers)
+  end
+end
+struct LibWin32::IFsrmFileGroupImported
+  def query_interface(this : IFsrmFileGroupImported*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileGroupImported*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileGroupImported*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileGroupImported*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileGroupImported*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileGroupImported*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileGroupImported*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileGroupImported*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileGroupImported*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileGroupImported*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileGroupImported*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileGroupImported*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmFileGroupImported*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmFileGroupImported*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_members(this : IFsrmFileGroupImported*, members : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_members.call(this, members)
+  end
+  def put_members(this : IFsrmFileGroupImported*, members : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_members.call(this, members)
+  end
+  def get_non_members(this : IFsrmFileGroupImported*, nonmembers : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_non_members.call(this, nonmembers)
+  end
+  def put_non_members(this : IFsrmFileGroupImported*, nonmembers : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_non_members.call(this, nonmembers)
+  end
+  def get_overwrite_on_commit(this : IFsrmFileGroupImported*, overwrite : Int16*) : HRESULT
+    @lpVtbl.value.get_overwrite_on_commit.call(this, overwrite)
+  end
+  def put_overwrite_on_commit(this : IFsrmFileGroupImported*, overwrite : Int16) : HRESULT
+    @lpVtbl.value.put_overwrite_on_commit.call(this, overwrite)
+  end
+end
+struct LibWin32::IFsrmFileGroupManager
+  def query_interface(this : IFsrmFileGroupManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileGroupManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileGroupManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileGroupManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileGroupManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileGroupManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileGroupManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_file_group(this : IFsrmFileGroupManager*, filegroup : IFsrmFileGroup*) : HRESULT
+    @lpVtbl.value.create_file_group.call(this, filegroup)
+  end
+  def get_file_group(this : IFsrmFileGroupManager*, name : UInt8*, filegroup : IFsrmFileGroup*) : HRESULT
+    @lpVtbl.value.get_file_group.call(this, name, filegroup)
+  end
+  def enum_file_groups(this : IFsrmFileGroupManager*, options : FsrmEnumOptions, filegroups : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_file_groups.call(this, options, filegroups)
+  end
+  def export_file_groups(this : IFsrmFileGroupManager*, filegroupnamesarray : VARIANT*, serializedfilegroups : UInt8**) : HRESULT
+    @lpVtbl.value.export_file_groups.call(this, filegroupnamesarray, serializedfilegroups)
+  end
+  def import_file_groups(this : IFsrmFileGroupManager*, serializedfilegroups : UInt8*, filegroupnamesarray : VARIANT*, filegroups : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_file_groups.call(this, serializedfilegroups, filegroupnamesarray, filegroups)
+  end
+end
+struct LibWin32::IFsrmFileScreenBase
+  def query_interface(this : IFsrmFileScreenBase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenBase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenBase*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenBase*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenBase*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenBase*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenBase*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileScreenBase*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileScreenBase*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileScreenBase*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileScreenBase*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileScreenBase*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_blocked_file_groups(this : IFsrmFileScreenBase*, blocklist : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_blocked_file_groups.call(this, blocklist)
+  end
+  def put_blocked_file_groups(this : IFsrmFileScreenBase*, blocklist : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_blocked_file_groups.call(this, blocklist)
+  end
+  def get_file_screen_flags(this : IFsrmFileScreenBase*, filescreenflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_screen_flags.call(this, filescreenflags)
+  end
+  def put_file_screen_flags(this : IFsrmFileScreenBase*, filescreenflags : Int32) : HRESULT
+    @lpVtbl.value.put_file_screen_flags.call(this, filescreenflags)
+  end
+  def create_action(this : IFsrmFileScreenBase*, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_action.call(this, actiontype, action)
+  end
+  def enum_actions(this : IFsrmFileScreenBase*, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_actions.call(this, actions)
+  end
+end
+struct LibWin32::IFsrmFileScreen
+  def query_interface(this : IFsrmFileScreen*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreen*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreen*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreen*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreen*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreen*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreen*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileScreen*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileScreen*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileScreen*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileScreen*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileScreen*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_blocked_file_groups(this : IFsrmFileScreen*, blocklist : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_blocked_file_groups.call(this, blocklist)
+  end
+  def put_blocked_file_groups(this : IFsrmFileScreen*, blocklist : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_blocked_file_groups.call(this, blocklist)
+  end
+  def get_file_screen_flags(this : IFsrmFileScreen*, filescreenflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_screen_flags.call(this, filescreenflags)
+  end
+  def put_file_screen_flags(this : IFsrmFileScreen*, filescreenflags : Int32) : HRESULT
+    @lpVtbl.value.put_file_screen_flags.call(this, filescreenflags)
+  end
+  def create_action(this : IFsrmFileScreen*, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_action.call(this, actiontype, action)
+  end
+  def enum_actions(this : IFsrmFileScreen*, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_actions.call(this, actions)
+  end
+  def get_path(this : IFsrmFileScreen*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
+  end
+  def get_source_template_name(this : IFsrmFileScreen*, filescreentemplatename : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_template_name.call(this, filescreentemplatename)
+  end
+  def get_matches_source_template(this : IFsrmFileScreen*, matches : Int16*) : HRESULT
+    @lpVtbl.value.get_matches_source_template.call(this, matches)
+  end
+  def get_user_sid(this : IFsrmFileScreen*, usersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sid.call(this, usersid)
+  end
+  def get_user_account(this : IFsrmFileScreen*, useraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, useraccount)
+  end
+  def apply_template(this : IFsrmFileScreen*, filescreentemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.apply_template.call(this, filescreentemplatename)
+  end
+end
+struct LibWin32::IFsrmFileScreenException
+  def query_interface(this : IFsrmFileScreenException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenException*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenException*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenException*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenException*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileScreenException*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileScreenException*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileScreenException*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileScreenException*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileScreenException*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_path(this : IFsrmFileScreenException*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, path)
+  end
+  def get_allowed_file_groups(this : IFsrmFileScreenException*, allowlist : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_allowed_file_groups.call(this, allowlist)
+  end
+  def put_allowed_file_groups(this : IFsrmFileScreenException*, allowlist : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_allowed_file_groups.call(this, allowlist)
+  end
+end
+struct LibWin32::IFsrmFileScreenManager
+  def query_interface(this : IFsrmFileScreenManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_action_variables(this : IFsrmFileScreenManager*, variables : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variables.call(this, variables)
+  end
+  def get_action_variable_descriptions(this : IFsrmFileScreenManager*, descriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variable_descriptions.call(this, descriptions)
+  end
+  def create_file_screen(this : IFsrmFileScreenManager*, path : UInt8*, filescreen : IFsrmFileScreen*) : HRESULT
+    @lpVtbl.value.create_file_screen.call(this, path, filescreen)
+  end
+  def get_file_screen(this : IFsrmFileScreenManager*, path : UInt8*, filescreen : IFsrmFileScreen*) : HRESULT
+    @lpVtbl.value.get_file_screen.call(this, path, filescreen)
+  end
+  def enum_file_screens(this : IFsrmFileScreenManager*, path : UInt8*, options : FsrmEnumOptions, filescreens : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_file_screens.call(this, path, options, filescreens)
+  end
+  def create_file_screen_exception(this : IFsrmFileScreenManager*, path : UInt8*, filescreenexception : IFsrmFileScreenException*) : HRESULT
+    @lpVtbl.value.create_file_screen_exception.call(this, path, filescreenexception)
+  end
+  def get_file_screen_exception(this : IFsrmFileScreenManager*, path : UInt8*, filescreenexception : IFsrmFileScreenException*) : HRESULT
+    @lpVtbl.value.get_file_screen_exception.call(this, path, filescreenexception)
+  end
+  def enum_file_screen_exceptions(this : IFsrmFileScreenManager*, path : UInt8*, options : FsrmEnumOptions, filescreenexceptions : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_file_screen_exceptions.call(this, path, options, filescreenexceptions)
+  end
+  def create_file_screen_collection(this : IFsrmFileScreenManager*, collection : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.create_file_screen_collection.call(this, collection)
+  end
+end
+struct LibWin32::IFsrmFileScreenTemplate
+  def query_interface(this : IFsrmFileScreenTemplate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenTemplate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenTemplate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenTemplate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenTemplate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenTemplate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenTemplate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileScreenTemplate*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileScreenTemplate*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileScreenTemplate*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileScreenTemplate*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileScreenTemplate*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_blocked_file_groups(this : IFsrmFileScreenTemplate*, blocklist : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_blocked_file_groups.call(this, blocklist)
+  end
+  def put_blocked_file_groups(this : IFsrmFileScreenTemplate*, blocklist : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_blocked_file_groups.call(this, blocklist)
+  end
+  def get_file_screen_flags(this : IFsrmFileScreenTemplate*, filescreenflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_screen_flags.call(this, filescreenflags)
+  end
+  def put_file_screen_flags(this : IFsrmFileScreenTemplate*, filescreenflags : Int32) : HRESULT
+    @lpVtbl.value.put_file_screen_flags.call(this, filescreenflags)
+  end
+  def create_action(this : IFsrmFileScreenTemplate*, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_action.call(this, actiontype, action)
+  end
+  def enum_actions(this : IFsrmFileScreenTemplate*, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_actions.call(this, actions)
+  end
+  def get_name(this : IFsrmFileScreenTemplate*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmFileScreenTemplate*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def copy_template(this : IFsrmFileScreenTemplate*, filescreentemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.copy_template.call(this, filescreentemplatename)
+  end
+  def commit_and_update_derived(this : IFsrmFileScreenTemplate*, commitoptions : FsrmCommitOptions, applyoptions : FsrmTemplateApplyOptions, derivedobjectsresult : IFsrmDerivedObjectsResult*) : HRESULT
+    @lpVtbl.value.commit_and_update_derived.call(this, commitoptions, applyoptions, derivedobjectsresult)
+  end
+end
+struct LibWin32::IFsrmFileScreenTemplateImported
+  def query_interface(this : IFsrmFileScreenTemplateImported*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenTemplateImported*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenTemplateImported*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenTemplateImported*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenTemplateImported*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenTemplateImported*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenTemplateImported*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileScreenTemplateImported*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileScreenTemplateImported*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileScreenTemplateImported*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileScreenTemplateImported*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileScreenTemplateImported*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_blocked_file_groups(this : IFsrmFileScreenTemplateImported*, blocklist : IFsrmMutableCollection*) : HRESULT
+    @lpVtbl.value.get_blocked_file_groups.call(this, blocklist)
+  end
+  def put_blocked_file_groups(this : IFsrmFileScreenTemplateImported*, blocklist : IFsrmMutableCollection) : HRESULT
+    @lpVtbl.value.put_blocked_file_groups.call(this, blocklist)
+  end
+  def get_file_screen_flags(this : IFsrmFileScreenTemplateImported*, filescreenflags : Int32*) : HRESULT
+    @lpVtbl.value.get_file_screen_flags.call(this, filescreenflags)
+  end
+  def put_file_screen_flags(this : IFsrmFileScreenTemplateImported*, filescreenflags : Int32) : HRESULT
+    @lpVtbl.value.put_file_screen_flags.call(this, filescreenflags)
+  end
+  def create_action(this : IFsrmFileScreenTemplateImported*, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_action.call(this, actiontype, action)
+  end
+  def enum_actions(this : IFsrmFileScreenTemplateImported*, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_actions.call(this, actions)
+  end
+  def get_name(this : IFsrmFileScreenTemplateImported*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmFileScreenTemplateImported*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def copy_template(this : IFsrmFileScreenTemplateImported*, filescreentemplatename : UInt8*) : HRESULT
+    @lpVtbl.value.copy_template.call(this, filescreentemplatename)
+  end
+  def commit_and_update_derived(this : IFsrmFileScreenTemplateImported*, commitoptions : FsrmCommitOptions, applyoptions : FsrmTemplateApplyOptions, derivedobjectsresult : IFsrmDerivedObjectsResult*) : HRESULT
+    @lpVtbl.value.commit_and_update_derived.call(this, commitoptions, applyoptions, derivedobjectsresult)
+  end
+  def get_overwrite_on_commit(this : IFsrmFileScreenTemplateImported*, overwrite : Int16*) : HRESULT
+    @lpVtbl.value.get_overwrite_on_commit.call(this, overwrite)
+  end
+  def put_overwrite_on_commit(this : IFsrmFileScreenTemplateImported*, overwrite : Int16) : HRESULT
+    @lpVtbl.value.put_overwrite_on_commit.call(this, overwrite)
+  end
+end
+struct LibWin32::IFsrmFileScreenTemplateManager
+  def query_interface(this : IFsrmFileScreenTemplateManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileScreenTemplateManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileScreenTemplateManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileScreenTemplateManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileScreenTemplateManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileScreenTemplateManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileScreenTemplateManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_template(this : IFsrmFileScreenTemplateManager*, filescreentemplate : IFsrmFileScreenTemplate*) : HRESULT
+    @lpVtbl.value.create_template.call(this, filescreentemplate)
+  end
+  def get_template(this : IFsrmFileScreenTemplateManager*, name : UInt8*, filescreentemplate : IFsrmFileScreenTemplate*) : HRESULT
+    @lpVtbl.value.get_template.call(this, name, filescreentemplate)
+  end
+  def enum_templates(this : IFsrmFileScreenTemplateManager*, options : FsrmEnumOptions, filescreentemplates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.enum_templates.call(this, options, filescreentemplates)
+  end
+  def export_templates(this : IFsrmFileScreenTemplateManager*, filescreentemplatenamesarray : VARIANT*, serializedfilescreentemplates : UInt8**) : HRESULT
+    @lpVtbl.value.export_templates.call(this, filescreentemplatenamesarray, serializedfilescreentemplates)
+  end
+  def import_templates(this : IFsrmFileScreenTemplateManager*, serializedfilescreentemplates : UInt8*, filescreentemplatenamesarray : VARIANT*, filescreentemplates : IFsrmCommittableCollection*) : HRESULT
+    @lpVtbl.value.import_templates.call(this, serializedfilescreentemplates, filescreentemplatenamesarray, filescreentemplates)
+  end
+end
+struct LibWin32::IFsrmReportManager
+  def query_interface(this : IFsrmReportManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmReportManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmReportManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmReportManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmReportManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmReportManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmReportManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enum_report_jobs(this : IFsrmReportManager*, options : FsrmEnumOptions, reportjobs : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_report_jobs.call(this, options, reportjobs)
+  end
+  def create_report_job(this : IFsrmReportManager*, reportjob : IFsrmReportJob*) : HRESULT
+    @lpVtbl.value.create_report_job.call(this, reportjob)
+  end
+  def get_report_job(this : IFsrmReportManager*, taskname : UInt8*, reportjob : IFsrmReportJob*) : HRESULT
+    @lpVtbl.value.get_report_job.call(this, taskname, reportjob)
+  end
+  def get_output_directory(this : IFsrmReportManager*, context : FsrmReportGenerationContext, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_output_directory.call(this, context, path)
+  end
+  def set_output_directory(this : IFsrmReportManager*, context : FsrmReportGenerationContext, path : UInt8*) : HRESULT
+    @lpVtbl.value.set_output_directory.call(this, context, path)
+  end
+  def is_filter_valid_for_report_type(this : IFsrmReportManager*, reporttype : FsrmReportType, filter : FsrmReportFilter, valid : Int16*) : HRESULT
+    @lpVtbl.value.is_filter_valid_for_report_type.call(this, reporttype, filter, valid)
+  end
+  def get_default_filter(this : IFsrmReportManager*, reporttype : FsrmReportType, filter : FsrmReportFilter, filtervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_default_filter.call(this, reporttype, filter, filtervalue)
+  end
+  def set_default_filter(this : IFsrmReportManager*, reporttype : FsrmReportType, filter : FsrmReportFilter, filtervalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_default_filter.call(this, reporttype, filter, filtervalue)
+  end
+  def get_report_size_limit(this : IFsrmReportManager*, limit : FsrmReportLimit, limitvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_report_size_limit.call(this, limit, limitvalue)
+  end
+  def set_report_size_limit(this : IFsrmReportManager*, limit : FsrmReportLimit, limitvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_report_size_limit.call(this, limit, limitvalue)
+  end
+end
+struct LibWin32::IFsrmReportJob
+  def query_interface(this : IFsrmReportJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmReportJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmReportJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmReportJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmReportJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmReportJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmReportJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmReportJob*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmReportJob*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmReportJob*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmReportJob*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmReportJob*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_task(this : IFsrmReportJob*, taskname : UInt8**) : HRESULT
+    @lpVtbl.value.get_task.call(this, taskname)
+  end
+  def put_task(this : IFsrmReportJob*, taskname : UInt8*) : HRESULT
+    @lpVtbl.value.put_task.call(this, taskname)
+  end
+  def get_namespace_roots(this : IFsrmReportJob*, namespaceroots : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_namespace_roots.call(this, namespaceroots)
+  end
+  def put_namespace_roots(this : IFsrmReportJob*, namespaceroots : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_namespace_roots.call(this, namespaceroots)
+  end
+  def get_formats(this : IFsrmReportJob*, formats : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_formats.call(this, formats)
+  end
+  def put_formats(this : IFsrmReportJob*, formats : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_formats.call(this, formats)
+  end
+  def get_mail_to(this : IFsrmReportJob*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_to.call(this, mailto)
+  end
+  def put_mail_to(this : IFsrmReportJob*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_to.call(this, mailto)
+  end
+  def get_running_status(this : IFsrmReportJob*, runningstatus : FsrmReportRunningStatus*) : HRESULT
+    @lpVtbl.value.get_running_status.call(this, runningstatus)
+  end
+  def get_last_run(this : IFsrmReportJob*, lastrun : Float64*) : HRESULT
+    @lpVtbl.value.get_last_run.call(this, lastrun)
+  end
+  def get_last_error(this : IFsrmReportJob*, lasterror : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, lasterror)
+  end
+  def get_last_generated_in_directory(this : IFsrmReportJob*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_generated_in_directory.call(this, path)
+  end
+  def enum_reports(this : IFsrmReportJob*, reports : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_reports.call(this, reports)
+  end
+  def create_report(this : IFsrmReportJob*, reporttype : FsrmReportType, report : IFsrmReport*) : HRESULT
+    @lpVtbl.value.create_report.call(this, reporttype, report)
+  end
+  def run(this : IFsrmReportJob*, context : FsrmReportGenerationContext) : HRESULT
+    @lpVtbl.value.run.call(this, context)
+  end
+  def wait_for_completion(this : IFsrmReportJob*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, waitseconds, completed)
+  end
+  def cancel(this : IFsrmReportJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IFsrmReport
+  def query_interface(this : IFsrmReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmReport*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IFsrmReport*, reporttype : FsrmReportType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, reporttype)
+  end
+  def get_name(this : IFsrmReport*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmReport*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_description(this : IFsrmReport*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmReport*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def get_last_generated_file_name_prefix(this : IFsrmReport*, prefix : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_generated_file_name_prefix.call(this, prefix)
+  end
+  def get_filter(this : IFsrmReport*, filter : FsrmReportFilter, filtervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_filter.call(this, filter, filtervalue)
+  end
+  def set_filter(this : IFsrmReport*, filter : FsrmReportFilter, filtervalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_filter.call(this, filter, filtervalue)
+  end
+  def delete(this : IFsrmReport*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFsrmReportScheduler
+  def query_interface(this : IFsrmReportScheduler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmReportScheduler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmReportScheduler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmReportScheduler*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmReportScheduler*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmReportScheduler*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmReportScheduler*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def verify_namespaces(this : IFsrmReportScheduler*, namespacessafearray : VARIANT*) : HRESULT
+    @lpVtbl.value.verify_namespaces.call(this, namespacessafearray)
+  end
+  def create_schedule_task(this : IFsrmReportScheduler*, taskname : UInt8*, namespacessafearray : VARIANT*, serializedtask : UInt8*) : HRESULT
+    @lpVtbl.value.create_schedule_task.call(this, taskname, namespacessafearray, serializedtask)
+  end
+  def modify_schedule_task(this : IFsrmReportScheduler*, taskname : UInt8*, namespacessafearray : VARIANT*, serializedtask : UInt8*) : HRESULT
+    @lpVtbl.value.modify_schedule_task.call(this, taskname, namespacessafearray, serializedtask)
+  end
+  def delete_schedule_task(this : IFsrmReportScheduler*, taskname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_schedule_task.call(this, taskname)
+  end
+end
+struct LibWin32::IFsrmFileManagementJobManager
+  def query_interface(this : IFsrmFileManagementJobManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileManagementJobManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileManagementJobManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileManagementJobManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileManagementJobManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileManagementJobManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileManagementJobManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_action_variables(this : IFsrmFileManagementJobManager*, variables : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variables.call(this, variables)
+  end
+  def get_action_variable_descriptions(this : IFsrmFileManagementJobManager*, descriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_action_variable_descriptions.call(this, descriptions)
+  end
+  def enum_file_management_jobs(this : IFsrmFileManagementJobManager*, options : FsrmEnumOptions, filemanagementjobs : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_file_management_jobs.call(this, options, filemanagementjobs)
+  end
+  def create_file_management_job(this : IFsrmFileManagementJobManager*, filemanagementjob : IFsrmFileManagementJob*) : HRESULT
+    @lpVtbl.value.create_file_management_job.call(this, filemanagementjob)
+  end
+  def get_file_management_job(this : IFsrmFileManagementJobManager*, name : UInt8*, filemanagementjob : IFsrmFileManagementJob*) : HRESULT
+    @lpVtbl.value.get_file_management_job.call(this, name, filemanagementjob)
+  end
+end
+struct LibWin32::IFsrmFileManagementJob
+  def query_interface(this : IFsrmFileManagementJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileManagementJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileManagementJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileManagementJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileManagementJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileManagementJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileManagementJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmFileManagementJob*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmFileManagementJob*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmFileManagementJob*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmFileManagementJob*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmFileManagementJob*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmFileManagementJob*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmFileManagementJob*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_namespace_roots(this : IFsrmFileManagementJob*, namespaceroots : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_namespace_roots.call(this, namespaceroots)
+  end
+  def put_namespace_roots(this : IFsrmFileManagementJob*, namespaceroots : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_namespace_roots.call(this, namespaceroots)
+  end
+  def get_enabled(this : IFsrmFileManagementJob*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : IFsrmFileManagementJob*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_operation_type(this : IFsrmFileManagementJob*, operationtype : FsrmFileManagementType*) : HRESULT
+    @lpVtbl.value.get_operation_type.call(this, operationtype)
+  end
+  def put_operation_type(this : IFsrmFileManagementJob*, operationtype : FsrmFileManagementType) : HRESULT
+    @lpVtbl.value.put_operation_type.call(this, operationtype)
+  end
+  def get_expiration_directory(this : IFsrmFileManagementJob*, expirationdirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_expiration_directory.call(this, expirationdirectory)
+  end
+  def put_expiration_directory(this : IFsrmFileManagementJob*, expirationdirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_expiration_directory.call(this, expirationdirectory)
+  end
+  def get_custom_action(this : IFsrmFileManagementJob*, action : IFsrmActionCommand*) : HRESULT
+    @lpVtbl.value.get_custom_action.call(this, action)
+  end
+  def get_notifications(this : IFsrmFileManagementJob*, notifications : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_notifications.call(this, notifications)
+  end
+  def get_logging(this : IFsrmFileManagementJob*, loggingflags : Int32*) : HRESULT
+    @lpVtbl.value.get_logging.call(this, loggingflags)
+  end
+  def put_logging(this : IFsrmFileManagementJob*, loggingflags : Int32) : HRESULT
+    @lpVtbl.value.put_logging.call(this, loggingflags)
+  end
+  def get_report_enabled(this : IFsrmFileManagementJob*, reportenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_report_enabled.call(this, reportenabled)
+  end
+  def put_report_enabled(this : IFsrmFileManagementJob*, reportenabled : Int16) : HRESULT
+    @lpVtbl.value.put_report_enabled.call(this, reportenabled)
+  end
+  def get_formats(this : IFsrmFileManagementJob*, formats : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_formats.call(this, formats)
+  end
+  def put_formats(this : IFsrmFileManagementJob*, formats : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_formats.call(this, formats)
+  end
+  def get_mail_to(this : IFsrmFileManagementJob*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_mail_to.call(this, mailto)
+  end
+  def put_mail_to(this : IFsrmFileManagementJob*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_mail_to.call(this, mailto)
+  end
+  def get_days_since_file_created(this : IFsrmFileManagementJob*, dayssincecreation : Int32*) : HRESULT
+    @lpVtbl.value.get_days_since_file_created.call(this, dayssincecreation)
+  end
+  def put_days_since_file_created(this : IFsrmFileManagementJob*, dayssincecreation : Int32) : HRESULT
+    @lpVtbl.value.put_days_since_file_created.call(this, dayssincecreation)
+  end
+  def get_days_since_file_last_accessed(this : IFsrmFileManagementJob*, dayssinceaccess : Int32*) : HRESULT
+    @lpVtbl.value.get_days_since_file_last_accessed.call(this, dayssinceaccess)
+  end
+  def put_days_since_file_last_accessed(this : IFsrmFileManagementJob*, dayssinceaccess : Int32) : HRESULT
+    @lpVtbl.value.put_days_since_file_last_accessed.call(this, dayssinceaccess)
+  end
+  def get_days_since_file_last_modified(this : IFsrmFileManagementJob*, dayssincemodify : Int32*) : HRESULT
+    @lpVtbl.value.get_days_since_file_last_modified.call(this, dayssincemodify)
+  end
+  def put_days_since_file_last_modified(this : IFsrmFileManagementJob*, dayssincemodify : Int32) : HRESULT
+    @lpVtbl.value.put_days_since_file_last_modified.call(this, dayssincemodify)
+  end
+  def get_property_conditions(this : IFsrmFileManagementJob*, propertyconditions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.get_property_conditions.call(this, propertyconditions)
+  end
+  def get_from_date(this : IFsrmFileManagementJob*, fromdate : Float64*) : HRESULT
+    @lpVtbl.value.get_from_date.call(this, fromdate)
+  end
+  def put_from_date(this : IFsrmFileManagementJob*, fromdate : Float64) : HRESULT
+    @lpVtbl.value.put_from_date.call(this, fromdate)
+  end
+  def get_task(this : IFsrmFileManagementJob*, taskname : UInt8**) : HRESULT
+    @lpVtbl.value.get_task.call(this, taskname)
+  end
+  def put_task(this : IFsrmFileManagementJob*, taskname : UInt8*) : HRESULT
+    @lpVtbl.value.put_task.call(this, taskname)
+  end
+  def get_parameters(this : IFsrmFileManagementJob*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmFileManagementJob*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_running_status(this : IFsrmFileManagementJob*, runningstatus : FsrmReportRunningStatus*) : HRESULT
+    @lpVtbl.value.get_running_status.call(this, runningstatus)
+  end
+  def get_last_error(this : IFsrmFileManagementJob*, lasterror : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, lasterror)
+  end
+  def get_last_report_path_without_extension(this : IFsrmFileManagementJob*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_report_path_without_extension.call(this, path)
+  end
+  def get_last_run(this : IFsrmFileManagementJob*, lastrun : Float64*) : HRESULT
+    @lpVtbl.value.get_last_run.call(this, lastrun)
+  end
+  def get_file_name_pattern(this : IFsrmFileManagementJob*, filenamepattern : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name_pattern.call(this, filenamepattern)
+  end
+  def put_file_name_pattern(this : IFsrmFileManagementJob*, filenamepattern : UInt8*) : HRESULT
+    @lpVtbl.value.put_file_name_pattern.call(this, filenamepattern)
+  end
+  def run(this : IFsrmFileManagementJob*, context : FsrmReportGenerationContext) : HRESULT
+    @lpVtbl.value.run.call(this, context)
+  end
+  def wait_for_completion(this : IFsrmFileManagementJob*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_completion.call(this, waitseconds, completed)
+  end
+  def cancel(this : IFsrmFileManagementJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def add_notification(this : IFsrmFileManagementJob*, days : Int32) : HRESULT
+    @lpVtbl.value.add_notification.call(this, days)
+  end
+  def delete_notification(this : IFsrmFileManagementJob*, days : Int32) : HRESULT
+    @lpVtbl.value.delete_notification.call(this, days)
+  end
+  def modify_notification(this : IFsrmFileManagementJob*, days : Int32, newdays : Int32) : HRESULT
+    @lpVtbl.value.modify_notification.call(this, days, newdays)
+  end
+  def create_notification_action(this : IFsrmFileManagementJob*, days : Int32, actiontype : FsrmActionType, action : IFsrmAction*) : HRESULT
+    @lpVtbl.value.create_notification_action.call(this, days, actiontype, action)
+  end
+  def enum_notification_actions(this : IFsrmFileManagementJob*, days : Int32, actions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_notification_actions.call(this, days, actions)
+  end
+  def create_property_condition(this : IFsrmFileManagementJob*, name : UInt8*, propertycondition : IFsrmPropertyCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.call(this, name, propertycondition)
+  end
+  def create_custom_action(this : IFsrmFileManagementJob*, customaction : IFsrmActionCommand*) : HRESULT
+    @lpVtbl.value.create_custom_action.call(this, customaction)
+  end
+end
+struct LibWin32::IFsrmPropertyCondition
+  def query_interface(this : IFsrmPropertyCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyCondition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyCondition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyCondition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyCondition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFsrmPropertyCondition*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmPropertyCondition*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_type(this : IFsrmPropertyCondition*, type : FsrmPropertyConditionType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def put_type(this : IFsrmPropertyCondition*, type : FsrmPropertyConditionType) : HRESULT
+    @lpVtbl.value.put_type.call(this, type)
+  end
+  def get_value(this : IFsrmPropertyCondition*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+  def put_value(this : IFsrmPropertyCondition*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_value.call(this, value)
+  end
+  def delete(this : IFsrmPropertyCondition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFsrmFileCondition
+  def query_interface(this : IFsrmFileCondition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileCondition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileCondition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileCondition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileCondition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileCondition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileCondition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IFsrmFileCondition*, pval : FsrmFileConditionType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def delete(this : IFsrmFileCondition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFsrmFileConditionProperty
+  def query_interface(this : IFsrmFileConditionProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmFileConditionProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmFileConditionProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmFileConditionProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmFileConditionProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmFileConditionProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmFileConditionProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IFsrmFileConditionProperty*, pval : FsrmFileConditionType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def delete(this : IFsrmFileConditionProperty*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_property_name(this : IFsrmFileConditionProperty*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_name.call(this, pval)
+  end
+  def put_property_name(this : IFsrmFileConditionProperty*, newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_property_name.call(this, newval)
+  end
+  def get_property_id(this : IFsrmFileConditionProperty*, pval : FsrmFileSystemPropertyId*) : HRESULT
+    @lpVtbl.value.get_property_id.call(this, pval)
+  end
+  def put_property_id(this : IFsrmFileConditionProperty*, newval : FsrmFileSystemPropertyId) : HRESULT
+    @lpVtbl.value.put_property_id.call(this, newval)
+  end
+  def get_operator(this : IFsrmFileConditionProperty*, pval : FsrmPropertyConditionType*) : HRESULT
+    @lpVtbl.value.get_operator.call(this, pval)
+  end
+  def put_operator(this : IFsrmFileConditionProperty*, newval : FsrmPropertyConditionType) : HRESULT
+    @lpVtbl.value.put_operator.call(this, newval)
+  end
+  def get_value_type(this : IFsrmFileConditionProperty*, pval : FsrmPropertyValueType*) : HRESULT
+    @lpVtbl.value.get_value_type.call(this, pval)
+  end
+  def put_value_type(this : IFsrmFileConditionProperty*, newval : FsrmPropertyValueType) : HRESULT
+    @lpVtbl.value.put_value_type.call(this, newval)
+  end
+  def get_value(this : IFsrmFileConditionProperty*, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.call(this, pval)
+  end
+  def put_value(this : IFsrmFileConditionProperty*, newval : VARIANT) : HRESULT
+    @lpVtbl.value.put_value.call(this, newval)
+  end
+end
+struct LibWin32::IFsrmPropertyDefinition
+  def query_interface(this : IFsrmPropertyDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmPropertyDefinition*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmPropertyDefinition*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmPropertyDefinition*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmPropertyDefinition*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmPropertyDefinition*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_type(this : IFsrmPropertyDefinition*, type : FsrmPropertyDefinitionType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def put_type(this : IFsrmPropertyDefinition*, type : FsrmPropertyDefinitionType) : HRESULT
+    @lpVtbl.value.put_type.call(this, type)
+  end
+  def get_possible_values(this : IFsrmPropertyDefinition*, possiblevalues : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_possible_values.call(this, possiblevalues)
+  end
+  def put_possible_values(this : IFsrmPropertyDefinition*, possiblevalues : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_possible_values.call(this, possiblevalues)
+  end
+  def get_value_descriptions(this : IFsrmPropertyDefinition*, valuedescriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_value_descriptions.call(this, valuedescriptions)
+  end
+  def put_value_descriptions(this : IFsrmPropertyDefinition*, valuedescriptions : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_value_descriptions.call(this, valuedescriptions)
+  end
+  def get_parameters(this : IFsrmPropertyDefinition*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmPropertyDefinition*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+end
+struct LibWin32::IFsrmPropertyDefinition2
+  def query_interface(this : IFsrmPropertyDefinition2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyDefinition2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyDefinition2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyDefinition2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyDefinition2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyDefinition2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyDefinition2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmPropertyDefinition2*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmPropertyDefinition2*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmPropertyDefinition2*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmPropertyDefinition2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmPropertyDefinition2*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmPropertyDefinition2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmPropertyDefinition2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_type(this : IFsrmPropertyDefinition2*, type : FsrmPropertyDefinitionType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def put_type(this : IFsrmPropertyDefinition2*, type : FsrmPropertyDefinitionType) : HRESULT
+    @lpVtbl.value.put_type.call(this, type)
+  end
+  def get_possible_values(this : IFsrmPropertyDefinition2*, possiblevalues : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_possible_values.call(this, possiblevalues)
+  end
+  def put_possible_values(this : IFsrmPropertyDefinition2*, possiblevalues : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_possible_values.call(this, possiblevalues)
+  end
+  def get_value_descriptions(this : IFsrmPropertyDefinition2*, valuedescriptions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_value_descriptions.call(this, valuedescriptions)
+  end
+  def put_value_descriptions(this : IFsrmPropertyDefinition2*, valuedescriptions : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_value_descriptions.call(this, valuedescriptions)
+  end
+  def get_parameters(this : IFsrmPropertyDefinition2*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmPropertyDefinition2*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_property_definition_flags(this : IFsrmPropertyDefinition2*, propertydefinitionflags : Int32*) : HRESULT
+    @lpVtbl.value.get_property_definition_flags.call(this, propertydefinitionflags)
+  end
+  def get_display_name(this : IFsrmPropertyDefinition2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, name)
+  end
+  def put_display_name(this : IFsrmPropertyDefinition2*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.call(this, name)
+  end
+  def get_applies_to(this : IFsrmPropertyDefinition2*, appliesto : Int32*) : HRESULT
+    @lpVtbl.value.get_applies_to.call(this, appliesto)
+  end
+  def get_value_definitions(this : IFsrmPropertyDefinition2*, valuedefinitions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.get_value_definitions.call(this, valuedefinitions)
+  end
+end
+struct LibWin32::IFsrmPropertyDefinitionValue
+  def query_interface(this : IFsrmPropertyDefinitionValue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyDefinitionValue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyDefinitionValue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyDefinitionValue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyDefinitionValue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyDefinitionValue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyDefinitionValue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFsrmPropertyDefinitionValue*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_display_name(this : IFsrmPropertyDefinitionValue*, displayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, displayname)
+  end
+  def get_description(this : IFsrmPropertyDefinitionValue*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def get_unique_id(this : IFsrmPropertyDefinitionValue*, uniqueid : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_id.call(this, uniqueid)
+  end
+end
+struct LibWin32::IFsrmProperty
+  def query_interface(this : IFsrmProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFsrmProperty*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_value(this : IFsrmProperty*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+  def get_sources(this : IFsrmProperty*, sources : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_sources.call(this, sources)
+  end
+  def get_property_flags(this : IFsrmProperty*, flags : Int32*) : HRESULT
+    @lpVtbl.value.get_property_flags.call(this, flags)
+  end
+end
+struct LibWin32::IFsrmRule
+  def query_interface(this : IFsrmRule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmRule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmRule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmRule*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmRule*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmRule*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmRule*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmRule*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmRule*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmRule*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmRule*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_rule_type(this : IFsrmRule*, ruletype : FsrmRuleType*) : HRESULT
+    @lpVtbl.value.get_rule_type.call(this, ruletype)
+  end
+  def get_module_definition_name(this : IFsrmRule*, moduledefinitionname : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_definition_name.call(this, moduledefinitionname)
+  end
+  def put_module_definition_name(this : IFsrmRule*, moduledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.put_module_definition_name.call(this, moduledefinitionname)
+  end
+  def get_namespace_roots(this : IFsrmRule*, namespaceroots : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_namespace_roots.call(this, namespaceroots)
+  end
+  def put_namespace_roots(this : IFsrmRule*, namespaceroots : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_namespace_roots.call(this, namespaceroots)
+  end
+  def get_rule_flags(this : IFsrmRule*, ruleflags : Int32*) : HRESULT
+    @lpVtbl.value.get_rule_flags.call(this, ruleflags)
+  end
+  def put_rule_flags(this : IFsrmRule*, ruleflags : Int32) : HRESULT
+    @lpVtbl.value.put_rule_flags.call(this, ruleflags)
+  end
+  def get_parameters(this : IFsrmRule*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmRule*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_last_modified(this : IFsrmRule*, lastmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_modified.call(this, lastmodified)
+  end
+end
+struct LibWin32::IFsrmClassificationRule
+  def query_interface(this : IFsrmClassificationRule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmClassificationRule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmClassificationRule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmClassificationRule*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmClassificationRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmClassificationRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmClassificationRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmClassificationRule*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmClassificationRule*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmClassificationRule*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmClassificationRule*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmClassificationRule*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_name(this : IFsrmClassificationRule*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmClassificationRule*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_rule_type(this : IFsrmClassificationRule*, ruletype : FsrmRuleType*) : HRESULT
+    @lpVtbl.value.get_rule_type.call(this, ruletype)
+  end
+  def get_module_definition_name(this : IFsrmClassificationRule*, moduledefinitionname : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_definition_name.call(this, moduledefinitionname)
+  end
+  def put_module_definition_name(this : IFsrmClassificationRule*, moduledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.put_module_definition_name.call(this, moduledefinitionname)
+  end
+  def get_namespace_roots(this : IFsrmClassificationRule*, namespaceroots : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_namespace_roots.call(this, namespaceroots)
+  end
+  def put_namespace_roots(this : IFsrmClassificationRule*, namespaceroots : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_namespace_roots.call(this, namespaceroots)
+  end
+  def get_rule_flags(this : IFsrmClassificationRule*, ruleflags : Int32*) : HRESULT
+    @lpVtbl.value.get_rule_flags.call(this, ruleflags)
+  end
+  def put_rule_flags(this : IFsrmClassificationRule*, ruleflags : Int32) : HRESULT
+    @lpVtbl.value.put_rule_flags.call(this, ruleflags)
+  end
+  def get_parameters(this : IFsrmClassificationRule*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmClassificationRule*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_last_modified(this : IFsrmClassificationRule*, lastmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_modified.call(this, lastmodified)
+  end
+  def get_execution_option(this : IFsrmClassificationRule*, executionoption : FsrmExecutionOption*) : HRESULT
+    @lpVtbl.value.get_execution_option.call(this, executionoption)
+  end
+  def put_execution_option(this : IFsrmClassificationRule*, executionoption : FsrmExecutionOption) : HRESULT
+    @lpVtbl.value.put_execution_option.call(this, executionoption)
+  end
+  def get_property_affected(this : IFsrmClassificationRule*, property : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_affected.call(this, property)
+  end
+  def put_property_affected(this : IFsrmClassificationRule*, property : UInt8*) : HRESULT
+    @lpVtbl.value.put_property_affected.call(this, property)
+  end
+  def get_value(this : IFsrmClassificationRule*, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, value)
+  end
+  def put_value(this : IFsrmClassificationRule*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_value.call(this, value)
+  end
+end
+struct LibWin32::IFsrmPipelineModuleDefinition
+  def query_interface(this : IFsrmPipelineModuleDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPipelineModuleDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPipelineModuleDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPipelineModuleDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPipelineModuleDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPipelineModuleDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPipelineModuleDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmPipelineModuleDefinition*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmPipelineModuleDefinition*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmPipelineModuleDefinition*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_module_clsid(this : IFsrmPipelineModuleDefinition*, moduleclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_clsid.call(this, moduleclsid)
+  end
+  def put_module_clsid(this : IFsrmPipelineModuleDefinition*, moduleclsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_module_clsid.call(this, moduleclsid)
+  end
+  def get_name(this : IFsrmPipelineModuleDefinition*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmPipelineModuleDefinition*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_company(this : IFsrmPipelineModuleDefinition*, company : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.call(this, company)
+  end
+  def put_company(this : IFsrmPipelineModuleDefinition*, company : UInt8*) : HRESULT
+    @lpVtbl.value.put_company.call(this, company)
+  end
+  def get_version(this : IFsrmPipelineModuleDefinition*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+  def put_version(this : IFsrmPipelineModuleDefinition*, version : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, version)
+  end
+  def get_module_type(this : IFsrmPipelineModuleDefinition*, moduletype : FsrmPipelineModuleType*) : HRESULT
+    @lpVtbl.value.get_module_type.call(this, moduletype)
+  end
+  def get_enabled(this : IFsrmPipelineModuleDefinition*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : IFsrmPipelineModuleDefinition*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_needs_file_content(this : IFsrmPipelineModuleDefinition*, needsfilecontent : Int16*) : HRESULT
+    @lpVtbl.value.get_needs_file_content.call(this, needsfilecontent)
+  end
+  def put_needs_file_content(this : IFsrmPipelineModuleDefinition*, needsfilecontent : Int16) : HRESULT
+    @lpVtbl.value.put_needs_file_content.call(this, needsfilecontent)
+  end
+  def get_account(this : IFsrmPipelineModuleDefinition*, retrievalaccount : FsrmAccountType*) : HRESULT
+    @lpVtbl.value.get_account.call(this, retrievalaccount)
+  end
+  def put_account(this : IFsrmPipelineModuleDefinition*, retrievalaccount : FsrmAccountType) : HRESULT
+    @lpVtbl.value.put_account.call(this, retrievalaccount)
+  end
+  def get_supported_extensions(this : IFsrmPipelineModuleDefinition*, supportedextensions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_extensions.call(this, supportedextensions)
+  end
+  def put_supported_extensions(this : IFsrmPipelineModuleDefinition*, supportedextensions : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_supported_extensions.call(this, supportedextensions)
+  end
+  def get_parameters(this : IFsrmPipelineModuleDefinition*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmPipelineModuleDefinition*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+end
+struct LibWin32::IFsrmClassifierModuleDefinition
+  def query_interface(this : IFsrmClassifierModuleDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmClassifierModuleDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmClassifierModuleDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmClassifierModuleDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmClassifierModuleDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmClassifierModuleDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmClassifierModuleDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmClassifierModuleDefinition*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmClassifierModuleDefinition*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmClassifierModuleDefinition*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmClassifierModuleDefinition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmClassifierModuleDefinition*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_module_clsid(this : IFsrmClassifierModuleDefinition*, moduleclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_clsid.call(this, moduleclsid)
+  end
+  def put_module_clsid(this : IFsrmClassifierModuleDefinition*, moduleclsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_module_clsid.call(this, moduleclsid)
+  end
+  def get_name(this : IFsrmClassifierModuleDefinition*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmClassifierModuleDefinition*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_company(this : IFsrmClassifierModuleDefinition*, company : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.call(this, company)
+  end
+  def put_company(this : IFsrmClassifierModuleDefinition*, company : UInt8*) : HRESULT
+    @lpVtbl.value.put_company.call(this, company)
+  end
+  def get_version(this : IFsrmClassifierModuleDefinition*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+  def put_version(this : IFsrmClassifierModuleDefinition*, version : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, version)
+  end
+  def get_module_type(this : IFsrmClassifierModuleDefinition*, moduletype : FsrmPipelineModuleType*) : HRESULT
+    @lpVtbl.value.get_module_type.call(this, moduletype)
+  end
+  def get_enabled(this : IFsrmClassifierModuleDefinition*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : IFsrmClassifierModuleDefinition*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_needs_file_content(this : IFsrmClassifierModuleDefinition*, needsfilecontent : Int16*) : HRESULT
+    @lpVtbl.value.get_needs_file_content.call(this, needsfilecontent)
+  end
+  def put_needs_file_content(this : IFsrmClassifierModuleDefinition*, needsfilecontent : Int16) : HRESULT
+    @lpVtbl.value.put_needs_file_content.call(this, needsfilecontent)
+  end
+  def get_account(this : IFsrmClassifierModuleDefinition*, retrievalaccount : FsrmAccountType*) : HRESULT
+    @lpVtbl.value.get_account.call(this, retrievalaccount)
+  end
+  def put_account(this : IFsrmClassifierModuleDefinition*, retrievalaccount : FsrmAccountType) : HRESULT
+    @lpVtbl.value.put_account.call(this, retrievalaccount)
+  end
+  def get_supported_extensions(this : IFsrmClassifierModuleDefinition*, supportedextensions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_extensions.call(this, supportedextensions)
+  end
+  def put_supported_extensions(this : IFsrmClassifierModuleDefinition*, supportedextensions : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_supported_extensions.call(this, supportedextensions)
+  end
+  def get_parameters(this : IFsrmClassifierModuleDefinition*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmClassifierModuleDefinition*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_properties_affected(this : IFsrmClassifierModuleDefinition*, propertiesaffected : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_properties_affected.call(this, propertiesaffected)
+  end
+  def put_properties_affected(this : IFsrmClassifierModuleDefinition*, propertiesaffected : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_properties_affected.call(this, propertiesaffected)
+  end
+  def get_properties_used(this : IFsrmClassifierModuleDefinition*, propertiesused : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_properties_used.call(this, propertiesused)
+  end
+  def put_properties_used(this : IFsrmClassifierModuleDefinition*, propertiesused : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_properties_used.call(this, propertiesused)
+  end
+  def get_needs_explicit_value(this : IFsrmClassifierModuleDefinition*, needsexplicitvalue : Int16*) : HRESULT
+    @lpVtbl.value.get_needs_explicit_value.call(this, needsexplicitvalue)
+  end
+  def put_needs_explicit_value(this : IFsrmClassifierModuleDefinition*, needsexplicitvalue : Int16) : HRESULT
+    @lpVtbl.value.put_needs_explicit_value.call(this, needsexplicitvalue)
+  end
+end
+struct LibWin32::IFsrmStorageModuleDefinition
+  def query_interface(this : IFsrmStorageModuleDefinition*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmStorageModuleDefinition*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmStorageModuleDefinition*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmStorageModuleDefinition*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmStorageModuleDefinition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmStorageModuleDefinition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmStorageModuleDefinition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFsrmStorageModuleDefinition*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_description(this : IFsrmStorageModuleDefinition*, description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, description)
+  end
+  def put_description(this : IFsrmStorageModuleDefinition*, description : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, description)
+  end
+  def delete(this : IFsrmStorageModuleDefinition*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def commit(this : IFsrmStorageModuleDefinition*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_module_clsid(this : IFsrmStorageModuleDefinition*, moduleclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_clsid.call(this, moduleclsid)
+  end
+  def put_module_clsid(this : IFsrmStorageModuleDefinition*, moduleclsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_module_clsid.call(this, moduleclsid)
+  end
+  def get_name(this : IFsrmStorageModuleDefinition*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def put_name(this : IFsrmStorageModuleDefinition*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_company(this : IFsrmStorageModuleDefinition*, company : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.call(this, company)
+  end
+  def put_company(this : IFsrmStorageModuleDefinition*, company : UInt8*) : HRESULT
+    @lpVtbl.value.put_company.call(this, company)
+  end
+  def get_version(this : IFsrmStorageModuleDefinition*, version : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.call(this, version)
+  end
+  def put_version(this : IFsrmStorageModuleDefinition*, version : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.call(this, version)
+  end
+  def get_module_type(this : IFsrmStorageModuleDefinition*, moduletype : FsrmPipelineModuleType*) : HRESULT
+    @lpVtbl.value.get_module_type.call(this, moduletype)
+  end
+  def get_enabled(this : IFsrmStorageModuleDefinition*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, enabled)
+  end
+  def put_enabled(this : IFsrmStorageModuleDefinition*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, enabled)
+  end
+  def get_needs_file_content(this : IFsrmStorageModuleDefinition*, needsfilecontent : Int16*) : HRESULT
+    @lpVtbl.value.get_needs_file_content.call(this, needsfilecontent)
+  end
+  def put_needs_file_content(this : IFsrmStorageModuleDefinition*, needsfilecontent : Int16) : HRESULT
+    @lpVtbl.value.put_needs_file_content.call(this, needsfilecontent)
+  end
+  def get_account(this : IFsrmStorageModuleDefinition*, retrievalaccount : FsrmAccountType*) : HRESULT
+    @lpVtbl.value.get_account.call(this, retrievalaccount)
+  end
+  def put_account(this : IFsrmStorageModuleDefinition*, retrievalaccount : FsrmAccountType) : HRESULT
+    @lpVtbl.value.put_account.call(this, retrievalaccount)
+  end
+  def get_supported_extensions(this : IFsrmStorageModuleDefinition*, supportedextensions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_extensions.call(this, supportedextensions)
+  end
+  def put_supported_extensions(this : IFsrmStorageModuleDefinition*, supportedextensions : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_supported_extensions.call(this, supportedextensions)
+  end
+  def get_parameters(this : IFsrmStorageModuleDefinition*, parameters : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_parameters.call(this, parameters)
+  end
+  def put_parameters(this : IFsrmStorageModuleDefinition*, parameters : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_parameters.call(this, parameters)
+  end
+  def get_capabilities(this : IFsrmStorageModuleDefinition*, capabilities : FsrmStorageModuleCaps*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilities)
+  end
+  def put_capabilities(this : IFsrmStorageModuleDefinition*, capabilities : FsrmStorageModuleCaps) : HRESULT
+    @lpVtbl.value.put_capabilities.call(this, capabilities)
+  end
+  def get_storage_type(this : IFsrmStorageModuleDefinition*, storagetype : FsrmStorageModuleType*) : HRESULT
+    @lpVtbl.value.get_storage_type.call(this, storagetype)
+  end
+  def put_storage_type(this : IFsrmStorageModuleDefinition*, storagetype : FsrmStorageModuleType) : HRESULT
+    @lpVtbl.value.put_storage_type.call(this, storagetype)
+  end
+  def get_updates_file_content(this : IFsrmStorageModuleDefinition*, updatesfilecontent : Int16*) : HRESULT
+    @lpVtbl.value.get_updates_file_content.call(this, updatesfilecontent)
+  end
+  def put_updates_file_content(this : IFsrmStorageModuleDefinition*, updatesfilecontent : Int16) : HRESULT
+    @lpVtbl.value.put_updates_file_content.call(this, updatesfilecontent)
+  end
+end
+struct LibWin32::IFsrmClassificationManager
+  def query_interface(this : IFsrmClassificationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmClassificationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmClassificationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmClassificationManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmClassificationManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmClassificationManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmClassificationManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_classification_report_formats(this : IFsrmClassificationManager*, formats : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_classification_report_formats.call(this, formats)
+  end
+  def put_classification_report_formats(this : IFsrmClassificationManager*, formats : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_classification_report_formats.call(this, formats)
+  end
+  def get_logging(this : IFsrmClassificationManager*, logging : Int32*) : HRESULT
+    @lpVtbl.value.get_logging.call(this, logging)
+  end
+  def put_logging(this : IFsrmClassificationManager*, logging : Int32) : HRESULT
+    @lpVtbl.value.put_logging.call(this, logging)
+  end
+  def get_classification_report_mail_to(this : IFsrmClassificationManager*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_report_mail_to.call(this, mailto)
+  end
+  def put_classification_report_mail_to(this : IFsrmClassificationManager*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_classification_report_mail_to.call(this, mailto)
+  end
+  def get_classification_report_enabled(this : IFsrmClassificationManager*, reportenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_classification_report_enabled.call(this, reportenabled)
+  end
+  def put_classification_report_enabled(this : IFsrmClassificationManager*, reportenabled : Int16) : HRESULT
+    @lpVtbl.value.put_classification_report_enabled.call(this, reportenabled)
+  end
+  def get_classification_last_report_path_without_extension(this : IFsrmClassificationManager*, lastreportpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_last_report_path_without_extension.call(this, lastreportpath)
+  end
+  def get_classification_last_error(this : IFsrmClassificationManager*, lasterror : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_last_error.call(this, lasterror)
+  end
+  def get_classification_running_status(this : IFsrmClassificationManager*, runningstatus : FsrmReportRunningStatus*) : HRESULT
+    @lpVtbl.value.get_classification_running_status.call(this, runningstatus)
+  end
+  def enum_property_definitions(this : IFsrmClassificationManager*, options : FsrmEnumOptions, propertydefinitions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_property_definitions.call(this, options, propertydefinitions)
+  end
+  def create_property_definition(this : IFsrmClassificationManager*, propertydefinition : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.create_property_definition.call(this, propertydefinition)
+  end
+  def get_property_definition(this : IFsrmClassificationManager*, propertyname : UInt8*, propertydefinition : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.get_property_definition.call(this, propertyname, propertydefinition)
+  end
+  def enum_rules(this : IFsrmClassificationManager*, ruletype : FsrmRuleType, options : FsrmEnumOptions, rules : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_rules.call(this, ruletype, options, rules)
+  end
+  def create_rule(this : IFsrmClassificationManager*, ruletype : FsrmRuleType, rule : IFsrmRule*) : HRESULT
+    @lpVtbl.value.create_rule.call(this, ruletype, rule)
+  end
+  def get_rule(this : IFsrmClassificationManager*, rulename : UInt8*, ruletype : FsrmRuleType, rule : IFsrmRule*) : HRESULT
+    @lpVtbl.value.get_rule.call(this, rulename, ruletype, rule)
+  end
+  def enum_module_definitions(this : IFsrmClassificationManager*, moduletype : FsrmPipelineModuleType, options : FsrmEnumOptions, moduledefinitions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_module_definitions.call(this, moduletype, options, moduledefinitions)
+  end
+  def create_module_definition(this : IFsrmClassificationManager*, moduletype : FsrmPipelineModuleType, moduledefinition : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.create_module_definition.call(this, moduletype, moduledefinition)
+  end
+  def get_module_definition(this : IFsrmClassificationManager*, modulename : UInt8*, moduletype : FsrmPipelineModuleType, moduledefinition : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.get_module_definition.call(this, modulename, moduletype, moduledefinition)
+  end
+  def run_classification(this : IFsrmClassificationManager*, context : FsrmReportGenerationContext, reserved : UInt8*) : HRESULT
+    @lpVtbl.value.run_classification.call(this, context, reserved)
+  end
+  def wait_for_classification_completion(this : IFsrmClassificationManager*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_classification_completion.call(this, waitseconds, completed)
+  end
+  def cancel_classification(this : IFsrmClassificationManager*) : HRESULT
+    @lpVtbl.value.cancel_classification.call(this)
+  end
+  def enum_file_properties(this : IFsrmClassificationManager*, filepath : UInt8*, options : FsrmGetFilePropertyOptions, fileproperties : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_file_properties.call(this, filepath, options, fileproperties)
+  end
+  def get_file_property(this : IFsrmClassificationManager*, filepath : UInt8*, propertyname : UInt8*, options : FsrmGetFilePropertyOptions, property : IFsrmProperty*) : HRESULT
+    @lpVtbl.value.get_file_property.call(this, filepath, propertyname, options, property)
+  end
+  def set_file_property(this : IFsrmClassificationManager*, filepath : UInt8*, propertyname : UInt8*, propertyvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_file_property.call(this, filepath, propertyname, propertyvalue)
+  end
+  def clear_file_property(this : IFsrmClassificationManager*, filepath : UInt8*, property : UInt8*) : HRESULT
+    @lpVtbl.value.clear_file_property.call(this, filepath, property)
+  end
+end
+struct LibWin32::IFsrmClassificationManager2
+  def query_interface(this : IFsrmClassificationManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmClassificationManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmClassificationManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmClassificationManager2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmClassificationManager2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmClassificationManager2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmClassificationManager2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_classification_report_formats(this : IFsrmClassificationManager2*, formats : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_classification_report_formats.call(this, formats)
+  end
+  def put_classification_report_formats(this : IFsrmClassificationManager2*, formats : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.put_classification_report_formats.call(this, formats)
+  end
+  def get_logging(this : IFsrmClassificationManager2*, logging : Int32*) : HRESULT
+    @lpVtbl.value.get_logging.call(this, logging)
+  end
+  def put_logging(this : IFsrmClassificationManager2*, logging : Int32) : HRESULT
+    @lpVtbl.value.put_logging.call(this, logging)
+  end
+  def get_classification_report_mail_to(this : IFsrmClassificationManager2*, mailto : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_report_mail_to.call(this, mailto)
+  end
+  def put_classification_report_mail_to(this : IFsrmClassificationManager2*, mailto : UInt8*) : HRESULT
+    @lpVtbl.value.put_classification_report_mail_to.call(this, mailto)
+  end
+  def get_classification_report_enabled(this : IFsrmClassificationManager2*, reportenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_classification_report_enabled.call(this, reportenabled)
+  end
+  def put_classification_report_enabled(this : IFsrmClassificationManager2*, reportenabled : Int16) : HRESULT
+    @lpVtbl.value.put_classification_report_enabled.call(this, reportenabled)
+  end
+  def get_classification_last_report_path_without_extension(this : IFsrmClassificationManager2*, lastreportpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_last_report_path_without_extension.call(this, lastreportpath)
+  end
+  def get_classification_last_error(this : IFsrmClassificationManager2*, lasterror : UInt8**) : HRESULT
+    @lpVtbl.value.get_classification_last_error.call(this, lasterror)
+  end
+  def get_classification_running_status(this : IFsrmClassificationManager2*, runningstatus : FsrmReportRunningStatus*) : HRESULT
+    @lpVtbl.value.get_classification_running_status.call(this, runningstatus)
+  end
+  def enum_property_definitions(this : IFsrmClassificationManager2*, options : FsrmEnumOptions, propertydefinitions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_property_definitions.call(this, options, propertydefinitions)
+  end
+  def create_property_definition(this : IFsrmClassificationManager2*, propertydefinition : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.create_property_definition.call(this, propertydefinition)
+  end
+  def get_property_definition(this : IFsrmClassificationManager2*, propertyname : UInt8*, propertydefinition : IFsrmPropertyDefinition*) : HRESULT
+    @lpVtbl.value.get_property_definition.call(this, propertyname, propertydefinition)
+  end
+  def enum_rules(this : IFsrmClassificationManager2*, ruletype : FsrmRuleType, options : FsrmEnumOptions, rules : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_rules.call(this, ruletype, options, rules)
+  end
+  def create_rule(this : IFsrmClassificationManager2*, ruletype : FsrmRuleType, rule : IFsrmRule*) : HRESULT
+    @lpVtbl.value.create_rule.call(this, ruletype, rule)
+  end
+  def get_rule(this : IFsrmClassificationManager2*, rulename : UInt8*, ruletype : FsrmRuleType, rule : IFsrmRule*) : HRESULT
+    @lpVtbl.value.get_rule.call(this, rulename, ruletype, rule)
+  end
+  def enum_module_definitions(this : IFsrmClassificationManager2*, moduletype : FsrmPipelineModuleType, options : FsrmEnumOptions, moduledefinitions : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_module_definitions.call(this, moduletype, options, moduledefinitions)
+  end
+  def create_module_definition(this : IFsrmClassificationManager2*, moduletype : FsrmPipelineModuleType, moduledefinition : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.create_module_definition.call(this, moduletype, moduledefinition)
+  end
+  def get_module_definition(this : IFsrmClassificationManager2*, modulename : UInt8*, moduletype : FsrmPipelineModuleType, moduledefinition : IFsrmPipelineModuleDefinition*) : HRESULT
+    @lpVtbl.value.get_module_definition.call(this, modulename, moduletype, moduledefinition)
+  end
+  def run_classification(this : IFsrmClassificationManager2*, context : FsrmReportGenerationContext, reserved : UInt8*) : HRESULT
+    @lpVtbl.value.run_classification.call(this, context, reserved)
+  end
+  def wait_for_classification_completion(this : IFsrmClassificationManager2*, waitseconds : Int32, completed : Int16*) : HRESULT
+    @lpVtbl.value.wait_for_classification_completion.call(this, waitseconds, completed)
+  end
+  def cancel_classification(this : IFsrmClassificationManager2*) : HRESULT
+    @lpVtbl.value.cancel_classification.call(this)
+  end
+  def enum_file_properties(this : IFsrmClassificationManager2*, filepath : UInt8*, options : FsrmGetFilePropertyOptions, fileproperties : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.enum_file_properties.call(this, filepath, options, fileproperties)
+  end
+  def get_file_property(this : IFsrmClassificationManager2*, filepath : UInt8*, propertyname : UInt8*, options : FsrmGetFilePropertyOptions, property : IFsrmProperty*) : HRESULT
+    @lpVtbl.value.get_file_property.call(this, filepath, propertyname, options, property)
+  end
+  def set_file_property(this : IFsrmClassificationManager2*, filepath : UInt8*, propertyname : UInt8*, propertyvalue : UInt8*) : HRESULT
+    @lpVtbl.value.set_file_property.call(this, filepath, propertyname, propertyvalue)
+  end
+  def clear_file_property(this : IFsrmClassificationManager2*, filepath : UInt8*, property : UInt8*) : HRESULT
+    @lpVtbl.value.clear_file_property.call(this, filepath, property)
+  end
+  def classify_files(this : IFsrmClassificationManager2*, filepaths : SAFEARRAY*, propertynames : SAFEARRAY*, propertyvalues : SAFEARRAY*, options : FsrmGetFilePropertyOptions) : HRESULT
+    @lpVtbl.value.classify_files.call(this, filepaths, propertynames, propertyvalues, options)
+  end
+end
+struct LibWin32::IFsrmPropertyBag
+  def query_interface(this : IFsrmPropertyBag*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyBag*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyBag*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyBag*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyBag*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyBag*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyBag*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFsrmPropertyBag*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_relative_path(this : IFsrmPropertyBag*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_relative_path.call(this, path)
+  end
+  def get_volume_name(this : IFsrmPropertyBag*, volumename : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_name.call(this, volumename)
+  end
+  def get_relative_namespace_root(this : IFsrmPropertyBag*, relativenamespaceroot : UInt8**) : HRESULT
+    @lpVtbl.value.get_relative_namespace_root.call(this, relativenamespaceroot)
+  end
+  def get_volume_index(this : IFsrmPropertyBag*, volumeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_volume_index.call(this, volumeid)
+  end
+  def get_file_id(this : IFsrmPropertyBag*, fileid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_file_id.call(this, fileid)
+  end
+  def get_parent_directory_id(this : IFsrmPropertyBag*, parentdirectoryid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parent_directory_id.call(this, parentdirectoryid)
+  end
+  def get_size(this : IFsrmPropertyBag*, size : VARIANT*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_size_allocated(this : IFsrmPropertyBag*, sizeallocated : VARIANT*) : HRESULT
+    @lpVtbl.value.get_size_allocated.call(this, sizeallocated)
+  end
+  def get_creation_time(this : IFsrmPropertyBag*, creationtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_creation_time.call(this, creationtime)
+  end
+  def get_last_access_time(this : IFsrmPropertyBag*, lastaccesstime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_access_time.call(this, lastaccesstime)
+  end
+  def get_last_modification_time(this : IFsrmPropertyBag*, lastmodificationtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_modification_time.call(this, lastmodificationtime)
+  end
+  def get_attributes(this : IFsrmPropertyBag*, attributes : UInt32*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributes)
+  end
+  def get_owner_sid(this : IFsrmPropertyBag*, ownersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_owner_sid.call(this, ownersid)
+  end
+  def get_file_property_names(this : IFsrmPropertyBag*, filepropertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_file_property_names.call(this, filepropertynames)
+  end
+  def get_messages(this : IFsrmPropertyBag*, messages : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_messages.call(this, messages)
+  end
+  def get_property_bag_flags(this : IFsrmPropertyBag*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_bag_flags.call(this, flags)
+  end
+  def get_file_property(this : IFsrmPropertyBag*, name : UInt8*, fileproperty : IFsrmProperty*) : HRESULT
+    @lpVtbl.value.get_file_property.call(this, name, fileproperty)
+  end
+  def set_file_property(this : IFsrmPropertyBag*, name : UInt8*, value : UInt8*) : HRESULT
+    @lpVtbl.value.set_file_property.call(this, name, value)
+  end
+  def add_message(this : IFsrmPropertyBag*, message : UInt8*) : HRESULT
+    @lpVtbl.value.add_message.call(this, message)
+  end
+  def get_file_stream_interface(this : IFsrmPropertyBag*, accessmode : FsrmFileStreamingMode, interfacetype : FsrmFileStreamingInterfaceType, pstreaminterface : VARIANT*) : HRESULT
+    @lpVtbl.value.get_file_stream_interface.call(this, accessmode, interfacetype, pstreaminterface)
+  end
+end
+struct LibWin32::IFsrmPropertyBag2
+  def query_interface(this : IFsrmPropertyBag2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPropertyBag2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPropertyBag2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPropertyBag2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPropertyBag2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPropertyBag2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPropertyBag2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFsrmPropertyBag2*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_relative_path(this : IFsrmPropertyBag2*, path : UInt8**) : HRESULT
+    @lpVtbl.value.get_relative_path.call(this, path)
+  end
+  def get_volume_name(this : IFsrmPropertyBag2*, volumename : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_name.call(this, volumename)
+  end
+  def get_relative_namespace_root(this : IFsrmPropertyBag2*, relativenamespaceroot : UInt8**) : HRESULT
+    @lpVtbl.value.get_relative_namespace_root.call(this, relativenamespaceroot)
+  end
+  def get_volume_index(this : IFsrmPropertyBag2*, volumeid : UInt32*) : HRESULT
+    @lpVtbl.value.get_volume_index.call(this, volumeid)
+  end
+  def get_file_id(this : IFsrmPropertyBag2*, fileid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_file_id.call(this, fileid)
+  end
+  def get_parent_directory_id(this : IFsrmPropertyBag2*, parentdirectoryid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parent_directory_id.call(this, parentdirectoryid)
+  end
+  def get_size(this : IFsrmPropertyBag2*, size : VARIANT*) : HRESULT
+    @lpVtbl.value.get_size.call(this, size)
+  end
+  def get_size_allocated(this : IFsrmPropertyBag2*, sizeallocated : VARIANT*) : HRESULT
+    @lpVtbl.value.get_size_allocated.call(this, sizeallocated)
+  end
+  def get_creation_time(this : IFsrmPropertyBag2*, creationtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_creation_time.call(this, creationtime)
+  end
+  def get_last_access_time(this : IFsrmPropertyBag2*, lastaccesstime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_access_time.call(this, lastaccesstime)
+  end
+  def get_last_modification_time(this : IFsrmPropertyBag2*, lastmodificationtime : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_modification_time.call(this, lastmodificationtime)
+  end
+  def get_attributes(this : IFsrmPropertyBag2*, attributes : UInt32*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, attributes)
+  end
+  def get_owner_sid(this : IFsrmPropertyBag2*, ownersid : UInt8**) : HRESULT
+    @lpVtbl.value.get_owner_sid.call(this, ownersid)
+  end
+  def get_file_property_names(this : IFsrmPropertyBag2*, filepropertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_file_property_names.call(this, filepropertynames)
+  end
+  def get_messages(this : IFsrmPropertyBag2*, messages : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_messages.call(this, messages)
+  end
+  def get_property_bag_flags(this : IFsrmPropertyBag2*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_bag_flags.call(this, flags)
+  end
+  def get_file_property(this : IFsrmPropertyBag2*, name : UInt8*, fileproperty : IFsrmProperty*) : HRESULT
+    @lpVtbl.value.get_file_property.call(this, name, fileproperty)
+  end
+  def set_file_property(this : IFsrmPropertyBag2*, name : UInt8*, value : UInt8*) : HRESULT
+    @lpVtbl.value.set_file_property.call(this, name, value)
+  end
+  def add_message(this : IFsrmPropertyBag2*, message : UInt8*) : HRESULT
+    @lpVtbl.value.add_message.call(this, message)
+  end
+  def get_file_stream_interface(this : IFsrmPropertyBag2*, accessmode : FsrmFileStreamingMode, interfacetype : FsrmFileStreamingInterfaceType, pstreaminterface : VARIANT*) : HRESULT
+    @lpVtbl.value.get_file_stream_interface.call(this, accessmode, interfacetype, pstreaminterface)
+  end
+  def get_field_value(this : IFsrmPropertyBag2*, field : FsrmPropertyBagField, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_field_value.call(this, field, value)
+  end
+  def get_untrusted_in_file_properties(this : IFsrmPropertyBag2*, props : IFsrmCollection*) : HRESULT
+    @lpVtbl.value.get_untrusted_in_file_properties.call(this, props)
+  end
+end
+struct LibWin32::IFsrmPipelineModuleImplementation
+  def query_interface(this : IFsrmPipelineModuleImplementation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPipelineModuleImplementation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPipelineModuleImplementation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPipelineModuleImplementation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPipelineModuleImplementation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPipelineModuleImplementation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPipelineModuleImplementation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_load(this : IFsrmPipelineModuleImplementation*, moduledefinition : IFsrmPipelineModuleDefinition, moduleconnector : IFsrmPipelineModuleConnector*) : HRESULT
+    @lpVtbl.value.on_load.call(this, moduledefinition, moduleconnector)
+  end
+  def on_unload(this : IFsrmPipelineModuleImplementation*) : HRESULT
+    @lpVtbl.value.on_unload.call(this)
+  end
+end
+struct LibWin32::IFsrmClassifierModuleImplementation
+  def query_interface(this : IFsrmClassifierModuleImplementation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmClassifierModuleImplementation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmClassifierModuleImplementation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmClassifierModuleImplementation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmClassifierModuleImplementation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmClassifierModuleImplementation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmClassifierModuleImplementation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_load(this : IFsrmClassifierModuleImplementation*, moduledefinition : IFsrmPipelineModuleDefinition, moduleconnector : IFsrmPipelineModuleConnector*) : HRESULT
+    @lpVtbl.value.on_load.call(this, moduledefinition, moduleconnector)
+  end
+  def on_unload(this : IFsrmClassifierModuleImplementation*) : HRESULT
+    @lpVtbl.value.on_unload.call(this)
+  end
+  def get_last_modified(this : IFsrmClassifierModuleImplementation*, lastmodified : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_modified.call(this, lastmodified)
+  end
+  def use_rules_and_definitions(this : IFsrmClassifierModuleImplementation*, rules : IFsrmCollection, propertydefinitions : IFsrmCollection) : HRESULT
+    @lpVtbl.value.use_rules_and_definitions.call(this, rules, propertydefinitions)
+  end
+  def on_begin_file(this : IFsrmClassifierModuleImplementation*, propertybag : IFsrmPropertyBag, arrayruleids : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_begin_file.call(this, propertybag, arrayruleids)
+  end
+  def does_property_value_apply(this : IFsrmClassifierModuleImplementation*, property : UInt8*, value : UInt8*, applyvalue : Int16*, idrule : Guid, idpropdef : Guid) : HRESULT
+    @lpVtbl.value.does_property_value_apply.call(this, property, value, applyvalue, idrule, idpropdef)
+  end
+  def get_property_value_to_apply(this : IFsrmClassifierModuleImplementation*, property : UInt8*, value : UInt8**, idrule : Guid, idpropdef : Guid) : HRESULT
+    @lpVtbl.value.get_property_value_to_apply.call(this, property, value, idrule, idpropdef)
+  end
+  def on_end_file(this : IFsrmClassifierModuleImplementation*) : HRESULT
+    @lpVtbl.value.on_end_file.call(this)
+  end
+end
+struct LibWin32::IFsrmStorageModuleImplementation
+  def query_interface(this : IFsrmStorageModuleImplementation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmStorageModuleImplementation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmStorageModuleImplementation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmStorageModuleImplementation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmStorageModuleImplementation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmStorageModuleImplementation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmStorageModuleImplementation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_load(this : IFsrmStorageModuleImplementation*, moduledefinition : IFsrmPipelineModuleDefinition, moduleconnector : IFsrmPipelineModuleConnector*) : HRESULT
+    @lpVtbl.value.on_load.call(this, moduledefinition, moduleconnector)
+  end
+  def on_unload(this : IFsrmStorageModuleImplementation*) : HRESULT
+    @lpVtbl.value.on_unload.call(this)
+  end
+  def use_definitions(this : IFsrmStorageModuleImplementation*, propertydefinitions : IFsrmCollection) : HRESULT
+    @lpVtbl.value.use_definitions.call(this, propertydefinitions)
+  end
+  def load_properties(this : IFsrmStorageModuleImplementation*, propertybag : IFsrmPropertyBag) : HRESULT
+    @lpVtbl.value.load_properties.call(this, propertybag)
+  end
+  def save_properties(this : IFsrmStorageModuleImplementation*, propertybag : IFsrmPropertyBag) : HRESULT
+    @lpVtbl.value.save_properties.call(this, propertybag)
+  end
+end
+struct LibWin32::IFsrmPipelineModuleConnector
+  def query_interface(this : IFsrmPipelineModuleConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFsrmPipelineModuleConnector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFsrmPipelineModuleConnector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFsrmPipelineModuleConnector*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFsrmPipelineModuleConnector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFsrmPipelineModuleConnector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFsrmPipelineModuleConnector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_module_implementation(this : IFsrmPipelineModuleConnector*, pipelinemoduleimplementation : IFsrmPipelineModuleImplementation*) : HRESULT
+    @lpVtbl.value.get_module_implementation.call(this, pipelinemoduleimplementation)
+  end
+  def get_module_name(this : IFsrmPipelineModuleConnector*, username : UInt8**) : HRESULT
+    @lpVtbl.value.get_module_name.call(this, username)
+  end
+  def get_hosting_user_account(this : IFsrmPipelineModuleConnector*, useraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_hosting_user_account.call(this, useraccount)
+  end
+  def get_hosting_process_pid(this : IFsrmPipelineModuleConnector*, pid : Int32*) : HRESULT
+    @lpVtbl.value.get_hosting_process_pid.call(this, pid)
+  end
+  def bind(this : IFsrmPipelineModuleConnector*, moduledefinition : IFsrmPipelineModuleDefinition, moduleimplementation : IFsrmPipelineModuleImplementation) : HRESULT
+    @lpVtbl.value.bind.call(this, moduledefinition, moduleimplementation)
+  end
+end
+struct LibWin32::DIFsrmClassificationEvents
+  def query_interface(this : DIFsrmClassificationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : DIFsrmClassificationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : DIFsrmClassificationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : DIFsrmClassificationEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : DIFsrmClassificationEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : DIFsrmClassificationEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : DIFsrmClassificationEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end

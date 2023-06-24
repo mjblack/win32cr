@@ -2346,20 +2346,1542 @@ lib LibWin32
   fun D3DPERF_EndEvent : Int32
 
   # Params # col : UInt32 [In],wszname : LibC::LPWSTR [In]
-  fun D3DPERF_SetMarker(col : UInt32, wszname : LibC::LPWSTR)
+  fun D3DPERF_SetMarker(col : UInt32, wszname : LibC::LPWSTR) : Void
 
   # Params # col : UInt32 [In],wszname : LibC::LPWSTR [In]
-  fun D3DPERF_SetRegion(col : UInt32, wszname : LibC::LPWSTR)
+  fun D3DPERF_SetRegion(col : UInt32, wszname : LibC::LPWSTR) : Void
 
   # Params # 
   fun D3DPERF_QueryRepeatFrame : LibC::BOOL
 
   # Params # dwoptions : UInt32 [In]
-  fun D3DPERF_SetOptions(dwoptions : UInt32)
+  fun D3DPERF_SetOptions(dwoptions : UInt32) : Void
 
   # Params # 
   fun D3DPERF_GetStatus : UInt32
 
   # Params # sdkversion : UInt32 [In],param1 : IDirect3D9Ex* [In]
   fun Direct3DCreate9Ex(sdkversion : UInt32, param1 : IDirect3D9Ex*) : HRESULT
+end
+struct LibWin32::IDirect3D9
+  def query_interface(this : IDirect3D9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3D9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3D9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_software_device(this : IDirect3D9*, pinitializefunction : Void*) : HRESULT
+    @lpVtbl.value.register_software_device.call(this, pinitializefunction)
+  end
+  def get_adapter_count(this : IDirect3D9*) : UInt32
+    @lpVtbl.value.get_adapter_count.call(this)
+  end
+  def get_adapter_identifier(this : IDirect3D9*, adapter : UInt32, flags : UInt32, pidentifier : D3DADAPTER_IDENTIFIER9*) : HRESULT
+    @lpVtbl.value.get_adapter_identifier.call(this, adapter, flags, pidentifier)
+  end
+  def get_adapter_mode_count(this : IDirect3D9*, adapter : UInt32, format : D3DFORMAT) : UInt32
+    @lpVtbl.value.get_adapter_mode_count.call(this, adapter, format)
+  end
+  def enum_adapter_modes(this : IDirect3D9*, adapter : UInt32, format : D3DFORMAT, mode : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.enum_adapter_modes.call(this, adapter, format, mode, pmode)
+  end
+  def get_adapter_display_mode(this : IDirect3D9*, adapter : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_adapter_display_mode.call(this, adapter, pmode)
+  end
+  def check_device_type(this : IDirect3D9*, adapter : UInt32, devtype : D3DDEVTYPE, adapterformat : D3DFORMAT, backbufferformat : D3DFORMAT, bwindowed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.check_device_type.call(this, adapter, devtype, adapterformat, backbufferformat, bwindowed)
+  end
+  def check_device_format(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, adapterformat : D3DFORMAT, usage : UInt32, rtype : D3DRESOURCETYPE, checkformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_device_format.call(this, adapter, devicetype, adapterformat, usage, rtype, checkformat)
+  end
+  def check_device_multi_sample_type(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, surfaceformat : D3DFORMAT, windowed : LibC::BOOL, multisampletype : D3DMULTISAMPLE_TYPE, pqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_device_multi_sample_type.call(this, adapter, devicetype, surfaceformat, windowed, multisampletype, pqualitylevels)
+  end
+  def check_depth_stencil_match(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, adapterformat : D3DFORMAT, rendertargetformat : D3DFORMAT, depthstencilformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_depth_stencil_match.call(this, adapter, devicetype, adapterformat, rendertargetformat, depthstencilformat)
+  end
+  def check_device_format_conversion(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, sourceformat : D3DFORMAT, targetformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_device_format_conversion.call(this, adapter, devicetype, sourceformat, targetformat)
+  end
+  def get_device_caps(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, pcaps : D3DCAPS9*) : HRESULT
+    @lpVtbl.value.get_device_caps.call(this, adapter, devicetype, pcaps)
+  end
+  def get_adapter_monitor(this : IDirect3D9*, adapter : UInt32) : HMONITOR
+    @lpVtbl.value.get_adapter_monitor.call(this, adapter)
+  end
+  def create_device(this : IDirect3D9*, adapter : UInt32, devicetype : D3DDEVTYPE, hfocuswindow : LibC::HANDLE, behaviorflags : UInt32, ppresentationparameters : D3DPRESENT_PARAMETERS*, ppreturneddeviceinterface : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.create_device.call(this, adapter, devicetype, hfocuswindow, behaviorflags, ppresentationparameters, ppreturneddeviceinterface)
+  end
+end
+struct LibWin32::IDirect3DDevice9
+  def query_interface(this : IDirect3DDevice9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDevice9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDevice9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def test_cooperative_level(this : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.test_cooperative_level.call(this)
+  end
+  def get_available_texture_mem(this : IDirect3DDevice9*) : UInt32
+    @lpVtbl.value.get_available_texture_mem.call(this)
+  end
+  def evict_managed_resources(this : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.evict_managed_resources.call(this)
+  end
+  def get_direct3_d(this : IDirect3DDevice9*, ppd3d9 : IDirect3D9*) : HRESULT
+    @lpVtbl.value.get_direct3_d.call(this, ppd3d9)
+  end
+  def get_device_caps(this : IDirect3DDevice9*, pcaps : D3DCAPS9*) : HRESULT
+    @lpVtbl.value.get_device_caps.call(this, pcaps)
+  end
+  def get_display_mode(this : IDirect3DDevice9*, iswapchain : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, iswapchain, pmode)
+  end
+  def get_creation_parameters(this : IDirect3DDevice9*, pparameters : D3DDEVICE_CREATION_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_creation_parameters.call(this, pparameters)
+  end
+  def set_cursor_properties(this : IDirect3DDevice9*, xhotspot : UInt32, yhotspot : UInt32, pcursorbitmap : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_cursor_properties.call(this, xhotspot, yhotspot, pcursorbitmap)
+  end
+  def set_cursor_position(this : IDirect3DDevice9*, x : Int32, y : Int32, flags : UInt32) : Void
+    @lpVtbl.value.set_cursor_position.call(this, x, y, flags)
+  end
+  def show_cursor(this : IDirect3DDevice9*, bshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.show_cursor.call(this, bshow)
+  end
+  def create_additional_swap_chain(this : IDirect3DDevice9*, ppresentationparameters : D3DPRESENT_PARAMETERS*, pswapchain : IDirect3DSwapChain9*) : HRESULT
+    @lpVtbl.value.create_additional_swap_chain.call(this, ppresentationparameters, pswapchain)
+  end
+  def get_swap_chain(this : IDirect3DDevice9*, iswapchain : UInt32, pswapchain : IDirect3DSwapChain9*) : HRESULT
+    @lpVtbl.value.get_swap_chain.call(this, iswapchain, pswapchain)
+  end
+  def get_number_of_swap_chains(this : IDirect3DDevice9*) : UInt32
+    @lpVtbl.value.get_number_of_swap_chains.call(this)
+  end
+  def reset(this : IDirect3DDevice9*, ppresentationparameters : D3DPRESENT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.reset.call(this, ppresentationparameters)
+  end
+  def present(this : IDirect3DDevice9*, psourcerect : RECT*, pdestrect : RECT*, hdestwindowoverride : LibC::HANDLE, pdirtyregion : RGNDATA*) : HRESULT
+    @lpVtbl.value.present.call(this, psourcerect, pdestrect, hdestwindowoverride, pdirtyregion)
+  end
+  def get_back_buffer(this : IDirect3DDevice9*, iswapchain : UInt32, ibackbuffer : UInt32, type : D3DBACKBUFFER_TYPE, ppbackbuffer : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_back_buffer.call(this, iswapchain, ibackbuffer, type, ppbackbuffer)
+  end
+  def get_raster_status(this : IDirect3DDevice9*, iswapchain : UInt32, prasterstatus : D3DRASTER_STATUS*) : HRESULT
+    @lpVtbl.value.get_raster_status.call(this, iswapchain, prasterstatus)
+  end
+  def set_dialog_box_mode(this : IDirect3DDevice9*, benabledialogs : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_dialog_box_mode.call(this, benabledialogs)
+  end
+  def set_gamma_ramp(this : IDirect3DDevice9*, iswapchain : UInt32, flags : UInt32, pramp : D3DGAMMARAMP*) : Void
+    @lpVtbl.value.set_gamma_ramp.call(this, iswapchain, flags, pramp)
+  end
+  def get_gamma_ramp(this : IDirect3DDevice9*, iswapchain : UInt32, pramp : D3DGAMMARAMP*) : Void
+    @lpVtbl.value.get_gamma_ramp.call(this, iswapchain, pramp)
+  end
+  def create_texture(this : IDirect3DDevice9*, width : UInt32, height : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, pptexture : IDirect3DTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_texture.call(this, width, height, levels, usage, format, pool, pptexture, psharedhandle)
+  end
+  def create_volume_texture(this : IDirect3DDevice9*, width : UInt32, height : UInt32, depth : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppvolumetexture : IDirect3DVolumeTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_volume_texture.call(this, width, height, depth, levels, usage, format, pool, ppvolumetexture, psharedhandle)
+  end
+  def create_cube_texture(this : IDirect3DDevice9*, edgelength : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppcubetexture : IDirect3DCubeTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_cube_texture.call(this, edgelength, levels, usage, format, pool, ppcubetexture, psharedhandle)
+  end
+  def create_vertex_buffer(this : IDirect3DDevice9*, length : UInt32, usage : UInt32, fvf : UInt32, pool : D3DPOOL, ppvertexbuffer : IDirect3DVertexBuffer9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.call(this, length, usage, fvf, pool, ppvertexbuffer, psharedhandle)
+  end
+  def create_index_buffer(this : IDirect3DDevice9*, length : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppindexbuffer : IDirect3DIndexBuffer9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_index_buffer.call(this, length, usage, format, pool, ppindexbuffer, psharedhandle)
+  end
+  def create_render_target(this : IDirect3DDevice9*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, lockable : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_render_target.call(this, width, height, format, multisample, multisamplequality, lockable, ppsurface, psharedhandle)
+  end
+  def create_depth_stencil_surface(this : IDirect3DDevice9*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, discard : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_surface.call(this, width, height, format, multisample, multisamplequality, discard, ppsurface, psharedhandle)
+  end
+  def update_surface(this : IDirect3DDevice9*, psourcesurface : IDirect3DSurface9, psourcerect : RECT*, pdestinationsurface : IDirect3DSurface9, pdestpoint : POINT*) : HRESULT
+    @lpVtbl.value.update_surface.call(this, psourcesurface, psourcerect, pdestinationsurface, pdestpoint)
+  end
+  def update_texture(this : IDirect3DDevice9*, psourcetexture : IDirect3DBaseTexture9, pdestinationtexture : IDirect3DBaseTexture9) : HRESULT
+    @lpVtbl.value.update_texture.call(this, psourcetexture, pdestinationtexture)
+  end
+  def get_render_target_data(this : IDirect3DDevice9*, prendertarget : IDirect3DSurface9, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_render_target_data.call(this, prendertarget, pdestsurface)
+  end
+  def get_front_buffer_data(this : IDirect3DDevice9*, iswapchain : UInt32, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_front_buffer_data.call(this, iswapchain, pdestsurface)
+  end
+  def stretch_rect(this : IDirect3DDevice9*, psourcesurface : IDirect3DSurface9, psourcerect : RECT*, pdestsurface : IDirect3DSurface9, pdestrect : RECT*, filter : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.stretch_rect.call(this, psourcesurface, psourcerect, pdestsurface, pdestrect, filter)
+  end
+  def color_fill(this : IDirect3DDevice9*, psurface : IDirect3DSurface9, prect : RECT*, color : UInt32) : HRESULT
+    @lpVtbl.value.color_fill.call(this, psurface, prect, color)
+  end
+  def create_offscreen_plain_surface(this : IDirect3DDevice9*, width : UInt32, height : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_offscreen_plain_surface.call(this, width, height, format, pool, ppsurface, psharedhandle)
+  end
+  def set_render_target(this : IDirect3DDevice9*, rendertargetindex : UInt32, prendertarget : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_render_target.call(this, rendertargetindex, prendertarget)
+  end
+  def get_render_target(this : IDirect3DDevice9*, rendertargetindex : UInt32, pprendertarget : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_render_target.call(this, rendertargetindex, pprendertarget)
+  end
+  def set_depth_stencil_surface(this : IDirect3DDevice9*, pnewzstencil : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_depth_stencil_surface.call(this, pnewzstencil)
+  end
+  def get_depth_stencil_surface(this : IDirect3DDevice9*, ppzstencilsurface : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_depth_stencil_surface.call(this, ppzstencilsurface)
+  end
+  def begin_scene(this : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.begin_scene.call(this)
+  end
+  def end_scene(this : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.end_scene.call(this)
+  end
+  def clear(this : IDirect3DDevice9*, count : UInt32, prects : D3DRECT*, flags : UInt32, color : UInt32, z : Float32, stencil : UInt32) : HRESULT
+    @lpVtbl.value.clear.call(this, count, prects, flags, color, z, stencil)
+  end
+  def set_transform(this : IDirect3DDevice9*, state : D3DTRANSFORMSTATETYPE, pmatrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, state, pmatrix)
+  end
+  def get_transform(this : IDirect3DDevice9*, state : D3DTRANSFORMSTATETYPE, pmatrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, state, pmatrix)
+  end
+  def multiply_transform(this : IDirect3DDevice9*, param0 : D3DTRANSFORMSTATETYPE, param1 : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.multiply_transform.call(this, param0, param1)
+  end
+  def set_viewport(this : IDirect3DDevice9*, pviewport : D3DVIEWPORT9*) : HRESULT
+    @lpVtbl.value.set_viewport.call(this, pviewport)
+  end
+  def get_viewport(this : IDirect3DDevice9*, pviewport : D3DVIEWPORT9*) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, pviewport)
+  end
+  def set_material(this : IDirect3DDevice9*, pmaterial : D3DMATERIAL9*) : HRESULT
+    @lpVtbl.value.set_material.call(this, pmaterial)
+  end
+  def get_material(this : IDirect3DDevice9*, pmaterial : D3DMATERIAL9*) : HRESULT
+    @lpVtbl.value.get_material.call(this, pmaterial)
+  end
+  def set_light(this : IDirect3DDevice9*, index : UInt32, param1 : D3DLIGHT9*) : HRESULT
+    @lpVtbl.value.set_light.call(this, index, param1)
+  end
+  def get_light(this : IDirect3DDevice9*, index : UInt32, param1 : D3DLIGHT9*) : HRESULT
+    @lpVtbl.value.get_light.call(this, index, param1)
+  end
+  def light_enable(this : IDirect3DDevice9*, index : UInt32, enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.light_enable.call(this, index, enable)
+  end
+  def get_light_enable(this : IDirect3DDevice9*, index : UInt32, penable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_light_enable.call(this, index, penable)
+  end
+  def set_clip_plane(this : IDirect3DDevice9*, index : UInt32, pplane : Float32*) : HRESULT
+    @lpVtbl.value.set_clip_plane.call(this, index, pplane)
+  end
+  def get_clip_plane(this : IDirect3DDevice9*, index : UInt32, pplane : Float32*) : HRESULT
+    @lpVtbl.value.get_clip_plane.call(this, index, pplane)
+  end
+  def set_render_state(this : IDirect3DDevice9*, state : D3DRENDERSTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_render_state.call(this, state, value)
+  end
+  def get_render_state(this : IDirect3DDevice9*, state : D3DRENDERSTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_render_state.call(this, state, pvalue)
+  end
+  def create_state_block(this : IDirect3DDevice9*, type : D3DSTATEBLOCKTYPE, ppsb : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.create_state_block.call(this, type, ppsb)
+  end
+  def begin_state_block(this : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.begin_state_block.call(this)
+  end
+  def end_state_block(this : IDirect3DDevice9*, ppsb : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.end_state_block.call(this, ppsb)
+  end
+  def set_clip_status(this : IDirect3DDevice9*, pclipstatus : D3DCLIPSTATUS9*) : HRESULT
+    @lpVtbl.value.set_clip_status.call(this, pclipstatus)
+  end
+  def get_clip_status(this : IDirect3DDevice9*, pclipstatus : D3DCLIPSTATUS9*) : HRESULT
+    @lpVtbl.value.get_clip_status.call(this, pclipstatus)
+  end
+  def get_texture(this : IDirect3DDevice9*, stage : UInt32, pptexture : IDirect3DBaseTexture9*) : HRESULT
+    @lpVtbl.value.get_texture.call(this, stage, pptexture)
+  end
+  def set_texture(this : IDirect3DDevice9*, stage : UInt32, ptexture : IDirect3DBaseTexture9) : HRESULT
+    @lpVtbl.value.set_texture.call(this, stage, ptexture)
+  end
+  def get_texture_stage_state(this : IDirect3DDevice9*, stage : UInt32, type : D3DTEXTURESTAGESTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_texture_stage_state.call(this, stage, type, pvalue)
+  end
+  def set_texture_stage_state(this : IDirect3DDevice9*, stage : UInt32, type : D3DTEXTURESTAGESTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_texture_stage_state.call(this, stage, type, value)
+  end
+  def get_sampler_state(this : IDirect3DDevice9*, sampler : UInt32, type : D3DSAMPLERSTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_sampler_state.call(this, sampler, type, pvalue)
+  end
+  def set_sampler_state(this : IDirect3DDevice9*, sampler : UInt32, type : D3DSAMPLERSTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_sampler_state.call(this, sampler, type, value)
+  end
+  def validate_device(this : IDirect3DDevice9*, pnumpasses : UInt32*) : HRESULT
+    @lpVtbl.value.validate_device.call(this, pnumpasses)
+  end
+  def set_palette_entries(this : IDirect3DDevice9*, palettenumber : UInt32, pentries : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.set_palette_entries.call(this, palettenumber, pentries)
+  end
+  def get_palette_entries(this : IDirect3DDevice9*, palettenumber : UInt32, pentries : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, palettenumber, pentries)
+  end
+  def set_current_texture_palette(this : IDirect3DDevice9*, palettenumber : UInt32) : HRESULT
+    @lpVtbl.value.set_current_texture_palette.call(this, palettenumber)
+  end
+  def get_current_texture_palette(this : IDirect3DDevice9*, palettenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_texture_palette.call(this, palettenumber)
+  end
+  def set_scissor_rect(this : IDirect3DDevice9*, prect : RECT*) : HRESULT
+    @lpVtbl.value.set_scissor_rect.call(this, prect)
+  end
+  def get_scissor_rect(this : IDirect3DDevice9*, prect : RECT*) : HRESULT
+    @lpVtbl.value.get_scissor_rect.call(this, prect)
+  end
+  def set_software_vertex_processing(this : IDirect3DDevice9*, bsoftware : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_software_vertex_processing.call(this, bsoftware)
+  end
+  def get_software_vertex_processing(this : IDirect3DDevice9*) : LibC::BOOL
+    @lpVtbl.value.get_software_vertex_processing.call(this)
+  end
+  def set_n_patch_mode(this : IDirect3DDevice9*, nsegments : Float32) : HRESULT
+    @lpVtbl.value.set_n_patch_mode.call(this, nsegments)
+  end
+  def get_n_patch_mode(this : IDirect3DDevice9*) : Float32
+    @lpVtbl.value.get_n_patch_mode.call(this)
+  end
+  def draw_primitive(this : IDirect3DDevice9*, primitivetype : D3DPRIMITIVETYPE, startvertex : UInt32, primitivecount : UInt32) : HRESULT
+    @lpVtbl.value.draw_primitive.call(this, primitivetype, startvertex, primitivecount)
+  end
+  def draw_indexed_primitive(this : IDirect3DDevice9*, param0 : D3DPRIMITIVETYPE, basevertexindex : Int32, minvertexindex : UInt32, numvertices : UInt32, startindex : UInt32, primcount : UInt32) : HRESULT
+    @lpVtbl.value.draw_indexed_primitive.call(this, param0, basevertexindex, minvertexindex, numvertices, startindex, primcount)
+  end
+  def draw_primitive_up(this : IDirect3DDevice9*, primitivetype : D3DPRIMITIVETYPE, primitivecount : UInt32, pvertexstreamzerodata : Void*, vertexstreamzerostride : UInt32) : HRESULT
+    @lpVtbl.value.draw_primitive_up.call(this, primitivetype, primitivecount, pvertexstreamzerodata, vertexstreamzerostride)
+  end
+  def draw_indexed_primitive_up(this : IDirect3DDevice9*, primitivetype : D3DPRIMITIVETYPE, minvertexindex : UInt32, numvertices : UInt32, primitivecount : UInt32, pindexdata : Void*, indexdataformat : D3DFORMAT, pvertexstreamzerodata : Void*, vertexstreamzerostride : UInt32) : HRESULT
+    @lpVtbl.value.draw_indexed_primitive_up.call(this, primitivetype, minvertexindex, numvertices, primitivecount, pindexdata, indexdataformat, pvertexstreamzerodata, vertexstreamzerostride)
+  end
+  def process_vertices(this : IDirect3DDevice9*, srcstartindex : UInt32, destindex : UInt32, vertexcount : UInt32, pdestbuffer : IDirect3DVertexBuffer9, pvertexdecl : IDirect3DVertexDeclaration9, flags : UInt32) : HRESULT
+    @lpVtbl.value.process_vertices.call(this, srcstartindex, destindex, vertexcount, pdestbuffer, pvertexdecl, flags)
+  end
+  def create_vertex_declaration(this : IDirect3DDevice9*, pvertexelements : D3DVERTEXELEMENT9*, ppdecl : IDirect3DVertexDeclaration9*) : HRESULT
+    @lpVtbl.value.create_vertex_declaration.call(this, pvertexelements, ppdecl)
+  end
+  def set_vertex_declaration(this : IDirect3DDevice9*, pdecl : IDirect3DVertexDeclaration9) : HRESULT
+    @lpVtbl.value.set_vertex_declaration.call(this, pdecl)
+  end
+  def get_vertex_declaration(this : IDirect3DDevice9*, ppdecl : IDirect3DVertexDeclaration9*) : HRESULT
+    @lpVtbl.value.get_vertex_declaration.call(this, ppdecl)
+  end
+  def set_fvf(this : IDirect3DDevice9*, fvf : UInt32) : HRESULT
+    @lpVtbl.value.set_fvf.call(this, fvf)
+  end
+  def get_fvf(this : IDirect3DDevice9*, pfvf : UInt32*) : HRESULT
+    @lpVtbl.value.get_fvf.call(this, pfvf)
+  end
+  def create_vertex_shader(this : IDirect3DDevice9*, pfunction : UInt32*, ppshader : IDirect3DVertexShader9*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.call(this, pfunction, ppshader)
+  end
+  def set_vertex_shader(this : IDirect3DDevice9*, pshader : IDirect3DVertexShader9) : HRESULT
+    @lpVtbl.value.set_vertex_shader.call(this, pshader)
+  end
+  def get_vertex_shader(this : IDirect3DDevice9*, ppshader : IDirect3DVertexShader9*) : HRESULT
+    @lpVtbl.value.get_vertex_shader.call(this, ppshader)
+  end
+  def set_vertex_shader_constant_f(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def get_vertex_shader_constant_f(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def set_vertex_shader_constant_i(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def get_vertex_shader_constant_i(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def set_vertex_shader_constant_b(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def get_vertex_shader_constant_b(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def set_stream_source(this : IDirect3DDevice9*, streamnumber : UInt32, pstreamdata : IDirect3DVertexBuffer9, offsetinbytes : UInt32, stride : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_source.call(this, streamnumber, pstreamdata, offsetinbytes, stride)
+  end
+  def get_stream_source(this : IDirect3DDevice9*, streamnumber : UInt32, ppstreamdata : IDirect3DVertexBuffer9*, poffsetinbytes : UInt32*, pstride : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_source.call(this, streamnumber, ppstreamdata, poffsetinbytes, pstride)
+  end
+  def set_stream_source_freq(this : IDirect3DDevice9*, streamnumber : UInt32, setting : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_source_freq.call(this, streamnumber, setting)
+  end
+  def get_stream_source_freq(this : IDirect3DDevice9*, streamnumber : UInt32, psetting : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_source_freq.call(this, streamnumber, psetting)
+  end
+  def set_indices(this : IDirect3DDevice9*, pindexdata : IDirect3DIndexBuffer9) : HRESULT
+    @lpVtbl.value.set_indices.call(this, pindexdata)
+  end
+  def get_indices(this : IDirect3DDevice9*, ppindexdata : IDirect3DIndexBuffer9*) : HRESULT
+    @lpVtbl.value.get_indices.call(this, ppindexdata)
+  end
+  def create_pixel_shader(this : IDirect3DDevice9*, pfunction : UInt32*, ppshader : IDirect3DPixelShader9*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.call(this, pfunction, ppshader)
+  end
+  def set_pixel_shader(this : IDirect3DDevice9*, pshader : IDirect3DPixelShader9) : HRESULT
+    @lpVtbl.value.set_pixel_shader.call(this, pshader)
+  end
+  def get_pixel_shader(this : IDirect3DDevice9*, ppshader : IDirect3DPixelShader9*) : HRESULT
+    @lpVtbl.value.get_pixel_shader.call(this, ppshader)
+  end
+  def set_pixel_shader_constant_f(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def get_pixel_shader_constant_f(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def set_pixel_shader_constant_i(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def get_pixel_shader_constant_i(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def set_pixel_shader_constant_b(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def get_pixel_shader_constant_b(this : IDirect3DDevice9*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def draw_rect_patch(this : IDirect3DDevice9*, handle : UInt32, pnumsegs : Float32*, prectpatchinfo : D3DRECTPATCH_INFO*) : HRESULT
+    @lpVtbl.value.draw_rect_patch.call(this, handle, pnumsegs, prectpatchinfo)
+  end
+  def draw_tri_patch(this : IDirect3DDevice9*, handle : UInt32, pnumsegs : Float32*, ptripatchinfo : D3DTRIPATCH_INFO*) : HRESULT
+    @lpVtbl.value.draw_tri_patch.call(this, handle, pnumsegs, ptripatchinfo)
+  end
+  def delete_patch(this : IDirect3DDevice9*, handle : UInt32) : HRESULT
+    @lpVtbl.value.delete_patch.call(this, handle)
+  end
+  def create_query(this : IDirect3DDevice9*, type : D3DQUERYTYPE, ppquery : IDirect3DQuery9*) : HRESULT
+    @lpVtbl.value.create_query.call(this, type, ppquery)
+  end
+end
+struct LibWin32::IDirect3DStateBlock9
+  def query_interface(this : IDirect3DStateBlock9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DStateBlock9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DStateBlock9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DStateBlock9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def capture(this : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.capture.call(this)
+  end
+  def apply(this : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.apply.call(this)
+  end
+end
+struct LibWin32::IDirect3DSwapChain9
+  def query_interface(this : IDirect3DSwapChain9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DSwapChain9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DSwapChain9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def present(this : IDirect3DSwapChain9*, psourcerect : RECT*, pdestrect : RECT*, hdestwindowoverride : LibC::HANDLE, pdirtyregion : RGNDATA*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.present.call(this, psourcerect, pdestrect, hdestwindowoverride, pdirtyregion, dwflags)
+  end
+  def get_front_buffer_data(this : IDirect3DSwapChain9*, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_front_buffer_data.call(this, pdestsurface)
+  end
+  def get_back_buffer(this : IDirect3DSwapChain9*, ibackbuffer : UInt32, type : D3DBACKBUFFER_TYPE, ppbackbuffer : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_back_buffer.call(this, ibackbuffer, type, ppbackbuffer)
+  end
+  def get_raster_status(this : IDirect3DSwapChain9*, prasterstatus : D3DRASTER_STATUS*) : HRESULT
+    @lpVtbl.value.get_raster_status.call(this, prasterstatus)
+  end
+  def get_display_mode(this : IDirect3DSwapChain9*, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, pmode)
+  end
+  def get_device(this : IDirect3DSwapChain9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_present_parameters(this : IDirect3DSwapChain9*, ppresentationparameters : D3DPRESENT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_present_parameters.call(this, ppresentationparameters)
+  end
+end
+struct LibWin32::IDirect3DResource9
+  def query_interface(this : IDirect3DResource9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DResource9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DResource9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DResource9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DResource9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DResource9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DResource9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DResource9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DResource9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DResource9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DResource9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+end
+struct LibWin32::IDirect3DVertexDeclaration9
+  def query_interface(this : IDirect3DVertexDeclaration9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DVertexDeclaration9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DVertexDeclaration9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DVertexDeclaration9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_declaration(this : IDirect3DVertexDeclaration9*, pelement : D3DVERTEXELEMENT9*, pnumelements : UInt32*) : HRESULT
+    @lpVtbl.value.get_declaration.call(this, pelement, pnumelements)
+  end
+end
+struct LibWin32::IDirect3DVertexShader9
+  def query_interface(this : IDirect3DVertexShader9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DVertexShader9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DVertexShader9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DVertexShader9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_function(this : IDirect3DVertexShader9*, param0 : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_function.call(this, param0, psizeofdata)
+  end
+end
+struct LibWin32::IDirect3DPixelShader9
+  def query_interface(this : IDirect3DPixelShader9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DPixelShader9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DPixelShader9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DPixelShader9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_function(this : IDirect3DPixelShader9*, param0 : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_function.call(this, param0, psizeofdata)
+  end
+end
+struct LibWin32::IDirect3DBaseTexture9
+  def query_interface(this : IDirect3DBaseTexture9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DBaseTexture9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DBaseTexture9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DBaseTexture9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DBaseTexture9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DBaseTexture9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DBaseTexture9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DBaseTexture9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DBaseTexture9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DBaseTexture9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DBaseTexture9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def set_lod(this : IDirect3DBaseTexture9*, lodnew : UInt32) : UInt32
+    @lpVtbl.value.set_lod.call(this, lodnew)
+  end
+  def get_lod(this : IDirect3DBaseTexture9*) : UInt32
+    @lpVtbl.value.get_lod.call(this)
+  end
+  def get_level_count(this : IDirect3DBaseTexture9*) : UInt32
+    @lpVtbl.value.get_level_count.call(this)
+  end
+  def set_auto_gen_filter_type(this : IDirect3DBaseTexture9*, filtertype : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.set_auto_gen_filter_type.call(this, filtertype)
+  end
+  def get_auto_gen_filter_type(this : IDirect3DBaseTexture9*) : D3DTEXTUREFILTERTYPE
+    @lpVtbl.value.get_auto_gen_filter_type.call(this)
+  end
+  def generate_mip_sub_levels(this : IDirect3DBaseTexture9*) : Void
+    @lpVtbl.value.generate_mip_sub_levels.call(this)
+  end
+end
+struct LibWin32::IDirect3DTexture9
+  def query_interface(this : IDirect3DTexture9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DTexture9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DTexture9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DTexture9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DTexture9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DTexture9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DTexture9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DTexture9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DTexture9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DTexture9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DTexture9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def set_lod(this : IDirect3DTexture9*, lodnew : UInt32) : UInt32
+    @lpVtbl.value.set_lod.call(this, lodnew)
+  end
+  def get_lod(this : IDirect3DTexture9*) : UInt32
+    @lpVtbl.value.get_lod.call(this)
+  end
+  def get_level_count(this : IDirect3DTexture9*) : UInt32
+    @lpVtbl.value.get_level_count.call(this)
+  end
+  def set_auto_gen_filter_type(this : IDirect3DTexture9*, filtertype : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.set_auto_gen_filter_type.call(this, filtertype)
+  end
+  def get_auto_gen_filter_type(this : IDirect3DTexture9*) : D3DTEXTUREFILTERTYPE
+    @lpVtbl.value.get_auto_gen_filter_type.call(this)
+  end
+  def generate_mip_sub_levels(this : IDirect3DTexture9*) : Void
+    @lpVtbl.value.generate_mip_sub_levels.call(this)
+  end
+  def get_level_desc(this : IDirect3DTexture9*, level : UInt32, pdesc : D3DSURFACE_DESC*) : HRESULT
+    @lpVtbl.value.get_level_desc.call(this, level, pdesc)
+  end
+  def get_surface_level(this : IDirect3DTexture9*, level : UInt32, ppsurfacelevel : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_surface_level.call(this, level, ppsurfacelevel)
+  end
+  def lock_rect(this : IDirect3DTexture9*, level : UInt32, plockedrect : D3DLOCKED_RECT*, prect : RECT*, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock_rect.call(this, level, plockedrect, prect, flags)
+  end
+  def unlock_rect(this : IDirect3DTexture9*, level : UInt32) : HRESULT
+    @lpVtbl.value.unlock_rect.call(this, level)
+  end
+  def add_dirty_rect(this : IDirect3DTexture9*, pdirtyrect : RECT*) : HRESULT
+    @lpVtbl.value.add_dirty_rect.call(this, pdirtyrect)
+  end
+end
+struct LibWin32::IDirect3DVolumeTexture9
+  def query_interface(this : IDirect3DVolumeTexture9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DVolumeTexture9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DVolumeTexture9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DVolumeTexture9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DVolumeTexture9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DVolumeTexture9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DVolumeTexture9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DVolumeTexture9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DVolumeTexture9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DVolumeTexture9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DVolumeTexture9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def set_lod(this : IDirect3DVolumeTexture9*, lodnew : UInt32) : UInt32
+    @lpVtbl.value.set_lod.call(this, lodnew)
+  end
+  def get_lod(this : IDirect3DVolumeTexture9*) : UInt32
+    @lpVtbl.value.get_lod.call(this)
+  end
+  def get_level_count(this : IDirect3DVolumeTexture9*) : UInt32
+    @lpVtbl.value.get_level_count.call(this)
+  end
+  def set_auto_gen_filter_type(this : IDirect3DVolumeTexture9*, filtertype : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.set_auto_gen_filter_type.call(this, filtertype)
+  end
+  def get_auto_gen_filter_type(this : IDirect3DVolumeTexture9*) : D3DTEXTUREFILTERTYPE
+    @lpVtbl.value.get_auto_gen_filter_type.call(this)
+  end
+  def generate_mip_sub_levels(this : IDirect3DVolumeTexture9*) : Void
+    @lpVtbl.value.generate_mip_sub_levels.call(this)
+  end
+  def get_level_desc(this : IDirect3DVolumeTexture9*, level : UInt32, pdesc : D3DVOLUME_DESC*) : HRESULT
+    @lpVtbl.value.get_level_desc.call(this, level, pdesc)
+  end
+  def get_volume_level(this : IDirect3DVolumeTexture9*, level : UInt32, ppvolumelevel : IDirect3DVolume9*) : HRESULT
+    @lpVtbl.value.get_volume_level.call(this, level, ppvolumelevel)
+  end
+  def lock_box(this : IDirect3DVolumeTexture9*, level : UInt32, plockedvolume : D3DLOCKED_BOX*, pbox : D3DBOX*, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock_box.call(this, level, plockedvolume, pbox, flags)
+  end
+  def unlock_box(this : IDirect3DVolumeTexture9*, level : UInt32) : HRESULT
+    @lpVtbl.value.unlock_box.call(this, level)
+  end
+  def add_dirty_box(this : IDirect3DVolumeTexture9*, pdirtybox : D3DBOX*) : HRESULT
+    @lpVtbl.value.add_dirty_box.call(this, pdirtybox)
+  end
+end
+struct LibWin32::IDirect3DCubeTexture9
+  def query_interface(this : IDirect3DCubeTexture9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DCubeTexture9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DCubeTexture9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DCubeTexture9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DCubeTexture9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DCubeTexture9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DCubeTexture9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DCubeTexture9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DCubeTexture9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DCubeTexture9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DCubeTexture9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def set_lod(this : IDirect3DCubeTexture9*, lodnew : UInt32) : UInt32
+    @lpVtbl.value.set_lod.call(this, lodnew)
+  end
+  def get_lod(this : IDirect3DCubeTexture9*) : UInt32
+    @lpVtbl.value.get_lod.call(this)
+  end
+  def get_level_count(this : IDirect3DCubeTexture9*) : UInt32
+    @lpVtbl.value.get_level_count.call(this)
+  end
+  def set_auto_gen_filter_type(this : IDirect3DCubeTexture9*, filtertype : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.set_auto_gen_filter_type.call(this, filtertype)
+  end
+  def get_auto_gen_filter_type(this : IDirect3DCubeTexture9*) : D3DTEXTUREFILTERTYPE
+    @lpVtbl.value.get_auto_gen_filter_type.call(this)
+  end
+  def generate_mip_sub_levels(this : IDirect3DCubeTexture9*) : Void
+    @lpVtbl.value.generate_mip_sub_levels.call(this)
+  end
+  def get_level_desc(this : IDirect3DCubeTexture9*, level : UInt32, pdesc : D3DSURFACE_DESC*) : HRESULT
+    @lpVtbl.value.get_level_desc.call(this, level, pdesc)
+  end
+  def get_cube_map_surface(this : IDirect3DCubeTexture9*, facetype : D3DCUBEMAP_FACES, level : UInt32, ppcubemapsurface : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_cube_map_surface.call(this, facetype, level, ppcubemapsurface)
+  end
+  def lock_rect(this : IDirect3DCubeTexture9*, facetype : D3DCUBEMAP_FACES, level : UInt32, plockedrect : D3DLOCKED_RECT*, prect : RECT*, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock_rect.call(this, facetype, level, plockedrect, prect, flags)
+  end
+  def unlock_rect(this : IDirect3DCubeTexture9*, facetype : D3DCUBEMAP_FACES, level : UInt32) : HRESULT
+    @lpVtbl.value.unlock_rect.call(this, facetype, level)
+  end
+  def add_dirty_rect(this : IDirect3DCubeTexture9*, facetype : D3DCUBEMAP_FACES, pdirtyrect : RECT*) : HRESULT
+    @lpVtbl.value.add_dirty_rect.call(this, facetype, pdirtyrect)
+  end
+end
+struct LibWin32::IDirect3DVertexBuffer9
+  def query_interface(this : IDirect3DVertexBuffer9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DVertexBuffer9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DVertexBuffer9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DVertexBuffer9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DVertexBuffer9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DVertexBuffer9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DVertexBuffer9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DVertexBuffer9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DVertexBuffer9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DVertexBuffer9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DVertexBuffer9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def lock(this : IDirect3DVertexBuffer9*, offsettolock : UInt32, sizetolock : UInt32, ppbdata : Void**, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, offsettolock, sizetolock, ppbdata, flags)
+  end
+  def unlock(this : IDirect3DVertexBuffer9*) : HRESULT
+    @lpVtbl.value.unlock.call(this)
+  end
+  def get_desc(this : IDirect3DVertexBuffer9*, pdesc : D3DVERTEXBUFFER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
+  end
+end
+struct LibWin32::IDirect3DIndexBuffer9
+  def query_interface(this : IDirect3DIndexBuffer9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DIndexBuffer9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DIndexBuffer9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DIndexBuffer9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DIndexBuffer9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DIndexBuffer9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DIndexBuffer9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DIndexBuffer9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DIndexBuffer9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DIndexBuffer9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DIndexBuffer9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def lock(this : IDirect3DIndexBuffer9*, offsettolock : UInt32, sizetolock : UInt32, ppbdata : Void**, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock.call(this, offsettolock, sizetolock, ppbdata, flags)
+  end
+  def unlock(this : IDirect3DIndexBuffer9*) : HRESULT
+    @lpVtbl.value.unlock.call(this)
+  end
+  def get_desc(this : IDirect3DIndexBuffer9*, pdesc : D3DINDEXBUFFER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
+  end
+end
+struct LibWin32::IDirect3DSurface9
+  def query_interface(this : IDirect3DSurface9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DSurface9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DSurface9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DSurface9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DSurface9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DSurface9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DSurface9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def set_priority(this : IDirect3DSurface9*, prioritynew : UInt32) : UInt32
+    @lpVtbl.value.set_priority.call(this, prioritynew)
+  end
+  def get_priority(this : IDirect3DSurface9*) : UInt32
+    @lpVtbl.value.get_priority.call(this)
+  end
+  def pre_load(this : IDirect3DSurface9*) : Void
+    @lpVtbl.value.pre_load.call(this)
+  end
+  def get_type(this : IDirect3DSurface9*) : D3DRESOURCETYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_container(this : IDirect3DSurface9*, riid : Guid*, ppcontainer : Void**) : HRESULT
+    @lpVtbl.value.get_container.call(this, riid, ppcontainer)
+  end
+  def get_desc(this : IDirect3DSurface9*, pdesc : D3DSURFACE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
+  end
+  def lock_rect(this : IDirect3DSurface9*, plockedrect : D3DLOCKED_RECT*, prect : RECT*, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock_rect.call(this, plockedrect, prect, flags)
+  end
+  def unlock_rect(this : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.unlock_rect.call(this)
+  end
+  def get_dc(this : IDirect3DSurface9*, phdc : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, phdc)
+  end
+  def release_dc(this : IDirect3DSurface9*, hdc : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, hdc)
+  end
+end
+struct LibWin32::IDirect3DVolume9
+  def query_interface(this : IDirect3DVolume9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DVolume9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DVolume9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DVolume9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def set_private_data(this : IDirect3DVolume9*, refguid : Guid*, pdata : Void*, sizeofdata : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_private_data.call(this, refguid, pdata, sizeofdata, flags)
+  end
+  def get_private_data(this : IDirect3DVolume9*, refguid : Guid*, pdata : Void*, psizeofdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_private_data.call(this, refguid, pdata, psizeofdata)
+  end
+  def free_private_data(this : IDirect3DVolume9*, refguid : Guid*) : HRESULT
+    @lpVtbl.value.free_private_data.call(this, refguid)
+  end
+  def get_container(this : IDirect3DVolume9*, riid : Guid*, ppcontainer : Void**) : HRESULT
+    @lpVtbl.value.get_container.call(this, riid, ppcontainer)
+  end
+  def get_desc(this : IDirect3DVolume9*, pdesc : D3DVOLUME_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.call(this, pdesc)
+  end
+  def lock_box(this : IDirect3DVolume9*, plockedvolume : D3DLOCKED_BOX*, pbox : D3DBOX*, flags : UInt32) : HRESULT
+    @lpVtbl.value.lock_box.call(this, plockedvolume, pbox, flags)
+  end
+  def unlock_box(this : IDirect3DVolume9*) : HRESULT
+    @lpVtbl.value.unlock_box.call(this)
+  end
+end
+struct LibWin32::IDirect3DQuery9
+  def query_interface(this : IDirect3DQuery9*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DQuery9*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DQuery9*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_device(this : IDirect3DQuery9*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_type(this : IDirect3DQuery9*) : D3DQUERYTYPE
+    @lpVtbl.value.get_type.call(this)
+  end
+  def get_data_size(this : IDirect3DQuery9*) : UInt32
+    @lpVtbl.value.get_data_size.call(this)
+  end
+  def issue(this : IDirect3DQuery9*, dwissueflags : UInt32) : HRESULT
+    @lpVtbl.value.issue.call(this, dwissueflags)
+  end
+  def get_data(this : IDirect3DQuery9*, pdata : Void*, dwsize : UInt32, dwgetdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.call(this, pdata, dwsize, dwgetdataflags)
+  end
+end
+struct LibWin32::IDirect3D9Ex
+  def query_interface(this : IDirect3D9Ex*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3D9Ex*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3D9Ex*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_software_device(this : IDirect3D9Ex*, pinitializefunction : Void*) : HRESULT
+    @lpVtbl.value.register_software_device.call(this, pinitializefunction)
+  end
+  def get_adapter_count(this : IDirect3D9Ex*) : UInt32
+    @lpVtbl.value.get_adapter_count.call(this)
+  end
+  def get_adapter_identifier(this : IDirect3D9Ex*, adapter : UInt32, flags : UInt32, pidentifier : D3DADAPTER_IDENTIFIER9*) : HRESULT
+    @lpVtbl.value.get_adapter_identifier.call(this, adapter, flags, pidentifier)
+  end
+  def get_adapter_mode_count(this : IDirect3D9Ex*, adapter : UInt32, format : D3DFORMAT) : UInt32
+    @lpVtbl.value.get_adapter_mode_count.call(this, adapter, format)
+  end
+  def enum_adapter_modes(this : IDirect3D9Ex*, adapter : UInt32, format : D3DFORMAT, mode : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.enum_adapter_modes.call(this, adapter, format, mode, pmode)
+  end
+  def get_adapter_display_mode(this : IDirect3D9Ex*, adapter : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_adapter_display_mode.call(this, adapter, pmode)
+  end
+  def check_device_type(this : IDirect3D9Ex*, adapter : UInt32, devtype : D3DDEVTYPE, adapterformat : D3DFORMAT, backbufferformat : D3DFORMAT, bwindowed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.check_device_type.call(this, adapter, devtype, adapterformat, backbufferformat, bwindowed)
+  end
+  def check_device_format(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, adapterformat : D3DFORMAT, usage : UInt32, rtype : D3DRESOURCETYPE, checkformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_device_format.call(this, adapter, devicetype, adapterformat, usage, rtype, checkformat)
+  end
+  def check_device_multi_sample_type(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, surfaceformat : D3DFORMAT, windowed : LibC::BOOL, multisampletype : D3DMULTISAMPLE_TYPE, pqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_device_multi_sample_type.call(this, adapter, devicetype, surfaceformat, windowed, multisampletype, pqualitylevels)
+  end
+  def check_depth_stencil_match(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, adapterformat : D3DFORMAT, rendertargetformat : D3DFORMAT, depthstencilformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_depth_stencil_match.call(this, adapter, devicetype, adapterformat, rendertargetformat, depthstencilformat)
+  end
+  def check_device_format_conversion(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, sourceformat : D3DFORMAT, targetformat : D3DFORMAT) : HRESULT
+    @lpVtbl.value.check_device_format_conversion.call(this, adapter, devicetype, sourceformat, targetformat)
+  end
+  def get_device_caps(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, pcaps : D3DCAPS9*) : HRESULT
+    @lpVtbl.value.get_device_caps.call(this, adapter, devicetype, pcaps)
+  end
+  def get_adapter_monitor(this : IDirect3D9Ex*, adapter : UInt32) : HMONITOR
+    @lpVtbl.value.get_adapter_monitor.call(this, adapter)
+  end
+  def create_device(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, hfocuswindow : LibC::HANDLE, behaviorflags : UInt32, ppresentationparameters : D3DPRESENT_PARAMETERS*, ppreturneddeviceinterface : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.create_device.call(this, adapter, devicetype, hfocuswindow, behaviorflags, ppresentationparameters, ppreturneddeviceinterface)
+  end
+  def get_adapter_mode_count_ex(this : IDirect3D9Ex*, adapter : UInt32, pfilter : D3DDISPLAYMODEFILTER*) : UInt32
+    @lpVtbl.value.get_adapter_mode_count_ex.call(this, adapter, pfilter)
+  end
+  def enum_adapter_modes_ex(this : IDirect3D9Ex*, adapter : UInt32, pfilter : D3DDISPLAYMODEFILTER*, mode : UInt32, pmode : D3DDISPLAYMODEEX*) : HRESULT
+    @lpVtbl.value.enum_adapter_modes_ex.call(this, adapter, pfilter, mode, pmode)
+  end
+  def get_adapter_display_mode_ex(this : IDirect3D9Ex*, adapter : UInt32, pmode : D3DDISPLAYMODEEX*, protation : D3DDISPLAYROTATION*) : HRESULT
+    @lpVtbl.value.get_adapter_display_mode_ex.call(this, adapter, pmode, protation)
+  end
+  def create_device_ex(this : IDirect3D9Ex*, adapter : UInt32, devicetype : D3DDEVTYPE, hfocuswindow : LibC::HANDLE, behaviorflags : UInt32, ppresentationparameters : D3DPRESENT_PARAMETERS*, pfullscreendisplaymode : D3DDISPLAYMODEEX*, ppreturneddeviceinterface : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.create_device_ex.call(this, adapter, devicetype, hfocuswindow, behaviorflags, ppresentationparameters, pfullscreendisplaymode, ppreturneddeviceinterface)
+  end
+  def get_adapter_luid(this : IDirect3D9Ex*, adapter : UInt32, pluid : LUID*) : HRESULT
+    @lpVtbl.value.get_adapter_luid.call(this, adapter, pluid)
+  end
+end
+struct LibWin32::IDirect3DDevice9Ex
+  def query_interface(this : IDirect3DDevice9Ex*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDevice9Ex*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDevice9Ex*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def test_cooperative_level(this : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.test_cooperative_level.call(this)
+  end
+  def get_available_texture_mem(this : IDirect3DDevice9Ex*) : UInt32
+    @lpVtbl.value.get_available_texture_mem.call(this)
+  end
+  def evict_managed_resources(this : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.evict_managed_resources.call(this)
+  end
+  def get_direct3_d(this : IDirect3DDevice9Ex*, ppd3d9 : IDirect3D9*) : HRESULT
+    @lpVtbl.value.get_direct3_d.call(this, ppd3d9)
+  end
+  def get_device_caps(this : IDirect3DDevice9Ex*, pcaps : D3DCAPS9*) : HRESULT
+    @lpVtbl.value.get_device_caps.call(this, pcaps)
+  end
+  def get_display_mode(this : IDirect3DDevice9Ex*, iswapchain : UInt32, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, iswapchain, pmode)
+  end
+  def get_creation_parameters(this : IDirect3DDevice9Ex*, pparameters : D3DDEVICE_CREATION_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_creation_parameters.call(this, pparameters)
+  end
+  def set_cursor_properties(this : IDirect3DDevice9Ex*, xhotspot : UInt32, yhotspot : UInt32, pcursorbitmap : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_cursor_properties.call(this, xhotspot, yhotspot, pcursorbitmap)
+  end
+  def set_cursor_position(this : IDirect3DDevice9Ex*, x : Int32, y : Int32, flags : UInt32) : Void
+    @lpVtbl.value.set_cursor_position.call(this, x, y, flags)
+  end
+  def show_cursor(this : IDirect3DDevice9Ex*, bshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.show_cursor.call(this, bshow)
+  end
+  def create_additional_swap_chain(this : IDirect3DDevice9Ex*, ppresentationparameters : D3DPRESENT_PARAMETERS*, pswapchain : IDirect3DSwapChain9*) : HRESULT
+    @lpVtbl.value.create_additional_swap_chain.call(this, ppresentationparameters, pswapchain)
+  end
+  def get_swap_chain(this : IDirect3DDevice9Ex*, iswapchain : UInt32, pswapchain : IDirect3DSwapChain9*) : HRESULT
+    @lpVtbl.value.get_swap_chain.call(this, iswapchain, pswapchain)
+  end
+  def get_number_of_swap_chains(this : IDirect3DDevice9Ex*) : UInt32
+    @lpVtbl.value.get_number_of_swap_chains.call(this)
+  end
+  def reset(this : IDirect3DDevice9Ex*, ppresentationparameters : D3DPRESENT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.reset.call(this, ppresentationparameters)
+  end
+  def present(this : IDirect3DDevice9Ex*, psourcerect : RECT*, pdestrect : RECT*, hdestwindowoverride : LibC::HANDLE, pdirtyregion : RGNDATA*) : HRESULT
+    @lpVtbl.value.present.call(this, psourcerect, pdestrect, hdestwindowoverride, pdirtyregion)
+  end
+  def get_back_buffer(this : IDirect3DDevice9Ex*, iswapchain : UInt32, ibackbuffer : UInt32, type : D3DBACKBUFFER_TYPE, ppbackbuffer : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_back_buffer.call(this, iswapchain, ibackbuffer, type, ppbackbuffer)
+  end
+  def get_raster_status(this : IDirect3DDevice9Ex*, iswapchain : UInt32, prasterstatus : D3DRASTER_STATUS*) : HRESULT
+    @lpVtbl.value.get_raster_status.call(this, iswapchain, prasterstatus)
+  end
+  def set_dialog_box_mode(this : IDirect3DDevice9Ex*, benabledialogs : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_dialog_box_mode.call(this, benabledialogs)
+  end
+  def set_gamma_ramp(this : IDirect3DDevice9Ex*, iswapchain : UInt32, flags : UInt32, pramp : D3DGAMMARAMP*) : Void
+    @lpVtbl.value.set_gamma_ramp.call(this, iswapchain, flags, pramp)
+  end
+  def get_gamma_ramp(this : IDirect3DDevice9Ex*, iswapchain : UInt32, pramp : D3DGAMMARAMP*) : Void
+    @lpVtbl.value.get_gamma_ramp.call(this, iswapchain, pramp)
+  end
+  def create_texture(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, pptexture : IDirect3DTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_texture.call(this, width, height, levels, usage, format, pool, pptexture, psharedhandle)
+  end
+  def create_volume_texture(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, depth : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppvolumetexture : IDirect3DVolumeTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_volume_texture.call(this, width, height, depth, levels, usage, format, pool, ppvolumetexture, psharedhandle)
+  end
+  def create_cube_texture(this : IDirect3DDevice9Ex*, edgelength : UInt32, levels : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppcubetexture : IDirect3DCubeTexture9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_cube_texture.call(this, edgelength, levels, usage, format, pool, ppcubetexture, psharedhandle)
+  end
+  def create_vertex_buffer(this : IDirect3DDevice9Ex*, length : UInt32, usage : UInt32, fvf : UInt32, pool : D3DPOOL, ppvertexbuffer : IDirect3DVertexBuffer9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.call(this, length, usage, fvf, pool, ppvertexbuffer, psharedhandle)
+  end
+  def create_index_buffer(this : IDirect3DDevice9Ex*, length : UInt32, usage : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppindexbuffer : IDirect3DIndexBuffer9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_index_buffer.call(this, length, usage, format, pool, ppindexbuffer, psharedhandle)
+  end
+  def create_render_target(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, lockable : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_render_target.call(this, width, height, format, multisample, multisamplequality, lockable, ppsurface, psharedhandle)
+  end
+  def create_depth_stencil_surface(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, discard : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_surface.call(this, width, height, format, multisample, multisamplequality, discard, ppsurface, psharedhandle)
+  end
+  def update_surface(this : IDirect3DDevice9Ex*, psourcesurface : IDirect3DSurface9, psourcerect : RECT*, pdestinationsurface : IDirect3DSurface9, pdestpoint : POINT*) : HRESULT
+    @lpVtbl.value.update_surface.call(this, psourcesurface, psourcerect, pdestinationsurface, pdestpoint)
+  end
+  def update_texture(this : IDirect3DDevice9Ex*, psourcetexture : IDirect3DBaseTexture9, pdestinationtexture : IDirect3DBaseTexture9) : HRESULT
+    @lpVtbl.value.update_texture.call(this, psourcetexture, pdestinationtexture)
+  end
+  def get_render_target_data(this : IDirect3DDevice9Ex*, prendertarget : IDirect3DSurface9, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_render_target_data.call(this, prendertarget, pdestsurface)
+  end
+  def get_front_buffer_data(this : IDirect3DDevice9Ex*, iswapchain : UInt32, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_front_buffer_data.call(this, iswapchain, pdestsurface)
+  end
+  def stretch_rect(this : IDirect3DDevice9Ex*, psourcesurface : IDirect3DSurface9, psourcerect : RECT*, pdestsurface : IDirect3DSurface9, pdestrect : RECT*, filter : D3DTEXTUREFILTERTYPE) : HRESULT
+    @lpVtbl.value.stretch_rect.call(this, psourcesurface, psourcerect, pdestsurface, pdestrect, filter)
+  end
+  def color_fill(this : IDirect3DDevice9Ex*, psurface : IDirect3DSurface9, prect : RECT*, color : UInt32) : HRESULT
+    @lpVtbl.value.color_fill.call(this, psurface, prect, color)
+  end
+  def create_offscreen_plain_surface(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_offscreen_plain_surface.call(this, width, height, format, pool, ppsurface, psharedhandle)
+  end
+  def set_render_target(this : IDirect3DDevice9Ex*, rendertargetindex : UInt32, prendertarget : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_render_target.call(this, rendertargetindex, prendertarget)
+  end
+  def get_render_target(this : IDirect3DDevice9Ex*, rendertargetindex : UInt32, pprendertarget : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_render_target.call(this, rendertargetindex, pprendertarget)
+  end
+  def set_depth_stencil_surface(this : IDirect3DDevice9Ex*, pnewzstencil : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.set_depth_stencil_surface.call(this, pnewzstencil)
+  end
+  def get_depth_stencil_surface(this : IDirect3DDevice9Ex*, ppzstencilsurface : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_depth_stencil_surface.call(this, ppzstencilsurface)
+  end
+  def begin_scene(this : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.begin_scene.call(this)
+  end
+  def end_scene(this : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.end_scene.call(this)
+  end
+  def clear(this : IDirect3DDevice9Ex*, count : UInt32, prects : D3DRECT*, flags : UInt32, color : UInt32, z : Float32, stencil : UInt32) : HRESULT
+    @lpVtbl.value.clear.call(this, count, prects, flags, color, z, stencil)
+  end
+  def set_transform(this : IDirect3DDevice9Ex*, state : D3DTRANSFORMSTATETYPE, pmatrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.set_transform.call(this, state, pmatrix)
+  end
+  def get_transform(this : IDirect3DDevice9Ex*, state : D3DTRANSFORMSTATETYPE, pmatrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, state, pmatrix)
+  end
+  def multiply_transform(this : IDirect3DDevice9Ex*, param0 : D3DTRANSFORMSTATETYPE, param1 : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.multiply_transform.call(this, param0, param1)
+  end
+  def set_viewport(this : IDirect3DDevice9Ex*, pviewport : D3DVIEWPORT9*) : HRESULT
+    @lpVtbl.value.set_viewport.call(this, pviewport)
+  end
+  def get_viewport(this : IDirect3DDevice9Ex*, pviewport : D3DVIEWPORT9*) : HRESULT
+    @lpVtbl.value.get_viewport.call(this, pviewport)
+  end
+  def set_material(this : IDirect3DDevice9Ex*, pmaterial : D3DMATERIAL9*) : HRESULT
+    @lpVtbl.value.set_material.call(this, pmaterial)
+  end
+  def get_material(this : IDirect3DDevice9Ex*, pmaterial : D3DMATERIAL9*) : HRESULT
+    @lpVtbl.value.get_material.call(this, pmaterial)
+  end
+  def set_light(this : IDirect3DDevice9Ex*, index : UInt32, param1 : D3DLIGHT9*) : HRESULT
+    @lpVtbl.value.set_light.call(this, index, param1)
+  end
+  def get_light(this : IDirect3DDevice9Ex*, index : UInt32, param1 : D3DLIGHT9*) : HRESULT
+    @lpVtbl.value.get_light.call(this, index, param1)
+  end
+  def light_enable(this : IDirect3DDevice9Ex*, index : UInt32, enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.light_enable.call(this, index, enable)
+  end
+  def get_light_enable(this : IDirect3DDevice9Ex*, index : UInt32, penable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_light_enable.call(this, index, penable)
+  end
+  def set_clip_plane(this : IDirect3DDevice9Ex*, index : UInt32, pplane : Float32*) : HRESULT
+    @lpVtbl.value.set_clip_plane.call(this, index, pplane)
+  end
+  def get_clip_plane(this : IDirect3DDevice9Ex*, index : UInt32, pplane : Float32*) : HRESULT
+    @lpVtbl.value.get_clip_plane.call(this, index, pplane)
+  end
+  def set_render_state(this : IDirect3DDevice9Ex*, state : D3DRENDERSTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_render_state.call(this, state, value)
+  end
+  def get_render_state(this : IDirect3DDevice9Ex*, state : D3DRENDERSTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_render_state.call(this, state, pvalue)
+  end
+  def create_state_block(this : IDirect3DDevice9Ex*, type : D3DSTATEBLOCKTYPE, ppsb : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.create_state_block.call(this, type, ppsb)
+  end
+  def begin_state_block(this : IDirect3DDevice9Ex*) : HRESULT
+    @lpVtbl.value.begin_state_block.call(this)
+  end
+  def end_state_block(this : IDirect3DDevice9Ex*, ppsb : IDirect3DStateBlock9*) : HRESULT
+    @lpVtbl.value.end_state_block.call(this, ppsb)
+  end
+  def set_clip_status(this : IDirect3DDevice9Ex*, pclipstatus : D3DCLIPSTATUS9*) : HRESULT
+    @lpVtbl.value.set_clip_status.call(this, pclipstatus)
+  end
+  def get_clip_status(this : IDirect3DDevice9Ex*, pclipstatus : D3DCLIPSTATUS9*) : HRESULT
+    @lpVtbl.value.get_clip_status.call(this, pclipstatus)
+  end
+  def get_texture(this : IDirect3DDevice9Ex*, stage : UInt32, pptexture : IDirect3DBaseTexture9*) : HRESULT
+    @lpVtbl.value.get_texture.call(this, stage, pptexture)
+  end
+  def set_texture(this : IDirect3DDevice9Ex*, stage : UInt32, ptexture : IDirect3DBaseTexture9) : HRESULT
+    @lpVtbl.value.set_texture.call(this, stage, ptexture)
+  end
+  def get_texture_stage_state(this : IDirect3DDevice9Ex*, stage : UInt32, type : D3DTEXTURESTAGESTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_texture_stage_state.call(this, stage, type, pvalue)
+  end
+  def set_texture_stage_state(this : IDirect3DDevice9Ex*, stage : UInt32, type : D3DTEXTURESTAGESTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_texture_stage_state.call(this, stage, type, value)
+  end
+  def get_sampler_state(this : IDirect3DDevice9Ex*, sampler : UInt32, type : D3DSAMPLERSTATETYPE, pvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_sampler_state.call(this, sampler, type, pvalue)
+  end
+  def set_sampler_state(this : IDirect3DDevice9Ex*, sampler : UInt32, type : D3DSAMPLERSTATETYPE, value : UInt32) : HRESULT
+    @lpVtbl.value.set_sampler_state.call(this, sampler, type, value)
+  end
+  def validate_device(this : IDirect3DDevice9Ex*, pnumpasses : UInt32*) : HRESULT
+    @lpVtbl.value.validate_device.call(this, pnumpasses)
+  end
+  def set_palette_entries(this : IDirect3DDevice9Ex*, palettenumber : UInt32, pentries : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.set_palette_entries.call(this, palettenumber, pentries)
+  end
+  def get_palette_entries(this : IDirect3DDevice9Ex*, palettenumber : UInt32, pentries : PALETTEENTRY*) : HRESULT
+    @lpVtbl.value.get_palette_entries.call(this, palettenumber, pentries)
+  end
+  def set_current_texture_palette(this : IDirect3DDevice9Ex*, palettenumber : UInt32) : HRESULT
+    @lpVtbl.value.set_current_texture_palette.call(this, palettenumber)
+  end
+  def get_current_texture_palette(this : IDirect3DDevice9Ex*, palettenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_texture_palette.call(this, palettenumber)
+  end
+  def set_scissor_rect(this : IDirect3DDevice9Ex*, prect : RECT*) : HRESULT
+    @lpVtbl.value.set_scissor_rect.call(this, prect)
+  end
+  def get_scissor_rect(this : IDirect3DDevice9Ex*, prect : RECT*) : HRESULT
+    @lpVtbl.value.get_scissor_rect.call(this, prect)
+  end
+  def set_software_vertex_processing(this : IDirect3DDevice9Ex*, bsoftware : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_software_vertex_processing.call(this, bsoftware)
+  end
+  def get_software_vertex_processing(this : IDirect3DDevice9Ex*) : LibC::BOOL
+    @lpVtbl.value.get_software_vertex_processing.call(this)
+  end
+  def set_n_patch_mode(this : IDirect3DDevice9Ex*, nsegments : Float32) : HRESULT
+    @lpVtbl.value.set_n_patch_mode.call(this, nsegments)
+  end
+  def get_n_patch_mode(this : IDirect3DDevice9Ex*) : Float32
+    @lpVtbl.value.get_n_patch_mode.call(this)
+  end
+  def draw_primitive(this : IDirect3DDevice9Ex*, primitivetype : D3DPRIMITIVETYPE, startvertex : UInt32, primitivecount : UInt32) : HRESULT
+    @lpVtbl.value.draw_primitive.call(this, primitivetype, startvertex, primitivecount)
+  end
+  def draw_indexed_primitive(this : IDirect3DDevice9Ex*, param0 : D3DPRIMITIVETYPE, basevertexindex : Int32, minvertexindex : UInt32, numvertices : UInt32, startindex : UInt32, primcount : UInt32) : HRESULT
+    @lpVtbl.value.draw_indexed_primitive.call(this, param0, basevertexindex, minvertexindex, numvertices, startindex, primcount)
+  end
+  def draw_primitive_up(this : IDirect3DDevice9Ex*, primitivetype : D3DPRIMITIVETYPE, primitivecount : UInt32, pvertexstreamzerodata : Void*, vertexstreamzerostride : UInt32) : HRESULT
+    @lpVtbl.value.draw_primitive_up.call(this, primitivetype, primitivecount, pvertexstreamzerodata, vertexstreamzerostride)
+  end
+  def draw_indexed_primitive_up(this : IDirect3DDevice9Ex*, primitivetype : D3DPRIMITIVETYPE, minvertexindex : UInt32, numvertices : UInt32, primitivecount : UInt32, pindexdata : Void*, indexdataformat : D3DFORMAT, pvertexstreamzerodata : Void*, vertexstreamzerostride : UInt32) : HRESULT
+    @lpVtbl.value.draw_indexed_primitive_up.call(this, primitivetype, minvertexindex, numvertices, primitivecount, pindexdata, indexdataformat, pvertexstreamzerodata, vertexstreamzerostride)
+  end
+  def process_vertices(this : IDirect3DDevice9Ex*, srcstartindex : UInt32, destindex : UInt32, vertexcount : UInt32, pdestbuffer : IDirect3DVertexBuffer9, pvertexdecl : IDirect3DVertexDeclaration9, flags : UInt32) : HRESULT
+    @lpVtbl.value.process_vertices.call(this, srcstartindex, destindex, vertexcount, pdestbuffer, pvertexdecl, flags)
+  end
+  def create_vertex_declaration(this : IDirect3DDevice9Ex*, pvertexelements : D3DVERTEXELEMENT9*, ppdecl : IDirect3DVertexDeclaration9*) : HRESULT
+    @lpVtbl.value.create_vertex_declaration.call(this, pvertexelements, ppdecl)
+  end
+  def set_vertex_declaration(this : IDirect3DDevice9Ex*, pdecl : IDirect3DVertexDeclaration9) : HRESULT
+    @lpVtbl.value.set_vertex_declaration.call(this, pdecl)
+  end
+  def get_vertex_declaration(this : IDirect3DDevice9Ex*, ppdecl : IDirect3DVertexDeclaration9*) : HRESULT
+    @lpVtbl.value.get_vertex_declaration.call(this, ppdecl)
+  end
+  def set_fvf(this : IDirect3DDevice9Ex*, fvf : UInt32) : HRESULT
+    @lpVtbl.value.set_fvf.call(this, fvf)
+  end
+  def get_fvf(this : IDirect3DDevice9Ex*, pfvf : UInt32*) : HRESULT
+    @lpVtbl.value.get_fvf.call(this, pfvf)
+  end
+  def create_vertex_shader(this : IDirect3DDevice9Ex*, pfunction : UInt32*, ppshader : IDirect3DVertexShader9*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.call(this, pfunction, ppshader)
+  end
+  def set_vertex_shader(this : IDirect3DDevice9Ex*, pshader : IDirect3DVertexShader9) : HRESULT
+    @lpVtbl.value.set_vertex_shader.call(this, pshader)
+  end
+  def get_vertex_shader(this : IDirect3DDevice9Ex*, ppshader : IDirect3DVertexShader9*) : HRESULT
+    @lpVtbl.value.get_vertex_shader.call(this, ppshader)
+  end
+  def set_vertex_shader_constant_f(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def get_vertex_shader_constant_f(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def set_vertex_shader_constant_i(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def get_vertex_shader_constant_i(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def set_vertex_shader_constant_b(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def get_vertex_shader_constant_b(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.get_vertex_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def set_stream_source(this : IDirect3DDevice9Ex*, streamnumber : UInt32, pstreamdata : IDirect3DVertexBuffer9, offsetinbytes : UInt32, stride : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_source.call(this, streamnumber, pstreamdata, offsetinbytes, stride)
+  end
+  def get_stream_source(this : IDirect3DDevice9Ex*, streamnumber : UInt32, ppstreamdata : IDirect3DVertexBuffer9*, poffsetinbytes : UInt32*, pstride : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_source.call(this, streamnumber, ppstreamdata, poffsetinbytes, pstride)
+  end
+  def set_stream_source_freq(this : IDirect3DDevice9Ex*, streamnumber : UInt32, setting : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_source_freq.call(this, streamnumber, setting)
+  end
+  def get_stream_source_freq(this : IDirect3DDevice9Ex*, streamnumber : UInt32, psetting : UInt32*) : HRESULT
+    @lpVtbl.value.get_stream_source_freq.call(this, streamnumber, psetting)
+  end
+  def set_indices(this : IDirect3DDevice9Ex*, pindexdata : IDirect3DIndexBuffer9) : HRESULT
+    @lpVtbl.value.set_indices.call(this, pindexdata)
+  end
+  def get_indices(this : IDirect3DDevice9Ex*, ppindexdata : IDirect3DIndexBuffer9*) : HRESULT
+    @lpVtbl.value.get_indices.call(this, ppindexdata)
+  end
+  def create_pixel_shader(this : IDirect3DDevice9Ex*, pfunction : UInt32*, ppshader : IDirect3DPixelShader9*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.call(this, pfunction, ppshader)
+  end
+  def set_pixel_shader(this : IDirect3DDevice9Ex*, pshader : IDirect3DPixelShader9) : HRESULT
+    @lpVtbl.value.set_pixel_shader.call(this, pshader)
+  end
+  def get_pixel_shader(this : IDirect3DDevice9Ex*, ppshader : IDirect3DPixelShader9*) : HRESULT
+    @lpVtbl.value.get_pixel_shader.call(this, ppshader)
+  end
+  def set_pixel_shader_constant_f(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def get_pixel_shader_constant_f(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Float32*, vector4fcount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_f.call(this, startregister, pconstantdata, vector4fcount)
+  end
+  def set_pixel_shader_constant_i(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def get_pixel_shader_constant_i(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : Int32*, vector4icount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_i.call(this, startregister, pconstantdata, vector4icount)
+  end
+  def set_pixel_shader_constant_b(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def get_pixel_shader_constant_b(this : IDirect3DDevice9Ex*, startregister : UInt32, pconstantdata : LibC::BOOL*, boolcount : UInt32) : HRESULT
+    @lpVtbl.value.get_pixel_shader_constant_b.call(this, startregister, pconstantdata, boolcount)
+  end
+  def draw_rect_patch(this : IDirect3DDevice9Ex*, handle : UInt32, pnumsegs : Float32*, prectpatchinfo : D3DRECTPATCH_INFO*) : HRESULT
+    @lpVtbl.value.draw_rect_patch.call(this, handle, pnumsegs, prectpatchinfo)
+  end
+  def draw_tri_patch(this : IDirect3DDevice9Ex*, handle : UInt32, pnumsegs : Float32*, ptripatchinfo : D3DTRIPATCH_INFO*) : HRESULT
+    @lpVtbl.value.draw_tri_patch.call(this, handle, pnumsegs, ptripatchinfo)
+  end
+  def delete_patch(this : IDirect3DDevice9Ex*, handle : UInt32) : HRESULT
+    @lpVtbl.value.delete_patch.call(this, handle)
+  end
+  def create_query(this : IDirect3DDevice9Ex*, type : D3DQUERYTYPE, ppquery : IDirect3DQuery9*) : HRESULT
+    @lpVtbl.value.create_query.call(this, type, ppquery)
+  end
+  def set_convolution_mono_kernel(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, rows : Float32*, columns : Float32*) : HRESULT
+    @lpVtbl.value.set_convolution_mono_kernel.call(this, width, height, rows, columns)
+  end
+  def compose_rects(this : IDirect3DDevice9Ex*, psrc : IDirect3DSurface9, pdst : IDirect3DSurface9, psrcrectdescs : IDirect3DVertexBuffer9, numrects : UInt32, pdstrectdescs : IDirect3DVertexBuffer9, operation : D3DCOMPOSERECTSOP, xoffset : Int32, yoffset : Int32) : HRESULT
+    @lpVtbl.value.compose_rects.call(this, psrc, pdst, psrcrectdescs, numrects, pdstrectdescs, operation, xoffset, yoffset)
+  end
+  def present_ex(this : IDirect3DDevice9Ex*, psourcerect : RECT*, pdestrect : RECT*, hdestwindowoverride : LibC::HANDLE, pdirtyregion : RGNDATA*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.present_ex.call(this, psourcerect, pdestrect, hdestwindowoverride, pdirtyregion, dwflags)
+  end
+  def get_gpu_thread_priority(this : IDirect3DDevice9Ex*, ppriority : Int32*) : HRESULT
+    @lpVtbl.value.get_gpu_thread_priority.call(this, ppriority)
+  end
+  def set_gpu_thread_priority(this : IDirect3DDevice9Ex*, priority : Int32) : HRESULT
+    @lpVtbl.value.set_gpu_thread_priority.call(this, priority)
+  end
+  def wait_for_v_blank(this : IDirect3DDevice9Ex*, iswapchain : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_v_blank.call(this, iswapchain)
+  end
+  def check_resource_residency(this : IDirect3DDevice9Ex*, presourcearray : IDirect3DResource9*, numresources : UInt32) : HRESULT
+    @lpVtbl.value.check_resource_residency.call(this, presourcearray, numresources)
+  end
+  def set_maximum_frame_latency(this : IDirect3DDevice9Ex*, maxlatency : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_frame_latency.call(this, maxlatency)
+  end
+  def get_maximum_frame_latency(this : IDirect3DDevice9Ex*, pmaxlatency : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_frame_latency.call(this, pmaxlatency)
+  end
+  def check_device_state(this : IDirect3DDevice9Ex*, hdestinationwindow : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.check_device_state.call(this, hdestinationwindow)
+  end
+  def create_render_target_ex(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, lockable : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*, usage : UInt32) : HRESULT
+    @lpVtbl.value.create_render_target_ex.call(this, width, height, format, multisample, multisamplequality, lockable, ppsurface, psharedhandle, usage)
+  end
+  def create_offscreen_plain_surface_ex(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, pool : D3DPOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*, usage : UInt32) : HRESULT
+    @lpVtbl.value.create_offscreen_plain_surface_ex.call(this, width, height, format, pool, ppsurface, psharedhandle, usage)
+  end
+  def create_depth_stencil_surface_ex(this : IDirect3DDevice9Ex*, width : UInt32, height : UInt32, format : D3DFORMAT, multisample : D3DMULTISAMPLE_TYPE, multisamplequality : UInt32, discard : LibC::BOOL, ppsurface : IDirect3DSurface9*, psharedhandle : LibC::HANDLE*, usage : UInt32) : HRESULT
+    @lpVtbl.value.create_depth_stencil_surface_ex.call(this, width, height, format, multisample, multisamplequality, discard, ppsurface, psharedhandle, usage)
+  end
+  def reset_ex(this : IDirect3DDevice9Ex*, ppresentationparameters : D3DPRESENT_PARAMETERS*, pfullscreendisplaymode : D3DDISPLAYMODEEX*) : HRESULT
+    @lpVtbl.value.reset_ex.call(this, ppresentationparameters, pfullscreendisplaymode)
+  end
+  def get_display_mode_ex(this : IDirect3DDevice9Ex*, iswapchain : UInt32, pmode : D3DDISPLAYMODEEX*, protation : D3DDISPLAYROTATION*) : HRESULT
+    @lpVtbl.value.get_display_mode_ex.call(this, iswapchain, pmode, protation)
+  end
+end
+struct LibWin32::IDirect3DSwapChain9Ex
+  def query_interface(this : IDirect3DSwapChain9Ex*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DSwapChain9Ex*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DSwapChain9Ex*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def present(this : IDirect3DSwapChain9Ex*, psourcerect : RECT*, pdestrect : RECT*, hdestwindowoverride : LibC::HANDLE, pdirtyregion : RGNDATA*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.present.call(this, psourcerect, pdestrect, hdestwindowoverride, pdirtyregion, dwflags)
+  end
+  def get_front_buffer_data(this : IDirect3DSwapChain9Ex*, pdestsurface : IDirect3DSurface9) : HRESULT
+    @lpVtbl.value.get_front_buffer_data.call(this, pdestsurface)
+  end
+  def get_back_buffer(this : IDirect3DSwapChain9Ex*, ibackbuffer : UInt32, type : D3DBACKBUFFER_TYPE, ppbackbuffer : IDirect3DSurface9*) : HRESULT
+    @lpVtbl.value.get_back_buffer.call(this, ibackbuffer, type, ppbackbuffer)
+  end
+  def get_raster_status(this : IDirect3DSwapChain9Ex*, prasterstatus : D3DRASTER_STATUS*) : HRESULT
+    @lpVtbl.value.get_raster_status.call(this, prasterstatus)
+  end
+  def get_display_mode(this : IDirect3DSwapChain9Ex*, pmode : D3DDISPLAYMODE*) : HRESULT
+    @lpVtbl.value.get_display_mode.call(this, pmode)
+  end
+  def get_device(this : IDirect3DSwapChain9Ex*, ppdevice : IDirect3DDevice9*) : HRESULT
+    @lpVtbl.value.get_device.call(this, ppdevice)
+  end
+  def get_present_parameters(this : IDirect3DSwapChain9Ex*, ppresentationparameters : D3DPRESENT_PARAMETERS*) : HRESULT
+    @lpVtbl.value.get_present_parameters.call(this, ppresentationparameters)
+  end
+  def get_last_present_count(this : IDirect3DSwapChain9Ex*, plastpresentcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_present_count.call(this, plastpresentcount)
+  end
+  def get_present_stats(this : IDirect3DSwapChain9Ex*, ppresentationstatistics : D3DPRESENTSTATS*) : HRESULT
+    @lpVtbl.value.get_present_stats.call(this, ppresentationstatistics)
+  end
+  def get_display_mode_ex(this : IDirect3DSwapChain9Ex*, pmode : D3DDISPLAYMODEEX*, protation : D3DDISPLAYROTATION*) : HRESULT
+    @lpVtbl.value.get_display_mode_ex.call(this, pmode, protation)
+  end
 end

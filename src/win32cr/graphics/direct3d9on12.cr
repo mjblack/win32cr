@@ -52,3 +52,23 @@ lib LibWin32
   # Params # sdkversion : UInt32 [In],poverridelist : D3D9ON12_ARGS* [In],numoverrideentries : UInt32 [In]
   fun Direct3DCreate9On12(sdkversion : UInt32, poverridelist : D3D9ON12_ARGS*, numoverrideentries : UInt32) : IDirect3D9
 end
+struct LibWin32::IDirect3DDevice9On12
+  def query_interface(this : IDirect3DDevice9On12*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDirect3DDevice9On12*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDirect3DDevice9On12*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_d3_d12_device(this : IDirect3DDevice9On12*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_d3_d12_device.call(this, riid, ppvdevice)
+  end
+  def unwrap_underlying_resource(this : IDirect3DDevice9On12*, presource : IDirect3DResource9, pcommandqueue : ID3D12CommandQueue, riid : Guid*, ppvresource12 : Void**) : HRESULT
+    @lpVtbl.value.unwrap_underlying_resource.call(this, presource, pcommandqueue, riid, ppvresource12)
+  end
+  def return_underlying_resource(this : IDirect3DDevice9On12*, presource : IDirect3DResource9, numsync : UInt32, psignalvalues : UInt64*, ppfences : ID3D12Fence*) : HRESULT
+    @lpVtbl.value.return_underlying_resource.call(this, presource, numsync, psignalvalues, ppfences)
+  end
+end

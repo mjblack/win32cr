@@ -46,3 +46,20 @@ lib LibWin32
   # Params # pdevice : IDXGIDevice [In],pprenderer : IPdfRendererNative* [In]
   fun PdfCreateRenderer(pdevice : IDXGIDevice, pprenderer : IPdfRendererNative*) : HRESULT
 end
+struct LibWin32::IPdfRendererNative
+  def query_interface(this : IPdfRendererNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPdfRendererNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPdfRendererNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def render_page_to_surface(this : IPdfRendererNative*, pdfpage : IUnknown, psurface : IDXGISurface, offset : POINT, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
+    @lpVtbl.value.render_page_to_surface.call(this, pdfpage, psurface, offset, prenderparams)
+  end
+  def render_page_to_device_context(this : IPdfRendererNative*, pdfpage : IUnknown, pd2ddevicecontext : ID2D1DeviceContext, prenderparams : PDF_RENDER_PARAMS*) : HRESULT
+    @lpVtbl.value.render_page_to_device_context.call(this, pdfpage, pd2ddevicecontext, prenderparams)
+  end
+end

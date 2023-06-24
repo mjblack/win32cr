@@ -321,3 +321,230 @@ lib LibWin32
   # Params # user : IInspectable [In],completionroutine : GameUICompletionRoutine [In],context : Void* [In]
   fun ShowUserSettingsUIForUser(user : IInspectable, completionroutine : GameUICompletionRoutine, context : Void*) : HRESULT
 end
+struct LibWin32::IGameExplorer
+  def query_interface(this : IGameExplorer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGameExplorer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGameExplorer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_game(this : IGameExplorer*, bstrgdfbinarypath : UInt8*, bstrgameinstalldirectory : UInt8*, installscope : GAME_INSTALL_SCOPE, pguidinstanceid : Guid*) : HRESULT
+    @lpVtbl.value.add_game.call(this, bstrgdfbinarypath, bstrgameinstalldirectory, installscope, pguidinstanceid)
+  end
+  def remove_game(this : IGameExplorer*, guidinstanceid : Guid) : HRESULT
+    @lpVtbl.value.remove_game.call(this, guidinstanceid)
+  end
+  def update_game(this : IGameExplorer*, guidinstanceid : Guid) : HRESULT
+    @lpVtbl.value.update_game.call(this, guidinstanceid)
+  end
+  def verify_access(this : IGameExplorer*, bstrgdfbinarypath : UInt8*, pfhasaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.verify_access.call(this, bstrgdfbinarypath, pfhasaccess)
+  end
+end
+struct LibWin32::IGameStatistics
+  def query_interface(this : IGameStatistics*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGameStatistics*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGameStatistics*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_max_category_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_category_length.call(this, cch)
+  end
+  def get_max_name_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_name_length.call(this, cch)
+  end
+  def get_max_value_length(this : IGameStatistics*, cch : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_value_length.call(this, cch)
+  end
+  def get_max_categories(this : IGameStatistics*, pmax : UInt16*) : HRESULT
+    @lpVtbl.value.get_max_categories.call(this, pmax)
+  end
+  def get_max_stats_per_category(this : IGameStatistics*, pmax : UInt16*) : HRESULT
+    @lpVtbl.value.get_max_stats_per_category.call(this, pmax)
+  end
+  def set_category_title(this : IGameStatistics*, categoryindex : UInt16, title : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_category_title.call(this, categoryindex, title)
+  end
+  def get_category_title(this : IGameStatistics*, categoryindex : UInt16, ptitle : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_category_title.call(this, categoryindex, ptitle)
+  end
+  def get_statistic(this : IGameStatistics*, categoryindex : UInt16, statindex : UInt16, pname : LibC::LPWSTR*, pvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_statistic.call(this, categoryindex, statindex, pname, pvalue)
+  end
+  def set_statistic(this : IGameStatistics*, categoryindex : UInt16, statindex : UInt16, name : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_statistic.call(this, categoryindex, statindex, name, value)
+  end
+  def save(this : IGameStatistics*, trackchanges : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, trackchanges)
+  end
+  def set_last_played_category(this : IGameStatistics*, categoryindex : UInt32) : HRESULT
+    @lpVtbl.value.set_last_played_category.call(this, categoryindex)
+  end
+  def get_last_played_category(this : IGameStatistics*, pcategoryindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_played_category.call(this, pcategoryindex)
+  end
+end
+struct LibWin32::IGameStatisticsMgr
+  def query_interface(this : IGameStatisticsMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGameStatisticsMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGameStatisticsMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_game_statistics(this : IGameStatisticsMgr*, gdfbinarypath : LibC::LPWSTR, opentype : GAMESTATS_OPEN_TYPE, popenresult : GAMESTATS_OPEN_RESULT*, ppistats : IGameStatistics*) : HRESULT
+    @lpVtbl.value.get_game_statistics.call(this, gdfbinarypath, opentype, popenresult, ppistats)
+  end
+  def remove_game_statistics(this : IGameStatisticsMgr*, gdfbinarypath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_game_statistics.call(this, gdfbinarypath)
+  end
+end
+struct LibWin32::IGameExplorer2
+  def query_interface(this : IGameExplorer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGameExplorer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGameExplorer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def install_game(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR, installdirectory : LibC::LPWSTR, installscope : GAME_INSTALL_SCOPE) : HRESULT
+    @lpVtbl.value.install_game.call(this, binarygdfpath, installdirectory, installscope)
+  end
+  def uninstall_game(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.uninstall_game.call(this, binarygdfpath)
+  end
+  def check_access(this : IGameExplorer2*, binarygdfpath : LibC::LPWSTR, phasaccess : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_access.call(this, binarygdfpath, phasaccess)
+  end
+end
+struct LibWin32::IXblIdpAuthManager
+  def query_interface(this : IXblIdpAuthManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXblIdpAuthManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXblIdpAuthManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_gamer_account(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR, xuid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_gamer_account.call(this, msaaccountid, xuid)
+  end
+  def get_gamer_account(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR*, xuid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_gamer_account.call(this, msaaccountid, xuid)
+  end
+  def set_app_view_initialized(this : IXblIdpAuthManager*, appsid : LibC::LPWSTR, msaaccountid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_app_view_initialized.call(this, appsid, msaaccountid)
+  end
+  def get_environment(this : IXblIdpAuthManager*, environment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_environment.call(this, environment)
+  end
+  def get_sandbox(this : IXblIdpAuthManager*, sandbox : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sandbox.call(this, sandbox)
+  end
+  def get_token_and_signature_with_token_result(this : IXblIdpAuthManager*, msaaccountid : LibC::LPWSTR, appsid : LibC::LPWSTR, msatarget : LibC::LPWSTR, msapolicy : LibC::LPWSTR, httpmethod : LibC::LPWSTR, uri : LibC::LPWSTR, headers : LibC::LPWSTR, body : UInt8*, bodysize : UInt32, forcerefresh : LibC::BOOL, result : IXblIdpAuthTokenResult*) : HRESULT
+    @lpVtbl.value.get_token_and_signature_with_token_result.call(this, msaaccountid, appsid, msatarget, msapolicy, httpmethod, uri, headers, body, bodysize, forcerefresh, result)
+  end
+end
+struct LibWin32::IXblIdpAuthTokenResult
+  def query_interface(this : IXblIdpAuthTokenResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXblIdpAuthTokenResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXblIdpAuthTokenResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IXblIdpAuthTokenResult*, status : XBL_IDP_AUTH_TOKEN_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, status)
+  end
+  def get_error_code(this : IXblIdpAuthTokenResult*, errorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error_code.call(this, errorcode)
+  end
+  def get_token(this : IXblIdpAuthTokenResult*, token : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_token.call(this, token)
+  end
+  def get_signature(this : IXblIdpAuthTokenResult*, signature : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature.call(this, signature)
+  end
+  def get_sandbox(this : IXblIdpAuthTokenResult*, sandbox : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_sandbox.call(this, sandbox)
+  end
+  def get_environment(this : IXblIdpAuthTokenResult*, environment : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_environment.call(this, environment)
+  end
+  def get_msa_account_id(this : IXblIdpAuthTokenResult*, msaaccountid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_account_id.call(this, msaaccountid)
+  end
+  def get_xuid(this : IXblIdpAuthTokenResult*, xuid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_xuid.call(this, xuid)
+  end
+  def get_gamertag(this : IXblIdpAuthTokenResult*, gamertag : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_gamertag.call(this, gamertag)
+  end
+  def get_age_group(this : IXblIdpAuthTokenResult*, agegroup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_age_group.call(this, agegroup)
+  end
+  def get_privileges(this : IXblIdpAuthTokenResult*, privileges : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_privileges.call(this, privileges)
+  end
+  def get_msa_target(this : IXblIdpAuthTokenResult*, msatarget : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_target.call(this, msatarget)
+  end
+  def get_msa_policy(this : IXblIdpAuthTokenResult*, msapolicy : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_policy.call(this, msapolicy)
+  end
+  def get_msa_app_id(this : IXblIdpAuthTokenResult*, msaappid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_msa_app_id.call(this, msaappid)
+  end
+  def get_redirect(this : IXblIdpAuthTokenResult*, redirect : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_redirect.call(this, redirect)
+  end
+  def get_message(this : IXblIdpAuthTokenResult*, message : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_message.call(this, message)
+  end
+  def get_help_id(this : IXblIdpAuthTokenResult*, helpid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_help_id.call(this, helpid)
+  end
+  def get_enforcement_bans(this : IXblIdpAuthTokenResult*, enforcementbans : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_enforcement_bans.call(this, enforcementbans)
+  end
+  def get_restrictions(this : IXblIdpAuthTokenResult*, restrictions : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_restrictions.call(this, restrictions)
+  end
+  def get_title_restrictions(this : IXblIdpAuthTokenResult*, titlerestrictions : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title_restrictions.call(this, titlerestrictions)
+  end
+end
+struct LibWin32::IXblIdpAuthTokenResult2
+  def query_interface(this : IXblIdpAuthTokenResult2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IXblIdpAuthTokenResult2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IXblIdpAuthTokenResult2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_modern_gamertag(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_modern_gamertag.call(this, value)
+  end
+  def get_modern_gamertag_suffix(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_modern_gamertag_suffix.call(this, value)
+  end
+  def get_unique_modern_gamertag(this : IXblIdpAuthTokenResult2*, value : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_modern_gamertag.call(this, value)
+  end
+end

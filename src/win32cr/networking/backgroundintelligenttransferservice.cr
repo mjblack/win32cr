@@ -1278,3 +1278,1703 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IBackgroundCopyFile
+  def query_interface(this : IBackgroundCopyFile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyFiles
+  def query_interface(this : IEnumBackgroundCopyFiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBackgroundCopyFiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBackgroundCopyFiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBackgroundCopyFiles*, celt : UInt32, rgelt : IBackgroundCopyFile*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBackgroundCopyFiles*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBackgroundCopyFiles*, ppenum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBackgroundCopyFiles*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyError
+  def query_interface(this : IBackgroundCopyError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error(this : IBackgroundCopyError*, pcontext : BG_ERROR_CONTEXT*, pcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pcontext, pcode)
+  end
+  def get_file(this : IBackgroundCopyError*, pval : IBackgroundCopyFile*) : HRESULT
+    @lpVtbl.value.get_file.call(this, pval)
+  end
+  def get_error_description(this : IBackgroundCopyError*, languageid : UInt32, perrordescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_description.call(this, languageid, perrordescription)
+  end
+  def get_error_context_description(this : IBackgroundCopyError*, languageid : UInt32, pcontextdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_context_description.call(this, languageid, pcontextdescription)
+  end
+  def get_protocol(this : IBackgroundCopyError*, pprotocol : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_protocol.call(this, pprotocol)
+  end
+end
+struct LibWin32::IBackgroundCopyJob
+  def query_interface(this : IBackgroundCopyJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_file_set(this : IBackgroundCopyJob*, cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.call(this, cfilecount, pfileset)
+  end
+  def add_file(this : IBackgroundCopyJob*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.call(this, remoteurl, localname)
+  end
+  def enum_files(this : IBackgroundCopyJob*, penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.call(this, penum)
+  end
+  def suspend(this : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
+  end
+  def resume(this : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def cancel(this : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def complete(this : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def get_id(this : IBackgroundCopyJob*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_type(this : IBackgroundCopyJob*, pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyJob*, pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_times(this : IBackgroundCopyJob*, pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.call(this, pval)
+  end
+  def get_state(this : IBackgroundCopyJob*, pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pval)
+  end
+  def get_error(this : IBackgroundCopyJob*, pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def get_owner(this : IBackgroundCopyJob*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pval)
+  end
+  def set_display_name(this : IBackgroundCopyJob*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, val)
+  end
+  def get_display_name(this : IBackgroundCopyJob*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pval)
+  end
+  def set_description(this : IBackgroundCopyJob*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, val)
+  end
+  def get_description(this : IBackgroundCopyJob*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def set_priority(this : IBackgroundCopyJob*, val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.call(this, val)
+  end
+  def get_priority(this : IBackgroundCopyJob*, pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pval)
+  end
+  def set_notify_flags(this : IBackgroundCopyJob*, val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.call(this, val)
+  end
+  def get_notify_flags(this : IBackgroundCopyJob*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.call(this, pval)
+  end
+  def set_notify_interface(this : IBackgroundCopyJob*, val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.call(this, val)
+  end
+  def get_notify_interface(this : IBackgroundCopyJob*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.call(this, pval)
+  end
+  def set_minimum_retry_delay(this : IBackgroundCopyJob*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.call(this, seconds)
+  end
+  def get_minimum_retry_delay(this : IBackgroundCopyJob*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.call(this, seconds)
+  end
+  def set_no_progress_timeout(this : IBackgroundCopyJob*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.call(this, seconds)
+  end
+  def get_no_progress_timeout(this : IBackgroundCopyJob*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.call(this, seconds)
+  end
+  def get_error_count(this : IBackgroundCopyJob*, errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, errors)
+  end
+  def set_proxy_settings(this : IBackgroundCopyJob*, proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(this : IBackgroundCopyJob*, pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership(this : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyJobs
+  def query_interface(this : IEnumBackgroundCopyJobs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBackgroundCopyJobs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBackgroundCopyJobs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBackgroundCopyJobs*, celt : UInt32, rgelt : IBackgroundCopyJob*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBackgroundCopyJobs*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBackgroundCopyJobs*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBackgroundCopyJobs*, ppenum : IEnumBackgroundCopyJobs*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBackgroundCopyJobs*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback
+  def query_interface(this : IBackgroundCopyCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def job_transferred(this : IBackgroundCopyCallback*, pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.call(this, pjob)
+  end
+  def job_error(this : IBackgroundCopyCallback*, pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.call(this, pjob, perror)
+  end
+  def job_modification(this : IBackgroundCopyCallback*, pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.call(this, pjob, dwreserved)
+  end
+end
+struct LibWin32::AsyncIBackgroundCopyCallback
+  def query_interface(this : AsyncIBackgroundCopyCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : AsyncIBackgroundCopyCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : AsyncIBackgroundCopyCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def begin_job_transferred(this : AsyncIBackgroundCopyCallback*, pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.begin_job_transferred.call(this, pjob)
+  end
+  def finish_job_transferred(this : AsyncIBackgroundCopyCallback*) : HRESULT
+    @lpVtbl.value.finish_job_transferred.call(this)
+  end
+  def begin_job_error(this : AsyncIBackgroundCopyCallback*, pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.begin_job_error.call(this, pjob, perror)
+  end
+  def finish_job_error(this : AsyncIBackgroundCopyCallback*) : HRESULT
+    @lpVtbl.value.finish_job_error.call(this)
+  end
+  def begin_job_modification(this : AsyncIBackgroundCopyCallback*, pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.begin_job_modification.call(this, pjob, dwreserved)
+  end
+  def finish_job_modification(this : AsyncIBackgroundCopyCallback*) : HRESULT
+    @lpVtbl.value.finish_job_modification.call(this)
+  end
+end
+struct LibWin32::IBackgroundCopyManager
+  def query_interface(this : IBackgroundCopyManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_job(this : IBackgroundCopyManager*, displayname : LibC::LPWSTR, type : BG_JOB_TYPE, pjobid : Guid*, ppjob : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.create_job.call(this, displayname, type, pjobid, ppjob)
+  end
+  def get_job(this : IBackgroundCopyManager*, jobid : Guid*, ppjob : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.get_job.call(this, jobid, ppjob)
+  end
+  def enum_jobs(this : IBackgroundCopyManager*, dwflags : UInt32, ppenum : IEnumBackgroundCopyJobs*) : HRESULT
+    @lpVtbl.value.enum_jobs.call(this, dwflags, ppenum)
+  end
+  def get_error_description(this : IBackgroundCopyManager*, hresult : HRESULT, languageid : UInt32, perrordescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_description.call(this, hresult, languageid, perrordescription)
+  end
+end
+struct LibWin32::IBackgroundCopyJob2
+  def query_interface(this : IBackgroundCopyJob2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_file_set(this : IBackgroundCopyJob2*, cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.call(this, cfilecount, pfileset)
+  end
+  def add_file(this : IBackgroundCopyJob2*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.call(this, remoteurl, localname)
+  end
+  def enum_files(this : IBackgroundCopyJob2*, penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.call(this, penum)
+  end
+  def suspend(this : IBackgroundCopyJob2*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
+  end
+  def resume(this : IBackgroundCopyJob2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def cancel(this : IBackgroundCopyJob2*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def complete(this : IBackgroundCopyJob2*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def get_id(this : IBackgroundCopyJob2*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_type(this : IBackgroundCopyJob2*, pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyJob2*, pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_times(this : IBackgroundCopyJob2*, pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.call(this, pval)
+  end
+  def get_state(this : IBackgroundCopyJob2*, pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pval)
+  end
+  def get_error(this : IBackgroundCopyJob2*, pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def get_owner(this : IBackgroundCopyJob2*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pval)
+  end
+  def set_display_name(this : IBackgroundCopyJob2*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, val)
+  end
+  def get_display_name(this : IBackgroundCopyJob2*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pval)
+  end
+  def set_description(this : IBackgroundCopyJob2*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, val)
+  end
+  def get_description(this : IBackgroundCopyJob2*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def set_priority(this : IBackgroundCopyJob2*, val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.call(this, val)
+  end
+  def get_priority(this : IBackgroundCopyJob2*, pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pval)
+  end
+  def set_notify_flags(this : IBackgroundCopyJob2*, val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.call(this, val)
+  end
+  def get_notify_flags(this : IBackgroundCopyJob2*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.call(this, pval)
+  end
+  def set_notify_interface(this : IBackgroundCopyJob2*, val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.call(this, val)
+  end
+  def get_notify_interface(this : IBackgroundCopyJob2*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.call(this, pval)
+  end
+  def set_minimum_retry_delay(this : IBackgroundCopyJob2*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.call(this, seconds)
+  end
+  def get_minimum_retry_delay(this : IBackgroundCopyJob2*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.call(this, seconds)
+  end
+  def set_no_progress_timeout(this : IBackgroundCopyJob2*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.call(this, seconds)
+  end
+  def get_no_progress_timeout(this : IBackgroundCopyJob2*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.call(this, seconds)
+  end
+  def get_error_count(this : IBackgroundCopyJob2*, errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, errors)
+  end
+  def set_proxy_settings(this : IBackgroundCopyJob2*, proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(this : IBackgroundCopyJob2*, pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership(this : IBackgroundCopyJob2*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this)
+  end
+  def set_notify_cmd_line(this : IBackgroundCopyJob2*, program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.call(this, program, parameters)
+  end
+  def get_notify_cmd_line(this : IBackgroundCopyJob2*, pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.call(this, pprogram, pparameters)
+  end
+  def get_reply_progress(this : IBackgroundCopyJob2*, pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.call(this, pprogress)
+  end
+  def get_reply_data(this : IBackgroundCopyJob2*, ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.call(this, ppbuffer, plength)
+  end
+  def set_reply_file_name(this : IBackgroundCopyJob2*, replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.call(this, replyfilename)
+  end
+  def get_reply_file_name(this : IBackgroundCopyJob2*, preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.call(this, preplyfilename)
+  end
+  def set_credentials(this : IBackgroundCopyJob2*, credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, credentials)
+  end
+  def remove_credentials(this : IBackgroundCopyJob2*, target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.call(this, target, scheme)
+  end
+end
+struct LibWin32::IBackgroundCopyJob3
+  def query_interface(this : IBackgroundCopyJob3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_file_set(this : IBackgroundCopyJob3*, cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.call(this, cfilecount, pfileset)
+  end
+  def add_file(this : IBackgroundCopyJob3*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.call(this, remoteurl, localname)
+  end
+  def enum_files(this : IBackgroundCopyJob3*, penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.call(this, penum)
+  end
+  def suspend(this : IBackgroundCopyJob3*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
+  end
+  def resume(this : IBackgroundCopyJob3*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def cancel(this : IBackgroundCopyJob3*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def complete(this : IBackgroundCopyJob3*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def get_id(this : IBackgroundCopyJob3*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_type(this : IBackgroundCopyJob3*, pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyJob3*, pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_times(this : IBackgroundCopyJob3*, pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.call(this, pval)
+  end
+  def get_state(this : IBackgroundCopyJob3*, pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pval)
+  end
+  def get_error(this : IBackgroundCopyJob3*, pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def get_owner(this : IBackgroundCopyJob3*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pval)
+  end
+  def set_display_name(this : IBackgroundCopyJob3*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, val)
+  end
+  def get_display_name(this : IBackgroundCopyJob3*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pval)
+  end
+  def set_description(this : IBackgroundCopyJob3*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, val)
+  end
+  def get_description(this : IBackgroundCopyJob3*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def set_priority(this : IBackgroundCopyJob3*, val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.call(this, val)
+  end
+  def get_priority(this : IBackgroundCopyJob3*, pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pval)
+  end
+  def set_notify_flags(this : IBackgroundCopyJob3*, val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.call(this, val)
+  end
+  def get_notify_flags(this : IBackgroundCopyJob3*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.call(this, pval)
+  end
+  def set_notify_interface(this : IBackgroundCopyJob3*, val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.call(this, val)
+  end
+  def get_notify_interface(this : IBackgroundCopyJob3*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.call(this, pval)
+  end
+  def set_minimum_retry_delay(this : IBackgroundCopyJob3*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.call(this, seconds)
+  end
+  def get_minimum_retry_delay(this : IBackgroundCopyJob3*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.call(this, seconds)
+  end
+  def set_no_progress_timeout(this : IBackgroundCopyJob3*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.call(this, seconds)
+  end
+  def get_no_progress_timeout(this : IBackgroundCopyJob3*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.call(this, seconds)
+  end
+  def get_error_count(this : IBackgroundCopyJob3*, errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, errors)
+  end
+  def set_proxy_settings(this : IBackgroundCopyJob3*, proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(this : IBackgroundCopyJob3*, pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership(this : IBackgroundCopyJob3*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this)
+  end
+  def set_notify_cmd_line(this : IBackgroundCopyJob3*, program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.call(this, program, parameters)
+  end
+  def get_notify_cmd_line(this : IBackgroundCopyJob3*, pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.call(this, pprogram, pparameters)
+  end
+  def get_reply_progress(this : IBackgroundCopyJob3*, pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.call(this, pprogress)
+  end
+  def get_reply_data(this : IBackgroundCopyJob3*, ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.call(this, ppbuffer, plength)
+  end
+  def set_reply_file_name(this : IBackgroundCopyJob3*, replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.call(this, replyfilename)
+  end
+  def get_reply_file_name(this : IBackgroundCopyJob3*, preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.call(this, preplyfilename)
+  end
+  def set_credentials(this : IBackgroundCopyJob3*, credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, credentials)
+  end
+  def remove_credentials(this : IBackgroundCopyJob3*, target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.call(this, target, scheme)
+  end
+  def replace_remote_prefix(this : IBackgroundCopyJob3*, oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.call(this, oldprefix, newprefix)
+  end
+  def add_file_with_ranges(this : IBackgroundCopyJob3*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.call(this, remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(this : IBackgroundCopyJob3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.call(this, flags)
+  end
+  def get_file_acl_flags(this : IBackgroundCopyJob3*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.call(this, flags)
+  end
+end
+struct LibWin32::IBackgroundCopyFile2
+  def query_interface(this : IBackgroundCopyFile2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile2*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile2*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile2*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_file_ranges(this : IBackgroundCopyFile2*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, rangecount, ranges)
+  end
+  def set_remote_name(this : IBackgroundCopyFile2*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.call(this, val)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions
+  def query_interface(this : IBackgroundCopyJobHttpOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJobHttpOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJobHttpOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_client_certificate_by_id(this : IBackgroundCopyJobHttpOptions*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.call(this, storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(this : IBackgroundCopyJobHttpOptions*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.call(this, storelocation, storename, subjectname)
+  end
+  def remove_client_certificate(this : IBackgroundCopyJobHttpOptions*) : HRESULT
+    @lpVtbl.value.remove_client_certificate.call(this)
+  end
+  def get_client_certificate(this : IBackgroundCopyJobHttpOptions*, pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.call(this, pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(this : IBackgroundCopyJobHttpOptions*, requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.call(this, requestheaders)
+  end
+  def get_custom_headers(this : IBackgroundCopyJobHttpOptions*, prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.call(this, prequestheaders)
+  end
+  def set_security_flags(this : IBackgroundCopyJobHttpOptions*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.call(this, flags)
+  end
+  def get_security_flags(this : IBackgroundCopyJobHttpOptions*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.call(this, pflags)
+  end
+end
+struct LibWin32::IBitsPeerCacheRecord
+  def query_interface(this : IBitsPeerCacheRecord*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBitsPeerCacheRecord*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBitsPeerCacheRecord*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IBitsPeerCacheRecord*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_origin_url(this : IBitsPeerCacheRecord*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_origin_url.call(this, pval)
+  end
+  def get_file_size(this : IBitsPeerCacheRecord*, pval : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, pval)
+  end
+  def get_file_modification_time(this : IBitsPeerCacheRecord*, pval : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_modification_time.call(this, pval)
+  end
+  def get_last_access_time(this : IBitsPeerCacheRecord*, pval : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_access_time.call(this, pval)
+  end
+  def is_file_validated(this : IBitsPeerCacheRecord*) : HRESULT
+    @lpVtbl.value.is_file_validated.call(this)
+  end
+  def get_file_ranges(this : IBitsPeerCacheRecord*, prangecount : UInt32*, ppranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, prangecount, ppranges)
+  end
+end
+struct LibWin32::IEnumBitsPeerCacheRecords
+  def query_interface(this : IEnumBitsPeerCacheRecords*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBitsPeerCacheRecords*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBitsPeerCacheRecords*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBitsPeerCacheRecords*, celt : UInt32, rgelt : IBitsPeerCacheRecord*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBitsPeerCacheRecords*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBitsPeerCacheRecords*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBitsPeerCacheRecords*, ppenum : IEnumBitsPeerCacheRecords*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBitsPeerCacheRecords*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBitsPeer
+  def query_interface(this : IBitsPeer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBitsPeer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBitsPeer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_peer_name(this : IBitsPeer*, pname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_peer_name.call(this, pname)
+  end
+  def is_authenticated(this : IBitsPeer*, pauth : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_authenticated.call(this, pauth)
+  end
+  def is_available(this : IBitsPeer*, ponline : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_available.call(this, ponline)
+  end
+end
+struct LibWin32::IEnumBitsPeers
+  def query_interface(this : IEnumBitsPeers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBitsPeers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBitsPeers*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBitsPeers*, celt : UInt32, rgelt : IBitsPeer*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBitsPeers*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBitsPeers*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBitsPeers*, ppenum : IEnumBitsPeers*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBitsPeers*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBitsPeerCacheAdministration
+  def query_interface(this : IBitsPeerCacheAdministration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBitsPeerCacheAdministration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBitsPeerCacheAdministration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_maximum_cache_size(this : IBitsPeerCacheAdministration*, pbytes : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_cache_size.call(this, pbytes)
+  end
+  def set_maximum_cache_size(this : IBitsPeerCacheAdministration*, bytes : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_cache_size.call(this, bytes)
+  end
+  def get_maximum_content_age(this : IBitsPeerCacheAdministration*, pseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_content_age.call(this, pseconds)
+  end
+  def set_maximum_content_age(this : IBitsPeerCacheAdministration*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_content_age.call(this, seconds)
+  end
+  def get_configuration_flags(this : IBitsPeerCacheAdministration*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_configuration_flags.call(this, pflags)
+  end
+  def set_configuration_flags(this : IBitsPeerCacheAdministration*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_configuration_flags.call(this, flags)
+  end
+  def enum_records(this : IBitsPeerCacheAdministration*, ppenum : IEnumBitsPeerCacheRecords*) : HRESULT
+    @lpVtbl.value.enum_records.call(this, ppenum)
+  end
+  def get_record(this : IBitsPeerCacheAdministration*, id : Guid*, pprecord : IBitsPeerCacheRecord*) : HRESULT
+    @lpVtbl.value.get_record.call(this, id, pprecord)
+  end
+  def clear_records(this : IBitsPeerCacheAdministration*) : HRESULT
+    @lpVtbl.value.clear_records.call(this)
+  end
+  def delete_record(this : IBitsPeerCacheAdministration*, id : Guid*) : HRESULT
+    @lpVtbl.value.delete_record.call(this, id)
+  end
+  def delete_url(this : IBitsPeerCacheAdministration*, url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_url.call(this, url)
+  end
+  def enum_peers(this : IBitsPeerCacheAdministration*, ppenum : IEnumBitsPeers*) : HRESULT
+    @lpVtbl.value.enum_peers.call(this, ppenum)
+  end
+  def clear_peers(this : IBitsPeerCacheAdministration*) : HRESULT
+    @lpVtbl.value.clear_peers.call(this)
+  end
+  def discover_peers(this : IBitsPeerCacheAdministration*) : HRESULT
+    @lpVtbl.value.discover_peers.call(this)
+  end
+end
+struct LibWin32::IBackgroundCopyJob4
+  def query_interface(this : IBackgroundCopyJob4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_file_set(this : IBackgroundCopyJob4*, cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.call(this, cfilecount, pfileset)
+  end
+  def add_file(this : IBackgroundCopyJob4*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.call(this, remoteurl, localname)
+  end
+  def enum_files(this : IBackgroundCopyJob4*, penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.call(this, penum)
+  end
+  def suspend(this : IBackgroundCopyJob4*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
+  end
+  def resume(this : IBackgroundCopyJob4*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def cancel(this : IBackgroundCopyJob4*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def complete(this : IBackgroundCopyJob4*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def get_id(this : IBackgroundCopyJob4*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_type(this : IBackgroundCopyJob4*, pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyJob4*, pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_times(this : IBackgroundCopyJob4*, pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.call(this, pval)
+  end
+  def get_state(this : IBackgroundCopyJob4*, pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pval)
+  end
+  def get_error(this : IBackgroundCopyJob4*, pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def get_owner(this : IBackgroundCopyJob4*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pval)
+  end
+  def set_display_name(this : IBackgroundCopyJob4*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, val)
+  end
+  def get_display_name(this : IBackgroundCopyJob4*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pval)
+  end
+  def set_description(this : IBackgroundCopyJob4*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, val)
+  end
+  def get_description(this : IBackgroundCopyJob4*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def set_priority(this : IBackgroundCopyJob4*, val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.call(this, val)
+  end
+  def get_priority(this : IBackgroundCopyJob4*, pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pval)
+  end
+  def set_notify_flags(this : IBackgroundCopyJob4*, val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.call(this, val)
+  end
+  def get_notify_flags(this : IBackgroundCopyJob4*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.call(this, pval)
+  end
+  def set_notify_interface(this : IBackgroundCopyJob4*, val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.call(this, val)
+  end
+  def get_notify_interface(this : IBackgroundCopyJob4*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.call(this, pval)
+  end
+  def set_minimum_retry_delay(this : IBackgroundCopyJob4*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.call(this, seconds)
+  end
+  def get_minimum_retry_delay(this : IBackgroundCopyJob4*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.call(this, seconds)
+  end
+  def set_no_progress_timeout(this : IBackgroundCopyJob4*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.call(this, seconds)
+  end
+  def get_no_progress_timeout(this : IBackgroundCopyJob4*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.call(this, seconds)
+  end
+  def get_error_count(this : IBackgroundCopyJob4*, errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, errors)
+  end
+  def set_proxy_settings(this : IBackgroundCopyJob4*, proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(this : IBackgroundCopyJob4*, pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership(this : IBackgroundCopyJob4*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this)
+  end
+  def set_notify_cmd_line(this : IBackgroundCopyJob4*, program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.call(this, program, parameters)
+  end
+  def get_notify_cmd_line(this : IBackgroundCopyJob4*, pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.call(this, pprogram, pparameters)
+  end
+  def get_reply_progress(this : IBackgroundCopyJob4*, pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.call(this, pprogress)
+  end
+  def get_reply_data(this : IBackgroundCopyJob4*, ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.call(this, ppbuffer, plength)
+  end
+  def set_reply_file_name(this : IBackgroundCopyJob4*, replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.call(this, replyfilename)
+  end
+  def get_reply_file_name(this : IBackgroundCopyJob4*, preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.call(this, preplyfilename)
+  end
+  def set_credentials(this : IBackgroundCopyJob4*, credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, credentials)
+  end
+  def remove_credentials(this : IBackgroundCopyJob4*, target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.call(this, target, scheme)
+  end
+  def replace_remote_prefix(this : IBackgroundCopyJob4*, oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.call(this, oldprefix, newprefix)
+  end
+  def add_file_with_ranges(this : IBackgroundCopyJob4*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.call(this, remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(this : IBackgroundCopyJob4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.call(this, flags)
+  end
+  def get_file_acl_flags(this : IBackgroundCopyJob4*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.call(this, flags)
+  end
+  def set_peer_caching_flags(this : IBackgroundCopyJob4*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_peer_caching_flags.call(this, flags)
+  end
+  def get_peer_caching_flags(this : IBackgroundCopyJob4*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_peer_caching_flags.call(this, pflags)
+  end
+  def get_owner_integrity_level(this : IBackgroundCopyJob4*, plevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_integrity_level.call(this, plevel)
+  end
+  def get_owner_elevation_state(this : IBackgroundCopyJob4*, pelevated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_owner_elevation_state.call(this, pelevated)
+  end
+  def set_maximum_download_time(this : IBackgroundCopyJob4*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_download_time.call(this, timeout)
+  end
+  def get_maximum_download_time(this : IBackgroundCopyJob4*, ptimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_download_time.call(this, ptimeout)
+  end
+end
+struct LibWin32::IBackgroundCopyFile3
+  def query_interface(this : IBackgroundCopyFile3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile3*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile3*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile3*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_file_ranges(this : IBackgroundCopyFile3*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, rangecount, ranges)
+  end
+  def set_remote_name(this : IBackgroundCopyFile3*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.call(this, val)
+  end
+  def get_temporary_name(this : IBackgroundCopyFile3*, pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.call(this, pfilename)
+  end
+  def set_validation_state(this : IBackgroundCopyFile3*, state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.call(this, state)
+  end
+  def get_validation_state(this : IBackgroundCopyFile3*, pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.call(this, pstate)
+  end
+  def is_downloaded_from_peer(this : IBackgroundCopyFile3*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.call(this, pval)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback2
+  def query_interface(this : IBackgroundCopyCallback2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyCallback2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyCallback2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def job_transferred(this : IBackgroundCopyCallback2*, pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.call(this, pjob)
+  end
+  def job_error(this : IBackgroundCopyCallback2*, pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.call(this, pjob, perror)
+  end
+  def job_modification(this : IBackgroundCopyCallback2*, pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.call(this, pjob, dwreserved)
+  end
+  def file_transferred(this : IBackgroundCopyCallback2*, pjob : IBackgroundCopyJob, pfile : IBackgroundCopyFile) : HRESULT
+    @lpVtbl.value.file_transferred.call(this, pjob, pfile)
+  end
+end
+struct LibWin32::IBitsTokenOptions
+  def query_interface(this : IBitsTokenOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBitsTokenOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBitsTokenOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_helper_token_flags(this : IBitsTokenOptions*, usageflags : BG_TOKEN) : HRESULT
+    @lpVtbl.value.set_helper_token_flags.call(this, usageflags)
+  end
+  def get_helper_token_flags(this : IBitsTokenOptions*, pflags : BG_TOKEN*) : HRESULT
+    @lpVtbl.value.get_helper_token_flags.call(this, pflags)
+  end
+  def set_helper_token(this : IBitsTokenOptions*) : HRESULT
+    @lpVtbl.value.set_helper_token.call(this)
+  end
+  def clear_helper_token(this : IBitsTokenOptions*) : HRESULT
+    @lpVtbl.value.clear_helper_token.call(this)
+  end
+  def get_helper_token_sid(this : IBitsTokenOptions*, psid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_helper_token_sid.call(this, psid)
+  end
+end
+struct LibWin32::IBackgroundCopyFile4
+  def query_interface(this : IBackgroundCopyFile4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile4*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile4*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile4*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_file_ranges(this : IBackgroundCopyFile4*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, rangecount, ranges)
+  end
+  def set_remote_name(this : IBackgroundCopyFile4*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.call(this, val)
+  end
+  def get_temporary_name(this : IBackgroundCopyFile4*, pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.call(this, pfilename)
+  end
+  def set_validation_state(this : IBackgroundCopyFile4*, state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.call(this, state)
+  end
+  def get_validation_state(this : IBackgroundCopyFile4*, pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.call(this, pstate)
+  end
+  def is_downloaded_from_peer(this : IBackgroundCopyFile4*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.call(this, pval)
+  end
+  def get_peer_download_stats(this : IBackgroundCopyFile4*, pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.call(this, pfromorigin, pfrompeers)
+  end
+end
+struct LibWin32::IBackgroundCopyJob5
+  def query_interface(this : IBackgroundCopyJob5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_file_set(this : IBackgroundCopyJob5*, cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.call(this, cfilecount, pfileset)
+  end
+  def add_file(this : IBackgroundCopyJob5*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.call(this, remoteurl, localname)
+  end
+  def enum_files(this : IBackgroundCopyJob5*, penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.call(this, penum)
+  end
+  def suspend(this : IBackgroundCopyJob5*) : HRESULT
+    @lpVtbl.value.suspend.call(this)
+  end
+  def resume(this : IBackgroundCopyJob5*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def cancel(this : IBackgroundCopyJob5*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def complete(this : IBackgroundCopyJob5*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def get_id(this : IBackgroundCopyJob5*, pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pval)
+  end
+  def get_type(this : IBackgroundCopyJob5*, pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyJob5*, pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_times(this : IBackgroundCopyJob5*, pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.call(this, pval)
+  end
+  def get_state(this : IBackgroundCopyJob5*, pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pval)
+  end
+  def get_error(this : IBackgroundCopyJob5*, pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.call(this, pperror)
+  end
+  def get_owner(this : IBackgroundCopyJob5*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.call(this, pval)
+  end
+  def set_display_name(this : IBackgroundCopyJob5*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.call(this, val)
+  end
+  def get_display_name(this : IBackgroundCopyJob5*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.call(this, pval)
+  end
+  def set_description(this : IBackgroundCopyJob5*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, val)
+  end
+  def get_description(this : IBackgroundCopyJob5*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.call(this, pval)
+  end
+  def set_priority(this : IBackgroundCopyJob5*, val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.call(this, val)
+  end
+  def get_priority(this : IBackgroundCopyJob5*, pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, pval)
+  end
+  def set_notify_flags(this : IBackgroundCopyJob5*, val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.call(this, val)
+  end
+  def get_notify_flags(this : IBackgroundCopyJob5*, pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.call(this, pval)
+  end
+  def set_notify_interface(this : IBackgroundCopyJob5*, val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.call(this, val)
+  end
+  def get_notify_interface(this : IBackgroundCopyJob5*, pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.call(this, pval)
+  end
+  def set_minimum_retry_delay(this : IBackgroundCopyJob5*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.call(this, seconds)
+  end
+  def get_minimum_retry_delay(this : IBackgroundCopyJob5*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.call(this, seconds)
+  end
+  def set_no_progress_timeout(this : IBackgroundCopyJob5*, seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.call(this, seconds)
+  end
+  def get_no_progress_timeout(this : IBackgroundCopyJob5*, seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.call(this, seconds)
+  end
+  def get_error_count(this : IBackgroundCopyJob5*, errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.call(this, errors)
+  end
+  def set_proxy_settings(this : IBackgroundCopyJob5*, proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.call(this, proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(this : IBackgroundCopyJob5*, pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.call(this, pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership(this : IBackgroundCopyJob5*) : HRESULT
+    @lpVtbl.value.take_ownership.call(this)
+  end
+  def set_notify_cmd_line(this : IBackgroundCopyJob5*, program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.call(this, program, parameters)
+  end
+  def get_notify_cmd_line(this : IBackgroundCopyJob5*, pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.call(this, pprogram, pparameters)
+  end
+  def get_reply_progress(this : IBackgroundCopyJob5*, pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.call(this, pprogress)
+  end
+  def get_reply_data(this : IBackgroundCopyJob5*, ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.call(this, ppbuffer, plength)
+  end
+  def set_reply_file_name(this : IBackgroundCopyJob5*, replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.call(this, replyfilename)
+  end
+  def get_reply_file_name(this : IBackgroundCopyJob5*, preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.call(this, preplyfilename)
+  end
+  def set_credentials(this : IBackgroundCopyJob5*, credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, credentials)
+  end
+  def remove_credentials(this : IBackgroundCopyJob5*, target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.call(this, target, scheme)
+  end
+  def replace_remote_prefix(this : IBackgroundCopyJob5*, oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.call(this, oldprefix, newprefix)
+  end
+  def add_file_with_ranges(this : IBackgroundCopyJob5*, remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.call(this, remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(this : IBackgroundCopyJob5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.call(this, flags)
+  end
+  def get_file_acl_flags(this : IBackgroundCopyJob5*, flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.call(this, flags)
+  end
+  def set_peer_caching_flags(this : IBackgroundCopyJob5*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_peer_caching_flags.call(this, flags)
+  end
+  def get_peer_caching_flags(this : IBackgroundCopyJob5*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_peer_caching_flags.call(this, pflags)
+  end
+  def get_owner_integrity_level(this : IBackgroundCopyJob5*, plevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_integrity_level.call(this, plevel)
+  end
+  def get_owner_elevation_state(this : IBackgroundCopyJob5*, pelevated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_owner_elevation_state.call(this, pelevated)
+  end
+  def set_maximum_download_time(this : IBackgroundCopyJob5*, timeout : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_download_time.call(this, timeout)
+  end
+  def get_maximum_download_time(this : IBackgroundCopyJob5*, ptimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_download_time.call(this, ptimeout)
+  end
+  def set_property(this : IBackgroundCopyJob5*, propertyid : BITS_JOB_PROPERTY_ID, propertyvalue : BITS_JOB_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, propertyvalue)
+  end
+  def get_property(this : IBackgroundCopyJob5*, propertyid : BITS_JOB_PROPERTY_ID, propertyvalue : BITS_JOB_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, propertyvalue)
+  end
+end
+struct LibWin32::IBackgroundCopyFile5
+  def query_interface(this : IBackgroundCopyFile5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile5*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile5*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile5*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_file_ranges(this : IBackgroundCopyFile5*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, rangecount, ranges)
+  end
+  def set_remote_name(this : IBackgroundCopyFile5*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.call(this, val)
+  end
+  def get_temporary_name(this : IBackgroundCopyFile5*, pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.call(this, pfilename)
+  end
+  def set_validation_state(this : IBackgroundCopyFile5*, state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.call(this, state)
+  end
+  def get_validation_state(this : IBackgroundCopyFile5*, pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.call(this, pstate)
+  end
+  def is_downloaded_from_peer(this : IBackgroundCopyFile5*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.call(this, pval)
+  end
+  def get_peer_download_stats(this : IBackgroundCopyFile5*, pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.call(this, pfromorigin, pfrompeers)
+  end
+  def set_property(this : IBackgroundCopyFile5*, propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, propertyvalue)
+  end
+  def get_property(this : IBackgroundCopyFile5*, propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, propertyvalue)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback3
+  def query_interface(this : IBackgroundCopyCallback3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyCallback3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyCallback3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def job_transferred(this : IBackgroundCopyCallback3*, pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.call(this, pjob)
+  end
+  def job_error(this : IBackgroundCopyCallback3*, pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.call(this, pjob, perror)
+  end
+  def job_modification(this : IBackgroundCopyCallback3*, pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.call(this, pjob, dwreserved)
+  end
+  def file_transferred(this : IBackgroundCopyCallback3*, pjob : IBackgroundCopyJob, pfile : IBackgroundCopyFile) : HRESULT
+    @lpVtbl.value.file_transferred.call(this, pjob, pfile)
+  end
+  def file_ranges_transferred(this : IBackgroundCopyCallback3*, job : IBackgroundCopyJob, file : IBackgroundCopyFile, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.file_ranges_transferred.call(this, job, file, rangecount, ranges)
+  end
+end
+struct LibWin32::IBackgroundCopyFile6
+  def query_interface(this : IBackgroundCopyFile6*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyFile6*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyFile6*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_remote_name(this : IBackgroundCopyFile6*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.call(this, pval)
+  end
+  def get_local_name(this : IBackgroundCopyFile6*, pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.call(this, pval)
+  end
+  def get_progress(this : IBackgroundCopyFile6*, pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, pval)
+  end
+  def get_file_ranges(this : IBackgroundCopyFile6*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.call(this, rangecount, ranges)
+  end
+  def set_remote_name(this : IBackgroundCopyFile6*, val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.call(this, val)
+  end
+  def get_temporary_name(this : IBackgroundCopyFile6*, pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.call(this, pfilename)
+  end
+  def set_validation_state(this : IBackgroundCopyFile6*, state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.call(this, state)
+  end
+  def get_validation_state(this : IBackgroundCopyFile6*, pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.call(this, pstate)
+  end
+  def is_downloaded_from_peer(this : IBackgroundCopyFile6*, pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.call(this, pval)
+  end
+  def get_peer_download_stats(this : IBackgroundCopyFile6*, pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.call(this, pfromorigin, pfrompeers)
+  end
+  def set_property(this : IBackgroundCopyFile6*, propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.call(this, propertyid, propertyvalue)
+  end
+  def get_property(this : IBackgroundCopyFile6*, propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.call(this, propertyid, propertyvalue)
+  end
+  def update_download_position(this : IBackgroundCopyFile6*, offset : UInt64) : HRESULT
+    @lpVtbl.value.update_download_position.call(this, offset)
+  end
+  def request_file_ranges(this : IBackgroundCopyFile6*, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.request_file_ranges.call(this, rangecount, ranges)
+  end
+  def get_filled_file_ranges(this : IBackgroundCopyFile6*, rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_filled_file_ranges.call(this, rangecount, ranges)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions2
+  def query_interface(this : IBackgroundCopyJobHttpOptions2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJobHttpOptions2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJobHttpOptions2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_client_certificate_by_id(this : IBackgroundCopyJobHttpOptions2*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.call(this, storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(this : IBackgroundCopyJobHttpOptions2*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.call(this, storelocation, storename, subjectname)
+  end
+  def remove_client_certificate(this : IBackgroundCopyJobHttpOptions2*) : HRESULT
+    @lpVtbl.value.remove_client_certificate.call(this)
+  end
+  def get_client_certificate(this : IBackgroundCopyJobHttpOptions2*, pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.call(this, pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(this : IBackgroundCopyJobHttpOptions2*, requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.call(this, requestheaders)
+  end
+  def get_custom_headers(this : IBackgroundCopyJobHttpOptions2*, prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.call(this, prequestheaders)
+  end
+  def set_security_flags(this : IBackgroundCopyJobHttpOptions2*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.call(this, flags)
+  end
+  def get_security_flags(this : IBackgroundCopyJobHttpOptions2*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.call(this, pflags)
+  end
+  def set_http_method(this : IBackgroundCopyJobHttpOptions2*, method : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_http_method.call(this, method)
+  end
+  def get_http_method(this : IBackgroundCopyJobHttpOptions2*, method : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_http_method.call(this, method)
+  end
+end
+struct LibWin32::IBackgroundCopyServerCertificateValidationCallback
+  def query_interface(this : IBackgroundCopyServerCertificateValidationCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyServerCertificateValidationCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyServerCertificateValidationCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def validate_server_certificate(this : IBackgroundCopyServerCertificateValidationCallback*, job : IBackgroundCopyJob, file : IBackgroundCopyFile, certlength : UInt32, certdata : UInt8*, certencodingtype : UInt32, certstorelength : UInt32, certstoredata : UInt8*) : HRESULT
+    @lpVtbl.value.validate_server_certificate.call(this, job, file, certlength, certdata, certencodingtype, certstorelength, certstoredata)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions3
+  def query_interface(this : IBackgroundCopyJobHttpOptions3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJobHttpOptions3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJobHttpOptions3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_client_certificate_by_id(this : IBackgroundCopyJobHttpOptions3*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.call(this, storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(this : IBackgroundCopyJobHttpOptions3*, storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.call(this, storelocation, storename, subjectname)
+  end
+  def remove_client_certificate(this : IBackgroundCopyJobHttpOptions3*) : HRESULT
+    @lpVtbl.value.remove_client_certificate.call(this)
+  end
+  def get_client_certificate(this : IBackgroundCopyJobHttpOptions3*, pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.call(this, pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(this : IBackgroundCopyJobHttpOptions3*, requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.call(this, requestheaders)
+  end
+  def get_custom_headers(this : IBackgroundCopyJobHttpOptions3*, prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.call(this, prequestheaders)
+  end
+  def set_security_flags(this : IBackgroundCopyJobHttpOptions3*, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.call(this, flags)
+  end
+  def get_security_flags(this : IBackgroundCopyJobHttpOptions3*, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.call(this, pflags)
+  end
+  def set_http_method(this : IBackgroundCopyJobHttpOptions3*, method : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_http_method.call(this, method)
+  end
+  def get_http_method(this : IBackgroundCopyJobHttpOptions3*, method : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_http_method.call(this, method)
+  end
+  def set_server_certificate_validation_interface(this : IBackgroundCopyJobHttpOptions3*, certvalidationcallback : IUnknown) : HRESULT
+    @lpVtbl.value.set_server_certificate_validation_interface.call(this, certvalidationcallback)
+  end
+  def make_custom_headers_write_only(this : IBackgroundCopyJobHttpOptions3*) : HRESULT
+    @lpVtbl.value.make_custom_headers_write_only.call(this)
+  end
+end
+struct LibWin32::IBITSExtensionSetup
+  def query_interface(this : IBITSExtensionSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBITSExtensionSetup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBITSExtensionSetup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IBITSExtensionSetup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IBITSExtensionSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IBITSExtensionSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IBITSExtensionSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enable_bits_uploads(this : IBITSExtensionSetup*) : HRESULT
+    @lpVtbl.value.enable_bits_uploads.call(this)
+  end
+  def disable_bits_uploads(this : IBITSExtensionSetup*) : HRESULT
+    @lpVtbl.value.disable_bits_uploads.call(this)
+  end
+  def get_cleanup_task_name(this : IBITSExtensionSetup*, ptaskname : UInt8**) : HRESULT
+    @lpVtbl.value.get_cleanup_task_name.call(this, ptaskname)
+  end
+  def get_cleanup_task(this : IBITSExtensionSetup*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cleanup_task.call(this, riid, ppunk)
+  end
+end
+struct LibWin32::IBITSExtensionSetupFactory
+  def query_interface(this : IBITSExtensionSetupFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBITSExtensionSetupFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBITSExtensionSetupFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IBITSExtensionSetupFactory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IBITSExtensionSetupFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IBITSExtensionSetupFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IBITSExtensionSetupFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object(this : IBITSExtensionSetupFactory*, path : UInt8*, ppextensionsetup : IBITSExtensionSetup*) : HRESULT
+    @lpVtbl.value.get_object.call(this, path, ppextensionsetup)
+  end
+end
+struct LibWin32::IBackgroundCopyJob1
+  def query_interface(this : IBackgroundCopyJob1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyJob1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyJob1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cancel_job(this : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.cancel_job.call(this)
+  end
+  def get_progress(this : IBackgroundCopyJob1*, dwflags : UInt32, pdwprogress : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, dwflags, pdwprogress)
+  end
+  def get_status(this : IBackgroundCopyJob1*, pdwstatus : UInt32*, pdwwin32result : UInt32*, pdwtransportresult : UInt32*, pdwnumofretries : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus, pdwwin32result, pdwtransportresult, pdwnumofretries)
+  end
+  def add_files(this : IBackgroundCopyJob1*, cfilecount : UInt32, ppfileset : FILESETINFO**) : HRESULT
+    @lpVtbl.value.add_files.call(this, cfilecount, ppfileset)
+  end
+  def get_file(this : IBackgroundCopyJob1*, cfileindex : UInt32, pfileinfo : FILESETINFO*) : HRESULT
+    @lpVtbl.value.get_file.call(this, cfileindex, pfileinfo)
+  end
+  def get_file_count(this : IBackgroundCopyJob1*, pdwfilecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_count.call(this, pdwfilecount)
+  end
+  def switch_to_foreground(this : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.switch_to_foreground.call(this)
+  end
+  def get_job_id(this : IBackgroundCopyJob1*, pguidjobid : Guid*) : HRESULT
+    @lpVtbl.value.get_job_id.call(this, pguidjobid)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyJobs1
+  def query_interface(this : IEnumBackgroundCopyJobs1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBackgroundCopyJobs1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBackgroundCopyJobs1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBackgroundCopyJobs1*, celt : UInt32, rgelt : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBackgroundCopyJobs1*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBackgroundCopyJobs1*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBackgroundCopyJobs1*, ppenum : IEnumBackgroundCopyJobs1*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBackgroundCopyJobs1*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyGroup
+  def query_interface(this : IBackgroundCopyGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_prop(this : IBackgroundCopyGroup*, propid : GROUPPROP, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_prop.call(this, propid, pvarval)
+  end
+  def set_prop(this : IBackgroundCopyGroup*, propid : GROUPPROP, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_prop.call(this, propid, pvarval)
+  end
+  def get_progress(this : IBackgroundCopyGroup*, dwflags : UInt32, pdwprogress : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, dwflags, pdwprogress)
+  end
+  def get_status(this : IBackgroundCopyGroup*, pdwstatus : UInt32*, pdwjobindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdwstatus, pdwjobindex)
+  end
+  def get_job(this : IBackgroundCopyGroup*, jobid : Guid, ppjob : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.get_job.call(this, jobid, ppjob)
+  end
+  def suspend_group(this : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.suspend_group.call(this)
+  end
+  def resume_group(this : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.resume_group.call(this)
+  end
+  def cancel_group(this : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.cancel_group.call(this)
+  end
+  def get_size(this : IBackgroundCopyGroup*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pdwsize)
+  end
+  def get_group_id(this : IBackgroundCopyGroup*, pguidgroupid : Guid*) : HRESULT
+    @lpVtbl.value.get_group_id.call(this, pguidgroupid)
+  end
+  def create_job(this : IBackgroundCopyGroup*, guidjobid : Guid, ppjob : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.create_job.call(this, guidjobid, ppjob)
+  end
+  def enum_jobs(this : IBackgroundCopyGroup*, dwflags : UInt32, ppenumjobs : IEnumBackgroundCopyJobs1*) : HRESULT
+    @lpVtbl.value.enum_jobs.call(this, dwflags, ppenumjobs)
+  end
+  def switch_to_foreground(this : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.switch_to_foreground.call(this)
+  end
+  def query_new_job_interface(this : IBackgroundCopyGroup*, iid : Guid*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.query_new_job_interface.call(this, iid, punk)
+  end
+  def set_notification_pointer(this : IBackgroundCopyGroup*, iid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_notification_pointer.call(this, iid, punk)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyGroups
+  def query_interface(this : IEnumBackgroundCopyGroups*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumBackgroundCopyGroups*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumBackgroundCopyGroups*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumBackgroundCopyGroups*, celt : UInt32, rgelt : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumBackgroundCopyGroups*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumBackgroundCopyGroups*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumBackgroundCopyGroups*, ppenum : IEnumBackgroundCopyGroups*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+  def get_count(this : IEnumBackgroundCopyGroups*, pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback1
+  def query_interface(this : IBackgroundCopyCallback1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyCallback1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyCallback1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status(this : IBackgroundCopyCallback1*, pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwstatus : UInt32, dwnumofretries : UInt32, dwwin32result : UInt32, dwtransportresult : UInt32) : HRESULT
+    @lpVtbl.value.on_status.call(this, pgroup, pjob, dwfileindex, dwstatus, dwnumofretries, dwwin32result, dwtransportresult)
+  end
+  def on_progress(this : IBackgroundCopyCallback1*, progresstype : UInt32, pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwprogressvalue : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.call(this, progresstype, pgroup, pjob, dwfileindex, dwprogressvalue)
+  end
+  def on_progress_ex(this : IBackgroundCopyCallback1*, progresstype : UInt32, pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwprogressvalue : UInt32, dwbytearraysize : UInt32, pbyte : UInt8*) : HRESULT
+    @lpVtbl.value.on_progress_ex.call(this, progresstype, pgroup, pjob, dwfileindex, dwprogressvalue, dwbytearraysize, pbyte)
+  end
+end
+struct LibWin32::IBackgroundCopyQMgr
+  def query_interface(this : IBackgroundCopyQMgr*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBackgroundCopyQMgr*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBackgroundCopyQMgr*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_group(this : IBackgroundCopyQMgr*, guidgroupid : Guid, ppgroup : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.create_group.call(this, guidgroupid, ppgroup)
+  end
+  def get_group(this : IBackgroundCopyQMgr*, groupid : Guid, ppgroup : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.get_group.call(this, groupid, ppgroup)
+  end
+  def enum_groups(this : IBackgroundCopyQMgr*, dwflags : UInt32, ppenumgroups : IEnumBackgroundCopyGroups*) : HRESULT
+    @lpVtbl.value.enum_groups.call(this, dwflags, ppenumgroups)
+  end
+end

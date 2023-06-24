@@ -694,7 +694,7 @@ lib LibWin32
   fun HSTRING_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : HSTRING*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HSTRING* [In]
-  fun HSTRING_UserFree(param0 : UInt32*, param1 : HSTRING*)
+  fun HSTRING_UserFree(param0 : UInt32*, param1 : HSTRING*) : Void
 
   # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : HSTRING* [In]
   fun HSTRING_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : HSTRING*) : UInt32
@@ -706,7 +706,7 @@ lib LibWin32
   fun HSTRING_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : HSTRING*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HSTRING* [In]
-  fun HSTRING_UserFree64(param0 : UInt32*, param1 : HSTRING*)
+  fun HSTRING_UserFree64(param0 : UInt32*, param1 : HSTRING*) : Void
 
   # Params # sourcestring : Char* [In],length : UInt32 [In],string : HSTRING* [In]
   fun WindowsCreateString(sourcestring : Char*, length : UInt32, string : HSTRING*) : HRESULT
@@ -775,7 +775,7 @@ lib LibWin32
   fun RoInitialize(inittype : RO_INIT_TYPE) : HRESULT
 
   # Params # 
-  fun RoUninitialize
+  fun RoUninitialize : Void
 
   # Params # activatableclassid : HSTRING [In],instance : IInspectable* [In]
   fun RoActivateInstance(activatableclassid : HSTRING, instance : IInspectable*) : HRESULT
@@ -784,7 +784,7 @@ lib LibWin32
   fun RoRegisterActivationFactories(activatableclassids : HSTRING*, activationfactorycallbacks : LibC::IntPtrT*, count : UInt32, cookie : LibC::IntPtrT*) : HRESULT
 
   # Params # cookie : LibC::IntPtrT [In]
-  fun RoRevokeActivationFactories(cookie : LibC::IntPtrT)
+  fun RoRevokeActivationFactories(cookie : LibC::IntPtrT) : Void
 
   # Params # activatableclassid : HSTRING [In],iid : Guid* [In],factory : Void** [In]
   fun RoGetActivationFactory(activatableclassid : HSTRING, iid : Guid*, factory : Void**) : HRESULT
@@ -832,13 +832,13 @@ lib LibWin32
   fun RoCaptureErrorContext(hr : HRESULT) : HRESULT
 
   # Params # hrerror : HRESULT [In]
-  fun RoFailFastWithErrorContext(hrerror : HRESULT)
+  fun RoFailFastWithErrorContext(hrerror : HRESULT) : Void
 
   # Params # error : HRESULT [In],message : HSTRING [In],languageexception : IUnknown [In]
   fun RoOriginateLanguageException(error : HRESULT, message : HSTRING, languageexception : IUnknown) : LibC::BOOL
 
   # Params # 
-  fun RoClearError
+  fun RoClearError : Void
 
   # Params # prestrictederrorinfo : IRestrictedErrorInfo [In]
   fun RoReportUnhandledError(prestrictederrorinfo : IRestrictedErrorInfo) : HRESULT
@@ -865,7 +865,7 @@ lib LibWin32
   fun RoGetParameterizedTypeInstanceIID(nameelementcount : UInt32, nameelements : LibC::LPWSTR*, metadatalocator : IRoMetaDataLocator, iid : Guid*, pextra : ROPARAMIIDHANDLE*) : HRESULT
 
   # Params # extra : ROPARAMIIDHANDLE [In]
-  fun RoFreeParameterizedTypeExtra(extra : ROPARAMIIDHANDLE)
+  fun RoFreeParameterizedTypeExtra(extra : ROPARAMIIDHANDLE) : Void
 
   # Params # extra : ROPARAMIIDHANDLE [In]
   fun RoParameterizedTypeExtraGetTypeSignature(extra : ROPARAMIIDHANDLE) : PSTR
@@ -881,4 +881,729 @@ lib LibWin32
 
   # Params # randomaccessstream : IUnknown [In],riid : Guid* [In],ppv : Void** [In]
   fun CreateStreamOverRandomAccessStream(randomaccessstream : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
+end
+struct LibWin32::IAgileReference
+  def query_interface(this : IAgileReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAgileReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAgileReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resolve(this : IAgileReference*, riid : Guid*, ppvobjectreference : Void**) : HRESULT
+    @lpVtbl.value.resolve.call(this, riid, ppvobjectreference)
+  end
+end
+struct LibWin32::IApartmentShutdown
+  def query_interface(this : IApartmentShutdown*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IApartmentShutdown*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IApartmentShutdown*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_uninitialize(this : IApartmentShutdown*, ui64apartmentidentifier : UInt64) : Void
+    @lpVtbl.value.on_uninitialize.call(this, ui64apartmentidentifier)
+  end
+end
+struct LibWin32::ISpatialInteractionManagerInterop
+  def query_interface(this : ISpatialInteractionManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpatialInteractionManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpatialInteractionManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ISpatialInteractionManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ISpatialInteractionManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ISpatialInteractionManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : ISpatialInteractionManagerInterop*, window : LibC::HANDLE, riid : Guid*, spatialinteractionmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, window, riid, spatialinteractionmanager)
+  end
+end
+struct LibWin32::IHolographicSpaceInterop
+  def query_interface(this : IHolographicSpaceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHolographicSpaceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHolographicSpaceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IHolographicSpaceInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IHolographicSpaceInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IHolographicSpaceInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_for_window(this : IHolographicSpaceInterop*, window : LibC::HANDLE, riid : Guid*, holographicspace : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.call(this, window, riid, holographicspace)
+  end
+end
+struct LibWin32::IInspectable
+  def query_interface(this : IInspectable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInspectable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInspectable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IInspectable*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IInspectable*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IInspectable*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+end
+struct LibWin32::IAccountsSettingsPaneInterop
+  def query_interface(this : IAccountsSettingsPaneInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAccountsSettingsPaneInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAccountsSettingsPaneInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IAccountsSettingsPaneInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IAccountsSettingsPaneInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IAccountsSettingsPaneInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IAccountsSettingsPaneInterop*, appwindow : LibC::HANDLE, riid : Guid*, accountssettingspane : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, accountssettingspane)
+  end
+  def show_manage_accounts_for_window_async(this : IAccountsSettingsPaneInterop*, appwindow : LibC::HANDLE, riid : Guid*, asyncaction : Void**) : HRESULT
+    @lpVtbl.value.show_manage_accounts_for_window_async.call(this, appwindow, riid, asyncaction)
+  end
+  def show_add_account_for_window_async(this : IAccountsSettingsPaneInterop*, appwindow : LibC::HANDLE, riid : Guid*, asyncaction : Void**) : HRESULT
+    @lpVtbl.value.show_add_account_for_window_async.call(this, appwindow, riid, asyncaction)
+  end
+end
+struct LibWin32::IAppServiceConnectionExtendedExecution
+  def query_interface(this : IAppServiceConnectionExtendedExecution*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAppServiceConnectionExtendedExecution*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAppServiceConnectionExtendedExecution*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open_for_extended_execution_async(this : IAppServiceConnectionExtendedExecution*, riid : Guid*, operation : Void**) : HRESULT
+    @lpVtbl.value.open_for_extended_execution_async.call(this, riid, operation)
+  end
+end
+struct LibWin32::ICorrelationVectorSource
+  def query_interface(this : ICorrelationVectorSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICorrelationVectorSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICorrelationVectorSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_correlation_vector(this : ICorrelationVectorSource*, cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_correlation_vector.call(this, cv)
+  end
+end
+struct LibWin32::ICastingEventHandler
+  def query_interface(this : ICastingEventHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICastingEventHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICastingEventHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_state_changed(this : ICastingEventHandler*, newstate : CASTING_CONNECTION_STATE) : HRESULT
+    @lpVtbl.value.on_state_changed.call(this, newstate)
+  end
+  def on_error(this : ICastingEventHandler*, errorstatus : CASTING_CONNECTION_ERROR_STATUS, errormessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_error.call(this, errorstatus, errormessage)
+  end
+end
+struct LibWin32::ICastingController
+  def query_interface(this : ICastingController*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICastingController*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICastingController*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : ICastingController*, castingengine : IUnknown, castingsource : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.call(this, castingengine, castingsource)
+  end
+  def connect(this : ICastingController*) : HRESULT
+    @lpVtbl.value.connect.call(this)
+  end
+  def disconnect(this : ICastingController*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def advise(this : ICastingController*, eventhandler : ICastingEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, eventhandler, cookie)
+  end
+  def un_advise(this : ICastingController*, cookie : UInt32) : HRESULT
+    @lpVtbl.value.un_advise.call(this, cookie)
+  end
+end
+struct LibWin32::ICastingSourceInfo
+  def query_interface(this : ICastingSourceInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICastingSourceInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICastingSourceInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_controller(this : ICastingSourceInfo*, controller : ICastingController*) : HRESULT
+    @lpVtbl.value.get_controller.call(this, controller)
+  end
+  def get_properties(this : ICastingSourceInfo*, props : INamedPropertyStore*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, props)
+  end
+end
+struct LibWin32::IDragDropManagerInterop
+  def query_interface(this : IDragDropManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDragDropManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDragDropManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IDragDropManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IDragDropManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IDragDropManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IDragDropManagerInterop*, hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IInputPaneInterop
+  def query_interface(this : IInputPaneInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInputPaneInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInputPaneInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IInputPaneInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IInputPaneInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IInputPaneInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IInputPaneInterop*, appwindow : LibC::HANDLE, riid : Guid*, inputpane : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, inputpane)
+  end
+end
+struct LibWin32::IPlayToManagerInterop
+  def query_interface(this : IPlayToManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPlayToManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPlayToManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IPlayToManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IPlayToManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IPlayToManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IPlayToManagerInterop*, appwindow : LibC::HANDLE, riid : Guid*, playtomanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, playtomanager)
+  end
+  def show_play_to_ui_for_window(this : IPlayToManagerInterop*, appwindow : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_play_to_ui_for_window.call(this, appwindow)
+  end
+end
+struct LibWin32::ICorrelationVectorInformation
+  def query_interface(this : ICorrelationVectorInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICorrelationVectorInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICorrelationVectorInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ICorrelationVectorInformation*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ICorrelationVectorInformation*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ICorrelationVectorInformation*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_last_correlation_vector_for_thread(this : ICorrelationVectorInformation*, cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_last_correlation_vector_for_thread.call(this, cv)
+  end
+  def get_next_correlation_vector_for_thread(this : ICorrelationVectorInformation*, cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_next_correlation_vector_for_thread.call(this, cv)
+  end
+  def put_next_correlation_vector_for_thread(this : ICorrelationVectorInformation*, cv : HSTRING) : HRESULT
+    @lpVtbl.value.put_next_correlation_vector_for_thread.call(this, cv)
+  end
+end
+struct LibWin32::IUIViewSettingsInterop
+  def query_interface(this : IUIViewSettingsInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUIViewSettingsInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUIViewSettingsInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IUIViewSettingsInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IUIViewSettingsInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IUIViewSettingsInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IUIViewSettingsInterop*, hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IUserActivityInterop
+  def query_interface(this : IUserActivityInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserActivityInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserActivityInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IUserActivityInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IUserActivityInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IUserActivityInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_session_for_window(this : IUserActivityInterop*, window : LibC::HANDLE, iid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.create_session_for_window.call(this, window, iid, value)
+  end
+end
+struct LibWin32::IUserActivitySourceHostInterop
+  def query_interface(this : IUserActivitySourceHostInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserActivitySourceHostInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserActivitySourceHostInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IUserActivitySourceHostInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IUserActivitySourceHostInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IUserActivitySourceHostInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def set_activity_source_host(this : IUserActivitySourceHostInterop*, activitysourcehost : HSTRING) : HRESULT
+    @lpVtbl.value.set_activity_source_host.call(this, activitysourcehost)
+  end
+end
+struct LibWin32::IUserActivityRequestManagerInterop
+  def query_interface(this : IUserActivityRequestManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserActivityRequestManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserActivityRequestManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IUserActivityRequestManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IUserActivityRequestManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IUserActivityRequestManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IUserActivityRequestManagerInterop*, window : LibC::HANDLE, iid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, window, iid, value)
+  end
+end
+struct LibWin32::IUserConsentVerifierInterop
+  def query_interface(this : IUserConsentVerifierInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserConsentVerifierInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserConsentVerifierInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IUserConsentVerifierInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IUserConsentVerifierInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IUserConsentVerifierInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def request_verification_for_window_async(this : IUserConsentVerifierInterop*, appwindow : LibC::HANDLE, message : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_verification_for_window_async.call(this, appwindow, message, riid, asyncoperation)
+  end
+end
+struct LibWin32::IWebAuthenticationCoreManagerInterop
+  def query_interface(this : IWebAuthenticationCoreManagerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebAuthenticationCoreManagerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebAuthenticationCoreManagerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IWebAuthenticationCoreManagerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IWebAuthenticationCoreManagerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IWebAuthenticationCoreManagerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def request_token_for_window_async(this : IWebAuthenticationCoreManagerInterop*, appwindow : LibC::HANDLE, request : IInspectable, riid : Guid*, asyncinfo : Void**) : HRESULT
+    @lpVtbl.value.request_token_for_window_async.call(this, appwindow, request, riid, asyncinfo)
+  end
+  def request_token_with_web_account_for_window_async(this : IWebAuthenticationCoreManagerInterop*, appwindow : LibC::HANDLE, request : IInspectable, webaccount : IInspectable, riid : Guid*, asyncinfo : Void**) : HRESULT
+    @lpVtbl.value.request_token_with_web_account_for_window_async.call(this, appwindow, request, webaccount, riid, asyncinfo)
+  end
+end
+struct LibWin32::IRestrictedErrorInfo
+  def query_interface(this : IRestrictedErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRestrictedErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRestrictedErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_error_details(this : IRestrictedErrorInfo*, description : UInt8**, error : HRESULT*, restricteddescription : UInt8**, capabilitysid : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_details.call(this, description, error, restricteddescription, capabilitysid)
+  end
+  def get_reference(this : IRestrictedErrorInfo*, reference : UInt8**) : HRESULT
+    @lpVtbl.value.get_reference.call(this, reference)
+  end
+end
+struct LibWin32::ILanguageExceptionErrorInfo
+  def query_interface(this : ILanguageExceptionErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILanguageExceptionErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILanguageExceptionErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_exception(this : ILanguageExceptionErrorInfo*, languageexception : IUnknown*) : HRESULT
+    @lpVtbl.value.get_language_exception.call(this, languageexception)
+  end
+end
+struct LibWin32::ILanguageExceptionTransform
+  def query_interface(this : ILanguageExceptionTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILanguageExceptionTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILanguageExceptionTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_transformed_restricted_error_info(this : ILanguageExceptionTransform*, restrictederrorinfo : IRestrictedErrorInfo*) : HRESULT
+    @lpVtbl.value.get_transformed_restricted_error_info.call(this, restrictederrorinfo)
+  end
+end
+struct LibWin32::ILanguageExceptionStackBackTrace
+  def query_interface(this : ILanguageExceptionStackBackTrace*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILanguageExceptionStackBackTrace*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILanguageExceptionStackBackTrace*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_stack_back_trace(this : ILanguageExceptionStackBackTrace*, maxframestocapture : UInt32, stackbacktrace : LibC::UINT_PTR*, framescaptured : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_back_trace.call(this, maxframestocapture, stackbacktrace, framescaptured)
+  end
+end
+struct LibWin32::ILanguageExceptionErrorInfo2
+  def query_interface(this : ILanguageExceptionErrorInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILanguageExceptionErrorInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILanguageExceptionErrorInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_language_exception(this : ILanguageExceptionErrorInfo2*, languageexception : IUnknown*) : HRESULT
+    @lpVtbl.value.get_language_exception.call(this, languageexception)
+  end
+  def get_previous_language_exception_error_info(this : ILanguageExceptionErrorInfo2*, previouslanguageexceptionerrorinfo : ILanguageExceptionErrorInfo2*) : HRESULT
+    @lpVtbl.value.get_previous_language_exception_error_info.call(this, previouslanguageexceptionerrorinfo)
+  end
+  def capture_propagation_context(this : ILanguageExceptionErrorInfo2*, languageexception : IUnknown) : HRESULT
+    @lpVtbl.value.capture_propagation_context.call(this, languageexception)
+  end
+  def get_propagation_context_head(this : ILanguageExceptionErrorInfo2*, propagatedlanguageexceptionerrorinfohead : ILanguageExceptionErrorInfo2*) : HRESULT
+    @lpVtbl.value.get_propagation_context_head.call(this, propagatedlanguageexceptionerrorinfohead)
+  end
+end
+struct LibWin32::IActivationFactory
+  def query_interface(this : IActivationFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IActivationFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IActivationFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IActivationFactory*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IActivationFactory*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IActivationFactory*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def activate_instance(this : IActivationFactory*, instance : IInspectable*) : HRESULT
+    @lpVtbl.value.activate_instance.call(this, instance)
+  end
+end
+struct LibWin32::IBufferByteAccess
+  def query_interface(this : IBufferByteAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IBufferByteAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IBufferByteAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def buffer(this : IBufferByteAccess*, value : UInt8**) : HRESULT
+    @lpVtbl.value.buffer.call(this, value)
+  end
+end
+struct LibWin32::IRoSimpleMetaDataBuilder
+  def set_win_rt_interface(this : IRoSimpleMetaDataBuilder*, iid : Guid) : HRESULT
+    @lpVtbl.value.set_win_rt_interface.call(this, iid)
+  end
+  def set_delegate(this : IRoSimpleMetaDataBuilder*, iid : Guid) : HRESULT
+    @lpVtbl.value.set_delegate.call(this, iid)
+  end
+  def set_interface_group_simple_default(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, defaultinterfacename : LibC::LPWSTR, defaultinterfaceiid : Guid*) : HRESULT
+    @lpVtbl.value.set_interface_group_simple_default.call(this, name, defaultinterfacename, defaultinterfaceiid)
+  end
+  def set_interface_group_parameterized_default(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, elementcount : UInt32, defaultinterfacenameelements : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_interface_group_parameterized_default.call(this, name, elementcount, defaultinterfacenameelements)
+  end
+  def set_runtime_class_simple_default(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, defaultinterfacename : LibC::LPWSTR, defaultinterfaceiid : Guid*) : HRESULT
+    @lpVtbl.value.set_runtime_class_simple_default.call(this, name, defaultinterfacename, defaultinterfaceiid)
+  end
+  def set_runtime_class_parameterized_default(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, elementcount : UInt32, defaultinterfacenameelements : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_runtime_class_parameterized_default.call(this, name, elementcount, defaultinterfacenameelements)
+  end
+  def set_struct(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, numfields : UInt32, fieldtypenames : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_struct.call(this, name, numfields, fieldtypenames)
+  end
+  def set_enum(this : IRoSimpleMetaDataBuilder*, name : LibC::LPWSTR, basetype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_enum.call(this, name, basetype)
+  end
+  def set_parameterized_interface(this : IRoSimpleMetaDataBuilder*, piid : Guid, numargs : UInt32) : HRESULT
+    @lpVtbl.value.set_parameterized_interface.call(this, piid, numargs)
+  end
+  def set_parameterized_delegate(this : IRoSimpleMetaDataBuilder*, piid : Guid, numargs : UInt32) : HRESULT
+    @lpVtbl.value.set_parameterized_delegate.call(this, piid, numargs)
+  end
+end
+struct LibWin32::IRoMetaDataLocator
+  def locate(this : IRoMetaDataLocator*, nameelement : LibC::LPWSTR, metadatadestination : IRoSimpleMetaDataBuilder) : HRESULT
+    @lpVtbl.value.locate.call(this, nameelement, metadatadestination)
+  end
+end
+struct LibWin32::IMemoryBufferByteAccess
+  def query_interface(this : IMemoryBufferByteAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMemoryBufferByteAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMemoryBufferByteAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_buffer(this : IMemoryBufferByteAccess*, value : UInt8**, capacity : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer.call(this, value, capacity)
+  end
+end
+struct LibWin32::IWeakReference
+  def query_interface(this : IWeakReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWeakReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWeakReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def resolve(this : IWeakReference*, riid : Guid*, objectreference : Void**) : HRESULT
+    @lpVtbl.value.resolve.call(this, riid, objectreference)
+  end
+end
+struct LibWin32::IWeakReferenceSource
+  def query_interface(this : IWeakReferenceSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWeakReferenceSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWeakReferenceSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_weak_reference(this : IWeakReferenceSource*, weakreference : IWeakReference*) : HRESULT
+    @lpVtbl.value.get_weak_reference.call(this, weakreference)
+  end
+end
+struct LibWin32::ISystemMediaTransportControlsInterop
+  def query_interface(this : ISystemMediaTransportControlsInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISystemMediaTransportControlsInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISystemMediaTransportControlsInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : ISystemMediaTransportControlsInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : ISystemMediaTransportControlsInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : ISystemMediaTransportControlsInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : ISystemMediaTransportControlsInterop*, appwindow : LibC::HANDLE, riid : Guid*, mediatransportcontrol : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, mediatransportcontrol)
+  end
+end
+struct LibWin32::IShareWindowCommandEventArgsInterop
+  def query_interface(this : IShareWindowCommandEventArgsInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IShareWindowCommandEventArgsInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IShareWindowCommandEventArgsInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IShareWindowCommandEventArgsInterop*, value : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, value)
+  end
+end
+struct LibWin32::IShareWindowCommandSourceInterop
+  def query_interface(this : IShareWindowCommandSourceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IShareWindowCommandSourceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IShareWindowCommandSourceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_for_window(this : IShareWindowCommandSourceInterop*, appwindow : LibC::HANDLE, riid : Guid*, sharewindowcommandsource : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, appwindow, riid, sharewindowcommandsource)
+  end
+end
+struct LibWin32::IMessageDispatcher
+  def query_interface(this : IMessageDispatcher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMessageDispatcher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMessageDispatcher*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IMessageDispatcher*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IMessageDispatcher*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IMessageDispatcher*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def pump_messages(this : IMessageDispatcher*) : HRESULT
+    @lpVtbl.value.pump_messages.call(this)
+  end
 end

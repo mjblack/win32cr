@@ -80,3 +80,75 @@ lib LibWin32
   # Params # pdevice : IUnknown [In],flags : UInt32 [In],pfeaturelevels : D3D_FEATURE_LEVEL* [In],featurelevels : UInt32 [In],ppcommandqueues : IUnknown* [In],numqueues : UInt32 [In],nodemask : UInt32 [In],ppdevice : ID3D11Device* [In],ppimmediatecontext : ID3D11DeviceContext* [In],pchosenfeaturelevel : D3D_FEATURE_LEVEL* [In]
   fun D3D11On12CreateDevice(pdevice : IUnknown, flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, ppcommandqueues : IUnknown*, numqueues : UInt32, nodemask : UInt32, ppdevice : ID3D11Device*, ppimmediatecontext : ID3D11DeviceContext*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
 end
+struct LibWin32::ID3D11On12Device
+  def query_interface(this : ID3D11On12Device*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D11On12Device*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D11On12Device*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_wrapped_resource(this : ID3D11On12Device*, presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.call(this, presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(this : ID3D11On12Device*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.call(this, ppresources, numresources)
+  end
+  def acquire_wrapped_resources(this : ID3D11On12Device*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.call(this, ppresources, numresources)
+  end
+end
+struct LibWin32::ID3D11On12Device1
+  def query_interface(this : ID3D11On12Device1*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D11On12Device1*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D11On12Device1*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_wrapped_resource(this : ID3D11On12Device1*, presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.call(this, presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(this : ID3D11On12Device1*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.call(this, ppresources, numresources)
+  end
+  def acquire_wrapped_resources(this : ID3D11On12Device1*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.call(this, ppresources, numresources)
+  end
+  def get_d3_d12_device(this : ID3D11On12Device1*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_d3_d12_device.call(this, riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D11On12Device2
+  def query_interface(this : ID3D11On12Device2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID3D11On12Device2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID3D11On12Device2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_wrapped_resource(this : ID3D11On12Device2*, presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.call(this, presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(this : ID3D11On12Device2*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.call(this, ppresources, numresources)
+  end
+  def acquire_wrapped_resources(this : ID3D11On12Device2*, ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.call(this, ppresources, numresources)
+  end
+  def get_d3_d12_device(this : ID3D11On12Device2*, riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_d3_d12_device.call(this, riid, ppvdevice)
+  end
+  def unwrap_underlying_resource(this : ID3D11On12Device2*, presource11 : ID3D11Resource, pcommandqueue : ID3D12CommandQueue, riid : Guid*, ppvresource12 : Void**) : HRESULT
+    @lpVtbl.value.unwrap_underlying_resource.call(this, presource11, pcommandqueue, riid, ppvresource12)
+  end
+  def return_underlying_resource(this : ID3D11On12Device2*, presource11 : ID3D11Resource, numsync : UInt32, psignalvalues : UInt64*, ppfences : ID3D12Fence*) : HRESULT
+    @lpVtbl.value.return_underlying_resource.call(this, presource11, numsync, psignalvalues, ppfences)
+  end
+end

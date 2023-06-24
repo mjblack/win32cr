@@ -3485,3 +3485,3585 @@ lib LibWin32
   # Params # clsid : Guid [In],precoattributes : RECO_ATTRS* [In]
   fun LoadCachedAttributes(clsid : Guid, precoattributes : RECO_ATTRS*) : HRESULT
 end
+struct LibWin32::IInkRectangle
+  def query_interface(this : IInkRectangle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRectangle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRectangle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRectangle*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRectangle*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRectangle*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRectangle*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_top(this : IInkRectangle*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_top.call(this, units)
+  end
+  def put_top(this : IInkRectangle*, units : Int32) : HRESULT
+    @lpVtbl.value.put_top.call(this, units)
+  end
+  def get_left(this : IInkRectangle*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_left.call(this, units)
+  end
+  def put_left(this : IInkRectangle*, units : Int32) : HRESULT
+    @lpVtbl.value.put_left.call(this, units)
+  end
+  def get_bottom(this : IInkRectangle*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_bottom.call(this, units)
+  end
+  def put_bottom(this : IInkRectangle*, units : Int32) : HRESULT
+    @lpVtbl.value.put_bottom.call(this, units)
+  end
+  def get_right(this : IInkRectangle*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_right.call(this, units)
+  end
+  def put_right(this : IInkRectangle*, units : Int32) : HRESULT
+    @lpVtbl.value.put_right.call(this, units)
+  end
+  def get_data(this : IInkRectangle*, rect : RECT*) : HRESULT
+    @lpVtbl.value.get_data.call(this, rect)
+  end
+  def put_data(this : IInkRectangle*, rect : RECT) : HRESULT
+    @lpVtbl.value.put_data.call(this, rect)
+  end
+  def get_rectangle(this : IInkRectangle*, top : Int32*, left : Int32*, bottom : Int32*, right : Int32*) : HRESULT
+    @lpVtbl.value.get_rectangle.call(this, top, left, bottom, right)
+  end
+  def set_rectangle(this : IInkRectangle*, top : Int32, left : Int32, bottom : Int32, right : Int32) : HRESULT
+    @lpVtbl.value.set_rectangle.call(this, top, left, bottom, right)
+  end
+end
+struct LibWin32::IInkExtendedProperty
+  def query_interface(this : IInkExtendedProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkExtendedProperty*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkExtendedProperty*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkExtendedProperty*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkExtendedProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkExtendedProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkExtendedProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_guid(this : IInkExtendedProperty*, guid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.call(this, guid)
+  end
+  def get_data(this : IInkExtendedProperty*, data : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data.call(this, data)
+  end
+  def put_data(this : IInkExtendedProperty*, data : VARIANT) : HRESULT
+    @lpVtbl.value.put_data.call(this, data)
+  end
+end
+struct LibWin32::IInkExtendedProperties
+  def query_interface(this : IInkExtendedProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkExtendedProperties*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkExtendedProperties*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkExtendedProperties*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkExtendedProperties*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkExtendedProperties*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkExtendedProperties*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkExtendedProperties*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkExtendedProperties*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def item(this : IInkExtendedProperties*, identifier : VARIANT, item : IInkExtendedProperty*) : HRESULT
+    @lpVtbl.value.item.call(this, identifier, item)
+  end
+  def add(this : IInkExtendedProperties*, guid : UInt8*, data : VARIANT, inkextendedproperty : IInkExtendedProperty*) : HRESULT
+    @lpVtbl.value.add.call(this, guid, data, inkextendedproperty)
+  end
+  def remove(this : IInkExtendedProperties*, identifier : VARIANT) : HRESULT
+    @lpVtbl.value.remove.call(this, identifier)
+  end
+  def clear(this : IInkExtendedProperties*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def does_property_exist(this : IInkExtendedProperties*, guid : UInt8*, doespropertyexist : Int16*) : HRESULT
+    @lpVtbl.value.does_property_exist.call(this, guid, doespropertyexist)
+  end
+end
+struct LibWin32::IInkDrawingAttributes
+  def query_interface(this : IInkDrawingAttributes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDrawingAttributes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDrawingAttributes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDrawingAttributes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDrawingAttributes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDrawingAttributes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDrawingAttributes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_color(this : IInkDrawingAttributes*, currentcolor : Int32*) : HRESULT
+    @lpVtbl.value.get_color.call(this, currentcolor)
+  end
+  def put_color(this : IInkDrawingAttributes*, newcolor : Int32) : HRESULT
+    @lpVtbl.value.put_color.call(this, newcolor)
+  end
+  def get_width(this : IInkDrawingAttributes*, currentwidth : Float32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, currentwidth)
+  end
+  def put_width(this : IInkDrawingAttributes*, newwidth : Float32) : HRESULT
+    @lpVtbl.value.put_width.call(this, newwidth)
+  end
+  def get_height(this : IInkDrawingAttributes*, currentheight : Float32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, currentheight)
+  end
+  def put_height(this : IInkDrawingAttributes*, newheight : Float32) : HRESULT
+    @lpVtbl.value.put_height.call(this, newheight)
+  end
+  def get_fit_to_curve(this : IInkDrawingAttributes*, flag : Int16*) : HRESULT
+    @lpVtbl.value.get_fit_to_curve.call(this, flag)
+  end
+  def put_fit_to_curve(this : IInkDrawingAttributes*, flag : Int16) : HRESULT
+    @lpVtbl.value.put_fit_to_curve.call(this, flag)
+  end
+  def get_ignore_pressure(this : IInkDrawingAttributes*, flag : Int16*) : HRESULT
+    @lpVtbl.value.get_ignore_pressure.call(this, flag)
+  end
+  def put_ignore_pressure(this : IInkDrawingAttributes*, flag : Int16) : HRESULT
+    @lpVtbl.value.put_ignore_pressure.call(this, flag)
+  end
+  def get_anti_aliased(this : IInkDrawingAttributes*, flag : Int16*) : HRESULT
+    @lpVtbl.value.get_anti_aliased.call(this, flag)
+  end
+  def put_anti_aliased(this : IInkDrawingAttributes*, flag : Int16) : HRESULT
+    @lpVtbl.value.put_anti_aliased.call(this, flag)
+  end
+  def get_transparency(this : IInkDrawingAttributes*, currenttransparency : Int32*) : HRESULT
+    @lpVtbl.value.get_transparency.call(this, currenttransparency)
+  end
+  def put_transparency(this : IInkDrawingAttributes*, newtransparency : Int32) : HRESULT
+    @lpVtbl.value.put_transparency.call(this, newtransparency)
+  end
+  def get_raster_operation(this : IInkDrawingAttributes*, currentrasteroperation : InkRasterOperation*) : HRESULT
+    @lpVtbl.value.get_raster_operation.call(this, currentrasteroperation)
+  end
+  def put_raster_operation(this : IInkDrawingAttributes*, newrasteroperation : InkRasterOperation) : HRESULT
+    @lpVtbl.value.put_raster_operation.call(this, newrasteroperation)
+  end
+  def get_pen_tip(this : IInkDrawingAttributes*, currentpentip : InkPenTip*) : HRESULT
+    @lpVtbl.value.get_pen_tip.call(this, currentpentip)
+  end
+  def put_pen_tip(this : IInkDrawingAttributes*, newpentip : InkPenTip) : HRESULT
+    @lpVtbl.value.put_pen_tip.call(this, newpentip)
+  end
+  def get_extended_properties(this : IInkDrawingAttributes*, properties : IInkExtendedProperties*) : HRESULT
+    @lpVtbl.value.get_extended_properties.call(this, properties)
+  end
+  def clone(this : IInkDrawingAttributes*, drawingattributes : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.clone.call(this, drawingattributes)
+  end
+end
+struct LibWin32::IInkTransform
+  def query_interface(this : IInkTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkTransform*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkTransform*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkTransform*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkTransform*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkTransform*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkTransform*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def reset(this : IInkTransform*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def translate(this : IInkTransform*, horizontalcomponent : Float32, verticalcomponent : Float32) : HRESULT
+    @lpVtbl.value.translate.call(this, horizontalcomponent, verticalcomponent)
+  end
+  def rotate(this : IInkTransform*, degrees : Float32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees, x, y)
+  end
+  def reflect(this : IInkTransform*, horizontally : Int16, vertically : Int16) : HRESULT
+    @lpVtbl.value.reflect.call(this, horizontally, vertically)
+  end
+  def shear(this : IInkTransform*, horizontalcomponent : Float32, verticalcomponent : Float32) : HRESULT
+    @lpVtbl.value.shear.call(this, horizontalcomponent, verticalcomponent)
+  end
+  def scale_transform(this : IInkTransform*, horizontalmultiplier : Float32, verticalmultiplier : Float32) : HRESULT
+    @lpVtbl.value.scale_transform.call(this, horizontalmultiplier, verticalmultiplier)
+  end
+  def get_transform(this : IInkTransform*, em11 : Float32*, em12 : Float32*, em21 : Float32*, em22 : Float32*, edx : Float32*, edy : Float32*) : HRESULT
+    @lpVtbl.value.get_transform.call(this, em11, em12, em21, em22, edx, edy)
+  end
+  def set_transform(this : IInkTransform*, em11 : Float32, em12 : Float32, em21 : Float32, em22 : Float32, edx : Float32, edy : Float32) : HRESULT
+    @lpVtbl.value.set_transform.call(this, em11, em12, em21, em22, edx, edy)
+  end
+  def get_e_m11(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_m11.call(this, value)
+  end
+  def put_e_m11(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_m11.call(this, value)
+  end
+  def get_e_m12(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_m12.call(this, value)
+  end
+  def put_e_m12(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_m12.call(this, value)
+  end
+  def get_e_m21(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_m21.call(this, value)
+  end
+  def put_e_m21(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_m21.call(this, value)
+  end
+  def get_e_m22(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_m22.call(this, value)
+  end
+  def put_e_m22(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_m22.call(this, value)
+  end
+  def get_e_dx(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_dx.call(this, value)
+  end
+  def put_e_dx(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_dx.call(this, value)
+  end
+  def get_e_dy(this : IInkTransform*, value : Float32*) : HRESULT
+    @lpVtbl.value.get_e_dy.call(this, value)
+  end
+  def put_e_dy(this : IInkTransform*, value : Float32) : HRESULT
+    @lpVtbl.value.put_e_dy.call(this, value)
+  end
+  def get_data(this : IInkTransform*, xform : XFORM*) : HRESULT
+    @lpVtbl.value.get_data.call(this, xform)
+  end
+  def put_data(this : IInkTransform*, xform : XFORM) : HRESULT
+    @lpVtbl.value.put_data.call(this, xform)
+  end
+end
+struct LibWin32::IInkGesture
+  def query_interface(this : IInkGesture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkGesture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkGesture*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkGesture*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkGesture*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkGesture*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkGesture*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_confidence(this : IInkGesture*, confidence : InkRecognitionConfidence*) : HRESULT
+    @lpVtbl.value.get_confidence.call(this, confidence)
+  end
+  def get_id(this : IInkGesture*, id : InkApplicationGesture*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_hot_point(this : IInkGesture*, x : Int32*, y : Int32*) : HRESULT
+    @lpVtbl.value.get_hot_point.call(this, x, y)
+  end
+end
+struct LibWin32::IInkCursor
+  def query_interface(this : IInkCursor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCursor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCursor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCursor*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCursor*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCursor*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCursor*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IInkCursor*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_id(this : IInkCursor*, id : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_inverted(this : IInkCursor*, status : Int16*) : HRESULT
+    @lpVtbl.value.get_inverted.call(this, status)
+  end
+  def get_drawing_attributes(this : IInkCursor*, attributes : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_drawing_attributes.call(this, attributes)
+  end
+  def putref_drawing_attributes(this : IInkCursor*, attributes : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_drawing_attributes.call(this, attributes)
+  end
+  def get_tablet(this : IInkCursor*, tablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet.call(this, tablet)
+  end
+  def get_buttons(this : IInkCursor*, buttons : IInkCursorButtons*) : HRESULT
+    @lpVtbl.value.get_buttons.call(this, buttons)
+  end
+end
+struct LibWin32::IInkCursors
+  def query_interface(this : IInkCursors*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCursors*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCursors*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCursors*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCursors*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCursors*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCursors*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkCursors*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkCursors*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def item(this : IInkCursors*, index : Int32, cursor : IInkCursor*) : HRESULT
+    @lpVtbl.value.item.call(this, index, cursor)
+  end
+end
+struct LibWin32::IInkCursorButton
+  def query_interface(this : IInkCursorButton*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCursorButton*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCursorButton*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCursorButton*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCursorButton*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCursorButton*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCursorButton*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IInkCursorButton*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_id(this : IInkCursorButton*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_state(this : IInkCursorButton*, currentstate : InkCursorButtonState*) : HRESULT
+    @lpVtbl.value.get_state.call(this, currentstate)
+  end
+end
+struct LibWin32::IInkCursorButtons
+  def query_interface(this : IInkCursorButtons*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCursorButtons*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCursorButtons*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCursorButtons*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCursorButtons*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCursorButtons*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCursorButtons*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkCursorButtons*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkCursorButtons*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def item(this : IInkCursorButtons*, identifier : VARIANT, button : IInkCursorButton*) : HRESULT
+    @lpVtbl.value.item.call(this, identifier, button)
+  end
+end
+struct LibWin32::IInkTablet
+  def query_interface(this : IInkTablet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkTablet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkTablet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkTablet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkTablet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkTablet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkTablet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IInkTablet*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_plug_and_play_id(this : IInkTablet*, id : UInt8**) : HRESULT
+    @lpVtbl.value.get_plug_and_play_id.call(this, id)
+  end
+  def get_maximum_input_rectangle(this : IInkTablet*, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_maximum_input_rectangle.call(this, rectangle)
+  end
+  def get_hardware_capabilities(this : IInkTablet*, capabilities : TabletHardwareCapabilities*) : HRESULT
+    @lpVtbl.value.get_hardware_capabilities.call(this, capabilities)
+  end
+  def is_packet_property_supported(this : IInkTablet*, packetpropertyname : UInt8*, supported : Int16*) : HRESULT
+    @lpVtbl.value.is_packet_property_supported.call(this, packetpropertyname, supported)
+  end
+  def get_property_metrics(this : IInkTablet*, propertyname : UInt8*, minimum : Int32*, maximum : Int32*, units : TabletPropertyMetricUnit*, resolution : Float32*) : HRESULT
+    @lpVtbl.value.get_property_metrics.call(this, propertyname, minimum, maximum, units, resolution)
+  end
+end
+struct LibWin32::IInkTablet2
+  def query_interface(this : IInkTablet2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkTablet2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkTablet2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkTablet2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkTablet2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkTablet2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkTablet2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_device_kind(this : IInkTablet2*, kind : TabletDeviceKind*) : HRESULT
+    @lpVtbl.value.get_device_kind.call(this, kind)
+  end
+end
+struct LibWin32::IInkTablet3
+  def query_interface(this : IInkTablet3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkTablet3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkTablet3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkTablet3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkTablet3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkTablet3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkTablet3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_is_multi_touch(this : IInkTablet3*, pismultitouch : Int16*) : HRESULT
+    @lpVtbl.value.get_is_multi_touch.call(this, pismultitouch)
+  end
+  def get_maximum_cursors(this : IInkTablet3*, pmaximumcursors : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_cursors.call(this, pmaximumcursors)
+  end
+end
+struct LibWin32::IInkTablets
+  def query_interface(this : IInkTablets*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkTablets*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkTablets*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkTablets*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkTablets*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkTablets*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkTablets*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkTablets*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkTablets*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def get_default_tablet(this : IInkTablets*, defaulttablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_default_tablet.call(this, defaulttablet)
+  end
+  def item(this : IInkTablets*, index : Int32, tablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.item.call(this, index, tablet)
+  end
+  def is_packet_property_supported(this : IInkTablets*, packetpropertyname : UInt8*, supported : Int16*) : HRESULT
+    @lpVtbl.value.is_packet_property_supported.call(this, packetpropertyname, supported)
+  end
+end
+struct LibWin32::IInkStrokeDisp
+  def query_interface(this : IInkStrokeDisp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkStrokeDisp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkStrokeDisp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkStrokeDisp*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkStrokeDisp*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkStrokeDisp*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkStrokeDisp*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IInkStrokeDisp*, id : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, id)
+  end
+  def get_bezier_points(this : IInkStrokeDisp*, points : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bezier_points.call(this, points)
+  end
+  def get_drawing_attributes(this : IInkStrokeDisp*, drawattrs : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_drawing_attributes.call(this, drawattrs)
+  end
+  def putref_drawing_attributes(this : IInkStrokeDisp*, drawattrs : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_drawing_attributes.call(this, drawattrs)
+  end
+  def get_ink(this : IInkStrokeDisp*, ink : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ink)
+  end
+  def get_extended_properties(this : IInkStrokeDisp*, properties : IInkExtendedProperties*) : HRESULT
+    @lpVtbl.value.get_extended_properties.call(this, properties)
+  end
+  def get_polyline_cusps(this : IInkStrokeDisp*, cusps : VARIANT*) : HRESULT
+    @lpVtbl.value.get_polyline_cusps.call(this, cusps)
+  end
+  def get_bezier_cusps(this : IInkStrokeDisp*, cusps : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bezier_cusps.call(this, cusps)
+  end
+  def get_self_intersections(this : IInkStrokeDisp*, intersections : VARIANT*) : HRESULT
+    @lpVtbl.value.get_self_intersections.call(this, intersections)
+  end
+  def get_packet_count(this : IInkStrokeDisp*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_packet_count.call(this, plcount)
+  end
+  def get_packet_size(this : IInkStrokeDisp*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_packet_size.call(this, plsize)
+  end
+  def get_packet_description(this : IInkStrokeDisp*, packetdescription : VARIANT*) : HRESULT
+    @lpVtbl.value.get_packet_description.call(this, packetdescription)
+  end
+  def get_deleted(this : IInkStrokeDisp*, deleted : Int16*) : HRESULT
+    @lpVtbl.value.get_deleted.call(this, deleted)
+  end
+  def get_bounding_box(this : IInkStrokeDisp*, boundingboxmode : InkBoundingBoxMode, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_bounding_box.call(this, boundingboxmode, rectangle)
+  end
+  def find_intersections(this : IInkStrokeDisp*, strokes : IInkStrokes, intersections : VARIANT*) : HRESULT
+    @lpVtbl.value.find_intersections.call(this, strokes, intersections)
+  end
+  def get_rectangle_intersections(this : IInkStrokeDisp*, rectangle : IInkRectangle, intersections : VARIANT*) : HRESULT
+    @lpVtbl.value.get_rectangle_intersections.call(this, rectangle, intersections)
+  end
+  def clip(this : IInkStrokeDisp*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.clip.call(this, rectangle)
+  end
+  def hit_test_circle(this : IInkStrokeDisp*, x : Int32, y : Int32, radius : Float32, intersects : Int16*) : HRESULT
+    @lpVtbl.value.hit_test_circle.call(this, x, y, radius, intersects)
+  end
+  def nearest_point(this : IInkStrokeDisp*, x : Int32, y : Int32, distance : Float32*, point : Float32*) : HRESULT
+    @lpVtbl.value.nearest_point.call(this, x, y, distance, point)
+  end
+  def split(this : IInkStrokeDisp*, splitat : Float32, newstroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.split.call(this, splitat, newstroke)
+  end
+  def get_packet_description_property_metrics(this : IInkStrokeDisp*, propertyname : UInt8*, minimum : Int32*, maximum : Int32*, units : TabletPropertyMetricUnit*, resolution : Float32*) : HRESULT
+    @lpVtbl.value.get_packet_description_property_metrics.call(this, propertyname, minimum, maximum, units, resolution)
+  end
+  def get_points(this : IInkStrokeDisp*, index : Int32, count : Int32, points : VARIANT*) : HRESULT
+    @lpVtbl.value.get_points.call(this, index, count, points)
+  end
+  def set_points(this : IInkStrokeDisp*, points : VARIANT, index : Int32, count : Int32, numberofpointsset : Int32*) : HRESULT
+    @lpVtbl.value.set_points.call(this, points, index, count, numberofpointsset)
+  end
+  def get_packet_data(this : IInkStrokeDisp*, index : Int32, count : Int32, packetdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_packet_data.call(this, index, count, packetdata)
+  end
+  def get_packet_values_by_property(this : IInkStrokeDisp*, propertyname : UInt8*, index : Int32, count : Int32, packetvalues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_packet_values_by_property.call(this, propertyname, index, count, packetvalues)
+  end
+  def set_packet_values_by_property(this : IInkStrokeDisp*, bstrpropertyname : UInt8*, packetvalues : VARIANT, index : Int32, count : Int32, numberofpacketsset : Int32*) : HRESULT
+    @lpVtbl.value.set_packet_values_by_property.call(this, bstrpropertyname, packetvalues, index, count, numberofpacketsset)
+  end
+  def get_flattened_bezier_points(this : IInkStrokeDisp*, fittingerror : Int32, flattenedbezierpoints : VARIANT*) : HRESULT
+    @lpVtbl.value.get_flattened_bezier_points.call(this, fittingerror, flattenedbezierpoints)
+  end
+  def transform(this : IInkStrokeDisp*, transform : IInkTransform, applyonpenwidth : Int16) : HRESULT
+    @lpVtbl.value.transform.call(this, transform, applyonpenwidth)
+  end
+  def scale_to_rectangle(this : IInkStrokeDisp*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.scale_to_rectangle.call(this, rectangle)
+  end
+  def move(this : IInkStrokeDisp*, horizontalcomponent : Float32, verticalcomponent : Float32) : HRESULT
+    @lpVtbl.value.move.call(this, horizontalcomponent, verticalcomponent)
+  end
+  def rotate(this : IInkStrokeDisp*, degrees : Float32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees, x, y)
+  end
+  def shear(this : IInkStrokeDisp*, horizontalmultiplier : Float32, verticalmultiplier : Float32) : HRESULT
+    @lpVtbl.value.shear.call(this, horizontalmultiplier, verticalmultiplier)
+  end
+  def scale_transform(this : IInkStrokeDisp*, horizontalmultiplier : Float32, verticalmultiplier : Float32) : HRESULT
+    @lpVtbl.value.scale_transform.call(this, horizontalmultiplier, verticalmultiplier)
+  end
+end
+struct LibWin32::IInkStrokes
+  def query_interface(this : IInkStrokes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkStrokes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkStrokes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkStrokes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkStrokes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkStrokes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkStrokes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkStrokes*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkStrokes*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def get_ink(this : IInkStrokes*, ink : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ink)
+  end
+  def get_recognition_result(this : IInkStrokes*, recognitionresult : IInkRecognitionResult*) : HRESULT
+    @lpVtbl.value.get_recognition_result.call(this, recognitionresult)
+  end
+  def to_string(this : IInkStrokes*, tostring : UInt8**) : HRESULT
+    @lpVtbl.value.to_string.call(this, tostring)
+  end
+  def item(this : IInkStrokes*, index : Int32, stroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.item.call(this, index, stroke)
+  end
+  def add(this : IInkStrokes*, inkstroke : IInkStrokeDisp) : HRESULT
+    @lpVtbl.value.add.call(this, inkstroke)
+  end
+  def add_strokes(this : IInkStrokes*, inkstrokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.add_strokes.call(this, inkstrokes)
+  end
+  def remove(this : IInkStrokes*, inkstroke : IInkStrokeDisp) : HRESULT
+    @lpVtbl.value.remove.call(this, inkstroke)
+  end
+  def remove_strokes(this : IInkStrokes*, inkstrokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.remove_strokes.call(this, inkstrokes)
+  end
+  def modify_drawing_attributes(this : IInkStrokes*, drawattrs : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.modify_drawing_attributes.call(this, drawattrs)
+  end
+  def get_bounding_box(this : IInkStrokes*, boundingboxmode : InkBoundingBoxMode, boundingbox : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_bounding_box.call(this, boundingboxmode, boundingbox)
+  end
+  def transform(this : IInkStrokes*, transform : IInkTransform, applyonpenwidth : Int16) : HRESULT
+    @lpVtbl.value.transform.call(this, transform, applyonpenwidth)
+  end
+  def scale_to_rectangle(this : IInkStrokes*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.scale_to_rectangle.call(this, rectangle)
+  end
+  def move(this : IInkStrokes*, horizontalcomponent : Float32, verticalcomponent : Float32) : HRESULT
+    @lpVtbl.value.move.call(this, horizontalcomponent, verticalcomponent)
+  end
+  def rotate(this : IInkStrokes*, degrees : Float32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees, x, y)
+  end
+  def shear(this : IInkStrokes*, horizontalmultiplier : Float32, verticalmultiplier : Float32) : HRESULT
+    @lpVtbl.value.shear.call(this, horizontalmultiplier, verticalmultiplier)
+  end
+  def scale_transform(this : IInkStrokes*, horizontalmultiplier : Float32, verticalmultiplier : Float32) : HRESULT
+    @lpVtbl.value.scale_transform.call(this, horizontalmultiplier, verticalmultiplier)
+  end
+  def clip(this : IInkStrokes*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.clip.call(this, rectangle)
+  end
+  def remove_recognition_result(this : IInkStrokes*) : HRESULT
+    @lpVtbl.value.remove_recognition_result.call(this)
+  end
+end
+struct LibWin32::IInkCustomStrokes
+  def query_interface(this : IInkCustomStrokes*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCustomStrokes*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCustomStrokes*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCustomStrokes*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCustomStrokes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCustomStrokes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCustomStrokes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkCustomStrokes*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkCustomStrokes*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def item(this : IInkCustomStrokes*, identifier : VARIANT, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.item.call(this, identifier, strokes)
+  end
+  def add(this : IInkCustomStrokes*, name : UInt8*, strokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.add.call(this, name, strokes)
+  end
+  def remove(this : IInkCustomStrokes*, identifier : VARIANT) : HRESULT
+    @lpVtbl.value.remove.call(this, identifier)
+  end
+  def clear(this : IInkCustomStrokes*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::IIInkStrokesEvents
+  def query_interface(this : IIInkStrokesEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkStrokesEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkStrokesEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkStrokesEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkStrokesEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkStrokesEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkStrokesEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkDisp
+  def query_interface(this : IInkDisp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDisp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDisp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDisp*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDisp*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDisp*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDisp*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_strokes(this : IInkDisp*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def get_extended_properties(this : IInkDisp*, properties : IInkExtendedProperties*) : HRESULT
+    @lpVtbl.value.get_extended_properties.call(this, properties)
+  end
+  def get_dirty(this : IInkDisp*, dirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, dirty)
+  end
+  def put_dirty(this : IInkDisp*, dirty : Int16) : HRESULT
+    @lpVtbl.value.put_dirty.call(this, dirty)
+  end
+  def get_custom_strokes(this : IInkDisp*, ppunkinkcustomstrokes : IInkCustomStrokes*) : HRESULT
+    @lpVtbl.value.get_custom_strokes.call(this, ppunkinkcustomstrokes)
+  end
+  def get_bounding_box(this : IInkDisp*, boundingboxmode : InkBoundingBoxMode, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_bounding_box.call(this, boundingboxmode, rectangle)
+  end
+  def delete_strokes(this : IInkDisp*, strokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.delete_strokes.call(this, strokes)
+  end
+  def delete_stroke(this : IInkDisp*, stroke : IInkStrokeDisp) : HRESULT
+    @lpVtbl.value.delete_stroke.call(this, stroke)
+  end
+  def extract_strokes(this : IInkDisp*, strokes : IInkStrokes, extractflags : InkExtractFlags, extractedink : IInkDisp*) : HRESULT
+    @lpVtbl.value.extract_strokes.call(this, strokes, extractflags, extractedink)
+  end
+  def extract_with_rectangle(this : IInkDisp*, rectangle : IInkRectangle, extractflags : InkExtractFlags, extractedink : IInkDisp*) : HRESULT
+    @lpVtbl.value.extract_with_rectangle.call(this, rectangle, extractflags, extractedink)
+  end
+  def clip(this : IInkDisp*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.clip.call(this, rectangle)
+  end
+  def clone(this : IInkDisp*, newink : IInkDisp*) : HRESULT
+    @lpVtbl.value.clone.call(this, newink)
+  end
+  def hit_test_circle(this : IInkDisp*, x : Int32, y : Int32, radius : Float32, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.hit_test_circle.call(this, x, y, radius, strokes)
+  end
+  def hit_test_with_rectangle(this : IInkDisp*, selectionrectangle : IInkRectangle, intersectpercent : Float32, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.hit_test_with_rectangle.call(this, selectionrectangle, intersectpercent, strokes)
+  end
+  def hit_test_with_lasso(this : IInkDisp*, points : VARIANT, intersectpercent : Float32, lassopoints : VARIANT*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.hit_test_with_lasso.call(this, points, intersectpercent, lassopoints, strokes)
+  end
+  def nearest_point(this : IInkDisp*, x : Int32, y : Int32, pointonstroke : Float32*, distancefrompacket : Float32*, stroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.nearest_point.call(this, x, y, pointonstroke, distancefrompacket, stroke)
+  end
+  def create_strokes(this : IInkDisp*, strokeids : VARIANT, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.create_strokes.call(this, strokeids, strokes)
+  end
+  def add_strokes_at_rectangle(this : IInkDisp*, sourcestrokes : IInkStrokes, targetrectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.add_strokes_at_rectangle.call(this, sourcestrokes, targetrectangle)
+  end
+  def save(this : IInkDisp*, persistenceformat : InkPersistenceFormat, compressionmode : InkPersistenceCompressionMode, data : VARIANT*) : HRESULT
+    @lpVtbl.value.save.call(this, persistenceformat, compressionmode, data)
+  end
+  def load(this : IInkDisp*, data : VARIANT) : HRESULT
+    @lpVtbl.value.load.call(this, data)
+  end
+  def create_stroke(this : IInkDisp*, packetdata : VARIANT, packetdescription : VARIANT, stroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.create_stroke.call(this, packetdata, packetdescription, stroke)
+  end
+  def clipboard_copy_with_rectangle(this : IInkDisp*, rectangle : IInkRectangle, clipboardformats : InkClipboardFormats, clipboardmodes : InkClipboardModes, dataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.clipboard_copy_with_rectangle.call(this, rectangle, clipboardformats, clipboardmodes, dataobject)
+  end
+  def clipboard_copy(this : IInkDisp*, strokes : IInkStrokes, clipboardformats : InkClipboardFormats, clipboardmodes : InkClipboardModes, dataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.clipboard_copy.call(this, strokes, clipboardformats, clipboardmodes, dataobject)
+  end
+  def can_paste(this : IInkDisp*, dataobject : IDataObject, canpaste : Int16*) : HRESULT
+    @lpVtbl.value.can_paste.call(this, dataobject, canpaste)
+  end
+  def clipboard_paste(this : IInkDisp*, x : Int32, y : Int32, dataobject : IDataObject, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.clipboard_paste.call(this, x, y, dataobject, strokes)
+  end
+end
+struct LibWin32::IIInkEvents
+  def query_interface(this : IIInkEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkRenderer
+  def query_interface(this : IInkRenderer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRenderer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRenderer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRenderer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRenderer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRenderer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRenderer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_view_transform(this : IInkRenderer*, viewtransform : IInkTransform) : HRESULT
+    @lpVtbl.value.get_view_transform.call(this, viewtransform)
+  end
+  def set_view_transform(this : IInkRenderer*, viewtransform : IInkTransform) : HRESULT
+    @lpVtbl.value.set_view_transform.call(this, viewtransform)
+  end
+  def get_object_transform(this : IInkRenderer*, objecttransform : IInkTransform) : HRESULT
+    @lpVtbl.value.get_object_transform.call(this, objecttransform)
+  end
+  def set_object_transform(this : IInkRenderer*, objecttransform : IInkTransform) : HRESULT
+    @lpVtbl.value.set_object_transform.call(this, objecttransform)
+  end
+  def draw(this : IInkRenderer*, hdc : LibC::IntPtrT, strokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.draw.call(this, hdc, strokes)
+  end
+  def draw_stroke(this : IInkRenderer*, hdc : LibC::IntPtrT, stroke : IInkStrokeDisp, drawingattributes : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.draw_stroke.call(this, hdc, stroke, drawingattributes)
+  end
+  def pixel_to_ink_space(this : IInkRenderer*, hdc : LibC::IntPtrT, x : Int32*, y : Int32*) : HRESULT
+    @lpVtbl.value.pixel_to_ink_space.call(this, hdc, x, y)
+  end
+  def ink_space_to_pixel(this : IInkRenderer*, hdcdisplay : LibC::IntPtrT, x : Int32*, y : Int32*) : HRESULT
+    @lpVtbl.value.ink_space_to_pixel.call(this, hdcdisplay, x, y)
+  end
+  def pixel_to_ink_space_from_points(this : IInkRenderer*, hdc : LibC::IntPtrT, points : VARIANT*) : HRESULT
+    @lpVtbl.value.pixel_to_ink_space_from_points.call(this, hdc, points)
+  end
+  def ink_space_to_pixel_from_points(this : IInkRenderer*, hdc : LibC::IntPtrT, points : VARIANT*) : HRESULT
+    @lpVtbl.value.ink_space_to_pixel_from_points.call(this, hdc, points)
+  end
+  def measure(this : IInkRenderer*, strokes : IInkStrokes, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.measure.call(this, strokes, rectangle)
+  end
+  def measure_stroke(this : IInkRenderer*, stroke : IInkStrokeDisp, drawingattributes : IInkDrawingAttributes, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.measure_stroke.call(this, stroke, drawingattributes, rectangle)
+  end
+  def move(this : IInkRenderer*, horizontalcomponent : Float32, verticalcomponent : Float32) : HRESULT
+    @lpVtbl.value.move.call(this, horizontalcomponent, verticalcomponent)
+  end
+  def rotate(this : IInkRenderer*, degrees : Float32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.rotate.call(this, degrees, x, y)
+  end
+  def scale_transform(this : IInkRenderer*, horizontalmultiplier : Float32, verticalmultiplier : Float32, applyonpenwidth : Int16) : HRESULT
+    @lpVtbl.value.scale_transform.call(this, horizontalmultiplier, verticalmultiplier, applyonpenwidth)
+  end
+end
+struct LibWin32::IInkCollector
+  def query_interface(this : IInkCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkCollector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkCollector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkCollector*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_wnd(this : IInkCollector*, currentwindow : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_h_wnd.call(this, currentwindow)
+  end
+  def put_h_wnd(this : IInkCollector*, newwindow : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.put_h_wnd.call(this, newwindow)
+  end
+  def get_enabled(this : IInkCollector*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, collecting)
+  end
+  def put_enabled(this : IInkCollector*, collecting : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, collecting)
+  end
+  def get_default_drawing_attributes(this : IInkCollector*, currentattributes : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_default_drawing_attributes.call(this, currentattributes)
+  end
+  def putref_default_drawing_attributes(this : IInkCollector*, newattributes : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_default_drawing_attributes.call(this, newattributes)
+  end
+  def get_renderer(this : IInkCollector*, currentinkrenderer : IInkRenderer*) : HRESULT
+    @lpVtbl.value.get_renderer.call(this, currentinkrenderer)
+  end
+  def putref_renderer(this : IInkCollector*, newinkrenderer : IInkRenderer) : HRESULT
+    @lpVtbl.value.putref_renderer.call(this, newinkrenderer)
+  end
+  def get_ink(this : IInkCollector*, ink : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ink)
+  end
+  def putref_ink(this : IInkCollector*, newink : IInkDisp) : HRESULT
+    @lpVtbl.value.putref_ink.call(this, newink)
+  end
+  def get_auto_redraw(this : IInkCollector*, autoredraw : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_redraw.call(this, autoredraw)
+  end
+  def put_auto_redraw(this : IInkCollector*, autoredraw : Int16) : HRESULT
+    @lpVtbl.value.put_auto_redraw.call(this, autoredraw)
+  end
+  def get_collecting_ink(this : IInkCollector*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_collecting_ink.call(this, collecting)
+  end
+  def get_collection_mode(this : IInkCollector*, mode : InkCollectionMode*) : HRESULT
+    @lpVtbl.value.get_collection_mode.call(this, mode)
+  end
+  def put_collection_mode(this : IInkCollector*, mode : InkCollectionMode) : HRESULT
+    @lpVtbl.value.put_collection_mode.call(this, mode)
+  end
+  def get_dynamic_rendering(this : IInkCollector*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_dynamic_rendering.call(this, enabled)
+  end
+  def put_dynamic_rendering(this : IInkCollector*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_dynamic_rendering.call(this, enabled)
+  end
+  def get_desired_packet_description(this : IInkCollector*, packetguids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_desired_packet_description.call(this, packetguids)
+  end
+  def put_desired_packet_description(this : IInkCollector*, packetguids : VARIANT) : HRESULT
+    @lpVtbl.value.put_desired_packet_description.call(this, packetguids)
+  end
+  def get_mouse_icon(this : IInkCollector*, mouseicon : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_mouse_icon.call(this, mouseicon)
+  end
+  def put_mouse_icon(this : IInkCollector*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.put_mouse_icon.call(this, mouseicon)
+  end
+  def putref_mouse_icon(this : IInkCollector*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.putref_mouse_icon.call(this, mouseicon)
+  end
+  def get_mouse_pointer(this : IInkCollector*, mousepointer : InkMousePointer*) : HRESULT
+    @lpVtbl.value.get_mouse_pointer.call(this, mousepointer)
+  end
+  def put_mouse_pointer(this : IInkCollector*, mousepointer : InkMousePointer) : HRESULT
+    @lpVtbl.value.put_mouse_pointer.call(this, mousepointer)
+  end
+  def get_cursors(this : IInkCollector*, cursors : IInkCursors*) : HRESULT
+    @lpVtbl.value.get_cursors.call(this, cursors)
+  end
+  def get_margin_x(this : IInkCollector*, marginx : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_x.call(this, marginx)
+  end
+  def put_margin_x(this : IInkCollector*, marginx : Int32) : HRESULT
+    @lpVtbl.value.put_margin_x.call(this, marginx)
+  end
+  def get_margin_y(this : IInkCollector*, marginy : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_y.call(this, marginy)
+  end
+  def put_margin_y(this : IInkCollector*, marginy : Int32) : HRESULT
+    @lpVtbl.value.put_margin_y.call(this, marginy)
+  end
+  def get_tablet(this : IInkCollector*, singletablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet.call(this, singletablet)
+  end
+  def get_support_high_contrast_ink(this : IInkCollector*, support : Int16*) : HRESULT
+    @lpVtbl.value.get_support_high_contrast_ink.call(this, support)
+  end
+  def put_support_high_contrast_ink(this : IInkCollector*, support : Int16) : HRESULT
+    @lpVtbl.value.put_support_high_contrast_ink.call(this, support)
+  end
+  def set_gesture_status(this : IInkCollector*, gesture : InkApplicationGesture, listen : Int16) : HRESULT
+    @lpVtbl.value.set_gesture_status.call(this, gesture, listen)
+  end
+  def get_gesture_status(this : IInkCollector*, gesture : InkApplicationGesture, listening : Int16*) : HRESULT
+    @lpVtbl.value.get_gesture_status.call(this, gesture, listening)
+  end
+  def get_window_input_rectangle(this : IInkCollector*, windowinputrectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_window_input_rectangle(this : IInkCollector*, windowinputrectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.set_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_all_tablets_mode(this : IInkCollector*, usemouseforinput : Int16) : HRESULT
+    @lpVtbl.value.set_all_tablets_mode.call(this, usemouseforinput)
+  end
+  def set_single_tablet_integrated_mode(this : IInkCollector*, tablet : IInkTablet) : HRESULT
+    @lpVtbl.value.set_single_tablet_integrated_mode.call(this, tablet)
+  end
+  def get_event_interest(this : IInkCollector*, eventid : InkCollectorEventInterest, listen : Int16*) : HRESULT
+    @lpVtbl.value.get_event_interest.call(this, eventid, listen)
+  end
+  def set_event_interest(this : IInkCollector*, eventid : InkCollectorEventInterest, listen : Int16) : HRESULT
+    @lpVtbl.value.set_event_interest.call(this, eventid, listen)
+  end
+end
+struct LibWin32::IIInkCollectorEvents
+  def query_interface(this : IIInkCollectorEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkCollectorEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkCollectorEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkCollectorEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkCollectorEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkCollectorEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkCollectorEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkOverlay
+  def query_interface(this : IInkOverlay*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkOverlay*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkOverlay*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkOverlay*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkOverlay*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkOverlay*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkOverlay*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_wnd(this : IInkOverlay*, currentwindow : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_h_wnd.call(this, currentwindow)
+  end
+  def put_h_wnd(this : IInkOverlay*, newwindow : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.put_h_wnd.call(this, newwindow)
+  end
+  def get_enabled(this : IInkOverlay*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, collecting)
+  end
+  def put_enabled(this : IInkOverlay*, collecting : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, collecting)
+  end
+  def get_default_drawing_attributes(this : IInkOverlay*, currentattributes : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_default_drawing_attributes.call(this, currentattributes)
+  end
+  def putref_default_drawing_attributes(this : IInkOverlay*, newattributes : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_default_drawing_attributes.call(this, newattributes)
+  end
+  def get_renderer(this : IInkOverlay*, currentinkrenderer : IInkRenderer*) : HRESULT
+    @lpVtbl.value.get_renderer.call(this, currentinkrenderer)
+  end
+  def putref_renderer(this : IInkOverlay*, newinkrenderer : IInkRenderer) : HRESULT
+    @lpVtbl.value.putref_renderer.call(this, newinkrenderer)
+  end
+  def get_ink(this : IInkOverlay*, ink : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ink)
+  end
+  def putref_ink(this : IInkOverlay*, newink : IInkDisp) : HRESULT
+    @lpVtbl.value.putref_ink.call(this, newink)
+  end
+  def get_auto_redraw(this : IInkOverlay*, autoredraw : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_redraw.call(this, autoredraw)
+  end
+  def put_auto_redraw(this : IInkOverlay*, autoredraw : Int16) : HRESULT
+    @lpVtbl.value.put_auto_redraw.call(this, autoredraw)
+  end
+  def get_collecting_ink(this : IInkOverlay*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_collecting_ink.call(this, collecting)
+  end
+  def get_collection_mode(this : IInkOverlay*, mode : InkCollectionMode*) : HRESULT
+    @lpVtbl.value.get_collection_mode.call(this, mode)
+  end
+  def put_collection_mode(this : IInkOverlay*, mode : InkCollectionMode) : HRESULT
+    @lpVtbl.value.put_collection_mode.call(this, mode)
+  end
+  def get_dynamic_rendering(this : IInkOverlay*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_dynamic_rendering.call(this, enabled)
+  end
+  def put_dynamic_rendering(this : IInkOverlay*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_dynamic_rendering.call(this, enabled)
+  end
+  def get_desired_packet_description(this : IInkOverlay*, packetguids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_desired_packet_description.call(this, packetguids)
+  end
+  def put_desired_packet_description(this : IInkOverlay*, packetguids : VARIANT) : HRESULT
+    @lpVtbl.value.put_desired_packet_description.call(this, packetguids)
+  end
+  def get_mouse_icon(this : IInkOverlay*, mouseicon : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_mouse_icon.call(this, mouseicon)
+  end
+  def put_mouse_icon(this : IInkOverlay*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.put_mouse_icon.call(this, mouseicon)
+  end
+  def putref_mouse_icon(this : IInkOverlay*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.putref_mouse_icon.call(this, mouseicon)
+  end
+  def get_mouse_pointer(this : IInkOverlay*, mousepointer : InkMousePointer*) : HRESULT
+    @lpVtbl.value.get_mouse_pointer.call(this, mousepointer)
+  end
+  def put_mouse_pointer(this : IInkOverlay*, mousepointer : InkMousePointer) : HRESULT
+    @lpVtbl.value.put_mouse_pointer.call(this, mousepointer)
+  end
+  def get_editing_mode(this : IInkOverlay*, editingmode : InkOverlayEditingMode*) : HRESULT
+    @lpVtbl.value.get_editing_mode.call(this, editingmode)
+  end
+  def put_editing_mode(this : IInkOverlay*, editingmode : InkOverlayEditingMode) : HRESULT
+    @lpVtbl.value.put_editing_mode.call(this, editingmode)
+  end
+  def get_selection(this : IInkOverlay*, selection : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, selection)
+  end
+  def put_selection(this : IInkOverlay*, selection : IInkStrokes) : HRESULT
+    @lpVtbl.value.put_selection.call(this, selection)
+  end
+  def get_eraser_mode(this : IInkOverlay*, erasermode : InkOverlayEraserMode*) : HRESULT
+    @lpVtbl.value.get_eraser_mode.call(this, erasermode)
+  end
+  def put_eraser_mode(this : IInkOverlay*, erasermode : InkOverlayEraserMode) : HRESULT
+    @lpVtbl.value.put_eraser_mode.call(this, erasermode)
+  end
+  def get_eraser_width(this : IInkOverlay*, eraserwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_eraser_width.call(this, eraserwidth)
+  end
+  def put_eraser_width(this : IInkOverlay*, neweraserwidth : Int32) : HRESULT
+    @lpVtbl.value.put_eraser_width.call(this, neweraserwidth)
+  end
+  def get_attach_mode(this : IInkOverlay*, attachmode : InkOverlayAttachMode*) : HRESULT
+    @lpVtbl.value.get_attach_mode.call(this, attachmode)
+  end
+  def put_attach_mode(this : IInkOverlay*, attachmode : InkOverlayAttachMode) : HRESULT
+    @lpVtbl.value.put_attach_mode.call(this, attachmode)
+  end
+  def get_cursors(this : IInkOverlay*, cursors : IInkCursors*) : HRESULT
+    @lpVtbl.value.get_cursors.call(this, cursors)
+  end
+  def get_margin_x(this : IInkOverlay*, marginx : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_x.call(this, marginx)
+  end
+  def put_margin_x(this : IInkOverlay*, marginx : Int32) : HRESULT
+    @lpVtbl.value.put_margin_x.call(this, marginx)
+  end
+  def get_margin_y(this : IInkOverlay*, marginy : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_y.call(this, marginy)
+  end
+  def put_margin_y(this : IInkOverlay*, marginy : Int32) : HRESULT
+    @lpVtbl.value.put_margin_y.call(this, marginy)
+  end
+  def get_tablet(this : IInkOverlay*, singletablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet.call(this, singletablet)
+  end
+  def get_support_high_contrast_ink(this : IInkOverlay*, support : Int16*) : HRESULT
+    @lpVtbl.value.get_support_high_contrast_ink.call(this, support)
+  end
+  def put_support_high_contrast_ink(this : IInkOverlay*, support : Int16) : HRESULT
+    @lpVtbl.value.put_support_high_contrast_ink.call(this, support)
+  end
+  def get_support_high_contrast_selection_ui(this : IInkOverlay*, support : Int16*) : HRESULT
+    @lpVtbl.value.get_support_high_contrast_selection_ui.call(this, support)
+  end
+  def put_support_high_contrast_selection_ui(this : IInkOverlay*, support : Int16) : HRESULT
+    @lpVtbl.value.put_support_high_contrast_selection_ui.call(this, support)
+  end
+  def hit_test_selection(this : IInkOverlay*, x : Int32, y : Int32, selarea : SelectionHitResult*) : HRESULT
+    @lpVtbl.value.hit_test_selection.call(this, x, y, selarea)
+  end
+  def draw(this : IInkOverlay*, rect : IInkRectangle) : HRESULT
+    @lpVtbl.value.draw.call(this, rect)
+  end
+  def set_gesture_status(this : IInkOverlay*, gesture : InkApplicationGesture, listen : Int16) : HRESULT
+    @lpVtbl.value.set_gesture_status.call(this, gesture, listen)
+  end
+  def get_gesture_status(this : IInkOverlay*, gesture : InkApplicationGesture, listening : Int16*) : HRESULT
+    @lpVtbl.value.get_gesture_status.call(this, gesture, listening)
+  end
+  def get_window_input_rectangle(this : IInkOverlay*, windowinputrectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_window_input_rectangle(this : IInkOverlay*, windowinputrectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.set_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_all_tablets_mode(this : IInkOverlay*, usemouseforinput : Int16) : HRESULT
+    @lpVtbl.value.set_all_tablets_mode.call(this, usemouseforinput)
+  end
+  def set_single_tablet_integrated_mode(this : IInkOverlay*, tablet : IInkTablet) : HRESULT
+    @lpVtbl.value.set_single_tablet_integrated_mode.call(this, tablet)
+  end
+  def get_event_interest(this : IInkOverlay*, eventid : InkCollectorEventInterest, listen : Int16*) : HRESULT
+    @lpVtbl.value.get_event_interest.call(this, eventid, listen)
+  end
+  def set_event_interest(this : IInkOverlay*, eventid : InkCollectorEventInterest, listen : Int16) : HRESULT
+    @lpVtbl.value.set_event_interest.call(this, eventid, listen)
+  end
+end
+struct LibWin32::IIInkOverlayEvents
+  def query_interface(this : IIInkOverlayEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkOverlayEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkOverlayEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkOverlayEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkOverlayEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkOverlayEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkOverlayEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkPicture
+  def query_interface(this : IInkPicture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkPicture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkPicture*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkPicture*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkPicture*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkPicture*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkPicture*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_wnd(this : IInkPicture*, currentwindow : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_h_wnd.call(this, currentwindow)
+  end
+  def get_default_drawing_attributes(this : IInkPicture*, currentattributes : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_default_drawing_attributes.call(this, currentattributes)
+  end
+  def putref_default_drawing_attributes(this : IInkPicture*, newattributes : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_default_drawing_attributes.call(this, newattributes)
+  end
+  def get_renderer(this : IInkPicture*, currentinkrenderer : IInkRenderer*) : HRESULT
+    @lpVtbl.value.get_renderer.call(this, currentinkrenderer)
+  end
+  def putref_renderer(this : IInkPicture*, newinkrenderer : IInkRenderer) : HRESULT
+    @lpVtbl.value.putref_renderer.call(this, newinkrenderer)
+  end
+  def get_ink(this : IInkPicture*, ink : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ink)
+  end
+  def putref_ink(this : IInkPicture*, newink : IInkDisp) : HRESULT
+    @lpVtbl.value.putref_ink.call(this, newink)
+  end
+  def get_auto_redraw(this : IInkPicture*, autoredraw : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_redraw.call(this, autoredraw)
+  end
+  def put_auto_redraw(this : IInkPicture*, autoredraw : Int16) : HRESULT
+    @lpVtbl.value.put_auto_redraw.call(this, autoredraw)
+  end
+  def get_collecting_ink(this : IInkPicture*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_collecting_ink.call(this, collecting)
+  end
+  def get_collection_mode(this : IInkPicture*, mode : InkCollectionMode*) : HRESULT
+    @lpVtbl.value.get_collection_mode.call(this, mode)
+  end
+  def put_collection_mode(this : IInkPicture*, mode : InkCollectionMode) : HRESULT
+    @lpVtbl.value.put_collection_mode.call(this, mode)
+  end
+  def get_dynamic_rendering(this : IInkPicture*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_dynamic_rendering.call(this, enabled)
+  end
+  def put_dynamic_rendering(this : IInkPicture*, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_dynamic_rendering.call(this, enabled)
+  end
+  def get_desired_packet_description(this : IInkPicture*, packetguids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_desired_packet_description.call(this, packetguids)
+  end
+  def put_desired_packet_description(this : IInkPicture*, packetguids : VARIANT) : HRESULT
+    @lpVtbl.value.put_desired_packet_description.call(this, packetguids)
+  end
+  def get_mouse_icon(this : IInkPicture*, mouseicon : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_mouse_icon.call(this, mouseicon)
+  end
+  def put_mouse_icon(this : IInkPicture*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.put_mouse_icon.call(this, mouseicon)
+  end
+  def putref_mouse_icon(this : IInkPicture*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.putref_mouse_icon.call(this, mouseicon)
+  end
+  def get_mouse_pointer(this : IInkPicture*, mousepointer : InkMousePointer*) : HRESULT
+    @lpVtbl.value.get_mouse_pointer.call(this, mousepointer)
+  end
+  def put_mouse_pointer(this : IInkPicture*, mousepointer : InkMousePointer) : HRESULT
+    @lpVtbl.value.put_mouse_pointer.call(this, mousepointer)
+  end
+  def get_editing_mode(this : IInkPicture*, editingmode : InkOverlayEditingMode*) : HRESULT
+    @lpVtbl.value.get_editing_mode.call(this, editingmode)
+  end
+  def put_editing_mode(this : IInkPicture*, editingmode : InkOverlayEditingMode) : HRESULT
+    @lpVtbl.value.put_editing_mode.call(this, editingmode)
+  end
+  def get_selection(this : IInkPicture*, selection : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, selection)
+  end
+  def put_selection(this : IInkPicture*, selection : IInkStrokes) : HRESULT
+    @lpVtbl.value.put_selection.call(this, selection)
+  end
+  def get_eraser_mode(this : IInkPicture*, erasermode : InkOverlayEraserMode*) : HRESULT
+    @lpVtbl.value.get_eraser_mode.call(this, erasermode)
+  end
+  def put_eraser_mode(this : IInkPicture*, erasermode : InkOverlayEraserMode) : HRESULT
+    @lpVtbl.value.put_eraser_mode.call(this, erasermode)
+  end
+  def get_eraser_width(this : IInkPicture*, eraserwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_eraser_width.call(this, eraserwidth)
+  end
+  def put_eraser_width(this : IInkPicture*, neweraserwidth : Int32) : HRESULT
+    @lpVtbl.value.put_eraser_width.call(this, neweraserwidth)
+  end
+  def putref_picture(this : IInkPicture*, ppicture : IPictureDisp) : HRESULT
+    @lpVtbl.value.putref_picture.call(this, ppicture)
+  end
+  def put_picture(this : IInkPicture*, ppicture : IPictureDisp) : HRESULT
+    @lpVtbl.value.put_picture.call(this, ppicture)
+  end
+  def get_picture(this : IInkPicture*, pppicture : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_picture.call(this, pppicture)
+  end
+  def put_size_mode(this : IInkPicture*, smnewsizemode : InkPictureSizeMode) : HRESULT
+    @lpVtbl.value.put_size_mode.call(this, smnewsizemode)
+  end
+  def get_size_mode(this : IInkPicture*, smsizemode : InkPictureSizeMode*) : HRESULT
+    @lpVtbl.value.get_size_mode.call(this, smsizemode)
+  end
+  def put_back_color(this : IInkPicture*, newcolor : UInt32) : HRESULT
+    @lpVtbl.value.put_back_color.call(this, newcolor)
+  end
+  def get_back_color(this : IInkPicture*, pcolor : UInt32*) : HRESULT
+    @lpVtbl.value.get_back_color.call(this, pcolor)
+  end
+  def get_cursors(this : IInkPicture*, cursors : IInkCursors*) : HRESULT
+    @lpVtbl.value.get_cursors.call(this, cursors)
+  end
+  def get_margin_x(this : IInkPicture*, marginx : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_x.call(this, marginx)
+  end
+  def put_margin_x(this : IInkPicture*, marginx : Int32) : HRESULT
+    @lpVtbl.value.put_margin_x.call(this, marginx)
+  end
+  def get_margin_y(this : IInkPicture*, marginy : Int32*) : HRESULT
+    @lpVtbl.value.get_margin_y.call(this, marginy)
+  end
+  def put_margin_y(this : IInkPicture*, marginy : Int32) : HRESULT
+    @lpVtbl.value.put_margin_y.call(this, marginy)
+  end
+  def get_tablet(this : IInkPicture*, singletablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet.call(this, singletablet)
+  end
+  def get_support_high_contrast_ink(this : IInkPicture*, support : Int16*) : HRESULT
+    @lpVtbl.value.get_support_high_contrast_ink.call(this, support)
+  end
+  def put_support_high_contrast_ink(this : IInkPicture*, support : Int16) : HRESULT
+    @lpVtbl.value.put_support_high_contrast_ink.call(this, support)
+  end
+  def get_support_high_contrast_selection_ui(this : IInkPicture*, support : Int16*) : HRESULT
+    @lpVtbl.value.get_support_high_contrast_selection_ui.call(this, support)
+  end
+  def put_support_high_contrast_selection_ui(this : IInkPicture*, support : Int16) : HRESULT
+    @lpVtbl.value.put_support_high_contrast_selection_ui.call(this, support)
+  end
+  def hit_test_selection(this : IInkPicture*, x : Int32, y : Int32, selarea : SelectionHitResult*) : HRESULT
+    @lpVtbl.value.hit_test_selection.call(this, x, y, selarea)
+  end
+  def set_gesture_status(this : IInkPicture*, gesture : InkApplicationGesture, listen : Int16) : HRESULT
+    @lpVtbl.value.set_gesture_status.call(this, gesture, listen)
+  end
+  def get_gesture_status(this : IInkPicture*, gesture : InkApplicationGesture, listening : Int16*) : HRESULT
+    @lpVtbl.value.get_gesture_status.call(this, gesture, listening)
+  end
+  def get_window_input_rectangle(this : IInkPicture*, windowinputrectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_window_input_rectangle(this : IInkPicture*, windowinputrectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.set_window_input_rectangle.call(this, windowinputrectangle)
+  end
+  def set_all_tablets_mode(this : IInkPicture*, usemouseforinput : Int16) : HRESULT
+    @lpVtbl.value.set_all_tablets_mode.call(this, usemouseforinput)
+  end
+  def set_single_tablet_integrated_mode(this : IInkPicture*, tablet : IInkTablet) : HRESULT
+    @lpVtbl.value.set_single_tablet_integrated_mode.call(this, tablet)
+  end
+  def get_event_interest(this : IInkPicture*, eventid : InkCollectorEventInterest, listen : Int16*) : HRESULT
+    @lpVtbl.value.get_event_interest.call(this, eventid, listen)
+  end
+  def set_event_interest(this : IInkPicture*, eventid : InkCollectorEventInterest, listen : Int16) : HRESULT
+    @lpVtbl.value.set_event_interest.call(this, eventid, listen)
+  end
+  def get_ink_enabled(this : IInkPicture*, collecting : Int16*) : HRESULT
+    @lpVtbl.value.get_ink_enabled.call(this, collecting)
+  end
+  def put_ink_enabled(this : IInkPicture*, collecting : Int16) : HRESULT
+    @lpVtbl.value.put_ink_enabled.call(this, collecting)
+  end
+  def get_enabled(this : IInkPicture*, pbool : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbool)
+  end
+  def put_enabled(this : IInkPicture*, vbool : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, vbool)
+  end
+end
+struct LibWin32::IIInkPictureEvents
+  def query_interface(this : IIInkPictureEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkPictureEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkPictureEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkPictureEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkPictureEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkPictureEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkPictureEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkRecognizer
+  def query_interface(this : IInkRecognizer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IInkRecognizer*, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_vendor(this : IInkRecognizer*, vendor : UInt8**) : HRESULT
+    @lpVtbl.value.get_vendor.call(this, vendor)
+  end
+  def get_capabilities(this : IInkRecognizer*, capabilitiesflags : InkRecognizerCapabilities*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, capabilitiesflags)
+  end
+  def get_languages(this : IInkRecognizer*, languages : VARIANT*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, languages)
+  end
+  def get_supported_properties(this : IInkRecognizer*, supportedproperties : VARIANT*) : HRESULT
+    @lpVtbl.value.get_supported_properties.call(this, supportedproperties)
+  end
+  def get_preferred_packet_description(this : IInkRecognizer*, preferredpacketdescription : VARIANT*) : HRESULT
+    @lpVtbl.value.get_preferred_packet_description.call(this, preferredpacketdescription)
+  end
+  def create_recognizer_context(this : IInkRecognizer*, context : IInkRecognizerContext*) : HRESULT
+    @lpVtbl.value.create_recognizer_context.call(this, context)
+  end
+end
+struct LibWin32::IInkRecognizer2
+  def query_interface(this : IInkRecognizer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizer2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizer2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizer2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizer2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IInkRecognizer2*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_unicode_ranges(this : IInkRecognizer2*, unicoderanges : VARIANT*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.call(this, unicoderanges)
+  end
+end
+struct LibWin32::IInkRecognizers
+  def query_interface(this : IInkRecognizers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizers*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizers*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizers*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizers*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizers*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkRecognizers*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkRecognizers*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def get_default_recognizer(this : IInkRecognizers*, lcid : Int32, defaultrecognizer : IInkRecognizer*) : HRESULT
+    @lpVtbl.value.get_default_recognizer.call(this, lcid, defaultrecognizer)
+  end
+  def item(this : IInkRecognizers*, index : Int32, inkrecognizer : IInkRecognizer*) : HRESULT
+    @lpVtbl.value.item.call(this, index, inkrecognizer)
+  end
+end
+struct LibWin32::IIInkRecognitionEvents
+  def query_interface(this : IIInkRecognitionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkRecognitionEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkRecognitionEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkRecognitionEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkRecognitionEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkRecognitionEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkRecognitionEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkRecognizerContext
+  def query_interface(this : IInkRecognizerContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizerContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizerContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizerContext*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizerContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizerContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizerContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_strokes(this : IInkRecognizerContext*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def putref_strokes(this : IInkRecognizerContext*, strokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.putref_strokes.call(this, strokes)
+  end
+  def get_character_auto_completion_mode(this : IInkRecognizerContext*, mode : InkRecognizerCharacterAutoCompletionMode*) : HRESULT
+    @lpVtbl.value.get_character_auto_completion_mode.call(this, mode)
+  end
+  def put_character_auto_completion_mode(this : IInkRecognizerContext*, mode : InkRecognizerCharacterAutoCompletionMode) : HRESULT
+    @lpVtbl.value.put_character_auto_completion_mode.call(this, mode)
+  end
+  def get_factoid(this : IInkRecognizerContext*, factoid : UInt8**) : HRESULT
+    @lpVtbl.value.get_factoid.call(this, factoid)
+  end
+  def put_factoid(this : IInkRecognizerContext*, factoid : UInt8*) : HRESULT
+    @lpVtbl.value.put_factoid.call(this, factoid)
+  end
+  def get_guide(this : IInkRecognizerContext*, recognizerguide : IInkRecognizerGuide*) : HRESULT
+    @lpVtbl.value.get_guide.call(this, recognizerguide)
+  end
+  def putref_guide(this : IInkRecognizerContext*, recognizerguide : IInkRecognizerGuide) : HRESULT
+    @lpVtbl.value.putref_guide.call(this, recognizerguide)
+  end
+  def get_prefix_text(this : IInkRecognizerContext*, prefix : UInt8**) : HRESULT
+    @lpVtbl.value.get_prefix_text.call(this, prefix)
+  end
+  def put_prefix_text(this : IInkRecognizerContext*, prefix : UInt8*) : HRESULT
+    @lpVtbl.value.put_prefix_text.call(this, prefix)
+  end
+  def get_suffix_text(this : IInkRecognizerContext*, suffix : UInt8**) : HRESULT
+    @lpVtbl.value.get_suffix_text.call(this, suffix)
+  end
+  def put_suffix_text(this : IInkRecognizerContext*, suffix : UInt8*) : HRESULT
+    @lpVtbl.value.put_suffix_text.call(this, suffix)
+  end
+  def get_recognition_flags(this : IInkRecognizerContext*, modes : InkRecognitionModes*) : HRESULT
+    @lpVtbl.value.get_recognition_flags.call(this, modes)
+  end
+  def put_recognition_flags(this : IInkRecognizerContext*, modes : InkRecognitionModes) : HRESULT
+    @lpVtbl.value.put_recognition_flags.call(this, modes)
+  end
+  def get_word_list(this : IInkRecognizerContext*, wordlist : IInkWordList*) : HRESULT
+    @lpVtbl.value.get_word_list.call(this, wordlist)
+  end
+  def putref_word_list(this : IInkRecognizerContext*, wordlist : IInkWordList) : HRESULT
+    @lpVtbl.value.putref_word_list.call(this, wordlist)
+  end
+  def get_recognizer(this : IInkRecognizerContext*, recognizer : IInkRecognizer*) : HRESULT
+    @lpVtbl.value.get_recognizer.call(this, recognizer)
+  end
+  def recognize(this : IInkRecognizerContext*, recognitionstatus : InkRecognitionStatus*, recognitionresult : IInkRecognitionResult*) : HRESULT
+    @lpVtbl.value.recognize.call(this, recognitionstatus, recognitionresult)
+  end
+  def stop_background_recognition(this : IInkRecognizerContext*) : HRESULT
+    @lpVtbl.value.stop_background_recognition.call(this)
+  end
+  def end_ink_input(this : IInkRecognizerContext*) : HRESULT
+    @lpVtbl.value.end_ink_input.call(this)
+  end
+  def background_recognize(this : IInkRecognizerContext*, customdata : VARIANT) : HRESULT
+    @lpVtbl.value.background_recognize.call(this, customdata)
+  end
+  def background_recognize_with_alternates(this : IInkRecognizerContext*, customdata : VARIANT) : HRESULT
+    @lpVtbl.value.background_recognize_with_alternates.call(this, customdata)
+  end
+  def clone(this : IInkRecognizerContext*, recocontext : IInkRecognizerContext*) : HRESULT
+    @lpVtbl.value.clone.call(this, recocontext)
+  end
+  def is_string_supported(this : IInkRecognizerContext*, string : UInt8*, supported : Int16*) : HRESULT
+    @lpVtbl.value.is_string_supported.call(this, string, supported)
+  end
+end
+struct LibWin32::IInkRecognizerContext2
+  def query_interface(this : IInkRecognizerContext2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizerContext2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizerContext2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizerContext2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizerContext2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizerContext2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizerContext2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_enabled_unicode_ranges(this : IInkRecognizerContext2*, unicoderanges : VARIANT*) : HRESULT
+    @lpVtbl.value.get_enabled_unicode_ranges.call(this, unicoderanges)
+  end
+  def put_enabled_unicode_ranges(this : IInkRecognizerContext2*, unicoderanges : VARIANT) : HRESULT
+    @lpVtbl.value.put_enabled_unicode_ranges.call(this, unicoderanges)
+  end
+end
+struct LibWin32::IInkRecognitionResult
+  def query_interface(this : IInkRecognitionResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognitionResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognitionResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognitionResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognitionResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognitionResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognitionResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_top_string(this : IInkRecognitionResult*, topstring : UInt8**) : HRESULT
+    @lpVtbl.value.get_top_string.call(this, topstring)
+  end
+  def get_top_alternate(this : IInkRecognitionResult*, topalternate : IInkRecognitionAlternate*) : HRESULT
+    @lpVtbl.value.get_top_alternate.call(this, topalternate)
+  end
+  def get_top_confidence(this : IInkRecognitionResult*, topconfidence : InkRecognitionConfidence*) : HRESULT
+    @lpVtbl.value.get_top_confidence.call(this, topconfidence)
+  end
+  def get_strokes(this : IInkRecognitionResult*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def alternates_from_selection(this : IInkRecognitionResult*, selectionstart : Int32, selectionlength : Int32, maximumalternates : Int32, alternatesfromselection : IInkRecognitionAlternates*) : HRESULT
+    @lpVtbl.value.alternates_from_selection.call(this, selectionstart, selectionlength, maximumalternates, alternatesfromselection)
+  end
+  def modify_top_alternate(this : IInkRecognitionResult*, alternate : IInkRecognitionAlternate) : HRESULT
+    @lpVtbl.value.modify_top_alternate.call(this, alternate)
+  end
+  def set_result_on_strokes(this : IInkRecognitionResult*) : HRESULT
+    @lpVtbl.value.set_result_on_strokes.call(this)
+  end
+end
+struct LibWin32::IInkRecognitionAlternate
+  def query_interface(this : IInkRecognitionAlternate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognitionAlternate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognitionAlternate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognitionAlternate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognitionAlternate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognitionAlternate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognitionAlternate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_string(this : IInkRecognitionAlternate*, recostring : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.call(this, recostring)
+  end
+  def get_confidence(this : IInkRecognitionAlternate*, confidence : InkRecognitionConfidence*) : HRESULT
+    @lpVtbl.value.get_confidence.call(this, confidence)
+  end
+  def get_baseline(this : IInkRecognitionAlternate*, baseline : VARIANT*) : HRESULT
+    @lpVtbl.value.get_baseline.call(this, baseline)
+  end
+  def get_midline(this : IInkRecognitionAlternate*, midline : VARIANT*) : HRESULT
+    @lpVtbl.value.get_midline.call(this, midline)
+  end
+  def get_ascender(this : IInkRecognitionAlternate*, ascender : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ascender.call(this, ascender)
+  end
+  def get_descender(this : IInkRecognitionAlternate*, descender : VARIANT*) : HRESULT
+    @lpVtbl.value.get_descender.call(this, descender)
+  end
+  def get_line_number(this : IInkRecognitionAlternate*, linenumber : Int32*) : HRESULT
+    @lpVtbl.value.get_line_number.call(this, linenumber)
+  end
+  def get_strokes(this : IInkRecognitionAlternate*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def get_line_alternates(this : IInkRecognitionAlternate*, linealternates : IInkRecognitionAlternates*) : HRESULT
+    @lpVtbl.value.get_line_alternates.call(this, linealternates)
+  end
+  def get_confidence_alternates(this : IInkRecognitionAlternate*, confidencealternates : IInkRecognitionAlternates*) : HRESULT
+    @lpVtbl.value.get_confidence_alternates.call(this, confidencealternates)
+  end
+  def get_strokes_from_stroke_ranges(this : IInkRecognitionAlternate*, strokes : IInkStrokes, getstrokesfromstrokeranges : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes_from_stroke_ranges.call(this, strokes, getstrokesfromstrokeranges)
+  end
+  def get_strokes_from_text_range(this : IInkRecognitionAlternate*, selectionstart : Int32*, selectionlength : Int32*, getstrokesfromtextrange : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes_from_text_range.call(this, selectionstart, selectionlength, getstrokesfromtextrange)
+  end
+  def get_text_range_from_strokes(this : IInkRecognitionAlternate*, strokes : IInkStrokes, selectionstart : Int32*, selectionlength : Int32*) : HRESULT
+    @lpVtbl.value.get_text_range_from_strokes.call(this, strokes, selectionstart, selectionlength)
+  end
+  def alternates_with_constant_property_values(this : IInkRecognitionAlternate*, propertytype : UInt8*, alternateswithconstantpropertyvalues : IInkRecognitionAlternates*) : HRESULT
+    @lpVtbl.value.alternates_with_constant_property_values.call(this, propertytype, alternateswithconstantpropertyvalues)
+  end
+  def get_property_value(this : IInkRecognitionAlternate*, propertytype : UInt8*, propertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.call(this, propertytype, propertyvalue)
+  end
+end
+struct LibWin32::IInkRecognitionAlternates
+  def query_interface(this : IInkRecognitionAlternates*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognitionAlternates*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognitionAlternates*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognitionAlternates*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognitionAlternates*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognitionAlternates*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognitionAlternates*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkRecognitionAlternates*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkRecognitionAlternates*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def get_strokes(this : IInkRecognitionAlternates*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def item(this : IInkRecognitionAlternates*, index : Int32, inkrecoalternate : IInkRecognitionAlternate*) : HRESULT
+    @lpVtbl.value.item.call(this, index, inkrecoalternate)
+  end
+end
+struct LibWin32::IInkRecognizerGuide
+  def query_interface(this : IInkRecognizerGuide*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkRecognizerGuide*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkRecognizerGuide*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkRecognizerGuide*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkRecognizerGuide*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkRecognizerGuide*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkRecognizerGuide*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_writing_box(this : IInkRecognizerGuide*, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_writing_box.call(this, rectangle)
+  end
+  def put_writing_box(this : IInkRecognizerGuide*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.put_writing_box.call(this, rectangle)
+  end
+  def get_drawn_box(this : IInkRecognizerGuide*, rectangle : IInkRectangle*) : HRESULT
+    @lpVtbl.value.get_drawn_box.call(this, rectangle)
+  end
+  def put_drawn_box(this : IInkRecognizerGuide*, rectangle : IInkRectangle) : HRESULT
+    @lpVtbl.value.put_drawn_box.call(this, rectangle)
+  end
+  def get_rows(this : IInkRecognizerGuide*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_rows.call(this, units)
+  end
+  def put_rows(this : IInkRecognizerGuide*, units : Int32) : HRESULT
+    @lpVtbl.value.put_rows.call(this, units)
+  end
+  def get_columns(this : IInkRecognizerGuide*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_columns.call(this, units)
+  end
+  def put_columns(this : IInkRecognizerGuide*, units : Int32) : HRESULT
+    @lpVtbl.value.put_columns.call(this, units)
+  end
+  def get_midline(this : IInkRecognizerGuide*, units : Int32*) : HRESULT
+    @lpVtbl.value.get_midline.call(this, units)
+  end
+  def put_midline(this : IInkRecognizerGuide*, units : Int32) : HRESULT
+    @lpVtbl.value.put_midline.call(this, units)
+  end
+  def get_guide_data(this : IInkRecognizerGuide*, precoguide : InkRecoGuide*) : HRESULT
+    @lpVtbl.value.get_guide_data.call(this, precoguide)
+  end
+  def put_guide_data(this : IInkRecognizerGuide*, recoguide : InkRecoGuide) : HRESULT
+    @lpVtbl.value.put_guide_data.call(this, recoguide)
+  end
+end
+struct LibWin32::IInkWordList
+  def query_interface(this : IInkWordList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkWordList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkWordList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkWordList*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkWordList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkWordList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkWordList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_word(this : IInkWordList*, newword : UInt8*) : HRESULT
+    @lpVtbl.value.add_word.call(this, newword)
+  end
+  def remove_word(this : IInkWordList*, removeword : UInt8*) : HRESULT
+    @lpVtbl.value.remove_word.call(this, removeword)
+  end
+  def merge(this : IInkWordList*, mergewordlist : IInkWordList) : HRESULT
+    @lpVtbl.value.merge.call(this, mergewordlist)
+  end
+end
+struct LibWin32::IInkWordList2
+  def query_interface(this : IInkWordList2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkWordList2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkWordList2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkWordList2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkWordList2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkWordList2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkWordList2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_words(this : IInkWordList2*, newwords : UInt8*) : HRESULT
+    @lpVtbl.value.add_words.call(this, newwords)
+  end
+end
+struct LibWin32::IInk
+  def query_interface(this : IInk*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInk*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInk*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInk*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInk*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInk*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInk*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkLineInfo
+  def query_interface(this : IInkLineInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkLineInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkLineInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_format(this : IInkLineInfo*, pim : INKMETRIC*) : HRESULT
+    @lpVtbl.value.set_format.call(this, pim)
+  end
+  def get_format(this : IInkLineInfo*, pim : INKMETRIC*) : HRESULT
+    @lpVtbl.value.get_format.call(this, pim)
+  end
+  def get_ink_extent(this : IInkLineInfo*, pim : INKMETRIC*, pnwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_ink_extent.call(this, pim, pnwidth)
+  end
+  def get_candidate(this : IInkLineInfo*, ncandidatenum : UInt32, pwcrecogword : LibC::LPWSTR, pcwcrecogword : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_candidate.call(this, ncandidatenum, pwcrecogword, pcwcrecogword, dwflags)
+  end
+  def set_candidate(this : IInkLineInfo*, ncandidatenum : UInt32, strrecogword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_candidate.call(this, ncandidatenum, strrecogword)
+  end
+  def recognize(this : IInkLineInfo*) : HRESULT
+    @lpVtbl.value.recognize.call(this)
+  end
+end
+struct LibWin32::ISketchInk
+  def query_interface(this : ISketchInk*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISketchInk*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISketchInk*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISketchInk*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISketchInk*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISketchInk*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISketchInk*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInkDivider
+  def query_interface(this : IInkDivider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDivider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDivider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDivider*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDivider*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDivider*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDivider*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_strokes(this : IInkDivider*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def putref_strokes(this : IInkDivider*, strokes : IInkStrokes) : HRESULT
+    @lpVtbl.value.putref_strokes.call(this, strokes)
+  end
+  def get_recognizer_context(this : IInkDivider*, recognizercontext : IInkRecognizerContext*) : HRESULT
+    @lpVtbl.value.get_recognizer_context.call(this, recognizercontext)
+  end
+  def putref_recognizer_context(this : IInkDivider*, recognizercontext : IInkRecognizerContext) : HRESULT
+    @lpVtbl.value.putref_recognizer_context.call(this, recognizercontext)
+  end
+  def get_line_height(this : IInkDivider*, lineheight : Int32*) : HRESULT
+    @lpVtbl.value.get_line_height.call(this, lineheight)
+  end
+  def put_line_height(this : IInkDivider*, lineheight : Int32) : HRESULT
+    @lpVtbl.value.put_line_height.call(this, lineheight)
+  end
+  def divide(this : IInkDivider*, inkdivisionresult : IInkDivisionResult*) : HRESULT
+    @lpVtbl.value.divide.call(this, inkdivisionresult)
+  end
+end
+struct LibWin32::IInkDivisionResult
+  def query_interface(this : IInkDivisionResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDivisionResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDivisionResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDivisionResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDivisionResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDivisionResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDivisionResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_strokes(this : IInkDivisionResult*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def result_by_type(this : IInkDivisionResult*, divisiontype : InkDivisionType, inkdivisionunits : IInkDivisionUnits*) : HRESULT
+    @lpVtbl.value.result_by_type.call(this, divisiontype, inkdivisionunits)
+  end
+end
+struct LibWin32::IInkDivisionUnit
+  def query_interface(this : IInkDivisionUnit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDivisionUnit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDivisionUnit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDivisionUnit*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDivisionUnit*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDivisionUnit*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDivisionUnit*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_strokes(this : IInkDivisionUnit*, strokes : IInkStrokes*) : HRESULT
+    @lpVtbl.value.get_strokes.call(this, strokes)
+  end
+  def get_division_type(this : IInkDivisionUnit*, divisiontype : InkDivisionType*) : HRESULT
+    @lpVtbl.value.get_division_type.call(this, divisiontype)
+  end
+  def get_recognized_string(this : IInkDivisionUnit*, recostring : UInt8**) : HRESULT
+    @lpVtbl.value.get_recognized_string.call(this, recostring)
+  end
+  def get_rotation_transform(this : IInkDivisionUnit*, rotationtransform : IInkTransform*) : HRESULT
+    @lpVtbl.value.get_rotation_transform.call(this, rotationtransform)
+  end
+end
+struct LibWin32::IInkDivisionUnits
+  def query_interface(this : IInkDivisionUnits*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkDivisionUnits*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkDivisionUnits*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkDivisionUnits*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkDivisionUnits*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkDivisionUnits*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkDivisionUnits*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IInkDivisionUnits*, count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, count)
+  end
+  def get__new_enum(this : IInkDivisionUnits*, newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, newenum)
+  end
+  def item(this : IInkDivisionUnits*, index : Int32, inkdivisionunit : IInkDivisionUnit*) : HRESULT
+    @lpVtbl.value.item.call(this, index, inkdivisionunit)
+  end
+end
+struct LibWin32::IPenInputPanel
+  def query_interface(this : IPenInputPanel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPenInputPanel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPenInputPanel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPenInputPanel*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPenInputPanel*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPenInputPanel*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPenInputPanel*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_busy(this : IPenInputPanel*, busy : Int16*) : HRESULT
+    @lpVtbl.value.get_busy.call(this, busy)
+  end
+  def get_factoid(this : IPenInputPanel*, factoid : UInt8**) : HRESULT
+    @lpVtbl.value.get_factoid.call(this, factoid)
+  end
+  def put_factoid(this : IPenInputPanel*, factoid : UInt8*) : HRESULT
+    @lpVtbl.value.put_factoid.call(this, factoid)
+  end
+  def get_attached_edit_window(this : IPenInputPanel*, attachededitwindow : Int32*) : HRESULT
+    @lpVtbl.value.get_attached_edit_window.call(this, attachededitwindow)
+  end
+  def put_attached_edit_window(this : IPenInputPanel*, attachededitwindow : Int32) : HRESULT
+    @lpVtbl.value.put_attached_edit_window.call(this, attachededitwindow)
+  end
+  def get_current_panel(this : IPenInputPanel*, currentpanel : PanelType*) : HRESULT
+    @lpVtbl.value.get_current_panel.call(this, currentpanel)
+  end
+  def put_current_panel(this : IPenInputPanel*, currentpanel : PanelType) : HRESULT
+    @lpVtbl.value.put_current_panel.call(this, currentpanel)
+  end
+  def get_default_panel(this : IPenInputPanel*, pdefaultpanel : PanelType*) : HRESULT
+    @lpVtbl.value.get_default_panel.call(this, pdefaultpanel)
+  end
+  def put_default_panel(this : IPenInputPanel*, defaultpanel : PanelType) : HRESULT
+    @lpVtbl.value.put_default_panel.call(this, defaultpanel)
+  end
+  def get_visible(this : IPenInputPanel*, visible : Int16*) : HRESULT
+    @lpVtbl.value.get_visible.call(this, visible)
+  end
+  def put_visible(this : IPenInputPanel*, visible : Int16) : HRESULT
+    @lpVtbl.value.put_visible.call(this, visible)
+  end
+  def get_top(this : IPenInputPanel*, top : Int32*) : HRESULT
+    @lpVtbl.value.get_top.call(this, top)
+  end
+  def get_left(this : IPenInputPanel*, left : Int32*) : HRESULT
+    @lpVtbl.value.get_left.call(this, left)
+  end
+  def get_width(this : IPenInputPanel*, width : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, width)
+  end
+  def get_height(this : IPenInputPanel*, height : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, height)
+  end
+  def get_vertical_offset(this : IPenInputPanel*, verticaloffset : Int32*) : HRESULT
+    @lpVtbl.value.get_vertical_offset.call(this, verticaloffset)
+  end
+  def put_vertical_offset(this : IPenInputPanel*, verticaloffset : Int32) : HRESULT
+    @lpVtbl.value.put_vertical_offset.call(this, verticaloffset)
+  end
+  def get_horizontal_offset(this : IPenInputPanel*, horizontaloffset : Int32*) : HRESULT
+    @lpVtbl.value.get_horizontal_offset.call(this, horizontaloffset)
+  end
+  def put_horizontal_offset(this : IPenInputPanel*, horizontaloffset : Int32) : HRESULT
+    @lpVtbl.value.put_horizontal_offset.call(this, horizontaloffset)
+  end
+  def get_auto_show(this : IPenInputPanel*, pautoshow : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_show.call(this, pautoshow)
+  end
+  def put_auto_show(this : IPenInputPanel*, autoshow : Int16) : HRESULT
+    @lpVtbl.value.put_auto_show.call(this, autoshow)
+  end
+  def move_to(this : IPenInputPanel*, left : Int32, top : Int32) : HRESULT
+    @lpVtbl.value.move_to.call(this, left, top)
+  end
+  def commit_pending_input(this : IPenInputPanel*) : HRESULT
+    @lpVtbl.value.commit_pending_input.call(this)
+  end
+  def refresh(this : IPenInputPanel*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def enable_tsf(this : IPenInputPanel*, enable : Int16) : HRESULT
+    @lpVtbl.value.enable_tsf.call(this, enable)
+  end
+end
+struct LibWin32::IIPenInputPanelEvents
+  def query_interface(this : IIPenInputPanelEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIPenInputPanelEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIPenInputPanelEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIPenInputPanelEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIPenInputPanelEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIPenInputPanelEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIPenInputPanelEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IHandwrittenTextInsertion
+  def query_interface(this : IHandwrittenTextInsertion*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IHandwrittenTextInsertion*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IHandwrittenTextInsertion*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def insert_recognition_results_array(this : IHandwrittenTextInsertion*, psaalternates : SAFEARRAY*, locale : UInt32, falternatecontainsautospacinginformation : LibC::BOOL) : HRESULT
+    @lpVtbl.value.insert_recognition_results_array.call(this, psaalternates, locale, falternatecontainsautospacinginformation)
+  end
+  def insert_ink_recognition_result(this : IHandwrittenTextInsertion*, piinkrecoresult : IInkRecognitionResult, locale : UInt32, falternatecontainsautospacinginformation : LibC::BOOL) : HRESULT
+    @lpVtbl.value.insert_ink_recognition_result.call(this, piinkrecoresult, locale, falternatecontainsautospacinginformation)
+  end
+end
+struct LibWin32::ITextInputPanelEventSink
+  def query_interface(this : ITextInputPanelEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextInputPanelEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextInputPanelEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def in_place_state_changing(this : ITextInputPanelEventSink*, oldinplacestate : InPlaceState, newinplacestate : InPlaceState) : HRESULT
+    @lpVtbl.value.in_place_state_changing.call(this, oldinplacestate, newinplacestate)
+  end
+  def in_place_state_changed(this : ITextInputPanelEventSink*, oldinplacestate : InPlaceState, newinplacestate : InPlaceState) : HRESULT
+    @lpVtbl.value.in_place_state_changed.call(this, oldinplacestate, newinplacestate)
+  end
+  def in_place_size_changing(this : ITextInputPanelEventSink*, oldboundingrectangle : RECT, newboundingrectangle : RECT) : HRESULT
+    @lpVtbl.value.in_place_size_changing.call(this, oldboundingrectangle, newboundingrectangle)
+  end
+  def in_place_size_changed(this : ITextInputPanelEventSink*, oldboundingrectangle : RECT, newboundingrectangle : RECT) : HRESULT
+    @lpVtbl.value.in_place_size_changed.call(this, oldboundingrectangle, newboundingrectangle)
+  end
+  def input_area_changing(this : ITextInputPanelEventSink*, oldinputarea : PanelInputArea, newinputarea : PanelInputArea) : HRESULT
+    @lpVtbl.value.input_area_changing.call(this, oldinputarea, newinputarea)
+  end
+  def input_area_changed(this : ITextInputPanelEventSink*, oldinputarea : PanelInputArea, newinputarea : PanelInputArea) : HRESULT
+    @lpVtbl.value.input_area_changed.call(this, oldinputarea, newinputarea)
+  end
+  def correction_mode_changing(this : ITextInputPanelEventSink*, oldcorrectionmode : CorrectionMode, newcorrectionmode : CorrectionMode) : HRESULT
+    @lpVtbl.value.correction_mode_changing.call(this, oldcorrectionmode, newcorrectionmode)
+  end
+  def correction_mode_changed(this : ITextInputPanelEventSink*, oldcorrectionmode : CorrectionMode, newcorrectionmode : CorrectionMode) : HRESULT
+    @lpVtbl.value.correction_mode_changed.call(this, oldcorrectionmode, newcorrectionmode)
+  end
+  def in_place_visibility_changing(this : ITextInputPanelEventSink*, oldvisible : LibC::BOOL, newvisible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.in_place_visibility_changing.call(this, oldvisible, newvisible)
+  end
+  def in_place_visibility_changed(this : ITextInputPanelEventSink*, oldvisible : LibC::BOOL, newvisible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.in_place_visibility_changed.call(this, oldvisible, newvisible)
+  end
+  def text_inserting(this : ITextInputPanelEventSink*, ink : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.text_inserting.call(this, ink)
+  end
+  def text_inserted(this : ITextInputPanelEventSink*, ink : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.text_inserted.call(this, ink)
+  end
+end
+struct LibWin32::ITextInputPanel
+  def query_interface(this : ITextInputPanel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextInputPanel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextInputPanel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attached_edit_window(this : ITextInputPanel*, attachededitwindow : HANDLE*) : HRESULT
+    @lpVtbl.value.get_attached_edit_window.call(this, attachededitwindow)
+  end
+  def put_attached_edit_window(this : ITextInputPanel*, attachededitwindow : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_attached_edit_window.call(this, attachededitwindow)
+  end
+  def get_current_interaction_mode(this : ITextInputPanel*, currentinteractionmode : InteractionMode*) : HRESULT
+    @lpVtbl.value.get_current_interaction_mode.call(this, currentinteractionmode)
+  end
+  def get_default_in_place_state(this : ITextInputPanel*, state : InPlaceState*) : HRESULT
+    @lpVtbl.value.get_default_in_place_state.call(this, state)
+  end
+  def put_default_in_place_state(this : ITextInputPanel*, state : InPlaceState) : HRESULT
+    @lpVtbl.value.put_default_in_place_state.call(this, state)
+  end
+  def get_current_in_place_state(this : ITextInputPanel*, state : InPlaceState*) : HRESULT
+    @lpVtbl.value.get_current_in_place_state.call(this, state)
+  end
+  def get_default_input_area(this : ITextInputPanel*, area : PanelInputArea*) : HRESULT
+    @lpVtbl.value.get_default_input_area.call(this, area)
+  end
+  def put_default_input_area(this : ITextInputPanel*, area : PanelInputArea) : HRESULT
+    @lpVtbl.value.put_default_input_area.call(this, area)
+  end
+  def get_current_input_area(this : ITextInputPanel*, area : PanelInputArea*) : HRESULT
+    @lpVtbl.value.get_current_input_area.call(this, area)
+  end
+  def get_current_correction_mode(this : ITextInputPanel*, mode : CorrectionMode*) : HRESULT
+    @lpVtbl.value.get_current_correction_mode.call(this, mode)
+  end
+  def get_preferred_in_place_direction(this : ITextInputPanel*, direction : InPlaceDirection*) : HRESULT
+    @lpVtbl.value.get_preferred_in_place_direction.call(this, direction)
+  end
+  def put_preferred_in_place_direction(this : ITextInputPanel*, direction : InPlaceDirection) : HRESULT
+    @lpVtbl.value.put_preferred_in_place_direction.call(this, direction)
+  end
+  def get_expand_post_insertion_correction(this : ITextInputPanel*, expand : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_expand_post_insertion_correction.call(this, expand)
+  end
+  def put_expand_post_insertion_correction(this : ITextInputPanel*, expand : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_expand_post_insertion_correction.call(this, expand)
+  end
+  def get_in_place_visible_on_focus(this : ITextInputPanel*, visible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_in_place_visible_on_focus.call(this, visible)
+  end
+  def put_in_place_visible_on_focus(this : ITextInputPanel*, visible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_in_place_visible_on_focus.call(this, visible)
+  end
+  def get_in_place_bounding_rectangle(this : ITextInputPanel*, boundingrectangle : RECT*) : HRESULT
+    @lpVtbl.value.get_in_place_bounding_rectangle.call(this, boundingrectangle)
+  end
+  def get_pop_up_correction_height(this : ITextInputPanel*, height : Int32*) : HRESULT
+    @lpVtbl.value.get_pop_up_correction_height.call(this, height)
+  end
+  def get_pop_down_correction_height(this : ITextInputPanel*, height : Int32*) : HRESULT
+    @lpVtbl.value.get_pop_down_correction_height.call(this, height)
+  end
+  def commit_pending_input(this : ITextInputPanel*) : HRESULT
+    @lpVtbl.value.commit_pending_input.call(this)
+  end
+  def set_in_place_visibility(this : ITextInputPanel*, visible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_in_place_visibility.call(this, visible)
+  end
+  def set_in_place_position(this : ITextInputPanel*, xposition : Int32, yposition : Int32, position : CorrectionPosition) : HRESULT
+    @lpVtbl.value.set_in_place_position.call(this, xposition, yposition, position)
+  end
+  def set_in_place_hover_target_position(this : ITextInputPanel*, xposition : Int32, yposition : Int32) : HRESULT
+    @lpVtbl.value.set_in_place_hover_target_position.call(this, xposition, yposition)
+  end
+  def advise(this : ITextInputPanel*, eventsink : ITextInputPanelEventSink, eventmask : UInt32) : HRESULT
+    @lpVtbl.value.advise.call(this, eventsink, eventmask)
+  end
+  def unadvise(this : ITextInputPanel*, eventsink : ITextInputPanelEventSink) : HRESULT
+    @lpVtbl.value.unadvise.call(this, eventsink)
+  end
+end
+struct LibWin32::IInputPanelWindowHandle
+  def query_interface(this : IInputPanelWindowHandle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInputPanelWindowHandle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInputPanelWindowHandle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_attached_edit_window32(this : IInputPanelWindowHandle*, attachededitwindow : Int32*) : HRESULT
+    @lpVtbl.value.get_attached_edit_window32.call(this, attachededitwindow)
+  end
+  def put_attached_edit_window32(this : IInputPanelWindowHandle*, attachededitwindow : Int32) : HRESULT
+    @lpVtbl.value.put_attached_edit_window32.call(this, attachededitwindow)
+  end
+  def get_attached_edit_window64(this : IInputPanelWindowHandle*, attachededitwindow : Int64*) : HRESULT
+    @lpVtbl.value.get_attached_edit_window64.call(this, attachededitwindow)
+  end
+  def put_attached_edit_window64(this : IInputPanelWindowHandle*, attachededitwindow : Int64) : HRESULT
+    @lpVtbl.value.put_attached_edit_window64.call(this, attachededitwindow)
+  end
+end
+struct LibWin32::ITextInputPanelRunInfo
+  def query_interface(this : ITextInputPanelRunInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextInputPanelRunInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextInputPanelRunInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_tip_running(this : ITextInputPanelRunInfo*, pfrunning : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_tip_running.call(this, pfrunning)
+  end
+end
+struct LibWin32::IInkEdit
+  def query_interface(this : IInkEdit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInkEdit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInkEdit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInkEdit*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInkEdit*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInkEdit*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInkEdit*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status(this : IInkEdit*, pstatus : InkEditStatus*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_use_mouse_for_input(this : IInkEdit*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_use_mouse_for_input.call(this, pval)
+  end
+  def put_use_mouse_for_input(this : IInkEdit*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_use_mouse_for_input.call(this, newval)
+  end
+  def get_ink_mode(this : IInkEdit*, pval : InkMode*) : HRESULT
+    @lpVtbl.value.get_ink_mode.call(this, pval)
+  end
+  def put_ink_mode(this : IInkEdit*, newval : InkMode) : HRESULT
+    @lpVtbl.value.put_ink_mode.call(this, newval)
+  end
+  def get_ink_insert_mode(this : IInkEdit*, pval : InkInsertMode*) : HRESULT
+    @lpVtbl.value.get_ink_insert_mode.call(this, pval)
+  end
+  def put_ink_insert_mode(this : IInkEdit*, newval : InkInsertMode) : HRESULT
+    @lpVtbl.value.put_ink_insert_mode.call(this, newval)
+  end
+  def get_drawing_attributes(this : IInkEdit*, pval : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_drawing_attributes.call(this, pval)
+  end
+  def putref_drawing_attributes(this : IInkEdit*, newval : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_drawing_attributes.call(this, newval)
+  end
+  def get_recognition_timeout(this : IInkEdit*, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_recognition_timeout.call(this, pval)
+  end
+  def put_recognition_timeout(this : IInkEdit*, newval : Int32) : HRESULT
+    @lpVtbl.value.put_recognition_timeout.call(this, newval)
+  end
+  def get_recognizer(this : IInkEdit*, pval : IInkRecognizer*) : HRESULT
+    @lpVtbl.value.get_recognizer.call(this, pval)
+  end
+  def putref_recognizer(this : IInkEdit*, newval : IInkRecognizer) : HRESULT
+    @lpVtbl.value.putref_recognizer.call(this, newval)
+  end
+  def get_factoid(this : IInkEdit*, pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_factoid.call(this, pval)
+  end
+  def put_factoid(this : IInkEdit*, newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_factoid.call(this, newval)
+  end
+  def get_sel_inks(this : IInkEdit*, pselink : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_inks.call(this, pselink)
+  end
+  def put_sel_inks(this : IInkEdit*, selink : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_inks.call(this, selink)
+  end
+  def get_sel_inks_display_mode(this : IInkEdit*, pinkdisplaymode : InkDisplayMode*) : HRESULT
+    @lpVtbl.value.get_sel_inks_display_mode.call(this, pinkdisplaymode)
+  end
+  def put_sel_inks_display_mode(this : IInkEdit*, inkdisplaymode : InkDisplayMode) : HRESULT
+    @lpVtbl.value.put_sel_inks_display_mode.call(this, inkdisplaymode)
+  end
+  def recognize(this : IInkEdit*) : HRESULT
+    @lpVtbl.value.recognize.call(this)
+  end
+  def get_gesture_status(this : IInkEdit*, gesture : InkApplicationGesture, plisten : Int16*) : HRESULT
+    @lpVtbl.value.get_gesture_status.call(this, gesture, plisten)
+  end
+  def set_gesture_status(this : IInkEdit*, gesture : InkApplicationGesture, listen : Int16) : HRESULT
+    @lpVtbl.value.set_gesture_status.call(this, gesture, listen)
+  end
+  def put_back_color(this : IInkEdit*, clr : UInt32) : HRESULT
+    @lpVtbl.value.put_back_color.call(this, clr)
+  end
+  def get_back_color(this : IInkEdit*, pclr : UInt32*) : HRESULT
+    @lpVtbl.value.get_back_color.call(this, pclr)
+  end
+  def get_appearance(this : IInkEdit*, pappearance : AppearanceConstants*) : HRESULT
+    @lpVtbl.value.get_appearance.call(this, pappearance)
+  end
+  def put_appearance(this : IInkEdit*, pappearance : AppearanceConstants) : HRESULT
+    @lpVtbl.value.put_appearance.call(this, pappearance)
+  end
+  def get_border_style(this : IInkEdit*, pborderstyle : BorderStyleConstants*) : HRESULT
+    @lpVtbl.value.get_border_style.call(this, pborderstyle)
+  end
+  def put_border_style(this : IInkEdit*, pborderstyle : BorderStyleConstants) : HRESULT
+    @lpVtbl.value.put_border_style.call(this, pborderstyle)
+  end
+  def get_hwnd(this : IInkEdit*, pohhwnd : UInt32*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, pohhwnd)
+  end
+  def get_font(this : IInkEdit*, ppfont : IFontDisp*) : HRESULT
+    @lpVtbl.value.get_font.call(this, ppfont)
+  end
+  def putref_font(this : IInkEdit*, ppfont : IFontDisp) : HRESULT
+    @lpVtbl.value.putref_font.call(this, ppfont)
+  end
+  def get_text(this : IInkEdit*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstrtext)
+  end
+  def put_text(this : IInkEdit*, pbstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.put_text.call(this, pbstrtext)
+  end
+  def get_mouse_icon(this : IInkEdit*, mouseicon : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_mouse_icon.call(this, mouseicon)
+  end
+  def put_mouse_icon(this : IInkEdit*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.put_mouse_icon.call(this, mouseicon)
+  end
+  def putref_mouse_icon(this : IInkEdit*, mouseicon : IPictureDisp) : HRESULT
+    @lpVtbl.value.putref_mouse_icon.call(this, mouseicon)
+  end
+  def get_mouse_pointer(this : IInkEdit*, mousepointer : InkMousePointer*) : HRESULT
+    @lpVtbl.value.get_mouse_pointer.call(this, mousepointer)
+  end
+  def put_mouse_pointer(this : IInkEdit*, mousepointer : InkMousePointer) : HRESULT
+    @lpVtbl.value.put_mouse_pointer.call(this, mousepointer)
+  end
+  def get_locked(this : IInkEdit*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_locked.call(this, pval)
+  end
+  def put_locked(this : IInkEdit*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_locked.call(this, newval)
+  end
+  def get_enabled(this : IInkEdit*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pval)
+  end
+  def put_enabled(this : IInkEdit*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, newval)
+  end
+  def get_max_length(this : IInkEdit*, plmaxlength : Int32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, plmaxlength)
+  end
+  def put_max_length(this : IInkEdit*, lmaxlength : Int32) : HRESULT
+    @lpVtbl.value.put_max_length.call(this, lmaxlength)
+  end
+  def get_multi_line(this : IInkEdit*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_multi_line.call(this, pval)
+  end
+  def put_multi_line(this : IInkEdit*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_multi_line.call(this, newval)
+  end
+  def get_scroll_bars(this : IInkEdit*, pval : ScrollBarsConstants*) : HRESULT
+    @lpVtbl.value.get_scroll_bars.call(this, pval)
+  end
+  def put_scroll_bars(this : IInkEdit*, newval : ScrollBarsConstants) : HRESULT
+    @lpVtbl.value.put_scroll_bars.call(this, newval)
+  end
+  def get_disable_no_scroll(this : IInkEdit*, pval : Int16*) : HRESULT
+    @lpVtbl.value.get_disable_no_scroll.call(this, pval)
+  end
+  def put_disable_no_scroll(this : IInkEdit*, newval : Int16) : HRESULT
+    @lpVtbl.value.put_disable_no_scroll.call(this, newval)
+  end
+  def get_sel_alignment(this : IInkEdit*, pvarselalignment : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_alignment.call(this, pvarselalignment)
+  end
+  def put_sel_alignment(this : IInkEdit*, pvarselalignment : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_alignment.call(this, pvarselalignment)
+  end
+  def get_sel_bold(this : IInkEdit*, pvarselbold : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_bold.call(this, pvarselbold)
+  end
+  def put_sel_bold(this : IInkEdit*, pvarselbold : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_bold.call(this, pvarselbold)
+  end
+  def get_sel_italic(this : IInkEdit*, pvarselitalic : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_italic.call(this, pvarselitalic)
+  end
+  def put_sel_italic(this : IInkEdit*, pvarselitalic : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_italic.call(this, pvarselitalic)
+  end
+  def get_sel_underline(this : IInkEdit*, pvarselunderline : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_underline.call(this, pvarselunderline)
+  end
+  def put_sel_underline(this : IInkEdit*, pvarselunderline : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_underline.call(this, pvarselunderline)
+  end
+  def get_sel_color(this : IInkEdit*, pvarselcolor : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_color.call(this, pvarselcolor)
+  end
+  def put_sel_color(this : IInkEdit*, pvarselcolor : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_color.call(this, pvarselcolor)
+  end
+  def get_sel_font_name(this : IInkEdit*, pvarselfontname : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_font_name.call(this, pvarselfontname)
+  end
+  def put_sel_font_name(this : IInkEdit*, pvarselfontname : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_font_name.call(this, pvarselfontname)
+  end
+  def get_sel_font_size(this : IInkEdit*, pvarselfontsize : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_font_size.call(this, pvarselfontsize)
+  end
+  def put_sel_font_size(this : IInkEdit*, pvarselfontsize : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_font_size.call(this, pvarselfontsize)
+  end
+  def get_sel_char_offset(this : IInkEdit*, pvarselcharoffset : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sel_char_offset.call(this, pvarselcharoffset)
+  end
+  def put_sel_char_offset(this : IInkEdit*, pvarselcharoffset : VARIANT) : HRESULT
+    @lpVtbl.value.put_sel_char_offset.call(this, pvarselcharoffset)
+  end
+  def get_text_rtf(this : IInkEdit*, pbstrtextrtf : UInt8**) : HRESULT
+    @lpVtbl.value.get_text_rtf.call(this, pbstrtextrtf)
+  end
+  def put_text_rtf(this : IInkEdit*, pbstrtextrtf : UInt8*) : HRESULT
+    @lpVtbl.value.put_text_rtf.call(this, pbstrtextrtf)
+  end
+  def get_sel_start(this : IInkEdit*, plselstart : Int32*) : HRESULT
+    @lpVtbl.value.get_sel_start.call(this, plselstart)
+  end
+  def put_sel_start(this : IInkEdit*, plselstart : Int32) : HRESULT
+    @lpVtbl.value.put_sel_start.call(this, plselstart)
+  end
+  def get_sel_length(this : IInkEdit*, plsellength : Int32*) : HRESULT
+    @lpVtbl.value.get_sel_length.call(this, plsellength)
+  end
+  def put_sel_length(this : IInkEdit*, plsellength : Int32) : HRESULT
+    @lpVtbl.value.put_sel_length.call(this, plsellength)
+  end
+  def get_sel_text(this : IInkEdit*, pbstrseltext : UInt8**) : HRESULT
+    @lpVtbl.value.get_sel_text.call(this, pbstrseltext)
+  end
+  def put_sel_text(this : IInkEdit*, pbstrseltext : UInt8*) : HRESULT
+    @lpVtbl.value.put_sel_text.call(this, pbstrseltext)
+  end
+  def get_sel_rtf(this : IInkEdit*, pbstrselrtf : UInt8**) : HRESULT
+    @lpVtbl.value.get_sel_rtf.call(this, pbstrselrtf)
+  end
+  def put_sel_rtf(this : IInkEdit*, pbstrselrtf : UInt8*) : HRESULT
+    @lpVtbl.value.put_sel_rtf.call(this, pbstrselrtf)
+  end
+  def refresh(this : IInkEdit*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+end
+struct LibWin32::IIInkEditEvents
+  def query_interface(this : IIInkEditEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIInkEditEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIInkEditEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIInkEditEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIInkEditEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIInkEditEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIInkEditEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IMathInputControl
+  def query_interface(this : IMathInputControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IMathInputControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IMathInputControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IMathInputControl*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IMathInputControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IMathInputControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IMathInputControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def show(this : IMathInputControl*) : HRESULT
+    @lpVtbl.value.show.call(this)
+  end
+  def hide(this : IMathInputControl*) : HRESULT
+    @lpVtbl.value.hide.call(this)
+  end
+  def is_visible(this : IMathInputControl*, pvbshown : Int16*) : HRESULT
+    @lpVtbl.value.is_visible.call(this, pvbshown)
+  end
+  def get_position(this : IMathInputControl*, left : Int32*, top : Int32*, right : Int32*, bottom : Int32*) : HRESULT
+    @lpVtbl.value.get_position.call(this, left, top, right, bottom)
+  end
+  def set_position(this : IMathInputControl*, left : Int32, top : Int32, right : Int32, bottom : Int32) : HRESULT
+    @lpVtbl.value.set_position.call(this, left, top, right, bottom)
+  end
+  def clear(this : IMathInputControl*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def set_custom_paint(this : IMathInputControl*, element : Int32, paint : Int16) : HRESULT
+    @lpVtbl.value.set_custom_paint.call(this, element, paint)
+  end
+  def set_caption_text(this : IMathInputControl*, captiontext : UInt8*) : HRESULT
+    @lpVtbl.value.set_caption_text.call(this, captiontext)
+  end
+  def load_ink(this : IMathInputControl*, ink : IInkDisp) : HRESULT
+    @lpVtbl.value.load_ink.call(this, ink)
+  end
+  def set_owner_window(this : IMathInputControl*, ownerwindow : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_owner_window.call(this, ownerwindow)
+  end
+  def enable_extended_buttons(this : IMathInputControl*, extended : Int16) : HRESULT
+    @lpVtbl.value.enable_extended_buttons.call(this, extended)
+  end
+  def get_preview_height(this : IMathInputControl*, height : Int32*) : HRESULT
+    @lpVtbl.value.get_preview_height.call(this, height)
+  end
+  def set_preview_height(this : IMathInputControl*, height : Int32) : HRESULT
+    @lpVtbl.value.set_preview_height.call(this, height)
+  end
+  def enable_auto_grow(this : IMathInputControl*, autogrow : Int16) : HRESULT
+    @lpVtbl.value.enable_auto_grow.call(this, autogrow)
+  end
+  def add_function_name(this : IMathInputControl*, functionname : UInt8*) : HRESULT
+    @lpVtbl.value.add_function_name.call(this, functionname)
+  end
+  def remove_function_name(this : IMathInputControl*, functionname : UInt8*) : HRESULT
+    @lpVtbl.value.remove_function_name.call(this, functionname)
+  end
+  def get_hover_icon(this : IMathInputControl*, hoverimage : IPictureDisp*) : HRESULT
+    @lpVtbl.value.get_hover_icon.call(this, hoverimage)
+  end
+end
+struct LibWin32::IIMathInputControlEvents
+  def query_interface(this : IIMathInputControlEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIMathInputControlEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIMathInputControlEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIMathInputControlEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIMathInputControlEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIMathInputControlEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIMathInputControlEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IRealTimeStylus
+  def query_interface(this : IRealTimeStylus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRealTimeStylus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRealTimeStylus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_enabled(this : IRealTimeStylus*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pfenable)
+  end
+  def put_enabled(this : IRealTimeStylus*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, fenable)
+  end
+  def get_hwnd(this : IRealTimeStylus*, phwnd : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, phwnd)
+  end
+  def put_hwnd(this : IRealTimeStylus*, hwnd : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.put_hwnd.call(this, hwnd)
+  end
+  def get_window_input_rectangle(this : IRealTimeStylus*, prcwndinputrect : RECT*) : HRESULT
+    @lpVtbl.value.get_window_input_rectangle.call(this, prcwndinputrect)
+  end
+  def put_window_input_rectangle(this : IRealTimeStylus*, prcwndinputrect : RECT*) : HRESULT
+    @lpVtbl.value.put_window_input_rectangle.call(this, prcwndinputrect)
+  end
+  def add_stylus_sync_plugin(this : IRealTimeStylus*, iindex : UInt32, piplugin : IStylusSyncPlugin) : HRESULT
+    @lpVtbl.value.add_stylus_sync_plugin.call(this, iindex, piplugin)
+  end
+  def remove_stylus_sync_plugin(this : IRealTimeStylus*, iindex : UInt32, ppiplugin : IStylusSyncPlugin*) : HRESULT
+    @lpVtbl.value.remove_stylus_sync_plugin.call(this, iindex, ppiplugin)
+  end
+  def remove_all_stylus_sync_plugins(this : IRealTimeStylus*) : HRESULT
+    @lpVtbl.value.remove_all_stylus_sync_plugins.call(this)
+  end
+  def get_stylus_sync_plugin(this : IRealTimeStylus*, iindex : UInt32, ppiplugin : IStylusSyncPlugin*) : HRESULT
+    @lpVtbl.value.get_stylus_sync_plugin.call(this, iindex, ppiplugin)
+  end
+  def get_stylus_sync_plugin_count(this : IRealTimeStylus*, pcplugins : UInt32*) : HRESULT
+    @lpVtbl.value.get_stylus_sync_plugin_count.call(this, pcplugins)
+  end
+  def add_stylus_async_plugin(this : IRealTimeStylus*, iindex : UInt32, piplugin : IStylusAsyncPlugin) : HRESULT
+    @lpVtbl.value.add_stylus_async_plugin.call(this, iindex, piplugin)
+  end
+  def remove_stylus_async_plugin(this : IRealTimeStylus*, iindex : UInt32, ppiplugin : IStylusAsyncPlugin*) : HRESULT
+    @lpVtbl.value.remove_stylus_async_plugin.call(this, iindex, ppiplugin)
+  end
+  def remove_all_stylus_async_plugins(this : IRealTimeStylus*) : HRESULT
+    @lpVtbl.value.remove_all_stylus_async_plugins.call(this)
+  end
+  def get_stylus_async_plugin(this : IRealTimeStylus*, iindex : UInt32, ppiplugin : IStylusAsyncPlugin*) : HRESULT
+    @lpVtbl.value.get_stylus_async_plugin.call(this, iindex, ppiplugin)
+  end
+  def get_stylus_async_plugin_count(this : IRealTimeStylus*, pcplugins : UInt32*) : HRESULT
+    @lpVtbl.value.get_stylus_async_plugin_count.call(this, pcplugins)
+  end
+  def get_child_real_time_stylus_plugin(this : IRealTimeStylus*, ppirts : IRealTimeStylus*) : HRESULT
+    @lpVtbl.value.get_child_real_time_stylus_plugin.call(this, ppirts)
+  end
+  def putref_child_real_time_stylus_plugin(this : IRealTimeStylus*, pirts : IRealTimeStylus) : HRESULT
+    @lpVtbl.value.putref_child_real_time_stylus_plugin.call(this, pirts)
+  end
+  def add_custom_stylus_data_to_queue(this : IRealTimeStylus*, sq : StylusQueue, pguidid : Guid*, cbdata : UInt32, pbdata : UInt8*) : HRESULT
+    @lpVtbl.value.add_custom_stylus_data_to_queue.call(this, sq, pguidid, cbdata, pbdata)
+  end
+  def clear_stylus_queues(this : IRealTimeStylus*) : HRESULT
+    @lpVtbl.value.clear_stylus_queues.call(this)
+  end
+  def set_all_tablets_mode(this : IRealTimeStylus*, fusemouseforinput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_all_tablets_mode.call(this, fusemouseforinput)
+  end
+  def set_single_tablet_mode(this : IRealTimeStylus*, pitablet : IInkTablet) : HRESULT
+    @lpVtbl.value.set_single_tablet_mode.call(this, pitablet)
+  end
+  def get_tablet(this : IRealTimeStylus*, ppisingletablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet.call(this, ppisingletablet)
+  end
+  def get_tablet_context_id_from_tablet(this : IRealTimeStylus*, pitablet : IInkTablet, ptcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_tablet_context_id_from_tablet.call(this, pitablet, ptcid)
+  end
+  def get_tablet_from_tablet_context_id(this : IRealTimeStylus*, tcid : UInt32, ppitablet : IInkTablet*) : HRESULT
+    @lpVtbl.value.get_tablet_from_tablet_context_id.call(this, tcid, ppitablet)
+  end
+  def get_all_tablet_context_ids(this : IRealTimeStylus*, pctcidcount : UInt32*, pptcids : UInt32**) : HRESULT
+    @lpVtbl.value.get_all_tablet_context_ids.call(this, pctcidcount, pptcids)
+  end
+  def get_styluses(this : IRealTimeStylus*, ppiinkcursors : IInkCursors*) : HRESULT
+    @lpVtbl.value.get_styluses.call(this, ppiinkcursors)
+  end
+  def get_stylus_for_id(this : IRealTimeStylus*, sid : UInt32, ppiinkcursor : IInkCursor*) : HRESULT
+    @lpVtbl.value.get_stylus_for_id.call(this, sid, ppiinkcursor)
+  end
+  def set_desired_packet_description(this : IRealTimeStylus*, cproperties : UInt32, ppropertyguids : Guid*) : HRESULT
+    @lpVtbl.value.set_desired_packet_description.call(this, cproperties, ppropertyguids)
+  end
+  def get_desired_packet_description(this : IRealTimeStylus*, pcproperties : UInt32*, pppropertyguids : Guid**) : HRESULT
+    @lpVtbl.value.get_desired_packet_description.call(this, pcproperties, pppropertyguids)
+  end
+  def get_packet_description_data(this : IRealTimeStylus*, tcid : UInt32, pfinktodevicescalex : Float32*, pfinktodevicescaley : Float32*, pcpacketproperties : UInt32*, pppacketproperties : PACKET_PROPERTY**) : HRESULT
+    @lpVtbl.value.get_packet_description_data.call(this, tcid, pfinktodevicescalex, pfinktodevicescaley, pcpacketproperties, pppacketproperties)
+  end
+end
+struct LibWin32::IRealTimeStylus2
+  def query_interface(this : IRealTimeStylus2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRealTimeStylus2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRealTimeStylus2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_flicks_enabled(this : IRealTimeStylus2*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_flicks_enabled.call(this, pfenable)
+  end
+  def put_flicks_enabled(this : IRealTimeStylus2*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_flicks_enabled.call(this, fenable)
+  end
+end
+struct LibWin32::IRealTimeStylus3
+  def query_interface(this : IRealTimeStylus3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRealTimeStylus3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRealTimeStylus3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_multi_touch_enabled(this : IRealTimeStylus3*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_multi_touch_enabled.call(this, pfenable)
+  end
+  def put_multi_touch_enabled(this : IRealTimeStylus3*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_multi_touch_enabled.call(this, fenable)
+  end
+end
+struct LibWin32::IRealTimeStylusSynchronization
+  def query_interface(this : IRealTimeStylusSynchronization*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRealTimeStylusSynchronization*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRealTimeStylusSynchronization*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def acquire_lock(this : IRealTimeStylusSynchronization*, lock : RealTimeStylusLockType) : HRESULT
+    @lpVtbl.value.acquire_lock.call(this, lock)
+  end
+  def release_lock(this : IRealTimeStylusSynchronization*, lock : RealTimeStylusLockType) : HRESULT
+    @lpVtbl.value.release_lock.call(this, lock)
+  end
+end
+struct LibWin32::IStrokeBuilder
+  def query_interface(this : IStrokeBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStrokeBuilder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStrokeBuilder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_stroke(this : IStrokeBuilder*, cpktbufflength : UInt32, ppackets : Int32*, cpacketproperties : UInt32, ppacketproperties : PACKET_PROPERTY*, finktodevicescalex : Float32, finktodevicescaley : Float32, ppiinkstroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.create_stroke.call(this, cpktbufflength, ppackets, cpacketproperties, ppacketproperties, finktodevicescalex, finktodevicescaley, ppiinkstroke)
+  end
+  def begin_stroke(this : IStrokeBuilder*, tcid : UInt32, sid : UInt32, ppacket : Int32*, cpacketproperties : UInt32, ppacketproperties : PACKET_PROPERTY*, finktodevicescalex : Float32, finktodevicescaley : Float32, ppiinkstroke : IInkStrokeDisp*) : HRESULT
+    @lpVtbl.value.begin_stroke.call(this, tcid, sid, ppacket, cpacketproperties, ppacketproperties, finktodevicescalex, finktodevicescaley, ppiinkstroke)
+  end
+  def append_packets(this : IStrokeBuilder*, tcid : UInt32, sid : UInt32, cpktbufflength : UInt32, ppackets : Int32*) : HRESULT
+    @lpVtbl.value.append_packets.call(this, tcid, sid, cpktbufflength, ppackets)
+  end
+  def end_stroke(this : IStrokeBuilder*, tcid : UInt32, sid : UInt32, ppiinkstroke : IInkStrokeDisp*, pdirtyrect : RECT*) : HRESULT
+    @lpVtbl.value.end_stroke.call(this, tcid, sid, ppiinkstroke, pdirtyrect)
+  end
+  def get_ink(this : IStrokeBuilder*, ppiinkobj : IInkDisp*) : HRESULT
+    @lpVtbl.value.get_ink.call(this, ppiinkobj)
+  end
+  def putref_ink(this : IStrokeBuilder*, piinkobj : IInkDisp) : HRESULT
+    @lpVtbl.value.putref_ink.call(this, piinkobj)
+  end
+end
+struct LibWin32::IStylusPlugin
+  def query_interface(this : IStylusPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStylusPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStylusPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def real_time_stylus_enabled(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_enabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def real_time_stylus_disabled(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_disabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def stylus_in_range(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_in_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_out_of_range(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_out_of_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_down(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_down.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_up(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_up.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_button_down(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_down.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def stylus_button_up(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_up.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def in_air_packets(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.in_air_packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def packets(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def custom_stylus_data_added(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pguidid : Guid*, cbdata : UInt32, pbdata : UInt8*) : HRESULT
+    @lpVtbl.value.custom_stylus_data_added.call(this, pirtssrc, pguidid, cbdata, pbdata)
+  end
+  def system_event(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32, event : UInt16, eventdata : SYSTEM_EVENT_DATA) : HRESULT
+    @lpVtbl.value.system_event.call(this, pirtssrc, tcid, sid, event, eventdata)
+  end
+  def tablet_added(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, pitablet : IInkTablet) : HRESULT
+    @lpVtbl.value.tablet_added.call(this, pirtssrc, pitablet)
+  end
+  def tablet_removed(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, itabletindex : Int32) : HRESULT
+    @lpVtbl.value.tablet_removed.call(this, pirtssrc, itabletindex)
+  end
+  def error(this : IStylusPlugin*, pirtssrc : IRealTimeStylus, piplugin : IStylusPlugin, datainterest : RealTimeStylusDataInterest, hrerrorcode : HRESULT, lptrkey : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.error.call(this, pirtssrc, piplugin, datainterest, hrerrorcode, lptrkey)
+  end
+  def update_mapping(this : IStylusPlugin*, pirtssrc : IRealTimeStylus) : HRESULT
+    @lpVtbl.value.update_mapping.call(this, pirtssrc)
+  end
+  def data_interest(this : IStylusPlugin*, pdatainterest : RealTimeStylusDataInterest*) : HRESULT
+    @lpVtbl.value.data_interest.call(this, pdatainterest)
+  end
+end
+struct LibWin32::IStylusSyncPlugin
+  def query_interface(this : IStylusSyncPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStylusSyncPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStylusSyncPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def real_time_stylus_enabled(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_enabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def real_time_stylus_disabled(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_disabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def stylus_in_range(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_in_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_out_of_range(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_out_of_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_down(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_down.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_up(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_up.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_button_down(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_down.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def stylus_button_up(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_up.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def in_air_packets(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.in_air_packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def packets(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def custom_stylus_data_added(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pguidid : Guid*, cbdata : UInt32, pbdata : UInt8*) : HRESULT
+    @lpVtbl.value.custom_stylus_data_added.call(this, pirtssrc, pguidid, cbdata, pbdata)
+  end
+  def system_event(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32, event : UInt16, eventdata : SYSTEM_EVENT_DATA) : HRESULT
+    @lpVtbl.value.system_event.call(this, pirtssrc, tcid, sid, event, eventdata)
+  end
+  def tablet_added(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, pitablet : IInkTablet) : HRESULT
+    @lpVtbl.value.tablet_added.call(this, pirtssrc, pitablet)
+  end
+  def tablet_removed(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, itabletindex : Int32) : HRESULT
+    @lpVtbl.value.tablet_removed.call(this, pirtssrc, itabletindex)
+  end
+  def error(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus, piplugin : IStylusPlugin, datainterest : RealTimeStylusDataInterest, hrerrorcode : HRESULT, lptrkey : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.error.call(this, pirtssrc, piplugin, datainterest, hrerrorcode, lptrkey)
+  end
+  def update_mapping(this : IStylusSyncPlugin*, pirtssrc : IRealTimeStylus) : HRESULT
+    @lpVtbl.value.update_mapping.call(this, pirtssrc)
+  end
+  def data_interest(this : IStylusSyncPlugin*, pdatainterest : RealTimeStylusDataInterest*) : HRESULT
+    @lpVtbl.value.data_interest.call(this, pdatainterest)
+  end
+end
+struct LibWin32::IStylusAsyncPlugin
+  def query_interface(this : IStylusAsyncPlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStylusAsyncPlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStylusAsyncPlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def real_time_stylus_enabled(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_enabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def real_time_stylus_disabled(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, ctcidcount : UInt32, ptcids : UInt32*) : HRESULT
+    @lpVtbl.value.real_time_stylus_disabled.call(this, pirtssrc, ctcidcount, ptcids)
+  end
+  def stylus_in_range(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_in_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_out_of_range(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32) : HRESULT
+    @lpVtbl.value.stylus_out_of_range.call(this, pirtssrc, tcid, sid)
+  end
+  def stylus_down(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_down.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_up(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpropcountperpkt : UInt32, ppacket : Int32*, ppinoutpkt : Int32**) : HRESULT
+    @lpVtbl.value.stylus_up.call(this, pirtssrc, pstylusinfo, cpropcountperpkt, ppacket, ppinoutpkt)
+  end
+  def stylus_button_down(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_down.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def stylus_button_up(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, sid : UInt32, pguidstylusbutton : Guid*, pstyluspos : POINT*) : HRESULT
+    @lpVtbl.value.stylus_button_up.call(this, pirtssrc, sid, pguidstylusbutton, pstyluspos)
+  end
+  def in_air_packets(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.in_air_packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def packets(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pstylusinfo : StylusInfo*, cpktcount : UInt32, cpktbufflength : UInt32, ppackets : Int32*, pcinoutpkts : UInt32*, ppinoutpkts : Int32**) : HRESULT
+    @lpVtbl.value.packets.call(this, pirtssrc, pstylusinfo, cpktcount, cpktbufflength, ppackets, pcinoutpkts, ppinoutpkts)
+  end
+  def custom_stylus_data_added(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pguidid : Guid*, cbdata : UInt32, pbdata : UInt8*) : HRESULT
+    @lpVtbl.value.custom_stylus_data_added.call(this, pirtssrc, pguidid, cbdata, pbdata)
+  end
+  def system_event(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, tcid : UInt32, sid : UInt32, event : UInt16, eventdata : SYSTEM_EVENT_DATA) : HRESULT
+    @lpVtbl.value.system_event.call(this, pirtssrc, tcid, sid, event, eventdata)
+  end
+  def tablet_added(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, pitablet : IInkTablet) : HRESULT
+    @lpVtbl.value.tablet_added.call(this, pirtssrc, pitablet)
+  end
+  def tablet_removed(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, itabletindex : Int32) : HRESULT
+    @lpVtbl.value.tablet_removed.call(this, pirtssrc, itabletindex)
+  end
+  def error(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus, piplugin : IStylusPlugin, datainterest : RealTimeStylusDataInterest, hrerrorcode : HRESULT, lptrkey : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.error.call(this, pirtssrc, piplugin, datainterest, hrerrorcode, lptrkey)
+  end
+  def update_mapping(this : IStylusAsyncPlugin*, pirtssrc : IRealTimeStylus) : HRESULT
+    @lpVtbl.value.update_mapping.call(this, pirtssrc)
+  end
+  def data_interest(this : IStylusAsyncPlugin*, pdatainterest : RealTimeStylusDataInterest*) : HRESULT
+    @lpVtbl.value.data_interest.call(this, pdatainterest)
+  end
+end
+struct LibWin32::IDynamicRenderer
+  def query_interface(this : IDynamicRenderer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDynamicRenderer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDynamicRenderer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_enabled(this : IDynamicRenderer*, benabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, benabled)
+  end
+  def put_enabled(this : IDynamicRenderer*, benabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
+  end
+  def get_hwnd(this : IDynamicRenderer*, hwnd : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_hwnd.call(this, hwnd)
+  end
+  def put_hwnd(this : IDynamicRenderer*, hwnd : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.put_hwnd.call(this, hwnd)
+  end
+  def get_clip_rectangle(this : IDynamicRenderer*, prccliprect : RECT*) : HRESULT
+    @lpVtbl.value.get_clip_rectangle.call(this, prccliprect)
+  end
+  def put_clip_rectangle(this : IDynamicRenderer*, prccliprect : RECT*) : HRESULT
+    @lpVtbl.value.put_clip_rectangle.call(this, prccliprect)
+  end
+  def get_clip_region(this : IDynamicRenderer*, phcliprgn : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_clip_region.call(this, phcliprgn)
+  end
+  def put_clip_region(this : IDynamicRenderer*, hcliprgn : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.put_clip_region.call(this, hcliprgn)
+  end
+  def get_drawing_attributes(this : IDynamicRenderer*, ppida : IInkDrawingAttributes*) : HRESULT
+    @lpVtbl.value.get_drawing_attributes.call(this, ppida)
+  end
+  def putref_drawing_attributes(this : IDynamicRenderer*, pida : IInkDrawingAttributes) : HRESULT
+    @lpVtbl.value.putref_drawing_attributes.call(this, pida)
+  end
+  def get_data_cache_enabled(this : IDynamicRenderer*, pfcachedata : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_data_cache_enabled.call(this, pfcachedata)
+  end
+  def put_data_cache_enabled(this : IDynamicRenderer*, fcachedata : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_data_cache_enabled.call(this, fcachedata)
+  end
+  def release_cached_data(this : IDynamicRenderer*, strokeid : UInt32) : HRESULT
+    @lpVtbl.value.release_cached_data.call(this, strokeid)
+  end
+  def refresh(this : IDynamicRenderer*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def draw(this : IDynamicRenderer*, hdc : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.draw.call(this, hdc)
+  end
+end
+struct LibWin32::IGestureRecognizer
+  def query_interface(this : IGestureRecognizer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGestureRecognizer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGestureRecognizer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_enabled(this : IGestureRecognizer*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pfenabled)
+  end
+  def put_enabled(this : IGestureRecognizer*, fenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, fenabled)
+  end
+  def get_max_stroke_count(this : IGestureRecognizer*, pcstrokes : Int32*) : HRESULT
+    @lpVtbl.value.get_max_stroke_count.call(this, pcstrokes)
+  end
+  def put_max_stroke_count(this : IGestureRecognizer*, cstrokes : Int32) : HRESULT
+    @lpVtbl.value.put_max_stroke_count.call(this, cstrokes)
+  end
+  def enable_gestures(this : IGestureRecognizer*, cgestures : UInt32, pgestures : Int32*) : HRESULT
+    @lpVtbl.value.enable_gestures.call(this, cgestures, pgestures)
+  end
+  def reset(this : IGestureRecognizer*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+end
+struct LibWin32::ITipAutoCompleteProvider
+  def query_interface(this : ITipAutoCompleteProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITipAutoCompleteProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITipAutoCompleteProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def update_pending_text(this : ITipAutoCompleteProvider*, bstrpendingtext : UInt8*) : HRESULT
+    @lpVtbl.value.update_pending_text.call(this, bstrpendingtext)
+  end
+  def show(this : ITipAutoCompleteProvider*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+end
+struct LibWin32::ITipAutoCompleteClient
+  def query_interface(this : ITipAutoCompleteClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITipAutoCompleteClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITipAutoCompleteClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise_provider(this : ITipAutoCompleteClient*, hwndfield : LibC::HANDLE, piprovider : ITipAutoCompleteProvider) : HRESULT
+    @lpVtbl.value.advise_provider.call(this, hwndfield, piprovider)
+  end
+  def unadvise_provider(this : ITipAutoCompleteClient*, hwndfield : LibC::HANDLE, piprovider : ITipAutoCompleteProvider) : HRESULT
+    @lpVtbl.value.unadvise_provider.call(this, hwndfield, piprovider)
+  end
+  def user_selection(this : ITipAutoCompleteClient*) : HRESULT
+    @lpVtbl.value.user_selection.call(this)
+  end
+  def preferred_rects(this : ITipAutoCompleteClient*, prcaclist : RECT*, prcfield : RECT*, prcmodifiedaclist : RECT*, pfshownabovetip : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.preferred_rects.call(this, prcaclist, prcfield, prcmodifiedaclist, pfshownabovetip)
+  end
+  def request_show_ui(this : ITipAutoCompleteClient*, hwndlist : LibC::HANDLE, pfallowshowing : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.request_show_ui.call(this, hwndlist, pfallowshowing)
+  end
+end

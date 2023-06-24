@@ -3671,13 +3671,13 @@ lib LibWin32
   fun SafeArrayCopyData(psasource : SAFEARRAY*, psatarget : SAFEARRAY*) : HRESULT
 
   # Params # psa : SAFEARRAY* [In]
-  fun SafeArrayReleaseDescriptor(psa : SAFEARRAY*)
+  fun SafeArrayReleaseDescriptor(psa : SAFEARRAY*) : Void
 
   # Params # psa : SAFEARRAY* [In]
   fun SafeArrayDestroyDescriptor(psa : SAFEARRAY*) : HRESULT
 
   # Params # pdata : Void* [In]
-  fun SafeArrayReleaseData(pdata : Void*)
+  fun SafeArrayReleaseData(pdata : Void*) : Void
 
   # Params # psa : SAFEARRAY* [In]
   fun SafeArrayDestroyData(psa : SAFEARRAY*) : HRESULT
@@ -3749,7 +3749,7 @@ lib LibWin32
   fun SafeArrayCreateVectorEx(vt : UInt16, llbound : Int32, celements : UInt32, pvextra : Void*) : SAFEARRAY*
 
   # Params # pvarg : VARIANT* [In]
-  fun VariantInit(pvarg : VARIANT*)
+  fun VariantInit(pvarg : VARIANT*) : Void
 
   # Params # pvarg : VARIANT* [In]
   fun VariantClear(pvarg : VARIANT*) : HRESULT
@@ -4706,10 +4706,10 @@ lib LibWin32
   fun OaBuildVersion : UInt32
 
   # Params # pcustdata : CUSTDATA* [In]
-  fun ClearCustData(pcustdata : CUSTDATA*)
+  fun ClearCustData(pcustdata : CUSTDATA*) : Void
 
   # Params # 
-  fun OaEnablePerUserTLibRegistration
+  fun OaEnablePerUserTLibRegistration : Void
 
   # Params # 
   fun OleBuildVersion : UInt32
@@ -4718,7 +4718,7 @@ lib LibWin32
   fun OleInitialize(pvreserved : Void*) : HRESULT
 
   # Params # 
-  fun OleUninitialize
+  fun OleUninitialize : Void
 
   # Params # psrcdataobject : IDataObject [In]
   fun OleQueryLinkFromData(psrcdataobject : IDataObject) : HRESULT
@@ -4835,7 +4835,7 @@ lib LibWin32
   fun OleLockRunning(punknown : IUnknown, flock : LibC::BOOL, flastunlockcloses : LibC::BOOL) : HRESULT
 
   # Params # param0 : STGMEDIUM* [In]
-  fun ReleaseStgMedium(param0 : STGMEDIUM*)
+  fun ReleaseStgMedium(param0 : STGMEDIUM*) : Void
 
   # Params # ppoaholder : IOleAdviseHolder* [In]
   fun CreateOleAdviseHolder(ppoaholder : IOleAdviseHolder*) : HRESULT
@@ -4889,7 +4889,7 @@ lib LibWin32
   fun HRGN_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : HRGN*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HRGN* [In]
-  fun HRGN_UserFree(param0 : UInt32*, param1 : HRGN*)
+  fun HRGN_UserFree(param0 : UInt32*, param1 : HRGN*) : Void
 
   # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : HRGN* [In]
   fun HRGN_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : HRGN*) : UInt32
@@ -4901,7 +4901,7 @@ lib LibWin32
   fun HRGN_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : HRGN*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HRGN* [In]
-  fun HRGN_UserFree64(param0 : UInt32*, param1 : HRGN*)
+  fun HRGN_UserFree64(param0 : UInt32*, param1 : HRGN*) : Void
 
   # Params # hwndowner : LibC::HANDLE [In],x : UInt32 [In],y : UInt32 [In],lpszcaption : LibC::LPWSTR [In],cobjects : UInt32 [In],ppunk : IUnknown* [In],cpages : UInt32 [In],ppageclsid : Guid* [In],lcid : UInt32 [In],dwreserved : UInt32 [In],pvreserved : Void* [In]
   fun OleCreatePropertyFrame(hwndowner : LibC::HANDLE, x : UInt32, y : UInt32, lpszcaption : LibC::LPWSTR, cobjects : UInt32, ppunk : IUnknown*, cpages : UInt32, ppageclsid : Guid*, lcid : UInt32, dwreserved : UInt32, pvreserved : Void*) : HRESULT
@@ -5007,4 +5007,2821 @@ lib LibWin32
 
   # Params # lpoleuilinkcntr : IOleUILinkContainerA [In],hwndparent : LibC::HANDLE [In],lpsztitle : PSTR [In],clinks : Int32 [In]
   fun OleUIUpdateLinksA(lpoleuilinkcntr : IOleUILinkContainerA, hwndparent : LibC::HANDLE, lpsztitle : PSTR, clinks : Int32) : LibC::BOOL
+end
+struct LibWin32::ICreateTypeInfo
+  def query_interface(this : ICreateTypeInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICreateTypeInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICreateTypeInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_guid(this : ICreateTypeInfo*, guid : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guid)
+  end
+  def set_type_flags(this : ICreateTypeInfo*, utypeflags : UInt32) : HRESULT
+    @lpVtbl.value.set_type_flags.call(this, utypeflags)
+  end
+  def set_doc_string(this : ICreateTypeInfo*, pstrdoc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_doc_string.call(this, pstrdoc)
+  end
+  def set_help_context(this : ICreateTypeInfo*, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_context.call(this, dwhelpcontext)
+  end
+  def set_version(this : ICreateTypeInfo*, wmajorvernum : UInt16, wminorvernum : UInt16) : HRESULT
+    @lpVtbl.value.set_version.call(this, wmajorvernum, wminorvernum)
+  end
+  def add_ref_type_info(this : ICreateTypeInfo*, ptinfo : ITypeInfo, phreftype : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_type_info.call(this, ptinfo, phreftype)
+  end
+  def add_func_desc(this : ICreateTypeInfo*, index : UInt32, pfuncdesc : FUNCDESC*) : HRESULT
+    @lpVtbl.value.add_func_desc.call(this, index, pfuncdesc)
+  end
+  def add_impl_type(this : ICreateTypeInfo*, index : UInt32, hreftype : UInt32) : HRESULT
+    @lpVtbl.value.add_impl_type.call(this, index, hreftype)
+  end
+  def set_impl_type_flags(this : ICreateTypeInfo*, index : UInt32, impltypeflags : Int32) : HRESULT
+    @lpVtbl.value.set_impl_type_flags.call(this, index, impltypeflags)
+  end
+  def set_alignment(this : ICreateTypeInfo*, cbalignment : UInt16) : HRESULT
+    @lpVtbl.value.set_alignment.call(this, cbalignment)
+  end
+  def set_schema(this : ICreateTypeInfo*, pstrschema : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_schema.call(this, pstrschema)
+  end
+  def add_var_desc(this : ICreateTypeInfo*, index : UInt32, pvardesc : VARDESC*) : HRESULT
+    @lpVtbl.value.add_var_desc.call(this, index, pvardesc)
+  end
+  def set_func_and_param_names(this : ICreateTypeInfo*, index : UInt32, rgsznames : LibC::LPWSTR*, cnames : UInt32) : HRESULT
+    @lpVtbl.value.set_func_and_param_names.call(this, index, rgsznames, cnames)
+  end
+  def set_var_name(this : ICreateTypeInfo*, index : UInt32, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_var_name.call(this, index, szname)
+  end
+  def set_type_desc_alias(this : ICreateTypeInfo*, ptdescalias : TYPEDESC*) : HRESULT
+    @lpVtbl.value.set_type_desc_alias.call(this, ptdescalias)
+  end
+  def define_func_as_dll_entry(this : ICreateTypeInfo*, index : UInt32, szdllname : LibC::LPWSTR, szprocname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.define_func_as_dll_entry.call(this, index, szdllname, szprocname)
+  end
+  def set_func_doc_string(this : ICreateTypeInfo*, index : UInt32, szdocstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_func_doc_string.call(this, index, szdocstring)
+  end
+  def set_var_doc_string(this : ICreateTypeInfo*, index : UInt32, szdocstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_var_doc_string.call(this, index, szdocstring)
+  end
+  def set_func_help_context(this : ICreateTypeInfo*, index : UInt32, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_func_help_context.call(this, index, dwhelpcontext)
+  end
+  def set_var_help_context(this : ICreateTypeInfo*, index : UInt32, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_var_help_context.call(this, index, dwhelpcontext)
+  end
+  def set_mops(this : ICreateTypeInfo*, index : UInt32, bstrmops : UInt8*) : HRESULT
+    @lpVtbl.value.set_mops.call(this, index, bstrmops)
+  end
+  def set_type_idldesc(this : ICreateTypeInfo*, pidldesc : IDLDESC*) : HRESULT
+    @lpVtbl.value.set_type_idldesc.call(this, pidldesc)
+  end
+  def lay_out(this : ICreateTypeInfo*) : HRESULT
+    @lpVtbl.value.lay_out.call(this)
+  end
+end
+struct LibWin32::ICreateTypeInfo2
+  def query_interface(this : ICreateTypeInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICreateTypeInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICreateTypeInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_guid(this : ICreateTypeInfo2*, guid : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guid)
+  end
+  def set_type_flags(this : ICreateTypeInfo2*, utypeflags : UInt32) : HRESULT
+    @lpVtbl.value.set_type_flags.call(this, utypeflags)
+  end
+  def set_doc_string(this : ICreateTypeInfo2*, pstrdoc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_doc_string.call(this, pstrdoc)
+  end
+  def set_help_context(this : ICreateTypeInfo2*, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_context.call(this, dwhelpcontext)
+  end
+  def set_version(this : ICreateTypeInfo2*, wmajorvernum : UInt16, wminorvernum : UInt16) : HRESULT
+    @lpVtbl.value.set_version.call(this, wmajorvernum, wminorvernum)
+  end
+  def add_ref_type_info(this : ICreateTypeInfo2*, ptinfo : ITypeInfo, phreftype : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_type_info.call(this, ptinfo, phreftype)
+  end
+  def add_func_desc(this : ICreateTypeInfo2*, index : UInt32, pfuncdesc : FUNCDESC*) : HRESULT
+    @lpVtbl.value.add_func_desc.call(this, index, pfuncdesc)
+  end
+  def add_impl_type(this : ICreateTypeInfo2*, index : UInt32, hreftype : UInt32) : HRESULT
+    @lpVtbl.value.add_impl_type.call(this, index, hreftype)
+  end
+  def set_impl_type_flags(this : ICreateTypeInfo2*, index : UInt32, impltypeflags : Int32) : HRESULT
+    @lpVtbl.value.set_impl_type_flags.call(this, index, impltypeflags)
+  end
+  def set_alignment(this : ICreateTypeInfo2*, cbalignment : UInt16) : HRESULT
+    @lpVtbl.value.set_alignment.call(this, cbalignment)
+  end
+  def set_schema(this : ICreateTypeInfo2*, pstrschema : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_schema.call(this, pstrschema)
+  end
+  def add_var_desc(this : ICreateTypeInfo2*, index : UInt32, pvardesc : VARDESC*) : HRESULT
+    @lpVtbl.value.add_var_desc.call(this, index, pvardesc)
+  end
+  def set_func_and_param_names(this : ICreateTypeInfo2*, index : UInt32, rgsznames : LibC::LPWSTR*, cnames : UInt32) : HRESULT
+    @lpVtbl.value.set_func_and_param_names.call(this, index, rgsznames, cnames)
+  end
+  def set_var_name(this : ICreateTypeInfo2*, index : UInt32, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_var_name.call(this, index, szname)
+  end
+  def set_type_desc_alias(this : ICreateTypeInfo2*, ptdescalias : TYPEDESC*) : HRESULT
+    @lpVtbl.value.set_type_desc_alias.call(this, ptdescalias)
+  end
+  def define_func_as_dll_entry(this : ICreateTypeInfo2*, index : UInt32, szdllname : LibC::LPWSTR, szprocname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.define_func_as_dll_entry.call(this, index, szdllname, szprocname)
+  end
+  def set_func_doc_string(this : ICreateTypeInfo2*, index : UInt32, szdocstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_func_doc_string.call(this, index, szdocstring)
+  end
+  def set_var_doc_string(this : ICreateTypeInfo2*, index : UInt32, szdocstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_var_doc_string.call(this, index, szdocstring)
+  end
+  def set_func_help_context(this : ICreateTypeInfo2*, index : UInt32, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_func_help_context.call(this, index, dwhelpcontext)
+  end
+  def set_var_help_context(this : ICreateTypeInfo2*, index : UInt32, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_var_help_context.call(this, index, dwhelpcontext)
+  end
+  def set_mops(this : ICreateTypeInfo2*, index : UInt32, bstrmops : UInt8*) : HRESULT
+    @lpVtbl.value.set_mops.call(this, index, bstrmops)
+  end
+  def set_type_idldesc(this : ICreateTypeInfo2*, pidldesc : IDLDESC*) : HRESULT
+    @lpVtbl.value.set_type_idldesc.call(this, pidldesc)
+  end
+  def lay_out(this : ICreateTypeInfo2*) : HRESULT
+    @lpVtbl.value.lay_out.call(this)
+  end
+  def delete_func_desc(this : ICreateTypeInfo2*, index : UInt32) : HRESULT
+    @lpVtbl.value.delete_func_desc.call(this, index)
+  end
+  def delete_func_desc_by_mem_id(this : ICreateTypeInfo2*, memid : Int32, invkind : INVOKEKIND) : HRESULT
+    @lpVtbl.value.delete_func_desc_by_mem_id.call(this, memid, invkind)
+  end
+  def delete_var_desc(this : ICreateTypeInfo2*, index : UInt32) : HRESULT
+    @lpVtbl.value.delete_var_desc.call(this, index)
+  end
+  def delete_var_desc_by_mem_id(this : ICreateTypeInfo2*, memid : Int32) : HRESULT
+    @lpVtbl.value.delete_var_desc_by_mem_id.call(this, memid)
+  end
+  def delete_impl_type(this : ICreateTypeInfo2*, index : UInt32) : HRESULT
+    @lpVtbl.value.delete_impl_type.call(this, index)
+  end
+  def set_cust_data(this : ICreateTypeInfo2*, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_cust_data.call(this, guid, pvarval)
+  end
+  def set_func_cust_data(this : ICreateTypeInfo2*, index : UInt32, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_func_cust_data.call(this, index, guid, pvarval)
+  end
+  def set_param_cust_data(this : ICreateTypeInfo2*, indexfunc : UInt32, indexparam : UInt32, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_param_cust_data.call(this, indexfunc, indexparam, guid, pvarval)
+  end
+  def set_var_cust_data(this : ICreateTypeInfo2*, index : UInt32, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_var_cust_data.call(this, index, guid, pvarval)
+  end
+  def set_impl_type_cust_data(this : ICreateTypeInfo2*, index : UInt32, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_impl_type_cust_data.call(this, index, guid, pvarval)
+  end
+  def set_help_string_context(this : ICreateTypeInfo2*, dwhelpstringcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_string_context.call(this, dwhelpstringcontext)
+  end
+  def set_func_help_string_context(this : ICreateTypeInfo2*, index : UInt32, dwhelpstringcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_func_help_string_context.call(this, index, dwhelpstringcontext)
+  end
+  def set_var_help_string_context(this : ICreateTypeInfo2*, index : UInt32, dwhelpstringcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_var_help_string_context.call(this, index, dwhelpstringcontext)
+  end
+  def invalidate(this : ICreateTypeInfo2*) : HRESULT
+    @lpVtbl.value.invalidate.call(this)
+  end
+  def set_name(this : ICreateTypeInfo2*, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, szname)
+  end
+end
+struct LibWin32::ICreateTypeLib
+  def query_interface(this : ICreateTypeLib*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICreateTypeLib*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICreateTypeLib*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_type_info(this : ICreateTypeLib*, szname : LibC::LPWSTR, tkind : TYPEKIND, ppctinfo : ICreateTypeInfo*) : HRESULT
+    @lpVtbl.value.create_type_info.call(this, szname, tkind, ppctinfo)
+  end
+  def set_name(this : ICreateTypeLib*, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, szname)
+  end
+  def set_version(this : ICreateTypeLib*, wmajorvernum : UInt16, wminorvernum : UInt16) : HRESULT
+    @lpVtbl.value.set_version.call(this, wmajorvernum, wminorvernum)
+  end
+  def set_guid(this : ICreateTypeLib*, guid : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guid)
+  end
+  def set_doc_string(this : ICreateTypeLib*, szdoc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_doc_string.call(this, szdoc)
+  end
+  def set_help_file_name(this : ICreateTypeLib*, szhelpfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_help_file_name.call(this, szhelpfilename)
+  end
+  def set_help_context(this : ICreateTypeLib*, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_context.call(this, dwhelpcontext)
+  end
+  def set_lcid(this : ICreateTypeLib*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_lcid.call(this, lcid)
+  end
+  def set_lib_flags(this : ICreateTypeLib*, ulibflags : UInt32) : HRESULT
+    @lpVtbl.value.set_lib_flags.call(this, ulibflags)
+  end
+  def save_all_changes(this : ICreateTypeLib*) : HRESULT
+    @lpVtbl.value.save_all_changes.call(this)
+  end
+end
+struct LibWin32::ICreateTypeLib2
+  def query_interface(this : ICreateTypeLib2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICreateTypeLib2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICreateTypeLib2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_type_info(this : ICreateTypeLib2*, szname : LibC::LPWSTR, tkind : TYPEKIND, ppctinfo : ICreateTypeInfo*) : HRESULT
+    @lpVtbl.value.create_type_info.call(this, szname, tkind, ppctinfo)
+  end
+  def set_name(this : ICreateTypeLib2*, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.call(this, szname)
+  end
+  def set_version(this : ICreateTypeLib2*, wmajorvernum : UInt16, wminorvernum : UInt16) : HRESULT
+    @lpVtbl.value.set_version.call(this, wmajorvernum, wminorvernum)
+  end
+  def set_guid(this : ICreateTypeLib2*, guid : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, guid)
+  end
+  def set_doc_string(this : ICreateTypeLib2*, szdoc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_doc_string.call(this, szdoc)
+  end
+  def set_help_file_name(this : ICreateTypeLib2*, szhelpfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_help_file_name.call(this, szhelpfilename)
+  end
+  def set_help_context(this : ICreateTypeLib2*, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_context.call(this, dwhelpcontext)
+  end
+  def set_lcid(this : ICreateTypeLib2*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_lcid.call(this, lcid)
+  end
+  def set_lib_flags(this : ICreateTypeLib2*, ulibflags : UInt32) : HRESULT
+    @lpVtbl.value.set_lib_flags.call(this, ulibflags)
+  end
+  def save_all_changes(this : ICreateTypeLib2*) : HRESULT
+    @lpVtbl.value.save_all_changes.call(this)
+  end
+  def delete_type_info(this : ICreateTypeLib2*, szname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_type_info.call(this, szname)
+  end
+  def set_cust_data(this : ICreateTypeLib2*, guid : Guid*, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_cust_data.call(this, guid, pvarval)
+  end
+  def set_help_string_context(this : ICreateTypeLib2*, dwhelpstringcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_string_context.call(this, dwhelpstringcontext)
+  end
+  def set_help_string_dll(this : ICreateTypeLib2*, szfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_help_string_dll.call(this, szfilename)
+  end
+end
+struct LibWin32::IEnumVARIANT
+  def query_interface(this : IEnumVARIANT*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumVARIANT*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumVARIANT*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumVARIANT*, celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgvar, pceltfetched)
+  end
+  def skip(this : IEnumVARIANT*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumVARIANT*, ppenum : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::ITypeChangeEvents
+  def query_interface(this : ITypeChangeEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITypeChangeEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITypeChangeEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def request_type_change(this : ITypeChangeEvents*, changekind : CHANGEKIND, ptinfobefore : ITypeInfo, pstrname : LibC::LPWSTR, pfcancel : Int32*) : HRESULT
+    @lpVtbl.value.request_type_change.call(this, changekind, ptinfobefore, pstrname, pfcancel)
+  end
+  def after_type_change(this : ITypeChangeEvents*, changekind : CHANGEKIND, ptinfoafter : ITypeInfo, pstrname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.after_type_change.call(this, changekind, ptinfoafter, pstrname)
+  end
+end
+struct LibWin32::ICreateErrorInfo
+  def query_interface(this : ICreateErrorInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICreateErrorInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICreateErrorInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_guid(this : ICreateErrorInfo*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.set_guid.call(this, rguid)
+  end
+  def set_source(this : ICreateErrorInfo*, szsource : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_source.call(this, szsource)
+  end
+  def set_description(this : ICreateErrorInfo*, szdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.call(this, szdescription)
+  end
+  def set_help_file(this : ICreateErrorInfo*, szhelpfile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_help_file.call(this, szhelpfile)
+  end
+  def set_help_context(this : ICreateErrorInfo*, dwhelpcontext : UInt32) : HRESULT
+    @lpVtbl.value.set_help_context.call(this, dwhelpcontext)
+  end
+end
+struct LibWin32::ITypeFactory
+  def query_interface(this : ITypeFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITypeFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITypeFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_from_type_info(this : ITypeFactory*, ptypeinfo : ITypeInfo, riid : Guid*, ppv : IUnknown*) : HRESULT
+    @lpVtbl.value.create_from_type_info.call(this, ptypeinfo, riid, ppv)
+  end
+end
+struct LibWin32::ITypeMarshal
+  def query_interface(this : ITypeMarshal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITypeMarshal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITypeMarshal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def size(this : ITypeMarshal*, pvtype : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, psize : UInt32*) : HRESULT
+    @lpVtbl.value.size.call(this, pvtype, dwdestcontext, pvdestcontext, psize)
+  end
+  def marshal(this : ITypeMarshal*, pvtype : Void*, dwdestcontext : UInt32, pvdestcontext : Void*, cbbufferlength : UInt32, pbuffer : UInt8*, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.marshal.call(this, pvtype, dwdestcontext, pvdestcontext, cbbufferlength, pbuffer, pcbwritten)
+  end
+  def unmarshal(this : ITypeMarshal*, pvtype : Void*, dwflags : UInt32, cbbufferlength : UInt32, pbuffer : UInt8*, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.unmarshal.call(this, pvtype, dwflags, cbbufferlength, pbuffer, pcbread)
+  end
+  def free(this : ITypeMarshal*, pvtype : Void*) : HRESULT
+    @lpVtbl.value.free.call(this, pvtype)
+  end
+end
+struct LibWin32::IRecordInfo
+  def query_interface(this : IRecordInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRecordInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRecordInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def record_init(this : IRecordInfo*, pvnew : Void*) : HRESULT
+    @lpVtbl.value.record_init.call(this, pvnew)
+  end
+  def record_clear(this : IRecordInfo*, pvexisting : Void*) : HRESULT
+    @lpVtbl.value.record_clear.call(this, pvexisting)
+  end
+  def record_copy(this : IRecordInfo*, pvexisting : Void*, pvnew : Void*) : HRESULT
+    @lpVtbl.value.record_copy.call(this, pvexisting, pvnew)
+  end
+  def get_guid(this : IRecordInfo*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pguid)
+  end
+  def get_name(this : IRecordInfo*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_size(this : IRecordInfo*, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pcbsize)
+  end
+  def get_type_info(this : IRecordInfo*, pptypeinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, pptypeinfo)
+  end
+  def get_field(this : IRecordInfo*, pvdata : Void*, szfieldname : LibC::LPWSTR, pvarfield : VARIANT*) : HRESULT
+    @lpVtbl.value.get_field.call(this, pvdata, szfieldname, pvarfield)
+  end
+  def get_field_no_copy(this : IRecordInfo*, pvdata : Void*, szfieldname : LibC::LPWSTR, pvarfield : VARIANT*, ppvdatacarray : Void**) : HRESULT
+    @lpVtbl.value.get_field_no_copy.call(this, pvdata, szfieldname, pvarfield, ppvdatacarray)
+  end
+  def put_field(this : IRecordInfo*, wflags : UInt32, pvdata : Void*, szfieldname : LibC::LPWSTR, pvarfield : VARIANT*) : HRESULT
+    @lpVtbl.value.put_field.call(this, wflags, pvdata, szfieldname, pvarfield)
+  end
+  def put_field_no_copy(this : IRecordInfo*, wflags : UInt32, pvdata : Void*, szfieldname : LibC::LPWSTR, pvarfield : VARIANT*) : HRESULT
+    @lpVtbl.value.put_field_no_copy.call(this, wflags, pvdata, szfieldname, pvarfield)
+  end
+  def get_field_names(this : IRecordInfo*, pcnames : UInt32*, rgbstrnames : UInt8**) : HRESULT
+    @lpVtbl.value.get_field_names.call(this, pcnames, rgbstrnames)
+  end
+  def is_matching_type(this : IRecordInfo*, precordinfo : IRecordInfo) : LibC::BOOL
+    @lpVtbl.value.is_matching_type.call(this, precordinfo)
+  end
+  def record_create(this : IRecordInfo*) : Void*
+    @lpVtbl.value.record_create.call(this)
+  end
+  def record_create_copy(this : IRecordInfo*, pvsource : Void*, ppvdest : Void**) : HRESULT
+    @lpVtbl.value.record_create_copy.call(this, pvsource, ppvdest)
+  end
+  def record_destroy(this : IRecordInfo*, pvrecord : Void*) : HRESULT
+    @lpVtbl.value.record_destroy.call(this, pvrecord)
+  end
+end
+struct LibWin32::IOleAdviseHolder
+  def query_interface(this : IOleAdviseHolder*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleAdviseHolder*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleAdviseHolder*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def advise(this : IOleAdviseHolder*, padvise : IAdviseSink, pdwconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, padvise, pdwconnection)
+  end
+  def unadvise(this : IOleAdviseHolder*, dwconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwconnection)
+  end
+  def enum_advise(this : IOleAdviseHolder*, ppenumadvise : IEnumSTATDATA*) : HRESULT
+    @lpVtbl.value.enum_advise.call(this, ppenumadvise)
+  end
+  def send_on_rename(this : IOleAdviseHolder*, pmk : IMoniker) : HRESULT
+    @lpVtbl.value.send_on_rename.call(this, pmk)
+  end
+  def send_on_save(this : IOleAdviseHolder*) : HRESULT
+    @lpVtbl.value.send_on_save.call(this)
+  end
+  def send_on_close(this : IOleAdviseHolder*) : HRESULT
+    @lpVtbl.value.send_on_close.call(this)
+  end
+end
+struct LibWin32::IOleCache
+  def query_interface(this : IOleCache*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleCache*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleCache*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache(this : IOleCache*, pformatetc : FORMATETC*, advf : UInt32, pdwconnection : UInt32*) : HRESULT
+    @lpVtbl.value.cache.call(this, pformatetc, advf, pdwconnection)
+  end
+  def uncache(this : IOleCache*, dwconnection : UInt32) : HRESULT
+    @lpVtbl.value.uncache.call(this, dwconnection)
+  end
+  def enum_cache(this : IOleCache*, ppenumstatdata : IEnumSTATDATA*) : HRESULT
+    @lpVtbl.value.enum_cache.call(this, ppenumstatdata)
+  end
+  def init_cache(this : IOleCache*, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.init_cache.call(this, pdataobject)
+  end
+  def set_data(this : IOleCache*, pformatetc : FORMATETC*, pmedium : STGMEDIUM*, frelease : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_data.call(this, pformatetc, pmedium, frelease)
+  end
+end
+struct LibWin32::IOleCache2
+  def query_interface(this : IOleCache2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleCache2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleCache2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cache(this : IOleCache2*, pformatetc : FORMATETC*, advf : UInt32, pdwconnection : UInt32*) : HRESULT
+    @lpVtbl.value.cache.call(this, pformatetc, advf, pdwconnection)
+  end
+  def uncache(this : IOleCache2*, dwconnection : UInt32) : HRESULT
+    @lpVtbl.value.uncache.call(this, dwconnection)
+  end
+  def enum_cache(this : IOleCache2*, ppenumstatdata : IEnumSTATDATA*) : HRESULT
+    @lpVtbl.value.enum_cache.call(this, ppenumstatdata)
+  end
+  def init_cache(this : IOleCache2*, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.init_cache.call(this, pdataobject)
+  end
+  def set_data(this : IOleCache2*, pformatetc : FORMATETC*, pmedium : STGMEDIUM*, frelease : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_data.call(this, pformatetc, pmedium, frelease)
+  end
+  def update_cache(this : IOleCache2*, pdataobject : IDataObject, grfupdf : UPDFCACHE_FLAGS, preserved : Void*) : HRESULT
+    @lpVtbl.value.update_cache.call(this, pdataobject, grfupdf, preserved)
+  end
+  def discard_cache(this : IOleCache2*, dwdiscardoptions : UInt32) : HRESULT
+    @lpVtbl.value.discard_cache.call(this, dwdiscardoptions)
+  end
+end
+struct LibWin32::IOleCacheControl
+  def query_interface(this : IOleCacheControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleCacheControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleCacheControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_run(this : IOleCacheControl*, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.on_run.call(this, pdataobject)
+  end
+  def on_stop(this : IOleCacheControl*) : HRESULT
+    @lpVtbl.value.on_stop.call(this)
+  end
+end
+struct LibWin32::IParseDisplayName
+  def query_interface(this : IParseDisplayName*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IParseDisplayName*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IParseDisplayName*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_display_name(this : IParseDisplayName*, pbc : IBindCtx, pszdisplayname : LibC::LPWSTR, pcheaten : UInt32*, ppmkout : IMoniker*) : HRESULT
+    @lpVtbl.value.parse_display_name.call(this, pbc, pszdisplayname, pcheaten, ppmkout)
+  end
+end
+struct LibWin32::IOleContainer
+  def query_interface(this : IOleContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_display_name(this : IOleContainer*, pbc : IBindCtx, pszdisplayname : LibC::LPWSTR, pcheaten : UInt32*, ppmkout : IMoniker*) : HRESULT
+    @lpVtbl.value.parse_display_name.call(this, pbc, pszdisplayname, pcheaten, ppmkout)
+  end
+  def enum_objects(this : IOleContainer*, grfflags : UInt32, ppenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, grfflags, ppenum)
+  end
+  def lock_container(this : IOleContainer*, flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_container.call(this, flock)
+  end
+end
+struct LibWin32::IOleClientSite
+  def query_interface(this : IOleClientSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleClientSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleClientSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def save_object(this : IOleClientSite*) : HRESULT
+    @lpVtbl.value.save_object.call(this)
+  end
+  def get_moniker(this : IOleClientSite*, dwassign : UInt32, dwwhichmoniker : UInt32, ppmk : IMoniker*) : HRESULT
+    @lpVtbl.value.get_moniker.call(this, dwassign, dwwhichmoniker, ppmk)
+  end
+  def get_container(this : IOleClientSite*, ppcontainer : IOleContainer*) : HRESULT
+    @lpVtbl.value.get_container.call(this, ppcontainer)
+  end
+  def show_object(this : IOleClientSite*) : HRESULT
+    @lpVtbl.value.show_object.call(this)
+  end
+  def on_show_window(this : IOleClientSite*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_show_window.call(this, fshow)
+  end
+  def request_new_object_layout(this : IOleClientSite*) : HRESULT
+    @lpVtbl.value.request_new_object_layout.call(this)
+  end
+end
+struct LibWin32::IOleObject
+  def query_interface(this : IOleObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_client_site(this : IOleObject*, pclientsite : IOleClientSite) : HRESULT
+    @lpVtbl.value.set_client_site.call(this, pclientsite)
+  end
+  def get_client_site(this : IOleObject*, ppclientsite : IOleClientSite*) : HRESULT
+    @lpVtbl.value.get_client_site.call(this, ppclientsite)
+  end
+  def set_host_names(this : IOleObject*, szcontainerapp : LibC::LPWSTR, szcontainerobj : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_host_names.call(this, szcontainerapp, szcontainerobj)
+  end
+  def close(this : IOleObject*, dwsaveoption : UInt32) : HRESULT
+    @lpVtbl.value.close.call(this, dwsaveoption)
+  end
+  def set_moniker(this : IOleObject*, dwwhichmoniker : UInt32, pmk : IMoniker) : HRESULT
+    @lpVtbl.value.set_moniker.call(this, dwwhichmoniker, pmk)
+  end
+  def get_moniker(this : IOleObject*, dwassign : UInt32, dwwhichmoniker : UInt32, ppmk : IMoniker*) : HRESULT
+    @lpVtbl.value.get_moniker.call(this, dwassign, dwwhichmoniker, ppmk)
+  end
+  def init_from_data(this : IOleObject*, pdataobject : IDataObject, fcreation : LibC::BOOL, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.init_from_data.call(this, pdataobject, fcreation, dwreserved)
+  end
+  def get_clipboard_data(this : IOleObject*, dwreserved : UInt32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_clipboard_data.call(this, dwreserved, ppdataobject)
+  end
+  def do_verb(this : IOleObject*, iverb : Int32, lpmsg : MSG*, pactivesite : IOleClientSite, lindex : Int32, hwndparent : LibC::HANDLE, lprcposrect : RECT*) : HRESULT
+    @lpVtbl.value.do_verb.call(this, iverb, lpmsg, pactivesite, lindex, hwndparent, lprcposrect)
+  end
+  def enum_verbs(this : IOleObject*, ppenumoleverb : IEnumOLEVERB*) : HRESULT
+    @lpVtbl.value.enum_verbs.call(this, ppenumoleverb)
+  end
+  def update(this : IOleObject*) : HRESULT
+    @lpVtbl.value.update.call(this)
+  end
+  def is_up_to_date(this : IOleObject*) : HRESULT
+    @lpVtbl.value.is_up_to_date.call(this)
+  end
+  def get_user_class_id(this : IOleObject*, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_user_class_id.call(this, pclsid)
+  end
+  def get_user_type(this : IOleObject*, dwformoftype : UInt32, pszusertype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user_type.call(this, dwformoftype, pszusertype)
+  end
+  def set_extent(this : IOleObject*, dwdrawaspect : UInt32, psizel : SIZE*) : HRESULT
+    @lpVtbl.value.set_extent.call(this, dwdrawaspect, psizel)
+  end
+  def get_extent(this : IOleObject*, dwdrawaspect : UInt32, psizel : SIZE*) : HRESULT
+    @lpVtbl.value.get_extent.call(this, dwdrawaspect, psizel)
+  end
+  def advise(this : IOleObject*, padvsink : IAdviseSink, pdwconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.call(this, padvsink, pdwconnection)
+  end
+  def unadvise(this : IOleObject*, dwconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwconnection)
+  end
+  def enum_advise(this : IOleObject*, ppenumadvise : IEnumSTATDATA*) : HRESULT
+    @lpVtbl.value.enum_advise.call(this, ppenumadvise)
+  end
+  def get_misc_status(this : IOleObject*, dwaspect : UInt32, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_misc_status.call(this, dwaspect, pdwstatus)
+  end
+  def set_color_scheme(this : IOleObject*, plogpal : LOGPALETTE*) : HRESULT
+    @lpVtbl.value.set_color_scheme.call(this, plogpal)
+  end
+end
+struct LibWin32::IOleWindow
+  def query_interface(this : IOleWindow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleWindow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleWindow*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleWindow*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleWindow*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+end
+struct LibWin32::IOleLink
+  def query_interface(this : IOleLink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleLink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleLink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_update_options(this : IOleLink*, dwupdateopt : UInt32) : HRESULT
+    @lpVtbl.value.set_update_options.call(this, dwupdateopt)
+  end
+  def get_update_options(this : IOleLink*, pdwupdateopt : UInt32*) : HRESULT
+    @lpVtbl.value.get_update_options.call(this, pdwupdateopt)
+  end
+  def set_source_moniker(this : IOleLink*, pmk : IMoniker, rclsid : Guid*) : HRESULT
+    @lpVtbl.value.set_source_moniker.call(this, pmk, rclsid)
+  end
+  def get_source_moniker(this : IOleLink*, ppmk : IMoniker*) : HRESULT
+    @lpVtbl.value.get_source_moniker.call(this, ppmk)
+  end
+  def set_source_display_name(this : IOleLink*, pszstatustext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_source_display_name.call(this, pszstatustext)
+  end
+  def get_source_display_name(this : IOleLink*, ppszdisplayname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_source_display_name.call(this, ppszdisplayname)
+  end
+  def bind_to_source(this : IOleLink*, bindflags : UInt32, pbc : IBindCtx) : HRESULT
+    @lpVtbl.value.bind_to_source.call(this, bindflags, pbc)
+  end
+  def bind_if_running(this : IOleLink*) : HRESULT
+    @lpVtbl.value.bind_if_running.call(this)
+  end
+  def get_bound_source(this : IOleLink*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_bound_source.call(this, ppunk)
+  end
+  def unbind_source(this : IOleLink*) : HRESULT
+    @lpVtbl.value.unbind_source.call(this)
+  end
+  def update(this : IOleLink*, pbc : IBindCtx) : HRESULT
+    @lpVtbl.value.update.call(this, pbc)
+  end
+end
+struct LibWin32::IOleItemContainer
+  def query_interface(this : IOleItemContainer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleItemContainer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleItemContainer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def parse_display_name(this : IOleItemContainer*, pbc : IBindCtx, pszdisplayname : LibC::LPWSTR, pcheaten : UInt32*, ppmkout : IMoniker*) : HRESULT
+    @lpVtbl.value.parse_display_name.call(this, pbc, pszdisplayname, pcheaten, ppmkout)
+  end
+  def enum_objects(this : IOleItemContainer*, grfflags : UInt32, ppenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enum_objects.call(this, grfflags, ppenum)
+  end
+  def lock_container(this : IOleItemContainer*, flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_container.call(this, flock)
+  end
+  def get_object(this : IOleItemContainer*, pszitem : LibC::LPWSTR, dwspeedneeded : UInt32, pbc : IBindCtx, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_object.call(this, pszitem, dwspeedneeded, pbc, riid, ppvobject)
+  end
+  def get_object_storage(this : IOleItemContainer*, pszitem : LibC::LPWSTR, pbc : IBindCtx, riid : Guid*, ppvstorage : Void**) : HRESULT
+    @lpVtbl.value.get_object_storage.call(this, pszitem, pbc, riid, ppvstorage)
+  end
+  def is_running(this : IOleItemContainer*, pszitem : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.is_running.call(this, pszitem)
+  end
+end
+struct LibWin32::IOleInPlaceUIWindow
+  def query_interface(this : IOleInPlaceUIWindow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceUIWindow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceUIWindow*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceUIWindow*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceUIWindow*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def get_border(this : IOleInPlaceUIWindow*, lprectborder : RECT*) : HRESULT
+    @lpVtbl.value.get_border.call(this, lprectborder)
+  end
+  def request_border_space(this : IOleInPlaceUIWindow*, pborderwidths : RECT*) : HRESULT
+    @lpVtbl.value.request_border_space.call(this, pborderwidths)
+  end
+  def set_border_space(this : IOleInPlaceUIWindow*, pborderwidths : RECT*) : HRESULT
+    @lpVtbl.value.set_border_space.call(this, pborderwidths)
+  end
+  def set_active_object(this : IOleInPlaceUIWindow*, pactiveobject : IOleInPlaceActiveObject, pszobjname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_active_object.call(this, pactiveobject, pszobjname)
+  end
+end
+struct LibWin32::IOleInPlaceActiveObject
+  def query_interface(this : IOleInPlaceActiveObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceActiveObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceActiveObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceActiveObject*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceActiveObject*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def translate_accelerator(this : IOleInPlaceActiveObject*, lpmsg : MSG*) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, lpmsg)
+  end
+  def on_frame_window_activate(this : IOleInPlaceActiveObject*, factivate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_frame_window_activate.call(this, factivate)
+  end
+  def on_doc_window_activate(this : IOleInPlaceActiveObject*, factivate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_doc_window_activate.call(this, factivate)
+  end
+  def resize_border(this : IOleInPlaceActiveObject*, prcborder : RECT*, puiwindow : IOleInPlaceUIWindow, fframewindow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.resize_border.call(this, prcborder, puiwindow, fframewindow)
+  end
+  def enable_modeless(this : IOleInPlaceActiveObject*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_modeless.call(this, fenable)
+  end
+end
+struct LibWin32::IOleInPlaceFrame
+  def query_interface(this : IOleInPlaceFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceFrame*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceFrame*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceFrame*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceFrame*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def get_border(this : IOleInPlaceFrame*, lprectborder : RECT*) : HRESULT
+    @lpVtbl.value.get_border.call(this, lprectborder)
+  end
+  def request_border_space(this : IOleInPlaceFrame*, pborderwidths : RECT*) : HRESULT
+    @lpVtbl.value.request_border_space.call(this, pborderwidths)
+  end
+  def set_border_space(this : IOleInPlaceFrame*, pborderwidths : RECT*) : HRESULT
+    @lpVtbl.value.set_border_space.call(this, pborderwidths)
+  end
+  def set_active_object(this : IOleInPlaceFrame*, pactiveobject : IOleInPlaceActiveObject, pszobjname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_active_object.call(this, pactiveobject, pszobjname)
+  end
+  def insert_menus(this : IOleInPlaceFrame*, hmenushared : LibC::HANDLE, lpmenuwidths : OleMenuGroupWidths*) : HRESULT
+    @lpVtbl.value.insert_menus.call(this, hmenushared, lpmenuwidths)
+  end
+  def set_menu(this : IOleInPlaceFrame*, hmenushared : LibC::HANDLE, holemenu : LibC::IntPtrT, hwndactiveobject : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_menu.call(this, hmenushared, holemenu, hwndactiveobject)
+  end
+  def remove_menus(this : IOleInPlaceFrame*, hmenushared : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.remove_menus.call(this, hmenushared)
+  end
+  def set_status_text(this : IOleInPlaceFrame*, pszstatustext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_status_text.call(this, pszstatustext)
+  end
+  def enable_modeless(this : IOleInPlaceFrame*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_modeless.call(this, fenable)
+  end
+  def translate_accelerator(this : IOleInPlaceFrame*, lpmsg : MSG*, wid : UInt16) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, lpmsg, wid)
+  end
+end
+struct LibWin32::IOleInPlaceObject
+  def query_interface(this : IOleInPlaceObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceObject*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceObject*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def in_place_deactivate(this : IOleInPlaceObject*) : HRESULT
+    @lpVtbl.value.in_place_deactivate.call(this)
+  end
+  def ui_deactivate(this : IOleInPlaceObject*) : HRESULT
+    @lpVtbl.value.ui_deactivate.call(this)
+  end
+  def set_object_rects(this : IOleInPlaceObject*, lprcposrect : RECT*, lprccliprect : RECT*) : HRESULT
+    @lpVtbl.value.set_object_rects.call(this, lprcposrect, lprccliprect)
+  end
+  def reactivate_and_undo(this : IOleInPlaceObject*) : HRESULT
+    @lpVtbl.value.reactivate_and_undo.call(this)
+  end
+end
+struct LibWin32::IOleInPlaceSite
+  def query_interface(this : IOleInPlaceSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceSite*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceSite*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def can_in_place_activate(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.can_in_place_activate.call(this)
+  end
+  def on_in_place_activate(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.on_in_place_activate.call(this)
+  end
+  def on_ui_activate(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.on_ui_activate.call(this)
+  end
+  def get_window_context(this : IOleInPlaceSite*, ppframe : IOleInPlaceFrame*, ppdoc : IOleInPlaceUIWindow*, lprcposrect : RECT*, lprccliprect : RECT*, lpframeinfo : OIFI*) : HRESULT
+    @lpVtbl.value.get_window_context.call(this, ppframe, ppdoc, lprcposrect, lprccliprect, lpframeinfo)
+  end
+  def scroll(this : IOleInPlaceSite*, scrollextant : SIZE) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollextant)
+  end
+  def on_ui_deactivate(this : IOleInPlaceSite*, fundoable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_ui_deactivate.call(this, fundoable)
+  end
+  def on_in_place_deactivate(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.on_in_place_deactivate.call(this)
+  end
+  def discard_undo_state(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.discard_undo_state.call(this)
+  end
+  def deactivate_and_undo(this : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.deactivate_and_undo.call(this)
+  end
+  def on_pos_rect_change(this : IOleInPlaceSite*, lprcposrect : RECT*) : HRESULT
+    @lpVtbl.value.on_pos_rect_change.call(this, lprcposrect)
+  end
+end
+struct LibWin32::IContinue
+  def query_interface(this : IContinue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IContinue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IContinue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def f_continue(this : IContinue*) : HRESULT
+    @lpVtbl.value.f_continue.call(this)
+  end
+end
+struct LibWin32::IViewObject
+  def query_interface(this : IViewObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IViewObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IViewObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IViewObject*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdctargetdev : HDC, hdcdraw : HDC, lprcbounds : RECTL*, lprcwbounds : RECTL*, pfncontinue : LibC::IntPtrT, dwcontinue : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.draw.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdctargetdev, hdcdraw, lprcbounds, lprcwbounds, pfncontinue, dwcontinue)
+  end
+  def get_color_set(this : IViewObject*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hictargetdev : HDC, ppcolorset : LOGPALETTE**) : HRESULT
+    @lpVtbl.value.get_color_set.call(this, dwdrawaspect, lindex, pvaspect, ptd, hictargetdev, ppcolorset)
+  end
+  def freeze(this : IViewObject*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, pdwfreeze : UInt32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, dwdrawaspect, lindex, pvaspect, pdwfreeze)
+  end
+  def unfreeze(this : IViewObject*, dwfreeze : UInt32) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, dwfreeze)
+  end
+  def set_advise(this : IViewObject*, aspects : UInt32, advf : UInt32, padvsink : IAdviseSink) : HRESULT
+    @lpVtbl.value.set_advise.call(this, aspects, advf, padvsink)
+  end
+  def get_advise(this : IViewObject*, paspects : UInt32*, padvf : UInt32*, ppadvsink : IAdviseSink*) : HRESULT
+    @lpVtbl.value.get_advise.call(this, paspects, padvf, ppadvsink)
+  end
+end
+struct LibWin32::IViewObject2
+  def query_interface(this : IViewObject2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IViewObject2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IViewObject2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IViewObject2*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdctargetdev : HDC, hdcdraw : HDC, lprcbounds : RECTL*, lprcwbounds : RECTL*, pfncontinue : LibC::IntPtrT, dwcontinue : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.draw.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdctargetdev, hdcdraw, lprcbounds, lprcwbounds, pfncontinue, dwcontinue)
+  end
+  def get_color_set(this : IViewObject2*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hictargetdev : HDC, ppcolorset : LOGPALETTE**) : HRESULT
+    @lpVtbl.value.get_color_set.call(this, dwdrawaspect, lindex, pvaspect, ptd, hictargetdev, ppcolorset)
+  end
+  def freeze(this : IViewObject2*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, pdwfreeze : UInt32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, dwdrawaspect, lindex, pvaspect, pdwfreeze)
+  end
+  def unfreeze(this : IViewObject2*, dwfreeze : UInt32) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, dwfreeze)
+  end
+  def set_advise(this : IViewObject2*, aspects : UInt32, advf : UInt32, padvsink : IAdviseSink) : HRESULT
+    @lpVtbl.value.set_advise.call(this, aspects, advf, padvsink)
+  end
+  def get_advise(this : IViewObject2*, paspects : UInt32*, padvf : UInt32*, ppadvsink : IAdviseSink*) : HRESULT
+    @lpVtbl.value.get_advise.call(this, paspects, padvf, ppadvsink)
+  end
+  def get_extent(this : IViewObject2*, dwdrawaspect : UInt32, lindex : Int32, ptd : DVTARGETDEVICE*, lpsizel : SIZE*) : HRESULT
+    @lpVtbl.value.get_extent.call(this, dwdrawaspect, lindex, ptd, lpsizel)
+  end
+end
+struct LibWin32::IDropSource
+  def query_interface(this : IDropSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDropSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDropSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_continue_drag(this : IDropSource*, fescapepressed : LibC::BOOL, grfkeystate : UInt32) : HRESULT
+    @lpVtbl.value.query_continue_drag.call(this, fescapepressed, grfkeystate)
+  end
+  def give_feedback(this : IDropSource*, dweffect : UInt32) : HRESULT
+    @lpVtbl.value.give_feedback.call(this, dweffect)
+  end
+end
+struct LibWin32::IDropTarget
+  def query_interface(this : IDropTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDropTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDropTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def drag_enter(this : IDropTarget*, pdataobj : IDataObject, grfkeystate : UInt32, pt : POINTL, pdweffect : UInt32*) : HRESULT
+    @lpVtbl.value.drag_enter.call(this, pdataobj, grfkeystate, pt, pdweffect)
+  end
+  def drag_over(this : IDropTarget*, grfkeystate : UInt32, pt : POINTL, pdweffect : UInt32*) : HRESULT
+    @lpVtbl.value.drag_over.call(this, grfkeystate, pt, pdweffect)
+  end
+  def drag_leave(this : IDropTarget*) : HRESULT
+    @lpVtbl.value.drag_leave.call(this)
+  end
+  def drop(this : IDropTarget*, pdataobj : IDataObject, grfkeystate : UInt32, pt : POINTL, pdweffect : UInt32*) : HRESULT
+    @lpVtbl.value.drop.call(this, pdataobj, grfkeystate, pt, pdweffect)
+  end
+end
+struct LibWin32::IDropSourceNotify
+  def query_interface(this : IDropSourceNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDropSourceNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDropSourceNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def drag_enter_target(this : IDropSourceNotify*, hwndtarget : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.drag_enter_target.call(this, hwndtarget)
+  end
+  def drag_leave_target(this : IDropSourceNotify*) : HRESULT
+    @lpVtbl.value.drag_leave_target.call(this)
+  end
+end
+struct LibWin32::IEnterpriseDropTarget
+  def query_interface(this : IEnterpriseDropTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnterpriseDropTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnterpriseDropTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_drop_source_enterprise_id(this : IEnterpriseDropTarget*, identity : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_drop_source_enterprise_id.call(this, identity)
+  end
+  def is_evaluating_edp_policy(this : IEnterpriseDropTarget*, value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_evaluating_edp_policy.call(this, value)
+  end
+end
+struct LibWin32::IEnumOLEVERB
+  def query_interface(this : IEnumOLEVERB*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumOLEVERB*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumOLEVERB*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumOLEVERB*, celt : UInt32, rgelt : OLEVERB*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumOLEVERB*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumOLEVERB*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumOLEVERB*, ppenum : IEnumOLEVERB*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IClassFactory2
+  def query_interface(this : IClassFactory2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IClassFactory2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IClassFactory2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_instance(this : IClassFactory2*, punkouter : IUnknown, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance.call(this, punkouter, riid, ppvobject)
+  end
+  def lock_server(this : IClassFactory2*, flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_server.call(this, flock)
+  end
+  def get_lic_info(this : IClassFactory2*, plicinfo : LICINFO*) : HRESULT
+    @lpVtbl.value.get_lic_info.call(this, plicinfo)
+  end
+  def request_lic_key(this : IClassFactory2*, dwreserved : UInt32, pbstrkey : UInt8**) : HRESULT
+    @lpVtbl.value.request_lic_key.call(this, dwreserved, pbstrkey)
+  end
+  def create_instance_lic(this : IClassFactory2*, punkouter : IUnknown, punkreserved : IUnknown, riid : Guid*, bstrkey : UInt8*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.create_instance_lic.call(this, punkouter, punkreserved, riid, bstrkey, ppvobj)
+  end
+end
+struct LibWin32::IProvideClassInfo
+  def query_interface(this : IProvideClassInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideClassInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideClassInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_info(this : IProvideClassInfo*, ppti : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_class_info.call(this, ppti)
+  end
+end
+struct LibWin32::IProvideClassInfo2
+  def query_interface(this : IProvideClassInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideClassInfo2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideClassInfo2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_info(this : IProvideClassInfo2*, ppti : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_class_info.call(this, ppti)
+  end
+  def get_guid(this : IProvideClassInfo2*, dwguidkind : UInt32, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, dwguidkind, pguid)
+  end
+end
+struct LibWin32::IProvideMultipleClassInfo
+  def query_interface(this : IProvideMultipleClassInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideMultipleClassInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideMultipleClassInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_info(this : IProvideMultipleClassInfo*, ppti : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_class_info.call(this, ppti)
+  end
+  def get_guid(this : IProvideMultipleClassInfo*, dwguidkind : UInt32, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.call(this, dwguidkind, pguid)
+  end
+  def get_multi_type_info_count(this : IProvideMultipleClassInfo*, pcti : UInt32*) : HRESULT
+    @lpVtbl.value.get_multi_type_info_count.call(this, pcti)
+  end
+  def get_info_of_index(this : IProvideMultipleClassInfo*, iti : UInt32, dwflags : MULTICLASSINFO_FLAGS, ppticoclass : ITypeInfo*, pdwtiflags : UInt32*, pcdispidreserved : UInt32*, piidprimary : Guid*, piidsource : Guid*) : HRESULT
+    @lpVtbl.value.get_info_of_index.call(this, iti, dwflags, ppticoclass, pdwtiflags, pcdispidreserved, piidprimary, piidsource)
+  end
+end
+struct LibWin32::IOleControl
+  def query_interface(this : IOleControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_control_info(this : IOleControl*, pci : CONTROLINFO*) : HRESULT
+    @lpVtbl.value.get_control_info.call(this, pci)
+  end
+  def on_mnemonic(this : IOleControl*, pmsg : MSG*) : HRESULT
+    @lpVtbl.value.on_mnemonic.call(this, pmsg)
+  end
+  def on_ambient_property_change(this : IOleControl*, dispid : Int32) : HRESULT
+    @lpVtbl.value.on_ambient_property_change.call(this, dispid)
+  end
+  def freeze_events(this : IOleControl*, bfreeze : LibC::BOOL) : HRESULT
+    @lpVtbl.value.freeze_events.call(this, bfreeze)
+  end
+end
+struct LibWin32::IOleControlSite
+  def query_interface(this : IOleControlSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleControlSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleControlSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_control_info_changed(this : IOleControlSite*) : HRESULT
+    @lpVtbl.value.on_control_info_changed.call(this)
+  end
+  def lock_in_place_active(this : IOleControlSite*, flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_in_place_active.call(this, flock)
+  end
+  def get_extended_control(this : IOleControlSite*, ppdisp : IDispatch*) : HRESULT
+    @lpVtbl.value.get_extended_control.call(this, ppdisp)
+  end
+  def transform_coords(this : IOleControlSite*, pptlhimetric : POINTL*, pptfcontainer : POINTF*, dwflags : XFORMCOORDS) : HRESULT
+    @lpVtbl.value.transform_coords.call(this, pptlhimetric, pptfcontainer, dwflags)
+  end
+  def translate_accelerator(this : IOleControlSite*, pmsg : MSG*, grfmodifiers : UInt32) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, pmsg, grfmodifiers)
+  end
+  def on_focus(this : IOleControlSite*, fgotfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_focus.call(this, fgotfocus)
+  end
+  def show_property_frame(this : IOleControlSite*) : HRESULT
+    @lpVtbl.value.show_property_frame.call(this)
+  end
+end
+struct LibWin32::IPropertyPage
+  def query_interface(this : IPropertyPage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyPage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyPage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_page_site(this : IPropertyPage*, ppagesite : IPropertyPageSite) : HRESULT
+    @lpVtbl.value.set_page_site.call(this, ppagesite)
+  end
+  def activate(this : IPropertyPage*, hwndparent : LibC::HANDLE, prect : RECT*, bmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.call(this, hwndparent, prect, bmodal)
+  end
+  def deactivate(this : IPropertyPage*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def get_page_info(this : IPropertyPage*, ppageinfo : PROPPAGEINFO*) : HRESULT
+    @lpVtbl.value.get_page_info.call(this, ppageinfo)
+  end
+  def set_objects(this : IPropertyPage*, cobjects : UInt32, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.set_objects.call(this, cobjects, ppunk)
+  end
+  def show(this : IPropertyPage*, ncmdshow : UInt32) : HRESULT
+    @lpVtbl.value.show.call(this, ncmdshow)
+  end
+  def move(this : IPropertyPage*, prect : RECT*) : HRESULT
+    @lpVtbl.value.move.call(this, prect)
+  end
+  def is_page_dirty(this : IPropertyPage*) : HRESULT
+    @lpVtbl.value.is_page_dirty.call(this)
+  end
+  def apply(this : IPropertyPage*) : HRESULT
+    @lpVtbl.value.apply.call(this)
+  end
+  def help(this : IPropertyPage*, pszhelpdir : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.help.call(this, pszhelpdir)
+  end
+  def translate_accelerator(this : IPropertyPage*, pmsg : MSG*) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, pmsg)
+  end
+end
+struct LibWin32::IPropertyPage2
+  def query_interface(this : IPropertyPage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyPage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyPage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_page_site(this : IPropertyPage2*, ppagesite : IPropertyPageSite) : HRESULT
+    @lpVtbl.value.set_page_site.call(this, ppagesite)
+  end
+  def activate(this : IPropertyPage2*, hwndparent : LibC::HANDLE, prect : RECT*, bmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.call(this, hwndparent, prect, bmodal)
+  end
+  def deactivate(this : IPropertyPage2*) : HRESULT
+    @lpVtbl.value.deactivate.call(this)
+  end
+  def get_page_info(this : IPropertyPage2*, ppageinfo : PROPPAGEINFO*) : HRESULT
+    @lpVtbl.value.get_page_info.call(this, ppageinfo)
+  end
+  def set_objects(this : IPropertyPage2*, cobjects : UInt32, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.set_objects.call(this, cobjects, ppunk)
+  end
+  def show(this : IPropertyPage2*, ncmdshow : UInt32) : HRESULT
+    @lpVtbl.value.show.call(this, ncmdshow)
+  end
+  def move(this : IPropertyPage2*, prect : RECT*) : HRESULT
+    @lpVtbl.value.move.call(this, prect)
+  end
+  def is_page_dirty(this : IPropertyPage2*) : HRESULT
+    @lpVtbl.value.is_page_dirty.call(this)
+  end
+  def apply(this : IPropertyPage2*) : HRESULT
+    @lpVtbl.value.apply.call(this)
+  end
+  def help(this : IPropertyPage2*, pszhelpdir : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.help.call(this, pszhelpdir)
+  end
+  def translate_accelerator(this : IPropertyPage2*, pmsg : MSG*) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, pmsg)
+  end
+  def edit_property(this : IPropertyPage2*, dispid : Int32) : HRESULT
+    @lpVtbl.value.edit_property.call(this, dispid)
+  end
+end
+struct LibWin32::IPropertyPageSite
+  def query_interface(this : IPropertyPageSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyPageSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyPageSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_status_change(this : IPropertyPageSite*, dwflags : PROPPAGESTATUS) : HRESULT
+    @lpVtbl.value.on_status_change.call(this, dwflags)
+  end
+  def get_locale_id(this : IPropertyPageSite*, plocaleid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_id.call(this, plocaleid)
+  end
+  def get_page_container(this : IPropertyPageSite*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_page_container.call(this, ppunk)
+  end
+  def translate_accelerator(this : IPropertyPageSite*, pmsg : MSG*) : HRESULT
+    @lpVtbl.value.translate_accelerator.call(this, pmsg)
+  end
+end
+struct LibWin32::IPropertyNotifySink
+  def query_interface(this : IPropertyNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPropertyNotifySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPropertyNotifySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_changed(this : IPropertyNotifySink*, dispid : Int32) : HRESULT
+    @lpVtbl.value.on_changed.call(this, dispid)
+  end
+  def on_request_edit(this : IPropertyNotifySink*, dispid : Int32) : HRESULT
+    @lpVtbl.value.on_request_edit.call(this, dispid)
+  end
+end
+struct LibWin32::ISpecifyPropertyPages
+  def query_interface(this : ISpecifyPropertyPages*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISpecifyPropertyPages*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISpecifyPropertyPages*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_pages(this : ISpecifyPropertyPages*, ppages : CAUUID*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, ppages)
+  end
+end
+struct LibWin32::IPersistPropertyBag
+  def query_interface(this : IPersistPropertyBag*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPersistPropertyBag*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPersistPropertyBag*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_id(this : IPersistPropertyBag*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
+  end
+  def init_new(this : IPersistPropertyBag*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
+  end
+  def load(this : IPersistPropertyBag*, ppropbag : IPropertyBag, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.load.call(this, ppropbag, perrorlog)
+  end
+  def save(this : IPersistPropertyBag*, ppropbag : IPropertyBag, fcleardirty : LibC::BOOL, fsaveallproperties : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, ppropbag, fcleardirty, fsaveallproperties)
+  end
+end
+struct LibWin32::ISimpleFrameSite
+  def query_interface(this : ISimpleFrameSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISimpleFrameSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISimpleFrameSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def pre_message_filter(this : ISimpleFrameSite*, hwnd : LibC::HANDLE, msg : UInt32, wp : LibC::UINT_PTR, lp : LPARAM, plresult : LRESULT*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.pre_message_filter.call(this, hwnd, msg, wp, lp, plresult, pdwcookie)
+  end
+  def post_message_filter(this : ISimpleFrameSite*, hwnd : LibC::HANDLE, msg : UInt32, wp : LibC::UINT_PTR, lp : LPARAM, plresult : LRESULT*, dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.post_message_filter.call(this, hwnd, msg, wp, lp, plresult, dwcookie)
+  end
+end
+struct LibWin32::IFont
+  def query_interface(this : IFont*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFont*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFont*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IFont*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def put_name(this : IFont*, name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, name)
+  end
+  def get_size(this : IFont*, psize : CY*) : HRESULT
+    @lpVtbl.value.get_size.call(this, psize)
+  end
+  def put_size(this : IFont*, size : CY) : HRESULT
+    @lpVtbl.value.put_size.call(this, size)
+  end
+  def get_bold(this : IFont*, pbold : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bold.call(this, pbold)
+  end
+  def put_bold(this : IFont*, bold : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_bold.call(this, bold)
+  end
+  def get_italic(this : IFont*, pitalic : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_italic.call(this, pitalic)
+  end
+  def put_italic(this : IFont*, italic : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_italic.call(this, italic)
+  end
+  def get_underline(this : IFont*, punderline : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, punderline)
+  end
+  def put_underline(this : IFont*, underline : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_underline.call(this, underline)
+  end
+  def get_strikethrough(this : IFont*, pstrikethrough : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_strikethrough.call(this, pstrikethrough)
+  end
+  def put_strikethrough(this : IFont*, strikethrough : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_strikethrough.call(this, strikethrough)
+  end
+  def get_weight(this : IFont*, pweight : Int16*) : HRESULT
+    @lpVtbl.value.get_weight.call(this, pweight)
+  end
+  def put_weight(this : IFont*, weight : Int16) : HRESULT
+    @lpVtbl.value.put_weight.call(this, weight)
+  end
+  def get_charset(this : IFont*, pcharset : Int16*) : HRESULT
+    @lpVtbl.value.get_charset.call(this, pcharset)
+  end
+  def put_charset(this : IFont*, charset : Int16) : HRESULT
+    @lpVtbl.value.put_charset.call(this, charset)
+  end
+  def get_h_font(this : IFont*, phfont : HFONT*) : HRESULT
+    @lpVtbl.value.get_h_font.call(this, phfont)
+  end
+  def clone(this : IFont*, ppfont : IFont*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppfont)
+  end
+  def is_equal(this : IFont*, pfontother : IFont) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pfontother)
+  end
+  def set_ratio(this : IFont*, cylogical : Int32, cyhimetric : Int32) : HRESULT
+    @lpVtbl.value.set_ratio.call(this, cylogical, cyhimetric)
+  end
+  def query_text_metrics(this : IFont*, ptm : TEXTMETRICW*) : HRESULT
+    @lpVtbl.value.query_text_metrics.call(this, ptm)
+  end
+  def add_ref_hfont(this : IFont*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.add_ref_hfont.call(this, hfont)
+  end
+  def release_hfont(this : IFont*, hfont : HFONT) : HRESULT
+    @lpVtbl.value.release_hfont.call(this, hfont)
+  end
+  def set_hdc(this : IFont*, hdc : HDC) : HRESULT
+    @lpVtbl.value.set_hdc.call(this, hdc)
+  end
+end
+struct LibWin32::IPicture
+  def query_interface(this : IPicture*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPicture*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPicture*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_handle(this : IPicture*, phandle : UInt32*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_h_pal(this : IPicture*, phpal : UInt32*) : HRESULT
+    @lpVtbl.value.get_h_pal.call(this, phpal)
+  end
+  def get_type(this : IPicture*, ptype : Int16*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_width(this : IPicture*, pwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, pwidth)
+  end
+  def get_height(this : IPicture*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, pheight)
+  end
+  def render(this : IPicture*, hdc : HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, xsrc : Int32, ysrc : Int32, cxsrc : Int32, cysrc : Int32, prcwbounds : RECT*) : HRESULT
+    @lpVtbl.value.render.call(this, hdc, x, y, cx, cy, xsrc, ysrc, cxsrc, cysrc, prcwbounds)
+  end
+  def set_h_pal(this : IPicture*, hpal : UInt32) : HRESULT
+    @lpVtbl.value.set_h_pal.call(this, hpal)
+  end
+  def get_cur_dc(this : IPicture*, phdc : HDC*) : HRESULT
+    @lpVtbl.value.get_cur_dc.call(this, phdc)
+  end
+  def select_picture(this : IPicture*, hdcin : HDC, phdcout : HDC*, phbmpout : UInt32*) : HRESULT
+    @lpVtbl.value.select_picture.call(this, hdcin, phdcout, phbmpout)
+  end
+  def get_keep_original_format(this : IPicture*, pkeep : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_keep_original_format.call(this, pkeep)
+  end
+  def put_keep_original_format(this : IPicture*, keep : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_keep_original_format.call(this, keep)
+  end
+  def picture_changed(this : IPicture*) : HRESULT
+    @lpVtbl.value.picture_changed.call(this)
+  end
+  def save_as_file(this : IPicture*, pstream : IStream, fsavememcopy : LibC::BOOL, pcbsize : Int32*) : HRESULT
+    @lpVtbl.value.save_as_file.call(this, pstream, fsavememcopy, pcbsize)
+  end
+  def get_attributes(this : IPicture*, pdwattr : UInt32*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattr)
+  end
+end
+struct LibWin32::IPicture2
+  def query_interface(this : IPicture2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPicture2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPicture2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_handle(this : IPicture2*, phandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_handle.call(this, phandle)
+  end
+  def get_h_pal(this : IPicture2*, phpal : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_h_pal.call(this, phpal)
+  end
+  def get_type(this : IPicture2*, ptype : Int16*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_width(this : IPicture2*, pwidth : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, pwidth)
+  end
+  def get_height(this : IPicture2*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, pheight)
+  end
+  def render(this : IPicture2*, hdc : HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, xsrc : Int32, ysrc : Int32, cxsrc : Int32, cysrc : Int32, prcwbounds : RECT*) : HRESULT
+    @lpVtbl.value.render.call(this, hdc, x, y, cx, cy, xsrc, ysrc, cxsrc, cysrc, prcwbounds)
+  end
+  def set_h_pal(this : IPicture2*, hpal : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set_h_pal.call(this, hpal)
+  end
+  def get_cur_dc(this : IPicture2*, phdc : HDC*) : HRESULT
+    @lpVtbl.value.get_cur_dc.call(this, phdc)
+  end
+  def select_picture(this : IPicture2*, hdcin : HDC, phdcout : HDC*, phbmpout : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.select_picture.call(this, hdcin, phdcout, phbmpout)
+  end
+  def get_keep_original_format(this : IPicture2*, pkeep : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_keep_original_format.call(this, pkeep)
+  end
+  def put_keep_original_format(this : IPicture2*, keep : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_keep_original_format.call(this, keep)
+  end
+  def picture_changed(this : IPicture2*) : HRESULT
+    @lpVtbl.value.picture_changed.call(this)
+  end
+  def save_as_file(this : IPicture2*, pstream : IStream, fsavememcopy : LibC::BOOL, pcbsize : Int32*) : HRESULT
+    @lpVtbl.value.save_as_file.call(this, pstream, fsavememcopy, pcbsize)
+  end
+  def get_attributes(this : IPicture2*, pdwattr : UInt32*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pdwattr)
+  end
+end
+struct LibWin32::IFontEventsDisp
+  def query_interface(this : IFontEventsDisp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFontEventsDisp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFontEventsDisp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFontEventsDisp*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFontEventsDisp*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFontEventsDisp*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFontEventsDisp*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IFontDisp
+  def query_interface(this : IFontDisp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFontDisp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFontDisp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFontDisp*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFontDisp*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFontDisp*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFontDisp*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IPictureDisp
+  def query_interface(this : IPictureDisp*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPictureDisp*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPictureDisp*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IPictureDisp*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IPictureDisp*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IPictureDisp*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IPictureDisp*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IOleInPlaceObjectWindowless
+  def query_interface(this : IOleInPlaceObjectWindowless*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceObjectWindowless*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceObjectWindowless*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceObjectWindowless*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceObjectWindowless*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def in_place_deactivate(this : IOleInPlaceObjectWindowless*) : HRESULT
+    @lpVtbl.value.in_place_deactivate.call(this)
+  end
+  def ui_deactivate(this : IOleInPlaceObjectWindowless*) : HRESULT
+    @lpVtbl.value.ui_deactivate.call(this)
+  end
+  def set_object_rects(this : IOleInPlaceObjectWindowless*, lprcposrect : RECT*, lprccliprect : RECT*) : HRESULT
+    @lpVtbl.value.set_object_rects.call(this, lprcposrect, lprccliprect)
+  end
+  def reactivate_and_undo(this : IOleInPlaceObjectWindowless*) : HRESULT
+    @lpVtbl.value.reactivate_and_undo.call(this)
+  end
+  def on_window_message(this : IOleInPlaceObjectWindowless*, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.on_window_message.call(this, msg, wparam, lparam, plresult)
+  end
+  def get_drop_target(this : IOleInPlaceObjectWindowless*, ppdroptarget : IDropTarget*) : HRESULT
+    @lpVtbl.value.get_drop_target.call(this, ppdroptarget)
+  end
+end
+struct LibWin32::IOleInPlaceSiteEx
+  def query_interface(this : IOleInPlaceSiteEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceSiteEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceSiteEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceSiteEx*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceSiteEx*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def can_in_place_activate(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.can_in_place_activate.call(this)
+  end
+  def on_in_place_activate(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.on_in_place_activate.call(this)
+  end
+  def on_ui_activate(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.on_ui_activate.call(this)
+  end
+  def get_window_context(this : IOleInPlaceSiteEx*, ppframe : IOleInPlaceFrame*, ppdoc : IOleInPlaceUIWindow*, lprcposrect : RECT*, lprccliprect : RECT*, lpframeinfo : OIFI*) : HRESULT
+    @lpVtbl.value.get_window_context.call(this, ppframe, ppdoc, lprcposrect, lprccliprect, lpframeinfo)
+  end
+  def scroll(this : IOleInPlaceSiteEx*, scrollextant : SIZE) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollextant)
+  end
+  def on_ui_deactivate(this : IOleInPlaceSiteEx*, fundoable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_ui_deactivate.call(this, fundoable)
+  end
+  def on_in_place_deactivate(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.on_in_place_deactivate.call(this)
+  end
+  def discard_undo_state(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.discard_undo_state.call(this)
+  end
+  def deactivate_and_undo(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.deactivate_and_undo.call(this)
+  end
+  def on_pos_rect_change(this : IOleInPlaceSiteEx*, lprcposrect : RECT*) : HRESULT
+    @lpVtbl.value.on_pos_rect_change.call(this, lprcposrect)
+  end
+  def on_in_place_activate_ex(this : IOleInPlaceSiteEx*, pfnoredraw : LibC::BOOL*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_in_place_activate_ex.call(this, pfnoredraw, dwflags)
+  end
+  def on_in_place_deactivate_ex(this : IOleInPlaceSiteEx*, fnoredraw : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_in_place_deactivate_ex.call(this, fnoredraw)
+  end
+  def request_ui_activate(this : IOleInPlaceSiteEx*) : HRESULT
+    @lpVtbl.value.request_ui_activate.call(this)
+  end
+end
+struct LibWin32::IOleInPlaceSiteWindowless
+  def query_interface(this : IOleInPlaceSiteWindowless*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleInPlaceSiteWindowless*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleInPlaceSiteWindowless*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_window(this : IOleInPlaceSiteWindowless*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def context_sensitive_help(this : IOleInPlaceSiteWindowless*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def can_in_place_activate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.can_in_place_activate.call(this)
+  end
+  def on_in_place_activate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.on_in_place_activate.call(this)
+  end
+  def on_ui_activate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.on_ui_activate.call(this)
+  end
+  def get_window_context(this : IOleInPlaceSiteWindowless*, ppframe : IOleInPlaceFrame*, ppdoc : IOleInPlaceUIWindow*, lprcposrect : RECT*, lprccliprect : RECT*, lpframeinfo : OIFI*) : HRESULT
+    @lpVtbl.value.get_window_context.call(this, ppframe, ppdoc, lprcposrect, lprccliprect, lpframeinfo)
+  end
+  def scroll(this : IOleInPlaceSiteWindowless*, scrollextant : SIZE) : HRESULT
+    @lpVtbl.value.scroll.call(this, scrollextant)
+  end
+  def on_ui_deactivate(this : IOleInPlaceSiteWindowless*, fundoable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_ui_deactivate.call(this, fundoable)
+  end
+  def on_in_place_deactivate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.on_in_place_deactivate.call(this)
+  end
+  def discard_undo_state(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.discard_undo_state.call(this)
+  end
+  def deactivate_and_undo(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.deactivate_and_undo.call(this)
+  end
+  def on_pos_rect_change(this : IOleInPlaceSiteWindowless*, lprcposrect : RECT*) : HRESULT
+    @lpVtbl.value.on_pos_rect_change.call(this, lprcposrect)
+  end
+  def on_in_place_activate_ex(this : IOleInPlaceSiteWindowless*, pfnoredraw : LibC::BOOL*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_in_place_activate_ex.call(this, pfnoredraw, dwflags)
+  end
+  def on_in_place_deactivate_ex(this : IOleInPlaceSiteWindowless*, fnoredraw : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_in_place_deactivate_ex.call(this, fnoredraw)
+  end
+  def request_ui_activate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.request_ui_activate.call(this)
+  end
+  def can_windowless_activate(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.can_windowless_activate.call(this)
+  end
+  def get_capture(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.get_capture.call(this)
+  end
+  def set_capture(this : IOleInPlaceSiteWindowless*, fcapture : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_capture.call(this, fcapture)
+  end
+  def get_focus(this : IOleInPlaceSiteWindowless*) : HRESULT
+    @lpVtbl.value.get_focus.call(this)
+  end
+  def set_focus(this : IOleInPlaceSiteWindowless*, ffocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_focus.call(this, ffocus)
+  end
+  def get_dc(this : IOleInPlaceSiteWindowless*, prect : RECT*, grfflags : UInt32, phdc : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.call(this, prect, grfflags, phdc)
+  end
+  def release_dc(this : IOleInPlaceSiteWindowless*, hdc : HDC) : HRESULT
+    @lpVtbl.value.release_dc.call(this, hdc)
+  end
+  def invalidate_rect(this : IOleInPlaceSiteWindowless*, prect : RECT*, ferase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.invalidate_rect.call(this, prect, ferase)
+  end
+  def invalidate_rgn(this : IOleInPlaceSiteWindowless*, hrgn : HRGN, ferase : LibC::BOOL) : HRESULT
+    @lpVtbl.value.invalidate_rgn.call(this, hrgn, ferase)
+  end
+  def scroll_rect(this : IOleInPlaceSiteWindowless*, dx : Int32, dy : Int32, prectscroll : RECT*, prectclip : RECT*) : HRESULT
+    @lpVtbl.value.scroll_rect.call(this, dx, dy, prectscroll, prectclip)
+  end
+  def adjust_rect(this : IOleInPlaceSiteWindowless*, prc : RECT*) : HRESULT
+    @lpVtbl.value.adjust_rect.call(this, prc)
+  end
+  def on_def_window_message(this : IOleInPlaceSiteWindowless*, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.on_def_window_message.call(this, msg, wparam, lparam, plresult)
+  end
+end
+struct LibWin32::IViewObjectEx
+  def query_interface(this : IViewObjectEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IViewObjectEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IViewObjectEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def draw(this : IViewObjectEx*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdctargetdev : HDC, hdcdraw : HDC, lprcbounds : RECTL*, lprcwbounds : RECTL*, pfncontinue : LibC::IntPtrT, dwcontinue : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.draw.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdctargetdev, hdcdraw, lprcbounds, lprcwbounds, pfncontinue, dwcontinue)
+  end
+  def get_color_set(this : IViewObjectEx*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hictargetdev : HDC, ppcolorset : LOGPALETTE**) : HRESULT
+    @lpVtbl.value.get_color_set.call(this, dwdrawaspect, lindex, pvaspect, ptd, hictargetdev, ppcolorset)
+  end
+  def freeze(this : IViewObjectEx*, dwdrawaspect : UInt32, lindex : Int32, pvaspect : Void*, pdwfreeze : UInt32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, dwdrawaspect, lindex, pvaspect, pdwfreeze)
+  end
+  def unfreeze(this : IViewObjectEx*, dwfreeze : UInt32) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, dwfreeze)
+  end
+  def set_advise(this : IViewObjectEx*, aspects : UInt32, advf : UInt32, padvsink : IAdviseSink) : HRESULT
+    @lpVtbl.value.set_advise.call(this, aspects, advf, padvsink)
+  end
+  def get_advise(this : IViewObjectEx*, paspects : UInt32*, padvf : UInt32*, ppadvsink : IAdviseSink*) : HRESULT
+    @lpVtbl.value.get_advise.call(this, paspects, padvf, ppadvsink)
+  end
+  def get_extent(this : IViewObjectEx*, dwdrawaspect : UInt32, lindex : Int32, ptd : DVTARGETDEVICE*, lpsizel : SIZE*) : HRESULT
+    @lpVtbl.value.get_extent.call(this, dwdrawaspect, lindex, ptd, lpsizel)
+  end
+  def get_rect(this : IViewObjectEx*, dwaspect : UInt32, prect : RECTL*) : HRESULT
+    @lpVtbl.value.get_rect.call(this, dwaspect, prect)
+  end
+  def get_view_status(this : IViewObjectEx*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_view_status.call(this, pdwstatus)
+  end
+  def query_hit_point(this : IViewObjectEx*, dwaspect : UInt32, prectbounds : RECT*, ptlloc : POINT, lclosehint : Int32, phitresult : UInt32*) : HRESULT
+    @lpVtbl.value.query_hit_point.call(this, dwaspect, prectbounds, ptlloc, lclosehint, phitresult)
+  end
+  def query_hit_rect(this : IViewObjectEx*, dwaspect : UInt32, prectbounds : RECT*, prectloc : RECT*, lclosehint : Int32, phitresult : UInt32*) : HRESULT
+    @lpVtbl.value.query_hit_rect.call(this, dwaspect, prectbounds, prectloc, lclosehint, phitresult)
+  end
+  def get_natural_extent(this : IViewObjectEx*, dwaspect : DVASPECT, lindex : Int32, ptd : DVTARGETDEVICE*, hictargetdev : HDC, pextentinfo : ExtentInfo*, psizel : SIZE*) : HRESULT
+    @lpVtbl.value.get_natural_extent.call(this, dwaspect, lindex, ptd, hictargetdev, pextentinfo, psizel)
+  end
+end
+struct LibWin32::IOleUndoUnit
+  def query_interface(this : IOleUndoUnit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUndoUnit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUndoUnit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def do(this : IOleUndoUnit*, pundomanager : IOleUndoManager) : HRESULT
+    @lpVtbl.value.do.call(this, pundomanager)
+  end
+  def get_description(this : IOleUndoUnit*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstr)
+  end
+  def get_unit_type(this : IOleUndoUnit*, pclsid : Guid*, plid : Int32*) : HRESULT
+    @lpVtbl.value.get_unit_type.call(this, pclsid, plid)
+  end
+  def on_next_add(this : IOleUndoUnit*) : HRESULT
+    @lpVtbl.value.on_next_add.call(this)
+  end
+end
+struct LibWin32::IOleParentUndoUnit
+  def query_interface(this : IOleParentUndoUnit*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleParentUndoUnit*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleParentUndoUnit*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def do(this : IOleParentUndoUnit*, pundomanager : IOleUndoManager) : HRESULT
+    @lpVtbl.value.do.call(this, pundomanager)
+  end
+  def get_description(this : IOleParentUndoUnit*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstr)
+  end
+  def get_unit_type(this : IOleParentUndoUnit*, pclsid : Guid*, plid : Int32*) : HRESULT
+    @lpVtbl.value.get_unit_type.call(this, pclsid, plid)
+  end
+  def on_next_add(this : IOleParentUndoUnit*) : HRESULT
+    @lpVtbl.value.on_next_add.call(this)
+  end
+  def open(this : IOleParentUndoUnit*, ppuu : IOleParentUndoUnit) : HRESULT
+    @lpVtbl.value.open.call(this, ppuu)
+  end
+  def close(this : IOleParentUndoUnit*, ppuu : IOleParentUndoUnit, fcommit : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close.call(this, ppuu, fcommit)
+  end
+  def add(this : IOleParentUndoUnit*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.add.call(this, puu)
+  end
+  def find_unit(this : IOleParentUndoUnit*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.find_unit.call(this, puu)
+  end
+  def get_parent_state(this : IOleParentUndoUnit*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_parent_state.call(this, pdwstate)
+  end
+end
+struct LibWin32::IEnumOleUndoUnits
+  def query_interface(this : IEnumOleUndoUnits*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumOleUndoUnits*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumOleUndoUnits*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumOleUndoUnits*, celt : UInt32, rgelt : IOleUndoUnit*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  end
+  def skip(this : IEnumOleUndoUnits*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumOleUndoUnits*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumOleUndoUnits*, ppenum : IEnumOleUndoUnits*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IOleUndoManager
+  def query_interface(this : IOleUndoManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUndoManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUndoManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IOleUndoManager*, ppuu : IOleParentUndoUnit) : HRESULT
+    @lpVtbl.value.open.call(this, ppuu)
+  end
+  def close(this : IOleUndoManager*, ppuu : IOleParentUndoUnit, fcommit : LibC::BOOL) : HRESULT
+    @lpVtbl.value.close.call(this, ppuu, fcommit)
+  end
+  def add(this : IOleUndoManager*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.add.call(this, puu)
+  end
+  def get_open_parent_state(this : IOleUndoManager*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_open_parent_state.call(this, pdwstate)
+  end
+  def discard_from(this : IOleUndoManager*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.discard_from.call(this, puu)
+  end
+  def undo_to(this : IOleUndoManager*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.undo_to.call(this, puu)
+  end
+  def redo_to(this : IOleUndoManager*, puu : IOleUndoUnit) : HRESULT
+    @lpVtbl.value.redo_to.call(this, puu)
+  end
+  def enum_undoable(this : IOleUndoManager*, ppenum : IEnumOleUndoUnits*) : HRESULT
+    @lpVtbl.value.enum_undoable.call(this, ppenum)
+  end
+  def enum_redoable(this : IOleUndoManager*, ppenum : IEnumOleUndoUnits*) : HRESULT
+    @lpVtbl.value.enum_redoable.call(this, ppenum)
+  end
+  def get_last_undo_description(this : IOleUndoManager*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_undo_description.call(this, pbstr)
+  end
+  def get_last_redo_description(this : IOleUndoManager*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_redo_description.call(this, pbstr)
+  end
+  def enable(this : IOleUndoManager*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable.call(this, fenable)
+  end
+end
+struct LibWin32::IPointerInactive
+  def query_interface(this : IPointerInactive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPointerInactive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPointerInactive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_activation_policy(this : IPointerInactive*, pdwpolicy : UInt32*) : HRESULT
+    @lpVtbl.value.get_activation_policy.call(this, pdwpolicy)
+  end
+  def on_inactive_mouse_move(this : IPointerInactive*, prectbounds : RECT*, x : Int32, y : Int32, grfkeystate : UInt32) : HRESULT
+    @lpVtbl.value.on_inactive_mouse_move.call(this, prectbounds, x, y, grfkeystate)
+  end
+  def on_inactive_set_cursor(this : IPointerInactive*, prectbounds : RECT*, x : Int32, y : Int32, dwmousemsg : UInt32, fsetalways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_inactive_set_cursor.call(this, prectbounds, x, y, dwmousemsg, fsetalways)
+  end
+end
+struct LibWin32::IObjectWithSite
+  def query_interface(this : IObjectWithSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectWithSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectWithSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_site(this : IObjectWithSite*, punksite : IUnknown) : HRESULT
+    @lpVtbl.value.set_site.call(this, punksite)
+  end
+  def get_site(this : IObjectWithSite*, riid : Guid*, ppvsite : Void**) : HRESULT
+    @lpVtbl.value.get_site.call(this, riid, ppvsite)
+  end
+end
+struct LibWin32::IPerPropertyBrowsing
+  def query_interface(this : IPerPropertyBrowsing*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPerPropertyBrowsing*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPerPropertyBrowsing*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_display_string(this : IPerPropertyBrowsing*, dispid : Int32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_string.call(this, dispid, pbstr)
+  end
+  def map_property_to_page(this : IPerPropertyBrowsing*, dispid : Int32, pclsid : Guid*) : HRESULT
+    @lpVtbl.value.map_property_to_page.call(this, dispid, pclsid)
+  end
+  def get_predefined_strings(this : IPerPropertyBrowsing*, dispid : Int32, pcastringsout : CALPOLESTR*, pcacookiesout : CADWORD*) : HRESULT
+    @lpVtbl.value.get_predefined_strings.call(this, dispid, pcastringsout, pcacookiesout)
+  end
+  def get_predefined_value(this : IPerPropertyBrowsing*, dispid : Int32, dwcookie : UInt32, pvarout : VARIANT*) : HRESULT
+    @lpVtbl.value.get_predefined_value.call(this, dispid, dwcookie, pvarout)
+  end
+end
+struct LibWin32::IPersistPropertyBag2
+  def query_interface(this : IPersistPropertyBag2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPersistPropertyBag2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPersistPropertyBag2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_id(this : IPersistPropertyBag2*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
+  end
+  def init_new(this : IPersistPropertyBag2*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
+  end
+  def load(this : IPersistPropertyBag2*, ppropbag : IPropertyBag2, perrlog : IErrorLog) : HRESULT
+    @lpVtbl.value.load.call(this, ppropbag, perrlog)
+  end
+  def save(this : IPersistPropertyBag2*, ppropbag : IPropertyBag2, fcleardirty : LibC::BOOL, fsaveallproperties : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, ppropbag, fcleardirty, fsaveallproperties)
+  end
+  def is_dirty(this : IPersistPropertyBag2*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
+  end
+end
+struct LibWin32::IAdviseSinkEx
+  def query_interface(this : IAdviseSinkEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAdviseSinkEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAdviseSinkEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_data_change(this : IAdviseSinkEx*, pformatetc : FORMATETC*, pstgmed : STGMEDIUM*) : Void
+    @lpVtbl.value.on_data_change.call(this, pformatetc, pstgmed)
+  end
+  def on_view_change(this : IAdviseSinkEx*, dwaspect : UInt32, lindex : Int32) : Void
+    @lpVtbl.value.on_view_change.call(this, dwaspect, lindex)
+  end
+  def on_rename(this : IAdviseSinkEx*, pmk : IMoniker) : Void
+    @lpVtbl.value.on_rename.call(this, pmk)
+  end
+  def on_save(this : IAdviseSinkEx*) : Void
+    @lpVtbl.value.on_save.call(this)
+  end
+  def on_close(this : IAdviseSinkEx*) : Void
+    @lpVtbl.value.on_close.call(this)
+  end
+  def on_view_status_change(this : IAdviseSinkEx*, dwviewstatus : UInt32) : Void
+    @lpVtbl.value.on_view_status_change.call(this, dwviewstatus)
+  end
+end
+struct LibWin32::IQuickActivate
+  def query_interface(this : IQuickActivate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IQuickActivate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IQuickActivate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def quick_activate(this : IQuickActivate*, pqacontainer : QACONTAINER*, pqacontrol : QACONTROL*) : HRESULT
+    @lpVtbl.value.quick_activate.call(this, pqacontainer, pqacontrol)
+  end
+  def set_content_extent(this : IQuickActivate*, psizel : SIZE*) : HRESULT
+    @lpVtbl.value.set_content_extent.call(this, psizel)
+  end
+  def get_content_extent(this : IQuickActivate*, psizel : SIZE*) : HRESULT
+    @lpVtbl.value.get_content_extent.call(this, psizel)
+  end
+end
+struct LibWin32::IVBGetControl
+  def query_interface(this : IVBGetControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVBGetControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVBGetControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enum_controls(this : IVBGetControl*, dwolecontf : OLECONTF, dwwhich : ENUM_CONTROLS_WHICH_FLAGS, ppenumunk : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enum_controls.call(this, dwolecontf, dwwhich, ppenumunk)
+  end
+end
+struct LibWin32::IGetOleObject
+  def query_interface(this : IGetOleObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetOleObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetOleObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_ole_object(this : IGetOleObject*, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.get_ole_object.call(this, riid, ppvobj)
+  end
+end
+struct LibWin32::IVBFormat
+  def query_interface(this : IVBFormat*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVBFormat*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVBFormat*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def format(this : IVBFormat*, vdata : VARIANT*, bstrformat : UInt8*, lpbuffer : Void*, cb : UInt16, lcid : Int32, sfirstdayofweek : Int16, sfirstweekofyear : UInt16, rcb : UInt16*) : HRESULT
+    @lpVtbl.value.format.call(this, vdata, bstrformat, lpbuffer, cb, lcid, sfirstdayofweek, sfirstweekofyear, rcb)
+  end
+end
+struct LibWin32::IGetVBAObject
+  def query_interface(this : IGetVBAObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGetVBAObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGetVBAObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object(this : IGetVBAObject*, riid : Guid*, ppvobj : Void**, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.get_object.call(this, riid, ppvobj, dwreserved)
+  end
+end
+struct LibWin32::IOleDocument
+  def query_interface(this : IOleDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_view(this : IOleDocument*, pipsite : IOleInPlaceSite, pstm : IStream, dwreserved : UInt32, ppview : IOleDocumentView*) : HRESULT
+    @lpVtbl.value.create_view.call(this, pipsite, pstm, dwreserved, ppview)
+  end
+  def get_doc_misc_status(this : IOleDocument*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_doc_misc_status.call(this, pdwstatus)
+  end
+  def enum_views(this : IOleDocument*, ppenum : IEnumOleDocumentViews*, ppview : IOleDocumentView*) : HRESULT
+    @lpVtbl.value.enum_views.call(this, ppenum, ppview)
+  end
+end
+struct LibWin32::IOleDocumentSite
+  def query_interface(this : IOleDocumentSite*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleDocumentSite*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleDocumentSite*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def activate_me(this : IOleDocumentSite*, pviewtoactivate : IOleDocumentView) : HRESULT
+    @lpVtbl.value.activate_me.call(this, pviewtoactivate)
+  end
+end
+struct LibWin32::IOleDocumentView
+  def query_interface(this : IOleDocumentView*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleDocumentView*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleDocumentView*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_in_place_site(this : IOleDocumentView*, pipsite : IOleInPlaceSite) : HRESULT
+    @lpVtbl.value.set_in_place_site.call(this, pipsite)
+  end
+  def get_in_place_site(this : IOleDocumentView*, ppipsite : IOleInPlaceSite*) : HRESULT
+    @lpVtbl.value.get_in_place_site.call(this, ppipsite)
+  end
+  def get_document(this : IOleDocumentView*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_document.call(this, ppunk)
+  end
+  def set_rect(this : IOleDocumentView*, prcview : RECT*) : HRESULT
+    @lpVtbl.value.set_rect.call(this, prcview)
+  end
+  def get_rect(this : IOleDocumentView*, prcview : RECT*) : HRESULT
+    @lpVtbl.value.get_rect.call(this, prcview)
+  end
+  def set_rect_complex(this : IOleDocumentView*, prcview : RECT*, prchscroll : RECT*, prcvscroll : RECT*, prcsizebox : RECT*) : HRESULT
+    @lpVtbl.value.set_rect_complex.call(this, prcview, prchscroll, prcvscroll, prcsizebox)
+  end
+  def show(this : IOleDocumentView*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.call(this, fshow)
+  end
+  def ui_activate(this : IOleDocumentView*, fuiactivate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.ui_activate.call(this, fuiactivate)
+  end
+  def open(this : IOleDocumentView*) : HRESULT
+    @lpVtbl.value.open.call(this)
+  end
+  def close_view(this : IOleDocumentView*, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.close_view.call(this, dwreserved)
+  end
+  def save_view_state(this : IOleDocumentView*, pstm : IStream) : HRESULT
+    @lpVtbl.value.save_view_state.call(this, pstm)
+  end
+  def apply_view_state(this : IOleDocumentView*, pstm : IStream) : HRESULT
+    @lpVtbl.value.apply_view_state.call(this, pstm)
+  end
+  def clone(this : IOleDocumentView*, pipsitenew : IOleInPlaceSite, ppviewnew : IOleDocumentView*) : HRESULT
+    @lpVtbl.value.clone.call(this, pipsitenew, ppviewnew)
+  end
+end
+struct LibWin32::IEnumOleDocumentViews
+  def query_interface(this : IEnumOleDocumentViews*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumOleDocumentViews*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumOleDocumentViews*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumOleDocumentViews*, cviews : UInt32, rgpview : IOleDocumentView*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, cviews, rgpview, pcfetched)
+  end
+  def skip(this : IEnumOleDocumentViews*, cviews : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, cviews)
+  end
+  def reset(this : IEnumOleDocumentViews*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumOleDocumentViews*, ppenum : IEnumOleDocumentViews*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IContinueCallback
+  def query_interface(this : IContinueCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IContinueCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IContinueCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def f_continue(this : IContinueCallback*) : HRESULT
+    @lpVtbl.value.f_continue.call(this)
+  end
+  def f_continue_printing(this : IContinueCallback*, ncntprinted : Int32, ncurpage : Int32, pwszprintstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.f_continue_printing.call(this, ncntprinted, ncurpage, pwszprintstatus)
+  end
+end
+struct LibWin32::IPrint
+  def query_interface(this : IPrint*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPrint*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPrint*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_initial_page_num(this : IPrint*, nfirstpage : Int32) : HRESULT
+    @lpVtbl.value.set_initial_page_num.call(this, nfirstpage)
+  end
+  def get_page_info(this : IPrint*, pnfirstpage : Int32*, pcpages : Int32*) : HRESULT
+    @lpVtbl.value.get_page_info.call(this, pnfirstpage, pcpages)
+  end
+  def print(this : IPrint*, grfflags : UInt32, pptd : DVTARGETDEVICE**, pppageset : PAGESET**, pstgmoptions : STGMEDIUM*, pcallback : IContinueCallback, nfirstpage : Int32, pcpagesprinted : Int32*, pnlastpage : Int32*) : HRESULT
+    @lpVtbl.value.print.call(this, grfflags, pptd, pppageset, pstgmoptions, pcallback, nfirstpage, pcpagesprinted, pnlastpage)
+  end
+end
+struct LibWin32::IOleCommandTarget
+  def query_interface(this : IOleCommandTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleCommandTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleCommandTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_status(this : IOleCommandTarget*, pguidcmdgroup : Guid*, ccmds : UInt32, prgcmds : OLECMD*, pcmdtext : OLECMDTEXT*) : HRESULT
+    @lpVtbl.value.query_status.call(this, pguidcmdgroup, ccmds, prgcmds, pcmdtext)
+  end
+  def exec(this : IOleCommandTarget*, pguidcmdgroup : Guid*, ncmdid : UInt32, ncmdexecopt : UInt32, pvain : VARIANT*, pvaout : VARIANT*) : HRESULT
+    @lpVtbl.value.exec.call(this, pguidcmdgroup, ncmdid, ncmdexecopt, pvain, pvaout)
+  end
+end
+struct LibWin32::IZoomEvents
+  def query_interface(this : IZoomEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IZoomEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IZoomEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_zoom_percent_changed(this : IZoomEvents*, ulzoompercent : UInt32) : HRESULT
+    @lpVtbl.value.on_zoom_percent_changed.call(this, ulzoompercent)
+  end
+end
+struct LibWin32::IProtectFocus
+  def query_interface(this : IProtectFocus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProtectFocus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProtectFocus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def allow_focus_change(this : IProtectFocus*, pfallow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.allow_focus_change.call(this, pfallow)
+  end
+end
+struct LibWin32::IProtectedModeMenuServices
+  def query_interface(this : IProtectedModeMenuServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProtectedModeMenuServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProtectedModeMenuServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_menu(this : IProtectedModeMenuServices*, phmenu : HANDLE*) : HRESULT
+    @lpVtbl.value.create_menu.call(this, phmenu)
+  end
+  def load_menu(this : IProtectedModeMenuServices*, pszmodulename : LibC::LPWSTR, pszmenuname : LibC::LPWSTR, phmenu : HANDLE*) : HRESULT
+    @lpVtbl.value.load_menu.call(this, pszmodulename, pszmenuname, phmenu)
+  end
+  def load_menu_id(this : IProtectedModeMenuServices*, pszmodulename : LibC::LPWSTR, wresourceid : UInt16, phmenu : HANDLE*) : HRESULT
+    @lpVtbl.value.load_menu_id.call(this, pszmodulename, wresourceid, phmenu)
+  end
+end
+struct LibWin32::IOleUILinkContainerW
+  def query_interface(this : IOleUILinkContainerW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUILinkContainerW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUILinkContainerW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_link(this : IOleUILinkContainerW*, dwlink : UInt32) : UInt32
+    @lpVtbl.value.get_next_link.call(this, dwlink)
+  end
+  def set_link_update_options(this : IOleUILinkContainerW*, dwlink : UInt32, dwupdateopt : UInt32) : HRESULT
+    @lpVtbl.value.set_link_update_options.call(this, dwlink, dwupdateopt)
+  end
+  def get_link_update_options(this : IOleUILinkContainerW*, dwlink : UInt32, lpdwupdateopt : UInt32*) : HRESULT
+    @lpVtbl.value.get_link_update_options.call(this, dwlink, lpdwupdateopt)
+  end
+  def set_link_source(this : IOleUILinkContainerW*, dwlink : UInt32, lpszdisplayname : LibC::LPWSTR, lenfilename : UInt32, pcheaten : UInt32*, fvalidatesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_link_source.call(this, dwlink, lpszdisplayname, lenfilename, pcheaten, fvalidatesource)
+  end
+  def get_link_source(this : IOleUILinkContainerW*, dwlink : UInt32, lplpszdisplayname : LibC::LPWSTR*, lplenfilename : UInt32*, lplpszfulllinktype : LibC::LPWSTR*, lplpszshortlinktype : LibC::LPWSTR*, lpfsourceavailable : LibC::BOOL*, lpfisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_link_source.call(this, dwlink, lplpszdisplayname, lplenfilename, lplpszfulllinktype, lplpszshortlinktype, lpfsourceavailable, lpfisselected)
+  end
+  def open_link_source(this : IOleUILinkContainerW*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.open_link_source.call(this, dwlink)
+  end
+  def update_link(this : IOleUILinkContainerW*, dwlink : UInt32, ferrormessage : LibC::BOOL, freserved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.update_link.call(this, dwlink, ferrormessage, freserved)
+  end
+  def cancel_link(this : IOleUILinkContainerW*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.cancel_link.call(this, dwlink)
+  end
+end
+struct LibWin32::IOleUILinkContainerA
+  def query_interface(this : IOleUILinkContainerA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUILinkContainerA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUILinkContainerA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_link(this : IOleUILinkContainerA*, dwlink : UInt32) : UInt32
+    @lpVtbl.value.get_next_link.call(this, dwlink)
+  end
+  def set_link_update_options(this : IOleUILinkContainerA*, dwlink : UInt32, dwupdateopt : UInt32) : HRESULT
+    @lpVtbl.value.set_link_update_options.call(this, dwlink, dwupdateopt)
+  end
+  def get_link_update_options(this : IOleUILinkContainerA*, dwlink : UInt32, lpdwupdateopt : UInt32*) : HRESULT
+    @lpVtbl.value.get_link_update_options.call(this, dwlink, lpdwupdateopt)
+  end
+  def set_link_source(this : IOleUILinkContainerA*, dwlink : UInt32, lpszdisplayname : PSTR, lenfilename : UInt32, pcheaten : UInt32*, fvalidatesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_link_source.call(this, dwlink, lpszdisplayname, lenfilename, pcheaten, fvalidatesource)
+  end
+  def get_link_source(this : IOleUILinkContainerA*, dwlink : UInt32, lplpszdisplayname : PSTR*, lplenfilename : UInt32*, lplpszfulllinktype : PSTR*, lplpszshortlinktype : PSTR*, lpfsourceavailable : LibC::BOOL*, lpfisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_link_source.call(this, dwlink, lplpszdisplayname, lplenfilename, lplpszfulllinktype, lplpszshortlinktype, lpfsourceavailable, lpfisselected)
+  end
+  def open_link_source(this : IOleUILinkContainerA*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.open_link_source.call(this, dwlink)
+  end
+  def update_link(this : IOleUILinkContainerA*, dwlink : UInt32, ferrormessage : LibC::BOOL, freserved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.update_link.call(this, dwlink, ferrormessage, freserved)
+  end
+  def cancel_link(this : IOleUILinkContainerA*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.cancel_link.call(this, dwlink)
+  end
+end
+struct LibWin32::IOleUIObjInfoW
+  def query_interface(this : IOleUIObjInfoW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUIObjInfoW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUIObjInfoW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_info(this : IOleUIObjInfoW*, dwobject : UInt32, lpdwobjsize : UInt32*, lplpszlabel : LibC::LPWSTR*, lplpsztype : LibC::LPWSTR*, lplpszshorttype : LibC::LPWSTR*, lplpszlocation : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, dwobject, lpdwobjsize, lplpszlabel, lplpsztype, lplpszshorttype, lplpszlocation)
+  end
+  def get_convert_info(this : IOleUIObjInfoW*, dwobject : UInt32, lpclassid : Guid*, lpwformat : UInt16*, lpconvertdefaultclassid : Guid*, lplpclsidexclude : Guid**, lpcclsidexclude : UInt32*) : HRESULT
+    @lpVtbl.value.get_convert_info.call(this, dwobject, lpclassid, lpwformat, lpconvertdefaultclassid, lplpclsidexclude, lpcclsidexclude)
+  end
+  def convert_object(this : IOleUIObjInfoW*, dwobject : UInt32, clsidnew : Guid*) : HRESULT
+    @lpVtbl.value.convert_object.call(this, dwobject, clsidnew)
+  end
+  def get_view_info(this : IOleUIObjInfoW*, dwobject : UInt32, phmetapict : LibC::IntPtrT*, pdvaspect : UInt32*, pncurrentscale : Int32*) : HRESULT
+    @lpVtbl.value.get_view_info.call(this, dwobject, phmetapict, pdvaspect, pncurrentscale)
+  end
+  def set_view_info(this : IOleUIObjInfoW*, dwobject : UInt32, hmetapict : LibC::IntPtrT, dvaspect : UInt32, ncurrentscale : Int32, brelativetoorig : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_view_info.call(this, dwobject, hmetapict, dvaspect, ncurrentscale, brelativetoorig)
+  end
+end
+struct LibWin32::IOleUIObjInfoA
+  def query_interface(this : IOleUIObjInfoA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUIObjInfoA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUIObjInfoA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object_info(this : IOleUIObjInfoA*, dwobject : UInt32, lpdwobjsize : UInt32*, lplpszlabel : PSTR*, lplpsztype : PSTR*, lplpszshorttype : PSTR*, lplpszlocation : PSTR*) : HRESULT
+    @lpVtbl.value.get_object_info.call(this, dwobject, lpdwobjsize, lplpszlabel, lplpsztype, lplpszshorttype, lplpszlocation)
+  end
+  def get_convert_info(this : IOleUIObjInfoA*, dwobject : UInt32, lpclassid : Guid*, lpwformat : UInt16*, lpconvertdefaultclassid : Guid*, lplpclsidexclude : Guid**, lpcclsidexclude : UInt32*) : HRESULT
+    @lpVtbl.value.get_convert_info.call(this, dwobject, lpclassid, lpwformat, lpconvertdefaultclassid, lplpclsidexclude, lpcclsidexclude)
+  end
+  def convert_object(this : IOleUIObjInfoA*, dwobject : UInt32, clsidnew : Guid*) : HRESULT
+    @lpVtbl.value.convert_object.call(this, dwobject, clsidnew)
+  end
+  def get_view_info(this : IOleUIObjInfoA*, dwobject : UInt32, phmetapict : LibC::IntPtrT*, pdvaspect : UInt32*, pncurrentscale : Int32*) : HRESULT
+    @lpVtbl.value.get_view_info.call(this, dwobject, phmetapict, pdvaspect, pncurrentscale)
+  end
+  def set_view_info(this : IOleUIObjInfoA*, dwobject : UInt32, hmetapict : LibC::IntPtrT, dvaspect : UInt32, ncurrentscale : Int32, brelativetoorig : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_view_info.call(this, dwobject, hmetapict, dvaspect, ncurrentscale, brelativetoorig)
+  end
+end
+struct LibWin32::IOleUILinkInfoW
+  def query_interface(this : IOleUILinkInfoW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUILinkInfoW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUILinkInfoW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_link(this : IOleUILinkInfoW*, dwlink : UInt32) : UInt32
+    @lpVtbl.value.get_next_link.call(this, dwlink)
+  end
+  def set_link_update_options(this : IOleUILinkInfoW*, dwlink : UInt32, dwupdateopt : UInt32) : HRESULT
+    @lpVtbl.value.set_link_update_options.call(this, dwlink, dwupdateopt)
+  end
+  def get_link_update_options(this : IOleUILinkInfoW*, dwlink : UInt32, lpdwupdateopt : UInt32*) : HRESULT
+    @lpVtbl.value.get_link_update_options.call(this, dwlink, lpdwupdateopt)
+  end
+  def set_link_source(this : IOleUILinkInfoW*, dwlink : UInt32, lpszdisplayname : LibC::LPWSTR, lenfilename : UInt32, pcheaten : UInt32*, fvalidatesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_link_source.call(this, dwlink, lpszdisplayname, lenfilename, pcheaten, fvalidatesource)
+  end
+  def get_link_source(this : IOleUILinkInfoW*, dwlink : UInt32, lplpszdisplayname : LibC::LPWSTR*, lplenfilename : UInt32*, lplpszfulllinktype : LibC::LPWSTR*, lplpszshortlinktype : LibC::LPWSTR*, lpfsourceavailable : LibC::BOOL*, lpfisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_link_source.call(this, dwlink, lplpszdisplayname, lplenfilename, lplpszfulllinktype, lplpszshortlinktype, lpfsourceavailable, lpfisselected)
+  end
+  def open_link_source(this : IOleUILinkInfoW*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.open_link_source.call(this, dwlink)
+  end
+  def update_link(this : IOleUILinkInfoW*, dwlink : UInt32, ferrormessage : LibC::BOOL, freserved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.update_link.call(this, dwlink, ferrormessage, freserved)
+  end
+  def cancel_link(this : IOleUILinkInfoW*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.cancel_link.call(this, dwlink)
+  end
+  def get_last_update(this : IOleUILinkInfoW*, dwlink : UInt32, lplastupdate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_update.call(this, dwlink, lplastupdate)
+  end
+end
+struct LibWin32::IOleUILinkInfoA
+  def query_interface(this : IOleUILinkInfoA*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOleUILinkInfoA*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOleUILinkInfoA*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_next_link(this : IOleUILinkInfoA*, dwlink : UInt32) : UInt32
+    @lpVtbl.value.get_next_link.call(this, dwlink)
+  end
+  def set_link_update_options(this : IOleUILinkInfoA*, dwlink : UInt32, dwupdateopt : UInt32) : HRESULT
+    @lpVtbl.value.set_link_update_options.call(this, dwlink, dwupdateopt)
+  end
+  def get_link_update_options(this : IOleUILinkInfoA*, dwlink : UInt32, lpdwupdateopt : UInt32*) : HRESULT
+    @lpVtbl.value.get_link_update_options.call(this, dwlink, lpdwupdateopt)
+  end
+  def set_link_source(this : IOleUILinkInfoA*, dwlink : UInt32, lpszdisplayname : PSTR, lenfilename : UInt32, pcheaten : UInt32*, fvalidatesource : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_link_source.call(this, dwlink, lpszdisplayname, lenfilename, pcheaten, fvalidatesource)
+  end
+  def get_link_source(this : IOleUILinkInfoA*, dwlink : UInt32, lplpszdisplayname : PSTR*, lplenfilename : UInt32*, lplpszfulllinktype : PSTR*, lplpszshortlinktype : PSTR*, lpfsourceavailable : LibC::BOOL*, lpfisselected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_link_source.call(this, dwlink, lplpszdisplayname, lplenfilename, lplpszfulllinktype, lplpszshortlinktype, lpfsourceavailable, lpfisselected)
+  end
+  def open_link_source(this : IOleUILinkInfoA*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.open_link_source.call(this, dwlink)
+  end
+  def update_link(this : IOleUILinkInfoA*, dwlink : UInt32, ferrormessage : LibC::BOOL, freserved : LibC::BOOL) : HRESULT
+    @lpVtbl.value.update_link.call(this, dwlink, ferrormessage, freserved)
+  end
+  def cancel_link(this : IOleUILinkInfoA*, dwlink : UInt32) : HRESULT
+    @lpVtbl.value.cancel_link.call(this, dwlink)
+  end
+  def get_last_update(this : IOleUILinkInfoA*, dwlink : UInt32, lplastupdate : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_update.call(this, dwlink, lplastupdate)
+  end
+end
+struct LibWin32::IDispatchEx
+  def query_interface(this : IDispatchEx*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDispatchEx*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDispatchEx*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDispatchEx*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDispatchEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDispatchEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDispatchEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_disp_id(this : IDispatchEx*, bstrname : UInt8*, grfdex : UInt32, pid : Int32*) : HRESULT
+    @lpVtbl.value.get_disp_id.call(this, bstrname, grfdex, pid)
+  end
+  def invoke_ex(this : IDispatchEx*, id : Int32, lcid : UInt32, wflags : UInt16, pdp : DISPPARAMS*, pvarres : VARIANT*, pei : EXCEPINFO*, pspcaller : IServiceProvider) : HRESULT
+    @lpVtbl.value.invoke_ex.call(this, id, lcid, wflags, pdp, pvarres, pei, pspcaller)
+  end
+  def delete_member_by_name(this : IDispatchEx*, bstrname : UInt8*, grfdex : UInt32) : HRESULT
+    @lpVtbl.value.delete_member_by_name.call(this, bstrname, grfdex)
+  end
+  def delete_member_by_disp_id(this : IDispatchEx*, id : Int32) : HRESULT
+    @lpVtbl.value.delete_member_by_disp_id.call(this, id)
+  end
+  def get_member_properties(this : IDispatchEx*, id : Int32, grfdexfetch : UInt32, pgrfdex : UInt32*) : HRESULT
+    @lpVtbl.value.get_member_properties.call(this, id, grfdexfetch, pgrfdex)
+  end
+  def get_member_name(this : IDispatchEx*, id : Int32, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_member_name.call(this, id, pbstrname)
+  end
+  def get_next_disp_id(this : IDispatchEx*, grfdex : UInt32, id : Int32, pid : Int32*) : HRESULT
+    @lpVtbl.value.get_next_disp_id.call(this, grfdex, id, pid)
+  end
+  def get_name_space_parent(this : IDispatchEx*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_name_space_parent.call(this, ppunk)
+  end
+end
+struct LibWin32::IDispError
+  def query_interface(this : IDispError*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDispError*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDispError*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_error_info(this : IDispError*, guiderrortype : Guid, ppde : IDispError*) : HRESULT
+    @lpVtbl.value.query_error_info.call(this, guiderrortype, ppde)
+  end
+  def get_next(this : IDispError*, ppde : IDispError*) : HRESULT
+    @lpVtbl.value.get_next.call(this, ppde)
+  end
+  def get_hresult(this : IDispError*, phr : HRESULT*) : HRESULT
+    @lpVtbl.value.get_hresult.call(this, phr)
+  end
+  def get_source(this : IDispError*, pbstrsource : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.call(this, pbstrsource)
+  end
+  def get_help_info(this : IDispError*, pbstrfilename : UInt8**, pdwcontext : UInt32*) : HRESULT
+    @lpVtbl.value.get_help_info.call(this, pbstrfilename, pdwcontext)
+  end
+  def get_description(this : IDispError*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+end
+struct LibWin32::IVariantChangeType
+  def query_interface(this : IVariantChangeType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVariantChangeType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVariantChangeType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def change_type(this : IVariantChangeType*, pvardst : VARIANT*, pvarsrc : VARIANT*, lcid : UInt32, vtnew : UInt16) : HRESULT
+    @lpVtbl.value.change_type.call(this, pvardst, pvarsrc, lcid, vtnew)
+  end
+end
+struct LibWin32::IObjectIdentity
+  def query_interface(this : IObjectIdentity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectIdentity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectIdentity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def is_equal_object(this : IObjectIdentity*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.is_equal_object.call(this, punk)
+  end
+end
+struct LibWin32::ICanHandleException
+  def query_interface(this : ICanHandleException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICanHandleException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICanHandleException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def can_handle_exception(this : ICanHandleException*, pexcepinfo : EXCEPINFO*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.can_handle_exception.call(this, pexcepinfo, pvar)
+  end
+end
+struct LibWin32::IProvideRuntimeContext
+  def query_interface(this : IProvideRuntimeContext*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProvideRuntimeContext*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProvideRuntimeContext*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_current_source_context(this : IProvideRuntimeContext*, pdwcontext : LibC::UINT_PTR*, pfexecutingglobalcode : Int16*) : HRESULT
+    @lpVtbl.value.get_current_source_context.call(this, pdwcontext, pfexecutingglobalcode)
+  end
 end

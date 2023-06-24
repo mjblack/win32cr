@@ -3019,7 +3019,7 @@ lib LibWin32
   fun FaxInitializeEventQueue(faxhandle : LibC::HANDLE, completionport : LibC::HANDLE, completionkey : LibC::UINT_PTR, hwnd : LibC::HANDLE, messagestart : UInt32) : LibC::BOOL
 
   # Params # buffer : Void* [In]
-  fun FaxFreeBuffer(buffer : Void*)
+  fun FaxFreeBuffer(buffer : Void*) : Void
 
   # Params # printername : PSTR [In],printinfo : FAX_PRINT_INFOA* [In],faxjobid : UInt32* [In],faxcontextinfo : FAX_CONTEXT_INFOA* [In]
   fun FaxStartPrintJobA(printername : PSTR, printinfo : FAX_PRINT_INFOA*, faxjobid : UInt32*, faxcontextinfo : FAX_CONTEXT_INFOA*) : LibC::BOOL
@@ -3053,4 +3053,3765 @@ lib LibWin32
 
   # Params # hinst : HINSTANCE [In],dwver : UInt32 [In],ppsti : IStillImageW* [In],punkouter : IUnknown [In]
   fun StiCreateInstanceW(hinst : HINSTANCE, dwver : UInt32, ppsti : IStillImageW*, punkouter : IUnknown) : HRESULT
+end
+struct LibWin32::IFaxJobStatus
+  def query_interface(this : IFaxJobStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxJobStatus*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxJobStatus*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxJobStatus*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxJobStatus*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxJobStatus*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxJobStatus*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status(this : IFaxJobStatus*, pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_pages(this : IFaxJobStatus*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxJobStatus*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_current_page(this : IFaxJobStatus*, plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, plcurrentpage)
+  end
+  def get_device_id(this : IFaxJobStatus*, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pldeviceid)
+  end
+  def get_csid(this : IFaxJobStatus*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxJobStatus*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_extended_status_code(this : IFaxJobStatus*, pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.call(this, pextendedstatuscode)
+  end
+  def get_extended_status(this : IFaxJobStatus*, pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.call(this, pbstrextendedstatus)
+  end
+  def get_available_operations(this : IFaxJobStatus*, pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.call(this, pavailableoperations)
+  end
+  def get_retries(this : IFaxJobStatus*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_job_type(this : IFaxJobStatus*, pjobtype : FAX_JOB_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_job_type.call(this, pjobtype)
+  end
+  def get_scheduled_time(this : IFaxJobStatus*, pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.call(this, pdatescheduledtime)
+  end
+  def get_transmission_start(this : IFaxJobStatus*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxJobStatus*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_caller_id(this : IFaxJobStatus*, pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.call(this, pbstrcallerid)
+  end
+  def get_routing_information(this : IFaxJobStatus*, pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.call(this, pbstrroutinginformation)
+  end
+end
+struct LibWin32::IFaxServer
+  def query_interface(this : IFaxServer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxServer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxServer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxServer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxServer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxServer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxServer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(this : IFaxServer*, bstrservername : UInt8*) : HRESULT
+    @lpVtbl.value.connect.call(this, bstrservername)
+  end
+  def get_server_name(this : IFaxServer*, pbstrservername : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_name.call(this, pbstrservername)
+  end
+  def get_device_providers(this : IFaxServer*, ppfaxdeviceproviders : IFaxDeviceProviders*) : HRESULT
+    @lpVtbl.value.get_device_providers.call(this, ppfaxdeviceproviders)
+  end
+  def get_devices(this : IFaxServer*, ppfaxdevices : IFaxDevices*) : HRESULT
+    @lpVtbl.value.get_devices.call(this, ppfaxdevices)
+  end
+  def get_inbound_routing(this : IFaxServer*, ppfaxinboundrouting : IFaxInboundRouting*) : HRESULT
+    @lpVtbl.value.get_inbound_routing.call(this, ppfaxinboundrouting)
+  end
+  def get_folders(this : IFaxServer*, pfaxfolders : IFaxFolders*) : HRESULT
+    @lpVtbl.value.get_folders.call(this, pfaxfolders)
+  end
+  def get_logging_options(this : IFaxServer*, ppfaxloggingoptions : IFaxLoggingOptions*) : HRESULT
+    @lpVtbl.value.get_logging_options.call(this, ppfaxloggingoptions)
+  end
+  def get_major_version(this : IFaxServer*, plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, plmajorversion)
+  end
+  def get_minor_version(this : IFaxServer*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, plminorversion)
+  end
+  def get_major_build(this : IFaxServer*, plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.call(this, plmajorbuild)
+  end
+  def get_minor_build(this : IFaxServer*, plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.call(this, plminorbuild)
+  end
+  def get_debug(this : IFaxServer*, pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.call(this, pbdebug)
+  end
+  def get_activity(this : IFaxServer*, ppfaxactivity : IFaxActivity*) : HRESULT
+    @lpVtbl.value.get_activity.call(this, ppfaxactivity)
+  end
+  def get_outbound_routing(this : IFaxServer*, ppfaxoutboundrouting : IFaxOutboundRouting*) : HRESULT
+    @lpVtbl.value.get_outbound_routing.call(this, ppfaxoutboundrouting)
+  end
+  def get_receipt_options(this : IFaxServer*, ppfaxreceiptoptions : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.get_receipt_options.call(this, ppfaxreceiptoptions)
+  end
+  def get_security(this : IFaxServer*, ppfaxsecurity : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.get_security.call(this, ppfaxsecurity)
+  end
+  def disconnect(this : IFaxServer*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def get_extension_property(this : IFaxServer*, bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.call(this, bstrguid, pvproperty)
+  end
+  def set_extension_property(this : IFaxServer*, bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.call(this, bstrguid, vproperty)
+  end
+  def listen_to_server_events(this : IFaxServer*, eventtypes : FAX_SERVER_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_server_events.call(this, eventtypes)
+  end
+  def register_device_provider(this : IFaxServer*, bstrguid : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, tspname : UInt8*, lfspiversion : Int32) : HRESULT
+    @lpVtbl.value.register_device_provider.call(this, bstrguid, bstrfriendlyname, bstrimagename, tspname, lfspiversion)
+  end
+  def unregister_device_provider(this : IFaxServer*, bstruniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_device_provider.call(this, bstruniquename)
+  end
+  def register_inbound_routing_extension(this : IFaxServer*, bstrextensionname : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, vmethods : VARIANT) : HRESULT
+    @lpVtbl.value.register_inbound_routing_extension.call(this, bstrextensionname, bstrfriendlyname, bstrimagename, vmethods)
+  end
+  def unregister_inbound_routing_extension(this : IFaxServer*, bstrextensionuniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_inbound_routing_extension.call(this, bstrextensionuniquename)
+  end
+  def get_registered_events(this : IFaxServer*, peventtypes : FAX_SERVER_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.call(this, peventtypes)
+  end
+  def get_api_version(this : IFaxServer*, papiversion : FAX_SERVER_APIVERSION_ENUM*) : HRESULT
+    @lpVtbl.value.get_api_version.call(this, papiversion)
+  end
+end
+struct LibWin32::IFaxDeviceProviders
+  def query_interface(this : IFaxDeviceProviders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDeviceProviders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDeviceProviders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDeviceProviders*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDeviceProviders*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDeviceProviders*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDeviceProviders*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxDeviceProviders*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxDeviceProviders*, vindex : VARIANT, pfaxdeviceprovider : IFaxDeviceProvider*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxdeviceprovider)
+  end
+  def get_count(this : IFaxDeviceProviders*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxDevices
+  def query_interface(this : IFaxDevices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDevices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDevices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDevices*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDevices*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDevices*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDevices*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxDevices*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxDevices*, vindex : VARIANT, pfaxdevice : IFaxDevice*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxdevice)
+  end
+  def get_count(this : IFaxDevices*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def get_item_by_id(this : IFaxDevices*, lid : Int32, ppfaxdevice : IFaxDevice*) : HRESULT
+    @lpVtbl.value.get_item_by_id.call(this, lid, ppfaxdevice)
+  end
+end
+struct LibWin32::IFaxInboundRouting
+  def query_interface(this : IFaxInboundRouting*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxInboundRouting*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxInboundRouting*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxInboundRouting*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxInboundRouting*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxInboundRouting*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxInboundRouting*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_extensions(this : IFaxInboundRouting*, pfaxinboundroutingextensions : IFaxInboundRoutingExtensions*) : HRESULT
+    @lpVtbl.value.get_extensions.call(this, pfaxinboundroutingextensions)
+  end
+  def get_methods(this : IFaxInboundRouting*, pfaxinboundroutingmethods : IFaxInboundRoutingMethods*) : HRESULT
+    @lpVtbl.value.get_methods.call(this, pfaxinboundroutingmethods)
+  end
+end
+struct LibWin32::IFaxFolders
+  def query_interface(this : IFaxFolders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxFolders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxFolders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxFolders*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxFolders*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxFolders*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxFolders*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_outgoing_queue(this : IFaxFolders*, pfaxoutgoingqueue : IFaxOutgoingQueue*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.call(this, pfaxoutgoingqueue)
+  end
+  def get_incoming_queue(this : IFaxFolders*, pfaxincomingqueue : IFaxIncomingQueue*) : HRESULT
+    @lpVtbl.value.get_incoming_queue.call(this, pfaxincomingqueue)
+  end
+  def get_incoming_archive(this : IFaxFolders*, pfaxincomingarchive : IFaxIncomingArchive*) : HRESULT
+    @lpVtbl.value.get_incoming_archive.call(this, pfaxincomingarchive)
+  end
+  def get_outgoing_archive(this : IFaxFolders*, pfaxoutgoingarchive : IFaxOutgoingArchive*) : HRESULT
+    @lpVtbl.value.get_outgoing_archive.call(this, pfaxoutgoingarchive)
+  end
+end
+struct LibWin32::IFaxLoggingOptions
+  def query_interface(this : IFaxLoggingOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxLoggingOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxLoggingOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxLoggingOptions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxLoggingOptions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxLoggingOptions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxLoggingOptions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event_logging(this : IFaxLoggingOptions*, pfaxeventlogging : IFaxEventLogging*) : HRESULT
+    @lpVtbl.value.get_event_logging.call(this, pfaxeventlogging)
+  end
+  def get_activity_logging(this : IFaxLoggingOptions*, pfaxactivitylogging : IFaxActivityLogging*) : HRESULT
+    @lpVtbl.value.get_activity_logging.call(this, pfaxactivitylogging)
+  end
+end
+struct LibWin32::IFaxActivity
+  def query_interface(this : IFaxActivity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxActivity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxActivity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxActivity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxActivity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxActivity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxActivity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_incoming_messages(this : IFaxActivity*, plincomingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_incoming_messages.call(this, plincomingmessages)
+  end
+  def get_routing_messages(this : IFaxActivity*, plroutingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_routing_messages.call(this, plroutingmessages)
+  end
+  def get_outgoing_messages(this : IFaxActivity*, ploutgoingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_outgoing_messages.call(this, ploutgoingmessages)
+  end
+  def get_queued_messages(this : IFaxActivity*, plqueuedmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_queued_messages.call(this, plqueuedmessages)
+  end
+  def refresh(this : IFaxActivity*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+end
+struct LibWin32::IFaxOutboundRouting
+  def query_interface(this : IFaxOutboundRouting*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutboundRouting*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutboundRouting*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutboundRouting*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutboundRouting*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutboundRouting*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutboundRouting*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_groups(this : IFaxOutboundRouting*, pfaxoutboundroutinggroups : IFaxOutboundRoutingGroups*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, pfaxoutboundroutinggroups)
+  end
+  def get_rules(this : IFaxOutboundRouting*, pfaxoutboundroutingrules : IFaxOutboundRoutingRules*) : HRESULT
+    @lpVtbl.value.get_rules.call(this, pfaxoutboundroutingrules)
+  end
+end
+struct LibWin32::IFaxReceiptOptions
+  def query_interface(this : IFaxReceiptOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxReceiptOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxReceiptOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxReceiptOptions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxReceiptOptions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxReceiptOptions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxReceiptOptions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_authentication_type(this : IFaxReceiptOptions*, ptype : FAX_SMTP_AUTHENTICATION_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_authentication_type.call(this, ptype)
+  end
+  def put_authentication_type(this : IFaxReceiptOptions*, type : FAX_SMTP_AUTHENTICATION_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_authentication_type.call(this, type)
+  end
+  def get_smtp_server(this : IFaxReceiptOptions*, pbstrsmtpserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_server.call(this, pbstrsmtpserver)
+  end
+  def put_smtp_server(this : IFaxReceiptOptions*, bstrsmtpserver : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_server.call(this, bstrsmtpserver)
+  end
+  def get_smtp_port(this : IFaxReceiptOptions*, plsmtpport : Int32*) : HRESULT
+    @lpVtbl.value.get_smtp_port.call(this, plsmtpport)
+  end
+  def put_smtp_port(this : IFaxReceiptOptions*, lsmtpport : Int32) : HRESULT
+    @lpVtbl.value.put_smtp_port.call(this, lsmtpport)
+  end
+  def get_smtp_sender(this : IFaxReceiptOptions*, pbstrsmtpsender : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_sender.call(this, pbstrsmtpsender)
+  end
+  def put_smtp_sender(this : IFaxReceiptOptions*, bstrsmtpsender : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_sender.call(this, bstrsmtpsender)
+  end
+  def get_smtp_user(this : IFaxReceiptOptions*, pbstrsmtpuser : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_user.call(this, pbstrsmtpuser)
+  end
+  def put_smtp_user(this : IFaxReceiptOptions*, bstrsmtpuser : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_user.call(this, bstrsmtpuser)
+  end
+  def get_allowed_receipts(this : IFaxReceiptOptions*, pallowedreceipts : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_allowed_receipts.call(this, pallowedreceipts)
+  end
+  def put_allowed_receipts(this : IFaxReceiptOptions*, allowedreceipts : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_allowed_receipts.call(this, allowedreceipts)
+  end
+  def get_smtp_password(this : IFaxReceiptOptions*, pbstrsmtppassword : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_password.call(this, pbstrsmtppassword)
+  end
+  def put_smtp_password(this : IFaxReceiptOptions*, bstrsmtppassword : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_password.call(this, bstrsmtppassword)
+  end
+  def refresh(this : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_use_for_inbound_routing(this : IFaxReceiptOptions*, pbuseforinboundrouting : Int16*) : HRESULT
+    @lpVtbl.value.get_use_for_inbound_routing.call(this, pbuseforinboundrouting)
+  end
+  def put_use_for_inbound_routing(this : IFaxReceiptOptions*, buseforinboundrouting : Int16) : HRESULT
+    @lpVtbl.value.put_use_for_inbound_routing.call(this, buseforinboundrouting)
+  end
+end
+struct LibWin32::IFaxSecurity
+  def query_interface(this : IFaxSecurity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxSecurity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxSecurity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxSecurity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxSecurity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxSecurity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxSecurity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_descriptor(this : IFaxSecurity*, pvdescriptor : VARIANT*) : HRESULT
+    @lpVtbl.value.get_descriptor.call(this, pvdescriptor)
+  end
+  def put_descriptor(this : IFaxSecurity*, vdescriptor : VARIANT) : HRESULT
+    @lpVtbl.value.put_descriptor.call(this, vdescriptor)
+  end
+  def get_granted_rights(this : IFaxSecurity*, pgrantedrights : FAX_ACCESS_RIGHTS_ENUM*) : HRESULT
+    @lpVtbl.value.get_granted_rights.call(this, pgrantedrights)
+  end
+  def refresh(this : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_information_type(this : IFaxSecurity*, plinformationtype : Int32*) : HRESULT
+    @lpVtbl.value.get_information_type.call(this, plinformationtype)
+  end
+  def put_information_type(this : IFaxSecurity*, linformationtype : Int32) : HRESULT
+    @lpVtbl.value.put_information_type.call(this, linformationtype)
+  end
+end
+struct LibWin32::IFaxDocument
+  def query_interface(this : IFaxDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDocument*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDocument*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDocument*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDocument*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_body(this : IFaxDocument*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.call(this, pbstrbody)
+  end
+  def put_body(this : IFaxDocument*, bstrbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_body.call(this, bstrbody)
+  end
+  def get_sender(this : IFaxDocument*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipients(this : IFaxDocument*, ppfaxrecipients : IFaxRecipients*) : HRESULT
+    @lpVtbl.value.get_recipients.call(this, ppfaxrecipients)
+  end
+  def get_cover_page(this : IFaxDocument*, pbstrcoverpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_cover_page.call(this, pbstrcoverpage)
+  end
+  def put_cover_page(this : IFaxDocument*, bstrcoverpage : UInt8*) : HRESULT
+    @lpVtbl.value.put_cover_page.call(this, bstrcoverpage)
+  end
+  def get_subject(this : IFaxDocument*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def put_subject(this : IFaxDocument*, bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.call(this, bstrsubject)
+  end
+  def get_note(this : IFaxDocument*, pbstrnote : UInt8**) : HRESULT
+    @lpVtbl.value.get_note.call(this, pbstrnote)
+  end
+  def put_note(this : IFaxDocument*, bstrnote : UInt8*) : HRESULT
+    @lpVtbl.value.put_note.call(this, bstrnote)
+  end
+  def get_schedule_time(this : IFaxDocument*, pdatescheduletime : Float64*) : HRESULT
+    @lpVtbl.value.get_schedule_time.call(this, pdatescheduletime)
+  end
+  def put_schedule_time(this : IFaxDocument*, datescheduletime : Float64) : HRESULT
+    @lpVtbl.value.put_schedule_time.call(this, datescheduletime)
+  end
+  def get_receipt_address(this : IFaxDocument*, pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.call(this, pbstrreceiptaddress)
+  end
+  def put_receipt_address(this : IFaxDocument*, bstrreceiptaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_receipt_address.call(this, bstrreceiptaddress)
+  end
+  def get_document_name(this : IFaxDocument*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def put_document_name(this : IFaxDocument*, bstrdocumentname : UInt8*) : HRESULT
+    @lpVtbl.value.put_document_name.call(this, bstrdocumentname)
+  end
+  def get_call_handle(this : IFaxDocument*, plcallhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_call_handle.call(this, plcallhandle)
+  end
+  def put_call_handle(this : IFaxDocument*, lcallhandle : Int32) : HRESULT
+    @lpVtbl.value.put_call_handle.call(this, lcallhandle)
+  end
+  def get_cover_page_type(this : IFaxDocument*, pcoverpagetype : FAX_COVERPAGE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_cover_page_type.call(this, pcoverpagetype)
+  end
+  def put_cover_page_type(this : IFaxDocument*, coverpagetype : FAX_COVERPAGE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_cover_page_type.call(this, coverpagetype)
+  end
+  def get_schedule_type(this : IFaxDocument*, pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.call(this, pscheduletype)
+  end
+  def put_schedule_type(this : IFaxDocument*, scheduletype : FAX_SCHEDULE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_schedule_type.call(this, scheduletype)
+  end
+  def get_receipt_type(this : IFaxDocument*, preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.call(this, preceipttype)
+  end
+  def put_receipt_type(this : IFaxDocument*, receipttype : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_receipt_type.call(this, receipttype)
+  end
+  def get_group_broadcast_receipts(this : IFaxDocument*, pbusegrouping : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.call(this, pbusegrouping)
+  end
+  def put_group_broadcast_receipts(this : IFaxDocument*, busegrouping : Int16) : HRESULT
+    @lpVtbl.value.put_group_broadcast_receipts.call(this, busegrouping)
+  end
+  def get_priority(this : IFaxDocument*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def put_priority(this : IFaxDocument*, priority : FAX_PRIORITY_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_priority.call(this, priority)
+  end
+  def get_tapi_connection(this : IFaxDocument*, pptapiconnection : IDispatch*) : HRESULT
+    @lpVtbl.value.get_tapi_connection.call(this, pptapiconnection)
+  end
+  def putref_tapi_connection(this : IFaxDocument*, ptapiconnection : IDispatch) : HRESULT
+    @lpVtbl.value.putref_tapi_connection.call(this, ptapiconnection)
+  end
+  def submit(this : IFaxDocument*, bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.submit.call(this, bstrfaxservername, pvfaxoutgoingjobids)
+  end
+  def connected_submit(this : IFaxDocument*, pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.connected_submit.call(this, pfaxserver, pvfaxoutgoingjobids)
+  end
+  def get_attach_fax_to_receipt(this : IFaxDocument*, pbattachfax : Int16*) : HRESULT
+    @lpVtbl.value.get_attach_fax_to_receipt.call(this, pbattachfax)
+  end
+  def put_attach_fax_to_receipt(this : IFaxDocument*, battachfax : Int16) : HRESULT
+    @lpVtbl.value.put_attach_fax_to_receipt.call(this, battachfax)
+  end
+end
+struct LibWin32::IFaxSender
+  def query_interface(this : IFaxSender*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxSender*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxSender*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxSender*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxSender*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxSender*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxSender*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_billing_code(this : IFaxSender*, pbstrbillingcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_billing_code.call(this, pbstrbillingcode)
+  end
+  def put_billing_code(this : IFaxSender*, bstrbillingcode : UInt8*) : HRESULT
+    @lpVtbl.value.put_billing_code.call(this, bstrbillingcode)
+  end
+  def get_city(this : IFaxSender*, pbstrcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.call(this, pbstrcity)
+  end
+  def put_city(this : IFaxSender*, bstrcity : UInt8*) : HRESULT
+    @lpVtbl.value.put_city.call(this, bstrcity)
+  end
+  def get_company(this : IFaxSender*, pbstrcompany : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.call(this, pbstrcompany)
+  end
+  def put_company(this : IFaxSender*, bstrcompany : UInt8*) : HRESULT
+    @lpVtbl.value.put_company.call(this, bstrcompany)
+  end
+  def get_country(this : IFaxSender*, pbstrcountry : UInt8**) : HRESULT
+    @lpVtbl.value.get_country.call(this, pbstrcountry)
+  end
+  def put_country(this : IFaxSender*, bstrcountry : UInt8*) : HRESULT
+    @lpVtbl.value.put_country.call(this, bstrcountry)
+  end
+  def get_department(this : IFaxSender*, pbstrdepartment : UInt8**) : HRESULT
+    @lpVtbl.value.get_department.call(this, pbstrdepartment)
+  end
+  def put_department(this : IFaxSender*, bstrdepartment : UInt8*) : HRESULT
+    @lpVtbl.value.put_department.call(this, bstrdepartment)
+  end
+  def get_email(this : IFaxSender*, pbstremail : UInt8**) : HRESULT
+    @lpVtbl.value.get_email.call(this, pbstremail)
+  end
+  def put_email(this : IFaxSender*, bstremail : UInt8*) : HRESULT
+    @lpVtbl.value.put_email.call(this, bstremail)
+  end
+  def get_fax_number(this : IFaxSender*, pbstrfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.call(this, pbstrfaxnumber)
+  end
+  def put_fax_number(this : IFaxSender*, bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.call(this, bstrfaxnumber)
+  end
+  def get_home_phone(this : IFaxSender*, pbstrhomephone : UInt8**) : HRESULT
+    @lpVtbl.value.get_home_phone.call(this, pbstrhomephone)
+  end
+  def put_home_phone(this : IFaxSender*, bstrhomephone : UInt8*) : HRESULT
+    @lpVtbl.value.put_home_phone.call(this, bstrhomephone)
+  end
+  def get_name(this : IFaxSender*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IFaxSender*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_tsid(this : IFaxSender*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def put_tsid(this : IFaxSender*, bstrtsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_tsid.call(this, bstrtsid)
+  end
+  def get_office_phone(this : IFaxSender*, pbstrofficephone : UInt8**) : HRESULT
+    @lpVtbl.value.get_office_phone.call(this, pbstrofficephone)
+  end
+  def put_office_phone(this : IFaxSender*, bstrofficephone : UInt8*) : HRESULT
+    @lpVtbl.value.put_office_phone.call(this, bstrofficephone)
+  end
+  def get_office_location(this : IFaxSender*, pbstrofficelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_office_location.call(this, pbstrofficelocation)
+  end
+  def put_office_location(this : IFaxSender*, bstrofficelocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_office_location.call(this, bstrofficelocation)
+  end
+  def get_state(this : IFaxSender*, pbstrstate : UInt8**) : HRESULT
+    @lpVtbl.value.get_state.call(this, pbstrstate)
+  end
+  def put_state(this : IFaxSender*, bstrstate : UInt8*) : HRESULT
+    @lpVtbl.value.put_state.call(this, bstrstate)
+  end
+  def get_street_address(this : IFaxSender*, pbstrstreetaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_street_address.call(this, pbstrstreetaddress)
+  end
+  def put_street_address(this : IFaxSender*, bstrstreetaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_street_address.call(this, bstrstreetaddress)
+  end
+  def get_title(this : IFaxSender*, pbstrtitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, pbstrtitle)
+  end
+  def put_title(this : IFaxSender*, bstrtitle : UInt8*) : HRESULT
+    @lpVtbl.value.put_title.call(this, bstrtitle)
+  end
+  def get_zip_code(this : IFaxSender*, pbstrzipcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_zip_code.call(this, pbstrzipcode)
+  end
+  def put_zip_code(this : IFaxSender*, bstrzipcode : UInt8*) : HRESULT
+    @lpVtbl.value.put_zip_code.call(this, bstrzipcode)
+  end
+  def load_default_sender(this : IFaxSender*) : HRESULT
+    @lpVtbl.value.load_default_sender.call(this)
+  end
+  def save_default_sender(this : IFaxSender*) : HRESULT
+    @lpVtbl.value.save_default_sender.call(this)
+  end
+end
+struct LibWin32::IFaxRecipient
+  def query_interface(this : IFaxRecipient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxRecipient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxRecipient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxRecipient*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxRecipient*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxRecipient*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxRecipient*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_fax_number(this : IFaxRecipient*, pbstrfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.call(this, pbstrfaxnumber)
+  end
+  def put_fax_number(this : IFaxRecipient*, bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.call(this, bstrfaxnumber)
+  end
+  def get_name(this : IFaxRecipient*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IFaxRecipient*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+end
+struct LibWin32::IFaxRecipients
+  def query_interface(this : IFaxRecipients*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxRecipients*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxRecipients*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxRecipients*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxRecipients*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxRecipients*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxRecipients*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxRecipients*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxRecipients*, lindex : Int32, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_item.call(this, lindex, ppfaxrecipient)
+  end
+  def get_count(this : IFaxRecipients*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def add(this : IFaxRecipients*, bstrfaxnumber : UInt8*, bstrrecipientname : UInt8*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrfaxnumber, bstrrecipientname, ppfaxrecipient)
+  end
+  def remove(this : IFaxRecipients*, lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, lindex)
+  end
+end
+struct LibWin32::IFaxIncomingArchive
+  def query_interface(this : IFaxIncomingArchive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingArchive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingArchive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingArchive*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingArchive*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingArchive*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingArchive*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(this : IFaxIncomingArchive*, pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.call(this, pbusearchive)
+  end
+  def put_use_archive(this : IFaxIncomingArchive*, busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.call(this, busearchive)
+  end
+  def get_archive_folder(this : IFaxIncomingArchive*, pbstrarchivefolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_folder.call(this, pbstrarchivefolder)
+  end
+  def put_archive_folder(this : IFaxIncomingArchive*, bstrarchivefolder : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_folder.call(this, bstrarchivefolder)
+  end
+  def get_size_quota_warning(this : IFaxIncomingArchive*, pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.call(this, pbsizequotawarning)
+  end
+  def put_size_quota_warning(this : IFaxIncomingArchive*, bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.call(this, bsizequotawarning)
+  end
+  def get_high_quota_water_mark(this : IFaxIncomingArchive*, plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.call(this, plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(this : IFaxIncomingArchive*, lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.call(this, lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(this : IFaxIncomingArchive*, pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.call(this, pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(this : IFaxIncomingArchive*, llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.call(this, llowquotawatermark)
+  end
+  def get_age_limit(this : IFaxIncomingArchive*, plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.call(this, plagelimit)
+  end
+  def put_age_limit(this : IFaxIncomingArchive*, lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.call(this, lagelimit)
+  end
+  def get_size_low(this : IFaxIncomingArchive*, plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.call(this, plsizelow)
+  end
+  def get_size_high(this : IFaxIncomingArchive*, plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.call(this, plsizehigh)
+  end
+  def refresh(this : IFaxIncomingArchive*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxIncomingArchive*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_messages(this : IFaxIncomingArchive*, lprefetchsize : Int32, pfaxincomingmessageiterator : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.call(this, lprefetchsize, pfaxincomingmessageiterator)
+  end
+  def get_message(this : IFaxIncomingArchive*, bstrmessageid : UInt8*, pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, bstrmessageid, pfaxincomingmessage)
+  end
+end
+struct LibWin32::IFaxIncomingQueue
+  def query_interface(this : IFaxIncomingQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_blocked(this : IFaxIncomingQueue*, pbblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_blocked.call(this, pbblocked)
+  end
+  def put_blocked(this : IFaxIncomingQueue*, bblocked : Int16) : HRESULT
+    @lpVtbl.value.put_blocked.call(this, bblocked)
+  end
+  def refresh(this : IFaxIncomingQueue*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxIncomingQueue*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_jobs(this : IFaxIncomingQueue*, pfaxincomingjobs : IFaxIncomingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.call(this, pfaxincomingjobs)
+  end
+  def get_job(this : IFaxIncomingQueue*, bstrjobid : UInt8*, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_job.call(this, bstrjobid, pfaxincomingjob)
+  end
+end
+struct LibWin32::IFaxOutgoingArchive
+  def query_interface(this : IFaxOutgoingArchive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingArchive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingArchive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingArchive*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingArchive*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingArchive*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingArchive*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(this : IFaxOutgoingArchive*, pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.call(this, pbusearchive)
+  end
+  def put_use_archive(this : IFaxOutgoingArchive*, busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.call(this, busearchive)
+  end
+  def get_archive_folder(this : IFaxOutgoingArchive*, pbstrarchivefolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_folder.call(this, pbstrarchivefolder)
+  end
+  def put_archive_folder(this : IFaxOutgoingArchive*, bstrarchivefolder : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_folder.call(this, bstrarchivefolder)
+  end
+  def get_size_quota_warning(this : IFaxOutgoingArchive*, pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.call(this, pbsizequotawarning)
+  end
+  def put_size_quota_warning(this : IFaxOutgoingArchive*, bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.call(this, bsizequotawarning)
+  end
+  def get_high_quota_water_mark(this : IFaxOutgoingArchive*, plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.call(this, plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(this : IFaxOutgoingArchive*, lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.call(this, lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(this : IFaxOutgoingArchive*, pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.call(this, pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(this : IFaxOutgoingArchive*, llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.call(this, llowquotawatermark)
+  end
+  def get_age_limit(this : IFaxOutgoingArchive*, plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.call(this, plagelimit)
+  end
+  def put_age_limit(this : IFaxOutgoingArchive*, lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.call(this, lagelimit)
+  end
+  def get_size_low(this : IFaxOutgoingArchive*, plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.call(this, plsizelow)
+  end
+  def get_size_high(this : IFaxOutgoingArchive*, plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.call(this, plsizehigh)
+  end
+  def refresh(this : IFaxOutgoingArchive*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxOutgoingArchive*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_messages(this : IFaxOutgoingArchive*, lprefetchsize : Int32, pfaxoutgoingmessageiterator : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.call(this, lprefetchsize, pfaxoutgoingmessageiterator)
+  end
+  def get_message(this : IFaxOutgoingArchive*, bstrmessageid : UInt8*, pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, bstrmessageid, pfaxoutgoingmessage)
+  end
+end
+struct LibWin32::IFaxOutgoingQueue
+  def query_interface(this : IFaxOutgoingQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_blocked(this : IFaxOutgoingQueue*, pbblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_blocked.call(this, pbblocked)
+  end
+  def put_blocked(this : IFaxOutgoingQueue*, bblocked : Int16) : HRESULT
+    @lpVtbl.value.put_blocked.call(this, bblocked)
+  end
+  def get_paused(this : IFaxOutgoingQueue*, pbpaused : Int16*) : HRESULT
+    @lpVtbl.value.get_paused.call(this, pbpaused)
+  end
+  def put_paused(this : IFaxOutgoingQueue*, bpaused : Int16) : HRESULT
+    @lpVtbl.value.put_paused.call(this, bpaused)
+  end
+  def get_allow_personal_cover_pages(this : IFaxOutgoingQueue*, pballowpersonalcoverpages : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_personal_cover_pages.call(this, pballowpersonalcoverpages)
+  end
+  def put_allow_personal_cover_pages(this : IFaxOutgoingQueue*, ballowpersonalcoverpages : Int16) : HRESULT
+    @lpVtbl.value.put_allow_personal_cover_pages.call(this, ballowpersonalcoverpages)
+  end
+  def get_use_device_tsid(this : IFaxOutgoingQueue*, pbusedevicetsid : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device_tsid.call(this, pbusedevicetsid)
+  end
+  def put_use_device_tsid(this : IFaxOutgoingQueue*, busedevicetsid : Int16) : HRESULT
+    @lpVtbl.value.put_use_device_tsid.call(this, busedevicetsid)
+  end
+  def get_retries(this : IFaxOutgoingQueue*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def put_retries(this : IFaxOutgoingQueue*, lretries : Int32) : HRESULT
+    @lpVtbl.value.put_retries.call(this, lretries)
+  end
+  def get_retry_delay(this : IFaxOutgoingQueue*, plretrydelay : Int32*) : HRESULT
+    @lpVtbl.value.get_retry_delay.call(this, plretrydelay)
+  end
+  def put_retry_delay(this : IFaxOutgoingQueue*, lretrydelay : Int32) : HRESULT
+    @lpVtbl.value.put_retry_delay.call(this, lretrydelay)
+  end
+  def get_discount_rate_start(this : IFaxOutgoingQueue*, pdatediscountratestart : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_start.call(this, pdatediscountratestart)
+  end
+  def put_discount_rate_start(this : IFaxOutgoingQueue*, datediscountratestart : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_start.call(this, datediscountratestart)
+  end
+  def get_discount_rate_end(this : IFaxOutgoingQueue*, pdatediscountrateend : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_end.call(this, pdatediscountrateend)
+  end
+  def put_discount_rate_end(this : IFaxOutgoingQueue*, datediscountrateend : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_end.call(this, datediscountrateend)
+  end
+  def get_age_limit(this : IFaxOutgoingQueue*, plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.call(this, plagelimit)
+  end
+  def put_age_limit(this : IFaxOutgoingQueue*, lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.call(this, lagelimit)
+  end
+  def get_branding(this : IFaxOutgoingQueue*, pbbranding : Int16*) : HRESULT
+    @lpVtbl.value.get_branding.call(this, pbbranding)
+  end
+  def put_branding(this : IFaxOutgoingQueue*, bbranding : Int16) : HRESULT
+    @lpVtbl.value.put_branding.call(this, bbranding)
+  end
+  def refresh(this : IFaxOutgoingQueue*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxOutgoingQueue*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_jobs(this : IFaxOutgoingQueue*, pfaxoutgoingjobs : IFaxOutgoingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.call(this, pfaxoutgoingjobs)
+  end
+  def get_job(this : IFaxOutgoingQueue*, bstrjobid : UInt8*, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_job.call(this, bstrjobid, pfaxoutgoingjob)
+  end
+end
+struct LibWin32::IFaxIncomingMessageIterator
+  def query_interface(this : IFaxIncomingMessageIterator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingMessageIterator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingMessageIterator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingMessageIterator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingMessageIterator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingMessageIterator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingMessageIterator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(this : IFaxIncomingMessageIterator*, pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, pfaxincomingmessage)
+  end
+  def get_prefetch_size(this : IFaxIncomingMessageIterator*, plprefetchsize : Int32*) : HRESULT
+    @lpVtbl.value.get_prefetch_size.call(this, plprefetchsize)
+  end
+  def put_prefetch_size(this : IFaxIncomingMessageIterator*, lprefetchsize : Int32) : HRESULT
+    @lpVtbl.value.put_prefetch_size.call(this, lprefetchsize)
+  end
+  def get_at_eof(this : IFaxIncomingMessageIterator*, pbeof : Int16*) : HRESULT
+    @lpVtbl.value.get_at_eof.call(this, pbeof)
+  end
+  def move_first(this : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.move_first.call(this)
+  end
+  def move_next(this : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.move_next.call(this)
+  end
+end
+struct LibWin32::IFaxIncomingMessage
+  def query_interface(this : IFaxIncomingMessage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingMessage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingMessage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingMessage*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingMessage*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingMessage*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingMessage*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFaxIncomingMessage*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_pages(this : IFaxIncomingMessage*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxIncomingMessage*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_device_name(this : IFaxIncomingMessage*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_retries(this : IFaxIncomingMessage*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_transmission_start(this : IFaxIncomingMessage*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxIncomingMessage*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxIncomingMessage*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxIncomingMessage*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_caller_id(this : IFaxIncomingMessage*, pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.call(this, pbstrcallerid)
+  end
+  def get_routing_information(this : IFaxIncomingMessage*, pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.call(this, pbstrroutinginformation)
+  end
+  def copy_tiff(this : IFaxIncomingMessage*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def delete(this : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFaxOutgoingJobs
+  def query_interface(this : IFaxOutgoingJobs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingJobs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingJobs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingJobs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingJobs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingJobs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingJobs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxOutgoingJobs*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxOutgoingJobs*, vindex : VARIANT, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxoutgoingjob)
+  end
+  def get_count(this : IFaxOutgoingJobs*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxOutgoingJob
+  def query_interface(this : IFaxOutgoingJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_subject(this : IFaxOutgoingJob*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def get_document_name(this : IFaxOutgoingJob*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def get_pages(this : IFaxOutgoingJob*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxOutgoingJob*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_submission_id(this : IFaxOutgoingJob*, pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.call(this, pbstrsubmissionid)
+  end
+  def get_id(this : IFaxOutgoingJob*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_original_scheduled_time(this : IFaxOutgoingJob*, pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.call(this, pdateoriginalscheduledtime)
+  end
+  def get_submission_time(this : IFaxOutgoingJob*, pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.call(this, pdatesubmissiontime)
+  end
+  def get_receipt_type(this : IFaxOutgoingJob*, preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.call(this, preceipttype)
+  end
+  def get_priority(this : IFaxOutgoingJob*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def get_sender(this : IFaxOutgoingJob*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipient(this : IFaxOutgoingJob*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.call(this, ppfaxrecipient)
+  end
+  def get_current_page(this : IFaxOutgoingJob*, plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, plcurrentpage)
+  end
+  def get_device_id(this : IFaxOutgoingJob*, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pldeviceid)
+  end
+  def get_status(this : IFaxOutgoingJob*, pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_extended_status_code(this : IFaxOutgoingJob*, pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.call(this, pextendedstatuscode)
+  end
+  def get_extended_status(this : IFaxOutgoingJob*, pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.call(this, pbstrextendedstatus)
+  end
+  def get_available_operations(this : IFaxOutgoingJob*, pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.call(this, pavailableoperations)
+  end
+  def get_retries(this : IFaxOutgoingJob*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_scheduled_time(this : IFaxOutgoingJob*, pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.call(this, pdatescheduledtime)
+  end
+  def get_transmission_start(this : IFaxOutgoingJob*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxOutgoingJob*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxOutgoingJob*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxOutgoingJob*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_group_broadcast_receipts(this : IFaxOutgoingJob*, pbgroupbroadcastreceipts : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.call(this, pbgroupbroadcastreceipts)
+  end
+  def pause(this : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def restart(this : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.restart.call(this)
+  end
+  def copy_tiff(this : IFaxOutgoingJob*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def refresh(this : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def cancel(this : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+end
+struct LibWin32::IFaxOutgoingMessageIterator
+  def query_interface(this : IFaxOutgoingMessageIterator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingMessageIterator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingMessageIterator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingMessageIterator*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingMessageIterator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingMessageIterator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingMessageIterator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(this : IFaxOutgoingMessageIterator*, pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, pfaxoutgoingmessage)
+  end
+  def get_at_eof(this : IFaxOutgoingMessageIterator*, pbeof : Int16*) : HRESULT
+    @lpVtbl.value.get_at_eof.call(this, pbeof)
+  end
+  def get_prefetch_size(this : IFaxOutgoingMessageIterator*, plprefetchsize : Int32*) : HRESULT
+    @lpVtbl.value.get_prefetch_size.call(this, plprefetchsize)
+  end
+  def put_prefetch_size(this : IFaxOutgoingMessageIterator*, lprefetchsize : Int32) : HRESULT
+    @lpVtbl.value.put_prefetch_size.call(this, lprefetchsize)
+  end
+  def move_first(this : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.move_first.call(this)
+  end
+  def move_next(this : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.move_next.call(this)
+  end
+end
+struct LibWin32::IFaxOutgoingMessage
+  def query_interface(this : IFaxOutgoingMessage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingMessage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingMessage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingMessage*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingMessage*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingMessage*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingMessage*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_submission_id(this : IFaxOutgoingMessage*, pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.call(this, pbstrsubmissionid)
+  end
+  def get_id(this : IFaxOutgoingMessage*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_subject(this : IFaxOutgoingMessage*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def get_document_name(this : IFaxOutgoingMessage*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def get_retries(this : IFaxOutgoingMessage*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_pages(this : IFaxOutgoingMessage*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxOutgoingMessage*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_original_scheduled_time(this : IFaxOutgoingMessage*, pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.call(this, pdateoriginalscheduledtime)
+  end
+  def get_submission_time(this : IFaxOutgoingMessage*, pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.call(this, pdatesubmissiontime)
+  end
+  def get_priority(this : IFaxOutgoingMessage*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def get_sender(this : IFaxOutgoingMessage*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipient(this : IFaxOutgoingMessage*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.call(this, ppfaxrecipient)
+  end
+  def get_device_name(this : IFaxOutgoingMessage*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_transmission_start(this : IFaxOutgoingMessage*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxOutgoingMessage*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxOutgoingMessage*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxOutgoingMessage*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def copy_tiff(this : IFaxOutgoingMessage*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def delete(this : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+end
+struct LibWin32::IFaxIncomingJobs
+  def query_interface(this : IFaxIncomingJobs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingJobs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingJobs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingJobs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingJobs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingJobs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingJobs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxIncomingJobs*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxIncomingJobs*, vindex : VARIANT, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxincomingjob)
+  end
+  def get_count(this : IFaxIncomingJobs*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxIncomingJob
+  def query_interface(this : IFaxIncomingJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size(this : IFaxIncomingJob*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_id(this : IFaxIncomingJob*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_current_page(this : IFaxIncomingJob*, plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, plcurrentpage)
+  end
+  def get_device_id(this : IFaxIncomingJob*, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pldeviceid)
+  end
+  def get_status(this : IFaxIncomingJob*, pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_extended_status_code(this : IFaxIncomingJob*, pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.call(this, pextendedstatuscode)
+  end
+  def get_extended_status(this : IFaxIncomingJob*, pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.call(this, pbstrextendedstatus)
+  end
+  def get_available_operations(this : IFaxIncomingJob*, pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.call(this, pavailableoperations)
+  end
+  def get_retries(this : IFaxIncomingJob*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_transmission_start(this : IFaxIncomingJob*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxIncomingJob*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxIncomingJob*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxIncomingJob*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_caller_id(this : IFaxIncomingJob*, pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.call(this, pbstrcallerid)
+  end
+  def get_routing_information(this : IFaxIncomingJob*, pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.call(this, pbstrroutinginformation)
+  end
+  def get_job_type(this : IFaxIncomingJob*, pjobtype : FAX_JOB_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_job_type.call(this, pjobtype)
+  end
+  def cancel(this : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def refresh(this : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def copy_tiff(this : IFaxIncomingJob*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+end
+struct LibWin32::IFaxDeviceProvider
+  def query_interface(this : IFaxDeviceProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDeviceProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDeviceProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDeviceProvider*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDeviceProvider*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDeviceProvider*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDeviceProvider*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_friendly_name(this : IFaxDeviceProvider*, pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrfriendlyname)
+  end
+  def get_image_name(this : IFaxDeviceProvider*, pbstrimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.call(this, pbstrimagename)
+  end
+  def get_unique_name(this : IFaxDeviceProvider*, pbstruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_name.call(this, pbstruniquename)
+  end
+  def get_tapi_provider_name(this : IFaxDeviceProvider*, pbstrtapiprovidername : UInt8**) : HRESULT
+    @lpVtbl.value.get_tapi_provider_name.call(this, pbstrtapiprovidername)
+  end
+  def get_major_version(this : IFaxDeviceProvider*, plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, plmajorversion)
+  end
+  def get_minor_version(this : IFaxDeviceProvider*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, plminorversion)
+  end
+  def get_major_build(this : IFaxDeviceProvider*, plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.call(this, plmajorbuild)
+  end
+  def get_minor_build(this : IFaxDeviceProvider*, plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.call(this, plminorbuild)
+  end
+  def get_debug(this : IFaxDeviceProvider*, pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.call(this, pbdebug)
+  end
+  def get_status(this : IFaxDeviceProvider*, pstatus : FAX_PROVIDER_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_init_error_code(this : IFaxDeviceProvider*, pliniterrorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_init_error_code.call(this, pliniterrorcode)
+  end
+  def get_device_ids(this : IFaxDeviceProvider*, pvdeviceids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_device_ids.call(this, pvdeviceids)
+  end
+end
+struct LibWin32::IFaxDevice
+  def query_interface(this : IFaxDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDevice*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDevice*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDevice*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDevice*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFaxDevice*, plid : Int32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, plid)
+  end
+  def get_device_name(this : IFaxDevice*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_provider_unique_name(this : IFaxDevice*, pbstrprovideruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_unique_name.call(this, pbstrprovideruniquename)
+  end
+  def get_powered_off(this : IFaxDevice*, pbpoweredoff : Int16*) : HRESULT
+    @lpVtbl.value.get_powered_off.call(this, pbpoweredoff)
+  end
+  def get_receiving_now(this : IFaxDevice*, pbreceivingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_receiving_now.call(this, pbreceivingnow)
+  end
+  def get_sending_now(this : IFaxDevice*, pbsendingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_sending_now.call(this, pbsendingnow)
+  end
+  def get_used_routing_methods(this : IFaxDevice*, pvusedroutingmethods : VARIANT*) : HRESULT
+    @lpVtbl.value.get_used_routing_methods.call(this, pvusedroutingmethods)
+  end
+  def get_description(this : IFaxDevice*, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbstrdescription)
+  end
+  def put_description(this : IFaxDevice*, bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bstrdescription)
+  end
+  def get_send_enabled(this : IFaxDevice*, pbsendenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_send_enabled.call(this, pbsendenabled)
+  end
+  def put_send_enabled(this : IFaxDevice*, bsendenabled : Int16) : HRESULT
+    @lpVtbl.value.put_send_enabled.call(this, bsendenabled)
+  end
+  def get_receive_mode(this : IFaxDevice*, preceivemode : FAX_DEVICE_RECEIVE_MODE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receive_mode.call(this, preceivemode)
+  end
+  def put_receive_mode(this : IFaxDevice*, receivemode : FAX_DEVICE_RECEIVE_MODE_ENUM) : HRESULT
+    @lpVtbl.value.put_receive_mode.call(this, receivemode)
+  end
+  def get_rings_before_answer(this : IFaxDevice*, plringsbeforeanswer : Int32*) : HRESULT
+    @lpVtbl.value.get_rings_before_answer.call(this, plringsbeforeanswer)
+  end
+  def put_rings_before_answer(this : IFaxDevice*, lringsbeforeanswer : Int32) : HRESULT
+    @lpVtbl.value.put_rings_before_answer.call(this, lringsbeforeanswer)
+  end
+  def get_csid(this : IFaxDevice*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def put_csid(this : IFaxDevice*, bstrcsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_csid.call(this, bstrcsid)
+  end
+  def get_tsid(this : IFaxDevice*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def put_tsid(this : IFaxDevice*, bstrtsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_tsid.call(this, bstrtsid)
+  end
+  def refresh(this : IFaxDevice*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxDevice*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_extension_property(this : IFaxDevice*, bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.call(this, bstrguid, pvproperty)
+  end
+  def set_extension_property(this : IFaxDevice*, bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.call(this, bstrguid, vproperty)
+  end
+  def use_routing_method(this : IFaxDevice*, bstrmethodguid : UInt8*, buse : Int16) : HRESULT
+    @lpVtbl.value.use_routing_method.call(this, bstrmethodguid, buse)
+  end
+  def get_ringing_now(this : IFaxDevice*, pbringingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_ringing_now.call(this, pbringingnow)
+  end
+  def answer_call(this : IFaxDevice*) : HRESULT
+    @lpVtbl.value.answer_call.call(this)
+  end
+end
+struct LibWin32::IFaxActivityLogging
+  def query_interface(this : IFaxActivityLogging*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxActivityLogging*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxActivityLogging*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxActivityLogging*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxActivityLogging*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxActivityLogging*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxActivityLogging*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_log_incoming(this : IFaxActivityLogging*, pblogincoming : Int16*) : HRESULT
+    @lpVtbl.value.get_log_incoming.call(this, pblogincoming)
+  end
+  def put_log_incoming(this : IFaxActivityLogging*, blogincoming : Int16) : HRESULT
+    @lpVtbl.value.put_log_incoming.call(this, blogincoming)
+  end
+  def get_log_outgoing(this : IFaxActivityLogging*, pblogoutgoing : Int16*) : HRESULT
+    @lpVtbl.value.get_log_outgoing.call(this, pblogoutgoing)
+  end
+  def put_log_outgoing(this : IFaxActivityLogging*, blogoutgoing : Int16) : HRESULT
+    @lpVtbl.value.put_log_outgoing.call(this, blogoutgoing)
+  end
+  def get_database_path(this : IFaxActivityLogging*, pbstrdatabasepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_database_path.call(this, pbstrdatabasepath)
+  end
+  def put_database_path(this : IFaxActivityLogging*, bstrdatabasepath : UInt8*) : HRESULT
+    @lpVtbl.value.put_database_path.call(this, bstrdatabasepath)
+  end
+  def refresh(this : IFaxActivityLogging*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxActivityLogging*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IFaxEventLogging
+  def query_interface(this : IFaxEventLogging*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxEventLogging*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxEventLogging*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxEventLogging*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxEventLogging*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxEventLogging*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxEventLogging*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_init_events_level(this : IFaxEventLogging*, piniteventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_init_events_level.call(this, piniteventlevel)
+  end
+  def put_init_events_level(this : IFaxEventLogging*, initeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_init_events_level.call(this, initeventlevel)
+  end
+  def get_inbound_events_level(this : IFaxEventLogging*, pinboundeventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_inbound_events_level.call(this, pinboundeventlevel)
+  end
+  def put_inbound_events_level(this : IFaxEventLogging*, inboundeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_inbound_events_level.call(this, inboundeventlevel)
+  end
+  def get_outbound_events_level(this : IFaxEventLogging*, poutboundeventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_outbound_events_level.call(this, poutboundeventlevel)
+  end
+  def put_outbound_events_level(this : IFaxEventLogging*, outboundeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_outbound_events_level.call(this, outboundeventlevel)
+  end
+  def get_general_events_level(this : IFaxEventLogging*, pgeneraleventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_general_events_level.call(this, pgeneraleventlevel)
+  end
+  def put_general_events_level(this : IFaxEventLogging*, generaleventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_general_events_level.call(this, generaleventlevel)
+  end
+  def refresh(this : IFaxEventLogging*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxEventLogging*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingGroups
+  def query_interface(this : IFaxOutboundRoutingGroups*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutboundRoutingGroups*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutboundRoutingGroups*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutboundRoutingGroups*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutboundRoutingGroups*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutboundRoutingGroups*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutboundRoutingGroups*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxOutboundRoutingGroups*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxOutboundRoutingGroups*, vindex : VARIANT, pfaxoutboundroutinggroup : IFaxOutboundRoutingGroup*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxoutboundroutinggroup)
+  end
+  def get_count(this : IFaxOutboundRoutingGroups*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def add(this : IFaxOutboundRoutingGroups*, bstrname : UInt8*, pfaxoutboundroutinggroup : IFaxOutboundRoutingGroup*) : HRESULT
+    @lpVtbl.value.add.call(this, bstrname, pfaxoutboundroutinggroup)
+  end
+  def remove(this : IFaxOutboundRoutingGroups*, vindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove.call(this, vindex)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingGroup
+  def query_interface(this : IFaxOutboundRoutingGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutboundRoutingGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutboundRoutingGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutboundRoutingGroup*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutboundRoutingGroup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutboundRoutingGroup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutboundRoutingGroup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFaxOutboundRoutingGroup*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_status(this : IFaxOutboundRoutingGroup*, pstatus : FAX_GROUP_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_device_ids(this : IFaxOutboundRoutingGroup*, pfaxdeviceids : IFaxDeviceIds*) : HRESULT
+    @lpVtbl.value.get_device_ids.call(this, pfaxdeviceids)
+  end
+end
+struct LibWin32::IFaxDeviceIds
+  def query_interface(this : IFaxDeviceIds*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDeviceIds*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDeviceIds*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDeviceIds*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDeviceIds*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDeviceIds*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDeviceIds*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxDeviceIds*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxDeviceIds*, lindex : Int32, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_item.call(this, lindex, pldeviceid)
+  end
+  def get_count(this : IFaxDeviceIds*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def add(this : IFaxDeviceIds*, ldeviceid : Int32) : HRESULT
+    @lpVtbl.value.add.call(this, ldeviceid)
+  end
+  def remove(this : IFaxDeviceIds*, lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, lindex)
+  end
+  def set_order(this : IFaxDeviceIds*, ldeviceid : Int32, lneworder : Int32) : HRESULT
+    @lpVtbl.value.set_order.call(this, ldeviceid, lneworder)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingRules
+  def query_interface(this : IFaxOutboundRoutingRules*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutboundRoutingRules*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutboundRoutingRules*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutboundRoutingRules*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutboundRoutingRules*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutboundRoutingRules*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutboundRoutingRules*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxOutboundRoutingRules*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxOutboundRoutingRules*, lindex : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.get_item.call(this, lindex, pfaxoutboundroutingrule)
+  end
+  def get_count(this : IFaxOutboundRoutingRules*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+  def item_by_country_and_area(this : IFaxOutboundRoutingRules*, lcountrycode : Int32, lareacode : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.item_by_country_and_area.call(this, lcountrycode, lareacode, pfaxoutboundroutingrule)
+  end
+  def remove_by_country_and_area(this : IFaxOutboundRoutingRules*, lcountrycode : Int32, lareacode : Int32) : HRESULT
+    @lpVtbl.value.remove_by_country_and_area.call(this, lcountrycode, lareacode)
+  end
+  def remove(this : IFaxOutboundRoutingRules*, lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, lindex)
+  end
+  def add(this : IFaxOutboundRoutingRules*, lcountrycode : Int32, lareacode : Int32, busedevice : Int16, bstrgroupname : UInt8*, ldeviceid : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.add.call(this, lcountrycode, lareacode, busedevice, bstrgroupname, ldeviceid, pfaxoutboundroutingrule)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingRule
+  def query_interface(this : IFaxOutboundRoutingRule*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutboundRoutingRule*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutboundRoutingRule*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutboundRoutingRule*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutboundRoutingRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutboundRoutingRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutboundRoutingRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_country_code(this : IFaxOutboundRoutingRule*, plcountrycode : Int32*) : HRESULT
+    @lpVtbl.value.get_country_code.call(this, plcountrycode)
+  end
+  def get_area_code(this : IFaxOutboundRoutingRule*, plareacode : Int32*) : HRESULT
+    @lpVtbl.value.get_area_code.call(this, plareacode)
+  end
+  def get_status(this : IFaxOutboundRoutingRule*, pstatus : FAX_RULE_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_use_device(this : IFaxOutboundRoutingRule*, pbusedevice : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device.call(this, pbusedevice)
+  end
+  def put_use_device(this : IFaxOutboundRoutingRule*, busedevice : Int16) : HRESULT
+    @lpVtbl.value.put_use_device.call(this, busedevice)
+  end
+  def get_device_id(this : IFaxOutboundRoutingRule*, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pldeviceid)
+  end
+  def put_device_id(this : IFaxOutboundRoutingRule*, deviceid : Int32) : HRESULT
+    @lpVtbl.value.put_device_id.call(this, deviceid)
+  end
+  def get_group_name(this : IFaxOutboundRoutingRule*, pbstrgroupname : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_name.call(this, pbstrgroupname)
+  end
+  def put_group_name(this : IFaxOutboundRoutingRule*, bstrgroupname : UInt8*) : HRESULT
+    @lpVtbl.value.put_group_name.call(this, bstrgroupname)
+  end
+  def refresh(this : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IFaxInboundRoutingExtensions
+  def query_interface(this : IFaxInboundRoutingExtensions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxInboundRoutingExtensions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxInboundRoutingExtensions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxInboundRoutingExtensions*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxInboundRoutingExtensions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxInboundRoutingExtensions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxInboundRoutingExtensions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxInboundRoutingExtensions*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxInboundRoutingExtensions*, vindex : VARIANT, pfaxinboundroutingextension : IFaxInboundRoutingExtension*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxinboundroutingextension)
+  end
+  def get_count(this : IFaxInboundRoutingExtensions*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxInboundRoutingExtension
+  def query_interface(this : IFaxInboundRoutingExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxInboundRoutingExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxInboundRoutingExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxInboundRoutingExtension*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxInboundRoutingExtension*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxInboundRoutingExtension*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxInboundRoutingExtension*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_friendly_name(this : IFaxInboundRoutingExtension*, pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrfriendlyname)
+  end
+  def get_image_name(this : IFaxInboundRoutingExtension*, pbstrimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.call(this, pbstrimagename)
+  end
+  def get_unique_name(this : IFaxInboundRoutingExtension*, pbstruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_name.call(this, pbstruniquename)
+  end
+  def get_major_version(this : IFaxInboundRoutingExtension*, plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, plmajorversion)
+  end
+  def get_minor_version(this : IFaxInboundRoutingExtension*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, plminorversion)
+  end
+  def get_major_build(this : IFaxInboundRoutingExtension*, plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.call(this, plmajorbuild)
+  end
+  def get_minor_build(this : IFaxInboundRoutingExtension*, plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.call(this, plminorbuild)
+  end
+  def get_debug(this : IFaxInboundRoutingExtension*, pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.call(this, pbdebug)
+  end
+  def get_status(this : IFaxInboundRoutingExtension*, pstatus : FAX_PROVIDER_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_init_error_code(this : IFaxInboundRoutingExtension*, pliniterrorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_init_error_code.call(this, pliniterrorcode)
+  end
+  def get_methods(this : IFaxInboundRoutingExtension*, pvmethods : VARIANT*) : HRESULT
+    @lpVtbl.value.get_methods.call(this, pvmethods)
+  end
+end
+struct LibWin32::IFaxInboundRoutingMethods
+  def query_interface(this : IFaxInboundRoutingMethods*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxInboundRoutingMethods*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxInboundRoutingMethods*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxInboundRoutingMethods*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxInboundRoutingMethods*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxInboundRoutingMethods*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxInboundRoutingMethods*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxInboundRoutingMethods*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxInboundRoutingMethods*, vindex : VARIANT, pfaxinboundroutingmethod : IFaxInboundRoutingMethod*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxinboundroutingmethod)
+  end
+  def get_count(this : IFaxInboundRoutingMethods*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxInboundRoutingMethod
+  def query_interface(this : IFaxInboundRoutingMethod*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxInboundRoutingMethod*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxInboundRoutingMethod*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxInboundRoutingMethod*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxInboundRoutingMethod*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxInboundRoutingMethod*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxInboundRoutingMethod*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IFaxInboundRoutingMethod*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_guid(this : IFaxInboundRoutingMethod*, pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.call(this, pbstrguid)
+  end
+  def get_function_name(this : IFaxInboundRoutingMethod*, pbstrfunctionname : UInt8**) : HRESULT
+    @lpVtbl.value.get_function_name.call(this, pbstrfunctionname)
+  end
+  def get_extension_friendly_name(this : IFaxInboundRoutingMethod*, pbstrextensionfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension_friendly_name.call(this, pbstrextensionfriendlyname)
+  end
+  def get_extension_image_name(this : IFaxInboundRoutingMethod*, pbstrextensionimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension_image_name.call(this, pbstrextensionimagename)
+  end
+  def get_priority(this : IFaxInboundRoutingMethod*, plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, plpriority)
+  end
+  def put_priority(this : IFaxInboundRoutingMethod*, lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.call(this, lpriority)
+  end
+  def refresh(this : IFaxInboundRoutingMethod*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxInboundRoutingMethod*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IFaxDocument2
+  def query_interface(this : IFaxDocument2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxDocument2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxDocument2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxDocument2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxDocument2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxDocument2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxDocument2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_body(this : IFaxDocument2*, pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.call(this, pbstrbody)
+  end
+  def put_body(this : IFaxDocument2*, bstrbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_body.call(this, bstrbody)
+  end
+  def get_sender(this : IFaxDocument2*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipients(this : IFaxDocument2*, ppfaxrecipients : IFaxRecipients*) : HRESULT
+    @lpVtbl.value.get_recipients.call(this, ppfaxrecipients)
+  end
+  def get_cover_page(this : IFaxDocument2*, pbstrcoverpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_cover_page.call(this, pbstrcoverpage)
+  end
+  def put_cover_page(this : IFaxDocument2*, bstrcoverpage : UInt8*) : HRESULT
+    @lpVtbl.value.put_cover_page.call(this, bstrcoverpage)
+  end
+  def get_subject(this : IFaxDocument2*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def put_subject(this : IFaxDocument2*, bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.call(this, bstrsubject)
+  end
+  def get_note(this : IFaxDocument2*, pbstrnote : UInt8**) : HRESULT
+    @lpVtbl.value.get_note.call(this, pbstrnote)
+  end
+  def put_note(this : IFaxDocument2*, bstrnote : UInt8*) : HRESULT
+    @lpVtbl.value.put_note.call(this, bstrnote)
+  end
+  def get_schedule_time(this : IFaxDocument2*, pdatescheduletime : Float64*) : HRESULT
+    @lpVtbl.value.get_schedule_time.call(this, pdatescheduletime)
+  end
+  def put_schedule_time(this : IFaxDocument2*, datescheduletime : Float64) : HRESULT
+    @lpVtbl.value.put_schedule_time.call(this, datescheduletime)
+  end
+  def get_receipt_address(this : IFaxDocument2*, pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.call(this, pbstrreceiptaddress)
+  end
+  def put_receipt_address(this : IFaxDocument2*, bstrreceiptaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_receipt_address.call(this, bstrreceiptaddress)
+  end
+  def get_document_name(this : IFaxDocument2*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def put_document_name(this : IFaxDocument2*, bstrdocumentname : UInt8*) : HRESULT
+    @lpVtbl.value.put_document_name.call(this, bstrdocumentname)
+  end
+  def get_call_handle(this : IFaxDocument2*, plcallhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_call_handle.call(this, plcallhandle)
+  end
+  def put_call_handle(this : IFaxDocument2*, lcallhandle : Int32) : HRESULT
+    @lpVtbl.value.put_call_handle.call(this, lcallhandle)
+  end
+  def get_cover_page_type(this : IFaxDocument2*, pcoverpagetype : FAX_COVERPAGE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_cover_page_type.call(this, pcoverpagetype)
+  end
+  def put_cover_page_type(this : IFaxDocument2*, coverpagetype : FAX_COVERPAGE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_cover_page_type.call(this, coverpagetype)
+  end
+  def get_schedule_type(this : IFaxDocument2*, pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.call(this, pscheduletype)
+  end
+  def put_schedule_type(this : IFaxDocument2*, scheduletype : FAX_SCHEDULE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_schedule_type.call(this, scheduletype)
+  end
+  def get_receipt_type(this : IFaxDocument2*, preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.call(this, preceipttype)
+  end
+  def put_receipt_type(this : IFaxDocument2*, receipttype : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_receipt_type.call(this, receipttype)
+  end
+  def get_group_broadcast_receipts(this : IFaxDocument2*, pbusegrouping : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.call(this, pbusegrouping)
+  end
+  def put_group_broadcast_receipts(this : IFaxDocument2*, busegrouping : Int16) : HRESULT
+    @lpVtbl.value.put_group_broadcast_receipts.call(this, busegrouping)
+  end
+  def get_priority(this : IFaxDocument2*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def put_priority(this : IFaxDocument2*, priority : FAX_PRIORITY_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_priority.call(this, priority)
+  end
+  def get_tapi_connection(this : IFaxDocument2*, pptapiconnection : IDispatch*) : HRESULT
+    @lpVtbl.value.get_tapi_connection.call(this, pptapiconnection)
+  end
+  def putref_tapi_connection(this : IFaxDocument2*, ptapiconnection : IDispatch) : HRESULT
+    @lpVtbl.value.putref_tapi_connection.call(this, ptapiconnection)
+  end
+  def submit(this : IFaxDocument2*, bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.submit.call(this, bstrfaxservername, pvfaxoutgoingjobids)
+  end
+  def connected_submit(this : IFaxDocument2*, pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.connected_submit.call(this, pfaxserver, pvfaxoutgoingjobids)
+  end
+  def get_attach_fax_to_receipt(this : IFaxDocument2*, pbattachfax : Int16*) : HRESULT
+    @lpVtbl.value.get_attach_fax_to_receipt.call(this, pbattachfax)
+  end
+  def put_attach_fax_to_receipt(this : IFaxDocument2*, battachfax : Int16) : HRESULT
+    @lpVtbl.value.put_attach_fax_to_receipt.call(this, battachfax)
+  end
+  def get_submission_id(this : IFaxDocument2*, pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.call(this, pbstrsubmissionid)
+  end
+  def get_bodies(this : IFaxDocument2*, pvbodies : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bodies.call(this, pvbodies)
+  end
+  def put_bodies(this : IFaxDocument2*, vbodies : VARIANT) : HRESULT
+    @lpVtbl.value.put_bodies.call(this, vbodies)
+  end
+  def submit2(this : IFaxDocument2*, bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*, plerrorbodyfile : Int32*) : HRESULT
+    @lpVtbl.value.submit2.call(this, bstrfaxservername, pvfaxoutgoingjobids, plerrorbodyfile)
+  end
+  def connected_submit2(this : IFaxDocument2*, pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*, plerrorbodyfile : Int32*) : HRESULT
+    @lpVtbl.value.connected_submit2.call(this, pfaxserver, pvfaxoutgoingjobids, plerrorbodyfile)
+  end
+end
+struct LibWin32::IFaxConfiguration
+  def query_interface(this : IFaxConfiguration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxConfiguration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxConfiguration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxConfiguration*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxConfiguration*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxConfiguration*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxConfiguration*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(this : IFaxConfiguration*, pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.call(this, pbusearchive)
+  end
+  def put_use_archive(this : IFaxConfiguration*, busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.call(this, busearchive)
+  end
+  def get_archive_location(this : IFaxConfiguration*, pbstrarchivelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_location.call(this, pbstrarchivelocation)
+  end
+  def put_archive_location(this : IFaxConfiguration*, bstrarchivelocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_location.call(this, bstrarchivelocation)
+  end
+  def get_size_quota_warning(this : IFaxConfiguration*, pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.call(this, pbsizequotawarning)
+  end
+  def put_size_quota_warning(this : IFaxConfiguration*, bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.call(this, bsizequotawarning)
+  end
+  def get_high_quota_water_mark(this : IFaxConfiguration*, plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.call(this, plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(this : IFaxConfiguration*, lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.call(this, lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(this : IFaxConfiguration*, pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.call(this, pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(this : IFaxConfiguration*, llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.call(this, llowquotawatermark)
+  end
+  def get_archive_age_limit(this : IFaxConfiguration*, plarchiveagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_age_limit.call(this, plarchiveagelimit)
+  end
+  def put_archive_age_limit(this : IFaxConfiguration*, larchiveagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_archive_age_limit.call(this, larchiveagelimit)
+  end
+  def get_archive_size_low(this : IFaxConfiguration*, plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_size_low.call(this, plsizelow)
+  end
+  def get_archive_size_high(this : IFaxConfiguration*, plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_size_high.call(this, plsizehigh)
+  end
+  def get_outgoing_queue_blocked(this : IFaxConfiguration*, pboutgoingblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_blocked.call(this, pboutgoingblocked)
+  end
+  def put_outgoing_queue_blocked(this : IFaxConfiguration*, boutgoingblocked : Int16) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_blocked.call(this, boutgoingblocked)
+  end
+  def get_outgoing_queue_paused(this : IFaxConfiguration*, pboutgoingpaused : Int16*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_paused.call(this, pboutgoingpaused)
+  end
+  def put_outgoing_queue_paused(this : IFaxConfiguration*, boutgoingpaused : Int16) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_paused.call(this, boutgoingpaused)
+  end
+  def get_allow_personal_cover_pages(this : IFaxConfiguration*, pballowpersonalcoverpages : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_personal_cover_pages.call(this, pballowpersonalcoverpages)
+  end
+  def put_allow_personal_cover_pages(this : IFaxConfiguration*, ballowpersonalcoverpages : Int16) : HRESULT
+    @lpVtbl.value.put_allow_personal_cover_pages.call(this, ballowpersonalcoverpages)
+  end
+  def get_use_device_tsid(this : IFaxConfiguration*, pbusedevicetsid : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device_tsid.call(this, pbusedevicetsid)
+  end
+  def put_use_device_tsid(this : IFaxConfiguration*, busedevicetsid : Int16) : HRESULT
+    @lpVtbl.value.put_use_device_tsid.call(this, busedevicetsid)
+  end
+  def get_retries(this : IFaxConfiguration*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def put_retries(this : IFaxConfiguration*, lretries : Int32) : HRESULT
+    @lpVtbl.value.put_retries.call(this, lretries)
+  end
+  def get_retry_delay(this : IFaxConfiguration*, plretrydelay : Int32*) : HRESULT
+    @lpVtbl.value.get_retry_delay.call(this, plretrydelay)
+  end
+  def put_retry_delay(this : IFaxConfiguration*, lretrydelay : Int32) : HRESULT
+    @lpVtbl.value.put_retry_delay.call(this, lretrydelay)
+  end
+  def get_discount_rate_start(this : IFaxConfiguration*, pdatediscountratestart : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_start.call(this, pdatediscountratestart)
+  end
+  def put_discount_rate_start(this : IFaxConfiguration*, datediscountratestart : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_start.call(this, datediscountratestart)
+  end
+  def get_discount_rate_end(this : IFaxConfiguration*, pdatediscountrateend : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_end.call(this, pdatediscountrateend)
+  end
+  def put_discount_rate_end(this : IFaxConfiguration*, datediscountrateend : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_end.call(this, datediscountrateend)
+  end
+  def get_outgoing_queue_age_limit(this : IFaxConfiguration*, ploutgoingqueueagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_age_limit.call(this, ploutgoingqueueagelimit)
+  end
+  def put_outgoing_queue_age_limit(this : IFaxConfiguration*, loutgoingqueueagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_age_limit.call(this, loutgoingqueueagelimit)
+  end
+  def get_branding(this : IFaxConfiguration*, pbbranding : Int16*) : HRESULT
+    @lpVtbl.value.get_branding.call(this, pbbranding)
+  end
+  def put_branding(this : IFaxConfiguration*, bbranding : Int16) : HRESULT
+    @lpVtbl.value.put_branding.call(this, bbranding)
+  end
+  def get_incoming_queue_blocked(this : IFaxConfiguration*, pbincomingblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_incoming_queue_blocked.call(this, pbincomingblocked)
+  end
+  def put_incoming_queue_blocked(this : IFaxConfiguration*, bincomingblocked : Int16) : HRESULT
+    @lpVtbl.value.put_incoming_queue_blocked.call(this, bincomingblocked)
+  end
+  def get_auto_create_account_on_connect(this : IFaxConfiguration*, pbautocreateaccountonconnect : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_create_account_on_connect.call(this, pbautocreateaccountonconnect)
+  end
+  def put_auto_create_account_on_connect(this : IFaxConfiguration*, bautocreateaccountonconnect : Int16) : HRESULT
+    @lpVtbl.value.put_auto_create_account_on_connect.call(this, bautocreateaccountonconnect)
+  end
+  def get_incoming_faxes_are_public(this : IFaxConfiguration*, pbincomingfaxesarepublic : Int16*) : HRESULT
+    @lpVtbl.value.get_incoming_faxes_are_public.call(this, pbincomingfaxesarepublic)
+  end
+  def put_incoming_faxes_are_public(this : IFaxConfiguration*, bincomingfaxesarepublic : Int16) : HRESULT
+    @lpVtbl.value.put_incoming_faxes_are_public.call(this, bincomingfaxesarepublic)
+  end
+  def refresh(this : IFaxConfiguration*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxConfiguration*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IFaxServer2
+  def query_interface(this : IFaxServer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxServer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxServer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxServer2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxServer2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxServer2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxServer2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(this : IFaxServer2*, bstrservername : UInt8*) : HRESULT
+    @lpVtbl.value.connect.call(this, bstrservername)
+  end
+  def get_server_name(this : IFaxServer2*, pbstrservername : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_name.call(this, pbstrservername)
+  end
+  def get_device_providers(this : IFaxServer2*, ppfaxdeviceproviders : IFaxDeviceProviders*) : HRESULT
+    @lpVtbl.value.get_device_providers.call(this, ppfaxdeviceproviders)
+  end
+  def get_devices(this : IFaxServer2*, ppfaxdevices : IFaxDevices*) : HRESULT
+    @lpVtbl.value.get_devices.call(this, ppfaxdevices)
+  end
+  def get_inbound_routing(this : IFaxServer2*, ppfaxinboundrouting : IFaxInboundRouting*) : HRESULT
+    @lpVtbl.value.get_inbound_routing.call(this, ppfaxinboundrouting)
+  end
+  def get_folders(this : IFaxServer2*, pfaxfolders : IFaxFolders*) : HRESULT
+    @lpVtbl.value.get_folders.call(this, pfaxfolders)
+  end
+  def get_logging_options(this : IFaxServer2*, ppfaxloggingoptions : IFaxLoggingOptions*) : HRESULT
+    @lpVtbl.value.get_logging_options.call(this, ppfaxloggingoptions)
+  end
+  def get_major_version(this : IFaxServer2*, plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.call(this, plmajorversion)
+  end
+  def get_minor_version(this : IFaxServer2*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.call(this, plminorversion)
+  end
+  def get_major_build(this : IFaxServer2*, plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.call(this, plmajorbuild)
+  end
+  def get_minor_build(this : IFaxServer2*, plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.call(this, plminorbuild)
+  end
+  def get_debug(this : IFaxServer2*, pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.call(this, pbdebug)
+  end
+  def get_activity(this : IFaxServer2*, ppfaxactivity : IFaxActivity*) : HRESULT
+    @lpVtbl.value.get_activity.call(this, ppfaxactivity)
+  end
+  def get_outbound_routing(this : IFaxServer2*, ppfaxoutboundrouting : IFaxOutboundRouting*) : HRESULT
+    @lpVtbl.value.get_outbound_routing.call(this, ppfaxoutboundrouting)
+  end
+  def get_receipt_options(this : IFaxServer2*, ppfaxreceiptoptions : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.get_receipt_options.call(this, ppfaxreceiptoptions)
+  end
+  def get_security(this : IFaxServer2*, ppfaxsecurity : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.get_security.call(this, ppfaxsecurity)
+  end
+  def disconnect(this : IFaxServer2*) : HRESULT
+    @lpVtbl.value.disconnect.call(this)
+  end
+  def get_extension_property(this : IFaxServer2*, bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.call(this, bstrguid, pvproperty)
+  end
+  def set_extension_property(this : IFaxServer2*, bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.call(this, bstrguid, vproperty)
+  end
+  def listen_to_server_events(this : IFaxServer2*, eventtypes : FAX_SERVER_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_server_events.call(this, eventtypes)
+  end
+  def register_device_provider(this : IFaxServer2*, bstrguid : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, tspname : UInt8*, lfspiversion : Int32) : HRESULT
+    @lpVtbl.value.register_device_provider.call(this, bstrguid, bstrfriendlyname, bstrimagename, tspname, lfspiversion)
+  end
+  def unregister_device_provider(this : IFaxServer2*, bstruniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_device_provider.call(this, bstruniquename)
+  end
+  def register_inbound_routing_extension(this : IFaxServer2*, bstrextensionname : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, vmethods : VARIANT) : HRESULT
+    @lpVtbl.value.register_inbound_routing_extension.call(this, bstrextensionname, bstrfriendlyname, bstrimagename, vmethods)
+  end
+  def unregister_inbound_routing_extension(this : IFaxServer2*, bstrextensionuniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_inbound_routing_extension.call(this, bstrextensionuniquename)
+  end
+  def get_registered_events(this : IFaxServer2*, peventtypes : FAX_SERVER_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.call(this, peventtypes)
+  end
+  def get_api_version(this : IFaxServer2*, papiversion : FAX_SERVER_APIVERSION_ENUM*) : HRESULT
+    @lpVtbl.value.get_api_version.call(this, papiversion)
+  end
+  def get_configuration(this : IFaxServer2*, ppfaxconfiguration : IFaxConfiguration*) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, ppfaxconfiguration)
+  end
+  def get_current_account(this : IFaxServer2*, ppcurrentaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_current_account.call(this, ppcurrentaccount)
+  end
+  def get_fax_account_set(this : IFaxServer2*, ppfaxaccountset : IFaxAccountSet*) : HRESULT
+    @lpVtbl.value.get_fax_account_set.call(this, ppfaxaccountset)
+  end
+  def get_security2(this : IFaxServer2*, ppfaxsecurity2 : IFaxSecurity2*) : HRESULT
+    @lpVtbl.value.get_security2.call(this, ppfaxsecurity2)
+  end
+end
+struct LibWin32::IFaxAccountSet
+  def query_interface(this : IFaxAccountSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountSet*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_accounts(this : IFaxAccountSet*, ppfaxaccounts : IFaxAccounts*) : HRESULT
+    @lpVtbl.value.get_accounts.call(this, ppfaxaccounts)
+  end
+  def get_account(this : IFaxAccountSet*, bstraccountname : UInt8*, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_account.call(this, bstraccountname, pfaxaccount)
+  end
+  def add_account(this : IFaxAccountSet*, bstraccountname : UInt8*, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.add_account.call(this, bstraccountname, pfaxaccount)
+  end
+  def remove_account(this : IFaxAccountSet*, bstraccountname : UInt8*) : HRESULT
+    @lpVtbl.value.remove_account.call(this, bstraccountname)
+  end
+end
+struct LibWin32::IFaxAccounts
+  def query_interface(this : IFaxAccounts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccounts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccounts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccounts*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccounts*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccounts*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccounts*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(this : IFaxAccounts*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppunk)
+  end
+  def get_item(this : IFaxAccounts*, vindex : VARIANT, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_item.call(this, vindex, pfaxaccount)
+  end
+  def get_count(this : IFaxAccounts*, plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, plcount)
+  end
+end
+struct LibWin32::IFaxAccount
+  def query_interface(this : IFaxAccount*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccount*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccount*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccount*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccount*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccount*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccount*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_account_name(this : IFaxAccount*, pbstraccountname : UInt8**) : HRESULT
+    @lpVtbl.value.get_account_name.call(this, pbstraccountname)
+  end
+  def get_folders(this : IFaxAccount*, ppfolders : IFaxAccountFolders*) : HRESULT
+    @lpVtbl.value.get_folders.call(this, ppfolders)
+  end
+  def listen_to_account_events(this : IFaxAccount*, eventtypes : FAX_ACCOUNT_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_account_events.call(this, eventtypes)
+  end
+  def get_registered_events(this : IFaxAccount*, pregisteredevents : FAX_ACCOUNT_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.call(this, pregisteredevents)
+  end
+end
+struct LibWin32::IFaxOutgoingJob2
+  def query_interface(this : IFaxOutgoingJob2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingJob2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingJob2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingJob2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingJob2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingJob2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingJob2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_subject(this : IFaxOutgoingJob2*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def get_document_name(this : IFaxOutgoingJob2*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def get_pages(this : IFaxOutgoingJob2*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxOutgoingJob2*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_submission_id(this : IFaxOutgoingJob2*, pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.call(this, pbstrsubmissionid)
+  end
+  def get_id(this : IFaxOutgoingJob2*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_original_scheduled_time(this : IFaxOutgoingJob2*, pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.call(this, pdateoriginalscheduledtime)
+  end
+  def get_submission_time(this : IFaxOutgoingJob2*, pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.call(this, pdatesubmissiontime)
+  end
+  def get_receipt_type(this : IFaxOutgoingJob2*, preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.call(this, preceipttype)
+  end
+  def get_priority(this : IFaxOutgoingJob2*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def get_sender(this : IFaxOutgoingJob2*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipient(this : IFaxOutgoingJob2*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.call(this, ppfaxrecipient)
+  end
+  def get_current_page(this : IFaxOutgoingJob2*, plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.call(this, plcurrentpage)
+  end
+  def get_device_id(this : IFaxOutgoingJob2*, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pldeviceid)
+  end
+  def get_status(this : IFaxOutgoingJob2*, pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pstatus)
+  end
+  def get_extended_status_code(this : IFaxOutgoingJob2*, pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.call(this, pextendedstatuscode)
+  end
+  def get_extended_status(this : IFaxOutgoingJob2*, pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.call(this, pbstrextendedstatus)
+  end
+  def get_available_operations(this : IFaxOutgoingJob2*, pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.call(this, pavailableoperations)
+  end
+  def get_retries(this : IFaxOutgoingJob2*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_scheduled_time(this : IFaxOutgoingJob2*, pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.call(this, pdatescheduledtime)
+  end
+  def get_transmission_start(this : IFaxOutgoingJob2*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxOutgoingJob2*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxOutgoingJob2*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxOutgoingJob2*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_group_broadcast_receipts(this : IFaxOutgoingJob2*, pbgroupbroadcastreceipts : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.call(this, pbgroupbroadcastreceipts)
+  end
+  def pause(this : IFaxOutgoingJob2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IFaxOutgoingJob2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def restart(this : IFaxOutgoingJob2*) : HRESULT
+    @lpVtbl.value.restart.call(this)
+  end
+  def copy_tiff(this : IFaxOutgoingJob2*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def refresh(this : IFaxOutgoingJob2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def cancel(this : IFaxOutgoingJob2*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def get_has_cover_page(this : IFaxOutgoingJob2*, pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.call(this, pbhascoverpage)
+  end
+  def get_receipt_address(this : IFaxOutgoingJob2*, pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.call(this, pbstrreceiptaddress)
+  end
+  def get_schedule_type(this : IFaxOutgoingJob2*, pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.call(this, pscheduletype)
+  end
+end
+struct LibWin32::IFaxAccountFolders
+  def query_interface(this : IFaxAccountFolders*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountFolders*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountFolders*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountFolders*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountFolders*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountFolders*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountFolders*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_outgoing_queue(this : IFaxAccountFolders*, pfaxoutgoingqueue : IFaxAccountOutgoingQueue*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.call(this, pfaxoutgoingqueue)
+  end
+  def get_incoming_queue(this : IFaxAccountFolders*, pfaxincomingqueue : IFaxAccountIncomingQueue*) : HRESULT
+    @lpVtbl.value.get_incoming_queue.call(this, pfaxincomingqueue)
+  end
+  def get_incoming_archive(this : IFaxAccountFolders*, pfaxincomingarchive : IFaxAccountIncomingArchive*) : HRESULT
+    @lpVtbl.value.get_incoming_archive.call(this, pfaxincomingarchive)
+  end
+  def get_outgoing_archive(this : IFaxAccountFolders*, pfaxoutgoingarchive : IFaxAccountOutgoingArchive*) : HRESULT
+    @lpVtbl.value.get_outgoing_archive.call(this, pfaxoutgoingarchive)
+  end
+end
+struct LibWin32::IFaxAccountIncomingQueue
+  def query_interface(this : IFaxAccountIncomingQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountIncomingQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountIncomingQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountIncomingQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountIncomingQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountIncomingQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountIncomingQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_jobs(this : IFaxAccountIncomingQueue*, pfaxincomingjobs : IFaxIncomingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.call(this, pfaxincomingjobs)
+  end
+  def get_job(this : IFaxAccountIncomingQueue*, bstrjobid : UInt8*, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_job.call(this, bstrjobid, pfaxincomingjob)
+  end
+end
+struct LibWin32::IFaxAccountOutgoingQueue
+  def query_interface(this : IFaxAccountOutgoingQueue*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountOutgoingQueue*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountOutgoingQueue*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountOutgoingQueue*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountOutgoingQueue*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountOutgoingQueue*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountOutgoingQueue*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_jobs(this : IFaxAccountOutgoingQueue*, pfaxoutgoingjobs : IFaxOutgoingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.call(this, pfaxoutgoingjobs)
+  end
+  def get_job(this : IFaxAccountOutgoingQueue*, bstrjobid : UInt8*, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_job.call(this, bstrjobid, pfaxoutgoingjob)
+  end
+end
+struct LibWin32::IFaxOutgoingMessage2
+  def query_interface(this : IFaxOutgoingMessage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxOutgoingMessage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxOutgoingMessage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxOutgoingMessage2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxOutgoingMessage2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxOutgoingMessage2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxOutgoingMessage2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_submission_id(this : IFaxOutgoingMessage2*, pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.call(this, pbstrsubmissionid)
+  end
+  def get_id(this : IFaxOutgoingMessage2*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_subject(this : IFaxOutgoingMessage2*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def get_document_name(this : IFaxOutgoingMessage2*, pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.call(this, pbstrdocumentname)
+  end
+  def get_retries(this : IFaxOutgoingMessage2*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_pages(this : IFaxOutgoingMessage2*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxOutgoingMessage2*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_original_scheduled_time(this : IFaxOutgoingMessage2*, pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.call(this, pdateoriginalscheduledtime)
+  end
+  def get_submission_time(this : IFaxOutgoingMessage2*, pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.call(this, pdatesubmissiontime)
+  end
+  def get_priority(this : IFaxOutgoingMessage2*, ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, ppriority)
+  end
+  def get_sender(this : IFaxOutgoingMessage2*, ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.call(this, ppfaxsender)
+  end
+  def get_recipient(this : IFaxOutgoingMessage2*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.call(this, ppfaxrecipient)
+  end
+  def get_device_name(this : IFaxOutgoingMessage2*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_transmission_start(this : IFaxOutgoingMessage2*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxOutgoingMessage2*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxOutgoingMessage2*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxOutgoingMessage2*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def copy_tiff(this : IFaxOutgoingMessage2*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def delete(this : IFaxOutgoingMessage2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_has_cover_page(this : IFaxOutgoingMessage2*, pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.call(this, pbhascoverpage)
+  end
+  def get_receipt_type(this : IFaxOutgoingMessage2*, preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.call(this, preceipttype)
+  end
+  def get_receipt_address(this : IFaxOutgoingMessage2*, pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.call(this, pbstrreceiptaddress)
+  end
+  def get_read(this : IFaxOutgoingMessage2*, pbread : Int16*) : HRESULT
+    @lpVtbl.value.get_read.call(this, pbread)
+  end
+  def put_read(this : IFaxOutgoingMessage2*, bread : Int16) : HRESULT
+    @lpVtbl.value.put_read.call(this, bread)
+  end
+  def save(this : IFaxOutgoingMessage2*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def refresh(this : IFaxOutgoingMessage2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+end
+struct LibWin32::IFaxAccountIncomingArchive
+  def query_interface(this : IFaxAccountIncomingArchive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountIncomingArchive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountIncomingArchive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountIncomingArchive*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountIncomingArchive*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountIncomingArchive*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountIncomingArchive*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size_low(this : IFaxAccountIncomingArchive*, plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.call(this, plsizelow)
+  end
+  def get_size_high(this : IFaxAccountIncomingArchive*, plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.call(this, plsizehigh)
+  end
+  def refresh(this : IFaxAccountIncomingArchive*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_messages(this : IFaxAccountIncomingArchive*, lprefetchsize : Int32, pfaxincomingmessageiterator : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.call(this, lprefetchsize, pfaxincomingmessageiterator)
+  end
+  def get_message(this : IFaxAccountIncomingArchive*, bstrmessageid : UInt8*, pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, bstrmessageid, pfaxincomingmessage)
+  end
+end
+struct LibWin32::IFaxAccountOutgoingArchive
+  def query_interface(this : IFaxAccountOutgoingArchive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountOutgoingArchive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountOutgoingArchive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountOutgoingArchive*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountOutgoingArchive*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountOutgoingArchive*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountOutgoingArchive*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size_low(this : IFaxAccountOutgoingArchive*, plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.call(this, plsizelow)
+  end
+  def get_size_high(this : IFaxAccountOutgoingArchive*, plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.call(this, plsizehigh)
+  end
+  def refresh(this : IFaxAccountOutgoingArchive*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def get_messages(this : IFaxAccountOutgoingArchive*, lprefetchsize : Int32, pfaxoutgoingmessageiterator : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.call(this, lprefetchsize, pfaxoutgoingmessageiterator)
+  end
+  def get_message(this : IFaxAccountOutgoingArchive*, bstrmessageid : UInt8*, pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.call(this, bstrmessageid, pfaxoutgoingmessage)
+  end
+end
+struct LibWin32::IFaxSecurity2
+  def query_interface(this : IFaxSecurity2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxSecurity2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxSecurity2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxSecurity2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxSecurity2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxSecurity2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxSecurity2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_descriptor(this : IFaxSecurity2*, pvdescriptor : VARIANT*) : HRESULT
+    @lpVtbl.value.get_descriptor.call(this, pvdescriptor)
+  end
+  def put_descriptor(this : IFaxSecurity2*, vdescriptor : VARIANT) : HRESULT
+    @lpVtbl.value.put_descriptor.call(this, vdescriptor)
+  end
+  def get_granted_rights(this : IFaxSecurity2*, pgrantedrights : FAX_ACCESS_RIGHTS_ENUM_2*) : HRESULT
+    @lpVtbl.value.get_granted_rights.call(this, pgrantedrights)
+  end
+  def refresh(this : IFaxSecurity2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IFaxSecurity2*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_information_type(this : IFaxSecurity2*, plinformationtype : Int32*) : HRESULT
+    @lpVtbl.value.get_information_type.call(this, plinformationtype)
+  end
+  def put_information_type(this : IFaxSecurity2*, linformationtype : Int32) : HRESULT
+    @lpVtbl.value.put_information_type.call(this, linformationtype)
+  end
+end
+struct LibWin32::IFaxIncomingMessage2
+  def query_interface(this : IFaxIncomingMessage2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxIncomingMessage2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxIncomingMessage2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxIncomingMessage2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxIncomingMessage2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxIncomingMessage2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxIncomingMessage2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(this : IFaxIncomingMessage2*, pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.call(this, pbstrid)
+  end
+  def get_pages(this : IFaxIncomingMessage2*, plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.call(this, plpages)
+  end
+  def get_size(this : IFaxIncomingMessage2*, plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, plsize)
+  end
+  def get_device_name(this : IFaxIncomingMessage2*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.call(this, pbstrdevicename)
+  end
+  def get_retries(this : IFaxIncomingMessage2*, plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.call(this, plretries)
+  end
+  def get_transmission_start(this : IFaxIncomingMessage2*, pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.call(this, pdatetransmissionstart)
+  end
+  def get_transmission_end(this : IFaxIncomingMessage2*, pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.call(this, pdatetransmissionend)
+  end
+  def get_csid(this : IFaxIncomingMessage2*, pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.call(this, pbstrcsid)
+  end
+  def get_tsid(this : IFaxIncomingMessage2*, pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.call(this, pbstrtsid)
+  end
+  def get_caller_id(this : IFaxIncomingMessage2*, pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.call(this, pbstrcallerid)
+  end
+  def get_routing_information(this : IFaxIncomingMessage2*, pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.call(this, pbstrroutinginformation)
+  end
+  def copy_tiff(this : IFaxIncomingMessage2*, bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.call(this, bstrtiffpath)
+  end
+  def delete(this : IFaxIncomingMessage2*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_subject(this : IFaxIncomingMessage2*, pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.call(this, pbstrsubject)
+  end
+  def put_subject(this : IFaxIncomingMessage2*, bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.call(this, bstrsubject)
+  end
+  def get_sender_name(this : IFaxIncomingMessage2*, pbstrsendername : UInt8**) : HRESULT
+    @lpVtbl.value.get_sender_name.call(this, pbstrsendername)
+  end
+  def put_sender_name(this : IFaxIncomingMessage2*, bstrsendername : UInt8*) : HRESULT
+    @lpVtbl.value.put_sender_name.call(this, bstrsendername)
+  end
+  def get_sender_fax_number(this : IFaxIncomingMessage2*, pbstrsenderfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_sender_fax_number.call(this, pbstrsenderfaxnumber)
+  end
+  def put_sender_fax_number(this : IFaxIncomingMessage2*, bstrsenderfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_sender_fax_number.call(this, bstrsenderfaxnumber)
+  end
+  def get_has_cover_page(this : IFaxIncomingMessage2*, pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.call(this, pbhascoverpage)
+  end
+  def put_has_cover_page(this : IFaxIncomingMessage2*, bhascoverpage : Int16) : HRESULT
+    @lpVtbl.value.put_has_cover_page.call(this, bhascoverpage)
+  end
+  def get_recipients(this : IFaxIncomingMessage2*, pbstrrecipients : UInt8**) : HRESULT
+    @lpVtbl.value.get_recipients.call(this, pbstrrecipients)
+  end
+  def put_recipients(this : IFaxIncomingMessage2*, bstrrecipients : UInt8*) : HRESULT
+    @lpVtbl.value.put_recipients.call(this, bstrrecipients)
+  end
+  def get_was_re_assigned(this : IFaxIncomingMessage2*, pbwasreassigned : Int16*) : HRESULT
+    @lpVtbl.value.get_was_re_assigned.call(this, pbwasreassigned)
+  end
+  def get_read(this : IFaxIncomingMessage2*, pbread : Int16*) : HRESULT
+    @lpVtbl.value.get_read.call(this, pbread)
+  end
+  def put_read(this : IFaxIncomingMessage2*, bread : Int16) : HRESULT
+    @lpVtbl.value.put_read.call(this, bread)
+  end
+  def re_assign(this : IFaxIncomingMessage2*) : HRESULT
+    @lpVtbl.value.re_assign.call(this)
+  end
+  def save(this : IFaxIncomingMessage2*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def refresh(this : IFaxIncomingMessage2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+end
+struct LibWin32::IFaxServerNotify
+  def query_interface(this : IFaxServerNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxServerNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxServerNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxServerNotify*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxServerNotify*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxServerNotify*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxServerNotify*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IIFaxServerNotify2
+  def query_interface(this : IIFaxServerNotify2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIFaxServerNotify2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIFaxServerNotify2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIFaxServerNotify2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIFaxServerNotify2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIFaxServerNotify2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIFaxServerNotify2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_incoming_job_added(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_added.call(this, pfaxserver, bstrjobid)
+  end
+  def on_incoming_job_removed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_removed.call(this, pfaxserver, bstrjobid)
+  end
+  def on_incoming_job_changed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_incoming_job_changed.call(this, pfaxserver, bstrjobid, pjobstatus)
+  end
+  def on_outgoing_job_added(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_added.call(this, pfaxserver, bstrjobid)
+  end
+  def on_outgoing_job_removed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_removed.call(this, pfaxserver, bstrjobid)
+  end
+  def on_outgoing_job_changed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_outgoing_job_changed.call(this, pfaxserver, bstrjobid, pjobstatus)
+  end
+  def on_incoming_message_added(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_message_added.call(this, pfaxserver, bstrmessageid)
+  end
+  def on_incoming_message_removed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_message_removed.call(this, pfaxserver, bstrmessageid)
+  end
+  def on_outgoing_message_added(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_added.call(this, pfaxserver, bstrmessageid)
+  end
+  def on_outgoing_message_removed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_removed.call(this, pfaxserver, bstrmessageid)
+  end
+  def on_receipt_options_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_receipt_options_change.call(this, pfaxserver)
+  end
+  def on_activity_logging_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_activity_logging_config_change.call(this, pfaxserver)
+  end
+  def on_security_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_security_config_change.call(this, pfaxserver)
+  end
+  def on_event_logging_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_event_logging_config_change.call(this, pfaxserver)
+  end
+  def on_outgoing_queue_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outgoing_queue_config_change.call(this, pfaxserver)
+  end
+  def on_outgoing_archive_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outgoing_archive_config_change.call(this, pfaxserver)
+  end
+  def on_incoming_archive_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_incoming_archive_config_change.call(this, pfaxserver)
+  end
+  def on_devices_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_devices_config_change.call(this, pfaxserver)
+  end
+  def on_outbound_routing_groups_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outbound_routing_groups_config_change.call(this, pfaxserver)
+  end
+  def on_outbound_routing_rules_config_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outbound_routing_rules_config_change.call(this, pfaxserver)
+  end
+  def on_server_activity_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, lincomingmessages : Int32, lroutingmessages : Int32, loutgoingmessages : Int32, lqueuedmessages : Int32) : HRESULT
+    @lpVtbl.value.on_server_activity_change.call(this, pfaxserver, lincomingmessages, lroutingmessages, loutgoingmessages, lqueuedmessages)
+  end
+  def on_queues_status_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, boutgoingqueueblocked : Int16, boutgoingqueuepaused : Int16, bincomingqueueblocked : Int16) : HRESULT
+    @lpVtbl.value.on_queues_status_change.call(this, pfaxserver, boutgoingqueueblocked, boutgoingqueuepaused, bincomingqueueblocked)
+  end
+  def on_new_call(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, lcallid : Int32, ldeviceid : Int32, bstrcallerid : UInt8*) : HRESULT
+    @lpVtbl.value.on_new_call.call(this, pfaxserver, lcallid, ldeviceid, bstrcallerid)
+  end
+  def on_server_shut_down(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_server_shut_down.call(this, pfaxserver)
+  end
+  def on_device_status_change(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2, ldeviceid : Int32, bpoweredoff : Int16, bsending : Int16, breceiving : Int16, bringing : Int16) : HRESULT
+    @lpVtbl.value.on_device_status_change.call(this, pfaxserver, ldeviceid, bpoweredoff, bsending, breceiving, bringing)
+  end
+  def on_general_server_config_changed(this : IIFaxServerNotify2*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_general_server_config_changed.call(this, pfaxserver)
+  end
+end
+struct LibWin32::IFaxServerNotify2
+  def query_interface(this : IFaxServerNotify2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxServerNotify2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxServerNotify2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxServerNotify2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxServerNotify2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxServerNotify2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxServerNotify2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IIFaxAccountNotify
+  def query_interface(this : IIFaxAccountNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIFaxAccountNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIFaxAccountNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IIFaxAccountNotify*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IIFaxAccountNotify*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IIFaxAccountNotify*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IIFaxAccountNotify*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_incoming_job_added(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_added.call(this, pfaxaccount, bstrjobid)
+  end
+  def on_incoming_job_removed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_removed.call(this, pfaxaccount, bstrjobid)
+  end
+  def on_incoming_job_changed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_incoming_job_changed.call(this, pfaxaccount, bstrjobid, pjobstatus)
+  end
+  def on_outgoing_job_added(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_added.call(this, pfaxaccount, bstrjobid)
+  end
+  def on_outgoing_job_removed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_removed.call(this, pfaxaccount, bstrjobid)
+  end
+  def on_outgoing_job_changed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_outgoing_job_changed.call(this, pfaxaccount, bstrjobid, pjobstatus)
+  end
+  def on_incoming_message_added(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrmessageid : UInt8*, faddedtoreceivefolder : Int16) : HRESULT
+    @lpVtbl.value.on_incoming_message_added.call(this, pfaxaccount, bstrmessageid, faddedtoreceivefolder)
+  end
+  def on_incoming_message_removed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrmessageid : UInt8*, fremovedfromreceivefolder : Int16) : HRESULT
+    @lpVtbl.value.on_incoming_message_removed.call(this, pfaxaccount, bstrmessageid, fremovedfromreceivefolder)
+  end
+  def on_outgoing_message_added(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_added.call(this, pfaxaccount, bstrmessageid)
+  end
+  def on_outgoing_message_removed(this : IIFaxAccountNotify*, pfaxaccount : IFaxAccount, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_removed.call(this, pfaxaccount, bstrmessageid)
+  end
+  def on_server_shut_down(this : IIFaxAccountNotify*, pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_server_shut_down.call(this, pfaxserver)
+  end
+end
+struct LibWin32::IFaxAccountNotify
+  def query_interface(this : IFaxAccountNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFaxAccountNotify*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFaxAccountNotify*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IFaxAccountNotify*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IFaxAccountNotify*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IFaxAccountNotify*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IFaxAccountNotify*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IStillImageW
+  def query_interface(this : IStillImageW*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStillImageW*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStillImageW*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IStillImageW*, hinst : HINSTANCE, dwversion : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, hinst, dwversion)
+  end
+  def get_device_list(this : IStillImageW*, dwtype : UInt32, dwflags : UInt32, pdwitemsreturned : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_device_list.call(this, dwtype, dwflags, pdwitemsreturned, ppbuffer)
+  end
+  def get_device_info(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_device_info.call(this, pwszdevicename, ppbuffer)
+  end
+  def create_device(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, dwmode : UInt32, pdevice : IStiDevice*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.call(this, pwszdevicename, dwmode, pdevice, punkouter)
+  end
+  def get_device_value(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, pvaluename : LibC::LPWSTR, ptype : UInt32*, pdata : UInt8*, cbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_value.call(this, pwszdevicename, pvaluename, ptype, pdata, cbdata)
+  end
+  def set_device_value(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, pvaluename : LibC::LPWSTR, type : UInt32, pdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.set_device_value.call(this, pwszdevicename, pvaluename, type, pdata, cbdata)
+  end
+  def get_sti_launch_information(this : IStillImageW*, pwszdevicename : Char*, pdweventcode : UInt32*, pwszeventname : Char*) : HRESULT
+    @lpVtbl.value.get_sti_launch_information.call(this, pwszdevicename, pdweventcode, pwszeventname)
+  end
+  def register_launch_application(this : IStillImageW*, pwszappname : LibC::LPWSTR, pwszcommandline : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_launch_application.call(this, pwszappname, pwszcommandline)
+  end
+  def unregister_launch_application(this : IStillImageW*, pwszappname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_launch_application.call(this, pwszappname)
+  end
+  def enable_hw_notifications(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, bnewstate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_hw_notifications.call(this, pwszdevicename, bnewstate)
+  end
+  def get_hw_notification_state(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, pbcurrentstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_hw_notification_state.call(this, pwszdevicename, pbcurrentstate)
+  end
+  def refresh_device_bus(this : IStillImageW*, pwszdevicename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.refresh_device_bus.call(this, pwszdevicename)
+  end
+  def launch_application_for_device(this : IStillImageW*, pwszdevicename : LibC::LPWSTR, pwszappname : LibC::LPWSTR, pstinotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.launch_application_for_device.call(this, pwszdevicename, pwszappname, pstinotify)
+  end
+  def setup_device_parameters(this : IStillImageW*, param0 : STI_DEVICE_INFORMATIONW*) : HRESULT
+    @lpVtbl.value.setup_device_parameters.call(this, param0)
+  end
+  def write_to_error_log(this : IStillImageW*, dwmessagetype : UInt32, pszmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_to_error_log.call(this, dwmessagetype, pszmessage)
+  end
+end
+struct LibWin32::IStiDevice
+  def query_interface(this : IStiDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStiDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStiDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IStiDevice*, hinst : HINSTANCE, pwszdevicename : LibC::LPWSTR, dwversion : UInt32, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, hinst, pwszdevicename, dwversion, dwmode)
+  end
+  def get_capabilities(this : IStiDevice*, pdevcaps : STI_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdevcaps)
+  end
+  def get_status(this : IStiDevice*, pdevstatus : STI_DEVICE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdevstatus)
+  end
+  def device_reset(this : IStiDevice*) : HRESULT
+    @lpVtbl.value.device_reset.call(this)
+  end
+  def diagnostic(this : IStiDevice*, pbuffer : STI_DIAG*) : HRESULT
+    @lpVtbl.value.diagnostic.call(this, pbuffer)
+  end
+  def escape(this : IStiDevice*, escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, dwoutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.escape.call(this, escapefunction, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdata)
+  end
+  def get_last_error(this : IStiDevice*, pdwlastdeviceerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, pdwlastdeviceerror)
+  end
+  def lock_device(this : IStiDevice*, dwtimeout : UInt32) : HRESULT
+    @lpVtbl.value.lock_device.call(this, dwtimeout)
+  end
+  def un_lock_device(this : IStiDevice*) : HRESULT
+    @lpVtbl.value.un_lock_device.call(this)
+  end
+  def raw_read_data(this : IStiDevice*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(this : IStiDevice*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(this : IStiDevice*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(this : IStiDevice*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def subscribe(this : IStiDevice*, lpsubsribe : STISUBSCRIBE*) : HRESULT
+    @lpVtbl.value.subscribe.call(this, lpsubsribe)
+  end
+  def get_last_notification_data(this : IStiDevice*, lpnotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.get_last_notification_data.call(this, lpnotify)
+  end
+  def un_subscribe(this : IStiDevice*) : HRESULT
+    @lpVtbl.value.un_subscribe.call(this)
+  end
+  def get_last_error_info(this : IStiDevice*, plasterrorinfo : ERROR_INFOW*) : HRESULT
+    @lpVtbl.value.get_last_error_info.call(this, plasterrorinfo)
+  end
+end
+struct LibWin32::IStiDeviceControl
+  def query_interface(this : IStiDeviceControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStiDeviceControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStiDeviceControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IStiDeviceControl*, dwdevicetype : UInt32, dwmode : UInt32, pwszportname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.initialize.call(this, dwdevicetype, dwmode, pwszportname, dwflags)
+  end
+  def raw_read_data(this : IStiDeviceControl*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(this : IStiDeviceControl*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(this : IStiDeviceControl*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(this : IStiDeviceControl*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_device_control(this : IStiDeviceControl*, escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, dwoutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.raw_device_control.call(this, escapefunction, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdata)
+  end
+  def get_last_error(this : IStiDeviceControl*, lpdwlasterror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, lpdwlasterror)
+  end
+  def get_my_device_port_name(this : IStiDeviceControl*, lpszdevicepath : Char*, cwdevicepathsize : UInt32) : HRESULT
+    @lpVtbl.value.get_my_device_port_name.call(this, lpszdevicepath, cwdevicepathsize)
+  end
+  def get_my_device_handle(this : IStiDeviceControl*, lph : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_my_device_handle.call(this, lph)
+  end
+  def get_my_device_open_mode(this : IStiDeviceControl*, pdwopenmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_my_device_open_mode.call(this, pdwopenmode)
+  end
+  def write_to_error_log(this : IStiDeviceControl*, dwmessagetype : UInt32, pszmessage : LibC::LPWSTR, dwerrorcode : UInt32) : HRESULT
+    @lpVtbl.value.write_to_error_log.call(this, dwmessagetype, pszmessage, dwerrorcode)
+  end
+end
+struct LibWin32::IStiUSD
+  def query_interface(this : IStiUSD*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStiUSD*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStiUSD*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IStiUSD*, pheldcb : IStiDeviceControl, dwstiversion : UInt32, hparameterskey : HKEY) : HRESULT
+    @lpVtbl.value.initialize.call(this, pheldcb, dwstiversion, hparameterskey)
+  end
+  def get_capabilities(this : IStiUSD*, pdevcaps : STI_USD_CAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.call(this, pdevcaps)
+  end
+  def get_status(this : IStiUSD*, pdevstatus : STI_DEVICE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, pdevstatus)
+  end
+  def device_reset(this : IStiUSD*) : HRESULT
+    @lpVtbl.value.device_reset.call(this)
+  end
+  def diagnostic(this : IStiUSD*, pbuffer : STI_DIAG*) : HRESULT
+    @lpVtbl.value.diagnostic.call(this, pbuffer)
+  end
+  def escape(this : IStiUSD*, escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, cboutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.escape.call(this, escapefunction, lpindata, cbindatasize, poutdata, cboutdatasize, pdwactualdata)
+  end
+  def get_last_error(this : IStiUSD*, pdwlastdeviceerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.call(this, pdwlastdeviceerror)
+  end
+  def lock_device(this : IStiUSD*) : HRESULT
+    @lpVtbl.value.lock_device.call(this)
+  end
+  def un_lock_device(this : IStiUSD*) : HRESULT
+    @lpVtbl.value.un_lock_device.call(this)
+  end
+  def raw_read_data(this : IStiUSD*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(this : IStiUSD*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(this : IStiUSD*, lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.call(this, lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(this : IStiUSD*, lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.call(this, lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def set_notification_handle(this : IStiUSD*, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_notification_handle.call(this, hevent)
+  end
+  def get_notification_data(this : IStiUSD*, lpnotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.get_notification_data.call(this, lpnotify)
+  end
+  def get_last_error_info(this : IStiUSD*, plasterrorinfo : ERROR_INFOW*) : HRESULT
+    @lpVtbl.value.get_last_error_info.call(this, plasterrorinfo)
+  end
 end

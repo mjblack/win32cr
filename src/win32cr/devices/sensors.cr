@@ -696,7 +696,7 @@ lib LibWin32
   fun SerializationBufferAllocate(sizeinbytes : UInt32, pbuffer : UInt8**) : NTSTATUS
 
   # Params # buffer : UInt8* [In]
-  fun SerializationBufferFree(buffer : UInt8*)
+  fun SerializationBufferFree(buffer : UInt8*) : Void
 
   # Params # collection : SENSOR_COLLECTION_LIST* [In]
   fun CollectionsListGetSerializedSize(collection : SENSOR_COLLECTION_LIST*) : UInt32
@@ -730,4 +730,189 @@ lib LibWin32
 
   # Params # guidarray : Guid* [In],arraylength : UInt32 [In],guidelem : Guid* [In]
   fun IsGUIDPresentInList(guidarray : Guid*, arraylength : UInt32, guidelem : Guid*) : BOOLEAN
+end
+struct LibWin32::ISensorManager
+  def query_interface(this : ISensorManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensorManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensorManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_sensors_by_category(this : ISensorManager*, sensorcategory : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
+    @lpVtbl.value.get_sensors_by_category.call(this, sensorcategory, ppsensorsfound)
+  end
+  def get_sensors_by_type(this : ISensorManager*, sensortype : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
+    @lpVtbl.value.get_sensors_by_type.call(this, sensortype, ppsensorsfound)
+  end
+  def get_sensor_by_id(this : ISensorManager*, sensorid : Guid*, ppsensor : ISensor*) : HRESULT
+    @lpVtbl.value.get_sensor_by_id.call(this, sensorid, ppsensor)
+  end
+  def set_event_sink(this : ISensorManager*, pevents : ISensorManagerEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.call(this, pevents)
+  end
+  def request_permissions(this : ISensorManager*, hparent : LibC::HANDLE, psensors : ISensorCollection, fmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.request_permissions.call(this, hparent, psensors, fmodal)
+  end
+end
+struct LibWin32::ILocationPermissions
+  def query_interface(this : ILocationPermissions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ILocationPermissions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ILocationPermissions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_global_location_permission(this : ILocationPermissions*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_global_location_permission.call(this, pfenabled)
+  end
+  def check_location_capability(this : ILocationPermissions*, dwclientthreadid : UInt32) : HRESULT
+    @lpVtbl.value.check_location_capability.call(this, dwclientthreadid)
+  end
+end
+struct LibWin32::ISensorCollection
+  def query_interface(this : ISensorCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensorCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensorCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_at(this : ISensorCollection*, ulindex : UInt32, ppsensor : ISensor*) : HRESULT
+    @lpVtbl.value.get_at.call(this, ulindex, ppsensor)
+  end
+  def get_count(this : ISensorCollection*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def add(this : ISensorCollection*, psensor : ISensor) : HRESULT
+    @lpVtbl.value.add.call(this, psensor)
+  end
+  def remove(this : ISensorCollection*, psensor : ISensor) : HRESULT
+    @lpVtbl.value.remove.call(this, psensor)
+  end
+  def remove_by_id(this : ISensorCollection*, sensorid : Guid*) : HRESULT
+    @lpVtbl.value.remove_by_id.call(this, sensorid)
+  end
+  def clear(this : ISensorCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end
+struct LibWin32::ISensor
+  def query_interface(this : ISensor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : ISensor*, pid : Guid*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pid)
+  end
+  def get_category(this : ISensor*, psensorcategory : Guid*) : HRESULT
+    @lpVtbl.value.get_category.call(this, psensorcategory)
+  end
+  def get_type(this : ISensor*, psensortype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.call(this, psensortype)
+  end
+  def get_friendly_name(this : ISensor*, pfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pfriendlyname)
+  end
+  def get_property(this : ISensor*, key : PROPERTYKEY*, pproperty : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, key, pproperty)
+  end
+  def get_properties(this : ISensor*, pkeys : IPortableDeviceKeyCollection, ppproperties : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pkeys, ppproperties)
+  end
+  def get_supported_data_fields(this : ISensor*, ppdatafields : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_data_fields.call(this, ppdatafields)
+  end
+  def set_properties(this : ISensor*, pproperties : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.set_properties.call(this, pproperties, ppresults)
+  end
+  def supports_data_field(this : ISensor*, key : PROPERTYKEY*, pissupported : Int16*) : HRESULT
+    @lpVtbl.value.supports_data_field.call(this, key, pissupported)
+  end
+  def get_state(this : ISensor*, pstate : SensorState*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def get_data(this : ISensor*, ppdatareport : ISensorDataReport*) : HRESULT
+    @lpVtbl.value.get_data.call(this, ppdatareport)
+  end
+  def supports_event(this : ISensor*, eventguid : Guid*, pissupported : Int16*) : HRESULT
+    @lpVtbl.value.supports_event.call(this, eventguid, pissupported)
+  end
+  def get_event_interest(this : ISensor*, ppvalues : Guid**, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_interest.call(this, ppvalues, pcount)
+  end
+  def set_event_interest(this : ISensor*, pvalues : Guid*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_event_interest.call(this, pvalues, count)
+  end
+  def set_event_sink(this : ISensor*, pevents : ISensorEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.call(this, pevents)
+  end
+end
+struct LibWin32::ISensorDataReport
+  def query_interface(this : ISensorDataReport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensorDataReport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensorDataReport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_timestamp(this : ISensorDataReport*, ptimestamp : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.call(this, ptimestamp)
+  end
+  def get_sensor_value(this : ISensorDataReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_sensor_value.call(this, pkey, pvalue)
+  end
+  def get_sensor_values(this : ISensorDataReport*, pkeys : IPortableDeviceKeyCollection, ppvalues : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_sensor_values.call(this, pkeys, ppvalues)
+  end
+end
+struct LibWin32::ISensorManagerEvents
+  def query_interface(this : ISensorManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensorManagerEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensorManagerEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_sensor_enter(this : ISensorManagerEvents*, psensor : ISensor, state : SensorState) : HRESULT
+    @lpVtbl.value.on_sensor_enter.call(this, psensor, state)
+  end
+end
+struct LibWin32::ISensorEvents
+  def query_interface(this : ISensorEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISensorEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISensorEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_state_changed(this : ISensorEvents*, psensor : ISensor, state : SensorState) : HRESULT
+    @lpVtbl.value.on_state_changed.call(this, psensor, state)
+  end
+  def on_data_updated(this : ISensorEvents*, psensor : ISensor, pnewdata : ISensorDataReport) : HRESULT
+    @lpVtbl.value.on_data_updated.call(this, psensor, pnewdata)
+  end
+  def on_event(this : ISensorEvents*, psensor : ISensor, eventid : Guid*, peventdata : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.on_event.call(this, psensor, eventid, peventdata)
+  end
+  def on_leave(this : ISensorEvents*, id : Guid*) : HRESULT
+    @lpVtbl.value.on_leave.call(this, id)
+  end
 end

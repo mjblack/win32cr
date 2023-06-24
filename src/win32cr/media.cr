@@ -243,3 +243,66 @@ lib LibWin32
   # Params # utimerid : UInt32 [In]
   fun timeKillEvent(utimerid : UInt32) : UInt32
 end
+struct LibWin32::IReferenceClock
+  def query_interface(this : IReferenceClock*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceClock*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceClock*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_time(this : IReferenceClock*, ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, ptime)
+  end
+  def advise_time(this : IReferenceClock*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
+  end
+  def advise_periodic(this : IReferenceClock*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
+  end
+  def unadvise(this : IReferenceClock*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
+  end
+end
+struct LibWin32::IReferenceClockTimerControl
+  def query_interface(this : IReferenceClockTimerControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceClockTimerControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceClockTimerControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_default_timer_resolution(this : IReferenceClockTimerControl*, timerresolution : Int64) : HRESULT
+    @lpVtbl.value.set_default_timer_resolution.call(this, timerresolution)
+  end
+  def get_default_timer_resolution(this : IReferenceClockTimerControl*, ptimerresolution : Int64*) : HRESULT
+    @lpVtbl.value.get_default_timer_resolution.call(this, ptimerresolution)
+  end
+end
+struct LibWin32::IReferenceClock2
+  def query_interface(this : IReferenceClock2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceClock2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceClock2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_time(this : IReferenceClock2*, ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_time.call(this, ptime)
+  end
+  def advise_time(this : IReferenceClock2*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
+  end
+  def advise_periodic(this : IReferenceClock2*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
+  end
+  def unadvise(this : IReferenceClock2*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
+  end
+end

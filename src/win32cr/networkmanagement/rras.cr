@@ -2695,10 +2695,10 @@ lib LibWin32
   fun RasGetEapUserIdentityA(pszphonebook : PSTR, pszentry : PSTR, dwflags : UInt32, hwnd : LibC::HANDLE, ppraseapuseridentity : RASEAPUSERIDENTITYA**) : UInt32
 
   # Params # praseapuseridentity : RASEAPUSERIDENTITYW* [In]
-  fun RasFreeEapUserIdentityW(praseapuseridentity : RASEAPUSERIDENTITYW*)
+  fun RasFreeEapUserIdentityW(praseapuseridentity : RASEAPUSERIDENTITYW*) : Void
 
   # Params # praseapuseridentity : RASEAPUSERIDENTITYA* [In]
-  fun RasFreeEapUserIdentityA(praseapuseridentity : RASEAPUSERIDENTITYA*)
+  fun RasFreeEapUserIdentityA(praseapuseridentity : RASEAPUSERIDENTITYA*) : Void
 
   # Params # pszphonebook : PSTR [In],pszentry : PSTR [In],dwsubentryid : UInt32 [In]
   fun RasDeleteSubEntryA(pszphonebook : PSTR, pszentry : PSTR, dwsubentryid : UInt32) : UInt32
@@ -2812,7 +2812,7 @@ lib LibWin32
   fun MprAdminServerConnect(lpwsservername : LibC::LPWSTR, phmprserver : LibC::IntPtrT*) : UInt32
 
   # Params # hmprserver : LibC::IntPtrT [In]
-  fun MprAdminServerDisconnect(hmprserver : LibC::IntPtrT)
+  fun MprAdminServerDisconnect(hmprserver : LibC::IntPtrT) : Void
 
   # Params # hmprserver : LibC::IntPtrT [In],dwlevel : UInt32 [In],lplpbbuffer : UInt8** [In]
   fun MprAdminServerGetCredentials(hmprserver : LibC::IntPtrT, dwlevel : UInt32, lplpbbuffer : UInt8**) : UInt32
@@ -2923,7 +2923,7 @@ lib LibWin32
   fun MprAdminMIBServerConnect(lpwsservername : LibC::LPWSTR, phmibserver : LibC::IntPtrT*) : UInt32
 
   # Params # hmibserver : LibC::IntPtrT [In]
-  fun MprAdminMIBServerDisconnect(hmibserver : LibC::IntPtrT)
+  fun MprAdminMIBServerDisconnect(hmibserver : LibC::IntPtrT) : Void
 
   # Params # hmibserver : LibC::IntPtrT [In],dwpid : UInt32 [In],dwroutingpid : UInt32 [In],lpentry : Void* [In],dwentrysize : UInt32 [In]
   fun MprAdminMIBEntryCreate(hmibserver : LibC::IntPtrT, dwpid : UInt32, dwroutingpid : UInt32, lpentry : Void*, dwentrysize : UInt32) : UInt32
@@ -2953,7 +2953,7 @@ lib LibWin32
   fun MprConfigServerConnect(lpwsservername : LibC::LPWSTR, phmprconfig : LibC::HANDLE*) : UInt32
 
   # Params # hmprconfig : LibC::HANDLE [In]
-  fun MprConfigServerDisconnect(hmprconfig : LibC::HANDLE)
+  fun MprConfigServerDisconnect(hmprconfig : LibC::HANDLE) : Void
 
   # Params # hmprconfig : LibC::HANDLE [In]
   fun MprConfigServerRefresh(hmprconfig : LibC::HANDLE) : UInt32

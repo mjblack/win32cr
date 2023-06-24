@@ -792,7 +792,7 @@ lib LibWin32
   fun ldap_err2string(err : UInt32) : PSTR
 
   # Params # ld : Ldap* [In],msg : PSTR [In]
-  fun ldap_perror(ld : Ldap*, msg : PSTR)
+  fun ldap_perror(ld : Ldap*, msg : PSTR) : Void
 
   # Params # ld : Ldap* [In],res : LDAPMessage* [In]
   fun ldap_first_entry(ld : Ldap*, res : LDAPMessage*) : LDAPMessage*
@@ -891,16 +891,16 @@ lib LibWin32
   fun ldap_dn2ufn(dn : PSTR) : PSTR
 
   # Params # block : LibC::LPWSTR [In]
-  fun ldap_memfreeW(block : LibC::LPWSTR)
+  fun ldap_memfreeW(block : LibC::LPWSTR) : Void
 
   # Params # block : PSTR [In]
-  fun ldap_memfreeA(block : PSTR)
+  fun ldap_memfreeA(block : PSTR) : Void
 
   # Params # bv : LDAP_BERVAL* [In]
-  fun ber_bvfree(bv : LDAP_BERVAL*)
+  fun ber_bvfree(bv : LDAP_BERVAL*) : Void
 
   # Params # block : PSTR [In]
-  fun ldap_memfree(block : PSTR)
+  fun ldap_memfree(block : PSTR) : Void
 
   # Params # ufn : LibC::LPWSTR [In],pdn : LibC::LPWSTR* [In]
   fun ldap_ufn2dnW(ufn : LibC::LPWSTR, pdn : LibC::LPWSTR*) : UInt32
@@ -930,7 +930,7 @@ lib LibWin32
   fun ldap_set_dbg_flags(newflags : UInt32) : UInt32
 
   # Params # debugprintroutine : DBGPRINT [In]
-  fun ldap_set_dbg_routine(debugprintroutine : DBGPRINT)
+  fun ldap_set_dbg_routine(debugprintroutine : DBGPRINT) : Void
 
   # Params # lpsrcstr : UInt8* [In],cchsrc : Int32 [In],lpdeststr : Char* [In],cchdest : Int32 [In]
   fun LdapUTF8ToUnicode(lpsrcstr : UInt8*, cchsrc : Int32, lpdeststr : Char*, cchdest : Int32) : Int32
@@ -1071,10 +1071,10 @@ lib LibWin32
   fun ber_init(pberval : LDAP_BERVAL*) : Berelement*
 
   # Params # pberelement : Berelement* [In],fbuf : Int32 [In]
-  fun ber_free(pberelement : Berelement*, fbuf : Int32)
+  fun ber_free(pberelement : Berelement*, fbuf : Int32) : Void
 
   # Params # pberval : LDAP_BERVAL** [In]
-  fun ber_bvecfree(pberval : LDAP_BERVAL**)
+  fun ber_bvecfree(pberval : LDAP_BERVAL**) : Void
 
   # Params # pberval : LDAP_BERVAL* [In]
   fun ber_bvdup(pberval : LDAP_BERVAL*) : LDAP_BERVAL*

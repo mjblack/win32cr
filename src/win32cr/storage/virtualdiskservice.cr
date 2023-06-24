@@ -2091,3 +2091,801 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IEnumVdsObject
+  def query_interface(this : IEnumVdsObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IEnumVdsObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IEnumVdsObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IEnumVdsObject*, celt : UInt32, ppobjectarray : IUnknown*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppobjectarray, pcfetched)
+  end
+  def skip(this : IEnumVdsObject*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def reset(this : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def clone(this : IEnumVdsObject*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IVdsAsync
+  def query_interface(this : IVdsAsync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsAsync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsAsync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cancel(this : IVdsAsync*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def wait(this : IVdsAsync*, phrresult : HRESULT*, pasyncout : VDS_ASYNC_OUTPUT*) : HRESULT
+    @lpVtbl.value.wait.call(this, phrresult, pasyncout)
+  end
+  def query_status(this : IVdsAsync*, phrresult : HRESULT*, pulpercentcompleted : UInt32*) : HRESULT
+    @lpVtbl.value.query_status.call(this, phrresult, pulpercentcompleted)
+  end
+end
+struct LibWin32::IVdsAdviseSink
+  def query_interface(this : IVdsAdviseSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsAdviseSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsAdviseSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_notify(this : IVdsAdviseSink*, lnumberofnotifications : Int32, pnotificationarray : VDS_NOTIFICATION*) : HRESULT
+    @lpVtbl.value.on_notify.call(this, lnumberofnotifications, pnotificationarray)
+  end
+end
+struct LibWin32::IVdsProvider
+  def query_interface(this : IVdsProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsProvider*, pproviderprop : VDS_PROVIDER_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pproviderprop)
+  end
+end
+struct LibWin32::IVdsProviderSupport
+  def query_interface(this : IVdsProviderSupport*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsProviderSupport*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsProviderSupport*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_version_support(this : IVdsProviderSupport*, ulversionsupport : UInt32*) : HRESULT
+    @lpVtbl.value.get_version_support.call(this, ulversionsupport)
+  end
+end
+struct LibWin32::IVdsProviderPrivate
+  def query_interface(this : IVdsProviderPrivate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsProviderPrivate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsProviderPrivate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_object(this : IVdsProviderPrivate*, objectid : Guid, type : VDS_OBJECT_TYPE, ppobjectunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.call(this, objectid, type, ppobjectunk)
+  end
+  def on_load(this : IVdsProviderPrivate*, pwszmachinename : LibC::LPWSTR, pcallbackobject : IUnknown) : HRESULT
+    @lpVtbl.value.on_load.call(this, pwszmachinename, pcallbackobject)
+  end
+  def on_unload(this : IVdsProviderPrivate*, bforceunload : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_unload.call(this, bforceunload)
+  end
+end
+struct LibWin32::IVdsHwProvider
+  def query_interface(this : IVdsHwProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_sub_systems(this : IVdsHwProvider*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_sub_systems.call(this, ppenum)
+  end
+  def reenumerate(this : IVdsHwProvider*) : HRESULT
+    @lpVtbl.value.reenumerate.call(this)
+  end
+  def refresh(this : IVdsHwProvider*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+end
+struct LibWin32::IVdsHwProviderType
+  def query_interface(this : IVdsHwProviderType*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProviderType*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProviderType*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider_type(this : IVdsHwProviderType*, ptype : VDS_HWPROVIDER_TYPE*) : HRESULT
+    @lpVtbl.value.get_provider_type.call(this, ptype)
+  end
+end
+struct LibWin32::IVdsHwProviderType2
+  def query_interface(this : IVdsHwProviderType2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProviderType2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProviderType2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider_type2(this : IVdsHwProviderType2*, ptype : VDS_HWPROVIDER_TYPE*) : HRESULT
+    @lpVtbl.value.get_provider_type2.call(this, ptype)
+  end
+end
+struct LibWin32::IVdsHwProviderStoragePools
+  def query_interface(this : IVdsHwProviderStoragePools*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProviderStoragePools*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProviderStoragePools*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_storage_pools(this : IVdsHwProviderStoragePools*, ulflags : UInt32, ullremainingfreespace : UInt64, ppoolattributes : VDS_POOL_ATTRIBUTES*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_storage_pools.call(this, ulflags, ullremainingfreespace, ppoolattributes, ppenum)
+  end
+  def create_lun_in_storage_pool(this : IVdsHwProviderStoragePools*, type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, storagepoolid : Guid, pwszunmaskinglist : LibC::LPWSTR, phints2 : VDS_HINTS2*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun_in_storage_pool.call(this, type, ullsizeinbytes, storagepoolid, pwszunmaskinglist, phints2, ppasync)
+  end
+  def query_max_lun_create_size_in_storage_pool(this : IVdsHwProviderStoragePools*, type : VDS_LUN_TYPE, storagepoolid : Guid, phints2 : VDS_HINTS2*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size_in_storage_pool.call(this, type, storagepoolid, phints2, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystem
+  def query_interface(this : IVdsSubSystem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsSubSystem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsSubSystem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsSubSystem*, psubsystemprop : VDS_SUB_SYSTEM_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, psubsystemprop)
+  end
+  def get_provider(this : IVdsSubSystem*, ppprovider : IVdsProvider*) : HRESULT
+    @lpVtbl.value.get_provider.call(this, ppprovider)
+  end
+  def query_controllers(this : IVdsSubSystem*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_controllers.call(this, ppenum)
+  end
+  def query_luns(this : IVdsSubSystem*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_luns.call(this, ppenum)
+  end
+  def query_drives(this : IVdsSubSystem*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_drives.call(this, ppenum)
+  end
+  def get_drive(this : IVdsSubSystem*, sbusnumber : Int16, sslotnumber : Int16, ppdrive : IVdsDrive*) : HRESULT
+    @lpVtbl.value.get_drive.call(this, sbusnumber, sslotnumber, ppdrive)
+  end
+  def reenumerate(this : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.reenumerate.call(this)
+  end
+  def set_controller_status(this : IVdsSubSystem*, ponlinecontrolleridarray : Guid*, lnumberofonlinecontrollers : Int32, pofflinecontrolleridarray : Guid*, lnumberofofflinecontrollers : Int32) : HRESULT
+    @lpVtbl.value.set_controller_status.call(this, ponlinecontrolleridarray, lnumberofonlinecontrollers, pofflinecontrolleridarray, lnumberofofflinecontrollers)
+  end
+  def create_lun(this : IVdsSubSystem*, type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, pwszunmaskinglist : LibC::LPWSTR, phints : VDS_HINTS*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun.call(this, type, ullsizeinbytes, pdriveidarray, lnumberofdrives, pwszunmaskinglist, phints, ppasync)
+  end
+  def replace_drive(this : IVdsSubSystem*, drivetobereplaced : Guid, replacementdrive : Guid) : HRESULT
+    @lpVtbl.value.replace_drive.call(this, drivetobereplaced, replacementdrive)
+  end
+  def set_status(this : IVdsSubSystem*, status : VDS_SUB_SYSTEM_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+  def query_max_lun_create_size(this : IVdsSubSystem*, type : VDS_LUN_TYPE, pdriveidarray : Guid*, lnumberofdrives : Int32, phints : VDS_HINTS*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size.call(this, type, pdriveidarray, lnumberofdrives, phints, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystem2
+  def query_interface(this : IVdsSubSystem2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsSubSystem2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsSubSystem2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties2(this : IVdsSubSystem2*, psubsystemprop2 : VDS_SUB_SYSTEM_PROP2*) : HRESULT
+    @lpVtbl.value.get_properties2.call(this, psubsystemprop2)
+  end
+  def get_drive2(this : IVdsSubSystem2*, sbusnumber : Int16, sslotnumber : Int16, ulenclosurenumber : UInt32, ppdrive : IVdsDrive*) : HRESULT
+    @lpVtbl.value.get_drive2.call(this, sbusnumber, sslotnumber, ulenclosurenumber, ppdrive)
+  end
+  def create_lun2(this : IVdsSubSystem2*, type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, pwszunmaskinglist : LibC::LPWSTR, phints2 : VDS_HINTS2*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun2.call(this, type, ullsizeinbytes, pdriveidarray, lnumberofdrives, pwszunmaskinglist, phints2, ppasync)
+  end
+  def query_max_lun_create_size2(this : IVdsSubSystem2*, type : VDS_LUN_TYPE, pdriveidarray : Guid*, lnumberofdrives : Int32, phints2 : VDS_HINTS2*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size2.call(this, type, pdriveidarray, lnumberofdrives, phints2, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystemNaming
+  def query_interface(this : IVdsSubSystemNaming*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsSubSystemNaming*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsSubSystemNaming*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_friendly_name(this : IVdsSubSystemNaming*, pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.call(this, pwszfriendlyname)
+  end
+end
+struct LibWin32::IVdsSubSystemIscsi
+  def query_interface(this : IVdsSubSystemIscsi*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsSubSystemIscsi*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsSubSystemIscsi*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_targets(this : IVdsSubSystemIscsi*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_targets.call(this, ppenum)
+  end
+  def query_portals(this : IVdsSubSystemIscsi*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_portals.call(this, ppenum)
+  end
+  def create_target(this : IVdsSubSystemIscsi*, pwsziscsiname : LibC::LPWSTR, pwszfriendlyname : LibC::LPWSTR, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_target.call(this, pwsziscsiname, pwszfriendlyname, ppasync)
+  end
+  def set_ipsec_group_preshared_key(this : IVdsSubSystemIscsi*, pipseckey : VDS_ISCSI_IPSEC_KEY*) : HRESULT
+    @lpVtbl.value.set_ipsec_group_preshared_key.call(this, pipseckey)
+  end
+end
+struct LibWin32::IVdsSubSystemInterconnect
+  def query_interface(this : IVdsSubSystemInterconnect*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsSubSystemInterconnect*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsSubSystemInterconnect*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supported_interconnects(this : IVdsSubSystemInterconnect*, pulsupportedinterconnectsflag : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_interconnects.call(this, pulsupportedinterconnectsflag)
+  end
+end
+struct LibWin32::IVdsControllerPort
+  def query_interface(this : IVdsControllerPort*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsControllerPort*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsControllerPort*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsControllerPort*, pportprop : VDS_PORT_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pportprop)
+  end
+  def get_controller(this : IVdsControllerPort*, ppcontroller : IVdsController*) : HRESULT
+    @lpVtbl.value.get_controller.call(this, ppcontroller)
+  end
+  def query_associated_luns(this : IVdsControllerPort*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.call(this, ppenum)
+  end
+  def reset(this : IVdsControllerPort*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def set_status(this : IVdsControllerPort*, status : VDS_PORT_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+end
+struct LibWin32::IVdsController
+  def query_interface(this : IVdsController*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsController*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsController*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsController*, pcontrollerprop : VDS_CONTROLLER_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pcontrollerprop)
+  end
+  def get_sub_system(this : IVdsController*, ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.call(this, ppsubsystem)
+  end
+  def get_port_properties(this : IVdsController*, sportnumber : Int16, pportprop : VDS_PORT_PROP*) : HRESULT
+    @lpVtbl.value.get_port_properties.call(this, sportnumber, pportprop)
+  end
+  def flush_cache(this : IVdsController*) : HRESULT
+    @lpVtbl.value.flush_cache.call(this)
+  end
+  def invalidate_cache(this : IVdsController*) : HRESULT
+    @lpVtbl.value.invalidate_cache.call(this)
+  end
+  def reset(this : IVdsController*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def query_associated_luns(this : IVdsController*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.call(this, ppenum)
+  end
+  def set_status(this : IVdsController*, status : VDS_CONTROLLER_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+end
+struct LibWin32::IVdsControllerControllerPort
+  def query_interface(this : IVdsControllerControllerPort*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsControllerControllerPort*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsControllerControllerPort*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_controller_ports(this : IVdsControllerControllerPort*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_controller_ports.call(this, ppenum)
+  end
+end
+struct LibWin32::IVdsDrive
+  def query_interface(this : IVdsDrive*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsDrive*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsDrive*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsDrive*, pdriveprop : VDS_DRIVE_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pdriveprop)
+  end
+  def get_sub_system(this : IVdsDrive*, ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.call(this, ppsubsystem)
+  end
+  def query_extents(this : IVdsDrive*, ppextentarray : VDS_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_extents.call(this, ppextentarray, plnumberofextents)
+  end
+  def set_flags(this : IVdsDrive*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, ulflags)
+  end
+  def clear_flags(this : IVdsDrive*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.clear_flags.call(this, ulflags)
+  end
+  def set_status(this : IVdsDrive*, status : VDS_DRIVE_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+end
+struct LibWin32::IVdsDrive2
+  def query_interface(this : IVdsDrive2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsDrive2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsDrive2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties2(this : IVdsDrive2*, pdriveprop2 : VDS_DRIVE_PROP2*) : HRESULT
+    @lpVtbl.value.get_properties2.call(this, pdriveprop2)
+  end
+end
+struct LibWin32::IVdsLun
+  def query_interface(this : IVdsLun*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLun*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLun*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsLun*, plunprop : VDS_LUN_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, plunprop)
+  end
+  def get_sub_system(this : IVdsLun*, ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.call(this, ppsubsystem)
+  end
+  def get_identification_data(this : IVdsLun*, pluninfo : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_identification_data.call(this, pluninfo)
+  end
+  def query_active_controllers(this : IVdsLun*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_active_controllers.call(this, ppenum)
+  end
+  def extend(this : IVdsLun*, ullnumberofbytestoadd : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.extend.call(this, ullnumberofbytestoadd, pdriveidarray, lnumberofdrives, ppasync)
+  end
+  def shrink(this : IVdsLun*, ullnumberofbytestoremove : UInt64, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.shrink.call(this, ullnumberofbytestoremove, ppasync)
+  end
+  def query_plexes(this : IVdsLun*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_plexes.call(this, ppenum)
+  end
+  def add_plex(this : IVdsLun*, lunid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.add_plex.call(this, lunid, ppasync)
+  end
+  def remove_plex(this : IVdsLun*, plexid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.remove_plex.call(this, plexid, ppasync)
+  end
+  def recover(this : IVdsLun*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.recover.call(this, ppasync)
+  end
+  def set_mask(this : IVdsLun*, pwszunmaskinglist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_mask.call(this, pwszunmaskinglist)
+  end
+  def delete(this : IVdsLun*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def associate_controllers(this : IVdsLun*, pactivecontrolleridarray : Guid*, lnumberofactivecontrollers : Int32, pinactivecontrolleridarray : Guid*, lnumberofinactivecontrollers : Int32) : HRESULT
+    @lpVtbl.value.associate_controllers.call(this, pactivecontrolleridarray, lnumberofactivecontrollers, pinactivecontrolleridarray, lnumberofinactivecontrollers)
+  end
+  def query_hints(this : IVdsLun*, phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.query_hints.call(this, phints)
+  end
+  def apply_hints(this : IVdsLun*, phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.apply_hints.call(this, phints)
+  end
+  def set_status(this : IVdsLun*, status : VDS_LUN_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+  def query_max_lun_extend_size(this : IVdsLun*, pdriveidarray : Guid*, lnumberofdrives : Int32, pullmaxbytestobeadded : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_extend_size.call(this, pdriveidarray, lnumberofdrives, pullmaxbytestobeadded)
+  end
+end
+struct LibWin32::IVdsLun2
+  def query_interface(this : IVdsLun2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLun2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLun2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_hints2(this : IVdsLun2*, phints2 : VDS_HINTS2*) : HRESULT
+    @lpVtbl.value.query_hints2.call(this, phints2)
+  end
+  def apply_hints2(this : IVdsLun2*, phints2 : VDS_HINTS2*) : HRESULT
+    @lpVtbl.value.apply_hints2.call(this, phints2)
+  end
+end
+struct LibWin32::IVdsLunNaming
+  def query_interface(this : IVdsLunNaming*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunNaming*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunNaming*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_friendly_name(this : IVdsLunNaming*, pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.call(this, pwszfriendlyname)
+  end
+end
+struct LibWin32::IVdsLunNumber
+  def query_interface(this : IVdsLunNumber*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunNumber*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunNumber*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_lun_number(this : IVdsLunNumber*, pullunnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_lun_number.call(this, pullunnumber)
+  end
+end
+struct LibWin32::IVdsLunControllerPorts
+  def query_interface(this : IVdsLunControllerPorts*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunControllerPorts*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunControllerPorts*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def associate_controller_ports(this : IVdsLunControllerPorts*, pactivecontrollerportidarray : Guid*, lnumberofactivecontrollerports : Int32, pinactivecontrollerportidarray : Guid*, lnumberofinactivecontrollerports : Int32) : HRESULT
+    @lpVtbl.value.associate_controller_ports.call(this, pactivecontrollerportidarray, lnumberofactivecontrollerports, pinactivecontrollerportidarray, lnumberofinactivecontrollerports)
+  end
+  def query_active_controller_ports(this : IVdsLunControllerPorts*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_active_controller_ports.call(this, ppenum)
+  end
+end
+struct LibWin32::IVdsLunMpio
+  def query_interface(this : IVdsLunMpio*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunMpio*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunMpio*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_path_info(this : IVdsLunMpio*, pppaths : VDS_PATH_INFO**, plnumberofpaths : Int32*) : HRESULT
+    @lpVtbl.value.get_path_info.call(this, pppaths, plnumberofpaths)
+  end
+  def get_load_balance_policy(this : IVdsLunMpio*, ppolicy : VDS_LOADBALANCE_POLICY_ENUM*, pppaths : VDS_PATH_POLICY**, plnumberofpaths : Int32*) : HRESULT
+    @lpVtbl.value.get_load_balance_policy.call(this, ppolicy, pppaths, plnumberofpaths)
+  end
+  def set_load_balance_policy(this : IVdsLunMpio*, policy : VDS_LOADBALANCE_POLICY_ENUM, ppaths : VDS_PATH_POLICY*, lnumberofpaths : Int32) : HRESULT
+    @lpVtbl.value.set_load_balance_policy.call(this, policy, ppaths, lnumberofpaths)
+  end
+  def get_supported_lb_policies(this : IVdsLunMpio*, pullbflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_lb_policies.call(this, pullbflags)
+  end
+end
+struct LibWin32::IVdsLunIscsi
+  def query_interface(this : IVdsLunIscsi*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunIscsi*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunIscsi*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def associate_targets(this : IVdsLunIscsi*, ptargetidarray : Guid*, lnumberoftargets : Int32) : HRESULT
+    @lpVtbl.value.associate_targets.call(this, ptargetidarray, lnumberoftargets)
+  end
+  def query_associated_targets(this : IVdsLunIscsi*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_targets.call(this, ppenum)
+  end
+end
+struct LibWin32::IVdsLunPlex
+  def query_interface(this : IVdsLunPlex*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsLunPlex*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsLunPlex*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsLunPlex*, pplexprop : VDS_LUN_PLEX_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pplexprop)
+  end
+  def get_lun(this : IVdsLunPlex*, pplun : IVdsLun*) : HRESULT
+    @lpVtbl.value.get_lun.call(this, pplun)
+  end
+  def query_extents(this : IVdsLunPlex*, ppextentarray : VDS_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_extents.call(this, ppextentarray, plnumberofextents)
+  end
+  def query_hints(this : IVdsLunPlex*, phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.query_hints.call(this, phints)
+  end
+  def apply_hints(this : IVdsLunPlex*, phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.apply_hints.call(this, phints)
+  end
+end
+struct LibWin32::IVdsIscsiPortal
+  def query_interface(this : IVdsIscsiPortal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsIscsiPortal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsIscsiPortal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsIscsiPortal*, pportalprop : VDS_ISCSI_PORTAL_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pportalprop)
+  end
+  def get_sub_system(this : IVdsIscsiPortal*, ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.call(this, ppsubsystem)
+  end
+  def query_associated_portal_groups(this : IVdsIscsiPortal*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_portal_groups.call(this, ppenum)
+  end
+  def set_status(this : IVdsIscsiPortal*, status : VDS_ISCSI_PORTAL_STATUS) : HRESULT
+    @lpVtbl.value.set_status.call(this, status)
+  end
+  def set_ipsec_tunnel_address(this : IVdsIscsiPortal*, ptunneladdress : VDS_IPADDRESS*, pdestinationaddress : VDS_IPADDRESS*) : HRESULT
+    @lpVtbl.value.set_ipsec_tunnel_address.call(this, ptunneladdress, pdestinationaddress)
+  end
+  def get_ipsec_security(this : IVdsIscsiPortal*, pinitiatorportaladdress : VDS_IPADDRESS*, pullsecurityflags : UInt64*) : HRESULT
+    @lpVtbl.value.get_ipsec_security.call(this, pinitiatorportaladdress, pullsecurityflags)
+  end
+  def set_ipsec_security(this : IVdsIscsiPortal*, pinitiatorportaladdress : VDS_IPADDRESS*, ullsecurityflags : UInt64, pipseckey : VDS_ISCSI_IPSEC_KEY*) : HRESULT
+    @lpVtbl.value.set_ipsec_security.call(this, pinitiatorportaladdress, ullsecurityflags, pipseckey)
+  end
+end
+struct LibWin32::IVdsIscsiTarget
+  def query_interface(this : IVdsIscsiTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsIscsiTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsIscsiTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsIscsiTarget*, ptargetprop : VDS_ISCSI_TARGET_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, ptargetprop)
+  end
+  def get_sub_system(this : IVdsIscsiTarget*, ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.call(this, ppsubsystem)
+  end
+  def query_portal_groups(this : IVdsIscsiTarget*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_portal_groups.call(this, ppenum)
+  end
+  def query_associated_luns(this : IVdsIscsiTarget*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.call(this, ppenum)
+  end
+  def create_portal_group(this : IVdsIscsiTarget*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_portal_group.call(this, ppasync)
+  end
+  def delete(this : IVdsIscsiTarget*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.delete.call(this, ppasync)
+  end
+  def set_friendly_name(this : IVdsIscsiTarget*, pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.call(this, pwszfriendlyname)
+  end
+  def set_shared_secret(this : IVdsIscsiTarget*, ptargetsharedsecret : VDS_ISCSI_SHARED_SECRET*, pwszinitiatorname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_shared_secret.call(this, ptargetsharedsecret, pwszinitiatorname)
+  end
+  def remember_initiator_shared_secret(this : IVdsIscsiTarget*, pwszinitiatorname : LibC::LPWSTR, pinitiatorsharedsecret : VDS_ISCSI_SHARED_SECRET*) : HRESULT
+    @lpVtbl.value.remember_initiator_shared_secret.call(this, pwszinitiatorname, pinitiatorsharedsecret)
+  end
+  def get_connected_initiators(this : IVdsIscsiTarget*, pppwszinitiatorlist : LibC::LPWSTR**, plnumberofinitiators : Int32*) : HRESULT
+    @lpVtbl.value.get_connected_initiators.call(this, pppwszinitiatorlist, plnumberofinitiators)
+  end
+end
+struct LibWin32::IVdsIscsiPortalGroup
+  def query_interface(this : IVdsIscsiPortalGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsIscsiPortalGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsIscsiPortalGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_properties(this : IVdsIscsiPortalGroup*, pportalgroupprop : VDS_ISCSI_PORTALGROUP_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pportalgroupprop)
+  end
+  def get_target(this : IVdsIscsiPortalGroup*, pptarget : IVdsIscsiTarget*) : HRESULT
+    @lpVtbl.value.get_target.call(this, pptarget)
+  end
+  def query_associated_portals(this : IVdsIscsiPortalGroup*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_portals.call(this, ppenum)
+  end
+  def add_portal(this : IVdsIscsiPortalGroup*, portalid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.add_portal.call(this, portalid, ppasync)
+  end
+  def remove_portal(this : IVdsIscsiPortalGroup*, portalid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.remove_portal.call(this, portalid, ppasync)
+  end
+  def delete(this : IVdsIscsiPortalGroup*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.delete.call(this, ppasync)
+  end
+end
+struct LibWin32::IVdsStoragePool
+  def query_interface(this : IVdsStoragePool*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsStoragePool*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsStoragePool*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_provider(this : IVdsStoragePool*, ppprovider : IVdsProvider*) : HRESULT
+    @lpVtbl.value.get_provider.call(this, ppprovider)
+  end
+  def get_properties(this : IVdsStoragePool*, pstoragepoolprop : VDS_STORAGE_POOL_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pstoragepoolprop)
+  end
+  def get_attributes(this : IVdsStoragePool*, pstoragepoolattributes : VDS_POOL_ATTRIBUTES*) : HRESULT
+    @lpVtbl.value.get_attributes.call(this, pstoragepoolattributes)
+  end
+  def query_drive_extents(this : IVdsStoragePool*, ppextentarray : VDS_STORAGE_POOL_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_drive_extents.call(this, ppextentarray, plnumberofextents)
+  end
+  def query_allocated_luns(this : IVdsStoragePool*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_allocated_luns.call(this, ppenum)
+  end
+  def query_allocated_storage_pools(this : IVdsStoragePool*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_allocated_storage_pools.call(this, ppenum)
+  end
+end
+struct LibWin32::IVdsMaintenance
+  def query_interface(this : IVdsMaintenance*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsMaintenance*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsMaintenance*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_maintenance(this : IVdsMaintenance*, operation : VDS_MAINTENANCE_OPERATION) : HRESULT
+    @lpVtbl.value.start_maintenance.call(this, operation)
+  end
+  def stop_maintenance(this : IVdsMaintenance*, operation : VDS_MAINTENANCE_OPERATION) : HRESULT
+    @lpVtbl.value.stop_maintenance.call(this, operation)
+  end
+  def pulse_maintenance(this : IVdsMaintenance*, operation : VDS_MAINTENANCE_OPERATION, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.pulse_maintenance.call(this, operation, ulcount)
+  end
+end
+struct LibWin32::IVdsHwProviderPrivate
+  def query_interface(this : IVdsHwProviderPrivate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProviderPrivate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProviderPrivate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def query_if_created_lun(this : IVdsHwProviderPrivate*, pwszdevicepath : LibC::LPWSTR, pvdsluninformation : VDS_LUN_INFORMATION*, plunid : Guid*) : HRESULT
+    @lpVtbl.value.query_if_created_lun.call(this, pwszdevicepath, pvdsluninformation, plunid)
+  end
+end
+struct LibWin32::IVdsHwProviderPrivateMpio
+  def query_interface(this : IVdsHwProviderPrivateMpio*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsHwProviderPrivateMpio*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsHwProviderPrivateMpio*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_all_path_statuses_from_hba_port(this : IVdsHwProviderPrivateMpio*, hbaportprop : VDS_HBAPORT_PROP, status : VDS_PATH_STATUS) : HRESULT
+    @lpVtbl.value.set_all_path_statuses_from_hba_port.call(this, hbaportprop, status)
+  end
+end
+struct LibWin32::IVdsAdmin
+  def query_interface(this : IVdsAdmin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVdsAdmin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVdsAdmin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def register_provider(this : IVdsAdmin*, providerid : Guid, providerclsid : Guid, pwszname : LibC::LPWSTR, type : VDS_PROVIDER_TYPE, pwszmachinename : LibC::LPWSTR, pwszversion : LibC::LPWSTR, guidversionid : Guid) : HRESULT
+    @lpVtbl.value.register_provider.call(this, providerid, providerclsid, pwszname, type, pwszmachinename, pwszversion, guidversionid)
+  end
+  def unregister_provider(this : IVdsAdmin*, providerid : Guid) : HRESULT
+    @lpVtbl.value.unregister_provider.call(this, providerid)
+  end
+end

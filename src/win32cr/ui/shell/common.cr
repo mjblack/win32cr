@@ -147,3 +147,49 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IObjectArray
+  def query_interface(this : IObjectArray*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectArray*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectArray*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IObjectArray*, pcobjects : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcobjects)
+  end
+  def get_at(this : IObjectArray*, uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.call(this, uiindex, riid, ppv)
+  end
+end
+struct LibWin32::IObjectCollection
+  def query_interface(this : IObjectCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IObjectCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IObjectCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_count(this : IObjectCollection*, pcobjects : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcobjects)
+  end
+  def get_at(this : IObjectCollection*, uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.call(this, uiindex, riid, ppv)
+  end
+  def add_object(this : IObjectCollection*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.add_object.call(this, punk)
+  end
+  def add_from_array(this : IObjectCollection*, poasource : IObjectArray) : HRESULT
+    @lpVtbl.value.add_from_array.call(this, poasource)
+  end
+  def remove_object_at(this : IObjectCollection*, uiindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_object_at.call(this, uiindex)
+  end
+  def clear(this : IObjectCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+end

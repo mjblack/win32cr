@@ -2006,3 +2006,2583 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IRTCClient
+  def query_interface(this : IRTCClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IRTCClient*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
+  end
+  def shutdown(this : IRTCClient*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def prepare_for_shutdown(this : IRTCClient*) : HRESULT
+    @lpVtbl.value.prepare_for_shutdown.call(this)
+  end
+  def put_event_filter(this : IRTCClient*, lfilter : Int32) : HRESULT
+    @lpVtbl.value.put_event_filter.call(this, lfilter)
+  end
+  def get_event_filter(this : IRTCClient*, plfilter : Int32*) : HRESULT
+    @lpVtbl.value.get_event_filter.call(this, plfilter)
+  end
+  def set_preferred_media_types(this : IRTCClient*, lmediatypes : Int32, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.set_preferred_media_types.call(this, lmediatypes, fpersistent)
+  end
+  def get_preferred_media_types(this : IRTCClient*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_media_types.call(this, plmediatypes)
+  end
+  def get_media_capabilities(this : IRTCClient*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_media_capabilities.call(this, plmediatypes)
+  end
+  def create_session(this : IRTCClient*, entype : RTC_SESSION_TYPE, bstrlocalphoneuri : UInt8*, pprofile : IRTCProfile, lflags : Int32, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.create_session.call(this, entype, bstrlocalphoneuri, pprofile, lflags, ppsession)
+  end
+  def put_listen_for_incoming_sessions(this : IRTCClient*, enlisten : RTC_LISTEN_MODE) : HRESULT
+    @lpVtbl.value.put_listen_for_incoming_sessions.call(this, enlisten)
+  end
+  def get_listen_for_incoming_sessions(this : IRTCClient*, penlisten : RTC_LISTEN_MODE*) : HRESULT
+    @lpVtbl.value.get_listen_for_incoming_sessions.call(this, penlisten)
+  end
+  def get_network_addresses(this : IRTCClient*, ftcp : Int16, fexternal : Int16, pvaddresses : VARIANT*) : HRESULT
+    @lpVtbl.value.get_network_addresses.call(this, ftcp, fexternal, pvaddresses)
+  end
+  def put_volume(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.call(this, endevice, lvolume)
+  end
+  def get_volume(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, endevice, plvolume)
+  end
+  def put_audio_muted(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, fmuted : Int16) : HRESULT
+    @lpVtbl.value.put_audio_muted.call(this, endevice, fmuted)
+  end
+  def get_audio_muted(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, pfmuted : Int16*) : HRESULT
+    @lpVtbl.value.get_audio_muted.call(this, endevice, pfmuted)
+  end
+  def get_i_video_window(this : IRTCClient*, endevice : RTC_VIDEO_DEVICE, ppivideowindow : IVideoWindow*) : HRESULT
+    @lpVtbl.value.get_i_video_window.call(this, endevice, ppivideowindow)
+  end
+  def put_preferred_audio_device(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_preferred_audio_device.call(this, endevice, bstrdevicename)
+  end
+  def get_preferred_audio_device(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_preferred_audio_device.call(this, endevice, pbstrdevicename)
+  end
+  def put_preferred_volume(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_preferred_volume.call(this, endevice, lvolume)
+  end
+  def get_preferred_volume(this : IRTCClient*, endevice : RTC_AUDIO_DEVICE, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_volume.call(this, endevice, plvolume)
+  end
+  def put_preferred_aec(this : IRTCClient*, benable : Int16) : HRESULT
+    @lpVtbl.value.put_preferred_aec.call(this, benable)
+  end
+  def get_preferred_aec(this : IRTCClient*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_preferred_aec.call(this, pbenabled)
+  end
+  def put_preferred_video_device(this : IRTCClient*, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_preferred_video_device.call(this, bstrdevicename)
+  end
+  def get_preferred_video_device(this : IRTCClient*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_preferred_video_device.call(this, pbstrdevicename)
+  end
+  def get_active_media(this : IRTCClient*, plmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_active_media.call(this, plmediatype)
+  end
+  def put_max_bitrate(this : IRTCClient*, lmaxbitrate : Int32) : HRESULT
+    @lpVtbl.value.put_max_bitrate.call(this, lmaxbitrate)
+  end
+  def get_max_bitrate(this : IRTCClient*, plmaxbitrate : Int32*) : HRESULT
+    @lpVtbl.value.get_max_bitrate.call(this, plmaxbitrate)
+  end
+  def put_temporal_spatial_trade_off(this : IRTCClient*, lvalue : Int32) : HRESULT
+    @lpVtbl.value.put_temporal_spatial_trade_off.call(this, lvalue)
+  end
+  def get_temporal_spatial_trade_off(this : IRTCClient*, plvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_temporal_spatial_trade_off.call(this, plvalue)
+  end
+  def get_network_quality(this : IRTCClient*, plnetworkquality : Int32*) : HRESULT
+    @lpVtbl.value.get_network_quality.call(this, plnetworkquality)
+  end
+  def start_t120_applet(this : IRTCClient*, enapplet : RTC_T120_APPLET) : HRESULT
+    @lpVtbl.value.start_t120_applet.call(this, enapplet)
+  end
+  def stop_t120_applets(this : IRTCClient*) : HRESULT
+    @lpVtbl.value.stop_t120_applets.call(this)
+  end
+  def get_is_t120_applet_running(this : IRTCClient*, enapplet : RTC_T120_APPLET, pfrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_is_t120_applet_running.call(this, enapplet, pfrunning)
+  end
+  def get_local_user_uri(this : IRTCClient*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_uri.call(this, pbstruseruri)
+  end
+  def put_local_user_uri(this : IRTCClient*, bstruseruri : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_uri.call(this, bstruseruri)
+  end
+  def get_local_user_name(this : IRTCClient*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_name.call(this, pbstrusername)
+  end
+  def put_local_user_name(this : IRTCClient*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_name.call(this, bstrusername)
+  end
+  def play_ring(this : IRTCClient*, entype : RTC_RING_TYPE, bplay : Int16) : HRESULT
+    @lpVtbl.value.play_ring.call(this, entype, bplay)
+  end
+  def send_dtmf(this : IRTCClient*, endtmf : RTC_DTMF) : HRESULT
+    @lpVtbl.value.send_dtmf.call(this, endtmf)
+  end
+  def invoke_tuning_wizard(this : IRTCClient*, hwndparent : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.invoke_tuning_wizard.call(this, hwndparent)
+  end
+  def get_is_tuned(this : IRTCClient*, pftuned : Int16*) : HRESULT
+    @lpVtbl.value.get_is_tuned.call(this, pftuned)
+  end
+end
+struct LibWin32::IRTCClient2
+  def query_interface(this : IRTCClient2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClient2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClient2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IRTCClient2*) : HRESULT
+    @lpVtbl.value.initialize.call(this)
+  end
+  def shutdown(this : IRTCClient2*) : HRESULT
+    @lpVtbl.value.shutdown.call(this)
+  end
+  def prepare_for_shutdown(this : IRTCClient2*) : HRESULT
+    @lpVtbl.value.prepare_for_shutdown.call(this)
+  end
+  def put_event_filter(this : IRTCClient2*, lfilter : Int32) : HRESULT
+    @lpVtbl.value.put_event_filter.call(this, lfilter)
+  end
+  def get_event_filter(this : IRTCClient2*, plfilter : Int32*) : HRESULT
+    @lpVtbl.value.get_event_filter.call(this, plfilter)
+  end
+  def set_preferred_media_types(this : IRTCClient2*, lmediatypes : Int32, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.set_preferred_media_types.call(this, lmediatypes, fpersistent)
+  end
+  def get_preferred_media_types(this : IRTCClient2*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_media_types.call(this, plmediatypes)
+  end
+  def get_media_capabilities(this : IRTCClient2*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_media_capabilities.call(this, plmediatypes)
+  end
+  def create_session(this : IRTCClient2*, entype : RTC_SESSION_TYPE, bstrlocalphoneuri : UInt8*, pprofile : IRTCProfile, lflags : Int32, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.create_session.call(this, entype, bstrlocalphoneuri, pprofile, lflags, ppsession)
+  end
+  def put_listen_for_incoming_sessions(this : IRTCClient2*, enlisten : RTC_LISTEN_MODE) : HRESULT
+    @lpVtbl.value.put_listen_for_incoming_sessions.call(this, enlisten)
+  end
+  def get_listen_for_incoming_sessions(this : IRTCClient2*, penlisten : RTC_LISTEN_MODE*) : HRESULT
+    @lpVtbl.value.get_listen_for_incoming_sessions.call(this, penlisten)
+  end
+  def get_network_addresses(this : IRTCClient2*, ftcp : Int16, fexternal : Int16, pvaddresses : VARIANT*) : HRESULT
+    @lpVtbl.value.get_network_addresses.call(this, ftcp, fexternal, pvaddresses)
+  end
+  def put_volume(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.call(this, endevice, lvolume)
+  end
+  def get_volume(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.call(this, endevice, plvolume)
+  end
+  def put_audio_muted(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, fmuted : Int16) : HRESULT
+    @lpVtbl.value.put_audio_muted.call(this, endevice, fmuted)
+  end
+  def get_audio_muted(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, pfmuted : Int16*) : HRESULT
+    @lpVtbl.value.get_audio_muted.call(this, endevice, pfmuted)
+  end
+  def get_i_video_window(this : IRTCClient2*, endevice : RTC_VIDEO_DEVICE, ppivideowindow : IVideoWindow*) : HRESULT
+    @lpVtbl.value.get_i_video_window.call(this, endevice, ppivideowindow)
+  end
+  def put_preferred_audio_device(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_preferred_audio_device.call(this, endevice, bstrdevicename)
+  end
+  def get_preferred_audio_device(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_preferred_audio_device.call(this, endevice, pbstrdevicename)
+  end
+  def put_preferred_volume(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_preferred_volume.call(this, endevice, lvolume)
+  end
+  def get_preferred_volume(this : IRTCClient2*, endevice : RTC_AUDIO_DEVICE, plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_volume.call(this, endevice, plvolume)
+  end
+  def put_preferred_aec(this : IRTCClient2*, benable : Int16) : HRESULT
+    @lpVtbl.value.put_preferred_aec.call(this, benable)
+  end
+  def get_preferred_aec(this : IRTCClient2*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_preferred_aec.call(this, pbenabled)
+  end
+  def put_preferred_video_device(this : IRTCClient2*, bstrdevicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_preferred_video_device.call(this, bstrdevicename)
+  end
+  def get_preferred_video_device(this : IRTCClient2*, pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_preferred_video_device.call(this, pbstrdevicename)
+  end
+  def get_active_media(this : IRTCClient2*, plmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_active_media.call(this, plmediatype)
+  end
+  def put_max_bitrate(this : IRTCClient2*, lmaxbitrate : Int32) : HRESULT
+    @lpVtbl.value.put_max_bitrate.call(this, lmaxbitrate)
+  end
+  def get_max_bitrate(this : IRTCClient2*, plmaxbitrate : Int32*) : HRESULT
+    @lpVtbl.value.get_max_bitrate.call(this, plmaxbitrate)
+  end
+  def put_temporal_spatial_trade_off(this : IRTCClient2*, lvalue : Int32) : HRESULT
+    @lpVtbl.value.put_temporal_spatial_trade_off.call(this, lvalue)
+  end
+  def get_temporal_spatial_trade_off(this : IRTCClient2*, plvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_temporal_spatial_trade_off.call(this, plvalue)
+  end
+  def get_network_quality(this : IRTCClient2*, plnetworkquality : Int32*) : HRESULT
+    @lpVtbl.value.get_network_quality.call(this, plnetworkquality)
+  end
+  def start_t120_applet(this : IRTCClient2*, enapplet : RTC_T120_APPLET) : HRESULT
+    @lpVtbl.value.start_t120_applet.call(this, enapplet)
+  end
+  def stop_t120_applets(this : IRTCClient2*) : HRESULT
+    @lpVtbl.value.stop_t120_applets.call(this)
+  end
+  def get_is_t120_applet_running(this : IRTCClient2*, enapplet : RTC_T120_APPLET, pfrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_is_t120_applet_running.call(this, enapplet, pfrunning)
+  end
+  def get_local_user_uri(this : IRTCClient2*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_uri.call(this, pbstruseruri)
+  end
+  def put_local_user_uri(this : IRTCClient2*, bstruseruri : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_uri.call(this, bstruseruri)
+  end
+  def get_local_user_name(this : IRTCClient2*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_name.call(this, pbstrusername)
+  end
+  def put_local_user_name(this : IRTCClient2*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_name.call(this, bstrusername)
+  end
+  def play_ring(this : IRTCClient2*, entype : RTC_RING_TYPE, bplay : Int16) : HRESULT
+    @lpVtbl.value.play_ring.call(this, entype, bplay)
+  end
+  def send_dtmf(this : IRTCClient2*, endtmf : RTC_DTMF) : HRESULT
+    @lpVtbl.value.send_dtmf.call(this, endtmf)
+  end
+  def invoke_tuning_wizard(this : IRTCClient2*, hwndparent : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.invoke_tuning_wizard.call(this, hwndparent)
+  end
+  def get_is_tuned(this : IRTCClient2*, pftuned : Int16*) : HRESULT
+    @lpVtbl.value.get_is_tuned.call(this, pftuned)
+  end
+  def put_answer_mode(this : IRTCClient2*, entype : RTC_SESSION_TYPE, enmode : RTC_ANSWER_MODE) : HRESULT
+    @lpVtbl.value.put_answer_mode.call(this, entype, enmode)
+  end
+  def get_answer_mode(this : IRTCClient2*, entype : RTC_SESSION_TYPE, penmode : RTC_ANSWER_MODE*) : HRESULT
+    @lpVtbl.value.get_answer_mode.call(this, entype, penmode)
+  end
+  def invoke_tuning_wizard_ex(this : IRTCClient2*, hwndparent : LibC::IntPtrT, fallowaudio : Int16, fallowvideo : Int16) : HRESULT
+    @lpVtbl.value.invoke_tuning_wizard_ex.call(this, hwndparent, fallowaudio, fallowvideo)
+  end
+  def get_version(this : IRTCClient2*, plversion : Int32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, plversion)
+  end
+  def put_client_name(this : IRTCClient2*, bstrclientname : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_name.call(this, bstrclientname)
+  end
+  def put_client_cur_ver(this : IRTCClient2*, bstrclientcurver : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_cur_ver.call(this, bstrclientcurver)
+  end
+  def initialize_ex(this : IRTCClient2*, lflags : Int32) : HRESULT
+    @lpVtbl.value.initialize_ex.call(this, lflags)
+  end
+  def create_session_with_description(this : IRTCClient2*, bstrcontenttype : UInt8*, bstrsessiondescription : UInt8*, pprofile : IRTCProfile, lflags : Int32, ppsession2 : IRTCSession2*) : HRESULT
+    @lpVtbl.value.create_session_with_description.call(this, bstrcontenttype, bstrsessiondescription, pprofile, lflags, ppsession2)
+  end
+  def set_session_description_manager(this : IRTCClient2*, psessiondescriptionmanager : IRTCSessionDescriptionManager) : HRESULT
+    @lpVtbl.value.set_session_description_manager.call(this, psessiondescriptionmanager)
+  end
+  def put_preferred_security_level(this : IRTCClient2*, ensecuritytype : RTC_SECURITY_TYPE, ensecuritylevel : RTC_SECURITY_LEVEL) : HRESULT
+    @lpVtbl.value.put_preferred_security_level.call(this, ensecuritytype, ensecuritylevel)
+  end
+  def get_preferred_security_level(this : IRTCClient2*, ensecuritytype : RTC_SECURITY_TYPE, pensecuritylevel : RTC_SECURITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_preferred_security_level.call(this, ensecuritytype, pensecuritylevel)
+  end
+  def put_allowed_ports(this : IRTCClient2*, ltransport : Int32, enlistenmode : RTC_LISTEN_MODE) : HRESULT
+    @lpVtbl.value.put_allowed_ports.call(this, ltransport, enlistenmode)
+  end
+  def get_allowed_ports(this : IRTCClient2*, ltransport : Int32, penlistenmode : RTC_LISTEN_MODE*) : HRESULT
+    @lpVtbl.value.get_allowed_ports.call(this, ltransport, penlistenmode)
+  end
+end
+struct LibWin32::IRTCClientPresence
+  def query_interface(this : IRTCClientPresence*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientPresence*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientPresence*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable_presence(this : IRTCClientPresence*, fusestorage : Int16, varstorage : VARIANT) : HRESULT
+    @lpVtbl.value.enable_presence.call(this, fusestorage, varstorage)
+  end
+  def export(this : IRTCClientPresence*, varstorage : VARIANT) : HRESULT
+    @lpVtbl.value.export.call(this, varstorage)
+  end
+  def import(this : IRTCClientPresence*, varstorage : VARIANT, freplaceall : Int16) : HRESULT
+    @lpVtbl.value.import.call(this, varstorage, freplaceall)
+  end
+  def enumerate_buddies(this : IRTCClientPresence*, ppenum : IRTCEnumBuddies*) : HRESULT
+    @lpVtbl.value.enumerate_buddies.call(this, ppenum)
+  end
+  def get_buddies(this : IRTCClientPresence*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_buddies.call(this, ppcollection)
+  end
+  def get_buddy(this : IRTCClientPresence*, bstrpresentityuri : UInt8*, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.get_buddy.call(this, bstrpresentityuri, ppbuddy)
+  end
+  def add_buddy(this : IRTCClientPresence*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, fpersistent : Int16, pprofile : IRTCProfile, lflags : Int32, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.add_buddy.call(this, bstrpresentityuri, bstrusername, bstrdata, fpersistent, pprofile, lflags, ppbuddy)
+  end
+  def remove_buddy(this : IRTCClientPresence*, pbuddy : IRTCBuddy) : HRESULT
+    @lpVtbl.value.remove_buddy.call(this, pbuddy)
+  end
+  def enumerate_watchers(this : IRTCClientPresence*, ppenum : IRTCEnumWatchers*) : HRESULT
+    @lpVtbl.value.enumerate_watchers.call(this, ppenum)
+  end
+  def get_watchers(this : IRTCClientPresence*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_watchers.call(this, ppcollection)
+  end
+  def get_watcher(this : IRTCClientPresence*, bstrpresentityuri : UInt8*, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, bstrpresentityuri, ppwatcher)
+  end
+  def add_watcher(this : IRTCClientPresence*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, fblocked : Int16, fpersistent : Int16, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.add_watcher.call(this, bstrpresentityuri, bstrusername, bstrdata, fblocked, fpersistent, ppwatcher)
+  end
+  def remove_watcher(this : IRTCClientPresence*, pwatcher : IRTCWatcher) : HRESULT
+    @lpVtbl.value.remove_watcher.call(this, pwatcher)
+  end
+  def set_local_presence_info(this : IRTCClientPresence*, enstatus : RTC_PRESENCE_STATUS, bstrnotes : UInt8*) : HRESULT
+    @lpVtbl.value.set_local_presence_info.call(this, enstatus, bstrnotes)
+  end
+  def get_offer_watcher_mode(this : IRTCClientPresence*, penmode : RTC_OFFER_WATCHER_MODE*) : HRESULT
+    @lpVtbl.value.get_offer_watcher_mode.call(this, penmode)
+  end
+  def put_offer_watcher_mode(this : IRTCClientPresence*, enmode : RTC_OFFER_WATCHER_MODE) : HRESULT
+    @lpVtbl.value.put_offer_watcher_mode.call(this, enmode)
+  end
+  def get_privacy_mode(this : IRTCClientPresence*, penmode : RTC_PRIVACY_MODE*) : HRESULT
+    @lpVtbl.value.get_privacy_mode.call(this, penmode)
+  end
+  def put_privacy_mode(this : IRTCClientPresence*, enmode : RTC_PRIVACY_MODE) : HRESULT
+    @lpVtbl.value.put_privacy_mode.call(this, enmode)
+  end
+end
+struct LibWin32::IRTCClientPresence2
+  def query_interface(this : IRTCClientPresence2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientPresence2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientPresence2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def enable_presence(this : IRTCClientPresence2*, fusestorage : Int16, varstorage : VARIANT) : HRESULT
+    @lpVtbl.value.enable_presence.call(this, fusestorage, varstorage)
+  end
+  def export(this : IRTCClientPresence2*, varstorage : VARIANT) : HRESULT
+    @lpVtbl.value.export.call(this, varstorage)
+  end
+  def import(this : IRTCClientPresence2*, varstorage : VARIANT, freplaceall : Int16) : HRESULT
+    @lpVtbl.value.import.call(this, varstorage, freplaceall)
+  end
+  def enumerate_buddies(this : IRTCClientPresence2*, ppenum : IRTCEnumBuddies*) : HRESULT
+    @lpVtbl.value.enumerate_buddies.call(this, ppenum)
+  end
+  def get_buddies(this : IRTCClientPresence2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_buddies.call(this, ppcollection)
+  end
+  def get_buddy(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.get_buddy.call(this, bstrpresentityuri, ppbuddy)
+  end
+  def add_buddy(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, fpersistent : Int16, pprofile : IRTCProfile, lflags : Int32, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.add_buddy.call(this, bstrpresentityuri, bstrusername, bstrdata, fpersistent, pprofile, lflags, ppbuddy)
+  end
+  def remove_buddy(this : IRTCClientPresence2*, pbuddy : IRTCBuddy) : HRESULT
+    @lpVtbl.value.remove_buddy.call(this, pbuddy)
+  end
+  def enumerate_watchers(this : IRTCClientPresence2*, ppenum : IRTCEnumWatchers*) : HRESULT
+    @lpVtbl.value.enumerate_watchers.call(this, ppenum)
+  end
+  def get_watchers(this : IRTCClientPresence2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_watchers.call(this, ppcollection)
+  end
+  def get_watcher(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, bstrpresentityuri, ppwatcher)
+  end
+  def add_watcher(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, fblocked : Int16, fpersistent : Int16, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.add_watcher.call(this, bstrpresentityuri, bstrusername, bstrdata, fblocked, fpersistent, ppwatcher)
+  end
+  def remove_watcher(this : IRTCClientPresence2*, pwatcher : IRTCWatcher) : HRESULT
+    @lpVtbl.value.remove_watcher.call(this, pwatcher)
+  end
+  def set_local_presence_info(this : IRTCClientPresence2*, enstatus : RTC_PRESENCE_STATUS, bstrnotes : UInt8*) : HRESULT
+    @lpVtbl.value.set_local_presence_info.call(this, enstatus, bstrnotes)
+  end
+  def get_offer_watcher_mode(this : IRTCClientPresence2*, penmode : RTC_OFFER_WATCHER_MODE*) : HRESULT
+    @lpVtbl.value.get_offer_watcher_mode.call(this, penmode)
+  end
+  def put_offer_watcher_mode(this : IRTCClientPresence2*, enmode : RTC_OFFER_WATCHER_MODE) : HRESULT
+    @lpVtbl.value.put_offer_watcher_mode.call(this, enmode)
+  end
+  def get_privacy_mode(this : IRTCClientPresence2*, penmode : RTC_PRIVACY_MODE*) : HRESULT
+    @lpVtbl.value.get_privacy_mode.call(this, penmode)
+  end
+  def put_privacy_mode(this : IRTCClientPresence2*, enmode : RTC_PRIVACY_MODE) : HRESULT
+    @lpVtbl.value.put_privacy_mode.call(this, enmode)
+  end
+  def enable_presence_ex(this : IRTCClientPresence2*, pprofile : IRTCProfile, varstorage : VARIANT, lflags : Int32) : HRESULT
+    @lpVtbl.value.enable_presence_ex.call(this, pprofile, varstorage, lflags)
+  end
+  def disable_presence(this : IRTCClientPresence2*) : HRESULT
+    @lpVtbl.value.disable_presence.call(this)
+  end
+  def add_group(this : IRTCClientPresence2*, bstrgroupname : UInt8*, bstrdata : UInt8*, pprofile : IRTCProfile, lflags : Int32, ppgroup : IRTCBuddyGroup*) : HRESULT
+    @lpVtbl.value.add_group.call(this, bstrgroupname, bstrdata, pprofile, lflags, ppgroup)
+  end
+  def remove_group(this : IRTCClientPresence2*, pgroup : IRTCBuddyGroup) : HRESULT
+    @lpVtbl.value.remove_group.call(this, pgroup)
+  end
+  def enumerate_groups(this : IRTCClientPresence2*, ppenum : IRTCEnumGroups*) : HRESULT
+    @lpVtbl.value.enumerate_groups.call(this, ppenum)
+  end
+  def get_groups(this : IRTCClientPresence2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, ppcollection)
+  end
+  def get_group(this : IRTCClientPresence2*, bstrgroupname : UInt8*, ppgroup : IRTCBuddyGroup*) : HRESULT
+    @lpVtbl.value.get_group.call(this, bstrgroupname, ppgroup)
+  end
+  def add_watcher_ex(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, enstate : RTC_WATCHER_STATE, fpersistent : Int16, enscope : RTC_ACE_SCOPE, pprofile : IRTCProfile, lflags : Int32, ppwatcher : IRTCWatcher2*) : HRESULT
+    @lpVtbl.value.add_watcher_ex.call(this, bstrpresentityuri, bstrusername, bstrdata, enstate, fpersistent, enscope, pprofile, lflags, ppwatcher)
+  end
+  def get_watcher_ex(this : IRTCClientPresence2*, enmode : RTC_WATCHER_MATCH_MODE, bstrpresentityuri : UInt8*, ppwatcher : IRTCWatcher2*) : HRESULT
+    @lpVtbl.value.get_watcher_ex.call(this, enmode, bstrpresentityuri, ppwatcher)
+  end
+  def put_presence_property(this : IRTCClientPresence2*, enproperty : RTC_PRESENCE_PROPERTY, bstrproperty : UInt8*) : HRESULT
+    @lpVtbl.value.put_presence_property.call(this, enproperty, bstrproperty)
+  end
+  def get_presence_property(this : IRTCClientPresence2*, enproperty : RTC_PRESENCE_PROPERTY, pbstrproperty : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_property.call(this, enproperty, pbstrproperty)
+  end
+  def set_presence_data(this : IRTCClientPresence2*, bstrnamespace : UInt8*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.set_presence_data.call(this, bstrnamespace, bstrdata)
+  end
+  def get_presence_data(this : IRTCClientPresence2*, pbstrnamespace : UInt8**, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_data.call(this, pbstrnamespace, pbstrdata)
+  end
+  def get_local_presence_info(this : IRTCClientPresence2*, penstatus : RTC_PRESENCE_STATUS*, pbstrnotes : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_presence_info.call(this, penstatus, pbstrnotes)
+  end
+  def add_buddy_ex(this : IRTCClientPresence2*, bstrpresentityuri : UInt8*, bstrusername : UInt8*, bstrdata : UInt8*, fpersistent : Int16, ensubscriptiontype : RTC_BUDDY_SUBSCRIPTION_TYPE, pprofile : IRTCProfile, lflags : Int32, ppbuddy : IRTCBuddy2*) : HRESULT
+    @lpVtbl.value.add_buddy_ex.call(this, bstrpresentityuri, bstrusername, bstrdata, fpersistent, ensubscriptiontype, pprofile, lflags, ppbuddy)
+  end
+end
+struct LibWin32::IRTCClientProvisioning
+  def query_interface(this : IRTCClientProvisioning*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientProvisioning*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientProvisioning*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_profile(this : IRTCClientProvisioning*, bstrprofilexml : UInt8*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.create_profile.call(this, bstrprofilexml, ppprofile)
+  end
+  def enable_profile(this : IRTCClientProvisioning*, pprofile : IRTCProfile, lregisterflags : Int32) : HRESULT
+    @lpVtbl.value.enable_profile.call(this, pprofile, lregisterflags)
+  end
+  def disable_profile(this : IRTCClientProvisioning*, pprofile : IRTCProfile) : HRESULT
+    @lpVtbl.value.disable_profile.call(this, pprofile)
+  end
+  def enumerate_profiles(this : IRTCClientProvisioning*, ppenum : IRTCEnumProfiles*) : HRESULT
+    @lpVtbl.value.enumerate_profiles.call(this, ppenum)
+  end
+  def get_profiles(this : IRTCClientProvisioning*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_profiles.call(this, ppcollection)
+  end
+  def get_profile(this : IRTCClientProvisioning*, bstruseraccount : UInt8*, bstruserpassword : UInt8*, bstruseruri : UInt8*, bstrserver : UInt8*, ltransport : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.get_profile.call(this, bstruseraccount, bstruserpassword, bstruseruri, bstrserver, ltransport, lcookie)
+  end
+  def get_session_capabilities(this : IRTCClientProvisioning*, plsupportedsessions : Int32*) : HRESULT
+    @lpVtbl.value.get_session_capabilities.call(this, plsupportedsessions)
+  end
+end
+struct LibWin32::IRTCClientProvisioning2
+  def query_interface(this : IRTCClientProvisioning2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientProvisioning2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientProvisioning2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_profile(this : IRTCClientProvisioning2*, bstrprofilexml : UInt8*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.create_profile.call(this, bstrprofilexml, ppprofile)
+  end
+  def enable_profile(this : IRTCClientProvisioning2*, pprofile : IRTCProfile, lregisterflags : Int32) : HRESULT
+    @lpVtbl.value.enable_profile.call(this, pprofile, lregisterflags)
+  end
+  def disable_profile(this : IRTCClientProvisioning2*, pprofile : IRTCProfile) : HRESULT
+    @lpVtbl.value.disable_profile.call(this, pprofile)
+  end
+  def enumerate_profiles(this : IRTCClientProvisioning2*, ppenum : IRTCEnumProfiles*) : HRESULT
+    @lpVtbl.value.enumerate_profiles.call(this, ppenum)
+  end
+  def get_profiles(this : IRTCClientProvisioning2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_profiles.call(this, ppcollection)
+  end
+  def get_profile(this : IRTCClientProvisioning2*, bstruseraccount : UInt8*, bstruserpassword : UInt8*, bstruseruri : UInt8*, bstrserver : UInt8*, ltransport : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.get_profile.call(this, bstruseraccount, bstruserpassword, bstruseruri, bstrserver, ltransport, lcookie)
+  end
+  def get_session_capabilities(this : IRTCClientProvisioning2*, plsupportedsessions : Int32*) : HRESULT
+    @lpVtbl.value.get_session_capabilities.call(this, plsupportedsessions)
+  end
+  def enable_profile_ex(this : IRTCClientProvisioning2*, pprofile : IRTCProfile, lregisterflags : Int32, lroamingflags : Int32) : HRESULT
+    @lpVtbl.value.enable_profile_ex.call(this, pprofile, lregisterflags, lroamingflags)
+  end
+end
+struct LibWin32::IRTCProfile
+  def query_interface(this : IRTCProfile*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCProfile*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCProfile*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key(this : IRTCProfile*, pbstrkey : UInt8**) : HRESULT
+    @lpVtbl.value.get_key.call(this, pbstrkey)
+  end
+  def get_name(this : IRTCProfile*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_xml(this : IRTCProfile*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, pbstrxml)
+  end
+  def get_provider_name(this : IRTCProfile*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_name.call(this, pbstrname)
+  end
+  def get_provider_uri(this : IRTCProfile*, enuri : RTC_PROVIDER_URI, pbstruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_uri.call(this, enuri, pbstruri)
+  end
+  def get_provider_data(this : IRTCProfile*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_data.call(this, pbstrdata)
+  end
+  def get_client_name(this : IRTCProfile*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_name.call(this, pbstrname)
+  end
+  def get_client_banner(this : IRTCProfile*, pfbanner : Int16*) : HRESULT
+    @lpVtbl.value.get_client_banner.call(this, pfbanner)
+  end
+  def get_client_min_ver(this : IRTCProfile*, pbstrminver : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_min_ver.call(this, pbstrminver)
+  end
+  def get_client_cur_ver(this : IRTCProfile*, pbstrcurver : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_cur_ver.call(this, pbstrcurver)
+  end
+  def get_client_update_uri(this : IRTCProfile*, pbstrupdateuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_update_uri.call(this, pbstrupdateuri)
+  end
+  def get_client_data(this : IRTCProfile*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_data.call(this, pbstrdata)
+  end
+  def get_user_uri(this : IRTCProfile*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_uri.call(this, pbstruseruri)
+  end
+  def get_user_name(this : IRTCProfile*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, pbstrusername)
+  end
+  def get_user_account(this : IRTCProfile*, pbstruseraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, pbstruseraccount)
+  end
+  def set_credentials(this : IRTCProfile*, bstruseruri : UInt8*, bstruseraccount : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, bstruseruri, bstruseraccount, bstrpassword)
+  end
+  def get_session_capabilities(this : IRTCProfile*, plsupportedsessions : Int32*) : HRESULT
+    @lpVtbl.value.get_session_capabilities.call(this, plsupportedsessions)
+  end
+  def get_state(this : IRTCProfile*, penstate : RTC_REGISTRATION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+end
+struct LibWin32::IRTCProfile2
+  def query_interface(this : IRTCProfile2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCProfile2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCProfile2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_key(this : IRTCProfile2*, pbstrkey : UInt8**) : HRESULT
+    @lpVtbl.value.get_key.call(this, pbstrkey)
+  end
+  def get_name(this : IRTCProfile2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_xml(this : IRTCProfile2*, pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.call(this, pbstrxml)
+  end
+  def get_provider_name(this : IRTCProfile2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_name.call(this, pbstrname)
+  end
+  def get_provider_uri(this : IRTCProfile2*, enuri : RTC_PROVIDER_URI, pbstruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_uri.call(this, enuri, pbstruri)
+  end
+  def get_provider_data(this : IRTCProfile2*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_data.call(this, pbstrdata)
+  end
+  def get_client_name(this : IRTCProfile2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_name.call(this, pbstrname)
+  end
+  def get_client_banner(this : IRTCProfile2*, pfbanner : Int16*) : HRESULT
+    @lpVtbl.value.get_client_banner.call(this, pfbanner)
+  end
+  def get_client_min_ver(this : IRTCProfile2*, pbstrminver : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_min_ver.call(this, pbstrminver)
+  end
+  def get_client_cur_ver(this : IRTCProfile2*, pbstrcurver : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_cur_ver.call(this, pbstrcurver)
+  end
+  def get_client_update_uri(this : IRTCProfile2*, pbstrupdateuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_update_uri.call(this, pbstrupdateuri)
+  end
+  def get_client_data(this : IRTCProfile2*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_data.call(this, pbstrdata)
+  end
+  def get_user_uri(this : IRTCProfile2*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_uri.call(this, pbstruseruri)
+  end
+  def get_user_name(this : IRTCProfile2*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, pbstrusername)
+  end
+  def get_user_account(this : IRTCProfile2*, pbstruseraccount : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_account.call(this, pbstruseraccount)
+  end
+  def set_credentials(this : IRTCProfile2*, bstruseruri : UInt8*, bstruseraccount : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_credentials.call(this, bstruseruri, bstruseraccount, bstrpassword)
+  end
+  def get_session_capabilities(this : IRTCProfile2*, plsupportedsessions : Int32*) : HRESULT
+    @lpVtbl.value.get_session_capabilities.call(this, plsupportedsessions)
+  end
+  def get_state(this : IRTCProfile2*, penstate : RTC_REGISTRATION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_realm(this : IRTCProfile2*, pbstrrealm : UInt8**) : HRESULT
+    @lpVtbl.value.get_realm.call(this, pbstrrealm)
+  end
+  def put_realm(this : IRTCProfile2*, bstrrealm : UInt8*) : HRESULT
+    @lpVtbl.value.put_realm.call(this, bstrrealm)
+  end
+  def get_allowed_auth(this : IRTCProfile2*, plallowedauth : Int32*) : HRESULT
+    @lpVtbl.value.get_allowed_auth.call(this, plallowedauth)
+  end
+  def put_allowed_auth(this : IRTCProfile2*, lallowedauth : Int32) : HRESULT
+    @lpVtbl.value.put_allowed_auth.call(this, lallowedauth)
+  end
+end
+struct LibWin32::IRTCSession
+  def query_interface(this : IRTCSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client(this : IRTCSession*, ppclient : IRTCClient*) : HRESULT
+    @lpVtbl.value.get_client.call(this, ppclient)
+  end
+  def get_state(this : IRTCSession*, penstate : RTC_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_type(this : IRTCSession*, pentype : RTC_SESSION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pentype)
+  end
+  def get_profile(this : IRTCSession*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_participants(this : IRTCSession*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_participants.call(this, ppcollection)
+  end
+  def answer(this : IRTCSession*) : HRESULT
+    @lpVtbl.value.answer.call(this)
+  end
+  def terminate(this : IRTCSession*, enreason : RTC_TERMINATE_REASON) : HRESULT
+    @lpVtbl.value.terminate.call(this, enreason)
+  end
+  def redirect(this : IRTCSession*, entype : RTC_SESSION_TYPE, bstrlocalphoneuri : UInt8*, pprofile : IRTCProfile, lflags : Int32) : HRESULT
+    @lpVtbl.value.redirect.call(this, entype, bstrlocalphoneuri, pprofile, lflags)
+  end
+  def add_participant(this : IRTCSession*, bstraddress : UInt8*, bstrname : UInt8*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.add_participant.call(this, bstraddress, bstrname, ppparticipant)
+  end
+  def remove_participant(this : IRTCSession*, pparticipant : IRTCParticipant) : HRESULT
+    @lpVtbl.value.remove_participant.call(this, pparticipant)
+  end
+  def enumerate_participants(this : IRTCSession*, ppenum : IRTCEnumParticipants*) : HRESULT
+    @lpVtbl.value.enumerate_participants.call(this, ppenum)
+  end
+  def get_can_add_participants(this : IRTCSession*, pfcanadd : Int16*) : HRESULT
+    @lpVtbl.value.get_can_add_participants.call(this, pfcanadd)
+  end
+  def get_redirected_user_uri(this : IRTCSession*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_redirected_user_uri.call(this, pbstruseruri)
+  end
+  def get_redirected_user_name(this : IRTCSession*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_redirected_user_name.call(this, pbstrusername)
+  end
+  def next_redirected_user(this : IRTCSession*) : HRESULT
+    @lpVtbl.value.next_redirected_user.call(this)
+  end
+  def send_message(this : IRTCSession*, bstrmessageheader : UInt8*, bstrmessage : UInt8*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.send_message.call(this, bstrmessageheader, bstrmessage, lcookie)
+  end
+  def send_message_status(this : IRTCSession*, enuserstatus : RTC_MESSAGING_USER_STATUS, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.send_message_status.call(this, enuserstatus, lcookie)
+  end
+  def add_stream(this : IRTCSession*, lmediatype : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.add_stream.call(this, lmediatype, lcookie)
+  end
+  def remove_stream(this : IRTCSession*, lmediatype : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, lmediatype, lcookie)
+  end
+  def put_encryption_key(this : IRTCSession*, lmediatype : Int32, encryptionkey : UInt8*) : HRESULT
+    @lpVtbl.value.put_encryption_key.call(this, lmediatype, encryptionkey)
+  end
+end
+struct LibWin32::IRTCSession2
+  def query_interface(this : IRTCSession2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSession2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSession2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client(this : IRTCSession2*, ppclient : IRTCClient*) : HRESULT
+    @lpVtbl.value.get_client.call(this, ppclient)
+  end
+  def get_state(this : IRTCSession2*, penstate : RTC_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_type(this : IRTCSession2*, pentype : RTC_SESSION_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pentype)
+  end
+  def get_profile(this : IRTCSession2*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_participants(this : IRTCSession2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_participants.call(this, ppcollection)
+  end
+  def answer(this : IRTCSession2*) : HRESULT
+    @lpVtbl.value.answer.call(this)
+  end
+  def terminate(this : IRTCSession2*, enreason : RTC_TERMINATE_REASON) : HRESULT
+    @lpVtbl.value.terminate.call(this, enreason)
+  end
+  def redirect(this : IRTCSession2*, entype : RTC_SESSION_TYPE, bstrlocalphoneuri : UInt8*, pprofile : IRTCProfile, lflags : Int32) : HRESULT
+    @lpVtbl.value.redirect.call(this, entype, bstrlocalphoneuri, pprofile, lflags)
+  end
+  def add_participant(this : IRTCSession2*, bstraddress : UInt8*, bstrname : UInt8*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.add_participant.call(this, bstraddress, bstrname, ppparticipant)
+  end
+  def remove_participant(this : IRTCSession2*, pparticipant : IRTCParticipant) : HRESULT
+    @lpVtbl.value.remove_participant.call(this, pparticipant)
+  end
+  def enumerate_participants(this : IRTCSession2*, ppenum : IRTCEnumParticipants*) : HRESULT
+    @lpVtbl.value.enumerate_participants.call(this, ppenum)
+  end
+  def get_can_add_participants(this : IRTCSession2*, pfcanadd : Int16*) : HRESULT
+    @lpVtbl.value.get_can_add_participants.call(this, pfcanadd)
+  end
+  def get_redirected_user_uri(this : IRTCSession2*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_redirected_user_uri.call(this, pbstruseruri)
+  end
+  def get_redirected_user_name(this : IRTCSession2*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_redirected_user_name.call(this, pbstrusername)
+  end
+  def next_redirected_user(this : IRTCSession2*) : HRESULT
+    @lpVtbl.value.next_redirected_user.call(this)
+  end
+  def send_message(this : IRTCSession2*, bstrmessageheader : UInt8*, bstrmessage : UInt8*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.send_message.call(this, bstrmessageheader, bstrmessage, lcookie)
+  end
+  def send_message_status(this : IRTCSession2*, enuserstatus : RTC_MESSAGING_USER_STATUS, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.send_message_status.call(this, enuserstatus, lcookie)
+  end
+  def add_stream(this : IRTCSession2*, lmediatype : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.add_stream.call(this, lmediatype, lcookie)
+  end
+  def remove_stream(this : IRTCSession2*, lmediatype : Int32, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.remove_stream.call(this, lmediatype, lcookie)
+  end
+  def put_encryption_key(this : IRTCSession2*, lmediatype : Int32, encryptionkey : UInt8*) : HRESULT
+    @lpVtbl.value.put_encryption_key.call(this, lmediatype, encryptionkey)
+  end
+  def send_info(this : IRTCSession2*, bstrinfoheader : UInt8*, bstrinfo : UInt8*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.send_info.call(this, bstrinfoheader, bstrinfo, lcookie)
+  end
+  def put_preferred_security_level(this : IRTCSession2*, ensecuritytype : RTC_SECURITY_TYPE, ensecuritylevel : RTC_SECURITY_LEVEL) : HRESULT
+    @lpVtbl.value.put_preferred_security_level.call(this, ensecuritytype, ensecuritylevel)
+  end
+  def get_preferred_security_level(this : IRTCSession2*, ensecuritytype : RTC_SECURITY_TYPE, pensecuritylevel : RTC_SECURITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_preferred_security_level.call(this, ensecuritytype, pensecuritylevel)
+  end
+  def is_security_enabled(this : IRTCSession2*, ensecuritytype : RTC_SECURITY_TYPE, pfsecurityenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_security_enabled.call(this, ensecuritytype, pfsecurityenabled)
+  end
+  def answer_with_session_description(this : IRTCSession2*, bstrcontenttype : UInt8*, bstrsessiondescription : UInt8*) : HRESULT
+    @lpVtbl.value.answer_with_session_description.call(this, bstrcontenttype, bstrsessiondescription)
+  end
+  def re_invite_with_session_description(this : IRTCSession2*, bstrcontenttype : UInt8*, bstrsessiondescription : UInt8*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.re_invite_with_session_description.call(this, bstrcontenttype, bstrsessiondescription, lcookie)
+  end
+end
+struct LibWin32::IRTCSessionCallControl
+  def query_interface(this : IRTCSessionCallControl*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionCallControl*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionCallControl*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def hold(this : IRTCSessionCallControl*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.hold.call(this, lcookie)
+  end
+  def un_hold(this : IRTCSessionCallControl*, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.un_hold.call(this, lcookie)
+  end
+  def forward(this : IRTCSessionCallControl*, bstrforwardtouri : UInt8*) : HRESULT
+    @lpVtbl.value.forward.call(this, bstrforwardtouri)
+  end
+  def refer(this : IRTCSessionCallControl*, bstrrefertouri : UInt8*, bstrrefercookie : UInt8*) : HRESULT
+    @lpVtbl.value.refer.call(this, bstrrefertouri, bstrrefercookie)
+  end
+  def put_referred_by_uri(this : IRTCSessionCallControl*, bstrreferredbyuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_referred_by_uri.call(this, bstrreferredbyuri)
+  end
+  def get_referred_by_uri(this : IRTCSessionCallControl*, pbstrreferredbyuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_referred_by_uri.call(this, pbstrreferredbyuri)
+  end
+  def put_refer_cookie(this : IRTCSessionCallControl*, bstrrefercookie : UInt8*) : HRESULT
+    @lpVtbl.value.put_refer_cookie.call(this, bstrrefercookie)
+  end
+  def get_refer_cookie(this : IRTCSessionCallControl*, pbstrrefercookie : UInt8**) : HRESULT
+    @lpVtbl.value.get_refer_cookie.call(this, pbstrrefercookie)
+  end
+  def get_is_referred(this : IRTCSessionCallControl*, pfisreferred : Int16*) : HRESULT
+    @lpVtbl.value.get_is_referred.call(this, pfisreferred)
+  end
+end
+struct LibWin32::IRTCParticipant
+  def query_interface(this : IRTCParticipant*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCParticipant*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCParticipant*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_user_uri(this : IRTCParticipant*, pbstruseruri : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_uri.call(this, pbstruseruri)
+  end
+  def get_name(this : IRTCParticipant*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def get_removable(this : IRTCParticipant*, pfremovable : Int16*) : HRESULT
+    @lpVtbl.value.get_removable.call(this, pfremovable)
+  end
+  def get_state(this : IRTCParticipant*, penstate : RTC_PARTICIPANT_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_session(this : IRTCParticipant*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+end
+struct LibWin32::IRTCRoamingEvent
+  def query_interface(this : IRTCRoamingEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCRoamingEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCRoamingEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCRoamingEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCRoamingEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCRoamingEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCRoamingEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event_type(this : IRTCRoamingEvent*, peventtype : RTC_ROAMING_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peventtype)
+  end
+  def get_profile(this : IRTCRoamingEvent*, ppprofile : IRTCProfile2*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_status_code(this : IRTCRoamingEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCRoamingEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCProfileEvent
+  def query_interface(this : IRTCProfileEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCProfileEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCProfileEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCProfileEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCProfileEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCProfileEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCProfileEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_profile(this : IRTCProfileEvent*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_cookie(this : IRTCProfileEvent*, plcookie : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, plcookie)
+  end
+  def get_status_code(this : IRTCProfileEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+end
+struct LibWin32::IRTCProfileEvent2
+  def query_interface(this : IRTCProfileEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCProfileEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCProfileEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCProfileEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCProfileEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCProfileEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCProfileEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_profile(this : IRTCProfileEvent2*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_cookie(this : IRTCProfileEvent2*, plcookie : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, plcookie)
+  end
+  def get_status_code(this : IRTCProfileEvent2*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_event_type(this : IRTCProfileEvent2*, peventtype : RTC_PROFILE_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peventtype)
+  end
+end
+struct LibWin32::IRTCClientEvent
+  def query_interface(this : IRTCClientEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCClientEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCClientEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCClientEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCClientEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event_type(this : IRTCClientEvent*, peneventtype : RTC_CLIENT_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peneventtype)
+  end
+  def get_client(this : IRTCClientEvent*, ppclient : IRTCClient*) : HRESULT
+    @lpVtbl.value.get_client.call(this, ppclient)
+  end
+end
+struct LibWin32::IRTCRegistrationStateChangeEvent
+  def query_interface(this : IRTCRegistrationStateChangeEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCRegistrationStateChangeEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCRegistrationStateChangeEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCRegistrationStateChangeEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCRegistrationStateChangeEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCRegistrationStateChangeEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCRegistrationStateChangeEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_profile(this : IRTCRegistrationStateChangeEvent*, ppprofile : IRTCProfile*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_state(this : IRTCRegistrationStateChangeEvent*, penstate : RTC_REGISTRATION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_status_code(this : IRTCRegistrationStateChangeEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCRegistrationStateChangeEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCSessionStateChangeEvent
+  def query_interface(this : IRTCSessionStateChangeEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionStateChangeEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionStateChangeEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionStateChangeEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionStateChangeEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionStateChangeEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionStateChangeEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionStateChangeEvent*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_state(this : IRTCSessionStateChangeEvent*, penstate : RTC_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_status_code(this : IRTCSessionStateChangeEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCSessionStateChangeEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCSessionStateChangeEvent2
+  def query_interface(this : IRTCSessionStateChangeEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionStateChangeEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionStateChangeEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionStateChangeEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionStateChangeEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionStateChangeEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionStateChangeEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionStateChangeEvent2*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_state(this : IRTCSessionStateChangeEvent2*, penstate : RTC_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_status_code(this : IRTCSessionStateChangeEvent2*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCSessionStateChangeEvent2*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+  def get_media_types(this : IRTCSessionStateChangeEvent2*, pmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_media_types.call(this, pmediatypes)
+  end
+  def get_remote_preferred_security_level(this : IRTCSessionStateChangeEvent2*, ensecuritytype : RTC_SECURITY_TYPE, pensecuritylevel : RTC_SECURITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_remote_preferred_security_level.call(this, ensecuritytype, pensecuritylevel)
+  end
+  def get_is_forked(this : IRTCSessionStateChangeEvent2*, pfisforked : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forked.call(this, pfisforked)
+  end
+  def get_remote_session_description(this : IRTCSessionStateChangeEvent2*, pbstrcontenttype : UInt8**, pbstrsessiondescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_session_description.call(this, pbstrcontenttype, pbstrsessiondescription)
+  end
+end
+struct LibWin32::IRTCSessionOperationCompleteEvent
+  def query_interface(this : IRTCSessionOperationCompleteEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionOperationCompleteEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionOperationCompleteEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionOperationCompleteEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionOperationCompleteEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionOperationCompleteEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionOperationCompleteEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionOperationCompleteEvent*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_cookie(this : IRTCSessionOperationCompleteEvent*, plcookie : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, plcookie)
+  end
+  def get_status_code(this : IRTCSessionOperationCompleteEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCSessionOperationCompleteEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCSessionOperationCompleteEvent2
+  def query_interface(this : IRTCSessionOperationCompleteEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionOperationCompleteEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionOperationCompleteEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionOperationCompleteEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionOperationCompleteEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionOperationCompleteEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionOperationCompleteEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionOperationCompleteEvent2*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_cookie(this : IRTCSessionOperationCompleteEvent2*, plcookie : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, plcookie)
+  end
+  def get_status_code(this : IRTCSessionOperationCompleteEvent2*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCSessionOperationCompleteEvent2*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+  def get_participant(this : IRTCSessionOperationCompleteEvent2*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.get_participant.call(this, ppparticipant)
+  end
+  def get_remote_session_description(this : IRTCSessionOperationCompleteEvent2*, pbstrcontenttype : UInt8**, pbstrsessiondescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_session_description.call(this, pbstrcontenttype, pbstrsessiondescription)
+  end
+end
+struct LibWin32::IRTCParticipantStateChangeEvent
+  def query_interface(this : IRTCParticipantStateChangeEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCParticipantStateChangeEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCParticipantStateChangeEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCParticipantStateChangeEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCParticipantStateChangeEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCParticipantStateChangeEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCParticipantStateChangeEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_participant(this : IRTCParticipantStateChangeEvent*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.get_participant.call(this, ppparticipant)
+  end
+  def get_state(this : IRTCParticipantStateChangeEvent*, penstate : RTC_PARTICIPANT_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def get_status_code(this : IRTCParticipantStateChangeEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+end
+struct LibWin32::IRTCMediaEvent
+  def query_interface(this : IRTCMediaEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCMediaEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCMediaEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCMediaEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCMediaEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCMediaEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCMediaEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_media_type(this : IRTCMediaEvent*, pmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_media_type.call(this, pmediatype)
+  end
+  def get_event_type(this : IRTCMediaEvent*, peneventtype : RTC_MEDIA_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peneventtype)
+  end
+  def get_event_reason(this : IRTCMediaEvent*, peneventreason : RTC_MEDIA_EVENT_REASON*) : HRESULT
+    @lpVtbl.value.get_event_reason.call(this, peneventreason)
+  end
+end
+struct LibWin32::IRTCIntensityEvent
+  def query_interface(this : IRTCIntensityEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCIntensityEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCIntensityEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCIntensityEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCIntensityEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCIntensityEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCIntensityEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_level(this : IRTCIntensityEvent*, pllevel : Int32*) : HRESULT
+    @lpVtbl.value.get_level.call(this, pllevel)
+  end
+  def get_min(this : IRTCIntensityEvent*, plmin : Int32*) : HRESULT
+    @lpVtbl.value.get_min.call(this, plmin)
+  end
+  def get_max(this : IRTCIntensityEvent*, plmax : Int32*) : HRESULT
+    @lpVtbl.value.get_max.call(this, plmax)
+  end
+  def get_direction(this : IRTCIntensityEvent*, pendirection : RTC_AUDIO_DEVICE*) : HRESULT
+    @lpVtbl.value.get_direction.call(this, pendirection)
+  end
+end
+struct LibWin32::IRTCMessagingEvent
+  def query_interface(this : IRTCMessagingEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCMessagingEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCMessagingEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCMessagingEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCMessagingEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCMessagingEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCMessagingEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCMessagingEvent*, ppsession : IRTCSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_participant(this : IRTCMessagingEvent*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.get_participant.call(this, ppparticipant)
+  end
+  def get_event_type(this : IRTCMessagingEvent*, peneventtype : RTC_MESSAGING_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peneventtype)
+  end
+  def get_message(this : IRTCMessagingEvent*, pbstrmessage : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.call(this, pbstrmessage)
+  end
+  def get_message_header(this : IRTCMessagingEvent*, pbstrmessageheader : UInt8**) : HRESULT
+    @lpVtbl.value.get_message_header.call(this, pbstrmessageheader)
+  end
+  def get_user_status(this : IRTCMessagingEvent*, penuserstatus : RTC_MESSAGING_USER_STATUS*) : HRESULT
+    @lpVtbl.value.get_user_status.call(this, penuserstatus)
+  end
+end
+struct LibWin32::IRTCBuddyEvent
+  def query_interface(this : IRTCBuddyEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddyEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddyEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCBuddyEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCBuddyEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCBuddyEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCBuddyEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_buddy(this : IRTCBuddyEvent*, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.get_buddy.call(this, ppbuddy)
+  end
+end
+struct LibWin32::IRTCBuddyEvent2
+  def query_interface(this : IRTCBuddyEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddyEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddyEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCBuddyEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCBuddyEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCBuddyEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCBuddyEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_buddy(this : IRTCBuddyEvent2*, ppbuddy : IRTCBuddy*) : HRESULT
+    @lpVtbl.value.get_buddy.call(this, ppbuddy)
+  end
+  def get_event_type(this : IRTCBuddyEvent2*, peventtype : RTC_BUDDY_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peventtype)
+  end
+  def get_status_code(this : IRTCBuddyEvent2*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCBuddyEvent2*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCWatcherEvent
+  def query_interface(this : IRTCWatcherEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCWatcherEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCWatcherEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCWatcherEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCWatcherEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCWatcherEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCWatcherEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_watcher(this : IRTCWatcherEvent*, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, ppwatcher)
+  end
+end
+struct LibWin32::IRTCWatcherEvent2
+  def query_interface(this : IRTCWatcherEvent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCWatcherEvent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCWatcherEvent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCWatcherEvent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCWatcherEvent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCWatcherEvent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCWatcherEvent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_watcher(this : IRTCWatcherEvent2*, ppwatcher : IRTCWatcher*) : HRESULT
+    @lpVtbl.value.get_watcher.call(this, ppwatcher)
+  end
+  def get_event_type(this : IRTCWatcherEvent2*, peventtype : RTC_WATCHER_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peventtype)
+  end
+  def get_status_code(this : IRTCWatcherEvent2*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+end
+struct LibWin32::IRTCBuddyGroupEvent
+  def query_interface(this : IRTCBuddyGroupEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddyGroupEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddyGroupEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCBuddyGroupEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCBuddyGroupEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCBuddyGroupEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCBuddyGroupEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event_type(this : IRTCBuddyGroupEvent*, peventtype : RTC_GROUP_EVENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_event_type.call(this, peventtype)
+  end
+  def get_group(this : IRTCBuddyGroupEvent*, ppgroup : IRTCBuddyGroup*) : HRESULT
+    @lpVtbl.value.get_group.call(this, ppgroup)
+  end
+  def get_buddy(this : IRTCBuddyGroupEvent*, ppbuddy : IRTCBuddy2*) : HRESULT
+    @lpVtbl.value.get_buddy.call(this, ppbuddy)
+  end
+  def get_status_code(this : IRTCBuddyGroupEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+end
+struct LibWin32::IRTCInfoEvent
+  def query_interface(this : IRTCInfoEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCInfoEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCInfoEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCInfoEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCInfoEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCInfoEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCInfoEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCInfoEvent*, ppsession : IRTCSession2*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_participant(this : IRTCInfoEvent*, ppparticipant : IRTCParticipant*) : HRESULT
+    @lpVtbl.value.get_participant.call(this, ppparticipant)
+  end
+  def get_info(this : IRTCInfoEvent*, pbstrinfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_info.call(this, pbstrinfo)
+  end
+  def get_info_header(this : IRTCInfoEvent*, pbstrinfoheader : UInt8**) : HRESULT
+    @lpVtbl.value.get_info_header.call(this, pbstrinfoheader)
+  end
+end
+struct LibWin32::IRTCMediaRequestEvent
+  def query_interface(this : IRTCMediaRequestEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCMediaRequestEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCMediaRequestEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCMediaRequestEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCMediaRequestEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCMediaRequestEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCMediaRequestEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCMediaRequestEvent*, ppsession : IRTCSession2*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_proposed_media(this : IRTCMediaRequestEvent*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_proposed_media.call(this, plmediatypes)
+  end
+  def get_current_media(this : IRTCMediaRequestEvent*, plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_current_media.call(this, plmediatypes)
+  end
+  def accept(this : IRTCMediaRequestEvent*, lmediatypes : Int32) : HRESULT
+    @lpVtbl.value.accept.call(this, lmediatypes)
+  end
+  def get_remote_preferred_security_level(this : IRTCMediaRequestEvent*, ensecuritytype : RTC_SECURITY_TYPE, pensecuritylevel : RTC_SECURITY_LEVEL*) : HRESULT
+    @lpVtbl.value.get_remote_preferred_security_level.call(this, ensecuritytype, pensecuritylevel)
+  end
+  def reject(this : IRTCMediaRequestEvent*) : HRESULT
+    @lpVtbl.value.reject.call(this)
+  end
+  def get_state(this : IRTCMediaRequestEvent*, pstate : RTC_REINVITE_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+end
+struct LibWin32::IRTCReInviteEvent
+  def query_interface(this : IRTCReInviteEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCReInviteEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCReInviteEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCReInviteEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCReInviteEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCReInviteEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCReInviteEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCReInviteEvent*, ppsession2 : IRTCSession2*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession2)
+  end
+  def accept(this : IRTCReInviteEvent*, bstrcontenttype : UInt8*, bstrsessiondescription : UInt8*) : HRESULT
+    @lpVtbl.value.accept.call(this, bstrcontenttype, bstrsessiondescription)
+  end
+  def reject(this : IRTCReInviteEvent*) : HRESULT
+    @lpVtbl.value.reject.call(this)
+  end
+  def get_state(this : IRTCReInviteEvent*, pstate : RTC_REINVITE_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, pstate)
+  end
+  def get_remote_session_description(this : IRTCReInviteEvent*, pbstrcontenttype : UInt8**, pbstrsessiondescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_session_description.call(this, pbstrcontenttype, pbstrsessiondescription)
+  end
+end
+struct LibWin32::IRTCPresencePropertyEvent
+  def query_interface(this : IRTCPresencePropertyEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPresencePropertyEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPresencePropertyEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCPresencePropertyEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCPresencePropertyEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCPresencePropertyEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCPresencePropertyEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status_code(this : IRTCPresencePropertyEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCPresencePropertyEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+  def get_presence_property(this : IRTCPresencePropertyEvent*, penpresprop : RTC_PRESENCE_PROPERTY*) : HRESULT
+    @lpVtbl.value.get_presence_property.call(this, penpresprop)
+  end
+  def get_value(this : IRTCPresencePropertyEvent*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, pbstrvalue)
+  end
+end
+struct LibWin32::IRTCPresenceDataEvent
+  def query_interface(this : IRTCPresenceDataEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPresenceDataEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPresenceDataEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCPresenceDataEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCPresenceDataEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCPresenceDataEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCPresenceDataEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status_code(this : IRTCPresenceDataEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCPresenceDataEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+  def get_presence_data(this : IRTCPresenceDataEvent*, pbstrnamespace : UInt8**, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_data.call(this, pbstrnamespace, pbstrdata)
+  end
+end
+struct LibWin32::IRTCPresenceStatusEvent
+  def query_interface(this : IRTCPresenceStatusEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPresenceStatusEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPresenceStatusEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCPresenceStatusEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCPresenceStatusEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCPresenceStatusEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCPresenceStatusEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status_code(this : IRTCPresenceStatusEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCPresenceStatusEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+  def get_local_presence_info(this : IRTCPresenceStatusEvent*, penstatus : RTC_PRESENCE_STATUS*, pbstrnotes : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_presence_info.call(this, penstatus, pbstrnotes)
+  end
+end
+struct LibWin32::IRTCCollection
+  def query_interface(this : IRTCCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IRTCCollection*, lcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, lcount)
+  end
+  def get_item(this : IRTCCollection*, index : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, pvariant)
+  end
+  def get__new_enum(this : IRTCCollection*, ppnewenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppnewenum)
+  end
+end
+struct LibWin32::IRTCEnumParticipants
+  def query_interface(this : IRTCEnumParticipants*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumParticipants*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumParticipants*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumParticipants*, celt : UInt32, ppelements : IRTCParticipant*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumParticipants*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumParticipants*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumParticipants*, ppenum : IRTCEnumParticipants*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCEnumProfiles
+  def query_interface(this : IRTCEnumProfiles*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumProfiles*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumProfiles*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumProfiles*, celt : UInt32, ppelements : IRTCProfile*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumProfiles*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumProfiles*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumProfiles*, ppenum : IRTCEnumProfiles*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCEnumBuddies
+  def query_interface(this : IRTCEnumBuddies*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumBuddies*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumBuddies*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumBuddies*, celt : UInt32, ppelements : IRTCBuddy*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumBuddies*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumBuddies*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumBuddies*, ppenum : IRTCEnumBuddies*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCEnumWatchers
+  def query_interface(this : IRTCEnumWatchers*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumWatchers*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumWatchers*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumWatchers*, celt : UInt32, ppelements : IRTCWatcher*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumWatchers*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumWatchers*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumWatchers*, ppenum : IRTCEnumWatchers*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCEnumGroups
+  def query_interface(this : IRTCEnumGroups*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumGroups*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumGroups*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumGroups*, celt : UInt32, ppelements : IRTCBuddyGroup*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumGroups*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumGroups*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumGroups*, ppenum : IRTCEnumGroups*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCPresenceContact
+  def query_interface(this : IRTCPresenceContact*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPresenceContact*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPresenceContact*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_presentity_uri(this : IRTCPresenceContact*, pbstrpresentityuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentity_uri.call(this, pbstrpresentityuri)
+  end
+  def put_presentity_uri(this : IRTCPresenceContact*, bstrpresentityuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_presentity_uri.call(this, bstrpresentityuri)
+  end
+  def get_name(this : IRTCPresenceContact*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IRTCPresenceContact*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_data(this : IRTCPresenceContact*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCPresenceContact*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_persistent(this : IRTCPresenceContact*, pfpersistent : Int16*) : HRESULT
+    @lpVtbl.value.get_persistent.call(this, pfpersistent)
+  end
+  def put_persistent(this : IRTCPresenceContact*, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.put_persistent.call(this, fpersistent)
+  end
+end
+struct LibWin32::IRTCBuddy
+  def query_interface(this : IRTCBuddy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_presentity_uri(this : IRTCBuddy*, pbstrpresentityuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentity_uri.call(this, pbstrpresentityuri)
+  end
+  def put_presentity_uri(this : IRTCBuddy*, bstrpresentityuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_presentity_uri.call(this, bstrpresentityuri)
+  end
+  def get_name(this : IRTCBuddy*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IRTCBuddy*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_data(this : IRTCBuddy*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCBuddy*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_persistent(this : IRTCBuddy*, pfpersistent : Int16*) : HRESULT
+    @lpVtbl.value.get_persistent.call(this, pfpersistent)
+  end
+  def put_persistent(this : IRTCBuddy*, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.put_persistent.call(this, fpersistent)
+  end
+  def get_status(this : IRTCBuddy*, penstatus : RTC_PRESENCE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, penstatus)
+  end
+  def get_notes(this : IRTCBuddy*, pbstrnotes : UInt8**) : HRESULT
+    @lpVtbl.value.get_notes.call(this, pbstrnotes)
+  end
+end
+struct LibWin32::IRTCBuddy2
+  def query_interface(this : IRTCBuddy2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddy2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddy2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_presentity_uri(this : IRTCBuddy2*, pbstrpresentityuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentity_uri.call(this, pbstrpresentityuri)
+  end
+  def put_presentity_uri(this : IRTCBuddy2*, bstrpresentityuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_presentity_uri.call(this, bstrpresentityuri)
+  end
+  def get_name(this : IRTCBuddy2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IRTCBuddy2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_data(this : IRTCBuddy2*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCBuddy2*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_persistent(this : IRTCBuddy2*, pfpersistent : Int16*) : HRESULT
+    @lpVtbl.value.get_persistent.call(this, pfpersistent)
+  end
+  def put_persistent(this : IRTCBuddy2*, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.put_persistent.call(this, fpersistent)
+  end
+  def get_status(this : IRTCBuddy2*, penstatus : RTC_PRESENCE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, penstatus)
+  end
+  def get_notes(this : IRTCBuddy2*, pbstrnotes : UInt8**) : HRESULT
+    @lpVtbl.value.get_notes.call(this, pbstrnotes)
+  end
+  def get_profile(this : IRTCBuddy2*, ppprofile : IRTCProfile2*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def refresh(this : IRTCBuddy2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def enumerate_groups(this : IRTCBuddy2*, ppenum : IRTCEnumGroups*) : HRESULT
+    @lpVtbl.value.enumerate_groups.call(this, ppenum)
+  end
+  def get_groups(this : IRTCBuddy2*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_groups.call(this, ppcollection)
+  end
+  def get_presence_property(this : IRTCBuddy2*, enproperty : RTC_PRESENCE_PROPERTY, pbstrproperty : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_property.call(this, enproperty, pbstrproperty)
+  end
+  def enumerate_presence_devices(this : IRTCBuddy2*, ppenumdevices : IRTCEnumPresenceDevices*) : HRESULT
+    @lpVtbl.value.enumerate_presence_devices.call(this, ppenumdevices)
+  end
+  def get_presence_devices(this : IRTCBuddy2*, ppdevicescollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_presence_devices.call(this, ppdevicescollection)
+  end
+  def get_subscription_type(this : IRTCBuddy2*, pensubscriptiontype : RTC_BUDDY_SUBSCRIPTION_TYPE*) : HRESULT
+    @lpVtbl.value.get_subscription_type.call(this, pensubscriptiontype)
+  end
+end
+struct LibWin32::IRTCWatcher
+  def query_interface(this : IRTCWatcher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCWatcher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCWatcher*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_presentity_uri(this : IRTCWatcher*, pbstrpresentityuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentity_uri.call(this, pbstrpresentityuri)
+  end
+  def put_presentity_uri(this : IRTCWatcher*, bstrpresentityuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_presentity_uri.call(this, bstrpresentityuri)
+  end
+  def get_name(this : IRTCWatcher*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IRTCWatcher*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_data(this : IRTCWatcher*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCWatcher*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_persistent(this : IRTCWatcher*, pfpersistent : Int16*) : HRESULT
+    @lpVtbl.value.get_persistent.call(this, pfpersistent)
+  end
+  def put_persistent(this : IRTCWatcher*, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.put_persistent.call(this, fpersistent)
+  end
+  def get_state(this : IRTCWatcher*, penstate : RTC_WATCHER_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def put_state(this : IRTCWatcher*, enstate : RTC_WATCHER_STATE) : HRESULT
+    @lpVtbl.value.put_state.call(this, enstate)
+  end
+end
+struct LibWin32::IRTCWatcher2
+  def query_interface(this : IRTCWatcher2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCWatcher2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCWatcher2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_presentity_uri(this : IRTCWatcher2*, pbstrpresentityuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_presentity_uri.call(this, pbstrpresentityuri)
+  end
+  def put_presentity_uri(this : IRTCWatcher2*, bstrpresentityuri : UInt8*) : HRESULT
+    @lpVtbl.value.put_presentity_uri.call(this, bstrpresentityuri)
+  end
+  def get_name(this : IRTCWatcher2*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrname)
+  end
+  def put_name(this : IRTCWatcher2*, bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrname)
+  end
+  def get_data(this : IRTCWatcher2*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCWatcher2*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_persistent(this : IRTCWatcher2*, pfpersistent : Int16*) : HRESULT
+    @lpVtbl.value.get_persistent.call(this, pfpersistent)
+  end
+  def put_persistent(this : IRTCWatcher2*, fpersistent : Int16) : HRESULT
+    @lpVtbl.value.put_persistent.call(this, fpersistent)
+  end
+  def get_state(this : IRTCWatcher2*, penstate : RTC_WATCHER_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, penstate)
+  end
+  def put_state(this : IRTCWatcher2*, enstate : RTC_WATCHER_STATE) : HRESULT
+    @lpVtbl.value.put_state.call(this, enstate)
+  end
+  def get_profile(this : IRTCWatcher2*, ppprofile : IRTCProfile2*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_scope(this : IRTCWatcher2*, penscope : RTC_ACE_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.call(this, penscope)
+  end
+end
+struct LibWin32::IRTCBuddyGroup
+  def query_interface(this : IRTCBuddyGroup*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCBuddyGroup*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCBuddyGroup*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_name(this : IRTCBuddyGroup*, pbstrgroupname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstrgroupname)
+  end
+  def put_name(this : IRTCBuddyGroup*, bstrgroupname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bstrgroupname)
+  end
+  def add_buddy(this : IRTCBuddyGroup*, pbuddy : IRTCBuddy) : HRESULT
+    @lpVtbl.value.add_buddy.call(this, pbuddy)
+  end
+  def remove_buddy(this : IRTCBuddyGroup*, pbuddy : IRTCBuddy) : HRESULT
+    @lpVtbl.value.remove_buddy.call(this, pbuddy)
+  end
+  def enumerate_buddies(this : IRTCBuddyGroup*, ppenum : IRTCEnumBuddies*) : HRESULT
+    @lpVtbl.value.enumerate_buddies.call(this, ppenum)
+  end
+  def get_buddies(this : IRTCBuddyGroup*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_buddies.call(this, ppcollection)
+  end
+  def get_data(this : IRTCBuddyGroup*, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_data.call(this, pbstrdata)
+  end
+  def put_data(this : IRTCBuddyGroup*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_data.call(this, bstrdata)
+  end
+  def get_profile(this : IRTCBuddyGroup*, ppprofile : IRTCProfile2*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+end
+struct LibWin32::IRTCEventNotification
+  def query_interface(this : IRTCEventNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEventNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEventNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def event(this : IRTCEventNotification*, rtcevent : RTC_EVENT, pevent : IDispatch) : HRESULT
+    @lpVtbl.value.event.call(this, rtcevent, pevent)
+  end
+end
+struct LibWin32::IRTCPortManager
+  def query_interface(this : IRTCPortManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPortManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPortManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_mapping(this : IRTCPortManager*, bstrremoteaddress : UInt8*, enporttype : RTC_PORT_TYPE, pbstrinternallocaladdress : UInt8**, plinternallocalport : Int32*, pbstrexternallocaladdress : UInt8**, plexternallocalport : Int32*) : HRESULT
+    @lpVtbl.value.get_mapping.call(this, bstrremoteaddress, enporttype, pbstrinternallocaladdress, plinternallocalport, pbstrexternallocaladdress, plexternallocalport)
+  end
+  def update_remote_address(this : IRTCPortManager*, bstrremoteaddress : UInt8*, bstrinternallocaladdress : UInt8*, linternallocalport : Int32, bstrexternallocaladdress : UInt8*, lexternallocalport : Int32) : HRESULT
+    @lpVtbl.value.update_remote_address.call(this, bstrremoteaddress, bstrinternallocaladdress, linternallocalport, bstrexternallocaladdress, lexternallocalport)
+  end
+  def release_mapping(this : IRTCPortManager*, bstrinternallocaladdress : UInt8*, linternallocalport : Int32, bstrexternallocaladdress : UInt8*, lexternallocaladdress : Int32) : HRESULT
+    @lpVtbl.value.release_mapping.call(this, bstrinternallocaladdress, linternallocalport, bstrexternallocaladdress, lexternallocaladdress)
+  end
+end
+struct LibWin32::IRTCSessionPortManagement
+  def query_interface(this : IRTCSessionPortManagement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionPortManagement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionPortManagement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_port_manager(this : IRTCSessionPortManagement*, pportmanager : IRTCPortManager) : HRESULT
+    @lpVtbl.value.set_port_manager.call(this, pportmanager)
+  end
+end
+struct LibWin32::IRTCClientPortManagement
+  def query_interface(this : IRTCClientPortManagement*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCClientPortManagement*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCClientPortManagement*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def start_listen_address_and_port(this : IRTCClientPortManagement*, bstrinternallocaladdress : UInt8*, linternallocalport : Int32) : HRESULT
+    @lpVtbl.value.start_listen_address_and_port.call(this, bstrinternallocaladdress, linternallocalport)
+  end
+  def stop_listen_address_and_port(this : IRTCClientPortManagement*, bstrinternallocaladdress : UInt8*, linternallocalport : Int32) : HRESULT
+    @lpVtbl.value.stop_listen_address_and_port.call(this, bstrinternallocaladdress, linternallocalport)
+  end
+  def get_port_range(this : IRTCClientPortManagement*, enporttype : RTC_PORT_TYPE, plminvalue : Int32*, plmaxvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_port_range.call(this, enporttype, plminvalue, plmaxvalue)
+  end
+end
+struct LibWin32::IRTCUserSearch
+  def query_interface(this : IRTCUserSearch*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCUserSearch*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCUserSearch*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_query(this : IRTCUserSearch*, ppquery : IRTCUserSearchQuery*) : HRESULT
+    @lpVtbl.value.create_query.call(this, ppquery)
+  end
+  def execute_search(this : IRTCUserSearch*, pquery : IRTCUserSearchQuery, pprofile : IRTCProfile, lcookie : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.execute_search.call(this, pquery, pprofile, lcookie)
+  end
+end
+struct LibWin32::IRTCUserSearchQuery
+  def query_interface(this : IRTCUserSearchQuery*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCUserSearchQuery*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCUserSearchQuery*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def put_search_term(this : IRTCUserSearchQuery*, bstrname : UInt8*, bstrvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_search_term.call(this, bstrname, bstrvalue)
+  end
+  def get_search_term(this : IRTCUserSearchQuery*, bstrname : UInt8*, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_search_term.call(this, bstrname, pbstrvalue)
+  end
+  def get_search_terms(this : IRTCUserSearchQuery*, pbstrnames : UInt8**) : HRESULT
+    @lpVtbl.value.get_search_terms.call(this, pbstrnames)
+  end
+  def put_search_preference(this : IRTCUserSearchQuery*, enpreference : RTC_USER_SEARCH_PREFERENCE, lvalue : Int32) : HRESULT
+    @lpVtbl.value.put_search_preference.call(this, enpreference, lvalue)
+  end
+  def get_search_preference(this : IRTCUserSearchQuery*, enpreference : RTC_USER_SEARCH_PREFERENCE, plvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_search_preference.call(this, enpreference, plvalue)
+  end
+  def put_search_domain(this : IRTCUserSearchQuery*, bstrdomain : UInt8*) : HRESULT
+    @lpVtbl.value.put_search_domain.call(this, bstrdomain)
+  end
+  def get_search_domain(this : IRTCUserSearchQuery*, pbstrdomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_search_domain.call(this, pbstrdomain)
+  end
+end
+struct LibWin32::IRTCUserSearchResult
+  def query_interface(this : IRTCUserSearchResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCUserSearchResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCUserSearchResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_value(this : IRTCUserSearchResult*, encolumn : RTC_USER_SEARCH_COLUMN, pbstrvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.call(this, encolumn, pbstrvalue)
+  end
+end
+struct LibWin32::IRTCEnumUserSearchResults
+  def query_interface(this : IRTCEnumUserSearchResults*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumUserSearchResults*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumUserSearchResults*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumUserSearchResults*, celt : UInt32, ppelements : IRTCUserSearchResult*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumUserSearchResults*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumUserSearchResults*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumUserSearchResults*, ppenum : IRTCEnumUserSearchResults*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCUserSearchResultsEvent
+  def query_interface(this : IRTCUserSearchResultsEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCUserSearchResultsEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCUserSearchResultsEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCUserSearchResultsEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCUserSearchResultsEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCUserSearchResultsEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCUserSearchResultsEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enumerate_results(this : IRTCUserSearchResultsEvent*, ppenum : IRTCEnumUserSearchResults*) : HRESULT
+    @lpVtbl.value.enumerate_results.call(this, ppenum)
+  end
+  def get_results(this : IRTCUserSearchResultsEvent*, ppcollection : IRTCCollection*) : HRESULT
+    @lpVtbl.value.get_results.call(this, ppcollection)
+  end
+  def get_profile(this : IRTCUserSearchResultsEvent*, ppprofile : IRTCProfile2*) : HRESULT
+    @lpVtbl.value.get_profile.call(this, ppprofile)
+  end
+  def get_query(this : IRTCUserSearchResultsEvent*, ppquery : IRTCUserSearchQuery*) : HRESULT
+    @lpVtbl.value.get_query.call(this, ppquery)
+  end
+  def get_cookie(this : IRTCUserSearchResultsEvent*, plcookie : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, plcookie)
+  end
+  def get_status_code(this : IRTCUserSearchResultsEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_more_available(this : IRTCUserSearchResultsEvent*, pfmoreavailable : Int16*) : HRESULT
+    @lpVtbl.value.get_more_available.call(this, pfmoreavailable)
+  end
+end
+struct LibWin32::IRTCSessionReferStatusEvent
+  def query_interface(this : IRTCSessionReferStatusEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionReferStatusEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionReferStatusEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionReferStatusEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionReferStatusEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionReferStatusEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionReferStatusEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionReferStatusEvent*, ppsession : IRTCSession2*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_refer_status(this : IRTCSessionReferStatusEvent*, penreferstatus : RTC_SESSION_REFER_STATUS*) : HRESULT
+    @lpVtbl.value.get_refer_status.call(this, penreferstatus)
+  end
+  def get_status_code(this : IRTCSessionReferStatusEvent*, plstatuscode : Int32*) : HRESULT
+    @lpVtbl.value.get_status_code.call(this, plstatuscode)
+  end
+  def get_status_text(this : IRTCSessionReferStatusEvent*, pbstrstatustext : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_text.call(this, pbstrstatustext)
+  end
+end
+struct LibWin32::IRTCSessionReferredEvent
+  def query_interface(this : IRTCSessionReferredEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionReferredEvent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionReferredEvent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCSessionReferredEvent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCSessionReferredEvent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCSessionReferredEvent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCSessionReferredEvent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IRTCSessionReferredEvent*, ppsession : IRTCSession2*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppsession)
+  end
+  def get_referred_by_uri(this : IRTCSessionReferredEvent*, pbstrreferredbyuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_referred_by_uri.call(this, pbstrreferredbyuri)
+  end
+  def get_refer_to_uri(this : IRTCSessionReferredEvent*, pbstrreferouri : UInt8**) : HRESULT
+    @lpVtbl.value.get_refer_to_uri.call(this, pbstrreferouri)
+  end
+  def get_refer_cookie(this : IRTCSessionReferredEvent*, pbstrrefercookie : UInt8**) : HRESULT
+    @lpVtbl.value.get_refer_cookie.call(this, pbstrrefercookie)
+  end
+  def accept(this : IRTCSessionReferredEvent*) : HRESULT
+    @lpVtbl.value.accept.call(this)
+  end
+  def reject(this : IRTCSessionReferredEvent*) : HRESULT
+    @lpVtbl.value.reject.call(this)
+  end
+  def set_referred_session_state(this : IRTCSessionReferredEvent*, enstate : RTC_SESSION_STATE) : HRESULT
+    @lpVtbl.value.set_referred_session_state.call(this, enstate)
+  end
+end
+struct LibWin32::IRTCSessionDescriptionManager
+  def query_interface(this : IRTCSessionDescriptionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCSessionDescriptionManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCSessionDescriptionManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def evaluate_session_description(this : IRTCSessionDescriptionManager*, bstrcontenttype : UInt8*, bstrsessiondescription : UInt8*, pfapplicationsession : Int16*) : HRESULT
+    @lpVtbl.value.evaluate_session_description.call(this, bstrcontenttype, bstrsessiondescription, pfapplicationsession)
+  end
+end
+struct LibWin32::IRTCEnumPresenceDevices
+  def query_interface(this : IRTCEnumPresenceDevices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCEnumPresenceDevices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCEnumPresenceDevices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def next(this : IRTCEnumPresenceDevices*, celt : UInt32, ppelements : IRTCPresenceDevice*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.call(this, celt, ppelements, pceltfetched)
+  end
+  def reset(this : IRTCEnumPresenceDevices*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def skip(this : IRTCEnumPresenceDevices*, celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.call(this, celt)
+  end
+  def clone(this : IRTCEnumPresenceDevices*, ppenum : IRTCEnumPresenceDevices*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppenum)
+  end
+end
+struct LibWin32::IRTCPresenceDevice
+  def query_interface(this : IRTCPresenceDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCPresenceDevice*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCPresenceDevice*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_status(this : IRTCPresenceDevice*, penstatus : RTC_PRESENCE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.call(this, penstatus)
+  end
+  def get_notes(this : IRTCPresenceDevice*, pbstrnotes : UInt8**) : HRESULT
+    @lpVtbl.value.get_notes.call(this, pbstrnotes)
+  end
+  def get_presence_property(this : IRTCPresenceDevice*, enproperty : RTC_PRESENCE_PROPERTY, pbstrproperty : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_property.call(this, enproperty, pbstrproperty)
+  end
+  def get_presence_data(this : IRTCPresenceDevice*, pbstrnamespace : UInt8**, pbstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_presence_data.call(this, pbstrnamespace, pbstrdata)
+  end
+end
+struct LibWin32::IRTCDispatchEventNotification
+  def query_interface(this : IRTCDispatchEventNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRTCDispatchEventNotification*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRTCDispatchEventNotification*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IRTCDispatchEventNotification*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IRTCDispatchEventNotification*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IRTCDispatchEventNotification*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IRTCDispatchEventNotification*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::ITransportSettingsInternal
+  def query_interface(this : ITransportSettingsInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITransportSettingsInternal*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITransportSettingsInternal*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def apply_setting(this : ITransportSettingsInternal*, setting : TRANSPORT_SETTING*) : HRESULT
+    @lpVtbl.value.apply_setting.call(this, setting)
+  end
+  def query_setting(this : ITransportSettingsInternal*, setting : TRANSPORT_SETTING*) : HRESULT
+    @lpVtbl.value.query_setting.call(this, setting)
+  end
+end
+struct LibWin32::INetworkTransportSettings
+  def query_interface(this : INetworkTransportSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INetworkTransportSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INetworkTransportSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def apply_setting(this : INetworkTransportSettings*, settingid : TRANSPORT_SETTING_ID*, lengthin : UInt32, valuein : UInt8*, lengthout : UInt32*, valueout : UInt8**) : HRESULT
+    @lpVtbl.value.apply_setting.call(this, settingid, lengthin, valuein, lengthout, valueout)
+  end
+  def query_setting(this : INetworkTransportSettings*, settingid : TRANSPORT_SETTING_ID*, lengthin : UInt32, valuein : UInt8*, lengthout : UInt32*, valueout : UInt8**) : HRESULT
+    @lpVtbl.value.query_setting.call(this, settingid, lengthin, valuein, lengthout, valueout)
+  end
+end
+struct LibWin32::INotificationTransportSync
+  def query_interface(this : INotificationTransportSync*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : INotificationTransportSync*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : INotificationTransportSync*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def complete_delivery(this : INotificationTransportSync*) : HRESULT
+    @lpVtbl.value.complete_delivery.call(this)
+  end
+  def flush(this : INotificationTransportSync*) : HRESULT
+    @lpVtbl.value.flush.call(this)
+  end
+end

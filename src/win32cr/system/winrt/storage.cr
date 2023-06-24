@@ -125,3 +125,90 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IRandomAccessStreamFileAccessMode
+  def query_interface(this : IRandomAccessStreamFileAccessMode*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRandomAccessStreamFileAccessMode*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRandomAccessStreamFileAccessMode*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_mode(this : IRandomAccessStreamFileAccessMode*, fileaccessmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_mode.call(this, fileaccessmode)
+  end
+end
+struct LibWin32::IUnbufferedFileHandleOplockCallback
+  def query_interface(this : IUnbufferedFileHandleOplockCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUnbufferedFileHandleOplockCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUnbufferedFileHandleOplockCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_broken_callback(this : IUnbufferedFileHandleOplockCallback*) : HRESULT
+    @lpVtbl.value.on_broken_callback.call(this)
+  end
+end
+struct LibWin32::IUnbufferedFileHandleProvider
+  def query_interface(this : IUnbufferedFileHandleProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUnbufferedFileHandleProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUnbufferedFileHandleProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open_unbuffered_file_handle(this : IUnbufferedFileHandleProvider*, oplockbreakcallback : IUnbufferedFileHandleOplockCallback, filehandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.open_unbuffered_file_handle.call(this, oplockbreakcallback, filehandle)
+  end
+  def close_unbuffered_file_handle(this : IUnbufferedFileHandleProvider*) : HRESULT
+    @lpVtbl.value.close_unbuffered_file_handle.call(this)
+  end
+end
+struct LibWin32::IOplockBreakingHandler
+  def query_interface(this : IOplockBreakingHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOplockBreakingHandler*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOplockBreakingHandler*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def oplock_breaking(this : IOplockBreakingHandler*) : HRESULT
+    @lpVtbl.value.oplock_breaking.call(this)
+  end
+end
+struct LibWin32::IStorageItemHandleAccess
+  def query_interface(this : IStorageItemHandleAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStorageItemHandleAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStorageItemHandleAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IStorageItemHandleAccess*, accessoptions : HANDLE_ACCESS_OPTIONS, sharingoptions : HANDLE_SHARING_OPTIONS, options : HANDLE_OPTIONS, oplockbreakinghandler : IOplockBreakingHandler, interophandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create.call(this, accessoptions, sharingoptions, options, oplockbreakinghandler, interophandle)
+  end
+end
+struct LibWin32::IStorageFolderHandleAccess
+  def query_interface(this : IStorageFolderHandleAccess*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStorageFolderHandleAccess*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStorageFolderHandleAccess*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IStorageFolderHandleAccess*, filename : LibC::LPWSTR, creationoptions : HANDLE_CREATION_OPTIONS, accessoptions : HANDLE_ACCESS_OPTIONS, sharingoptions : HANDLE_SHARING_OPTIONS, options : HANDLE_OPTIONS, oplockbreakinghandler : IOplockBreakingHandler, interophandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create.call(this, filename, creationoptions, accessoptions, sharingoptions, options, oplockbreakinghandler, interophandle)
+  end
+end

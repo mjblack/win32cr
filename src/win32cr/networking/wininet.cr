@@ -1188,7 +1188,7 @@ lib LibWin32
     time_zone : GOPHER_TIMEZONE_ATTRIBUTE_TYPE
     provider : GOPHER_PROVIDER_ATTRIBUTE_TYPE
     version : GOPHER_VERSION_ATTRIBUTE_TYPE
-    vabstract : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
+    abstract_ : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
     view : GOPHER_VIEW_ATTRIBUTE_TYPE
     veronica : GOPHER_VERONICA_ATTRIBUTE_TYPE
     ask : GOPHER_ASK_ATTRIBUTE_TYPE
@@ -2095,7 +2095,7 @@ lib LibWin32
   fun InternetGetCookieExW(lpszurl : LibC::LPWSTR, lpszcookiename : LibC::LPWSTR, lpszcookiedata : Char*, lpdwsize : UInt32*, dwflags : INTERNET_COOKIE_FLAGS, lpreserved : Void*) : LibC::BOOL
 
   # Params # pcookies : INTERNET_COOKIE2* [In],dwcookiecount : UInt32 [In]
-  fun InternetFreeCookies(pcookies : INTERNET_COOKIE2*, dwcookiecount : UInt32)
+  fun InternetFreeCookies(pcookies : INTERNET_COOKIE2*, dwcookiecount : UInt32) : Void
 
   # Params # pcwszurl : LibC::LPWSTR [In],pcwszcookiename : LibC::LPWSTR [In],dwflags : UInt32 [In],ppcookies : INTERNET_COOKIE2** [In],pdwcookiecount : UInt32* [In]
   fun InternetGetCookieEx2(pcwszurl : LibC::LPWSTR, pcwszcookiename : LibC::LPWSTR, dwflags : UInt32, ppcookies : INTERNET_COOKIE2**, pdwcookiecount : UInt32*) : UInt32
@@ -2413,7 +2413,7 @@ lib LibWin32
   fun HttpPushWait(hwait : HTTP_PUSH_WAIT_HANDLE, etype : HTTP_PUSH_WAIT_TYPE, pnotificationstatus : HTTP_PUSH_NOTIFICATION_STATUS*) : UInt32
 
   # Params # hwait : HTTP_PUSH_WAIT_HANDLE [In]
-  fun HttpPushClose(hwait : HTTP_PUSH_WAIT_HANDLE)
+  fun HttpPushClose(hwait : HTTP_PUSH_WAIT_HANDLE) : Void
 
   # Params # lpszurl : PSTR [In],lpszcompliancetoken : PSTR [In],lpffound : Int32* [In],hwnd : LibC::HANDLE [In],lpvreserved : Void* [In]
   fun HttpCheckDavComplianceA(lpszurl : PSTR, lpszcompliancetoken : PSTR, lpffound : Int32*, hwnd : LibC::HANDLE, lpvreserved : Void*) : LibC::BOOL
@@ -2518,7 +2518,7 @@ lib LibWin32
   fun AppCacheGetDownloadList(happcache : Void*, pdownloadlist : APP_CACHE_DOWNLOAD_LIST*) : UInt32
 
   # Params # pdownloadlist : APP_CACHE_DOWNLOAD_LIST* [In]
-  fun AppCacheFreeDownloadList(pdownloadlist : APP_CACHE_DOWNLOAD_LIST*)
+  fun AppCacheFreeDownloadList(pdownloadlist : APP_CACHE_DOWNLOAD_LIST*) : Void
 
   # Params # happcache : Void* [In],pbmanifestdata : UInt8* [In],dwmanifestdatasize : UInt32 [In],pestate : APP_CACHE_FINALIZE_STATE* [In]
   fun AppCacheFinalize(happcache : Void*, pbmanifestdata : UInt8*, dwmanifestdatasize : UInt32, pestate : APP_CACHE_FINALIZE_STATE*) : UInt32
@@ -2533,10 +2533,10 @@ lib LibWin32
   fun AppCacheDuplicateHandle(happcache : Void*, phduplicatedappcache : Void**) : UInt32
 
   # Params # happcache : Void* [In]
-  fun AppCacheCloseHandle(happcache : Void*)
+  fun AppCacheCloseHandle(happcache : Void*) : Void
 
   # Params # pappcachegrouplist : APP_CACHE_GROUP_LIST* [In]
-  fun AppCacheFreeGroupList(pappcachegrouplist : APP_CACHE_GROUP_LIST*)
+  fun AppCacheFreeGroupList(pappcachegrouplist : APP_CACHE_GROUP_LIST*) : Void
 
   # Params # pappcachegrouplist : APP_CACHE_GROUP_LIST* [In]
   fun AppCacheGetGroupList(pappcachegrouplist : APP_CACHE_GROUP_LIST*) : UInt32
@@ -2566,7 +2566,7 @@ lib LibWin32
   fun HttpOpenDependencyHandle(hrequesthandle : Void*, fbackground : LibC::BOOL, phdependencyhandle : Void**) : UInt32
 
   # Params # hdependencyhandle : Void* [In]
-  fun HttpCloseDependencyHandle(hdependencyhandle : Void*)
+  fun HttpCloseDependencyHandle(hdependencyhandle : Void*) : Void
 
   # Params # hdependencyhandle : Void* [In],phduplicateddependencyhandle : Void** [In]
   fun HttpDuplicateDependencyHandle(hdependencyhandle : Void*, phduplicateddependencyhandle : Void**) : UInt32
@@ -2575,13 +2575,13 @@ lib LibWin32
   fun HttpIndicatePageLoadComplete(hdependencyhandle : Void*) : UInt32
 
   # Params # pcacheentryinfo : URLCACHE_ENTRY_INFO* [In]
-  fun UrlCacheFreeEntryInfo(pcacheentryinfo : URLCACHE_ENTRY_INFO*)
+  fun UrlCacheFreeEntryInfo(pcacheentryinfo : URLCACHE_ENTRY_INFO*) : Void
 
   # Params # happcache : Void* [In],pcwszurl : LibC::LPWSTR [In],pcacheentryinfo : URLCACHE_ENTRY_INFO* [In]
   fun UrlCacheGetEntryInfo(happcache : Void*, pcwszurl : LibC::LPWSTR, pcacheentryinfo : URLCACHE_ENTRY_INFO*) : UInt32
 
   # Params # hentryfile : Void* [In]
-  fun UrlCacheCloseEntryHandle(hentryfile : Void*)
+  fun UrlCacheCloseEntryHandle(hentryfile : Void*) : Void
 
   # Params # happcache : Void* [In],pcwszurl : LibC::LPWSTR [In],pcacheentryinfo : URLCACHE_ENTRY_INFO* [In],phentryfile : Void** [In]
   fun UrlCacheRetrieveEntryFile(happcache : Void*, pcwszurl : LibC::LPWSTR, pcacheentryinfo : URLCACHE_ENTRY_INFO*, phentryfile : Void**) : UInt32
@@ -2632,7 +2632,7 @@ lib LibWin32
   fun IsHostInProxyBypassList(tscheme : INTERNET_SCHEME, lpszhost : UInt8*, cchhost : UInt32) : LibC::BOOL
 
   # Params # pproxyinfolist : WININET_PROXY_INFO_LIST* [In]
-  fun InternetFreeProxyInfoList(pproxyinfolist : WININET_PROXY_INFO_LIST*)
+  fun InternetFreeProxyInfoList(pproxyinfolist : WININET_PROXY_INFO_LIST*) : Void
 
   # Params # hinternet : Void* [In],pcwszurl : LibC::LPWSTR [In],pproxyinfolist : WININET_PROXY_INFO_LIST* [In]
   fun InternetGetProxyForUrl(hinternet : Void*, pcwszurl : LibC::LPWSTR, pproxyinfolist : WININET_PROXY_INFO_LIST*) : UInt32
@@ -2690,4 +2690,95 @@ lib LibWin32
 
   # Params # pcszurl : UInt8* [In],cchurl : UInt32 [In],pcwszbaseurl : LibC::LPWSTR [In],dwcodepagehost : UInt32 [In],dwcodepagepath : UInt32 [In],fencodepathextra : LibC::BOOL [In],dwcodepageextra : UInt32 [In],ppwszconvertedurl : LibC::LPWSTR* [In]
   fun InternetConvertUrlFromWireToWideChar(pcszurl : UInt8*, cchurl : UInt32, pcwszbaseurl : LibC::LPWSTR, dwcodepagehost : UInt32, dwcodepagepath : UInt32, fencodepathextra : LibC::BOOL, dwcodepageextra : UInt32, ppwszconvertedurl : LibC::LPWSTR*) : UInt32
+end
+struct LibWin32::IDialEventSink
+  def query_interface(this : IDialEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDialEventSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDialEventSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def on_event(this : IDialEventSink*, dwevent : UInt32, dwstatus : UInt32) : HRESULT
+    @lpVtbl.value.on_event.call(this, dwevent, dwstatus)
+  end
+end
+struct LibWin32::IDialEngine
+  def query_interface(this : IDialEngine*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDialEngine*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDialEngine*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IDialEngine*, pwzconnectoid : LibC::LPWSTR, pides : IDialEventSink) : HRESULT
+    @lpVtbl.value.initialize.call(this, pwzconnectoid, pides)
+  end
+  def get_property(this : IDialEngine*, pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.get_property.call(this, pwzproperty, pwzvalue, dwbufsize)
+  end
+  def set_property(this : IDialEngine*, pwzproperty : LibC::LPWSTR, pwzvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_property.call(this, pwzproperty, pwzvalue)
+  end
+  def dial(this : IDialEngine*) : HRESULT
+    @lpVtbl.value.dial.call(this)
+  end
+  def hang_up(this : IDialEngine*) : HRESULT
+    @lpVtbl.value.hang_up.call(this)
+  end
+  def get_connected_state(this : IDialEngine*, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_connected_state.call(this, pdwstate)
+  end
+  def get_connect_handle(this : IDialEngine*, pdwhandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_connect_handle.call(this, pdwhandle)
+  end
+end
+struct LibWin32::IDialBranding
+  def query_interface(this : IDialBranding*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDialBranding*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDialBranding*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IDialBranding*, pwzconnectoid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, pwzconnectoid)
+  end
+  def get_bitmap(this : IDialBranding*, dwindex : UInt32, phbitmap : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_bitmap.call(this, dwindex, phbitmap)
+  end
+end
+struct LibWin32::IProofOfPossessionCookieInfoManager
+  def query_interface(this : IProofOfPossessionCookieInfoManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProofOfPossessionCookieInfoManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProofOfPossessionCookieInfoManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cookie_info_for_uri(this : IProofOfPossessionCookieInfoManager*, uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
+    @lpVtbl.value.get_cookie_info_for_uri.call(this, uri, cookieinfocount, cookieinfo)
+  end
+end
+struct LibWin32::IProofOfPossessionCookieInfoManager2
+  def query_interface(this : IProofOfPossessionCookieInfoManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IProofOfPossessionCookieInfoManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IProofOfPossessionCookieInfoManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_cookie_info_with_uri_for_account(this : IProofOfPossessionCookieInfoManager2*, webaccount : IInspectable, uri : LibC::LPWSTR, cookieinfocount : UInt32*, cookieinfo : ProofOfPossessionCookieInfo**) : HRESULT
+    @lpVtbl.value.get_cookie_info_with_uri_for_account.call(this, webaccount, uri, cookieinfocount, cookieinfo)
+  end
 end

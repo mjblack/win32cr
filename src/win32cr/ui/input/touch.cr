@@ -240,3 +240,255 @@ lib LibWin32
   # Params # hwnd : LibC::HANDLE [In],dwreserved : UInt32 [In],dwflags : UInt32 [In],pcids : UInt32* [In],pgestureconfig : GESTURECONFIG* [In],cbsize : UInt32 [In]
   fun GetGestureConfig(hwnd : LibC::HANDLE, dwreserved : UInt32, dwflags : UInt32, pcids : UInt32*, pgestureconfig : GESTURECONFIG*, cbsize : UInt32) : LibC::BOOL
 end
+struct LibWin32::IIManipulationEvents
+  def query_interface(this : IIManipulationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IIManipulationEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IIManipulationEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def manipulation_started(this : IIManipulationEvents*, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.manipulation_started.call(this, x, y)
+  end
+  def manipulation_delta(this : IIManipulationEvents*, x : Float32, y : Float32, translationdeltax : Float32, translationdeltay : Float32, scaledelta : Float32, expansiondelta : Float32, rotationdelta : Float32, cumulativetranslationx : Float32, cumulativetranslationy : Float32, cumulativescale : Float32, cumulativeexpansion : Float32, cumulativerotation : Float32) : HRESULT
+    @lpVtbl.value.manipulation_delta.call(this, x, y, translationdeltax, translationdeltay, scaledelta, expansiondelta, rotationdelta, cumulativetranslationx, cumulativetranslationy, cumulativescale, cumulativeexpansion, cumulativerotation)
+  end
+  def manipulation_completed(this : IIManipulationEvents*, x : Float32, y : Float32, cumulativetranslationx : Float32, cumulativetranslationy : Float32, cumulativescale : Float32, cumulativeexpansion : Float32, cumulativerotation : Float32) : HRESULT
+    @lpVtbl.value.manipulation_completed.call(this, x, y, cumulativetranslationx, cumulativetranslationy, cumulativescale, cumulativeexpansion, cumulativerotation)
+  end
+end
+struct LibWin32::IInertiaProcessor
+  def query_interface(this : IInertiaProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInertiaProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInertiaProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_initial_origin_x(this : IInertiaProcessor*, x : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_origin_x.call(this, x)
+  end
+  def put_initial_origin_x(this : IInertiaProcessor*, x : Float32) : HRESULT
+    @lpVtbl.value.put_initial_origin_x.call(this, x)
+  end
+  def get_initial_origin_y(this : IInertiaProcessor*, y : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_origin_y.call(this, y)
+  end
+  def put_initial_origin_y(this : IInertiaProcessor*, y : Float32) : HRESULT
+    @lpVtbl.value.put_initial_origin_y.call(this, y)
+  end
+  def get_initial_velocity_x(this : IInertiaProcessor*, x : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_velocity_x.call(this, x)
+  end
+  def put_initial_velocity_x(this : IInertiaProcessor*, x : Float32) : HRESULT
+    @lpVtbl.value.put_initial_velocity_x.call(this, x)
+  end
+  def get_initial_velocity_y(this : IInertiaProcessor*, y : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_velocity_y.call(this, y)
+  end
+  def put_initial_velocity_y(this : IInertiaProcessor*, y : Float32) : HRESULT
+    @lpVtbl.value.put_initial_velocity_y.call(this, y)
+  end
+  def get_initial_angular_velocity(this : IInertiaProcessor*, velocity : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_angular_velocity.call(this, velocity)
+  end
+  def put_initial_angular_velocity(this : IInertiaProcessor*, velocity : Float32) : HRESULT
+    @lpVtbl.value.put_initial_angular_velocity.call(this, velocity)
+  end
+  def get_initial_expansion_velocity(this : IInertiaProcessor*, velocity : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_expansion_velocity.call(this, velocity)
+  end
+  def put_initial_expansion_velocity(this : IInertiaProcessor*, velocity : Float32) : HRESULT
+    @lpVtbl.value.put_initial_expansion_velocity.call(this, velocity)
+  end
+  def get_initial_radius(this : IInertiaProcessor*, radius : Float32*) : HRESULT
+    @lpVtbl.value.get_initial_radius.call(this, radius)
+  end
+  def put_initial_radius(this : IInertiaProcessor*, radius : Float32) : HRESULT
+    @lpVtbl.value.put_initial_radius.call(this, radius)
+  end
+  def get_boundary_left(this : IInertiaProcessor*, left : Float32*) : HRESULT
+    @lpVtbl.value.get_boundary_left.call(this, left)
+  end
+  def put_boundary_left(this : IInertiaProcessor*, left : Float32) : HRESULT
+    @lpVtbl.value.put_boundary_left.call(this, left)
+  end
+  def get_boundary_top(this : IInertiaProcessor*, top : Float32*) : HRESULT
+    @lpVtbl.value.get_boundary_top.call(this, top)
+  end
+  def put_boundary_top(this : IInertiaProcessor*, top : Float32) : HRESULT
+    @lpVtbl.value.put_boundary_top.call(this, top)
+  end
+  def get_boundary_right(this : IInertiaProcessor*, right : Float32*) : HRESULT
+    @lpVtbl.value.get_boundary_right.call(this, right)
+  end
+  def put_boundary_right(this : IInertiaProcessor*, right : Float32) : HRESULT
+    @lpVtbl.value.put_boundary_right.call(this, right)
+  end
+  def get_boundary_bottom(this : IInertiaProcessor*, bottom : Float32*) : HRESULT
+    @lpVtbl.value.get_boundary_bottom.call(this, bottom)
+  end
+  def put_boundary_bottom(this : IInertiaProcessor*, bottom : Float32) : HRESULT
+    @lpVtbl.value.put_boundary_bottom.call(this, bottom)
+  end
+  def get_elastic_margin_left(this : IInertiaProcessor*, left : Float32*) : HRESULT
+    @lpVtbl.value.get_elastic_margin_left.call(this, left)
+  end
+  def put_elastic_margin_left(this : IInertiaProcessor*, left : Float32) : HRESULT
+    @lpVtbl.value.put_elastic_margin_left.call(this, left)
+  end
+  def get_elastic_margin_top(this : IInertiaProcessor*, top : Float32*) : HRESULT
+    @lpVtbl.value.get_elastic_margin_top.call(this, top)
+  end
+  def put_elastic_margin_top(this : IInertiaProcessor*, top : Float32) : HRESULT
+    @lpVtbl.value.put_elastic_margin_top.call(this, top)
+  end
+  def get_elastic_margin_right(this : IInertiaProcessor*, right : Float32*) : HRESULT
+    @lpVtbl.value.get_elastic_margin_right.call(this, right)
+  end
+  def put_elastic_margin_right(this : IInertiaProcessor*, right : Float32) : HRESULT
+    @lpVtbl.value.put_elastic_margin_right.call(this, right)
+  end
+  def get_elastic_margin_bottom(this : IInertiaProcessor*, bottom : Float32*) : HRESULT
+    @lpVtbl.value.get_elastic_margin_bottom.call(this, bottom)
+  end
+  def put_elastic_margin_bottom(this : IInertiaProcessor*, bottom : Float32) : HRESULT
+    @lpVtbl.value.put_elastic_margin_bottom.call(this, bottom)
+  end
+  def get_desired_displacement(this : IInertiaProcessor*, displacement : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_displacement.call(this, displacement)
+  end
+  def put_desired_displacement(this : IInertiaProcessor*, displacement : Float32) : HRESULT
+    @lpVtbl.value.put_desired_displacement.call(this, displacement)
+  end
+  def get_desired_rotation(this : IInertiaProcessor*, rotation : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_rotation.call(this, rotation)
+  end
+  def put_desired_rotation(this : IInertiaProcessor*, rotation : Float32) : HRESULT
+    @lpVtbl.value.put_desired_rotation.call(this, rotation)
+  end
+  def get_desired_expansion(this : IInertiaProcessor*, expansion : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_expansion.call(this, expansion)
+  end
+  def put_desired_expansion(this : IInertiaProcessor*, expansion : Float32) : HRESULT
+    @lpVtbl.value.put_desired_expansion.call(this, expansion)
+  end
+  def get_desired_deceleration(this : IInertiaProcessor*, deceleration : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_deceleration.call(this, deceleration)
+  end
+  def put_desired_deceleration(this : IInertiaProcessor*, deceleration : Float32) : HRESULT
+    @lpVtbl.value.put_desired_deceleration.call(this, deceleration)
+  end
+  def get_desired_angular_deceleration(this : IInertiaProcessor*, deceleration : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_angular_deceleration.call(this, deceleration)
+  end
+  def put_desired_angular_deceleration(this : IInertiaProcessor*, deceleration : Float32) : HRESULT
+    @lpVtbl.value.put_desired_angular_deceleration.call(this, deceleration)
+  end
+  def get_desired_expansion_deceleration(this : IInertiaProcessor*, deceleration : Float32*) : HRESULT
+    @lpVtbl.value.get_desired_expansion_deceleration.call(this, deceleration)
+  end
+  def put_desired_expansion_deceleration(this : IInertiaProcessor*, deceleration : Float32) : HRESULT
+    @lpVtbl.value.put_desired_expansion_deceleration.call(this, deceleration)
+  end
+  def get_initial_timestamp(this : IInertiaProcessor*, timestamp : UInt32*) : HRESULT
+    @lpVtbl.value.get_initial_timestamp.call(this, timestamp)
+  end
+  def put_initial_timestamp(this : IInertiaProcessor*, timestamp : UInt32) : HRESULT
+    @lpVtbl.value.put_initial_timestamp.call(this, timestamp)
+  end
+  def reset(this : IInertiaProcessor*) : HRESULT
+    @lpVtbl.value.reset.call(this)
+  end
+  def process(this : IInertiaProcessor*, completed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process.call(this, completed)
+  end
+  def process_time(this : IInertiaProcessor*, timestamp : UInt32, completed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.process_time.call(this, timestamp, completed)
+  end
+  def complete(this : IInertiaProcessor*) : HRESULT
+    @lpVtbl.value.complete.call(this)
+  end
+  def complete_time(this : IInertiaProcessor*, timestamp : UInt32) : HRESULT
+    @lpVtbl.value.complete_time.call(this, timestamp)
+  end
+end
+struct LibWin32::IManipulationProcessor
+  def query_interface(this : IManipulationProcessor*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IManipulationProcessor*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IManipulationProcessor*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_supported_manipulations(this : IManipulationProcessor*, manipulations : MANIPULATION_PROCESSOR_MANIPULATIONS*) : HRESULT
+    @lpVtbl.value.get_supported_manipulations.call(this, manipulations)
+  end
+  def put_supported_manipulations(this : IManipulationProcessor*, manipulations : MANIPULATION_PROCESSOR_MANIPULATIONS) : HRESULT
+    @lpVtbl.value.put_supported_manipulations.call(this, manipulations)
+  end
+  def get_pivot_point_x(this : IManipulationProcessor*, pivotpointx : Float32*) : HRESULT
+    @lpVtbl.value.get_pivot_point_x.call(this, pivotpointx)
+  end
+  def put_pivot_point_x(this : IManipulationProcessor*, pivotpointx : Float32) : HRESULT
+    @lpVtbl.value.put_pivot_point_x.call(this, pivotpointx)
+  end
+  def get_pivot_point_y(this : IManipulationProcessor*, pivotpointy : Float32*) : HRESULT
+    @lpVtbl.value.get_pivot_point_y.call(this, pivotpointy)
+  end
+  def put_pivot_point_y(this : IManipulationProcessor*, pivotpointy : Float32) : HRESULT
+    @lpVtbl.value.put_pivot_point_y.call(this, pivotpointy)
+  end
+  def get_pivot_radius(this : IManipulationProcessor*, pivotradius : Float32*) : HRESULT
+    @lpVtbl.value.get_pivot_radius.call(this, pivotradius)
+  end
+  def put_pivot_radius(this : IManipulationProcessor*, pivotradius : Float32) : HRESULT
+    @lpVtbl.value.put_pivot_radius.call(this, pivotradius)
+  end
+  def complete_manipulation(this : IManipulationProcessor*) : HRESULT
+    @lpVtbl.value.complete_manipulation.call(this)
+  end
+  def process_down(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.process_down.call(this, manipulatorid, x, y)
+  end
+  def process_move(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.process_move.call(this, manipulatorid, x, y)
+  end
+  def process_up(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.process_up.call(this, manipulatorid, x, y)
+  end
+  def process_down_with_time(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32, timestamp : UInt32) : HRESULT
+    @lpVtbl.value.process_down_with_time.call(this, manipulatorid, x, y, timestamp)
+  end
+  def process_move_with_time(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32, timestamp : UInt32) : HRESULT
+    @lpVtbl.value.process_move_with_time.call(this, manipulatorid, x, y, timestamp)
+  end
+  def process_up_with_time(this : IManipulationProcessor*, manipulatorid : UInt32, x : Float32, y : Float32, timestamp : UInt32) : HRESULT
+    @lpVtbl.value.process_up_with_time.call(this, manipulatorid, x, y, timestamp)
+  end
+  def get_velocity_x(this : IManipulationProcessor*, velocityx : Float32*) : HRESULT
+    @lpVtbl.value.get_velocity_x.call(this, velocityx)
+  end
+  def get_velocity_y(this : IManipulationProcessor*, velocityy : Float32*) : HRESULT
+    @lpVtbl.value.get_velocity_y.call(this, velocityy)
+  end
+  def get_expansion_velocity(this : IManipulationProcessor*, expansionvelocity : Float32*) : HRESULT
+    @lpVtbl.value.get_expansion_velocity.call(this, expansionvelocity)
+  end
+  def get_angular_velocity(this : IManipulationProcessor*, angularvelocity : Float32*) : HRESULT
+    @lpVtbl.value.get_angular_velocity.call(this, angularvelocity)
+  end
+  def get_minimum_scale_rotate_radius(this : IManipulationProcessor*, minradius : Float32*) : HRESULT
+    @lpVtbl.value.get_minimum_scale_rotate_radius.call(this, minradius)
+  end
+  def put_minimum_scale_rotate_radius(this : IManipulationProcessor*, minradius : Float32) : HRESULT
+    @lpVtbl.value.put_minimum_scale_rotate_radius.call(this, minradius)
+  end
+end

@@ -606,3 +606,344 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IITPropList
+  def query_interface(this : IITPropList*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IITPropList*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IITPropList*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_class_id(this : IITPropList*, pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.call(this, pclassid)
+  end
+  def is_dirty(this : IITPropList*) : HRESULT
+    @lpVtbl.value.is_dirty.call(this)
+  end
+  def load(this : IITPropList*, pstm : IStream) : HRESULT
+    @lpVtbl.value.load.call(this, pstm)
+  end
+  def save(this : IITPropList*, pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.call(this, pstm, fcleardirty)
+  end
+  def get_size_max(this : IITPropList*, pcbsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_size_max.call(this, pcbsize)
+  end
+  def init_new(this : IITPropList*) : HRESULT
+    @lpVtbl.value.init_new.call(this)
+  end
+  def set(this : IITPropList*, propid : UInt32, lpszwstring : LibC::LPWSTR, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set.call(this, propid, lpszwstring, dwoperation)
+  end
+  def set2(this : IITPropList*, propid : UInt32, lpvdata : Void*, cbdata : UInt32, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set2.call(this, propid, lpvdata, cbdata, dwoperation)
+  end
+  def set3(this : IITPropList*, propid : UInt32, dwdata : UInt32, dwoperation : UInt32) : HRESULT
+    @lpVtbl.value.set3.call(this, propid, dwdata, dwoperation)
+  end
+  def add(this : IITPropList*, prop : CProperty*) : HRESULT
+    @lpVtbl.value.add.call(this, prop)
+  end
+  def get(this : IITPropList*, propid : UInt32, property : CProperty*) : HRESULT
+    @lpVtbl.value.get.call(this, propid, property)
+  end
+  def clear(this : IITPropList*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def set_persist(this : IITPropList*, fpersist : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_persist.call(this, fpersist)
+  end
+  def set_persist2(this : IITPropList*, propid : UInt32, fpersist : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_persist2.call(this, propid, fpersist)
+  end
+  def get_first(this : IITPropList*, property : CProperty*) : HRESULT
+    @lpVtbl.value.get_first.call(this, property)
+  end
+  def get_next(this : IITPropList*, property : CProperty*) : HRESULT
+    @lpVtbl.value.get_next.call(this, property)
+  end
+  def get_prop_count(this : IITPropList*, cprop : Int32*) : HRESULT
+    @lpVtbl.value.get_prop_count.call(this, cprop)
+  end
+  def save_header(this : IITPropList*, lpvdata : Void*, dwhdrsize : UInt32) : HRESULT
+    @lpVtbl.value.save_header.call(this, lpvdata, dwhdrsize)
+  end
+  def save_data(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.save_data.call(this, lpvheader, dwhdrsize, lpvdata, dwbufsize)
+  end
+  def get_header_size(this : IITPropList*, dwhdrsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_header_size.call(this, dwhdrsize)
+  end
+  def get_data_size(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, dwdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_size.call(this, lpvheader, dwhdrsize, dwdatasize)
+  end
+  def save_data_to_stream(this : IITPropList*, lpvheader : Void*, dwhdrsize : UInt32, pstream : IStream) : HRESULT
+    @lpVtbl.value.save_data_to_stream.call(this, lpvheader, dwhdrsize, pstream)
+  end
+  def load_from_mem(this : IITPropList*, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.load_from_mem.call(this, lpvdata, dwbufsize)
+  end
+  def save_to_mem(this : IITPropList*, lpvdata : Void*, dwbufsize : UInt32) : HRESULT
+    @lpVtbl.value.save_to_mem.call(this, lpvdata, dwbufsize)
+  end
+end
+struct LibWin32::IITDatabase
+  def query_interface(this : IITDatabase*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IITDatabase*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IITDatabase*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IITDatabase*, lpszhost : LibC::LPWSTR, lpszmoniker : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.open.call(this, lpszhost, lpszmoniker, dwflags)
+  end
+  def close(this : IITDatabase*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def create_object(this : IITDatabase*, rclsid : Guid*, pdwobjinstance : UInt32*) : HRESULT
+    @lpVtbl.value.create_object.call(this, rclsid, pdwobjinstance)
+  end
+  def get_object(this : IITDatabase*, dwobjinstance : UInt32, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.get_object.call(this, dwobjinstance, riid, ppvobj)
+  end
+  def get_object_persistence(this : IITDatabase*, lpwszobject : LibC::LPWSTR, dwobjinstance : UInt32, ppvpersistence : Void**, fstream : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_object_persistence.call(this, lpwszobject, dwobjinstance, ppvpersistence, fstream)
+  end
+end
+struct LibWin32::IITWordWheel
+  def query_interface(this : IITWordWheel*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IITWordWheel*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IITWordWheel*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def open(this : IITWordWheel*, lpitdb : IITDatabase, lpszmoniker : LibC::LPWSTR, dwflags : WORD_WHEEL_OPEN_FLAGS) : HRESULT
+    @lpVtbl.value.open.call(this, lpitdb, lpszmoniker, dwflags)
+  end
+  def close(this : IITWordWheel*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+  def get_locale_info(this : IITWordWheel*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
+  end
+  def get_sorter_instance(this : IITWordWheel*, pdwobjinstance : UInt32*) : HRESULT
+    @lpVtbl.value.get_sorter_instance.call(this, pdwobjinstance)
+  end
+  def count(this : IITWordWheel*, pcentries : Int32*) : HRESULT
+    @lpVtbl.value.count.call(this, pcentries)
+  end
+  def lookup(this : IITWordWheel*, lpcvprefix : Void*, fexactmatch : LibC::BOOL, plentry : Int32*) : HRESULT
+    @lpVtbl.value.lookup.call(this, lpcvprefix, fexactmatch, plentry)
+  end
+  def lookup2(this : IITWordWheel*, lentry : Int32, lpitresult : IITResultSet, centries : Int32) : HRESULT
+    @lpVtbl.value.lookup2.call(this, lentry, lpitresult, centries)
+  end
+  def lookup3(this : IITWordWheel*, lentry : Int32, lpvkeybuf : Void*, cbkeybuf : UInt32) : HRESULT
+    @lpVtbl.value.lookup3.call(this, lentry, lpvkeybuf, cbkeybuf)
+  end
+  def set_group(this : IITWordWheel*, piitgroup : IITGroup*) : HRESULT
+    @lpVtbl.value.set_group.call(this, piitgroup)
+  end
+  def get_group(this : IITWordWheel*, ppiitgroup : IITGroup**) : HRESULT
+    @lpVtbl.value.get_group.call(this, ppiitgroup)
+  end
+  def get_data_count(this : IITWordWheel*, lentry : Int32, pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_count.call(this, lentry, pdwcount)
+  end
+  def get_data(this : IITWordWheel*, lentry : Int32, lpitresult : IITResultSet) : HRESULT
+    @lpVtbl.value.get_data.call(this, lentry, lpitresult)
+  end
+  def get_data_columns(this : IITWordWheel*, prs : IITResultSet) : HRESULT
+    @lpVtbl.value.get_data_columns.call(this, prs)
+  end
+end
+struct LibWin32::IStemSink
+  def query_interface(this : IStemSink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStemSink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStemSink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def put_alt_word(this : IStemSink*, pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_alt_word.call(this, pwcinbuf, cwc)
+  end
+  def put_word(this : IStemSink*, pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_word.call(this, pwcinbuf, cwc)
+  end
+end
+struct LibWin32::IStemmerConfig
+  def query_interface(this : IStemmerConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStemmerConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStemmerConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_locale_info(this : IStemmerConfig*, dwcodepageid : UInt32, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_locale_info.call(this, dwcodepageid, lcid)
+  end
+  def get_locale_info(this : IStemmerConfig*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
+  end
+  def set_control_info(this : IStemmerConfig*, grfstemflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_control_info.call(this, grfstemflags, dwreserved)
+  end
+  def get_control_info(this : IStemmerConfig*, pgrfstemflags : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_control_info.call(this, pgrfstemflags, pdwreserved)
+  end
+  def load_external_stemmer_data(this : IStemmerConfig*, pstream : IStream, dwextdatatype : UInt32) : HRESULT
+    @lpVtbl.value.load_external_stemmer_data.call(this, pstream, dwextdatatype)
+  end
+end
+struct LibWin32::IWordBreakerConfig
+  def query_interface(this : IWordBreakerConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWordBreakerConfig*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWordBreakerConfig*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_locale_info(this : IWordBreakerConfig*, dwcodepageid : UInt32, lcid : UInt32) : HRESULT
+    @lpVtbl.value.set_locale_info.call(this, dwcodepageid, lcid)
+  end
+  def get_locale_info(this : IWordBreakerConfig*, pdwcodepageid : UInt32*, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_info.call(this, pdwcodepageid, plcid)
+  end
+  def set_break_word_type(this : IWordBreakerConfig*, dwbreakwordtype : UInt32) : HRESULT
+    @lpVtbl.value.set_break_word_type.call(this, dwbreakwordtype)
+  end
+  def get_break_word_type(this : IWordBreakerConfig*, pdwbreakwordtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_break_word_type.call(this, pdwbreakwordtype)
+  end
+  def set_control_info(this : IWordBreakerConfig*, grfbreakflags : UInt32, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.set_control_info.call(this, grfbreakflags, dwreserved)
+  end
+  def get_control_info(this : IWordBreakerConfig*, pgrfbreakflags : UInt32*, pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_control_info.call(this, pgrfbreakflags, pdwreserved)
+  end
+  def load_external_breaker_data(this : IWordBreakerConfig*, pstream : IStream, dwextdatatype : UInt32) : HRESULT
+    @lpVtbl.value.load_external_breaker_data.call(this, pstream, dwextdatatype)
+  end
+  def set_word_stemmer(this : IWordBreakerConfig*, rclsid : Guid*, pstemmer : IStemmer) : HRESULT
+    @lpVtbl.value.set_word_stemmer.call(this, rclsid, pstemmer)
+  end
+  def get_word_stemmer(this : IWordBreakerConfig*, ppstemmer : IStemmer*) : HRESULT
+    @lpVtbl.value.get_word_stemmer.call(this, ppstemmer)
+  end
+end
+struct LibWin32::IITResultSet
+  def query_interface(this : IITResultSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IITResultSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IITResultSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_column_priority(this : IITResultSet*, lcolumnindex : Int32, columnpriority : PRIORITY) : HRESULT
+    @lpVtbl.value.set_column_priority.call(this, lcolumnindex, columnpriority)
+  end
+  def set_column_heap(this : IITResultSet*, lcolumnindex : Int32, lpvheap : Void*, pfncolheapfree : PFNCOLHEAPFREE) : HRESULT
+    @lpVtbl.value.set_column_heap.call(this, lcolumnindex, lpvheap, pfncolheapfree)
+  end
+  def set_key_prop(this : IITResultSet*, propid : UInt32) : HRESULT
+    @lpVtbl.value.set_key_prop.call(this, propid)
+  end
+  def add(this : IITResultSet*, propid : UInt32, dwdefaultdata : UInt32, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add.call(this, propid, dwdefaultdata, priority)
+  end
+  def add2(this : IITResultSet*, propid : UInt32, lpszwdefault : LibC::LPWSTR, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add2.call(this, propid, lpszwdefault, priority)
+  end
+  def add3(this : IITResultSet*, propid : UInt32, lpvdefaultdata : Void*, cbdata : UInt32, priority : PRIORITY) : HRESULT
+    @lpVtbl.value.add3.call(this, propid, lpvdefaultdata, cbdata, priority)
+  end
+  def add4(this : IITResultSet*, lpvhdr : Void*) : HRESULT
+    @lpVtbl.value.add4.call(this, lpvhdr)
+  end
+  def append(this : IITResultSet*, lpvhdr : Void*, lpvdata : Void*) : HRESULT
+    @lpVtbl.value.append.call(this, lpvhdr, lpvdata)
+  end
+  def set(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, lpvdata : Void*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.set.call(this, lrowindex, lcolumnindex, lpvdata, cbdata)
+  end
+  def set2(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, lpwstr : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set2.call(this, lrowindex, lcolumnindex, lpwstr)
+  end
+  def set3(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, dwdata : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.set3.call(this, lrowindex, lcolumnindex, dwdata)
+  end
+  def set4(this : IITResultSet*, lrowindex : Int32, lpvhdr : Void*, lpvdata : Void*) : HRESULT
+    @lpVtbl.value.set4.call(this, lrowindex, lpvhdr, lpvdata)
+  end
+  def copy(this : IITResultSet*, prscopy : IITResultSet) : HRESULT
+    @lpVtbl.value.copy.call(this, prscopy)
+  end
+  def append_rows(this : IITResultSet*, pressrc : IITResultSet, lrowsrcfirst : Int32, csrcrows : Int32, lrowfirstdest : Int32*) : HRESULT
+    @lpVtbl.value.append_rows.call(this, pressrc, lrowsrcfirst, csrcrows, lrowfirstdest)
+  end
+  def get(this : IITResultSet*, lrowindex : Int32, lcolumnindex : Int32, prop : CProperty*) : HRESULT
+    @lpVtbl.value.get.call(this, lrowindex, lcolumnindex, prop)
+  end
+  def get_key_prop(this : IITResultSet*, keypropid : UInt32*) : HRESULT
+    @lpVtbl.value.get_key_prop.call(this, keypropid)
+  end
+  def get_column_priority(this : IITResultSet*, lcolumnindex : Int32, columnpriority : PRIORITY*) : HRESULT
+    @lpVtbl.value.get_column_priority.call(this, lcolumnindex, columnpriority)
+  end
+  def get_row_count(this : IITResultSet*, lnumberofrows : Int32*) : HRESULT
+    @lpVtbl.value.get_row_count.call(this, lnumberofrows)
+  end
+  def get_column_count(this : IITResultSet*, lnumberofcolumns : Int32*) : HRESULT
+    @lpVtbl.value.get_column_count.call(this, lnumberofcolumns)
+  end
+  def get_column(this : IITResultSet*, lcolumnindex : Int32, propid : UInt32*, dwtype : UInt32*, lpvdefaultvalue : Void**, cbsize : UInt32*, columnpriority : PRIORITY*) : HRESULT
+    @lpVtbl.value.get_column.call(this, lcolumnindex, propid, dwtype, lpvdefaultvalue, cbsize, columnpriority)
+  end
+  def get_column2(this : IITResultSet*, lcolumnindex : Int32, propid : UInt32*) : HRESULT
+    @lpVtbl.value.get_column2.call(this, lcolumnindex, propid)
+  end
+  def get_column_from_prop_id(this : IITResultSet*, propid : UInt32, lcolumnindex : Int32*) : HRESULT
+    @lpVtbl.value.get_column_from_prop_id.call(this, propid, lcolumnindex)
+  end
+  def clear(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def clear_rows(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.clear_rows.call(this)
+  end
+  def free(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.free.call(this)
+  end
+  def is_completed(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.is_completed.call(this)
+  end
+  def cancel(this : IITResultSet*) : HRESULT
+    @lpVtbl.value.cancel.call(this)
+  end
+  def pause(this : IITResultSet*, fpause : LibC::BOOL) : HRESULT
+    @lpVtbl.value.pause.call(this, fpause)
+  end
+  def get_row_status(this : IITResultSet*, lrowfirst : Int32, crows : Int32, lprowstatus : ROWSTATUS*) : HRESULT
+    @lpVtbl.value.get_row_status.call(this, lrowfirst, crows, lprowstatus)
+  end
+  def get_column_status(this : IITResultSet*, lpcolstatus : COLUMNSTATUS*) : HRESULT
+    @lpVtbl.value.get_column_status.call(this, lpcolstatus)
+  end
+end

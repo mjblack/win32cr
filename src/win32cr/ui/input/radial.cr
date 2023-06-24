@@ -59,3 +59,72 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IRadialControllerInterop
+  def query_interface(this : IRadialControllerInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRadialControllerInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRadialControllerInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IRadialControllerInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IRadialControllerInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IRadialControllerInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_for_window(this : IRadialControllerInterop*, hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.call(this, hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IRadialControllerConfigurationInterop
+  def query_interface(this : IRadialControllerConfigurationInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRadialControllerConfigurationInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRadialControllerConfigurationInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IRadialControllerConfigurationInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IRadialControllerConfigurationInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IRadialControllerConfigurationInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def get_for_window(this : IRadialControllerConfigurationInterop*, hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.call(this, hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IRadialControllerIndependentInputSourceInterop
+  def query_interface(this : IRadialControllerIndependentInputSourceInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRadialControllerIndependentInputSourceInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRadialControllerIndependentInputSourceInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_iids(this : IRadialControllerIndependentInputSourceInterop*, iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.call(this, iidcount, iids)
+  end
+  def get_runtime_class_name(this : IRadialControllerIndependentInputSourceInterop*, classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.call(this, classname)
+  end
+  def get_trust_level(this : IRadialControllerIndependentInputSourceInterop*, trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.call(this, trustlevel)
+  end
+  def create_for_window(this : IRadialControllerIndependentInputSourceInterop*, hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.call(this, hwnd, riid, ppv)
+  end
+end

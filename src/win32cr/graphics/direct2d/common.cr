@@ -295,3 +295,35 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ID2D1SimplifiedGeometrySink
+  def query_interface(this : ID2D1SimplifiedGeometrySink*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ID2D1SimplifiedGeometrySink*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ID2D1SimplifiedGeometrySink*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_fill_mode(this : ID2D1SimplifiedGeometrySink*, fillmode : D2D1_FILL_MODE) : Void
+    @lpVtbl.value.set_fill_mode.call(this, fillmode)
+  end
+  def set_segment_flags(this : ID2D1SimplifiedGeometrySink*, vertexflags : D2D1_PATH_SEGMENT) : Void
+    @lpVtbl.value.set_segment_flags.call(this, vertexflags)
+  end
+  def begin_figure(this : ID2D1SimplifiedGeometrySink*, startpoint : D2D_POINT_2F, figurebegin : D2D1_FIGURE_BEGIN) : Void
+    @lpVtbl.value.begin_figure.call(this, startpoint, figurebegin)
+  end
+  def add_lines(this : ID2D1SimplifiedGeometrySink*, points : D2D_POINT_2F*, pointscount : UInt32) : Void
+    @lpVtbl.value.add_lines.call(this, points, pointscount)
+  end
+  def add_beziers(this : ID2D1SimplifiedGeometrySink*, beziers : D2D1_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_beziers.call(this, beziers, bezierscount)
+  end
+  def end_figure(this : ID2D1SimplifiedGeometrySink*, figureend : D2D1_FIGURE_END) : Void
+    @lpVtbl.value.end_figure.call(this, figureend)
+  end
+  def close(this : ID2D1SimplifiedGeometrySink*) : HRESULT
+    @lpVtbl.value.close.call(this)
+  end
+end

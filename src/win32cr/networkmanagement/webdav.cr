@@ -83,5 +83,5 @@ lib LibWin32
   fun DavRegisterAuthCallback(callback : PFNDAVAUTHCALLBACK, version : UInt32) : UInt32
 
   # Params # hcallback : UInt32 [In]
-  fun DavUnregisterAuthCallback(hcallback : UInt32)
+  fun DavUnregisterAuthCallback(hcallback : UInt32) : Void
 end

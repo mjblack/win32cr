@@ -283,3 +283,352 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ISurfaceImageSourceNative
+  def query_interface(this : ISurfaceImageSourceNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISurfaceImageSourceNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISurfaceImageSourceNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_device(this : ISurfaceImageSourceNative*, device : IDXGIDevice) : HRESULT
+    @lpVtbl.value.set_device.call(this, device)
+  end
+  def begin_draw(this : ISurfaceImageSourceNative*, updaterect : RECT, surface : IDXGISurface*, offset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, surface, offset)
+  end
+  def end_draw(this : ISurfaceImageSourceNative*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+end
+struct LibWin32::IVirtualSurfaceUpdatesCallbackNative
+  def query_interface(this : IVirtualSurfaceUpdatesCallbackNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVirtualSurfaceUpdatesCallbackNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVirtualSurfaceUpdatesCallbackNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def updates_needed(this : IVirtualSurfaceUpdatesCallbackNative*) : HRESULT
+    @lpVtbl.value.updates_needed.call(this)
+  end
+end
+struct LibWin32::IVirtualSurfaceImageSourceNative
+  def query_interface(this : IVirtualSurfaceImageSourceNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IVirtualSurfaceImageSourceNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IVirtualSurfaceImageSourceNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_device(this : IVirtualSurfaceImageSourceNative*, device : IDXGIDevice) : HRESULT
+    @lpVtbl.value.set_device.call(this, device)
+  end
+  def begin_draw(this : IVirtualSurfaceImageSourceNative*, updaterect : RECT, surface : IDXGISurface*, offset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, surface, offset)
+  end
+  def end_draw(this : IVirtualSurfaceImageSourceNative*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def invalidate(this : IVirtualSurfaceImageSourceNative*, updaterect : RECT) : HRESULT
+    @lpVtbl.value.invalidate.call(this, updaterect)
+  end
+  def get_update_rect_count(this : IVirtualSurfaceImageSourceNative*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_update_rect_count.call(this, count)
+  end
+  def get_update_rects(this : IVirtualSurfaceImageSourceNative*, updates : RECT*, count : UInt32) : HRESULT
+    @lpVtbl.value.get_update_rects.call(this, updates, count)
+  end
+  def get_visible_bounds(this : IVirtualSurfaceImageSourceNative*, bounds : RECT*) : HRESULT
+    @lpVtbl.value.get_visible_bounds.call(this, bounds)
+  end
+  def register_for_updates_needed(this : IVirtualSurfaceImageSourceNative*, callback : IVirtualSurfaceUpdatesCallbackNative) : HRESULT
+    @lpVtbl.value.register_for_updates_needed.call(this, callback)
+  end
+  def resize(this : IVirtualSurfaceImageSourceNative*, newwidth : Int32, newheight : Int32) : HRESULT
+    @lpVtbl.value.resize.call(this, newwidth, newheight)
+  end
+end
+struct LibWin32::ISwapChainBackgroundPanelNative
+  def query_interface(this : ISwapChainBackgroundPanelNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISwapChainBackgroundPanelNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISwapChainBackgroundPanelNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_swap_chain(this : ISwapChainBackgroundPanelNative*, swapchain : IDXGISwapChain) : HRESULT
+    @lpVtbl.value.set_swap_chain.call(this, swapchain)
+  end
+end
+struct LibWin32::ISurfaceImageSourceManagerNative
+  def query_interface(this : ISurfaceImageSourceManagerNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISurfaceImageSourceManagerNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISurfaceImageSourceManagerNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def flush_all_surfaces_with_device(this : ISurfaceImageSourceManagerNative*, device : IUnknown) : HRESULT
+    @lpVtbl.value.flush_all_surfaces_with_device.call(this, device)
+  end
+end
+struct LibWin32::ISurfaceImageSourceNativeWithD2D
+  def query_interface(this : ISurfaceImageSourceNativeWithD2D*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISurfaceImageSourceNativeWithD2D*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISurfaceImageSourceNativeWithD2D*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_device(this : ISurfaceImageSourceNativeWithD2D*, device : IUnknown) : HRESULT
+    @lpVtbl.value.set_device.call(this, device)
+  end
+  def begin_draw(this : ISurfaceImageSourceNativeWithD2D*, updaterect : RECT*, iid : Guid*, updateobject : Void**, offset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.call(this, updaterect, iid, updateobject, offset)
+  end
+  def end_draw(this : ISurfaceImageSourceNativeWithD2D*) : HRESULT
+    @lpVtbl.value.end_draw.call(this)
+  end
+  def suspend_draw(this : ISurfaceImageSourceNativeWithD2D*) : HRESULT
+    @lpVtbl.value.suspend_draw.call(this)
+  end
+  def resume_draw(this : ISurfaceImageSourceNativeWithD2D*) : HRESULT
+    @lpVtbl.value.resume_draw.call(this)
+  end
+end
+struct LibWin32::ISwapChainPanelNative
+  def query_interface(this : ISwapChainPanelNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISwapChainPanelNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISwapChainPanelNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_swap_chain(this : ISwapChainPanelNative*, swapchain : IDXGISwapChain) : HRESULT
+    @lpVtbl.value.set_swap_chain.call(this, swapchain)
+  end
+end
+struct LibWin32::ISwapChainPanelNative2
+  def query_interface(this : ISwapChainPanelNative2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISwapChainPanelNative2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISwapChainPanelNative2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_swap_chain(this : ISwapChainPanelNative2*, swapchain : IDXGISwapChain) : HRESULT
+    @lpVtbl.value.set_swap_chain.call(this, swapchain)
+  end
+  def set_swap_chain_handle(this : ISwapChainPanelNative2*, swapchainhandle : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_swap_chain_handle.call(this, swapchainhandle)
+  end
+end
+struct LibWin32::IDesktopWindowXamlSourceNative
+  def query_interface(this : IDesktopWindowXamlSourceNative*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDesktopWindowXamlSourceNative*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDesktopWindowXamlSourceNative*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_to_window(this : IDesktopWindowXamlSourceNative*, parentwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.attach_to_window.call(this, parentwnd)
+  end
+  def get_window_handle(this : IDesktopWindowXamlSourceNative*, hwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window_handle.call(this, hwnd)
+  end
+end
+struct LibWin32::IDesktopWindowXamlSourceNative2
+  def query_interface(this : IDesktopWindowXamlSourceNative2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDesktopWindowXamlSourceNative2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDesktopWindowXamlSourceNative2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def attach_to_window(this : IDesktopWindowXamlSourceNative2*, parentwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.attach_to_window.call(this, parentwnd)
+  end
+  def get_window_handle(this : IDesktopWindowXamlSourceNative2*, hwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window_handle.call(this, hwnd)
+  end
+  def pre_translate_message(this : IDesktopWindowXamlSourceNative2*, message : MSG*, result : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.pre_translate_message.call(this, message, result)
+  end
+end
+struct LibWin32::IReferenceTrackerTarget
+  def query_interface(this : IReferenceTrackerTarget*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceTrackerTarget*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceTrackerTarget*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add_ref_from_reference_tracker(this : IReferenceTrackerTarget*) : UInt32
+    @lpVtbl.value.add_ref_from_reference_tracker.call(this)
+  end
+  def release_from_reference_tracker(this : IReferenceTrackerTarget*) : UInt32
+    @lpVtbl.value.release_from_reference_tracker.call(this)
+  end
+  def peg(this : IReferenceTrackerTarget*) : HRESULT
+    @lpVtbl.value.peg.call(this)
+  end
+  def unpeg(this : IReferenceTrackerTarget*) : HRESULT
+    @lpVtbl.value.unpeg.call(this)
+  end
+end
+struct LibWin32::IReferenceTracker
+  def query_interface(this : IReferenceTracker*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceTracker*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceTracker*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def connect_from_tracker_source(this : IReferenceTracker*) : HRESULT
+    @lpVtbl.value.connect_from_tracker_source.call(this)
+  end
+  def disconnect_from_tracker_source(this : IReferenceTracker*) : HRESULT
+    @lpVtbl.value.disconnect_from_tracker_source.call(this)
+  end
+  def find_tracker_targets(this : IReferenceTracker*, callback : IFindReferenceTargetsCallback) : HRESULT
+    @lpVtbl.value.find_tracker_targets.call(this, callback)
+  end
+  def get_reference_tracker_manager(this : IReferenceTracker*, value : IReferenceTrackerManager*) : HRESULT
+    @lpVtbl.value.get_reference_tracker_manager.call(this, value)
+  end
+  def add_ref_from_tracker_source(this : IReferenceTracker*) : HRESULT
+    @lpVtbl.value.add_ref_from_tracker_source.call(this)
+  end
+  def release_from_tracker_source(this : IReferenceTracker*) : HRESULT
+    @lpVtbl.value.release_from_tracker_source.call(this)
+  end
+  def peg_from_tracker_source(this : IReferenceTracker*) : HRESULT
+    @lpVtbl.value.peg_from_tracker_source.call(this)
+  end
+end
+struct LibWin32::IReferenceTrackerManager
+  def query_interface(this : IReferenceTrackerManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceTrackerManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceTrackerManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def reference_tracking_started(this : IReferenceTrackerManager*) : HRESULT
+    @lpVtbl.value.reference_tracking_started.call(this)
+  end
+  def find_tracker_targets_completed(this : IReferenceTrackerManager*, findfailed : UInt8) : HRESULT
+    @lpVtbl.value.find_tracker_targets_completed.call(this, findfailed)
+  end
+  def reference_tracking_completed(this : IReferenceTrackerManager*) : HRESULT
+    @lpVtbl.value.reference_tracking_completed.call(this)
+  end
+  def set_reference_tracker_host(this : IReferenceTrackerManager*, value : IReferenceTrackerHost) : HRESULT
+    @lpVtbl.value.set_reference_tracker_host.call(this, value)
+  end
+end
+struct LibWin32::IFindReferenceTargetsCallback
+  def query_interface(this : IFindReferenceTargetsCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IFindReferenceTargetsCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IFindReferenceTargetsCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def found_tracker_target(this : IFindReferenceTargetsCallback*, target : IReferenceTrackerTarget) : HRESULT
+    @lpVtbl.value.found_tracker_target.call(this, target)
+  end
+end
+struct LibWin32::IReferenceTrackerHost
+  def query_interface(this : IReferenceTrackerHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceTrackerHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceTrackerHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def disconnect_unused_reference_sources(this : IReferenceTrackerHost*, options : XAML_REFERENCETRACKER_DISCONNECT) : HRESULT
+    @lpVtbl.value.disconnect_unused_reference_sources.call(this, options)
+  end
+  def release_disconnected_reference_sources(this : IReferenceTrackerHost*) : HRESULT
+    @lpVtbl.value.release_disconnected_reference_sources.call(this)
+  end
+  def notify_end_of_reference_tracking_on_thread(this : IReferenceTrackerHost*) : HRESULT
+    @lpVtbl.value.notify_end_of_reference_tracking_on_thread.call(this)
+  end
+  def get_tracker_target(this : IReferenceTrackerHost*, unknown : IUnknown, newreference : IReferenceTrackerTarget*) : HRESULT
+    @lpVtbl.value.get_tracker_target.call(this, unknown, newreference)
+  end
+  def add_memory_pressure(this : IReferenceTrackerHost*, bytesallocated : UInt64) : HRESULT
+    @lpVtbl.value.add_memory_pressure.call(this, bytesallocated)
+  end
+  def remove_memory_pressure(this : IReferenceTrackerHost*, bytesallocated : UInt64) : HRESULT
+    @lpVtbl.value.remove_memory_pressure.call(this, bytesallocated)
+  end
+end
+struct LibWin32::IReferenceTrackerExtension
+  def query_interface(this : IReferenceTrackerExtension*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IReferenceTrackerExtension*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IReferenceTrackerExtension*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+end
+struct LibWin32::ITrackerOwner
+  def query_interface(this : ITrackerOwner*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITrackerOwner*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITrackerOwner*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_tracker_handle(this : ITrackerOwner*, returnvalue : TrackerHandle__**) : HRESULT
+    @lpVtbl.value.create_tracker_handle.call(this, returnvalue)
+  end
+  def delete_tracker_handle(this : ITrackerOwner*, handle : TrackerHandle__*) : HRESULT
+    @lpVtbl.value.delete_tracker_handle.call(this, handle)
+  end
+  def set_tracker_value(this : ITrackerOwner*, handle : TrackerHandle__*, value : IUnknown) : HRESULT
+    @lpVtbl.value.set_tracker_value.call(this, handle, value)
+  end
+  def try_get_safe_tracker_value(this : ITrackerOwner*, handle : TrackerHandle__*, returnvalue : IUnknown*) : UInt8
+    @lpVtbl.value.try_get_safe_tracker_value.call(this, handle, returnvalue)
+  end
+end

@@ -84,3 +84,66 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IRendezvousSession
+  def query_interface(this : IRendezvousSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRendezvousSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRendezvousSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_state(this : IRendezvousSession*, psessionstate : RENDEZVOUS_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.call(this, psessionstate)
+  end
+  def get_remote_user(this : IRendezvousSession*, bstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_user.call(this, bstrusername)
+  end
+  def get_flags(this : IRendezvousSession*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def send_context_data(this : IRendezvousSession*, bstrdata : UInt8*) : HRESULT
+    @lpVtbl.value.send_context_data.call(this, bstrdata)
+  end
+  def terminate(this : IRendezvousSession*, hr : HRESULT, bstrappdata : UInt8*) : HRESULT
+    @lpVtbl.value.terminate.call(this, hr, bstrappdata)
+  end
+end
+struct LibWin32::DRendezvousSessionEvents
+  def query_interface(this : DRendezvousSessionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : DRendezvousSessionEvents*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : DRendezvousSessionEvents*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : DRendezvousSessionEvents*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : DRendezvousSessionEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : DRendezvousSessionEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : DRendezvousSessionEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IRendezvousApplication
+  def query_interface(this : IRendezvousApplication*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRendezvousApplication*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRendezvousApplication*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_rendezvous_session(this : IRendezvousApplication*, prendezvoussession : IUnknown) : HRESULT
+    @lpVtbl.value.set_rendezvous_session.call(this, prendezvoussession)
+  end
+end

@@ -329,3 +329,403 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IPhotoAcquireItem
+  def query_interface(this : IPhotoAcquireItem*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireItem*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireItem*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_item_name(this : IPhotoAcquireItem*, pbstritemname : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.call(this, pbstritemname)
+  end
+  def get_thumbnail(this : IPhotoAcquireItem*, sizethumbnail : SIZE, phbmpthumbnail : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_thumbnail.call(this, sizethumbnail, phbmpthumbnail)
+  end
+  def get_property(this : IPhotoAcquireItem*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.call(this, key, pv)
+  end
+  def set_property(this : IPhotoAcquireItem*, key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.call(this, key, pv)
+  end
+  def get_stream(this : IPhotoAcquireItem*, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.call(this, ppstream)
+  end
+  def can_delete(this : IPhotoAcquireItem*, pfcandelete : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_delete.call(this, pfcandelete)
+  end
+  def delete(this : IPhotoAcquireItem*) : HRESULT
+    @lpVtbl.value.delete.call(this)
+  end
+  def get_sub_item_count(this : IPhotoAcquireItem*, pncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_sub_item_count.call(this, pncount)
+  end
+  def get_sub_item_at(this : IPhotoAcquireItem*, nitemindex : UInt32, ppphotoacquireitem : IPhotoAcquireItem*) : HRESULT
+    @lpVtbl.value.get_sub_item_at.call(this, nitemindex, ppphotoacquireitem)
+  end
+end
+struct LibWin32::IUserInputString
+  def query_interface(this : IUserInputString*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUserInputString*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUserInputString*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_submit_button_text(this : IUserInputString*, pbstrsubmitbuttontext : UInt8**) : HRESULT
+    @lpVtbl.value.get_submit_button_text.call(this, pbstrsubmitbuttontext)
+  end
+  def get_prompt(this : IUserInputString*, pbstrprompttitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_prompt.call(this, pbstrprompttitle)
+  end
+  def get_string_id(this : IUserInputString*, pbstrstringid : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_id.call(this, pbstrstringid)
+  end
+  def get_string_type(this : IUserInputString*, pnstringtype : USER_INPUT_STRING_TYPE*) : HRESULT
+    @lpVtbl.value.get_string_type.call(this, pnstringtype)
+  end
+  def get_tooltip_text(this : IUserInputString*, pbstrtooltiptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_text.call(this, pbstrtooltiptext)
+  end
+  def get_max_length(this : IUserInputString*, pcchmaxlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.call(this, pcchmaxlength)
+  end
+  def get_default(this : IUserInputString*, pbstrdefault : UInt8**) : HRESULT
+    @lpVtbl.value.get_default.call(this, pbstrdefault)
+  end
+  def get_mru_count(this : IUserInputString*, pnmrucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_mru_count.call(this, pnmrucount)
+  end
+  def get_mru_entry_at(this : IUserInputString*, nindex : UInt32, pbstrmruentry : UInt8**) : HRESULT
+    @lpVtbl.value.get_mru_entry_at.call(this, nindex, pbstrmruentry)
+  end
+  def get_image(this : IUserInputString*, nsize : UInt32, phbitmap : HBITMAP*, phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_image.call(this, nsize, phbitmap, phicon)
+  end
+end
+struct LibWin32::IPhotoAcquireProgressCB
+  def query_interface(this : IPhotoAcquireProgressCB*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireProgressCB*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireProgressCB*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def cancelled(this : IPhotoAcquireProgressCB*, pfcancelled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.cancelled.call(this, pfcancelled)
+  end
+  def start_enumeration(this : IPhotoAcquireProgressCB*, pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_enumeration.call(this, pphotoacquiresource)
+  end
+  def found_item(this : IPhotoAcquireProgressCB*, pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.found_item.call(this, pphotoacquireitem)
+  end
+  def end_enumeration(this : IPhotoAcquireProgressCB*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_enumeration.call(this, hr)
+  end
+  def start_transfer(this : IPhotoAcquireProgressCB*, pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_transfer.call(this, pphotoacquiresource)
+  end
+  def start_item_transfer(this : IPhotoAcquireProgressCB*, nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.start_item_transfer.call(this, nitemindex, pphotoacquireitem)
+  end
+  def directory_created(this : IPhotoAcquireProgressCB*, pszdirectory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.directory_created.call(this, pszdirectory)
+  end
+  def update_transfer_percent(this : IPhotoAcquireProgressCB*, foverall : LibC::BOOL, npercent : UInt32) : HRESULT
+    @lpVtbl.value.update_transfer_percent.call(this, foverall, npercent)
+  end
+  def end_item_transfer(this : IPhotoAcquireProgressCB*, nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_item_transfer.call(this, nitemindex, pphotoacquireitem, hr)
+  end
+  def end_transfer(this : IPhotoAcquireProgressCB*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_transfer.call(this, hr)
+  end
+  def start_delete(this : IPhotoAcquireProgressCB*, pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_delete.call(this, pphotoacquiresource)
+  end
+  def start_item_delete(this : IPhotoAcquireProgressCB*, nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.start_item_delete.call(this, nitemindex, pphotoacquireitem)
+  end
+  def update_delete_percent(this : IPhotoAcquireProgressCB*, npercent : UInt32) : HRESULT
+    @lpVtbl.value.update_delete_percent.call(this, npercent)
+  end
+  def end_item_delete(this : IPhotoAcquireProgressCB*, nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_item_delete.call(this, nitemindex, pphotoacquireitem, hr)
+  end
+  def end_delete(this : IPhotoAcquireProgressCB*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_delete.call(this, hr)
+  end
+  def end_session(this : IPhotoAcquireProgressCB*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_session.call(this, hr)
+  end
+  def get_delete_after_acquire(this : IPhotoAcquireProgressCB*, pfdeleteafteracquire : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_delete_after_acquire.call(this, pfdeleteafteracquire)
+  end
+  def error_advise(this : IPhotoAcquireProgressCB*, hr : HRESULT, pszerrormessage : LibC::LPWSTR, nmessagetype : ERROR_ADVISE_MESSAGE_TYPE, pnerroradviseresult : ERROR_ADVISE_RESULT*) : HRESULT
+    @lpVtbl.value.error_advise.call(this, hr, pszerrormessage, nmessagetype, pnerroradviseresult)
+  end
+  def get_user_input(this : IPhotoAcquireProgressCB*, riidtype : Guid*, punknown : IUnknown, ppropvarresult : PROPVARIANT*, ppropvardefault : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_user_input.call(this, riidtype, punknown, ppropvarresult, ppropvardefault)
+  end
+end
+struct LibWin32::IPhotoProgressActionCB
+  def query_interface(this : IPhotoProgressActionCB*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoProgressActionCB*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoProgressActionCB*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def do_action(this : IPhotoProgressActionCB*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.do_action.call(this, hwndparent)
+  end
+end
+struct LibWin32::IPhotoProgressDialog
+  def query_interface(this : IPhotoProgressDialog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoProgressDialog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoProgressDialog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IPhotoProgressDialog*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.create.call(this, hwndparent)
+  end
+  def get_window(this : IPhotoProgressDialog*, phwndprogressdialog : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwndprogressdialog)
+  end
+  def destroy(this : IPhotoProgressDialog*) : HRESULT
+    @lpVtbl.value.destroy.call(this)
+  end
+  def set_title(this : IPhotoProgressDialog*, psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.call(this, psztitle)
+  end
+  def show_checkbox(this : IPhotoProgressDialog*, ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_checkbox.call(this, ncheckboxid, fshow)
+  end
+  def set_checkbox_text(this : IPhotoProgressDialog*, ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pszcheckboxtext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_checkbox_text.call(this, ncheckboxid, pszcheckboxtext)
+  end
+  def set_checkbox_check(this : IPhotoProgressDialog*, ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, fchecked : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_checkbox_check.call(this, ncheckboxid, fchecked)
+  end
+  def set_checkbox_tooltip(this : IPhotoProgressDialog*, ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pszcheckboxtooltiptext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_checkbox_tooltip.call(this, ncheckboxid, pszcheckboxtooltiptext)
+  end
+  def is_checkbox_checked(this : IPhotoProgressDialog*, ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pfchecked : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_checkbox_checked.call(this, ncheckboxid, pfchecked)
+  end
+  def set_caption(this : IPhotoProgressDialog*, psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_caption.call(this, psztitle)
+  end
+  def set_image(this : IPhotoProgressDialog*, nimagetype : PROGRESS_DIALOG_IMAGE_TYPE, hicon : LibC::HANDLE, hbitmap : HBITMAP) : HRESULT
+    @lpVtbl.value.set_image.call(this, nimagetype, hicon, hbitmap)
+  end
+  def set_percent_complete(this : IPhotoProgressDialog*, npercent : Int32) : HRESULT
+    @lpVtbl.value.set_percent_complete.call(this, npercent)
+  end
+  def set_progress_text(this : IPhotoProgressDialog*, pszprogresstext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_progress_text.call(this, pszprogresstext)
+  end
+  def set_action_link_callback(this : IPhotoProgressDialog*, pphotoprogressactioncb : IPhotoProgressActionCB) : HRESULT
+    @lpVtbl.value.set_action_link_callback.call(this, pphotoprogressactioncb)
+  end
+  def set_action_link_text(this : IPhotoProgressDialog*, pszcaption : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_action_link_text.call(this, pszcaption)
+  end
+  def show_action_link(this : IPhotoProgressDialog*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_action_link.call(this, fshow)
+  end
+  def is_cancelled(this : IPhotoProgressDialog*, pfcancelled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_cancelled.call(this, pfcancelled)
+  end
+  def get_user_input(this : IPhotoProgressDialog*, riidtype : Guid*, punknown : IUnknown, ppropvarresult : PROPVARIANT*, ppropvardefault : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_user_input.call(this, riidtype, punknown, ppropvarresult, ppropvardefault)
+  end
+end
+struct LibWin32::IPhotoAcquireSource
+  def query_interface(this : IPhotoAcquireSource*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireSource*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireSource*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_friendly_name(this : IPhotoAcquireSource*, pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbstrfriendlyname)
+  end
+  def get_device_icons(this : IPhotoAcquireSource*, nsize : UInt32, phlargeicon : HANDLE*, phsmallicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_device_icons.call(this, nsize, phlargeicon, phsmallicon)
+  end
+  def initialize_item_list(this : IPhotoAcquireSource*, fforceenumeration : LibC::BOOL, pphotoacquireprogresscb : IPhotoAcquireProgressCB, pnitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.initialize_item_list.call(this, fforceenumeration, pphotoacquireprogresscb, pnitemcount)
+  end
+  def get_item_count(this : IPhotoAcquireSource*, pnitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_count.call(this, pnitemcount)
+  end
+  def get_item_at(this : IPhotoAcquireSource*, nindex : UInt32, ppphotoacquireitem : IPhotoAcquireItem*) : HRESULT
+    @lpVtbl.value.get_item_at.call(this, nindex, ppphotoacquireitem)
+  end
+  def get_photo_acquire_settings(this : IPhotoAcquireSource*, ppphotoacquiresettings : IPhotoAcquireSettings*) : HRESULT
+    @lpVtbl.value.get_photo_acquire_settings.call(this, ppphotoacquiresettings)
+  end
+  def get_device_id(this : IPhotoAcquireSource*, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.call(this, pbstrdeviceid)
+  end
+  def bind_to_object(this : IPhotoAcquireSource*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.bind_to_object.call(this, riid, ppv)
+  end
+end
+struct LibWin32::IPhotoAcquire
+  def query_interface(this : IPhotoAcquire*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquire*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquire*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_photo_source(this : IPhotoAcquire*, pszdevice : LibC::LPWSTR, ppphotoacquiresource : IPhotoAcquireSource*) : HRESULT
+    @lpVtbl.value.create_photo_source.call(this, pszdevice, ppphotoacquiresource)
+  end
+  def acquire(this : IPhotoAcquire*, pphotoacquiresource : IPhotoAcquireSource, fshowprogress : LibC::BOOL, hwndparent : LibC::HANDLE, pszapplicationname : LibC::LPWSTR, pphotoacquireprogresscb : IPhotoAcquireProgressCB) : HRESULT
+    @lpVtbl.value.acquire.call(this, pphotoacquiresource, fshowprogress, hwndparent, pszapplicationname, pphotoacquireprogresscb)
+  end
+  def enum_results(this : IPhotoAcquire*, ppenumfilepaths : IEnumString*) : HRESULT
+    @lpVtbl.value.enum_results.call(this, ppenumfilepaths)
+  end
+end
+struct LibWin32::IPhotoAcquireSettings
+  def query_interface(this : IPhotoAcquireSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize_from_registry(this : IPhotoAcquireSettings*, pszregistrykey : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize_from_registry.call(this, pszregistrykey)
+  end
+  def set_flags(this : IPhotoAcquireSettings*, dwphotoacquireflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, dwphotoacquireflags)
+  end
+  def set_output_filename_template(this : IPhotoAcquireSettings*, psztemplate : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_filename_template.call(this, psztemplate)
+  end
+  def set_sequence_padding_width(this : IPhotoAcquireSettings*, dwwidth : UInt32) : HRESULT
+    @lpVtbl.value.set_sequence_padding_width.call(this, dwwidth)
+  end
+  def set_sequence_zero_padding(this : IPhotoAcquireSettings*, fzeropad : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_sequence_zero_padding.call(this, fzeropad)
+  end
+  def set_group_tag(this : IPhotoAcquireSettings*, pszgrouptag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_group_tag.call(this, pszgrouptag)
+  end
+  def set_acquisition_time(this : IPhotoAcquireSettings*, pftacquisitiontime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_acquisition_time.call(this, pftacquisitiontime)
+  end
+  def get_flags(this : IPhotoAcquireSettings*, pdwphotoacquireflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pdwphotoacquireflags)
+  end
+  def get_output_filename_template(this : IPhotoAcquireSettings*, pbstrtemplate : UInt8**) : HRESULT
+    @lpVtbl.value.get_output_filename_template.call(this, pbstrtemplate)
+  end
+  def get_sequence_padding_width(this : IPhotoAcquireSettings*, pdwwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_sequence_padding_width.call(this, pdwwidth)
+  end
+  def get_sequence_zero_padding(this : IPhotoAcquireSettings*, pfzeropad : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_sequence_zero_padding.call(this, pfzeropad)
+  end
+  def get_group_tag(this : IPhotoAcquireSettings*, pbstrgrouptag : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_tag.call(this, pbstrgrouptag)
+  end
+  def get_acquisition_time(this : IPhotoAcquireSettings*, pftacquisitiontime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_acquisition_time.call(this, pftacquisitiontime)
+  end
+end
+struct LibWin32::IPhotoAcquireOptionsDialog
+  def query_interface(this : IPhotoAcquireOptionsDialog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireOptionsDialog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireOptionsDialog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IPhotoAcquireOptionsDialog*, pszregistryroot : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.call(this, pszregistryroot)
+  end
+  def create(this : IPhotoAcquireOptionsDialog*, hwndparent : LibC::HANDLE, phwnddialog : HANDLE*) : HRESULT
+    @lpVtbl.value.create.call(this, hwndparent, phwnddialog)
+  end
+  def destroy(this : IPhotoAcquireOptionsDialog*) : HRESULT
+    @lpVtbl.value.destroy.call(this)
+  end
+  def do_modal(this : IPhotoAcquireOptionsDialog*, hwndparent : LibC::HANDLE, ppnreturncode : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.do_modal.call(this, hwndparent, ppnreturncode)
+  end
+  def save_data(this : IPhotoAcquireOptionsDialog*) : HRESULT
+    @lpVtbl.value.save_data.call(this)
+  end
+end
+struct LibWin32::IPhotoAcquireDeviceSelectionDialog
+  def query_interface(this : IPhotoAcquireDeviceSelectionDialog*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquireDeviceSelectionDialog*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquireDeviceSelectionDialog*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def set_title(this : IPhotoAcquireDeviceSelectionDialog*, psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.call(this, psztitle)
+  end
+  def set_submit_button_text(this : IPhotoAcquireDeviceSelectionDialog*, pszsubmitbuttontext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_submit_button_text.call(this, pszsubmitbuttontext)
+  end
+  def do_modal(this : IPhotoAcquireDeviceSelectionDialog*, hwndparent : LibC::HANDLE, dwdeviceflags : UInt32, pbstrdeviceid : UInt8**, pndevicetype : DEVICE_SELECTION_DEVICE_TYPE*) : HRESULT
+    @lpVtbl.value.do_modal.call(this, hwndparent, dwdeviceflags, pbstrdeviceid, pndevicetype)
+  end
+end
+struct LibWin32::IPhotoAcquirePlugin
+  def query_interface(this : IPhotoAcquirePlugin*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IPhotoAcquirePlugin*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IPhotoAcquirePlugin*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def initialize(this : IPhotoAcquirePlugin*, pphotoacquiresource : IPhotoAcquireSource, pphotoacquireprogresscb : IPhotoAcquireProgressCB) : HRESULT
+    @lpVtbl.value.initialize.call(this, pphotoacquiresource, pphotoacquireprogresscb)
+  end
+  def process_item(this : IPhotoAcquirePlugin*, dwacquirestage : UInt32, pphotoacquireitem : IPhotoAcquireItem, poriginalitemstream : IStream, pszfinalfilename : LibC::LPWSTR, ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.process_item.call(this, dwacquirestage, pphotoacquireitem, poriginalitemstream, pszfinalfilename, ppropertystore)
+  end
+  def transfer_complete(this : IPhotoAcquirePlugin*, hr : HRESULT) : HRESULT
+    @lpVtbl.value.transfer_complete.call(this, hr)
+  end
+  def display_configure_dialog(this : IPhotoAcquirePlugin*, hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_configure_dialog.call(this, hwndparent)
+  end
+end

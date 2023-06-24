@@ -664,19 +664,19 @@ lib LibWin32
   fun IsThreadAFiber : LibC::BOOL
 
   # Params # srwlock : RTL_SRWLOCK* [In]
-  fun InitializeSRWLock(srwlock : RTL_SRWLOCK*)
+  fun InitializeSRWLock(srwlock : RTL_SRWLOCK*) : Void
 
   # Params # srwlock : RTL_SRWLOCK* [In]
-  fun ReleaseSRWLockExclusive(srwlock : RTL_SRWLOCK*)
+  fun ReleaseSRWLockExclusive(srwlock : RTL_SRWLOCK*) : Void
 
   # Params # srwlock : RTL_SRWLOCK* [In]
-  fun ReleaseSRWLockShared(srwlock : RTL_SRWLOCK*)
+  fun ReleaseSRWLockShared(srwlock : RTL_SRWLOCK*) : Void
 
   # Params # srwlock : RTL_SRWLOCK* [In]
-  fun AcquireSRWLockExclusive(srwlock : RTL_SRWLOCK*)
+  fun AcquireSRWLockExclusive(srwlock : RTL_SRWLOCK*) : Void
 
   # Params # srwlock : RTL_SRWLOCK* [In]
-  fun AcquireSRWLockShared(srwlock : RTL_SRWLOCK*)
+  fun AcquireSRWLockShared(srwlock : RTL_SRWLOCK*) : Void
 
   # Params # srwlock : RTL_SRWLOCK* [In]
   fun TryAcquireSRWLockExclusive(srwlock : RTL_SRWLOCK*) : BOOLEAN
@@ -685,15 +685,15 @@ lib LibWin32
   fun TryAcquireSRWLockShared(srwlock : RTL_SRWLOCK*) : BOOLEAN
 
   # Params # lpcriticalsection : RTL_CRITICAL_SECTION* [In]
-  fun InitializeCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*)
+  fun InitializeCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*) : Void
 
   # Params # lpcriticalsection : RTL_CRITICAL_SECTION* [In]
   # Commented out because function is part of Lib C
-  #fun EnterCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*)
+  #fun EnterCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*) : Void
 
   # Params # lpcriticalsection : RTL_CRITICAL_SECTION* [In]
   # Commented out because function is part of Lib C
-  #fun LeaveCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*)
+  #fun LeaveCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*) : Void
 
   # Params # lpcriticalsection : RTL_CRITICAL_SECTION* [In],dwspincount : UInt32 [In]
   # Commented out because function is part of Lib C
@@ -711,10 +711,10 @@ lib LibWin32
 
   # Params # lpcriticalsection : RTL_CRITICAL_SECTION* [In]
   # Commented out because function is part of Lib C
-  #fun DeleteCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*)
+  #fun DeleteCriticalSection(lpcriticalsection : RTL_CRITICAL_SECTION*) : Void
 
   # Params # initonce : RTL_RUN_ONCE* [In]
-  fun InitOnceInitialize(initonce : RTL_RUN_ONCE*)
+  fun InitOnceInitialize(initonce : RTL_RUN_ONCE*) : Void
 
   # Params # initonce : RTL_RUN_ONCE* [In],initfn : PINIT_ONCE_FN [In],parameter : Void* [In],context : Void** [In]
   fun InitOnceExecuteOnce(initonce : RTL_RUN_ONCE*, initfn : PINIT_ONCE_FN, parameter : Void*, context : Void**) : LibC::BOOL
@@ -727,15 +727,15 @@ lib LibWin32
 
   # Params # conditionvariable : RTL_CONDITION_VARIABLE* [In]
   # Commented out because function is part of Lib C
-  #fun InitializeConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*)
+  #fun InitializeConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*) : Void
 
   # Params # conditionvariable : RTL_CONDITION_VARIABLE* [In]
   # Commented out because function is part of Lib C
-  #fun WakeConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*)
+  #fun WakeConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*) : Void
 
   # Params # conditionvariable : RTL_CONDITION_VARIABLE* [In]
   # Commented out because function is part of Lib C
-  #fun WakeAllConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*)
+  #fun WakeAllConditionVariable(conditionvariable : RTL_CONDITION_VARIABLE*) : Void
 
   # Params # conditionvariable : RTL_CONDITION_VARIABLE* [In],criticalsection : RTL_CRITICAL_SECTION* [In],dwmilliseconds : UInt32 [In]
   # Commented out because function is part of Lib C
@@ -834,16 +834,16 @@ lib LibWin32
 
   # Params # dwmilliseconds : UInt32 [In]
   # Commented out because function is part of Lib C
-  #fun Sleep(dwmilliseconds : UInt32)
+  #fun Sleep(dwmilliseconds : UInt32) : Void
 
   # Params # address : Void* [In],compareaddress : Void* [In],addresssize : LibC::UINT_PTR [In],dwmilliseconds : UInt32 [In]
   fun WaitOnAddress(address : Void*, compareaddress : Void*, addresssize : LibC::UINT_PTR, dwmilliseconds : UInt32) : LibC::BOOL
 
   # Params # address : Void* [In]
-  fun WakeByAddressSingle(address : Void*)
+  fun WakeByAddressSingle(address : Void*) : Void
 
   # Params # address : Void* [In]
-  fun WakeByAddressAll(address : Void*)
+  fun WakeByAddressAll(address : Void*) : Void
 
   # Params # ncount : UInt32 [In],lphandles : LibC::HANDLE* [In],bwaitall : LibC::BOOL [In],dwmilliseconds : UInt32 [In]
   fun WaitForMultipleObjects(ncount : UInt32, lphandles : LibC::HANDLE*, bwaitall : LibC::BOOL, dwmilliseconds : UInt32) : UInt32
@@ -855,7 +855,7 @@ lib LibWin32
   fun CreateWaitableTimerW(lptimerattributes : SECURITY_ATTRIBUTES*, bmanualreset : LibC::BOOL, lptimername : LibC::LPWSTR) : LibC::HANDLE
 
   # Params # listhead : SLIST_HEADER* [In]
-  fun InitializeSListHead(listhead : SLIST_HEADER*)
+  fun InitializeSListHead(listhead : SLIST_HEADER*) : Void
 
   # Params # listhead : SLIST_HEADER* [In]
   fun InterlockedPopEntrySList(listhead : SLIST_HEADER*) : SLIST_ENTRY*
@@ -892,7 +892,7 @@ lib LibWin32
 
   # Params # uexitcode : UInt32 [In]
   # Commented out because function is part of Lib C
-  #fun ExitProcess(uexitcode : UInt32)
+  #fun ExitProcess(uexitcode : UInt32) : Void
 
   # Params # hprocess : LibC::HANDLE [In],uexitcode : UInt32 [In]
   # Commented out because function is part of Lib C
@@ -936,7 +936,7 @@ lib LibWin32
   fun GetThreadPriority(hthread : LibC::HANDLE) : Int32
 
   # Params # dwexitcode : UInt32 [In]
-  fun ExitThread(dwexitcode : UInt32)
+  fun ExitThread(dwexitcode : UInt32) : Void
 
   # Params # hthread : LibC::HANDLE [In],dwexitcode : UInt32 [In]
   fun TerminateThread(hthread : LibC::HANDLE, dwexitcode : UInt32) : LibC::BOOL
@@ -976,7 +976,7 @@ lib LibWin32
   fun GetProcessVersion(processid : UInt32) : UInt32
 
   # Params # lpstartupinfo : STARTUPINFOW* [In]
-  fun GetStartupInfoW(lpstartupinfo : STARTUPINFOW*)
+  fun GetStartupInfoW(lpstartupinfo : STARTUPINFOW*) : Void
 
   # Params # htoken : LibC::HANDLE [In],lpapplicationname : LibC::LPWSTR [In],lpcommandline : LibC::LPWSTR [In],lpprocessattributes : SECURITY_ATTRIBUTES* [In],lpthreadattributes : SECURITY_ATTRIBUTES* [In],binherithandles : LibC::BOOL [In],dwcreationflags : UInt32 [In],lpenvironment : Void* [In],lpcurrentdirectory : LibC::LPWSTR [In],lpstartupinfo : STARTUPINFOW* [In],lpprocessinformation : PROCESS_INFORMATION* [In]
   fun CreateProcessAsUserW(htoken : LibC::HANDLE, lpapplicationname : LibC::LPWSTR, lpcommandline : LibC::LPWSTR, lpprocessattributes : SECURITY_ATTRIBUTES*, lpthreadattributes : SECURITY_ATTRIBUTES*, binherithandles : LibC::BOOL, dwcreationflags : UInt32, lpenvironment : Void*, lpcurrentdirectory : LibC::LPWSTR, lpstartupinfo : STARTUPINFOW*, lpprocessinformation : PROCESS_INFORMATION*) : LibC::BOOL
@@ -1007,7 +1007,7 @@ lib LibWin32
   fun GetThreadId(thread : LibC::HANDLE) : UInt32
 
   # Params # 
-  fun FlushProcessWriteBuffers
+  fun FlushProcessWriteBuffers : Void
 
   # Params # thread : LibC::HANDLE [In]
   fun GetProcessIdOfThread(thread : LibC::HANDLE) : UInt32
@@ -1016,7 +1016,7 @@ lib LibWin32
   fun InitializeProcThreadAttributeList(lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST, dwattributecount : UInt32, dwflags : UInt32, lpsize : LibC::UINT_PTR*) : LibC::BOOL
 
   # Params # lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST [In]
-  fun DeleteProcThreadAttributeList(lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST)
+  fun DeleteProcThreadAttributeList(lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST) : Void
 
   # Params # lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST [In],dwflags : UInt32 [In],attribute : LibC::UINT_PTR [In],lpvalue : Void* [In],cbsize : LibC::UINT_PTR [In],lppreviousvalue : Void* [In],lpreturnsize : LibC::UINT_PTR* [In]
   fun UpdateProcThreadAttribute(lpattributelist : LPPROC_THREAD_ATTRIBUTE_LIST, dwflags : UInt32, attribute : LibC::UINT_PTR, lpvalue : Void*, cbsize : LibC::UINT_PTR, lppreviousvalue : Void*, lpreturnsize : LibC::UINT_PTR*) : LibC::BOOL
@@ -1038,7 +1038,7 @@ lib LibWin32
 
   # Params # lowlimit : LibC::UINT_PTR* [In],highlimit : LibC::UINT_PTR* [In]
   # Commented out because function is part of Lib C
-  #fun GetCurrentThreadStackLimits(lowlimit : LibC::UINT_PTR*, highlimit : LibC::UINT_PTR*)
+  #fun GetCurrentThreadStackLimits(lowlimit : LibC::UINT_PTR*, highlimit : LibC::UINT_PTR*) : Void
 
   # Params # hprocess : LibC::HANDLE [In],mitigationpolicy : PROCESS_MITIGATION_POLICY [In],lpbuffer : Void* [In],dwlength : LibC::UINT_PTR [In]
   fun GetProcessMitigationPolicy(hprocess : LibC::HANDLE, mitigationpolicy : PROCESS_MITIGATION_POLICY, lpbuffer : Void*, dwlength : LibC::UINT_PTR) : LibC::BOOL
@@ -1069,7 +1069,7 @@ lib LibWin32
   fun GetThreadIdealProcessorEx(hthread : LibC::HANDLE, lpidealprocessor : PROCESSOR_NUMBER*) : LibC::BOOL
 
   # Params # procnumber : PROCESSOR_NUMBER* [In]
-  fun GetCurrentProcessorNumberEx(procnumber : PROCESSOR_NUMBER*)
+  fun GetCurrentProcessorNumberEx(procnumber : PROCESSOR_NUMBER*) : Void
 
   # Params # hprocess : LibC::HANDLE [In],pdisablepriorityboost : LibC::BOOL* [In]
   fun GetProcessPriorityBoost(hprocess : LibC::HANDLE, pdisablepriorityboost : LibC::BOOL*) : LibC::BOOL
@@ -1174,7 +1174,7 @@ lib LibWin32
   fun CreateThreadpool(reserved : Void*) : PTP_POOL
 
   # Params # ptpp : PTP_POOL [In],cthrdmost : UInt32 [In]
-  fun SetThreadpoolThreadMaximum(ptpp : PTP_POOL, cthrdmost : UInt32)
+  fun SetThreadpoolThreadMaximum(ptpp : PTP_POOL, cthrdmost : UInt32) : Void
 
   # Params # ptpp : PTP_POOL [In],cthrdmic : UInt32 [In]
   fun SetThreadpoolThreadMinimum(ptpp : PTP_POOL, cthrdmic : UInt32) : LibC::BOOL
@@ -1186,37 +1186,37 @@ lib LibWin32
   fun QueryThreadpoolStackInformation(ptpp : PTP_POOL, ptpsi : TP_POOL_STACK_INFORMATION*) : LibC::BOOL
 
   # Params # ptpp : PTP_POOL [In]
-  fun CloseThreadpool(ptpp : PTP_POOL)
+  fun CloseThreadpool(ptpp : PTP_POOL) : Void
 
   # Params # 
   fun CreateThreadpoolCleanupGroup : LibC::IntPtrT
 
   # Params # ptpcg : LibC::IntPtrT [In],fcancelpendingcallbacks : LibC::BOOL [In],pvcleanupcontext : Void* [In]
-  fun CloseThreadpoolCleanupGroupMembers(ptpcg : LibC::IntPtrT, fcancelpendingcallbacks : LibC::BOOL, pvcleanupcontext : Void*)
+  fun CloseThreadpoolCleanupGroupMembers(ptpcg : LibC::IntPtrT, fcancelpendingcallbacks : LibC::BOOL, pvcleanupcontext : Void*) : Void
 
   # Params # ptpcg : LibC::IntPtrT [In]
-  fun CloseThreadpoolCleanupGroup(ptpcg : LibC::IntPtrT)
+  fun CloseThreadpoolCleanupGroup(ptpcg : LibC::IntPtrT) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In],evt : LibC::HANDLE [In]
-  fun SetEventWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, evt : LibC::HANDLE)
+  fun SetEventWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, evt : LibC::HANDLE) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In],sem : LibC::HANDLE [In],crel : UInt32 [In]
-  fun ReleaseSemaphoreWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, sem : LibC::HANDLE, crel : UInt32)
+  fun ReleaseSemaphoreWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, sem : LibC::HANDLE, crel : UInt32) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In],mut : LibC::HANDLE [In]
-  fun ReleaseMutexWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, mut : LibC::HANDLE)
+  fun ReleaseMutexWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, mut : LibC::HANDLE) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In],pcs : RTL_CRITICAL_SECTION* [In]
-  fun LeaveCriticalSectionWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, pcs : RTL_CRITICAL_SECTION*)
+  fun LeaveCriticalSectionWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, pcs : RTL_CRITICAL_SECTION*) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In],mod : HINSTANCE [In]
-  fun FreeLibraryWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, mod : HINSTANCE)
+  fun FreeLibraryWhenCallbackReturns(pci : TP_CALLBACK_INSTANCE*, mod : HINSTANCE) : Void
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In]
   fun CallbackMayRunLong(pci : TP_CALLBACK_INSTANCE*) : LibC::BOOL
 
   # Params # pci : TP_CALLBACK_INSTANCE* [In]
-  fun DisassociateCurrentThreadFromCallback(pci : TP_CALLBACK_INSTANCE*)
+  fun DisassociateCurrentThreadFromCallback(pci : TP_CALLBACK_INSTANCE*) : Void
 
   # Params # pfns : PTP_SIMPLE_CALLBACK [In],pv : Void* [In],pcbe : TP_CALLBACK_ENVIRON_V3* [In]
   fun TrySubmitThreadpoolCallback(pfns : PTP_SIMPLE_CALLBACK, pv : Void*, pcbe : TP_CALLBACK_ENVIRON_V3*) : LibC::BOOL
@@ -1225,55 +1225,55 @@ lib LibWin32
   fun CreateThreadpoolWork(pfnwk : PTP_WORK_CALLBACK, pv : Void*, pcbe : TP_CALLBACK_ENVIRON_V3*) : TP_WORK*
 
   # Params # pwk : TP_WORK* [In]
-  fun SubmitThreadpoolWork(pwk : TP_WORK*)
+  fun SubmitThreadpoolWork(pwk : TP_WORK*) : Void
 
   # Params # pwk : TP_WORK* [In],fcancelpendingcallbacks : LibC::BOOL [In]
-  fun WaitForThreadpoolWorkCallbacks(pwk : TP_WORK*, fcancelpendingcallbacks : LibC::BOOL)
+  fun WaitForThreadpoolWorkCallbacks(pwk : TP_WORK*, fcancelpendingcallbacks : LibC::BOOL) : Void
 
   # Params # pwk : TP_WORK* [In]
-  fun CloseThreadpoolWork(pwk : TP_WORK*)
+  fun CloseThreadpoolWork(pwk : TP_WORK*) : Void
 
   # Params # pfnti : PTP_TIMER_CALLBACK [In],pv : Void* [In],pcbe : TP_CALLBACK_ENVIRON_V3* [In]
   fun CreateThreadpoolTimer(pfnti : PTP_TIMER_CALLBACK, pv : Void*, pcbe : TP_CALLBACK_ENVIRON_V3*) : TP_TIMER*
 
   # Params # pti : TP_TIMER* [In],pftduetime : FILETIME* [In],msperiod : UInt32 [In],mswindowlength : UInt32 [In]
-  fun SetThreadpoolTimer(pti : TP_TIMER*, pftduetime : FILETIME*, msperiod : UInt32, mswindowlength : UInt32)
+  fun SetThreadpoolTimer(pti : TP_TIMER*, pftduetime : FILETIME*, msperiod : UInt32, mswindowlength : UInt32) : Void
 
   # Params # pti : TP_TIMER* [In]
   fun IsThreadpoolTimerSet(pti : TP_TIMER*) : LibC::BOOL
 
   # Params # pti : TP_TIMER* [In],fcancelpendingcallbacks : LibC::BOOL [In]
-  fun WaitForThreadpoolTimerCallbacks(pti : TP_TIMER*, fcancelpendingcallbacks : LibC::BOOL)
+  fun WaitForThreadpoolTimerCallbacks(pti : TP_TIMER*, fcancelpendingcallbacks : LibC::BOOL) : Void
 
   # Params # pti : TP_TIMER* [In]
-  fun CloseThreadpoolTimer(pti : TP_TIMER*)
+  fun CloseThreadpoolTimer(pti : TP_TIMER*) : Void
 
   # Params # pfnwa : PTP_WAIT_CALLBACK [In],pv : Void* [In],pcbe : TP_CALLBACK_ENVIRON_V3* [In]
   fun CreateThreadpoolWait(pfnwa : PTP_WAIT_CALLBACK, pv : Void*, pcbe : TP_CALLBACK_ENVIRON_V3*) : TP_WAIT*
 
   # Params # pwa : TP_WAIT* [In],h : LibC::HANDLE [In],pfttimeout : FILETIME* [In]
-  fun SetThreadpoolWait(pwa : TP_WAIT*, h : LibC::HANDLE, pfttimeout : FILETIME*)
+  fun SetThreadpoolWait(pwa : TP_WAIT*, h : LibC::HANDLE, pfttimeout : FILETIME*) : Void
 
   # Params # pwa : TP_WAIT* [In],fcancelpendingcallbacks : LibC::BOOL [In]
-  fun WaitForThreadpoolWaitCallbacks(pwa : TP_WAIT*, fcancelpendingcallbacks : LibC::BOOL)
+  fun WaitForThreadpoolWaitCallbacks(pwa : TP_WAIT*, fcancelpendingcallbacks : LibC::BOOL) : Void
 
   # Params # pwa : TP_WAIT* [In]
-  fun CloseThreadpoolWait(pwa : TP_WAIT*)
+  fun CloseThreadpoolWait(pwa : TP_WAIT*) : Void
 
   # Params # fl : LibC::HANDLE [In],pfnio : PTP_WIN32_IO_CALLBACK [In],pv : Void* [In],pcbe : TP_CALLBACK_ENVIRON_V3* [In]
   fun CreateThreadpoolIo(fl : LibC::HANDLE, pfnio : PTP_WIN32_IO_CALLBACK, pv : Void*, pcbe : TP_CALLBACK_ENVIRON_V3*) : TP_IO*
 
   # Params # pio : TP_IO* [In]
-  fun StartThreadpoolIo(pio : TP_IO*)
+  fun StartThreadpoolIo(pio : TP_IO*) : Void
 
   # Params # pio : TP_IO* [In]
-  fun CancelThreadpoolIo(pio : TP_IO*)
+  fun CancelThreadpoolIo(pio : TP_IO*) : Void
 
   # Params # pio : TP_IO* [In],fcancelpendingcallbacks : LibC::BOOL [In]
-  fun WaitForThreadpoolIoCallbacks(pio : TP_IO*, fcancelpendingcallbacks : LibC::BOOL)
+  fun WaitForThreadpoolIoCallbacks(pio : TP_IO*, fcancelpendingcallbacks : LibC::BOOL) : Void
 
   # Params # pio : TP_IO* [In]
-  fun CloseThreadpoolIo(pio : TP_IO*)
+  fun CloseThreadpoolIo(pio : TP_IO*) : Void
 
   # Params # pti : TP_TIMER* [In],pftduetime : FILETIME* [In],msperiod : UInt32 [In],mswindowlength : UInt32 [In]
   fun SetThreadpoolTimerEx(pti : TP_TIMER*, pftduetime : FILETIME*, msperiod : UInt32, mswindowlength : UInt32) : LibC::BOOL
@@ -1309,7 +1309,7 @@ lib LibWin32
   fun AddSIDToBoundaryDescriptor(boundarydescriptor : LibC::HANDLE*, requiredsid : PSID) : LibC::BOOL
 
   # Params # boundarydescriptor : BoundaryDescriptorHandle [In]
-  fun DeleteBoundaryDescriptor(boundarydescriptor : BoundaryDescriptorHandle)
+  fun DeleteBoundaryDescriptor(boundarydescriptor : BoundaryDescriptorHandle) : Void
 
   # Params # highestnodenumber : UInt32* [In]
   fun GetNumaHighestNodeNumber(highestnodenumber : UInt32*) : LibC::BOOL
@@ -1357,10 +1357,10 @@ lib LibWin32
   fun GetProcessIoCounters(hprocess : LibC::HANDLE, lpiocounters : IO_COUNTERS*) : LibC::BOOL
 
   # Params # lpfiber : Void* [In]
-  fun SwitchToFiber(lpfiber : Void*)
+  fun SwitchToFiber(lpfiber : Void*) : Void
 
   # Params # lpfiber : Void* [In]
-  fun DeleteFiber(lpfiber : Void*)
+  fun DeleteFiber(lpfiber : Void*) : Void
 
   # Params # 
   fun ConvertFiberToThread : LibC::BOOL
@@ -1447,7 +1447,7 @@ lib LibWin32
   fun QueryFullProcessImageNameW(hprocess : LibC::HANDLE, dwflags : PROCESS_NAME_FORMAT, lpexename : Char*, lpdwsize : UInt32*) : LibC::BOOL
 
   # Params # lpstartupinfo : STARTUPINFOA* [In]
-  fun GetStartupInfoA(lpstartupinfo : STARTUPINFOA*)
+  fun GetStartupInfoA(lpstartupinfo : STARTUPINFOA*) : Void
 
   # Params # lpusername : LibC::LPWSTR [In],lpdomain : LibC::LPWSTR [In],lppassword : LibC::LPWSTR [In],dwlogonflags : CREATE_PROCESS_LOGON_FLAGS [In],lpapplicationname : LibC::LPWSTR [In],lpcommandline : LibC::LPWSTR [In],dwcreationflags : UInt32 [In],lpenvironment : Void* [In],lpcurrentdirectory : LibC::LPWSTR [In],lpstartupinfo : STARTUPINFOW* [In],lpprocessinformation : PROCESS_INFORMATION* [In]
   fun CreateProcessWithLogonW(lpusername : LibC::LPWSTR, lpdomain : LibC::LPWSTR, lppassword : LibC::LPWSTR, dwlogonflags : CREATE_PROCESS_LOGON_FLAGS, lpapplicationname : LibC::LPWSTR, lpcommandline : LibC::LPWSTR, dwcreationflags : UInt32, lpenvironment : Void*, lpcurrentdirectory : LibC::LPWSTR, lpstartupinfo : STARTUPINFOW*, lpprocessinformation : PROCESS_INFORMATION*) : LibC::BOOL

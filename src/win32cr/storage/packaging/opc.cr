@@ -760,3 +760,959 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IOpcUri
+  def query_interface(this : IOpcUri*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcUri*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcUri*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_bstr(this : IOpcUri*, uriprop : Uri_PROPERTY, pbstrproperty : UInt8**, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_bstr.call(this, uriprop, pbstrproperty, dwflags)
+  end
+  def get_property_length(this : IOpcUri*, uriprop : Uri_PROPERTY, pcchproperty : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_length.call(this, uriprop, pcchproperty, dwflags)
+  end
+  def get_property_dword(this : IOpcUri*, uriprop : Uri_PROPERTY, pdwproperty : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_dword.call(this, uriprop, pdwproperty, dwflags)
+  end
+  def has_property(this : IOpcUri*, uriprop : Uri_PROPERTY, pfhasproperty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_property.call(this, uriprop, pfhasproperty)
+  end
+  def get_absolute_uri(this : IOpcUri*, pbstrabsoluteuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_absolute_uri.call(this, pbstrabsoluteuri)
+  end
+  def get_authority(this : IOpcUri*, pbstrauthority : UInt8**) : HRESULT
+    @lpVtbl.value.get_authority.call(this, pbstrauthority)
+  end
+  def get_display_uri(this : IOpcUri*, pbstrdisplaystring : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_uri.call(this, pbstrdisplaystring)
+  end
+  def get_domain(this : IOpcUri*, pbstrdomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.call(this, pbstrdomain)
+  end
+  def get_extension(this : IOpcUri*, pbstrextension : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension.call(this, pbstrextension)
+  end
+  def get_fragment(this : IOpcUri*, pbstrfragment : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment.call(this, pbstrfragment)
+  end
+  def get_host(this : IOpcUri*, pbstrhost : UInt8**) : HRESULT
+    @lpVtbl.value.get_host.call(this, pbstrhost)
+  end
+  def get_password(this : IOpcUri*, pbstrpassword : UInt8**) : HRESULT
+    @lpVtbl.value.get_password.call(this, pbstrpassword)
+  end
+  def get_path(this : IOpcUri*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, pbstrpath)
+  end
+  def get_path_and_query(this : IOpcUri*, pbstrpathandquery : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_and_query.call(this, pbstrpathandquery)
+  end
+  def get_query(this : IOpcUri*, pbstrquery : UInt8**) : HRESULT
+    @lpVtbl.value.get_query.call(this, pbstrquery)
+  end
+  def get_raw_uri(this : IOpcUri*, pbstrrawuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_raw_uri.call(this, pbstrrawuri)
+  end
+  def get_scheme_name(this : IOpcUri*, pbstrschemename : UInt8**) : HRESULT
+    @lpVtbl.value.get_scheme_name.call(this, pbstrschemename)
+  end
+  def get_user_info(this : IOpcUri*, pbstruserinfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_info.call(this, pbstruserinfo)
+  end
+  def get_user_name(this : IOpcUri*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, pbstrusername)
+  end
+  def get_host_type(this : IOpcUri*, pdwhosttype : UInt32*) : HRESULT
+    @lpVtbl.value.get_host_type.call(this, pdwhosttype)
+  end
+  def get_port(this : IOpcUri*, pdwport : UInt32*) : HRESULT
+    @lpVtbl.value.get_port.call(this, pdwport)
+  end
+  def get_scheme(this : IOpcUri*, pdwscheme : UInt32*) : HRESULT
+    @lpVtbl.value.get_scheme.call(this, pdwscheme)
+  end
+  def get_zone(this : IOpcUri*, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_zone.call(this, pdwzone)
+  end
+  def get_properties(this : IOpcUri*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pdwflags)
+  end
+  def is_equal(this : IOpcUri*, puri : IUri, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, puri, pfequal)
+  end
+  def get_relationships_part_uri(this : IOpcUri*, relationshipparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_relationships_part_uri.call(this, relationshipparturi)
+  end
+  def get_relative_uri(this : IOpcUri*, targetparturi : IOpcPartUri, relativeuri : IUri*) : HRESULT
+    @lpVtbl.value.get_relative_uri.call(this, targetparturi, relativeuri)
+  end
+  def combine_part_uri(this : IOpcUri*, relativeuri : IUri, combineduri : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.combine_part_uri.call(this, relativeuri, combineduri)
+  end
+end
+struct LibWin32::IOpcPartUri
+  def query_interface(this : IOpcPartUri*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcPartUri*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcPartUri*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_bstr(this : IOpcPartUri*, uriprop : Uri_PROPERTY, pbstrproperty : UInt8**, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_bstr.call(this, uriprop, pbstrproperty, dwflags)
+  end
+  def get_property_length(this : IOpcPartUri*, uriprop : Uri_PROPERTY, pcchproperty : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_length.call(this, uriprop, pcchproperty, dwflags)
+  end
+  def get_property_dword(this : IOpcPartUri*, uriprop : Uri_PROPERTY, pdwproperty : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_property_dword.call(this, uriprop, pdwproperty, dwflags)
+  end
+  def has_property(this : IOpcPartUri*, uriprop : Uri_PROPERTY, pfhasproperty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_property.call(this, uriprop, pfhasproperty)
+  end
+  def get_absolute_uri(this : IOpcPartUri*, pbstrabsoluteuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_absolute_uri.call(this, pbstrabsoluteuri)
+  end
+  def get_authority(this : IOpcPartUri*, pbstrauthority : UInt8**) : HRESULT
+    @lpVtbl.value.get_authority.call(this, pbstrauthority)
+  end
+  def get_display_uri(this : IOpcPartUri*, pbstrdisplaystring : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_uri.call(this, pbstrdisplaystring)
+  end
+  def get_domain(this : IOpcPartUri*, pbstrdomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.call(this, pbstrdomain)
+  end
+  def get_extension(this : IOpcPartUri*, pbstrextension : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension.call(this, pbstrextension)
+  end
+  def get_fragment(this : IOpcPartUri*, pbstrfragment : UInt8**) : HRESULT
+    @lpVtbl.value.get_fragment.call(this, pbstrfragment)
+  end
+  def get_host(this : IOpcPartUri*, pbstrhost : UInt8**) : HRESULT
+    @lpVtbl.value.get_host.call(this, pbstrhost)
+  end
+  def get_password(this : IOpcPartUri*, pbstrpassword : UInt8**) : HRESULT
+    @lpVtbl.value.get_password.call(this, pbstrpassword)
+  end
+  def get_path(this : IOpcPartUri*, pbstrpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.call(this, pbstrpath)
+  end
+  def get_path_and_query(this : IOpcPartUri*, pbstrpathandquery : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_and_query.call(this, pbstrpathandquery)
+  end
+  def get_query(this : IOpcPartUri*, pbstrquery : UInt8**) : HRESULT
+    @lpVtbl.value.get_query.call(this, pbstrquery)
+  end
+  def get_raw_uri(this : IOpcPartUri*, pbstrrawuri : UInt8**) : HRESULT
+    @lpVtbl.value.get_raw_uri.call(this, pbstrrawuri)
+  end
+  def get_scheme_name(this : IOpcPartUri*, pbstrschemename : UInt8**) : HRESULT
+    @lpVtbl.value.get_scheme_name.call(this, pbstrschemename)
+  end
+  def get_user_info(this : IOpcPartUri*, pbstruserinfo : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_info.call(this, pbstruserinfo)
+  end
+  def get_user_name(this : IOpcPartUri*, pbstrusername : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, pbstrusername)
+  end
+  def get_host_type(this : IOpcPartUri*, pdwhosttype : UInt32*) : HRESULT
+    @lpVtbl.value.get_host_type.call(this, pdwhosttype)
+  end
+  def get_port(this : IOpcPartUri*, pdwport : UInt32*) : HRESULT
+    @lpVtbl.value.get_port.call(this, pdwport)
+  end
+  def get_scheme(this : IOpcPartUri*, pdwscheme : UInt32*) : HRESULT
+    @lpVtbl.value.get_scheme.call(this, pdwscheme)
+  end
+  def get_zone(this : IOpcPartUri*, pdwzone : UInt32*) : HRESULT
+    @lpVtbl.value.get_zone.call(this, pdwzone)
+  end
+  def get_properties(this : IOpcPartUri*, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_properties.call(this, pdwflags)
+  end
+  def is_equal(this : IOpcPartUri*, puri : IUri, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, puri, pfequal)
+  end
+  def get_relationships_part_uri(this : IOpcPartUri*, relationshipparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_relationships_part_uri.call(this, relationshipparturi)
+  end
+  def get_relative_uri(this : IOpcPartUri*, targetparturi : IOpcPartUri, relativeuri : IUri*) : HRESULT
+    @lpVtbl.value.get_relative_uri.call(this, targetparturi, relativeuri)
+  end
+  def combine_part_uri(this : IOpcPartUri*, relativeuri : IUri, combineduri : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.combine_part_uri.call(this, relativeuri, combineduri)
+  end
+  def compare_part_uri(this : IOpcPartUri*, parturi : IOpcPartUri, comparisonresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_part_uri.call(this, parturi, comparisonresult)
+  end
+  def get_source_uri(this : IOpcPartUri*, sourceuri : IOpcUri*) : HRESULT
+    @lpVtbl.value.get_source_uri.call(this, sourceuri)
+  end
+  def is_relationships_part_uri(this : IOpcPartUri*, isrelationshipuri : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_relationships_part_uri.call(this, isrelationshipuri)
+  end
+end
+struct LibWin32::IOpcPackage
+  def query_interface(this : IOpcPackage*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcPackage*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcPackage*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_set(this : IOpcPackage*, partset : IOpcPartSet*) : HRESULT
+    @lpVtbl.value.get_part_set.call(this, partset)
+  end
+  def get_relationship_set(this : IOpcPackage*, relationshipset : IOpcRelationshipSet*) : HRESULT
+    @lpVtbl.value.get_relationship_set.call(this, relationshipset)
+  end
+end
+struct LibWin32::IOpcPart
+  def query_interface(this : IOpcPart*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcPart*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcPart*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_relationship_set(this : IOpcPart*, relationshipset : IOpcRelationshipSet*) : HRESULT
+    @lpVtbl.value.get_relationship_set.call(this, relationshipset)
+  end
+  def get_content_stream(this : IOpcPart*, stream : IStream*) : HRESULT
+    @lpVtbl.value.get_content_stream.call(this, stream)
+  end
+  def get_name(this : IOpcPart*, name : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_name.call(this, name)
+  end
+  def get_content_type(this : IOpcPart*, contenttype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, contenttype)
+  end
+  def get_compression_options(this : IOpcPart*, compressionoptions : OPC_COMPRESSION_OPTIONS*) : HRESULT
+    @lpVtbl.value.get_compression_options.call(this, compressionoptions)
+  end
+end
+struct LibWin32::IOpcRelationship
+  def query_interface(this : IOpcRelationship*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationship*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationship*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IOpcRelationship*, relationshipidentifier : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, relationshipidentifier)
+  end
+  def get_relationship_type(this : IOpcRelationship*, relationshiptype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_relationship_type.call(this, relationshiptype)
+  end
+  def get_source_uri(this : IOpcRelationship*, sourceuri : IOpcUri*) : HRESULT
+    @lpVtbl.value.get_source_uri.call(this, sourceuri)
+  end
+  def get_target_uri(this : IOpcRelationship*, targeturi : IUri*) : HRESULT
+    @lpVtbl.value.get_target_uri.call(this, targeturi)
+  end
+  def get_target_mode(this : IOpcRelationship*, targetmode : OPC_URI_TARGET_MODE*) : HRESULT
+    @lpVtbl.value.get_target_mode.call(this, targetmode)
+  end
+end
+struct LibWin32::IOpcPartSet
+  def query_interface(this : IOpcPartSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcPartSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcPartSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part(this : IOpcPartSet*, name : IOpcPartUri, part : IOpcPart*) : HRESULT
+    @lpVtbl.value.get_part.call(this, name, part)
+  end
+  def create_part(this : IOpcPartSet*, name : IOpcPartUri, contenttype : LibC::LPWSTR, compressionoptions : OPC_COMPRESSION_OPTIONS, part : IOpcPart*) : HRESULT
+    @lpVtbl.value.create_part.call(this, name, contenttype, compressionoptions, part)
+  end
+  def delete_part(this : IOpcPartSet*, name : IOpcPartUri) : HRESULT
+    @lpVtbl.value.delete_part.call(this, name)
+  end
+  def part_exists(this : IOpcPartSet*, name : IOpcPartUri, partexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.part_exists.call(this, name, partexists)
+  end
+  def get_enumerator(this : IOpcPartSet*, partenumerator : IOpcPartEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, partenumerator)
+  end
+end
+struct LibWin32::IOpcRelationshipSet
+  def query_interface(this : IOpcRelationshipSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationshipSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationshipSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_relationship(this : IOpcRelationshipSet*, relationshipidentifier : LibC::LPWSTR, relationship : IOpcRelationship*) : HRESULT
+    @lpVtbl.value.get_relationship.call(this, relationshipidentifier, relationship)
+  end
+  def create_relationship(this : IOpcRelationshipSet*, relationshipidentifier : LibC::LPWSTR, relationshiptype : LibC::LPWSTR, targeturi : IUri, targetmode : OPC_URI_TARGET_MODE, relationship : IOpcRelationship*) : HRESULT
+    @lpVtbl.value.create_relationship.call(this, relationshipidentifier, relationshiptype, targeturi, targetmode, relationship)
+  end
+  def delete_relationship(this : IOpcRelationshipSet*, relationshipidentifier : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_relationship.call(this, relationshipidentifier)
+  end
+  def relationship_exists(this : IOpcRelationshipSet*, relationshipidentifier : LibC::LPWSTR, relationshipexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.relationship_exists.call(this, relationshipidentifier, relationshipexists)
+  end
+  def get_enumerator(this : IOpcRelationshipSet*, relationshipenumerator : IOpcRelationshipEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, relationshipenumerator)
+  end
+  def get_enumerator_for_type(this : IOpcRelationshipSet*, relationshiptype : LibC::LPWSTR, relationshipenumerator : IOpcRelationshipEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator_for_type.call(this, relationshiptype, relationshipenumerator)
+  end
+  def get_relationships_content_stream(this : IOpcRelationshipSet*, contents : IStream*) : HRESULT
+    @lpVtbl.value.get_relationships_content_stream.call(this, contents)
+  end
+end
+struct LibWin32::IOpcPartEnumerator
+  def query_interface(this : IOpcPartEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcPartEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcPartEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcPartEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcPartEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcPartEnumerator*, part : IOpcPart*) : HRESULT
+    @lpVtbl.value.get_current.call(this, part)
+  end
+  def clone(this : IOpcPartEnumerator*, copy : IOpcPartEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcRelationshipEnumerator
+  def query_interface(this : IOpcRelationshipEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationshipEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationshipEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcRelationshipEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcRelationshipEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcRelationshipEnumerator*, relationship : IOpcRelationship*) : HRESULT
+    @lpVtbl.value.get_current.call(this, relationship)
+  end
+  def clone(this : IOpcRelationshipEnumerator*, copy : IOpcRelationshipEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcSignaturePartReference
+  def query_interface(this : IOpcSignaturePartReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignaturePartReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignaturePartReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_part_name(this : IOpcSignaturePartReference*, partname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.call(this, partname)
+  end
+  def get_content_type(this : IOpcSignaturePartReference*, contenttype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_type.call(this, contenttype)
+  end
+  def get_digest_method(this : IOpcSignaturePartReference*, digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_digest_method.call(this, digestmethod)
+  end
+  def get_digest_value(this : IOpcSignaturePartReference*, digestvalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_digest_value.call(this, digestvalue, count)
+  end
+  def get_transform_method(this : IOpcSignaturePartReference*, transformmethod : OPC_CANONICALIZATION_METHOD*) : HRESULT
+    @lpVtbl.value.get_transform_method.call(this, transformmethod)
+  end
+end
+struct LibWin32::IOpcSignatureRelationshipReference
+  def query_interface(this : IOpcSignatureRelationshipReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureRelationshipReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureRelationshipReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_source_uri(this : IOpcSignatureRelationshipReference*, sourceuri : IOpcUri*) : HRESULT
+    @lpVtbl.value.get_source_uri.call(this, sourceuri)
+  end
+  def get_digest_method(this : IOpcSignatureRelationshipReference*, digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_digest_method.call(this, digestmethod)
+  end
+  def get_digest_value(this : IOpcSignatureRelationshipReference*, digestvalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_digest_value.call(this, digestvalue, count)
+  end
+  def get_transform_method(this : IOpcSignatureRelationshipReference*, transformmethod : OPC_CANONICALIZATION_METHOD*) : HRESULT
+    @lpVtbl.value.get_transform_method.call(this, transformmethod)
+  end
+  def get_relationship_signing_option(this : IOpcSignatureRelationshipReference*, relationshipsigningoption : OPC_RELATIONSHIPS_SIGNING_OPTION*) : HRESULT
+    @lpVtbl.value.get_relationship_signing_option.call(this, relationshipsigningoption)
+  end
+  def get_relationship_selector_enumerator(this : IOpcSignatureRelationshipReference*, selectorenumerator : IOpcRelationshipSelectorEnumerator*) : HRESULT
+    @lpVtbl.value.get_relationship_selector_enumerator.call(this, selectorenumerator)
+  end
+end
+struct LibWin32::IOpcRelationshipSelector
+  def query_interface(this : IOpcRelationshipSelector*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationshipSelector*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationshipSelector*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_selector_type(this : IOpcRelationshipSelector*, selector : OPC_RELATIONSHIP_SELECTOR*) : HRESULT
+    @lpVtbl.value.get_selector_type.call(this, selector)
+  end
+  def get_selection_criterion(this : IOpcRelationshipSelector*, selectioncriterion : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_selection_criterion.call(this, selectioncriterion)
+  end
+end
+struct LibWin32::IOpcSignatureReference
+  def query_interface(this : IOpcSignatureReference*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureReference*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureReference*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_id(this : IOpcSignatureReference*, referenceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_id.call(this, referenceid)
+  end
+  def get_uri(this : IOpcSignatureReference*, referenceuri : IUri*) : HRESULT
+    @lpVtbl.value.get_uri.call(this, referenceuri)
+  end
+  def get_type(this : IOpcSignatureReference*, type : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_type.call(this, type)
+  end
+  def get_transform_method(this : IOpcSignatureReference*, transformmethod : OPC_CANONICALIZATION_METHOD*) : HRESULT
+    @lpVtbl.value.get_transform_method.call(this, transformmethod)
+  end
+  def get_digest_method(this : IOpcSignatureReference*, digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_digest_method.call(this, digestmethod)
+  end
+  def get_digest_value(this : IOpcSignatureReference*, digestvalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_digest_value.call(this, digestvalue, count)
+  end
+end
+struct LibWin32::IOpcSignatureCustomObject
+  def query_interface(this : IOpcSignatureCustomObject*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureCustomObject*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureCustomObject*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_xml(this : IOpcSignatureCustomObject*, xmlmarkup : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_xml.call(this, xmlmarkup, count)
+  end
+end
+struct LibWin32::IOpcDigitalSignature
+  def query_interface(this : IOpcDigitalSignature*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcDigitalSignature*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcDigitalSignature*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_namespaces(this : IOpcDigitalSignature*, prefixes : LibC::LPWSTR**, namespaces : LibC::LPWSTR**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_namespaces.call(this, prefixes, namespaces, count)
+  end
+  def get_signature_id(this : IOpcDigitalSignature*, signatureid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.call(this, signatureid)
+  end
+  def get_signature_part_name(this : IOpcDigitalSignature*, signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.call(this, signaturepartname)
+  end
+  def get_signature_method(this : IOpcDigitalSignature*, signaturemethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_method.call(this, signaturemethod)
+  end
+  def get_canonicalization_method(this : IOpcDigitalSignature*, canonicalizationmethod : OPC_CANONICALIZATION_METHOD*) : HRESULT
+    @lpVtbl.value.get_canonicalization_method.call(this, canonicalizationmethod)
+  end
+  def get_signature_value(this : IOpcDigitalSignature*, signaturevalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_value.call(this, signaturevalue, count)
+  end
+  def get_signature_part_reference_enumerator(this : IOpcDigitalSignature*, partreferenceenumerator : IOpcSignaturePartReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_signature_part_reference_enumerator.call(this, partreferenceenumerator)
+  end
+  def get_signature_relationship_reference_enumerator(this : IOpcDigitalSignature*, relationshipreferenceenumerator : IOpcSignatureRelationshipReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_signature_relationship_reference_enumerator.call(this, relationshipreferenceenumerator)
+  end
+  def get_signing_time(this : IOpcDigitalSignature*, signingtime : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signing_time.call(this, signingtime)
+  end
+  def get_time_format(this : IOpcDigitalSignature*, timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_time_format.call(this, timeformat)
+  end
+  def get_package_object_reference(this : IOpcDigitalSignature*, packageobjectreference : IOpcSignatureReference*) : HRESULT
+    @lpVtbl.value.get_package_object_reference.call(this, packageobjectreference)
+  end
+  def get_certificate_enumerator(this : IOpcDigitalSignature*, certificateenumerator : IOpcCertificateEnumerator*) : HRESULT
+    @lpVtbl.value.get_certificate_enumerator.call(this, certificateenumerator)
+  end
+  def get_custom_reference_enumerator(this : IOpcDigitalSignature*, customreferenceenumerator : IOpcSignatureReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_reference_enumerator.call(this, customreferenceenumerator)
+  end
+  def get_custom_object_enumerator(this : IOpcDigitalSignature*, customobjectenumerator : IOpcSignatureCustomObjectEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_object_enumerator.call(this, customobjectenumerator)
+  end
+  def get_signature_xml(this : IOpcDigitalSignature*, signaturexml : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_xml.call(this, signaturexml, count)
+  end
+end
+struct LibWin32::IOpcSigningOptions
+  def query_interface(this : IOpcSigningOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSigningOptions*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSigningOptions*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_signature_id(this : IOpcSigningOptions*, signatureid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.call(this, signatureid)
+  end
+  def set_signature_id(this : IOpcSigningOptions*, signatureid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_id.call(this, signatureid)
+  end
+  def get_signature_method(this : IOpcSigningOptions*, signaturemethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_method.call(this, signaturemethod)
+  end
+  def set_signature_method(this : IOpcSigningOptions*, signaturemethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_method.call(this, signaturemethod)
+  end
+  def get_default_digest_method(this : IOpcSigningOptions*, digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_default_digest_method.call(this, digestmethod)
+  end
+  def set_default_digest_method(this : IOpcSigningOptions*, digestmethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_default_digest_method.call(this, digestmethod)
+  end
+  def get_certificate_embedding_option(this : IOpcSigningOptions*, embeddingoption : OPC_CERTIFICATE_EMBEDDING_OPTION*) : HRESULT
+    @lpVtbl.value.get_certificate_embedding_option.call(this, embeddingoption)
+  end
+  def set_certificate_embedding_option(this : IOpcSigningOptions*, embeddingoption : OPC_CERTIFICATE_EMBEDDING_OPTION) : HRESULT
+    @lpVtbl.value.set_certificate_embedding_option.call(this, embeddingoption)
+  end
+  def get_time_format(this : IOpcSigningOptions*, timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_time_format.call(this, timeformat)
+  end
+  def set_time_format(this : IOpcSigningOptions*, timeformat : OPC_SIGNATURE_TIME_FORMAT) : HRESULT
+    @lpVtbl.value.set_time_format.call(this, timeformat)
+  end
+  def get_signature_part_reference_set(this : IOpcSigningOptions*, partreferenceset : IOpcSignaturePartReferenceSet*) : HRESULT
+    @lpVtbl.value.get_signature_part_reference_set.call(this, partreferenceset)
+  end
+  def get_signature_relationship_reference_set(this : IOpcSigningOptions*, relationshipreferenceset : IOpcSignatureRelationshipReferenceSet*) : HRESULT
+    @lpVtbl.value.get_signature_relationship_reference_set.call(this, relationshipreferenceset)
+  end
+  def get_custom_object_set(this : IOpcSigningOptions*, customobjectset : IOpcSignatureCustomObjectSet*) : HRESULT
+    @lpVtbl.value.get_custom_object_set.call(this, customobjectset)
+  end
+  def get_custom_reference_set(this : IOpcSigningOptions*, customreferenceset : IOpcSignatureReferenceSet*) : HRESULT
+    @lpVtbl.value.get_custom_reference_set.call(this, customreferenceset)
+  end
+  def get_certificate_set(this : IOpcSigningOptions*, certificateset : IOpcCertificateSet*) : HRESULT
+    @lpVtbl.value.get_certificate_set.call(this, certificateset)
+  end
+  def get_signature_part_name(this : IOpcSigningOptions*, signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.call(this, signaturepartname)
+  end
+  def set_signature_part_name(this : IOpcSigningOptions*, signaturepartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_part_name.call(this, signaturepartname)
+  end
+end
+struct LibWin32::IOpcDigitalSignatureManager
+  def query_interface(this : IOpcDigitalSignatureManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcDigitalSignatureManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcDigitalSignatureManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_signature_origin_part_name(this : IOpcDigitalSignatureManager*, signatureoriginpartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_origin_part_name.call(this, signatureoriginpartname)
+  end
+  def set_signature_origin_part_name(this : IOpcDigitalSignatureManager*, signatureoriginpartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_origin_part_name.call(this, signatureoriginpartname)
+  end
+  def get_signature_enumerator(this : IOpcDigitalSignatureManager*, signatureenumerator : IOpcDigitalSignatureEnumerator*) : HRESULT
+    @lpVtbl.value.get_signature_enumerator.call(this, signatureenumerator)
+  end
+  def remove_signature(this : IOpcDigitalSignatureManager*, signaturepartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.remove_signature.call(this, signaturepartname)
+  end
+  def create_signing_options(this : IOpcDigitalSignatureManager*, signingoptions : IOpcSigningOptions*) : HRESULT
+    @lpVtbl.value.create_signing_options.call(this, signingoptions)
+  end
+  def validate(this : IOpcDigitalSignatureManager*, signature : IOpcDigitalSignature, certificate : CERT_CONTEXT*, validationresult : OPC_SIGNATURE_VALIDATION_RESULT*) : HRESULT
+    @lpVtbl.value.validate.call(this, signature, certificate, validationresult)
+  end
+  def sign(this : IOpcDigitalSignatureManager*, certificate : CERT_CONTEXT*, signingoptions : IOpcSigningOptions, digitalsignature : IOpcDigitalSignature*) : HRESULT
+    @lpVtbl.value.sign.call(this, certificate, signingoptions, digitalsignature)
+  end
+  def replace_signature_xml(this : IOpcDigitalSignatureManager*, signaturepartname : IOpcPartUri, newsignaturexml : UInt8*, count : UInt32, digitalsignature : IOpcDigitalSignature*) : HRESULT
+    @lpVtbl.value.replace_signature_xml.call(this, signaturepartname, newsignaturexml, count, digitalsignature)
+  end
+end
+struct LibWin32::IOpcSignaturePartReferenceEnumerator
+  def query_interface(this : IOpcSignaturePartReferenceEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignaturePartReferenceEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignaturePartReferenceEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcSignaturePartReferenceEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcSignaturePartReferenceEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcSignaturePartReferenceEnumerator*, partreference : IOpcSignaturePartReference*) : HRESULT
+    @lpVtbl.value.get_current.call(this, partreference)
+  end
+  def clone(this : IOpcSignaturePartReferenceEnumerator*, copy : IOpcSignaturePartReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcSignatureRelationshipReferenceEnumerator
+  def query_interface(this : IOpcSignatureRelationshipReferenceEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureRelationshipReferenceEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureRelationshipReferenceEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcSignatureRelationshipReferenceEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcSignatureRelationshipReferenceEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcSignatureRelationshipReferenceEnumerator*, relationshipreference : IOpcSignatureRelationshipReference*) : HRESULT
+    @lpVtbl.value.get_current.call(this, relationshipreference)
+  end
+  def clone(this : IOpcSignatureRelationshipReferenceEnumerator*, copy : IOpcSignatureRelationshipReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcRelationshipSelectorEnumerator
+  def query_interface(this : IOpcRelationshipSelectorEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationshipSelectorEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationshipSelectorEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcRelationshipSelectorEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcRelationshipSelectorEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcRelationshipSelectorEnumerator*, relationshipselector : IOpcRelationshipSelector*) : HRESULT
+    @lpVtbl.value.get_current.call(this, relationshipselector)
+  end
+  def clone(this : IOpcRelationshipSelectorEnumerator*, copy : IOpcRelationshipSelectorEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcSignatureReferenceEnumerator
+  def query_interface(this : IOpcSignatureReferenceEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureReferenceEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureReferenceEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcSignatureReferenceEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcSignatureReferenceEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcSignatureReferenceEnumerator*, reference : IOpcSignatureReference*) : HRESULT
+    @lpVtbl.value.get_current.call(this, reference)
+  end
+  def clone(this : IOpcSignatureReferenceEnumerator*, copy : IOpcSignatureReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcSignatureCustomObjectEnumerator
+  def query_interface(this : IOpcSignatureCustomObjectEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureCustomObjectEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureCustomObjectEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcSignatureCustomObjectEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcSignatureCustomObjectEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcSignatureCustomObjectEnumerator*, customobject : IOpcSignatureCustomObject*) : HRESULT
+    @lpVtbl.value.get_current.call(this, customobject)
+  end
+  def clone(this : IOpcSignatureCustomObjectEnumerator*, copy : IOpcSignatureCustomObjectEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcCertificateEnumerator
+  def query_interface(this : IOpcCertificateEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcCertificateEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcCertificateEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcCertificateEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcCertificateEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcCertificateEnumerator*, certificate : CERT_CONTEXT**) : HRESULT
+    @lpVtbl.value.get_current.call(this, certificate)
+  end
+  def clone(this : IOpcCertificateEnumerator*, copy : IOpcCertificateEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcDigitalSignatureEnumerator
+  def query_interface(this : IOpcDigitalSignatureEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcDigitalSignatureEnumerator*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcDigitalSignatureEnumerator*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def move_next(this : IOpcDigitalSignatureEnumerator*, hasnext : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.call(this, hasnext)
+  end
+  def move_previous(this : IOpcDigitalSignatureEnumerator*, hasprevious : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_previous.call(this, hasprevious)
+  end
+  def get_current(this : IOpcDigitalSignatureEnumerator*, digitalsignature : IOpcDigitalSignature*) : HRESULT
+    @lpVtbl.value.get_current.call(this, digitalsignature)
+  end
+  def clone(this : IOpcDigitalSignatureEnumerator*, copy : IOpcDigitalSignatureEnumerator*) : HRESULT
+    @lpVtbl.value.clone.call(this, copy)
+  end
+end
+struct LibWin32::IOpcSignaturePartReferenceSet
+  def query_interface(this : IOpcSignaturePartReferenceSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignaturePartReferenceSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignaturePartReferenceSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IOpcSignaturePartReferenceSet*, parturi : IOpcPartUri, digestmethod : LibC::LPWSTR, transformmethod : OPC_CANONICALIZATION_METHOD, partreference : IOpcSignaturePartReference*) : HRESULT
+    @lpVtbl.value.create.call(this, parturi, digestmethod, transformmethod, partreference)
+  end
+  def delete(this : IOpcSignaturePartReferenceSet*, partreference : IOpcSignaturePartReference) : HRESULT
+    @lpVtbl.value.delete.call(this, partreference)
+  end
+  def get_enumerator(this : IOpcSignaturePartReferenceSet*, partreferenceenumerator : IOpcSignaturePartReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, partreferenceenumerator)
+  end
+end
+struct LibWin32::IOpcSignatureRelationshipReferenceSet
+  def query_interface(this : IOpcSignatureRelationshipReferenceSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureRelationshipReferenceSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureRelationshipReferenceSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IOpcSignatureRelationshipReferenceSet*, sourceuri : IOpcUri, digestmethod : LibC::LPWSTR, relationshipsigningoption : OPC_RELATIONSHIPS_SIGNING_OPTION, selectorset : IOpcRelationshipSelectorSet, transformmethod : OPC_CANONICALIZATION_METHOD, relationshipreference : IOpcSignatureRelationshipReference*) : HRESULT
+    @lpVtbl.value.create.call(this, sourceuri, digestmethod, relationshipsigningoption, selectorset, transformmethod, relationshipreference)
+  end
+  def create_relationship_selector_set(this : IOpcSignatureRelationshipReferenceSet*, selectorset : IOpcRelationshipSelectorSet*) : HRESULT
+    @lpVtbl.value.create_relationship_selector_set.call(this, selectorset)
+  end
+  def delete(this : IOpcSignatureRelationshipReferenceSet*, relationshipreference : IOpcSignatureRelationshipReference) : HRESULT
+    @lpVtbl.value.delete.call(this, relationshipreference)
+  end
+  def get_enumerator(this : IOpcSignatureRelationshipReferenceSet*, relationshipreferenceenumerator : IOpcSignatureRelationshipReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, relationshipreferenceenumerator)
+  end
+end
+struct LibWin32::IOpcRelationshipSelectorSet
+  def query_interface(this : IOpcRelationshipSelectorSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcRelationshipSelectorSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcRelationshipSelectorSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IOpcRelationshipSelectorSet*, selector : OPC_RELATIONSHIP_SELECTOR, selectioncriterion : LibC::LPWSTR, relationshipselector : IOpcRelationshipSelector*) : HRESULT
+    @lpVtbl.value.create.call(this, selector, selectioncriterion, relationshipselector)
+  end
+  def delete(this : IOpcRelationshipSelectorSet*, relationshipselector : IOpcRelationshipSelector) : HRESULT
+    @lpVtbl.value.delete.call(this, relationshipselector)
+  end
+  def get_enumerator(this : IOpcRelationshipSelectorSet*, relationshipselectorenumerator : IOpcRelationshipSelectorEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, relationshipselectorenumerator)
+  end
+end
+struct LibWin32::IOpcSignatureReferenceSet
+  def query_interface(this : IOpcSignatureReferenceSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureReferenceSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureReferenceSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IOpcSignatureReferenceSet*, referenceuri : IUri, referenceid : LibC::LPWSTR, type : LibC::LPWSTR, digestmethod : LibC::LPWSTR, transformmethod : OPC_CANONICALIZATION_METHOD, reference : IOpcSignatureReference*) : HRESULT
+    @lpVtbl.value.create.call(this, referenceuri, referenceid, type, digestmethod, transformmethod, reference)
+  end
+  def delete(this : IOpcSignatureReferenceSet*, reference : IOpcSignatureReference) : HRESULT
+    @lpVtbl.value.delete.call(this, reference)
+  end
+  def get_enumerator(this : IOpcSignatureReferenceSet*, referenceenumerator : IOpcSignatureReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, referenceenumerator)
+  end
+end
+struct LibWin32::IOpcSignatureCustomObjectSet
+  def query_interface(this : IOpcSignatureCustomObjectSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcSignatureCustomObjectSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcSignatureCustomObjectSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create(this : IOpcSignatureCustomObjectSet*, xmlmarkup : UInt8*, count : UInt32, customobject : IOpcSignatureCustomObject*) : HRESULT
+    @lpVtbl.value.create.call(this, xmlmarkup, count, customobject)
+  end
+  def delete(this : IOpcSignatureCustomObjectSet*, customobject : IOpcSignatureCustomObject) : HRESULT
+    @lpVtbl.value.delete.call(this, customobject)
+  end
+  def get_enumerator(this : IOpcSignatureCustomObjectSet*, customobjectenumerator : IOpcSignatureCustomObjectEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, customobjectenumerator)
+  end
+end
+struct LibWin32::IOpcCertificateSet
+  def query_interface(this : IOpcCertificateSet*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcCertificateSet*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcCertificateSet*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def add(this : IOpcCertificateSet*, certificate : CERT_CONTEXT*) : HRESULT
+    @lpVtbl.value.add.call(this, certificate)
+  end
+  def remove(this : IOpcCertificateSet*, certificate : CERT_CONTEXT*) : HRESULT
+    @lpVtbl.value.remove.call(this, certificate)
+  end
+  def get_enumerator(this : IOpcCertificateSet*, certificateenumerator : IOpcCertificateEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.call(this, certificateenumerator)
+  end
+end
+struct LibWin32::IOpcFactory
+  def query_interface(this : IOpcFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IOpcFactory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IOpcFactory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def create_package_root_uri(this : IOpcFactory*, rooturi : IOpcUri*) : HRESULT
+    @lpVtbl.value.create_package_root_uri.call(this, rooturi)
+  end
+  def create_part_uri(this : IOpcFactory*, pwzuri : LibC::LPWSTR, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.create_part_uri.call(this, pwzuri, parturi)
+  end
+  def create_stream_on_file(this : IOpcFactory*, filename : LibC::LPWSTR, iomode : OPC_STREAM_IO_MODE, securityattributes : SECURITY_ATTRIBUTES*, dwflagsandattributes : UInt32, stream : IStream*) : HRESULT
+    @lpVtbl.value.create_stream_on_file.call(this, filename, iomode, securityattributes, dwflagsandattributes, stream)
+  end
+  def create_package(this : IOpcFactory*, package : IOpcPackage*) : HRESULT
+    @lpVtbl.value.create_package.call(this, package)
+  end
+  def read_package_from_stream(this : IOpcFactory*, stream : IStream, flags : OPC_READ_FLAGS, package : IOpcPackage*) : HRESULT
+    @lpVtbl.value.read_package_from_stream.call(this, stream, flags, package)
+  end
+  def write_package_to_stream(this : IOpcFactory*, package : IOpcPackage, flags : OPC_WRITE_FLAGS, stream : IStream) : HRESULT
+    @lpVtbl.value.write_package_to_stream.call(this, package, flags, stream)
+  end
+  def create_digital_signature_manager(this : IOpcFactory*, package : IOpcPackage, signaturemanager : IOpcDigitalSignatureManager*) : HRESULT
+    @lpVtbl.value.create_digital_signature_manager.call(this, package, signaturemanager)
+  end
+end

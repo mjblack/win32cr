@@ -2839,3 +2839,4724 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IUpdateLockdown
+  def query_interface(this : IUpdateLockdown*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateLockdown*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateLockdown*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def lock_down(this : IUpdateLockdown*, flags : Int32) : HRESULT
+    @lpVtbl.value.lock_down.call(this, flags)
+  end
+end
+struct LibWin32::IStringCollection
+  def query_interface(this : IStringCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IStringCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IStringCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IStringCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IStringCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IStringCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IStringCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IStringCollection*, index : Int32, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def put_item(this : IStringCollection*, index : Int32, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_item.call(this, index, value)
+  end
+  def get__new_enum(this : IStringCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IStringCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+  def get_read_only(this : IStringCollection*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def add(this : IStringCollection*, value : UInt8*, retval : Int32*) : HRESULT
+    @lpVtbl.value.add.call(this, value, retval)
+  end
+  def clear(this : IStringCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def copy(this : IStringCollection*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, retval)
+  end
+  def insert(this : IStringCollection*, index : Int32, value : UInt8*) : HRESULT
+    @lpVtbl.value.insert.call(this, index, value)
+  end
+  def remove_at(this : IStringCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+end
+struct LibWin32::IWebProxy
+  def query_interface(this : IWebProxy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWebProxy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWebProxy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWebProxy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWebProxy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWebProxy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWebProxy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(this : IWebProxy*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_address.call(this, retval)
+  end
+  def put_address(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_address.call(this, value)
+  end
+  def get_bypass_list(this : IWebProxy*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_bypass_list.call(this, retval)
+  end
+  def put_bypass_list(this : IWebProxy*, value : IStringCollection) : HRESULT
+    @lpVtbl.value.put_bypass_list.call(this, value)
+  end
+  def get_bypass_proxy_on_local(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_bypass_proxy_on_local.call(this, retval)
+  end
+  def put_bypass_proxy_on_local(this : IWebProxy*, value : Int16) : HRESULT
+    @lpVtbl.value.put_bypass_proxy_on_local.call(this, value)
+  end
+  def get_read_only(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_user_name(this : IWebProxy*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.call(this, retval)
+  end
+  def put_user_name(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_user_name.call(this, value)
+  end
+  def set_password(this : IWebProxy*, value : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.call(this, value)
+  end
+  def prompt_for_credentials(this : IWebProxy*, parentwindow : IUnknown, title : UInt8*) : HRESULT
+    @lpVtbl.value.prompt_for_credentials.call(this, parentwindow, title)
+  end
+  def prompt_for_credentials_from_hwnd(this : IWebProxy*, parentwindow : LibC::HANDLE, title : UInt8*) : HRESULT
+    @lpVtbl.value.prompt_for_credentials_from_hwnd.call(this, parentwindow, title)
+  end
+  def get_auto_detect(this : IWebProxy*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_detect.call(this, retval)
+  end
+  def put_auto_detect(this : IWebProxy*, value : Int16) : HRESULT
+    @lpVtbl.value.put_auto_detect.call(this, value)
+  end
+end
+struct LibWin32::ISystemInformation
+  def query_interface(this : ISystemInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISystemInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISystemInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISystemInformation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISystemInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISystemInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISystemInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_oem_hardware_support_link(this : ISystemInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_oem_hardware_support_link.call(this, retval)
+  end
+  def get_reboot_required(this : ISystemInformation*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsUpdateAgentInfo
+  def query_interface(this : IWindowsUpdateAgentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsUpdateAgentInfo*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsUpdateAgentInfo*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsUpdateAgentInfo*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsUpdateAgentInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsUpdateAgentInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsUpdateAgentInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_info(this : IWindowsUpdateAgentInfo*, varinfoidentifier : VARIANT, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_info.call(this, varinfoidentifier, retval)
+  end
+end
+struct LibWin32::IAutomaticUpdatesResults
+  def query_interface(this : IAutomaticUpdatesResults*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdatesResults*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdatesResults*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdatesResults*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdatesResults*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdatesResults*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdatesResults*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_last_search_success_date(this : IAutomaticUpdatesResults*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_search_success_date.call(this, retval)
+  end
+  def get_last_installation_success_date(this : IAutomaticUpdatesResults*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_last_installation_success_date.call(this, retval)
+  end
+end
+struct LibWin32::IAutomaticUpdatesSettings
+  def query_interface(this : IAutomaticUpdatesSettings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdatesSettings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdatesSettings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdatesSettings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdatesSettings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdatesSettings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_notification_level(this : IAutomaticUpdatesSettings*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
+  end
+  def put_notification_level(this : IAutomaticUpdatesSettings*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
+  end
+  def get_read_only(this : IAutomaticUpdatesSettings*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_required(this : IAutomaticUpdatesSettings*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
+  end
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
+  end
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
+  end
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
+  end
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
+  end
+  def refresh(this : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+end
+struct LibWin32::IAutomaticUpdatesSettings2
+  def query_interface(this : IAutomaticUpdatesSettings2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdatesSettings2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdatesSettings2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdatesSettings2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdatesSettings2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdatesSettings2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_notification_level(this : IAutomaticUpdatesSettings2*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
+  end
+  def put_notification_level(this : IAutomaticUpdatesSettings2*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
+  end
+  def get_read_only(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_required(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
+  end
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings2*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
+  end
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings2*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
+  end
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
+  end
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings2*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
+  end
+  def refresh(this : IAutomaticUpdatesSettings2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IAutomaticUpdatesSettings2*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_include_recommended_updates(this : IAutomaticUpdatesSettings2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_recommended_updates.call(this, retval)
+  end
+  def put_include_recommended_updates(this : IAutomaticUpdatesSettings2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_recommended_updates.call(this, value)
+  end
+  def check_permission(this : IAutomaticUpdatesSettings2*, usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
+    @lpVtbl.value.check_permission.call(this, usertype, permissiontype, userhaspermission)
+  end
+end
+struct LibWin32::IAutomaticUpdatesSettings3
+  def query_interface(this : IAutomaticUpdatesSettings3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdatesSettings3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdatesSettings3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdatesSettings3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdatesSettings3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdatesSettings3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdatesSettings3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_notification_level(this : IAutomaticUpdatesSettings3*, retval : AutomaticUpdatesNotificationLevel*) : HRESULT
+    @lpVtbl.value.get_notification_level.call(this, retval)
+  end
+  def put_notification_level(this : IAutomaticUpdatesSettings3*, value : AutomaticUpdatesNotificationLevel) : HRESULT
+    @lpVtbl.value.put_notification_level.call(this, value)
+  end
+  def get_read_only(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_required(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_required.call(this, retval)
+  end
+  def get_scheduled_installation_day(this : IAutomaticUpdatesSettings3*, retval : AutomaticUpdatesScheduledInstallationDay*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_day.call(this, retval)
+  end
+  def put_scheduled_installation_day(this : IAutomaticUpdatesSettings3*, value : AutomaticUpdatesScheduledInstallationDay) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_day.call(this, value)
+  end
+  def get_scheduled_installation_time(this : IAutomaticUpdatesSettings3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_scheduled_installation_time.call(this, retval)
+  end
+  def put_scheduled_installation_time(this : IAutomaticUpdatesSettings3*, value : Int32) : HRESULT
+    @lpVtbl.value.put_scheduled_installation_time.call(this, value)
+  end
+  def refresh(this : IAutomaticUpdatesSettings3*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def save(this : IAutomaticUpdatesSettings3*) : HRESULT
+    @lpVtbl.value.save.call(this)
+  end
+  def get_include_recommended_updates(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_recommended_updates.call(this, retval)
+  end
+  def put_include_recommended_updates(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_recommended_updates.call(this, value)
+  end
+  def check_permission(this : IAutomaticUpdatesSettings3*, usertype : AutomaticUpdatesUserType, permissiontype : AutomaticUpdatesPermissionType, userhaspermission : Int16*) : HRESULT
+    @lpVtbl.value.check_permission.call(this, usertype, permissiontype, userhaspermission)
+  end
+  def get_non_administrators_elevated(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_non_administrators_elevated.call(this, retval)
+  end
+  def put_non_administrators_elevated(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_non_administrators_elevated.call(this, value)
+  end
+  def get_featured_updates_enabled(this : IAutomaticUpdatesSettings3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_featured_updates_enabled.call(this, retval)
+  end
+  def put_featured_updates_enabled(this : IAutomaticUpdatesSettings3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_featured_updates_enabled.call(this, value)
+  end
+end
+struct LibWin32::IAutomaticUpdates
+  def query_interface(this : IAutomaticUpdates*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdates*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdates*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdates*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdates*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdates*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdates*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def detect_now(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.detect_now.call(this)
+  end
+  def pause(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def show_settings_dialog(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.show_settings_dialog.call(this)
+  end
+  def get_settings(this : IAutomaticUpdates*, retval : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, retval)
+  end
+  def get_service_enabled(this : IAutomaticUpdates*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_service_enabled.call(this, retval)
+  end
+  def enable_service(this : IAutomaticUpdates*) : HRESULT
+    @lpVtbl.value.enable_service.call(this)
+  end
+end
+struct LibWin32::IAutomaticUpdates2
+  def query_interface(this : IAutomaticUpdates2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IAutomaticUpdates2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IAutomaticUpdates2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IAutomaticUpdates2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IAutomaticUpdates2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IAutomaticUpdates2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IAutomaticUpdates2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def detect_now(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.detect_now.call(this)
+  end
+  def pause(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.pause.call(this)
+  end
+  def resume(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.resume.call(this)
+  end
+  def show_settings_dialog(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.show_settings_dialog.call(this)
+  end
+  def get_settings(this : IAutomaticUpdates2*, retval : IAutomaticUpdatesSettings*) : HRESULT
+    @lpVtbl.value.get_settings.call(this, retval)
+  end
+  def get_service_enabled(this : IAutomaticUpdates2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_service_enabled.call(this, retval)
+  end
+  def enable_service(this : IAutomaticUpdates2*) : HRESULT
+    @lpVtbl.value.enable_service.call(this)
+  end
+  def get_results(this : IAutomaticUpdates2*, retval : IAutomaticUpdatesResults*) : HRESULT
+    @lpVtbl.value.get_results.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateIdentity
+  def query_interface(this : IUpdateIdentity*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateIdentity*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateIdentity*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateIdentity*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateIdentity*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateIdentity*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateIdentity*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_revision_number(this : IUpdateIdentity*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_revision_number.call(this, retval)
+  end
+  def get_update_id(this : IUpdateIdentity*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_update_id.call(this, retval)
+  end
+end
+struct LibWin32::IImageInformation
+  def query_interface(this : IImageInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IImageInformation*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IImageInformation*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IImageInformation*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IImageInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IImageInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IImageInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_alt_text(this : IImageInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_alt_text.call(this, retval)
+  end
+  def get_height(this : IImageInformation*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, retval)
+  end
+  def get_source(this : IImageInformation*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.call(this, retval)
+  end
+  def get_width(this : IImageInformation*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_width.call(this, retval)
+  end
+end
+struct LibWin32::ICategory
+  def query_interface(this : ICategory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICategory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICategory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICategory*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICategory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICategory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICategory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
+  end
+  def get_category_id(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_category_id.call(this, retval)
+  end
+  def get_children(this : ICategory*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_children.call(this, retval)
+  end
+  def get_description(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_image(this : ICategory*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_order(this : ICategory*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_order.call(this, retval)
+  end
+  def get_parent(this : ICategory*, retval : ICategory*) : HRESULT
+    @lpVtbl.value.get_parent.call(this, retval)
+  end
+  def get_type(this : ICategory*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_updates(this : ICategory*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+end
+struct LibWin32::ICategoryCollection
+  def query_interface(this : ICategoryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ICategoryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ICategoryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ICategoryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ICategoryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ICategoryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ICategoryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : ICategoryCollection*, index : Int32, retval : ICategory*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : ICategoryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : ICategoryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::IInstallationBehavior
+  def query_interface(this : IInstallationBehavior*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationBehavior*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationBehavior*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationBehavior*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationBehavior*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationBehavior*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationBehavior*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_can_request_user_input(this : IInstallationBehavior*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_request_user_input.call(this, retval)
+  end
+  def get_impact(this : IInstallationBehavior*, retval : InstallationImpact*) : HRESULT
+    @lpVtbl.value.get_impact.call(this, retval)
+  end
+  def get_reboot_behavior(this : IInstallationBehavior*, retval : InstallationRebootBehavior*) : HRESULT
+    @lpVtbl.value.get_reboot_behavior.call(this, retval)
+  end
+  def get_requires_network_connectivity(this : IInstallationBehavior*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_requires_network_connectivity.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateDownloadContent
+  def query_interface(this : IUpdateDownloadContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateDownloadContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateDownloadContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateDownloadContent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateDownloadContent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateDownloadContent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateDownloadContent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_download_url(this : IUpdateDownloadContent*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateDownloadContent2
+  def query_interface(this : IUpdateDownloadContent2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateDownloadContent2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateDownloadContent2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateDownloadContent2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateDownloadContent2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateDownloadContent2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateDownloadContent2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_download_url(this : IUpdateDownloadContent2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_download_url.call(this, retval)
+  end
+  def get_is_delta_compressed_content(this : IUpdateDownloadContent2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_delta_compressed_content.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateDownloadContentCollection
+  def query_interface(this : IUpdateDownloadContentCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateDownloadContentCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateDownloadContentCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateDownloadContentCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateDownloadContentCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateDownloadContentCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateDownloadContentCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IUpdateDownloadContentCollection*, index : Int32, retval : IUpdateDownloadContent*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : IUpdateDownloadContentCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IUpdateDownloadContentCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::IUpdate
+  def query_interface(this : IUpdate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IUpdate*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IUpdate*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IUpdate*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IUpdate*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IUpdate*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IUpdate*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IUpdate*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IUpdate*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IUpdate*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IUpdate*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IUpdate*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IUpdate*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdate
+  def query_interface(this : IWindowsDriverUpdate*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdate*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdate*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdate*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IWindowsDriverUpdate*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IWindowsDriverUpdate*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IWindowsDriverUpdate*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IWindowsDriverUpdate*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IWindowsDriverUpdate*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IWindowsDriverUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IWindowsDriverUpdate*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IWindowsDriverUpdate*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IWindowsDriverUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IWindowsDriverUpdate*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IWindowsDriverUpdate*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IWindowsDriverUpdate*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IWindowsDriverUpdate*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IWindowsDriverUpdate*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IWindowsDriverUpdate*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IWindowsDriverUpdate*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_driver_class(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdate*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdate*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdate*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+end
+struct LibWin32::IUpdate2
+  def query_interface(this : IUpdate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdate2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdate2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdate2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdate2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdate2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IUpdate2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IUpdate2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IUpdate2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IUpdate2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IUpdate2*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IUpdate2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IUpdate2*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IUpdate2*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IUpdate2*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IUpdate2*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IUpdate2*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IUpdate2*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_reboot_required(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IUpdate2*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+end
+struct LibWin32::IUpdate3
+  def query_interface(this : IUpdate3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdate3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdate3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdate3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdate3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdate3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdate3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IUpdate3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IUpdate3*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IUpdate3*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IUpdate3*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IUpdate3*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IUpdate3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IUpdate3*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IUpdate3*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IUpdate3*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IUpdate3*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IUpdate3*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IUpdate3*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_reboot_required(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IUpdate3*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+end
+struct LibWin32::IUpdate4
+  def query_interface(this : IUpdate4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdate4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdate4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdate4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdate4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdate4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdate4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IUpdate4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IUpdate4*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IUpdate4*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IUpdate4*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IUpdate4*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IUpdate4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IUpdate4*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IUpdate4*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IUpdate4*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IUpdate4*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IUpdate4*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IUpdate4*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_reboot_required(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IUpdate4*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+  def get_per_user(this : IUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
+  end
+end
+struct LibWin32::IUpdate5
+  def query_interface(this : IUpdate5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdate5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdate5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdate5*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdate5*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdate5*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdate5*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IUpdate5*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IUpdate5*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IUpdate5*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IUpdate5*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IUpdate5*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IUpdate5*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IUpdate5*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IUpdate5*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IUpdate5*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IUpdate5*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IUpdate5*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IUpdate5*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_reboot_required(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IUpdate5*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+  def get_per_user(this : IUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
+  end
+  def get_auto_selection(this : IUpdate5*, retval : AutoSelectionMode*) : HRESULT
+    @lpVtbl.value.get_auto_selection.call(this, retval)
+  end
+  def get_auto_download(this : IUpdate5*, retval : AutoDownloadMode*) : HRESULT
+    @lpVtbl.value.get_auto_download.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdate2
+  def query_interface(this : IWindowsDriverUpdate2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdate2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdate2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdate2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdate2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdate2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdate2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IWindowsDriverUpdate2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IWindowsDriverUpdate2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IWindowsDriverUpdate2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IWindowsDriverUpdate2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IWindowsDriverUpdate2*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IWindowsDriverUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IWindowsDriverUpdate2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IWindowsDriverUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IWindowsDriverUpdate2*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IWindowsDriverUpdate2*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate2*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IWindowsDriverUpdate2*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IWindowsDriverUpdate2*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IWindowsDriverUpdate2*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IWindowsDriverUpdate2*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IWindowsDriverUpdate2*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_driver_class(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdate2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdate2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdate2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+  def get_reboot_required(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IWindowsDriverUpdate2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IWindowsDriverUpdate2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IWindowsDriverUpdate2*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+end
+struct LibWin32::IWindowsDriverUpdate3
+  def query_interface(this : IWindowsDriverUpdate3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdate3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdate3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdate3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdate3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdate3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdate3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IWindowsDriverUpdate3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IWindowsDriverUpdate3*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IWindowsDriverUpdate3*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IWindowsDriverUpdate3*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IWindowsDriverUpdate3*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IWindowsDriverUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IWindowsDriverUpdate3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IWindowsDriverUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IWindowsDriverUpdate3*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IWindowsDriverUpdate3*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate3*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IWindowsDriverUpdate3*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IWindowsDriverUpdate3*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IWindowsDriverUpdate3*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IWindowsDriverUpdate3*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IWindowsDriverUpdate3*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_driver_class(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdate3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdate3*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdate3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+  def get_reboot_required(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IWindowsDriverUpdate3*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IWindowsDriverUpdate3*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IWindowsDriverUpdate3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdateEntry
+  def query_interface(this : IWindowsDriverUpdateEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdateEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdateEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdateEntry*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdateEntry*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdateEntry*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdateEntry*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_driver_class(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdateEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdateEntry*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdateEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdateEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdateEntryCollection
+  def query_interface(this : IWindowsDriverUpdateEntryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdateEntryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdateEntryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdateEntryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdateEntryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdateEntryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdateEntryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IWindowsDriverUpdateEntryCollection*, index : Int32, retval : IWindowsDriverUpdateEntry*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : IWindowsDriverUpdateEntryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IWindowsDriverUpdateEntryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdate4
+  def query_interface(this : IWindowsDriverUpdate4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdate4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdate4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdate4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdate4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdate4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdate4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IWindowsDriverUpdate4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IWindowsDriverUpdate4*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IWindowsDriverUpdate4*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IWindowsDriverUpdate4*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IWindowsDriverUpdate4*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IWindowsDriverUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IWindowsDriverUpdate4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IWindowsDriverUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IWindowsDriverUpdate4*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IWindowsDriverUpdate4*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate4*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IWindowsDriverUpdate4*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IWindowsDriverUpdate4*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IWindowsDriverUpdate4*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IWindowsDriverUpdate4*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IWindowsDriverUpdate4*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_driver_class(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdate4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdate4*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdate4*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+  def get_reboot_required(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IWindowsDriverUpdate4*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IWindowsDriverUpdate4*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+  def get_windows_driver_update_entries(this : IWindowsDriverUpdate4*, retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
+    @lpVtbl.value.get_windows_driver_update_entries.call(this, retval)
+  end
+  def get_per_user(this : IWindowsDriverUpdate4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
+  end
+end
+struct LibWin32::IWindowsDriverUpdate5
+  def query_interface(this : IWindowsDriverUpdate5*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWindowsDriverUpdate5*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWindowsDriverUpdate5*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWindowsDriverUpdate5*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWindowsDriverUpdate5*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWindowsDriverUpdate5*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWindowsDriverUpdate5*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_title(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_auto_select_on_web_sites(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_select_on_web_sites.call(this, retval)
+  end
+  def get_bundled_updates(this : IWindowsDriverUpdate5*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_bundled_updates.call(this, retval)
+  end
+  def get_can_require_source(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_require_source.call(this, retval)
+  end
+  def get_categories(this : IWindowsDriverUpdate5*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+  def get_deadline(this : IWindowsDriverUpdate5*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_deadline.call(this, retval)
+  end
+  def get_delta_compressed_content_available(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_available.call(this, retval)
+  end
+  def get_delta_compressed_content_preferred(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_delta_compressed_content_preferred.call(this, retval)
+  end
+  def get_description(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_eula_accepted(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_eula_accepted.call(this, retval)
+  end
+  def get_eula_text(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_eula_text.call(this, retval)
+  end
+  def get_handler_id(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_handler_id.call(this, retval)
+  end
+  def get_identity(this : IWindowsDriverUpdate5*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.call(this, retval)
+  end
+  def get_image(this : IWindowsDriverUpdate5*, retval : IImageInformation*) : HRESULT
+    @lpVtbl.value.get_image.call(this, retval)
+  end
+  def get_installation_behavior(this : IWindowsDriverUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_installation_behavior.call(this, retval)
+  end
+  def get_is_beta(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_beta.call(this, retval)
+  end
+  def get_is_downloaded(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_downloaded.call(this, retval)
+  end
+  def get_is_hidden(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_hidden.call(this, retval)
+  end
+  def put_is_hidden(this : IWindowsDriverUpdate5*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_hidden.call(this, value)
+  end
+  def get_is_installed(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_installed.call(this, retval)
+  end
+  def get_is_mandatory(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_mandatory.call(this, retval)
+  end
+  def get_is_uninstallable(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_uninstallable.call(this, retval)
+  end
+  def get_languages(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_languages.call(this, retval)
+  end
+  def get_last_deployment_change_time(this : IWindowsDriverUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_deployment_change_time.call(this, retval)
+  end
+  def get_max_download_size(this : IWindowsDriverUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_max_download_size.call(this, retval)
+  end
+  def get_min_download_size(this : IWindowsDriverUpdate5*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_min_download_size.call(this, retval)
+  end
+  def get_more_info_urls(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_more_info_urls.call(this, retval)
+  end
+  def get_msrc_severity(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_msrc_severity.call(this, retval)
+  end
+  def get_recommended_cpu_speed(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_cpu_speed.call(this, retval)
+  end
+  def get_recommended_hard_disk_space(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_hard_disk_space.call(this, retval)
+  end
+  def get_recommended_memory(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_recommended_memory.call(this, retval)
+  end
+  def get_release_notes(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_release_notes.call(this, retval)
+  end
+  def get_security_bulletin_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_security_bulletin_i_ds.call(this, retval)
+  end
+  def get_superseded_update_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_superseded_update_i_ds.call(this, retval)
+  end
+  def get_support_url(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_type(this : IWindowsDriverUpdate5*, retval : UpdateType*) : HRESULT
+    @lpVtbl.value.get_type.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_uninstallation_behavior(this : IWindowsDriverUpdate5*, retval : IInstallationBehavior*) : HRESULT
+    @lpVtbl.value.get_uninstallation_behavior.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_kb_article_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_kb_article_i_ds.call(this, retval)
+  end
+  def accept_eula(this : IWindowsDriverUpdate5*) : HRESULT
+    @lpVtbl.value.accept_eula.call(this)
+  end
+  def get_deployment_action(this : IWindowsDriverUpdate5*, retval : DeploymentAction*) : HRESULT
+    @lpVtbl.value.get_deployment_action.call(this, retval)
+  end
+  def copy_from_cache(this : IWindowsDriverUpdate5*, path : UInt8*, toextractcabfiles : Int16) : HRESULT
+    @lpVtbl.value.copy_from_cache.call(this, path, toextractcabfiles)
+  end
+  def get_download_priority(this : IWindowsDriverUpdate5*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_download_priority.call(this, retval)
+  end
+  def get_download_contents(this : IWindowsDriverUpdate5*, retval : IUpdateDownloadContentCollection*) : HRESULT
+    @lpVtbl.value.get_download_contents.call(this, retval)
+  end
+  def get_driver_class(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_class.call(this, retval)
+  end
+  def get_driver_hardware_id(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_hardware_id.call(this, retval)
+  end
+  def get_driver_manufacturer(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_manufacturer.call(this, retval)
+  end
+  def get_driver_model(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_model.call(this, retval)
+  end
+  def get_driver_provider(this : IWindowsDriverUpdate5*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_driver_provider.call(this, retval)
+  end
+  def get_driver_ver_date(this : IWindowsDriverUpdate5*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_driver_ver_date.call(this, retval)
+  end
+  def get_device_problem_number(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_problem_number.call(this, retval)
+  end
+  def get_device_status(this : IWindowsDriverUpdate5*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_device_status.call(this, retval)
+  end
+  def get_reboot_required(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_is_present(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_present.call(this, retval)
+  end
+  def get_cve_i_ds(this : IWindowsDriverUpdate5*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_cve_i_ds.call(this, retval)
+  end
+  def copy_to_cache(this : IWindowsDriverUpdate5*, pfiles : IStringCollection) : HRESULT
+    @lpVtbl.value.copy_to_cache.call(this, pfiles)
+  end
+  def get_browse_only(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_browse_only.call(this, retval)
+  end
+  def get_windows_driver_update_entries(this : IWindowsDriverUpdate5*, retval : IWindowsDriverUpdateEntryCollection*) : HRESULT
+    @lpVtbl.value.get_windows_driver_update_entries.call(this, retval)
+  end
+  def get_per_user(this : IWindowsDriverUpdate5*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_per_user.call(this, retval)
+  end
+  def get_auto_selection(this : IWindowsDriverUpdate5*, retval : AutoSelectionMode*) : HRESULT
+    @lpVtbl.value.get_auto_selection.call(this, retval)
+  end
+  def get_auto_download(this : IWindowsDriverUpdate5*, retval : AutoDownloadMode*) : HRESULT
+    @lpVtbl.value.get_auto_download.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateCollection
+  def query_interface(this : IUpdateCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IUpdateCollection*, index : Int32, retval : IUpdate*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def put_item(this : IUpdateCollection*, index : Int32, value : IUpdate) : HRESULT
+    @lpVtbl.value.put_item.call(this, index, value)
+  end
+  def get__new_enum(this : IUpdateCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IUpdateCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+  def get_read_only(this : IUpdateCollection*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def add(this : IUpdateCollection*, value : IUpdate, retval : Int32*) : HRESULT
+    @lpVtbl.value.add.call(this, value, retval)
+  end
+  def clear(this : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.clear.call(this)
+  end
+  def copy(this : IUpdateCollection*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.copy.call(this, retval)
+  end
+  def insert(this : IUpdateCollection*, index : Int32, value : IUpdate) : HRESULT
+    @lpVtbl.value.insert.call(this, index, value)
+  end
+  def remove_at(this : IUpdateCollection*, index : Int32) : HRESULT
+    @lpVtbl.value.remove_at.call(this, index)
+  end
+end
+struct LibWin32::IUpdateException
+  def query_interface(this : IUpdateException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateException*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateException*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateException*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateException*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(this : IUpdateException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.call(this, retval)
+  end
+  def get_h_result(this : IUpdateException*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_context(this : IUpdateException*, retval : UpdateExceptionContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, retval)
+  end
+end
+struct LibWin32::IInvalidProductLicenseException
+  def query_interface(this : IInvalidProductLicenseException*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInvalidProductLicenseException*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInvalidProductLicenseException*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInvalidProductLicenseException*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInvalidProductLicenseException*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInvalidProductLicenseException*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInvalidProductLicenseException*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(this : IInvalidProductLicenseException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.call(this, retval)
+  end
+  def get_h_result(this : IInvalidProductLicenseException*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_context(this : IInvalidProductLicenseException*, retval : UpdateExceptionContext*) : HRESULT
+    @lpVtbl.value.get_context.call(this, retval)
+  end
+  def get_product(this : IInvalidProductLicenseException*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateExceptionCollection
+  def query_interface(this : IUpdateExceptionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateExceptionCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateExceptionCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateExceptionCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateExceptionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateExceptionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateExceptionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IUpdateExceptionCollection*, index : Int32, retval : IUpdateException*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : IUpdateExceptionCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IUpdateExceptionCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::ISearchResult
+  def query_interface(this : ISearchResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISearchResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISearchResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISearchResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISearchResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISearchResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISearchResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_result_code(this : ISearchResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+  def get_root_categories(this : ISearchResult*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_root_categories.call(this, retval)
+  end
+  def get_updates(this : ISearchResult*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def get_warnings(this : ISearchResult*, retval : IUpdateExceptionCollection*) : HRESULT
+    @lpVtbl.value.get_warnings.call(this, retval)
+  end
+end
+struct LibWin32::ISearchJob
+  def query_interface(this : ISearchJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISearchJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISearchJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISearchJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISearchJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISearchJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISearchJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_async_state(this : ISearchJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
+  end
+  def get_is_completed(this : ISearchJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
+  end
+  def clean_up(this : ISearchJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
+  end
+  def request_abort(this : ISearchJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
+  end
+end
+struct LibWin32::ISearchCompletedCallbackArgs
+  def query_interface(this : ISearchCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISearchCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISearchCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ISearchCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ISearchCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ISearchCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ISearchCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::ISearchCompletedCallback
+  def query_interface(this : ISearchCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ISearchCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ISearchCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : ISearchCompletedCallback*, searchjob : ISearchJob, callbackargs : ISearchCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, searchjob, callbackargs)
+  end
+end
+struct LibWin32::IUpdateHistoryEntry
+  def query_interface(this : IUpdateHistoryEntry*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateHistoryEntry*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateHistoryEntry*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateHistoryEntry*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateHistoryEntry*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateHistoryEntry*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateHistoryEntry*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_operation(this : IUpdateHistoryEntry*, retval : UpdateOperation*) : HRESULT
+    @lpVtbl.value.get_operation.call(this, retval)
+  end
+  def get_result_code(this : IUpdateHistoryEntry*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+  def get_h_result(this : IUpdateHistoryEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_date(this : IUpdateHistoryEntry*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_date.call(this, retval)
+  end
+  def get_update_identity(this : IUpdateHistoryEntry*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_update_identity.call(this, retval)
+  end
+  def get_title(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_description(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_unmapped_result_code(this : IUpdateHistoryEntry*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_unmapped_result_code.call(this, retval)
+  end
+  def get_client_application_id(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def get_server_selection(this : IUpdateHistoryEntry*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
+  end
+  def get_service_id(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdateHistoryEntry*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_support_url(this : IUpdateHistoryEntry*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateHistoryEntry2
+  def query_interface(this : IUpdateHistoryEntry2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateHistoryEntry2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateHistoryEntry2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateHistoryEntry2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateHistoryEntry2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateHistoryEntry2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateHistoryEntry2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_operation(this : IUpdateHistoryEntry2*, retval : UpdateOperation*) : HRESULT
+    @lpVtbl.value.get_operation.call(this, retval)
+  end
+  def get_result_code(this : IUpdateHistoryEntry2*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+  def get_h_result(this : IUpdateHistoryEntry2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_date(this : IUpdateHistoryEntry2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_date.call(this, retval)
+  end
+  def get_update_identity(this : IUpdateHistoryEntry2*, retval : IUpdateIdentity*) : HRESULT
+    @lpVtbl.value.get_update_identity.call(this, retval)
+  end
+  def get_title(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.call(this, retval)
+  end
+  def get_description(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, retval)
+  end
+  def get_unmapped_result_code(this : IUpdateHistoryEntry2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_unmapped_result_code.call(this, retval)
+  end
+  def get_client_application_id(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def get_server_selection(this : IUpdateHistoryEntry2*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
+  end
+  def get_service_id(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def get_uninstallation_steps(this : IUpdateHistoryEntry2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_uninstallation_steps.call(this, retval)
+  end
+  def get_uninstallation_notes(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_uninstallation_notes.call(this, retval)
+  end
+  def get_support_url(this : IUpdateHistoryEntry2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_support_url.call(this, retval)
+  end
+  def get_categories(this : IUpdateHistoryEntry2*, retval : ICategoryCollection*) : HRESULT
+    @lpVtbl.value.get_categories.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateHistoryEntryCollection
+  def query_interface(this : IUpdateHistoryEntryCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateHistoryEntryCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateHistoryEntryCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateHistoryEntryCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateHistoryEntryCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateHistoryEntryCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateHistoryEntryCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IUpdateHistoryEntryCollection*, index : Int32, retval : IUpdateHistoryEntry*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : IUpdateHistoryEntryCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IUpdateHistoryEntryCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateSearcher
+  def query_interface(this : IUpdateSearcher*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSearcher*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSearcher*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSearcher*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSearcher*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSearcher*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSearcher*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
+  end
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
+  end
+  def get_client_application_id(this : IUpdateSearcher*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSearcher*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
+  end
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
+  end
+  def get_server_selection(this : IUpdateSearcher*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
+  end
+  def put_server_selection(this : IUpdateSearcher*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
+  end
+  def begin_search(this : IUpdateSearcher*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
+  end
+  def end_search(this : IUpdateSearcher*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
+  end
+  def escape_string(this : IUpdateSearcher*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
+  end
+  def query_history(this : IUpdateSearcher*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
+  end
+  def search(this : IUpdateSearcher*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
+  end
+  def get_online(this : IUpdateSearcher*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
+  end
+  def put_online(this : IUpdateSearcher*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
+  end
+  def get_total_history_count(this : IUpdateSearcher*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
+  end
+  def get_service_id(this : IUpdateSearcher*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def put_service_id(this : IUpdateSearcher*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
+  end
+end
+struct LibWin32::IUpdateSearcher2
+  def query_interface(this : IUpdateSearcher2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSearcher2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSearcher2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSearcher2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSearcher2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSearcher2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSearcher2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
+  end
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
+  end
+  def get_client_application_id(this : IUpdateSearcher2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSearcher2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
+  end
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
+  end
+  def get_server_selection(this : IUpdateSearcher2*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
+  end
+  def put_server_selection(this : IUpdateSearcher2*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
+  end
+  def begin_search(this : IUpdateSearcher2*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
+  end
+  def end_search(this : IUpdateSearcher2*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
+  end
+  def escape_string(this : IUpdateSearcher2*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
+  end
+  def query_history(this : IUpdateSearcher2*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
+  end
+  def search(this : IUpdateSearcher2*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
+  end
+  def get_online(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
+  end
+  def put_online(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
+  end
+  def get_total_history_count(this : IUpdateSearcher2*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
+  end
+  def get_service_id(this : IUpdateSearcher2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def put_service_id(this : IUpdateSearcher2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
+  end
+  def get_ignore_download_priority(this : IUpdateSearcher2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_ignore_download_priority.call(this, retval)
+  end
+  def put_ignore_download_priority(this : IUpdateSearcher2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_ignore_download_priority.call(this, value)
+  end
+end
+struct LibWin32::IUpdateSearcher3
+  def query_interface(this : IUpdateSearcher3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSearcher3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSearcher3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSearcher3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSearcher3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSearcher3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSearcher3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_can_automatically_upgrade_service(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_automatically_upgrade_service.call(this, retval)
+  end
+  def put_can_automatically_upgrade_service(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_can_automatically_upgrade_service.call(this, value)
+  end
+  def get_client_application_id(this : IUpdateSearcher3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSearcher3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_include_potentially_superseded_updates(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_include_potentially_superseded_updates.call(this, retval)
+  end
+  def put_include_potentially_superseded_updates(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_include_potentially_superseded_updates.call(this, value)
+  end
+  def get_server_selection(this : IUpdateSearcher3*, retval : ServerSelection*) : HRESULT
+    @lpVtbl.value.get_server_selection.call(this, retval)
+  end
+  def put_server_selection(this : IUpdateSearcher3*, value : ServerSelection) : HRESULT
+    @lpVtbl.value.put_server_selection.call(this, value)
+  end
+  def begin_search(this : IUpdateSearcher3*, criteria : UInt8*, oncompleted : IUnknown, state : VARIANT, retval : ISearchJob*) : HRESULT
+    @lpVtbl.value.begin_search.call(this, criteria, oncompleted, state, retval)
+  end
+  def end_search(this : IUpdateSearcher3*, searchjob : ISearchJob, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.end_search.call(this, searchjob, retval)
+  end
+  def escape_string(this : IUpdateSearcher3*, unescaped : UInt8*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.escape_string.call(this, unescaped, retval)
+  end
+  def query_history(this : IUpdateSearcher3*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, startindex, count, retval)
+  end
+  def search(this : IUpdateSearcher3*, criteria : UInt8*, retval : ISearchResult*) : HRESULT
+    @lpVtbl.value.search.call(this, criteria, retval)
+  end
+  def get_online(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_online.call(this, retval)
+  end
+  def put_online(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_online.call(this, value)
+  end
+  def get_total_history_count(this : IUpdateSearcher3*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_history_count.call(this, retval)
+  end
+  def get_service_id(this : IUpdateSearcher3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def put_service_id(this : IUpdateSearcher3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_id.call(this, value)
+  end
+  def get_ignore_download_priority(this : IUpdateSearcher3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_ignore_download_priority.call(this, retval)
+  end
+  def put_ignore_download_priority(this : IUpdateSearcher3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_ignore_download_priority.call(this, value)
+  end
+  def get_search_scope(this : IUpdateSearcher3*, retval : SearchScope*) : HRESULT
+    @lpVtbl.value.get_search_scope.call(this, retval)
+  end
+  def put_search_scope(this : IUpdateSearcher3*, value : SearchScope) : HRESULT
+    @lpVtbl.value.put_search_scope.call(this, value)
+  end
+end
+struct LibWin32::IUpdateDownloadResult
+  def query_interface(this : IUpdateDownloadResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateDownloadResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateDownloadResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateDownloadResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateDownloadResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateDownloadResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateDownloadResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_result(this : IUpdateDownloadResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_result_code(this : IUpdateDownloadResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+end
+struct LibWin32::IDownloadResult
+  def query_interface(this : IDownloadResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDownloadResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDownloadResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDownloadResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDownloadResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_result(this : IDownloadResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_result_code(this : IDownloadResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+  def get_update_result(this : IDownloadResult*, updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
+  end
+end
+struct LibWin32::IDownloadProgress
+  def query_interface(this : IDownloadProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDownloadProgress*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDownloadProgress*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDownloadProgress*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDownloadProgress*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_update_bytes_downloaded(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_current_update_bytes_downloaded.call(this, retval)
+  end
+  def get_current_update_bytes_to_download(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_current_update_bytes_to_download.call(this, retval)
+  end
+  def get_current_update_index(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_index.call(this, retval)
+  end
+  def get_percent_complete(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_percent_complete.call(this, retval)
+  end
+  def get_total_bytes_downloaded(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_total_bytes_downloaded.call(this, retval)
+  end
+  def get_total_bytes_to_download(this : IDownloadProgress*, retval : DECIMAL*) : HRESULT
+    @lpVtbl.value.get_total_bytes_to_download.call(this, retval)
+  end
+  def get_update_result(this : IDownloadProgress*, updateindex : Int32, retval : IUpdateDownloadResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
+  end
+  def get_current_update_download_phase(this : IDownloadProgress*, retval : DownloadPhase*) : HRESULT
+    @lpVtbl.value.get_current_update_download_phase.call(this, retval)
+  end
+  def get_current_update_percent_complete(this : IDownloadProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_percent_complete.call(this, retval)
+  end
+end
+struct LibWin32::IDownloadJob
+  def query_interface(this : IDownloadJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDownloadJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDownloadJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDownloadJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDownloadJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_async_state(this : IDownloadJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
+  end
+  def get_is_completed(this : IDownloadJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
+  end
+  def get_updates(this : IDownloadJob*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def clean_up(this : IDownloadJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
+  end
+  def get_progress(this : IDownloadJob*, retval : IDownloadProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
+  end
+  def request_abort(this : IDownloadJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
+  end
+end
+struct LibWin32::IDownloadCompletedCallbackArgs
+  def query_interface(this : IDownloadCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDownloadCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDownloadCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDownloadCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDownloadCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IDownloadCompletedCallback
+  def query_interface(this : IDownloadCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IDownloadCompletedCallback*, downloadjob : IDownloadJob, callbackargs : IDownloadCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, downloadjob, callbackargs)
+  end
+end
+struct LibWin32::IDownloadProgressChangedCallbackArgs
+  def query_interface(this : IDownloadProgressChangedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IDownloadProgressChangedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IDownloadProgressChangedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IDownloadProgressChangedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IDownloadProgressChangedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_progress(this : IDownloadProgressChangedCallbackArgs*, retval : IDownloadProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
+  end
+end
+struct LibWin32::IDownloadProgressChangedCallback
+  def query_interface(this : IDownloadProgressChangedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IDownloadProgressChangedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IDownloadProgressChangedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IDownloadProgressChangedCallback*, downloadjob : IDownloadJob, callbackargs : IDownloadProgressChangedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, downloadjob, callbackargs)
+  end
+end
+struct LibWin32::IUpdateDownloader
+  def query_interface(this : IUpdateDownloader*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateDownloader*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateDownloader*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateDownloader*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateDownloader*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateDownloader*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateDownloader*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateDownloader*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateDownloader*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_is_forced(this : IUpdateDownloader*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
+  end
+  def put_is_forced(this : IUpdateDownloader*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
+  end
+  def get_priority(this : IUpdateDownloader*, retval : DownloadPriority*) : HRESULT
+    @lpVtbl.value.get_priority.call(this, retval)
+  end
+  def put_priority(this : IUpdateDownloader*, value : DownloadPriority) : HRESULT
+    @lpVtbl.value.put_priority.call(this, value)
+  end
+  def get_updates(this : IUpdateDownloader*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def put_updates(this : IUpdateDownloader*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
+  end
+  def begin_download(this : IUpdateDownloader*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IDownloadJob*) : HRESULT
+    @lpVtbl.value.begin_download.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def download(this : IUpdateDownloader*, retval : IDownloadResult*) : HRESULT
+    @lpVtbl.value.download.call(this, retval)
+  end
+  def end_download(this : IUpdateDownloader*, value : IDownloadJob, retval : IDownloadResult*) : HRESULT
+    @lpVtbl.value.end_download.call(this, value, retval)
+  end
+end
+struct LibWin32::IUpdateInstallationResult
+  def query_interface(this : IUpdateInstallationResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateInstallationResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateInstallationResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateInstallationResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateInstallationResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateInstallationResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateInstallationResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_result(this : IUpdateInstallationResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_reboot_required(this : IUpdateInstallationResult*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_result_code(this : IUpdateInstallationResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+end
+struct LibWin32::IInstallationResult
+  def query_interface(this : IInstallationResult*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationResult*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationResult*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationResult*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_result(this : IInstallationResult*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_h_result.call(this, retval)
+  end
+  def get_reboot_required(this : IInstallationResult*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required.call(this, retval)
+  end
+  def get_result_code(this : IInstallationResult*, retval : OperationResultCode*) : HRESULT
+    @lpVtbl.value.get_result_code.call(this, retval)
+  end
+  def get_update_result(this : IInstallationResult*, updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
+  end
+end
+struct LibWin32::IInstallationProgress
+  def query_interface(this : IInstallationProgress*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationProgress*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationProgress*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationProgress*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationProgress*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationProgress*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationProgress*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_update_index(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_index.call(this, retval)
+  end
+  def get_current_update_percent_complete(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_update_percent_complete.call(this, retval)
+  end
+  def get_percent_complete(this : IInstallationProgress*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_percent_complete.call(this, retval)
+  end
+  def get_update_result(this : IInstallationProgress*, updateindex : Int32, retval : IUpdateInstallationResult*) : HRESULT
+    @lpVtbl.value.get_update_result.call(this, updateindex, retval)
+  end
+end
+struct LibWin32::IInstallationJob
+  def query_interface(this : IInstallationJob*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationJob*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationJob*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationJob*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationJob*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationJob*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationJob*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_async_state(this : IInstallationJob*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_async_state.call(this, retval)
+  end
+  def get_is_completed(this : IInstallationJob*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_completed.call(this, retval)
+  end
+  def get_updates(this : IInstallationJob*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def clean_up(this : IInstallationJob*) : HRESULT
+    @lpVtbl.value.clean_up.call(this)
+  end
+  def get_progress(this : IInstallationJob*, retval : IInstallationProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
+  end
+  def request_abort(this : IInstallationJob*) : HRESULT
+    @lpVtbl.value.request_abort.call(this)
+  end
+end
+struct LibWin32::IInstallationCompletedCallbackArgs
+  def query_interface(this : IInstallationCompletedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationCompletedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationCompletedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationCompletedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationCompletedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationCompletedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IInstallationCompletedCallback
+  def query_interface(this : IInstallationCompletedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationCompletedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationCompletedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IInstallationCompletedCallback*, installationjob : IInstallationJob, callbackargs : IInstallationCompletedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, installationjob, callbackargs)
+  end
+end
+struct LibWin32::IInstallationProgressChangedCallbackArgs
+  def query_interface(this : IInstallationProgressChangedCallbackArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationProgressChangedCallbackArgs*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationProgressChangedCallbackArgs*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationProgressChangedCallbackArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationProgressChangedCallbackArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationProgressChangedCallbackArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_progress(this : IInstallationProgressChangedCallbackArgs*, retval : IInstallationProgress*) : HRESULT
+    @lpVtbl.value.get_progress.call(this, retval)
+  end
+end
+struct LibWin32::IInstallationProgressChangedCallback
+  def query_interface(this : IInstallationProgressChangedCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationProgressChangedCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationProgressChangedCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def invoke(this : IInstallationProgressChangedCallback*, installationjob : IInstallationJob, callbackargs : IInstallationProgressChangedCallbackArgs) : HRESULT
+    @lpVtbl.value.invoke.call(this, installationjob, callbackargs)
+  end
+end
+struct LibWin32::IUpdateInstaller
+  def query_interface(this : IUpdateInstaller*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateInstaller*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateInstaller*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateInstaller*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateInstaller*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateInstaller*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateInstaller*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateInstaller*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateInstaller*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_is_forced(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
+  end
+  def put_is_forced(this : IUpdateInstaller*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
+  end
+  def get_parent_hwnd(this : IUpdateInstaller*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
+  end
+  def put_parent_hwnd(this : IUpdateInstaller*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
+  end
+  def put_parent_window(this : IUpdateInstaller*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
+  end
+  def get_parent_window(this : IUpdateInstaller*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
+  end
+  def get_updates(this : IUpdateInstaller*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def put_updates(this : IUpdateInstaller*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
+  end
+  def begin_install(this : IUpdateInstaller*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def begin_uninstall(this : IUpdateInstaller*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def end_install(this : IUpdateInstaller*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
+  end
+  def end_uninstall(this : IUpdateInstaller*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
+  end
+  def install(this : IUpdateInstaller*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
+  end
+  def run_wizard(this : IUpdateInstaller*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
+  end
+  def get_is_busy(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
+  end
+  def uninstall(this : IUpdateInstaller*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
+  end
+  def get_allow_source_prompts(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
+  end
+  def put_allow_source_prompts(this : IUpdateInstaller*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
+  end
+  def get_reboot_required_before_installation(this : IUpdateInstaller*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateInstaller2
+  def query_interface(this : IUpdateInstaller2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateInstaller2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateInstaller2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateInstaller2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateInstaller2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateInstaller2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateInstaller2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateInstaller2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateInstaller2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_is_forced(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
+  end
+  def put_is_forced(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
+  end
+  def get_parent_hwnd(this : IUpdateInstaller2*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
+  end
+  def put_parent_hwnd(this : IUpdateInstaller2*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
+  end
+  def put_parent_window(this : IUpdateInstaller2*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
+  end
+  def get_parent_window(this : IUpdateInstaller2*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
+  end
+  def get_updates(this : IUpdateInstaller2*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def put_updates(this : IUpdateInstaller2*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
+  end
+  def begin_install(this : IUpdateInstaller2*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def begin_uninstall(this : IUpdateInstaller2*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def end_install(this : IUpdateInstaller2*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
+  end
+  def end_uninstall(this : IUpdateInstaller2*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
+  end
+  def install(this : IUpdateInstaller2*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
+  end
+  def run_wizard(this : IUpdateInstaller2*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
+  end
+  def get_is_busy(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
+  end
+  def uninstall(this : IUpdateInstaller2*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
+  end
+  def get_allow_source_prompts(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
+  end
+  def put_allow_source_prompts(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
+  end
+  def get_reboot_required_before_installation(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
+  end
+  def get_force_quiet(this : IUpdateInstaller2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
+  end
+  def put_force_quiet(this : IUpdateInstaller2*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
+  end
+end
+struct LibWin32::IUpdateInstaller3
+  def query_interface(this : IUpdateInstaller3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateInstaller3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateInstaller3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateInstaller3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateInstaller3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateInstaller3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateInstaller3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateInstaller3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateInstaller3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_is_forced(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
+  end
+  def put_is_forced(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
+  end
+  def get_parent_hwnd(this : IUpdateInstaller3*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
+  end
+  def put_parent_hwnd(this : IUpdateInstaller3*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
+  end
+  def put_parent_window(this : IUpdateInstaller3*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
+  end
+  def get_parent_window(this : IUpdateInstaller3*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
+  end
+  def get_updates(this : IUpdateInstaller3*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def put_updates(this : IUpdateInstaller3*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
+  end
+  def begin_install(this : IUpdateInstaller3*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def begin_uninstall(this : IUpdateInstaller3*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def end_install(this : IUpdateInstaller3*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
+  end
+  def end_uninstall(this : IUpdateInstaller3*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
+  end
+  def install(this : IUpdateInstaller3*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
+  end
+  def run_wizard(this : IUpdateInstaller3*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
+  end
+  def get_is_busy(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
+  end
+  def uninstall(this : IUpdateInstaller3*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
+  end
+  def get_allow_source_prompts(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
+  end
+  def put_allow_source_prompts(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
+  end
+  def get_reboot_required_before_installation(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
+  end
+  def get_force_quiet(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
+  end
+  def put_force_quiet(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
+  end
+  def get_attempt_close_apps_if_necessary(this : IUpdateInstaller3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_attempt_close_apps_if_necessary.call(this, retval)
+  end
+  def put_attempt_close_apps_if_necessary(this : IUpdateInstaller3*, value : Int16) : HRESULT
+    @lpVtbl.value.put_attempt_close_apps_if_necessary.call(this, value)
+  end
+end
+struct LibWin32::IUpdateInstaller4
+  def query_interface(this : IUpdateInstaller4*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateInstaller4*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateInstaller4*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateInstaller4*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateInstaller4*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateInstaller4*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateInstaller4*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateInstaller4*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateInstaller4*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_is_forced(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_forced.call(this, retval)
+  end
+  def put_is_forced(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_is_forced.call(this, value)
+  end
+  def get_parent_hwnd(this : IUpdateInstaller4*, retval : HANDLE*) : HRESULT
+    @lpVtbl.value.get_parent_hwnd.call(this, retval)
+  end
+  def put_parent_hwnd(this : IUpdateInstaller4*, value : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.put_parent_hwnd.call(this, value)
+  end
+  def put_parent_window(this : IUpdateInstaller4*, value : IUnknown) : HRESULT
+    @lpVtbl.value.put_parent_window.call(this, value)
+  end
+  def get_parent_window(this : IUpdateInstaller4*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_parent_window.call(this, retval)
+  end
+  def get_updates(this : IUpdateInstaller4*, retval : IUpdateCollection*) : HRESULT
+    @lpVtbl.value.get_updates.call(this, retval)
+  end
+  def put_updates(this : IUpdateInstaller4*, value : IUpdateCollection) : HRESULT
+    @lpVtbl.value.put_updates.call(this, value)
+  end
+  def begin_install(this : IUpdateInstaller4*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_install.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def begin_uninstall(this : IUpdateInstaller4*, onprogresschanged : IUnknown, oncompleted : IUnknown, state : VARIANT, retval : IInstallationJob*) : HRESULT
+    @lpVtbl.value.begin_uninstall.call(this, onprogresschanged, oncompleted, state, retval)
+  end
+  def end_install(this : IUpdateInstaller4*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_install.call(this, value, retval)
+  end
+  def end_uninstall(this : IUpdateInstaller4*, value : IInstallationJob, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.end_uninstall.call(this, value, retval)
+  end
+  def install(this : IUpdateInstaller4*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.install.call(this, retval)
+  end
+  def run_wizard(this : IUpdateInstaller4*, dialogtitle : UInt8*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.run_wizard.call(this, dialogtitle, retval)
+  end
+  def get_is_busy(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_busy.call(this, retval)
+  end
+  def uninstall(this : IUpdateInstaller4*, retval : IInstallationResult*) : HRESULT
+    @lpVtbl.value.uninstall.call(this, retval)
+  end
+  def get_allow_source_prompts(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_source_prompts.call(this, retval)
+  end
+  def put_allow_source_prompts(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_allow_source_prompts.call(this, value)
+  end
+  def get_reboot_required_before_installation(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_reboot_required_before_installation.call(this, retval)
+  end
+  def get_force_quiet(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_force_quiet.call(this, retval)
+  end
+  def put_force_quiet(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_force_quiet.call(this, value)
+  end
+  def get_attempt_close_apps_if_necessary(this : IUpdateInstaller4*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_attempt_close_apps_if_necessary.call(this, retval)
+  end
+  def put_attempt_close_apps_if_necessary(this : IUpdateInstaller4*, value : Int16) : HRESULT
+    @lpVtbl.value.put_attempt_close_apps_if_necessary.call(this, value)
+  end
+  def commit(this : IUpdateInstaller4*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.call(this, dwflags)
+  end
+end
+struct LibWin32::IUpdateSession
+  def query_interface(this : IUpdateSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateSession*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSession*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_read_only(this : IUpdateSession*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_web_proxy(this : IUpdateSession*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
+  end
+  def put_web_proxy(this : IUpdateSession*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
+  end
+  def create_update_searcher(this : IUpdateSession*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
+  end
+  def create_update_downloader(this : IUpdateSession*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
+  end
+  def create_update_installer(this : IUpdateSession*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateSession2
+  def query_interface(this : IUpdateSession2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSession2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSession2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSession2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSession2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSession2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSession2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateSession2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSession2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_read_only(this : IUpdateSession2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_web_proxy(this : IUpdateSession2*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
+  end
+  def put_web_proxy(this : IUpdateSession2*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
+  end
+  def create_update_searcher(this : IUpdateSession2*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
+  end
+  def create_update_downloader(this : IUpdateSession2*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
+  end
+  def create_update_installer(this : IUpdateSession2*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
+  end
+  def get_user_locale(this : IUpdateSession2*, retval : UInt32*) : HRESULT
+    @lpVtbl.value.get_user_locale.call(this, retval)
+  end
+  def put_user_locale(this : IUpdateSession2*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_user_locale.call(this, lcid)
+  end
+end
+struct LibWin32::IUpdateSession3
+  def query_interface(this : IUpdateSession3*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateSession3*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateSession3*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateSession3*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateSession3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateSession3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateSession3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_client_application_id(this : IUpdateSession3*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateSession3*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def get_read_only(this : IUpdateSession3*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_read_only.call(this, retval)
+  end
+  def get_web_proxy(this : IUpdateSession3*, retval : IWebProxy*) : HRESULT
+    @lpVtbl.value.get_web_proxy.call(this, retval)
+  end
+  def put_web_proxy(this : IUpdateSession3*, value : IWebProxy) : HRESULT
+    @lpVtbl.value.put_web_proxy.call(this, value)
+  end
+  def create_update_searcher(this : IUpdateSession3*, retval : IUpdateSearcher*) : HRESULT
+    @lpVtbl.value.create_update_searcher.call(this, retval)
+  end
+  def create_update_downloader(this : IUpdateSession3*, retval : IUpdateDownloader*) : HRESULT
+    @lpVtbl.value.create_update_downloader.call(this, retval)
+  end
+  def create_update_installer(this : IUpdateSession3*, retval : IUpdateInstaller*) : HRESULT
+    @lpVtbl.value.create_update_installer.call(this, retval)
+  end
+  def get_user_locale(this : IUpdateSession3*, retval : UInt32*) : HRESULT
+    @lpVtbl.value.get_user_locale.call(this, retval)
+  end
+  def put_user_locale(this : IUpdateSession3*, lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_user_locale.call(this, lcid)
+  end
+  def create_update_service_manager(this : IUpdateSession3*, retval : IUpdateServiceManager2*) : HRESULT
+    @lpVtbl.value.create_update_service_manager.call(this, retval)
+  end
+  def query_history(this : IUpdateSession3*, criteria : UInt8*, startindex : Int32, count : Int32, retval : IUpdateHistoryEntryCollection*) : HRESULT
+    @lpVtbl.value.query_history.call(this, criteria, startindex, count, retval)
+  end
+end
+struct LibWin32::IUpdateService
+  def query_interface(this : IUpdateService*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateService*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateService*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateService*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateService*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateService*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateService*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
+  end
+  def get_content_validation_cert(this : IUpdateService*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_content_validation_cert.call(this, retval)
+  end
+  def get_expiration_date(this : IUpdateService*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration_date.call(this, retval)
+  end
+  def get_is_managed(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_managed.call(this, retval)
+  end
+  def get_is_registered_with_au(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_registered_with_au.call(this, retval)
+  end
+  def get_issue_date(this : IUpdateService*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_issue_date.call(this, retval)
+  end
+  def get_offers_windows_updates(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_offers_windows_updates.call(this, retval)
+  end
+  def get_redirect_urls(this : IUpdateService*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_redirect_urls.call(this, retval)
+  end
+  def get_service_id(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def get_is_scan_package_service(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_scan_package_service.call(this, retval)
+  end
+  def get_can_register_with_au(this : IUpdateService*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_register_with_au.call(this, retval)
+  end
+  def get_service_url(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_url.call(this, retval)
+  end
+  def get_setup_prefix(this : IUpdateService*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_setup_prefix.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateService2
+  def query_interface(this : IUpdateService2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateService2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateService2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateService2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateService2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateService2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateService2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, retval)
+  end
+  def get_content_validation_cert(this : IUpdateService2*, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_content_validation_cert.call(this, retval)
+  end
+  def get_expiration_date(this : IUpdateService2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_expiration_date.call(this, retval)
+  end
+  def get_is_managed(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_managed.call(this, retval)
+  end
+  def get_is_registered_with_au(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_registered_with_au.call(this, retval)
+  end
+  def get_issue_date(this : IUpdateService2*, retval : Float64*) : HRESULT
+    @lpVtbl.value.get_issue_date.call(this, retval)
+  end
+  def get_offers_windows_updates(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_offers_windows_updates.call(this, retval)
+  end
+  def get_redirect_urls(this : IUpdateService2*, retval : IStringCollection*) : HRESULT
+    @lpVtbl.value.get_redirect_urls.call(this, retval)
+  end
+  def get_service_id(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def get_is_scan_package_service(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_scan_package_service.call(this, retval)
+  end
+  def get_can_register_with_au(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_can_register_with_au.call(this, retval)
+  end
+  def get_service_url(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_url.call(this, retval)
+  end
+  def get_setup_prefix(this : IUpdateService2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_setup_prefix.call(this, retval)
+  end
+  def get_is_default_au_service(this : IUpdateService2*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_default_au_service.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateServiceCollection
+  def query_interface(this : IUpdateServiceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateServiceCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateServiceCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateServiceCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateServiceCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateServiceCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateServiceCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(this : IUpdateServiceCollection*, index : Int32, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.get_item.call(this, index, retval)
+  end
+  def get__new_enum(this : IUpdateServiceCollection*, retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, retval)
+  end
+  def get_count(this : IUpdateServiceCollection*, retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateServiceRegistration
+  def query_interface(this : IUpdateServiceRegistration*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateServiceRegistration*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateServiceRegistration*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateServiceRegistration*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateServiceRegistration*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateServiceRegistration*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateServiceRegistration*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_registration_state(this : IUpdateServiceRegistration*, retval : UpdateServiceRegistrationState*) : HRESULT
+    @lpVtbl.value.get_registration_state.call(this, retval)
+  end
+  def get_service_id(this : IUpdateServiceRegistration*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_id.call(this, retval)
+  end
+  def get_is_pending_registration_with_au(this : IUpdateServiceRegistration*, retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_pending_registration_with_au.call(this, retval)
+  end
+  def get_service(this : IUpdateServiceRegistration*, retval : IUpdateService2*) : HRESULT
+    @lpVtbl.value.get_service.call(this, retval)
+  end
+end
+struct LibWin32::IUpdateServiceManager
+  def query_interface(this : IUpdateServiceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateServiceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateServiceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateServiceManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateServiceManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateServiceManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateServiceManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_services(this : IUpdateServiceManager*, retval : IUpdateServiceCollection*) : HRESULT
+    @lpVtbl.value.get_services.call(this, retval)
+  end
+  def add_service(this : IUpdateServiceManager*, serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_service.call(this, serviceid, authorizationcabpath, retval)
+  end
+  def register_service_with_au(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.register_service_with_au.call(this, serviceid)
+  end
+  def remove_service(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.remove_service.call(this, serviceid)
+  end
+  def unregister_service_with_au(this : IUpdateServiceManager*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_service_with_au.call(this, serviceid)
+  end
+  def add_scan_package_service(this : IUpdateServiceManager*, servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_scan_package_service.call(this, servicename, scanfilelocation, flags, ppservice)
+  end
+  def set_option(this : IUpdateServiceManager*, optionname : UInt8*, optionvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, optionname, optionvalue)
+  end
+end
+struct LibWin32::IUpdateServiceManager2
+  def query_interface(this : IUpdateServiceManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IUpdateServiceManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IUpdateServiceManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IUpdateServiceManager2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IUpdateServiceManager2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IUpdateServiceManager2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IUpdateServiceManager2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_services(this : IUpdateServiceManager2*, retval : IUpdateServiceCollection*) : HRESULT
+    @lpVtbl.value.get_services.call(this, retval)
+  end
+  def add_service(this : IUpdateServiceManager2*, serviceid : UInt8*, authorizationcabpath : UInt8*, retval : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_service.call(this, serviceid, authorizationcabpath, retval)
+  end
+  def register_service_with_au(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.register_service_with_au.call(this, serviceid)
+  end
+  def remove_service(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.remove_service.call(this, serviceid)
+  end
+  def unregister_service_with_au(this : IUpdateServiceManager2*, serviceid : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_service_with_au.call(this, serviceid)
+  end
+  def add_scan_package_service(this : IUpdateServiceManager2*, servicename : UInt8*, scanfilelocation : UInt8*, flags : Int32, ppservice : IUpdateService*) : HRESULT
+    @lpVtbl.value.add_scan_package_service.call(this, servicename, scanfilelocation, flags, ppservice)
+  end
+  def set_option(this : IUpdateServiceManager2*, optionname : UInt8*, optionvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.call(this, optionname, optionvalue)
+  end
+  def get_client_application_id(this : IUpdateServiceManager2*, retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_client_application_id.call(this, retval)
+  end
+  def put_client_application_id(this : IUpdateServiceManager2*, value : UInt8*) : HRESULT
+    @lpVtbl.value.put_client_application_id.call(this, value)
+  end
+  def query_service_registration(this : IUpdateServiceManager2*, serviceid : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
+    @lpVtbl.value.query_service_registration.call(this, serviceid, retval)
+  end
+  def add_service2(this : IUpdateServiceManager2*, serviceid : UInt8*, flags : Int32, authorizationcabpath : UInt8*, retval : IUpdateServiceRegistration*) : HRESULT
+    @lpVtbl.value.add_service2.call(this, serviceid, flags, authorizationcabpath, retval)
+  end
+end
+struct LibWin32::IInstallationAgent
+  def query_interface(this : IInstallationAgent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IInstallationAgent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IInstallationAgent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IInstallationAgent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IInstallationAgent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IInstallationAgent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IInstallationAgent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def record_installation_result(this : IInstallationAgent*, installationresultcookie : UInt8*, hresult : Int32, extendedreportingdata : IStringCollection) : HRESULT
+    @lpVtbl.value.record_installation_result.call(this, installationresultcookie, hresult, extendedreportingdata)
+  end
+end

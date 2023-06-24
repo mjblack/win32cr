@@ -1253,7 +1253,7 @@ lib LibWin32
   fun WdsCliGetTransferSize(hifh : LibC::HANDLE, pullvalue : UInt64*) : HRESULT
 
   # Params # ulsizeinbytes : UInt32 [In]
-  fun WdsCliSetTransferBufferSize(ulsizeinbytes : UInt32)
+  fun WdsCliSetTransferBufferSize(ulsizeinbytes : UInt32) : Void
 
   # Params # himage : LibC::HANDLE [In],pwszlocalpath : LibC::LPWSTR [In],dwflags : UInt32 [In],dwreserved : UInt32 [In],pfnwdsclicallback : PFN_WdsCliCallback [In],pvuserdata : Void* [In],phtransfer : LibC::HANDLE* [In]
   fun WdsCliTransferImage(himage : LibC::HANDLE, pwszlocalpath : LibC::LPWSTR, dwflags : UInt32, dwreserved : UInt32, pfnwdsclicallback : PFN_WdsCliCallback, pvuserdata : Void*, phtransfer : LibC::HANDLE*) : HRESULT
@@ -1446,4 +1446,1359 @@ lib LibWin32
 
   # Params # hhandle : LibC::HANDLE [In],ubufferlen : UInt32 [In],pbuffer : Void* [In],pubytes : UInt32* [In]
   fun WdsBpGetOptionBuffer(hhandle : LibC::HANDLE, ubufferlen : UInt32, pbuffer : Void*, pubytes : UInt32*) : UInt32
+end
+struct LibWin32::IWdsTransportCacheable
+  def query_interface(this : IWdsTransportCacheable*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportCacheable*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportCacheable*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportCacheable*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportCacheable*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportCacheable*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportCacheable*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(this : IWdsTransportCacheable*, pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, pbdirty)
+  end
+  def discard(this : IWdsTransportCacheable*) : HRESULT
+    @lpVtbl.value.discard.call(this)
+  end
+  def refresh(this : IWdsTransportCacheable*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def commit(this : IWdsTransportCacheable*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+end
+struct LibWin32::IWdsTransportCollection
+  def query_interface(this : IWdsTransportCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportCollection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportCollection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportCollection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(this : IWdsTransportCollection*, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pulcount)
+  end
+  def get_item(this : IWdsTransportCollection*, ulindex : UInt32, ppval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_item.call(this, ulindex, ppval)
+  end
+  def get__new_enum(this : IWdsTransportCollection*, ppval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, ppval)
+  end
+end
+struct LibWin32::IWdsTransportManager
+  def query_interface(this : IWdsTransportManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_wds_transport_server(this : IWdsTransportManager*, bszservername : UInt8*, ppwdstransportserver : IWdsTransportServer*) : HRESULT
+    @lpVtbl.value.get_wds_transport_server.call(this, bszservername, ppwdstransportserver)
+  end
+end
+struct LibWin32::IWdsTransportServer
+  def query_interface(this : IWdsTransportServer*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportServer*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportServer*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportServer*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportServer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportServer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportServer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IWdsTransportServer*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def get_setup_manager(this : IWdsTransportServer*, ppwdstransportsetupmanager : IWdsTransportSetupManager*) : HRESULT
+    @lpVtbl.value.get_setup_manager.call(this, ppwdstransportsetupmanager)
+  end
+  def get_configuration_manager(this : IWdsTransportServer*, ppwdstransportconfigurationmanager : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.get_configuration_manager.call(this, ppwdstransportconfigurationmanager)
+  end
+  def get_namespace_manager(this : IWdsTransportServer*, ppwdstransportnamespacemanager : IWdsTransportNamespaceManager*) : HRESULT
+    @lpVtbl.value.get_namespace_manager.call(this, ppwdstransportnamespacemanager)
+  end
+  def disconnect_client(this : IWdsTransportServer*, ulclientid : UInt32, disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect_client.call(this, ulclientid, disconnectiontype)
+  end
+end
+struct LibWin32::IWdsTransportServer2
+  def query_interface(this : IWdsTransportServer2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportServer2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportServer2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportServer2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportServer2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportServer2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportServer2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IWdsTransportServer2*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def get_setup_manager(this : IWdsTransportServer2*, ppwdstransportsetupmanager : IWdsTransportSetupManager*) : HRESULT
+    @lpVtbl.value.get_setup_manager.call(this, ppwdstransportsetupmanager)
+  end
+  def get_configuration_manager(this : IWdsTransportServer2*, ppwdstransportconfigurationmanager : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.get_configuration_manager.call(this, ppwdstransportconfigurationmanager)
+  end
+  def get_namespace_manager(this : IWdsTransportServer2*, ppwdstransportnamespacemanager : IWdsTransportNamespaceManager*) : HRESULT
+    @lpVtbl.value.get_namespace_manager.call(this, ppwdstransportnamespacemanager)
+  end
+  def disconnect_client(this : IWdsTransportServer2*, ulclientid : UInt32, disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect_client.call(this, ulclientid, disconnectiontype)
+  end
+  def get_tftp_manager(this : IWdsTransportServer2*, ppwdstransporttftpmanager : IWdsTransportTftpManager*) : HRESULT
+    @lpVtbl.value.get_tftp_manager.call(this, ppwdstransporttftpmanager)
+  end
+end
+struct LibWin32::IWdsTransportSetupManager
+  def query_interface(this : IWdsTransportSetupManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportSetupManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportSetupManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportSetupManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportSetupManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportSetupManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportSetupManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_version(this : IWdsTransportSetupManager*, pullversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pullversion)
+  end
+  def get_installed_features(this : IWdsTransportSetupManager*, pulinstalledfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_installed_features.call(this, pulinstalledfeatures)
+  end
+  def get_protocols(this : IWdsTransportSetupManager*, pulprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocols.call(this, pulprotocols)
+  end
+  def register_content_provider(this : IWdsTransportSetupManager*, bszname : UInt8*, bszdescription : UInt8*, bszfilepath : UInt8*, bszinitializationroutine : UInt8*) : HRESULT
+    @lpVtbl.value.register_content_provider.call(this, bszname, bszdescription, bszfilepath, bszinitializationroutine)
+  end
+  def deregister_content_provider(this : IWdsTransportSetupManager*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.deregister_content_provider.call(this, bszname)
+  end
+end
+struct LibWin32::IWdsTransportSetupManager2
+  def query_interface(this : IWdsTransportSetupManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportSetupManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportSetupManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportSetupManager2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportSetupManager2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportSetupManager2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportSetupManager2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_version(this : IWdsTransportSetupManager2*, pullversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pullversion)
+  end
+  def get_installed_features(this : IWdsTransportSetupManager2*, pulinstalledfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_installed_features.call(this, pulinstalledfeatures)
+  end
+  def get_protocols(this : IWdsTransportSetupManager2*, pulprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocols.call(this, pulprotocols)
+  end
+  def register_content_provider(this : IWdsTransportSetupManager2*, bszname : UInt8*, bszdescription : UInt8*, bszfilepath : UInt8*, bszinitializationroutine : UInt8*) : HRESULT
+    @lpVtbl.value.register_content_provider.call(this, bszname, bszdescription, bszfilepath, bszinitializationroutine)
+  end
+  def deregister_content_provider(this : IWdsTransportSetupManager2*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.deregister_content_provider.call(this, bszname)
+  end
+  def get_tftp_capabilities(this : IWdsTransportSetupManager2*, pultftpcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_tftp_capabilities.call(this, pultftpcapabilities)
+  end
+  def get_content_providers(this : IWdsTransportSetupManager2*, ppprovidercollection : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.get_content_providers.call(this, ppprovidercollection)
+  end
+end
+struct LibWin32::IWdsTransportConfigurationManager
+  def query_interface(this : IWdsTransportConfigurationManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportConfigurationManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportConfigurationManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportConfigurationManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportConfigurationManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportConfigurationManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportConfigurationManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_service_policy(this : IWdsTransportConfigurationManager*, ppwdstransportservicepolicy : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.get_service_policy.call(this, ppwdstransportservicepolicy)
+  end
+  def get_diagnostics_policy(this : IWdsTransportConfigurationManager*, ppwdstransportdiagnosticspolicy : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.get_diagnostics_policy.call(this, ppwdstransportdiagnosticspolicy)
+  end
+  def get_wds_transport_services_running(this : IWdsTransportConfigurationManager*, brealtimestatus : Int16, pbservicesrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_wds_transport_services_running.call(this, brealtimestatus, pbservicesrunning)
+  end
+  def enable_wds_transport_services(this : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.enable_wds_transport_services.call(this)
+  end
+  def disable_wds_transport_services(this : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.disable_wds_transport_services.call(this)
+  end
+  def start_wds_transport_services(this : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.start_wds_transport_services.call(this)
+  end
+  def stop_wds_transport_services(this : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.stop_wds_transport_services.call(this)
+  end
+  def restart_wds_transport_services(this : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.restart_wds_transport_services.call(this)
+  end
+  def notify_wds_transport_services(this : IWdsTransportConfigurationManager*, servicenotification : WDSTRANSPORT_SERVICE_NOTIFICATION) : HRESULT
+    @lpVtbl.value.notify_wds_transport_services.call(this, servicenotification)
+  end
+end
+struct LibWin32::IWdsTransportConfigurationManager2
+  def query_interface(this : IWdsTransportConfigurationManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportConfigurationManager2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportConfigurationManager2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportConfigurationManager2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportConfigurationManager2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportConfigurationManager2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportConfigurationManager2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_service_policy(this : IWdsTransportConfigurationManager2*, ppwdstransportservicepolicy : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.get_service_policy.call(this, ppwdstransportservicepolicy)
+  end
+  def get_diagnostics_policy(this : IWdsTransportConfigurationManager2*, ppwdstransportdiagnosticspolicy : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.get_diagnostics_policy.call(this, ppwdstransportdiagnosticspolicy)
+  end
+  def get_wds_transport_services_running(this : IWdsTransportConfigurationManager2*, brealtimestatus : Int16, pbservicesrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_wds_transport_services_running.call(this, brealtimestatus, pbservicesrunning)
+  end
+  def enable_wds_transport_services(this : IWdsTransportConfigurationManager2*) : HRESULT
+    @lpVtbl.value.enable_wds_transport_services.call(this)
+  end
+  def disable_wds_transport_services(this : IWdsTransportConfigurationManager2*) : HRESULT
+    @lpVtbl.value.disable_wds_transport_services.call(this)
+  end
+  def start_wds_transport_services(this : IWdsTransportConfigurationManager2*) : HRESULT
+    @lpVtbl.value.start_wds_transport_services.call(this)
+  end
+  def stop_wds_transport_services(this : IWdsTransportConfigurationManager2*) : HRESULT
+    @lpVtbl.value.stop_wds_transport_services.call(this)
+  end
+  def restart_wds_transport_services(this : IWdsTransportConfigurationManager2*) : HRESULT
+    @lpVtbl.value.restart_wds_transport_services.call(this)
+  end
+  def notify_wds_transport_services(this : IWdsTransportConfigurationManager2*, servicenotification : WDSTRANSPORT_SERVICE_NOTIFICATION) : HRESULT
+    @lpVtbl.value.notify_wds_transport_services.call(this, servicenotification)
+  end
+  def get_multicast_session_policy(this : IWdsTransportConfigurationManager2*, ppwdstransportmulticastsessionpolicy : IWdsTransportMulticastSessionPolicy*) : HRESULT
+    @lpVtbl.value.get_multicast_session_policy.call(this, ppwdstransportmulticastsessionpolicy)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceManager
+  def query_interface(this : IWdsTransportNamespaceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespaceManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespaceManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespaceManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespaceManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespaceManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespaceManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_namespace(this : IWdsTransportNamespaceManager*, namespacetype : WDSTRANSPORT_NAMESPACE_TYPE, bsznamespacename : UInt8*, bszcontentprovider : UInt8*, bszconfiguration : UInt8*, ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.create_namespace.call(this, namespacetype, bsznamespacename, bszcontentprovider, bszconfiguration, ppwdstransportnamespace)
+  end
+  def retrieve_namespace(this : IWdsTransportNamespaceManager*, bsznamespacename : UInt8*, ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.retrieve_namespace.call(this, bsznamespacename, ppwdstransportnamespace)
+  end
+  def retrieve_namespaces(this : IWdsTransportNamespaceManager*, bszcontentprovider : UInt8*, bsznamespacename : UInt8*, bincludetombstones : Int16, ppwdstransportnamespaces : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_namespaces.call(this, bszcontentprovider, bsznamespacename, bincludetombstones, ppwdstransportnamespaces)
+  end
+end
+struct LibWin32::IWdsTransportTftpManager
+  def query_interface(this : IWdsTransportTftpManager*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportTftpManager*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportTftpManager*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportTftpManager*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportTftpManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportTftpManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportTftpManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def retrieve_tftp_clients(this : IWdsTransportTftpManager*, ppwdstransporttftpclients : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_tftp_clients.call(this, ppwdstransporttftpclients)
+  end
+end
+struct LibWin32::IWdsTransportServicePolicy
+  def query_interface(this : IWdsTransportServicePolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportServicePolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportServicePolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportServicePolicy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportServicePolicy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportServicePolicy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportServicePolicy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(this : IWdsTransportServicePolicy*, pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, pbdirty)
+  end
+  def discard(this : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.discard.call(this)
+  end
+  def refresh(this : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def commit(this : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_ip_address_source(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, psourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*) : HRESULT
+    @lpVtbl.value.get_ip_address_source.call(this, addresstype, psourcetype)
+  end
+  def put_ip_address_source(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, sourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) : HRESULT
+    @lpVtbl.value.put_ip_address_source.call(this, addresstype, sourcetype)
+  end
+  def get_start_ip_address(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszstartipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_ip_address.call(this, addresstype, pbszstartipaddress)
+  end
+  def put_start_ip_address(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszstartipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_ip_address.call(this, addresstype, bszstartipaddress)
+  end
+  def get_end_ip_address(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszendipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_ip_address.call(this, addresstype, pbszendipaddress)
+  end
+  def put_end_ip_address(this : IWdsTransportServicePolicy*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszendipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_ip_address.call(this, addresstype, bszendipaddress)
+  end
+  def get_start_port(this : IWdsTransportServicePolicy*, pulstartport : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_port.call(this, pulstartport)
+  end
+  def put_start_port(this : IWdsTransportServicePolicy*, ulstartport : UInt32) : HRESULT
+    @lpVtbl.value.put_start_port.call(this, ulstartport)
+  end
+  def get_end_port(this : IWdsTransportServicePolicy*, pulendport : UInt32*) : HRESULT
+    @lpVtbl.value.get_end_port.call(this, pulendport)
+  end
+  def put_end_port(this : IWdsTransportServicePolicy*, ulendport : UInt32) : HRESULT
+    @lpVtbl.value.put_end_port.call(this, ulendport)
+  end
+  def get_network_profile(this : IWdsTransportServicePolicy*, pprofiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_network_profile.call(this, pprofiletype)
+  end
+  def put_network_profile(this : IWdsTransportServicePolicy*, profiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE) : HRESULT
+    @lpVtbl.value.put_network_profile.call(this, profiletype)
+  end
+end
+struct LibWin32::IWdsTransportServicePolicy2
+  def query_interface(this : IWdsTransportServicePolicy2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportServicePolicy2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportServicePolicy2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportServicePolicy2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportServicePolicy2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportServicePolicy2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportServicePolicy2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(this : IWdsTransportServicePolicy2*, pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, pbdirty)
+  end
+  def discard(this : IWdsTransportServicePolicy2*) : HRESULT
+    @lpVtbl.value.discard.call(this)
+  end
+  def refresh(this : IWdsTransportServicePolicy2*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def commit(this : IWdsTransportServicePolicy2*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_ip_address_source(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, psourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*) : HRESULT
+    @lpVtbl.value.get_ip_address_source.call(this, addresstype, psourcetype)
+  end
+  def put_ip_address_source(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, sourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) : HRESULT
+    @lpVtbl.value.put_ip_address_source.call(this, addresstype, sourcetype)
+  end
+  def get_start_ip_address(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszstartipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_ip_address.call(this, addresstype, pbszstartipaddress)
+  end
+  def put_start_ip_address(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszstartipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_ip_address.call(this, addresstype, bszstartipaddress)
+  end
+  def get_end_ip_address(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszendipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_ip_address.call(this, addresstype, pbszendipaddress)
+  end
+  def put_end_ip_address(this : IWdsTransportServicePolicy2*, addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszendipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_ip_address.call(this, addresstype, bszendipaddress)
+  end
+  def get_start_port(this : IWdsTransportServicePolicy2*, pulstartport : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_port.call(this, pulstartport)
+  end
+  def put_start_port(this : IWdsTransportServicePolicy2*, ulstartport : UInt32) : HRESULT
+    @lpVtbl.value.put_start_port.call(this, ulstartport)
+  end
+  def get_end_port(this : IWdsTransportServicePolicy2*, pulendport : UInt32*) : HRESULT
+    @lpVtbl.value.get_end_port.call(this, pulendport)
+  end
+  def put_end_port(this : IWdsTransportServicePolicy2*, ulendport : UInt32) : HRESULT
+    @lpVtbl.value.put_end_port.call(this, ulendport)
+  end
+  def get_network_profile(this : IWdsTransportServicePolicy2*, pprofiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_network_profile.call(this, pprofiletype)
+  end
+  def put_network_profile(this : IWdsTransportServicePolicy2*, profiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE) : HRESULT
+    @lpVtbl.value.put_network_profile.call(this, profiletype)
+  end
+  def get_udp_port_policy(this : IWdsTransportServicePolicy2*, pudpportpolicy : WDSTRANSPORT_UDP_PORT_POLICY*) : HRESULT
+    @lpVtbl.value.get_udp_port_policy.call(this, pudpportpolicy)
+  end
+  def put_udp_port_policy(this : IWdsTransportServicePolicy2*, udpportpolicy : WDSTRANSPORT_UDP_PORT_POLICY) : HRESULT
+    @lpVtbl.value.put_udp_port_policy.call(this, udpportpolicy)
+  end
+  def get_tftp_maximum_block_size(this : IWdsTransportServicePolicy2*, pultftpmaximumblocksize : UInt32*) : HRESULT
+    @lpVtbl.value.get_tftp_maximum_block_size.call(this, pultftpmaximumblocksize)
+  end
+  def put_tftp_maximum_block_size(this : IWdsTransportServicePolicy2*, ultftpmaximumblocksize : UInt32) : HRESULT
+    @lpVtbl.value.put_tftp_maximum_block_size.call(this, ultftpmaximumblocksize)
+  end
+  def get_enable_tftp_variable_window_extension(this : IWdsTransportServicePolicy2*, pbenabletftpvariablewindowextension : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_tftp_variable_window_extension.call(this, pbenabletftpvariablewindowextension)
+  end
+  def put_enable_tftp_variable_window_extension(this : IWdsTransportServicePolicy2*, benabletftpvariablewindowextension : Int16) : HRESULT
+    @lpVtbl.value.put_enable_tftp_variable_window_extension.call(this, benabletftpvariablewindowextension)
+  end
+end
+struct LibWin32::IWdsTransportDiagnosticsPolicy
+  def query_interface(this : IWdsTransportDiagnosticsPolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportDiagnosticsPolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportDiagnosticsPolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportDiagnosticsPolicy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportDiagnosticsPolicy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportDiagnosticsPolicy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportDiagnosticsPolicy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(this : IWdsTransportDiagnosticsPolicy*, pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, pbdirty)
+  end
+  def discard(this : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.discard.call(this)
+  end
+  def refresh(this : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def commit(this : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_enabled(this : IWdsTransportDiagnosticsPolicy*, pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.call(this, pbenabled)
+  end
+  def put_enabled(this : IWdsTransportDiagnosticsPolicy*, benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.call(this, benabled)
+  end
+  def get_components(this : IWdsTransportDiagnosticsPolicy*, pulcomponents : UInt32*) : HRESULT
+    @lpVtbl.value.get_components.call(this, pulcomponents)
+  end
+  def put_components(this : IWdsTransportDiagnosticsPolicy*, ulcomponents : UInt32) : HRESULT
+    @lpVtbl.value.put_components.call(this, ulcomponents)
+  end
+end
+struct LibWin32::IWdsTransportMulticastSessionPolicy
+  def query_interface(this : IWdsTransportMulticastSessionPolicy*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportMulticastSessionPolicy*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportMulticastSessionPolicy*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportMulticastSessionPolicy*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportMulticastSessionPolicy*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportMulticastSessionPolicy*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportMulticastSessionPolicy*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(this : IWdsTransportMulticastSessionPolicy*, pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.call(this, pbdirty)
+  end
+  def discard(this : IWdsTransportMulticastSessionPolicy*) : HRESULT
+    @lpVtbl.value.discard.call(this)
+  end
+  def refresh(this : IWdsTransportMulticastSessionPolicy*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def commit(this : IWdsTransportMulticastSessionPolicy*) : HRESULT
+    @lpVtbl.value.commit.call(this)
+  end
+  def get_slow_client_handling(this : IWdsTransportMulticastSessionPolicy*, pslowclienthandling : WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE*) : HRESULT
+    @lpVtbl.value.get_slow_client_handling.call(this, pslowclienthandling)
+  end
+  def put_slow_client_handling(this : IWdsTransportMulticastSessionPolicy*, slowclienthandling : WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE) : HRESULT
+    @lpVtbl.value.put_slow_client_handling.call(this, slowclienthandling)
+  end
+  def get_auto_disconnect_threshold(this : IWdsTransportMulticastSessionPolicy*, pulthreshold : UInt32*) : HRESULT
+    @lpVtbl.value.get_auto_disconnect_threshold.call(this, pulthreshold)
+  end
+  def put_auto_disconnect_threshold(this : IWdsTransportMulticastSessionPolicy*, ulthreshold : UInt32) : HRESULT
+    @lpVtbl.value.put_auto_disconnect_threshold.call(this, ulthreshold)
+  end
+  def get_multistream_stream_count(this : IWdsTransportMulticastSessionPolicy*, pulstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_multistream_stream_count.call(this, pulstreamcount)
+  end
+  def put_multistream_stream_count(this : IWdsTransportMulticastSessionPolicy*, ulstreamcount : UInt32) : HRESULT
+    @lpVtbl.value.put_multistream_stream_count.call(this, ulstreamcount)
+  end
+  def get_slow_client_fallback(this : IWdsTransportMulticastSessionPolicy*, pbclientfallback : Int16*) : HRESULT
+    @lpVtbl.value.get_slow_client_fallback.call(this, pbclientfallback)
+  end
+  def put_slow_client_fallback(this : IWdsTransportMulticastSessionPolicy*, bclientfallback : Int16) : HRESULT
+    @lpVtbl.value.put_slow_client_fallback.call(this, bclientfallback)
+  end
+end
+struct LibWin32::IWdsTransportNamespace
+  def query_interface(this : IWdsTransportNamespace*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespace*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespace*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespace*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespace*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespace*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespace*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWdsTransportNamespace*, ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWdsTransportNamespace*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportNamespace*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def put_name(this : IWdsTransportNamespace*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bszname)
+  end
+  def get_friendly_name(this : IWdsTransportNamespace*, pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbszfriendlyname)
+  end
+  def put_friendly_name(this : IWdsTransportNamespace*, bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bszfriendlyname)
+  end
+  def get_description(this : IWdsTransportNamespace*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def put_description(this : IWdsTransportNamespace*, bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bszdescription)
+  end
+  def get_content_provider(this : IWdsTransportNamespace*, pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.call(this, pbszcontentprovider)
+  end
+  def put_content_provider(this : IWdsTransportNamespace*, bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.call(this, bszcontentprovider)
+  end
+  def get_configuration(this : IWdsTransportNamespace*, pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pbszconfiguration)
+  end
+  def put_configuration(this : IWdsTransportNamespace*, bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.call(this, bszconfiguration)
+  end
+  def get_registered(this : IWdsTransportNamespace*, pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.call(this, pbregistered)
+  end
+  def get_tombstoned(this : IWdsTransportNamespace*, pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.call(this, pbtombstoned)
+  end
+  def get_tombstone_time(this : IWdsTransportNamespace*, ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.call(this, ptombstonetime)
+  end
+  def get_transmission_started(this : IWdsTransportNamespace*, pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.call(this, pbtransmissionstarted)
+  end
+  def register(this : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.register.call(this)
+  end
+  def deregister(this : IWdsTransportNamespace*, bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.call(this, bterminatesessions)
+  end
+  def clone(this : IWdsTransportNamespace*, ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppwdstransportnamespaceclone)
+  end
+  def refresh(this : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def retrieve_contents(this : IWdsTransportNamespace*, ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.call(this, ppwdstransportcontents)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceAutoCast
+  def query_interface(this : IWdsTransportNamespaceAutoCast*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespaceAutoCast*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespaceAutoCast*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespaceAutoCast*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespaceAutoCast*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespaceAutoCast*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespaceAutoCast*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWdsTransportNamespaceAutoCast*, ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWdsTransportNamespaceAutoCast*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportNamespaceAutoCast*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def put_name(this : IWdsTransportNamespaceAutoCast*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bszname)
+  end
+  def get_friendly_name(this : IWdsTransportNamespaceAutoCast*, pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbszfriendlyname)
+  end
+  def put_friendly_name(this : IWdsTransportNamespaceAutoCast*, bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bszfriendlyname)
+  end
+  def get_description(this : IWdsTransportNamespaceAutoCast*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def put_description(this : IWdsTransportNamespaceAutoCast*, bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bszdescription)
+  end
+  def get_content_provider(this : IWdsTransportNamespaceAutoCast*, pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.call(this, pbszcontentprovider)
+  end
+  def put_content_provider(this : IWdsTransportNamespaceAutoCast*, bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.call(this, bszcontentprovider)
+  end
+  def get_configuration(this : IWdsTransportNamespaceAutoCast*, pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pbszconfiguration)
+  end
+  def put_configuration(this : IWdsTransportNamespaceAutoCast*, bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.call(this, bszconfiguration)
+  end
+  def get_registered(this : IWdsTransportNamespaceAutoCast*, pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.call(this, pbregistered)
+  end
+  def get_tombstoned(this : IWdsTransportNamespaceAutoCast*, pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.call(this, pbtombstoned)
+  end
+  def get_tombstone_time(this : IWdsTransportNamespaceAutoCast*, ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.call(this, ptombstonetime)
+  end
+  def get_transmission_started(this : IWdsTransportNamespaceAutoCast*, pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.call(this, pbtransmissionstarted)
+  end
+  def register(this : IWdsTransportNamespaceAutoCast*) : HRESULT
+    @lpVtbl.value.register.call(this)
+  end
+  def deregister(this : IWdsTransportNamespaceAutoCast*, bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.call(this, bterminatesessions)
+  end
+  def clone(this : IWdsTransportNamespaceAutoCast*, ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppwdstransportnamespaceclone)
+  end
+  def refresh(this : IWdsTransportNamespaceAutoCast*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def retrieve_contents(this : IWdsTransportNamespaceAutoCast*, ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.call(this, ppwdstransportcontents)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCast
+  def query_interface(this : IWdsTransportNamespaceScheduledCast*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespaceScheduledCast*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespaceScheduledCast*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespaceScheduledCast*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespaceScheduledCast*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCast*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespaceScheduledCast*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWdsTransportNamespaceScheduledCast*, ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWdsTransportNamespaceScheduledCast*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportNamespaceScheduledCast*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def put_name(this : IWdsTransportNamespaceScheduledCast*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bszname)
+  end
+  def get_friendly_name(this : IWdsTransportNamespaceScheduledCast*, pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbszfriendlyname)
+  end
+  def put_friendly_name(this : IWdsTransportNamespaceScheduledCast*, bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bszfriendlyname)
+  end
+  def get_description(this : IWdsTransportNamespaceScheduledCast*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def put_description(this : IWdsTransportNamespaceScheduledCast*, bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bszdescription)
+  end
+  def get_content_provider(this : IWdsTransportNamespaceScheduledCast*, pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.call(this, pbszcontentprovider)
+  end
+  def put_content_provider(this : IWdsTransportNamespaceScheduledCast*, bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.call(this, bszcontentprovider)
+  end
+  def get_configuration(this : IWdsTransportNamespaceScheduledCast*, pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pbszconfiguration)
+  end
+  def put_configuration(this : IWdsTransportNamespaceScheduledCast*, bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.call(this, bszconfiguration)
+  end
+  def get_registered(this : IWdsTransportNamespaceScheduledCast*, pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.call(this, pbregistered)
+  end
+  def get_tombstoned(this : IWdsTransportNamespaceScheduledCast*, pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.call(this, pbtombstoned)
+  end
+  def get_tombstone_time(this : IWdsTransportNamespaceScheduledCast*, ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.call(this, ptombstonetime)
+  end
+  def get_transmission_started(this : IWdsTransportNamespaceScheduledCast*, pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.call(this, pbtransmissionstarted)
+  end
+  def register(this : IWdsTransportNamespaceScheduledCast*) : HRESULT
+    @lpVtbl.value.register.call(this)
+  end
+  def deregister(this : IWdsTransportNamespaceScheduledCast*, bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.call(this, bterminatesessions)
+  end
+  def clone(this : IWdsTransportNamespaceScheduledCast*, ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppwdstransportnamespaceclone)
+  end
+  def refresh(this : IWdsTransportNamespaceScheduledCast*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def retrieve_contents(this : IWdsTransportNamespaceScheduledCast*, ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.call(this, ppwdstransportcontents)
+  end
+  def start_transmission(this : IWdsTransportNamespaceScheduledCast*) : HRESULT
+    @lpVtbl.value.start_transmission.call(this)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCastManualStart
+  def query_interface(this : IWdsTransportNamespaceScheduledCastManualStart*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespaceScheduledCastManualStart*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespaceScheduledCastManualStart*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespaceScheduledCastManualStart*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespaceScheduledCastManualStart*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCastManualStart*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespaceScheduledCastManualStart*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWdsTransportNamespaceScheduledCastManualStart*, ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWdsTransportNamespaceScheduledCastManualStart*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportNamespaceScheduledCastManualStart*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def put_name(this : IWdsTransportNamespaceScheduledCastManualStart*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bszname)
+  end
+  def get_friendly_name(this : IWdsTransportNamespaceScheduledCastManualStart*, pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbszfriendlyname)
+  end
+  def put_friendly_name(this : IWdsTransportNamespaceScheduledCastManualStart*, bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bszfriendlyname)
+  end
+  def get_description(this : IWdsTransportNamespaceScheduledCastManualStart*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def put_description(this : IWdsTransportNamespaceScheduledCastManualStart*, bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bszdescription)
+  end
+  def get_content_provider(this : IWdsTransportNamespaceScheduledCastManualStart*, pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.call(this, pbszcontentprovider)
+  end
+  def put_content_provider(this : IWdsTransportNamespaceScheduledCastManualStart*, bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.call(this, bszcontentprovider)
+  end
+  def get_configuration(this : IWdsTransportNamespaceScheduledCastManualStart*, pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pbszconfiguration)
+  end
+  def put_configuration(this : IWdsTransportNamespaceScheduledCastManualStart*, bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.call(this, bszconfiguration)
+  end
+  def get_registered(this : IWdsTransportNamespaceScheduledCastManualStart*, pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.call(this, pbregistered)
+  end
+  def get_tombstoned(this : IWdsTransportNamespaceScheduledCastManualStart*, pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.call(this, pbtombstoned)
+  end
+  def get_tombstone_time(this : IWdsTransportNamespaceScheduledCastManualStart*, ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.call(this, ptombstonetime)
+  end
+  def get_transmission_started(this : IWdsTransportNamespaceScheduledCastManualStart*, pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.call(this, pbtransmissionstarted)
+  end
+  def register(this : IWdsTransportNamespaceScheduledCastManualStart*) : HRESULT
+    @lpVtbl.value.register.call(this)
+  end
+  def deregister(this : IWdsTransportNamespaceScheduledCastManualStart*, bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.call(this, bterminatesessions)
+  end
+  def clone(this : IWdsTransportNamespaceScheduledCastManualStart*, ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppwdstransportnamespaceclone)
+  end
+  def refresh(this : IWdsTransportNamespaceScheduledCastManualStart*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def retrieve_contents(this : IWdsTransportNamespaceScheduledCastManualStart*, ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.call(this, ppwdstransportcontents)
+  end
+  def start_transmission(this : IWdsTransportNamespaceScheduledCastManualStart*) : HRESULT
+    @lpVtbl.value.start_transmission.call(this)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCastAutoStart
+  def query_interface(this : IWdsTransportNamespaceScheduledCastAutoStart*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportNamespaceScheduledCastAutoStart*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportNamespaceScheduledCastAutoStart*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportNamespaceScheduledCastAutoStart*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportNamespaceScheduledCastAutoStart*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCastAutoStart*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportNamespaceScheduledCastAutoStart*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(this : IWdsTransportNamespaceScheduledCastAutoStart*, ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def get_id(this : IWdsTransportNamespaceScheduledCastAutoStart*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def put_name(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.call(this, bszname)
+  end
+  def get_friendly_name(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.call(this, pbszfriendlyname)
+  end
+  def put_friendly_name(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.call(this, bszfriendlyname)
+  end
+  def get_description(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def put_description(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.call(this, bszdescription)
+  end
+  def get_content_provider(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.call(this, pbszcontentprovider)
+  end
+  def put_content_provider(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.call(this, bszcontentprovider)
+  end
+  def get_configuration(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.call(this, pbszconfiguration)
+  end
+  def put_configuration(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.call(this, bszconfiguration)
+  end
+  def get_registered(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.call(this, pbregistered)
+  end
+  def get_tombstoned(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.call(this, pbtombstoned)
+  end
+  def get_tombstone_time(this : IWdsTransportNamespaceScheduledCastAutoStart*, ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.call(this, ptombstonetime)
+  end
+  def get_transmission_started(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.call(this, pbtransmissionstarted)
+  end
+  def register(this : IWdsTransportNamespaceScheduledCastAutoStart*) : HRESULT
+    @lpVtbl.value.register.call(this)
+  end
+  def deregister(this : IWdsTransportNamespaceScheduledCastAutoStart*, bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.call(this, bterminatesessions)
+  end
+  def clone(this : IWdsTransportNamespaceScheduledCastAutoStart*, ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.call(this, ppwdstransportnamespaceclone)
+  end
+  def refresh(this : IWdsTransportNamespaceScheduledCastAutoStart*) : HRESULT
+    @lpVtbl.value.refresh.call(this)
+  end
+  def retrieve_contents(this : IWdsTransportNamespaceScheduledCastAutoStart*, ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.call(this, ppwdstransportcontents)
+  end
+  def start_transmission(this : IWdsTransportNamespaceScheduledCastAutoStart*) : HRESULT
+    @lpVtbl.value.start_transmission.call(this)
+  end
+  def get_minimum_clients(this : IWdsTransportNamespaceScheduledCastAutoStart*, pulminimumclients : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_clients.call(this, pulminimumclients)
+  end
+  def put_minimum_clients(this : IWdsTransportNamespaceScheduledCastAutoStart*, ulminimumclients : UInt32) : HRESULT
+    @lpVtbl.value.put_minimum_clients.call(this, ulminimumclients)
+  end
+  def get_start_time(this : IWdsTransportNamespaceScheduledCastAutoStart*, pstarttime : Float64*) : HRESULT
+    @lpVtbl.value.get_start_time.call(this, pstarttime)
+  end
+  def put_start_time(this : IWdsTransportNamespaceScheduledCastAutoStart*, starttime : Float64) : HRESULT
+    @lpVtbl.value.put_start_time.call(this, starttime)
+  end
+end
+struct LibWin32::IWdsTransportContent
+  def query_interface(this : IWdsTransportContent*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportContent*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportContent*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportContent*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportContent*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportContent*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportContent*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_namespace(this : IWdsTransportContent*, ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.get_namespace.call(this, ppwdstransportnamespace)
+  end
+  def get_id(this : IWdsTransportContent*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportContent*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def retrieve_sessions(this : IWdsTransportContent*, ppwdstransportsessions : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_sessions.call(this, ppwdstransportsessions)
+  end
+  def terminate(this : IWdsTransportContent*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+end
+struct LibWin32::IWdsTransportSession
+  def query_interface(this : IWdsTransportSession*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportSession*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportSession*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportSession*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportSession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportSession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportSession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_content(this : IWdsTransportSession*, ppwdstransportcontent : IWdsTransportContent*) : HRESULT
+    @lpVtbl.value.get_content.call(this, ppwdstransportcontent)
+  end
+  def get_id(this : IWdsTransportSession*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_network_interface_name(this : IWdsTransportSession*, pbsznetworkinterfacename : UInt8**) : HRESULT
+    @lpVtbl.value.get_network_interface_name.call(this, pbsznetworkinterfacename)
+  end
+  def get_network_interface_address(this : IWdsTransportSession*, pbsznetworkinterfaceaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_network_interface_address.call(this, pbsznetworkinterfaceaddress)
+  end
+  def get_transfer_rate(this : IWdsTransportSession*, pultransferrate : UInt32*) : HRESULT
+    @lpVtbl.value.get_transfer_rate.call(this, pultransferrate)
+  end
+  def get_master_client_id(this : IWdsTransportSession*, pulmasterclientid : UInt32*) : HRESULT
+    @lpVtbl.value.get_master_client_id.call(this, pulmasterclientid)
+  end
+  def retrieve_clients(this : IWdsTransportSession*, ppwdstransportclients : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_clients.call(this, ppwdstransportclients)
+  end
+  def terminate(this : IWdsTransportSession*) : HRESULT
+    @lpVtbl.value.terminate.call(this)
+  end
+end
+struct LibWin32::IWdsTransportClient
+  def query_interface(this : IWdsTransportClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportClient*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportClient*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportClient*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportClient*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(this : IWdsTransportClient*, ppwdstransportsession : IWdsTransportSession*) : HRESULT
+    @lpVtbl.value.get_session.call(this, ppwdstransportsession)
+  end
+  def get_id(this : IWdsTransportClient*, pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.call(this, pulid)
+  end
+  def get_name(this : IWdsTransportClient*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def get_mac_address(this : IWdsTransportClient*, pbszmacaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_mac_address.call(this, pbszmacaddress)
+  end
+  def get_ip_address(this : IWdsTransportClient*, pbszipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_ip_address.call(this, pbszipaddress)
+  end
+  def get_percent_completion(this : IWdsTransportClient*, pulpercentcompletion : UInt32*) : HRESULT
+    @lpVtbl.value.get_percent_completion.call(this, pulpercentcompletion)
+  end
+  def get_join_duration(this : IWdsTransportClient*, puljoinduration : UInt32*) : HRESULT
+    @lpVtbl.value.get_join_duration.call(this, puljoinduration)
+  end
+  def get_cpu_utilization(this : IWdsTransportClient*, pulcpuutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_cpu_utilization.call(this, pulcpuutilization)
+  end
+  def get_memory_utilization(this : IWdsTransportClient*, pulmemoryutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_memory_utilization.call(this, pulmemoryutilization)
+  end
+  def get_network_utilization(this : IWdsTransportClient*, pulnetworkutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_network_utilization.call(this, pulnetworkutilization)
+  end
+  def get_user_identity(this : IWdsTransportClient*, pbszuseridentity : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_identity.call(this, pbszuseridentity)
+  end
+  def disconnect(this : IWdsTransportClient*, disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect.call(this, disconnectiontype)
+  end
+end
+struct LibWin32::IWdsTransportTftpClient
+  def query_interface(this : IWdsTransportTftpClient*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportTftpClient*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportTftpClient*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportTftpClient*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportTftpClient*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportTftpClient*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportTftpClient*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_file_name(this : IWdsTransportTftpClient*, pbszfilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name.call(this, pbszfilename)
+  end
+  def get_ip_address(this : IWdsTransportTftpClient*, pbszipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_ip_address.call(this, pbszipaddress)
+  end
+  def get_timeout(this : IWdsTransportTftpClient*, pultimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_timeout.call(this, pultimeout)
+  end
+  def get_current_file_offset(this : IWdsTransportTftpClient*, pul64currentoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_file_offset.call(this, pul64currentoffset)
+  end
+  def get_file_size(this : IWdsTransportTftpClient*, pul64filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.call(this, pul64filesize)
+  end
+  def get_block_size(this : IWdsTransportTftpClient*, pulblocksize : UInt32*) : HRESULT
+    @lpVtbl.value.get_block_size.call(this, pulblocksize)
+  end
+  def get_window_size(this : IWdsTransportTftpClient*, pulwindowsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_window_size.call(this, pulwindowsize)
+  end
+end
+struct LibWin32::IWdsTransportContentProvider
+  def query_interface(this : IWdsTransportContentProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IWdsTransportContentProvider*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IWdsTransportContentProvider*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : IWdsTransportContentProvider*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : IWdsTransportContentProvider*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : IWdsTransportContentProvider*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : IWdsTransportContentProvider*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : IWdsTransportContentProvider*, pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbszname)
+  end
+  def get_description(this : IWdsTransportContentProvider*, pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.call(this, pbszdescription)
+  end
+  def get_file_path(this : IWdsTransportContentProvider*, pbszfilepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_path.call(this, pbszfilepath)
+  end
+  def get_initialization_routine(this : IWdsTransportContentProvider*, pbszinitializationroutine : UInt8**) : HRESULT
+    @lpVtbl.value.get_initialization_routine.call(this, pbszinitializationroutine)
+  end
 end

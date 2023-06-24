@@ -59,3 +59,49 @@ lib LibWin32
   end
 
 end
+struct LibWin32::IGraphicsEffectD2D1Interop
+  def query_interface(this : IGraphicsEffectD2D1Interop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGraphicsEffectD2D1Interop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGraphicsEffectD2D1Interop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_effect_id(this : IGraphicsEffectD2D1Interop*, id : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_id.call(this, id)
+  end
+  def get_named_property_mapping(this : IGraphicsEffectD2D1Interop*, name : LibC::LPWSTR, index : UInt32*, mapping : GRAPHICS_EFFECT_PROPERTY_MAPPING*) : HRESULT
+    @lpVtbl.value.get_named_property_mapping.call(this, name, index, mapping)
+  end
+  def get_property_count(this : IGraphicsEffectD2D1Interop*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_count.call(this, count)
+  end
+  def get_property(this : IGraphicsEffectD2D1Interop*, index : UInt32, value : IPropertyValue*) : HRESULT
+    @lpVtbl.value.get_property.call(this, index, value)
+  end
+  def get_source(this : IGraphicsEffectD2D1Interop*, index : UInt32, source : IGraphicsEffectSource*) : HRESULT
+    @lpVtbl.value.get_source.call(this, index, source)
+  end
+  def get_source_count(this : IGraphicsEffectD2D1Interop*, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_count.call(this, count)
+  end
+end
+struct LibWin32::IGeometrySource2DInterop
+  def query_interface(this : IGeometrySource2DInterop*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IGeometrySource2DInterop*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IGeometrySource2DInterop*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_geometry(this : IGeometrySource2DInterop*, value : ID2D1Geometry*) : HRESULT
+    @lpVtbl.value.get_geometry.call(this, value)
+  end
+  def try_get_geometry_using_factory(this : IGeometrySource2DInterop*, factory : ID2D1Factory, value : ID2D1Geometry*) : HRESULT
+    @lpVtbl.value.try_get_geometry_using_factory.call(this, factory, value)
+  end
+end

@@ -2983,3 +2983,3291 @@ lib LibWin32
   end
 
 end
+struct LibWin32::ITextServices
+  def query_interface(this : ITextServices*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextServices*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextServices*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def tx_send_message(this : ITextServices*, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.tx_send_message.call(this, msg, wparam, lparam, plresult)
+  end
+  def tx_draw(this : ITextServices*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcbounds : RECTL*, lprcwbounds : RECTL*, lprcupdate : RECT*, pfncontinue : LibC::IntPtrT, dwcontinue : UInt32, lviewid : Int32) : HRESULT
+    @lpVtbl.value.tx_draw.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcbounds, lprcwbounds, lprcupdate, pfncontinue, dwcontinue, lviewid)
+  end
+  def tx_get_h_scroll(this : ITextServices*, plmin : Int32*, plmax : Int32*, plpos : Int32*, plpage : Int32*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.tx_get_h_scroll.call(this, plmin, plmax, plpos, plpage, pfenabled)
+  end
+  def tx_get_v_scroll(this : ITextServices*, plmin : Int32*, plmax : Int32*, plpos : Int32*, plpage : Int32*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.tx_get_v_scroll.call(this, plmin, plmax, plpos, plpage, pfenabled)
+  end
+  def on_tx_set_cursor(this : ITextServices*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcclient : RECT*, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.on_tx_set_cursor.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcclient, x, y)
+  end
+  def tx_query_hit_point(this : ITextServices*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcclient : RECT*, x : Int32, y : Int32, phitresult : UInt32*) : HRESULT
+    @lpVtbl.value.tx_query_hit_point.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcclient, x, y, phitresult)
+  end
+  def on_tx_in_place_activate(this : ITextServices*, prcclient : RECT*) : HRESULT
+    @lpVtbl.value.on_tx_in_place_activate.call(this, prcclient)
+  end
+  def on_tx_in_place_deactivate(this : ITextServices*) : HRESULT
+    @lpVtbl.value.on_tx_in_place_deactivate.call(this)
+  end
+  def on_tx_ui_activate(this : ITextServices*) : HRESULT
+    @lpVtbl.value.on_tx_ui_activate.call(this)
+  end
+  def on_tx_ui_deactivate(this : ITextServices*) : HRESULT
+    @lpVtbl.value.on_tx_ui_deactivate.call(this)
+  end
+  def tx_get_text(this : ITextServices*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.tx_get_text.call(this, pbstrtext)
+  end
+  def tx_set_text(this : ITextServices*, psztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.tx_set_text.call(this, psztext)
+  end
+  def tx_get_cur_target_x(this : ITextServices*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_cur_target_x.call(this, param0)
+  end
+  def tx_get_base_line_pos(this : ITextServices*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_base_line_pos.call(this, param0)
+  end
+  def tx_get_natural_size(this : ITextServices*, dwaspect : UInt32, hdcdraw : HDC, hictargetdev : HDC, ptd : DVTARGETDEVICE*, dwmode : UInt32, psizelextent : SIZE*, pwidth : Int32*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_natural_size.call(this, dwaspect, hdcdraw, hictargetdev, ptd, dwmode, psizelextent, pwidth, pheight)
+  end
+  def tx_get_drop_target(this : ITextServices*, ppdroptarget : IDropTarget*) : HRESULT
+    @lpVtbl.value.tx_get_drop_target.call(this, ppdroptarget)
+  end
+  def on_tx_property_bits_change(this : ITextServices*, dwmask : UInt32, dwbits : UInt32) : HRESULT
+    @lpVtbl.value.on_tx_property_bits_change.call(this, dwmask, dwbits)
+  end
+  def tx_get_cached_size(this : ITextServices*, pdwwidth : UInt32*, pdwheight : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_cached_size.call(this, pdwwidth, pdwheight)
+  end
+end
+struct LibWin32::ITextHost
+  def query_interface(this : ITextHost*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextHost*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextHost*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def tx_get_dc(this : ITextHost*) : HDC
+    @lpVtbl.value.tx_get_dc.call(this)
+  end
+  def tx_release_dc(this : ITextHost*, hdc : HDC) : Int32
+    @lpVtbl.value.tx_release_dc.call(this, hdc)
+  end
+  def tx_show_scroll_bar(this : ITextHost*, fnbar : Int32, fshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_show_scroll_bar.call(this, fnbar, fshow)
+  end
+  def tx_enable_scroll_bar(this : ITextHost*, fusbflags : SCROLLBAR_CONSTANTS, fuarrowflags : ENABLE_SCROLL_BAR_ARROWS) : LibC::BOOL
+    @lpVtbl.value.tx_enable_scroll_bar.call(this, fusbflags, fuarrowflags)
+  end
+  def tx_set_scroll_range(this : ITextHost*, fnbar : Int32, nminpos : Int32, nmaxpos : Int32, fredraw : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_set_scroll_range.call(this, fnbar, nminpos, nmaxpos, fredraw)
+  end
+  def tx_set_scroll_pos(this : ITextHost*, fnbar : Int32, npos : Int32, fredraw : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_set_scroll_pos.call(this, fnbar, npos, fredraw)
+  end
+  def tx_invalidate_rect(this : ITextHost*, prc : RECT*, fmode : LibC::BOOL) : Void
+    @lpVtbl.value.tx_invalidate_rect.call(this, prc, fmode)
+  end
+  def tx_view_change(this : ITextHost*, fupdate : LibC::BOOL) : Void
+    @lpVtbl.value.tx_view_change.call(this, fupdate)
+  end
+  def tx_create_caret(this : ITextHost*, hbmp : HBITMAP, xwidth : Int32, yheight : Int32) : LibC::BOOL
+    @lpVtbl.value.tx_create_caret.call(this, hbmp, xwidth, yheight)
+  end
+  def tx_show_caret(this : ITextHost*, fshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_show_caret.call(this, fshow)
+  end
+  def tx_set_caret_pos(this : ITextHost*, x : Int32, y : Int32) : LibC::BOOL
+    @lpVtbl.value.tx_set_caret_pos.call(this, x, y)
+  end
+  def tx_set_timer(this : ITextHost*, idtimer : UInt32, utimeout : UInt32) : LibC::BOOL
+    @lpVtbl.value.tx_set_timer.call(this, idtimer, utimeout)
+  end
+  def tx_kill_timer(this : ITextHost*, idtimer : UInt32) : Void
+    @lpVtbl.value.tx_kill_timer.call(this, idtimer)
+  end
+  def tx_scroll_window_ex(this : ITextHost*, dx : Int32, dy : Int32, lprcscroll : RECT*, lprcclip : RECT*, hrgnupdate : HRGN, lprcupdate : RECT*, fuscroll : SHOW_WINDOW_CMD) : Void
+    @lpVtbl.value.tx_scroll_window_ex.call(this, dx, dy, lprcscroll, lprcclip, hrgnupdate, lprcupdate, fuscroll)
+  end
+  def tx_set_capture(this : ITextHost*, fcapture : LibC::BOOL) : Void
+    @lpVtbl.value.tx_set_capture.call(this, fcapture)
+  end
+  def tx_set_focus(this : ITextHost*) : Void
+    @lpVtbl.value.tx_set_focus.call(this)
+  end
+  def tx_set_cursor(this : ITextHost*, hcur : LibC::HANDLE, ftext : LibC::BOOL) : Void
+    @lpVtbl.value.tx_set_cursor.call(this, hcur, ftext)
+  end
+  def tx_screen_to_client(this : ITextHost*, lppt : POINT*) : LibC::BOOL
+    @lpVtbl.value.tx_screen_to_client.call(this, lppt)
+  end
+  def tx_client_to_screen(this : ITextHost*, lppt : POINT*) : LibC::BOOL
+    @lpVtbl.value.tx_client_to_screen.call(this, lppt)
+  end
+  def tx_activate(this : ITextHost*, ploldstate : Int32*) : HRESULT
+    @lpVtbl.value.tx_activate.call(this, ploldstate)
+  end
+  def tx_deactivate(this : ITextHost*, lnewstate : Int32) : HRESULT
+    @lpVtbl.value.tx_deactivate.call(this, lnewstate)
+  end
+  def tx_get_client_rect(this : ITextHost*, prc : RECT*) : HRESULT
+    @lpVtbl.value.tx_get_client_rect.call(this, prc)
+  end
+  def tx_get_view_inset(this : ITextHost*, prc : RECT*) : HRESULT
+    @lpVtbl.value.tx_get_view_inset.call(this, prc)
+  end
+  def tx_get_char_format(this : ITextHost*, ppcf : CHARFORMATW**) : HRESULT
+    @lpVtbl.value.tx_get_char_format.call(this, ppcf)
+  end
+  def tx_get_para_format(this : ITextHost*, pppf : PARAFORMAT**) : HRESULT
+    @lpVtbl.value.tx_get_para_format.call(this, pppf)
+  end
+  def tx_get_sys_color(this : ITextHost*, nindex : Int32) : UInt32
+    @lpVtbl.value.tx_get_sys_color.call(this, nindex)
+  end
+  def tx_get_back_style(this : ITextHost*, pstyle : TXTBACKSTYLE*) : HRESULT
+    @lpVtbl.value.tx_get_back_style.call(this, pstyle)
+  end
+  def tx_get_max_length(this : ITextHost*, plength : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_max_length.call(this, plength)
+  end
+  def tx_get_scroll_bars(this : ITextHost*, pdwscrollbar : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_scroll_bars.call(this, pdwscrollbar)
+  end
+  def tx_get_password_char(this : ITextHost*, pch : Int8*) : HRESULT
+    @lpVtbl.value.tx_get_password_char.call(this, pch)
+  end
+  def tx_get_accelerator_pos(this : ITextHost*, pcp : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_accelerator_pos.call(this, pcp)
+  end
+  def tx_get_extent(this : ITextHost*, lpextent : SIZE*) : HRESULT
+    @lpVtbl.value.tx_get_extent.call(this, lpextent)
+  end
+  def on_tx_char_format_change(this : ITextHost*, pcf : CHARFORMATW*) : HRESULT
+    @lpVtbl.value.on_tx_char_format_change.call(this, pcf)
+  end
+  def on_tx_para_format_change(this : ITextHost*, ppf : PARAFORMAT*) : HRESULT
+    @lpVtbl.value.on_tx_para_format_change.call(this, ppf)
+  end
+  def tx_get_property_bits(this : ITextHost*, dwmask : UInt32, pdwbits : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_property_bits.call(this, dwmask, pdwbits)
+  end
+  def tx_notify(this : ITextHost*, inotify : UInt32, pv : Void*) : HRESULT
+    @lpVtbl.value.tx_notify.call(this, inotify, pv)
+  end
+  def tx_imm_get_context(this : ITextHost*) : HIMC
+    @lpVtbl.value.tx_imm_get_context.call(this)
+  end
+  def tx_imm_release_context(this : ITextHost*, himc : HIMC) : Void
+    @lpVtbl.value.tx_imm_release_context.call(this, himc)
+  end
+  def tx_get_selection_bar_width(this : ITextHost*, lselbarwidth : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_selection_bar_width.call(this, lselbarwidth)
+  end
+end
+struct LibWin32::IRicheditUiaOverrides
+  def query_interface(this : IRicheditUiaOverrides*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRicheditUiaOverrides*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRicheditUiaOverrides*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_property_override_value(this : IRicheditUiaOverrides*, propertyid : Int32, pretvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_override_value.call(this, propertyid, pretvalue)
+  end
+end
+struct LibWin32::ITextHost2
+  def query_interface(this : ITextHost2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextHost2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextHost2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def tx_get_dc(this : ITextHost2*) : HDC
+    @lpVtbl.value.tx_get_dc.call(this)
+  end
+  def tx_release_dc(this : ITextHost2*, hdc : HDC) : Int32
+    @lpVtbl.value.tx_release_dc.call(this, hdc)
+  end
+  def tx_show_scroll_bar(this : ITextHost2*, fnbar : Int32, fshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_show_scroll_bar.call(this, fnbar, fshow)
+  end
+  def tx_enable_scroll_bar(this : ITextHost2*, fusbflags : SCROLLBAR_CONSTANTS, fuarrowflags : ENABLE_SCROLL_BAR_ARROWS) : LibC::BOOL
+    @lpVtbl.value.tx_enable_scroll_bar.call(this, fusbflags, fuarrowflags)
+  end
+  def tx_set_scroll_range(this : ITextHost2*, fnbar : Int32, nminpos : Int32, nmaxpos : Int32, fredraw : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_set_scroll_range.call(this, fnbar, nminpos, nmaxpos, fredraw)
+  end
+  def tx_set_scroll_pos(this : ITextHost2*, fnbar : Int32, npos : Int32, fredraw : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_set_scroll_pos.call(this, fnbar, npos, fredraw)
+  end
+  def tx_invalidate_rect(this : ITextHost2*, prc : RECT*, fmode : LibC::BOOL) : Void
+    @lpVtbl.value.tx_invalidate_rect.call(this, prc, fmode)
+  end
+  def tx_view_change(this : ITextHost2*, fupdate : LibC::BOOL) : Void
+    @lpVtbl.value.tx_view_change.call(this, fupdate)
+  end
+  def tx_create_caret(this : ITextHost2*, hbmp : HBITMAP, xwidth : Int32, yheight : Int32) : LibC::BOOL
+    @lpVtbl.value.tx_create_caret.call(this, hbmp, xwidth, yheight)
+  end
+  def tx_show_caret(this : ITextHost2*, fshow : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.tx_show_caret.call(this, fshow)
+  end
+  def tx_set_caret_pos(this : ITextHost2*, x : Int32, y : Int32) : LibC::BOOL
+    @lpVtbl.value.tx_set_caret_pos.call(this, x, y)
+  end
+  def tx_set_timer(this : ITextHost2*, idtimer : UInt32, utimeout : UInt32) : LibC::BOOL
+    @lpVtbl.value.tx_set_timer.call(this, idtimer, utimeout)
+  end
+  def tx_kill_timer(this : ITextHost2*, idtimer : UInt32) : Void
+    @lpVtbl.value.tx_kill_timer.call(this, idtimer)
+  end
+  def tx_scroll_window_ex(this : ITextHost2*, dx : Int32, dy : Int32, lprcscroll : RECT*, lprcclip : RECT*, hrgnupdate : HRGN, lprcupdate : RECT*, fuscroll : SHOW_WINDOW_CMD) : Void
+    @lpVtbl.value.tx_scroll_window_ex.call(this, dx, dy, lprcscroll, lprcclip, hrgnupdate, lprcupdate, fuscroll)
+  end
+  def tx_set_capture(this : ITextHost2*, fcapture : LibC::BOOL) : Void
+    @lpVtbl.value.tx_set_capture.call(this, fcapture)
+  end
+  def tx_set_focus(this : ITextHost2*) : Void
+    @lpVtbl.value.tx_set_focus.call(this)
+  end
+  def tx_set_cursor(this : ITextHost2*, hcur : LibC::HANDLE, ftext : LibC::BOOL) : Void
+    @lpVtbl.value.tx_set_cursor.call(this, hcur, ftext)
+  end
+  def tx_screen_to_client(this : ITextHost2*, lppt : POINT*) : LibC::BOOL
+    @lpVtbl.value.tx_screen_to_client.call(this, lppt)
+  end
+  def tx_client_to_screen(this : ITextHost2*, lppt : POINT*) : LibC::BOOL
+    @lpVtbl.value.tx_client_to_screen.call(this, lppt)
+  end
+  def tx_activate(this : ITextHost2*, ploldstate : Int32*) : HRESULT
+    @lpVtbl.value.tx_activate.call(this, ploldstate)
+  end
+  def tx_deactivate(this : ITextHost2*, lnewstate : Int32) : HRESULT
+    @lpVtbl.value.tx_deactivate.call(this, lnewstate)
+  end
+  def tx_get_client_rect(this : ITextHost2*, prc : RECT*) : HRESULT
+    @lpVtbl.value.tx_get_client_rect.call(this, prc)
+  end
+  def tx_get_view_inset(this : ITextHost2*, prc : RECT*) : HRESULT
+    @lpVtbl.value.tx_get_view_inset.call(this, prc)
+  end
+  def tx_get_char_format(this : ITextHost2*, ppcf : CHARFORMATW**) : HRESULT
+    @lpVtbl.value.tx_get_char_format.call(this, ppcf)
+  end
+  def tx_get_para_format(this : ITextHost2*, pppf : PARAFORMAT**) : HRESULT
+    @lpVtbl.value.tx_get_para_format.call(this, pppf)
+  end
+  def tx_get_sys_color(this : ITextHost2*, nindex : Int32) : UInt32
+    @lpVtbl.value.tx_get_sys_color.call(this, nindex)
+  end
+  def tx_get_back_style(this : ITextHost2*, pstyle : TXTBACKSTYLE*) : HRESULT
+    @lpVtbl.value.tx_get_back_style.call(this, pstyle)
+  end
+  def tx_get_max_length(this : ITextHost2*, plength : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_max_length.call(this, plength)
+  end
+  def tx_get_scroll_bars(this : ITextHost2*, pdwscrollbar : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_scroll_bars.call(this, pdwscrollbar)
+  end
+  def tx_get_password_char(this : ITextHost2*, pch : Int8*) : HRESULT
+    @lpVtbl.value.tx_get_password_char.call(this, pch)
+  end
+  def tx_get_accelerator_pos(this : ITextHost2*, pcp : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_accelerator_pos.call(this, pcp)
+  end
+  def tx_get_extent(this : ITextHost2*, lpextent : SIZE*) : HRESULT
+    @lpVtbl.value.tx_get_extent.call(this, lpextent)
+  end
+  def on_tx_char_format_change(this : ITextHost2*, pcf : CHARFORMATW*) : HRESULT
+    @lpVtbl.value.on_tx_char_format_change.call(this, pcf)
+  end
+  def on_tx_para_format_change(this : ITextHost2*, ppf : PARAFORMAT*) : HRESULT
+    @lpVtbl.value.on_tx_para_format_change.call(this, ppf)
+  end
+  def tx_get_property_bits(this : ITextHost2*, dwmask : UInt32, pdwbits : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_property_bits.call(this, dwmask, pdwbits)
+  end
+  def tx_notify(this : ITextHost2*, inotify : UInt32, pv : Void*) : HRESULT
+    @lpVtbl.value.tx_notify.call(this, inotify, pv)
+  end
+  def tx_imm_get_context(this : ITextHost2*) : HIMC
+    @lpVtbl.value.tx_imm_get_context.call(this)
+  end
+  def tx_imm_release_context(this : ITextHost2*, himc : HIMC) : Void
+    @lpVtbl.value.tx_imm_release_context.call(this, himc)
+  end
+  def tx_get_selection_bar_width(this : ITextHost2*, lselbarwidth : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_selection_bar_width.call(this, lselbarwidth)
+  end
+  def tx_is_double_click_pending(this : ITextHost2*) : LibC::BOOL
+    @lpVtbl.value.tx_is_double_click_pending.call(this)
+  end
+  def tx_get_window(this : ITextHost2*, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.tx_get_window.call(this, phwnd)
+  end
+  def tx_set_foreground_window(this : ITextHost2*) : HRESULT
+    @lpVtbl.value.tx_set_foreground_window.call(this)
+  end
+  def tx_get_palette(this : ITextHost2*) : HPALETTE
+    @lpVtbl.value.tx_get_palette.call(this)
+  end
+  def tx_get_east_asian_flags(this : ITextHost2*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_east_asian_flags.call(this, pflags)
+  end
+  def tx_set_cursor2(this : ITextHost2*, hcur : LibC::HANDLE, btext : LibC::BOOL) : HANDLE
+    @lpVtbl.value.tx_set_cursor2.call(this, hcur, btext)
+  end
+  def tx_free_text_services_notification(this : ITextHost2*) : Void
+    @lpVtbl.value.tx_free_text_services_notification.call(this)
+  end
+  def tx_get_edit_style(this : ITextHost2*, dwitem : UInt32, pdwdata : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_edit_style.call(this, dwitem, pdwdata)
+  end
+  def tx_get_window_styles(this : ITextHost2*, pdwstyle : UInt32*, pdwexstyle : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_window_styles.call(this, pdwstyle, pdwexstyle)
+  end
+  def tx_show_drop_caret(this : ITextHost2*, fshow : LibC::BOOL, hdc : HDC, prc : RECT*) : HRESULT
+    @lpVtbl.value.tx_show_drop_caret.call(this, fshow, hdc, prc)
+  end
+  def tx_destroy_caret(this : ITextHost2*) : HRESULT
+    @lpVtbl.value.tx_destroy_caret.call(this)
+  end
+  def tx_get_horz_extent(this : ITextHost2*, plhorzextent : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_horz_extent.call(this, plhorzextent)
+  end
+end
+struct LibWin32::ITextServices2
+  def query_interface(this : ITextServices2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextServices2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextServices2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def tx_send_message(this : ITextServices2*, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.tx_send_message.call(this, msg, wparam, lparam, plresult)
+  end
+  def tx_draw(this : ITextServices2*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcbounds : RECTL*, lprcwbounds : RECTL*, lprcupdate : RECT*, pfncontinue : LibC::IntPtrT, dwcontinue : UInt32, lviewid : Int32) : HRESULT
+    @lpVtbl.value.tx_draw.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcbounds, lprcwbounds, lprcupdate, pfncontinue, dwcontinue, lviewid)
+  end
+  def tx_get_h_scroll(this : ITextServices2*, plmin : Int32*, plmax : Int32*, plpos : Int32*, plpage : Int32*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.tx_get_h_scroll.call(this, plmin, plmax, plpos, plpage, pfenabled)
+  end
+  def tx_get_v_scroll(this : ITextServices2*, plmin : Int32*, plmax : Int32*, plpos : Int32*, plpage : Int32*, pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.tx_get_v_scroll.call(this, plmin, plmax, plpos, plpage, pfenabled)
+  end
+  def on_tx_set_cursor(this : ITextServices2*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcclient : RECT*, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.on_tx_set_cursor.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcclient, x, y)
+  end
+  def tx_query_hit_point(this : ITextServices2*, dwdrawaspect : DVASPECT, lindex : Int32, pvaspect : Void*, ptd : DVTARGETDEVICE*, hdcdraw : HDC, hictargetdev : HDC, lprcclient : RECT*, x : Int32, y : Int32, phitresult : UInt32*) : HRESULT
+    @lpVtbl.value.tx_query_hit_point.call(this, dwdrawaspect, lindex, pvaspect, ptd, hdcdraw, hictargetdev, lprcclient, x, y, phitresult)
+  end
+  def on_tx_in_place_activate(this : ITextServices2*, prcclient : RECT*) : HRESULT
+    @lpVtbl.value.on_tx_in_place_activate.call(this, prcclient)
+  end
+  def on_tx_in_place_deactivate(this : ITextServices2*) : HRESULT
+    @lpVtbl.value.on_tx_in_place_deactivate.call(this)
+  end
+  def on_tx_ui_activate(this : ITextServices2*) : HRESULT
+    @lpVtbl.value.on_tx_ui_activate.call(this)
+  end
+  def on_tx_ui_deactivate(this : ITextServices2*) : HRESULT
+    @lpVtbl.value.on_tx_ui_deactivate.call(this)
+  end
+  def tx_get_text(this : ITextServices2*, pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.tx_get_text.call(this, pbstrtext)
+  end
+  def tx_set_text(this : ITextServices2*, psztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.tx_set_text.call(this, psztext)
+  end
+  def tx_get_cur_target_x(this : ITextServices2*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_cur_target_x.call(this, param0)
+  end
+  def tx_get_base_line_pos(this : ITextServices2*, param0 : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_base_line_pos.call(this, param0)
+  end
+  def tx_get_natural_size(this : ITextServices2*, dwaspect : UInt32, hdcdraw : HDC, hictargetdev : HDC, ptd : DVTARGETDEVICE*, dwmode : UInt32, psizelextent : SIZE*, pwidth : Int32*, pheight : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_natural_size.call(this, dwaspect, hdcdraw, hictargetdev, ptd, dwmode, psizelextent, pwidth, pheight)
+  end
+  def tx_get_drop_target(this : ITextServices2*, ppdroptarget : IDropTarget*) : HRESULT
+    @lpVtbl.value.tx_get_drop_target.call(this, ppdroptarget)
+  end
+  def on_tx_property_bits_change(this : ITextServices2*, dwmask : UInt32, dwbits : UInt32) : HRESULT
+    @lpVtbl.value.on_tx_property_bits_change.call(this, dwmask, dwbits)
+  end
+  def tx_get_cached_size(this : ITextServices2*, pdwwidth : UInt32*, pdwheight : UInt32*) : HRESULT
+    @lpVtbl.value.tx_get_cached_size.call(this, pdwwidth, pdwheight)
+  end
+  def tx_get_natural_size2(this : ITextServices2*, dwaspect : UInt32, hdcdraw : HDC, hictargetdev : HDC, ptd : DVTARGETDEVICE*, dwmode : UInt32, psizelextent : SIZE*, pwidth : Int32*, pheight : Int32*, pascent : Int32*) : HRESULT
+    @lpVtbl.value.tx_get_natural_size2.call(this, dwaspect, hdcdraw, hictargetdev, ptd, dwmode, psizelextent, pwidth, pheight, pascent)
+  end
+  def tx_draw_d2_d(this : ITextServices2*, prendertarget : ID2D1RenderTarget, lprcbounds : RECTL*, lprcupdate : RECT*, lviewid : Int32) : HRESULT
+    @lpVtbl.value.tx_draw_d2_d.call(this, prendertarget, lprcbounds, lprcupdate, lviewid)
+  end
+end
+struct LibWin32::IRichEditOle
+  def query_interface(this : IRichEditOle*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRichEditOle*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRichEditOle*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_client_site(this : IRichEditOle*, lplpolesite : IOleClientSite*) : HRESULT
+    @lpVtbl.value.get_client_site.call(this, lplpolesite)
+  end
+  def get_object_count(this : IRichEditOle*) : Int32
+    @lpVtbl.value.get_object_count.call(this)
+  end
+  def get_link_count(this : IRichEditOle*) : Int32
+    @lpVtbl.value.get_link_count.call(this)
+  end
+  def get_object(this : IRichEditOle*, iob : Int32, lpreobject : REOBJECT*, dwflags : RICH_EDIT_GET_OBJECT_FLAGS) : HRESULT
+    @lpVtbl.value.get_object.call(this, iob, lpreobject, dwflags)
+  end
+  def insert_object(this : IRichEditOle*, lpreobject : REOBJECT*) : HRESULT
+    @lpVtbl.value.insert_object.call(this, lpreobject)
+  end
+  def convert_object(this : IRichEditOle*, iob : Int32, rclsidnew : Guid*, lpstrusertypenew : PSTR) : HRESULT
+    @lpVtbl.value.convert_object.call(this, iob, rclsidnew, lpstrusertypenew)
+  end
+  def activate_as(this : IRichEditOle*, rclsid : Guid*, rclsidas : Guid*) : HRESULT
+    @lpVtbl.value.activate_as.call(this, rclsid, rclsidas)
+  end
+  def set_host_names(this : IRichEditOle*, lpstrcontainerapp : PSTR, lpstrcontainerobj : PSTR) : HRESULT
+    @lpVtbl.value.set_host_names.call(this, lpstrcontainerapp, lpstrcontainerobj)
+  end
+  def set_link_available(this : IRichEditOle*, iob : Int32, favailable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_link_available.call(this, iob, favailable)
+  end
+  def set_dvaspect(this : IRichEditOle*, iob : Int32, dvaspect : UInt32) : HRESULT
+    @lpVtbl.value.set_dvaspect.call(this, iob, dvaspect)
+  end
+  def hands_off_storage(this : IRichEditOle*, iob : Int32) : HRESULT
+    @lpVtbl.value.hands_off_storage.call(this, iob)
+  end
+  def save_completed(this : IRichEditOle*, iob : Int32, lpstg : IStorage) : HRESULT
+    @lpVtbl.value.save_completed.call(this, iob, lpstg)
+  end
+  def in_place_deactivate(this : IRichEditOle*) : HRESULT
+    @lpVtbl.value.in_place_deactivate.call(this)
+  end
+  def context_sensitive_help(this : IRichEditOle*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def get_clipboard_data(this : IRichEditOle*, lpchrg : CHARRANGE*, reco : UInt32, lplpdataobj : IDataObject*) : HRESULT
+    @lpVtbl.value.get_clipboard_data.call(this, lpchrg, reco, lplpdataobj)
+  end
+  def import_data_object(this : IRichEditOle*, lpdataobj : IDataObject, cf : UInt16, hmetapict : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.import_data_object.call(this, lpdataobj, cf, hmetapict)
+  end
+end
+struct LibWin32::IRichEditOleCallback
+  def query_interface(this : IRichEditOleCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : IRichEditOleCallback*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : IRichEditOleCallback*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_new_storage(this : IRichEditOleCallback*, lplpstg : IStorage*) : HRESULT
+    @lpVtbl.value.get_new_storage.call(this, lplpstg)
+  end
+  def get_in_place_context(this : IRichEditOleCallback*, lplpframe : IOleInPlaceFrame*, lplpdoc : IOleInPlaceUIWindow*, lpframeinfo : OIFI*) : HRESULT
+    @lpVtbl.value.get_in_place_context.call(this, lplpframe, lplpdoc, lpframeinfo)
+  end
+  def show_container_ui(this : IRichEditOleCallback*, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_container_ui.call(this, fshow)
+  end
+  def query_insert_object(this : IRichEditOleCallback*, lpclsid : Guid*, lpstg : IStorage, cp : Int32) : HRESULT
+    @lpVtbl.value.query_insert_object.call(this, lpclsid, lpstg, cp)
+  end
+  def delete_object(this : IRichEditOleCallback*, lpoleobj : IOleObject) : HRESULT
+    @lpVtbl.value.delete_object.call(this, lpoleobj)
+  end
+  def query_accept_data(this : IRichEditOleCallback*, lpdataobj : IDataObject, lpcfformat : UInt16*, reco : UInt32, freally : LibC::BOOL, hmetapict : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.query_accept_data.call(this, lpdataobj, lpcfformat, reco, freally, hmetapict)
+  end
+  def context_sensitive_help(this : IRichEditOleCallback*, fentermode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.context_sensitive_help.call(this, fentermode)
+  end
+  def get_clipboard_data(this : IRichEditOleCallback*, lpchrg : CHARRANGE*, reco : UInt32, lplpdataobj : IDataObject*) : HRESULT
+    @lpVtbl.value.get_clipboard_data.call(this, lpchrg, reco, lplpdataobj)
+  end
+  def get_drag_drop_effect(this : IRichEditOleCallback*, fdrag : LibC::BOOL, grfkeystate : UInt32, pdweffect : UInt32*) : HRESULT
+    @lpVtbl.value.get_drag_drop_effect.call(this, fdrag, grfkeystate, pdweffect)
+  end
+  def get_context_menu(this : IRichEditOleCallback*, seltype : RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj : IOleObject, lpchrg : CHARRANGE*, lphmenu : HANDLE*) : HRESULT
+    @lpVtbl.value.get_context_menu.call(this, seltype, lpoleobj, lpchrg, lphmenu)
+  end
+end
+struct LibWin32::ITextDocument
+  def query_interface(this : ITextDocument*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextDocument*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextDocument*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextDocument*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextDocument*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextDocument*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextDocument*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ITextDocument*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_selection(this : ITextDocument*, ppsel : ITextSelection*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ppsel)
+  end
+  def get_story_count(this : ITextDocument*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_count.call(this, pcount)
+  end
+  def get_story_ranges(this : ITextDocument*, ppstories : ITextStoryRanges*) : HRESULT
+    @lpVtbl.value.get_story_ranges.call(this, ppstories)
+  end
+  def get_saved(this : ITextDocument*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_saved.call(this, pvalue)
+  end
+  def set_saved(this : ITextDocument*, value : Tomconstants) : HRESULT
+    @lpVtbl.value.set_saved.call(this, value)
+  end
+  def get_default_tab_stop(this : ITextDocument*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_default_tab_stop.call(this, pvalue)
+  end
+  def set_default_tab_stop(this : ITextDocument*, value : Float32) : HRESULT
+    @lpVtbl.value.set_default_tab_stop.call(this, value)
+  end
+  def new(this : ITextDocument*) : HRESULT
+    @lpVtbl.value.new.call(this)
+  end
+  def open(this : ITextDocument*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.open.call(this, pvar, flags, codepage)
+  end
+  def save(this : ITextDocument*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.save.call(this, pvar, flags, codepage)
+  end
+  def freeze(this : ITextDocument*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, pcount)
+  end
+  def unfreeze(this : ITextDocument*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, pcount)
+  end
+  def begin_edit_collection(this : ITextDocument*) : HRESULT
+    @lpVtbl.value.begin_edit_collection.call(this)
+  end
+  def end_edit_collection(this : ITextDocument*) : HRESULT
+    @lpVtbl.value.end_edit_collection.call(this)
+  end
+  def undo(this : ITextDocument*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.undo.call(this, count, pcount)
+  end
+  def redo(this : ITextDocument*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.redo.call(this, count, pcount)
+  end
+  def range(this : ITextDocument*, cpactive : Int32, cpanchor : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range.call(this, cpactive, cpanchor, pprange)
+  end
+  def range_from_point(this : ITextDocument*, x : Int32, y : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, x, y, pprange)
+  end
+end
+struct LibWin32::ITextRange
+  def query_interface(this : ITextRange*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextRange*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextRange*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextRange*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextRange*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextRange*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextRange*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_text(this : ITextRange*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : ITextRange*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text.call(this, bstr)
+  end
+  def get_char(this : ITextRange*, pchar : Int32*) : HRESULT
+    @lpVtbl.value.get_char.call(this, pchar)
+  end
+  def set_char(this : ITextRange*, char : Int32) : HRESULT
+    @lpVtbl.value.set_char.call(this, char)
+  end
+  def get_duplicate(this : ITextRange*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pprange)
+  end
+  def get_formatted_text(this : ITextRange*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, pprange)
+  end
+  def set_formatted_text(this : ITextRange*, prange : ITextRange) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, prange)
+  end
+  def get_start(this : ITextRange*, pcpfirst : Int32*) : HRESULT
+    @lpVtbl.value.get_start.call(this, pcpfirst)
+  end
+  def set_start(this : ITextRange*, cpfirst : Int32) : HRESULT
+    @lpVtbl.value.set_start.call(this, cpfirst)
+  end
+  def get_end(this : ITextRange*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_end.call(this, pcplim)
+  end
+  def set_end(this : ITextRange*, cplim : Int32) : HRESULT
+    @lpVtbl.value.set_end.call(this, cplim)
+  end
+  def get_font(this : ITextRange*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, ppfont)
+  end
+  def set_font(this : ITextRange*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_font.call(this, pfont)
+  end
+  def get_para(this : ITextRange*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_para.call(this, pppara)
+  end
+  def set_para(this : ITextRange*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_para.call(this, ppara)
+  end
+  def get_story_length(this : ITextRange*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_length.call(this, pcount)
+  end
+  def get_story_type(this : ITextRange*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_story_type.call(this, pvalue)
+  end
+  def collapse(this : ITextRange*, bstart : Int32) : HRESULT
+    @lpVtbl.value.collapse.call(this, bstart)
+  end
+  def expand(this : ITextRange*, unit : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.expand.call(this, unit, pdelta)
+  end
+  def get_index(this : ITextRange*, unit : Int32, pindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, unit, pindex)
+  end
+  def set_index(this : ITextRange*, unit : Int32, index : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  end
+  def set_range(this : ITextRange*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
+  end
+  def in_range(this : ITextRange*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_range.call(this, prange, pvalue)
+  end
+  def in_story(this : ITextRange*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_story.call(this, prange, pvalue)
+  end
+  def is_equal(this : ITextRange*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, prange, pvalue)
+  end
+  def select(this : ITextRange*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def start_of(this : ITextRange*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  end
+  def end_of(this : ITextRange*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  end
+  def move(this : ITextRange*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pdelta)
+  end
+  def move_start(this : ITextRange*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start.call(this, unit, count, pdelta)
+  end
+  def move_end(this : ITextRange*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end.call(this, unit, count, pdelta)
+  end
+  def move_while(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_while.call(this, cset, count, pdelta)
+  end
+  def move_start_while(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_while.call(this, cset, count, pdelta)
+  end
+  def move_end_while(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_while.call(this, cset, count, pdelta)
+  end
+  def move_until(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_until.call(this, cset, count, pdelta)
+  end
+  def move_start_until(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_until.call(this, cset, count, pdelta)
+  end
+  def move_end_until(this : ITextRange*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_until.call(this, cset, count, pdelta)
+  end
+  def find_text(this : ITextRange*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text.call(this, bstr, count, flags, plength)
+  end
+  def find_text_start(this : ITextRange*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_start.call(this, bstr, count, flags, plength)
+  end
+  def find_text_end(this : ITextRange*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_end.call(this, bstr, count, flags, plength)
+  end
+  def delete(this : ITextRange*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.delete.call(this, unit, count, pdelta)
+  end
+  def cut(this : ITextRange*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.cut.call(this, pvar)
+  end
+  def copy(this : ITextRange*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.copy.call(this, pvar)
+  end
+  def paste(this : ITextRange*, pvar : VARIANT*, format : Int32) : HRESULT
+    @lpVtbl.value.paste.call(this, pvar, format)
+  end
+  def can_paste(this : ITextRange*, pvar : VARIANT*, format : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_paste.call(this, pvar, format, pvalue)
+  end
+  def can_edit(this : ITextRange*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_edit.call(this, pvalue)
+  end
+  def change_case(this : ITextRange*, type : Int32) : HRESULT
+    @lpVtbl.value.change_case.call(this, type)
+  end
+  def get_point(this : ITextRange*, type : Int32, px : Int32*, py : Int32*) : HRESULT
+    @lpVtbl.value.get_point.call(this, type, px, py)
+  end
+  def set_point(this : ITextRange*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  end
+  def scroll_into_view(this : ITextRange*, value : Int32) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, value)
+  end
+  def get_embedded_object(this : ITextRange*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded_object.call(this, ppobject)
+  end
+end
+struct LibWin32::ITextSelection
+  def query_interface(this : ITextSelection*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextSelection*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextSelection*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextSelection*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextSelection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextSelection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextSelection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_text(this : ITextSelection*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : ITextSelection*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text.call(this, bstr)
+  end
+  def get_char(this : ITextSelection*, pchar : Int32*) : HRESULT
+    @lpVtbl.value.get_char.call(this, pchar)
+  end
+  def set_char(this : ITextSelection*, char : Int32) : HRESULT
+    @lpVtbl.value.set_char.call(this, char)
+  end
+  def get_duplicate(this : ITextSelection*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pprange)
+  end
+  def get_formatted_text(this : ITextSelection*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, pprange)
+  end
+  def set_formatted_text(this : ITextSelection*, prange : ITextRange) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, prange)
+  end
+  def get_start(this : ITextSelection*, pcpfirst : Int32*) : HRESULT
+    @lpVtbl.value.get_start.call(this, pcpfirst)
+  end
+  def set_start(this : ITextSelection*, cpfirst : Int32) : HRESULT
+    @lpVtbl.value.set_start.call(this, cpfirst)
+  end
+  def get_end(this : ITextSelection*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_end.call(this, pcplim)
+  end
+  def set_end(this : ITextSelection*, cplim : Int32) : HRESULT
+    @lpVtbl.value.set_end.call(this, cplim)
+  end
+  def get_font(this : ITextSelection*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, ppfont)
+  end
+  def set_font(this : ITextSelection*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_font.call(this, pfont)
+  end
+  def get_para(this : ITextSelection*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_para.call(this, pppara)
+  end
+  def set_para(this : ITextSelection*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_para.call(this, ppara)
+  end
+  def get_story_length(this : ITextSelection*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_length.call(this, pcount)
+  end
+  def get_story_type(this : ITextSelection*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_story_type.call(this, pvalue)
+  end
+  def collapse(this : ITextSelection*, bstart : Int32) : HRESULT
+    @lpVtbl.value.collapse.call(this, bstart)
+  end
+  def expand(this : ITextSelection*, unit : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.expand.call(this, unit, pdelta)
+  end
+  def get_index(this : ITextSelection*, unit : Int32, pindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, unit, pindex)
+  end
+  def set_index(this : ITextSelection*, unit : Int32, index : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  end
+  def set_range(this : ITextSelection*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
+  end
+  def in_range(this : ITextSelection*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_range.call(this, prange, pvalue)
+  end
+  def in_story(this : ITextSelection*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_story.call(this, prange, pvalue)
+  end
+  def is_equal(this : ITextSelection*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, prange, pvalue)
+  end
+  def select(this : ITextSelection*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def start_of(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  end
+  def end_of(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  end
+  def move(this : ITextSelection*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pdelta)
+  end
+  def move_start(this : ITextSelection*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start.call(this, unit, count, pdelta)
+  end
+  def move_end(this : ITextSelection*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end.call(this, unit, count, pdelta)
+  end
+  def move_while(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_while.call(this, cset, count, pdelta)
+  end
+  def move_start_while(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_while.call(this, cset, count, pdelta)
+  end
+  def move_end_while(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_while.call(this, cset, count, pdelta)
+  end
+  def move_until(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_until.call(this, cset, count, pdelta)
+  end
+  def move_start_until(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_until.call(this, cset, count, pdelta)
+  end
+  def move_end_until(this : ITextSelection*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_until.call(this, cset, count, pdelta)
+  end
+  def find_text(this : ITextSelection*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text.call(this, bstr, count, flags, plength)
+  end
+  def find_text_start(this : ITextSelection*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_start.call(this, bstr, count, flags, plength)
+  end
+  def find_text_end(this : ITextSelection*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_end.call(this, bstr, count, flags, plength)
+  end
+  def delete(this : ITextSelection*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.delete.call(this, unit, count, pdelta)
+  end
+  def cut(this : ITextSelection*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.cut.call(this, pvar)
+  end
+  def copy(this : ITextSelection*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.copy.call(this, pvar)
+  end
+  def paste(this : ITextSelection*, pvar : VARIANT*, format : Int32) : HRESULT
+    @lpVtbl.value.paste.call(this, pvar, format)
+  end
+  def can_paste(this : ITextSelection*, pvar : VARIANT*, format : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_paste.call(this, pvar, format, pvalue)
+  end
+  def can_edit(this : ITextSelection*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_edit.call(this, pvalue)
+  end
+  def change_case(this : ITextSelection*, type : Int32) : HRESULT
+    @lpVtbl.value.change_case.call(this, type)
+  end
+  def get_point(this : ITextSelection*, type : Int32, px : Int32*, py : Int32*) : HRESULT
+    @lpVtbl.value.get_point.call(this, type, px, py)
+  end
+  def set_point(this : ITextSelection*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  end
+  def scroll_into_view(this : ITextSelection*, value : Int32) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, value)
+  end
+  def get_embedded_object(this : ITextSelection*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded_object.call(this, ppobject)
+  end
+  def get_flags(this : ITextSelection*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def set_flags(this : ITextSelection*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_type(this : ITextSelection*, ptype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def move_left(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  end
+  def move_right(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  end
+  def move_up(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  end
+  def move_down(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  end
+  def home_key(this : ITextSelection*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  end
+  def end_key(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  end
+  def type_text(this : ITextSelection*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.type_text.call(this, bstr)
+  end
+end
+struct LibWin32::ITextFont
+  def query_interface(this : ITextFont*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextFont*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextFont*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextFont*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextFont*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextFont*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextFont*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_duplicate(this : ITextFont*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, ppfont)
+  end
+  def set_duplicate(this : ITextFont*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_duplicate.call(this, pfont)
+  end
+  def can_change(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_change.call(this, pvalue)
+  end
+  def is_equal(this : ITextFont*, pfont : ITextFont, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pfont, pvalue)
+  end
+  def reset(this : ITextFont*, value : Tomconstants) : HRESULT
+    @lpVtbl.value.reset.call(this, value)
+  end
+  def get_style(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_style.call(this, pvalue)
+  end
+  def set_style(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_style.call(this, value)
+  end
+  def get_all_caps(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_all_caps.call(this, pvalue)
+  end
+  def set_all_caps(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_all_caps.call(this, value)
+  end
+  def get_animation(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_animation.call(this, pvalue)
+  end
+  def set_animation(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_animation.call(this, value)
+  end
+  def get_back_color(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_back_color.call(this, pvalue)
+  end
+  def set_back_color(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_back_color.call(this, value)
+  end
+  def get_bold(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_bold.call(this, pvalue)
+  end
+  def set_bold(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_bold.call(this, value)
+  end
+  def get_emboss(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_emboss.call(this, pvalue)
+  end
+  def set_emboss(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_emboss.call(this, value)
+  end
+  def get_fore_color(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_fore_color.call(this, pvalue)
+  end
+  def set_fore_color(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_fore_color.call(this, value)
+  end
+  def get_hidden(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_hidden.call(this, pvalue)
+  end
+  def set_hidden(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_hidden.call(this, value)
+  end
+  def get_engrave(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_engrave.call(this, pvalue)
+  end
+  def set_engrave(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_engrave.call(this, value)
+  end
+  def get_italic(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_italic.call(this, pvalue)
+  end
+  def set_italic(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_italic.call(this, value)
+  end
+  def get_kerning(this : ITextFont*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_kerning.call(this, pvalue)
+  end
+  def set_kerning(this : ITextFont*, value : Float32) : HRESULT
+    @lpVtbl.value.set_kerning.call(this, value)
+  end
+  def get_language_id(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_language_id.call(this, pvalue)
+  end
+  def set_language_id(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_language_id.call(this, value)
+  end
+  def get_name(this : ITextFont*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstr)
+  end
+  def set_name(this : ITextFont*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_name.call(this, bstr)
+  end
+  def get_outline(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_outline.call(this, pvalue)
+  end
+  def set_outline(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_outline.call(this, value)
+  end
+  def get_position(this : ITextFont*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_position.call(this, pvalue)
+  end
+  def set_position(this : ITextFont*, value : Float32) : HRESULT
+    @lpVtbl.value.set_position.call(this, value)
+  end
+  def get_protected(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_protected.call(this, pvalue)
+  end
+  def set_protected(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_protected.call(this, value)
+  end
+  def get_shadow(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_shadow.call(this, pvalue)
+  end
+  def set_shadow(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_shadow.call(this, value)
+  end
+  def get_size(this : ITextFont*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pvalue)
+  end
+  def set_size(this : ITextFont*, value : Float32) : HRESULT
+    @lpVtbl.value.set_size.call(this, value)
+  end
+  def get_small_caps(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_small_caps.call(this, pvalue)
+  end
+  def set_small_caps(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_small_caps.call(this, value)
+  end
+  def get_spacing(this : ITextFont*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_spacing.call(this, pvalue)
+  end
+  def set_spacing(this : ITextFont*, value : Float32) : HRESULT
+    @lpVtbl.value.set_spacing.call(this, value)
+  end
+  def get_strike_through(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_strike_through.call(this, pvalue)
+  end
+  def set_strike_through(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_strike_through.call(this, value)
+  end
+  def get_subscript(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_subscript.call(this, pvalue)
+  end
+  def set_subscript(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_subscript.call(this, value)
+  end
+  def get_superscript(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_superscript.call(this, pvalue)
+  end
+  def set_superscript(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_superscript.call(this, value)
+  end
+  def get_underline(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, pvalue)
+  end
+  def set_underline(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_underline.call(this, value)
+  end
+  def get_weight(this : ITextFont*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_weight.call(this, pvalue)
+  end
+  def set_weight(this : ITextFont*, value : Int32) : HRESULT
+    @lpVtbl.value.set_weight.call(this, value)
+  end
+end
+struct LibWin32::ITextPara
+  def query_interface(this : ITextPara*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextPara*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextPara*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextPara*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextPara*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextPara*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextPara*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_duplicate(this : ITextPara*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pppara)
+  end
+  def set_duplicate(this : ITextPara*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_duplicate.call(this, ppara)
+  end
+  def can_change(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_change.call(this, pvalue)
+  end
+  def is_equal(this : ITextPara*, ppara : ITextPara, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, ppara, pvalue)
+  end
+  def reset(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.reset.call(this, value)
+  end
+  def get_style(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_style.call(this, pvalue)
+  end
+  def set_style(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_style.call(this, value)
+  end
+  def get_alignment(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_alignment.call(this, pvalue)
+  end
+  def set_alignment(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_alignment.call(this, value)
+  end
+  def get_hyphenation(this : ITextPara*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_hyphenation.call(this, pvalue)
+  end
+  def set_hyphenation(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_hyphenation.call(this, value)
+  end
+  def get_first_line_indent(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_first_line_indent.call(this, pvalue)
+  end
+  def get_keep_together(this : ITextPara*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_keep_together.call(this, pvalue)
+  end
+  def set_keep_together(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_together.call(this, value)
+  end
+  def get_keep_with_next(this : ITextPara*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_keep_with_next.call(this, pvalue)
+  end
+  def set_keep_with_next(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_with_next.call(this, value)
+  end
+  def get_left_indent(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_left_indent.call(this, pvalue)
+  end
+  def get_line_spacing(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, pvalue)
+  end
+  def get_line_spacing_rule(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_line_spacing_rule.call(this, pvalue)
+  end
+  def get_list_alignment(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_alignment.call(this, pvalue)
+  end
+  def set_list_alignment(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_alignment.call(this, value)
+  end
+  def get_list_level_index(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_level_index.call(this, pvalue)
+  end
+  def set_list_level_index(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_level_index.call(this, value)
+  end
+  def get_list_start(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_start.call(this, pvalue)
+  end
+  def set_list_start(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_start.call(this, value)
+  end
+  def get_list_tab(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_list_tab.call(this, pvalue)
+  end
+  def set_list_tab(this : ITextPara*, value : Float32) : HRESULT
+    @lpVtbl.value.set_list_tab.call(this, value)
+  end
+  def get_list_type(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_type.call(this, pvalue)
+  end
+  def set_list_type(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_type.call(this, value)
+  end
+  def get_no_line_number(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_no_line_number.call(this, pvalue)
+  end
+  def set_no_line_number(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_no_line_number.call(this, value)
+  end
+  def get_page_break_before(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_page_break_before.call(this, pvalue)
+  end
+  def set_page_break_before(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_page_break_before.call(this, value)
+  end
+  def get_right_indent(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_right_indent.call(this, pvalue)
+  end
+  def set_right_indent(this : ITextPara*, value : Float32) : HRESULT
+    @lpVtbl.value.set_right_indent.call(this, value)
+  end
+  def set_indents(this : ITextPara*, first : Float32, left : Float32, right : Float32) : HRESULT
+    @lpVtbl.value.set_indents.call(this, first, left, right)
+  end
+  def set_line_spacing(this : ITextPara*, rule : Int32, spacing : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, rule, spacing)
+  end
+  def get_space_after(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_space_after.call(this, pvalue)
+  end
+  def set_space_after(this : ITextPara*, value : Float32) : HRESULT
+    @lpVtbl.value.set_space_after.call(this, value)
+  end
+  def get_space_before(this : ITextPara*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_space_before.call(this, pvalue)
+  end
+  def set_space_before(this : ITextPara*, value : Float32) : HRESULT
+    @lpVtbl.value.set_space_before.call(this, value)
+  end
+  def get_widow_control(this : ITextPara*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_widow_control.call(this, pvalue)
+  end
+  def set_widow_control(this : ITextPara*, value : Int32) : HRESULT
+    @lpVtbl.value.set_widow_control.call(this, value)
+  end
+  def get_tab_count(this : ITextPara*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tab_count.call(this, pcount)
+  end
+  def add_tab(this : ITextPara*, tbpos : Float32, tbalign : Int32, tbleader : Int32) : HRESULT
+    @lpVtbl.value.add_tab.call(this, tbpos, tbalign, tbleader)
+  end
+  def clear_all_tabs(this : ITextPara*) : HRESULT
+    @lpVtbl.value.clear_all_tabs.call(this)
+  end
+  def delete_tab(this : ITextPara*, tbpos : Float32) : HRESULT
+    @lpVtbl.value.delete_tab.call(this, tbpos)
+  end
+  def get_tab(this : ITextPara*, itab : Int32, ptbpos : Float32*, ptbalign : Int32*, ptbleader : Int32*) : HRESULT
+    @lpVtbl.value.get_tab.call(this, itab, ptbpos, ptbalign, ptbleader)
+  end
+end
+struct LibWin32::ITextStoryRanges
+  def query_interface(this : ITextStoryRanges*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoryRanges*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoryRanges*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextStoryRanges*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextStoryRanges*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextStoryRanges*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextStoryRanges*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def _new_enum(this : ITextStoryRanges*, ppunkenum : IUnknown*) : HRESULT
+    @lpVtbl.value._new_enum.call(this, ppunkenum)
+  end
+  def item(this : ITextStoryRanges*, index : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.item.call(this, index, pprange)
+  end
+  def get_count(this : ITextStoryRanges*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+end
+struct LibWin32::ITextDocument2
+  def query_interface(this : ITextDocument2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextDocument2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextDocument2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextDocument2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextDocument2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextDocument2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextDocument2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ITextDocument2*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_selection(this : ITextDocument2*, ppsel : ITextSelection*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ppsel)
+  end
+  def get_story_count(this : ITextDocument2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_count.call(this, pcount)
+  end
+  def get_story_ranges(this : ITextDocument2*, ppstories : ITextStoryRanges*) : HRESULT
+    @lpVtbl.value.get_story_ranges.call(this, ppstories)
+  end
+  def get_saved(this : ITextDocument2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_saved.call(this, pvalue)
+  end
+  def set_saved(this : ITextDocument2*, value : Tomconstants) : HRESULT
+    @lpVtbl.value.set_saved.call(this, value)
+  end
+  def get_default_tab_stop(this : ITextDocument2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_default_tab_stop.call(this, pvalue)
+  end
+  def set_default_tab_stop(this : ITextDocument2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_default_tab_stop.call(this, value)
+  end
+  def new(this : ITextDocument2*) : HRESULT
+    @lpVtbl.value.new.call(this)
+  end
+  def open(this : ITextDocument2*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.open.call(this, pvar, flags, codepage)
+  end
+  def save(this : ITextDocument2*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.save.call(this, pvar, flags, codepage)
+  end
+  def freeze(this : ITextDocument2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, pcount)
+  end
+  def unfreeze(this : ITextDocument2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, pcount)
+  end
+  def begin_edit_collection(this : ITextDocument2*) : HRESULT
+    @lpVtbl.value.begin_edit_collection.call(this)
+  end
+  def end_edit_collection(this : ITextDocument2*) : HRESULT
+    @lpVtbl.value.end_edit_collection.call(this)
+  end
+  def undo(this : ITextDocument2*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.undo.call(this, count, pcount)
+  end
+  def redo(this : ITextDocument2*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.redo.call(this, count, pcount)
+  end
+  def range(this : ITextDocument2*, cpactive : Int32, cpanchor : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range.call(this, cpactive, cpanchor, pprange)
+  end
+  def range_from_point(this : ITextDocument2*, x : Int32, y : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, x, y, pprange)
+  end
+  def get_caret_type(this : ITextDocument2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_caret_type.call(this, pvalue)
+  end
+  def set_caret_type(this : ITextDocument2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_caret_type.call(this, value)
+  end
+  def get_displays(this : ITextDocument2*, ppdisplays : ITextDisplays*) : HRESULT
+    @lpVtbl.value.get_displays.call(this, ppdisplays)
+  end
+  def get_document_font(this : ITextDocument2*, ppfont : ITextFont2*) : HRESULT
+    @lpVtbl.value.get_document_font.call(this, ppfont)
+  end
+  def set_document_font(this : ITextDocument2*, pfont : ITextFont2) : HRESULT
+    @lpVtbl.value.set_document_font.call(this, pfont)
+  end
+  def get_document_para(this : ITextDocument2*, pppara : ITextPara2*) : HRESULT
+    @lpVtbl.value.get_document_para.call(this, pppara)
+  end
+  def set_document_para(this : ITextDocument2*, ppara : ITextPara2) : HRESULT
+    @lpVtbl.value.set_document_para.call(this, ppara)
+  end
+  def get_east_asian_flags(this : ITextDocument2*, pflags : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_east_asian_flags.call(this, pflags)
+  end
+  def get_generator(this : ITextDocument2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_generator.call(this, pbstr)
+  end
+  def set_ime_in_progress(this : ITextDocument2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_ime_in_progress.call(this, value)
+  end
+  def get_notification_mode(this : ITextDocument2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_notification_mode.call(this, pvalue)
+  end
+  def set_notification_mode(this : ITextDocument2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_notification_mode.call(this, value)
+  end
+  def get_selection2(this : ITextDocument2*, ppsel : ITextSelection2*) : HRESULT
+    @lpVtbl.value.get_selection2.call(this, ppsel)
+  end
+  def get_story_ranges2(this : ITextDocument2*, ppstories : ITextStoryRanges2*) : HRESULT
+    @lpVtbl.value.get_story_ranges2.call(this, ppstories)
+  end
+  def get_typography_options(this : ITextDocument2*, poptions : Int32*) : HRESULT
+    @lpVtbl.value.get_typography_options.call(this, poptions)
+  end
+  def get_version(this : ITextDocument2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_version.call(this, pvalue)
+  end
+  def get_window(this : ITextDocument2*, phwnd : Int64*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def attach_msg_filter(this : ITextDocument2*, pfilter : IUnknown) : HRESULT
+    @lpVtbl.value.attach_msg_filter.call(this, pfilter)
+  end
+  def check_text_limit(this : ITextDocument2*, cch : Int32, pcch : Int32*) : HRESULT
+    @lpVtbl.value.check_text_limit.call(this, cch, pcch)
+  end
+  def get_call_manager(this : ITextDocument2*, ppvoid : IUnknown*) : HRESULT
+    @lpVtbl.value.get_call_manager.call(this, ppvoid)
+  end
+  def get_client_rect(this : ITextDocument2*, type : Tomconstants, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*) : HRESULT
+    @lpVtbl.value.get_client_rect.call(this, type, pleft, ptop, pright, pbottom)
+  end
+  def get_effect_color(this : ITextDocument2*, index : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_effect_color.call(this, index, pvalue)
+  end
+  def get_imm_context(this : ITextDocument2*, pcontext : Int64*) : HRESULT
+    @lpVtbl.value.get_imm_context.call(this, pcontext)
+  end
+  def get_preferred_font(this : ITextDocument2*, cp : Int32, charrep : Int32, options : Int32, curcharrep : Int32, curfontsize : Int32, pbstr : UInt8**, ppitchandfamily : Int32*, pnewfontsize : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_font.call(this, cp, charrep, options, curcharrep, curfontsize, pbstr, ppitchandfamily, pnewfontsize)
+  end
+  def get_property(this : ITextDocument2*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def get_strings(this : ITextDocument2*, ppstrs : ITextStrings*) : HRESULT
+    @lpVtbl.value.get_strings.call(this, ppstrs)
+  end
+  def notify(this : ITextDocument2*, notify : Int32) : HRESULT
+    @lpVtbl.value.notify.call(this, notify)
+  end
+  def range2(this : ITextDocument2*, cpactive : Int32, cpanchor : Int32, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.range2.call(this, cpactive, cpanchor, pprange)
+  end
+  def range_from_point2(this : ITextDocument2*, x : Int32, y : Int32, type : Int32, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.range_from_point2.call(this, x, y, type, pprange)
+  end
+  def release_call_manager(this : ITextDocument2*, pvoid : IUnknown) : HRESULT
+    @lpVtbl.value.release_call_manager.call(this, pvoid)
+  end
+  def release_imm_context(this : ITextDocument2*, context : Int64) : HRESULT
+    @lpVtbl.value.release_imm_context.call(this, context)
+  end
+  def set_effect_color(this : ITextDocument2*, index : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_effect_color.call(this, index, value)
+  end
+  def set_property(this : ITextDocument2*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+  def set_typography_options(this : ITextDocument2*, options : Int32, mask : Int32) : HRESULT
+    @lpVtbl.value.set_typography_options.call(this, options, mask)
+  end
+  def sys_beep(this : ITextDocument2*) : HRESULT
+    @lpVtbl.value.sys_beep.call(this)
+  end
+  def update(this : ITextDocument2*, value : Int32) : HRESULT
+    @lpVtbl.value.update.call(this, value)
+  end
+  def update_window(this : ITextDocument2*) : HRESULT
+    @lpVtbl.value.update_window.call(this)
+  end
+  def get_math_properties(this : ITextDocument2*, poptions : Int32*) : HRESULT
+    @lpVtbl.value.get_math_properties.call(this, poptions)
+  end
+  def set_math_properties(this : ITextDocument2*, options : Int32, mask : Int32) : HRESULT
+    @lpVtbl.value.set_math_properties.call(this, options, mask)
+  end
+  def get_active_story(this : ITextDocument2*, ppstory : ITextStory*) : HRESULT
+    @lpVtbl.value.get_active_story.call(this, ppstory)
+  end
+  def set_active_story(this : ITextDocument2*, pstory : ITextStory) : HRESULT
+    @lpVtbl.value.set_active_story.call(this, pstory)
+  end
+  def get_main_story(this : ITextDocument2*, ppstory : ITextStory*) : HRESULT
+    @lpVtbl.value.get_main_story.call(this, ppstory)
+  end
+  def get_new_story(this : ITextDocument2*, ppstory : ITextStory*) : HRESULT
+    @lpVtbl.value.get_new_story.call(this, ppstory)
+  end
+  def get_story(this : ITextDocument2*, index : Int32, ppstory : ITextStory*) : HRESULT
+    @lpVtbl.value.get_story.call(this, index, ppstory)
+  end
+end
+struct LibWin32::ITextRange2
+  def query_interface(this : ITextRange2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextRange2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextRange2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextRange2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextRange2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextRange2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextRange2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_text(this : ITextRange2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : ITextRange2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text.call(this, bstr)
+  end
+  def get_char(this : ITextRange2*, pchar : Int32*) : HRESULT
+    @lpVtbl.value.get_char.call(this, pchar)
+  end
+  def set_char(this : ITextRange2*, char : Int32) : HRESULT
+    @lpVtbl.value.set_char.call(this, char)
+  end
+  def get_duplicate(this : ITextRange2*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pprange)
+  end
+  def get_formatted_text(this : ITextRange2*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, pprange)
+  end
+  def set_formatted_text(this : ITextRange2*, prange : ITextRange) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, prange)
+  end
+  def get_start(this : ITextRange2*, pcpfirst : Int32*) : HRESULT
+    @lpVtbl.value.get_start.call(this, pcpfirst)
+  end
+  def set_start(this : ITextRange2*, cpfirst : Int32) : HRESULT
+    @lpVtbl.value.set_start.call(this, cpfirst)
+  end
+  def get_end(this : ITextRange2*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_end.call(this, pcplim)
+  end
+  def set_end(this : ITextRange2*, cplim : Int32) : HRESULT
+    @lpVtbl.value.set_end.call(this, cplim)
+  end
+  def get_font(this : ITextRange2*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, ppfont)
+  end
+  def set_font(this : ITextRange2*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_font.call(this, pfont)
+  end
+  def get_para(this : ITextRange2*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_para.call(this, pppara)
+  end
+  def set_para(this : ITextRange2*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_para.call(this, ppara)
+  end
+  def get_story_length(this : ITextRange2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_length.call(this, pcount)
+  end
+  def get_story_type(this : ITextRange2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_story_type.call(this, pvalue)
+  end
+  def collapse(this : ITextRange2*, bstart : Int32) : HRESULT
+    @lpVtbl.value.collapse.call(this, bstart)
+  end
+  def expand(this : ITextRange2*, unit : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.expand.call(this, unit, pdelta)
+  end
+  def get_index(this : ITextRange2*, unit : Int32, pindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, unit, pindex)
+  end
+  def set_index(this : ITextRange2*, unit : Int32, index : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  end
+  def set_range(this : ITextRange2*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
+  end
+  def in_range(this : ITextRange2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_range.call(this, prange, pvalue)
+  end
+  def in_story(this : ITextRange2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_story.call(this, prange, pvalue)
+  end
+  def is_equal(this : ITextRange2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, prange, pvalue)
+  end
+  def select(this : ITextRange2*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def start_of(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  end
+  def end_of(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  end
+  def move(this : ITextRange2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pdelta)
+  end
+  def move_start(this : ITextRange2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start.call(this, unit, count, pdelta)
+  end
+  def move_end(this : ITextRange2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end.call(this, unit, count, pdelta)
+  end
+  def move_while(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_while.call(this, cset, count, pdelta)
+  end
+  def move_start_while(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_while.call(this, cset, count, pdelta)
+  end
+  def move_end_while(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_while.call(this, cset, count, pdelta)
+  end
+  def move_until(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_until.call(this, cset, count, pdelta)
+  end
+  def move_start_until(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_until.call(this, cset, count, pdelta)
+  end
+  def move_end_until(this : ITextRange2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_until.call(this, cset, count, pdelta)
+  end
+  def find_text(this : ITextRange2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text.call(this, bstr, count, flags, plength)
+  end
+  def find_text_start(this : ITextRange2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_start.call(this, bstr, count, flags, plength)
+  end
+  def find_text_end(this : ITextRange2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_end.call(this, bstr, count, flags, plength)
+  end
+  def delete(this : ITextRange2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.delete.call(this, unit, count, pdelta)
+  end
+  def cut(this : ITextRange2*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.cut.call(this, pvar)
+  end
+  def copy(this : ITextRange2*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.copy.call(this, pvar)
+  end
+  def paste(this : ITextRange2*, pvar : VARIANT*, format : Int32) : HRESULT
+    @lpVtbl.value.paste.call(this, pvar, format)
+  end
+  def can_paste(this : ITextRange2*, pvar : VARIANT*, format : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_paste.call(this, pvar, format, pvalue)
+  end
+  def can_edit(this : ITextRange2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_edit.call(this, pvalue)
+  end
+  def change_case(this : ITextRange2*, type : Int32) : HRESULT
+    @lpVtbl.value.change_case.call(this, type)
+  end
+  def get_point(this : ITextRange2*, type : Int32, px : Int32*, py : Int32*) : HRESULT
+    @lpVtbl.value.get_point.call(this, type, px, py)
+  end
+  def set_point(this : ITextRange2*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  end
+  def scroll_into_view(this : ITextRange2*, value : Int32) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, value)
+  end
+  def get_embedded_object(this : ITextRange2*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded_object.call(this, ppobject)
+  end
+  def get_flags(this : ITextRange2*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def set_flags(this : ITextRange2*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_type(this : ITextRange2*, ptype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def move_left(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  end
+  def move_right(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  end
+  def move_up(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  end
+  def move_down(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  end
+  def home_key(this : ITextRange2*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  end
+  def end_key(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  end
+  def type_text(this : ITextRange2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.type_text.call(this, bstr)
+  end
+  def get_cch(this : ITextRange2*, pcch : Int32*) : HRESULT
+    @lpVtbl.value.get_cch.call(this, pcch)
+  end
+  def get_cells(this : ITextRange2*, ppcells : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cells.call(this, ppcells)
+  end
+  def get_column(this : ITextRange2*, ppcolumn : IUnknown*) : HRESULT
+    @lpVtbl.value.get_column.call(this, ppcolumn)
+  end
+  def get_count(this : ITextRange2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_duplicate2(this : ITextRange2*, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.get_duplicate2.call(this, pprange)
+  end
+  def get_font2(this : ITextRange2*, ppfont : ITextFont2*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, ppfont)
+  end
+  def set_font2(this : ITextRange2*, pfont : ITextFont2) : HRESULT
+    @lpVtbl.value.set_font2.call(this, pfont)
+  end
+  def get_formatted_text2(this : ITextRange2*, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.get_formatted_text2.call(this, pprange)
+  end
+  def set_formatted_text2(this : ITextRange2*, prange : ITextRange2) : HRESULT
+    @lpVtbl.value.set_formatted_text2.call(this, prange)
+  end
+  def get_gravity(this : ITextRange2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_gravity.call(this, pvalue)
+  end
+  def set_gravity(this : ITextRange2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_gravity.call(this, value)
+  end
+  def get_para2(this : ITextRange2*, pppara : ITextPara2*) : HRESULT
+    @lpVtbl.value.get_para2.call(this, pppara)
+  end
+  def set_para2(this : ITextRange2*, ppara : ITextPara2) : HRESULT
+    @lpVtbl.value.set_para2.call(this, ppara)
+  end
+  def get_row(this : ITextRange2*, pprow : ITextRow*) : HRESULT
+    @lpVtbl.value.get_row.call(this, pprow)
+  end
+  def get_start_para(this : ITextRange2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_start_para.call(this, pvalue)
+  end
+  def get_table(this : ITextRange2*, pptable : IUnknown*) : HRESULT
+    @lpVtbl.value.get_table.call(this, pptable)
+  end
+  def get_url(this : ITextRange2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstr)
+  end
+  def set_url(this : ITextRange2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_url.call(this, bstr)
+  end
+  def add_subrange(this : ITextRange2*, cp1 : Int32, cp2 : Int32, activate : Int32) : HRESULT
+    @lpVtbl.value.add_subrange.call(this, cp1, cp2, activate)
+  end
+  def build_up_math(this : ITextRange2*, flags : Int32) : HRESULT
+    @lpVtbl.value.build_up_math.call(this, flags)
+  end
+  def delete_subrange(this : ITextRange2*, cpfirst : Int32, cplim : Int32) : HRESULT
+    @lpVtbl.value.delete_subrange.call(this, cpfirst, cplim)
+  end
+  def find(this : ITextRange2*, prange : ITextRange2, count : Int32, flags : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.find.call(this, prange, count, flags, pdelta)
+  end
+  def get_char2(this : ITextRange2*, pchar : Int32*, offset : Int32) : HRESULT
+    @lpVtbl.value.get_char2.call(this, pchar, offset)
+  end
+  def get_drop_cap(this : ITextRange2*, pcline : Int32*, pposition : Int32*) : HRESULT
+    @lpVtbl.value.get_drop_cap.call(this, pcline, pposition)
+  end
+  def get_inline_object(this : ITextRange2*, ptype : Int32*, palign : Int32*, pchar : Int32*, pchar1 : Int32*, pchar2 : Int32*, pcount : Int32*, ptexstyle : Int32*, pccol : Int32*, plevel : Int32*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, ptype, palign, pchar, pchar1, pchar2, pcount, ptexstyle, pccol, plevel)
+  end
+  def get_property(this : ITextRange2*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def get_rect(this : ITextRange2*, type : Int32, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*, phit : Int32*) : HRESULT
+    @lpVtbl.value.get_rect.call(this, type, pleft, ptop, pright, pbottom, phit)
+  end
+  def get_subrange(this : ITextRange2*, isubrange : Int32, pcpfirst : Int32*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_subrange.call(this, isubrange, pcpfirst, pcplim)
+  end
+  def get_text2(this : ITextRange2*, flags : Int32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text2.call(this, flags, pbstr)
+  end
+  def hex_to_unicode(this : ITextRange2*) : HRESULT
+    @lpVtbl.value.hex_to_unicode.call(this)
+  end
+  def insert_table(this : ITextRange2*, ccol : Int32, crow : Int32, autofit : Int32) : HRESULT
+    @lpVtbl.value.insert_table.call(this, ccol, crow, autofit)
+  end
+  def linearize(this : ITextRange2*, flags : Int32) : HRESULT
+    @lpVtbl.value.linearize.call(this, flags)
+  end
+  def set_active_subrange(this : ITextRange2*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_active_subrange.call(this, cpanchor, cpactive)
+  end
+  def set_drop_cap(this : ITextRange2*, cline : Int32, position : Int32) : HRESULT
+    @lpVtbl.value.set_drop_cap.call(this, cline, position)
+  end
+  def set_property(this : ITextRange2*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+  def set_text2(this : ITextRange2*, flags : Int32, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text2.call(this, flags, bstr)
+  end
+  def unicode_to_hex(this : ITextRange2*) : HRESULT
+    @lpVtbl.value.unicode_to_hex.call(this)
+  end
+  def set_inline_object(this : ITextRange2*, type : Int32, align : Int32, char : Int32, char1 : Int32, char2 : Int32, count : Int32, texstyle : Int32, ccol : Int32) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, type, align, char, char1, char2, count, texstyle, ccol)
+  end
+  def get_math_function_type(this : ITextRange2*, bstr : UInt8*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_math_function_type.call(this, bstr, pvalue)
+  end
+  def insert_image(this : ITextRange2*, width : Int32, height : Int32, ascent : Int32, type : TEXT_ALIGN_OPTIONS, bstralttext : UInt8*, pstream : IStream) : HRESULT
+    @lpVtbl.value.insert_image.call(this, width, height, ascent, type, bstralttext, pstream)
+  end
+end
+struct LibWin32::ITextSelection2
+  def query_interface(this : ITextSelection2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextSelection2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextSelection2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextSelection2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextSelection2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextSelection2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextSelection2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_text(this : ITextSelection2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, pbstr)
+  end
+  def set_text(this : ITextSelection2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text.call(this, bstr)
+  end
+  def get_char(this : ITextSelection2*, pchar : Int32*) : HRESULT
+    @lpVtbl.value.get_char.call(this, pchar)
+  end
+  def set_char(this : ITextSelection2*, char : Int32) : HRESULT
+    @lpVtbl.value.set_char.call(this, char)
+  end
+  def get_duplicate(this : ITextSelection2*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pprange)
+  end
+  def get_formatted_text(this : ITextSelection2*, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.get_formatted_text.call(this, pprange)
+  end
+  def set_formatted_text(this : ITextSelection2*, prange : ITextRange) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, prange)
+  end
+  def get_start(this : ITextSelection2*, pcpfirst : Int32*) : HRESULT
+    @lpVtbl.value.get_start.call(this, pcpfirst)
+  end
+  def set_start(this : ITextSelection2*, cpfirst : Int32) : HRESULT
+    @lpVtbl.value.set_start.call(this, cpfirst)
+  end
+  def get_end(this : ITextSelection2*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_end.call(this, pcplim)
+  end
+  def set_end(this : ITextSelection2*, cplim : Int32) : HRESULT
+    @lpVtbl.value.set_end.call(this, cplim)
+  end
+  def get_font(this : ITextSelection2*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_font.call(this, ppfont)
+  end
+  def set_font(this : ITextSelection2*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_font.call(this, pfont)
+  end
+  def get_para(this : ITextSelection2*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_para.call(this, pppara)
+  end
+  def set_para(this : ITextSelection2*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_para.call(this, ppara)
+  end
+  def get_story_length(this : ITextSelection2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_length.call(this, pcount)
+  end
+  def get_story_type(this : ITextSelection2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_story_type.call(this, pvalue)
+  end
+  def collapse(this : ITextSelection2*, bstart : Int32) : HRESULT
+    @lpVtbl.value.collapse.call(this, bstart)
+  end
+  def expand(this : ITextSelection2*, unit : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.expand.call(this, unit, pdelta)
+  end
+  def get_index(this : ITextSelection2*, unit : Int32, pindex : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, unit, pindex)
+  end
+  def set_index(this : ITextSelection2*, unit : Int32, index : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  end
+  def set_range(this : ITextSelection2*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
+  end
+  def in_range(this : ITextSelection2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_range.call(this, prange, pvalue)
+  end
+  def in_story(this : ITextSelection2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.in_story.call(this, prange, pvalue)
+  end
+  def is_equal(this : ITextSelection2*, prange : ITextRange, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, prange, pvalue)
+  end
+  def select(this : ITextSelection2*) : HRESULT
+    @lpVtbl.value.select.call(this)
+  end
+  def start_of(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  end
+  def end_of(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  end
+  def move(this : ITextSelection2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move.call(this, unit, count, pdelta)
+  end
+  def move_start(this : ITextSelection2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start.call(this, unit, count, pdelta)
+  end
+  def move_end(this : ITextSelection2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end.call(this, unit, count, pdelta)
+  end
+  def move_while(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_while.call(this, cset, count, pdelta)
+  end
+  def move_start_while(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_while.call(this, cset, count, pdelta)
+  end
+  def move_end_while(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_while.call(this, cset, count, pdelta)
+  end
+  def move_until(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_until.call(this, cset, count, pdelta)
+  end
+  def move_start_until(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_start_until.call(this, cset, count, pdelta)
+  end
+  def move_end_until(this : ITextSelection2*, cset : VARIANT*, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_end_until.call(this, cset, count, pdelta)
+  end
+  def find_text(this : ITextSelection2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text.call(this, bstr, count, flags, plength)
+  end
+  def find_text_start(this : ITextSelection2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_start.call(this, bstr, count, flags, plength)
+  end
+  def find_text_end(this : ITextSelection2*, bstr : UInt8*, count : Int32, flags : Int32, plength : Int32*) : HRESULT
+    @lpVtbl.value.find_text_end.call(this, bstr, count, flags, plength)
+  end
+  def delete(this : ITextSelection2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.delete.call(this, unit, count, pdelta)
+  end
+  def cut(this : ITextSelection2*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.cut.call(this, pvar)
+  end
+  def copy(this : ITextSelection2*, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.copy.call(this, pvar)
+  end
+  def paste(this : ITextSelection2*, pvar : VARIANT*, format : Int32) : HRESULT
+    @lpVtbl.value.paste.call(this, pvar, format)
+  end
+  def can_paste(this : ITextSelection2*, pvar : VARIANT*, format : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_paste.call(this, pvar, format, pvalue)
+  end
+  def can_edit(this : ITextSelection2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_edit.call(this, pvalue)
+  end
+  def change_case(this : ITextSelection2*, type : Int32) : HRESULT
+    @lpVtbl.value.change_case.call(this, type)
+  end
+  def get_point(this : ITextSelection2*, type : Int32, px : Int32*, py : Int32*) : HRESULT
+    @lpVtbl.value.get_point.call(this, type, px, py)
+  end
+  def set_point(this : ITextSelection2*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  end
+  def scroll_into_view(this : ITextSelection2*, value : Int32) : HRESULT
+    @lpVtbl.value.scroll_into_view.call(this, value)
+  end
+  def get_embedded_object(this : ITextSelection2*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded_object.call(this, ppobject)
+  end
+  def get_flags(this : ITextSelection2*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.call(this, pflags)
+  end
+  def set_flags(this : ITextSelection2*, flags : Int32) : HRESULT
+    @lpVtbl.value.set_flags.call(this, flags)
+  end
+  def get_type(this : ITextSelection2*, ptype : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, ptype)
+  end
+  def move_left(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  end
+  def move_right(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  end
+  def move_up(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  end
+  def move_down(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  end
+  def home_key(this : ITextSelection2*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  end
+  def end_key(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  end
+  def type_text(this : ITextSelection2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.type_text.call(this, bstr)
+  end
+  def get_cch(this : ITextSelection2*, pcch : Int32*) : HRESULT
+    @lpVtbl.value.get_cch.call(this, pcch)
+  end
+  def get_cells(this : ITextSelection2*, ppcells : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cells.call(this, ppcells)
+  end
+  def get_column(this : ITextSelection2*, ppcolumn : IUnknown*) : HRESULT
+    @lpVtbl.value.get_column.call(this, ppcolumn)
+  end
+  def get_count(this : ITextSelection2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_duplicate2(this : ITextSelection2*, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.get_duplicate2.call(this, pprange)
+  end
+  def get_font2(this : ITextSelection2*, ppfont : ITextFont2*) : HRESULT
+    @lpVtbl.value.get_font2.call(this, ppfont)
+  end
+  def set_font2(this : ITextSelection2*, pfont : ITextFont2) : HRESULT
+    @lpVtbl.value.set_font2.call(this, pfont)
+  end
+  def get_formatted_text2(this : ITextSelection2*, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.get_formatted_text2.call(this, pprange)
+  end
+  def set_formatted_text2(this : ITextSelection2*, prange : ITextRange2) : HRESULT
+    @lpVtbl.value.set_formatted_text2.call(this, prange)
+  end
+  def get_gravity(this : ITextSelection2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_gravity.call(this, pvalue)
+  end
+  def set_gravity(this : ITextSelection2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_gravity.call(this, value)
+  end
+  def get_para2(this : ITextSelection2*, pppara : ITextPara2*) : HRESULT
+    @lpVtbl.value.get_para2.call(this, pppara)
+  end
+  def set_para2(this : ITextSelection2*, ppara : ITextPara2) : HRESULT
+    @lpVtbl.value.set_para2.call(this, ppara)
+  end
+  def get_row(this : ITextSelection2*, pprow : ITextRow*) : HRESULT
+    @lpVtbl.value.get_row.call(this, pprow)
+  end
+  def get_start_para(this : ITextSelection2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_start_para.call(this, pvalue)
+  end
+  def get_table(this : ITextSelection2*, pptable : IUnknown*) : HRESULT
+    @lpVtbl.value.get_table.call(this, pptable)
+  end
+  def get_url(this : ITextSelection2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.call(this, pbstr)
+  end
+  def set_url(this : ITextSelection2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_url.call(this, bstr)
+  end
+  def add_subrange(this : ITextSelection2*, cp1 : Int32, cp2 : Int32, activate : Int32) : HRESULT
+    @lpVtbl.value.add_subrange.call(this, cp1, cp2, activate)
+  end
+  def build_up_math(this : ITextSelection2*, flags : Int32) : HRESULT
+    @lpVtbl.value.build_up_math.call(this, flags)
+  end
+  def delete_subrange(this : ITextSelection2*, cpfirst : Int32, cplim : Int32) : HRESULT
+    @lpVtbl.value.delete_subrange.call(this, cpfirst, cplim)
+  end
+  def find(this : ITextSelection2*, prange : ITextRange2, count : Int32, flags : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.find.call(this, prange, count, flags, pdelta)
+  end
+  def get_char2(this : ITextSelection2*, pchar : Int32*, offset : Int32) : HRESULT
+    @lpVtbl.value.get_char2.call(this, pchar, offset)
+  end
+  def get_drop_cap(this : ITextSelection2*, pcline : Int32*, pposition : Int32*) : HRESULT
+    @lpVtbl.value.get_drop_cap.call(this, pcline, pposition)
+  end
+  def get_inline_object(this : ITextSelection2*, ptype : Int32*, palign : Int32*, pchar : Int32*, pchar1 : Int32*, pchar2 : Int32*, pcount : Int32*, ptexstyle : Int32*, pccol : Int32*, plevel : Int32*) : HRESULT
+    @lpVtbl.value.get_inline_object.call(this, ptype, palign, pchar, pchar1, pchar2, pcount, ptexstyle, pccol, plevel)
+  end
+  def get_property(this : ITextSelection2*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def get_rect(this : ITextSelection2*, type : Int32, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*, phit : Int32*) : HRESULT
+    @lpVtbl.value.get_rect.call(this, type, pleft, ptop, pright, pbottom, phit)
+  end
+  def get_subrange(this : ITextSelection2*, isubrange : Int32, pcpfirst : Int32*, pcplim : Int32*) : HRESULT
+    @lpVtbl.value.get_subrange.call(this, isubrange, pcpfirst, pcplim)
+  end
+  def get_text2(this : ITextSelection2*, flags : Int32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text2.call(this, flags, pbstr)
+  end
+  def hex_to_unicode(this : ITextSelection2*) : HRESULT
+    @lpVtbl.value.hex_to_unicode.call(this)
+  end
+  def insert_table(this : ITextSelection2*, ccol : Int32, crow : Int32, autofit : Int32) : HRESULT
+    @lpVtbl.value.insert_table.call(this, ccol, crow, autofit)
+  end
+  def linearize(this : ITextSelection2*, flags : Int32) : HRESULT
+    @lpVtbl.value.linearize.call(this, flags)
+  end
+  def set_active_subrange(this : ITextSelection2*, cpanchor : Int32, cpactive : Int32) : HRESULT
+    @lpVtbl.value.set_active_subrange.call(this, cpanchor, cpactive)
+  end
+  def set_drop_cap(this : ITextSelection2*, cline : Int32, position : Int32) : HRESULT
+    @lpVtbl.value.set_drop_cap.call(this, cline, position)
+  end
+  def set_property(this : ITextSelection2*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+  def set_text2(this : ITextSelection2*, flags : Int32, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text2.call(this, flags, bstr)
+  end
+  def unicode_to_hex(this : ITextSelection2*) : HRESULT
+    @lpVtbl.value.unicode_to_hex.call(this)
+  end
+  def set_inline_object(this : ITextSelection2*, type : Int32, align : Int32, char : Int32, char1 : Int32, char2 : Int32, count : Int32, texstyle : Int32, ccol : Int32) : HRESULT
+    @lpVtbl.value.set_inline_object.call(this, type, align, char, char1, char2, count, texstyle, ccol)
+  end
+  def get_math_function_type(this : ITextSelection2*, bstr : UInt8*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_math_function_type.call(this, bstr, pvalue)
+  end
+  def insert_image(this : ITextSelection2*, width : Int32, height : Int32, ascent : Int32, type : TEXT_ALIGN_OPTIONS, bstralttext : UInt8*, pstream : IStream) : HRESULT
+    @lpVtbl.value.insert_image.call(this, width, height, ascent, type, bstralttext, pstream)
+  end
+end
+struct LibWin32::ITextFont2
+  def query_interface(this : ITextFont2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextFont2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextFont2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextFont2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextFont2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextFont2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextFont2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_duplicate(this : ITextFont2*, ppfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, ppfont)
+  end
+  def set_duplicate(this : ITextFont2*, pfont : ITextFont) : HRESULT
+    @lpVtbl.value.set_duplicate.call(this, pfont)
+  end
+  def can_change(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_change.call(this, pvalue)
+  end
+  def is_equal(this : ITextFont2*, pfont : ITextFont, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, pfont, pvalue)
+  end
+  def reset(this : ITextFont2*, value : Tomconstants) : HRESULT
+    @lpVtbl.value.reset.call(this, value)
+  end
+  def get_style(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_style.call(this, pvalue)
+  end
+  def set_style(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_style.call(this, value)
+  end
+  def get_all_caps(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_all_caps.call(this, pvalue)
+  end
+  def set_all_caps(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_all_caps.call(this, value)
+  end
+  def get_animation(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_animation.call(this, pvalue)
+  end
+  def set_animation(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_animation.call(this, value)
+  end
+  def get_back_color(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_back_color.call(this, pvalue)
+  end
+  def set_back_color(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_back_color.call(this, value)
+  end
+  def get_bold(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_bold.call(this, pvalue)
+  end
+  def set_bold(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_bold.call(this, value)
+  end
+  def get_emboss(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_emboss.call(this, pvalue)
+  end
+  def set_emboss(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_emboss.call(this, value)
+  end
+  def get_fore_color(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_fore_color.call(this, pvalue)
+  end
+  def set_fore_color(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_fore_color.call(this, value)
+  end
+  def get_hidden(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_hidden.call(this, pvalue)
+  end
+  def set_hidden(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_hidden.call(this, value)
+  end
+  def get_engrave(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_engrave.call(this, pvalue)
+  end
+  def set_engrave(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_engrave.call(this, value)
+  end
+  def get_italic(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_italic.call(this, pvalue)
+  end
+  def set_italic(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_italic.call(this, value)
+  end
+  def get_kerning(this : ITextFont2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_kerning.call(this, pvalue)
+  end
+  def set_kerning(this : ITextFont2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_kerning.call(this, value)
+  end
+  def get_language_id(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_language_id.call(this, pvalue)
+  end
+  def set_language_id(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_language_id.call(this, value)
+  end
+  def get_name(this : ITextFont2*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pbstr)
+  end
+  def set_name(this : ITextFont2*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_name.call(this, bstr)
+  end
+  def get_outline(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_outline.call(this, pvalue)
+  end
+  def set_outline(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_outline.call(this, value)
+  end
+  def get_position(this : ITextFont2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_position.call(this, pvalue)
+  end
+  def set_position(this : ITextFont2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_position.call(this, value)
+  end
+  def get_protected(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_protected.call(this, pvalue)
+  end
+  def set_protected(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_protected.call(this, value)
+  end
+  def get_shadow(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_shadow.call(this, pvalue)
+  end
+  def set_shadow(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_shadow.call(this, value)
+  end
+  def get_size(this : ITextFont2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_size.call(this, pvalue)
+  end
+  def set_size(this : ITextFont2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_size.call(this, value)
+  end
+  def get_small_caps(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_small_caps.call(this, pvalue)
+  end
+  def set_small_caps(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_small_caps.call(this, value)
+  end
+  def get_spacing(this : ITextFont2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_spacing.call(this, pvalue)
+  end
+  def set_spacing(this : ITextFont2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_spacing.call(this, value)
+  end
+  def get_strike_through(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_strike_through.call(this, pvalue)
+  end
+  def set_strike_through(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_strike_through.call(this, value)
+  end
+  def get_subscript(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_subscript.call(this, pvalue)
+  end
+  def set_subscript(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_subscript.call(this, value)
+  end
+  def get_superscript(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_superscript.call(this, pvalue)
+  end
+  def set_superscript(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_superscript.call(this, value)
+  end
+  def get_underline(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_underline.call(this, pvalue)
+  end
+  def set_underline(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_underline.call(this, value)
+  end
+  def get_weight(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_weight.call(this, pvalue)
+  end
+  def set_weight(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_weight.call(this, value)
+  end
+  def get_count(this : ITextFont2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def get_auto_ligatures(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_ligatures.call(this, pvalue)
+  end
+  def set_auto_ligatures(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_auto_ligatures.call(this, value)
+  end
+  def get_autospace_alpha(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_autospace_alpha.call(this, pvalue)
+  end
+  def set_autospace_alpha(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_autospace_alpha.call(this, value)
+  end
+  def get_autospace_numeric(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_autospace_numeric.call(this, pvalue)
+  end
+  def set_autospace_numeric(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_autospace_numeric.call(this, value)
+  end
+  def get_autospace_parens(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_autospace_parens.call(this, pvalue)
+  end
+  def set_autospace_parens(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_autospace_parens.call(this, value)
+  end
+  def get_char_rep(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_char_rep.call(this, pvalue)
+  end
+  def set_char_rep(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_char_rep.call(this, value)
+  end
+  def get_compression_mode(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_compression_mode.call(this, pvalue)
+  end
+  def set_compression_mode(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_compression_mode.call(this, value)
+  end
+  def get_cookie(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cookie.call(this, pvalue)
+  end
+  def set_cookie(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cookie.call(this, value)
+  end
+  def get_double_strike(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_double_strike.call(this, pvalue)
+  end
+  def set_double_strike(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_double_strike.call(this, value)
+  end
+  def get_duplicate2(this : ITextFont2*, ppfont : ITextFont2*) : HRESULT
+    @lpVtbl.value.get_duplicate2.call(this, ppfont)
+  end
+  def set_duplicate2(this : ITextFont2*, pfont : ITextFont2) : HRESULT
+    @lpVtbl.value.set_duplicate2.call(this, pfont)
+  end
+  def get_link_type(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_link_type.call(this, pvalue)
+  end
+  def get_math_zone(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_math_zone.call(this, pvalue)
+  end
+  def set_math_zone(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_math_zone.call(this, value)
+  end
+  def get_mod_width_pairs(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_mod_width_pairs.call(this, pvalue)
+  end
+  def set_mod_width_pairs(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_mod_width_pairs.call(this, value)
+  end
+  def get_mod_width_space(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_mod_width_space.call(this, pvalue)
+  end
+  def set_mod_width_space(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_mod_width_space.call(this, value)
+  end
+  def get_old_numbers(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_old_numbers.call(this, pvalue)
+  end
+  def set_old_numbers(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_old_numbers.call(this, value)
+  end
+  def get_overlapping(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_overlapping.call(this, pvalue)
+  end
+  def set_overlapping(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_overlapping.call(this, value)
+  end
+  def get_position_sub_super(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_position_sub_super.call(this, pvalue)
+  end
+  def set_position_sub_super(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_position_sub_super.call(this, value)
+  end
+  def get_scaling(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_scaling.call(this, pvalue)
+  end
+  def set_scaling(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_scaling.call(this, value)
+  end
+  def get_space_extension(this : ITextFont2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_space_extension.call(this, pvalue)
+  end
+  def set_space_extension(this : ITextFont2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_space_extension.call(this, value)
+  end
+  def get_underline_position_mode(this : ITextFont2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_underline_position_mode.call(this, pvalue)
+  end
+  def set_underline_position_mode(this : ITextFont2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_underline_position_mode.call(this, value)
+  end
+  def get_effects(this : ITextFont2*, pvalue : Int32*, pmask : Int32*) : HRESULT
+    @lpVtbl.value.get_effects.call(this, pvalue, pmask)
+  end
+  def get_effects2(this : ITextFont2*, pvalue : Int32*, pmask : Int32*) : HRESULT
+    @lpVtbl.value.get_effects2.call(this, pvalue, pmask)
+  end
+  def get_property(this : ITextFont2*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def get_property_info(this : ITextFont2*, index : Int32, ptype : Int32*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property_info.call(this, index, ptype, pvalue)
+  end
+  def is_equal2(this : ITextFont2*, pfont : ITextFont2, pb : Int32*) : HRESULT
+    @lpVtbl.value.is_equal2.call(this, pfont, pb)
+  end
+  def set_effects(this : ITextFont2*, value : Int32, mask : Int32) : HRESULT
+    @lpVtbl.value.set_effects.call(this, value, mask)
+  end
+  def set_effects2(this : ITextFont2*, value : Int32, mask : Int32) : HRESULT
+    @lpVtbl.value.set_effects2.call(this, value, mask)
+  end
+  def set_property(this : ITextFont2*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+end
+struct LibWin32::ITextPara2
+  def query_interface(this : ITextPara2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextPara2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextPara2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextPara2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextPara2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextPara2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextPara2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_duplicate(this : ITextPara2*, pppara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_duplicate.call(this, pppara)
+  end
+  def set_duplicate(this : ITextPara2*, ppara : ITextPara) : HRESULT
+    @lpVtbl.value.set_duplicate.call(this, ppara)
+  end
+  def can_change(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_change.call(this, pvalue)
+  end
+  def is_equal(this : ITextPara2*, ppara : ITextPara, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, ppara, pvalue)
+  end
+  def reset(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.reset.call(this, value)
+  end
+  def get_style(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_style.call(this, pvalue)
+  end
+  def set_style(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_style.call(this, value)
+  end
+  def get_alignment(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_alignment.call(this, pvalue)
+  end
+  def set_alignment(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_alignment.call(this, value)
+  end
+  def get_hyphenation(this : ITextPara2*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_hyphenation.call(this, pvalue)
+  end
+  def set_hyphenation(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_hyphenation.call(this, value)
+  end
+  def get_first_line_indent(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_first_line_indent.call(this, pvalue)
+  end
+  def get_keep_together(this : ITextPara2*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_keep_together.call(this, pvalue)
+  end
+  def set_keep_together(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_together.call(this, value)
+  end
+  def get_keep_with_next(this : ITextPara2*, pvalue : Tomconstants*) : HRESULT
+    @lpVtbl.value.get_keep_with_next.call(this, pvalue)
+  end
+  def set_keep_with_next(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_with_next.call(this, value)
+  end
+  def get_left_indent(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_left_indent.call(this, pvalue)
+  end
+  def get_line_spacing(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.call(this, pvalue)
+  end
+  def get_line_spacing_rule(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_line_spacing_rule.call(this, pvalue)
+  end
+  def get_list_alignment(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_alignment.call(this, pvalue)
+  end
+  def set_list_alignment(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_alignment.call(this, value)
+  end
+  def get_list_level_index(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_level_index.call(this, pvalue)
+  end
+  def set_list_level_index(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_level_index.call(this, value)
+  end
+  def get_list_start(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_start.call(this, pvalue)
+  end
+  def set_list_start(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_start.call(this, value)
+  end
+  def get_list_tab(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_list_tab.call(this, pvalue)
+  end
+  def set_list_tab(this : ITextPara2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_list_tab.call(this, value)
+  end
+  def get_list_type(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_list_type.call(this, pvalue)
+  end
+  def set_list_type(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_list_type.call(this, value)
+  end
+  def get_no_line_number(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_no_line_number.call(this, pvalue)
+  end
+  def set_no_line_number(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_no_line_number.call(this, value)
+  end
+  def get_page_break_before(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_page_break_before.call(this, pvalue)
+  end
+  def set_page_break_before(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_page_break_before.call(this, value)
+  end
+  def get_right_indent(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_right_indent.call(this, pvalue)
+  end
+  def set_right_indent(this : ITextPara2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_right_indent.call(this, value)
+  end
+  def set_indents(this : ITextPara2*, first : Float32, left : Float32, right : Float32) : HRESULT
+    @lpVtbl.value.set_indents.call(this, first, left, right)
+  end
+  def set_line_spacing(this : ITextPara2*, rule : Int32, spacing : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.call(this, rule, spacing)
+  end
+  def get_space_after(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_space_after.call(this, pvalue)
+  end
+  def set_space_after(this : ITextPara2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_space_after.call(this, value)
+  end
+  def get_space_before(this : ITextPara2*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_space_before.call(this, pvalue)
+  end
+  def set_space_before(this : ITextPara2*, value : Float32) : HRESULT
+    @lpVtbl.value.set_space_before.call(this, value)
+  end
+  def get_widow_control(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_widow_control.call(this, pvalue)
+  end
+  def set_widow_control(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_widow_control.call(this, value)
+  end
+  def get_tab_count(this : ITextPara2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tab_count.call(this, pcount)
+  end
+  def add_tab(this : ITextPara2*, tbpos : Float32, tbalign : Int32, tbleader : Int32) : HRESULT
+    @lpVtbl.value.add_tab.call(this, tbpos, tbalign, tbleader)
+  end
+  def clear_all_tabs(this : ITextPara2*) : HRESULT
+    @lpVtbl.value.clear_all_tabs.call(this)
+  end
+  def delete_tab(this : ITextPara2*, tbpos : Float32) : HRESULT
+    @lpVtbl.value.delete_tab.call(this, tbpos)
+  end
+  def get_tab(this : ITextPara2*, itab : Int32, ptbpos : Float32*, ptbalign : Int32*, ptbleader : Int32*) : HRESULT
+    @lpVtbl.value.get_tab.call(this, itab, ptbpos, ptbalign, ptbleader)
+  end
+  def get_borders(this : ITextPara2*, ppborders : IUnknown*) : HRESULT
+    @lpVtbl.value.get_borders.call(this, ppborders)
+  end
+  def get_duplicate2(this : ITextPara2*, pppara : ITextPara2*) : HRESULT
+    @lpVtbl.value.get_duplicate2.call(this, pppara)
+  end
+  def set_duplicate2(this : ITextPara2*, ppara : ITextPara2) : HRESULT
+    @lpVtbl.value.set_duplicate2.call(this, ppara)
+  end
+  def get_font_alignment(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_font_alignment.call(this, pvalue)
+  end
+  def set_font_alignment(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_font_alignment.call(this, value)
+  end
+  def get_hanging_punctuation(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_hanging_punctuation.call(this, pvalue)
+  end
+  def set_hanging_punctuation(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_hanging_punctuation.call(this, value)
+  end
+  def get_snap_to_grid(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_snap_to_grid.call(this, pvalue)
+  end
+  def set_snap_to_grid(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_snap_to_grid.call(this, value)
+  end
+  def get_trim_punctuation_at_start(this : ITextPara2*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_trim_punctuation_at_start.call(this, pvalue)
+  end
+  def set_trim_punctuation_at_start(this : ITextPara2*, value : Int32) : HRESULT
+    @lpVtbl.value.set_trim_punctuation_at_start.call(this, value)
+  end
+  def get_effects(this : ITextPara2*, pvalue : Int32*, pmask : Int32*) : HRESULT
+    @lpVtbl.value.get_effects.call(this, pvalue, pmask)
+  end
+  def get_property(this : ITextPara2*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def is_equal2(this : ITextPara2*, ppara : ITextPara2, pb : Int32*) : HRESULT
+    @lpVtbl.value.is_equal2.call(this, ppara, pb)
+  end
+  def set_effects(this : ITextPara2*, value : Int32, mask : Int32) : HRESULT
+    @lpVtbl.value.set_effects.call(this, value, mask)
+  end
+  def set_property(this : ITextPara2*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+end
+struct LibWin32::ITextStoryRanges2
+  def query_interface(this : ITextStoryRanges2*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStoryRanges2*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStoryRanges2*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextStoryRanges2*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextStoryRanges2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextStoryRanges2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextStoryRanges2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def _new_enum(this : ITextStoryRanges2*, ppunkenum : IUnknown*) : HRESULT
+    @lpVtbl.value._new_enum.call(this, ppunkenum)
+  end
+  def item(this : ITextStoryRanges2*, index : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.item.call(this, index, pprange)
+  end
+  def get_count(this : ITextStoryRanges2*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def item2(this : ITextStoryRanges2*, index : Int32, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.item2.call(this, index, pprange)
+  end
+end
+struct LibWin32::ITextStory
+  def query_interface(this : ITextStory*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStory*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStory*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_active(this : ITextStory*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_active.call(this, pvalue)
+  end
+  def set_active(this : ITextStory*, value : Int32) : HRESULT
+    @lpVtbl.value.set_active.call(this, value)
+  end
+  def get_display(this : ITextStory*, ppdisplay : IUnknown*) : HRESULT
+    @lpVtbl.value.get_display.call(this, ppdisplay)
+  end
+  def get_index(this : ITextStory*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_index.call(this, pvalue)
+  end
+  def get_type(this : ITextStory*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_type.call(this, pvalue)
+  end
+  def set_type(this : ITextStory*, value : Int32) : HRESULT
+    @lpVtbl.value.set_type.call(this, value)
+  end
+  def get_property(this : ITextStory*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def get_range(this : ITextStory*, cpactive : Int32, cpanchor : Int32, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.get_range.call(this, cpactive, cpanchor, pprange)
+  end
+  def get_text(this : ITextStory*, flags : Int32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.call(this, flags, pbstr)
+  end
+  def set_formatted_text(this : ITextStory*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, punk)
+  end
+  def set_property(this : ITextStory*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+  def set_text(this : ITextStory*, flags : Int32, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.set_text.call(this, flags, bstr)
+  end
+end
+struct LibWin32::ITextStrings
+  def query_interface(this : ITextStrings*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextStrings*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextStrings*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextStrings*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextStrings*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextStrings*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextStrings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def item(this : ITextStrings*, index : Int32, pprange : ITextRange2*) : HRESULT
+    @lpVtbl.value.item.call(this, index, pprange)
+  end
+  def get_count(this : ITextStrings*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.call(this, pcount)
+  end
+  def add(this : ITextStrings*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.add.call(this, bstr)
+  end
+  def append(this : ITextStrings*, prange : ITextRange2, istring : Int32) : HRESULT
+    @lpVtbl.value.append.call(this, prange, istring)
+  end
+  def cat2(this : ITextStrings*, istring : Int32) : HRESULT
+    @lpVtbl.value.cat2.call(this, istring)
+  end
+  def cat_top2(this : ITextStrings*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.cat_top2.call(this, bstr)
+  end
+  def delete_range(this : ITextStrings*, prange : ITextRange2) : HRESULT
+    @lpVtbl.value.delete_range.call(this, prange)
+  end
+  def encode_function(this : ITextStrings*, type : Int32, align : Int32, char : Int32, char1 : Int32, char2 : Int32, count : Int32, texstyle : Int32, ccol : Int32, prange : ITextRange2) : HRESULT
+    @lpVtbl.value.encode_function.call(this, type, align, char, char1, char2, count, texstyle, ccol, prange)
+  end
+  def get_cch(this : ITextStrings*, istring : Int32, pcch : Int32*) : HRESULT
+    @lpVtbl.value.get_cch.call(this, istring, pcch)
+  end
+  def insert_null_str(this : ITextStrings*, istring : Int32) : HRESULT
+    @lpVtbl.value.insert_null_str.call(this, istring)
+  end
+  def move_boundary(this : ITextStrings*, istring : Int32, cch : Int32) : HRESULT
+    @lpVtbl.value.move_boundary.call(this, istring, cch)
+  end
+  def prefix_top(this : ITextStrings*, bstr : UInt8*) : HRESULT
+    @lpVtbl.value.prefix_top.call(this, bstr)
+  end
+  def remove(this : ITextStrings*, istring : Int32, cstring : Int32) : HRESULT
+    @lpVtbl.value.remove.call(this, istring, cstring)
+  end
+  def set_formatted_text(this : ITextStrings*, pranged : ITextRange2, pranges : ITextRange2) : HRESULT
+    @lpVtbl.value.set_formatted_text.call(this, pranged, pranges)
+  end
+  def set_op_cp(this : ITextStrings*, istring : Int32, cp : Int32) : HRESULT
+    @lpVtbl.value.set_op_cp.call(this, istring, cp)
+  end
+  def suffix_top(this : ITextStrings*, bstr : UInt8*, prange : ITextRange2) : HRESULT
+    @lpVtbl.value.suffix_top.call(this, bstr, prange)
+  end
+  def swap(this : ITextStrings*) : HRESULT
+    @lpVtbl.value.swap.call(this)
+  end
+end
+struct LibWin32::ITextRow
+  def query_interface(this : ITextRow*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextRow*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextRow*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextRow*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextRow*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextRow*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextRow*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_alignment(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_alignment.call(this, pvalue)
+  end
+  def set_alignment(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_alignment.call(this, value)
+  end
+  def get_cell_count(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_count.call(this, pvalue)
+  end
+  def set_cell_count(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_count.call(this, value)
+  end
+  def get_cell_count_cache(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_count_cache.call(this, pvalue)
+  end
+  def set_cell_count_cache(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_count_cache.call(this, value)
+  end
+  def get_cell_index(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_index.call(this, pvalue)
+  end
+  def set_cell_index(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_index.call(this, value)
+  end
+  def get_cell_margin(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_margin.call(this, pvalue)
+  end
+  def set_cell_margin(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_margin.call(this, value)
+  end
+  def get_height(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_height.call(this, pvalue)
+  end
+  def set_height(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_height.call(this, value)
+  end
+  def get_indent(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_indent.call(this, pvalue)
+  end
+  def set_indent(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_indent.call(this, value)
+  end
+  def get_keep_together(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_keep_together.call(this, pvalue)
+  end
+  def set_keep_together(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_together.call(this, value)
+  end
+  def get_keep_with_next(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_keep_with_next.call(this, pvalue)
+  end
+  def set_keep_with_next(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_keep_with_next.call(this, value)
+  end
+  def get_nest_level(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_nest_level.call(this, pvalue)
+  end
+  def get_rtl(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_rtl.call(this, pvalue)
+  end
+  def set_rtl(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_rtl.call(this, value)
+  end
+  def get_cell_alignment(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_alignment.call(this, pvalue)
+  end
+  def set_cell_alignment(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_alignment.call(this, value)
+  end
+  def get_cell_color_back(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_color_back.call(this, pvalue)
+  end
+  def set_cell_color_back(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_color_back.call(this, value)
+  end
+  def get_cell_color_fore(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_color_fore.call(this, pvalue)
+  end
+  def set_cell_color_fore(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_color_fore.call(this, value)
+  end
+  def get_cell_merge_flags(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_merge_flags.call(this, pvalue)
+  end
+  def set_cell_merge_flags(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_merge_flags.call(this, value)
+  end
+  def get_cell_shading(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_shading.call(this, pvalue)
+  end
+  def set_cell_shading(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_shading.call(this, value)
+  end
+  def get_cell_vertical_text(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_vertical_text.call(this, pvalue)
+  end
+  def set_cell_vertical_text(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_vertical_text.call(this, value)
+  end
+  def get_cell_width(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_width.call(this, pvalue)
+  end
+  def set_cell_width(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.set_cell_width.call(this, value)
+  end
+  def get_cell_border_colors(this : ITextRow*, pcrleft : Int32*, pcrtop : Int32*, pcrright : Int32*, pcrbottom : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_border_colors.call(this, pcrleft, pcrtop, pcrright, pcrbottom)
+  end
+  def get_cell_border_widths(this : ITextRow*, pduleft : Int32*, pdutop : Int32*, pduright : Int32*, pdubottom : Int32*) : HRESULT
+    @lpVtbl.value.get_cell_border_widths.call(this, pduleft, pdutop, pduright, pdubottom)
+  end
+  def set_cell_border_colors(this : ITextRow*, crleft : Int32, crtop : Int32, crright : Int32, crbottom : Int32) : HRESULT
+    @lpVtbl.value.set_cell_border_colors.call(this, crleft, crtop, crright, crbottom)
+  end
+  def set_cell_border_widths(this : ITextRow*, duleft : Int32, dutop : Int32, duright : Int32, dubottom : Int32) : HRESULT
+    @lpVtbl.value.set_cell_border_widths.call(this, duleft, dutop, duright, dubottom)
+  end
+  def apply(this : ITextRow*, crow : Int32, flags : Tomconstants) : HRESULT
+    @lpVtbl.value.apply.call(this, crow, flags)
+  end
+  def can_change(this : ITextRow*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.can_change.call(this, pvalue)
+  end
+  def get_property(this : ITextRow*, type : Int32, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_property.call(this, type, pvalue)
+  end
+  def insert(this : ITextRow*, crow : Int32) : HRESULT
+    @lpVtbl.value.insert.call(this, crow)
+  end
+  def is_equal(this : ITextRow*, prow : ITextRow, pb : Int32*) : HRESULT
+    @lpVtbl.value.is_equal.call(this, prow, pb)
+  end
+  def reset(this : ITextRow*, value : Int32) : HRESULT
+    @lpVtbl.value.reset.call(this, value)
+  end
+  def set_property(this : ITextRow*, type : Int32, value : Int32) : HRESULT
+    @lpVtbl.value.set_property.call(this, type, value)
+  end
+end
+struct LibWin32::ITextDisplays
+  def query_interface(this : ITextDisplays*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextDisplays*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextDisplays*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextDisplays*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextDisplays*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextDisplays*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextDisplays*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::ITextDocument2Old
+  def query_interface(this : ITextDocument2Old*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  end
+  def add_ref(this : ITextDocument2Old*) : UInt32
+    @lpVtbl.value.add_ref.call(this)
+  end
+  def release(this : ITextDocument2Old*) : UInt32
+    @lpVtbl.value.release.call(this)
+  end
+  def get_type_info_count(this : ITextDocument2Old*, pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
+  end
+  def get_type_info(this : ITextDocument2Old*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(this : ITextDocument2Old*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(this : ITextDocument2Old*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(this : ITextDocument2Old*, pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.call(this, pname)
+  end
+  def get_selection(this : ITextDocument2Old*, ppsel : ITextSelection*) : HRESULT
+    @lpVtbl.value.get_selection.call(this, ppsel)
+  end
+  def get_story_count(this : ITextDocument2Old*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_story_count.call(this, pcount)
+  end
+  def get_story_ranges(this : ITextDocument2Old*, ppstories : ITextStoryRanges*) : HRESULT
+    @lpVtbl.value.get_story_ranges.call(this, ppstories)
+  end
+  def get_saved(this : ITextDocument2Old*, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_saved.call(this, pvalue)
+  end
+  def set_saved(this : ITextDocument2Old*, value : Tomconstants) : HRESULT
+    @lpVtbl.value.set_saved.call(this, value)
+  end
+  def get_default_tab_stop(this : ITextDocument2Old*, pvalue : Float32*) : HRESULT
+    @lpVtbl.value.get_default_tab_stop.call(this, pvalue)
+  end
+  def set_default_tab_stop(this : ITextDocument2Old*, value : Float32) : HRESULT
+    @lpVtbl.value.set_default_tab_stop.call(this, value)
+  end
+  def new(this : ITextDocument2Old*) : HRESULT
+    @lpVtbl.value.new.call(this)
+  end
+  def open(this : ITextDocument2Old*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.open.call(this, pvar, flags, codepage)
+  end
+  def save(this : ITextDocument2Old*, pvar : VARIANT*, flags : Int32, codepage : Int32) : HRESULT
+    @lpVtbl.value.save.call(this, pvar, flags, codepage)
+  end
+  def freeze(this : ITextDocument2Old*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.freeze.call(this, pcount)
+  end
+  def unfreeze(this : ITextDocument2Old*, pcount : Int32*) : HRESULT
+    @lpVtbl.value.unfreeze.call(this, pcount)
+  end
+  def begin_edit_collection(this : ITextDocument2Old*) : HRESULT
+    @lpVtbl.value.begin_edit_collection.call(this)
+  end
+  def end_edit_collection(this : ITextDocument2Old*) : HRESULT
+    @lpVtbl.value.end_edit_collection.call(this)
+  end
+  def undo(this : ITextDocument2Old*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.undo.call(this, count, pcount)
+  end
+  def redo(this : ITextDocument2Old*, count : Int32, pcount : Int32*) : HRESULT
+    @lpVtbl.value.redo.call(this, count, pcount)
+  end
+  def range(this : ITextDocument2Old*, cpactive : Int32, cpanchor : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range.call(this, cpactive, cpanchor, pprange)
+  end
+  def range_from_point(this : ITextDocument2Old*, x : Int32, y : Int32, pprange : ITextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.call(this, x, y, pprange)
+  end
+  def attach_msg_filter(this : ITextDocument2Old*, pfilter : IUnknown) : HRESULT
+    @lpVtbl.value.attach_msg_filter.call(this, pfilter)
+  end
+  def set_effect_color(this : ITextDocument2Old*, index : Int32, cr : UInt32) : HRESULT
+    @lpVtbl.value.set_effect_color.call(this, index, cr)
+  end
+  def get_effect_color(this : ITextDocument2Old*, index : Int32, pcr : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_color.call(this, index, pcr)
+  end
+  def get_caret_type(this : ITextDocument2Old*, pcarettype : Int32*) : HRESULT
+    @lpVtbl.value.get_caret_type.call(this, pcarettype)
+  end
+  def set_caret_type(this : ITextDocument2Old*, carettype : Int32) : HRESULT
+    @lpVtbl.value.set_caret_type.call(this, carettype)
+  end
+  def get_imm_context(this : ITextDocument2Old*, pcontext : Int64*) : HRESULT
+    @lpVtbl.value.get_imm_context.call(this, pcontext)
+  end
+  def release_imm_context(this : ITextDocument2Old*, context : Int64) : HRESULT
+    @lpVtbl.value.release_imm_context.call(this, context)
+  end
+  def get_preferred_font(this : ITextDocument2Old*, cp : Int32, charrep : Int32, option : Int32, charrepcur : Int32, curfontsize : Int32, pbstr : UInt8**, ppitchandfamily : Int32*, pnewfontsize : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_font.call(this, cp, charrep, option, charrepcur, curfontsize, pbstr, ppitchandfamily, pnewfontsize)
+  end
+  def get_notification_mode(this : ITextDocument2Old*, pmode : Int32*) : HRESULT
+    @lpVtbl.value.get_notification_mode.call(this, pmode)
+  end
+  def set_notification_mode(this : ITextDocument2Old*, mode : Int32) : HRESULT
+    @lpVtbl.value.set_notification_mode.call(this, mode)
+  end
+  def get_client_rect(this : ITextDocument2Old*, type : Int32, pleft : Int32*, ptop : Int32*, pright : Int32*, pbottom : Int32*) : HRESULT
+    @lpVtbl.value.get_client_rect.call(this, type, pleft, ptop, pright, pbottom)
+  end
+  def get_selection2(this : ITextDocument2Old*, ppsel : ITextSelection*) : HRESULT
+    @lpVtbl.value.get_selection2.call(this, ppsel)
+  end
+  def get_window(this : ITextDocument2Old*, phwnd : Int32*) : HRESULT
+    @lpVtbl.value.get_window.call(this, phwnd)
+  end
+  def get_fe_flags(this : ITextDocument2Old*, pflags : Int32*) : HRESULT
+    @lpVtbl.value.get_fe_flags.call(this, pflags)
+  end
+  def update_window(this : ITextDocument2Old*) : HRESULT
+    @lpVtbl.value.update_window.call(this)
+  end
+  def check_text_limit(this : ITextDocument2Old*, cch : Int32, pcch : Int32*) : HRESULT
+    @lpVtbl.value.check_text_limit.call(this, cch, pcch)
+  end
+  def ime_in_progress(this : ITextDocument2Old*, value : Int32) : HRESULT
+    @lpVtbl.value.ime_in_progress.call(this, value)
+  end
+  def sys_beep(this : ITextDocument2Old*) : HRESULT
+    @lpVtbl.value.sys_beep.call(this)
+  end
+  def update(this : ITextDocument2Old*, mode : Int32) : HRESULT
+    @lpVtbl.value.update.call(this, mode)
+  end
+  def notify(this : ITextDocument2Old*, notify : Int32) : HRESULT
+    @lpVtbl.value.notify.call(this, notify)
+  end
+  def get_document_font(this : ITextDocument2Old*, ppitextfont : ITextFont*) : HRESULT
+    @lpVtbl.value.get_document_font.call(this, ppitextfont)
+  end
+  def get_document_para(this : ITextDocument2Old*, ppitextpara : ITextPara*) : HRESULT
+    @lpVtbl.value.get_document_para.call(this, ppitextpara)
+  end
+  def get_call_manager(this : ITextDocument2Old*, ppvoid : IUnknown*) : HRESULT
+    @lpVtbl.value.get_call_manager.call(this, ppvoid)
+  end
+  def release_call_manager(this : ITextDocument2Old*, pvoid : IUnknown) : HRESULT
+    @lpVtbl.value.release_call_manager.call(this, pvoid)
+  end
+end
