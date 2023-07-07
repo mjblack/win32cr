@@ -61,7 +61,7 @@ module Win32cr::System
          LibWin32.IIDFromString(bad_iid, out bad_guid)
          com = ComPtr(LibWin32::IFileOpenDialog).new(LibWin32::CLSID_FileOpenDialog, bad_guid)
        rescue e
-         e.message.should eq("Failed to create COM instance. (error E_NOINTERFACE)")
+         e.message.should eq("Failed to create COM instance. (error -2147467262)")
        end
       end
     end

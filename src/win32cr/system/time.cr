@@ -64,7 +64,7 @@ lib LibWin32
   fun SetDynamicTimeZoneInformation(lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : LibC::BOOL
 
   # Params # ptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In]
-  fun GetDynamicTimeZoneInformation(ptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
+  # fun GetDynamicTimeZoneInformation(ptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
 
   # Params # wyear : UInt16 [In],pdtzi : DYNAMIC_TIME_ZONE_INFORMATION* [In],ptzi : TIME_ZONE_INFORMATION* [In]
   fun GetTimeZoneInformationForYear(wyear : UInt16, pdtzi : DYNAMIC_TIME_ZONE_INFORMATION*, ptzi : TIME_ZONE_INFORMATION*) : LibC::BOOL

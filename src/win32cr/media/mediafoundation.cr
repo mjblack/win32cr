@@ -13715,7 +13715,7 @@ lib LibWin32
     place_marker : Proc(IMFSinkWriter*, UInt32, Void*, HRESULT)
     notify_end_of_segment : Proc(IMFSinkWriter*, UInt32, HRESULT)
     flush : Proc(IMFSinkWriter*, UInt32, HRESULT)
-    finalize : Proc(IMFSinkWriter*, HRESULT)
+    finalize_ : Proc(IMFSinkWriter*, HRESULT)
     get_service_for_stream : Proc(IMFSinkWriter*, UInt32, Guid*, Guid*, Void**, HRESULT)
     get_statistics : Proc(IMFSinkWriter*, UInt32, MF_SINK_WRITER_STATISTICS*, HRESULT)
   end
@@ -13738,7 +13738,7 @@ lib LibWin32
     place_marker : Proc(IMFSinkWriterEx*, UInt32, Void*, HRESULT)
     notify_end_of_segment : Proc(IMFSinkWriterEx*, UInt32, HRESULT)
     flush : Proc(IMFSinkWriterEx*, UInt32, HRESULT)
-    finalize : Proc(IMFSinkWriterEx*, HRESULT)
+    finalize_ : Proc(IMFSinkWriterEx*, HRESULT)
     get_service_for_stream : Proc(IMFSinkWriterEx*, UInt32, Guid*, Guid*, Void**, HRESULT)
     get_statistics : Proc(IMFSinkWriterEx*, UInt32, MF_SINK_WRITER_STATISTICS*, HRESULT)
     get_transform_for_stream : Proc(IMFSinkWriterEx*, UInt32, UInt32, Guid*, IMFTransform*, HRESULT)
@@ -25638,8 +25638,8 @@ struct LibWin32::IMFSinkWriter
   def flush(this : IMFSinkWriter*, dwstreamindex : UInt32) : HRESULT
     @lpVtbl.value.flush.call(this, dwstreamindex)
   end
-  def finalize(this : IMFSinkWriter*) : HRESULT
-    @lpVtbl.value.finalize.call(this)
+  def finalize_(this : IMFSinkWriter*) : HRESULT
+    @lpVtbl.value.finalize_.call(this)
   end
   def get_service_for_stream(this : IMFSinkWriter*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
     @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)
@@ -25682,8 +25682,8 @@ struct LibWin32::IMFSinkWriterEx
   def flush(this : IMFSinkWriterEx*, dwstreamindex : UInt32) : HRESULT
     @lpVtbl.value.flush.call(this, dwstreamindex)
   end
-  def finalize(this : IMFSinkWriterEx*) : HRESULT
-    @lpVtbl.value.finalize.call(this)
+  def finalize_(this : IMFSinkWriterEx*) : HRESULT
+    @lpVtbl.value.finalize_.call(this)
   end
   def get_service_for_stream(this : IMFSinkWriterEx*, dwstreamindex : UInt32, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
     @lpVtbl.value.get_service_for_stream.call(this, dwstreamindex, guidservice, riid, ppvobject)

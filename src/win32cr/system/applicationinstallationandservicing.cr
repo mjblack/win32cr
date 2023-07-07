@@ -1874,7 +1874,7 @@ lib LibWin32
     release : Proc(IAssemblyName*, UInt32)
     set_property : Proc(IAssemblyName*, UInt32, Void*, UInt32, HRESULT)
     get_property : Proc(IAssemblyName*, UInt32, Void*, UInt32*, HRESULT)
-    finalize : Proc(IAssemblyName*, HRESULT)
+    finalize_ : Proc(IAssemblyName*, HRESULT)
     get_display_name : Proc(IAssemblyName*, Char*, UInt32*, UInt32, HRESULT)
     reserved : Proc(IAssemblyName*, Guid*, IUnknown, IUnknown, LibC::LPWSTR, Int64, Void*, UInt32, Void**, HRESULT)
     get_name : Proc(IAssemblyName*, UInt32*, Char*, HRESULT)
@@ -3797,8 +3797,8 @@ struct LibWin32::IAssemblyName
   def get_property(this : IAssemblyName*, propertyid : UInt32, pvproperty : Void*, pcbproperty : UInt32*) : HRESULT
     @lpVtbl.value.get_property.call(this, propertyid, pvproperty, pcbproperty)
   end
-  def finalize(this : IAssemblyName*) : HRESULT
-    @lpVtbl.value.finalize.call(this)
+  def finalize_(this : IAssemblyName*) : HRESULT
+    @lpVtbl.value.finalize_.call(this)
   end
   def get_display_name(this : IAssemblyName*, szdisplayname : Char*, pccdisplayname : UInt32*, dwdisplayflags : UInt32) : HRESULT
     @lpVtbl.value.get_display_name.call(this, szdisplayname, pccdisplayname, dwdisplayflags)
