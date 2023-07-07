@@ -702,7 +702,7 @@ lib LibWin32
     errmsg16 : LibC::IntPtrT
     exec : LibC::IntPtrT
     expired : LibC::IntPtrT
-    finalize : LibC::IntPtrT
+    finalize_ : LibC::IntPtrT
     free : LibC::IntPtrT
     free_table : LibC::IntPtrT
     get_autocommit : LibC::IntPtrT

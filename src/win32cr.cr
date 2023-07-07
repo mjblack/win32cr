@@ -44,25 +44,13 @@ class ComPtr(T)
   def self.new(clsid : LibWin32::Guid, iid : LibWin32::Guid, clsctx : LibWin32::CLSCTX = LibWin32::CLSCTX::CLSCTX_ALL)
     result = LibWin32.CoCreateInstance(pointerof(clsid), nil, clsctx, pointerof(iid), out ptr)
     unless result == LibWin32::S_OK
-      if result == LibWin32::REGDB_E_CLASSNOTREG
-        error = "REGDB_E_CLASSNOTREG"
-      elsif result == LibWin32::CLASS_E_NOAGGREGATION
-        error = "CLASS_E_NOAGGREGATION"
-      elsif result == LibWin32::E_NOINTERFACE
-        error = "E_NOINTERFACE"
-      elsif result == LibWin32::E_POINTER
-        error = "E_POINTER"
-      else
-        error = result
-      end
-      raise RuntimeError.new "Failed to create COM instance. (error #{error})"
+      raise RuntimeError.new "Failed to create COM instance. (error #{result})"
     end
-
     new(ptr.as(Pointer(T)))
   end
 
   macro method_missing(method)
-      \{% begin %}
+    \{% begin %}
     \{% unless m = T.instance.methods.find(&.name. == {{method.name.stringify}}) %}
       \{% raise "No method named #{{{method.name.stringify}}} in #{T.name.stringify}" %}
     \{% end %}

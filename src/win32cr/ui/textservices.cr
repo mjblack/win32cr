@@ -2660,7 +2660,7 @@ lib LibWin32
     set_page_index : Proc(ITfCandidateListUIElementBehavior*, UInt32*, UInt32, HRESULT)
     get_current_page : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
     set_selection : Proc(ITfCandidateListUIElementBehavior*, UInt32, HRESULT)
-    finalize : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
+    finalize_ : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
     abort : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
   end
 
@@ -6399,8 +6399,8 @@ struct LibWin32::ITfCandidateListUIElementBehavior
   def set_selection(this : ITfCandidateListUIElementBehavior*, nindex : UInt32) : HRESULT
     @lpVtbl.value.set_selection.call(this, nindex)
   end
-  def finalize(this : ITfCandidateListUIElementBehavior*) : HRESULT
-    @lpVtbl.value.finalize.call(this)
+  def finalize_(this : ITfCandidateListUIElementBehavior*) : HRESULT
+    @lpVtbl.value.finalize_.call(this)
   end
   def abort(this : ITfCandidateListUIElementBehavior*) : HRESULT
     @lpVtbl.value.abort.call(this)
