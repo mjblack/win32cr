@@ -28,11 +28,14 @@ jobs:
         dir 'C:\Program Files\Crystal'
     - name: crystal version
       shell: pwsh
-      run: & 'C:\Program Files\Crystal\crystal.exe' version
+      run: |
+        & 'C:\Program Files\Crystal\crystal.exe' version
     - uses: actions/checkout@v3
     - name: Install dependencies
       shell: pwsh
-      run: & 'C:\Program Files\Crystal\shards.exe' install
+      run: |
+        & 'C:\Program Files\Crystal\shards.exe' install
     - name: Run tests
       shell: pwsh
-      run: & 'C:\Program Files\Crystal\crystal.exe' spec
+      run: |
+        & 'C:\Program Files\Crystal\crystal.exe' spec
