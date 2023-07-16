@@ -3320,7 +3320,8 @@ lib LibWin32
   #fun SetFileAttributesW(lpfilename : LibC::LPWSTR, dwfileattributes : FILE_FLAGS_AND_ATTRIBUTES) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],fileinformationclass : FILE_INFO_BY_HANDLE_CLASS [In],lpfileinformation : Void* [In],dwbuffersize : UInt32 [In]
-  fun SetFileInformationByHandle(hfile : LibC::HANDLE, fileinformationclass : FILE_INFO_BY_HANDLE_CLASS, lpfileinformation : Void*, dwbuffersize : UInt32) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun SetFileInformationByHandle(hfile : LibC::HANDLE, fileinformationclass : FILE_INFO_BY_HANDLE_CLASS, lpfileinformation : Void*, dwbuffersize : UInt32) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],ldistancetomove : Int32 [In],lpdistancetomovehigh : Int32* [In],dwmovemethod : SET_FILE_POINTER_MOVE_METHOD [In]
   fun SetFilePointer(hfile : LibC::HANDLE, ldistancetomove : Int32, lpdistancetomovehigh : Int32*, dwmovemethod : SET_FILE_POINTER_MOVE_METHOD) : UInt32
@@ -4330,7 +4331,8 @@ lib LibWin32
   fun GetVolumePathNamesForVolumeNameA(lpszvolumename : PSTR, lpszvolumepathnames : UInt8*, cchbufferlength : UInt32, lpcchreturnlength : UInt32*) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],fileinformationclass : FILE_INFO_BY_HANDLE_CLASS [In],lpfileinformation : Void* [In],dwbuffersize : UInt32 [In]
-  fun GetFileInformationByHandleEx(hfile : LibC::HANDLE, fileinformationclass : FILE_INFO_BY_HANDLE_CLASS, lpfileinformation : Void*, dwbuffersize : UInt32) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun GetFileInformationByHandleEx(hfile : LibC::HANDLE, fileinformationclass : FILE_INFO_BY_HANDLE_CLASS, lpfileinformation : Void*, dwbuffersize : UInt32) : LibC::BOOL
 
   # Params # hvolumehint : LibC::HANDLE [In],lpfileid : FILE_ID_DESCRIPTOR* [In],dwdesiredaccess : FILE_ACCESS_FLAGS [In],dwsharemode : FILE_SHARE_MODE [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In],dwflagsandattributes : FILE_FLAGS_AND_ATTRIBUTES [In]
   fun OpenFileById(hvolumehint : LibC::HANDLE, lpfileid : FILE_ID_DESCRIPTOR*, dwdesiredaccess : FILE_ACCESS_FLAGS, dwsharemode : FILE_SHARE_MODE, lpsecurityattributes : SECURITY_ATTRIBUTES*, dwflagsandattributes : FILE_FLAGS_AND_ATTRIBUTES) : LibC::HANDLE
