@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
     - name: Install Crystal 1.9.0
       shell: pwsh
@@ -38,4 +38,4 @@ jobs:
     - name: Run tests
       shell: pwsh
       run: |
-        & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec
+        & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
