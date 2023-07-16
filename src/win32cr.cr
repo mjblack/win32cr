@@ -13,7 +13,7 @@ struct LibC::GUID
 end
 
 module Win32cr
-  VERSION = "0.3.0"
+  VERSION = "0.3.1"
 end
 
 class ComPtr(T)
