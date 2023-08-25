@@ -5,11 +5,11 @@ module Win32::System
 
   describe "Win32::System::Registry" do
     describe "Getting a registry key" do
-      bios_name = {{ `C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "& {(Get-ItemProperty -Path HKLM:\\HARDWARE\\DESCRIPTION\\System\\BIOS -Name BIOSVendor).BIOSVendor}"`.chomp.stringify }}
+      bios_name = {{ `C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "& {(Get-ItemProperty -Path HKLM:\\HARDWARE\\DESCRIPTION\\System -Name Identifier).Identifier}"`.chomp.stringify }}
       dwSize = 0_u32
       hr = LibWin32.RegGetValueW(LibWin32::HKEY_LOCAL_MACHINE,
-        "HARDWARE\\DESCRIPTION\\System\\BIOS".to_utf16,
-        "BIOSVendor".to_utf16,
+        "HARDWARE\\DESCRIPTION\\System".to_utf16,
+        "Identifier".to_utf16,
         LibWin32::RRF_RT::RRF_RT_ANY,
         nil,
         nil,
@@ -26,8 +26,8 @@ module Win32::System
       pValue = LibC.HeapAlloc(LibC.GetProcessHeap, 0, dwSize)
 
       hr = LibWin32.RegGetValueW(LibWin32::HKEY_LOCAL_MACHINE,
-        "HARDWARE\\DESCRIPTION\\System\\BIOS".to_utf16,
-        "BIOSVendor".to_utf16,
+        "HARDWARE\\DESCRIPTION\\System".to_utf16,
+        "Identifier".to_utf16,
         LibWin32::RRF_RT::RRF_RT_ANY,
         nil,
         pValue,
