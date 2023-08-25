@@ -1,0 +1,44 @@
+name: Crystal Latest CI
+
+on:
+  workflow_dispatch:
+    logLevel:
+      description: 'Log level'
+      required: true
+      default: 'warning'
+      type: choice
+      options:
+        - info
+        - warning
+        - debug
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+
+    runs-on: windows-2019
+
+    steps:
+      - name: Install Latest Crystal
+        shell: pwsh
+        run: |
+          $release = gh release view --repo crystal-lang/crystal --json tagName|ConvertFrom-Json
+          gh release download -R crystal-lang/crystal -p "*.exe" -O crystal-installer.exe --clobber $release.tagName
+          $code = Start-Process .\crystal-installer.exe -Wait -ArgumentList "/VERYSILENT","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
+          dir $env:LOCALAPPDATA\Programs\Crystal
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Crystal Version
+        shell: pwsh
+        run: |
+          & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
+      - name: Run tests
+        shell: pwsh
+        run: |
+          & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
