@@ -13,7 +13,7 @@ struct LibC::GUID
 end
 
 module Win32cr
-  VERSION = "0.3.1"
+  VERSION = {{ `shards version`.chomp.stringify }}
 end
 
 class ComPtr(T)
