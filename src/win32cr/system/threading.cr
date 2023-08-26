@@ -17,7 +17,9 @@ require "../system/systeminformation.cr"
 @[Link(ldflags: "/DELAYLOAD:onecore.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
 {% else %}
+{% if flag?(:preview_dll)%}
 @[Link("vertdll")]
+{% end %}
 @[Link("advapi32")]
 @[Link("onecore")]
 @[Link("user32")]
