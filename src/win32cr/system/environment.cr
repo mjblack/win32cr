@@ -14,7 +14,9 @@ require "../foundation.cr"
 {% else %}
 @[Link("userenv")]
 @[Link("onecore")]
+{% if flag?(:preview_dll)%}
 @[Link("vertdll")]
+{% end %}
 {% end %}
 lib LibWin32
   ENCLAVE_RUNTIME_POLICY_ALLOW_FULL_DEBUG = 1_u32
