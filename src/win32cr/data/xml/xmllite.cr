@@ -14,10 +14,6 @@ require "../../foundation.cr"
 @[Link("xmllite")]
 {% end %}
 lib LibWin32
-  IID_IXmlReader = "7279fc81-709d-4095-b63d-69fe4b0d9030"
-  IID_IXmlWriter = "7279fc88-709d-4095-b63d-69fe4b0d9030"
-  IID_IXmlResolver = "7279fc82-709d-4095-b63d-69fe4b0d9030"
-
 
   enum XmlNodeType : Int32
     XmlNodeType_None = 0
