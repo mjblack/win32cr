@@ -198,7 +198,7 @@ lib LibWin32
   fun ExpandEnvironmentStringsA(lpsrc : PSTR, lpdst : UInt8*, nsize : UInt32) : UInt32
 
   # Params # lpsrc : LibC::LPWSTR [In],lpdst : Char* [In],nsize : UInt32 [In]
-  fun ExpandEnvironmentStringsW(lpsrc : LibC::LPWSTR, lpdst : Char*, nsize : UInt32) : UInt32
+  fun ExpandEnvironmentStringsW(lpsrc : LibC::LPWSTR, lpdst : UInt16*, nsize : UInt32) : UInt32
 
   # Params # lppathname : PSTR [In]
   fun SetCurrentDirectoryA(lppathname : PSTR) : LibC::BOOL
@@ -230,7 +230,7 @@ lib LibWin32
   fun ExpandEnvironmentStringsForUserA(htoken : LibC::HANDLE, lpsrc : PSTR, lpdest : UInt8*, dwsize : UInt32) : LibC::BOOL
 
   # Params # htoken : LibC::HANDLE [In],lpsrc : LibC::LPWSTR [In],lpdest : Char* [In],dwsize : UInt32 [In]
-  fun ExpandEnvironmentStringsForUserW(htoken : LibC::HANDLE, lpsrc : LibC::LPWSTR, lpdest : Char*, dwsize : UInt32) : LibC::BOOL
+  fun ExpandEnvironmentStringsForUserW(htoken : LibC::HANDLE, lpsrc : LibC::LPWSTR, lpdest : UInt16*, dwsize : UInt32) : LibC::BOOL
 
   # Params # flenclavetype : UInt32 [In]
   fun IsEnclaveTypeSupported(flenclavetype : UInt32) : LibC::BOOL
