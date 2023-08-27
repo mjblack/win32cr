@@ -41,20 +41,10 @@ module Win32::System
         dwSize.should be > 0
       end
 
-      data = pValue.as(Pointer(UInt8))
-                   .to_slice(dwSize)
-                   .to_a
-                   .map { |x| x unless x == 0 }
-                   .compact
+      str = String.from_utf16(pValue.as(Pointer(UInt16))).first
 
       it "reg value data should be the same size as bios_name" do
-        data.size.should eq(bios_name.size)
-      end
-
-      str = String.build(bios_name.size) do |sb|
-        data.each do |c|
-          sb << c.chr
-        end
+        str.size.should eq(bios_name.size)
       end
 
       it "Reg value should be the same as bios name" do
