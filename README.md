@@ -1,6 +1,6 @@
 # win32cr
 
-![CI](https://github.com/mjblack/win32cr/actions/workflows/crystal.yml/badge.svg) [![Crystal Latest CI](https://github.com/mjblack/win32cr/actions/workflows/crystal_latest.yml/badge.svg)](https://github.com/mjblack/win32cr/actions/workflows/crystal_latest.yml)
+[![CI](https://github.com/mjblack/win32cr/actions/workflows/crystal.yml/badge.svg)](https://github.com/mjblack/win32cr/actions/workflows/crystal.yml) [![Crystal Latest CI](https://github.com/mjblack/win32cr/actions/workflows/crystal_latest.yml/badge.svg)](https://github.com/mjblack/win32cr/actions/workflows/crystal_latest.yml)
 
 Win32 library bindings created from Windows Metadata.
 
