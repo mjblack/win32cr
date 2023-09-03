@@ -585,7 +585,7 @@ lib LibWin32
     get_type_info : Proc(IAppEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IAppEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IAppEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_quit : Proc(IAppEvents*, Application, HRESULT)
+    on_quit : Proc(IAppEvents*, IApplication, HRESULT)
     on_document_open : Proc(IAppEvents*, Document, LibC::BOOL, HRESULT)
     on_document_close : Proc(IAppEvents*, Document, HRESULT)
     on_snap_in_added : Proc(IAppEvents*, Document, SnapIn, HRESULT)
@@ -629,7 +629,7 @@ lib LibWin32
     get_type_info : Proc(IEventConnector*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IEventConnector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IEventConnector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect_to : Proc(IEventConnector*, Application, HRESULT)
+    connect_to : Proc(IEventConnector*, IApplication, HRESULT)
     disconnect : Proc(IEventConnector*, HRESULT)
   end
 
@@ -731,7 +731,7 @@ lib LibWin32
     get_root_node : Proc(Document*, Node*, HRESULT)
     get_scope_namespace : Proc(Document*, ScopeNamespace*, HRESULT)
     create_properties : Proc(Document*, Properties*, HRESULT)
-    get_application : Proc(Document*, Application*, HRESULT)
+    get_application : Proc(Document*, IApplication*, HRESULT)
   end
 
   Document_GUID = "225120d6-1e0f-40a3-93fe-1079e6a8017b"
@@ -1066,23 +1066,23 @@ lib LibWin32
     lpVtbl : IComponentDataVTbl*
   end
 
-  struct IComponentVTbl
-    query_interface : Proc(IComponent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IComponent*, UInt32)
-    release : Proc(IComponent*, UInt32)
-    initialize : Proc(IComponent*, IConsole, HRESULT)
-    notify : Proc(IComponent*, IDataObject, MMC_NOTIFY_TYPE, LPARAM, LPARAM, HRESULT)
-    destroy : Proc(IComponent*, LibC::IntPtrT, HRESULT)
-    query_data_object : Proc(IComponent*, LibC::IntPtrT, DATA_OBJECT_TYPES, IDataObject*, HRESULT)
-    get_result_view_type : Proc(IComponent*, LibC::IntPtrT, LibC::LPWSTR*, Int32*, HRESULT)
-    get_display_info : Proc(IComponent*, RESULTDATAITEM*, HRESULT)
-    compare_objects : Proc(IComponent*, IDataObject, IDataObject, HRESULT)
+  struct IComponent1VTbl
+    query_interface : Proc(IComponent1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IComponent1*, UInt32)
+    release : Proc(IComponent1*, UInt32)
+    initialize : Proc(IComponent1*, IConsole, HRESULT)
+    notify : Proc(IComponent1*, IDataObject, MMC_NOTIFY_TYPE, LPARAM, LPARAM, HRESULT)
+    destroy : Proc(IComponent1*, LibC::IntPtrT, HRESULT)
+    query_data_object : Proc(IComponent1*, LibC::IntPtrT, DATA_OBJECT_TYPES, IDataObject*, HRESULT)
+    get_result_view_type : Proc(IComponent1*, LibC::IntPtrT, LibC::LPWSTR*, Int32*, HRESULT)
+    get_display_info : Proc(IComponent1*, RESULTDATAITEM*, HRESULT)
+    compare_objects : Proc(IComponent1*, IDataObject, IDataObject, HRESULT)
   end
 
-  IComponent_GUID = "43136eb2-d36c-11cf-adbc-00aa00a80033"
-  IID_IComponent = LibC::GUID.new(0x43136eb2_u32, 0xd36c_u16, 0x11cf_u16, StaticArray[0xad_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa8_u8, 0x0_u8, 0x33_u8])
-  struct IComponent
-    lpVtbl : IComponentVTbl*
+  IComponent1_GUID = "43136eb2-d36c-11cf-adbc-00aa00a80033"
+  IID_IComponent1 = LibC::GUID.new(0x43136eb2_u32, 0xd36c_u16, 0x11cf_u16, StaticArray[0xad_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa8_u8, 0x0_u8, 0x33_u8])
+  struct IComponent1
+    lpVtbl : IComponent1VTbl*
   end
 
   struct IResultDataCompareVTbl
@@ -1198,18 +1198,18 @@ lib LibWin32
     lpVtbl : IExtendContextMenuVTbl*
   end
 
-  struct IImageListVTbl
-    query_interface : Proc(IImageList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImageList*, UInt32)
-    release : Proc(IImageList*, UInt32)
-    image_list_set_icon : Proc(IImageList*, LibC::IntPtrT*, Int32, HRESULT)
-    image_list_set_strip : Proc(IImageList*, LibC::IntPtrT*, LibC::IntPtrT*, Int32, UInt32, HRESULT)
+  struct IImageList1VTbl
+    query_interface : Proc(IImageList1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IImageList1*, UInt32)
+    release : Proc(IImageList1*, UInt32)
+    image_list_set_icon : Proc(IImageList1*, LibC::IntPtrT*, Int32, HRESULT)
+    image_list_set_strip : Proc(IImageList1*, LibC::IntPtrT*, LibC::IntPtrT*, Int32, UInt32, HRESULT)
   end
 
-  IImageList_GUID = "43136eb8-d36c-11cf-adbc-00aa00a80033"
-  IID_IImageList = LibC::GUID.new(0x43136eb8_u32, 0xd36c_u16, 0x11cf_u16, StaticArray[0xad_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa8_u8, 0x0_u8, 0x33_u8])
-  struct IImageList
-    lpVtbl : IImageListVTbl*
+  IImageList1_GUID = "43136eb8-d36c-11cf-adbc-00aa00a80033"
+  IID_IImageList1 = LibC::GUID.new(0x43136eb8_u32, 0xd36c_u16, 0x11cf_u16, StaticArray[0xad_u8, 0xbc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa8_u8, 0x0_u8, 0x33_u8])
+  struct IImageList1
+    lpVtbl : IImageList1VTbl*
   end
 
   struct IResultDataVTbl
@@ -1486,7 +1486,7 @@ lib LibWin32
     query_interface : Proc(IEnumTASK*, Guid*, Void**, HRESULT)
     add_ref : Proc(IEnumTASK*, UInt32)
     release : Proc(IEnumTASK*, UInt32)
-    next : Proc(IEnumTASK*, UInt32, MMC_TASK*, UInt32*, HRESULT)
+    next_ : Proc(IEnumTASK*, UInt32, MMC_TASK*, UInt32*, HRESULT)
     skip : Proc(IEnumTASK*, UInt32, HRESULT)
     reset : Proc(IEnumTASK*, HRESULT)
     clone : Proc(IEnumTASK*, IEnumTASK*, HRESULT)
@@ -1939,7 +1939,7 @@ struct LibWin32::IAppEvents
   def invoke(this : IAppEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
     @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def on_quit(this : IAppEvents*, application : Application) : HRESULT
+  def on_quit(this : IAppEvents*, application : IApplication) : HRESULT
     @lpVtbl.value.on_quit.call(this, application)
   end
   def on_document_open(this : IAppEvents*, document : Document, new : LibC::BOOL) : HRESULT
@@ -2021,7 +2021,7 @@ struct LibWin32::IEventConnector
   def invoke(this : IEventConnector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
     @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def connect_to(this : IEventConnector*, application : Application) : HRESULT
+  def connect_to(this : IEventConnector*, application : IApplication) : HRESULT
     @lpVtbl.value.connect_to.call(this, application)
   end
   def disconnect(this : IEventConnector*) : HRESULT
@@ -2150,8 +2150,8 @@ struct LibWin32::ScopeNamespace
   def get_child(this : ScopeNamespace*, node : Node, child : Node*) : HRESULT
     @lpVtbl.value.get_child.call(this, node, child)
   end
-  def get_next(this : ScopeNamespace*, node : Node, next : Node*) : HRESULT
-    @lpVtbl.value.get_next.call(this, node, next)
+  def get_next(this : ScopeNamespace*, node : Node, _next : Node*) : HRESULT
+    @lpVtbl.value.get_next.call(this, node, _next)
   end
   def get_root(this : ScopeNamespace*, root : Node*) : HRESULT
     @lpVtbl.value.get_root.call(this, root)
@@ -2227,7 +2227,7 @@ struct LibWin32::Document
   def create_properties(this : Document*, properties : Properties*) : HRESULT
     @lpVtbl.value.create_properties.call(this, properties)
   end
-  def get_application(this : Document*, application : Application*) : HRESULT
+  def get_application(this : Document*, application : IApplication*) : HRESULT
     @lpVtbl.value.get_application.call(this, application)
   end
 end
@@ -3492,8 +3492,8 @@ struct LibWin32::IEnumTASK
   def release(this : IEnumTASK*) : UInt32
     @lpVtbl.value.release.call(this)
   end
-  def next(this : IEnumTASK*, celt : UInt32, rgelt : MMC_TASK*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
+  def next_(this : IEnumTASK*, celt : UInt32, rgelt : MMC_TASK*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next_.call(this, celt, rgelt, pceltfetched)
   end
   def skip(this : IEnumTASK*, celt : UInt32) : HRESULT
     @lpVtbl.value.skip.call(this, celt)

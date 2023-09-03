@@ -2933,8 +2933,8 @@ struct LibWin32::IFolderActionCollection
   def get_item(this : IFolderActionCollection*, index : VARIANT, action : IFolderAction*) : HRESULT
     @lpVtbl.value.get_item.call(this, index, action)
   end
-  def get__new_enum(this : IFolderActionCollection*, enum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enum)
+  def get__new_enum(this : IFolderActionCollection*, _enum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.call(this, _enum)
   end
   def add(this : IFolderActionCollection*, action : IFolderAction) : HRESULT
     @lpVtbl.value.add.call(this, action)

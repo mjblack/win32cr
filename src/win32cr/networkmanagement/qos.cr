@@ -742,7 +742,7 @@ lib LibWin32
     tb_tspec_b : Float32
     tb_tspec_p : Float32
     tb_tspec_m : UInt32
-    tb_tspec_m : UInt32
+    tb_tspec_M : UInt32
   end
   struct GenTspec
     gen_tspec_serv_hdr : IntServServiceHdr

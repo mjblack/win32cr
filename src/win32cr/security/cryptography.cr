@@ -4767,7 +4767,7 @@ lib LibWin32
     internal_token_reference : LibC::LPWSTR
     external_token_reference : LibC::LPWSTR
   end
-  struct POLICY_ELEMENT
+  struct CRYPTO_POLICY_ELEMENT
     target_endpoint_address : LibC::LPWSTR
     issuer_endpoint_address : LibC::LPWSTR
     issued_token_parameters : LibC::LPWSTR
@@ -6116,8 +6116,8 @@ lib LibWin32
   # Params # dwgroupid : UInt32 [In],dwflags : UInt32 [In],pvarg : Void* [In],pfnenumalginfo : PFN_CRYPT_XML_ENUM_ALG_INFO [In]
   fun CryptXmlEnumAlgorithmInfo(dwgroupid : UInt32, dwflags : UInt32, pvarg : Void*, pfnenumalginfo : PFN_CRYPT_XML_ENUM_ALG_INFO) : HRESULT
 
-  # Params # cpolicychain : UInt32 [In],ppolicychain : POLICY_ELEMENT* [In],securitytoken : GENERIC_XML_TOKEN** [In],phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE** [In]
-  fun GetToken(cpolicychain : UInt32, ppolicychain : POLICY_ELEMENT*, securitytoken : GENERIC_XML_TOKEN**, phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE**) : HRESULT
+  # Params # cpolicychain : UInt32 [In],ppolicychain : CRYPTO_POLICY_ELEMENT* [In],securitytoken : GENERIC_XML_TOKEN** [In],phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE** [In]
+  fun GetToken(cpolicychain : UInt32, ppolicychain : CRYPTO_POLICY_ELEMENT*, securitytoken : GENERIC_XML_TOKEN**, phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE**) : HRESULT
 
   # Params # 
   fun ManageCardSpace : HRESULT

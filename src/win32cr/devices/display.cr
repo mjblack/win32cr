@@ -1687,7 +1687,7 @@ lib LibWin32
   struct CIECHROMA
     x : Int32
     y : Int32
-    y : Int32
+    _y : Int32
   end
   struct COLORINFO
     red : CIECHROMA
@@ -2165,7 +2165,7 @@ lib LibWin32
     blue_phosphore_decay : Int32
     white_chromaticity_x : Int32
     white_chromaticity_y : Int32
-    white_chromaticity_y : Int32
+    white_chromaticity_Y : Int32
     red_chromaticity_x : Int32
     red_chromaticity_y : Int32
     green_chromaticity_x : Int32
