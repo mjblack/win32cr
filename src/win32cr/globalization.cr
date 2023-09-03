@@ -5685,14 +5685,14 @@ lib LibWin32
   # Params # perrorcode : UErrorCode* [In]
   fun ucnv_openAllNames(perrorcode : UErrorCode*) : UEnumeration*
 
-  # Params # alias : PSTR [In],perrorcode : UErrorCode* [In]
-  fun ucnv_countAliases(alias : PSTR, perrorcode : UErrorCode*) : UInt16
+  # Params # _alias : PSTR [In],perrorcode : UErrorCode* [In]
+  fun ucnv_countAliases(_alias : PSTR, perrorcode : UErrorCode*) : UInt16
 
-  # Params # alias : PSTR [In],n : UInt16 [In],perrorcode : UErrorCode* [In]
-  fun ucnv_getAlias(alias : PSTR, n : UInt16, perrorcode : UErrorCode*) : PSTR
+  # Params # _alias : PSTR [In],n : UInt16 [In],perrorcode : UErrorCode* [In]
+  fun ucnv_getAlias(_alias : PSTR, n : UInt16, perrorcode : UErrorCode*) : PSTR
 
-  # Params # alias : PSTR [In],aliases : Int8** [In],perrorcode : UErrorCode* [In]
-  fun ucnv_getAliases(alias : PSTR, aliases : Int8**, perrorcode : UErrorCode*) : Void
+  # Params # _alias : PSTR [In],aliases : Int8** [In],perrorcode : UErrorCode* [In]
+  fun ucnv_getAliases(_alias : PSTR, aliases : Int8**, perrorcode : UErrorCode*) : Void
 
   # Params # convname : PSTR [In],standard : PSTR [In],perrorcode : UErrorCode* [In]
   fun ucnv_openStandardNames(convname : PSTR, standard : PSTR, perrorcode : UErrorCode*) : UEnumeration*
@@ -5706,8 +5706,8 @@ lib LibWin32
   # Params # name : PSTR [In],standard : PSTR [In],perrorcode : UErrorCode* [In]
   fun ucnv_getStandardName(name : PSTR, standard : PSTR, perrorcode : UErrorCode*) : PSTR
 
-  # Params # alias : PSTR [In],standard : PSTR [In],perrorcode : UErrorCode* [In]
-  fun ucnv_getCanonicalName(alias : PSTR, standard : PSTR, perrorcode : UErrorCode*) : PSTR
+  # Params # _alias : PSTR [In],standard : PSTR [In],perrorcode : UErrorCode* [In]
+  fun ucnv_getCanonicalName(_alias : PSTR, standard : PSTR, perrorcode : UErrorCode*) : PSTR
 
   # Params # 
   fun ucnv_getDefaultName : PSTR
@@ -5898,14 +5898,14 @@ lib LibWin32
   # Params # property : UProperty [In],namechoice : UPropertyNameChoice [In]
   fun u_getPropertyName(property : UProperty, namechoice : UPropertyNameChoice) : PSTR
 
-  # Params # alias : PSTR [In]
-  fun u_getPropertyEnum(alias : PSTR) : UProperty
+  # Params # _alias : PSTR [In]
+  fun u_getPropertyEnum(_alias : PSTR) : UProperty
 
   # Params # property : UProperty [In],value : Int32 [In],namechoice : UPropertyNameChoice [In]
   fun u_getPropertyValueName(property : UProperty, value : Int32, namechoice : UPropertyNameChoice) : PSTR
 
-  # Params # property : UProperty [In],alias : PSTR [In]
-  fun u_getPropertyValueEnum(property : UProperty, alias : PSTR) : Int32
+  # Params # property : UProperty [In],_alias : PSTR [In]
+  fun u_getPropertyValueEnum(property : UProperty, _alias : PSTR) : Int32
 
   # Params # c : Int32 [In]
   fun u_isIDStart(c : Int32) : Int8

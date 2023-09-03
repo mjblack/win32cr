@@ -1813,7 +1813,7 @@ lib LibWin32
     msp_tone_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct
   end
   union NSID_address_e__Union
-    alias : ADDR_ALIAS
+    _alias : ADDR_ALIAS
     rgch_inter_net : CHAR[0]*
   end
 
