@@ -1210,7 +1210,7 @@ lib LibWin32
     pp_vm_entries : VM_NOTIFY_ENTRY**
   end
   struct Pluginresource
-    alias : Char[256]*
+    _alias : Char[256]*
     name : Char[256]*
     resource_file_contents : LibC::LPWSTR
     file_extension : Char[256]*
@@ -5192,8 +5192,8 @@ struct LibWin32::ItsPubPlugin
   def get_resource_list(this : ItsPubPlugin*, userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource**) : HRESULT
     @lpVtbl.value.get_resource_list.call(this, userid, pceapplistsize, resourcelist)
   end
-  def get_resource(this : ItsPubPlugin*, alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
-    @lpVtbl.value.get_resource.call(this, alias, flags, resource)
+  def get_resource(this : ItsPubPlugin*, _alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
+    @lpVtbl.value.get_resource.call(this, _alias, flags, resource)
   end
   def get_cache_last_update_time(this : ItsPubPlugin*, lastupdatetime : UInt64*) : HRESULT
     @lpVtbl.value.get_cache_last_update_time.call(this, lastupdatetime)
@@ -5204,8 +5204,8 @@ struct LibWin32::ItsPubPlugin
   def get_plugin_version(this : ItsPubPlugin*, pval : UInt8**) : HRESULT
     @lpVtbl.value.get_plugin_version.call(this, pval)
   end
-  def resolve_resource(this : ItsPubPlugin*, resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, alias : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.resolve_resource.call(this, resourcetype, resourcelocation, endpointname, userid, alias)
+  def resolve_resource(this : ItsPubPlugin*, resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, _alias : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resolve_resource.call(this, resourcetype, resourcelocation, endpointname, userid, _alias)
   end
 end
 struct LibWin32::ItsPubPlugin2
@@ -5221,8 +5221,8 @@ struct LibWin32::ItsPubPlugin2
   def get_resource_list(this : ItsPubPlugin2*, userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource**) : HRESULT
     @lpVtbl.value.get_resource_list.call(this, userid, pceapplistsize, resourcelist)
   end
-  def get_resource(this : ItsPubPlugin2*, alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
-    @lpVtbl.value.get_resource.call(this, alias, flags, resource)
+  def get_resource(this : ItsPubPlugin2*, _alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
+    @lpVtbl.value.get_resource.call(this, _alias, flags, resource)
   end
   def get_cache_last_update_time(this : ItsPubPlugin2*, lastupdatetime : UInt64*) : HRESULT
     @lpVtbl.value.get_cache_last_update_time.call(this, lastupdatetime)
@@ -5233,14 +5233,14 @@ struct LibWin32::ItsPubPlugin2
   def get_plugin_version(this : ItsPubPlugin2*, pval : UInt8**) : HRESULT
     @lpVtbl.value.get_plugin_version.call(this, pval)
   end
-  def resolve_resource(this : ItsPubPlugin2*, resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, alias : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.resolve_resource.call(this, resourcetype, resourcelocation, endpointname, userid, alias)
+  def resolve_resource(this : ItsPubPlugin2*, resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, _alias : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resolve_resource.call(this, resourcetype, resourcelocation, endpointname, userid, _alias)
   end
   def get_resource2_list(this : ItsPubPlugin2*, userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource2**) : HRESULT
     @lpVtbl.value.get_resource2_list.call(this, userid, pceapplistsize, resourcelist)
   end
-  def get_resource2(this : ItsPubPlugin2*, alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource2*) : HRESULT
-    @lpVtbl.value.get_resource2.call(this, alias, flags, resource)
+  def get_resource2(this : ItsPubPlugin2*, _alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource2*) : HRESULT
+    @lpVtbl.value.get_resource2.call(this, _alias, flags, resource)
   end
   def resolve_personal_desktop(this : ItsPubPlugin2*, userid : LibC::LPWSTR, poolid : LibC::LPWSTR, epdresolutiontype : TSPUB_PLUGIN_PD_RESOLUTION_TYPE, ppdassignmenttype : TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE*, endpointname : LibC::LPWSTR) : HRESULT
     @lpVtbl.value.resolve_personal_desktop.call(this, userid, poolid, epdresolutiontype, ppdassignmenttype, endpointname)

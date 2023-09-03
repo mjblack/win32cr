@@ -1056,7 +1056,7 @@ lib LibWin32
     interface_luid : NET_LUID_LH
     interface_index : UInt32
     interface_guid : Guid
-    alias : Char[257]*
+    _alias : Char[257]*
     description : Char[257]*
     physical_address_length : UInt32
     physical_address : UInt8[32]*
