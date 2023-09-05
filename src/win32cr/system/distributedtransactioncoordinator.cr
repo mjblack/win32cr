@@ -824,20 +824,20 @@ lib LibWin32
     lpVtbl : IResourceManagerSinkVTbl*
   end
 
-  struct IResourceManagerVTbl
-    query_interface : Proc(IResourceManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IResourceManager*, UInt32)
-    release : Proc(IResourceManager*, UInt32)
-    enlist : Proc(IResourceManager*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)
-    reenlist : Proc(IResourceManager*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
-    reenlistment_complete : Proc(IResourceManager*, HRESULT)
-    get_distributed_transaction_manager : Proc(IResourceManager*, Guid*, Void**, HRESULT)
+  struct IResourceManager1VTbl
+    query_interface : Proc(IResourceManager1*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IResourceManager1*, UInt32)
+    release : Proc(IResourceManager1*, UInt32)
+    enlist : Proc(IResourceManager1*, ITransaction, ITransactionResourceAsync, BOID*, Int32*, ITransactionEnlistmentAsync*, HRESULT)
+    reenlist : Proc(IResourceManager1*, UInt8*, UInt32, UInt32, XACTSTAT*, HRESULT)
+    reenlistment_complete : Proc(IResourceManager1*, HRESULT)
+    get_distributed_transaction_manager : Proc(IResourceManager1*, Guid*, Void**, HRESULT)
   end
 
-  IResourceManager_GUID = "13741d21-87eb-11ce-8081-0080c758527e"
-  IID_IResourceManager = LibC::GUID.new(0x13741d21_u32, 0x87eb_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
-  struct IResourceManager
-    lpVtbl : IResourceManagerVTbl*
+  IResourceManager1_GUID = "13741d21-87eb-11ce-8081-0080c758527e"
+  IID_IResourceManager1 = LibC::GUID.new(0x13741d21_u32, 0x87eb_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
+  struct IResourceManager1
+    lpVtbl : IResourceManager1VTbl*
   end
 
   struct ILastResourceManagerVTbl
@@ -936,7 +936,7 @@ lib LibWin32
     query_interface : Proc(IResourceManagerFactory*, Guid*, Void**, HRESULT)
     add_ref : Proc(IResourceManagerFactory*, UInt32)
     release : Proc(IResourceManagerFactory*, UInt32)
-    create : Proc(IResourceManagerFactory*, Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)
+    create : Proc(IResourceManagerFactory*, Guid*, PSTR, IResourceManagerSink, IResourceManager1*, HRESULT)
   end
 
   IResourceManagerFactory_GUID = "13741d20-87eb-11ce-8081-0080c758527e"
@@ -949,7 +949,7 @@ lib LibWin32
     query_interface : Proc(IResourceManagerFactory2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IResourceManagerFactory2*, UInt32)
     release : Proc(IResourceManagerFactory2*, UInt32)
-    create : Proc(IResourceManagerFactory2*, Guid*, PSTR, IResourceManagerSink, IResourceManager*, HRESULT)
+    create : Proc(IResourceManagerFactory2*, Guid*, PSTR, IResourceManagerSink, IResourceManager1*, HRESULT)
     create_ex : Proc(IResourceManagerFactory2*, Guid*, PSTR, IResourceManagerSink, Guid*, Void**, HRESULT)
   end
 
@@ -2067,7 +2067,7 @@ struct LibWin32::IResourceManagerSink
     @lpVtbl.value.tm_down.call(this)
   end
 end
-struct LibWin32::IResourceManager
+struct LibWin32::IResourceManager1
   def query_interface(this : IResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
     @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end

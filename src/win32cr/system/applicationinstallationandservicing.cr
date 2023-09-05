@@ -3497,8 +3497,8 @@ struct LibWin32::IMsmStrings
   def invoke(this : IMsmStrings*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
     @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(this : IMsmStrings*, item : Int32, return : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.call(this, item, return)
+  def get_item(this : IMsmStrings*, item : Int32, _return : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, _return)
   end
   def get_count(this : IMsmStrings*, count : Int32*) : HRESULT
     @lpVtbl.value.get_count.call(this, count)
@@ -3596,8 +3596,8 @@ struct LibWin32::IMsmErrors
   def invoke(this : IMsmErrors*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
     @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(this : IMsmErrors*, item : Int32, return : IMsmError*) : HRESULT
-    @lpVtbl.value.get_item.call(this, item, return)
+  def get_item(this : IMsmErrors*, item : Int32, _return : IMsmError*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, _return)
   end
   def get_count(this : IMsmErrors*, count : Int32*) : HRESULT
     @lpVtbl.value.get_count.call(this, count)
@@ -3683,8 +3683,8 @@ struct LibWin32::IMsmDependencies
   def invoke(this : IMsmDependencies*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
     @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
-  def get_item(this : IMsmDependencies*, item : Int32, return : IMsmDependency*) : HRESULT
-    @lpVtbl.value.get_item.call(this, item, return)
+  def get_item(this : IMsmDependencies*, item : Int32, _return : IMsmDependency*) : HRESULT
+    @lpVtbl.value.get_item.call(this, item, _return)
   end
   def get_count(this : IMsmDependencies*, count : Int32*) : HRESULT
     @lpVtbl.value.get_count.call(this, count)

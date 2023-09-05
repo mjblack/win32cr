@@ -443,87 +443,87 @@ lib LibWin32
   end
   union DNS_RECORDW_Data_e__Union
     a : DNS_A_DATA
+    _soa : DNS_SOA_DATAW
     soa : DNS_SOA_DATAW
-    soa : DNS_SOA_DATAW
+    _ptr : DNS_PTR_DATAW
     ptr : DNS_PTR_DATAW
-    ptr : DNS_PTR_DATAW
+    _ns : DNS_PTR_DATAW
     ns : DNS_PTR_DATAW
-    ns : DNS_PTR_DATAW
+    _cname : DNS_PTR_DATAW
     cname : DNS_PTR_DATAW
-    cname : DNS_PTR_DATAW
+    _dname : DNS_PTR_DATAW
     dname : DNS_PTR_DATAW
-    dname : DNS_PTR_DATAW
+    _mb : DNS_PTR_DATAW
     mb : DNS_PTR_DATAW
-    mb : DNS_PTR_DATAW
+    _md : DNS_PTR_DATAW
     md : DNS_PTR_DATAW
-    md : DNS_PTR_DATAW
+    _mf : DNS_PTR_DATAW
     mf : DNS_PTR_DATAW
-    mf : DNS_PTR_DATAW
+    _mg : DNS_PTR_DATAW
     mg : DNS_PTR_DATAW
-    mg : DNS_PTR_DATAW
+    _mr : DNS_PTR_DATAW
     mr : DNS_PTR_DATAW
-    mr : DNS_PTR_DATAW
+    _minfo : DNS_MINFO_DATAW
     minfo : DNS_MINFO_DATAW
-    minfo : DNS_MINFO_DATAW
+    _rp : DNS_MINFO_DATAW
     rp : DNS_MINFO_DATAW
-    rp : DNS_MINFO_DATAW
+    _mx : DNS_MX_DATAW
     mx : DNS_MX_DATAW
-    mx : DNS_MX_DATAW
+    _afsdb : DNS_MX_DATAW
     afsdb : DNS_MX_DATAW
-    afsdb : DNS_MX_DATAW
+    _rt : DNS_MX_DATAW
     rt : DNS_MX_DATAW
-    rt : DNS_MX_DATAW
+    _hinfo : DNS_TXT_DATAW
     hinfo : DNS_TXT_DATAW
-    hinfo : DNS_TXT_DATAW
+    _isdn : DNS_TXT_DATAW
     isdn : DNS_TXT_DATAW
-    isdn : DNS_TXT_DATAW
-    txt : DNS_TXT_DATAW
+    _txt : DNS_TXT_DATAW
     txt : DNS_TXT_DATAW
     x25 : DNS_TXT_DATAW
     null : DNS_NULL_DATA
-    wks : DNS_WKS_DATA
+    _wks : DNS_WKS_DATA
     wks : DNS_WKS_DATA
     aaaa : DNS_AAAA_DATA
+    _key : DNS_KEY_DATA
     key : DNS_KEY_DATA
-    key : DNS_KEY_DATA
+    _sig : DNS_SIG_DATAW
     sig : DNS_SIG_DATAW
-    sig : DNS_SIG_DATAW
+    _atma : DNS_ATMA_DATA
     atma : DNS_ATMA_DATA
-    atma : DNS_ATMA_DATA
+    _nxt : DNS_NXT_DATAW
     nxt : DNS_NXT_DATAW
-    nxt : DNS_NXT_DATAW
+    _srv : DNS_SRV_DATAW
     srv : DNS_SRV_DATAW
-    srv : DNS_SRV_DATAW
+    _naptr : DNS_NAPTR_DATAW
     naptr : DNS_NAPTR_DATAW
-    naptr : DNS_NAPTR_DATAW
+    _opt : DNS_OPT_DATA
     opt : DNS_OPT_DATA
-    opt : DNS_OPT_DATA
+    _ds : DNS_DS_DATA
     ds : DNS_DS_DATA
-    ds : DNS_DS_DATA
+    _rrsig : DNS_SIG_DATAW
     rrsig : DNS_SIG_DATAW
-    rrsig : DNS_SIG_DATAW
+    _nsec : DNS_NSEC_DATAW
     nsec : DNS_NSEC_DATAW
-    nsec : DNS_NSEC_DATAW
+    _dnskey : DNS_KEY_DATA
     dnskey : DNS_KEY_DATA
-    dnskey : DNS_KEY_DATA
+    _tkey : DNS_TKEY_DATAW
     tkey : DNS_TKEY_DATAW
-    tkey : DNS_TKEY_DATAW
+    _tsig : DNS_TSIG_DATAW
     tsig : DNS_TSIG_DATAW
-    tsig : DNS_TSIG_DATAW
-    wins : DNS_WINS_DATA
+    _wins : DNS_WINS_DATA
     wins : DNS_WINS_DATA
     winsr : DNS_WINSR_DATAW
     wins_r : DNS_WINSR_DATAW
-    nbstat : DNS_WINSR_DATAW
+    _nbstat : DNS_WINSR_DATAW
     nbstat : DNS_WINSR_DATAW
     dhcid : DNS_DHCID_DATA
+    _nsec3 : DNS_NSEC3_DATA
     nsec3 : DNS_NSEC3_DATA
-    nsec3 : DNS_NSEC3_DATA
+    _nsec3_param : DNS_NSEC3PARAM_DATA
     nsec3_param : DNS_NSEC3PARAM_DATA
-    nsec3_param : DNS_NSEC3PARAM_DATA
+    _tlsa : DNS_TLSA_DATA
     tlsa : DNS_TLSA_DATA
-    tlsa : DNS_TLSA_DATA
-    unknown : DNS_UNKNOWN_DATA
+    _unknown : DNS_UNKNOWN_DATA
     unknown : DNS_UNKNOWN_DATA
     p_data_ptr : UInt8*
   end
@@ -532,7 +532,7 @@ lib LibWin32
     s : DNS_RECORD_FLAGS
   end
   union DnsRecordOptW_Data_e__Union
-    opt : DNS_OPT_DATA
+    _opt : DNS_OPT_DATA
     opt : DNS_OPT_DATA
   end
   union DNS_RECORDA_Flags_e__Union
@@ -541,87 +541,87 @@ lib LibWin32
   end
   union DNS_RECORDA_Data_e__Union
     a : DNS_A_DATA
+    _soa : DNS_SOA_DATAA
     soa : DNS_SOA_DATAA
-    soa : DNS_SOA_DATAA
+    _ptr : DNS_PTR_DATAA
     ptr : DNS_PTR_DATAA
-    ptr : DNS_PTR_DATAA
+    _ns : DNS_PTR_DATAA
     ns : DNS_PTR_DATAA
-    ns : DNS_PTR_DATAA
+    _cname : DNS_PTR_DATAA
     cname : DNS_PTR_DATAA
-    cname : DNS_PTR_DATAA
+    _dname : DNS_PTR_DATAA
     dname : DNS_PTR_DATAA
-    dname : DNS_PTR_DATAA
+    _mb : DNS_PTR_DATAA
     mb : DNS_PTR_DATAA
-    mb : DNS_PTR_DATAA
+    _md : DNS_PTR_DATAA
     md : DNS_PTR_DATAA
-    md : DNS_PTR_DATAA
+    _mf : DNS_PTR_DATAA
     mf : DNS_PTR_DATAA
-    mf : DNS_PTR_DATAA
+    _mg : DNS_PTR_DATAA
     mg : DNS_PTR_DATAA
-    mg : DNS_PTR_DATAA
+    _mr : DNS_PTR_DATAA
     mr : DNS_PTR_DATAA
-    mr : DNS_PTR_DATAA
+    _minfo : DNS_MINFO_DATAA
     minfo : DNS_MINFO_DATAA
-    minfo : DNS_MINFO_DATAA
+    _rp : DNS_MINFO_DATAA
     rp : DNS_MINFO_DATAA
-    rp : DNS_MINFO_DATAA
+    _mx : DNS_MX_DATAA
     mx : DNS_MX_DATAA
-    mx : DNS_MX_DATAA
+    _afsdb : DNS_MX_DATAA
     afsdb : DNS_MX_DATAA
-    afsdb : DNS_MX_DATAA
+    _rt : DNS_MX_DATAA
     rt : DNS_MX_DATAA
-    rt : DNS_MX_DATAA
+    _hinfo : DNS_TXT_DATAA
     hinfo : DNS_TXT_DATAA
-    hinfo : DNS_TXT_DATAA
+    _isdn : DNS_TXT_DATAA
     isdn : DNS_TXT_DATAA
-    isdn : DNS_TXT_DATAA
-    txt : DNS_TXT_DATAA
+    _txt : DNS_TXT_DATAA
     txt : DNS_TXT_DATAA
     x25 : DNS_TXT_DATAA
     null : DNS_NULL_DATA
-    wks : DNS_WKS_DATA
+    _wks : DNS_WKS_DATA
     wks : DNS_WKS_DATA
     aaaa : DNS_AAAA_DATA
+    _key : DNS_KEY_DATA
     key : DNS_KEY_DATA
-    key : DNS_KEY_DATA
+    _sig : DNS_SIG_DATAA
     sig : DNS_SIG_DATAA
-    sig : DNS_SIG_DATAA
+    _atma : DNS_ATMA_DATA
     atma : DNS_ATMA_DATA
-    atma : DNS_ATMA_DATA
+    _nxt : DNS_NXT_DATAA
     nxt : DNS_NXT_DATAA
-    nxt : DNS_NXT_DATAA
+    _srv : DNS_SRV_DATAA
     srv : DNS_SRV_DATAA
-    srv : DNS_SRV_DATAA
+    _naptr : DNS_NAPTR_DATAA
     naptr : DNS_NAPTR_DATAA
-    naptr : DNS_NAPTR_DATAA
+    _opt : DNS_OPT_DATA
     opt : DNS_OPT_DATA
-    opt : DNS_OPT_DATA
+    _ds : DNS_DS_DATA
     ds : DNS_DS_DATA
-    ds : DNS_DS_DATA
+    _rrsig : DNS_SIG_DATAA
     rrsig : DNS_SIG_DATAA
-    rrsig : DNS_SIG_DATAA
+    _nsec : DNS_NSEC_DATAA
     nsec : DNS_NSEC_DATAA
-    nsec : DNS_NSEC_DATAA
+    _dnskey : DNS_KEY_DATA
     dnskey : DNS_KEY_DATA
-    dnskey : DNS_KEY_DATA
+    _tkey : DNS_TKEY_DATAA
     tkey : DNS_TKEY_DATAA
-    tkey : DNS_TKEY_DATAA
+    _tsig : DNS_TSIG_DATAA
     tsig : DNS_TSIG_DATAA
-    tsig : DNS_TSIG_DATAA
-    wins : DNS_WINS_DATA
+    _wins : DNS_WINS_DATA
     wins : DNS_WINS_DATA
     winsr : DNS_WINSR_DATAA
     wins_r : DNS_WINSR_DATAA
-    nbstat : DNS_WINSR_DATAA
+    _nbstat : DNS_WINSR_DATAA
     nbstat : DNS_WINSR_DATAA
     dhcid : DNS_DHCID_DATA
+    _nsec3 : DNS_NSEC3_DATA
     nsec3 : DNS_NSEC3_DATA
-    nsec3 : DNS_NSEC3_DATA
+    _nsec3_param : DNS_NSEC3PARAM_DATA
     nsec3_param : DNS_NSEC3PARAM_DATA
-    nsec3_param : DNS_NSEC3PARAM_DATA
+    _tlsa : DNS_TLSA_DATA
     tlsa : DNS_TLSA_DATA
-    tlsa : DNS_TLSA_DATA
-    unknown : DNS_UNKNOWN_DATA
+    _unknown : DNS_UNKNOWN_DATA
     unknown : DNS_UNKNOWN_DATA
     p_data_ptr : UInt8*
   end
@@ -630,7 +630,7 @@ lib LibWin32
     s : DNS_RECORD_FLAGS
   end
   union DnsRecordOptA_Data_e__Union
-    opt : DNS_OPT_DATA
+    _opt : DNS_OPT_DATA
     opt : DNS_OPT_DATA
   end
   union DNS_CUSTOM_SERVER_Anonymous1_e__Union

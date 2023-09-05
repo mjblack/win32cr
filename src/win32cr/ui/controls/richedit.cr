@@ -3687,8 +3687,8 @@ struct LibWin32::ITextRange
   def get_index(this : ITextRange*, unit : Int32, pindex : Int32*) : HRESULT
     @lpVtbl.value.get_index.call(this, unit, pindex)
   end
-  def set_index(this : ITextRange*, unit : Int32, index : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  def set_index(this : ITextRange*, unit : Int32, index : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, _extend)
   end
   def set_range(this : ITextRange*, cpanchor : Int32, cpactive : Int32) : HRESULT
     @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
@@ -3705,11 +3705,11 @@ struct LibWin32::ITextRange
   def select(this : ITextRange*) : HRESULT
     @lpVtbl.value.select.call(this)
   end
-  def start_of(this : ITextRange*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  def start_of(this : ITextRange*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, _extend, pdelta)
   end
-  def end_of(this : ITextRange*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  def end_of(this : ITextRange*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, _extend, pdelta)
   end
   def move(this : ITextRange*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
     @lpVtbl.value.move.call(this, unit, count, pdelta)
@@ -3771,8 +3771,8 @@ struct LibWin32::ITextRange
   def get_point(this : ITextRange*, type : Int32, px : Int32*, py : Int32*) : HRESULT
     @lpVtbl.value.get_point.call(this, type, px, py)
   end
-  def set_point(this : ITextRange*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  def set_point(this : ITextRange*, x : Int32, y : Int32, type : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, _extend)
   end
   def scroll_into_view(this : ITextRange*, value : Int32) : HRESULT
     @lpVtbl.value.scroll_into_view.call(this, value)
@@ -3863,8 +3863,8 @@ struct LibWin32::ITextSelection
   def get_index(this : ITextSelection*, unit : Int32, pindex : Int32*) : HRESULT
     @lpVtbl.value.get_index.call(this, unit, pindex)
   end
-  def set_index(this : ITextSelection*, unit : Int32, index : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  def set_index(this : ITextSelection*, unit : Int32, index : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, _extend)
   end
   def set_range(this : ITextSelection*, cpanchor : Int32, cpactive : Int32) : HRESULT
     @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
@@ -3881,11 +3881,11 @@ struct LibWin32::ITextSelection
   def select(this : ITextSelection*) : HRESULT
     @lpVtbl.value.select.call(this)
   end
-  def start_of(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  def start_of(this : ITextSelection*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, _extend, pdelta)
   end
-  def end_of(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  def end_of(this : ITextSelection*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, _extend, pdelta)
   end
   def move(this : ITextSelection*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
     @lpVtbl.value.move.call(this, unit, count, pdelta)
@@ -3947,8 +3947,8 @@ struct LibWin32::ITextSelection
   def get_point(this : ITextSelection*, type : Int32, px : Int32*, py : Int32*) : HRESULT
     @lpVtbl.value.get_point.call(this, type, px, py)
   end
-  def set_point(this : ITextSelection*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  def set_point(this : ITextSelection*, x : Int32, y : Int32, type : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, _extend)
   end
   def scroll_into_view(this : ITextSelection*, value : Int32) : HRESULT
     @lpVtbl.value.scroll_into_view.call(this, value)
@@ -3965,23 +3965,23 @@ struct LibWin32::ITextSelection
   def get_type(this : ITextSelection*, ptype : Int32*) : HRESULT
     @lpVtbl.value.get_type.call(this, ptype)
   end
-  def move_left(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  def move_left(this : ITextSelection*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, _extend, pdelta)
   end
-  def move_right(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  def move_right(this : ITextSelection*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, _extend, pdelta)
   end
-  def move_up(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  def move_up(this : ITextSelection*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, _extend, pdelta)
   end
-  def move_down(this : ITextSelection*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  def move_down(this : ITextSelection*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, _extend, pdelta)
   end
-  def home_key(this : ITextSelection*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  def home_key(this : ITextSelection*, unit : Tomconstants, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, _extend, pdelta)
   end
-  def end_key(this : ITextSelection*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  def end_key(this : ITextSelection*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, _extend, pdelta)
   end
   def type_text(this : ITextSelection*, bstr : UInt8*) : HRESULT
     @lpVtbl.value.type_text.call(this, bstr)
@@ -4668,8 +4668,8 @@ struct LibWin32::ITextRange2
   def get_index(this : ITextRange2*, unit : Int32, pindex : Int32*) : HRESULT
     @lpVtbl.value.get_index.call(this, unit, pindex)
   end
-  def set_index(this : ITextRange2*, unit : Int32, index : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  def set_index(this : ITextRange2*, unit : Int32, index : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, _extend)
   end
   def set_range(this : ITextRange2*, cpanchor : Int32, cpactive : Int32) : HRESULT
     @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
@@ -4686,11 +4686,11 @@ struct LibWin32::ITextRange2
   def select(this : ITextRange2*) : HRESULT
     @lpVtbl.value.select.call(this)
   end
-  def start_of(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  def start_of(this : ITextRange2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, _extend, pdelta)
   end
-  def end_of(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  def end_of(this : ITextRange2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, _extend, pdelta)
   end
   def move(this : ITextRange2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
     @lpVtbl.value.move.call(this, unit, count, pdelta)
@@ -4752,8 +4752,8 @@ struct LibWin32::ITextRange2
   def get_point(this : ITextRange2*, type : Int32, px : Int32*, py : Int32*) : HRESULT
     @lpVtbl.value.get_point.call(this, type, px, py)
   end
-  def set_point(this : ITextRange2*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  def set_point(this : ITextRange2*, x : Int32, y : Int32, type : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, _extend)
   end
   def scroll_into_view(this : ITextRange2*, value : Int32) : HRESULT
     @lpVtbl.value.scroll_into_view.call(this, value)
@@ -4770,23 +4770,23 @@ struct LibWin32::ITextRange2
   def get_type(this : ITextRange2*, ptype : Int32*) : HRESULT
     @lpVtbl.value.get_type.call(this, ptype)
   end
-  def move_left(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  def move_left(this : ITextRange2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, _extend, pdelta)
   end
-  def move_right(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  def move_right(this : ITextRange2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, _extend, pdelta)
   end
-  def move_up(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  def move_up(this : ITextRange2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, _extend, pdelta)
   end
-  def move_down(this : ITextRange2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  def move_down(this : ITextRange2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, _extend, pdelta)
   end
-  def home_key(this : ITextRange2*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  def home_key(this : ITextRange2*, unit : Tomconstants, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, _extend, pdelta)
   end
-  def end_key(this : ITextRange2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  def end_key(this : ITextRange2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, _extend, pdelta)
   end
   def type_text(this : ITextRange2*, bstr : UInt8*) : HRESULT
     @lpVtbl.value.type_text.call(this, bstr)
@@ -4994,8 +4994,8 @@ struct LibWin32::ITextSelection2
   def get_index(this : ITextSelection2*, unit : Int32, pindex : Int32*) : HRESULT
     @lpVtbl.value.get_index.call(this, unit, pindex)
   end
-  def set_index(this : ITextSelection2*, unit : Int32, index : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_index.call(this, unit, index, extend)
+  def set_index(this : ITextSelection2*, unit : Int32, index : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_index.call(this, unit, index, _extend)
   end
   def set_range(this : ITextSelection2*, cpanchor : Int32, cpactive : Int32) : HRESULT
     @lpVtbl.value.set_range.call(this, cpanchor, cpactive)
@@ -5012,11 +5012,11 @@ struct LibWin32::ITextSelection2
   def select(this : ITextSelection2*) : HRESULT
     @lpVtbl.value.select.call(this)
   end
-  def start_of(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.start_of.call(this, unit, extend, pdelta)
+  def start_of(this : ITextSelection2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.start_of.call(this, unit, _extend, pdelta)
   end
-  def end_of(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_of.call(this, unit, extend, pdelta)
+  def end_of(this : ITextSelection2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_of.call(this, unit, _extend, pdelta)
   end
   def move(this : ITextSelection2*, unit : Int32, count : Int32, pdelta : Int32*) : HRESULT
     @lpVtbl.value.move.call(this, unit, count, pdelta)
@@ -5078,8 +5078,8 @@ struct LibWin32::ITextSelection2
   def get_point(this : ITextSelection2*, type : Int32, px : Int32*, py : Int32*) : HRESULT
     @lpVtbl.value.get_point.call(this, type, px, py)
   end
-  def set_point(this : ITextSelection2*, x : Int32, y : Int32, type : Int32, extend : Int32) : HRESULT
-    @lpVtbl.value.set_point.call(this, x, y, type, extend)
+  def set_point(this : ITextSelection2*, x : Int32, y : Int32, type : Int32, _extend : Int32) : HRESULT
+    @lpVtbl.value.set_point.call(this, x, y, type, _extend)
   end
   def scroll_into_view(this : ITextSelection2*, value : Int32) : HRESULT
     @lpVtbl.value.scroll_into_view.call(this, value)
@@ -5096,23 +5096,23 @@ struct LibWin32::ITextSelection2
   def get_type(this : ITextSelection2*, ptype : Int32*) : HRESULT
     @lpVtbl.value.get_type.call(this, ptype)
   end
-  def move_left(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_left.call(this, unit, count, extend, pdelta)
+  def move_left(this : ITextSelection2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_left.call(this, unit, count, _extend, pdelta)
   end
-  def move_right(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_right.call(this, unit, count, extend, pdelta)
+  def move_right(this : ITextSelection2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_right.call(this, unit, count, _extend, pdelta)
   end
-  def move_up(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_up.call(this, unit, count, extend, pdelta)
+  def move_up(this : ITextSelection2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_up.call(this, unit, count, _extend, pdelta)
   end
-  def move_down(this : ITextSelection2*, unit : Int32, count : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.move_down.call(this, unit, count, extend, pdelta)
+  def move_down(this : ITextSelection2*, unit : Int32, count : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.move_down.call(this, unit, count, _extend, pdelta)
   end
-  def home_key(this : ITextSelection2*, unit : Tomconstants, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.home_key.call(this, unit, extend, pdelta)
+  def home_key(this : ITextSelection2*, unit : Tomconstants, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.home_key.call(this, unit, _extend, pdelta)
   end
-  def end_key(this : ITextSelection2*, unit : Int32, extend : Int32, pdelta : Int32*) : HRESULT
-    @lpVtbl.value.end_key.call(this, unit, extend, pdelta)
+  def end_key(this : ITextSelection2*, unit : Int32, _extend : Int32, pdelta : Int32*) : HRESULT
+    @lpVtbl.value.end_key.call(this, unit, _extend, pdelta)
   end
   def type_text(this : ITextSelection2*, bstr : UInt8*) : HRESULT
     @lpVtbl.value.type_text.call(this, bstr)

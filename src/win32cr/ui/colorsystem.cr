@@ -364,7 +364,7 @@ lib LibWin32
     z : UInt16
   end
   struct YxyCOLOR
-    y : UInt16
+    _y : UInt16
     x : UInt16
     y : UInt16
   end

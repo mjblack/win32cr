@@ -289,7 +289,7 @@ lib LibWin32
     IAS_AUTH_PEAP = 11
   end
 
-  enum IDENTITY_TYPE : Int32
+  enum NETPOL_IDENTITY_TYPE : Int32
     IAS_IDENTITY_NO_DEFAULT = 1
   end
 

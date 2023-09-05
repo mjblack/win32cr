@@ -272,8 +272,8 @@ struct LibWin32::IFhConfigMgr
   def add_remove_exclude_rule(this : IFhConfigMgr*, add : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, item : UInt8*) : HRESULT
     @lpVtbl.value.add_remove_exclude_rule.call(this, add, category, item)
   end
-  def get_include_exclude_rules(this : IFhConfigMgr*, include : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, iterator : IFhScopeIterator*) : HRESULT
-    @lpVtbl.value.get_include_exclude_rules.call(this, include, category, iterator)
+  def get_include_exclude_rules(this : IFhConfigMgr*, _include : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, iterator : IFhScopeIterator*) : HRESULT
+    @lpVtbl.value.get_include_exclude_rules.call(this, _include, category, iterator)
   end
   def get_local_policy(this : IFhConfigMgr*, localpolicytype : FH_LOCAL_POLICY_TYPE, policyvalue : UInt64*) : HRESULT
     @lpVtbl.value.get_local_policy.call(this, localpolicytype, policyvalue)

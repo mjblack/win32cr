@@ -7603,8 +7603,8 @@ struct LibWin32::IUIAutomationTreeWalker
   def get_last_child_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, last : IUIAutomationElement*) : HRESULT
     @lpVtbl.value.get_last_child_element.call(this, element, last)
   end
-  def get_next_sibling_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, next : IUIAutomationElement*) : HRESULT
-    @lpVtbl.value.get_next_sibling_element.call(this, element, next)
+  def get_next_sibling_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, _next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element.call(this, element, _next)
   end
   def get_previous_sibling_element(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, previous : IUIAutomationElement*) : HRESULT
     @lpVtbl.value.get_previous_sibling_element.call(this, element, previous)
@@ -7621,8 +7621,8 @@ struct LibWin32::IUIAutomationTreeWalker
   def get_last_child_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, last : IUIAutomationElement*) : HRESULT
     @lpVtbl.value.get_last_child_element_build_cache.call(this, element, cacherequest, last)
   end
-  def get_next_sibling_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, next : IUIAutomationElement*) : HRESULT
-    @lpVtbl.value.get_next_sibling_element_build_cache.call(this, element, cacherequest, next)
+  def get_next_sibling_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, _next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element_build_cache.call(this, element, cacherequest, _next)
   end
   def get_previous_sibling_element_build_cache(this : IUIAutomationTreeWalker*, element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, previous : IUIAutomationElement*) : HRESULT
     @lpVtbl.value.get_previous_sibling_element_build_cache.call(this, element, cacherequest, previous)
@@ -8623,8 +8623,8 @@ struct LibWin32::IUIAutomationTextPattern2
   def get_supported_text_selection(this : IUIAutomationTextPattern2*, supportedtextselection : SupportedTextSelection*) : HRESULT
     @lpVtbl.value.get_supported_text_selection.call(this, supportedtextselection)
   end
-  def range_from_annotation(this : IUIAutomationTextPattern2*, annotation : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
-    @lpVtbl.value.range_from_annotation.call(this, annotation, range)
+  def range_from_annotation(this : IUIAutomationTextPattern2*, _annotation : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_annotation.call(this, _annotation, range)
   end
   def get_caret_range(this : IUIAutomationTextPattern2*, isactive : LibC::BOOL*, range : IUIAutomationTextRange*) : HRESULT
     @lpVtbl.value.get_caret_range.call(this, isactive, range)
