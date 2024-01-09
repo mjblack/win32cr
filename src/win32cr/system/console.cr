@@ -258,7 +258,8 @@ lib LibWin32
   fun ReadConsoleA(hconsoleinput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstoread : UInt32, lpnumberofcharsread : UInt32*, pinputcontrol : CONSOLE_READCONSOLE_CONTROL*) : LibC::BOOL
 
   # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstoread : UInt32 [In],lpnumberofcharsread : UInt32* [In],pinputcontrol : CONSOLE_READCONSOLE_CONTROL* [In]
-  fun ReadConsoleW(hconsoleinput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstoread : UInt32, lpnumberofcharsread : UInt32*, pinputcontrol : CONSOLE_READCONSOLE_CONTROL*) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun ReadConsoleW(hconsoleinput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstoread : UInt32, lpnumberofcharsread : UInt32*, pinputcontrol : CONSOLE_READCONSOLE_CONTROL*) : LibC::BOOL
 
   # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstowrite : UInt32 [In],lpnumberofcharswritten : UInt32* [In],lpreserved : Void* [In]
   fun WriteConsoleA(hconsoleoutput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstowrite : UInt32, lpnumberofcharswritten : UInt32*, lpreserved : Void*) : LibC::BOOL
