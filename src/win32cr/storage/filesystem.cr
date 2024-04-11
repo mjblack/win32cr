@@ -3110,7 +3110,8 @@ lib LibWin32
   fun CreateDirectoryA(lppathname : PSTR, lpsecurityattributes : SECURITY_ATTRIBUTES*) : LibC::BOOL
 
   # Params # lppathname : LibC::LPWSTR [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In]
-  fun CreateDirectoryW(lppathname : LibC::LPWSTR, lpsecurityattributes : SECURITY_ATTRIBUTES*) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun CreateDirectoryW(lppathname : LibC::LPWSTR, lpsecurityattributes : SECURITY_ATTRIBUTES*) : LibC::BOOL
 
   # Params # lpfilename : PSTR [In],dwdesiredaccess : FILE_ACCESS_FLAGS [In],dwsharemode : FILE_SHARE_MODE [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In],dwcreationdisposition : FILE_CREATION_DISPOSITION [In],dwflagsandattributes : FILE_FLAGS_AND_ATTRIBUTES [In],htemplatefile : LibC::HANDLE [In]
   fun CreateFileA(lpfilename : PSTR, dwdesiredaccess : FILE_ACCESS_FLAGS, dwsharemode : FILE_SHARE_MODE, lpsecurityattributes : SECURITY_ATTRIBUTES*, dwcreationdisposition : FILE_CREATION_DISPOSITION, dwflagsandattributes : FILE_FLAGS_AND_ATTRIBUTES, htemplatefile : LibC::HANDLE) : LibC::HANDLE
@@ -3327,7 +3328,8 @@ lib LibWin32
   fun SetFilePointer(hfile : LibC::HANDLE, ldistancetomove : Int32, lpdistancetomovehigh : Int32*, dwmovemethod : SET_FILE_POINTER_MOVE_METHOD) : UInt32
 
   # Params # hfile : LibC::HANDLE [In],lidistancetomove : LARGE_INTEGER [In],lpnewfilepointer : LARGE_INTEGER* [In],dwmovemethod : SET_FILE_POINTER_MOVE_METHOD [In]
-  fun SetFilePointerEx(hfile : LibC::HANDLE, lidistancetomove : LARGE_INTEGER, lpnewfilepointer : LARGE_INTEGER*, dwmovemethod : SET_FILE_POINTER_MOVE_METHOD) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun SetFilePointerEx(hfile : LibC::HANDLE, lidistancetomove : LARGE_INTEGER, lpnewfilepointer : LARGE_INTEGER*, dwmovemethod : SET_FILE_POINTER_MOVE_METHOD) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpcreationtime : FILETIME* [In],lplastaccesstime : FILETIME* [In],lplastwritetime : FILETIME* [In]
   # Commented out because function is part of Lib C
