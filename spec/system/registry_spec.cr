@@ -1,3 +1,4 @@
+require "c/heapapi"
 require "../spec_helper"
 require "../../src/win32cr/system/registry"
 

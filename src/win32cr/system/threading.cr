@@ -875,7 +875,8 @@ lib LibWin32
   fun QueryDepthSList(listhead : SLIST_HEADER*) : UInt16
 
   # Params # pfnapc : PAPCFUNC [In],hthread : LibC::HANDLE [In],dwdata : LibC::UINT_PTR [In]
-  fun QueueUserAPC(pfnapc : PAPCFUNC, hthread : LibC::HANDLE, dwdata : LibC::UINT_PTR) : UInt32
+  # Commented out because function is part of Lib C
+  #fun QueueUserAPC(pfnapc : PAPCFUNC, hthread : LibC::HANDLE, dwdata : LibC::UINT_PTR) : UInt32
 
   # Params # apcroutine : PAPCFUNC [In],thread : LibC::HANDLE [In],data : LibC::UINT_PTR [In],flags : QUEUE_USER_APC_FLAGS [In]
   fun QueueUserAPC2(apcroutine : PAPCFUNC, thread : LibC::HANDLE, data : LibC::UINT_PTR, flags : QUEUE_USER_APC_FLAGS) : LibC::BOOL
