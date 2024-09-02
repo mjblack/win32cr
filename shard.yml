@@ -1,9 +1,9 @@
 name: win32cr
-version: 0.3.6
+version: 0.3.7
 
 authors:
   - Matthew J. Black <mjblack@gmail.com>
 
-crystal: 1.11.0
+crystal: 1.13.2
 
 license: MIT
